@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import { App as CapacitorApp } from '@capacitor/app'
-import { Browser } from '@capacitor/browser'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import ScrollToTop from './components/ScrollToTop'
 import { supabase } from './lib/supabase'
@@ -67,26 +66,15 @@ function DeepLinkHandler() {
         return
       }
 
-      // Handle OAuth callback — PKCE flow returns ?code=xxx as query param
+      // Handle OAuth callback — tokens passed as query params from
+      // the oauth-redirect edge function (which reads them from the
+      // implicit flow fragment client-side and converts to query params)
       const params = extractParams(normalized)
-      const code = params.get('code')
-
-      if (code) {
-        console.log('OAuth callback — exchanging code for session')
-        Browser.close().catch(() => {})
-        supabase.auth.exchangeCodeForSession(code).then(({ error }) => {
-          if (error) console.log('Code exchange error:', error.message)
-          else console.log('Google auth session set — onAuthStateChange will redirect')
-        })
-        return
-      }
-
-      // Fallback: handle implicit flow tokens (fragment-based, for web)
       const accessToken = params.get('access_token')
       const refreshToken = params.get('refresh_token')
+
       if (accessToken && refreshToken) {
         console.log('OAuth callback — setting session from tokens')
-        Browser.close().catch(() => {})
         supabase.auth.setSession({
           access_token: accessToken,
           refresh_token: refreshToken,

@@ -9,9 +9,9 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     storage: window.localStorage,
     autoRefreshToken: true,
     detectSessionInUrl: false,
-    // PKCE flow: code verifier is stored in WebView localStorage before
-    // opening system browser. Redirect returns ?code=xxx (query param),
-    // which Android preserves (unlike #fragment which gets stripped).
-    flowType: 'pkce',
+    // Implicit flow: tokens come in the URL fragment. The oauth-redirect
+    // edge function captures them client-side (JS) and presents a button
+    // with tokens as query params for the deep link back to the app.
+    flowType: 'implicit',
   }
 })
