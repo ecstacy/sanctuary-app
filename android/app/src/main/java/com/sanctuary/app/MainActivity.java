@@ -17,8 +17,10 @@ public class MainActivity extends BridgeActivity {
 
         super.onCreate(savedInstanceState);
         Uri data = getIntent().getData();
+        android.util.Log.d("DeepLink", "onCreate — intent data: " + (data != null ? data.toString() : "null"));
         if (data != null) {
             pendingUrl = data.toString();
+            android.util.Log.d("DeepLink", "onCreate — pendingUrl set: " + pendingUrl);
         }
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -59,6 +61,7 @@ public class MainActivity extends BridgeActivity {
             final String jsEvent = "{ \"url\": \"" + encodedUrl + "\" }";
             getBridge().getActivity().runOnUiThread(() -> {
                 new android.os.Handler().postDelayed(() -> {
+                    android.util.Log.d("DeepLink", "Firing event now: " + jsEvent);
                     getBridge().triggerWindowJSEvent("appUrlOpen", jsEvent);
                     android.util.Log.d("DeepLink", "Event fired: " + jsEvent);
                 }, 1500);

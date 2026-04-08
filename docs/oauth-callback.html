@@ -88,18 +88,25 @@
         return;
       }
 
-      // Build deep link with tokens as query params (Android preserves these)
-      var deepLink = 'com.sanctuary.app://login?access_token=' +
+      // Build both a custom scheme link and an intent:// URI.
+      // Android 12+ Chrome ignores custom scheme redirects but handles
+      // intent:// URIs properly, delivering the data to the app's intent.
+      var customLink = 'com.sanctuary.app://login?access_token=' +
         encodeURIComponent(accessToken) +
         '&refresh_token=' + encodeURIComponent(refreshToken);
 
-      // Set the button
-      document.getElementById('openApp').href = deepLink;
+      var intentLink = 'intent://login?access_token=' +
+        encodeURIComponent(accessToken) +
+        '&refresh_token=' + encodeURIComponent(refreshToken) +
+        '#Intent;scheme=com.sanctuary.app;package=com.sanctuary.app;end';
+
+      // Set the button (use intent:// for reliable Android delivery)
+      document.getElementById('openApp').href = intentLink;
       document.getElementById('loading').style.display = 'none';
       document.getElementById('ready').style.display = 'block';
 
-      // Try automatic redirect (works on some devices)
-      window.location.href = deepLink;
+      // Try automatic redirect with intent:// URI
+      window.location.href = intentLink;
     })();
   </script>
 </body>
