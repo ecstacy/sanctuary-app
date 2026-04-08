@@ -43,9 +43,6 @@ function DeepLinkHandler() {
     const processUrl = (url) => {
       if (!url) return
       console.log('Processing URL:', url)
-      // DEBUG: Show received URL — remove after fixing
-      window.__debugUrl = url
-      alert('Deep link received:\n' + url.substring(0, 200))
 
       // Handle both # and %23
       const normalized = url.replace(/%23/g, '#')
@@ -102,7 +99,7 @@ function DeepLinkHandler() {
 
     // Method 1: window event from MainActivity
     const handleWindowEvent = (event) => {
-      alert('DEBUG M1: window event fired\n' + JSON.stringify(event.detail).substring(0, 200))
+      console.log('Window event received:', event.detail)
       const url = event.detail?.url || event.detail
       processUrl(url)
     }
@@ -110,30 +107,21 @@ function DeepLinkHandler() {
 
     // Method 2: Capacitor plugin listener
     CapacitorApp.addListener('appUrlOpen', ({ url }) => {
-      alert('DEBUG M2: Capacitor event fired\n' + (url || '').substring(0, 200))
+      console.log('Capacitor listener received:', url)
       processUrl(url)
     })
 
     // Method 3: Check launch URL on mount
     CapacitorApp.getLaunchUrl().then((result) => {
       if (result?.url) {
-        alert('DEBUG M3: Launch URL\n' + result.url.substring(0, 200))
+        console.log('Launch URL:', result.url)
         processUrl(result.url)
       }
-    })
-
-    // Method 4: Listen for browser finish as fallback
-    Browser.addListener('browserFinished', () => {
-      alert('DEBUG M4: Browser finished — checking session')
-      supabase.auth.getSession().then(({ data }) => {
-        alert('DEBUG M4: Session exists? ' + !!data?.session)
-      })
     })
 
     return () => {
       window.removeEventListener('appUrlOpen', handleWindowEvent)
       CapacitorApp.removeAllListeners('appUrlOpen')
-      Browser.removeAllListeners()
     }
   }, [navigate])
 

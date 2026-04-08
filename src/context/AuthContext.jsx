@@ -1,14 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Capacitor } from '@capacitor/core'
-import { registerPlugin } from '@capacitor/core'
-
-// Minimal plugin to open URLs in the actual system browser (not Custom Chrome Tab)
-const ExternalBrowser = registerPlugin('ExternalBrowser', {
-  web: {
-    async open({ url }) { window.open(url, '_blank') }
-  }
-})
+import { Browser } from '@capacitor/browser'
 
 const AuthContext = createContext({})
 
@@ -70,8 +63,13 @@ export function AuthProvider({ children }) {
   }
 
   async function signInWithGoogle() {
+    // On native, redirect through the oauth-redirect edge function.
+    // Direct custom-scheme redirects don't work from browsers on Android.
+    // The edge function serves an HTML page with a JS redirect to the app
+    // (same proven pattern as the password reset flow).
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
     const redirectTo = Capacitor.isNativePlatform()
-      ? 'com.sanctuary.app://login'
+      ? `${supabaseUrl}/functions/v1/oauth-redirect`
       : window.location.origin
 
     const { data, error } = await supabase.auth.signInWithOAuth({
@@ -84,11 +82,9 @@ export function AuthProvider({ children }) {
 
     if (error) return { error }
 
-    // On native, open in the actual system browser (not Custom Chrome Tab).
-    // Custom Chrome Tabs swallow custom-scheme redirects — they never reach
-    // the app's intent filter. The system browser properly fires the intent.
+    // On native, open in a Custom Chrome Tab
     if (Capacitor.isNativePlatform() && data?.url) {
-      await ExternalBrowser.open({ url: data.url })
+      await Browser.open({ url: data.url })
     }
 
     return { data, error: null }
