@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js'
-import { Capacitor } from '@capacitor/core'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
@@ -10,8 +9,9 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     storage: window.localStorage,
     autoRefreshToken: true,
     detectSessionInUrl: false,
-    // Native apps use system browser for OAuth — PKCE code verifier
-    // can't be shared between WebView and browser, so use implicit flow
-    flowType: Capacitor.isNativePlatform() ? 'implicit' : 'pkce',
+    // PKCE flow: code verifier is stored in WebView localStorage before
+    // opening system browser. Redirect returns ?code=xxx (query param),
+    // which Android preserves (unlike #fragment which gets stripped).
+    flowType: 'pkce',
   }
 })

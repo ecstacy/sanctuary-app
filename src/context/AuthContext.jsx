@@ -1,7 +1,14 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Capacitor } from '@capacitor/core'
-import { Browser } from '@capacitor/browser'
+import { registerPlugin } from '@capacitor/core'
+
+// Minimal plugin to open URLs in the actual system browser (not Custom Chrome Tab)
+const ExternalBrowser = registerPlugin('ExternalBrowser', {
+  web: {
+    async open({ url }) { window.open(url, '_blank') }
+  }
+})
 
 const AuthContext = createContext({})
 
@@ -77,9 +84,11 @@ export function AuthProvider({ children }) {
 
     if (error) return { error }
 
-    // On native, open the OAuth URL in the system browser
+    // On native, open in the actual system browser (not Custom Chrome Tab).
+    // Custom Chrome Tabs swallow custom-scheme redirects — they never reach
+    // the app's intent filter. The system browser properly fires the intent.
     if (Capacitor.isNativePlatform() && data?.url) {
-      await Browser.open({ url: data.url, windowName: '_self' })
+      await ExternalBrowser.open({ url: data.url })
     }
 
     return { data, error: null }

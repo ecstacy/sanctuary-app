@@ -43,6 +43,9 @@ function DeepLinkHandler() {
     const processUrl = (url) => {
       if (!url) return
       console.log('Processing URL:', url)
+      // DEBUG: Show received URL — remove after fixing
+      window.__debugUrl = url
+      alert('Deep link received:\n' + url.substring(0, 200))
 
       // Handle both # and %23
       const normalized = url.replace(/%23/g, '#')
@@ -67,30 +70,39 @@ function DeepLinkHandler() {
         return
       }
 
-      // Handle OAuth callback (tokens in fragment or query params)
-      if (normalized.includes('access_token') || normalized.includes('refresh_token') || normalized.includes('code=')) {
-        const params = extractParams(normalized)
-        const accessToken = params.get('access_token')
-        const refreshToken = params.get('refresh_token')
+      // Handle OAuth callback — PKCE flow returns ?code=xxx as query param
+      const params = extractParams(normalized)
+      const code = params.get('code')
 
-        console.log('OAuth callback — has access_token:', !!accessToken, 'has refresh_token:', !!refreshToken)
+      if (code) {
+        console.log('OAuth callback — exchanging code for session')
+        Browser.close().catch(() => {})
+        supabase.auth.exchangeCodeForSession(code).then(({ error }) => {
+          if (error) console.log('Code exchange error:', error.message)
+          else console.log('Google auth session set — onAuthStateChange will redirect')
+        })
+        return
+      }
 
-        if (accessToken && refreshToken) {
-          Browser.close().catch(() => {})
-          supabase.auth.setSession({
-            access_token: accessToken,
-            refresh_token: refreshToken,
-          }).then(({ error }) => {
-            if (error) console.log('OAuth session error:', error.message)
-            else console.log('Google auth session set — onAuthStateChange will redirect')
-          })
-        }
+      // Fallback: handle implicit flow tokens (fragment-based, for web)
+      const accessToken = params.get('access_token')
+      const refreshToken = params.get('refresh_token')
+      if (accessToken && refreshToken) {
+        console.log('OAuth callback — setting session from tokens')
+        Browser.close().catch(() => {})
+        supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        }).then(({ error }) => {
+          if (error) console.log('OAuth session error:', error.message)
+          else console.log('Google auth session set — onAuthStateChange will redirect')
+        })
       }
     }
 
     // Method 1: window event from MainActivity
     const handleWindowEvent = (event) => {
-      console.log('Window event received:', event.detail)
+      alert('DEBUG M1: window event fired\n' + JSON.stringify(event.detail).substring(0, 200))
       const url = event.detail?.url || event.detail
       processUrl(url)
     }
@@ -98,21 +110,30 @@ function DeepLinkHandler() {
 
     // Method 2: Capacitor plugin listener
     CapacitorApp.addListener('appUrlOpen', ({ url }) => {
-      console.log('Capacitor listener received:', url)
+      alert('DEBUG M2: Capacitor event fired\n' + (url || '').substring(0, 200))
       processUrl(url)
     })
 
     // Method 3: Check launch URL on mount
     CapacitorApp.getLaunchUrl().then((result) => {
       if (result?.url) {
-        console.log('Launch URL:', result.url)
+        alert('DEBUG M3: Launch URL\n' + result.url.substring(0, 200))
         processUrl(result.url)
       }
+    })
+
+    // Method 4: Listen for browser finish as fallback
+    Browser.addListener('browserFinished', () => {
+      alert('DEBUG M4: Browser finished — checking session')
+      supabase.auth.getSession().then(({ data }) => {
+        alert('DEBUG M4: Session exists? ' + !!data?.session)
+      })
     })
 
     return () => {
       window.removeEventListener('appUrlOpen', handleWindowEvent)
       CapacitorApp.removeAllListeners('appUrlOpen')
+      Browser.removeAllListeners()
     }
   }, [navigate])
 
