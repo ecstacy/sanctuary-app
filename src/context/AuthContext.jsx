@@ -71,13 +71,13 @@ export function AuthProvider({ children }) {
   }
 
   async function signInWithGoogle() {
-    // On native, redirect through the oauth-redirect edge function.
-    // Direct custom-scheme redirects don't work from browsers on Android.
-    // The edge function serves an HTML page with a JS redirect to the app
-    // (same proven pattern as the password reset flow).
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+    // On native, redirect through a static page hosted on GitHub Pages.
+    // This page reads the implicit flow tokens from the URL fragment,
+    // then shows a button linking to the app with tokens as query params.
+    // (Supabase Edge Functions can't serve HTML; Android 12+ requires
+    //  user-tapped links for custom scheme navigation)
     const redirectTo = Capacitor.isNativePlatform()
-      ? `${supabaseUrl}/functions/v1/oauth-redirect`
+      ? 'https://ecstacy.github.io/sanctuary-app/oauth-callback.html'
       : window.location.origin
 
     const { data, error } = await supabase.auth.signInWithOAuth({
