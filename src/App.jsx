@@ -42,8 +42,6 @@ function DeepLinkHandler() {
     const processUrl = (url) => {
       if (!url) return
       console.log('Processing URL:', url)
-      // DEBUG — remove after fixing
-      alert('Deep link URL:\n' + (url || '').substring(0, 300))
 
       // Handle both # and %23
       const normalized = url.replace(/%23/g, '#')
