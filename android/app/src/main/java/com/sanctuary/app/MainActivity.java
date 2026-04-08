@@ -58,7 +58,7 @@ public class MainActivity extends BridgeActivity {
             android.util.Log.d("DeepLink", "Firing URL: " + url);
             // Encode the URL to make it safe for JSON
             String encodedUrl = url.replace("\\", "\\\\").replace("\"", "\\\"").replace("#", "%23");
-            final String jsEvent = "{ \"url\": \"" + encodedUrl + "\" }";
+            final String jsEvent = "{ detail: { \"url\": \"" + encodedUrl + "\" } }";
             getBridge().getActivity().runOnUiThread(() -> {
                 new android.os.Handler().postDelayed(() -> {
                     android.util.Log.d("DeepLink", "Firing event now: " + jsEvent);
