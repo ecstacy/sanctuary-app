@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import ErrorAlert from '../components/ErrorAlert'
 
 export default function ForgotPasswordPage() {
   const navigate = useNavigate()
@@ -81,11 +82,7 @@ export default function ForgotPasswordPage() {
                 </p>
               </div>
 
-              {error && (
-                <div className="bg-[#fde8e0] text-[#a73b21] text-xs font-label px-4 py-3 rounded-lg">
-                  {error}
-                </div>
-              )}
+              <ErrorAlert message={error} />
 
               <button
                 type="submit"

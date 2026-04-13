@@ -7,11 +7,206 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   PAGE TRANSITIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-page-enter {
+  animation: page-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   STAGGERED CONTENT REVEAL — use .stagger-[1-8] on child elements
+   Each child fades in + slides up with increasing delay
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-1, .stagger-2, .stagger-3, .stagger-4,
+.stagger-5, .stagger-6, .stagger-7, .stagger-8 {
+  opacity: 0;
+  animation: stagger-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LOADING SCREEN
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes loading-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%      { transform: scale(1.12); opacity: 1; }
+}
+.animate-loading-breathe {
+  animation: loading-breathe 2.4s ease-in-out infinite;
+}
+.animate-loading-breathe-delay {
+  animation: loading-breathe 2.4s ease-in-out 0.3s infinite;
+}
+
+@keyframes loading-fade {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+.animate-loading-fade {
+  animation: loading-fade 2.4s ease-in-out infinite;
+}
+
+@keyframes loading-dot {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+  40%           { opacity: 1; transform: scale(1.2); }
+}
+.animate-loading-dot {
+  animation: loading-dot 1.4s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOAST / OVERLAY
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateX(-50%) translateY(8px); }
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
-
 .animate-fade-in-up {
   animation: fade-in-up 0.2s ease-out forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BOTTOM NAV
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes nav-slide-up {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.animate-nav-enter {
+  animation: nav-slide-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DOSHA QUIZ ANIMATIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes quiz-enter {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-quiz-enter {
+  animation: quiz-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes quiz-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50%      { transform: scale(1.06); opacity: 1; }
+}
+.animate-quiz-pulse {
+  animation: quiz-pulse 2.5s ease-in-out infinite;
+}
+.animate-quiz-pulse-delay {
+  animation: quiz-pulse 2.5s ease-in-out 0.4s infinite;
+}
+
+@keyframes quiz-reveal {
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-quiz-reveal {
+  animation: quiz-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes quiz-slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-quiz-slide-up {
+  opacity: 0;
+  animation: quiz-slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes quiz-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-12px) scale(1.05); }
+}
+.animate-quiz-float {
+  animation: quiz-float 4s ease-in-out infinite;
+}
+.animate-quiz-float-delay {
+  animation: quiz-float 4s ease-in-out 1.5s infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+.animate-spin-slow-reverse {
+  animation: spin-slow 6s linear infinite reverse;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MICRO-INTERACTIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   POSE FIGURE BREATHING
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes pose-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.025); }
+}
+.animate-pose-breathe {
+  animation: pose-breathe 4s ease-in-out infinite;
+}
+
+/* Subtle scale on any tappable card */
+.tap-scale {
+  transition: transform 0.15s ease-out;
+}
+.tap-scale:active {
+  transform: scale(0.97);
+}
+
+/* Smooth shimmer for skeleton loading */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(90deg,
+    var(--tw-gradient-from, #efeee7) 25%,
+    var(--tw-gradient-to, #e3e3db) 50%,
+    var(--tw-gradient-from, #efeee7) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
 }

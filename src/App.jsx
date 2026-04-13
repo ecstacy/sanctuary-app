@@ -1,21 +1,32 @@
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, lazy, Suspense } from 'react'
 import { App as CapacitorApp } from '@capacitor/app'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import ScrollToTop from './components/ScrollToTop'
+import LoadingScreen from './components/LoadingScreen'
+import PageTransition from './components/PageTransition'
 import { supabase } from './lib/supabase'
 
-import WelcomePage from './pages/WelcomePage'
-import LoginPage from './pages/LoginPage'
-import SignupPage from './pages/SignupPage'
-import DiscoverPage from './pages/DiscoverPage'
-import PreviewPage from './pages/PreviewPage'
-import HomePage from './pages/HomePage'
-import ForgotPasswordPage from './pages/ForgotPasswordPage'
-import ResetPasswordPage from './pages/ResetPasswordPage'
+// Lazy-load pages for code-splitting
+const WelcomePage = lazy(() => import('./pages/WelcomePage'))
+const LoginPage = lazy(() => import('./pages/LoginPage'))
+const SignupPage = lazy(() => import('./pages/SignupPage'))
+const DiscoverPage = lazy(() => import('./pages/DiscoverPage'))
+const PreviewPage = lazy(() => import('./pages/PreviewPage'))
+const HomePage = lazy(() => import('./pages/HomePage'))
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'))
+const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
+const ProfilePage = lazy(() => import('./pages/ProfilePage'))
+const DoshaQuizPage = lazy(() => import('./pages/DoshaQuizPage'))
+const RecommendationsPage = lazy(() => import('./pages/RecommendationsPage'))
+const DoshaProfilePage = lazy(() => import('./pages/DoshaProfilePage'))
+const RoutinePage = lazy(() => import('./pages/RoutinePage'))
+const PracticePage = lazy(() => import('./pages/PracticePage'))
+const JourneyPage = lazy(() => import('./pages/JourneyPage'))
 
 function DeepLinkHandler() {
   const navigate = useNavigate()
+  const { setTransitioning } = useAuth()
 
   useEffect(() => {
     // Extract all params from a deep link URL (handles both ? and # and %23)
@@ -41,7 +52,6 @@ function DeepLinkHandler() {
 
     const processUrl = (url) => {
       if (!url) return
-      console.log('Processing URL:', url)
 
       // Handle both # and %23
       const normalized = url.replace(/%23/g, '#')
@@ -51,60 +61,49 @@ function DeepLinkHandler() {
         const tokenHash = params.get('token_hash')
         const type = params.get('type')
 
-        console.log('Token type:', type)
-        console.log('Has token_hash:', !!tokenHash)
-
         if (tokenHash && type === 'recovery') {
           supabase.auth.verifyOtp({ token_hash: tokenHash, type: 'recovery' }).then(({ error }) => {
-            if (error) console.log('OTP verify error:', error.message)
-            else {
-              console.log('Session set, navigating...')
-              navigate('/reset-password')
-            }
+            if (error) console.error('OTP verify error:', error.message)
+            else navigate('/reset-password')
           })
         }
         return
       }
 
       // Handle OAuth callback — tokens passed as query params from
-      // the oauth-redirect edge function (which reads them from the
-      // implicit flow fragment client-side and converts to query params)
+      // the GitHub Pages redirect page (which reads implicit flow
+      // fragment tokens client-side and converts to query params)
       const params = extractParams(normalized)
       const accessToken = params.get('access_token')
       const refreshToken = params.get('refresh_token')
 
       if (accessToken && refreshToken) {
-        console.log('OAuth callback — setting session from tokens')
+        setTransitioning(true)
         supabase.auth.setSession({
           access_token: accessToken,
           refresh_token: refreshToken,
         }).then(({ error }) => {
-          if (error) console.log('OAuth session error:', error.message)
-          else console.log('Google auth session set — onAuthStateChange will redirect')
+          if (error) {
+            console.error('OAuth session error:', error.message)
+            setTransitioning(false)
+          }
         })
       }
     }
 
     // Method 1: window event from MainActivity
     const handleWindowEvent = (event) => {
-      console.log('Window event received:', event.detail)
       const url = event.detail?.url || event.detail
       processUrl(url)
     }
     window.addEventListener('appUrlOpen', handleWindowEvent)
 
     // Method 2: Capacitor plugin listener
-    CapacitorApp.addListener('appUrlOpen', ({ url }) => {
-      console.log('Capacitor listener received:', url)
-      processUrl(url)
-    })
+    CapacitorApp.addListener('appUrlOpen', ({ url }) => processUrl(url))
 
     // Method 3: Check launch URL on mount
     CapacitorApp.getLaunchUrl().then((result) => {
-      if (result?.url) {
-        console.log('Launch URL:', result.url)
-        processUrl(result.url)
-      }
+      if (result?.url) processUrl(result.url)
     })
 
     return () => {
@@ -161,37 +160,40 @@ function BackButtonHandler() {
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth()
-  if (loading) return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
-      <p className="font-body text-on-surface-variant text-sm">Loading...</p>
-    </div>
-  )
+  if (loading) return <LoadingScreen />
   return user ? children : <Navigate to="/" replace />
 }
 
 function AppRoutes() {
   const { user, loading } = useAuth()
 
-  if (loading) return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
-      <p className="font-body text-on-surface-variant text-sm">Loading...</p>
-    </div>
-  )
+  if (loading) return <LoadingScreen />
 
   return (
     <>
       <DeepLinkHandler />
       <BackButtonHandler />
-      <Routes>
-        <Route path="/" element={user ? <Navigate to="/home" replace /> : <WelcomePage />} />
-        <Route path="/discover" element={<DiscoverPage />} />
-        <Route path="/preview" element={<PreviewPage />} />
-        <Route path="/login" element={user ? <Navigate to="/home" replace /> : <LoginPage />} />
-        <Route path="/signup" element={user ? <Navigate to="/home" replace /> : <SignupPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
-      </Routes>
+      <Suspense fallback={<LoadingScreen />}>
+      <PageTransition>
+        <Routes>
+          <Route path="/" element={user ? <Navigate to="/home" replace /> : <WelcomePage />} />
+          <Route path="/discover" element={<DiscoverPage />} />
+          <Route path="/preview" element={<PreviewPage />} />
+          <Route path="/login" element={user ? <Navigate to="/home" replace /> : <LoginPage />} />
+          <Route path="/signup" element={user ? <Navigate to="/home" replace /> : <SignupPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+          <Route path="/quiz" element={<PrivateRoute><DoshaQuizPage /></PrivateRoute>} />
+          <Route path="/dosha" element={<PrivateRoute><DoshaProfilePage /></PrivateRoute>} />
+          <Route path="/routine" element={<PrivateRoute><RoutinePage /></PrivateRoute>} />
+          <Route path="/practice/:id" element={<PrivateRoute><PracticePage /></PrivateRoute>} />
+          <Route path="/journey" element={<PrivateRoute><JourneyPage /></PrivateRoute>} />
+          <Route path="/recommendations" element={<PrivateRoute><RecommendationsPage /></PrivateRoute>} />
+        </Routes>
+      </PageTransition>
+      </Suspense>
     </>
   )
 }

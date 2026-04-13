@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import ErrorAlert from '../components/ErrorAlert'
 
 export default function ResetPasswordPage() {
   const navigate = useNavigate()
@@ -164,11 +165,7 @@ export default function ResetPasswordPage() {
                 ))}
               </div>
 
-              {error && (
-                <div className="bg-[#fde8e0] text-[#a73b21] text-xs font-label px-4 py-3 rounded-lg">
-                  {error}
-                </div>
-              )}
+              <ErrorAlert message={error} />
 
               <button
                 type="submit"

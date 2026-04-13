@@ -17,6 +17,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [authTransitioning, setAuthTransitioning] = useState(false)
 
   useEffect(() => {
     // Get initial session
@@ -30,6 +31,7 @@ export function AuthProvider({ children }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         setUser(session?.user ?? null)
+        setAuthTransitioning(false)
         if (session?.user) fetchProfile(session.user.id)
         else {
           setProfile(null)
@@ -42,11 +44,12 @@ export function AuthProvider({ children }) {
   }, [])
 
   async function fetchProfile(userId) {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', userId)
       .single()
+    if (error) console.error('Failed to fetch profile:', error.message)
     setProfile(data)
     setLoading(false)
   }
@@ -99,6 +102,18 @@ export function AuthProvider({ children }) {
     return { data, error: null }
   }
 
+  async function refreshProfile() {
+    // Fetch userId dynamically to avoid stale closure issues
+    const { data: { session } } = await supabase.auth.getSession()
+    if (session?.user?.id) await fetchProfile(session.user.id)
+  }
+
+  // Signal that an auth transition is in progress (e.g. OAuth callback)
+  // so the app shows the loading screen instead of flashing the login page
+  function setTransitioning(value) {
+    setAuthTransitioning(value)
+  }
+
   async function signOut() {
     await supabase.auth.signOut()
   }
@@ -107,11 +122,13 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider value={{
       user,
       profile,
-      loading,
+      loading: loading || authTransitioning,
       signUp,
       signIn,
       signInWithGoogle,
-      signOut
+      signOut,
+      refreshProfile,
+      setTransitioning
     }}>
       {children}
     </AuthContext.Provider>

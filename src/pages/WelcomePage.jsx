@@ -47,14 +47,14 @@ export default function WelcomePage() {
         </div>
 
         <div className="relative z-10 w-full max-w-sm text-center mb-8">
-          <h1 className="font-headline text-5xl text-on-surface leading-tight mb-5">
+          <h1 className="font-headline text-5xl text-on-surface leading-tight mb-5 stagger-1">
             Your Path to{' '}
             <span className="italic font-normal text-primary">Balance.</span>
           </h1>
-          <p className="font-body text-base text-on-surface-variant leading-relaxed mb-10">
+          <p className="font-body text-base text-on-surface-variant leading-relaxed mb-10 stagger-2">
             A holistic journey to find harmony in your body and mind through yoga and Ayurvedic principles.
           </p>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 stagger-3">
             <button
               onClick={() => navigate('/discover')}
               className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
@@ -75,7 +75,7 @@ export default function WelcomePage() {
       <section className="px-6 py-12 flex flex-col gap-5">
 
         {/* Personalised Ayurveda */}
-        <div className="bg-surface-container rounded-lg p-8 relative overflow-hidden group">
+        <div className="bg-surface-container rounded-lg p-8 relative overflow-hidden group stagger-4">
           <span className="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-[10px] font-label uppercase tracking-widest mb-5 inline-block">
             Daily Rituals
           </span>
@@ -83,7 +83,10 @@ export default function WelcomePage() {
           <p className="text-on-surface-variant text-sm leading-relaxed">
             Discover your Dosha and receive daily nutrition and wellness guidance tailored to your unique constitution.
           </p>
-          <button className="mt-6 text-primary font-label font-semibold text-sm flex items-center gap-1 border-b border-primary/20 pb-0.5">
+          <button
+            onClick={() => navigate('/discover')}
+            className="mt-6 text-primary font-label font-semibold text-sm flex items-center gap-1 border-b border-primary/20 pb-0.5"
+          >
             Explore Practices
             <span className="material-symbols-outlined text-sm">arrow_forward</span>
           </button>
@@ -93,7 +96,7 @@ export default function WelcomePage() {
         </div>
 
         {/* Two small cards */}
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-5 stagger-5">
           <div className="bg-tertiary-container rounded-lg p-6 flex flex-col items-center text-center">
             <div className="w-14 h-14 bg-tertiary-fixed-dim rounded-full flex items-center justify-center mb-4">
               <span className="material-symbols-outlined text-on-tertiary-container">self_care</span>
@@ -115,7 +118,7 @@ export default function WelcomePage() {
         </div>
 
         {/* Breath Lab */}
-        <div className="bg-surface-container-highest rounded-lg p-8 flex items-center justify-between gap-6">
+        <div className="bg-surface-container-highest rounded-lg p-8 flex items-center justify-between gap-6 stagger-6">
           <div className="flex-1">
             <h3 className="font-headline text-2xl text-on-surface mb-3">The Breath Lab</h3>
             <p className="text-on-surface-variant text-sm leading-relaxed">

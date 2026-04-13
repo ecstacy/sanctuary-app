@@ -1,162 +1,176 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { POPULAR_SEARCHES } from '../data/recommendations'
+import BottomNav from '../components/BottomNav'
 
-const STRUGGLES = [
-  {
-    id: 'stress',
-    label: 'Stress',
-    description: 'Ease mental fatigue and quiet the internal noise.',
-    icon: 'psychiatry',
-    color: 'bg-[#efeee7]',
-    activeColor: 'bg-primary-container',
-  },
-  {
-    id: 'sleep',
-    label: 'Sleep',
-    description: 'Deepen your rest and stabilise your circadian rhythm.',
-    icon: 'bedtime',
-    color: 'bg-[#efeee7]',
-    activeColor: 'bg-primary-container',
-  },
-  {
-    id: 'energy',
-    label: 'Energy',
-    description: 'Revitalise your spirit and overcome afternoon slumps.',
-    icon: 'bolt',
-    color: 'bg-[#efeee7]',
-    activeColor: 'bg-primary-container',
-  },
-  {
-    id: 'flexibility',
-    label: 'Flexibility',
-    description: 'Release physical tension and improve mobility.',
-    icon: 'self_care',
-    color: 'bg-[#efeee7]',
-    activeColor: 'bg-primary-container',
-  },
+// Browse categories — map to recommendation engine topics
+const CATEGORIES = [
+  { query: 'Lower back pain', label: 'Back & Spine', icon: 'accessibility_new', gradient: 'from-[#6b8f5e] to-[#b8d4a8]' },
+  { query: 'Neck pain', label: 'Neck & Shoulders', icon: 'self_care', gradient: 'from-[#a87b5e] to-[#e8c8a8]' },
+  { query: 'Anxiety', label: 'Stress & Anxiety', icon: 'cloud', gradient: 'from-[#8b7ba8] to-[#c8b8e8]' },
+  { query: 'Can\'t sleep', label: 'Sleep & Rest', icon: 'bedtime', gradient: 'from-[#5e6b8f] to-[#a8b8d4]' },
+  { query: 'Low energy', label: 'Energy & Vitality', icon: 'bolt', gradient: 'from-[#c4873a] to-[#f0d087]' },
+  { query: 'Tight hips', label: 'Hips & Mobility', icon: 'self_care', gradient: 'from-[#8f5e6b] to-[#d4a8b8]' },
+  { query: 'Bloating', label: 'Digestion', icon: 'gastroenterology', gradient: 'from-[#8f8b5e] to-[#d4d0a8]' },
+  { query: 'Posture', label: 'Posture', icon: 'straighten', gradient: 'from-[#5e7b8f] to-[#a8c8d4]' },
 ]
 
 export default function DiscoverPage() {
   const navigate = useNavigate()
-  const [selected, setSelected] = useState([])
-  const [notes, setNotes] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
 
-  function toggle(id) {
-    setSelected(prev =>
-      prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]
-    )
-  }
-
-  function handleContinue() {
-    // Pass selections via navigation state — no account needed yet
-    navigate('/preview', {
-      state: { struggles: selected, notes }
-    })
+  function handleSearch(q) {
+    const query = q || searchQuery
+    if (query.trim().length < 2) return
+    navigate('/recommendations', { state: { query: query.trim() } })
   }
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body flex flex-col">
+    <div className="min-h-screen bg-background text-on-surface font-body pb-28">
 
       {/* Top bar */}
-      <div className="flex items-center justify-between px-6 py-5">
+      <div className="flex items-center justify-between px-6 pt-3 pb-2">
+        <div className="flex items-center gap-2">
+          <span className="material-symbols-outlined text-primary">explore</span>
+          <span className="font-headline italic text-primary text-base">Discover</span>
+        </div>
         <button
-          onClick={() => navigate('/')}
-          className="text-on-surface-variant"
+          onClick={() => navigate('/profile')}
+          className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center"
         >
-          <span className="material-symbols-outlined text-xl">arrow_back</span>
+          <span className="material-symbols-outlined text-on-surface-variant text-lg">person</span>
         </button>
-        <span className="font-headline italic text-primary text-base">The Sanctuary</span>
-        <div className="w-6" />
       </div>
 
-      <div className="flex-1 flex flex-col px-6 pb-12">
+      <div className="px-6 flex flex-col gap-5">
 
-        {/* Heading */}
-        <div className="mb-8">
-          <p className="font-label text-xs text-primary uppercase tracking-widest mb-2">
-            Problem Discovery
-          </p>
-          <h1 className="font-headline text-4xl text-on-surface leading-tight">
-            What brings you to{' '}
-            <span className="italic font-normal text-primary">The Sanctuary</span>{' '}
-            today?
+        {/* ── Search — hero element ── */}
+        <div className="stagger-1">
+          <h1 className="font-headline text-2xl text-on-surface mb-1">
+            What do you need?
           </h1>
-          <p className="text-on-surface-variant text-sm mt-3 leading-relaxed">
-            Select the areas where you feel a need for restoration. We will craft your journey based on these.
+          <p className="font-body text-sm text-on-surface-variant mb-4">
+            Describe how you feel and we'll find the right practice.
           </p>
-        </div>
 
-        {/* Struggle cards */}
-        <div className="flex flex-col gap-4 mb-8">
-          {STRUGGLES.map(s => (
-            <button
-              key={s.id}
-              onClick={() => toggle(s.id)}
-              className={`flex items-center gap-4 p-5 rounded-lg text-left transition-all duration-200 ${
-                selected.includes(s.id) ? s.activeColor : s.color
-              }`}
-            >
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
-                selected.includes(s.id)
-                  ? 'bg-primary text-on-primary'
-                  : 'bg-surface-container-high text-on-surface-variant'
-              }`}>
-                <span className="material-symbols-outlined text-xl">{s.icon}</span>
-              </div>
-              <div className="flex-1">
-                <p className={`font-body font-semibold text-base ${
-                  selected.includes(s.id) ? 'text-on-primary-container' : 'text-on-surface'
-                }`}>
-                  {s.label}
-                </p>
-                <p className="text-xs text-on-surface-variant mt-0.5 leading-relaxed">
-                  {s.description}
-                </p>
-              </div>
-              {selected.includes(s.id) && (
-                <span className="material-symbols-outlined text-primary flex-shrink-0">check_circle</span>
-              )}
-            </button>
-          ))}
-        </div>
-
-        {/* Optional notes */}
-        {selected.length > 0 && (
-          <div className="bg-surface-container-low rounded-lg p-5 mb-8">
-            <p className="font-label text-xs text-on-surface-variant uppercase tracking-widest mb-3">
-              Describe your current state
-              <span className="normal-case tracking-normal text-on-surface-variant/50 ml-1">(optional)</span>
-            </p>
-            <textarea
-              value={notes}
-              onChange={e => setNotes(e.target.value)}
-              placeholder="In my own words, I am feeling..."
-              rows={3}
-              className="w-full bg-transparent text-on-surface font-body text-sm outline-none resize-none placeholder:text-on-surface-variant/40"
+          <div className="relative">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2">
+              <span className="material-symbols-outlined text-on-surface-variant/40 text-lg">search</span>
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  handleSearch()
+                }
+              }}
+              placeholder="Back pain, headache, can't sleep..."
+              className="w-full bg-surface-container-low rounded-2xl pl-11 pr-12 py-4 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
             />
-            <p className="font-label text-[10px] text-primary/60 italic mt-2">
-              Your words help us refine your wellness path.
-            </p>
+            {searchQuery.length > 0 ? (
+              <button
+                onClick={() => handleSearch()}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-primary flex items-center justify-center active:scale-90 transition-all"
+              >
+                <span className="material-symbols-outlined text-on-primary text-sm">arrow_forward</span>
+              </button>
+            ) : (
+              <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                <span className="material-symbols-outlined text-on-surface-variant/20 text-lg">mic</span>
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
-        {/* CTA */}
-        <button
-          onClick={handleContinue}
-          disabled={selected.length === 0}
-          className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-30 mt-auto"
-        >
-          Show My Sanctuary
-        </button>
+        {/* ── Popular search pills ── */}
+        <div className="stagger-2">
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2.5">Popular searches</p>
+          <div className="flex flex-wrap gap-2">
+            {POPULAR_SEARCHES.map((item, i) => (
+              <button
+                key={i}
+                onClick={() => handleSearch(item.query)}
+                className="flex items-center gap-1.5 bg-surface-container-low rounded-full px-3.5 py-2 active:scale-95 transition-all"
+              >
+                <span className="material-symbols-outlined text-primary text-xs">{item.icon}</span>
+                <span className="font-body text-xs text-on-surface">{item.query}</span>
+              </button>
+            ))}
+          </div>
+        </div>
 
-        <button
-          onClick={() => navigate('/preview', { state: { struggles: [], notes: '' } })}
-          className="mt-4 text-center text-xs text-on-surface-variant/50 font-label uppercase tracking-widest"
-        >
-          I'll decide later
-        </button>
+        {/* ── Browse by Category ── */}
+        <div className="stagger-3">
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Browse by category</p>
+          <div className="grid grid-cols-2 gap-3">
+            {CATEGORIES.map((cat, i) => (
+              <button
+                key={i}
+                onClick={() => handleSearch(cat.query)}
+                className="relative overflow-hidden rounded-xl p-4 text-left active:scale-[0.97] transition-all"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${cat.gradient} opacity-15`} />
+                <div className="relative z-10">
+                  <div className="w-10 h-10 rounded-full bg-surface/80 flex items-center justify-center mb-3">
+                    <span className="material-symbols-outlined text-primary text-lg">{cat.icon}</span>
+                  </div>
+                  <p className="font-body text-sm font-semibold text-on-surface">{cat.label}</p>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Quick routines ── */}
+        <div className="stagger-4">
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Quick routines</p>
+          <div className="flex flex-col gap-2.5">
+            {[
+              { key: 'stress', label: 'Stress Relief', desc: 'Calm your mind and release tension', icon: 'psychiatry', time: '15 min' },
+              { key: 'sleep', label: 'Better Sleep', desc: 'Wind down and prepare for deep rest', icon: 'bedtime', time: '12 min' },
+              { key: 'energy', label: 'Energy Boost', desc: 'Wake up your body and revitalise', icon: 'bolt', time: '18 min' },
+              { key: 'flexibility', label: 'Flexibility Flow', desc: 'Release stiffness and improve mobility', icon: 'self_care', time: '20 min' },
+            ].map(r => (
+              <button
+                key={r.key}
+                onClick={() => navigate('/routine', { state: { routineKey: r.key } })}
+                className="flex items-center gap-4 bg-surface-container-low rounded-xl p-4 text-left active:scale-[0.98] transition-all"
+              >
+                <div className="w-11 h-11 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0">
+                  <span className="material-symbols-outlined text-primary text-lg">{r.icon}</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-body text-sm font-semibold text-on-surface">{r.label}</p>
+                  <p className="font-body text-xs text-on-surface-variant/60 mt-0.5">{r.desc}</p>
+                </div>
+                <div className="flex items-center gap-1 flex-shrink-0">
+                  <span className="font-label text-[10px] text-on-surface-variant/40 uppercase">{r.time}</span>
+                  <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Ayurvedic tip ── */}
+        <div className="bg-primary-container/15 rounded-xl p-5 stagger-5">
+          <div className="flex items-start gap-3">
+            <span className="material-symbols-outlined text-primary text-lg mt-0.5">local_florist</span>
+            <div>
+              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">Ayurvedic Wisdom</p>
+              <p className="font-body text-sm text-on-surface-variant leading-relaxed">
+                The body heals with play, the mind heals with laughter, and the spirit heals with silence. Take a moment today to embrace all three.
+              </p>
+            </div>
+          </div>
+        </div>
 
       </div>
+
+      <BottomNav />
     </div>
   )
 }
