@@ -368,7 +368,7 @@ const POSE_VIDEOS = {
 
 export default function PoseFigure({ poseKey, size = 'lg', breathing = true }) {
   const videoSrc = POSE_VIDEOS[poseKey]
-  const dimension = size === 'lg' ? 220 : size === 'sm' ? 80 : 140
+  const dimension = size === 'xl' ? 320 : size === 'lg' ? 220 : size === 'sm' ? 80 : 140
 
   // If a video exists for this pose, render the video player
   if (videoSrc) {
@@ -385,8 +385,9 @@ export default function PoseFigure({ poseKey, size = 'lg', breathing = true }) {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover"
-            style={{ pointerEvents: 'none' }}
+            className="w-full h-full object-cover outline-none"
+            style={{ pointerEvents: 'none', WebkitTapHighlightColor: 'transparent' }}
+            tabIndex={-1}
           />
         </div>
       </div>
@@ -394,7 +395,7 @@ export default function PoseFigure({ poseKey, size = 'lg', breathing = true }) {
   }
 
   // Fallback: SVG illustration
-  const svgDim = size === 'lg' ? 200 : size === 'sm' ? 70 : 130
+  const svgDim = size === 'xl' ? 300 : size === 'lg' ? 200 : size === 'sm' ? 70 : 130
   return (
     <div className={`flex items-center justify-center ${breathing ? 'animate-pose-breathe' : ''}`}>
       <svg
@@ -402,8 +403,9 @@ export default function PoseFigure({ poseKey, size = 'lg', breathing = true }) {
         height={svgDim}
         viewBox="0 0 200 185"
         fill="none"
-        className="text-primary"
-        style={{ transition: 'all 0.6s ease' }}
+        className="text-primary outline-none"
+        style={{ transition: 'all 0.6s ease', WebkitTapHighlightColor: 'transparent' }}
+        focusable="false"
       >
         <PoseIllustration poseKey={poseKey} />
       </svg>

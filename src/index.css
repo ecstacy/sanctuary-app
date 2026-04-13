@@ -5,6 +5,12 @@
 body {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove focus outlines on non-keyboard interaction (Android WebView) */
+video:focus, svg:focus, button:focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

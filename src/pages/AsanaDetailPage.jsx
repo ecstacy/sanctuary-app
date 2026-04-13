@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { ASANAS, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
@@ -72,11 +73,68 @@ export default function AsanaDetailPage() {
   const precautions = PRECAUTIONS[asana.id] || []
   const steps = getSteps(asana)
 
+  const [expanded, setExpanded] = useState(false)
+  const [sticky, setSticky] = useState(false)
+  const heroRef = useRef(null)
+
+  // Track when hero scrolls out of view to show sticky mini player
+  useEffect(() => {
+    const el = heroRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setSticky(!entry.isIntersecting),
+      { threshold: 0 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div className="min-h-screen bg-background text-on-surface font-body pb-12">
 
+      {/* ── Expanded overlay ── */}
+      {expanded && (
+        <div
+          className="fixed inset-0 z-50 bg-on-surface/90 flex items-center justify-center animate-page-enter"
+          onClick={() => setExpanded(false)}
+        >
+          <button
+            onClick={() => setExpanded(false)}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/20 flex items-center justify-center"
+          >
+            <span className="material-symbols-outlined text-white text-lg">close</span>
+          </button>
+          <div className="w-[85vw] max-w-sm aspect-square flex items-center justify-center">
+            <PoseFigure poseKey={asana.poseKey} size="xl" breathing />
+          </div>
+          <div className="absolute bottom-12 left-0 right-0 text-center">
+            <p className="font-headline text-xl text-white">{asana.sanskrit}</p>
+            <p className="font-body text-sm text-white/60">{asana.english}</p>
+          </div>
+        </div>
+      )}
+
+      {/* ── Sticky mini player ── */}
+      {sticky && !expanded && (
+        <div className="fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-outline-variant/10 px-4 py-2 flex items-center gap-3 animate-page-enter">
+          <button onClick={() => setExpanded(true)} className="w-11 h-11 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0 overflow-hidden active:scale-90 transition-all">
+            <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} />
+          </button>
+          <div className="flex-1 min-w-0">
+            <p className="font-body text-sm font-semibold text-on-surface truncate">{asana.sanskrit}</p>
+            <p className="font-body text-xs text-on-surface-variant truncate">{asana.english}</p>
+          </div>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0"
+          >
+            <span className="material-symbols-outlined text-on-surface-variant text-sm">expand_less</span>
+          </button>
+        </div>
+      )}
+
       {/* ── Hero Section ── */}
-      <div className="relative bg-primary-container/20 pb-6">
+      <div ref={heroRef} className="relative bg-primary-container/20 pb-6">
         {/* Back button */}
         <div className="flex items-center justify-between px-4 pt-3 pb-2">
           <button onClick={() => navigate(-1)} className="w-10 h-10 rounded-full bg-surface/80 flex items-center justify-center active:scale-90 transition-all">
@@ -92,10 +150,19 @@ export default function AsanaDetailPage() {
           </div>
         </div>
 
-        {/* Pose figure */}
-        <div className="flex justify-center py-6">
-          <PoseFigure poseKey={asana.poseKey} size="lg" breathing />
-        </div>
+        {/* Pose figure — tap to expand */}
+        <button
+          onClick={() => setExpanded(true)}
+          className="w-full flex justify-center py-6 active:scale-95 transition-all outline-none"
+          style={{ WebkitTapHighlightColor: 'transparent' }}
+        >
+          <div className="relative">
+            <PoseFigure poseKey={asana.poseKey} size="lg" breathing />
+            <div className="absolute bottom-0 right-0 w-7 h-7 rounded-full bg-surface/80 flex items-center justify-center shadow-sm">
+              <span className="material-symbols-outlined text-on-surface-variant text-xs">fullscreen</span>
+            </div>
+          </div>
+        </button>
 
         {/* Name */}
         <div className="px-6 text-center">
