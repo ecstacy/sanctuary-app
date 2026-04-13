@@ -368,7 +368,7 @@ const POSE_VIDEOS = {
 
 export default function PoseFigure({ poseKey, size = 'lg', breathing = true }) {
   const videoSrc = POSE_VIDEOS[poseKey]
-  const dimension = size === 'lg' ? 220 : 140
+  const dimension = size === 'lg' ? 220 : size === 'sm' ? 80 : 140
 
   // If a video exists for this pose, render the video player
   if (videoSrc) {
@@ -394,7 +394,7 @@ export default function PoseFigure({ poseKey, size = 'lg', breathing = true }) {
   }
 
   // Fallback: SVG illustration
-  const svgDim = size === 'lg' ? 200 : 130
+  const svgDim = size === 'lg' ? 200 : size === 'sm' ? 70 : 130
   return (
     <div className={`flex items-center justify-center ${breathing ? 'animate-pose-breathe' : ''}`}>
       <svg

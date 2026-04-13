@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { POPULAR_SEARCHES } from '../data/recommendations'
+import { ASANAS } from '../data/asanas'
+import PoseFigure from '../components/PoseFigure'
 import BottomNav from '../components/BottomNav'
+
+const ALL_ASANAS = Object.values(ASANAS)
 
 // Browse categories — map to recommendation engine topics
 const CATEGORIES = [
@@ -18,6 +22,21 @@ const CATEGORIES = [
 export default function DiscoverPage() {
   const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState('')
+
+  // Filter asanas matching the search query
+  const matchedAsanas = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase()
+    if (q.length < 2) return []
+    return ALL_ASANAS.filter(a =>
+      a.sanskrit.toLowerCase().includes(q) ||
+      a.english.toLowerCase().includes(q) ||
+      a.category.toLowerCase().includes(q) ||
+      a.bodyParts.some(p => p.toLowerCase().includes(q)) ||
+      a.benefits.some(b => b.toLowerCase().includes(q))
+    )
+  }, [searchQuery])
+
+  const showAsanaResults = searchQuery.trim().length >= 2 && matchedAsanas.length > 0
 
   function handleSearch(q) {
     const query = q || searchQuery
@@ -85,6 +104,37 @@ export default function DiscoverPage() {
           </div>
         </div>
 
+        {/* ── Asana search results ── */}
+        {showAsanaResults && (
+          <div className="stagger-2">
+            <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2.5">
+              Asanas matching "{searchQuery.trim()}"
+            </p>
+            <div className="flex flex-col gap-2">
+              {matchedAsanas.map(asana => (
+                <button
+                  key={asana.id}
+                  onClick={() => navigate(`/asana/${asana.id}`)}
+                  className="flex items-center gap-3.5 bg-surface-container-low rounded-xl p-3 text-left active:scale-[0.98] transition-all"
+                >
+                  <div className="w-14 h-14 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-body text-sm font-semibold text-on-surface">{asana.sanskrit}</p>
+                    <p className="font-body text-xs text-on-surface-variant/60">{asana.english}</p>
+                    <div className="flex gap-1.5 mt-1">
+                      <span className="px-2 py-0.5 bg-primary-fixed rounded-full font-label text-[8px] text-primary uppercase">{asana.level}</span>
+                      <span className="px-2 py-0.5 bg-surface-container-high rounded-full font-label text-[8px] text-on-surface-variant uppercase">{asana.category}</span>
+                    </div>
+                  </div>
+                  <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* ── Popular search pills ── */}
         <div className="stagger-2">
           <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2.5">Popular searches</p>
@@ -150,6 +200,31 @@ export default function DiscoverPage() {
                   <span className="font-label text-[10px] text-on-surface-variant/40 uppercase">{r.time}</span>
                   <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
                 </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Explore all Asanas ── */}
+        <div className="stagger-5">
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Explore Asanas</p>
+          <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+            {ALL_ASANAS.map(asana => (
+              <button
+                key={asana.id}
+                onClick={() => navigate(`/asana/${asana.id}`)}
+                className="flex-shrink-0 w-36 snap-start active:scale-[0.97] transition-all"
+              >
+                <div className="relative aspect-square rounded-xl overflow-hidden mb-2 bg-primary-container/15">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-on-surface/40 via-transparent to-transparent" />
+                  <div className="absolute bottom-2 left-2 right-2">
+                    <p className="font-headline text-xs text-white leading-tight">{asana.sanskrit}</p>
+                  </div>
+                </div>
+                <p className="font-body text-xs text-on-surface text-left">{asana.english}</p>
               </button>
             ))}
           </div>
