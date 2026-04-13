@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { POPULAR_SEARCHES } from '../data/recommendations'
 import { ASANAS } from '../data/asanas'
-import PoseFigure from '../components/PoseFigure'
 import BottomNav from '../components/BottomNav'
 
 const ALL_ASANAS = Object.values(ASANAS)
@@ -117,8 +116,8 @@ export default function DiscoverPage() {
                   onClick={() => navigate(`/asana/${asana.id}`)}
                   className="flex items-center gap-3.5 bg-surface-container-low rounded-xl p-3 text-left active:scale-[0.98] transition-all"
                 >
-                  <div className="w-14 h-14 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0 overflow-hidden">
-                    <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} />
+                  <div className="w-14 h-14 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0">
+                    <span className="material-symbols-outlined text-primary text-2xl">{asana.icon}</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-body text-sm font-semibold text-on-surface">{asana.sanskrit}</p>
@@ -213,13 +212,16 @@ export default function DiscoverPage() {
               <button
                 key={asana.id}
                 onClick={() => navigate(`/asana/${asana.id}`)}
-                className="flex-shrink-0 w-36 snap-start active:scale-[0.97] transition-all"
+                className="flex-shrink-0 w-32 snap-start active:scale-[0.97] transition-all"
               >
-                <div className="relative aspect-square rounded-xl overflow-hidden mb-2 bg-primary-container/15">
+                <div className="relative aspect-[4/5] rounded-xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} />
+                    <span className="material-symbols-outlined text-primary/30 text-6xl">{asana.icon}</span>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-on-surface/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-on-surface/50 via-transparent to-transparent" />
+                  <div className="absolute top-2 left-2">
+                    <span className="px-2 py-0.5 bg-surface/70 rounded-full font-label text-[8px] text-primary uppercase">{asana.level}</span>
+                  </div>
                   <div className="absolute bottom-2 left-2 right-2">
                     <p className="font-headline text-xs text-white leading-tight">{asana.sanskrit}</p>
                   </div>
