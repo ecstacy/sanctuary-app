@@ -142,10 +142,17 @@ const DOSHA_RESULTS = {
     color: 'from-[#7b93a8] to-[#b8d4e8]',
     bgColor: 'bg-[#e8f0f6]',
     textColor: 'text-[#3d5a73]',
+    accentHex: '#3d5a73',
     tagline: 'The Creative Whirlwind',
     description: 'You are movement itself \u2014 quick-thinking, imaginative, and beautifully spontaneous. Like the wind, you bring change and inspiration wherever you go.',
     strengths: ['Creative & artistic', 'Quick learner', 'Adaptable & flexible', 'Enthusiastic spirit'],
     balanceTips: ['Ground yourself with warm, cooked foods', 'Establish a calming daily routine', 'Prioritise warmth and rest', 'Practice slow, grounding yoga'],
+    qualities: ['Light', 'Dry', 'Cold', 'Mobile', 'Subtle'],
+    season: 'Autumn & Early Winter',
+    timeOfDay: '2 AM \u2013 6 AM & 2 PM \u2013 6 PM',
+    taste: 'Sweet, Sour & Salty foods pacify Vata',
+    yoga: 'Slow, grounding flows \u2014 Tadasana, Warrior I & II, Child\'s Pose, Savasana',
+    meditation: 'Body scan & grounding visualisations to anchor the restless mind',
   },
   pitta: {
     name: 'Pitta',
@@ -154,10 +161,17 @@ const DOSHA_RESULTS = {
     color: 'from-[#c47a3a] to-[#f0c987]',
     bgColor: 'bg-[#fef3e2]',
     textColor: 'text-[#8b5a2b]',
+    accentHex: '#8b5a2b',
     tagline: 'The Fierce Transformer',
     description: 'You are fire incarnate \u2014 sharp, determined, and brilliantly focused. Your intensity transforms everything it touches.',
     strengths: ['Natural leader', 'Sharp intellect', 'Courageous & bold', 'Strong digestion'],
     balanceTips: ['Cool down with fresh, sweet foods', 'Avoid overworking \u2014 rest is not weakness', 'Spend time near water', 'Practice cooling breathwork'],
+    qualities: ['Hot', 'Sharp', 'Light', 'Oily', 'Liquid'],
+    season: 'Summer & Late Spring',
+    timeOfDay: '10 AM \u2013 2 PM & 10 PM \u2013 2 AM',
+    taste: 'Sweet, Bitter & Astringent foods pacify Pitta',
+    yoga: 'Cooling, non-competitive flows \u2014 Moon Salutation, Forward Folds, Twists, Pigeon Pose',
+    meditation: 'Loving-kindness & cooling breath (Sheetali) to calm the inner fire',
   },
   kapha: {
     name: 'Kapha',
@@ -166,11 +180,31 @@ const DOSHA_RESULTS = {
     color: 'from-[#6b8f5e] to-[#b8d4a8]',
     bgColor: 'bg-[#edf5e8]',
     textColor: 'text-[#3d5e34]',
+    accentHex: '#3d5e34',
     tagline: 'The Steady Mountain',
     description: 'You are earth embodied \u2014 steady, nurturing, and deeply resilient. Your calm presence is a sanctuary for everyone around you.',
     strengths: ['Loyal & compassionate', 'Incredible endurance', 'Strong memory', 'Natural caretaker'],
     balanceTips: ['Embrace variety and stimulation', 'Move daily \u2014 even gentle walks count', 'Favour warm, spiced foods', 'Wake early and resist oversleeping'],
+    qualities: ['Heavy', 'Slow', 'Cool', 'Oily', 'Smooth'],
+    season: 'Late Winter & Spring',
+    timeOfDay: '6 AM \u2013 10 AM & 6 PM \u2013 10 PM',
+    taste: 'Pungent, Bitter & Astringent foods pacify Kapha',
+    yoga: 'Vigorous, energising flows \u2014 Sun Salutation, Backbends, Warrior III, Camel Pose',
+    meditation: 'Energising breathwork (Kapalabhati) & walking meditation to spark vitality',
   },
+}
+
+function getCompositionDescription(label, percentages, primary, secondary, isTridoshic, isDual) {
+  if (isTridoshic) return 'A rare and balanced constitution. All three doshas are equally expressed in your nature.'
+  if (isDual) return `You express ${capitalize(primary)} and ${capitalize(secondary)} almost equally. Your constitution shifts with seasons and lifestyle.`
+
+  const pPct = percentages[primary]
+  const sPct = percentages[secondary]
+  const gap = pPct - sPct
+
+  if (gap >= 40) return `${capitalize(primary)} is overwhelmingly dominant in your constitution. The other doshas play a minor supporting role.`
+  if (gap >= 20) return `${capitalize(primary)} is clearly your leading dosha. ${capitalize(secondary)} (${sPct}%) plays a moderate background role.`
+  return `${capitalize(primary)} leads your constitution, with ${capitalize(secondary)} (${sPct}%) as a notable secondary influence.`
 }
 
 // ─── Dosha Calculation ───────────────────────────────────────────────────────
@@ -484,19 +518,13 @@ export default function DoshaQuizPage() {
 
         {/* Gradient hero */}
         <div className={`relative bg-gradient-to-b ${primaryData.color} px-6 pt-12 pb-16 overflow-hidden`}>
-
-          {/* Decorative circles */}
           <div className="absolute top-8 right-8 w-32 h-32 rounded-full bg-white/10 animate-quiz-float" />
           <div className="absolute bottom-12 left-4 w-20 h-20 rounded-full bg-white/10 animate-quiz-float-delay" />
 
           <div className="relative z-10 text-center">
             <div className="animate-quiz-reveal">
-              <p className="font-label text-xs text-white/70 uppercase tracking-widest mb-3">
-                Your Prakriti Is
-              </p>
-              <h1 className="font-headline text-5xl text-white leading-none mb-2">
-                {label}
-              </h1>
+              <p className="font-label text-xs text-white/70 uppercase tracking-widest mb-3">Your Prakriti Is</p>
+              <h1 className="font-headline text-5xl text-white leading-none mb-2">{label}</h1>
               <p className="font-headline italic text-lg text-white/80 mb-4">
                 {isTridoshic ? 'The Rare Equilibrium' : primaryData.tagline}
               </p>
@@ -512,12 +540,9 @@ export default function DoshaQuizPage() {
 
         <div className="px-6 -mt-6">
 
-          {/* Dosha Breakdown — the centrepiece */}
+          {/* 1. Dosha Composition */}
           <div className="bg-surface rounded-lg p-6 shadow-md mb-5 animate-quiz-slide-up">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-5">
-              Your Dosha Composition
-            </p>
-
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-5">Your Dosha Composition</p>
             {[
               { key: primary, data: primaryData, pct: percentages[primary] },
               { key: secondary, data: secondaryData, pct: percentages[secondary] },
@@ -526,15 +551,9 @@ export default function DoshaQuizPage() {
               <div key={key} className="mb-4 last:mb-0">
                 <div className="flex items-center justify-between mb-1.5">
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-sm" style={{ color: DOSHA_BAR_COLORS[key].replace('bg-[', '').replace(']', '') }}>
-                      {data.emoji}
-                    </span>
-                    <span className="font-body font-semibold text-sm text-on-surface">
-                      {data.name}
-                    </span>
-                    <span className="font-label text-[9px] text-on-surface-variant/50 uppercase">
-                      {data.element}
-                    </span>
+                    <span className="material-symbols-outlined text-sm" style={{ color: DOSHA_BAR_COLORS[key].replace('bg-[', '').replace(']', '') }}>{data.emoji}</span>
+                    <span className="font-body font-semibold text-sm text-on-surface">{data.name}</span>
+                    <span className="font-label text-[9px] text-on-surface-variant/50 uppercase">{data.element}</span>
                   </div>
                   <span className="font-headline text-lg text-on-surface">{pct}%</span>
                 </div>
@@ -546,50 +565,39 @@ export default function DoshaQuizPage() {
                 </div>
               </div>
             ))}
-
             <p className="font-body text-xs text-on-surface-variant/50 italic mt-4 leading-relaxed">
-              {isTridoshic
-                ? 'A rare and balanced constitution. All three doshas are equally expressed in your nature.'
-                : isDual
-                ? `You express ${capitalize(primary)} and ${capitalize(secondary)} almost equally. Your constitution shifts with seasons and lifestyle.`
-                : `${capitalize(primary)} is your dominant dosha, with ${capitalize(secondary)} as a strong secondary influence.`
-              }
+              {getCompositionDescription(label, percentages, primary, secondary, isTridoshic, isDual)}
             </p>
           </div>
 
-          {/* Primary dosha description */}
+          {/* 2. What this means — primary description */}
           <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5 animate-quiz-slide-up`} style={{ animationDelay: '0.1s' }}>
             <div className="flex items-center gap-2 mb-3">
               <span className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>{primaryData.emoji}</span>
-              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.textColor.replace('text-[', '').replace(']', '') }}>
+              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
                 {isTridoshic ? 'Your Balanced Nature' : `Dominant: ${primaryData.name}`}
               </p>
             </div>
-            <p className="font-body text-sm text-on-surface leading-relaxed">
-              {primaryData.description}
-            </p>
+            <p className="font-body text-sm text-on-surface leading-relaxed">{primaryData.description}</p>
           </div>
 
-          {/* Secondary dosha — always shown */}
-          <div className="bg-surface-container rounded-lg p-6 mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.15s' }}>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="material-symbols-outlined text-on-surface-variant text-lg">{secondaryData.emoji}</span>
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
-                Secondary: {secondaryData.name}
-              </p>
-            </div>
-            <p className="font-body text-xs text-on-surface-variant leading-relaxed">
-              {secondaryData.description}
-            </p>
-          </div>
-
-          {/* Strengths from primary + secondary */}
-          <div className="bg-surface-container rounded-lg p-6 mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.2s' }}>
+          {/* 3. Qualities */}
+          <div className="bg-surface-container rounded-lg p-6 mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.13s' }}>
             <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
-              Your Natural Strengths
+              {primaryData.name} Qualities (Gunas)
             </p>
+            <div className="flex flex-wrap gap-2">
+              {primaryData.qualities.map((q, i) => (
+                <span key={i} className={`${primaryData.bgColor} ${primaryData.textColor} px-3 py-1.5 rounded-full font-label text-xs font-medium`}>{q}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* 4. Strengths */}
+          <div className="bg-surface-container rounded-lg p-6 mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.16s' }}>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">Your Natural Strengths</p>
             <div className="grid grid-cols-2 gap-3">
-              {[...primaryData.strengths.slice(0, 3), ...secondaryData.strengths.slice(0, 1)].map((strength, i) => (
+              {[...primaryData.strengths, ...(isDual ? secondaryData.strengths.slice(0, 2) : [])].map((strength, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
                   <span className="font-body text-xs text-on-surface">{strength}</span>
@@ -598,11 +606,9 @@ export default function DoshaQuizPage() {
             </div>
           </div>
 
-          {/* Balance tips from primary */}
-          <div className="bg-surface-container-low rounded-lg p-6 mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.25s' }}>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
-              Stay In Balance
-            </p>
+          {/* 5. Stay In Balance — actionable */}
+          <div className="bg-surface-container-low rounded-lg p-6 mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.19s' }}>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">Stay In Balance</p>
             <div className="flex flex-col gap-3">
               {primaryData.balanceTips.map((tip, i) => (
                 <div key={i} className="flex items-start gap-3">
@@ -613,15 +619,47 @@ export default function DoshaQuizPage() {
             </div>
           </div>
 
-          {/* Ayurvedic context */}
-          <div className="bg-surface-container-low rounded-lg p-5 mb-5 flex items-start gap-3 animate-quiz-slide-up" style={{ animationDelay: '0.3s' }}>
+          {/* 6. Lifestyle Guide — season, time, taste */}
+          <div className="bg-surface-container rounded-lg overflow-hidden mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.22s' }}>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-6 pt-6 pb-4">Ayurvedic Lifestyle Guide</p>
+            {[
+              { icon: 'calendar_month', title: 'Peak Season', text: `${primaryData.season} \u2014 ${primaryData.name} is naturally elevated during this time. Extra care is needed.` },
+              { icon: 'schedule', title: `${primaryData.name} Hours`, text: `${primaryData.timeOfDay} \u2014 These are the hours when ${primaryData.name} energy peaks.` },
+              { icon: 'restaurant', title: 'Balancing Tastes', text: primaryData.taste },
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-4 px-6 py-4 border-t border-surface-container-high">
+                <div className={`w-10 h-10 rounded-full ${primaryData.bgColor} flex items-center justify-center flex-shrink-0`}>
+                  <span className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>{item.icon}</span>
+                </div>
+                <div>
+                  <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{item.title}</p>
+                  <p className="font-body text-xs text-on-surface-variant leading-relaxed">{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* 7. Yoga & Meditation */}
+          <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5 animate-quiz-slide-up`} style={{ animationDelay: '0.25s' }}>
+            <div className="flex items-center gap-2 mb-3">
+              <span className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>self_care</span>
+              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>Yoga & Movement</p>
+            </div>
+            <p className="font-body text-sm text-on-surface leading-relaxed mb-4">{primaryData.yoga}</p>
+            <div className="flex items-center gap-2 mb-2">
+              <span className={`material-symbols-outlined text-base ${primaryData.textColor}`}>air</span>
+              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>Meditation & Breathwork</p>
+            </div>
+            <p className="font-body text-sm text-on-surface leading-relaxed">{primaryData.meditation}</p>
+          </div>
+
+          {/* 8. About Prakriti — educational */}
+          <div className="bg-surface-container-low rounded-lg p-5 mb-5 flex items-start gap-3 animate-quiz-slide-up" style={{ animationDelay: '0.28s' }}>
             <span className="material-symbols-outlined text-primary text-base mt-0.5">auto_awesome</span>
             <div>
-              <p className="font-body font-semibold text-sm text-on-surface mb-1">
-                About Your Prakriti
-              </p>
+              <p className="font-body font-semibold text-sm text-on-surface mb-1">Understanding Prakriti</p>
               <p className="font-body text-xs text-on-surface-variant leading-relaxed">
-                In Ayurveda, everyone carries all three doshas. Your Prakriti (natural constitution) reflects their unique ratio — set at birth and stable throughout life. When your doshas shift out of balance (Vikriti), symptoms arise. This quiz reflects your Prakriti. Seasonal changes, diet, and lifestyle all influence your current state.
+                In Ayurveda, your Prakriti is your birth constitution \u2014 the unique ratio of Vata, Pitta, and Kapha you were born with. It remains stable throughout life. When doshas shift due to diet, stress, or seasons, that temporary state is called Vikriti. The goal is to bring Vikriti back in alignment with Prakriti.
               </p>
             </div>
           </div>
@@ -631,7 +669,7 @@ export default function DoshaQuizPage() {
             onClick={saveDosha}
             disabled={saving}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mb-3 animate-quiz-slide-up"
-            style={{ animationDelay: '0.35s' }}
+            style={{ animationDelay: '0.31s' }}
           >
             {saving ? 'Saving...' : 'Save My Dosha Profile'}
           </button>

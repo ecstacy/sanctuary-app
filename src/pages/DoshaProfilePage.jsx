@@ -203,7 +203,14 @@ export default function DoshaProfilePage() {
                 ? 'A rare and balanced constitution. All three doshas are equally expressed in your nature.'
                 : isDual
                 ? `You express ${capitalize(primary)} and ${capitalize(secondary)} almost equally. Your constitution shifts with seasons and lifestyle.`
-                : `${capitalize(primary)} is your dominant dosha, with ${secondary ? capitalize(secondary) + ' as a strong secondary influence.' : 'the other doshas in balance.'}`
+                : (() => {
+                    const pPct = percentages?.[primary] || 0
+                    const sPct = percentages?.[secondary] || 0
+                    const gap = pPct - sPct
+                    if (gap >= 40) return `${capitalize(primary)} is overwhelmingly dominant in your constitution. The other doshas play a minor supporting role.`
+                    if (gap >= 20) return `${capitalize(primary)} is clearly your leading dosha. ${capitalize(secondary)} (${sPct}%) plays a moderate background role.`
+                    return `${capitalize(primary)} leads your constitution, with ${capitalize(secondary)} (${sPct}%) as a notable secondary influence.`
+                  })()
               }
             </p>
           </div>
