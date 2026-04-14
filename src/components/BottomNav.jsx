@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
 
 const TABS = [
   { path: '/home', label: 'Home', icon: 'home_max' },
@@ -7,13 +8,52 @@ const TABS = [
   { path: '/profile', label: 'Profile', icon: 'person_2' },
 ]
 
+const SCROLL_THRESHOLD = 10
+
 export default function BottomNav() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  const [visible, setVisible] = useState(true)
+  const lastScrollY = useRef(0)
+  const ticking = useRef(false)
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (ticking.current) return
+      ticking.current = true
+
+      requestAnimationFrame(() => {
+        const currentY = window.scrollY
+        const delta = currentY - lastScrollY.current
+
+        if (delta > SCROLL_THRESHOLD && currentY > 80) {
+          // Scrolling down past the top area — hide
+          setVisible(false)
+        } else if (delta < -SCROLL_THRESHOLD || currentY < 80) {
+          // Scrolling up or near top — show
+          setVisible(true)
+        }
+
+        lastScrollY.current = currentY
+        ticking.current = false
+      })
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // Always show on route change
+  useEffect(() => {
+    setVisible(true)
+    lastScrollY.current = 0
+  }, [pathname])
 
   return (
     <nav
-      className="fixed bottom-0 left-0 w-full bg-background/90 backdrop-blur-xl rounded-t-[2rem] px-4 pt-3 flex justify-around items-center shadow-[0_-12px_32px_rgba(28,28,26,0.04)] animate-nav-enter"
+      className={`fixed bottom-0 left-0 w-full bg-background/95 backdrop-blur-xl rounded-t-[2rem] px-4 pt-3 flex justify-around items-center shadow-[0_-8px_24px_rgba(28,28,26,0.06)] z-30 transition-transform duration-300 ease-out ${
+        visible ? 'translate-y-0' : 'translate-y-full'
+      }`}
       style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
     >
       {TABS.map(tab => {
