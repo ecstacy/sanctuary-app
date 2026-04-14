@@ -708,22 +708,24 @@ export default function DoshaQuizPage() {
       {/* Question */}
       <div
         key={currentQ}
-        className="flex-1 flex flex-col px-6 pt-5 pb-8 animate-quiz-enter"
+        className="flex-1 flex flex-col px-6 pt-3 pb-5 animate-quiz-enter"
       >
-        {/* Question icon */}
-        <div className="w-14 h-14 rounded-full bg-primary-container flex items-center justify-center mb-5">
-          <span className="material-symbols-outlined text-primary text-2xl">{question.icon}</span>
+        {/* Question icon + text */}
+        <div className="flex items-center gap-3 mb-2">
+          <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
+            <span className="material-symbols-outlined text-primary text-xl">{question.icon}</span>
+          </div>
+          <p className="font-body text-[11px] text-on-surface-variant/60 italic flex-1">
+            {question.subtitle}
+          </p>
         </div>
 
-        <h2 className="font-headline text-2xl text-on-surface leading-snug mb-2">
+        <h2 className="font-headline text-xl text-on-surface leading-snug mb-4">
           {question.question}
         </h2>
-        <p className="font-body text-xs text-on-surface-variant/60 italic mb-7">
-          {question.subtitle}
-        </p>
 
         {/* Options */}
-        <div className="flex flex-col gap-3 mt-auto">
+        <div className="flex flex-col gap-2.5 mt-auto">
           {question.options.map((option, i) => {
             const isSelected = selectedOption === option.dosha
             return (
@@ -731,7 +733,7 @@ export default function DoshaQuizPage() {
                 key={i}
                 onClick={() => handleSelect(option.dosha)}
                 disabled={animating}
-                className={`flex items-center gap-4 p-4 rounded-lg text-left transition-all duration-300 ${
+                className={`flex items-center gap-3 px-3.5 py-3 rounded-lg text-left transition-all duration-300 ${
                   isSelected
                     ? 'bg-primary text-on-primary scale-[0.98]'
                     : animating
@@ -739,31 +741,31 @@ export default function DoshaQuizPage() {
                     : 'bg-surface-container active:scale-[0.98]'
                 }`}
               >
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
+                <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
                   isSelected
                     ? 'bg-on-primary/15'
                     : 'bg-surface-container-high'
                 }`}>
-                  <span className={`material-symbols-outlined text-lg ${
+                  <span className={`material-symbols-outlined text-base ${
                     isSelected ? 'text-on-primary' : 'text-on-surface-variant'
                   }`}>
                     {option.icon}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className={`font-body font-semibold text-sm ${
+                  <p className={`font-body font-semibold text-sm leading-tight ${
                     isSelected ? 'text-on-primary' : 'text-on-surface'
                   }`}>
                     {option.label}
                   </p>
-                  <p className={`font-label text-[11px] mt-0.5 leading-relaxed ${
+                  <p className={`font-label text-[10px] mt-0.5 leading-snug ${
                     isSelected ? 'text-on-primary/70' : 'text-on-surface-variant'
                   }`}>
                     {option.desc}
                   </p>
                 </div>
                 {isSelected && (
-                  <span className="material-symbols-outlined text-on-primary text-lg flex-shrink-0">
+                  <span className="material-symbols-outlined text-on-primary text-base flex-shrink-0">
                     check_circle
                   </span>
                 )}
