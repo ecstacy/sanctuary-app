@@ -17,13 +17,13 @@ const DOSHA_DATA = {
     tagline: 'The Creative Whirlwind',
     description: 'You are movement itself — quick-thinking, imaginative, and beautifully spontaneous. Like the wind, you bring change and inspiration wherever you go.',
     strengths: ['Creative & artistic', 'Quick learner', 'Adaptable & flexible', 'Enthusiastic spirit'],
-    balanceTips: ['Ground yourself with warm, cooked foods', 'Establish a calming daily routine', 'Prioritise warmth and rest', 'Practice slow, grounding yoga'],
+    balanceTips: ['Ground yourself with warm, cooked foods', 'Establish a calming daily routine', 'Prioritize warmth and rest', 'Practice slow, grounding yoga'],
     qualities: ['Light', 'Dry', 'Cold', 'Mobile', 'Subtle'],
     season: 'Autumn & Early Winter',
     timeOfDay: '2 AM – 6 AM & 2 PM – 6 PM',
     taste: 'Sweet, Sour & Salty foods pacify Vata',
     yoga: 'Slow, grounding flows — Tadasana, Warrior I & II, Child\'s Pose, Savasana',
-    meditation: 'Body scan & grounding visualisations to anchor the restless mind',
+    meditation: 'Body scan & grounding visualizations to anchor the restless mind',
   },
   pitta: {
     name: 'Pitta',
@@ -57,13 +57,13 @@ const DOSHA_DATA = {
     tagline: 'The Steady Mountain',
     description: 'You are earth embodied — steady, nurturing, and deeply resilient. Your calm presence is a sanctuary for everyone around you.',
     strengths: ['Loyal & compassionate', 'Incredible endurance', 'Strong memory', 'Natural caretaker'],
-    balanceTips: ['Embrace variety and stimulation', 'Move daily — even gentle walks count', 'Favour warm, spiced foods', 'Wake early and resist oversleeping'],
+    balanceTips: ['Embrace variety and stimulation', 'Move daily — even gentle walks count', 'Favor warm, spiced foods', 'Wake early and resist oversleeping'],
     qualities: ['Heavy', 'Slow', 'Cool', 'Oily', 'Smooth'],
     season: 'Late Winter & Spring',
     timeOfDay: '6 AM – 10 AM & 6 PM – 10 PM',
     taste: 'Pungent, Bitter & Astringent foods pacify Kapha',
-    yoga: 'Vigorous, energising flows — Sun Salutation, Backbends, Warrior III, Camel Pose',
-    meditation: 'Energising breathwork (Kapalabhati) & walking meditation to spark vitality',
+    yoga: 'Vigorous, energizing flows — Sun Salutation, Backbends, Warrior III, Camel Pose',
+    meditation: 'Energizing breathwork (Kapalabhati) & walking meditation to spark vitality',
   },
 }
 
@@ -97,7 +97,7 @@ export default function DoshaProfilePage() {
           Your Dosha Awaits
         </h2>
         <p className="font-body text-sm text-on-surface-variant text-center leading-relaxed mb-8 max-w-xs stagger-3">
-          Discover your unique Ayurvedic constitution through our guided quiz and unlock personalised wellness insights.
+          Discover your unique Ayurvedic constitution through our guided quiz and unlock personalized wellness insights.
         </p>
         <button
           onClick={() => navigate('/quiz')}
@@ -143,7 +143,7 @@ export default function DoshaProfilePage() {
 
         <div className="relative z-10 text-center mt-4 stagger-1">
           <p className="font-label text-[10px] text-white/60 uppercase tracking-widest mb-2">
-            Your Prakriti
+            Your Dosha Type
           </p>
           <h1 className="font-headline text-5xl text-white leading-none mb-2">
             {doshaLabel}

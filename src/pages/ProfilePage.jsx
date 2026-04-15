@@ -385,7 +385,7 @@ export default function ProfilePage() {
               <span className="material-symbols-outlined text-on-surface-variant text-lg">wc</span>
               <div className="flex-1">
                 <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Gender</p>
-                <p className="font-body text-[10px] text-on-surface-variant/40 mt-0.5">Optional · helps personalise recommendations</p>
+                <p className="font-body text-[10px] text-on-surface-variant/40 mt-0.5">Optional · helps personalize recommendations</p>
               </div>
               {savingGender && (
                 <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />

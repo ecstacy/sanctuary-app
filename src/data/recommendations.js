@@ -157,7 +157,7 @@ const RECOMMENDATIONS = [
     color: 'from-[#c4873a] to-[#f0d087]',
     description: 'Fire up your Prana (life force) with invigorating practices that transform sluggishness into vibrant energy.',
     practices: [
-      { title: 'Sun Salutation', subtitle: 'Surya Namaskar', duration: '12 min', level: 'Beginner', icon: 'wb_sunny', description: '5 rounds of the classic energising flow. Each round builds heat and vitality.' },
+      { title: 'Sun Salutation', subtitle: 'Surya Namaskar', duration: '12 min', level: 'Beginner', icon: 'wb_sunny', description: '5 rounds of the classic energizing flow. Each round builds heat and vitality.' },
       { title: 'Warrior III', subtitle: 'Virabhadrasana III', duration: '3 min', level: 'Intermediate', icon: 'fitness_center', description: 'A powerful balancing pose that demands full-body engagement and presence.' },
       { title: 'Camel Pose', subtitle: 'Ustrasana', duration: '3 min', level: 'Intermediate', icon: 'self_care', description: 'A deep backbend that opens the chest and stimulates the adrenal glands.' },
       { title: 'Chair Pose', subtitle: 'Utkatasana', duration: '2 min', level: 'Beginner', icon: 'event_seat', description: 'Burns through Kapha lethargy and activates the legs, core, and willpower.' },
@@ -188,7 +188,7 @@ const RECOMMENDATIONS = [
     label: 'Menstrual Comfort',
     icon: 'spa',
     color: 'from-[#a85e7b] to-[#e8a8c8]',
-    description: 'Gentle, restorative practices that honour your cycle and ease cramps, bloating, and mood shifts naturally.',
+    description: 'Gentle, restorative practices that honor your cycle and ease cramps, bloating, and mood shifts naturally.',
     practices: [
       { title: 'Reclined Butterfly', subtitle: 'Supta Baddha Konasana', duration: '5 min', level: 'Beginner', icon: 'spa', description: 'Opens the pelvis and encourages blood flow. Use a bolster under the back for extra comfort.' },
       { title: 'Child\'s Pose', subtitle: 'Balasana (Wide Knee)', duration: '4 min', level: 'Beginner', icon: 'spa', description: 'A wide-knee variation that creates space for the belly and gently stretches the lower back.' },
@@ -218,8 +218,8 @@ export const POPULAR_SEARCHES = [
 export function searchRecommendations(query, { gender } = {}) {
   if (!query || query.trim().length < 2) return []
 
-  const normalised = query.toLowerCase().trim()
-  const words = normalised.split(/\s+/)
+  const normalized = query.toLowerCase().trim()
+  const words = normalized.split(/\s+/)
 
   const scored = RECOMMENDATIONS
     .filter(rec => !gender || !rec.excludeGender || !rec.excludeGender.includes(gender))
@@ -227,7 +227,7 @@ export function searchRecommendations(query, { gender } = {}) {
     let score = 0
 
     // Exact full-query match in keywords (highest weight)
-    if (rec.keywords.some(k => normalised.includes(k) || k.includes(normalised))) {
+    if (rec.keywords.some(k => normalized.includes(k) || k.includes(normalized))) {
       score += 10
     }
 

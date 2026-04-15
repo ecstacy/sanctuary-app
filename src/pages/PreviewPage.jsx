@@ -35,7 +35,7 @@ const WHY_ACCOUNT = [
   },
   {
     icon: 'energy_savings_leaf',
-    title: 'Personalised to your constitution',
+    title: 'Personalized to your constitution',
     description: 'Your Dosha profile and daily recommendations evolve as we learn what works for you.',
   },
   {
@@ -74,7 +74,7 @@ export default function PreviewPage() {
         {/* Heading */}
         <div className="mb-8">
           <p className="font-label text-xs text-primary uppercase tracking-widest mb-2">
-            Your Personalised Preview
+            Your Personalized Preview
           </p>
           <h1 className="font-headline text-4xl text-on-surface leading-tight">
             Your path to{' '}
@@ -96,7 +96,7 @@ export default function PreviewPage() {
             <div>
               <p className="font-body font-semibold text-on-surface text-sm">{preview.label} Sequence</p>
               <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
-                Personalised practice{struggles.length > 1 ? ` · +${struggles.length - 1} more` : ''}
+                Personalized practice{struggles.length > 1 ? ` · +${struggles.length - 1} more` : ''}
               </p>
             </div>
           </div>

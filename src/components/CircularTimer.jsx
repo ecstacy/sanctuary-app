@@ -1,5 +1,5 @@
 // ─── Circular Countdown Timer ───────────────────────────────────────────────
-// SVG-based circular timer with animated stroke and centre countdown.
+// SVG-based circular timer with animated stroke and center countdown.
 
 export default function CircularTimer({ duration, remaining, isPaused, size = 160 }) {
   const radius = (size - 12) / 2

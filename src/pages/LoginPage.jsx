@@ -200,13 +200,13 @@ export default function LoginPage() {
           className="w-full py-4 bg-surface-container-low flex items-center justify-center gap-3 rounded-full font-label text-sm text-on-surface-variant tracking-wide mt-3 active:scale-95 transition-all"
         >
           <span className="material-symbols-outlined text-xl text-primary">lock_reset</span>
-          I have a reset link
+          I have a password reset link
         </button>
 
         <p className="text-center text-xs text-on-surface-variant/60 font-label mt-10">
           New here?{' '}
           <button
-            onClick={() => navigate('/discover')}
+            onClick={() => navigate('/signup')}
             className="text-primary font-semibold"
           >
             Start your journey

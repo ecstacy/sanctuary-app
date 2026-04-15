@@ -95,11 +95,7 @@ export default function DiscoverPage() {
               >
                 <span className="material-symbols-outlined text-on-primary text-sm">arrow_forward</span>
               </button>
-            ) : (
-              <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                <span className="material-symbols-outlined text-on-surface-variant/20 text-lg">mic</span>
-              </div>
-            )}
+            ) : null}
           </div>
         </div>
 
@@ -180,7 +176,7 @@ export default function DiscoverPage() {
             {[
               { key: 'stress', label: 'Stress Relief', desc: 'Calm your mind and release tension', icon: 'psychiatry', time: '15 min' },
               { key: 'sleep', label: 'Better Sleep', desc: 'Wind down and prepare for deep rest', icon: 'bedtime', time: '12 min' },
-              { key: 'energy', label: 'Energy Boost', desc: 'Wake up your body and revitalise', icon: 'bolt', time: '18 min' },
+              { key: 'energy', label: 'Energy Boost', desc: 'Wake up your body and revitalize', icon: 'bolt', time: '18 min' },
               { key: 'flexibility', label: 'Flexibility Flow', desc: 'Release stiffness and improve mobility', icon: 'self_care', time: '20 min' },
             ].map(r => (
               <button

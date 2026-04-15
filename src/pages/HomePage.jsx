@@ -190,7 +190,7 @@ export default function HomePage() {
             </div>
             <p className="font-headline text-3xl text-primary leading-none">{stats.streak}</p>
             <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">
-              {stats.streak === 0 ? 'Start today' : stats.streak === 1 ? 'day' : 'consecutive days'}
+              {stats.streak === 0 ? 'Start today' : stats.streak === 1 ? '1 day so far' : 'consecutive days'}
             </p>
           </button>
           <button
@@ -348,7 +348,7 @@ export default function HomePage() {
               <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">Daily Focus</p>
               <h3 className="font-headline text-lg text-on-surface mb-1">The Breath</h3>
               <p className="font-body text-xs text-on-surface-variant leading-relaxed mb-3">
-                Proper breathing is the foundation of all wellness. Take a moment to align.
+                Proper breathing is the foundation of all wellness. Take a moment to center yourself.
               </p>
               <button
                 onClick={() => navigate('/routine', { state: { routineKey: 'stress' } })}
@@ -394,7 +394,7 @@ export default function HomePage() {
           </h3>
           {!profile?.dosha && (
             <p className="font-body text-xs text-on-primary/70 leading-relaxed mb-4">
-              Take the Dosha quiz to unlock personalised recommendations.
+              Take the Dosha quiz to unlock personalized recommendations.
             </p>
           )}
           <button

@@ -99,7 +99,7 @@ export default function SignupPage() {
                 <span className="italic font-normal">language.</span>
               </h1>
               <p className="text-on-surface-variant text-sm mt-3 leading-relaxed">
-                The Sanctuary is available in English and German.
+                Choose your preferred language for The Sanctuary.
               </p>
             </div>
 

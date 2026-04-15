@@ -74,7 +74,7 @@ export default function WelcomePage() {
       {/* Feature Cards */}
       <section className="px-6 py-12 flex flex-col gap-5">
 
-        {/* Personalised Ayurveda */}
+        {/* Personalized Ayurveda */}
         <div className="bg-surface-container rounded-lg p-8 relative overflow-hidden group stagger-4">
           <span className="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-[10px] font-label uppercase tracking-widest mb-5 inline-block">
             Daily Rituals
@@ -96,7 +96,7 @@ export default function WelcomePage() {
         </div>
 
         {/* Two small cards */}
-        <div className="grid grid-cols-2 gap-5 stagger-5">
+        <div className="stagger-5">
           <div className="bg-tertiary-container rounded-lg p-6 flex flex-col items-center text-center">
             <div className="w-14 h-14 bg-tertiary-fixed-dim rounded-full flex items-center justify-center mb-4">
               <span className="material-symbols-outlined text-on-tertiary-container">self_care</span>
@@ -106,15 +106,6 @@ export default function WelcomePage() {
               Short, guided meditations for the busy modern soul.
             </p>
           </div>
-          <div className="bg-secondary-container rounded-lg p-6 flex flex-col justify-center gap-3">
-            <div className="w-12 h-12 bg-white/30 rounded-full flex items-center justify-center">
-              <span className="material-symbols-outlined text-secondary">water_drop</span>
-            </div>
-            <div>
-              <h4 className="font-headline text-base text-on-surface">Pure Hydration</h4>
-              <p className="text-[10px] text-on-surface-variant uppercase tracking-wider font-label">Ayurvedic Routine</p>
-            </div>
-          </div>
         </div>
 
         {/* Breath Lab */}
@@ -122,7 +113,7 @@ export default function WelcomePage() {
           <div className="flex-1">
             <h3 className="font-headline text-2xl text-on-surface mb-3">The Breath Lab</h3>
             <p className="text-on-surface-variant text-sm leading-relaxed">
-              Master the art of Pranayama to regulate your nervous system and find instant calm.
+              Master the art of Pranayama (yogic breathing) to regulate your nervous system and find instant calm.
             </p>
           </div>
           <div className="relative w-20 h-20 flex-shrink-0 flex items-center justify-center">
@@ -164,7 +155,7 @@ export default function WelcomePage() {
           Start Your Journey
         </button>
         <button
-          onClick={() => navigate('/discover')}
+          onClick={() => navigate('/login')}
           className="mt-6 font-label text-xs text-on-surface-variant/60 hover:text-primary transition-colors uppercase tracking-widest"
         >
           Already have an account? Sign in

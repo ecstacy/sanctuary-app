@@ -17,7 +17,7 @@ export function useVoiceGuidance() {
     function pickVoice() {
       const voices = speechSynthesis.getVoices()
       if (!voices.length) return
-      // Prefer English voices; prioritise non-local (network) voices for quality
+      // Prefer English voices; prioritize non-local (network) voices for quality
       voiceRef.current =
         voices.find(v => v.lang.startsWith('en') && !v.localService) ||
         voices.find(v => v.lang.startsWith('en-') && v.name.includes('Female')) ||

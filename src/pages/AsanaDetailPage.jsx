@@ -23,7 +23,7 @@ const CATEGORY_LABELS = {
 const PRECAUTIONS = {
   tadasana: ['Avoid locking your knees — keep a micro-bend', 'If you feel dizzy, widen your stance slightly', 'Those with low blood pressure should be mindful when holding still'],
   warrior1: ['Keep your front knee directly over your ankle, not beyond', 'Avoid this pose if you have a hip or knee injury', 'Those with shoulder issues can keep hands on hips instead of overhead', 'Do not let your back knee cave inward'],
-  warrior2: ['Front knee should track over your second toe', 'Avoid if you have severe knee or hip injury', 'Keep your torso centred — do not lean over the front leg', 'Relax your shoulders away from your ears'],
+  warrior2: ['Front knee should track over your second toe', 'Avoid if you have severe knee or hip injury', 'Keep your torso centered — do not lean over the front leg', 'Relax your shoulders away from your ears'],
   tree: ['Never place your foot on the knee joint — above or below only', 'Use a wall for support if balance is difficult', 'Avoid if you have ankle or knee injuries', 'Keep your standing leg slightly bent if needed'],
   sukhasana: ['Place a cushion under your hips if your knees are above your hips', 'Avoid if you have a knee injury — try sitting on a chair instead', 'Do not force your knees down', 'Keep your spine tall, not collapsed'],
   seatedTwist: ['Never force the twist — let your breath guide the depth', 'Avoid during pregnancy', 'Those with herniated discs should be cautious', 'Always lengthen the spine before twisting'],
@@ -299,7 +299,7 @@ export default function AsanaDetailPage() {
               onClick={() => navigate('/quiz')}
               className="w-full mt-4 py-3 bg-primary/10 text-primary rounded-full font-label text-xs tracking-wide active:scale-95 transition-all"
             >
-              Take the Dosha Quiz for personalised insights
+              Take the Dosha Quiz for personalized insights
             </button>
           )}
         </div>

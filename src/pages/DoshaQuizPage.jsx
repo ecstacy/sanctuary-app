@@ -17,34 +17,34 @@ const QUESTIONS = [
   {
     category: 'body',
     question: 'When you look in the mirror, your frame is...',
-    subtitle: 'Be honest. The mirror never lies.',
+    subtitle: 'Your natural frame reveals which elemental energy dominates your body.',
     icon: 'straighten',
     options: [
-      { label: 'Light & lean', desc: 'Narrow shoulders, visible bones, limbs for days', dosha: 'vata', icon: 'expand' },
+      { label: 'Naturally slim', desc: 'Slender frame, long limbs, may find it hard to gain weight', dosha: 'vata', icon: 'expand' },
       { label: 'Medium & athletic', desc: 'Proportioned build, muscle comes easily', dosha: 'pitta', icon: 'fitness_center' },
-      { label: 'Solid & sturdy', desc: 'Broad frame, naturally strong, curves in the right places', dosha: 'kapha', icon: 'shield' },
+      { label: 'Solid & sturdy', desc: 'Broad frame, naturally strong, gains weight more easily', dosha: 'kapha', icon: 'shield' },
     ],
   },
   {
     category: 'body',
     question: 'Your skin tends to be...',
-    subtitle: 'Your skin tells your constitution\'s story.',
+    subtitle: 'Skin type is one of the clearest physical indicators of your dosha.',
     icon: 'dermatology',
     options: [
       { label: 'Dry & cool', desc: 'Craves moisture, rough patches, feels the cold', dosha: 'vata', icon: 'ac_unit' },
       { label: 'Warm & sensitive', desc: 'Flushes easily, prone to redness, sunburn-prone', dosha: 'pitta', icon: 'local_fire_department' },
-      { label: 'Smooth & supple', desc: 'Naturally moisturised, thick, glowing', dosha: 'kapha', icon: 'water_drop' },
+      { label: 'Smooth & supple', desc: 'Naturally moisturized, thick, glowing', dosha: 'kapha', icon: 'water_drop' },
     ],
   },
   {
     category: 'body',
     question: 'Your appetite is...',
-    subtitle: 'The belly knows what the belly wants.',
+    subtitle: 'Digestion is central to Ayurveda — your hunger pattern reflects your inner fire (Agni).',
     icon: 'restaurant',
     options: [
       { label: 'Irregular & unpredictable', desc: 'Sometimes starving, sometimes forgetting to eat entirely', dosha: 'vata', icon: 'shuffle' },
-      { label: 'Strong & punctual', desc: 'Hangry is a real state of emergency. Do not skip meals.', dosha: 'pitta', icon: 'alarm' },
-      { label: 'Steady & moderate', desc: 'Can skip meals without drama, slow to get hungry', dosha: 'kapha', icon: 'timelapse' },
+      { label: 'Strong & punctual', desc: 'Strong appetite on a regular schedule — missing a meal makes you irritable', dosha: 'pitta', icon: 'alarm' },
+      { label: 'Steady & moderate', desc: 'Steady appetite, can comfortably skip a meal without much discomfort', dosha: 'kapha', icon: 'timelapse' },
     ],
   },
 
@@ -52,21 +52,21 @@ const QUESTIONS = [
   {
     category: 'mind',
     question: 'Under stress, you typically...',
-    subtitle: 'We all have our signature stress move.',
+    subtitle: 'How you handle stress reveals which dosha governs your mind.',
     icon: 'psychology_alt',
     options: [
-      { label: 'Worry & overthink', desc: 'Mind races at 3am, anxiety spirals, "what if" on repeat', dosha: 'vata', icon: 'cloud' },
-      { label: 'Get irritable & sharp', desc: 'Short fuse, frustrated, need to fix everything NOW', dosha: 'pitta', icon: 'flash_on' },
+      { label: 'Worry & overthink', desc: 'Tends toward worry, overthinking, and difficulty quieting the mind', dosha: 'vata', icon: 'cloud' },
+      { label: 'Get irritable & sharp', desc: 'Quick to frustration, impatient, driven to fix problems immediately', dosha: 'pitta', icon: 'flash_on' },
       { label: 'Withdraw & shut down', desc: 'Go quiet, comfort eat, resist any change', dosha: 'kapha', icon: 'do_not_disturb' },
     ],
   },
   {
     category: 'mind',
     question: 'Your mind works like a...',
-    subtitle: 'Every brain has its own operating system.',
+    subtitle: 'Each dosha has a distinct thinking style — quick, focused, or deep.',
     icon: 'memory',
     options: [
-      { label: 'Hummingbird', desc: 'Quick, darting, creative bursts — a thousand tabs open', dosha: 'vata', icon: 'flutter_dash' },
+      { label: 'Hummingbird', desc: 'Quick, creative, moves between ideas rapidly — easily inspired but easily distracted', dosha: 'vata', icon: 'flutter_dash' },
       { label: 'Laser beam', desc: 'Focused, sharp, strategic — one goal at a time', dosha: 'pitta', icon: 'track_changes' },
       { label: 'Deep lake', desc: 'Calm, reflective, steady — slow to start, never forgets', dosha: 'kapha', icon: 'water' },
     ],
@@ -74,7 +74,7 @@ const QUESTIONS = [
   {
     category: 'mind',
     question: 'Your sleep pattern is...',
-    subtitle: 'The night reveals what the day conceals.',
+    subtitle: 'Sleep quality is shaped by your dominant dosha — Vata sleeps light, Kapha sleeps deep.',
     icon: 'bedtime',
     options: [
       { label: 'Light & interrupted', desc: 'Takes forever to fall asleep, wakes at every creak', dosha: 'vata', icon: 'visibility' },
@@ -87,7 +87,7 @@ const QUESTIONS = [
   {
     category: 'energy',
     question: 'Your natural energy pattern is...',
-    subtitle: 'Are you a sparkler or a slow-burning candle?',
+    subtitle: 'Your energy rhythm is one of the strongest signals of your constitution.',
     icon: 'electric_bolt',
     options: [
       { label: 'Bursts & crashes', desc: 'Quick surges of energy followed by "I need a nap"', dosha: 'vata', icon: 'show_chart' },
@@ -98,10 +98,10 @@ const QUESTIONS = [
   {
     category: 'energy',
     question: 'In cold weather, you...',
-    subtitle: 'Your relationship with winter says a lot.',
+    subtitle: 'Your response to cold reflects your body\'s natural heat balance.',
     icon: 'thermostat',
     options: [
-      { label: 'Freeze instantly', desc: 'Cold hands, cold feet, cold soul. Layer everything.', dosha: 'vata', icon: 'severe_cold' },
+      { label: 'Freeze instantly', desc: 'Always cold — cold hands, cold feet, needs extra layers year-round', dosha: 'vata', icon: 'severe_cold' },
       { label: 'Handle it fine', desc: 'Actually prefer cool weather, built-in radiator', dosha: 'pitta', icon: 'thermostat_auto' },
       { label: 'Tolerate it well', desc: 'Don\'t love it, but rarely shiver. Natural insulation.', dosha: 'kapha', icon: 'cloudy' },
     ],
@@ -111,7 +111,7 @@ const QUESTIONS = [
   {
     category: 'lifestyle',
     question: 'Your ideal weekend looks like...',
-    subtitle: 'Guilty pleasures reveal constitutional truths.',
+    subtitle: 'What you crave on your day off reflects your dosha\'s natural tendencies.',
     icon: 'weekend',
     options: [
       { label: 'Adventure & spontaneity', desc: 'New places, new experiences, can\'t sit still', dosha: 'vata', icon: 'paragliding' },
@@ -122,7 +122,7 @@ const QUESTIONS = [
   {
     category: 'lifestyle',
     question: 'Friends would describe you as...',
-    subtitle: 'The final piece of the puzzle.',
+    subtitle: 'How others see you often confirms your dominant dosha energy.',
     icon: 'groups',
     options: [
       { label: 'Creative & unpredictable', desc: 'The spontaneous one, always full of wild ideas', dosha: 'vata', icon: 'palette' },
@@ -146,13 +146,13 @@ const DOSHA_RESULTS = {
     tagline: 'The Creative Whirlwind',
     description: 'You are movement itself \u2014 quick-thinking, imaginative, and beautifully spontaneous. Like the wind, you bring change and inspiration wherever you go.',
     strengths: ['Creative & artistic', 'Quick learner', 'Adaptable & flexible', 'Enthusiastic spirit'],
-    balanceTips: ['Ground yourself with warm, cooked foods', 'Establish a calming daily routine', 'Prioritise warmth and rest', 'Practice slow, grounding yoga'],
+    balanceTips: ['Ground yourself with warm, cooked foods', 'Establish a calming daily routine', 'Prioritize warmth and rest', 'Practice slow, grounding yoga'],
     qualities: ['Light', 'Dry', 'Cold', 'Mobile', 'Subtle'],
     season: 'Autumn & Early Winter',
     timeOfDay: '2 AM \u2013 6 AM & 2 PM \u2013 6 PM',
     taste: 'Sweet, Sour & Salty foods pacify Vata',
     yoga: 'Slow, grounding flows \u2014 Tadasana, Warrior I & II, Child\'s Pose, Savasana',
-    meditation: 'Body scan & grounding visualisations to anchor the restless mind',
+    meditation: 'Body scan & grounding visualizations to anchor the restless mind',
   },
   pitta: {
     name: 'Pitta',
@@ -184,13 +184,13 @@ const DOSHA_RESULTS = {
     tagline: 'The Steady Mountain',
     description: 'You are earth embodied \u2014 steady, nurturing, and deeply resilient. Your calm presence is a sanctuary for everyone around you.',
     strengths: ['Loyal & compassionate', 'Incredible endurance', 'Strong memory', 'Natural caretaker'],
-    balanceTips: ['Embrace variety and stimulation', 'Move daily \u2014 even gentle walks count', 'Favour warm, spiced foods', 'Wake early and resist oversleeping'],
+    balanceTips: ['Embrace variety and stimulation', 'Move daily \u2014 even gentle walks count', 'Favor warm, spiced foods', 'Wake early and resist oversleeping'],
     qualities: ['Heavy', 'Slow', 'Cool', 'Oily', 'Smooth'],
     season: 'Late Winter & Spring',
     timeOfDay: '6 AM \u2013 10 AM & 6 PM \u2013 10 PM',
     taste: 'Pungent, Bitter & Astringent foods pacify Kapha',
-    yoga: 'Vigorous, energising flows \u2014 Sun Salutation, Backbends, Warrior III, Camel Pose',
-    meditation: 'Energising breathwork (Kapalabhati) & walking meditation to spark vitality',
+    yoga: 'Vigorous, energizing flows \u2014 Sun Salutation, Backbends, Warrior III, Camel Pose',
+    meditation: 'Energizing breathwork (Kapalabhati) & walking meditation to spark vitality',
   },
 }
 
@@ -523,7 +523,7 @@ export default function DoshaQuizPage() {
 
           <div className="relative z-10 text-center">
             <div className="animate-quiz-reveal">
-              <p className="font-label text-xs text-white/70 uppercase tracking-widest mb-3">Your Prakriti Is</p>
+              <p className="font-label text-xs text-white/70 uppercase tracking-widest mb-3">Your Dosha Type</p>
               <h1 className="font-headline text-5xl text-white leading-none mb-2">{label}</h1>
               <p className="font-headline italic text-lg text-white/80 mb-4">
                 {isTridoshic ? 'The Rare Equilibrium' : primaryData.tagline}
