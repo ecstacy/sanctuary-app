@@ -182,8 +182,8 @@ export default function VikritiQuizPage() {
   // ── Intro ────────────────────────────────────────────────────────────────
   if (phase === 'intro') {
     return (
-      <div className="min-h-screen bg-background text-on-surface font-body flex flex-col">
-        <div className="flex items-center justify-between px-6 py-5">
+      <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
+        <div className="flex items-center justify-between px-6 py-5 flex-shrink-0">
           <button onClick={() => navigate(-1)} className="text-on-surface-variant">
             <span className="material-symbols-outlined text-xl">arrow_back</span>
           </button>
@@ -191,7 +191,7 @@ export default function VikritiQuizPage() {
           <div className="w-6" />
         </div>
 
-        <div className="flex-1 flex flex-col px-6 pb-12">
+        <div className="flex-1 overflow-y-auto min-h-0 flex flex-col px-6 pb-10">
           <div className="flex-1 flex flex-col items-center justify-center text-center">
             <div className="relative w-28 h-28 mb-8">
               <div className="absolute inset-0 rounded-full bg-primary-container animate-quiz-pulse" />
@@ -314,8 +314,8 @@ export default function VikritiQuizPage() {
 
   // ── Quiz ─────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body flex flex-col">
-      <div className="flex items-center justify-between px-6 py-4">
+    <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
+      <div className="flex items-center justify-between px-6 py-4 flex-shrink-0">
         <button onClick={handleBack} className="text-on-surface-variant">
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
@@ -325,13 +325,13 @@ export default function VikritiQuizPage() {
         <span className="font-label text-xs text-on-surface-variant/50">{currentQ + 1}/{total}</span>
       </div>
 
-      <div className="px-6 mb-1">
+      <div className="px-6 mb-1 flex-shrink-0">
         <div className="h-1 bg-surface-container-high rounded-full overflow-hidden">
           <div className="h-full bg-primary rounded-full transition-all duration-500 ease-out" style={{ width: `${progress}%` }} />
         </div>
       </div>
 
-      <div key={currentQ} className="flex-1 flex flex-col px-6 pt-3 pb-5 animate-quiz-enter">
+      <div key={currentQ} className="flex-1 overflow-y-auto min-h-0 flex flex-col px-6 pt-3 pb-6 animate-quiz-enter">
         <div className="flex items-center gap-3 mb-2">
           <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
             <span className="material-symbols-outlined text-primary text-xl">{question.icon}</span>
@@ -341,7 +341,7 @@ export default function VikritiQuizPage() {
 
         <h2 className="font-headline text-xl text-on-surface leading-snug mb-4">{question.question}</h2>
 
-        <div className="flex flex-col gap-2.5 mt-auto">
+        <div className="flex flex-col gap-2.5">
           {question.options.map((option, i) => {
             const isSelected = selectedOption === option.dosha
             return (

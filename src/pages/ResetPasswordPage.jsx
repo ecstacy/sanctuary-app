@@ -61,15 +61,16 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body flex flex-col">
+    <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
 
-      <div className="flex items-center justify-between px-6 py-5">
+      <div className="flex items-center justify-between px-6 py-5 flex-shrink-0">
         <div className="w-6" />
         <span className="font-headline italic text-primary text-base">The Sanctuary</span>
         <div className="w-6" />
       </div>
 
-      <div className="flex-1 flex flex-col justify-center px-6 pb-12">
+      <div className="flex-1 overflow-y-auto min-h-0 px-6 pb-10 flex flex-col">
+        <div className="min-h-full flex flex-col justify-center py-6">
 
         {!sessionReady ? (
           <div className="flex flex-col items-center text-center px-4">
@@ -193,6 +194,7 @@ export default function ResetPasswordPage() {
           </div>
         )}
 
+        </div>
       </div>
     </div>
   )

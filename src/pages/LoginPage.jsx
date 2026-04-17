@@ -90,10 +90,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body flex flex-col">
+    // Scrollable-middle layout: on tight viewports (small phones, Android
+    // gesture bar, keyboard open), the form + sign-in button always stay
+    // reachable via scroll. On tall viewports, min-h-full + justify-center
+    // preserves the centered-hero look.
+    <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
 
       {/* Top bar */}
-      <div className="flex items-center justify-between px-6 py-5">
+      <div className="flex items-center justify-between px-6 py-5 flex-shrink-0">
         <button
           onClick={() => navigate('/')}
           className="text-on-surface-variant"
@@ -104,7 +108,8 @@ export default function LoginPage() {
         <div className="w-6" />
       </div>
 
-      <div className="flex-1 flex flex-col justify-center px-6 pb-12">
+      <div className="flex-1 overflow-y-auto min-h-0 px-6 pb-10 flex flex-col">
+        <div className="min-h-full flex flex-col justify-center py-6">
 
         {/* Heading */}
         <div className="mb-10 stagger-1">
@@ -213,6 +218,7 @@ export default function LoginPage() {
           </button>
         </p>
 
+        </div>
       </div>
     </div>
   )

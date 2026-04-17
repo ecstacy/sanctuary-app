@@ -385,10 +385,10 @@ export default function DoshaQuizPage() {
 
   if (phase === 'intro') {
     return (
-      <div className="min-h-screen bg-background text-on-surface font-body flex flex-col">
+      <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
 
         {/* Top bar */}
-        <div className="flex items-center justify-between px-6 py-5">
+        <div className="flex items-center justify-between px-6 py-5 flex-shrink-0">
           <button onClick={() => navigate(-1)} className="text-on-surface-variant">
             <span className="material-symbols-outlined text-xl">arrow_back</span>
           </button>
@@ -396,7 +396,7 @@ export default function DoshaQuizPage() {
           <div className="w-6" />
         </div>
 
-        <div className="flex-1 flex flex-col px-6 pb-12">
+        <div className="flex-1 overflow-y-auto min-h-0 flex flex-col px-6 pb-10">
 
           {/* Hero */}
           <div className="flex-1 flex flex-col items-center justify-center text-center">
@@ -724,10 +724,10 @@ export default function DoshaQuizPage() {
   // ── Quiz Screen ───────────────────────────────────────────────────────────
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body flex flex-col">
+    <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
 
       {/* Top bar */}
-      <div className="flex items-center justify-between px-6 py-4">
+      <div className="flex items-center justify-between px-6 py-4 flex-shrink-0">
         <button onClick={handleBack} className="text-on-surface-variant">
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
@@ -743,7 +743,7 @@ export default function DoshaQuizPage() {
       </div>
 
       {/* Progress bar */}
-      <div className="px-6 mb-1">
+      <div className="px-6 mb-1 flex-shrink-0">
         <div className="h-1 bg-surface-container-high rounded-full overflow-hidden">
           <div
             className="h-full bg-primary rounded-full transition-all duration-500 ease-out"
@@ -754,7 +754,7 @@ export default function DoshaQuizPage() {
 
       {/* Category transition */}
       {isNewCategory && (
-        <div className="px-6 pt-3 pb-1">
+        <div className="px-6 pt-3 pb-1 flex-shrink-0">
           <div className="flex items-center gap-2">
             {CATEGORIES.map((cat, i) => (
               <div
@@ -772,10 +772,11 @@ export default function DoshaQuizPage() {
         </div>
       )}
 
-      {/* Question */}
+      {/* Question — scrollable. All options remain reachable even if the
+          question header + option list exceed the viewport on small phones. */}
       <div
         key={currentQ}
-        className="flex-1 flex flex-col px-6 pt-3 pb-5 animate-quiz-enter"
+        className="flex-1 overflow-y-auto min-h-0 flex flex-col px-6 pt-3 pb-6 animate-quiz-enter"
       >
         {/* Question icon + text */}
         <div className="flex items-center gap-3 mb-2">
@@ -791,8 +792,10 @@ export default function DoshaQuizPage() {
           {question.question}
         </h2>
 
-        {/* Options */}
-        <div className="flex flex-col gap-2.5 mt-auto">
+        {/* Options — sit naturally after the question. In scroll containers
+            mt-auto would place them below a fold on short content, so the
+            user would scroll past blank space to find them. */}
+        <div className="flex flex-col gap-2.5">
           {question.options.map((option, i) => {
             const isSelected = selectedOption === option.dosha
             return (

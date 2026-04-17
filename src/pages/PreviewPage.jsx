@@ -55,10 +55,10 @@ export default function PreviewPage() {
   const preview = STRUGGLE_PREVIEWS[primaryStruggle]
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body flex flex-col">
+    <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
 
       {/* Top bar */}
-      <div className="flex items-center justify-between px-6 py-5">
+      <div className="flex items-center justify-between px-6 py-5 flex-shrink-0">
         <button
           onClick={() => navigate('/discover')}
           className="text-on-surface-variant"
@@ -69,7 +69,7 @@ export default function PreviewPage() {
         <div className="w-6" />
       </div>
 
-      <div className="flex-1 flex flex-col px-6 pb-12">
+      <div className="flex-1 overflow-y-auto min-h-0 flex flex-col px-6 pb-10">
 
         {/* Heading */}
         <div className="mb-8">
