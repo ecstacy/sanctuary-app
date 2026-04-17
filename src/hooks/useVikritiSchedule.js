@@ -46,6 +46,10 @@ export default function useVikritiSchedule() {
     nextDueAt:            null,
     isDue:                false,
   })
+  // Bumping this re-runs the fetch effect. Exposed via the returned
+  // `refetch()` so callers (e.g. HomePage returning from /vikriti) can
+  // force a fresh read without waiting for auth/profile to change.
+  const [refetchKey, setRefetchKey] = useState(0)
 
   useEffect(() => {
     let cancelled = false
@@ -114,7 +118,7 @@ export default function useVikritiSchedule() {
     })()
 
     return () => { cancelled = true }
-  }, [user?.id, profile?.dosha, profile?.dosha_details])
+  }, [user?.id, profile?.dosha, profile?.dosha_details, refetchKey])
 
-  return state
+  return { ...state, refetch: () => setRefetchKey(k => k + 1) }
 }

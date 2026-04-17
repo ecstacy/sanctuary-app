@@ -168,7 +168,10 @@ function PrivateRoute({ children }) {
   return user ? children : <Navigate to="/" replace />
 }
 
-const NAV_PAGES = ['/home', '/discover', '/profile', '/routine', '/dosha', '/journey', '/recommendations', '/asana', '/quiz', '/vikriti']
+// Pages that display the bottom nav. /quiz and /vikriti are focused,
+// step-by-step flows (like a modal) — the main-tab nav would distract
+// from the task and also overlap their CTAs, so they're excluded.
+const NAV_PAGES = ['/home', '/discover', '/profile', '/routine', '/dosha', '/journey', '/recommendations', '/asana']
 
 function ShowBottomNav() {
   const { user } = useAuth()

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getRoutine, ASANAS } from '../data/asanas'
 import usePracticeStats from '../hooks/usePracticeStats'
@@ -125,6 +125,7 @@ function getSubtitle() {
 
 export default function HomePage() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { profile, user } = useAuth()
   const [checkedIn, setCheckedIn] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
@@ -143,6 +144,18 @@ export default function HomePage() {
   const avoidTips = AVOID_TIPS[timeOfDay]
   const stats = usePracticeStats()
   const vikriti = useVikritiSchedule()
+
+  // When we return from /vikriti after a save, the schedule hook's cached
+  // state is still pre-save (no row yet → isDue=true) so the prompt card
+  // sticks on screen. The quiz page passes location.state.vikritiSavedAt
+  // as a signal for us to refresh. Clear the state after handling so a
+  // browser-back doesn't re-trigger the refetch on every return.
+  useEffect(() => {
+    if (location.state?.vikritiSavedAt) {
+      vikriti.refetch()
+      navigate('.', { replace: true, state: null })
+    }
+  }, [location.state?.vikritiSavedAt])
 
   const routineKey = checkedIn || 'stress'
   const routine = getRoutine(routineKey)

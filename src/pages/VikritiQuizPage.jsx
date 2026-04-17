@@ -175,7 +175,11 @@ export default function VikritiQuizPage() {
       setSaving(false)
       return
     }
-    navigate('/home', { replace: true })
+    // Signal HomePage to refetch the vikriti schedule. Without this, its
+    // mounted `useVikritiSchedule` cache still shows the pre-save state
+    // (daysSinceLast=Infinity / isDue=true) so the prompt card sticks
+    // around until hard refresh.
+    navigate('/home', { replace: true, state: { vikritiSavedAt: Date.now() } })
     setSaving(false)
   }
 
