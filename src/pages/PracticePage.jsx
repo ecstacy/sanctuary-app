@@ -528,9 +528,9 @@ export default function PracticePage() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-surface-container rounded-2xl p-4 flex items-center justify-center gap-2 animate-fade-in-up">
+                <div className="bg-surface-container rounded-2xl p-4 flex items-center justify-center gap-2">
                   <span className="material-symbols-outlined text-primary text-base">favorite</span>
-                  <p className="font-body text-xs text-on-surface-variant">
+                  <p className="font-body text-xs text-on-surface-variant text-center">
                     {postFeel === 1 ? 'Glad the practice helped.'
                       : postFeel === 0 ? 'Thanks for checking in.'
                       : 'Noted — we\u2019ll learn from this.'}
