@@ -329,9 +329,48 @@ export default function PracticePage() {
   // READY STATE
   // ═════════════════════════════════════════════════════════════════════════
   if (status === 'ready') {
+    // Inline helper so the two scales stay visually identical. Keeping it
+    // local avoids adding a new file for a component only used here.
+    const CheckinScale = ({ question, loLabel, hiLabel, value, onChange, ariaPrefix, stagger }) => (
+      <div className={stagger}>
+        <p className="font-body text-sm text-on-surface text-center mb-3">
+          {question}
+        </p>
+        <div className="flex items-stretch justify-between gap-2 mb-2">
+          {[1, 2, 3, 4, 5].map(n => (
+            <button
+              key={n}
+              onClick={() => onChange(n)}
+              className={`flex-1 h-11 rounded-xl transition-all active:scale-95 flex items-center justify-center ${
+                value === n
+                  ? 'bg-primary shadow-sm'
+                  : 'bg-surface-container border border-outline-variant/30'
+              }`}
+              aria-label={`${ariaPrefix} ${n} out of 5`}
+            >
+              <span className={`font-body text-base font-semibold ${
+                value === n ? 'text-on-primary' : 'text-on-surface-variant/70'
+              }`}>
+                {n}
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center justify-between px-1">
+          <span className="font-label text-[11px] text-on-surface-variant/70 tracking-wide">{loLabel}</span>
+          <span className="font-label text-[11px] text-on-surface-variant/70 tracking-wide">{hiLabel}</span>
+        </div>
+      </div>
+    )
+
     return (
-      <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col">
-        <div className="flex items-center justify-between px-5 pt-3 pb-1">
+      // Scrollable-middle / fixed-CTA layout: the hero + check-in live in an
+      // overflow-y-auto container so content can never push the Start button
+      // below the viewport or the device gesture bar. pb-8 + body-level
+      // safe-area-inset keep the CTA clear of the Android nav area.
+      <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
+        {/* ── Top bar — fixed ── */}
+        <div className="flex items-center justify-between px-5 pt-3 pb-1 flex-shrink-0">
           <button onClick={handleExit} className="text-on-surface-variant">
             <span className="material-symbols-outlined text-xl">close</span>
           </button>
@@ -341,87 +380,65 @@ export default function PracticePage() {
           </button>
         </div>
 
-        <div className="flex-1 flex flex-col items-center justify-center px-6 min-h-0 py-2">
-          <div className="mb-3 stagger-1">
-            <PoseFigure poseKey={currentAsana.poseKey} size="lg" breathing />
+        {/* ── Scrollable middle: hero + check-in questions ── */}
+        <div className="flex-1 overflow-y-auto min-h-0 px-6">
+          {/* Hero */}
+          <div className="flex flex-col items-center pt-3 pb-5">
+            <div className="mb-3 stagger-1">
+              <PoseFigure poseKey={currentAsana.poseKey} size="lg" breathing />
+            </div>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1 stagger-2">Ready to Begin</p>
+            <h1 className="font-headline text-2xl text-on-surface text-center mb-1 stagger-2">{routine.label}</h1>
+            <p className="font-body text-sm text-on-surface-variant text-center mb-1 stagger-3">
+              {routine.asanas.length} poses · {formatDuration(routine.totalDuration)}
+            </p>
+            <p className="font-body text-xs text-on-surface-variant/50 text-center mb-3 stagger-3">
+              Starting with: {currentAsana.english}
+            </p>
+            <div className="flex items-center gap-2 bg-surface-container rounded-full px-4 py-1.5 stagger-4">
+              <span className="material-symbols-outlined text-primary text-sm">{voice.enabled ? 'volume_up' : 'volume_off'}</span>
+              <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">
+                Voice guidance {voice.enabled ? 'on' : 'off'}
+              </span>
+            </div>
           </div>
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1 stagger-2">Ready to Begin</p>
-          <h1 className="font-headline text-2xl text-on-surface text-center mb-1 stagger-2">{routine.label}</h1>
-          <p className="font-body text-sm text-on-surface-variant text-center mb-1 stagger-3">
-            {routine.asanas.length} poses · {formatDuration(routine.totalDuration)}
-          </p>
-          <p className="font-body text-xs text-on-surface-variant/50 text-center mb-3 stagger-3">
-            Starting with: {currentAsana.english}
-          </p>
 
-          <div className="flex items-center gap-2 bg-surface-container rounded-full px-4 py-1.5 stagger-4">
-            <span className="material-symbols-outlined text-primary text-sm">{voice.enabled ? 'volume_up' : 'volume_off'}</span>
-            <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">
-              Voice guidance {voice.enabled ? 'on' : 'off'}
-            </span>
+          {/* ── Pre-practice 2-tap check-in ──
+              Two optional 5-point scales, framed as natural-language
+              questions with readable endpoint captions. Tapping is optional
+              — pressing Start without rating logs nothing. */}
+          <div className="pt-2 pb-6">
+            <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-widest text-center mb-4 stagger-4">
+              Before you begin · optional
+            </p>
+            <div className="space-y-6">
+              <CheckinScale
+                question="How's your energy right now?"
+                loLabel="Drained"
+                hiLabel="Energized"
+                value={preEnergy}
+                onChange={setPreEnergy}
+                ariaPrefix="Energy level"
+                stagger="stagger-5"
+              />
+              <CheckinScale
+                question="How does your body feel?"
+                loLabel="Relaxed"
+                hiLabel="Tense"
+                value={preStress}
+                onChange={setPreStress}
+                ariaPrefix="Body tension level"
+                stagger="stagger-6"
+              />
+            </div>
           </div>
         </div>
 
-        <div className="px-6 pb-6">
-          {/* ── Pre-practice 2-tap check-in ──
-              Two compact 5-point scales. Tapping is optional — a user in a
-              hurry can just press Start and we log nothing. Selected state is
-              a primary-colored fill; unselected is a faint outline. */}
-          <div className="mb-5 stagger-4">
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Energy</span>
-              <span className="font-label text-[9px] text-on-surface-variant/40">Drained ← → Energized</span>
-            </div>
-            <div className="flex items-center justify-between gap-1.5 mb-4">
-              {[1, 2, 3, 4, 5].map(n => (
-                <button
-                  key={n}
-                  onClick={() => setPreEnergy(n)}
-                  className={`flex-1 h-9 rounded-lg transition-all active:scale-95 flex items-center justify-center ${
-                    preEnergy === n
-                      ? 'bg-primary'
-                      : 'bg-surface-container border border-outline-variant/30'
-                  }`}
-                  aria-label={`Energy level ${n}`}
-                >
-                  <span className={`font-body text-sm font-semibold ${
-                    preEnergy === n ? 'text-on-primary' : 'text-on-surface-variant/60'
-                  }`}>
-                    {n}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Body</span>
-              <span className="font-label text-[9px] text-on-surface-variant/40">Relaxed ← → Tense</span>
-            </div>
-            <div className="flex items-center justify-between gap-1.5">
-              {[1, 2, 3, 4, 5].map(n => (
-                <button
-                  key={n}
-                  onClick={() => setPreStress(n)}
-                  className={`flex-1 h-9 rounded-lg transition-all active:scale-95 flex items-center justify-center ${
-                    preStress === n
-                      ? 'bg-primary'
-                      : 'bg-surface-container border border-outline-variant/30'
-                  }`}
-                  aria-label={`Body tension level ${n}`}
-                >
-                  <span className={`font-body text-sm font-semibold ${
-                    preStress === n ? 'text-on-primary' : 'text-on-surface-variant/60'
-                  }`}>
-                    {n}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
+        {/* ── Fixed CTA — always visible ── */}
+        <div className="flex-shrink-0 px-6 pt-2 pb-8 bg-background border-t border-outline-variant/10">
           <button
             onClick={handleStart}
-            className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all flex items-center justify-center gap-2 stagger-5"
+            className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all flex items-center justify-center gap-2"
           >
             <span className="material-symbols-outlined text-lg">play_arrow</span>
             Start Practice
