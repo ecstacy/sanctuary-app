@@ -2,6 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   DOSHA THEME — CSS custom properties for the primary palette.
+   The default (no dosha) uses the app's original sage green.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --color-primary: #50644b;
+  --color-primary-dim: #445840;
+  --color-primary-container: #d2e9c9;
+  --color-primary-fixed: #d0e9d6;
+  --color-primary-fixed-dim: #b4ccbb;
+  --color-on-primary: #eaffe1;
+  --color-on-primary-container: #43573e;
+}
+
+/* Vata — cool slate blue (Air + Ether) */
+:root[data-dosha="vata"] {
+  --color-primary: #567b91;
+  --color-primary-dim: #486a7e;
+  --color-primary-container: #c8ddef;
+  --color-primary-fixed: #d4e5f2;
+  --color-primary-fixed-dim: #aec8d8;
+  --color-on-primary: #e4f2ff;
+  --color-on-primary-container: #3d5a73;
+}
+
+/* Pitta — warm amber/terracotta (Fire + Water) */
+:root[data-dosha="pitta"] {
+  --color-primary: #8b6a3e;
+  --color-primary-dim: #7a5b33;
+  --color-primary-container: #f0dcc4;
+  --color-primary-fixed: #f5e4d0;
+  --color-primary-fixed-dim: #dfc8a8;
+  --color-on-primary: #fff6eb;
+  --color-on-primary-container: #6b4b2f;
+}
+
+/* Kapha — lush earth green (Earth + Water) */
+:root[data-dosha="kapha"] {
+  --color-primary: #5a7a52;
+  --color-primary-dim: #4d6b46;
+  --color-primary-container: #c8e4bf;
+  --color-primary-fixed: #d4eccc;
+  --color-primary-fixed-dim: #b0d0a5;
+  --color-on-primary: #e8ffe2;
+  --color-on-primary-container: #3d5e34;
+}
+
 body {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
@@ -74,6 +122,14 @@ video:focus, svg:focus, button:focus:not(:focus-visible) {
 }
 .animate-loading-breathe-delay {
   animation: loading-breathe 2.4s ease-in-out 0.3s infinite;
+}
+
+@keyframes ritual-glow {
+  0%, 100% { transform: scale(1); opacity: 0.25; }
+  50%      { transform: scale(1.18); opacity: 0.45; }
+}
+.animate-ritual-glow {
+  animation: ritual-glow 4s ease-in-out infinite;
 }
 
 @keyframes loading-fade {

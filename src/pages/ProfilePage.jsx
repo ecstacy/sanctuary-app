@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
-import BottomNav from '../components/BottomNav'
+
 import GoogleIcon from '../components/GoogleIcon'
 
 export default function ProfilePage() {
@@ -209,7 +209,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body pb-28">
+    <div className="min-h-screen bg-background text-on-surface font-body pb-20">
 
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 pt-3 pb-2">
@@ -530,7 +530,6 @@ export default function ProfilePage() {
 
       </div>
 
-      <BottomNav />
 
     </div>
   )

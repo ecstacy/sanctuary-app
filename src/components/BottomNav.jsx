@@ -51,10 +51,10 @@ export default function BottomNav() {
 
   return (
     <nav
-      className={`fixed bottom-0 left-0 w-full bg-background/95 backdrop-blur-xl rounded-t-[2rem] px-4 pt-3 flex justify-around items-center shadow-[0_-8px_24px_rgba(28,28,26,0.06)] z-30 transition-transform duration-300 ease-out ${
+      className={`fixed bottom-0 left-0 w-full bg-background/60 backdrop-blur-2xl border-t border-outline-variant/10 px-4 pt-3 flex justify-around items-center transition-transform duration-300 ease-out ${
         visible ? 'translate-y-0' : 'translate-y-full'
       }`}
-      style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
+      style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))', zIndex: 50 }}
     >
       {TABS.map(tab => {
         const active = pathname === tab.path || (tab.path === '/routine' && pathname.startsWith('/practice'))

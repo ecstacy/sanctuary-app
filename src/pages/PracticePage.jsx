@@ -1,4 +1,4 @@
-import { useReducer, useEffect, useRef, useCallback } from 'react'
+import { useReducer, useEffect, useRef, useCallback, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getRoutine, getDoshaTag } from '../data/asanas'
@@ -8,6 +8,7 @@ import { useWakeLock } from '../hooks/useWakeLock'
 import { savePracticeSession } from '../hooks/usePracticeStats'
 import PoseFigure from '../components/PoseFigure'
 import CircularTimer from '../components/CircularTimer'
+import * as analytics from '../lib/analytics'
 
 // ─── State Machine ──────────────────────────────────────────────────────────
 
@@ -75,7 +76,27 @@ function formatDuration(seconds) {
 export default function PracticePage() {
   const navigate = useNavigate()
   const { id: routineKey } = useParams()
-  const { profile } = useAuth()
+  const { profile, user } = useAuth()
+
+  // ── Pre-practice 2-tap check-in (Chunk 13) ──
+  // Optional ratings captured on the ready screen, before the first pose.
+  // If both scales are tapped, we write a `pre_practice` user_state_checkin
+  // when the user starts. The returned id is parked in a ref so Chunk 14
+  // (post-practice) can later UPDATE related_session_id once the session
+  // exists, closing the loop pre → session → post.
+  const [preEnergy, setPreEnergy] = useState(null)
+  const [preStress, setPreStress] = useState(null)
+  const preCheckinIdRef = useRef(null)
+
+  // ── Post-practice one-tap feel-better (Chunk 14) ──
+  // After a session completes, the server round-trip gives us the session
+  // row id; we stash it in state so the UI can bind follow-on checkins to
+  // it. `postFeel` is -1 | 0 | 1 (worse / same / better) — one tap writes
+  // a post_practice checkin and transitions to a thank-you state.
+  const [sessionId, setSessionId] = useState(null)
+  const [postFeel, setPostFeel] = useState(null)
+  const [postSubmitted, setPostSubmitted] = useState(false)
+  const saveStartedRef = useRef(false)
   const voice = useVoiceGuidance()
   const audio = useAudio()
   useWakeLock()
@@ -170,12 +191,77 @@ export default function PracticePage() {
     }
   }, [status])
 
+  // ── Save session + link pre-checkin (Chunk 14) ──────────────────────────
+  // Runs exactly once when the practice finishes. We move the save out of
+  // render (where it used to live behind a window.__sanctuarySaved guard)
+  // into an effect so we can capture the returned session id and close
+  // the pre → session → post loop introduced in Chunks 13-14.
+  useEffect(() => {
+    if (status !== 'complete' || saveStartedRef.current) return
+    saveStartedRef.current = true
+
+    const totalTime = completedAsanas.reduce((sum, a) => sum + a.actualDuration, 0)
+    const completedCount = completedAsanas.filter(a => !a.skipped).length
+    const skippedCount   = completedAsanas.filter(a => a.skipped).length
+
+    ;(async () => {
+      const newSessionId = await savePracticeSession({
+        routineKey,
+        routineLabel:    routine.label,
+        durationSeconds: totalTime,
+        completedCount,
+        skippedCount,
+        totalPoses: routine.asanas.length,
+        asanas: completedAsanas.map((ca, i) => ({
+          id:                 routine.asanas[i]?.id,
+          sanskrit:           routine.asanas[i]?.sanskrit,
+          prescribedDuration: routine.asanas[i]?.durationSeconds,
+          actualDuration:     ca.actualDuration,
+          skipped:            ca.skipped,
+        })),
+      }, user?.id)
+
+      if (newSessionId) {
+        setSessionId(newSessionId)
+        // Back-fill the pre-practice checkin with the session it belongs to,
+        // so analytics can JOIN pre → session → post on a single key.
+        if (preCheckinIdRef.current) {
+          analytics.linkCheckinToSession({
+            checkinId: preCheckinIdRef.current,
+            sessionId: newSessionId,
+          })
+        }
+      }
+    })()
+  }, [status, completedAsanas, routine, routineKey, user?.id])
+
   // ── Actions ─────────────────────────────────────────────────────────────
   const handleStart = useCallback(() => {
     audio.init()
     audio.bell()
+
+    // Fire-and-forget check-in write. Never blocks the start of practice.
+    // Only logs if the user actually rated at least one scale — a fully
+    // unrated screen means "I just want to start" and should produce no row.
+    if (user?.id && (preEnergy !== null || preStress !== null)) {
+      ;(async () => {
+        const id = await analytics.logCheckin({
+          userId:       user.id,
+          type:         analytics.CHECKIN_TYPES.PRE_PRACTICE,
+          energyLevel:  preEnergy,
+          stressLevel:  preStress,
+          context: {
+            routine_key:    routineKey,
+            user_dosha:     profile?.dosha_details?.primary || null,
+            source:         'pre_practice_ready_screen',
+          },
+        })
+        preCheckinIdRef.current = id
+      })()
+    }
+
     dispatch({ type: 'START', duration: currentAsana.durationSeconds })
-  }, [currentAsana, audio])
+  }, [currentAsana, audio, user?.id, preEnergy, preStress, routineKey, profile?.dosha_details?.primary])
 
   const handleDone = useCallback(() => {
     voice.stop()
@@ -204,6 +290,41 @@ export default function PracticePage() {
     navigate(-1)
   }, [navigate, voice])
 
+  // ── Post-practice feel-better tap (Chunk 14) ───────────────────────────
+  // Single tap: pick worse / same / better. We normalize to -1 | 0 | 1 and
+  // write a post_practice checkin, tagging it to the just-saved session
+  // when available. The UI immediately thanks the user — we never block
+  // them on the network round-trip.
+  const handlePostFeel = useCallback((value, label) => {
+    if (postSubmitted) return
+    setPostFeel(value)
+    setPostSubmitted(true)
+
+    if (!user?.id) return
+
+    ;(async () => {
+      await analytics.logCheckin({
+        userId: user.id,
+        type:   analytics.CHECKIN_TYPES.POST_PRACTICE,
+        // Map the 3-point feel scale to energy_level on a 1-5 scale so it
+        // is comparable with the pre-practice Energy rating: worse=2,
+        // same=3, better=4. This keeps a single numeric field queryable.
+        energyLevel: value === 1 ? 4 : value === 0 ? 3 : 2,
+        moodTags:    [label],
+        relatedSessionId: sessionId,
+        context: {
+          routine_key: routineKey,
+          user_dosha:  profile?.dosha_details?.primary || null,
+          pre_checkin_id: preCheckinIdRef.current,
+          pre_energy:  preEnergy,
+          pre_stress:  preStress,
+          feel_delta:  value,       // -1 | 0 | 1
+          source:      'post_practice_complete_screen',
+        },
+      })
+    })()
+  }, [postSubmitted, user?.id, sessionId, routineKey, profile?.dosha_details?.primary, preEnergy, preStress])
+
   // ═════════════════════════════════════════════════════════════════════════
   // READY STATE
   // ═════════════════════════════════════════════════════════════════════════
@@ -220,8 +341,8 @@ export default function PracticePage() {
           </button>
         </div>
 
-        <div className="flex-1 flex flex-col items-center justify-center px-6 min-h-0">
-          <div className="mb-4 stagger-1">
+        <div className="flex-1 flex flex-col items-center justify-center px-6 min-h-0 py-2">
+          <div className="mb-3 stagger-1">
             <PoseFigure poseKey={currentAsana.poseKey} size="lg" breathing />
           </div>
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1 stagger-2">Ready to Begin</p>
@@ -229,11 +350,11 @@ export default function PracticePage() {
           <p className="font-body text-sm text-on-surface-variant text-center mb-1 stagger-3">
             {routine.asanas.length} poses · {formatDuration(routine.totalDuration)}
           </p>
-          <p className="font-body text-xs text-on-surface-variant/50 text-center mb-4 stagger-3">
+          <p className="font-body text-xs text-on-surface-variant/50 text-center mb-3 stagger-3">
             Starting with: {currentAsana.english}
           </p>
 
-          <div className="flex items-center gap-2 bg-surface-container rounded-full px-4 py-2 mb-4 stagger-4">
+          <div className="flex items-center gap-2 bg-surface-container rounded-full px-4 py-1.5 stagger-4">
             <span className="material-symbols-outlined text-primary text-sm">{voice.enabled ? 'volume_up' : 'volume_off'}</span>
             <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">
               Voice guidance {voice.enabled ? 'on' : 'off'}
@@ -242,6 +363,62 @@ export default function PracticePage() {
         </div>
 
         <div className="px-6 pb-6">
+          {/* ── Pre-practice 2-tap check-in ──
+              Two compact 5-point scales. Tapping is optional — a user in a
+              hurry can just press Start and we log nothing. Selected state is
+              a primary-colored fill; unselected is a faint outline. */}
+          <div className="mb-5 stagger-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Energy</span>
+              <span className="font-label text-[9px] text-on-surface-variant/40">Drained ← → Energized</span>
+            </div>
+            <div className="flex items-center justify-between gap-1.5 mb-4">
+              {[1, 2, 3, 4, 5].map(n => (
+                <button
+                  key={n}
+                  onClick={() => setPreEnergy(n)}
+                  className={`flex-1 h-9 rounded-lg transition-all active:scale-95 flex items-center justify-center ${
+                    preEnergy === n
+                      ? 'bg-primary'
+                      : 'bg-surface-container border border-outline-variant/30'
+                  }`}
+                  aria-label={`Energy level ${n}`}
+                >
+                  <span className={`font-body text-sm font-semibold ${
+                    preEnergy === n ? 'text-on-primary' : 'text-on-surface-variant/60'
+                  }`}>
+                    {n}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Body</span>
+              <span className="font-label text-[9px] text-on-surface-variant/40">Relaxed ← → Tense</span>
+            </div>
+            <div className="flex items-center justify-between gap-1.5">
+              {[1, 2, 3, 4, 5].map(n => (
+                <button
+                  key={n}
+                  onClick={() => setPreStress(n)}
+                  className={`flex-1 h-9 rounded-lg transition-all active:scale-95 flex items-center justify-center ${
+                    preStress === n
+                      ? 'bg-primary'
+                      : 'bg-surface-container border border-outline-variant/30'
+                  }`}
+                  aria-label={`Body tension level ${n}`}
+                >
+                  <span className={`font-body text-sm font-semibold ${
+                    preStress === n ? 'text-on-primary' : 'text-on-surface-variant/60'
+                  }`}>
+                    {n}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           <button
             onClick={handleStart}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all flex items-center justify-center gap-2 stagger-5"
@@ -261,26 +438,8 @@ export default function PracticePage() {
     const completedCount = completedAsanas.filter(a => !a.skipped).length
     const skippedCount = completedAsanas.filter(a => a.skipped).length
     const totalTime = completedAsanas.reduce((sum, a) => sum + a.actualDuration, 0)
-
-    // Save session to practice history (runs once via useEffect-like pattern)
-    if (!window.__sanctuarySaved?.[routineKey + totalTime]) {
-      if (!window.__sanctuarySaved) window.__sanctuarySaved = {}
-      window.__sanctuarySaved[routineKey + totalTime] = true
-      savePracticeSession({
-        routineKey,
-        routineLabel: routine.label,
-        durationSeconds: totalTime,
-        completedCount,
-        skippedCount,
-        totalPoses: routine.asanas.length,
-        asanas: completedAsanas.map((ca, i) => ({
-          id: routine.asanas[i]?.id,
-          sanskrit: routine.asanas[i]?.sanskrit,
-          actualDuration: ca.actualDuration,
-          skipped: ca.skipped,
-        })),
-      })
-    }
+    // Save-to-Supabase lives in the useEffect above so we can capture the
+    // new session id and link the pre-practice checkin to it.
 
     return (
       <div className="min-h-screen bg-background text-on-surface font-body pb-12">
@@ -333,6 +492,53 @@ export default function PracticePage() {
               )
             })}
           </div>
+
+          {/* ── Post-practice one-tap feel-better (Chunk 14) ──
+              One question, one tap, no follow-up. Tapping writes a
+              post_practice checkin linked to this session; the card then
+              collapses into a quiet acknowledgement so the user isn't
+              nagged a second time. Hidden entirely for anonymous users. */}
+          {user?.id && (
+            <div className="mb-4 stagger-6">
+              {!postSubmitted ? (
+                <div className="bg-surface-container rounded-2xl p-4">
+                  <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3 text-center">
+                    How do you feel now?
+                  </p>
+                  <div className="flex items-stretch justify-between gap-2">
+                    {[
+                      { value: -1, label: 'worse',  icon: 'sentiment_dissatisfied', caption: 'Worse' },
+                      { value:  0, label: 'same',   icon: 'sentiment_neutral',      caption: 'Same'  },
+                      { value:  1, label: 'better', icon: 'sentiment_satisfied',    caption: 'Better' },
+                    ].map(opt => (
+                      <button
+                        key={opt.label}
+                        onClick={() => handlePostFeel(opt.value, opt.label)}
+                        className="flex-1 flex flex-col items-center justify-center gap-1 py-3 bg-surface rounded-xl active:scale-95 transition-all border border-outline-variant/20"
+                        aria-label={`I feel ${opt.caption.toLowerCase()}`}
+                      >
+                        <span className="material-symbols-outlined text-2xl text-primary">
+                          {opt.icon}
+                        </span>
+                        <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">
+                          {opt.caption}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-surface-container rounded-2xl p-4 flex items-center justify-center gap-2 animate-fade-in-up">
+                  <span className="material-symbols-outlined text-primary text-base">favorite</span>
+                  <p className="font-body text-xs text-on-surface-variant">
+                    {postFeel === 1 ? 'Glad the practice helped.'
+                      : postFeel === 0 ? 'Thanks for checking in.'
+                      : 'Noted — we\u2019ll learn from this.'}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
 
           <button onClick={() => navigate('/home', { replace: true })} className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all mb-3 stagger-6">
             Back to Home

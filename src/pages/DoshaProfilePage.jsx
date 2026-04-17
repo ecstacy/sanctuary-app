@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import BottomNav from '../components/BottomNav'
+
 
 // ─── Dosha Data ─────────────────────────────────────────────────────────────
 
@@ -89,7 +89,7 @@ export default function DoshaProfilePage() {
   // If no dosha saved, show discovery prompt
   if (!doshaLabel || !primary) {
     return (
-      <div className="min-h-screen bg-background text-on-surface font-body flex flex-col items-center justify-center px-6 pb-28">
+      <div className="min-h-screen bg-background text-on-surface font-body flex flex-col items-center justify-center px-6 pb-20">
         <div className="w-24 h-24 bg-primary-container rounded-full flex items-center justify-center mb-8 stagger-1">
           <span className="material-symbols-outlined text-primary text-4xl">spa</span>
         </div>
@@ -111,7 +111,6 @@ export default function DoshaProfilePage() {
         >
           Go back
         </button>
-        <BottomNav />
       </div>
     )
   }
@@ -123,7 +122,7 @@ export default function DoshaProfilePage() {
   const isDual = doshaLabel.includes('-')
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body pb-28">
+    <div className="min-h-screen bg-background text-on-surface font-body pb-20">
 
       {/* Gradient Hero */}
       <div className={`relative bg-gradient-to-b ${primaryData.gradient} px-6 pt-12 pb-16 overflow-hidden`}>
@@ -389,7 +388,6 @@ export default function DoshaProfilePage() {
 
       </div>
 
-      <BottomNav />
     </div>
   )
 }

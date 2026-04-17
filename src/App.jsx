@@ -1,10 +1,12 @@
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useRef, useState, lazy, Suspense } from 'react'
 import { App as CapacitorApp } from '@capacitor/app'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import ScrollToTop from './components/ScrollToTop'
 import LoadingScreen from './components/LoadingScreen'
 import PageTransition from './components/PageTransition'
+import BottomNav from './components/BottomNav'
+import DoshaThemeProvider from './components/DoshaThemeProvider'
 import { supabase } from './lib/supabase'
 
 // Lazy-load pages for code-splitting
@@ -18,6 +20,7 @@ const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'))
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
 const ProfilePage = lazy(() => import('./pages/ProfilePage'))
 const DoshaQuizPage = lazy(() => import('./pages/DoshaQuizPage'))
+const VikritiQuizPage = lazy(() => import('./pages/VikritiQuizPage'))
 const RecommendationsPage = lazy(() => import('./pages/RecommendationsPage'))
 const DoshaProfilePage = lazy(() => import('./pages/DoshaProfilePage'))
 const RoutinePage = lazy(() => import('./pages/RoutinePage'))
@@ -165,6 +168,16 @@ function PrivateRoute({ children }) {
   return user ? children : <Navigate to="/" replace />
 }
 
+const NAV_PAGES = ['/home', '/discover', '/profile', '/routine', '/dosha', '/journey', '/recommendations', '/asana', '/quiz', '/vikriti']
+
+function ShowBottomNav() {
+  const { user } = useAuth()
+  const { pathname } = useLocation()
+  if (!user) return null
+  const show = NAV_PAGES.some(p => pathname === p || pathname.startsWith(p + '/'))
+  return show ? <BottomNav /> : null
+}
+
 function AppRoutes() {
   const { user, loading } = useAuth()
 
@@ -172,6 +185,7 @@ function AppRoutes() {
 
   return (
     <>
+      <DoshaThemeProvider />
       <DeepLinkHandler />
       <BackButtonHandler />
       <Suspense fallback={<LoadingScreen />}>
@@ -187,6 +201,7 @@ function AppRoutes() {
           <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
           <Route path="/quiz" element={<PrivateRoute><DoshaQuizPage /></PrivateRoute>} />
+          <Route path="/vikriti" element={<PrivateRoute><VikritiQuizPage /></PrivateRoute>} />
           <Route path="/dosha" element={<PrivateRoute><DoshaProfilePage /></PrivateRoute>} />
           <Route path="/routine" element={<PrivateRoute><RoutinePage /></PrivateRoute>} />
           <Route path="/asana/:id" element={<PrivateRoute><AsanaDetailPage /></PrivateRoute>} />
@@ -196,6 +211,7 @@ function AppRoutes() {
         </Routes>
       </PageTransition>
       </Suspense>
+      <ShowBottomNav />
     </>
   )
 }

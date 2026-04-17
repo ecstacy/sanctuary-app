@@ -2,19 +2,66 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { searchRecommendations, POPULAR_SEARCHES } from '../data/recommendations'
+import * as analytics from '../lib/analytics'
 
 export default function RecommendationsPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const inputRef = useRef(null)
-  const { profile } = useAuth()
+  const { profile, user } = useAuth()
   const gender = profile?.gender || null
 
   const initialQuery = location.state?.query || ''
+  const initialSource = location.state?.source || analytics.SEARCH_SOURCES.HOME_SEARCH
   const [query, setQuery] = useState(initialQuery)
   const [results, setResults] = useState([])
   const [expandedPractice, setExpandedPractice] = useState(null)
   const [hasSearched, setHasSearched] = useState(false)
+  // Tracks where the currently-displayed result set came from, so the
+  // searches-table log picks the right `source` value. Updated on every
+  // handleSearch call and on mount when we auto-run the initial query.
+  const [lastSearchSource, setLastSearchSource] = useState(null)
+  // Refs guard against double-logging (StrictMode, re-renders).
+  const lastLoggedShownKeyRef = useRef(null)
+  const lastLoggedSearchKeyRef = useRef(null)
+
+  // ── Log `shown` events for each result whenever a new result set arrives ──
+  useEffect(() => {
+    if (!user?.id || !hasSearched || results.length === 0) return
+    const key = `${query}|${results.map(r => r.id).join(',')}`
+    if (lastLoggedShownKeyRef.current === key) return
+    lastLoggedShownKeyRef.current = key
+
+    results.forEach((rec, i) => {
+      analytics.logContentEvent({
+        userId: user.id,
+        eventType: analytics.EVENT_TYPES.SHOWN,
+        contentType: analytics.CONTENT_TYPES.RECOMMENDATION,
+        contentId: rec.id,
+        surface: analytics.SURFACES.SEARCH_RESULT,
+        context: { query, rank: i + 1, total_results: results.length },
+      })
+    })
+  }, [user?.id, hasSearched, results, query])
+
+  // ── Log to `searches` table once per (query, source) pair ──
+  // Separate from the computation path so auth-hydration races don't drop rows.
+  useEffect(() => {
+    if (!user?.id || !hasSearched || !query || !lastSearchSource) return
+    const key = `${query}|${lastSearchSource}`
+    if (lastLoggedSearchKeyRef.current === key) return
+    lastLoggedSearchKeyRef.current = key
+
+    const top = results[0]
+    analytics.logSearch({
+      userId: user.id,
+      query,
+      resultCount: results.length,
+      topResultId: top?.id ?? null,
+      topResultType: top ? analytics.CONTENT_TYPES.RECOMMENDATION : null,
+      source: lastSearchSource,
+    })
+  }, [user?.id, hasSearched, query, results, lastSearchSource])
 
   // Run search on mount if query was passed
   useEffect(() => {
@@ -22,20 +69,55 @@ export default function RecommendationsPage() {
       const found = searchRecommendations(initialQuery, { gender })
       setResults(found)
       setHasSearched(true)
+      setLastSearchSource(initialSource)
     } else {
       // Focus input if no query
       setTimeout(() => inputRef.current?.focus(), 400)
     }
-  }, [initialQuery, gender])
+  }, [initialQuery, gender, initialSource])
 
-  function handleSearch(searchQuery) {
-    const q = searchQuery || query
-    if (q.trim().length < 2) return
+  function handleSearch(searchQuery, source = analytics.SEARCH_SOURCES.RECOMMENDATIONS_PAGE) {
+    const q = (searchQuery || query).trim()
+    if (q.length < 2) return
     setQuery(q)
     const found = searchRecommendations(q, { gender })
     setResults(found)
     setHasSearched(true)
+    setLastSearchSource(source)
     inputRef.current?.blur()
+  }
+
+  // ── Practice card expand/collapse — log `clicked` when expanding ──
+  function handlePracticeToggle(recId, practiceIndex, practiceTitle) {
+    const key = `${recId}-${practiceIndex}`
+    const willExpand = expandedPractice !== key
+    setExpandedPractice(willExpand ? key : null)
+    if (willExpand && user?.id) {
+      analytics.logContentEvent({
+        userId: user.id,
+        eventType: analytics.EVENT_TYPES.CLICKED,
+        contentType: analytics.CONTENT_TYPES.RECOMMENDATION,
+        contentId: `${recId}:practice:${practiceIndex}`,
+        surface: analytics.SURFACES.SEARCH_RESULT,
+        context: { query, practice_title: practiceTitle },
+      })
+    }
+  }
+
+  // ── "Also Related" card click — log `clicked`, then pivot the search ──
+  function handleRelatedClick(rec) {
+    if (user?.id) {
+      analytics.logContentEvent({
+        userId: user.id,
+        eventType: analytics.EVENT_TYPES.CLICKED,
+        contentType: analytics.CONTENT_TYPES.RECOMMENDATION,
+        contentId: rec.id,
+        surface: analytics.SURFACES.SEARCH_RESULT,
+        context: { query, source: 'also_related' },
+      })
+    }
+    setQuery(rec.label)
+    handleSearch(rec.label, analytics.SEARCH_SOURCES.ALSO_RELATED)
   }
 
   function handleKeyDown(e) {
@@ -96,7 +178,7 @@ export default function RecommendationsPage() {
               {POPULAR_SEARCHES.map((item, i) => (
                 <button
                   key={i}
-                  onClick={() => { setQuery(item.query); handleSearch(item.query) }}
+                  onClick={() => { setQuery(item.query); handleSearch(item.query, analytics.SEARCH_SOURCES.POPULAR_CHIP) }}
                   className="flex items-center gap-2 bg-surface-container rounded-full px-4 py-2.5 active:scale-95 transition-all"
                 >
                   <span className="material-symbols-outlined text-primary text-sm">{item.icon}</span>
@@ -137,7 +219,7 @@ export default function RecommendationsPage() {
               {POPULAR_SEARCHES.slice(0, 4).map((item, i) => (
                 <button
                   key={i}
-                  onClick={() => { setQuery(item.query); handleSearch(item.query) }}
+                  onClick={() => { setQuery(item.query); handleSearch(item.query, analytics.SEARCH_SOURCES.NO_RESULTS_SUGGESTION) }}
                   className="flex items-center gap-2 bg-surface-container rounded-full px-3 py-2 active:scale-95 transition-all"
                 >
                   <span className="material-symbols-outlined text-primary text-sm">{item.icon}</span>
@@ -184,7 +266,7 @@ export default function RecommendationsPage() {
                   return (
                     <button
                       key={i}
-                      onClick={() => setExpandedPractice(isExpanded ? null : `${topResult.id}-${i}`)}
+                      onClick={() => handlePracticeToggle(topResult.id, i, practice.title)}
                       className="bg-surface-container rounded-lg p-4 text-left transition-all active:scale-[0.98] w-full"
                     >
                       <div className="flex items-center gap-4">
@@ -258,7 +340,7 @@ export default function RecommendationsPage() {
                   {otherResults.map((rec, i) => (
                     <button
                       key={i}
-                      onClick={() => { setQuery(rec.label); handleSearch(rec.label) }}
+                      onClick={() => handleRelatedClick(rec)}
                       className="flex items-center gap-4 bg-surface-container rounded-lg p-4 text-left active:scale-[0.98] transition-all"
                     >
                       <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${rec.color} flex items-center justify-center flex-shrink-0`}>

@@ -90,12 +90,13 @@ export default function AsanaDetailPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body pb-12">
+    <div className="min-h-screen bg-background text-on-surface font-body pb-24">
 
       {/* ── Expanded overlay ── */}
       {expanded && (
         <div
-          className="fixed inset-0 z-50 bg-on-surface/90 flex items-center justify-center animate-page-enter"
+          className="bg-on-surface/90 flex items-center justify-center animate-page-enter"
+          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50 }}
           onClick={() => setExpanded(false)}
         >
           <button
@@ -116,7 +117,7 @@ export default function AsanaDetailPage() {
 
       {/* ── Sticky mini player ── */}
       {sticky && !expanded && (
-        <div className="fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-outline-variant/10 px-4 py-2 flex items-center gap-3 animate-page-enter">
+        <div className="bg-background/95 backdrop-blur-sm border-b border-outline-variant/10 px-4 py-2 flex items-center gap-3 animate-page-enter" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 40 }}>
           <button onClick={() => setExpanded(true)} className="w-11 h-11 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0 overflow-hidden active:scale-90 transition-all">
             <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} />
           </button>
@@ -322,27 +323,30 @@ export default function AsanaDetailPage() {
           </div>
         )}
 
-        {/* ── Practice CTA ── */}
-        <div className="pt-2 pb-4">
-          <button
-            onClick={() => {
-              // Find a routine containing this asana, or default to stress
-              const routineKey = Object.entries({
-                stress: ['sukhasana', 'balasana', 'uttanasana', 'pigeon', 'supinetwist', 'legUpWall', 'savasana'],
-                sleep: ['sukhasana', 'paschimottanasana', 'supinetwist', 'legUpWall', 'balasana', 'savasana'],
-                energy: ['tadasana', 'suryaNamaskar', 'warrior1', 'warrior2', 'cobra', 'downwardDog', 'tree', 'savasana'],
-                flexibility: ['suryaNamaskar', 'downwardDog', 'uttanasana', 'pigeon', 'seatedTwist', 'paschimottanasana', 'bridge', 'supinetwist', 'savasana'],
-              }).find(([, ids]) => ids.includes(asana.id))?.[0] || 'stress'
-              navigate(`/practice/${routineKey}`)
-            }}
-            className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-full font-label text-sm font-semibold tracking-wide active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(78,99,85,0.15)]"
-          >
-            <span className="material-symbols-outlined text-lg">play_arrow</span>
-            Practice {asana.sanskrit}
-          </button>
-        </div>
-
       </div>
+
+      {/* ── Sticky Practice CTA ── */}
+      <div
+        className="px-6 pb-2 pt-3 bg-background/80 backdrop-blur-xl border-t border-outline-variant/10"
+        style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 40, paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
+      >
+        <button
+          onClick={() => {
+            const routineKey = Object.entries({
+              stress: ['sukhasana', 'balasana', 'uttanasana', 'pigeon', 'supinetwist', 'legUpWall', 'savasana'],
+              sleep: ['sukhasana', 'paschimottanasana', 'supinetwist', 'legUpWall', 'balasana', 'savasana'],
+              energy: ['tadasana', 'suryaNamaskar', 'warrior1', 'warrior2', 'cobra', 'downwardDog', 'tree', 'savasana'],
+              flexibility: ['suryaNamaskar', 'downwardDog', 'uttanasana', 'pigeon', 'seatedTwist', 'paschimottanasana', 'bridge', 'supinetwist', 'savasana'],
+            }).find(([, ids]) => ids.includes(asana.id))?.[0] || 'stress'
+            navigate(`/practice/${routineKey}`)
+          }}
+          className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-full font-label text-sm font-semibold tracking-wide active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(78,99,85,0.15)]"
+        >
+          <span className="material-symbols-outlined text-lg">play_arrow</span>
+          Practice {asana.sanskrit}
+        </button>
+      </div>
+
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import usePracticeStats from '../hooks/usePracticeStats'
-import BottomNav from '../components/BottomNav'
+
 
 const PERIODS = [
   { key: '1d', label: 'Today' },
@@ -165,7 +165,7 @@ export default function JourneyPage() {
     : 100
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body pb-28">
+    <div className="min-h-screen bg-background text-on-surface font-body pb-20">
 
       {/* Header */}
       <div className="px-6 pt-3 pb-2 flex items-center gap-3">
@@ -389,7 +389,6 @@ export default function JourneyPage() {
 
       </div>
 
-      <BottomNav />
     </div>
   )
 }

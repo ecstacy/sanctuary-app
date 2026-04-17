@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getRoutine, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
-import BottomNav from '../components/BottomNav'
+
 
 function formatDuration(seconds) {
   const m = Math.floor(seconds / 60)
@@ -22,7 +22,7 @@ export default function RoutinePage() {
   const [expanded, setExpanded] = useState(null)
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body pb-28">
+    <div className="min-h-screen bg-background text-on-surface font-body pb-20">
 
       {/* Hero */}
       <div className={`relative bg-gradient-to-b ${routine.gradient} px-6 pt-12 pb-16 overflow-hidden`}>
@@ -190,7 +190,6 @@ export default function RoutinePage() {
 
       </div>
 
-      <BottomNav />
     </div>
   )
 }

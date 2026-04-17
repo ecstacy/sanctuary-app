@@ -329,6 +329,7 @@ export default function DoshaQuizPage() {
     if (!user || !doshaResult) return
     setSaving(true)
 
+    // 1) Update denormalized cache on profiles (fast reads everywhere else)
     const { error } = await supabase
       .from('profiles')
       .update({
@@ -345,10 +346,38 @@ export default function DoshaQuizPage() {
     if (error) {
       console.error('Failed to save dosha:', error.message)
       alert('Failed to save: ' + error.message)
-    } else {
-      await refreshProfile()
-      navigate('/dosha', { replace: true })
+      setSaving(false)
+      return
     }
+
+    // 2) Append immutable assessment row — source of truth / history.
+    //    The full quiz always produces a prakriti. The shorter vikriti
+    //    re-check (separate flow) writes type='vikriti'.
+    const { error: assessErr } = await supabase
+      .from('dosha_assessments')
+      .insert({
+        user_id: user.id,
+        assessment_type: 'prakriti',
+        primary_dosha: doshaResult.primary,
+        secondary_dosha: doshaResult.secondary,
+        vata_score: doshaResult.scores.vata,
+        pitta_score: doshaResult.scores.pitta,
+        kapha_score: doshaResult.scores.kapha,
+        quiz_version: 'v1',
+        raw_details: {
+          label: doshaResult.label,
+          percentages: doshaResult.percentages,
+          primary: doshaResult.primary,
+          secondary: doshaResult.secondary,
+          tertiary: doshaResult.tertiary,
+        },
+      })
+
+    // Non-fatal — profile is updated either way. Log and continue.
+    if (assessErr) console.error('Failed to log dosha assessment:', assessErr.message)
+
+    await refreshProfile()
+    navigate('/dosha', { replace: true })
     setSaving(false)
   }
 

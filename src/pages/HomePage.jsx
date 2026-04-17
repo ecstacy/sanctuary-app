@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { getRoutine } from '../data/asanas'
+import { getRoutine, ASANAS } from '../data/asanas'
 import usePracticeStats from '../hooks/usePracticeStats'
+import useVikritiSchedule from '../hooks/useVikritiSchedule'
 import PoseFigure from '../components/PoseFigure'
-import BottomNav from '../components/BottomNav'
+import * as analytics from '../lib/analytics'
+
 
 const CHECKIN_OPTIONS = [
   { id: 'stress', label: 'Stressed', icon: 'psychiatry' },
@@ -123,9 +125,13 @@ function getSubtitle() {
 
 export default function HomePage() {
   const navigate = useNavigate()
-  const { profile } = useAuth()
+  const { profile, user } = useAuth()
   const [checkedIn, setCheckedIn] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
+  // Recommendation id for the currently-shown suggested asana card.
+  // Refreshed whenever the asana/context changes so clicks link to the right row.
+  const [suggestedAsanaRecId, setSuggestedAsanaRecId] = useState(null)
+  const lastLoggedKeyRef = useRef(null)
 
   const firstName = profile?.full_name?.split(' ')[0] || 'Friend'
   // Rotate quote daily using day-of-year so all quotes cycle through
@@ -136,15 +142,99 @@ export default function HomePage() {
   const timeOfDay = getTimeOfDay()
   const avoidTips = AVOID_TIPS[timeOfDay]
   const stats = usePracticeStats()
+  const vikriti = useVikritiSchedule()
 
   const routineKey = checkedIn || 'stress'
   const routine = getRoutine(routineKey)
 
-  // Pick 3 featured asanas for visual cards
-  const featuredAsanas = routine.asanas.slice(0, 3)
+  // Pick a single contextual asana based on time of day, check-in, and dosha.
+  // Returns both the asana and the reasoning (which rules fired) so the
+  // recommendation log can answer "why did we suggest this?".
+  const pickAsana = () => {
+    const h = new Date().getHours()
+    const userDosha = profile?.dosha_details?.primary || null
+    const rules = []
+
+    // Morning: energizing poses
+    if (h < 12) {
+      rules.push('slot:morning')
+      if (checkedIn === 'energy')       { rules.push('checkin:energy');       return { asana: ASANAS.suryaNamaskar, rules, userDosha } }
+      if (checkedIn === 'flexibility')  { rules.push('checkin:flexibility');  return { asana: ASANAS.downwardDog,   rules, userDosha } }
+      if (userDosha === 'kapha')        { rules.push('dosha:kapha');          return { asana: ASANAS.suryaNamaskar, rules, userDosha } }
+      rules.push('default:morning')
+      return { asana: ASANAS.tadasana, rules, userDosha }
+    }
+    // Afternoon: grounding and focus
+    if (h < 17) {
+      rules.push('slot:afternoon')
+      if (checkedIn === 'stress')       { rules.push('checkin:stress');       return { asana: ASANAS.uttanasana, rules, userDosha } }
+      if (checkedIn === 'flexibility')  { rules.push('checkin:flexibility');  return { asana: ASANAS.pigeon,     rules, userDosha } }
+      if (userDosha === 'pitta')        { rules.push('dosha:pitta');          return { asana: ASANAS.tree,       rules, userDosha } }
+      rules.push('default:afternoon')
+      return { asana: ASANAS.warrior2, rules, userDosha }
+    }
+    // Evening: restorative and calming
+    rules.push('slot:evening')
+    if (checkedIn === 'sleep')   { rules.push('checkin:sleep');   return { asana: ASANAS.legUpWall,  rules, userDosha } }
+    if (checkedIn === 'stress')  { rules.push('checkin:stress');  return { asana: ASANAS.balasana,   rules, userDosha } }
+    if (userDosha === 'vata')    { rules.push('dosha:vata');      return { asana: ASANAS.sukhasana,  rules, userDosha } }
+    rules.push('default:evening')
+    return { asana: ASANAS.supinetwist, rules, userDosha }
+  }
+  const { asana: suggestedAsana, rules: suggestedAsanaRules, userDosha: suggestedAsanaUserDosha } = pickAsana()
+
+  const ASANA_CONTEXT = {
+    morning: 'Start your day grounded',
+    afternoon: 'Reset your afternoon',
+    evening: 'Wind down gently',
+  }
+  const asanaContext = ASANA_CONTEXT[timeOfDay]
+
+  // ── Log recommendation when the suggested asana card renders ──
+  // Guarded by a ref so we only write one row per unique
+  // (asana, time_of_day, checkedIn) combination within this session.
+  useEffect(() => {
+    if (!user?.id || !suggestedAsana?.id) return
+    const key = `${suggestedAsana.id}|${timeOfDay}|${checkedIn || 'none'}`
+    if (lastLoggedKeyRef.current === key) return
+    lastLoggedKeyRef.current = key
+
+    let cancelled = false
+    ;(async () => {
+      const recId = await analytics.logRecommendation({
+        userId: user.id,
+        surface: analytics.SURFACES.HOME_SUGGESTED_ASANA,
+        contentType: analytics.CONTENT_TYPES.ASANA,
+        contentId: suggestedAsana.id,
+        reasoning: {
+          rules_fired: suggestedAsanaRules,
+          time_of_day: timeOfDay,
+          checked_in: checkedIn,
+          user_dosha: suggestedAsanaUserDosha,
+        },
+      })
+      if (!cancelled) setSuggestedAsanaRecId(recId)
+    })()
+    return () => { cancelled = true }
+  }, [user?.id, suggestedAsana?.id, timeOfDay, checkedIn, suggestedAsanaRules, suggestedAsanaUserDosha])
+
+  // ── Handler for tapping the suggested asana card ──
+  const handleSuggestedAsanaClick = () => {
+    if (user?.id && suggestedAsana?.id) {
+      analytics.logContentEvent({
+        userId: user.id,
+        eventType: analytics.EVENT_TYPES.CLICKED,
+        contentType: analytics.CONTENT_TYPES.ASANA,
+        contentId: suggestedAsana.id,
+        surface: analytics.SURFACES.HOME_SUGGESTED_ASANA,
+        recommendationId: suggestedAsanaRecId,
+      })
+    }
+    navigate(`/asana/${suggestedAsana.id}`)
+  }
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body pb-28">
+    <div className="min-h-screen bg-background text-on-surface font-body pb-20">
 
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 pt-3 pb-2">
@@ -175,39 +265,70 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* ── Streak & Minutes Tiles ── */}
-        <div className="grid grid-cols-2 gap-3 stagger-2">
+        {/* ── Streak & Minutes Tiles — only shown after first practice ── */}
+        {stats.hasSessions && (
+          <div className="grid grid-cols-2 gap-3 stagger-2">
+            <button
+              onClick={() => navigate('/journey')}
+              className="bg-primary-container/30 rounded-xl p-4 text-left active:scale-[0.97] transition-all relative overflow-hidden border border-primary/[0.08]"
+            >
+              <div className="absolute -right-3 -bottom-3 opacity-[0.08]">
+                <span className="material-symbols-outlined text-5xl text-primary">local_fire_department</span>
+              </div>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="material-symbols-outlined text-primary text-sm">local_fire_department</span>
+                <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Day Streak</p>
+              </div>
+              <p className="font-headline text-3xl text-primary leading-none">{stats.streak}</p>
+              <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">
+                {stats.streak === 1 ? '1 day so far' : 'consecutive days'}
+              </p>
+            </button>
+            <button
+              onClick={() => navigate('/journey')}
+              className="bg-secondary-container/25 rounded-xl p-4 text-left active:scale-[0.97] transition-all relative overflow-hidden border border-secondary/[0.08]"
+            >
+              <div className="absolute -right-3 -bottom-3 opacity-[0.08]">
+                <span className="material-symbols-outlined text-5xl text-secondary">schedule</span>
+              </div>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="material-symbols-outlined text-secondary text-sm">schedule</span>
+                <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">This Week</p>
+              </div>
+              <p className="font-headline text-3xl text-secondary leading-none">{stats.weekMinutes}</p>
+              <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">minutes practiced</p>
+            </button>
+          </div>
+        )}
+
+        {/* ── Vikriti re-check prompt — only when due ── */}
+        {vikriti.isDue && vikriti.hasPrakriti && (
           <button
-            onClick={() => navigate('/journey')}
-            className="bg-primary-container/30 rounded-xl p-4 text-left active:scale-[0.97] transition-all relative overflow-hidden border border-primary/[0.08]"
+            onClick={() => navigate('/vikriti')}
+            className="relative w-full text-left rounded-xl p-4 bg-primary-container/40 border border-primary/15 active:scale-[0.98] transition-all stagger-2 overflow-hidden"
           >
             <div className="absolute -right-3 -bottom-3 opacity-[0.08]">
-              <span className="material-symbols-outlined text-5xl text-primary">local_fire_department</span>
+              <span className="material-symbols-outlined text-5xl text-primary">waving_hand</span>
             </div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="material-symbols-outlined text-primary text-sm">local_fire_department</span>
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Day Streak</p>
+            <div className="relative flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">
+                <span className="material-symbols-outlined text-primary text-lg">waving_hand</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-0.5">
+                  {vikriti.vikritiCount === 0 ? 'First Check-in' : 'Weekly Check-in'}
+                </p>
+                <p className="font-body font-semibold text-sm text-on-surface leading-tight">
+                  {vikriti.vikritiCount === 0
+                    ? 'How have you been lately?'
+                    : `It's been ${vikriti.daysSinceLast} days — how are you now?`}
+                </p>
+                <p className="font-body text-[11px] text-on-surface-variant mt-0.5">5 questions · 60 seconds</p>
+              </div>
+              <span className="material-symbols-outlined text-primary text-lg flex-shrink-0">arrow_forward</span>
             </div>
-            <p className="font-headline text-3xl text-primary leading-none">{stats.streak}</p>
-            <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">
-              {stats.streak === 0 ? 'Start today' : stats.streak === 1 ? '1 day so far' : 'consecutive days'}
-            </p>
           </button>
-          <button
-            onClick={() => navigate('/journey')}
-            className="bg-secondary-container/25 rounded-xl p-4 text-left active:scale-[0.97] transition-all relative overflow-hidden border border-secondary/[0.08]"
-          >
-            <div className="absolute -right-3 -bottom-3 opacity-[0.08]">
-              <span className="material-symbols-outlined text-5xl text-secondary">schedule</span>
-            </div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="material-symbols-outlined text-secondary text-sm">schedule</span>
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">This Week</p>
-            </div>
-            <p className="font-headline text-3xl text-secondary leading-none">{stats.weekMinutes}</p>
-            <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">minutes practiced</p>
-          </button>
-        </div>
+        )}
 
         {/* ── Daily Check-in ── */}
         <div className="bg-surface-container-low rounded-xl p-5 stagger-3">
@@ -226,7 +347,7 @@ export default function HomePage() {
               onChange={e => setSearchQuery(e.target.value)}
               onKeyDown={e => {
                 if (e.key === 'Enter' && searchQuery.trim().length >= 2) {
-                  navigate('/recommendations', { state: { query: searchQuery.trim() } })
+                  navigate('/recommendations', { state: { query: searchQuery.trim(), source: analytics.SEARCH_SOURCES.HOME_SEARCH } })
                 }
               }}
               placeholder="Lower back pain, headache..."
@@ -235,7 +356,7 @@ export default function HomePage() {
             {searchQuery.length > 0 && (
               <button
                 onClick={() => {
-                  if (searchQuery.trim().length >= 2) navigate('/recommendations', { state: { query: searchQuery.trim() } })
+                  if (searchQuery.trim().length >= 2) navigate('/recommendations', { state: { query: searchQuery.trim(), source: analytics.SEARCH_SOURCES.HOME_SEARCH } })
                 }}
                 className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-primary flex items-center justify-center active:scale-90 transition-all"
               >
@@ -275,90 +396,49 @@ export default function HomePage() {
           )}
         </div>
 
-        {/* ── Recommended Asanas — visual cards ── */}
-        <div className="stagger-3">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">Physical Practice</p>
-              <h3 className="font-headline text-xl text-on-surface">Recommended Asanas</h3>
-            </div>
-            <button
-              onClick={() => navigate('/routine', { state: { routineKey } })}
-              className="flex items-center gap-1 text-primary font-label text-xs active:scale-95 transition-all"
-            >
-              View all <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </button>
+        {/* ── Suggested Asana — single contextual card ── */}
+        <button
+          onClick={handleSuggestedAsanaClick}
+          className="bg-surface-container rounded-xl p-5 flex items-center gap-4 active:scale-[0.98] transition-all stagger-3 w-full text-left"
+        >
+          <div className="w-16 h-16 rounded-xl bg-primary-container/40 flex items-center justify-center flex-shrink-0">
+            <PoseFigure poseKey={suggestedAsana.poseKey} size="xs" />
           </div>
-
-          {/* Horizontal scroll cards */}
-          <div className="flex gap-4 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
-            {featuredAsanas.map((asana, i) => (
-              <button
-                key={asana.id + i}
-                onClick={() => navigate(`/practice/${routineKey}`)}
-                className="flex-shrink-0 w-44 snap-start active:scale-[0.97] transition-all"
-              >
-                <div className="relative aspect-[4/5] rounded-xl overflow-hidden mb-3 bg-surface-container-low">
-                  {/* Pose figure as visual */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <PoseFigure poseKey={asana.poseKey} size="lg" breathing />
-                  </div>
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-on-surface/50 via-transparent to-transparent" />
-                  {/* Label overlay */}
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <p className="font-label text-[8px] text-white/70 uppercase tracking-widest mb-0.5">{asana.category}</p>
-                    <p className="font-headline text-base text-white leading-tight">{asana.sanskrit}</p>
-                  </div>
-                </div>
-                <p className="font-body font-semibold text-sm text-on-surface text-left mb-0.5">{asana.english}</p>
-                <div className="flex gap-1.5 mt-1">
-                  <span className="px-2 py-0.5 bg-surface-container-high rounded-full font-label text-[9px] text-on-surface-variant uppercase">{Math.ceil(asana.durationSeconds / 60)} min</span>
-                  <span className="px-2 py-0.5 bg-primary-fixed rounded-full font-label text-[9px] text-primary uppercase">{asana.level}</span>
-                </div>
-              </button>
-            ))}
+          <div className="flex-1 min-w-0">
+            <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">{asanaContext}</p>
+            <p className="font-body font-semibold text-sm text-on-surface">{suggestedAsana.sanskrit}</p>
+            <p className="font-body text-xs text-on-surface-variant mt-0.5">{suggestedAsana.english} · {Math.ceil(suggestedAsana.durationSeconds / 60)} min</p>
           </div>
+          <span className="material-symbols-outlined text-primary text-xl flex-shrink-0">arrow_forward</span>
+        </button>
 
-          {/* Start practice CTA */}
-          <button
-            onClick={() => navigate(`/practice/${routineKey}`)}
-            className="w-full mt-4 py-3.5 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-full font-label text-xs font-semibold tracking-wide active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(78,99,85,0.15)]"
-          >
-            <span className="material-symbols-outlined text-sm">play_arrow</span>
-            Start Today's Practice · {routine.asanas.length} poses
-          </button>
-        </div>
-
-        {/* ── Breathing Exercise ── */}
-        <div className="bg-primary-container/20 rounded-xl p-6 stagger-4">
-          <div className="flex items-center gap-5">
-            {/* Breathing ring */}
-            <div className="relative w-24 h-24 flex-shrink-0">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary to-primary-container opacity-20 animate-loading-breathe" />
-              <div className="absolute inset-3 rounded-full border-2 border-dashed border-primary/20" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <p className="font-headline text-lg text-primary leading-none">Breathe</p>
-                  <p className="font-label text-[8px] text-primary/50 uppercase tracking-widest mt-0.5">4-7-8</p>
-                </div>
+        {/* ── Daily Ritual — Breathing ── */}
+        <button
+          onClick={() => navigate('/routine', { state: { routineKey: 'stress' } })}
+          className="bg-surface-container-low rounded-2xl p-5 stagger-4 active:scale-[0.98] transition-all w-full text-left"
+        >
+          <div className="flex items-center gap-4">
+            {/* Icon circle with subtle breathing animation */}
+            <div className="relative w-16 h-16 flex-shrink-0">
+              <div className="absolute inset-0 rounded-full bg-primary-container/40 animate-ritual-glow" />
+              <div className="absolute inset-0 rounded-full bg-surface-container-high flex items-center justify-center">
+                <span className="material-symbols-outlined text-primary text-2xl">air</span>
               </div>
             </div>
-            <div className="flex-1">
-              <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">Daily Focus</p>
-              <h3 className="font-headline text-lg text-on-surface mb-1">The Breath</h3>
-              <p className="font-body text-xs text-on-surface-variant leading-relaxed mb-3">
-                Proper breathing is the foundation of all wellness. Take a moment to center yourself.
-              </p>
-              <button
-                onClick={() => navigate('/routine', { state: { routineKey: 'stress' } })}
-                className="px-4 py-2 bg-primary text-on-primary rounded-full font-label text-[10px] uppercase tracking-widest font-semibold active:scale-95 transition-all"
-              >
-                Start Session
-              </button>
+
+            {/* Text content */}
+            <div className="flex-1 min-w-0">
+              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">Daily Ritual</p>
+              <h3 className="font-headline text-xl text-on-surface leading-snug">Mindful Respiration</h3>
+              <p className="font-body text-xs text-on-surface-variant mt-0.5">Find your center...</p>
+            </div>
+
+            {/* Start pill */}
+            <div className="px-5 py-2.5 bg-primary rounded-full flex-shrink-0">
+              <span className="font-label text-[10px] text-on-primary uppercase tracking-widest font-semibold">Start</span>
             </div>
           </div>
-        </div>
+        </button>
 
         {/* ── What to Avoid ── */}
         <div className="bg-secondary-container/15 rounded-xl p-5 stagger-5">
@@ -384,29 +464,116 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── Dosha Card ── */}
-        <div className="bg-primary rounded-xl p-6 text-on-primary relative overflow-hidden stagger-6">
-          <p className="font-label text-[10px] uppercase tracking-widest text-on-primary/60 mb-2">
-            Dosha Type
-          </p>
-          <h3 className="font-headline text-2xl mb-1">
-            {profile?.dosha || 'Undiscovered'}
-          </h3>
-          {!profile?.dosha && (
-            <p className="font-body text-xs text-on-primary/70 leading-relaxed mb-4">
-              Take the Dosha quiz to unlock personalized recommendations.
-            </p>
-          )}
-          <button
-            onClick={() => navigate(profile?.dosha ? '/dosha' : '/quiz')}
-            className="px-4 py-2 bg-on-primary/10 rounded-full font-label text-xs text-on-primary tracking-wide active:scale-95 transition-all"
-          >
-            {profile?.dosha ? 'Explore my Dosha' : 'Take the quiz \u2192'}
-          </button>
-          <div className="absolute -right-8 -bottom-8 opacity-10">
-            <span className="material-symbols-outlined text-[8rem]">spa</span>
-          </div>
-        </div>
+        {/* ── Dosha Card — themed per user's dosha, with vikriti delta overlay ── */}
+        {(() => {
+          const userDosha = (profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
+          const DOSHA_LABELS = { vata: 'Vata', pitta: 'Pitta', kapha: 'Kapha' }
+          // Delta vs. most recent vikriti check-in. Only meaningful when both
+          // prakriti exists AND user has done at least one vikriti recently.
+          // "Recently" = last 14 days — beyond that the signal is stale.
+          const vikritiFresh = vikriti.lastVikritiAt && vikriti.daysSinceLast <= 14
+          const vikritiPrimary = vikritiFresh ? vikriti.lastVikritiPrimary : null
+          const hasShifted = vikritiPrimary && userDosha && vikritiPrimary !== userDosha
+          const DOSHA_THEMES = {
+            vata: {
+              gradient: 'from-[#567b91] to-[#7ba3be]',
+              icon: 'wind_power',
+              element: 'Air + Ether',
+              tagline: 'Creative, quick-thinking, and adaptable',
+              bgIcon: 'air',
+            },
+            pitta: {
+              gradient: 'from-[#8b6a3e] to-[#c49a5c]',
+              icon: 'local_fire_department',
+              element: 'Fire + Water',
+              tagline: 'Focused, driven, and naturally radiant',
+              bgIcon: 'local_fire_department',
+            },
+            kapha: {
+              gradient: 'from-[#5a7a52] to-[#8aad7e]',
+              icon: 'landscape',
+              element: 'Earth + Water',
+              tagline: 'Grounded, nurturing, and steady',
+              bgIcon: 'water_drop',
+            },
+          }
+          const theme = DOSHA_THEMES[userDosha]
+          const hasDosha = !!theme
+
+          return (
+            <button
+              onClick={() => navigate(hasDosha ? '/dosha' : '/quiz')}
+              className={`rounded-xl p-6 text-left relative overflow-hidden stagger-6 active:scale-[0.98] transition-all w-full ${
+                hasDosha
+                  ? `bg-gradient-to-br ${theme.gradient} text-white`
+                  : 'bg-primary text-on-primary'
+              }`}
+            >
+              {/* Background decorative elements */}
+              {hasDosha ? (
+                <>
+                  <div className="absolute -right-6 -top-6 opacity-[0.12]">
+                    <span className="material-symbols-outlined text-[7rem]">{theme.bgIcon}</span>
+                  </div>
+                  <div className="absolute -left-4 -bottom-4 opacity-[0.08]">
+                    <span className="material-symbols-outlined text-[5rem]">spa</span>
+                  </div>
+                </>
+              ) : (
+                <div className="absolute -right-8 -bottom-8 opacity-10">
+                  <span className="material-symbols-outlined text-[8rem]">spa</span>
+                </div>
+              )}
+
+              {/* Content */}
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="material-symbols-outlined text-sm opacity-70">
+                    {hasDosha ? theme.icon : 'spa'}
+                  </span>
+                  <p className="font-label text-[10px] uppercase tracking-widest opacity-70">
+                    {hasDosha ? theme.element : 'Dosha Type'}
+                  </p>
+                </div>
+
+                <h3 className="font-headline text-2xl mb-1">
+                  {hasDosha ? `${userDosha.charAt(0).toUpperCase() + userDosha.slice(1)} Dosha` : 'Undiscovered'}
+                </h3>
+
+                {hasDosha ? (
+                  <p className="font-body text-xs opacity-80 leading-relaxed mb-3">
+                    {theme.tagline}
+                  </p>
+                ) : (
+                  <p className="font-body text-xs opacity-70 leading-relaxed mb-4">
+                    Take the Dosha quiz to unlock personalized recommendations and theme your app.
+                  </p>
+                )}
+
+                {/* Vikriti delta — subtle pill that reads "This week: elevated Vata" or "In rhythm" */}
+                {hasDosha && vikritiPrimary && (
+                  <div className="inline-flex items-center gap-1.5 mb-4 px-2.5 py-1 bg-white/15 backdrop-blur-sm rounded-full">
+                    <span className="material-symbols-outlined text-[12px] opacity-80">
+                      {hasShifted ? 'trending_up' : 'check_circle'}
+                    </span>
+                    <span className="font-label text-[10px] tracking-wide opacity-90">
+                      {hasShifted
+                        ? `This week: elevated ${DOSHA_LABELS[vikritiPrimary]}`
+                        : 'In rhythm this week'}
+                    </span>
+                  </div>
+                )}
+
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full font-label text-xs tracking-wide">
+                  {hasDosha
+                    ? (hasShifted ? 'See how to rebalance' : 'Explore my Dosha')
+                    : 'Take the quiz'}
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </span>
+              </div>
+            </button>
+          )
+        })()}
 
         {/* ── Quote ── */}
         <div className="bg-surface-container-low rounded-xl p-6 text-center stagger-7">
@@ -421,7 +588,6 @@ export default function HomePage() {
 
       </div>
 
-      <BottomNav />
     </div>
   )
 }

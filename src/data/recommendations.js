@@ -213,33 +213,109 @@ export const POPULAR_SEARCHES = [
   { query: 'Bloating', icon: 'gastroenterology' },
 ]
 
+// ─── Synonym Map ────────────────────────────────────────────────────────────
+// Maps common natural-language terms to recommendation IDs they should match.
+// This catches queries the keyword list alone would miss.
+
+const SYNONYMS = {
+  // Pain locations → closest recommendation
+  'toe': 'knee-pain', 'foot': 'knee-pain', 'feet': 'knee-pain', 'ankle': 'knee-pain',
+  'wrist': 'neck-shoulder', 'hand': 'neck-shoulder', 'arm': 'neck-shoulder', 'elbow': 'neck-shoulder',
+  'chest': 'posture', 'rib': 'posture', 'thoracic': 'posture',
+  'jaw': 'headache', 'tooth': 'headache', 'toothache': 'headache', 'teeth': 'headache', 'tmj': 'headache', 'face': 'headache',
+  'eye': 'headache', 'eyes': 'headache', 'sinus': 'headache',
+  'leg': 'knee-pain', 'calf': 'knee-pain', 'shin': 'knee-pain', 'thigh': 'hip-pain',
+  'groin': 'hip-pain', 'hamstring': 'hip-pain', 'butt': 'hip-pain', 'glutes': 'hip-pain', 'buttock': 'hip-pain',
+  'back': 'lower-back', 'lower back': 'lower-back', 'upper back': 'neck-shoulder',
+
+  // Emotional / mental states
+  'stress': 'anxiety', 'stressed': 'anxiety', 'tense': 'anxiety', 'tension': 'anxiety',
+  'sad': 'anxiety', 'depressed': 'anxiety', 'depression': 'anxiety', 'low mood': 'anxiety', 'mood': 'anxiety',
+  'angry': 'anxiety', 'irritable': 'anxiety', 'frustrated': 'anxiety', 'anger': 'anxiety',
+  'burnout': 'energy-boost', 'burnt out': 'energy-boost', 'drained': 'energy-boost',
+  'calm': 'anxiety', 'relax': 'anxiety', 'relaxation': 'anxiety', 'peace': 'anxiety',
+  'meditate': 'focus', 'meditation': 'focus', 'mindful': 'focus', 'mindfulness': 'focus',
+
+  // Physical conditions
+  'pain': 'lower-back', 'ache': 'lower-back', 'sore': 'lower-back', 'stiff': 'lower-back', 'stiffness': 'lower-back',
+  'cramp': 'digestion', 'spasm': 'lower-back',
+  'tight': 'hip-pain', 'tightness': 'hip-pain', 'flexibility': 'hip-pain',
+  'swelling': 'knee-pain', 'swollen': 'knee-pain', 'inflammation': 'knee-pain',
+  'numb': 'neck-shoulder', 'tingling': 'neck-shoulder', 'pins and needles': 'neck-shoulder',
+  'sciatica': 'hip-pain', 'nerve': 'hip-pain', 'pinched': 'neck-shoulder',
+
+  // Lifestyle
+  'sitting': 'posture', 'desk': 'posture', 'office': 'posture', 'work': 'posture', 'screen': 'posture', 'phone': 'posture',
+  'morning': 'energy-boost', 'wake': 'energy-boost', 'waking': 'energy-boost',
+  'night': 'insomnia', 'bedtime': 'insomnia', 'evening': 'insomnia',
+  'weight': 'energy-boost', 'fat': 'energy-boost', 'lose weight': 'energy-boost',
+  'pregnant': 'hip-pain', 'pregnancy': 'hip-pain',
+  'period': 'period-pain', 'pms': 'period-pain', 'menstrual': 'period-pain',
+
+  // Digestion
+  'stomach': 'digestion', 'belly': 'digestion', 'tummy': 'digestion', 'gut': 'digestion',
+  'bloat': 'digestion', 'gassy': 'digestion', 'acidity': 'digestion', 'heartburn': 'digestion',
+  'nausea': 'digestion', 'nauseous': 'digestion', 'sick': 'digestion',
+  'constipated': 'digestion', 'diarrhea': 'digestion',
+
+  // General
+  'beginner': 'lower-back', 'start': 'energy-boost', 'new': 'energy-boost',
+  'breathe': 'anxiety', 'breathing': 'anxiety', 'breath': 'anxiety',
+}
+
 // ─── Search Engine ───────────────────────────────────────────────────────────
 
 export function searchRecommendations(query, { gender } = {}) {
   if (!query || query.trim().length < 2) return []
 
   const normalized = query.toLowerCase().trim()
-  const words = normalized.split(/\s+/)
+  // Strip filler words for cleaner matching
+  const fillers = ['i', 'have', 'a', 'my', 'me', 'is', 'am', 'the', 'in', 'on', 'and', 'or', 'very', 'really', 'so', 'some', 'get', 'got', 'feel', 'feeling', 'lot', 'of', 'with', 'been', 'having', 'from', "can't", 'cant', 'cannot']
+  const words = normalized.split(/\s+/).filter(w => w.length >= 2 && !fillers.includes(w))
 
-  const scored = RECOMMENDATIONS
+  const eligible = RECOMMENDATIONS
     .filter(rec => !gender || !rec.excludeGender || !rec.excludeGender.includes(gender))
-    .map(rec => {
+
+  const scored = eligible.map(rec => {
     let score = 0
 
-    // Exact full-query match in keywords (highest weight)
+    // 1. Exact full-query match against keywords (highest weight)
     if (rec.keywords.some(k => normalized.includes(k) || k.includes(normalized))) {
       score += 10
     }
 
-    // Individual word matches
+    // 2. Individual word matches against keywords
     words.forEach(word => {
-      if (word.length < 2) return
       rec.keywords.forEach(keyword => {
-        if (keyword.includes(word)) score += 3
+        if (keyword === word) score += 5          // exact word match
+        else if (keyword.includes(word)) score += 3  // partial match
+        else if (word.includes(keyword)) score += 2  // query word contains keyword
       })
       // Also check label and description
       if (rec.label.toLowerCase().includes(word)) score += 2
       if (rec.description.toLowerCase().includes(word)) score += 1
+    })
+
+    // 3. Synonym boosting — check each query word against synonym map
+    words.forEach(word => {
+      const synonymTarget = SYNONYMS[word]
+      if (synonymTarget && synonymTarget === rec.id) {
+        score += 6
+      }
+    })
+    // Also check multi-word synonym phrases
+    Object.entries(SYNONYMS).forEach(([phrase, targetId]) => {
+      if (phrase.includes(' ') && normalized.includes(phrase) && targetId === rec.id) {
+        score += 8
+      }
+    })
+
+    // 4. Check practice titles and subtitles (catches specific pose searches)
+    words.forEach(word => {
+      rec.practices.forEach(p => {
+        if (p.title.toLowerCase().includes(word)) score += 2
+        if (p.subtitle.toLowerCase().includes(word)) score += 2
+      })
     })
 
     return { ...rec, score }
