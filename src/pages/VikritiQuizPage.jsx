@@ -237,9 +237,24 @@ export default function VikritiQuizPage() {
 
   // ── Result ───────────────────────────────────────────────────────────────
   if (phase === 'result' && result) {
-    const currentMeta = DOSHA_META[result.primary]
+    const currentMeta  = DOSHA_META[result.primary]
     const baselineMeta = prakritiPrimary ? DOSHA_META[prakritiPrimary] : null
-    const shifted = prakritiPrimary && prakritiPrimary !== result.primary
+    const shifted      = prakritiPrimary && prakritiPrimary !== result.primary
+    const primaryPct   = result.percentages[result.primary]
+
+    // Aggravation threshold. With 5 questions the granularity is 20%
+    // (answers produce 0/20/40/60/80/100). A balanced prakriti typically
+    // shows the primary around 40-50%. Anything >=60% of current state
+    // means the dosha is vitiated ("aggravated") and wants pacification
+    // — even when it matches prakriti. "Same dosha" ≠ "balanced".
+    const AGGRAVATED_THRESHOLD = 60
+    const isAggravated = primaryPct >= AGGRAVATED_THRESHOLD
+
+    // Display order: always descending by current percentage, not a fixed
+    // vata/pitta/kapha order. Users read this as a ranked view of what's
+    // dominant right now, so a 20% dosha should never sit above an 80%.
+    const orderedDoshas = ['vata', 'pitta', 'kapha']
+      .sort((a, b) => result.percentages[b] - result.percentages[a])
 
     return (
       <div className="min-h-screen bg-background text-on-surface font-body">
@@ -257,9 +272,10 @@ export default function VikritiQuizPage() {
             Your current state
           </h1>
 
-          {/* Composition bars */}
+          {/* Composition bars — ordered descending so the dominant dosha is
+              always on top, regardless of the classical V/P/K sequence. */}
           <div className="bg-surface-container rounded-lg p-5 mb-5">
-            {['vata', 'pitta', 'kapha'].map(key => {
+            {orderedDoshas.map(key => {
               const m = DOSHA_META[key]
               const pct = result.percentages[key]
               return (
@@ -279,21 +295,30 @@ export default function VikritiQuizPage() {
             })}
           </div>
 
-          {/* Delta narrative */}
+          {/* Delta narrative — three states:
+              1. shifted  : different dosha elevated vs baseline
+              2. same-but-aggravated : matches baseline but running high
+              3. in-rhythm : matches baseline and within normal range    */}
           <div className={`${currentMeta.bg} rounded-lg p-5 mb-5`}>
             <div className="flex items-center gap-2 mb-2">
               <span className={`material-symbols-outlined ${currentMeta.text} text-lg`}>{currentMeta.icon}</span>
               <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: currentMeta.hex }}>
-                Currently trending {currentMeta.name}
+                {isAggravated
+                  ? `${currentMeta.name} aggravated`
+                  : `Currently trending ${currentMeta.name}`}
               </p>
             </div>
             <p className="font-body text-sm text-on-surface leading-relaxed">
               {shifted ? (
-                <>Your baseline is <b className="capitalize">{baselineMeta.name}</b>, but this week {currentMeta.name} is elevated. Consider practices that pacify {currentMeta.name}.</>
+                <>Your baseline is <b className="capitalize">{baselineMeta.name}</b>, but this week <b>{currentMeta.name}</b> is elevated at {primaryPct}%. Favor practices that pacify {currentMeta.name}.</>
+              ) : prakritiPrimary && isAggravated ? (
+                <>Your baseline is <b className="capitalize">{baselineMeta.name}</b>, and right now it's running high at {primaryPct}%. Same dosha, but aggravated — favor cooling, grounding practices that pacify {currentMeta.name}.</>
               ) : prakritiPrimary ? (
-                <>You're in rhythm with your <b className="capitalize">{baselineMeta.name}</b> baseline. Keep doing what's working.</>
+                <>You're in rhythm with your <b className="capitalize">{baselineMeta.name}</b> baseline ({primaryPct}%). Keep doing what's working.</>
+              ) : isAggravated ? (
+                <>Your <b>{currentMeta.name}</b> is elevated at {primaryPct}%. Favor practices that pacify {currentMeta.name}.</>
               ) : (
-                <>Your {currentMeta.name} is currently dominant.</>
+                <>Your {currentMeta.name} is currently dominant at {primaryPct}%.</>
               )}
             </p>
           </div>
