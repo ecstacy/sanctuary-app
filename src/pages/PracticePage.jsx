@@ -1,7 +1,8 @@
-import { useReducer, useEffect, useRef, useCallback, useState } from 'react'
+import { useReducer, useEffect, useRef, useCallback, useState, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
-import { getRoutine, getDoshaTag } from '../data/asanas'
+import { getRoutine, getDoshaTag, ASANAS } from '../data/asanas'
 import { useVoiceGuidance } from '../hooks/useVoiceGuidance'
 import { useAudio } from '../hooks/useAudio'
 import { useWakeLock } from '../hooks/useWakeLock'
@@ -75,7 +76,10 @@ function formatDuration(seconds) {
 
 export default function PracticePage() {
   const navigate = useNavigate()
-  const { id: routineKey } = useParams()
+  const params = useParams()
+  const routineKey = params.id
+  const asanaId = params.asanaId // present when route is /practice/asana/:asanaId
+  const single = !!asanaId
   const { profile, user } = useAuth()
 
   // ── Pre-practice 2-tap check-in (Chunk 13) ──
@@ -86,6 +90,7 @@ export default function PracticePage() {
   // exists, closing the loop pre → session → post.
   const [preEnergy, setPreEnergy] = useState(null)
   const [preStress, setPreStress] = useState(null)
+  const [checkinOpen, setCheckinOpen] = useState(false)
   const preCheckinIdRef = useRef(null)
 
   // ── Post-practice one-tap feel-better (Chunk 14) ──
@@ -101,7 +106,22 @@ export default function PracticePage() {
   const audio = useAudio()
   useWakeLock()
 
-  const routine = getRoutine(routineKey || 'stress')
+  // In single-asana mode we synthesize a 1-pose "routine" so the rest of the
+  // state machine, voice cues, and stats pipeline keep working unchanged.
+  const routine = useMemo(() => {
+    if (single) {
+      const a = ASANAS[asanaId]
+      if (!a) return getRoutine('stress') // graceful fallback
+      return {
+        key: `asana-${a.id}`,
+        label: a.sanskrit,
+        gradient: 'from-primary-container to-surface-container-low',
+        totalDuration: a.durationSeconds,
+        asanas: [a],
+      }
+    }
+    return getRoutine(routineKey || 'stress')
+  }, [single, asanaId, routineKey])
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
   const timerRef = useRef(null)
   const voicePlayedRef = useRef({})
@@ -364,86 +384,118 @@ export default function PracticePage() {
     )
 
     return (
-      // Scrollable-middle / fixed-CTA layout: the hero + check-in live in an
-      // overflow-y-auto container so content can never push the Start button
-      // below the viewport or the device gesture bar. pb-8 + body-level
-      // safe-area-inset keep the CTA clear of the Android nav area.
       <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
-        {/* ── Top bar — fixed ── */}
-        <div className="flex items-center justify-between px-5 pt-3 pb-1 flex-shrink-0">
-          <button onClick={handleExit} className="text-on-surface-variant">
+        {/* ── Top bar: close + voice toggle only (routine name moved to H1 below) ── */}
+        <div className="flex items-center justify-between px-4 pt-3 pb-1 flex-shrink-0">
+          <button
+            onClick={handleExit}
+            aria-label="Close"
+            className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90 transition-all"
+          >
             <span className="material-symbols-outlined text-xl">close</span>
           </button>
-          <span className="font-headline italic text-primary text-base">{routine.label}</span>
-          <button onClick={voice.toggle} className="text-on-surface-variant">
-            <span className="material-symbols-outlined text-xl">{voice.enabled ? 'volume_up' : 'volume_off'}</span>
-          </button>
-        </div>
-
-        {/* ── Scrollable middle: hero + check-in questions ── */}
-        <div className="flex-1 overflow-y-auto min-h-0 px-6">
-          {/* Hero */}
-          <div className="flex flex-col items-center pt-3 pb-5">
-            <div className="mb-3 stagger-1">
-              <PoseFigure poseKey={currentAsana.poseKey} size="lg" breathing />
-            </div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-1 stagger-2">Ready to Begin</p>
-            <h1 className="font-headline text-2xl text-on-surface text-center mb-1 stagger-2">{routine.label}</h1>
-            <p className="font-body text-sm text-on-surface-variant text-center mb-1 stagger-3">
-              {routine.asanas.length} poses · {formatDuration(routine.totalDuration)}
-            </p>
-            <p className="font-body text-xs text-on-surface-variant/50 text-center mb-3 stagger-3">
-              Starting with: {currentAsana.english}
-            </p>
-            <div className="flex items-center gap-2 bg-surface-container rounded-full px-4 py-1.5 stagger-4">
-              <span className="material-symbols-outlined text-primary text-sm">{voice.enabled ? 'volume_up' : 'volume_off'}</span>
-              <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">
-                Voice guidance {voice.enabled ? 'on' : 'off'}
-              </span>
-            </div>
-          </div>
-
-          {/* ── Pre-practice 2-tap check-in ──
-              Two optional 5-point scales, framed as natural-language
-              questions with readable endpoint captions. Tapping is optional
-              — pressing Start without rating logs nothing. */}
-          <div className="pt-2 pb-6">
-            <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-widest text-center mb-4 stagger-4">
-              Before you begin · optional
-            </p>
-            <div className="space-y-6">
-              <CheckinScale
-                question="How's your energy right now?"
-                loLabel="Drained"
-                hiLabel="Energized"
-                value={preEnergy}
-                onChange={setPreEnergy}
-                ariaPrefix="Energy level"
-                stagger="stagger-5"
-              />
-              <CheckinScale
-                question="How does your body feel?"
-                loLabel="Relaxed"
-                hiLabel="Tense"
-                value={preStress}
-                onChange={setPreStress}
-                ariaPrefix="Body tension level"
-                stagger="stagger-6"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* ── Fixed CTA — always visible ── */}
-        <div className="flex-shrink-0 px-6 pt-2 pb-8 bg-background border-t border-outline-variant/10">
           <button
-            onClick={handleStart}
-            className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all flex items-center justify-center gap-2"
+            onClick={voice.toggle}
+            aria-label={voice.enabled ? 'Turn voice guidance off' : 'Turn voice guidance on'}
+            className={`h-9 px-3 rounded-full flex items-center gap-1.5 active:scale-95 transition-all ${
+              voice.enabled ? 'bg-primary-container/40 text-primary' : 'bg-surface-container text-on-surface-variant'
+            }`}
           >
-            <span className="material-symbols-outlined text-lg">play_arrow</span>
-            Start Practice
+            <span className="material-symbols-outlined text-lg">{voice.enabled ? 'volume_up' : 'volume_off'}</span>
+            <span className="font-label text-[10px] uppercase tracking-wider">Voice</span>
           </button>
         </div>
+
+        {/* ── Scrollable middle ── */}
+        <div className="flex-1 overflow-y-auto min-h-0 px-6">
+          {/* Hero — tap to expand video */}
+          <div className="flex flex-col items-center pt-2 pb-4">
+            <div className="mb-4 stagger-1">
+              <PoseFigure poseKey={currentAsana.poseKey} size="lg" breathing variant="video" expandable />
+            </div>
+            <h1 className="font-headline text-3xl text-on-surface text-center mb-1 stagger-2">{routine.label}</h1>
+            <p className="font-body text-sm text-on-surface-variant text-center stagger-3">
+              {formatDuration(routine.totalDuration)}
+            </p>
+          </div>
+
+          {/* ── Compact optional check-in (collapsed by default) ── */}
+          <div className="pb-4 stagger-4">
+            {!checkinOpen ? (
+              <button
+                onClick={() => setCheckinOpen(true)}
+                className="w-full flex items-center justify-between px-4 py-3 bg-surface-container-low rounded-full active:scale-[0.98] transition-all"
+              >
+                <span className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary text-base">tune</span>
+                  <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">
+                    Quick check-in · optional
+                  </span>
+                </span>
+                <span className="material-symbols-outlined text-on-surface-variant/50 text-base">expand_more</span>
+              </button>
+            ) : (
+              <div className="bg-surface-container-low rounded-2xl p-4 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Before you begin</span>
+                  <button
+                    onClick={() => setCheckinOpen(false)}
+                    aria-label="Collapse check-in"
+                    className="w-6 h-6 rounded-full flex items-center justify-center text-on-surface-variant/60"
+                  >
+                    <span className="material-symbols-outlined text-sm">expand_less</span>
+                  </button>
+                </div>
+                <CheckinScale
+                  question="Energy"
+                  loLabel="Drained"
+                  hiLabel="Energized"
+                  value={preEnergy}
+                  onChange={setPreEnergy}
+                  ariaPrefix="Energy level"
+                  stagger=""
+                />
+                <CheckinScale
+                  question="Body"
+                  loLabel="Relaxed"
+                  hiLabel="Tense"
+                  value={preStress}
+                  onChange={setPreStress}
+                  ariaPrefix="Body tension level"
+                  stagger=""
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Spacer so scrollable content never hides under the floating CTA */}
+        <div className="flex-shrink-0" style={{ height: 'calc(76px + env(safe-area-inset-bottom))' }} />
+
+        {/* ── Floating CTA — portaled to body so it stays fixed regardless of
+             ancestor transforms (e.g. PageTransition's animation containing block) ── */}
+        {createPortal(
+          <div
+            className="px-6 pt-3 bg-background/60 backdrop-blur-xl border-t border-outline-variant/10"
+            style={{
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              zIndex: 50,
+              paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))',
+            }}
+          >
+            <button
+              onClick={handleStart}
+              className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg"
+            >
+              <span className="material-symbols-outlined text-lg">play_arrow</span>
+              {single ? `Start ${routine.label}` : 'Start Practice'}
+            </button>
+          </div>,
+          document.body
+        )}
       </div>
     )
   }
@@ -459,16 +511,21 @@ export default function PracticePage() {
     // new session id and link the pre-practice checkin to it.
 
     return (
-      <div className="min-h-screen bg-background text-on-surface font-body pb-12">
-        <div className={`relative bg-gradient-to-b ${routine.gradient} px-6 pt-14 pb-16 overflow-hidden text-center`}>
-          <div className="absolute top-8 right-8 w-20 h-20 rounded-full bg-white/8 animate-quiz-float" />
+      <div className="min-h-screen bg-background text-on-surface font-body" style={{ paddingBottom: 'calc(140px + env(safe-area-inset-bottom))' }}>
+        {/* Hero uses the primary brand color so the white headline + label
+            stay legible regardless of which routine the user just finished
+            (some routine gradients land too light at the bottom edge for
+            white text). */}
+        <div className="relative bg-primary px-6 pt-14 pb-16 overflow-hidden text-center">
+          <div className="absolute top-8 right-8 w-20 h-20 rounded-full bg-white/10 animate-quiz-float" />
+          <div className="absolute -left-6 -bottom-6 w-32 h-32 rounded-full bg-white/5" />
           <div className="relative z-10">
             <div className="w-18 h-18 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 stagger-1" style={{ width: 72, height: 72 }}>
-              <span className="material-symbols-outlined text-white text-3xl">self_improvement</span>
+              <span className="material-symbols-outlined text-on-primary text-3xl">self_improvement</span>
             </div>
-            <p className="font-label text-[10px] text-white/60 uppercase tracking-widest mb-1 stagger-2">Practice Complete</p>
-            <h1 className="font-headline text-3xl text-white mb-2 stagger-2">Namaste</h1>
-            <p className="font-body text-sm text-white/75 stagger-3">
+            <p className="font-label text-[10px] text-on-primary/70 uppercase tracking-widest mb-1 stagger-2">Practice Complete</p>
+            <h1 className="font-headline text-3xl text-on-primary mb-2 stagger-2">Namaste</h1>
+            <p className="font-body text-sm text-on-primary/85 stagger-3">
               You completed your {routine.label.toLowerCase()} practice.
             </p>
           </div>
@@ -557,13 +614,35 @@ export default function PracticePage() {
             </div>
           )}
 
-          <button onClick={() => navigate('/home', { replace: true })} className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all mb-3 stagger-6">
-            Back to Home
-          </button>
-          <button onClick={() => { window.location.href = `/practice/${routineKey}` }} className="w-full py-3 text-center text-xs text-on-surface-variant/50 font-label uppercase tracking-widest">
-            Repeat Practice
-          </button>
         </div>
+
+        {/* ── Floating CTAs — portaled past PageTransition's transform so
+             position:fixed actually pins to the viewport. Keeps Back to Home
+             and Repeat reachable on long summaries without scrolling. ── */}
+        {createPortal(
+          <div
+            className="px-6 pt-3 bg-background/80 backdrop-blur-xl border-t border-outline-variant/10"
+            style={{
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              zIndex: 50,
+              paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))',
+            }}
+          >
+            <button onClick={() => navigate('/home', { replace: true })} className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all shadow-lg">
+              Back to Home
+            </button>
+            <button
+              onClick={() => { window.location.href = single ? `/practice/asana/${asanaId}` : `/practice/${routineKey}` }}
+              className="w-full py-2.5 text-center text-xs text-on-surface-variant/60 font-label uppercase tracking-widest"
+            >
+              {single ? 'Repeat Asana' : 'Repeat Practice'}
+            </button>
+          </div>,
+          document.body
+        )}
       </div>
     )
   }
@@ -617,42 +696,48 @@ export default function PracticePage() {
     <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
       {/* ── Top bar ── */}
       <div className="flex items-center justify-between px-5 pt-2 pb-1 flex-shrink-0">
-        <button onClick={handleExit} className="text-on-surface-variant">
+        <button onClick={handleExit} className="text-on-surface-variant" aria-label="Close">
           <span className="material-symbols-outlined text-xl">close</span>
         </button>
-        <span className="font-label text-xs text-on-surface-variant">{currentIndex + 1} / {routine.asanas.length}</span>
+        {single ? (
+          <span className="font-label text-xs text-on-surface-variant uppercase tracking-widest">Single Asana</span>
+        ) : (
+          <span className="font-label text-xs text-on-surface-variant">{currentIndex + 1} / {routine.asanas.length}</span>
+        )}
         <div className="flex items-center gap-3">
-          <button onClick={voice.toggle} className="text-on-surface-variant">
+          <button onClick={voice.toggle} className="text-on-surface-variant" aria-label="Toggle voice">
             <span className="material-symbols-outlined text-xl">{voice.enabled ? 'volume_up' : 'volume_off'}</span>
           </button>
-          <button onClick={() => dispatch({ type: 'PAUSE' })} className="text-on-surface-variant">
+          <button onClick={() => dispatch({ type: 'PAUSE' })} className="text-on-surface-variant" aria-label={isPaused ? 'Resume' : 'Pause'}>
             <span className="material-symbols-outlined text-xl">{isPaused ? 'play_arrow' : 'pause'}</span>
           </button>
         </div>
       </div>
 
-      {/* ── Progress bar ── */}
-      <div className="flex gap-1 px-5 mb-2 flex-shrink-0">
-        {routine.asanas.map((_, i) => (
-          <div key={i} className="flex-1 h-1 rounded-full bg-surface-container-high overflow-hidden">
-            <div
-              className="h-full bg-primary rounded-full transition-all duration-1000"
-              style={{
-                width: i < currentIndex ? '100%'
-                  : i === currentIndex ? `${Math.max(2, (1 - timeRemaining / currentAsana.durationSeconds) * 100)}%`
-                  : '0%',
-              }}
-            />
-          </div>
-        ))}
-      </div>
+      {/* ── Progress bar — only meaningful for multi-asana practice ── */}
+      {!single && (
+        <div className="flex gap-1 px-5 mb-2 flex-shrink-0">
+          {routine.asanas.map((_, i) => (
+            <div key={i} className="flex-1 h-1 rounded-full bg-surface-container-high overflow-hidden">
+              <div
+                className="h-full bg-primary rounded-full transition-all duration-1000"
+                style={{
+                  width: i < currentIndex ? '100%'
+                    : i === currentIndex ? `${Math.max(2, (1 - timeRemaining / currentAsana.durationSeconds) * 100)}%`
+                    : '0%',
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* ── Main content area ── */}
       <div className="flex-1 flex flex-col items-center justify-center px-6 min-h-0 overflow-y-auto">
         {!showInfo ? (
           <>
             <div className="mb-3">
-              <PoseFigure poseKey={currentAsana.poseKey} size="lg" breathing={!isPaused} />
+              <PoseFigure poseKey={currentAsana.poseKey} size="lg" breathing={!isPaused} variant="video" />
             </div>
             <h2 className="font-headline text-xl text-on-surface text-center mb-0.5">{currentAsana.sanskrit}</h2>
             <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{currentAsana.english}</p>

@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
 import { ASANAS, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
@@ -40,6 +41,98 @@ const PRECAUTIONS = {
   legUpWall: ['Avoid if you have glaucoma or uncontrolled high blood pressure', 'Scoot away from the wall if you feel tingling in your legs', 'Place a folded blanket under your hips for comfort', 'Avoid during menstruation if it causes discomfort'],
 }
 
+// ── Body-part → icon map for the Areas sheet ──
+const BODY_PART_ICONS = {
+  'Spine': 'airline_seat_recline_extra',
+  'Legs': 'directions_walk',
+  'Core': 'fitness_center',
+  'Hips': 'accessibility_new',
+  'Shoulders': 'accessibility',
+  'Arms': 'sports_martial_arts',
+  'Ankles': 'footprint',
+  'Hamstrings': 'directions_run',
+  'Calves': 'directions_run',
+  'Lower Back': 'airline_seat_recline_normal',
+  'Chest': 'favorite',
+  'Glutes': 'airline_seat_legroom_extra',
+  'Thighs': 'directions_walk',
+  'Psoas': 'accessibility_new',
+  'Knees': 'accessible',
+  'Obliques': 'rotate_right',
+  'Full Body': 'self_care',
+  'Nervous System': 'neurology',
+  'Neck': 'face',
+}
+function iconForBodyPart(part) { return BODY_PART_ICONS[part] || 'radio_button_unchecked' }
+
+// ── Level presets for the modals ──
+const LEVELS = [
+  { name: 'Beginner', range: '20–45s', mid: 32 },
+  { name: 'Intermediate', range: '45–75s', mid: 60 },
+  { name: 'Advanced', range: '75–120s', mid: 100 },
+]
+
+// Scale positioning for the Hold modal (0–120s mapped to 0–100%)
+function holdScalePct(seconds) {
+  const clamped = Math.max(10, Math.min(120, seconds))
+  return ((clamped - 10) / (120 - 10)) * 100
+}
+
+// ── Bottom-sheet modal ──
+function BottomSheet({ open, onClose, title, children }) {
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [open, onClose])
+
+  if (!open) return null
+
+  return createPortal(
+    <div
+      className="animate-page-enter"
+      style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 70 }}
+      onClick={onClose}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-on-surface/40 backdrop-blur-[2px]" />
+
+      {/* Sheet */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="absolute left-0 right-0 bottom-0 bg-surface rounded-t-3xl shadow-2xl animate-quiz-slide-up"
+        style={{ paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}
+      >
+        {/* Grabber */}
+        <div className="flex justify-center pt-3 pb-1">
+          <div className="w-10 h-1 rounded-full bg-on-surface-variant/25" />
+        </div>
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 pt-2 pb-3">
+          <h3 className="font-headline text-lg text-on-surface">{title}</h3>
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center active:scale-90 transition-all"
+          >
+            <span className="material-symbols-outlined text-on-surface-variant text-sm">close</span>
+          </button>
+        </div>
+        <div className="px-6 pb-2">
+          {children}
+        </div>
+      </div>
+    </div>,
+    document.body
+  )
+}
+
 // Step-by-step instructions derived from voice cues with more detail
 function getSteps(asana) {
   return [
@@ -73,8 +166,8 @@ export default function AsanaDetailPage() {
   const precautions = PRECAUTIONS[asana.id] || []
   const steps = getSteps(asana)
 
-  const [expanded, setExpanded] = useState(false)
   const [sticky, setSticky] = useState(false)
+  const [sheet, setSheet] = useState(null) // 'hold' | 'level' | 'areas' | null
   const heroRef = useRef(null)
 
   // Track when hero scrolls out of view to show sticky mini player
@@ -90,36 +183,32 @@ export default function AsanaDetailPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background text-on-surface font-body pb-24">
+    <div className="min-h-screen bg-background text-on-surface font-body pb-28">
 
-      {/* ── Expanded overlay ── */}
-      {expanded && (
+      {/* ── Sticky mini player — always portaled, animates in on scroll ── */}
+      {createPortal(
         <div
-          className="bg-on-surface/90 flex items-center justify-center animate-page-enter"
-          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50 }}
-          onClick={() => setExpanded(false)}
+          className="bg-background/95 backdrop-blur-sm border-b border-outline-variant/10 px-4 py-2 flex items-center gap-3"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 40,
+            paddingTop: 'max(0.5rem, env(safe-area-inset-top))',
+            transform: sticky ? 'translateY(0)' : 'translateY(-100%)',
+            opacity: sticky ? 1 : 0,
+            pointerEvents: sticky ? 'auto' : 'none',
+            transition: 'transform 300ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease-out',
+            willChange: 'transform, opacity',
+          }}
         >
           <button
-            onClick={() => setExpanded(false)}
-            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-surface/20 flex items-center justify-center"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex-shrink-0 active:scale-90 transition-all rounded-xl overflow-hidden"
+            aria-label="Scroll to top"
           >
-            <span className="material-symbols-outlined text-white text-lg">close</span>
-          </button>
-          <div className="w-[85vw] max-w-sm aspect-square flex items-center justify-center">
-            <PoseFigure poseKey={asana.poseKey} size="xl" breathing />
-          </div>
-          <div className="absolute bottom-12 left-0 right-0 text-center">
-            <p className="font-headline text-xl text-white">{asana.sanskrit}</p>
-            <p className="font-body text-sm text-white/60">{asana.english}</p>
-          </div>
-        </div>
-      )}
-
-      {/* ── Sticky mini player ── */}
-      {sticky && !expanded && (
-        <div className="bg-background/95 backdrop-blur-sm border-b border-outline-variant/10 px-4 py-2 flex items-center gap-3 animate-page-enter" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 40 }}>
-          <button onClick={() => setExpanded(true)} className="w-11 h-11 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0 overflow-hidden active:scale-90 transition-all">
-            <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} />
+            <PoseFigure poseKey={asana.poseKey} size={44} breathing={false} objectPosition="top" />
           </button>
           <div className="flex-1 min-w-0">
             <p className="font-body text-sm font-semibold text-on-surface truncate">{asana.sanskrit}</p>
@@ -131,7 +220,8 @@ export default function AsanaDetailPage() {
           >
             <span className="material-symbols-outlined text-on-surface-variant text-sm">expand_less</span>
           </button>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* ── Hero Section ── */}
@@ -142,28 +232,19 @@ export default function AsanaDetailPage() {
             <span className="material-symbols-outlined text-on-surface text-lg">arrow_back</span>
           </button>
           <div className="flex gap-2">
-            <span className="px-3 py-1 bg-surface/80 rounded-full font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+            <span className="px-3 py-1 bg-surface-container-high rounded-full font-label text-[10px] text-on-surface-variant uppercase tracking-widest shadow-sm border border-outline-variant/20">
               {CATEGORY_LABELS[asana.category] || asana.category}
             </span>
-            <span className="px-3 py-1 bg-surface/80 rounded-full font-label text-[10px] text-primary uppercase tracking-widest">
+            <span className="px-3 py-1 bg-primary text-on-primary rounded-full font-label text-[10px] uppercase tracking-widest shadow-sm">
               {asana.level}
             </span>
           </div>
         </div>
 
-        {/* Pose figure — tap to expand */}
-        <button
-          onClick={() => setExpanded(true)}
-          className="w-full flex justify-center py-6 active:scale-95 transition-all outline-none"
-          style={{ WebkitTapHighlightColor: 'transparent' }}
-        >
-          <div className="relative">
-            <PoseFigure poseKey={asana.poseKey} size="lg" breathing />
-            <div className="absolute bottom-0 right-0 w-7 h-7 rounded-full bg-surface/80 flex items-center justify-center shadow-sm">
-              <span className="material-symbols-outlined text-on-surface-variant text-xs">fullscreen</span>
-            </div>
-          </div>
-        </button>
+        {/* Pose figure — tap to expand, with option to play video */}
+        <div className="w-full flex justify-center py-6">
+          <PoseFigure poseKey={asana.poseKey} size="lg" breathing expandable />
+        </div>
 
         {/* Name */}
         <div className="px-6 text-center">
@@ -175,23 +256,32 @@ export default function AsanaDetailPage() {
 
       <div className="px-6 flex flex-col gap-5 mt-5">
 
-        {/* ── Quick Info Bar ── */}
+        {/* ── Quick Info Bar — each tile opens a bottom sheet with context ── */}
         <div className="flex gap-3">
-          <div className="flex-1 bg-surface-container-low rounded-xl p-3 text-center">
+          <button
+            onClick={() => setSheet('hold')}
+            className="flex-1 bg-surface-container-low rounded-xl p-3 text-center active:scale-95 transition-all"
+          >
             <span className="material-symbols-outlined text-primary text-lg mb-1 block">timer</span>
             <p className="font-headline text-lg text-on-surface">{asana.durationSeconds >= 60 ? `${Math.ceil(asana.durationSeconds / 60)}m` : `${asana.durationSeconds}s`}</p>
             <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Hold</p>
-          </div>
-          <div className="flex-1 bg-surface-container-low rounded-xl p-3 text-center">
+          </button>
+          <button
+            onClick={() => setSheet('level')}
+            className="flex-1 bg-surface-container-low rounded-xl p-3 text-center active:scale-95 transition-all"
+          >
             <span className="material-symbols-outlined text-primary text-lg mb-1 block">fitness_center</span>
             <p className="font-headline text-lg text-on-surface">{asana.level}</p>
             <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Level</p>
-          </div>
-          <div className="flex-1 bg-surface-container-low rounded-xl p-3 text-center">
+          </button>
+          <button
+            onClick={() => setSheet('areas')}
+            className="flex-1 bg-surface-container-low rounded-xl p-3 text-center active:scale-95 transition-all"
+          >
             <span className="material-symbols-outlined text-primary text-lg mb-1 block">body_system</span>
             <p className="font-headline text-lg text-on-surface">{asana.bodyParts.length}</p>
             <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Areas</p>
-          </div>
+          </button>
         </div>
 
         {/* ── About / Reasoning ── */}
@@ -325,27 +415,104 @@ export default function AsanaDetailPage() {
 
       </div>
 
-      {/* ── Sticky Practice CTA ── */}
-      <div
-        className="px-6 pb-2 pt-3 bg-background/80 backdrop-blur-xl border-t border-outline-variant/10"
-        style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 40, paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
-      >
-        <button
-          onClick={() => {
-            const routineKey = Object.entries({
-              stress: ['sukhasana', 'balasana', 'uttanasana', 'pigeon', 'supinetwist', 'legUpWall', 'savasana'],
-              sleep: ['sukhasana', 'paschimottanasana', 'supinetwist', 'legUpWall', 'balasana', 'savasana'],
-              energy: ['tadasana', 'suryaNamaskar', 'warrior1', 'warrior2', 'cobra', 'downwardDog', 'tree', 'savasana'],
-              flexibility: ['suryaNamaskar', 'downwardDog', 'uttanasana', 'pigeon', 'seatedTwist', 'paschimottanasana', 'bridge', 'supinetwist', 'savasana'],
-            }).find(([, ids]) => ids.includes(asana.id))?.[0] || 'stress'
-            navigate(`/practice/${routineKey}`)
-          }}
-          className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-full font-label text-sm font-semibold tracking-wide active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(78,99,85,0.15)]"
+      {/* ── Hold Sheet ── */}
+      <BottomSheet open={sheet === 'hold'} onClose={() => setSheet(null)} title="Hold Duration">
+        <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-5">
+          This pose is held for <span className="text-on-surface font-semibold">{asana.durationSeconds}s</span>. Here's where that sits on the beginner-to-expert scale.
+        </p>
+
+        <div className="relative mb-3 pt-8">
+          {/* Marker */}
+          <div
+            className="absolute top-0 flex flex-col items-center -translate-x-1/2"
+            style={{ left: `${holdScalePct(asana.durationSeconds)}%` }}
+          >
+            <span className="font-label text-[10px] text-primary font-semibold mb-1">{asana.durationSeconds}s</span>
+            <span className="material-symbols-outlined text-primary text-base -mb-1">arrow_drop_down</span>
+          </div>
+          {/* Track */}
+          <div className="h-2 rounded-full bg-gradient-to-r from-primary-container via-primary/50 to-primary" />
+        </div>
+
+        <div className="flex justify-between font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-5">
+          <span>Beginner</span>
+          <span>Intermediate</span>
+          <span>Expert</span>
+        </div>
+
+        <div className="bg-surface-container-low rounded-xl p-4">
+          <p className="font-body text-xs text-on-surface-variant leading-relaxed">
+            Longer holds build deeper stillness and strength — but only when the shorter ones feel natural. Don't rush the scale.
+          </p>
+        </div>
+      </BottomSheet>
+
+      {/* ── Level Sheet ── */}
+      <BottomSheet open={sheet === 'level'} onClose={() => setSheet(null)} title="Practice Level">
+        <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-4">
+          This pose is rated <span className="text-on-surface font-semibold">{asana.level}</span>. Hold times grow as you progress.
+        </p>
+        <div className="flex flex-col gap-2.5 mb-2">
+          {LEVELS.map((lvl) => {
+            const isCurrent = lvl.name === asana.level
+            return (
+              <div
+                key={lvl.name}
+                className={`flex items-center gap-3 p-3 rounded-xl ${isCurrent ? 'bg-primary-container/30 ring-1 ring-primary/20' : 'bg-surface-container-low'}`}
+              >
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${isCurrent ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant'}`}>
+                  <span className="material-symbols-outlined text-base">
+                    {lvl.name === 'Beginner' ? 'eco' : lvl.name === 'Intermediate' ? 'trending_up' : 'military_tech'}
+                  </span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <p className="font-body text-sm font-semibold text-on-surface">{lvl.name}</p>
+                    {isCurrent && (
+                      <span className="px-2 py-0.5 bg-primary/10 rounded-full font-label text-[8px] text-primary uppercase tracking-widest">This Pose</span>
+                    )}
+                  </div>
+                  <p className="font-body text-xs text-on-surface-variant mt-0.5">Typical hold · {lvl.range}</p>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </BottomSheet>
+
+      {/* ── Areas Sheet ── */}
+      <BottomSheet open={sheet === 'areas'} onClose={() => setSheet(null)} title="Areas Worked">
+        <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-4">
+          This pose engages <span className="text-on-surface font-semibold">{asana.bodyParts.length}</span> areas of your body.
+        </p>
+        <div className="grid grid-cols-2 gap-2.5">
+          {asana.bodyParts.map((part, i) => (
+            <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low">
+              <div className="w-10 h-10 rounded-full bg-primary-container/40 flex items-center justify-center flex-shrink-0">
+                <span className="material-symbols-outlined text-primary text-base">{iconForBodyPart(part)}</span>
+              </div>
+              <p className="font-body text-sm text-on-surface font-medium">{part}</p>
+            </div>
+          ))}
+        </div>
+      </BottomSheet>
+
+      {/* ── Sticky Practice CTA (portaled to bypass PageTransition transform ancestor) ── */}
+      {createPortal(
+        <div
+          className="px-6 pb-2 pt-3 bg-background/80 backdrop-blur-xl border-t border-outline-variant/10"
+          style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 40, paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
         >
-          <span className="material-symbols-outlined text-lg">play_arrow</span>
-          Practice {asana.sanskrit}
-        </button>
-      </div>
+          <button
+            onClick={() => navigate(`/practice/asana/${asana.id}`)}
+            className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-full font-label text-sm font-semibold tracking-wide active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(78,99,85,0.15)]"
+          >
+            <span className="material-symbols-outlined text-lg">play_arrow</span>
+            Practice {asana.sanskrit}
+          </button>
+        </div>,
+        document.body
+      )}
 
     </div>
   )

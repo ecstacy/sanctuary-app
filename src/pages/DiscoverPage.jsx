@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { POPULAR_SEARCHES } from '../data/recommendations'
 import { ASANAS } from '../data/asanas'
+import PoseFigure from '../components/PoseFigure'
 
 
 const ALL_ASANAS = Object.values(ASANAS)
@@ -211,12 +212,16 @@ export default function DiscoverPage() {
                 className="flex-shrink-0 w-32 snap-start active:scale-[0.97] transition-all"
               >
                 <div className="relative aspect-[4/5] rounded-xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-primary/30 text-6xl">{asana.icon}</span>
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    {asana.poseKey ? (
+                      <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} objectPosition="top" />
+                    ) : (
+                      <span className="material-symbols-outlined text-primary/30 text-6xl">{asana.icon}</span>
+                    )}
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-on-surface/50 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-on-surface/60 via-transparent to-transparent" />
                   <div className="absolute top-2 left-2">
-                    <span className="px-2 py-0.5 bg-surface/70 rounded-full font-label text-[8px] text-primary uppercase">{asana.level}</span>
+                    <span className="px-2 py-0.5 bg-surface/80 rounded-full font-label text-[8px] text-primary uppercase">{asana.level}</span>
                   </div>
                   <div className="absolute bottom-2 left-2 right-2">
                     <p className="font-headline text-xs text-white leading-tight">{asana.sanskrit}</p>

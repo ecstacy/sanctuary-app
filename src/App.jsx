@@ -171,7 +171,7 @@ function PrivateRoute({ children }) {
 // Pages that display the bottom nav. /quiz and /vikriti are focused,
 // step-by-step flows (like a modal) — the main-tab nav would distract
 // from the task and also overlap their CTAs, so they're excluded.
-const NAV_PAGES = ['/home', '/discover', '/profile', '/routine', '/dosha', '/journey', '/recommendations', '/asana']
+const NAV_PAGES = ['/home', '/discover', '/profile', '/routine', '/dosha', '/journey', '/recommendations']
 
 function ShowBottomNav() {
   const { user } = useAuth()
@@ -209,6 +209,7 @@ function AppRoutes() {
           <Route path="/routine" element={<PrivateRoute><RoutinePage /></PrivateRoute>} />
           <Route path="/asana/:id" element={<PrivateRoute><AsanaDetailPage /></PrivateRoute>} />
           <Route path="/practice/:id" element={<PrivateRoute><PracticePage /></PrivateRoute>} />
+          <Route path="/practice/asana/:asanaId" element={<PrivateRoute><PracticePage /></PrivateRoute>} />
           <Route path="/journey" element={<PrivateRoute><JourneyPage /></PrivateRoute>} />
           <Route path="/recommendations" element={<PrivateRoute><RecommendationsPage /></PrivateRoute>} />
         </Routes>

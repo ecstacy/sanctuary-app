@@ -1,0 +1,140 @@
+{
+  "app": {
+    "name": "The Sanctuary",
+    "tagline": "Your daily sanctuary for mind and body"
+  },
+  "languages": {
+    "en": { "label": "English", "sublabel": "Continue in English", "flag": "🇬🇧" },
+    "hi": { "label": "हिन्दी", "sublabel": "हिन्दी में जारी रखें", "flag": "🇮🇳" },
+    "de": { "label": "Deutsch", "sublabel": "Auf Deutsch fortfahren", "flag": "🇩🇪" }
+  },
+  "common": {
+    "continue": "Continue",
+    "back": "Back",
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading…",
+    "or": "or",
+    "retry": "Try again"
+  },
+  "welcome": {
+    "greeting": "Welcome to",
+    "intro": "A quiet place to reconnect with your body, breath and rhythm.",
+    "getStarted": "Get started",
+    "signIn": "I already have an account"
+  },
+  "signup": {
+    "step1": {
+      "kicker": "Almost there",
+      "title": "Choose your",
+      "titleItalic": "language.",
+      "subtitle": "Choose your preferred language for The Sanctuary.",
+      "strugglesNote": "We've noted your focus areas:",
+      "strugglesNoteTail": ". These will shape your practice from day one."
+    },
+    "step2": {
+      "kicker": "Create your account",
+      "title": "Your sanctuary",
+      "titleItalic": "awaits.",
+      "subtitle": "Free forever. No credit card needed.",
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Elena Rossi",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "Min. 8 characters",
+      "privacy": "Your data is encrypted and never shared with third parties. You can delete your account and all data at any time.",
+      "cta": "Begin My Journey",
+      "ctaLoading": "Creating your sanctuary…",
+      "googleCta": "Sign up with Google",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "validationError": "Please fill in all fields. Password must be at least 8 characters."
+    }
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Sign in to continue",
+    "email": "Email",
+    "password": "Password",
+    "cta": "Sign in",
+    "ctaLoading": "Signing in…",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "New to The Sanctuary?",
+    "signUp": "Create an account",
+    "googleCta": "Sign in with Google"
+  },
+  "nav": {
+    "home": "Home",
+    "discover": "Discover",
+    "routine": "Routine",
+    "journey": "Journey",
+    "profile": "Profile"
+  },
+  "home": {
+    "greetingMorning": "Good morning, {{name}}",
+    "greetingAfternoon": "Good afternoon, {{name}}",
+    "greetingEvening": "Good evening, {{name}}",
+    "greetingFallback": "Welcome, {{name}}",
+    "defaultName": "friend",
+    "checkinPrompt": "How are you feeling right now?",
+    "weeklyCheckinTitle": "Weekly check-in",
+    "weeklyCheckinBody": "Take 2 minutes to see how your doshas are trending this week.",
+    "weeklyCheckinCta": "Start check-in"
+  },
+  "profile": {
+    "title": "Profile",
+    "language": "Language",
+    "languageHint": "The app will switch immediately.",
+    "signOut": "Sign out",
+    "privacy": {
+      "section": "Privacy",
+      "aggregateTitle": "Help improve The Sanctuary",
+      "aggregateBody": "Share anonymous usage so we can see which features truly help.",
+      "aggregateOn": "Sharing anonymous usage",
+      "aggregateOff": "Off — we only use your data to personalize your own experience.",
+      "whatWeCollect": "What we collect when on",
+      "collectedList": [
+        "Which screens you visit and what you tap",
+        "Whether a practice was started, skipped, or completed",
+        "App version, device type, and language"
+      ],
+      "neverCollectHeading": "What we never collect",
+      "neverCollectList": [
+        "Your name, email, or any contact information",
+        "Your location",
+        "The text of your notes or search queries when sharing is on",
+        "Anything linked to your identity"
+      ],
+      "changeAnytime": "You can switch this off at any time."
+    },
+    "yourData": {
+      "section": "Your data",
+      "exportTitle": "Download my data",
+      "exportBody": "A JSON file with everything we have for you.",
+      "exportWorking": "Preparing your data…",
+      "exportDone": "Ready — saving file.",
+      "exportError": "Couldn't prepare your data.",
+      "deleteTitle": "Delete my account",
+      "deleteBody": "Permanent. All your data is removed.",
+      "deleteConfirmTitle": "Delete your account?",
+      "deleteConfirmBody": "This removes your profile, practice history, check-ins, and all other data from our servers. It cannot be undone.",
+      "deleteConfirmPrompt": "Type DELETE to confirm.",
+      "deleteConfirmPlaceholder": "DELETE",
+      "deleteConfirmCta": "Delete permanently",
+      "deleteWorking": "Deleting…",
+      "deleteDone": "Your data is gone. Safe travels.",
+      "deletePartial": "Most of your data was removed, but some entries couldn't be deleted. Please contact support."
+    }
+  },
+  "consent": {
+    "card": {
+      "title": "A quiet ask.",
+      "body": "Share anonymous usage so we can see what actually helps you — and drop what doesn't.",
+      "promise": "No name. No email. No location. Just event shapes.",
+      "allow": "Allow",
+      "notNow": "Not now",
+      "neverAsk": "Don't ask again"
+    }
+  }
+}

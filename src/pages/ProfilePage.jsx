@@ -1,14 +1,110 @@
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
+import i18n from '../i18n'
+import { SUPPORTED_LANGUAGES, writeStoredLanguage } from '../i18n/detect'
+import useConsent from '../hooks/useConsent'
+import { exportUserData } from '../lib/dataExport'
+import { deleteAllUserData } from '../lib/accountDeletion'
 
 import GoogleIcon from '../components/GoogleIcon'
 
 export default function ProfilePage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { user, profile, signOut, refreshProfile } = useAuth()
   const fileInputRef = useRef(null)
+
+  // ── Language switcher state ──
+  const [languagePickerOpen, setLanguagePickerOpen] = useState(false)
+  const [savingLanguage, setSavingLanguage] = useState(false)
+
+  // ── Privacy / analytics consent ──
+  const { consent, setAggregate } = useConsent()
+  const [privacyExpanded, setPrivacyExpanded] = useState(false)
+
+  // ── Data export / account deletion (GDPR Art. 15/17) ──
+  const [exporting, setExporting] = useState(false)
+  const [exportStatus, setExportStatus] = useState(null) // 'done' | 'error' | null
+  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [deleteConfirmText, setDeleteConfirmText] = useState('')
+  const [deleting, setDeleting] = useState(false)
+  const [deleteResult, setDeleteResult] = useState(null)
+
+  async function handleExport() {
+    if (!user?.id || exporting) return
+    setExporting(true)
+    setExportStatus(null)
+    const result = await exportUserData(user.id)
+    setExportStatus(result.ok ? 'done' : 'error')
+    setExporting(false)
+    // Clear the confirmation line after a few seconds so the row returns
+    // to its default state.
+    setTimeout(() => setExportStatus(null), 4000)
+  }
+
+  async function handleConfirmDelete() {
+    if (deleting) return
+    setDeleting(true)
+    const result = await deleteAllUserData(user.id)
+    setDeleteResult(result)
+    setDeleting(false)
+    // Whatever happened, the user is signed out inside deleteAllUserData.
+    // Give them a beat to read the outcome, then bounce them to the
+    // welcome page.
+    setTimeout(() => {
+      navigate('/', { replace: true })
+    }, result.ok ? 1500 : 3500)
+  }
+
+  async function handleToggleAggregate(next) {
+    // 1. Flip the local, sticky state first — UI reacts instantly.
+    const updated = setAggregate(next)
+    // 2. Best-effort mirror to the profile row so the choice follows the
+    //    user across devices. Tolerates a missing column gracefully.
+    try {
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update({ analytics_consent: updated })
+        .eq('id', user.id)
+      if (profileError && !/column .* does not exist/i.test(profileError.message)) {
+        console.error('Consent save failed:', profileError.message)
+      }
+    } catch (err) {
+      console.error('Consent update failed:', err?.message || err)
+    }
+  }
+
+  async function handleChangeLanguage(code) {
+    if (!SUPPORTED_LANGUAGES.includes(code)) return
+    setSavingLanguage(true)
+    // 1. Apply immediately so the UI reacts.
+    i18n.changeLanguage(code)
+    writeStoredLanguage(code)
+    // 2. Persist on the profile if the column exists; swallow the error
+    //    gracefully if the migration hasn't been applied yet (the local
+    //    sticky + auth_metadata copy are still good enough).
+    try {
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update({ language: code })
+        .eq('id', user.id)
+      if (profileError && !/column .* does not exist/i.test(profileError.message)) {
+        console.error('Language save failed:', profileError.message)
+      }
+      // 3. Mirror onto auth user_metadata so it's available before the
+      //    profile row loads on next launch.
+      await supabase.auth.updateUser({ data: { language: code } })
+      await refreshProfile()
+    } catch (err) {
+      console.error('Language update failed:', err.message)
+    } finally {
+      setSavingLanguage(false)
+      setLanguagePickerOpen(false)
+    }
+  }
 
   const fullName = profile?.full_name || user?.user_metadata?.full_name || 'User'
   const email = user?.email || ''
@@ -338,6 +434,55 @@ export default function ProfilePage() {
           </div>
         </button>
 
+        {/* Language */}
+        <div className="bg-surface-container rounded-lg overflow-hidden stagger-3">
+          <button
+            onClick={() => setLanguagePickerOpen(!languagePickerOpen)}
+            className="flex items-center gap-4 px-5 py-4 w-full text-left active:bg-surface-container-high/50 transition-colors"
+          >
+            <span className="material-symbols-outlined text-on-surface-variant text-lg">language</span>
+            <div className="flex-1">
+              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.language')}</p>
+              <p className="font-body text-sm text-on-surface">
+                {t(`languages.${i18n.language}.label`, { defaultValue: i18n.language })}
+              </p>
+            </div>
+            {savingLanguage ? (
+              <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <span className={`material-symbols-outlined text-on-surface-variant/30 text-sm transition-transform ${languagePickerOpen ? 'rotate-180' : ''}`}>expand_more</span>
+            )}
+          </button>
+
+          {languagePickerOpen && (
+            <div className="px-5 pb-4 pt-1 flex flex-col gap-2">
+              <p className="font-body text-[11px] text-on-surface-variant/60 mb-1">
+                {t('profile.languageHint')}
+              </p>
+              {SUPPORTED_LANGUAGES.map(code => {
+                const meta = t(`languages.${code}`, { returnObjects: true }) || {}
+                const selected = i18n.language === code
+                return (
+                  <button
+                    key={code}
+                    onClick={() => handleChangeLanguage(code)}
+                    disabled={savingLanguage}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all active:scale-[0.98] disabled:opacity-50 ${
+                      selected ? 'bg-primary-container' : 'bg-surface-container-low'
+                    }`}
+                  >
+                    <span className="text-lg">{meta.flag}</span>
+                    <span className="font-body text-sm text-on-surface flex-1 text-left">{meta.label}</span>
+                    {selected && (
+                      <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                    )}
+                  </button>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
         {/* Account info */}
         <div className="bg-surface-container rounded-lg overflow-hidden stagger-3">
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
@@ -515,13 +660,139 @@ export default function ProfilePage() {
           )}
         </div>
 
+        {/* Privacy */}
+        <div className="bg-surface-container rounded-lg overflow-hidden stagger-3">
+          <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
+            <span className="material-symbols-outlined text-on-surface-variant text-lg">shield</span>
+            <div className="flex-1 min-w-0">
+              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.privacy.aggregateTitle')}</p>
+              <p className="font-body text-xs text-on-surface-variant/80 mt-0.5 leading-snug">
+                {consent.aggregate ? t('profile.privacy.aggregateOn') : t('profile.privacy.aggregateOff')}
+              </p>
+            </div>
+            {/* Custom toggle — keeps UI language consistent with the rest of
+                the app (no native <input type=checkbox>) */}
+            <button
+              onClick={() => handleToggleAggregate(!consent.aggregate)}
+              role="switch"
+              aria-checked={consent.aggregate}
+              className={`relative w-11 h-6 rounded-full transition-colors flex-shrink-0 ${
+                consent.aggregate ? 'bg-primary' : 'bg-surface-container-high'
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 w-5 h-5 rounded-full bg-on-primary shadow-sm transition-all ${
+                  consent.aggregate ? 'left-[22px]' : 'left-0.5'
+                }`}
+              />
+            </button>
+          </div>
+
+          {/* "What we collect" expand — plain language, not legalese */}
+          <button
+            onClick={() => setPrivacyExpanded(!privacyExpanded)}
+            className="flex items-center gap-4 px-5 py-3 w-full text-left active:bg-surface-container-high/50 transition-colors"
+          >
+            <span className="material-symbols-outlined text-on-surface-variant/60 text-base">info</span>
+            <p className="flex-1 font-body text-xs text-on-surface-variant">
+              {t('profile.privacy.whatWeCollect')}
+            </p>
+            <span className={`material-symbols-outlined text-on-surface-variant/30 text-sm transition-transform ${privacyExpanded ? 'rotate-180' : ''}`}>expand_more</span>
+          </button>
+
+          {privacyExpanded && (
+            <div className="px-5 pb-5 pt-1 space-y-4">
+              {/* What we DO collect */}
+              <ul className="space-y-1.5">
+                {(t('profile.privacy.collectedList', { returnObjects: true }) || []).map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="material-symbols-outlined text-primary/70 text-[14px] mt-0.5">check</span>
+                    <span className="font-body text-[12px] text-on-surface-variant leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* What we NEVER collect — as prominent as the above */}
+              <div>
+                <p className="font-label text-[10px] text-on-surface-variant/70 uppercase tracking-wider mb-1.5">
+                  {t('profile.privacy.neverCollectHeading')}
+                </p>
+                <ul className="space-y-1.5">
+                  {(t('profile.privacy.neverCollectList', { returnObjects: true }) || []).map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="material-symbols-outlined text-on-surface-variant/40 text-[14px] mt-0.5">close</span>
+                      <span className="font-body text-[12px] text-on-surface-variant leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <p className="font-body text-[11px] text-on-surface-variant/60 italic pt-1">
+                {t('profile.privacy.changeAnytime')}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Your data — GDPR export + account deletion */}
+        <div className="bg-surface-container rounded-lg overflow-hidden stagger-4">
+          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
+            {t('profile.yourData.section')}
+          </p>
+
+          {/* Export */}
+          <button
+            onClick={handleExport}
+            disabled={exporting}
+            className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high w-full text-left active:bg-surface-container-high/50 transition-colors disabled:opacity-60"
+          >
+            <span className="material-symbols-outlined text-on-surface-variant text-lg">download</span>
+            <div className="flex-1 min-w-0">
+              <p className="font-body text-sm text-on-surface">
+                {t('profile.yourData.exportTitle')}
+              </p>
+              <p className="font-label text-[11px] text-on-surface-variant/80 mt-0.5">
+                {exporting
+                  ? t('profile.yourData.exportWorking')
+                  : exportStatus === 'done'
+                  ? t('profile.yourData.exportDone')
+                  : exportStatus === 'error'
+                  ? t('profile.yourData.exportError')
+                  : t('profile.yourData.exportBody')}
+              </p>
+            </div>
+            {exporting ? (
+              <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+            )}
+          </button>
+
+          {/* Delete */}
+          <button
+            onClick={() => { setDeleteConfirmText(''); setDeleteResult(null); setDeleteOpen(true) }}
+            className="flex items-center gap-4 px-5 py-4 w-full text-left active:bg-surface-container-high/50 transition-colors"
+          >
+            <span className="material-symbols-outlined text-[#b33a3a] text-lg">delete_forever</span>
+            <div className="flex-1 min-w-0">
+              <p className="font-body text-sm text-[#b33a3a]">
+                {t('profile.yourData.deleteTitle')}
+              </p>
+              <p className="font-label text-[11px] text-on-surface-variant/80 mt-0.5">
+                {t('profile.yourData.deleteBody')}
+              </p>
+            </div>
+            <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+          </button>
+        </div>
+
         {/* Sign out */}
         <button
           onClick={handleSignOut}
           className="w-full py-4 bg-surface-container rounded-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-all stagger-4"
         >
           <span className="material-symbols-outlined text-error text-lg">logout</span>
-          <span className="font-label text-sm font-semibold text-error tracking-wide">Sign Out</span>
+          <span className="font-label text-sm font-semibold text-error tracking-wide">{t('profile.signOut')}</span>
         </button>
 
         <p className="text-center font-label text-[10px] text-on-surface-variant/40 uppercase tracking-widest pb-4">
@@ -530,6 +801,87 @@ export default function ProfilePage() {
 
       </div>
 
+      {/* ── Delete account confirmation — rendered at page level so it
+           overlays the Profile content. Requires typing DELETE to arm the
+           destructive button (guards against accidental taps). */}
+      {deleteOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center px-4 pb-6 pt-6"
+          onClick={() => !deleting && !deleteResult && setDeleteOpen(false)}
+        >
+          <div
+            className="w-full max-w-md bg-surface-container rounded-2xl p-6 shadow-2xl"
+            onClick={e => e.stopPropagation()}
+          >
+            {deleteResult ? (
+              // Post-delete confirmation view
+              <div className="text-center py-4">
+                <div className="w-14 h-14 rounded-full bg-primary-container mx-auto mb-4 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-primary text-2xl">
+                    {deleteResult.ok ? 'check' : 'info'}
+                  </span>
+                </div>
+                <p className="font-headline text-lg text-on-surface mb-2">
+                  {deleteResult.ok
+                    ? t('profile.yourData.deleteDone')
+                    : t('profile.yourData.deletePartial')}
+                </p>
+              </div>
+            ) : (
+              <>
+                <div className="flex items-start gap-3 mb-4">
+                  <span className="material-symbols-outlined text-error mt-0.5">warning</span>
+                  <div className="flex-1">
+                    <h3 className="font-headline text-lg text-on-surface mb-1">
+                      {t('profile.yourData.deleteConfirmTitle')}
+                    </h3>
+                    <p className="font-body text-xs text-on-surface-variant leading-relaxed">
+                      {t('profile.yourData.deleteConfirmBody')}
+                    </p>
+                  </div>
+                </div>
+
+                <label className="block mb-4">
+                  <p className="font-label text-[11px] text-on-surface-variant mb-1.5">
+                    {t('profile.yourData.deleteConfirmPrompt')}
+                  </p>
+                  <input
+                    type="text"
+                    value={deleteConfirmText}
+                    onChange={e => setDeleteConfirmText(e.target.value)}
+                    placeholder={t('profile.yourData.deleteConfirmPlaceholder')}
+                    autoFocus
+                    autoCapitalize="characters"
+                    className="w-full bg-surface-container-low rounded-lg px-4 py-3 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-error/40 transition-all placeholder:text-on-surface-variant/35"
+                  />
+                </label>
+
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setDeleteOpen(false)}
+                    disabled={deleting}
+                    className="flex-1 py-3 bg-surface-container-low rounded-full font-label text-xs font-semibold tracking-wide text-on-surface active:scale-[0.97] transition-all disabled:opacity-50"
+                  >
+                    {t('common.cancel')}
+                  </button>
+                  <button
+                    onClick={handleConfirmDelete}
+                    disabled={deleting || deleteConfirmText.trim().toUpperCase() !== 'DELETE'}
+                    className="flex-1 py-3 bg-[#b33a3a] text-white rounded-full font-label text-xs font-semibold tracking-wide active:scale-[0.97] transition-all disabled:opacity-40 flex items-center justify-center gap-2"
+                  >
+                    {deleting && (
+                      <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    )}
+                    {deleting
+                      ? t('profile.yourData.deleteWorking')
+                      : t('profile.yourData.deleteConfirmCta')}
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
     </div>
   )

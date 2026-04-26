@@ -6,6 +6,7 @@ import usePracticeStats from '../hooks/usePracticeStats'
 import useVikritiSchedule from '../hooks/useVikritiSchedule'
 import PoseFigure from '../components/PoseFigure'
 import * as analytics from '../lib/analytics'
+import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
 
 
 const CHECKIN_OPTIONS = [
@@ -278,8 +279,15 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* ── Streak & Minutes Tiles — only shown after first practice ── */}
-        {stats.hasSessions && (
+        {/* ── Streak & Minutes Tiles ──
+            Three-state render to avoid layout shift:
+              1. have cached/real sessions → show real tiles immediately
+              2. still loading, no cache   → show same-shape skeleton so the
+                                             page below doesn't jump when
+                                             data arrives
+              3. loaded + no sessions      → render nothing (user hasn't
+                                             started practicing yet) */}
+        {stats.hasSessions ? (
           <div className="grid grid-cols-2 gap-3 stagger-2">
             <button
               onClick={() => navigate('/journey')}
@@ -312,10 +320,26 @@ export default function HomePage() {
               <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">minutes practiced</p>
             </button>
           </div>
-        )}
+        ) : stats.loading ? (
+          // Matches the real tiles' dimensions exactly (p-4 + 2 text lines +
+          // headline + sublabel). The `animate-pulse` comes from Tailwind.
+          <div className="grid grid-cols-2 gap-3 stagger-2" aria-hidden="true">
+            <div className="rounded-xl p-4 bg-primary-container/20 border border-primary/[0.05] animate-pulse">
+              <div className="h-3 w-16 bg-on-surface-variant/10 rounded mb-3" />
+              <div className="h-8 w-10 bg-on-surface-variant/15 rounded mb-2" />
+              <div className="h-2.5 w-24 bg-on-surface-variant/10 rounded" />
+            </div>
+            <div className="rounded-xl p-4 bg-secondary-container/20 border border-secondary/[0.05] animate-pulse">
+              <div className="h-3 w-16 bg-on-surface-variant/10 rounded mb-3" />
+              <div className="h-8 w-10 bg-on-surface-variant/15 rounded mb-2" />
+              <div className="h-2.5 w-24 bg-on-surface-variant/10 rounded" />
+            </div>
+          </div>
+        ) : null}
 
-        {/* ── Vikriti re-check prompt — only when due ── */}
-        {vikriti.isDue && vikriti.hasPrakriti && (
+        {/* ── Vikriti re-check prompt — only when due, and only after the
+             schedule hook has resolved so it doesn't pop in late. */}
+        {!vikriti.loading && vikriti.isDue && vikriti.hasPrakriti && (
           <button
             onClick={() => navigate('/vikriti')}
             className="relative w-full text-left rounded-xl p-4 bg-primary-container/40 border border-primary/15 active:scale-[0.98] transition-all stagger-2 overflow-hidden"
@@ -342,6 +366,12 @@ export default function HomePage() {
             </div>
           </button>
         )}
+
+        {/* ── Analytics consent card ──
+            Shown only after the user has at least one completed practice
+            (so we've earned enough trust to ask) and only if the consent
+            module says to ask now (i.e. no prior decision, not in cool-off). */}
+        {stats.hasSessions && <AnalyticsConsentCard />}
 
         {/* ── Daily Check-in ── */}
         <div className="bg-surface-container-low rounded-xl p-5 stagger-3">
@@ -409,46 +439,54 @@ export default function HomePage() {
           )}
         </div>
 
-        {/* ── Suggested Asana — single contextual card ── */}
-        <button
-          onClick={handleSuggestedAsanaClick}
-          className="bg-surface-container rounded-xl p-5 flex items-center gap-4 active:scale-[0.98] transition-all stagger-3 w-full text-left"
-        >
-          <div className="w-16 h-16 rounded-xl bg-primary-container/40 flex items-center justify-center flex-shrink-0">
-            <PoseFigure poseKey={suggestedAsana.poseKey} size="xs" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">{asanaContext}</p>
-            <p className="font-body font-semibold text-sm text-on-surface">{suggestedAsana.sanskrit}</p>
-            <p className="font-body text-xs text-on-surface-variant mt-0.5">{suggestedAsana.english} · {Math.ceil(suggestedAsana.durationSeconds / 60)} min</p>
-          </div>
-          <span className="material-symbols-outlined text-primary text-xl flex-shrink-0">arrow_forward</span>
-        </button>
+        {/* ── Suggested Asana — single-tap card nudging into the Routine tab ── */}
+        <section className="stagger-3">
+          <h3 className="font-headline text-lg text-on-surface leading-tight mb-2 px-1">
+            Pick up where you left off
+          </h3>
+          <button
+            onClick={handleSuggestedAsanaClick}
+            className="bg-surface-container rounded-xl p-5 flex items-center gap-4 w-full border border-primary-container/40 text-left active:scale-[0.98] transition-all"
+          >
+            <div className="w-16 h-16 rounded-xl bg-primary-container/50 flex items-center justify-center flex-shrink-0 overflow-hidden pointer-events-none">
+              <PoseFigure poseKey={suggestedAsana.poseKey} size="xs" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">{asanaContext}</p>
+              <p className="font-body font-semibold text-sm text-on-surface">{suggestedAsana.sanskrit}</p>
+              <p className="font-body text-xs text-on-surface-variant mt-0.5">{suggestedAsana.english} · {Math.ceil(suggestedAsana.durationSeconds / 60)} min</p>
+            </div>
+            <span className="material-symbols-outlined text-primary text-xl flex-shrink-0">arrow_forward</span>
+          </button>
+        </section>
 
-        {/* ── Daily Ritual — Breathing ── */}
+        {/* ── Daily Ritual — Breathing (redesigned with staggered breath rings) ── */}
         <button
-          onClick={() => navigate('/routine', { state: { routineKey: 'stress' } })}
-          className="bg-surface-container-low rounded-2xl p-5 stagger-4 active:scale-[0.98] transition-all w-full text-left"
+          onClick={() => navigate('/practice/asana/mindfulRespiration')}
+          className="relative overflow-hidden bg-gradient-to-br from-primary-container/60 via-surface-container-low to-primary-container/30 rounded-2xl p-5 stagger-4 active:scale-[0.98] transition-all w-full text-left border border-primary-container/50"
         >
           <div className="flex items-center gap-4">
-            {/* Icon circle with subtle breathing animation */}
-            <div className="relative w-16 h-16 flex-shrink-0">
-              <div className="absolute inset-0 rounded-full bg-primary-container/40 animate-ritual-glow" />
-              <div className="absolute inset-0 rounded-full bg-surface-container-high flex items-center justify-center">
-                <span className="material-symbols-outlined text-primary text-2xl">air</span>
+            {/* Breathing rings — 3 staggered concentric circles */}
+            <div className="relative w-20 h-20 flex-shrink-0 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full bg-primary/20 animate-breath-ring" />
+              <div className="absolute inset-1.5 rounded-full bg-primary/25 animate-breath-ring-delay-1" />
+              <div className="absolute inset-3 rounded-full bg-primary/30 animate-breath-ring-delay-2" />
+              <div className="relative w-11 h-11 rounded-full bg-primary flex items-center justify-center shadow-md">
+                <span className="material-symbols-outlined text-on-primary text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
               </div>
             </div>
 
             {/* Text content */}
             <div className="flex-1 min-w-0">
-              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">Daily Ritual</p>
+              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1 font-semibold">Daily Ritual · 2 min</p>
               <h3 className="font-headline text-xl text-on-surface leading-snug">Mindful Respiration</h3>
-              <p className="font-body text-xs text-on-surface-variant mt-0.5">Find your center...</p>
+              <p className="font-body text-xs text-on-surface-variant mt-1">Inhale · Hold · Exhale</p>
             </div>
 
-            {/* Start pill */}
-            <div className="px-5 py-2.5 bg-primary rounded-full flex-shrink-0">
-              <span className="font-label text-[10px] text-on-primary uppercase tracking-widest font-semibold">Start</span>
+            {/* Begin CTA */}
+            <div className="flex items-center gap-1 px-4 py-2.5 bg-primary rounded-full flex-shrink-0 shadow-sm">
+              <span className="font-label text-[11px] text-on-primary uppercase tracking-wider font-semibold">Begin</span>
+              <span className="material-symbols-outlined text-on-primary text-sm">arrow_forward</span>
             </div>
           </div>
         </button>
@@ -458,7 +496,7 @@ export default function HomePage() {
           <div className="flex items-center gap-2.5 mb-4">
             <span className="material-symbols-outlined text-secondary text-lg">block</span>
             <h3 className="font-headline text-lg text-on-surface">What to avoid</h3>
-            <span className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest ml-auto">{timeOfDay}</span>
+            <span className="ml-auto font-label text-[10px] text-on-secondary-container uppercase tracking-widest font-semibold bg-secondary-container px-2.5 py-1 rounded-full">{timeOfDay}</span>
           </div>
           <div className="flex flex-col gap-3">
             {avoidTips.map((tip, i) => (

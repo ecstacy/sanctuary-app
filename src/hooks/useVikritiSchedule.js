@@ -33,18 +33,68 @@ const INITIAL_INTERVAL_DAYS = 3
 const SETTLED_INTERVAL_DAYS = 7
 const INITIAL_PHASE_COUNT   = 3  // first N vikriti assessments use the tighter cadence
 
+// localStorage cache so HomePage doesn't get a delayed pop-in of the
+// "Weekly check-in" card on every visit. Scoped per-user so accounts can't
+// leak each other's schedule.
+const CACHE_KEY = 'sanctuary.vikritiSchedule.v1'
+
+function readCache(userId) {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY)
+    if (!raw || !userId) return null
+    const parsed = JSON.parse(raw)
+    if (parsed?.userId !== userId) return null
+    return parsed.state || null
+  } catch {
+    return null
+  }
+}
+
+function writeCache(userId, state) {
+  if (!userId) return
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ userId, state }))
+  } catch { /* quota — ignore */ }
+}
+
+// Recompute time-derived fields from a cached snapshot so `daysSinceLast`
+// and `isDue` stay correct even if the cache is hours/days old.
+function refreshDerived(cached) {
+  if (!cached) return null
+  const intervalDays = (cached.vikritiCount ?? 0) < INITIAL_PHASE_COUNT
+    ? INITIAL_INTERVAL_DAYS
+    : SETTLED_INTERVAL_DAYS
+  let daysSinceLast = Infinity
+  let nextDueAt = null
+  if (cached.lastVikritiAt) {
+    const last = new Date(cached.lastVikritiAt)
+    daysSinceLast = Math.floor((Date.now() - last.getTime()) / 86400000)
+    nextDueAt = new Date(last.getTime() + intervalDays * 86400000).toISOString()
+  }
+  return {
+    ...cached,
+    daysSinceLast,
+    nextDueAt,
+    isDue: daysSinceLast >= intervalDays,
+    loading: false,
+  }
+}
+
 export default function useVikritiSchedule() {
   const { user, profile } = useAuth()
-  const [state, setState] = useState({
-    loading:              true,
-    hasPrakriti:          false,
-    lastVikritiAt:        null,
-    lastVikritiPrimary:   null,
-    lastVikritiSecondary: null,
-    daysSinceLast:        Infinity,
-    vikritiCount:         0,
-    nextDueAt:            null,
-    isDue:                false,
+  const [state, setState] = useState(() => {
+    const cached = refreshDerived(readCache(user?.id))
+    return cached || {
+      loading:              true,
+      hasPrakriti:          false,
+      lastVikritiAt:        null,
+      lastVikritiPrimary:   null,
+      lastVikritiSecondary: null,
+      daysSinceLast:        Infinity,
+      vikritiCount:         0,
+      nextDueAt:            null,
+      isDue:                false,
+    }
   })
   // Bumping this re-runs the fetch effect. Exposed via the returned
   // `refetch()` so callers (e.g. HomePage returning from /vikriti) can
@@ -104,7 +154,7 @@ export default function useVikritiSchedule() {
 
       const isDue = daysSinceLast >= intervalDays
 
-      setState({
+      const next = {
         loading:              false,
         hasPrakriti:          true,
         lastVikritiAt,
@@ -114,7 +164,9 @@ export default function useVikritiSchedule() {
         vikritiCount,
         nextDueAt,
         isDue,
-      })
+      }
+      setState(next)
+      writeCache(user.id, next)
     })()
 
     return () => { cancelled = true }

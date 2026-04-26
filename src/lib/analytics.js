@@ -34,6 +34,7 @@
  */
 
 import { supabase } from './supabase'
+import { isAggregateAllowed } from './consent'
 
 // ── Vocabulary — single source of truth ──────────────────────────────────
 
@@ -216,6 +217,61 @@ export async function logSearch({
 // post loop is closed and queryable by session_id.
 //
 // Fire-and-forget. Safe to call with nulls — it will no-op.
+
+// ── logAggregateEvent ────────────────────────────────────────────────────
+// Fire an anonymous, aggregate-scope product event. Gated behind the user's
+// opt-in consent — if they haven't granted aggregate analytics, this is a
+// silent no-op. Never include user_id, email, full_name, or any free-text
+// input. The `anonId` is a random per-install UUID created by the caller
+// (see lib/anonId.js) and is explicitly NOT tied to the auth user.
+//
+// Write target is a nullable-user-id table (`aggregate_events`) that exists
+// only when the opt-in path is live. Until the migration lands, this helper
+// is a callable no-op — callers can drop it in now so instrumentation lands
+// in the same commit as the UI surface that triggers it.
+
+export async function logAggregateEvent({
+  anonId,
+  eventName,
+  properties = {},
+}) {
+  if (!isAggregateAllowed()) return          // fail-closed: no consent → no send
+  if (!anonId || !eventName) return
+  // Scrub anything that looks like PII before it hits the wire.
+  const safeProps = stripLikelyPII(properties)
+  try {
+    const { error } = await supabase.from('aggregate_events').insert({
+      anon_id: anonId,
+      event_name: String(eventName).slice(0, 64),
+      properties: safeProps,
+      context: baseContext(),
+    })
+    // Table may not exist yet on older DB snapshots — don't spam console.
+    if (error && !/relation .* does not exist/i.test(error.message)) {
+      console.error('logAggregateEvent failed:', error.message)
+    }
+  } catch (err) {
+    console.error('logAggregateEvent threw:', err?.message || err)
+  }
+}
+
+// Drop fields whose keys look like PII. Defensive — callers shouldn't be
+// passing these in the first place, but this makes it harder to leak by
+// mistake.
+const PII_KEY_RE = /(email|mail|name|phone|address|lat|lng|latitude|longitude|ip|geo|userid|user_id|device_id|advertising_id)/i
+function stripLikelyPII(obj) {
+  if (!obj || typeof obj !== 'object') return {}
+  const out = {}
+  for (const [k, v] of Object.entries(obj)) {
+    if (PII_KEY_RE.test(k)) continue
+    if (typeof v === 'string' && v.length > 200) {
+      out[k] = v.slice(0, 200)                // truncate free-text defensively
+    } else {
+      out[k] = v
+    }
+  }
+  return out
+}
 
 export async function linkCheckinToSession({ checkinId, sessionId }) {
   if (!checkinId || !sessionId) return

@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Capacitor } from '@capacitor/core'
 import { registerPlugin } from '@capacitor/core'
+import { syncLanguageFromProfile } from '../i18n'
+import { hydrateFromProfile as hydrateConsentFromProfile } from '../lib/consent'
 
 // Opens URLs in the actual system browser (not Custom Chrome Tab)
 // CCTs on some Android devices block custom-scheme redirects entirely.
@@ -51,6 +53,14 @@ export function AuthProvider({ children }) {
       .single()
     if (error) console.error('Failed to fetch profile:', error.message)
     setProfile(data)
+    // Apply the account-level language preference if one is stored on the
+    // profile. Falls through silently when the column isn't present yet
+    // (the migration is optional — see docs/i18n.md).
+    if (data?.language) syncLanguageFromProfile(data.language)
+    // Merge the per-account consent state with the local one. The consent
+    // module keeps whichever decision is newer — safe if the column
+    // doesn't exist yet (undefined → no-op).
+    if (data?.analytics_consent) hydrateConsentFromProfile(data.analytics_consent)
     setLoading(false)
   }
 

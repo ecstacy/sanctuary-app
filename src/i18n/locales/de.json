@@ -1,0 +1,140 @@
+{
+  "app": {
+    "name": "The Sanctuary",
+    "tagline": "Dein täglicher Rückzugsort für Körper und Geist"
+  },
+  "languages": {
+    "en": { "label": "English", "sublabel": "Continue in English", "flag": "🇬🇧" },
+    "hi": { "label": "हिन्दी", "sublabel": "हिन्दी में जारी रखें", "flag": "🇮🇳" },
+    "de": { "label": "Deutsch", "sublabel": "Auf Deutsch fortfahren", "flag": "🇩🇪" }
+  },
+  "common": {
+    "continue": "Weiter",
+    "back": "Zurück",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "loading": "Wird geladen…",
+    "or": "oder",
+    "retry": "Erneut versuchen"
+  },
+  "welcome": {
+    "greeting": "Willkommen bei",
+    "intro": "Ein stiller Ort, um dich wieder mit deinem Körper, Atem und Rhythmus zu verbinden.",
+    "getStarted": "Loslegen",
+    "signIn": "Ich habe bereits ein Konto"
+  },
+  "signup": {
+    "step1": {
+      "kicker": "Fast geschafft",
+      "title": "Wähle deine",
+      "titleItalic": "Sprache.",
+      "subtitle": "Wähle deine bevorzugte Sprache für The Sanctuary.",
+      "strugglesNote": "Wir haben deine Schwerpunkte notiert:",
+      "strugglesNoteTail": ". Sie werden deine Praxis vom ersten Tag an prägen."
+    },
+    "step2": {
+      "kicker": "Konto erstellen",
+      "title": "Dein Rückzugsort",
+      "titleItalic": "wartet.",
+      "subtitle": "Für immer kostenlos. Keine Kreditkarte nötig.",
+      "fullName": "Vollständiger Name",
+      "fullNamePlaceholder": "Elena Rossi",
+      "email": "E-Mail",
+      "emailPlaceholder": "du@beispiel.de",
+      "password": "Passwort",
+      "passwordPlaceholder": "Mind. 8 Zeichen",
+      "privacy": "Deine Daten sind verschlüsselt und werden niemals an Dritte weitergegeben. Du kannst dein Konto und alle Daten jederzeit löschen.",
+      "cta": "Meine Reise beginnen",
+      "ctaLoading": "Dein Rückzugsort wird erstellt…",
+      "googleCta": "Mit Google registrieren",
+      "haveAccount": "Schon ein Konto?",
+      "signIn": "Anmelden",
+      "validationError": "Bitte fülle alle Felder aus. Passwort muss mindestens 8 Zeichen lang sein."
+    }
+  },
+  "login": {
+    "title": "Willkommen zurück",
+    "subtitle": "Melde dich an, um fortzufahren",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "cta": "Anmelden",
+    "ctaLoading": "Anmeldung läuft…",
+    "forgotPassword": "Passwort vergessen?",
+    "noAccount": "Neu bei The Sanctuary?",
+    "signUp": "Konto erstellen",
+    "googleCta": "Mit Google anmelden"
+  },
+  "nav": {
+    "home": "Home",
+    "discover": "Entdecken",
+    "routine": "Routine",
+    "journey": "Reise",
+    "profile": "Profil"
+  },
+  "home": {
+    "greetingMorning": "Guten Morgen, {{name}}",
+    "greetingAfternoon": "Guten Tag, {{name}}",
+    "greetingEvening": "Guten Abend, {{name}}",
+    "greetingFallback": "Willkommen, {{name}}",
+    "defaultName": "Freund*in",
+    "checkinPrompt": "Wie fühlst du dich gerade?",
+    "weeklyCheckinTitle": "Wöchentlicher Check-in",
+    "weeklyCheckinBody": "Nimm dir 2 Minuten, um zu sehen, wie sich deine Doshas diese Woche entwickeln.",
+    "weeklyCheckinCta": "Check-in starten"
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Sprache",
+    "languageHint": "Die App wird sofort umgeschaltet.",
+    "signOut": "Abmelden",
+    "privacy": {
+      "section": "Privatsphäre",
+      "aggregateTitle": "The Sanctuary verbessern helfen",
+      "aggregateBody": "Anonyme Nutzungsdaten teilen, damit wir sehen, welche Funktionen wirklich helfen.",
+      "aggregateOn": "Anonyme Nutzungsdaten werden geteilt",
+      "aggregateOff": "Aus — deine Daten werden nur verwendet, um deine eigene Erfahrung zu personalisieren.",
+      "whatWeCollect": "Was wir erfassen, wenn aktiviert",
+      "collectedList": [
+        "Welche Screens du besuchst und was du antippst",
+        "Ob eine Übung gestartet, übersprungen oder beendet wurde",
+        "App-Version, Gerätetyp und Sprache"
+      ],
+      "neverCollectHeading": "Was wir nie erfassen",
+      "neverCollectList": [
+        "Deinen Namen, deine E-Mail oder Kontaktdaten",
+        "Deinen Standort",
+        "Den Text deiner Notizen oder Suchanfragen, wenn Teilen aktiv ist",
+        "Alles, was mit deiner Identität verknüpft ist"
+      ],
+      "changeAnytime": "Du kannst dies jederzeit ausschalten."
+    },
+    "yourData": {
+      "section": "Deine Daten",
+      "exportTitle": "Meine Daten herunterladen",
+      "exportBody": "Eine JSON-Datei mit allem, was wir über dich haben.",
+      "exportWorking": "Deine Daten werden vorbereitet…",
+      "exportDone": "Fertig — Datei wird gespeichert.",
+      "exportError": "Deine Daten konnten nicht vorbereitet werden.",
+      "deleteTitle": "Mein Konto löschen",
+      "deleteBody": "Dauerhaft. Alle deine Daten werden entfernt.",
+      "deleteConfirmTitle": "Konto wirklich löschen?",
+      "deleteConfirmBody": "Dies entfernt dein Profil, deinen Übungsverlauf, deine Check-ins und alle weiteren Daten von unseren Servern. Das kann nicht rückgängig gemacht werden.",
+      "deleteConfirmPrompt": "Tippe DELETE zur Bestätigung.",
+      "deleteConfirmPlaceholder": "DELETE",
+      "deleteConfirmCta": "Endgültig löschen",
+      "deleteWorking": "Wird gelöscht…",
+      "deleteDone": "Deine Daten sind weg. Alles Gute.",
+      "deletePartial": "Der Großteil deiner Daten wurde entfernt, einige Einträge konnten jedoch nicht gelöscht werden. Bitte kontaktiere den Support."
+    }
+  },
+  "consent": {
+    "card": {
+      "title": "Eine leise Bitte.",
+      "body": "Teile anonyme Nutzungsdaten, damit wir sehen, was dir wirklich hilft — und weglassen, was nicht hilft.",
+      "promise": "Kein Name. Keine E-Mail. Kein Standort. Nur Ereignismuster.",
+      "allow": "Erlauben",
+      "notNow": "Nicht jetzt",
+      "neverAsk": "Nicht mehr fragen"
+    }
+  }
+}

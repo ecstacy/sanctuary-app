@@ -34,18 +34,35 @@ function daysBetween(a, b) {
   return Math.round(Math.abs(db - da) / msDay)
 }
 
-function readLocalCache() {
+// Cache is scoped by userId (when known) so a second account on the same
+// device never sees the previous account's sessions on first paint.
+// Shape on disk: { userId: string | null, sessions: Session[] } or, for
+// legacy entries written before this version, just an array.
+function readLocalCache(userId = null) {
   try {
     const raw = localStorage.getItem(LOCAL_CACHE_KEY)
-    return raw ? JSON.parse(raw) : []
+    if (!raw) return []
+    const parsed = JSON.parse(raw)
+    // Legacy: array of sessions with no owner tag. Trust it only if we
+    // don't know the user yet; otherwise fall through to empty to avoid
+    // cross-account leakage.
+    if (Array.isArray(parsed)) return userId ? [] : parsed
+    if (parsed && Array.isArray(parsed.sessions)) {
+      if (!userId || parsed.userId === userId) return parsed.sessions
+      return []
+    }
+    return []
   } catch {
     return []
   }
 }
 
-function writeLocalCache(sessions) {
+function writeLocalCache(sessions, userId = null) {
   try {
-    localStorage.setItem(LOCAL_CACHE_KEY, JSON.stringify(sessions))
+    localStorage.setItem(
+      LOCAL_CACHE_KEY,
+      JSON.stringify({ userId, sessions })
+    )
   } catch { /* quota exceeded — ignore */ }
 }
 
@@ -157,7 +174,16 @@ async function migrateLocalToSupabase(userId) {
 
 export default function usePracticeStats() {
   const { user } = useAuth()
-  const [sessions, setSessions] = useState([])
+  // Hydrate synchronously from the local cache so returning users see their
+  // streak tiles on the very first paint — no 2-second pop-in while we wait
+  // for Supabase. The cache is written on every successful fetch, so it's
+  // usually at most one session stale. Fresh data from the network still
+  // overwrites this when it arrives.
+  const [sessions, setSessions] = useState(() => readLocalCache(user?.id))
+  // `loading` tracks the *network* fetch, not whether we have anything to
+  // show. Components can render optimistically from `sessions` and only use
+  // this flag to decide whether to render a skeleton when the cache is empty
+  // (first-ever launch).
   const [loading, setLoading] = useState(true)
 
   // Normalize a Supabase row into the shape the rest of the app expects
@@ -192,13 +218,13 @@ export default function usePracticeStats() {
 
     if (error) {
       console.error('Failed to fetch practice sessions:', error.message)
-      // Fallback to local cache
-      setSessions(readLocalCache())
+      // Fallback to local cache (scoped to this user)
+      setSessions(readLocalCache(user.id))
     } else {
       const normalized = (data || []).map(normalize)
       setSessions(normalized)
-      // Keep local cache in sync
-      writeLocalCache(normalized)
+      // Keep local cache in sync, tagged with the owning user
+      writeLocalCache(normalized, user.id)
     }
     setLoading(false)
   }, [user])

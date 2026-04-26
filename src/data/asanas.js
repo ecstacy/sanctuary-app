@@ -88,6 +88,27 @@ export const ASANAS = {
   },
 
   // ── Seated Poses ────────────────────────────────────────────────────────
+  mindfulRespiration: {
+    id: 'mindfulRespiration',
+    sanskrit: 'Pranayama',
+    english: 'Mindful Respiration',
+    icon: 'air',
+    durationSeconds: 120,
+    category: 'seated',
+    level: 'Beginner',
+    doshaAffinity: { vata: 'balancing', pitta: 'balancing', kapha: 'balancing' },
+    bodyParts: ['Nervous System', 'Lungs', 'Mind'],
+    benefits: ['Calms anxiety quickly', 'Lowers stress response', 'Sharpens focus', 'Anchors the wandering mind'],
+    reasoning: 'A two-minute reset for the nervous system. Slow, even breathing engages the vagus nerve, drops the heart rate, and pulls you out of fight-or-flight — the fastest evidence-based intervention for acute stress and anxiety.',
+    voiceCues: {
+      enter: 'Sit comfortably with your spine tall. Rest your hands on your knees. Soften your shoulders away from your ears.',
+      hold: 'Inhale slowly through the nose for four counts. Pause. Exhale gently for six counts.',
+      breathe: 'Let the exhale be longer than the inhale — that is what tells your body it is safe.',
+      exit: 'Allow your breath to return to its natural rhythm. Notice how you feel now.',
+    },
+    poseKey: 'sukhasana',
+  },
+
   sukhasana: {
     id: 'sukhasana',
     sanskrit: 'Sukhasana',
