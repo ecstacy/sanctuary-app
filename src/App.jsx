@@ -8,6 +8,8 @@ import PageTransition from './components/PageTransition'
 import BottomNav from './components/BottomNav'
 import DoshaThemeProvider from './components/DoshaThemeProvider'
 import { supabase } from './lib/supabase'
+import { init as initAnalytics, track, EVENTS } from './lib/track'
+import { routeNameFor } from './lib/routeName'
 
 // Lazy-load pages for code-splitting
 const WelcomePage = lazy(() => import('./pages/WelcomePage'))
@@ -220,10 +222,133 @@ function AppRoutes() {
   )
 }
 
+// ─── EngagementHeartbeat ───────────────────────────────────────────────
+// Fires `engagement_heartbeat` every 15s while the user is genuinely
+// active (tab visible, window focused, last interaction <30s ago).
+// Pauses on blur / visibilitychange to avoid counting AFK time.
+//
+// Why this exists when PostHog already tracks session duration:
+// PostHog's session duration is wall-clock from first event to last;
+// we want **active seconds** (used by retention cohorts and
+// engagement-quality signals). Cap at 4 hours/session as a safety
+// fuse so a forgotten tab can't burn the event budget.
+function EngagementHeartbeat() {
+  useEffect(() => {
+    let lastInteractionAt = Date.now()
+    let activeSeconds = 0
+    const HEARTBEAT_MS = 15_000
+    const IDLE_AFTER_MS = 30_000
+    const MAX_ACTIVE_SECONDS = 4 * 60 * 60   // 4h safety cap
+
+    const onAny = () => { lastInteractionAt = Date.now() }
+    window.addEventListener('click',     onAny, { passive: true })
+    window.addEventListener('keydown',   onAny, { passive: true })
+    window.addEventListener('touchstart',onAny, { passive: true })
+    window.addEventListener('scroll',    onAny, { passive: true })
+    window.addEventListener('mousemove', onAny, { passive: true })
+
+    const id = setInterval(() => {
+      if (document.hidden) return
+      if (!document.hasFocus()) return
+      if (Date.now() - lastInteractionAt > IDLE_AFTER_MS) return
+      if (activeSeconds >= MAX_ACTIVE_SECONDS) return
+      activeSeconds += HEARTBEAT_MS / 1000
+      track(EVENTS.ENGAGEMENT_HEARTBEAT, {
+        active_seconds: HEARTBEAT_MS / 1000,
+      })
+    }, HEARTBEAT_MS)
+
+    return () => {
+      clearInterval(id)
+      window.removeEventListener('click',     onAny)
+      window.removeEventListener('keydown',   onAny)
+      window.removeEventListener('touchstart',onAny)
+      window.removeEventListener('scroll',    onAny)
+      window.removeEventListener('mousemove', onAny)
+    }
+  }, [])
+  return null
+}
+
+// ─── ScreenTracker ─────────────────────────────────────────────────────
+// Fires `screen_viewed` on every route change and `screen_left` on the
+// outgoing screen, with dwell time, interaction count, and a bounce flag.
+// Lives inside <BrowserRouter> so it can use `useLocation`.
+//
+// Scroll depth is tracked here as a max-pct counter and rolled into
+// `screen_left.max_scroll_depth_pct`. The standalone `scroll_depth_reached`
+// threshold events (25/50/75/100) land in Chunk 7 with a dedicated hook.
+function ScreenTracker() {
+  const location = useLocation()
+  const prevRef = useRef(null)
+
+  useEffect(() => {
+    const enteredAt   = Date.now()
+    const routeName   = routeNameFor(location.pathname)
+    let interactions  = 0
+    let maxScrollPct  = 0
+
+    track(EVENTS.SCREEN_VIEWED, {
+      route_name: routeName,
+      path:       location.pathname,
+    })
+
+    // Tally any input that suggests the user engaged with the screen.
+    // Bounce = no interaction in <3s.
+    const onInteract = () => { interactions += 1 }
+    const onScroll = () => {
+      const doc = document.documentElement
+      const max = Math.max(1, doc.scrollHeight - doc.clientHeight)
+      const pct = Math.min(100, Math.round((doc.scrollTop / max) * 100))
+      if (pct > maxScrollPct) maxScrollPct = pct
+      interactions += 1
+    }
+
+    window.addEventListener('click',   onInteract, { passive: true })
+    window.addEventListener('keydown', onInteract, { passive: true })
+    window.addEventListener('touchstart', onInteract, { passive: true })
+    window.addEventListener('scroll',  onScroll,    { passive: true })
+
+    prevRef.current = { enteredAt, routeName, get interactions() { return interactions }, get maxScrollPct() { return maxScrollPct } }
+
+    return () => {
+      const seconds = Math.round((Date.now() - enteredAt) / 1000)
+      // Round scroll depth to nearest 10 to avoid noisy unique-value blowup.
+      const roundedScroll = Math.round(maxScrollPct / 10) * 10
+      track(EVENTS.SCREEN_LEFT, {
+        route_name:            routeName,
+        path:                  location.pathname,
+        seconds_on_screen:     seconds,
+        max_scroll_depth_pct:  roundedScroll,
+        interaction_count:     interactions,
+        bounced:               seconds < 3 && interactions === 0,
+      })
+      window.removeEventListener('click',   onInteract)
+      window.removeEventListener('keydown', onInteract)
+      window.removeEventListener('touchstart', onInteract)
+      window.removeEventListener('scroll',  onScroll)
+    }
+  }, [location.pathname])
+
+  return null
+}
+
 export default function App() {
+  // ── Boot product analytics once at app mount ───────────────────────────
+  // The façade is consent-gated internally — calling init() before consent
+  // is granted is a safe no-op; it sets up the consent subscriber so that
+  // the SDK boots the moment the user opts in. The first launch event
+  // doubles as a smoke test that the wiring is live.
+  useEffect(() => {
+    initAnalytics()
+    track(EVENTS.APP_OPENED, { cold_start: true })
+  }, [])
+
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <ScreenTracker />
+      <EngagementHeartbeat />
       <AuthProvider>
         <AppRoutes />
       </AuthProvider>

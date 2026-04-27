@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import ErrorAlert from '../components/ErrorAlert'
+import { track, EVENTS } from '../lib/track'
 
 export default function ForgotPasswordPage() {
   const navigate = useNavigate()
@@ -23,6 +24,9 @@ export default function ForgotPasswordPage() {
       return
     }
 
+    // Email is intentionally NOT included — PII scrubbing in track.js
+    // would drop it anyway, but better to never put it on the wire.
+    track(EVENTS.PASSWORD_RESET_REQUESTED)
     setSent(true)
     setLoading(false)
   }
@@ -35,6 +39,7 @@ export default function ForgotPasswordPage() {
         <button
           onClick={() => navigate('/login')}
           className="text-on-surface-variant"
+          aria-label="Back to login"
         >
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
@@ -72,6 +77,7 @@ export default function ForgotPasswordPage() {
                   placeholder="you@example.com"
                   required
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
+                  aria-label="Email address"
                 />
               </div>
 

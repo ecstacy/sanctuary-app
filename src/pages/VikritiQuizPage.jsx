@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
+import { track, EVENTS } from '../lib/track'
 
 /**
  * ═══════════════════════════════════════════════════════════════════════════
@@ -117,6 +118,29 @@ export default function VikritiQuizPage() {
   const [result, setResult] = useState(null)
   const [saving, setSaving] = useState(false)
 
+  // ── Abandonment tracking ──────────────────────────────────────────────
+  // Mirrors DoshaQuizPage: fire `vikriti_abandoned` only when the user
+  // left mid-quiz (phase === 'quiz'). Refs hold latest values so the
+  // cleanup sees post-render state, not initial closure.
+  const phaseRef    = useRef(phase)
+  const currentQRef = useRef(currentQ)
+  const startedAtRef = useRef(null)
+  useEffect(() => { phaseRef.current = phase }, [phase])
+  useEffect(() => { currentQRef.current = currentQ }, [currentQ])
+  useEffect(() => {
+    startedAtRef.current = Date.now()
+    return () => {
+      if (phaseRef.current === 'quiz') {
+        const startedAt = startedAtRef.current ?? Date.now()
+        track(EVENTS.VIKRITI_ABANDONED, {
+          last_question_index: currentQRef.current,
+          progress_pct:        Math.round((currentQRef.current / VIKRITI_QUESTIONS.length) * 100),
+          seconds_in:          Math.round((Date.now() - startedAt) / 1000),
+        })
+      }
+    }
+  }, [])
+
   const question = VIKRITI_QUESTIONS[currentQ]
   const total = VIKRITI_QUESTIONS.length
   const progress = (currentQ / total) * 100
@@ -136,12 +160,20 @@ export default function VikritiQuizPage() {
         setSelectedOption(null)
         setAnimating(false)
       } else {
-        setResult(calculateVikriti(nextAnswers))
+        const calcResult = calculateVikriti(nextAnswers)
+        setResult(calcResult)
+        track(EVENTS.VIKRITI_COMPLETED, {
+          primary_dosha: calcResult.primary,
+          vata_pct: calcResult.percentages.vata,
+          pitta_pct: calcResult.percentages.pitta,
+          kapha_pct: calcResult.percentages.kapha,
+          matches_prakriti: prakritiPrimary === calcResult.primary,
+        })
         setPhase('result')
         setAnimating(false)
       }
     }, 400)
-  }, [animating, answers, currentQ, total])
+  }, [animating, answers, currentQ, total, prakritiPrimary])
 
   const handleBack = useCallback(() => {
     if (animating) return
@@ -188,7 +220,7 @@ export default function VikritiQuizPage() {
     return (
       <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
         <div className="flex items-center justify-between px-6 py-5 flex-shrink-0">
-          <button onClick={() => navigate(-1)} className="text-on-surface-variant">
+          <button onClick={() => navigate(-1)} className="text-on-surface-variant" aria-label="Go back">
             <span className="material-symbols-outlined text-xl">arrow_back</span>
           </button>
           <span className="font-headline italic text-primary text-base">The Sanctuary</span>
@@ -219,7 +251,10 @@ export default function VikritiQuizPage() {
           </div>
 
           <button
-            onClick={() => setPhase('quiz')}
+            onClick={() => {
+              track(EVENTS.VIKRITI_STARTED, { has_prakriti: !!prakritiPrimary })
+              setPhase('quiz')
+            }}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
           >
             Begin Check-in
@@ -259,7 +294,7 @@ export default function VikritiQuizPage() {
     return (
       <div className="min-h-screen bg-background text-on-surface font-body">
         <div className="flex items-center justify-between px-6 py-5">
-          <button onClick={() => navigate(-1)} className="text-on-surface-variant">
+          <button onClick={() => navigate(-1)} className="text-on-surface-variant" aria-label="Close">
             <span className="material-symbols-outlined text-xl">close</span>
           </button>
           <span className="font-headline italic text-primary text-base">The Sanctuary</span>
@@ -324,7 +359,10 @@ export default function VikritiQuizPage() {
           </div>
 
           <button
-            onClick={saveVikriti}
+            onClick={() => {
+              track(EVENTS.CTA_CLICKED, { cta_id: 'vikriti_save', primary_dosha: result?.primary })
+              saveVikriti()
+            }}
             disabled={saving}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mb-3"
           >
@@ -345,7 +383,7 @@ export default function VikritiQuizPage() {
   return (
     <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
       <div className="flex items-center justify-between px-6 py-4 flex-shrink-0">
-        <button onClick={handleBack} className="text-on-surface-variant">
+        <button onClick={handleBack} className="text-on-surface-variant" aria-label="Previous question">
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
         <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">

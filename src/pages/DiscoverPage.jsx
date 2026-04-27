@@ -3,9 +3,44 @@ import { useNavigate } from 'react-router-dom'
 import { POPULAR_SEARCHES } from '../data/recommendations'
 import { ASANAS } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
+import { track, EVENTS } from '../lib/track'
+import useScrollDepth from '../hooks/useScrollDepth'
+import useImpression from '../hooks/useImpression'
 
 
 const ALL_ASANAS = Object.values(ASANAS)
+
+// ─── QuickRoutineCard ────────────────────────────────────────────────────
+// Extracted so each card can call `useImpression` legally (one hook call per
+// component). Visible for ≥1s at 50%+ → fires `content_impression`. Pair
+// with `routine_card_tapped` for CTR.
+function QuickRoutineCard({ routine, position, onTap }) {
+  const ref = useImpression({
+    surface:     'discover_quick_routines',
+    contentType: 'routine',
+    contentId:   routine.key,
+    position,
+  })
+  return (
+    <button
+      ref={ref}
+      onClick={onTap}
+      className="flex items-center gap-4 bg-surface-container-low rounded-xl p-4 text-left active:scale-[0.98] transition-all"
+    >
+      <div className="w-11 h-11 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0">
+        <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">{routine.icon}</span>
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="font-body text-sm font-semibold text-on-surface">{routine.label}</p>
+        <p className="font-body text-xs text-on-surface-variant/60 mt-0.5">{routine.desc}</p>
+      </div>
+      <div className="flex items-center gap-1 flex-shrink-0">
+        <span className="font-label text-[10px] text-on-surface-variant/40 uppercase">{routine.time}</span>
+        <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+      </div>
+    </button>
+  )
+}
 
 // Browse categories — map to recommendation engine topics
 const CATEGORIES = [
@@ -22,6 +57,7 @@ const CATEGORIES = [
 export default function DiscoverPage() {
   const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState('')
+  useScrollDepth('discover')
 
   // Filter asanas matching the search query
   const matchedAsanas = useMemo(() => {
@@ -41,6 +77,7 @@ export default function DiscoverPage() {
   function handleSearch(q) {
     const query = q || searchQuery
     if (query.trim().length < 2) return
+    track(EVENTS.SEARCH_SUBMITTED, { query: query.trim(), source: 'discover' })
     navigate('/recommendations', { state: { query: query.trim() } })
   }
 
@@ -56,6 +93,7 @@ export default function DiscoverPage() {
         <button
           onClick={() => navigate('/profile')}
           className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center"
+          aria-label="Open profile"
         >
           <span className="material-symbols-outlined text-on-surface-variant text-lg">person</span>
         </button>
@@ -88,11 +126,13 @@ export default function DiscoverPage() {
               }}
               placeholder="Back pain, headache, can't sleep..."
               className="w-full bg-surface-container-low rounded-2xl pl-11 pr-12 py-4 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
+              aria-label="Search asanas"
             />
             {searchQuery.length > 0 ? (
               <button
                 onClick={() => handleSearch()}
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-primary flex items-center justify-center active:scale-90 transition-all"
+                aria-label="Search"
               >
                 <span className="material-symbols-outlined text-on-primary text-sm">arrow_forward</span>
               </button>
@@ -110,7 +150,10 @@ export default function DiscoverPage() {
               {matchedAsanas.map(asana => (
                 <button
                   key={asana.id}
-                  onClick={() => navigate(`/asana/${asana.id}`)}
+                  onClick={() => {
+                    track(EVENTS.ASANA_CARD_TAPPED, { asana_id: asana.id, source: 'discover_search_results' })
+                    navigate(`/asana/${asana.id}`)
+                  }}
                   className="flex items-center gap-3.5 bg-surface-container-low rounded-xl p-3 text-left active:scale-[0.98] transition-all"
                 >
                   <div className="w-14 h-14 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0">
@@ -120,7 +163,9 @@ export default function DiscoverPage() {
                     <p className="font-body text-sm font-semibold text-on-surface">{asana.sanskrit}</p>
                     <p className="font-body text-xs text-on-surface-variant/60">{asana.english}</p>
                     <div className="flex gap-1.5 mt-1">
-                      <span className="px-2 py-0.5 bg-primary-fixed rounded-full font-label text-[8px] text-primary uppercase">{asana.level}</span>
+                      {asana.level && asana.level !== 'Beginner' && (
+                        <span className="px-2 py-0.5 bg-primary-fixed rounded-full font-label text-[8px] text-primary uppercase">{asana.level}</span>
+                      )}
                       <span className="px-2 py-0.5 bg-surface-container-high rounded-full font-label text-[8px] text-on-surface-variant uppercase">{asana.category}</span>
                     </div>
                   </div>
@@ -179,24 +224,16 @@ export default function DiscoverPage() {
               { key: 'sleep', label: 'Better Sleep', desc: 'Wind down and prepare for deep rest', icon: 'bedtime', time: '12 min' },
               { key: 'energy', label: 'Energy Boost', desc: 'Wake up your body and revitalize', icon: 'bolt', time: '18 min' },
               { key: 'flexibility', label: 'Flexibility Flow', desc: 'Release stiffness and improve mobility', icon: 'self_care', time: '20 min' },
-            ].map(r => (
-              <button
+            ].map((r, i) => (
+              <QuickRoutineCard
                 key={r.key}
-                onClick={() => navigate('/routine', { state: { routineKey: r.key } })}
-                className="flex items-center gap-4 bg-surface-container-low rounded-xl p-4 text-left active:scale-[0.98] transition-all"
-              >
-                <div className="w-11 h-11 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0">
-                  <span className="material-symbols-outlined text-primary text-lg">{r.icon}</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-body text-sm font-semibold text-on-surface">{r.label}</p>
-                  <p className="font-body text-xs text-on-surface-variant/60 mt-0.5">{r.desc}</p>
-                </div>
-                <div className="flex items-center gap-1 flex-shrink-0">
-                  <span className="font-label text-[10px] text-on-surface-variant/40 uppercase">{r.time}</span>
-                  <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
-                </div>
-              </button>
+                routine={r}
+                position={i}
+                onTap={() => {
+                  track(EVENTS.ROUTINE_CARD_TAPPED, { routine_key: r.key, source: 'discover_quick_routines' })
+                  navigate('/routine', { state: { routineKey: r.key } })
+                }}
+              />
             ))}
           </div>
         </div>
@@ -208,26 +245,36 @@ export default function DiscoverPage() {
             {ALL_ASANAS.map(asana => (
               <button
                 key={asana.id}
-                onClick={() => navigate(`/asana/${asana.id}`)}
-                className="flex-shrink-0 w-32 snap-start active:scale-[0.97] transition-all"
+                onClick={() => {
+                  track(EVENTS.ASANA_CARD_TAPPED, { asana_id: asana.id, source: 'discover_explore_grid' })
+                  navigate(`/asana/${asana.id}`)
+                }}
+                aria-label={`${asana.english} (${asana.sanskrit})`}
+                className="flex-shrink-0 w-36 snap-start active:scale-[0.97] transition-all text-left"
               >
-                <div className="relative aspect-[4/5] rounded-xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
+                {/* Square thumbnail — pose figure centered, no text overlay so
+                    nothing crops or collides on long Sanskrit names. */}
+                <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     {asana.poseKey ? (
-                      <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} objectPosition="top" />
+                      <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} objectPosition="center" />
                     ) : (
-                      <span className="material-symbols-outlined text-primary/30 text-6xl">{asana.icon}</span>
+                      <span aria-hidden="true" className="material-symbols-outlined text-primary/30 text-6xl">{asana.icon}</span>
                     )}
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-on-surface/60 via-transparent to-transparent" />
-                  <div className="absolute top-2 left-2">
-                    <span className="px-2 py-0.5 bg-surface/80 rounded-full font-label text-[8px] text-primary uppercase">{asana.level}</span>
-                  </div>
-                  <div className="absolute bottom-2 left-2 right-2">
-                    <p className="font-headline text-xs text-white leading-tight">{asana.sanskrit}</p>
-                  </div>
+                  {/* Level pill — only shown when the pose is harder than the
+                      default. Beginner is the baseline, so the chip stays
+                      uncluttered for the 90% case. */}
+                  {asana.level && asana.level !== 'Beginner' && (
+                    <div className="absolute top-2 left-2">
+                      <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-primary uppercase tracking-wide">
+                        {asana.level}
+                      </span>
+                    </div>
+                  )}
                 </div>
-                <p className="font-body text-xs text-on-surface text-left">{asana.english}</p>
+                <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{asana.english}</p>
+                <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{asana.sanskrit}</p>
               </button>
             ))}
           </div>

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
@@ -11,6 +11,7 @@ import {
 } from '../i18n/detect'
 import GoogleIcon from '../components/GoogleIcon'
 import ErrorAlert from '../components/ErrorAlert'
+import { track, identify, EVENTS } from '../lib/track'
 
 export default function SignupPage() {
   const navigate = useNavigate()
@@ -33,6 +34,13 @@ export default function SignupPage() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    // Mount-only: capture signup funnel entry once per page load.
+    // struggles comes from location.state which is stable after mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    track(EVENTS.SIGNUP_STARTED, { has_struggles: struggles.length > 0 })
+  }, [])
 
   // Region-ordered list so an Indian-region device sees Hindi first, a DACH
   // device sees Deutsch first, English is always present as a fallback.
@@ -78,6 +86,14 @@ export default function SignupPage() {
       if (struggleError) console.error('Struggles save failed:', struggleError.message)
     }
 
+    if (userId) identify(userId, { language })
+    track(EVENTS.SIGNUP_COMPLETED, {
+      method: 'email',
+      language,
+      has_struggles: struggles.length > 0,
+      struggle_count: struggles.length,
+    })
+
     setLoading(false)
   }
 
@@ -89,6 +105,7 @@ export default function SignupPage() {
         <button
           onClick={() => step > 1 ? setStep(step - 1) : navigate('/preview', { state: { struggles, notes } })}
           className="text-on-surface-variant"
+          aria-label="Go back"
         >
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
@@ -171,7 +188,10 @@ export default function SignupPage() {
           </div>
 
           <button
-            onClick={() => setStep(2)}
+            onClick={() => {
+              track(EVENTS.SIGNUP_STEP_COMPLETED, { step: 1, language })
+              setStep(2)
+            }}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all flex-shrink-0 mt-4"
           >
             {t('common.continue')}
@@ -209,6 +229,7 @@ export default function SignupPage() {
                   onChange={e => setFullName(e.target.value)}
                   placeholder={t('signup.step2.fullNamePlaceholder')}
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
+                  aria-label="Full name"
                 />
               </div>
 
@@ -223,6 +244,7 @@ export default function SignupPage() {
                   onChange={e => setEmail(e.target.value)}
                   placeholder={t('signup.step2.emailPlaceholder')}
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
+                  aria-label="Email address"
                 />
               </div>
 
@@ -238,6 +260,7 @@ export default function SignupPage() {
                   placeholder={t('signup.step2.passwordPlaceholder')}
                   minLength={8}
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
+                  aria-label="Password"
                 />
               </div>
 
@@ -281,7 +304,11 @@ export default function SignupPage() {
             onClick={async () => {
               setError('')
               const { error } = await signInWithGoogle()
-              if (error) setError(error.message)
+              if (error) {
+                setError(error.message)
+              } else {
+                track(EVENTS.SIGNUP_COMPLETED, { method: 'google', language })
+              }
             }}
             className="w-full py-4 bg-surface-container flex items-center justify-center gap-3 rounded-full font-label text-sm text-on-surface tracking-wide active:scale-95 transition-all flex-shrink-0"
           >

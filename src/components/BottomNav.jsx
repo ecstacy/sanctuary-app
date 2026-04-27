@@ -51,6 +51,7 @@ export default function BottomNav() {
 
   return (
     <nav
+      aria-label="Primary"
       className={`fixed bottom-0 left-0 w-full bg-background/60 backdrop-blur-2xl border-t border-outline-variant/10 px-4 pt-3 flex justify-around items-center transition-transform duration-300 ease-out ${
         visible ? 'translate-y-0' : 'translate-y-full'
       }`}
@@ -61,6 +62,8 @@ export default function BottomNav() {
         return (
           <button
             key={tab.path}
+            aria-label={tab.label}
+            aria-current={active ? 'page' : undefined}
             onClick={() => {
               if (tab.path === '/routine') {
                 navigate('/routine', { state: { routineKey: 'stress' } })
@@ -68,11 +71,12 @@ export default function BottomNav() {
                 navigate(tab.path)
               }
             }}
-            className={`flex flex-col items-center gap-1 px-4 py-2 transition-all duration-300 ${
+            className={`flex flex-col items-center gap-1 px-4 py-2 min-h-[44px] transition-all duration-300 ${
               active ? 'bg-primary-fixed rounded-full' : ''
             }`}
           >
             <span
+              aria-hidden="true"
               className={`material-symbols-outlined transition-colors duration-200 ${
                 active ? 'text-primary' : 'text-on-surface-variant/50'
               }`}

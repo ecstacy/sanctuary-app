@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { BiometricAuth } from '@aparajita/capacitor-biometric-auth'
 import GoogleIcon from '../components/GoogleIcon'
 import ErrorAlert from '../components/ErrorAlert'
+import { track, identify, EVENTS } from '../lib/track'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -57,10 +58,15 @@ export default function LoginPage() {
       }
 
       setLoading(true)
-      const { error } = await signIn({ email: savedEmail, password: savedPassword })
+      const { error, data } = await signIn({ email: savedEmail, password: savedPassword })
       if (error) {
         setError(error.message)
+        track(EVENTS.LOGIN_FAILED, { method: 'biometric', reason: 'credentials_invalid' })
         setLoading(false)
+      } else {
+        const userId = data?.user?.id
+        if (userId) identify(userId)
+        track(EVENTS.LOGIN_SUCCEEDED, { method: 'biometric' })
       }
 
     } catch (err) {
@@ -76,12 +82,17 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
 
-    const { error } = await signIn({ email, password })
+    const { error, data } = await signIn({ email, password })
     if (error) {
       setError(error.message)
+      track(EVENTS.LOGIN_FAILED, { method: 'email', reason: 'invalid_credentials' })
       setLoading(false)
       return
     }
+
+    const userId = data?.user?.id
+    if (userId) identify(userId)
+    track(EVENTS.LOGIN_SUCCEEDED, { method: 'email' })
 
     // Save credentials for future biometric login
     localStorage.setItem('sanctuary_email', email)
@@ -101,6 +112,7 @@ export default function LoginPage() {
         <button
           onClick={() => navigate('/')}
           className="text-on-surface-variant"
+          aria-label="Go back"
         >
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
@@ -133,6 +145,7 @@ export default function LoginPage() {
               placeholder="you@example.com"
               required
               className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
+              aria-label="Email address"
             />
           </div>
 
@@ -147,6 +160,7 @@ export default function LoginPage() {
               placeholder="••••••••"
               required
               className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
+              aria-label="Password"
             />
           </div>
 
@@ -182,7 +196,12 @@ export default function LoginPage() {
           onClick={async () => {
             setError('')
             const { error } = await signInWithGoogle()
-            if (error) setError(error.message)
+            if (error) {
+              setError(error.message)
+              track(EVENTS.LOGIN_FAILED, { method: 'google', reason: 'oauth_error' })
+            } else {
+              track(EVENTS.LOGIN_SUCCEEDED, { method: 'google' })
+            }
           }}
           className="w-full py-4 bg-surface-container flex items-center justify-center gap-3 rounded-full font-label text-sm text-on-surface tracking-wide active:scale-95 transition-all"
         >

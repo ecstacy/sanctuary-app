@@ -5,11 +5,13 @@ import { useAuth } from '../context/AuthContext'
 import { getRoutine, getDoshaTag, ASANAS } from '../data/asanas'
 import { useVoiceGuidance } from '../hooks/useVoiceGuidance'
 import { useAudio } from '../hooks/useAudio'
+import { buildSchedule, restNarration } from '../lib/voiceCoach'
 import { useWakeLock } from '../hooks/useWakeLock'
 import { savePracticeSession } from '../hooks/usePracticeStats'
 import PoseFigure from '../components/PoseFigure'
 import CircularTimer from '../components/CircularTimer'
 import * as analytics from '../lib/analytics'
+import { track, EVENTS } from '../lib/track'
 
 // ─── State Machine ──────────────────────────────────────────────────────────
 
@@ -90,7 +92,6 @@ export default function PracticePage() {
   // exists, closing the loop pre → session → post.
   const [preEnergy, setPreEnergy] = useState(null)
   const [preStress, setPreStress] = useState(null)
-  const [checkinOpen, setCheckinOpen] = useState(false)
   const preCheckinIdRef = useRef(null)
 
   // ── Post-practice one-tap feel-better (Chunk 14) ──
@@ -159,6 +160,13 @@ export default function PracticePage() {
   useEffect(() => {
     if (status === 'active' && timeRemaining === 0 && currentAsana) {
       audio.bell()
+      track(EVENTS.POSE_COMPLETED, {
+        pose_id:           currentAsana.id,
+        pose_index:        currentIndex,
+        pose_count:        routine.asanas.length,
+        routine_key:       routine.key,
+        duration_seconds:  currentAsana.durationSeconds,
+      })
       dispatch({
         type: 'COMPLETE_ASANA',
         id: currentAsana.id,
@@ -175,33 +183,62 @@ export default function PracticePage() {
     }
   }, [status, restTime])
 
-  // ── Voice cues ──────────────────────────────────────────────────────────
+  // ── Voice coach schedule — built once per pose, driven by tick ─────────
+  // Replaces the old fixed 4-cue effect with a richer, phase-based teacher
+  // (entry → settle → deepen → milestones → exit). See lib/voiceCoach.js.
+  const cueScheduleRef = useRef([])
   useEffect(() => {
-    if (status !== 'active' || !currentAsana) return
-    const key = `${currentIndex}`
-
-    if (!voicePlayedRef.current[key + '-enter']) {
-      voicePlayedRef.current[key + '-enter'] = true
-      voice.speak(`${currentAsana.english}. ${currentAsana.voiceCues.enter}`)
+    if (status !== 'active' || !currentAsana) {
+      cueScheduleRef.current = []
+      return
     }
+    cueScheduleRef.current = buildSchedule({
+      asana: currentAsana,
+      poseIndex: currentIndex,
+      userDosha,
+    })
+    // Pose-level analytics — runs whenever we transition into 'active' on a
+    // new pose. The combination of POSE_STARTED + POSE_COMPLETED + timing
+    // gives PostHog enough to compute per-pose drop-off and pacing.
+    track(EVENTS.POSE_STARTED, {
+      pose_id:          currentAsana.id,
+      pose_index:       currentIndex,
+      pose_count:       routine.asanas.length,
+      routine_key:      routine.key,
+      duration_seconds: currentAsana.durationSeconds,
+    })
+  }, [status, currentIndex, currentAsana?.id, userDosha])
 
-    const holdMark = Math.floor(currentAsana.durationSeconds * 0.75)
-    if (timeRemaining === holdMark && !voicePlayedRef.current[key + '-hold']) {
-      voicePlayedRef.current[key + '-hold'] = true
-      voice.speak(currentAsana.voiceCues.hold)
-    }
+  // Fire any cue whose `atRemaining` we just crossed. We compare against
+  // timeRemaining each tick; the schedule's keys are namespaced by pose so
+  // the `voicePlayedRef` set safely persists across the routine.
+  useEffect(() => {
+    if (status !== 'active') return
+    const schedule = cueScheduleRef.current
+    if (!schedule.length) return
 
-    const breatheMark = Math.floor(currentAsana.durationSeconds * 0.5)
-    if (timeRemaining === breatheMark && !voicePlayedRef.current[key + '-breathe']) {
-      voicePlayedRef.current[key + '-breathe'] = true
-      voice.speak(currentAsana.voiceCues.breathe)
+    for (const item of schedule) {
+      if (timeRemaining === item.atRemaining && !voicePlayedRef.current[item.key]) {
+        voicePlayedRef.current[item.key] = true
+        voice.speak(item.text)
+      }
     }
+  }, [status, timeRemaining])
 
-    if (timeRemaining === 8 && !voicePlayedRef.current[key + '-exit']) {
-      voicePlayedRef.current[key + '-exit'] = true
-      voice.speak(currentAsana.voiceCues.exit)
+  // Rest-period narration — announces the next pose so the user can keep
+  // their eyes closed. Speaks once, near the start of the rest, so the
+  // user has time to absorb it before the next entry cue fires.
+  useEffect(() => {
+    if (status !== 'resting' || !nextAsana) return
+    const key = `rest-${currentIndex}`
+    // Trigger on the first full tick of rest so it doesn't collide with
+    // the just-played exit cue from the prior pose.
+    if (restTime === 13 && !voicePlayedRef.current[key]) {
+      voicePlayedRef.current[key] = true
+      const text = restNarration({ nextAsana, restSeconds: restTime })
+      if (text) voice.speak(text)
     }
-  }, [status, timeRemaining, currentIndex])
+  }, [status, restTime, currentIndex, nextAsana])
 
   // ── Completion sound ────────────────────────────────────────────────────
   useEffect(() => {
@@ -223,6 +260,15 @@ export default function PracticePage() {
     const totalTime = completedAsanas.reduce((sum, a) => sum + a.actualDuration, 0)
     const completedCount = completedAsanas.filter(a => !a.skipped).length
     const skippedCount   = completedAsanas.filter(a => a.skipped).length
+
+    track(EVENTS.PRACTICE_COMPLETED, {
+      routine_key: routineKey || routine.key,
+      source: single ? 'single_asana' : 'routine',
+      completed_count: completedCount,
+      skipped_count: skippedCount,
+      total_duration_seconds: totalTime,
+      pose_count: routine.asanas.length,
+    })
 
     ;(async () => {
       const newSessionId = await savePracticeSession({
@@ -260,10 +306,23 @@ export default function PracticePage() {
     audio.init()
     audio.bell()
 
+    track(EVENTS.PRACTICE_STARTED, {
+      routine_key: routineKey || routine.key,
+      source: single ? 'single_asana' : 'routine',
+      pose_count: routine.asanas.length,
+      total_duration_seconds: routine.totalDuration,
+      has_pre_checkin: preEnergy !== null || preStress !== null,
+    })
+
     // Fire-and-forget check-in write. Never blocks the start of practice.
     // Only logs if the user actually rated at least one scale — a fully
     // unrated screen means "I just want to start" and should produce no row.
     if (user?.id && (preEnergy !== null || preStress !== null)) {
+      track(EVENTS.PRE_CHECKIN_SUBMITTED, {
+        energy_level: preEnergy,
+        stress_level: preStress,
+        routine_key: routineKey || routine.key,
+      })
       ;(async () => {
         const id = await analytics.logCheckin({
           userId:       user.id,
@@ -281,7 +340,7 @@ export default function PracticePage() {
     }
 
     dispatch({ type: 'START', duration: currentAsana.durationSeconds })
-  }, [currentAsana, audio, user?.id, preEnergy, preStress, routineKey, profile?.dosha_details?.primary])
+  }, [currentAsana, audio, user?.id, preEnergy, preStress, routineKey, routine, single, profile?.dosha_details?.primary])
 
   const handleDone = useCallback(() => {
     voice.stop()
@@ -296,19 +355,38 @@ export default function PracticePage() {
 
   const handleSkip = useCallback(() => {
     voice.stop()
+    track(EVENTS.POSE_SKIPPED, {
+      asana_id: currentAsana.id,
+      pose_index: currentIndex,
+      time_remaining: timeRemaining,
+      routine_key: routineKey || routine.key,
+    })
     dispatch({ type: 'SKIP_ASANA', id: currentAsana.id, isLast })
-  }, [currentAsana, isLast, voice])
+  }, [currentAsana, isLast, voice, currentIndex, timeRemaining, routineKey, routine])
 
   const handleRepeat = useCallback(() => {
     voicePlayedRef.current = {}
     audio.chime()
+    track(EVENTS.POSE_REPEATED, {
+      asana_id: currentAsana.id,
+      pose_index: currentIndex,
+      routine_key: routineKey || routine.key,
+    })
     dispatch({ type: 'REPEAT', duration: currentAsana.durationSeconds })
-  }, [currentAsana, audio])
+  }, [currentAsana, audio, currentIndex, routineKey, routine])
 
   const handleExit = useCallback(() => {
     voice.stop()
+    if (status === 'active' || status === 'resting') {
+      track(EVENTS.PRACTICE_ABANDONED, {
+        routine_key: routineKey || routine.key,
+        source: single ? 'single_asana' : 'routine',
+        last_asana_index: currentIndex,
+        time_elapsed: totalElapsed,
+      })
+    }
     navigate(-1)
-  }, [navigate, voice])
+  }, [navigate, voice, status, routineKey, routine, single, currentIndex, totalElapsed])
 
   // ── Post-practice feel-better tap (Chunk 14) ───────────────────────────
   // Single tap: pick worse / same / better. We normalize to -1 | 0 | 1 and
@@ -319,6 +397,11 @@ export default function PracticePage() {
     if (postSubmitted) return
     setPostFeel(value)
     setPostSubmitted(true)
+    track(EVENTS.POST_CHECKIN_SUBMITTED, {
+      feel_value: value,
+      feel_label: label,
+      routine_key: routineKey || routine.key,
+    })
 
     if (!user?.id) return
 
@@ -419,54 +502,37 @@ export default function PracticePage() {
             </p>
           </div>
 
-          {/* ── Compact optional check-in (collapsed by default) ── */}
-          <div className="pb-4 stagger-4">
-            {!checkinOpen ? (
-              <button
-                onClick={() => setCheckinOpen(true)}
-                className="w-full flex items-center justify-between px-4 py-3 bg-surface-container-low rounded-full active:scale-[0.98] transition-all"
-              >
-                <span className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary text-base">tune</span>
-                  <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">
-                    Quick check-in · optional
-                  </span>
-                </span>
-                <span className="material-symbols-outlined text-on-surface-variant/50 text-base">expand_more</span>
-              </button>
-            ) : (
-              <div className="bg-surface-container-low rounded-2xl p-4 space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Before you begin</span>
-                  <button
-                    onClick={() => setCheckinOpen(false)}
-                    aria-label="Collapse check-in"
-                    className="w-6 h-6 rounded-full flex items-center justify-center text-on-surface-variant/60"
-                  >
-                    <span className="material-symbols-outlined text-sm">expand_less</span>
-                  </button>
-                </div>
-                <CheckinScale
-                  question="Energy"
-                  loLabel="Drained"
-                  hiLabel="Energized"
-                  value={preEnergy}
-                  onChange={setPreEnergy}
-                  ariaPrefix="Energy level"
-                  stagger=""
-                />
-                <CheckinScale
-                  question="Body"
-                  loLabel="Relaxed"
-                  hiLabel="Tense"
-                  value={preStress}
-                  onChange={setPreStress}
-                  ariaPrefix="Body tension level"
-                  stagger=""
-                />
-              </div>
-            )}
-          </div>
+          {/* ── Inline check-in — always visible to maximize the chance the
+               user actually answers (collapsed accordions are mostly ignored
+               and starve the analytics that personalize the experience).
+               Styled minimally — quiet header, no card chrome — so it reads
+               as part of the pre-practice ritual rather than a form. ── */}
+          <section
+            aria-label="Quick check-in, optional"
+            className="pb-4 space-y-5 stagger-4"
+          >
+            <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-[0.2em] text-center">
+              How do you feel? <span className="text-on-surface-variant/40">· optional</span>
+            </p>
+            <CheckinScale
+              question="Energy"
+              loLabel="Drained"
+              hiLabel="Energized"
+              value={preEnergy}
+              onChange={setPreEnergy}
+              ariaPrefix="Energy level"
+              stagger=""
+            />
+            <CheckinScale
+              question="Body"
+              loLabel="Relaxed"
+              hiLabel="Tense"
+              value={preStress}
+              onChange={setPreStress}
+              ariaPrefix="Body tension level"
+              stagger=""
+            />
+          </section>
         </div>
 
         {/* Spacer so scrollable content never hides under the floating CTA */}
@@ -700,15 +766,36 @@ export default function PracticePage() {
           <span className="material-symbols-outlined text-xl">close</span>
         </button>
         {single ? (
-          <span className="font-label text-xs text-on-surface-variant uppercase tracking-widest">Single Asana</span>
+          // Pose name is already huge on the canvas below — no need for a
+          // header label. An empty span keeps the close/voice/pause buttons
+          // balanced via the parent's space-between layout.
+          <span aria-hidden="true" />
         ) : (
           <span className="font-label text-xs text-on-surface-variant">{currentIndex + 1} / {routine.asanas.length}</span>
         )}
         <div className="flex items-center gap-3">
-          <button onClick={voice.toggle} className="text-on-surface-variant" aria-label="Toggle voice">
+          <button
+            onClick={() => {
+              track(EVENTS.VOICE_TOGGLED, { enabled: !voice.enabled, phase: 'active' })
+              voice.toggle()
+            }}
+            className="text-on-surface-variant"
+            aria-label="Toggle voice"
+          >
             <span className="material-symbols-outlined text-xl">{voice.enabled ? 'volume_up' : 'volume_off'}</span>
           </button>
-          <button onClick={() => dispatch({ type: 'PAUSE' })} className="text-on-surface-variant" aria-label={isPaused ? 'Resume' : 'Pause'}>
+          <button
+            onClick={() => {
+              track(isPaused ? EVENTS.PRACTICE_RESUMED : EVENTS.PRACTICE_PAUSED, {
+                pose_index:             currentIndex,
+                routine_key:            routine.key,
+                time_remaining_seconds: timeRemaining,
+              })
+              dispatch({ type: 'PAUSE' })
+            }}
+            className="text-on-surface-variant"
+            aria-label={isPaused ? 'Resume' : 'Pause'}
+          >
             <span className="material-symbols-outlined text-xl">{isPaused ? 'play_arrow' : 'pause'}</span>
           </button>
         </div>
@@ -736,12 +823,21 @@ export default function PracticePage() {
       <div className="flex-1 flex flex-col items-center justify-center px-6 min-h-0 overflow-y-auto">
         {!showInfo ? (
           <>
-            <div className="mb-3">
-              <PoseFigure poseKey={currentAsana.poseKey} size="lg" breathing={!isPaused} variant="video" />
+            {/* Hero pose canvas — scales with viewport so it fills the
+                available space on bigger phones while never going wider than
+                the column. Improves form visibility, the whole point of
+                practicing along to a video. */}
+            <div className="mb-4 w-full flex justify-center">
+              <PoseFigure
+                poseKey={currentAsana.poseKey}
+                size={Math.min(360, typeof window !== 'undefined' ? window.innerWidth - 48 : 320)}
+                breathing={!isPaused}
+                variant="video"
+              />
             </div>
-            <h2 className="font-headline text-xl text-on-surface text-center mb-0.5">{currentAsana.sanskrit}</h2>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{currentAsana.english}</p>
-            <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={120} />
+            <h2 className="font-headline text-2xl text-on-surface text-center mb-0.5">{currentAsana.sanskrit}</h2>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">{currentAsana.english}</p>
+            <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={140} />
           </>
         ) : (
           <div className="w-full max-w-sm overflow-y-auto px-1 py-2" style={{ maxHeight: '55vh' }}>
@@ -796,32 +892,60 @@ export default function PracticePage() {
         )}
       </div>
 
-      {/* ── Bottom controls — pinned ── */}
-      <div className="px-5 pt-2 pb-5 flex-shrink-0 bg-background">
-        <button
-          onClick={() => dispatch({ type: 'TOGGLE_INFO' })}
-          className="w-full flex items-center justify-center gap-1.5 py-1.5 mb-2"
-        >
-          <span className="material-symbols-outlined text-on-surface-variant text-sm">{showInfo ? 'visibility_off' : 'info'}</span>
-          <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
-            {showInfo ? 'Show Pose' : 'Why This Pose'}
-          </span>
-        </button>
+      {/* Spacer so the timer + "Why This Pose" link never get covered by the
+          floating control bar below. ~120px = bar height + safe area. */}
+      <div className="flex-shrink-0" style={{ height: 'calc(120px + env(safe-area-inset-bottom))' }} />
 
-        <div className="flex gap-3">
-          <button onClick={handleSkip} className="flex-1 py-3 bg-surface-container rounded-full font-label text-xs text-on-surface-variant uppercase tracking-widest active:scale-95 transition-all flex items-center justify-center gap-1">
-            <span className="material-symbols-outlined text-sm">skip_next</span>
-            Skip
+      {/* ── Floating bottom controls — portaled past PageTransition's
+           transform containing block so position:fixed actually pins to
+           the viewport on Android. Replaces the previously-flex-pinned bar
+           which was being clipped on shorter viewports. ── */}
+      {createPortal(
+        <div
+          className="px-5 pt-2 bg-background/85 backdrop-blur-xl border-t border-outline-variant/10"
+          style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            zIndex: 50,
+            paddingBottom: 'max(0.875rem, env(safe-area-inset-bottom))',
+          }}
+        >
+          <button
+            onClick={() => {
+              if (!showInfo) {
+                track(EVENTS.WHY_THIS_POSE_OPENED, {
+                  asana_id: currentAsana.id,
+                  pose_index: currentIndex,
+                })
+              }
+              dispatch({ type: 'TOGGLE_INFO' })
+            }}
+            className="w-full flex items-center justify-center gap-1.5 py-1.5 mb-2"
+          >
+            <span className="material-symbols-outlined text-on-surface-variant text-sm">{showInfo ? 'visibility_off' : 'info'}</span>
+            <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+              {showInfo ? 'Show Pose' : 'Why This Pose'}
+            </span>
           </button>
-          <button onClick={handleRepeat} className="py-3 px-4 bg-surface-container rounded-full active:scale-95 transition-all flex items-center justify-center">
-            <span className="material-symbols-outlined text-on-surface-variant text-sm">replay</span>
-          </button>
-          <button onClick={handleDone} className="flex-1 py-3 bg-primary text-on-primary rounded-full font-label text-xs font-semibold uppercase tracking-widest active:scale-95 transition-all flex items-center justify-center gap-1">
-            <span className="material-symbols-outlined text-sm">check</span>
-            Done
-          </button>
-        </div>
-      </div>
+
+          <div className="flex gap-3">
+            <button onClick={handleSkip} className="flex-1 py-3 bg-surface-container rounded-full font-label text-xs text-on-surface-variant uppercase tracking-widest active:scale-95 transition-all flex items-center justify-center gap-1">
+              <span className="material-symbols-outlined text-sm">skip_next</span>
+              Skip
+            </button>
+            <button onClick={handleRepeat} className="py-3 px-4 bg-surface-container rounded-full active:scale-95 transition-all flex items-center justify-center" aria-label="Repeat practice">
+              <span className="material-symbols-outlined text-on-surface-variant text-sm">replay</span>
+            </button>
+            <button onClick={handleDone} className="flex-1 py-3 bg-primary text-on-primary rounded-full font-label text-xs font-semibold uppercase tracking-widest active:scale-95 transition-all flex items-center justify-center gap-1">
+              <span className="material-symbols-outlined text-sm">check</span>
+              Done
+            </button>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   )
 }

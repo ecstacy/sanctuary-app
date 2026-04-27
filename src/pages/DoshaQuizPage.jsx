@@ -1,7 +1,8 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
+import { track, EVENTS } from '../lib/track'
 
 // ─── Quiz Data ───────────────────────────────────────────────────────────────
 
@@ -267,6 +268,31 @@ export default function DoshaQuizPage() {
   const [saving, setSaving] = useState(false)
   const [calcStep, setCalcStep] = useState(0)
 
+  // ── Abandonment tracking ──────────────────────────────────────────────
+  // Fires `dosha_quiz_abandoned` on unmount if the user left mid-quiz
+  // (intro counts as "looked but didn't start", so we only fire from the
+  // quiz phase onward, and never if they reached calculating/result).
+  // Refs (not state) so the latest values are visible inside the cleanup.
+  const phaseRef    = useRef(phase)
+  const currentQRef = useRef(currentQ)
+  const startedAtRef = useRef(null)
+  useEffect(() => { phaseRef.current = phase }, [phase])
+  useEffect(() => { currentQRef.current = currentQ }, [currentQ])
+  useEffect(() => {
+    startedAtRef.current = Date.now()   // lazy-init avoids impure-call-in-render lint
+    return () => {
+      const lastPhase = phaseRef.current
+      if (lastPhase === 'quiz') {
+        const startedAt = startedAtRef.current ?? Date.now()
+        track(EVENTS.DOSHA_QUIZ_ABANDONED, {
+          last_question_index: currentQRef.current,
+          progress_pct:        Math.round((currentQRef.current / QUESTIONS.length) * 100),
+          seconds_in:          Math.round((Date.now() - startedAt) / 1000),
+        })
+      }
+    }
+  }, [])
+
   const question = QUESTIONS[currentQ]
   const totalQuestions = QUESTIONS.length
   const progress = (currentQ / totalQuestions) * 100
@@ -284,6 +310,12 @@ export default function DoshaQuizPage() {
     const newAnswers = { ...answers, [currentQ]: dosha }
     setAnswers(newAnswers)
 
+    track(EVENTS.DOSHA_QUIZ_QUESTION_ANSWERED, {
+      question_index: currentQ,
+      category: QUESTIONS[currentQ]?.category,
+      dosha_selected: dosha,
+    })
+
     setTimeout(() => {
       if (currentQ < totalQuestions - 1) {
         setCurrentQ(prev => prev + 1)
@@ -293,6 +325,13 @@ export default function DoshaQuizPage() {
         // Quiz complete — calculate and show animation
         const calcResult = calculateDosha(newAnswers)
         setDoshaResult(calcResult)
+        track(EVENTS.DOSHA_QUIZ_COMPLETED, {
+          primary_dosha: calcResult.primary,
+          dosha_label: calcResult.label,
+          vata_pct: calcResult.percentages.vata,
+          pitta_pct: calcResult.percentages.pitta,
+          kapha_pct: calcResult.percentages.kapha,
+        })
         setPhase('calculating')
         setAnimating(false)
       }
@@ -389,7 +428,7 @@ export default function DoshaQuizPage() {
 
         {/* Top bar */}
         <div className="flex items-center justify-between px-6 py-5 flex-shrink-0">
-          <button onClick={() => navigate(-1)} className="text-on-surface-variant">
+          <button onClick={() => navigate(-1)} className="text-on-surface-variant" aria-label="Go back">
             <span className="material-symbols-outlined text-xl">arrow_back</span>
           </button>
           <span className="font-headline italic text-primary text-base">The Sanctuary</span>
@@ -438,7 +477,10 @@ export default function DoshaQuizPage() {
 
           {/* CTA */}
           <button
-            onClick={() => setPhase('quiz')}
+            onClick={() => {
+              track(EVENTS.DOSHA_QUIZ_STARTED)
+              setPhase('quiz')
+            }}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
           >
             Discover My Dosha
@@ -695,7 +737,10 @@ export default function DoshaQuizPage() {
 
           {/* Save button */}
           <button
-            onClick={saveDosha}
+            onClick={() => {
+              track(EVENTS.CTA_CLICKED, { cta_id: 'dosha_save', primary_dosha: doshaResult?.primary })
+              saveDosha()
+            }}
             disabled={saving}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mb-3 animate-quiz-slide-up"
             style={{ animationDelay: '0.31s' }}
@@ -728,7 +773,7 @@ export default function DoshaQuizPage() {
 
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-4 flex-shrink-0">
-        <button onClick={handleBack} className="text-on-surface-variant">
+        <button onClick={handleBack} className="text-on-surface-variant" aria-label="Previous question">
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
         <div className="flex items-center gap-2">

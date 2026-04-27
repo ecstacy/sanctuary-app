@@ -313,7 +313,7 @@ Savasana (Corpse Pose), lying flat on her back centered on the mat. Head toward 
 
 **🎬 Kling motion prompt:**  *(upload the Savasana peak image as the start frame — and end frame, if supported — instead of Tadasana)*
 ```
-The subject holds this exact Corpse Pose position for the full 5 seconds. The only motion is slow, subtle breath — one full breath cycle, visible as a gentle rise and fall of the chest and belly. No change in limb position, feet remain fallen naturally outward, arms remain palms up alongside the body, shoulders stay melted down. Eyes remain softly closed, face at rest. Static camera. Seamless loop — final frame identical to the first.
+The subject holds this exact Corpse Pose position for the full 5 seconds. The only motion is slow, subtle breath — one full breath cycle, visible as a gentle rise and fall of the chest and belly. No change in limb position, feet remain fallen naturally outward, arms remain palms up alongside the body, shoulders stay melted down. Eyes remain softly CLOSED, face at rest. Static camera. Seamless loop — final frame identical to the first. Don't open the eyes.
 ```
 
 ---

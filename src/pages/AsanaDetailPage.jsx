@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
 import { ASANAS, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
+import useScrollDepth from '../hooks/useScrollDepth'
 
 const DOSHA_INFO = {
   vata: { label: 'Vata', icon: 'air', color: 'text-[#7b93a8]', bg: 'bg-[#7b93a8]/10' },
@@ -148,6 +149,7 @@ export default function AsanaDetailPage() {
   const navigate = useNavigate()
   const { profile } = useAuth()
   const asana = ASANAS[id]
+  useScrollDepth('asana_detail')
 
   if (!asana) {
     return (
@@ -217,6 +219,7 @@ export default function AsanaDetailPage() {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0"
+            aria-label="Scroll to top"
           >
             <span className="material-symbols-outlined text-on-surface-variant text-sm">expand_less</span>
           </button>
@@ -228,7 +231,7 @@ export default function AsanaDetailPage() {
       <div ref={heroRef} className="relative bg-primary-container/20 pb-6">
         {/* Back button */}
         <div className="flex items-center justify-between px-4 pt-3 pb-2">
-          <button onClick={() => navigate(-1)} className="w-10 h-10 rounded-full bg-surface/80 flex items-center justify-center active:scale-90 transition-all">
+          <button onClick={() => navigate(-1)} className="w-10 h-10 rounded-full bg-surface/80 flex items-center justify-center active:scale-90 transition-all" aria-label="Go back">
             <span className="material-symbols-outlined text-on-surface text-lg">arrow_back</span>
           </button>
           <div className="flex gap-2">

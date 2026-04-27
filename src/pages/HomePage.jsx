@@ -3,10 +3,30 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getRoutine, ASANAS } from '../data/asanas'
 import usePracticeStats from '../hooks/usePracticeStats'
+import useScrollDepth from '../hooks/useScrollDepth'
+import useImpression from '../hooks/useImpression'
 import useVikritiSchedule from '../hooks/useVikritiSchedule'
 import PoseFigure from '../components/PoseFigure'
 import * as analytics from '../lib/analytics'
 import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
+import { track, screen, setSuperProps, EVENTS } from '../lib/track'
+
+// Mirror of YOGI_LEVELS in JourneyPage; kept tiny here to avoid a cross-page
+// import for a 7-row lookup. If this list ever changes there, update both.
+const LEVEL_THRESHOLDS = [
+  { level: 1, minMinutes: 0 },
+  { level: 2, minMinutes: 60 },
+  { level: 3, minMinutes: 300 },
+  { level: 4, minMinutes: 900 },
+  { level: 5, minMinutes: 1800 },
+  { level: 6, minMinutes: 3600 },
+  { level: 7, minMinutes: 7200 },
+]
+function levelFor(totalMinutes) {
+  let lvl = 1
+  for (const t of LEVEL_THRESHOLDS) if (totalMinutes >= t.minMinutes) lvl = t.level
+  return lvl
+}
 
 
 const CHECKIN_OPTIONS = [
@@ -146,6 +166,43 @@ export default function HomePage() {
   const stats = usePracticeStats()
   const vikriti = useVikritiSchedule()
 
+  useEffect(() => {
+    screen('home', { time_of_day: getTimeOfDay() })
+  }, [])
+
+  useScrollDepth('home')
+
+  // ── Push practice stats into PostHog super-properties ────────────────
+  // AuthContext sets identity-level props (dosha, platform). Stats live
+  // behind usePracticeStats which we already mount here, so HomePage is
+  // the natural home for refreshing experience_minutes / streak / level
+  // on every fresh stats load. Rounding minutes to the nearest 5 keeps
+  // the value cardinality low for cohort analysis.
+  useEffect(() => {
+    if (stats.loading) return
+    const totalMinutes = stats.totalMinutes ?? 0
+    setSuperProps({
+      experience_minutes: Math.round(totalMinutes / 5) * 5,
+      streak_days:        stats.streak ?? 0,
+      experience_level:   levelFor(totalMinutes),
+    })
+  }, [stats.loading, stats.totalMinutes, stats.streak])
+
+  // ── Vikriti prompt impression ─────────────────────────────────────────
+  // Fires `vikriti_prompt_shown` once per HomePage visit when the prompt
+  // card is rendered. Pair with `vikriti_started` from the quiz to compute
+  // prompt-to-quiz CTR; pair with `vikriti_completed` for end-to-end.
+  const vikritiPromptShownRef = useRef(false)
+  useEffect(() => {
+    if (vikritiPromptShownRef.current) return
+    if (vikriti.loading || !vikriti.isDue || !vikriti.hasPrakriti) return
+    vikritiPromptShownRef.current = true
+    track(EVENTS.VIKRITI_PROMPT_SHOWN, {
+      days_since_last: vikriti.daysSinceLast === Infinity ? null : vikriti.daysSinceLast,
+      vikriti_count:   vikriti.vikritiCount,
+    })
+  }, [vikriti.loading, vikriti.isDue, vikriti.hasPrakriti, vikriti.daysSinceLast, vikriti.vikritiCount])
+
   // When we return from /vikriti after a save, the schedule hook's cached
   // state is still pre-save (no row yet → isDue=true) so the prompt card
   // sticks on screen. The quiz page passes location.state.vikritiSavedAt
@@ -196,6 +253,15 @@ export default function HomePage() {
     return { asana: ASANAS.supinetwist, rules, userDosha }
   }
   const { asana: suggestedAsana, rules: suggestedAsanaRules, userDosha: suggestedAsanaUserDosha } = pickAsana()
+
+  // Impression ref for the suggested-asana card. Fires `content_impression`
+  // once the card has been ≥50% visible for 1s — the CTR denominator we'll
+  // pair with `asana_card_tapped` from the click handler.
+  const suggestedAsanaImpressionRef = useImpression({
+    surface:     'home_suggested_asana',
+    contentType: 'asana',
+    contentId:   suggestedAsana?.id,
+  })
 
   const ASANA_CONTEXT = {
     morning: 'Start your day grounded',
@@ -259,6 +325,7 @@ export default function HomePage() {
         <button
           onClick={() => navigate('/profile')}
           className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center"
+          aria-label="Open profile"
         >
           <span className="material-symbols-outlined text-on-surface-variant text-lg">person</span>
         </button>
@@ -395,6 +462,7 @@ export default function HomePage() {
               }}
               placeholder="Lower back pain, headache..."
               className="w-full bg-background rounded-full pl-10 pr-10 py-3 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
+              aria-label="Search"
             />
             {searchQuery.length > 0 && (
               <button
@@ -402,6 +470,7 @@ export default function HomePage() {
                   if (searchQuery.trim().length >= 2) navigate('/recommendations', { state: { query: searchQuery.trim(), source: analytics.SEARCH_SOURCES.HOME_SEARCH } })
                 }}
                 className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-primary flex items-center justify-center active:scale-90 transition-all"
+                aria-label="Search"
               >
                 <span className="material-symbols-outlined text-on-primary text-sm">arrow_forward</span>
               </button>
@@ -431,7 +500,10 @@ export default function HomePage() {
           </div>
           {checkedIn && (
             <button
-              onClick={() => navigate('/routine', { state: { routineKey } })}
+              onClick={() => {
+                track(EVENTS.CTA_CLICKED, { cta_id: 'home_get_practice', routine_key: routineKey, checkin: checkedIn })
+                navigate('/routine', { state: { routineKey } })
+              }}
               className="w-full mt-4 py-3 bg-primary text-on-primary rounded-full font-label text-xs font-semibold tracking-wide active:scale-95 transition-all"
             >
               Get My Practice
@@ -445,6 +517,7 @@ export default function HomePage() {
             Pick up where you left off
           </h3>
           <button
+            ref={suggestedAsanaImpressionRef}
             onClick={handleSuggestedAsanaClick}
             className="bg-surface-container rounded-xl p-5 flex items-center gap-4 w-full border border-primary-container/40 text-left active:scale-[0.98] transition-all"
           >
@@ -462,7 +535,10 @@ export default function HomePage() {
 
         {/* ── Daily Ritual — Breathing (redesigned with staggered breath rings) ── */}
         <button
-          onClick={() => navigate('/practice/asana/mindfulRespiration')}
+          onClick={() => {
+            track(EVENTS.CTA_CLICKED, { cta_id: 'home_breathwork', asana_id: 'mindfulRespiration' })
+            navigate('/practice/asana/mindfulRespiration')
+          }}
           className="relative overflow-hidden bg-gradient-to-br from-primary-container/60 via-surface-container-low to-primary-container/30 rounded-2xl p-5 stagger-4 active:scale-[0.98] transition-all w-full text-left border border-primary-container/50"
         >
           <div className="flex items-center gap-4">
@@ -601,26 +677,30 @@ export default function HomePage() {
                   </p>
                 )}
 
-                {/* Vikriti delta — subtle pill that reads "This week: elevated Vata" or "In rhythm" */}
-                {hasDosha && vikritiPrimary && (
-                  <div className="inline-flex items-center gap-1.5 mb-4 px-2.5 py-1 bg-white/15 backdrop-blur-sm rounded-full">
-                    <span className="material-symbols-outlined text-[12px] opacity-80">
-                      {hasShifted ? 'trending_up' : 'check_circle'}
+                {/* Pill row — status badge + CTA. Wrap in a flex container
+                    with explicit gap so they never touch on narrow screens
+                    and align consistently when both are present. */}
+                <div className="flex flex-wrap items-center gap-2">
+                  {hasDosha && vikritiPrimary && (
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/15 backdrop-blur-sm rounded-full">
+                      <span className="material-symbols-outlined text-[12px] opacity-80" aria-hidden="true">
+                        {hasShifted ? 'trending_up' : 'check_circle'}
+                      </span>
+                      <span className="font-label text-[10px] tracking-wide opacity-90">
+                        {hasShifted
+                          ? `This week: elevated ${DOSHA_LABELS[vikritiPrimary]}`
+                          : 'In rhythm this week'}
+                      </span>
                     </span>
-                    <span className="font-label text-[10px] tracking-wide opacity-90">
-                      {hasShifted
-                        ? `This week: elevated ${DOSHA_LABELS[vikritiPrimary]}`
-                        : 'In rhythm this week'}
-                    </span>
-                  </div>
-                )}
+                  )}
 
-                <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full font-label text-xs tracking-wide">
-                  {hasDosha
-                    ? (hasShifted ? 'See how to rebalance' : 'Explore my Dosha')
-                    : 'Take the quiz'}
-                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                </span>
+                  <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full font-label text-xs tracking-wide">
+                    {hasDosha
+                      ? (hasShifted ? 'See how to rebalance' : 'Explore my Dosha')
+                      : 'Take the quiz'}
+                    <span className="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span>
+                  </span>
+                </div>
               </div>
             </button>
           )

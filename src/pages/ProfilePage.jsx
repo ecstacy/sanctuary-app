@@ -6,8 +6,10 @@ import { supabase } from '../lib/supabase'
 import i18n from '../i18n'
 import { SUPPORTED_LANGUAGES, writeStoredLanguage } from '../i18n/detect'
 import useConsent from '../hooks/useConsent'
+import useScrollDepth from '../hooks/useScrollDepth'
 import { exportUserData } from '../lib/dataExport'
 import { deleteAllUserData } from '../lib/accountDeletion'
+import { track, reset as resetAnalytics, EVENTS } from '../lib/track'
 
 import GoogleIcon from '../components/GoogleIcon'
 
@@ -16,6 +18,7 @@ export default function ProfilePage() {
   const { t } = useTranslation()
   const { user, profile, signOut, refreshProfile } = useAuth()
   const fileInputRef = useRef(null)
+  useScrollDepth('profile')
 
   // ── Language switcher state ──
   const [languagePickerOpen, setLanguagePickerOpen] = useState(false)
@@ -38,6 +41,7 @@ export default function ProfilePage() {
     setExporting(true)
     setExportStatus(null)
     const result = await exportUserData(user.id)
+    track(EVENTS.DATA_EXPORTED, { ok: result.ok })
     setExportStatus(result.ok ? 'done' : 'error')
     setExporting(false)
     // Clear the confirmation line after a few seconds so the row returns
@@ -48,7 +52,17 @@ export default function ProfilePage() {
   async function handleConfirmDelete() {
     if (deleting) return
     setDeleting(true)
+    // Fire the event BEFORE we delete + reset analytics. After
+    // resetAnalytics() runs, distinct_id is gone and PostHog can't
+    // attribute the deletion event to the right person.
+    track(EVENTS.ACCOUNT_DELETED, {})
     const result = await deleteAllUserData(user.id)
+    // Drop our local analytics identity so the next anon session can't
+    // be back-joined to the deleted user. PostHog also exposes a GDPR
+    // delete-person endpoint server-side; the recommended pattern is
+    // to call it from a Supabase Edge Function on user-deletion (TODO,
+    // see docs/analytics-events.md §7). For now this clears the device.
+    resetAnalytics()
     setDeleteResult(result)
     setDeleting(false)
     // Whatever happened, the user is signed out inside deleteAllUserData.
@@ -60,8 +74,18 @@ export default function ProfilePage() {
   }
 
   async function handleToggleAggregate(next) {
+    // Fire the event BEFORE flipping the flag if we're turning OFF, so
+    // the analytics layer is still alive and the event actually lands.
+    // When turning ON, the flag must flip first or the event itself is
+    // gated out — so we fire after.
+    if (!next) {
+      track(EVENTS.CONSENT_CHANGED, { kind: 'aggregate', granted: false })
+    }
     // 1. Flip the local, sticky state first — UI reacts instantly.
     const updated = setAggregate(next)
+    if (next) {
+      track(EVENTS.CONSENT_CHANGED, { kind: 'aggregate', granted: true })
+    }
     // 2. Best-effort mirror to the profile row so the choice follows the
     //    user across devices. Tolerates a missing column gracefully.
     try {
@@ -316,6 +340,7 @@ export default function ProfilePage() {
         <button
           onClick={() => navigate('/home')}
           className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center"
+          aria-label="Close profile"
         >
           <span className="material-symbols-outlined text-on-surface-variant text-lg">close</span>
         </button>
@@ -345,6 +370,7 @@ export default function ProfilePage() {
               onClick={() => fileInputRef.current?.click()}
               disabled={uploadingPhoto}
               className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-primary flex items-center justify-center shadow-md active:scale-90 transition-all disabled:opacity-50"
+              aria-label="Upload profile photo"
             >
               {uploadingPhoto ? (
                 <div className="w-4 h-4 border-2 border-on-primary border-t-transparent rounded-full animate-spin" />
@@ -375,11 +401,13 @@ export default function ProfilePage() {
                 autoFocus
                 maxLength={60}
                 className="flex-1 bg-surface-container-low rounded-xl px-4 py-2.5 text-center font-headline text-xl text-on-surface outline-none focus:ring-1 focus:ring-primary/30 transition-all"
+                aria-label="Display name"
               />
               <button
                 onClick={handleSaveName}
                 disabled={savingName}
                 className="w-10 h-10 rounded-full bg-primary flex items-center justify-center active:scale-90 transition-all disabled:opacity-50"
+                aria-label="Save name"
               >
                 {savingName ? (
                   <div className="w-4 h-4 border-2 border-on-primary border-t-transparent rounded-full animate-spin" />
@@ -390,6 +418,7 @@ export default function ProfilePage() {
               <button
                 onClick={() => { setEditingName(false); setNameValue(fullName) }}
                 className="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center active:scale-90 transition-all"
+                aria-label="Cancel"
               >
                 <span className="material-symbols-outlined text-on-surface-variant text-sm">close</span>
               </button>
@@ -571,7 +600,7 @@ export default function ProfilePage() {
             <div className="px-5 py-4">
               <div className="flex items-center justify-between mb-4">
                 <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Change Password</p>
-                <button onClick={resetPasswordForm} className="text-on-surface-variant/40 active:scale-90 transition-all">
+                <button onClick={resetPasswordForm} className="text-on-surface-variant/40 active:scale-90 transition-all" aria-label="Close password form">
                   <span className="material-symbols-outlined text-sm">close</span>
                 </button>
               </div>
@@ -584,11 +613,13 @@ export default function ProfilePage() {
                   onChange={e => setCurrentPassword(e.target.value)}
                   placeholder="Current password"
                   className="w-full bg-surface-container-low rounded-xl px-4 py-3 pr-11 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
+                  aria-label="Current password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowCurrentPw(!showCurrentPw)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant/30"
+                  aria-label="Toggle password visibility"
                 >
                   <span className="material-symbols-outlined text-lg">{showCurrentPw ? 'visibility_off' : 'visibility'}</span>
                 </button>
@@ -602,11 +633,13 @@ export default function ProfilePage() {
                   onChange={e => setNewPassword(e.target.value)}
                   placeholder="New password"
                   className="w-full bg-surface-container-low rounded-xl px-4 py-3 pr-11 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
+                  aria-label="New password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowNewPw(!showNewPw)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant/30"
+                  aria-label="Toggle password visibility"
                 >
                   <span className="material-symbols-outlined text-lg">{showNewPw ? 'visibility_off' : 'visibility'}</span>
                 </button>
@@ -620,6 +653,7 @@ export default function ProfilePage() {
                   onChange={e => setConfirmPassword(e.target.value)}
                   placeholder="Confirm new password"
                   className="w-full bg-surface-container-low rounded-xl px-4 py-3 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
+                  aria-label="Confirm new password"
                 />
               </div>
 
@@ -730,6 +764,29 @@ export default function ProfilePage() {
               <p className="font-body text-[11px] text-on-surface-variant/60 italic pt-1">
                 {t('profile.privacy.changeAnytime')}
               </p>
+
+              {/* Vendor disclosure — required by EAA/GDPR. Names the
+                  processor, where the data lives, and links to their
+                  privacy policy so the user can read the full DPA. */}
+              <div className="pt-2 border-t border-outline-variant/15">
+                <p className="font-label text-[10px] text-on-surface-variant/70 uppercase tracking-wider mb-1.5">
+                  Analytics provider
+                </p>
+                <p className="font-body text-[12px] text-on-surface-variant leading-relaxed">
+                  Aggregate analytics are processed by{' '}
+                  <a
+                    href="https://posthog.com/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline underline-offset-2"
+                  >
+                    PostHog
+                  </a>
+                  {' '}on EU-hosted infrastructure (Frankfurt). No PII is sent;
+                  events use a per-install pseudonymous id. Turn the toggle
+                  above off at any time and we stop sending anything.
+                </p>
+              </div>
             </div>
           )}
         </div>
@@ -745,6 +802,7 @@ export default function ProfilePage() {
             onClick={handleExport}
             disabled={exporting}
             className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high w-full text-left active:bg-surface-container-high/50 transition-colors disabled:opacity-60"
+            aria-label="Export your data"
           >
             <span className="material-symbols-outlined text-on-surface-variant text-lg">download</span>
             <div className="flex-1 min-w-0">
@@ -850,6 +908,7 @@ export default function ProfilePage() {
                     value={deleteConfirmText}
                     onChange={e => setDeleteConfirmText(e.target.value)}
                     placeholder={t('profile.yourData.deleteConfirmPlaceholder')}
+                    aria-label="Type DELETE to confirm"
                     autoFocus
                     autoCapitalize="characters"
                     className="w-full bg-surface-container-low rounded-lg px-4 py-3 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-error/40 transition-all placeholder:text-on-surface-variant/35"

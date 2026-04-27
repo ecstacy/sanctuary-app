@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
 import { getRoutine, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
+import { track, EVENTS } from '../lib/track'
 
 
 function formatDuration(seconds) {
@@ -58,7 +59,10 @@ export default function RoutinePage() {
             <span className="material-symbols-outlined text-white text-lg">arrow_back</span>
           </button>
           <button
-            onClick={() => navigate('/discover')}
+            onClick={() => {
+              track(EVENTS.ROUTINE_SWITCHED, { from_routine: routineKey })
+              navigate('/discover')
+            }}
             className="flex items-center gap-1.5 h-9 px-4 rounded-full bg-white/20 backdrop-blur-sm text-white active:scale-95 transition-all"
           >
             <span className="material-symbols-outlined text-base">swap_horiz</span>

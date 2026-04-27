@@ -3,11 +3,13 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { searchRecommendations, POPULAR_SEARCHES } from '../data/recommendations'
 import * as analytics from '../lib/analytics'
+import useScrollDepth from '../hooks/useScrollDepth'
 
 export default function RecommendationsPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const inputRef = useRef(null)
+  useScrollDepth('recommendations')
   const { profile, user } = useAuth()
   const gender = profile?.gender || null
 
@@ -135,7 +137,7 @@ export default function RecommendationsPage() {
 
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-5">
-        <button onClick={() => navigate('/home')} className="text-on-surface-variant">
+        <button onClick={() => navigate('/home')} className="text-on-surface-variant" aria-label="Go back">
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
         <span className="font-headline italic text-primary text-base">The Sanctuary</span>
@@ -157,11 +159,13 @@ export default function RecommendationsPage() {
             onKeyDown={handleKeyDown}
             placeholder="Describe what you're feeling..."
             className="w-full bg-surface-container rounded-full pl-11 pr-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container-high transition-colors placeholder:text-on-surface-variant/40"
+            aria-label="Search recommendations"
           />
           {query.length > 0 && (
             <button
               onClick={() => { setQuery(''); setResults([]); setHasSearched(false); inputRef.current?.focus() }}
               className="absolute right-4 top-1/2 -translate-y-1/2"
+              aria-label="Clear search"
             >
               <span className="material-symbols-outlined text-on-surface-variant/40 text-lg">close</span>
             </button>

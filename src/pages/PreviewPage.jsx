@@ -62,6 +62,7 @@ export default function PreviewPage() {
         <button
           onClick={() => navigate('/discover')}
           className="text-on-surface-variant"
+          aria-label="Go back"
         >
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>

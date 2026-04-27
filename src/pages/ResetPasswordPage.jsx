@@ -127,6 +127,7 @@ export default function ResetPasswordPage() {
                   minLength={8}
                   required
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
+                  aria-label="New password"
                 />
               </div>
 
@@ -142,6 +143,7 @@ export default function ResetPasswordPage() {
                   minLength={8}
                   required
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
+                  aria-label="Confirm password"
                 />
               </div>
 

@@ -169,7 +169,7 @@ export default function JourneyPage() {
 
       {/* Header */}
       <div className="px-6 pt-3 pb-2 flex items-center gap-3">
-        <button onClick={() => navigate(-1)} className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center">
+        <button onClick={() => navigate(-1)} className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center" aria-label="Go back">
           <span className="material-symbols-outlined text-on-surface-variant text-lg">arrow_back</span>
         </button>
         <h1 className="font-headline text-xl text-on-surface">Your Journey</h1>

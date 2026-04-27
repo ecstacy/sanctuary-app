@@ -136,6 +136,7 @@ export default function DoshaProfilePage() {
         <button
           onClick={() => navigate(-1)}
           className="absolute top-5 left-5 z-20 w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center"
+          aria-label="Go back"
         >
           <span className="material-symbols-outlined text-white text-lg">arrow_back</span>
         </button>

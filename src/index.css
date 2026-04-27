@@ -61,6 +61,38 @@ video:focus, svg:focus, button:focus:not(:focus-visible) {
   outline: none;
 }
 
+/* ─────────────────────────────────────────────────────────────────────────
+   A11Y — Focus-visible ring (WCAG 2.4.7 Focus Visible, EN 301 549)
+   Applies a high-contrast 2px ring on keyboard focus for any interactive
+   element. Component-level overrides are still honored because of the
+   :not([data-focus-custom]) escape hatch.
+   ───────────────────────────────────────────────────────────────────────── */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   A11Y — Reduced motion (WCAG 2.3.3, prefers-reduced-motion)
+   Honors the OS-level "reduce motion" setting by collapsing animations
+   to near-instant. Transitions remain so state changes still feel alive.
+   ───────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    PAGE TRANSITIONS
    ═══════════════════════════════════════════════════════════════════════════ */
