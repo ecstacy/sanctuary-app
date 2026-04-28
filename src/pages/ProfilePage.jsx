@@ -10,6 +10,7 @@ import useScrollDepth from '../hooks/useScrollDepth'
 import { exportUserData } from '../lib/dataExport'
 import { deleteAllUserData } from '../lib/accountDeletion'
 import { track, reset as resetAnalytics, EVENTS } from '../lib/track'
+import { _forceTestCrash, recordError as crashRecordError } from '../lib/crash'
 
 import GoogleIcon from '../components/GoogleIcon'
 
@@ -25,7 +26,7 @@ export default function ProfilePage() {
   const [savingLanguage, setSavingLanguage] = useState(false)
 
   // ── Privacy / analytics consent ──
-  const { consent, setAggregate } = useConsent()
+  const { consent, setAggregate, setCrash } = useConsent()
   const [privacyExpanded, setPrivacyExpanded] = useState(false)
 
   // ── Data export / account deletion (GDPR Art. 15/17) ──
@@ -88,6 +89,29 @@ export default function ProfilePage() {
     }
     // 2. Best-effort mirror to the profile row so the choice follows the
     //    user across devices. Tolerates a missing column gracefully.
+    try {
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update({ analytics_consent: updated })
+        .eq('id', user.id)
+      if (profileError && !/column .* does not exist/i.test(profileError.message)) {
+        console.error('Consent save failed:', profileError.message)
+      }
+    } catch (err) {
+      console.error('Consent update failed:', err?.message || err)
+    }
+  }
+
+  async function handleToggleCrash(next) {
+    // Same ordering trick as handleToggleAggregate — fire the off-event
+    // while consent is still on, the on-event after the flag flips.
+    if (!next) {
+      track(EVENTS.CONSENT_CHANGED, { kind: 'crash', granted: false })
+    }
+    const updated = setCrash(next)
+    if (next) {
+      track(EVENTS.CONSENT_CHANGED, { kind: 'crash', granted: true })
+    }
     try {
       const { error: profileError } = await supabase
         .from('profiles')
@@ -710,6 +734,7 @@ export default function ProfilePage() {
               onClick={() => handleToggleAggregate(!consent.aggregate)}
               role="switch"
               aria-checked={consent.aggregate}
+              aria-label="Aggregate analytics"
               className={`relative w-11 h-6 rounded-full transition-colors flex-shrink-0 ${
                 consent.aggregate ? 'bg-primary' : 'bg-surface-container-high'
               }`}
@@ -721,6 +746,63 @@ export default function ProfilePage() {
               />
             </button>
           </div>
+
+          {/* Crash reporting — independent of aggregate analytics. Some
+              users will accept anonymous events but not native crash
+              SDKs (which inherently fingerprint device + OS), so we
+              keep the choice separate. */}
+          <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
+            <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">bug_report</span>
+            <div className="flex-1 min-w-0">
+              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Crash reporting</p>
+              <p className="font-body text-xs text-on-surface-variant/80 mt-0.5 leading-snug">
+                {consent.crash
+                  ? 'On — stack traces sent to Firebase Crashlytics so we can fix bugs faster.'
+                  : 'Off — no crash data leaves your device.'}
+              </p>
+            </div>
+            <button
+              onClick={() => handleToggleCrash(!consent.crash)}
+              role="switch"
+              aria-checked={consent.crash}
+              aria-label="Crash reporting"
+              className={`relative w-11 h-6 rounded-full transition-colors flex-shrink-0 ${
+                consent.crash ? 'bg-primary' : 'bg-surface-container-high'
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 w-5 h-5 rounded-full bg-on-primary shadow-sm transition-all ${
+                  consent.crash ? 'left-[22px]' : 'left-0.5'
+                }`}
+              />
+            </button>
+          </div>
+
+          {/* Dev-only test buttons. Gated by the developer email so they
+              never render for real users in production. Used to verify
+              the Crashlytics integration end-to-end (see docs). */}
+          {user?.email === 'akashthagela@gmail.com' && (
+            <div className="px-5 py-3 border-b border-surface-container-high flex flex-wrap gap-2">
+              <button
+                onClick={() => {
+                  crashRecordError(new Error('Non-fatal test from ProfilePage'), { where: 'profile_test_button' })
+                  alert('Non-fatal sent. Should appear in Crashlytics within ~5 min.')
+                }}
+                className="px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label text-[10px] uppercase tracking-wide"
+              >
+                Send non-fatal
+              </button>
+              <button
+                onClick={() => {
+                  try { _forceTestCrash() }
+                  catch (err) { alert(err.message) }
+                }}
+                className="px-3 py-1.5 rounded-full bg-error/20 text-error font-label text-[10px] uppercase tracking-wide"
+              >
+                Force native crash
+              </button>
+            </div>
+          )}
 
           {/* "What we collect" expand — plain language, not legalese */}
           <button

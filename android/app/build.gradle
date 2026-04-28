@@ -48,6 +48,10 @@ try {
     def servicesJSON = file('google-services.json')
     if (servicesJSON.text) {
         apply plugin: 'com.google.gms.google-services'
+        // Crashlytics gradle plugin must be applied AFTER google-services so
+        // it can read the same project config. Wrapped in the same guard so
+        // local builds without google-services.json still work.
+        apply plugin: 'com.google.firebase.crashlytics'
     }
 } catch(Exception e) {
     logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")

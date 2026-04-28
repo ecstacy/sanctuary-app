@@ -5,6 +5,7 @@ import {
   declineAggregate,
   deferConsent,
   setAggregate,
+  setCrash,
   shouldAskNow,
   subscribe,
 } from '../lib/consent'
@@ -23,5 +24,6 @@ export default function useConsent() {
     decline: useCallback(() => declineAggregate(), []),
     defer: useCallback(() => deferConsent(), []),
     setAggregate: useCallback((v) => setAggregate(v), []),
+    setCrash:     useCallback((v) => setCrash(v), []),
   }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "881309935384",
+    "project_id": "the-sanctuary-60526",
+    "storage_bucket": "the-sanctuary-60526.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881309935384:android:b0164cbf2893207ffce06d",
+        "android_client_info": {
+          "package_name": "com.sanctuary.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB5vWLL115zzTsGWJJ3b4fdhaWoz96JAc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -154,6 +154,23 @@ export function setAggregate(enabled) {
   return _state
 }
 
+// Same shape as setAggregate, but for native crash reporting (Crashlytics).
+// Kept independent so users can opt into one without the other — some
+// privacy-conscious users will accept aggregate event analytics but not
+// any third-party SDK that ships device/OS fingerprints alongside stack
+// traces, and vice versa.
+export function setCrash(enabled) {
+  _state = {
+    ..._state,
+    crash: !!enabled,
+    decidedAt: new Date().toISOString(),
+    askAgainAfter: null,
+  }
+  writeToStorage(_state)
+  emit()
+  return _state
+}
+
 // Hydrate from the server-side copy on profile load. We take the server copy
 // only if it's newer than our local decision — otherwise the local wins
 // (handles the case where the user just toggled on this device but the row

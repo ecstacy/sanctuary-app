@@ -9,6 +9,7 @@ import BottomNav from './components/BottomNav'
 import DoshaThemeProvider from './components/DoshaThemeProvider'
 import { supabase } from './lib/supabase'
 import { init as initAnalytics, track, EVENTS } from './lib/track'
+import { init as initCrash, recordError as crashRecordError } from './lib/crash'
 import { routeNameFor } from './lib/routeName'
 
 // Lazy-load pages for code-splitting
@@ -341,7 +342,30 @@ export default function App() {
   // doubles as a smoke test that the wiring is live.
   useEffect(() => {
     initAnalytics()
+    initCrash()
     track(EVENTS.APP_OPENED, { cold_start: true })
+
+    // ── Global JS error handlers ─────────────────────────────────────
+    // Catches uncaught exceptions and unhandled promise rejections,
+    // sends to Crashlytics (if consent on) AND to PostHog as
+    // `error_caught` for cross-store correlation. Both stores no-op
+    // on missing consent so it's safe to fire unconditionally here.
+    const onError = (event) => {
+      const err = event?.error || event?.reason || new Error(event?.message || 'unknown error')
+      const where = event?.filename ? `${event.filename}:${event.lineno || 0}` : 'window.onerror'
+      crashRecordError(err, { where })
+      track(EVENTS.ERROR_CAUGHT, {
+        where,
+        kind:    event?.type === 'unhandledrejection' ? 'promise' : 'render',
+        message: (err?.message || String(err)).slice(0, 200),
+      })
+    }
+    window.addEventListener('error',              onError)
+    window.addEventListener('unhandledrejection', onError)
+    return () => {
+      window.removeEventListener('error',              onError)
+      window.removeEventListener('unhandledrejection', onError)
+    }
   }, [])
 
   return (

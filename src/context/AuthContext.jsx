@@ -5,6 +5,7 @@ import { registerPlugin } from '@capacitor/core'
 import { syncLanguageFromProfile } from '../i18n'
 import { hydrateFromProfile as hydrateConsentFromProfile } from '../lib/consent'
 import { identify, setSuperProps, reset as resetAnalytics, track, EVENTS } from '../lib/track'
+import { setUserId as crashSetUserId, setCustomKey as crashSetCustomKey, reset as resetCrash } from '../lib/crash'
 
 // Opens URLs in the actual system browser (not Custom Chrome Tab)
 // CCTs on some Android devices block custom-scheme redirects entirely.
@@ -52,6 +53,7 @@ export function AuthProvider({ children }) {
           // can't be back-joined to the prior user.
           if (event === 'SIGNED_OUT') {
             resetAnalytics()
+            resetCrash()
           }
         }
       }
@@ -100,6 +102,12 @@ export function AuthProvider({ children }) {
           vikriti_primary:  data?.vikriti_details?.primary || null,
           consent_aggregate: true,                          // identify only fires when consent is on
         })
+        // Crashlytics — independently consent-gated (crash flag, not
+        // aggregate). Internal calls no-op if the user hasn't opted in.
+        crashSetUserId(userId)
+        crashSetCustomKey('dosha_primary',   dosha.primary || data?.dosha?.toLowerCase() || 'none')
+        crashSetCustomKey('app_version',     import.meta.env.VITE_APP_VERSION || 'dev')
+        crashSetCustomKey('platform',        Capacitor.getPlatform())
       } catch (err) {
         // Never let analytics break auth.
         console.error('analytics identify failed:', err?.message || err)
