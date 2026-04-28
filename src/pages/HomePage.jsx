@@ -408,7 +408,14 @@ export default function HomePage() {
              schedule hook has resolved so it doesn't pop in late. */}
         {!vikriti.loading && vikriti.isDue && vikriti.hasPrakriti && (
           <button
-            onClick={() => navigate('/vikriti')}
+            onClick={() => {
+              track(EVENTS.CTA_CLICKED, {
+                cta_id:          'home_vikriti_take',
+                route_name:      'home',
+                days_since_last: vikriti.daysSinceLast === Infinity ? null : vikriti.daysSinceLast,
+              })
+              navigate('/vikriti')
+            }}
             className="relative w-full text-left rounded-xl p-4 bg-primary-container/40 border border-primary/15 active:scale-[0.98] transition-all stagger-2 overflow-hidden"
           >
             <div className="absolute -right-3 -bottom-3 opacity-[0.08]">

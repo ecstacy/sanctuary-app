@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import { ASANAS, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
 import useScrollDepth from '../hooks/useScrollDepth'
+import { track, EVENTS } from '../lib/track'
 
 const DOSHA_INFO = {
   vata: { label: 'Vata', icon: 'air', color: 'text-[#7b93a8]', bg: 'bg-[#7b93a8]/10' },
@@ -507,10 +508,18 @@ export default function AsanaDetailPage() {
           style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 40, paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
         >
           <button
-            onClick={() => navigate(`/practice/asana/${asana.id}`)}
+            onClick={() => {
+              track(EVENTS.CTA_CLICKED, {
+                cta_id:     'asana_detail_practice',
+                route_name: 'asana_detail',
+                asana_id:   asana.id,
+                label:      'Practice',
+              })
+              navigate(`/practice/asana/${asana.id}`)
+            }}
             className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-full font-label text-sm font-semibold tracking-wide active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(78,99,85,0.15)]"
           >
-            <span className="material-symbols-outlined text-lg">play_arrow</span>
+            <span aria-hidden="true" className="material-symbols-outlined text-lg">play_arrow</span>
             Practice {asana.sanskrit}
           </button>
         </div>,

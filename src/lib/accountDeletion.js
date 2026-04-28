@@ -71,6 +71,28 @@ export async function deleteAllUserData(userId) {
     errors.rpc_delete_account_self = err?.message || String(err)
   }
 
+  // Best-effort: server-side PostHog GDPR erasure. The Edge Function
+  // (supabase/functions/posthog-delete-person) reads the caller's user id
+  // from their JWT and asks PostHog to delete the matching person plus
+  // all linked events. Must run BEFORE signOut() — once the session is
+  // gone we can't authenticate the function call. Errors don't block
+  // the local deletion: the user's first-party data is already gone.
+  let posthogDeleted = false
+  try {
+    const { data, error } = await supabase.functions.invoke('posthog-delete-person', {
+      method: 'POST',
+    })
+    if (!error && data?.ok) posthogDeleted = true
+    else if (error) errors.posthog_delete_person = error.message || String(error)
+    else if (data && !data.ok) errors.posthog_delete_person = data.error || 'unknown'
+  } catch (err) {
+    // Function-not-deployed shows up as a 404 here. Don't spam the user
+    // with that — log internally and move on.
+    if (!/Failed to send|404|Not Found/i.test(err?.message || '')) {
+      errors.posthog_delete_person = err?.message || String(err)
+    }
+  }
+
   // Whatever happened, sign the user out on this device.
   try {
     await supabase.auth.signOut()
@@ -92,6 +114,7 @@ export async function deleteAllUserData(userId) {
   return {
     ok: remainingTables.length === 0,
     authDeleted,
+    posthogDeleted,
     errors,
     remainingTables,
   }

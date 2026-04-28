@@ -10,6 +10,47 @@ import useImpression from '../hooks/useImpression'
 
 const ALL_ASANAS = Object.values(ASANAS)
 
+// ─── ExploreAsanaCard ────────────────────────────────────────────────────
+// One card per asana in the horizontal Explore strip. Extracted so each
+// card can call `useImpression` legally (one hook per component). With the
+// strip being horizontally-scrolled, off-screen cards never fire — exactly
+// what we want for an honest CTR denominator.
+function ExploreAsanaCard({ asana, position, onTap }) {
+  const ref = useImpression({
+    surface:     'discover_explore_asanas',
+    contentType: 'asana',
+    contentId:   asana.id,
+    position,
+  })
+  return (
+    <button
+      ref={ref}
+      onClick={onTap}
+      aria-label={`${asana.english} (${asana.sanskrit})`}
+      className="flex-shrink-0 w-36 snap-start active:scale-[0.97] transition-all text-left"
+    >
+      <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          {asana.poseKey ? (
+            <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} objectPosition="center" />
+          ) : (
+            <span aria-hidden="true" className="material-symbols-outlined text-primary/30 text-6xl">{asana.icon}</span>
+          )}
+        </div>
+        {asana.level && asana.level !== 'Beginner' && (
+          <div className="absolute top-2 left-2">
+            <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-primary uppercase tracking-wide">
+              {asana.level}
+            </span>
+          </div>
+        )}
+      </div>
+      <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{asana.english}</p>
+      <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{asana.sanskrit}</p>
+    </button>
+  )
+}
+
 // ─── QuickRoutineCard ────────────────────────────────────────────────────
 // Extracted so each card can call `useImpression` legally (one hook call per
 // component). Visible for ≥1s at 50%+ → fires `content_impression`. Pair
@@ -242,40 +283,16 @@ export default function DiscoverPage() {
         <div className="stagger-5">
           <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Explore Asanas</p>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
-            {ALL_ASANAS.map(asana => (
-              <button
+            {ALL_ASANAS.map((asana, i) => (
+              <ExploreAsanaCard
                 key={asana.id}
-                onClick={() => {
+                asana={asana}
+                position={i}
+                onTap={() => {
                   track(EVENTS.ASANA_CARD_TAPPED, { asana_id: asana.id, source: 'discover_explore_grid' })
                   navigate(`/asana/${asana.id}`)
                 }}
-                aria-label={`${asana.english} (${asana.sanskrit})`}
-                className="flex-shrink-0 w-36 snap-start active:scale-[0.97] transition-all text-left"
-              >
-                {/* Square thumbnail — pose figure centered, no text overlay so
-                    nothing crops or collides on long Sanskrit names. */}
-                <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    {asana.poseKey ? (
-                      <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} objectPosition="center" />
-                    ) : (
-                      <span aria-hidden="true" className="material-symbols-outlined text-primary/30 text-6xl">{asana.icon}</span>
-                    )}
-                  </div>
-                  {/* Level pill — only shown when the pose is harder than the
-                      default. Beginner is the baseline, so the chip stays
-                      uncluttered for the 90% case. */}
-                  {asana.level && asana.level !== 'Beginner' && (
-                    <div className="absolute top-2 left-2">
-                      <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-primary uppercase tracking-wide">
-                        {asana.level}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{asana.english}</p>
-                <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{asana.sanskrit}</p>
-              </button>
+              />
             ))}
           </div>
         </div>

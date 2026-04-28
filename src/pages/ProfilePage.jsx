@@ -58,10 +58,10 @@ export default function ProfilePage() {
     track(EVENTS.ACCOUNT_DELETED, {})
     const result = await deleteAllUserData(user.id)
     // Drop our local analytics identity so the next anon session can't
-    // be back-joined to the deleted user. PostHog also exposes a GDPR
-    // delete-person endpoint server-side; the recommended pattern is
-    // to call it from a Supabase Edge Function on user-deletion (TODO,
-    // see docs/analytics-events.md §7). For now this clears the device.
+    // be back-joined to the deleted user. Server-side PostHog erasure is
+    // handled inside deleteAllUserData via the posthog-delete-person
+    // Edge Function (deployed separately) — that fully removes the
+    // person row and all linked events on the PostHog side.
     resetAnalytics()
     setDeleteResult(result)
     setDeleting(false)

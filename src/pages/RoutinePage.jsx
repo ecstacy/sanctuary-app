@@ -113,7 +113,15 @@ export default function RoutinePage() {
           Up Next
         </p>
         <button
-          onClick={() => navigate(`/practice/${routineKey}`)}
+          onClick={() => {
+            track(EVENTS.CTA_CLICKED, {
+              cta_id:      'routine_up_next',
+              route_name:  'routine',
+              routine_key: routineKey,
+              label:       'Up Next',
+            })
+            navigate(`/practice/${routineKey}`)
+          }}
           className="w-full bg-primary-container/40 border border-primary/20 rounded-2xl p-4 mb-6 flex items-center gap-4 text-left active:scale-[0.98] transition-all stagger-2"
         >
           <div className="w-20 h-20 rounded-xl bg-surface-container/60 flex items-center justify-center flex-shrink-0 overflow-hidden pointer-events-none">
@@ -270,10 +278,18 @@ export default function RoutinePage() {
           }}
         >
           <button
-            onClick={() => navigate(`/practice/${routineKey}`)}
+            onClick={() => {
+              track(EVENTS.CTA_CLICKED, {
+                cta_id:      'routine_start',
+                route_name:  'routine',
+                routine_key: routineKey,
+                label:       'Start Practice',
+              })
+              navigate(`/practice/${routineKey}`)
+            }}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all shadow-lg flex items-center justify-center gap-2"
           >
-            <span className="material-symbols-outlined text-lg">play_arrow</span>
+            <span aria-hidden="true" className="material-symbols-outlined text-lg">play_arrow</span>
             Start Practice · {Math.round(routine.totalDuration / 60)} min
           </button>
         </div>,
