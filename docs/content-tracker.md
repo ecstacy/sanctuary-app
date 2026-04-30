@@ -45,46 +45,46 @@ Empty rows pre-filled so we can fill in the columns as we go.
 
 | # | ID | English | Source | D | I | R | S | L |
 |---|---|---|---|---|---|---|---|---|
-| 11 | `vrksasana` | Tree | modern | | | | | |
-| 12 | `utkatasana` | Chair | modern | | | | | |
-| 13 | `virabhadrasanaI` | Warrior I | modern | | | | | |
-| 14 | `virabhadrasanaIII` | Warrior III | modern | | | | | |
-| 15 | `parsvakonasana` | Side Angle | modern | | | | | |
-| 16 | `parsvottanasana` | Pyramid | modern | | | | | |
-| 17 | `prasaritaPadottanasana` | Wide-Legged Forward Fold | modern | | | | | |
-| 18 | `anjaneyasana` | Low Lunge | modern | | | | | |
-| 19 | `uttanasana` | Standing Forward Fold | modern | | | | | |
-| 20 | `utthitaHastaPadangusthasana` | Hand-to-Big-Toe | modern | | | | | |
-| 21 | `garudasana` | Eagle | modern | | | | | |
-| 22 | `natarajasana` | Dancer's | modern | | | | | |
+| 11 | `vrksasana` | Tree | modern | ✓ | | | | |
+| 12 | `utkatasana` | Chair | modern | ✓ | | | | |
+| 13 | `virabhadrasanaI` | Warrior I | modern | ✓ | | | | |
+| 14 | `virabhadrasanaIII` | Warrior III | modern | ✓ | | | | |
+| 15 | `parsvakonasana` | Side Angle | modern | ✓ | | | | |
+| 16 | `parsvottanasana` | Pyramid | modern | ✓ | | | | |
+| 17 | `prasaritaPadottanasana` | Wide-Legged Forward Fold | modern | ✓ | | | | |
+| 18 | `anjaneyasana` | Low Lunge | modern | ✓ | | | | |
+| 19 | `uttanasana` | Standing Forward Fold | modern | ✓ | | | | |
+| 20 | `utthitaHastaPadangusthasana` | Hand-to-Big-Toe | modern | ✓ | | | | |
+| 21 | `garudasana` | Eagle | modern | ✓ | | | | |
+| 22 | `natarajasana` | Dancer's | modern | ✓ | | | | |
 
 ### Seated (11 remaining of 12 in §7)
 
 | # | ID | English | Source | D | I | R | S | L |
 |---|---|---|---|---|---|---|---|---|
-| 23 | `sukhasana` | Easy Pose | modern | | | | | |
-| 24 | `padmasana` | Lotus | **HYP 1.44-49** | | | | | |
-| 25 | `siddhasana` | Accomplished | **HYP 1.35-38** | | | | | |
-| 26 | `vajrasana` | Thunderbolt | modern (HYP-adjacent) | | | | | |
-| 27 | `ardhaPadmasana` | Half Lotus | modern | | | | | |
-| 28 | `baddhaKonasana` | Bound Angle | modern | | | | | |
-| 29 | `upavishtaKonasana` | Wide-Angle Seated Forward | modern | | | | | |
-| 30 | `januSirsasana` | Head-to-Knee | modern | | | | | |
-| 31 | `gomukhasana` | Cow Face | **HYP 1.20** | | | | | |
-| 32 | `marichyasanaC` | Marichi's Pose C | modern | | | | | |
-| 33 | `virasana` | Hero | **HYP 1.21** | | | | | |
+| 23 | `sukhasana` | Easy Pose | modern | ✓ | | | | |
+| 24 | `padmasana` | Lotus | **HYP 1.44-49** | ✓ | | | | |
+| 25 | `siddhasana` | Accomplished | **HYP 1.35-38** | ✓ | | | | |
+| 26 | `vajrasana` | Thunderbolt | modern (HYP-adjacent) | ✓ | | | | |
+| 27 | `ardhaPadmasana` | Half Lotus | modern | ✓ | | | | |
+| 28 | `baddhaKonasana` | Bound Angle | modern | ✓ | | | | |
+| 29 | `upavishtaKonasana` | Wide-Angle Seated Forward | modern | ✓ | | | | |
+| 30 | `januSirsasana` | Head-to-Knee | modern | ✓ | | | | |
+| 31 | `gomukhasana` | Cow Face | **HYP 1.20** | ✓ | | | | |
+| 32 | `marichyasanaC` | Marichi's Pose C | modern | ✓ | | | | |
+| 33 | `virasana` | Hero | **HYP 1.21** | ✓ | | | | |
 
 ### Supine (7 remaining of 8 in §7)
 
 | # | ID | English | Source | D | I | R | S | L |
 |---|---|---|---|---|---|---|---|---|
-| 34 | `suptaBaddhaKonasana` | Reclined Bound Angle | modern | | | | | |
-| 35 | `suptaPadangusthasana` | Reclined Hand-to-Big-Toe | modern | | | | | |
-| 36 | `suptaMatsyendrasana` | Supine Twist | modern (HYP 1.27 origin) | | | | | |
-| 37 | `apanasana` | Knees-to-Chest | modern | | | | | |
-| 38 | `legsUpTheWall` | Legs Up the Wall | modern (HYP 3.78 mudra origin) | | | | | |
-| 39 | `jatharaParivartanasana` | Belly Twist | modern | | | | | |
-| 40 | `dhanurasana` | Bow | **HYP 1.25** | | | | | |
+| 34 | `suptaBaddhaKonasana` | Reclined Bound Angle | modern | ✓ | | | | |
+| 35 | `suptaPadangusthasana` | Reclined Hand-to-Big-Toe | modern | ✓ | | | | |
+| 36 | `suptaMatsyendrasana` | Supine Twist | modern (HYP 1.27 origin) | ✓ | | | | |
+| 37 | `apanasana` | Knees-to-Chest | modern | ✓ | | | | |
+| 38 | `legsUpTheWall` | Legs Up the Wall | modern (HYP 3.78 mudra origin) | ✓ | | | | |
+| 39 | `jatharaParivartanasana` | Belly Twist | modern | ✓ | | | | |
+| 40 | `dhanurasana` | Bow | **HYP 1.25** | ✓ | | | | |
 
 ### Prone (5 remaining of 6 in §7) — split to batch 3
 
