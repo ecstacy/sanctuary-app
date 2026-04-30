@@ -33,6 +33,7 @@ const POSE_IMAGES = {
   downwardDog: '/poses/downwardDog.png',
   legsUpWall: '/poses/legUpWall.png',
   legUpWall: '/poses/legUpWall.png',
+  trikonasana: '/poses/trikonasana.png',
 }
 
 const POSE_VIDEOS = {

@@ -419,6 +419,22 @@ The subject holds this exact Legs Up the Wall position for the full 5 seconds. T
 
 ---
 
+### 18. Trikonasana — Triangle Pose
+
+**Pose key:** `trikonasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Utthita Trikonasana (Extended Triangle). Wide stance along the length of the mat, body turned in profile to face camera-left. Right foot at the right end of the mat pointing right (away from camera-left direction); left foot at the left end pointing camera-left. Both legs straight, no knee bend. Hips and torso turn to face camera, then lean / hinge laterally over the front (left) leg from the hip — not the waist. Left hand rests lightly on the left shin or on a yoga block placed outside the left ankle. Right arm extends straight up toward the ceiling, perpendicular to the floor, palm facing forward. Both arms form a single long line from the floor to the ceiling. Spine is long, no rounding through the side body. Head turns to gaze up toward the right (top) hand. Chest opens fully toward the camera-facing wall.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: steps her LEFT foot out to the side about 3.5 feet into a wide stance along the mat, turns the left foot to point camera-left, turns her body to face camera-left in profile, inhales and extends both arms out to the sides at shoulder height. On the exhale she hinges laterally from the left hip, lowering her left hand to her left shin (or a block) while her right arm rotates up to point straight at the ceiling. She turns her head to gaze up at the top hand, arriving at the peak around second 2 (matching the reference peak image). She holds for 1 breath (seconds 2 to 3). Then she reverses: inhales to rise back up to standing, lowers the arms, steps the left foot back to the right foot, turns to face camera, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
 ## QA checklist before adding a clip to the app
 
 **Image stage:**

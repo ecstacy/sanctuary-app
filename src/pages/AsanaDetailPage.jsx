@@ -254,6 +254,16 @@ export default function AsanaDetailPage() {
         <div className="px-6 text-center">
           <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{asana.category}</p>
           <h1 className="font-headline text-3xl text-on-surface mb-1">{asana.sanskrit}</h1>
+          {/* Devanagari + IAST — only render when the schema-rich fields
+              are present. Subtle styling so the romanized title still reads
+              as the primary heading. */}
+          {(asana.devanagari || asana.iast) && (
+            <p className="font-body text-[13px] text-on-surface-variant/70 mb-1" lang="sa">
+              {asana.devanagari}
+              {asana.devanagari && asana.iast && <span className="mx-1.5 text-on-surface-variant/40">·</span>}
+              {asana.iast && <span className="italic">{asana.iast}</span>}
+            </p>
+          )}
           <p className="font-body text-sm text-on-surface-variant">{asana.english}</p>
         </div>
       </div>
@@ -340,7 +350,7 @@ export default function AsanaDetailPage() {
         {/* ── Body Focus ── */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <span className="material-symbols-outlined text-primary text-lg">body_system</span>
+            <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">body_system</span>
             <h3 className="font-headline text-lg text-on-surface">Body Focus</h3>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -351,6 +361,61 @@ export default function AsanaDetailPage() {
             ))}
           </div>
         </div>
+
+        {/* ── Modifications — only renders for new-schema entries ── */}
+        {asana.modifications && asana.modifications.length > 0 && (
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">tune</span>
+              <h3 className="font-headline text-lg text-on-surface">Modifications</h3>
+            </div>
+            <div className="flex flex-col gap-2.5">
+              {asana.modifications.map((mod, i) => (
+                <div key={i} className="flex items-start gap-2.5">
+                  <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-sm mt-0.5">circle</span>
+                  <p className="font-body text-sm text-on-surface-variant">{mod}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── Contraindications — safety surface, prominent styling ── */}
+        {asana.contraindications && asana.contraindications.length > 0 && (
+          <div className="bg-error-container/30 border border-error/20 rounded-xl p-5" role="region" aria-label="Safety considerations">
+            <div className="flex items-center gap-2 mb-3">
+              <span aria-hidden="true" className="material-symbols-outlined text-error text-lg">health_and_safety</span>
+              <h3 className="font-headline text-lg text-on-surface">Important Safety Considerations</h3>
+            </div>
+            <div className="flex flex-col gap-2.5">
+              {asana.contraindications.map((item, i) => (
+                <div key={i} className="flex items-start gap-2.5">
+                  <span aria-hidden="true" className="material-symbols-outlined text-error/80 text-sm mt-0.5">warning</span>
+                  <p className="font-body text-sm text-on-surface-variant">{item}</p>
+                </div>
+              ))}
+            </div>
+            <p className="font-body text-[11px] text-on-surface-variant/60 italic mt-3 pt-3 border-t border-error/15">
+              Consult a teacher or healthcare provider if any of the above apply to you.
+            </p>
+          </div>
+        )}
+
+        {/* ── Source citation — "HYP 1.32" pill, only when source.text is set ── */}
+        {asana.source && (
+          <div className="flex items-center gap-2 px-3 py-2 bg-surface-container-low rounded-lg">
+            <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base">menu_book</span>
+            <p className="font-body text-xs text-on-surface-variant">
+              <span className="font-semibold">
+                {asana.source.text === 'HYP'    ? 'Hatha Yoga Pradipika'
+                 : asana.source.text === 'GS'   ? 'Gheranda Samhita'
+                 : 'Modern hatha tradition'}
+              </span>
+              {asana.source.verse && <span> · verse {asana.source.verse}</span>}
+              {asana.source.note && <span className="block mt-1 text-[11px] text-on-surface-variant/70 italic">{asana.source.note}</span>}
+            </p>
+          </div>
+        )}
 
         {/* ── Dosha Compatibility ── */}
         <div className="bg-surface-container-low rounded-xl p-5">
@@ -458,7 +523,10 @@ export default function AsanaDetailPage() {
         </p>
         <div className="flex flex-col gap-2.5 mb-2">
           {LEVELS.map((lvl) => {
-            const isCurrent = lvl.name === asana.level
+            // New schema uses lowercase ('beginner'); legacy uses 'Beginner'.
+            // Normalize both sides for the comparison so the highlight works
+            // for entries from either era.
+            const isCurrent = lvl.name.toLowerCase() === String(asana.level || '').toLowerCase()
             return (
               <div
                 key={lvl.name}
