@@ -21,16 +21,16 @@ A row is launch-ready only when all five gates are checked.
 
 | # | ID | English | Cat | Source | D | I | R | S | L | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | `tadasana` | Mountain Pose | standing | modern | ✓ | ✓ | ✓ | ✓ | | Migrated from legacy. |
-| 2 | `adhoMukhaSvanasana` | Down Dog | inversion | modern | ✓ | ✓ | ✓ | ✓ | | Renamed from `downwardDog`. |
-| 3 | `virabhadrasanaII` | Warrior II | standing | modern | ✓ | ✓ | ✓ | ✓ | | Renamed from `warrior2`. |
-| 4 | `trikonasana` | Triangle | standing | modern | ✓ | ✓ | ✓ | ✓ | | NEW. Image generated + wired into PoseFigure. |
-| 5 | `bhujangasana` | Cobra | backbend | modern | ✓ | ✓ | ✓ | ✓ | | Renamed from `cobra`. |
-| 6 | `setuBandhaSarvangasana` | Bridge | backbend | modern | ✓ | ✓ | ✓ | ✓ | | Renamed from `bridge`. |
-| 7 | `paschimottanasana` | Seated Forward Bend | forward_fold | **HYP 1.30-31** | ✓ | ✓ | ✓ | ✓ | | First true HYP citation. |
-| 8 | `ardhaMatsyendrasana` | Half Lord of the Fishes | twist | modern (HYP 1.27 origin) | ✓ | ✓ | ✓ | ✓ | | Renamed from `seatedTwist`. |
-| 9 | `balasana` | Child's Pose | restorative | modern | ✓ | ✓ | ✓ | ✓ | | Migrated from legacy. |
-| 10 | `savasana` | Corpse | restorative | **HYP 1.32** | ✓ | ✓ | ✓ | ✓ | | Real HYP citation. |
+| 1 | `tadasana` | Mountain Pose | standing | modern | ✓ | ✓ | ✓ | ✓ | ✓ | Shipped 3402def. |
+| 2 | `adhoMukhaSvanasana` | Down Dog | inversion | modern | ✓ | ✓ | ✓ | ✓ | ✓ | Shipped 3402def. Renamed from `downwardDog`. |
+| 3 | `virabhadrasanaII` | Warrior II | standing | modern | ✓ | ✓ | ✓ | ✓ | ✓ | Shipped 3402def. Renamed from `warrior2`. |
+| 4 | `trikonasana` | Triangle | standing | modern | ✓ | ✓ | ✓ | ✓ | ✓ | Shipped 3402def. NEW pose + image. |
+| 5 | `bhujangasana` | Cobra | backbend | modern | ✓ | ✓ | ✓ | ✓ | ✓ | Shipped 3402def. Renamed from `cobra`. |
+| 6 | `setuBandhaSarvangasana` | Bridge | backbend | modern | ✓ | ✓ | ✓ | ✓ | ✓ | Shipped 3402def. Renamed from `bridge`. |
+| 7 | `paschimottanasana` | Seated Forward Bend | forward_fold | **HYP 1.30-31** | ✓ | ✓ | ✓ | ✓ | ✓ | Shipped 3402def. First HYP citation. |
+| 8 | `ardhaMatsyendrasana` | Half Lord of the Fishes | twist | modern (HYP 1.27 origin) | ✓ | ✓ | ✓ | ✓ | ✓ | Shipped 3402def. Renamed from `seatedTwist`. |
+| 9 | `balasana` | Child's Pose | restorative | modern | ✓ | ✓ | ✓ | ✓ | ✓ | Shipped 3402def. |
+| 10 | `savasana` | Corpse | restorative | **HYP 1.32** | ✓ | ✓ | ✓ | ✓ | ✓ | Shipped 3402def. HYP-named asana. |
 
 **Pilot status: 10/10 DRAFTED.** Imagery exists for 9 (legacy clips, may need regeneration per Kling doc); Trikonasana clip yet to generate.
 
