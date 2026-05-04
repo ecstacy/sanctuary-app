@@ -94,26 +94,26 @@ Empty rows pre-filled so we can fill in the columns as we go.
 
 | # | ID | English | Source | D | I | R | S | L |
 |---|---|---|---|---|---|---|---|---|
-| 41 | `salabhasana` | Locust | modern | | | | | |
-| 42 | `ardhaSalabhasana` | Half Locust | modern | | | | | |
-| 43 | `makarasana` | Crocodile | modern | | | | | |
-| 44 | `sasangasana` | Rabbit | modern | | | | | |
-| 45 | `halasana` | Plow | modern (HYP 3.69 lineage) | | | | | |
-| 46 | `sarvangasana` | Shoulder Stand | modern (HYP Viparita Karani family) | | | | | |
-| 47 | `sirsasana` | Headstand | modern | | | | | |
-| 48 | `bharadvajasana` | Bharadvaja's Twist | modern | | | | | |
-| 49 | `marichyasanaA` | Marichi's Pose A | modern | | | | | |
-| 50 | `parivrttaTrikonasana` | Revolved Triangle | modern | | | | | |
-| 51 | `suptaVirasana` | Reclined Hero | modern (HYP 1.21 origin) | | | | | |
-| 52 | `suptaSukhasana` | Reclined Easy | modern | | | | | |
-| 53 | `suryaNamaskarA` | Sun Salutation A | modern | | | | | |
-| 54 | `suryaNamaskarB` | Sun Salutation B | modern | | | | | |
-| 55 | `chandraNamaskar` | Moon Salutation | modern | | | | | |
-| 56 | `cardiacWarmup` | Cat-Cow Flow | modern | | | | | |
-| 57 | `ekaPadaRajakapotasana` | Pigeon | modern (HYP 1.51 lineage) | | | | | |
-| 58 | `malasana` | Garland Squat | modern | | | | | |
-| 59 | `mandukasana` | Frog | modern | | | | | |
-| 60 | `ardhaPigeonForwardFold` | Half Pigeon Forward Fold | modern | | | | | |
+| 41 | `salabhasana` | Locust | modern | ✓ | | | | |
+| 42 | `ardhaSalabhasana` | Half Locust | modern | ✓ | | | | |
+| 43 | `makarasana` | Crocodile | modern | ✓ | | | | |
+| 44 | `sasangasana` | Rabbit | modern | ✓ | | | | |
+| 45 | `halasana` | Plow | modern (HYP 3.69 lineage) | ✓ | | | | |
+| 46 | `sarvangasana` | Shoulder Stand | modern (HYP Viparita Karani family) | ✓ | | | | |
+| 47 | `sirsasana` | Headstand | modern | ✓ | | | | |
+| 48 | `bharadvajasana` | Bharadvaja's Twist | modern | ✓ | | | | |
+| 49 | `marichyasanaA` | Marichi's Pose A | modern | ✓ | | | | |
+| 50 | `parivrttaTrikonasana` | Revolved Triangle | modern | ✓ | | | | |
+| 51 | `suptaVirasana` | Reclined Hero | modern (HYP 1.21 origin) | ✓ | | | | |
+| 52 | `suptaSukhasana` | Reclined Easy | modern | ✓ | | | | |
+| 53 | `suryaNamaskarA` | Sun Salutation A | modern | ✓ | | | | |
+| 54 | `suryaNamaskarB` | Sun Salutation B | modern | ✓ | | | | |
+| 55 | `chandraNamaskar` | Moon Salutation | modern | ✓ | | | | |
+| 56 | `cardiacWarmup` | Cat-Cow Flow | modern | ✓ | | | | |
+| 57 | `ekaPadaRajakapotasana` | Pigeon | modern (HYP 1.51 lineage) | ✓ | | | | |
+| 58 | `malasana` | Garland Squat | modern | ✓ | | | | |
+| 59 | `mandukasana` | Frog | modern | ✓ | | | | |
+| 60 | `ardhaPigeonForwardFold` | Half Pigeon Forward Fold | modern | ✓ | | | | |
 
 ---
 
