@@ -44,6 +44,15 @@ export const ASANAS = {
     breathCues: {
       notes: 'Steady natural breath. The pose itself is the breath cue — observe the rise and fall of the chest.',
     },
+    instructions: [
+      'Stand at the front of your mat with feet together, big toes touching, heels slightly apart.',
+      'Distribute your weight evenly across both feet — front, back, and edges.',
+      'Lift the kneecaps gently without locking the knees. Engage the thighs.',
+      'Roll the shoulders back and down, away from the ears.',
+      'Let the arms hang naturally by your sides, palms facing the body or forward.',
+      'Lengthen the spine — crown of the head reaches toward the ceiling.',
+      'Soften the jaw, soften the eyes. Breathe naturally.',
+    ],
     voiceCues: {
       enter: 'Stand with the feet together, the inner edges touching. Arms rest by your sides. Distribute weight evenly across both feet.',
       hold: 'Lift the kneecaps without locking the knees. Lengthen the spine. Crown of the head reaches toward the ceiling. Shoulders relaxed away from the ears.',
@@ -166,6 +175,15 @@ export const ASANAS = {
     breathCues: {
       notes: 'Steady, even breath. The asana itself is the work; the breath holds the steadiness.',
     },
+    instructions: [
+      'Stand at the front of the mat.',
+      'Step the feet wide apart, about a leg-length.',
+      'Turn the right foot out 90 degrees so the toes point to the right.',
+      'Slightly turn the left foot in, around 30 degrees.',
+      'Bend the right knee toward 90 degrees, knee tracking over the second toe.',
+      'Press the outer edge of the back foot down firmly.',
+      'Extend the arms out to the sides at shoulder height. Gaze over the right fingertips. Switch sides.',
+    ],
     voiceCues: {
       enter: 'From standing, step the feet wide apart, about a leg-length. Turn the right foot out ninety degrees, the left foot in slightly. Extend the arms out to the sides at shoulder height.',
       hold: 'Bend the right knee toward ninety degrees, tracking it over the second toe. Press the outer edge of the back foot down. Gaze over the right fingertips. Shoulders relaxed away from the ears.',
@@ -287,9 +305,18 @@ export const ASANAS = {
       enter: 'inhale',
       notes: 'Inhale to lengthen the spine on entry; exhale to extend out and over the front leg. Keep the breath flowing — don\'t hold it.',
     },
+    instructions: [
+      'Stand with feet wide apart on the mat, about a leg-length.',
+      'Turn the right foot out 90 degrees so the toes point to the right. Slightly turn the left foot in.',
+      'Extend both arms out to the sides at shoulder height, palms down.',
+      'Reach the right arm forward over the right leg as far as you can, lengthening through the side body.',
+      'Lower the right hand down to the shin, ankle, or a yoga block — wherever your spine stays long.',
+      'Reach the left arm straight up toward the ceiling. Stack the shoulders.',
+      'Look up under the top arm if the neck allows. Switch sides.',
+    ],
     voiceCues: {
-      enter: 'From standing, step the feet wide apart, about a leg-length. Turn the right foot out ninety degrees, the left foot in slightly. Extend the arms out to the sides at shoulder height.',
-      hold: 'Inhale and reach the right hand long over the front leg. Exhale and tilt from the hip, lowering the right hand to the shin, ankle, or a block. The left arm extends straight up. Gaze up toward the top hand.',
+      enter: 'Step the feet wide apart, about a leg-length. Turn the right foot out ninety degrees, the left foot in slightly. Extend the arms out to the sides at shoulder height. Reach the right arm long over the front leg.',
+      hold: 'Tilt from the hip, lowering the right hand to the shin, ankle, or a block. The left arm extends straight up. Gaze up toward the top hand.',
       breathe: 'Each inhale broadens the chest open to the side wall; each exhale lengthens out through the crown of the head.',
       exit: 'Inhale and rise back to standing, leading with the top arm. Step the feet together. We will repeat on the other side.',
     },
@@ -1500,6 +1527,15 @@ export const ASANAS = {
       enter: 'inhale',
       notes: 'Inhale to lengthen the spine; exhale to deepen the rotation. Never force the twist on the breath out.',
     },
+    instructions: [
+      'Sit on a folded blanket with both legs extended.',
+      'Bend the right knee and cross the right foot over the left thigh, foot flat on the floor outside the left knee.',
+      'The bottom left leg can stay extended OR fold the heel toward the right hip.',
+      'Inhale and lengthen the spine tall.',
+      'Exhale and rotate to the right. Place the right hand on the floor behind you for support.',
+      'Hook the left elbow on the OUTSIDE of the right knee (or hug the knee with the left arm for an easier version).',
+      'Each exhale deepens the rotation a touch — never force. Switch sides.',
+    ],
     voiceCues: {
       enter: 'Sit with both legs extended. Bend the right knee and cross the right foot over the left thigh, foot on the floor outside the left knee. The left leg can stay extended or fold the heel toward the right hip.',
       hold: 'Inhale to lengthen the spine. Exhale and rotate to the right. The right hand rests behind you for support; the left elbow hooks outside the right knee.',
@@ -1627,6 +1663,15 @@ export const ASANAS = {
       enter: 'inhale',
       notes: 'Inhale to lengthen the spine; exhale to fold deeper. Never compress on the inhale.',
     },
+    instructions: [
+      'Sit on a folded blanket with both legs extended in front.',
+      'Flex both feet so the toes point straight up.',
+      'Engage the thighs gently — kneecaps lift.',
+      'Inhale and lift both arms overhead, lengthening the spine.',
+      'Exhale and hinge forward from the hips — not the waist.',
+      'Reach for the shins, ankles, or feet — wherever you can hold without rounding the lower back.',
+      'Bend the knees if hamstrings feel pulled. Use a strap around the feet if needed.',
+    ],
     voiceCues: {
       enter: 'Sit with the legs extended in front of you. Flex the feet so the toes point up. Inhale and lift the arms overhead, lengthening the spine.',
       hold: 'Exhale and hinge forward from the hips — not the waist. Reach for the shins, ankles, or feet, wherever you can hold without rounding the lower back.',
@@ -1687,6 +1732,15 @@ export const ASANAS = {
     breathCues: {
       notes: 'Slow, full breaths into the back of the body. Let the inhale expand the lower back outward.',
     },
+    instructions: [
+      'Come to your hands and knees on a soft surface.',
+      'Bring the big toes together. Spread the knees as wide as feels comfortable.',
+      'Sit the hips back toward the heels.',
+      'Walk the hands forward and rest the forehead on the mat.',
+      'Arms can extend forward or rest alongside the body, palms up.',
+      'Soften the jaw. Soften the eyes.',
+      'Breathe into the back of the rib cage. Each inhale expands the lower back outward.',
+    ],
     voiceCues: {
       enter: 'Come to your hands and knees. Bring the big toes together and let the knees spread as wide as comfortable. Sit the hips back toward the heels.',
       hold: 'Rest the forehead on the mat. Arms can extend forward or rest alongside the body, palms up. Soften the jaw, soften the eyes.',
@@ -1810,6 +1864,15 @@ export const ASANAS = {
     breathCues: {
       notes: 'No controlled breath. Observe the natural rhythm and let it slow on its own. Counting interrupts the parasympathetic shift.',
     },
+    instructions: [
+      'Lie flat on your back on a soft surface.',
+      'Let the feet fall open, slightly wider than the hips.',
+      'Place the arms by your sides, palms facing up. Shoulders soften toward the floor.',
+      'Close the eyes or soften the gaze toward the ceiling.',
+      'Optional: place a folded blanket under the head or knees for support.',
+      'Optional: cover the eyes with a soft cloth.',
+      'Release all effort. Let the floor hold you completely. Stay 5-15 minutes.',
+    ],
     voiceCues: {
       enter: 'Lie flat on the back. Let the feet fall open naturally. Arms rest by the sides, palms facing up. Allow the eyes to close.',
       hold: 'Release all effort. The floor is holding you completely. There is nothing to fix, nothing to perform. Soften the face, soften the throat, soften the belly.',
@@ -2094,6 +2157,15 @@ export const ASANAS = {
       exit:  'exhale',
       notes: 'Inhale to lengthen and lift; exhale to soften the lift slightly without collapsing.',
     },
+    instructions: [
+      'Lie face down on a soft surface. Forehead resting on the mat.',
+      'Bring the palms under the shoulders, elbows tucked close to the ribs.',
+      'Press the tops of the feet into the floor, legs hip-width apart.',
+      'Inhale and peel the chest off the floor using the back muscles, NOT the hands.',
+      'Keep the elbows slightly bent. Shoulders draw away from the ears.',
+      'Lift only as high as feels comfortable in the lower back.',
+      'Each inhale lengthens the spine; each exhale softens the lift slightly.',
+    ],
     voiceCues: {
       enter: 'Lie face down. Bring the palms under the shoulders, elbows tucked close to the ribs. Tops of the feet pressing into the floor.',
       hold: 'Inhale and peel the chest off the floor using the back muscles, not the hands. Elbows stay slightly bent. Shoulders draw away from the ears.',
@@ -2155,6 +2227,15 @@ export const ASANAS = {
       exit:  'exhale',
       notes: 'Inhale to lift higher; exhale to soften the throat and jaw. Keep the breath flowing — a held breath in a backbend strains the lower back.',
     },
+    instructions: [
+      'Lie on your back on a soft surface.',
+      'Bend both knees and place the feet flat on the floor, hip-width apart.',
+      'Bring the heels close to your sit bones — close enough that your fingertips just brush the heels.',
+      'Rest the arms by your sides, palms down.',
+      'Inhale and press the feet firmly into the floor. Lift the hips toward the ceiling.',
+      'Roll the shoulders under and clasp the hands beneath you, OR keep palms down.',
+      'Lift the chest toward the chin (not the chin toward the chest). For the restorative variant: rest a yoga block under the sacrum.',
+    ],
     voiceCues: {
       enter: 'Lie on the back. Bend the knees and place the feet flat, hip-width apart, heels close to the sitting bones. Arms rest by the sides, palms down.',
       hold: 'Press through the feet and lift the hips toward the ceiling. Roll the shoulders under and interlace the fingers beneath you if it feels available. Keep the chin slightly away from the chest.',
@@ -2320,6 +2401,15 @@ export const ASANAS = {
     breathCues: {
       notes: 'Steady ujjayi-style breath if you know it; otherwise even nasal breathing. Each exhale presses the chest gently toward the thighs.',
     },
+    instructions: [
+      'Come to all fours on hands and knees.',
+      'Place the wrists directly under the shoulders. Spread the fingers wide.',
+      'Tuck the toes under so the balls of the feet press into the mat.',
+      'Inhale. On the exhale, lift the hips up and back, straightening the legs as much as is comfortable.',
+      'The body forms an inverted V — hips high, hands and feet rooting down.',
+      'Bend the knees as much as needed to keep the spine long.',
+      'Press the chest gently toward the thighs. Let the head hang naturally between the arms.',
+    ],
     voiceCues: {
       enter: 'Start on hands and knees, wrists under shoulders, knees under hips. Tuck the toes. Inhale. On the exhale, lift the hips up and back, straightening the legs as much as feels okay.',
       hold: 'Press the palms firmly into the mat, fingers spread wide. Let the head hang heavy between the arms. Bend the knees if the hamstrings are tight — a long spine matters more than straight legs.',
