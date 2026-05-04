@@ -78,11 +78,20 @@ type Asana = {
     notes?:  string                      // 'Inhale to lengthen, exhale to deepen'
   }
   voiceCues: {
-    enter:   string                      // Single sentence for entry
+    enter:   string                      // Single flowing sentence for audio entry
     hold:    string                      // Mid-pose alignment cue
     breathe: string                      // Breath/awareness cue
     exit:    string                      // Single sentence for exit
   }
+
+  // Numbered setup steps for the read view ("How to Perform"). 5-8
+  // short imperative steps that break down the entry granularly. Keeps
+  // voiceCues.enter compact for audio while giving users a step list
+  // they can follow without prior yoga vocabulary. Falls back to
+  // voiceCues.enter if absent — but new entries should always include
+  // it. Avoid jargon (scapula, drishti, mūla bandha) — describe the
+  // physical movement plainly.
+  instructions?:    string[]
 
   // Anatomical & energetic
   bodyParts:          string[]           // ['lower_back', 'hamstrings', 'core']

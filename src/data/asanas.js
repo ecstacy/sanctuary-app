@@ -20,7 +20,7 @@
 export const ASANAS = {
   // ── Standing Poses ──────────────────────────────────────────────────────
   // ── Pilot 1: Tadasana ─────────────────────────────────────────────────
-  // Modern foundational standing pose. Not named in HYP Ch. 1 — first
+  // Modern foundational standing pose. Not named in the Hatha Yoga Pradipika Ch. 1 — first
   // codified in 20th-century hatha (Krishnamacharya lineage). The "even
   // simple poses have contraindications" rule applies: vertigo, recent
   // ankle injury, fainting tendency are real concerns.
@@ -33,7 +33,7 @@ export const ASANAS = {
     aliases: ['Palm Tree Pose', 'Samasthiti'],
     source: {
       text: 'modern',
-      note: 'Modern foundational pose, codified in 20th-century hatha. Not named in HYP Ch. 1.',
+      note: 'Modern foundational pose, codified in 20th-century hatha. Not named in the Hatha Yoga Pradipika Ch. 1.',
     },
     category: 'standing',
     level: 'beginner',
@@ -79,7 +79,7 @@ export const ASANAS = {
 
   // ── Virabhadrasana I ───────────────────────────────────────────────────
   // Modern asana, named for the warrior incarnation Virabhadra born
-  // from Shiva's wrath. Not in HYP Ch. 1 — codified in 20th-century
+  // from Shiva's wrath. Not in the Hatha Yoga Pradipika Ch. 1 — codified in 20th-century
   // Krishnamacharya lineage. Distinct from Warrior II in that the hips
   // square forward over the front leg.
   virabhadrasanaI: {
@@ -89,7 +89,7 @@ export const ASANAS = {
     iast: 'vīrabhadrāsana I',
     english: 'Warrior I',
     aliases: ['Warrior 1', 'Hero Pose I'],
-    source: { text: 'modern', note: 'Modern hatha asana, codified in 20th-century lineages. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha asana, codified in 20th-century lineages. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'beginner',
     poseKey: 'warrior1',
@@ -97,6 +97,15 @@ export const ASANAS = {
     durationSeconds: 45,
     breathPattern: 'paced',
     breathCues: { enter: 'inhale', notes: 'Inhale to lift into the pose; exhale to settle the hips deeper. Keep the breath flowing.' },
+    instructions: [
+      'Stand at the front of your mat with feet together.',
+      'Step your right foot forward about a leg-length apart. Both feet stay on the floor.',
+      'Turn your back left foot out about 45 degrees, heel firmly down.',
+      'Square your hips toward the front of the mat.',
+      'Bend your right knee until it stacks directly above the right ankle.',
+      'Inhale and lift both arms overhead, biceps near the ears.',
+      'Press the back foot firmly down. Lift through the side ribs. Switch sides.',
+    ],
     voiceCues: {
       enter: 'Step the right foot forward about a leg-length, knee bent. Turn the back foot out forty-five degrees, heel down. Square the hips toward the front. Inhale and reach the arms overhead.',
       hold: 'Bend the front knee over the ankle, thigh moving toward parallel with the floor. Press the back foot firmly down. Lift through the side ribs and reach the fingertips up.',
@@ -134,7 +143,7 @@ export const ASANAS = {
 
   // ── Pilot 3: Virabhadrasana II ─────────────────────────────────────────
   // Modern hatha asana, named for the warrior incarnation Virabhadra
-  // born from Shiva's anger. Not in HYP Ch. 1 — codified in 20th-
+  // born from Shiva's anger. Not in the Hatha Yoga Pradipika Ch. 1 — codified in 20th-
   // century Krishnamacharya lineage. Distinct from Warrior I in that
   // the hips open laterally rather than facing forward.
   virabhadrasanaII: {
@@ -190,7 +199,7 @@ export const ASANAS = {
   },
 
   // ── Vrksasana ──────────────────────────────────────────────────────────
-  // Modern hatha balance pose. Not in HYP Ch. 1. The Sanskrit "vṛkṣa"
+  // Modern hatha balance pose. Not in the Hatha Yoga Pradipika Ch. 1. The Sanskrit "vṛkṣa"
   // means tree — the pose mimics a tree rooted to the earth with
   // branches reaching skyward.
   vrksasana: {
@@ -200,7 +209,7 @@ export const ASANAS = {
     iast: 'vṛkṣāsana',
     english: 'Tree Pose',
     aliases: ['Tree Stand'],
-    source: { text: 'modern', note: 'Modern hatha balance pose. Not enumerated in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha balance pose. Not enumerated in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'beginner',
     poseKey: 'tree',
@@ -208,6 +217,15 @@ export const ASANAS = {
     durationSeconds: 45,
     breathPattern: 'natural',
     breathCues: { notes: 'Steady, even nasal breath. The breath is the anchor — when balance wavers, return to the rhythm.' },
+    instructions: [
+      'Stand with your feet together, weight even on both feet.',
+      'Shift all your weight onto your left foot. Press it firmly into the floor.',
+      'Bend your right knee and lift your right foot. Place the sole against your inner left thigh or calf — never on the knee.',
+      'Bring your hands together in front of your chest, like a prayer.',
+      'Find a single still spot at eye level and rest your gaze there.',
+      'If steady, slowly extend your arms overhead. Palms can face each other or touch.',
+      'Hold for the duration. Lower the arms and foot, then switch sides.',
+    ],
     voiceCues: {
       enter: 'Shift the weight onto the left foot. Lift the right foot and place the sole against the inner left thigh or calf — never on the knee. Hands at the heart in prayer.',
       hold: 'Pick a single still point at eye level and let the gaze rest there. Press the standing foot firmly into the floor. If steady, extend the arms overhead like branches.',
@@ -244,7 +262,7 @@ export const ASANAS = {
   },
 
   // ── Pilot 4: Trikonasana ───────────────────────────────────────────────
-  // Modern hatha — "tri" = three, "kona" = angle. Not in HYP Ch. 1.
+  // Modern hatha — "tri" = three, "kona" = angle. Not in the Hatha Yoga Pradipika Ch. 1.
   // Codified in 20th-century Iyengar/Krishnamacharya tradition. The
   // only truly NEW asana in the pilot 10 — exercises the schema for
   // entries with no existing legacy data to migrate from.
@@ -257,7 +275,7 @@ export const ASANAS = {
     aliases: ['Utthita Trikonasana (Extended Triangle)'],
     source: {
       text: 'modern',
-      note: 'Modern hatha asana. Codified in 20th-century Iyengar and Krishnamacharya lineages. Not enumerated in HYP Ch. 1.',
+      note: 'Modern hatha asana. Codified in 20th-century Iyengar and Krishnamacharya lineages. Not enumerated in the Hatha Yoga Pradipika Ch. 1.',
     },
     category: 'standing',
     level: 'beginner',
@@ -313,7 +331,7 @@ export const ASANAS = {
     iast: 'utkaṭāsana',
     english: 'Chair Pose',
     aliases: ['Fierce Pose', 'Powerful Pose'],
-    source: { text: 'modern', note: 'Modern hatha asana. "Utkata" = fierce, powerful. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha asana. "Utkata" = fierce, powerful. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'beginner',
     poseKey: 'utkatasana',
@@ -321,6 +339,15 @@ export const ASANAS = {
     durationSeconds: 30,
     breathPattern: 'paced',
     breathCues: { enter: 'inhale', notes: "Inhale to lift the arms; exhale to sink the hips deeper. Don't hold the breath under load." },
+    instructions: [
+      'Stand with feet together or hip-width apart, toes pointing forward.',
+      'Inhale and reach both arms straight up overhead, biceps near the ears.',
+      'Exhale and bend your knees, lowering your hips as if sitting back into a chair behind you.',
+      'Press your weight into your heels — you should be able to wiggle your toes.',
+      'Lean your torso forward slightly so the chest stays open.',
+      'Lift your fingertips toward the ceiling. Soften the shoulders away from the ears.',
+      'Hold and breathe. Inhale to lengthen, exhale to settle.',
+    ],
     voiceCues: {
       enter: 'Stand with the feet together or hip-width apart. Inhale and reach the arms overhead, biceps near the ears.',
       hold: 'Exhale and bend the knees as if sitting back into a chair. Press the weight into the heels — you should be able to wiggle the toes. Lift through the side ribs.',
@@ -359,7 +386,7 @@ export const ASANAS = {
     iast: 'vīrabhadrāsana III',
     english: 'Warrior III',
     aliases: ['Warrior 3', 'Airplane Pose'],
-    source: { text: 'modern', note: 'Modern hatha. The full balance variant of the Virabhadra trilogy. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha. The full balance variant of the Virabhadra trilogy. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'intermediate',
     poseKey: 'warrior3',
@@ -367,6 +394,15 @@ export const ASANAS = {
     durationSeconds: 30,
     breathPattern: 'natural',
     breathCues: { notes: 'Steady breath through the nose. The pose is enough work — the breath stays smooth.' },
+    instructions: [
+      'Stand with feet hip-width apart.',
+      'Shift all your weight onto your right foot. Slightly bend the right knee for stability.',
+      'Hinge forward at your hips, lifting your left leg straight behind you.',
+      'Reach your arms straight forward, like an airplane.',
+      'Form one long line from fingertips through the back heel.',
+      "Keep both hips level — don't let the lifted hip rotate up.",
+      'Gaze at a point on the floor about a foot in front of you. Switch sides.',
+    ],
     voiceCues: {
       enter: 'From standing, shift the weight onto the right foot. Hinge forward from the hip and extend the left leg behind you, parallel to the floor. Reach the arms forward like an airplane.',
       hold: "Form one long line from fingertips through the back heel. Hips stay level — don't let the lifted hip rotate up. Gaze a foot in front of the standing toe.",
@@ -405,7 +441,7 @@ export const ASANAS = {
     iast: 'pārśvakoṇāsana',
     english: 'Side Angle Pose',
     aliases: ['Extended Side Angle', 'Utthita Parsvakonasana'],
-    source: { text: 'modern', note: 'Modern hatha. "Parsva" = side, "kona" = angle. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha. "Parsva" = side, "kona" = angle. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'beginner',
     poseKey: 'parsvakonasana',
@@ -413,6 +449,15 @@ export const ASANAS = {
     durationSeconds: 45,
     breathPattern: 'paced',
     breathCues: { enter: 'inhale', notes: 'Inhale to lengthen out through the top arm; exhale to settle deeper into the front leg.' },
+    instructions: [
+      'Step your feet wide apart on the mat, about a leg-length.',
+      'Turn your right foot out 90 degrees. Slightly turn the left foot in.',
+      'Bend the right knee toward 90 degrees, knee tracking over the ankle.',
+      'Lower your right forearm onto the right thigh, OR rest the right hand on a block outside the right foot.',
+      'Reach the left arm overhead, in line with the spine. Palm faces the floor.',
+      'Open the chest toward the ceiling, twisting the torso slightly upward.',
+      'Look up under the top arm if your neck allows. Switch sides.',
+    ],
     voiceCues: {
       enter: 'From a wide stance, turn the right foot out ninety degrees. Bend the right knee toward ninety degrees. Lower the right forearm onto the right thigh, or the right hand to a block outside the right foot.',
       hold: 'Reach the left arm overhead in line with the spine, palm facing the floor. Open the chest toward the ceiling. Gaze up under the top arm if the neck allows.',
@@ -451,7 +496,7 @@ export const ASANAS = {
     iast: 'pārśvottānāsana',
     english: 'Pyramid Pose',
     aliases: ['Intense Side Stretch'],
-    source: { text: 'modern', note: 'Modern hatha. "Parsva" = side, "ut-tāna" = intense stretch. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha. "Parsva" = side, "ut-tāna" = intense stretch. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'beginner',
     poseKey: 'parsvottanasana',
@@ -459,6 +504,15 @@ export const ASANAS = {
     durationSeconds: 45,
     breathPattern: 'paced',
     breathCues: { enter: 'inhale', notes: 'Inhale to lengthen the spine; exhale to fold over the front leg with a long spine, not a rounded one.' },
+    instructions: [
+      'Stand at the front of your mat, feet together.',
+      'Step your left foot back about three feet. Both feet stay flat.',
+      'Turn your back foot out slightly, around 45 degrees.',
+      'Square your hips toward the front of the mat.',
+      'Place your hands on your hips OR bring them into reverse prayer behind your back.',
+      'Inhale and lengthen your spine tall.',
+      'Exhale and hinge forward at the hips, lowering your chest over the front leg. Keep the front leg straight (or microbent). Switch sides.',
+    ],
     voiceCues: {
       enter: 'Step the right foot forward about three feet. Square the hips toward the front. Hands on the hips or in reverse prayer behind the back.',
       hold: 'Inhale to lengthen the spine. Exhale and hinge forward from the hips, keeping the front leg straight. Lead with the chest, not the head.',
@@ -497,7 +551,7 @@ export const ASANAS = {
     iast: 'prasārita pādottānāsana',
     english: 'Wide-Legged Forward Fold',
     aliases: ['Wide-Legged Standing Forward Bend'],
-    source: { text: 'modern', note: 'Modern hatha. "Prasarita" = spread out, "pāda" = foot. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha. "Prasarita" = spread out, "pāda" = foot. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'beginner',
     poseKey: 'prasaritaPadottanasana',
@@ -505,6 +559,15 @@ export const ASANAS = {
     durationSeconds: 60,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow even breath. Each exhale releases the head a little closer to the floor.' },
+    instructions: [
+      'Stand at the center of your mat.',
+      'Step your feet wide apart, about a leg-length, both feet parallel and pointing forward.',
+      'Press the weight evenly into both feet. Engage the thighs gently.',
+      'Place your hands on your hips. Inhale and lengthen the spine tall.',
+      'Exhale and hinge forward from your hips, keeping the back long.',
+      'Bring your hands to the floor between the feet, fingers in line with the toes.',
+      'Let the crown of the head reach toward the floor. Bend the knees if hamstrings feel tight.',
+    ],
     voiceCues: {
       enter: 'Step the feet wide apart, about a leg-length, both feet parallel and pointing forward. Hands on the hips. Inhale and lengthen the spine.',
       hold: 'Exhale and hinge forward from the hips. Bring the hands to the floor between the feet, fingers in line with the toes. Let the crown of the head reach toward the floor.',
@@ -543,7 +606,7 @@ export const ASANAS = {
     iast: 'añjaneyāsana',
     english: 'Low Lunge',
     aliases: ['Crescent Lunge (similar)'],
-    source: { text: 'modern', note: 'Modern hatha, named for Anjaneya (a name of Hanuman). Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha, named for Anjaneya (a name of Hanuman). Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'beginner',
     poseKey: 'anjaneyasana',
@@ -551,6 +614,15 @@ export const ASANAS = {
     durationSeconds: 45,
     breathPattern: 'paced',
     breathCues: { enter: 'inhale', notes: 'Inhale to lift the chest and arms; exhale to settle the hips lower.' },
+    instructions: [
+      'Come to all fours on hands and knees.',
+      'Step your right foot forward between your hands.',
+      'Lower your back left knee gently to the floor. Untuck the toes so the top of the foot rests on the mat.',
+      'Slide the back knee back a few inches if it feels intense. Pad the knee with a folded blanket if uncomfortable.',
+      'Press both hands into the floor and lift your torso upright.',
+      'Inhale and sweep both arms overhead, fingertips reaching for the ceiling.',
+      'Sink the hips down toward the floor as you lift through the chest. Switch sides.',
+    ],
     voiceCues: {
       enter: 'From all fours, step the right foot forward between the hands. Lower the back knee to the floor and untuck the toes.',
       hold: 'Inhale and sweep the arms overhead, fingertips reaching for the ceiling. Square the hips forward and let them sink toward the floor.',
@@ -589,7 +661,7 @@ export const ASANAS = {
     iast: 'utthita hasta pādāṅguṣṭhāsana',
     english: 'Hand-to-Big-Toe Pose',
     aliases: ['Standing Hand-to-Big-Toe'],
-    source: { text: 'modern', note: 'Modern hatha. "Utthita" = extended, "hasta" = hand, "pāda-aṅguṣṭha" = big toe. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha. "Utthita" = extended, "hasta" = hand, "pāda-aṅguṣṭha" = big toe. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'intermediate',
     poseKey: 'utthitaHastaPadangusthasana',
@@ -597,6 +669,15 @@ export const ASANAS = {
     durationSeconds: 30,
     breathPattern: 'natural',
     breathCues: { notes: 'Smooth, even breath. Balance + flexibility means tiny disruptions matter — keep the breath flowing.' },
+    instructions: [
+      'Stand on both feet with weight even.',
+      'Shift all your weight onto the left foot. Slightly bend the standing knee for balance.',
+      'Lift your right knee toward your chest until the thigh is parallel to the floor.',
+      'Loop a yoga strap around the ball of the right foot, holding both ends with the right hand. (Or hook the big toe with the index and middle fingers.)',
+      'Slowly extend the right leg straight forward. Lengthen the spine tall.',
+      'Keep shoulders relaxed and gaze straight ahead.',
+      "The lifted leg doesn't need to straighten — height isn't the goal, length is. Switch sides.",
+    ],
     voiceCues: {
       enter: 'From standing, shift the weight onto the left foot. Lift the right knee to hip height. Hook the right big toe with the right index and middle fingers (or use a strap around the foot).',
       hold: 'Slowly extend the right leg straight forward. Lengthen the spine. Keep the left standing leg active, kneecap lifted.',
@@ -635,7 +716,7 @@ export const ASANAS = {
     iast: 'garuḍāsana',
     english: 'Eagle Pose',
     aliases: ['Eagle'],
-    source: { text: 'modern', note: 'Modern hatha, named for Garuda, the divine eagle of Vishnu. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha, named for Garuda, the divine eagle of Vishnu. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'intermediate',
     poseKey: 'garudasana',
@@ -643,6 +724,15 @@ export const ASANAS = {
     durationSeconds: 30,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow, even breath. The wrap is intense — the breath keeps the shoulders soft.' },
+    instructions: [
+      'Stand on both feet. Slightly bend both knees.',
+      'Shift your weight onto the left foot.',
+      'Cross your right thigh over the left, as if sitting cross-legged in a chair.',
+      'If accessible, hook the right foot behind the left calf. Otherwise, keep the right toes lightly touching the floor for balance.',
+      'Extend your arms straight forward at shoulder height.',
+      'Cross your left elbow over the right at right angles. Wrap the forearms and bring the palms to touch (or backs of hands if palms don\'t reach).',
+      'Lift the elbows to shoulder height. Sit slightly lower into the standing leg. Switch sides.',
+    ],
     voiceCues: {
       enter: 'Stand on the left foot with a slight knee bend. Cross the right thigh over the left. If accessible, hook the right foot behind the left calf.',
       hold: 'Extend the arms forward. Cross the left elbow over the right at right angles. Wrap the forearms and bring the palms to touch (or backs of hands). Lift the elbows to shoulder height.',
@@ -681,7 +771,7 @@ export const ASANAS = {
     iast: 'naṭarājāsana',
     english: "Dancer's Pose",
     aliases: ['Lord of the Dance', 'Standing Bow'],
-    source: { text: 'modern', note: 'Modern hatha, named for Nataraja (Shiva as cosmic dancer). Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha, named for Nataraja (Shiva as cosmic dancer). Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'standing',
     level: 'intermediate',
     poseKey: 'natarajasana',
@@ -689,6 +779,15 @@ export const ASANAS = {
     durationSeconds: 30,
     breathPattern: 'natural',
     breathCues: { notes: 'Soft, steady breath. Backbend + balance is intense — the breath is the throttle.' },
+    instructions: [
+      'Stand on both feet, weight even.',
+      'Shift your weight onto the left foot. Slightly bend the left knee for stability.',
+      'Bend the right knee and lift the right foot behind you.',
+      'Reach back with the right hand and grasp the right ankle from the inside. (Use a yoga strap looped around the foot if your hand can\'t reach.)',
+      'Reach the left arm forward at shoulder height as a counterbalance.',
+      'Press the right foot back into the right hand, lifting the leg up and back behind you.',
+      'Open the chest forward. Find your gaze on a still spot. Switch sides.',
+    ],
     voiceCues: {
       enter: 'Stand on the left foot. Bend the right knee and grasp the right ankle (or a strap looped around the foot) with the right hand from the inside. Reach the left arm forward as a counterbalance.',
       hold: 'Press the right foot back into the right hand, lifting the leg up and back. The chest opens forward. Keep the standing knee soft.',
@@ -744,7 +843,7 @@ export const ASANAS = {
 
   // ── Sukhasana ──────────────────────────────────────────────────────────
   // Modern term for the simple cross-legged seat. "Sukha" = ease,
-  // comfort. Not in HYP Ch. 1 by this name (HYP names Padmasana,
+  // comfort. Not in the Hatha Yoga Pradipika Ch. 1 by this name (the Hatha Yoga Pradipika names Padmasana,
   // Siddhasana, Swastikasana, Bhadrasana as meditation seats).
   sukhasana: {
     id: 'sukhasana',
@@ -753,7 +852,7 @@ export const ASANAS = {
     iast: 'sukhāsana',
     english: 'Easy Seated Pose',
     aliases: ['Easy Pose', 'Comfortable Seat'],
-    source: { text: 'modern', note: 'Modern term for the basic cross-legged meditation seat. HYP Ch. 1 enumerates Padmasana, Siddhasana, Swastikasana, and Bhadrasana as meditation seats; Sukhasana is the accessible default.' },
+    source: { text: 'modern', note: 'Modern term for the basic cross-legged meditation seat. the Hatha Yoga Pradipika Ch. 1 enumerates Padmasana, Siddhasana, Swastikasana, and Bhadrasana as meditation seats; Sukhasana is the accessible default.' },
     category: 'seated',
     level: 'beginner',
     poseKey: 'sukhasana',
@@ -761,6 +860,15 @@ export const ASANAS = {
     durationSeconds: 120,
     breathPattern: 'natural',
     breathCues: { notes: 'Natural breath. The seat itself is the practice — the breath finds its own rhythm.' },
+    instructions: [
+      'Sit on the floor. Place a folded blanket or cushion under your hips for support.',
+      'Cross your shins comfortably, one in front of the other.',
+      "Let your knees release toward the floor. They don't need to touch the floor.",
+      'Rest your hands on your knees, palms up or down.',
+      'Lengthen the spine tall — sit bones rooting down, crown of the head reaching up.',
+      'Soften the shoulders, soften the jaw, soften the eyes.',
+      'Periodically switch which shin is in front to balance the hips.',
+    ],
     voiceCues: {
       enter: 'Come to a comfortable cross-legged seat. Let the knees release toward the floor. Rest the hands on the knees, palms up or down.',
       hold: 'Lengthen the spine — crown of the head reaches up while the sit bones root down. Soften the shoulders, soften the jaw.',
@@ -797,7 +905,7 @@ export const ASANAS = {
   },
 
   // ── Padmasana ──────────────────────────────────────────────────────────
-  // HYP 1.44-49 names Padmasana explicitly and devotes six verses to
+  // Hatha Yoga Pradipika 1.44-49 names Padmasana explicitly and devotes six verses to
   // its description — the classical meditation seat for advanced
   // practitioners. We tag this as INTERMEDIATE (not beginner) because
   // forcing the lotus on tight hips is the most common knee-injury
@@ -809,7 +917,7 @@ export const ASANAS = {
     iast: 'padmāsana',
     english: 'Lotus Pose',
     aliases: ['Full Lotus'],
-    source: { text: 'HYP', verse: '1.44-49', note: 'Named explicitly in HYP Ch. 1. Six verses describe its construction and value as a meditation seat.' },
+    source: { text: 'HYP', verse: '1.44-49', note: 'Named explicitly in the Hatha Yoga Pradipika Ch. 1. Six verses describe its construction and value as a meditation seat.' },
     category: 'seated',
     level: 'intermediate',
     poseKey: 'padmasana',
@@ -817,6 +925,15 @@ export const ASANAS = {
     durationSeconds: 180,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow, even breath. The seat is the practice — let the breath be the only motion.' },
+    instructions: [
+      "WARNING: don't force this pose. If it doesn't come easily, sit in Sukhasana on a cushion instead — your knees will thank you.",
+      'Sit with your legs extended straight in front of you on the floor.',
+      'Bend the right knee. Use your hands to lift the right foot and place it on top of the left thigh, sole facing up.',
+      'Bend the left knee. Lift the left foot and place it on top of the right thigh, sole facing up.',
+      "Both knees should rest on the floor. If either knee floats up, this isn't your pose yet — back off.",
+      'Rest your hands on your knees, palms up.',
+      'Lengthen the spine. The seat should feel stable, not strained.',
+    ],
     voiceCues: {
       enter: 'Sit with the legs extended. Bend the right knee and place the right foot on top of the left thigh, sole up. Then bend the left knee and place the left foot on top of the right thigh.',
       hold: 'Rest the hands on the knees, palms up or down. Lengthen the spine — the lotus seat is a vertical line from the sacrum through the crown.',
@@ -842,14 +959,14 @@ export const ASANAS = {
     benefits: [
       "Establishes the most stable upright seat — sit bones, knees, and one ankle each anchor a corner of a triangle",
       "Lengthens the spine through structural alignment, not muscular effort",
-      "The classical pranayama and meditation seat described in HYP and Patanjali's Yoga Sutras",
+      "The classical pranayama and meditation seat described in the Hatha Yoga Pradipika and Patanjali's Yoga Sutras",
       "Long holds become possible because the lower body is locked — only the spine and breath remain to manage",
     ],
-    reasoning: "Lotus is a destination pose — not a starting place. HYP describes it as the seat that 'destroys all diseases', but reaching it without injury requires patient hip-opening over months or years. If your hips don't allow lotus today, Sukhasana on a cushion is functionally identical for meditation purposes. Don't trade your knees for an Instagram pose.",
+    reasoning: "Lotus is a destination pose — not a starting place. the Hatha Yoga Pradipika describes it as the seat that 'destroys all diseases', but reaching it without injury requires patient hip-opening over months or years. If your hips don't allow lotus today, Sukhasana on a cushion is functionally identical for meditation purposes. Don't trade your knees for an Instagram pose.",
   },
 
   // ── Siddhasana ─────────────────────────────────────────────────────────
-  // HYP 1.35-38 names Siddhasana and praises it above all other
+  // Hatha Yoga Pradipika 1.35-38 names Siddhasana and praises it above all other
   // asanas: "as among the yamas amaratva (immortality) is the chief,
   // so among the asanas Siddhasana is chief". The text claims 84
   // asanas exist but Siddhasana alone is sufficient for liberation.
@@ -860,7 +977,7 @@ export const ASANAS = {
     iast: 'siddhāsana',
     english: 'Accomplished Pose',
     aliases: ["Adept's Pose", "Perfect Pose"],
-    source: { text: 'HYP', verse: '1.35-38', note: 'Named in HYP Ch. 1 as the chief of all asanas. The text claims its consistent practice purifies the nadis (subtle channels) sufficient for liberation.' },
+    source: { text: 'HYP', verse: '1.35-38', note: 'Named in the Hatha Yoga Pradipika Ch. 1 as the chief of all asanas. The text claims its consistent practice purifies the nadis (subtle channels) sufficient for liberation.' },
     category: 'seated',
     level: 'intermediate',
     poseKey: 'siddhasana',
@@ -868,6 +985,15 @@ export const ASANAS = {
     durationSeconds: 180,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow even breath. Siddhasana traditionally accompanies long pranayama and meditation; the breath becomes the practice.' },
+    instructions: [
+      'Sit with your legs extended straight in front of you.',
+      'Bend the left knee and bring the left heel to rest against the soft point between the genitals and anus (the perineum).',
+      'Bend the right knee and place the right foot on top of the left ankle. The right heel rests just above the pubic bone area.',
+      'Rest your hands on your knees, palms up.',
+      'Lengthen the spine, sit bones rooting, crown reaching.',
+      'Switch which leg is on the bottom periodically — the seat is asymmetric.',
+      'Sit on a folded blanket if your hips or knees protest.',
+    ],
     voiceCues: {
       enter: 'Sit with the legs extended. Bend the left knee and place the left heel against the perineum (the soft point between the genitals and anus). Bend the right knee and place the right foot on top of the left ankle, with the right heel pressing into the pubic bone area.',
       hold: 'Rest the hands on the knees, palms up. Lengthen the spine. The seat creates a stable energetic lock at the pelvic floor.',
@@ -906,7 +1032,7 @@ export const ASANAS = {
     iast: 'vajrāsana',
     english: 'Thunderbolt Pose',
     aliases: ['Diamond Pose', 'Adamantine Pose'],
-    source: { text: 'modern', verse: '1.51', note: 'Modern hatha lineages list this as a meditation seat. HYP 1.51 mentions a seat by similar name in the broader description of meditation postures.' },
+    source: { text: 'modern', verse: '1.51', note: 'Modern hatha lineages list this as a meditation seat. Hatha Yoga Pradipika 1.51 mentions a seat by similar name in the broader description of meditation postures.' },
     category: 'seated',
     level: 'beginner',
     poseKey: 'vajrasana',
@@ -914,6 +1040,15 @@ export const ASANAS = {
     durationSeconds: 120,
     breathPattern: 'natural',
     breathCues: { notes: 'Natural breath. Vajrasana is one of the few asanas safely practiced after eating — the kneeling shape gently supports digestion.' },
+    instructions: [
+      'Kneel on the floor with your knees together.',
+      'Bring the tops of the feet flat on the mat, big toes touching.',
+      'Sit back so your hips rest on your heels. Sit bones cradle between the heels.',
+      'Place a folded blanket between your calves and thighs if knees feel pinched.',
+      'Rest your hands on your thighs, palms down.',
+      'Lengthen the spine. Soften the shoulders.',
+      'This seat is safe to practice for 5 minutes after a meal — it supports digestion.',
+    ],
     voiceCues: {
       enter: 'Kneel on the floor with the knees together and the tops of the feet flat. Sit back on the heels. Big toes touching, heels apart enough to cradle the sit bones.',
       hold: 'Rest the hands on the thighs, palms down. Lengthen the spine. Soften the shoulders, soften the jaw.',
@@ -952,7 +1087,7 @@ export const ASANAS = {
     iast: 'ardha padmāsana',
     english: 'Half Lotus Pose',
     aliases: ['Half Lotus'],
-    source: { text: 'modern', verse: '1.44-49', note: 'Modern half-variant of HYP 1.44-49 Padmasana. The half version is the practical step on the path to full lotus.' },
+    source: { text: 'modern', verse: '1.44-49', note: 'Modern half-variant of Hatha Yoga Pradipika 1.44-49 Padmasana. The half version is the practical step on the path to full lotus.' },
     category: 'seated',
     level: 'beginner',
     poseKey: 'ardhaPadmasana',
@@ -960,6 +1095,15 @@ export const ASANAS = {
     durationSeconds: 120,
     breathPattern: 'natural',
     breathCues: { notes: 'Natural breath. The asymmetry teaches the breath to stay even when the body is not.' },
+    instructions: [
+      'Sit with your legs extended in front of you.',
+      'Bend the right knee and place the right foot on top of the left thigh, sole facing up.',
+      'Bend the left knee and tuck the left foot UNDER the right thigh.',
+      "The right knee rests on the floor or a cushion. Don't force it down.",
+      'Rest your hands on your knees, palms up or down.',
+      'Lengthen the spine — sit bones rooting, crown reaching.',
+      'Switch which leg is on top each time you practice to keep the hips balanced.',
+    ],
     voiceCues: {
       enter: 'Sit with the legs extended. Bend the right knee and place the right foot on top of the left thigh, sole up. Bend the left knee and tuck the left foot under the right thigh.',
       hold: 'Rest the hands on the knees, palms up or down. Lengthen the spine. Periodically alternate which foot is on top.',
@@ -1006,6 +1150,15 @@ export const ASANAS = {
     durationSeconds: 120,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow breath. Each exhale lets the knees descend a touch closer to the floor — never force them down.' },
+    instructions: [
+      'Sit on the front edge of a folded blanket.',
+      'Bring the soles of the feet together. Let the knees fall apart to the sides.',
+      'Hold your feet or ankles with both hands.',
+      'Move the heels closer to the body or further away — find what lets the knees release naturally.',
+      "Lengthen the spine — don't round forward to bring the knees down.",
+      'Let the knees descend toward the floor at their own pace. Never push them.',
+      'Optional: place a block or cushion under each knee for support.',
+    ],
     voiceCues: {
       enter: 'Sit with the spine tall. Bring the soles of the feet together and let the knees fall apart to the sides. Hold the feet or ankles. Heels close to the body or further away — whichever lets the knees release.',
       hold: 'Lengthen the spine. Don\'t round forward to bring the knees down — keep the back long and let the hips do the work.',
@@ -1045,7 +1198,7 @@ export const ASANAS = {
     iast: 'upaviṣṭa koṇāsana',
     english: 'Wide-Angle Seated Forward Bend',
     aliases: ['Seated Straddle Forward Fold'],
-    source: { text: 'modern', note: 'Modern hatha. "Upaviṣṭa" = seated, "kona" = angle. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha. "Upaviṣṭa" = seated, "kona" = angle. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'seated',
     level: 'beginner',
     poseKey: 'upavishtaKonasana',
@@ -1053,6 +1206,15 @@ export const ASANAS = {
     durationSeconds: 90,
     breathPattern: 'paced',
     breathCues: { enter: 'inhale', notes: 'Inhale to lengthen; exhale to fold a touch deeper. Lead with the chest, not the head.' },
+    instructions: [
+      'Sit on a folded blanket on the floor.',
+      'Extend both legs out wide to the sides — as wide as your hamstrings comfortably allow.',
+      'Flex both feet so toes point straight up. Engage the thighs gently.',
+      'Place your hands on the floor in front of you. Inhale and lengthen the spine tall.',
+      'Exhale and walk your hands forward, hinging from the hips.',
+      'Lead with the chest, not the head. Stop where the back wants to round.',
+      'Bend the knees if the hamstrings feel pulled.',
+    ],
     voiceCues: {
       enter: 'Sit with the legs extended wide apart, as wide as the hamstrings allow. Flex the feet, kneecaps pointing up. Sit on a blanket if the lower back rounds.',
       hold: 'Inhale to lengthen the spine. Exhale and walk the hands forward, hinging from the hips. Keep the spine long — don\'t round to reach the floor.',
@@ -1091,7 +1253,7 @@ export const ASANAS = {
     iast: 'jānuśīrṣāsana',
     english: 'Head-to-Knee Pose',
     aliases: ['Head-to-Knee Forward Bend'],
-    source: { text: 'modern', note: 'Modern hatha. "Jānu" = knee, "śīrṣa" = head. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha. "Jānu" = knee, "śīrṣa" = head. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'seated',
     level: 'beginner',
     poseKey: 'januSirsasana',
@@ -1099,6 +1261,15 @@ export const ASANAS = {
     durationSeconds: 60,
     breathPattern: 'paced',
     breathCues: { enter: 'inhale', notes: 'Inhale to lengthen the spine; exhale to fold a touch deeper. Don\'t hold the breath.' },
+    instructions: [
+      'Sit on a folded blanket with both legs extended in front of you.',
+      'Bend the right knee and place the right sole against the inner left thigh.',
+      'The right knee opens out to the side toward the floor. Place a block under it if it floats high.',
+      'Square your shoulders toward the extended left leg.',
+      'Inhale and lengthen the spine tall.',
+      'Exhale and hinge forward over the left leg. Hold the shin, ankle, or foot — wherever your back stays long.',
+      'Bend the extended knee if needed. Switch sides.',
+    ],
     voiceCues: {
       enter: 'Sit with the legs extended. Bend the right knee and place the right sole against the inner left thigh. The right knee opens out to the side toward the floor.',
       hold: 'Inhale and lengthen the spine. Exhale and hinge forward over the extended left leg. Hold the shin, ankle, or foot — wherever you can without rounding the spine.',
@@ -1130,7 +1301,7 @@ export const ASANAS = {
   },
 
   // ── Gomukhasana ────────────────────────────────────────────────────────
-  // HYP 1.20 names "Gomukhasana" — one of the few asanas the text
+  // Hatha Yoga Pradipika 1.20 names "Gomukhasana" — one of the few asanas the text
   // enumerates by name. The Sanskrit means cow-faced; the legs in the
   // pose form a shape said to resemble a cow's face.
   gomukhasana: {
@@ -1140,7 +1311,7 @@ export const ASANAS = {
     iast: 'gomukhāsana',
     english: 'Cow Face Pose',
     aliases: ['Cow-Faced Pose'],
-    source: { text: 'HYP', verse: '1.20', note: 'Named explicitly in HYP Ch. 1. The legs in the pose are said to resemble a cow\'s face — knees stacked like the muzzle, feet flaring like the ears.' },
+    source: { text: 'HYP', verse: '1.20', note: 'Named explicitly in the Hatha Yoga Pradipika Ch. 1. The legs in the pose are said to resemble a cow\'s face — knees stacked like the muzzle, feet flaring like the ears.' },
     category: 'seated',
     level: 'intermediate',
     poseKey: 'gomukhasana',
@@ -1148,6 +1319,15 @@ export const ASANAS = {
     durationSeconds: 60,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow even breath. The shape is intense — the breath keeps the shoulders soft.' },
+    instructions: [
+      'Sit on a folded blanket with legs extended.',
+      'Bend the left knee. Place the left foot beside the right hip, knee pointing forward.',
+      'Cross the right thigh over the left, stacking the knees. The right foot comes beside the left hip.',
+      'Sit evenly on both sit bones — adjust the blanket if needed.',
+      'Reach the right arm overhead. Bend the right elbow and let the right hand fall down your back.',
+      'Bring the left arm behind your back from below. If accessible, hook the fingers together. Otherwise, hold a strap or towel between the hands.',
+      'Lift the bottom elbow up. Lift the top elbow up. Switch BOTH arms and legs for the second side.',
+    ],
     voiceCues: {
       enter: 'From seated, cross the right thigh over the left so the knees stack. The feet flare out to the sides of the hips. Reach the right arm overhead, bend the elbow, and let the right hand fall down the back. Bring the left arm behind the back from below; if accessible, hook the fingers together. Otherwise hold a strap between the hands.',
       hold: 'Stack the spine vertically. Lift the bottom elbow up; lift the top elbow up. Soften the lifted shoulder away from the ear.',
@@ -1186,7 +1366,7 @@ export const ASANAS = {
     iast: 'marīcyāsana',
     english: "Marichi's Pose C",
     aliases: ["Sage Marichi's Twist"],
-    source: { text: 'modern', note: 'Modern Iyengar/Ashtanga lettering of seated twists named for the sage Marichi (a son of Brahma). HYP does not enumerate the lettered variants.' },
+    source: { text: 'modern', note: 'Modern Iyengar/Ashtanga lettering of seated twists named for the sage Marichi (a son of Brahma). the Hatha Yoga Pradipika does not enumerate the lettered variants.' },
     category: 'twist',
     level: 'intermediate',
     poseKey: 'marichyasanaC',
@@ -1194,6 +1374,15 @@ export const ASANAS = {
     durationSeconds: 45,
     breathPattern: 'paced',
     breathCues: { enter: 'inhale', notes: 'Inhale to lengthen; exhale to deepen the twist. Never force on the breath out.' },
+    instructions: [
+      'Sit with both legs extended in front of you.',
+      'Bend the right knee. Plant the right foot flat on the floor, heel close to the right sit bone.',
+      'Keep the left leg long and active, foot flexed.',
+      'Inhale and lengthen the spine tall.',
+      'Exhale and rotate your torso to the right. Place the right hand on the floor behind you for support.',
+      'Hook the left elbow on the OUTSIDE of the right knee.',
+      'Press the elbow into the knee gently to deepen the rotation. Switch sides.',
+    ],
     voiceCues: {
       enter: 'Sit with the legs extended. Bend the right knee and place the right foot flat on the floor, heel close to the right sit bone. Keep the left leg long and active.',
       hold: 'Inhale to lengthen the spine. Exhale and rotate the torso to the right. Hook the left elbow on the outside of the right knee. Right hand behind you for support.',
@@ -1225,7 +1414,7 @@ export const ASANAS = {
   },
 
   // ── Virasana ───────────────────────────────────────────────────────────
-  // HYP 1.21 names "Virasana" — one of the seats described as a
+  // Hatha Yoga Pradipika 1.21 names "Virasana" — one of the seats described as a
   // meditation posture. Modern teaching often distinguishes Virasana
   // (seated between the heels) from Vajrasana (seated on the heels).
   virasana: {
@@ -1235,7 +1424,7 @@ export const ASANAS = {
     iast: 'vīrāsana',
     english: 'Hero Pose',
     aliases: ["Hero's Seat"],
-    source: { text: 'HYP', verse: '1.21', note: 'Named in HYP Ch. 1 alongside other meditation seats. The Sanskrit "vīra" means hero, warrior.' },
+    source: { text: 'HYP', verse: '1.21', note: 'Named in the Hatha Yoga Pradipika Ch. 1 alongside other meditation seats. The Sanskrit "vīra" means hero, warrior.' },
     category: 'seated',
     level: 'beginner',
     poseKey: 'virasana',
@@ -1243,6 +1432,15 @@ export const ASANAS = {
     durationSeconds: 120,
     breathPattern: 'natural',
     breathCues: { notes: 'Natural breath. Like Vajrasana, this seat is safe after meals; the breath finds its own slow rhythm.' },
+    instructions: [
+      'Kneel on the floor with knees together.',
+      'Place your feet wider than your hips. The tops of the feet flat on the floor, toes pointing back.',
+      'Sit between your heels — your sit bones land on the floor or on a yoga block.',
+      'Most users need a block under the seat for years. Start tall, lower the block over weeks.',
+      "If the tops of the feet don't reach the floor, roll a thin blanket under the front of the ankles.",
+      'Rest your hands on your thighs.',
+      'Lengthen the spine, soften the shoulders.',
+    ],
     voiceCues: {
       enter: 'Kneel with the knees together and the feet wider than the hips. Sit between the feet, sit bones on the floor or on a block. The tops of the feet flat on the floor, toes pointing back.',
       hold: 'Rest the hands on the thighs. Lengthen the spine. Soften the shoulders, soften the jaw.',
@@ -1274,12 +1472,12 @@ export const ASANAS = {
   },
 
   // ── Pilot 8: Ardha Matsyendrasana ──────────────────────────────────────
-  // HYP 1.27 names "Matsyendrasana" — the full bind, named for the
+  // Hatha Yoga Pradipika 1.27 names "Matsyendrasana" — the full bind, named for the
   // sage Matsyendranath, founder of the Nath tradition and reputedly
   // hatha's first teacher. Modern teaching almost always offers the
   // half (`ardha`) variant, which is what we're shipping. Source is
   // marked `modern` because the half variant is a 20th-century
-  // simplification, but the `note` records the HYP origin.
+  // simplification, but the `note` records the Hatha Yoga Pradipika origin.
   ardhaMatsyendrasana: {
     id: 'ardhaMatsyendrasana',
     sanskrit: 'Ardha Matsyendrasana',
@@ -1290,7 +1488,7 @@ export const ASANAS = {
     source: {
       text: 'modern',
       verse: '1.27',
-      note: 'Modern half-variant of HYP 1.27 Matsyendrasana, named for the sage Matsyendranath. The full bind is intermediate-to-advanced; we ship the accessible half version.',
+      note: 'Modern half-variant of Hatha Yoga Pradipika 1.27 Matsyendrasana, named for the sage Matsyendranath. The full bind is intermediate-to-advanced; we ship the accessible half version.',
     },
     category: 'twist',
     level: 'beginner',
@@ -1340,7 +1538,7 @@ export const ASANAS = {
   // ── Forward Folds ───────────────────────────────────────────────────────
   // ── Uttanasana ─────────────────────────────────────────────────────────
   // Modern hatha forward fold. "Ut" = intense, "tāna" = stretch. Not
-  // in HYP Ch. 1 (which names Paschimottanasana, the seated version).
+  // in the Hatha Yoga Pradipika Ch. 1 (which names Paschimottanasana, the seated version).
   uttanasana: {
     id: 'uttanasana',
     sanskrit: 'Uttanasana',
@@ -1348,7 +1546,7 @@ export const ASANAS = {
     iast: 'uttānāsana',
     english: 'Standing Forward Fold',
     aliases: ['Standing Forward Bend', 'Rag Doll'],
-    source: { text: 'modern', note: 'Modern standing forward fold. HYP names Paschimottanasana (1.30-31), the seated version; Uttanasana is its standing-pose counterpart from modern hatha.' },
+    source: { text: 'modern', note: 'Modern standing forward fold. the Hatha Yoga Pradipika names Paschimottanasana (1.30-31), the seated version; Uttanasana is its standing-pose counterpart from modern hatha.' },
     category: 'standing',
     level: 'beginner',
     poseKey: 'uttanasana',
@@ -1356,6 +1554,15 @@ export const ASANAS = {
     durationSeconds: 60,
     breathPattern: 'paced',
     breathCues: { enter: 'exhale', notes: 'Inhale to lengthen the spine on entry; exhale to fold deeper. Stay with the breath — don\'t hold it.' },
+    instructions: [
+      'Stand with your feet hip-width apart at the front of the mat.',
+      'Inhale and lift your arms overhead, lengthening the spine.',
+      'Exhale and hinge forward from your hips, folding over the legs.',
+      'Bend your knees as much as you need to. Straight legs are NOT the goal.',
+      'Let your hands rest on shins, ankles, or the floor — wherever your back stays long.',
+      'Let the head hang heavy. Soften the neck completely.',
+      'Optional: hold opposite elbows and gently sway side to side.',
+    ],
     voiceCues: {
       enter: 'From standing, inhale and lift the arms overhead to lengthen the spine. Exhale and hinge from the hips, folding forward with a long spine. Bend the knees as much as needed.',
       hold: 'Let the head hang heavy. Hold opposite elbows and gently sway side to side, or rest the hands on shins, ankles, or the floor. Soften the neck completely.',
@@ -1394,7 +1601,7 @@ export const ASANAS = {
   },
 
   // ── Pilot 7: Paschimottanasana ─────────────────────────────────────────
-  // One of the few asanas explicitly named in HYP Ch. 1 (verses 1.30-31).
+  // One of the few asanas explicitly named in the Hatha Yoga Pradipika Ch. 1 (verses 1.30-31).
   // Translation: "paschima" = west = back of the body; "uttana" =
   // intense stretch. The text praises it as a means of awakening
   // pranic energy along the spine.
@@ -1408,7 +1615,7 @@ export const ASANAS = {
     source: {
       text: 'HYP',
       verse: '1.30-31',
-      note: 'Named explicitly in HYP Ch. 1. The text describes it as awakening pranic flow along the spine.',
+      note: 'Named explicitly in the Hatha Yoga Pradipika Ch. 1. The text describes it as awakening pranic flow along the spine.',
     },
     category: 'forward_fold',
     level: 'beginner',
@@ -1450,7 +1657,7 @@ export const ASANAS = {
       "Deeply stretches the hamstrings, calves, and entire posterior chain",
       "Compresses the abdomen — supports digestion and stimulates the kidneys",
       "Activates the parasympathetic response — direct anxiety relief",
-      "HYP describes it as moving prana up the central channel; modern reading: nervous-system regulation",
+      "the Hatha Yoga Pradipika describes it as moving prana up the central channel; modern reading: nervous-system regulation",
     ],
     reasoning: "Paschimottanasana is the canonical pose for an overstimulated nervous system — wired-but-tired vata, late-evening anxiety, the wind-down before sleep. Hold it longer than feels comfortable to let the parasympathetic shift take hold.",
   },
@@ -1458,7 +1665,7 @@ export const ASANAS = {
   // ── Restorative & Floor Poses ───────────────────────────────────────────
   balasana: {
     // ── Pilot 9: Balasana ──────────────────────────────────────────────
-    // Modern restorative pose — not in HYP Ch. 1. The Sanskrit "bala"
+    // Modern restorative pose — not in the Hatha Yoga Pradipika Ch. 1. The Sanskrit "bala"
     // means child or young one. A staple of every yoga lineage as a
     // resting pose between asanas.
     id: 'balasana',
@@ -1469,7 +1676,7 @@ export const ASANAS = {
     aliases: ['Resting Pose'],
     source: {
       text: 'modern',
-      note: 'Modern restorative pose, not enumerated in HYP Ch. 1. Universal across hatha lineages as a resting position.',
+      note: 'Modern restorative pose, not enumerated in the Hatha Yoga Pradipika Ch. 1. Universal across hatha lineages as a resting position.',
     },
     category: 'restorative',
     level: 'beginner',
@@ -1515,7 +1722,7 @@ export const ASANAS = {
   },
 
   // ── Supta Matsyendrasana ───────────────────────────────────────────────
-  // Modern reclined version of the HYP 1.27 Matsyendrasana. The
+  // Modern reclined version of the Hatha Yoga Pradipika 1.27 Matsyendrasana. The
   // supine geometry removes the muscular effort of an upright twist,
   // making this the most universally accessible spinal rotation.
   suptaMatsyendrasana: {
@@ -1525,7 +1732,7 @@ export const ASANAS = {
     iast: 'supta matsyendrāsana',
     english: 'Supine Spinal Twist',
     aliases: ['Reclined Twist', 'Belly Twist (informal)'],
-    source: { text: 'modern', verse: '1.27', note: 'Modern reclined variant of the HYP 1.27 Matsyendrasana, named for the sage Matsyendranath.' },
+    source: { text: 'modern', verse: '1.27', note: 'Modern reclined variant of the Hatha Yoga Pradipika 1.27 Matsyendrasana, named for the sage Matsyendranath.' },
     category: 'supine',
     level: 'beginner',
     poseKey: 'supineTwist',
@@ -1533,6 +1740,15 @@ export const ASANAS = {
     durationSeconds: 60,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow, full breaths into the side body. Each exhale lets gravity sink the knee a little closer to the floor.' },
+    instructions: [
+      'Lie on your back on a soft surface.',
+      'Hug your right knee into your chest with both hands.',
+      'Extend your left leg long along the floor.',
+      'Extend your right arm out to the side at shoulder height, palm up.',
+      'Use your left hand to gently guide the right knee across your body to the left.',
+      'Turn your head to the right if your neck allows.',
+      "Rest a cushion under the moving knee if it doesn't reach the floor. Switch sides.",
+    ],
     voiceCues: {
       enter: 'Lie on the back. Hug the right knee into the chest. Extend the left leg long along the floor.',
       hold: 'Guide the right knee across the body toward the left, letting it drop toward the floor. Extend the right arm out at shoulder height. Turn the head to the right if the neck allows.',
@@ -1569,7 +1785,7 @@ export const ASANAS = {
   },
 
   // ── Pilot 10: Savasana ─────────────────────────────────────────────
-  // HYP Ch. 1 verse 1.32 names "Shavasana" explicitly — one of the
+  // the Hatha Yoga Pradipika Ch. 1 verse 1.32 names "Shavasana" explicitly — one of the
   // few asanas the text enumerates by name. The verse describes it
   // as a position resembling a corpse, removing fatigue and
   // pacifying the mind. We keep the HYP source citation.
@@ -1583,7 +1799,7 @@ export const ASANAS = {
     source: {
       text: 'HYP',
       verse: '1.32',
-      note: 'Named explicitly in HYP Ch. 1. The text describes a supine pose like a corpse, removing fatigue and quieting the mind.',
+      note: 'Named explicitly in the Hatha Yoga Pradipika Ch. 1. The text describes a supine pose like a corpse, removing fatigue and quieting the mind.',
     },
     category: 'restorative',
     level: 'beginner',
@@ -1637,7 +1853,7 @@ export const ASANAS = {
     iast: 'supta baddha koṇāsana',
     english: 'Reclined Bound Angle Pose',
     aliases: ['Reclined Cobbler Pose', 'Reclining Goddess'],
-    source: { text: 'modern', note: 'Modern restorative variant of Baddha Konasana. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern restorative variant of Baddha Konasana. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'restorative',
     level: 'beginner',
     poseKey: 'suptaBaddhaKonasana',
@@ -1645,6 +1861,15 @@ export const ASANAS = {
     durationSeconds: 240,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow even breath. Each exhale releases the inner thighs a touch closer to the floor.' },
+    instructions: [
+      'Lie down on your back on a soft surface.',
+      'Bring the soles of your feet together. Let the knees fall apart to the sides.',
+      'Place a block, cushion, or folded blanket under EACH knee for support — non-negotiable for tight hips.',
+      'Move the feet closer to the body or further away to find what feels best.',
+      'Rest one hand on your belly, one on your heart. Or rest both arms by your sides, palms up.',
+      'Cover your eyes with a soft cloth or eye pillow if you have one.',
+      'Soften the jaw, soften the eyes. Stay 5-10 minutes.',
+    ],
     voiceCues: {
       enter: 'Lie on the back. Bring the soles of the feet together and let the knees fall apart to the sides. Place a cushion or block under each knee for support.',
       hold: 'Rest one hand on the belly, one on the heart. Or rest the arms by the sides, palms up. Soften the jaw, soften the eyes.',
@@ -1683,7 +1908,7 @@ export const ASANAS = {
     iast: 'supta pādāṅguṣṭhāsana',
     english: 'Reclined Hand-to-Big-Toe Pose',
     aliases: ['Reclining Hand-to-Big-Toe'],
-    source: { text: 'modern', note: 'Modern reclined variant of Utthita Hasta Padangusthasana. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern reclined variant of Utthita Hasta Padangusthasana. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'supine',
     level: 'beginner',
     poseKey: 'suptaPadangusthasana',
@@ -1691,6 +1916,15 @@ export const ASANAS = {
     durationSeconds: 60,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow even breath. Each exhale lets the hamstring release a touch deeper.' },
+    instructions: [
+      'Lie on your back on a flat surface.',
+      'Loop a yoga strap (or sturdy belt or scarf) around the ball of your right foot.',
+      'Hold both ends of the strap, one end in each hand.',
+      'Extend your right leg up toward the ceiling.',
+      'Press the right foot up into the strap. Soften the right hip down toward the floor.',
+      'Keep your left leg long on the floor with the foot flexed.',
+      'Both shoulders stay relaxed on the floor. Switch sides.',
+    ],
     voiceCues: {
       enter: 'Lie on the back. Loop a yoga strap around the ball of the right foot. Extend the right leg up toward the ceiling, holding the strap with both hands. Keep the left leg long on the floor, foot flexed.',
       hold: 'Press the right foot up into the strap, drawing the leg slightly closer to the chest. Soften the right hip down. Both shoulders stay on the floor.',
@@ -1729,7 +1963,7 @@ export const ASANAS = {
     iast: 'apānāsana',
     english: 'Knees-to-Chest Pose',
     aliases: ['Wind-Relieving Pose', 'Pavanamuktasana (similar)'],
-    source: { text: 'modern', note: 'Modern hatha. Named for "apāna" — the downward-moving prana that governs elimination. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha. Named for "apāna" — the downward-moving prana that governs elimination. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'supine',
     level: 'beginner',
     poseKey: 'apanasana',
@@ -1737,6 +1971,15 @@ export const ASANAS = {
     durationSeconds: 45,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow even breath. Each exhale lets the knees press a touch closer to the chest.' },
+    instructions: [
+      'Lie on your back on a soft surface.',
+      'Bend both knees and draw them toward your chest.',
+      'Wrap your arms around your shins. Hands hold opposite elbows OR clasp the shins.',
+      'Soften your shoulders down to the floor.',
+      'Hug the knees gently in toward your chest with each exhale.',
+      'Optional: rock side to side gently for a lower-back massage.',
+      'Optional: hold one knee at a time (Eka Pada Apanasana) for an easier variation.',
+    ],
     voiceCues: {
       enter: 'Lie on the back. Bend both knees and draw them in toward the chest. Wrap the arms around the shins, hands on opposite elbows or holding the shins.',
       hold: 'Hug the knees in. Soften the shoulders to the floor. Let the lower back release into the floor with each exhale.',
@@ -1775,7 +2018,7 @@ export const ASANAS = {
     iast: 'jaṭhara parivartanāsana',
     english: 'Belly Twist',
     aliases: ['Reclined Belly Twist', 'Revolved Abdomen Pose'],
-    source: { text: 'modern', note: 'Modern hatha. "Jaṭhara" = belly, "parivartana" = revolving. Not in HYP Ch. 1.' },
+    source: { text: 'modern', note: 'Modern hatha. "Jaṭhara" = belly, "parivartana" = revolving. Not in the Hatha Yoga Pradipika Ch. 1.' },
     category: 'supine',
     level: 'beginner',
     poseKey: 'jatharaParivartanasana',
@@ -1783,6 +2026,15 @@ export const ASANAS = {
     durationSeconds: 60,
     breathPattern: 'natural',
     breathCues: { notes: 'Slow even breath into the side ribs. Don\'t hold the breath in the twist.' },
+    instructions: [
+      'Lie on your back on a flat surface.',
+      'Draw both knees in toward your chest.',
+      'Extend your arms out to the sides at shoulder height, palms up.',
+      'Lower both knees to the right toward the floor, keeping them stacked.',
+      'Turn your head to the left.',
+      "Both shoulders stay on the floor — don't force the moving shoulder down.",
+      "Place a cushion under the moving knees if they don't reach the floor. Switch sides.",
+    ],
     voiceCues: {
       enter: 'Lie on the back. Draw both knees in toward the chest. Extend the arms out to the sides at shoulder height, palms up.',
       hold: 'Lower both knees to the right toward the floor. Turn the head to the left. Both shoulders stay on the floor.',
@@ -1829,7 +2081,7 @@ export const ASANAS = {
     aliases: ['Sarpasana (Snake Pose, simpler variant)'],
     source: {
       text: 'modern',
-      note: 'Belongs to the broader hatha tradition; HYP Ch. 1 does not enumerate it directly. Modern asana lineages (Krishnamacharya, Sivananda) treat it as a foundational backbend.',
+      note: 'Belongs to the broader hatha tradition; the Hatha Yoga Pradipika Ch. 1 does not enumerate it directly. Modern asana lineages (Krishnamacharya, Sivananda) treat it as a foundational backbend.',
     },
     category: 'backbend',
     level: 'beginner',
@@ -1879,7 +2131,7 @@ export const ASANAS = {
 
   // ── Pilot 6: Setu Bandha Sarvangasana ─────────────────────────────────
   // Modern hatha asana — "setu bandha" = bridge construction;
-  // "sarvanga" = whole body. Not in HYP Ch. 1. Often used as the
+  // "sarvanga" = whole body. Not in the Hatha Yoga Pradipika Ch. 1. Often used as the
   // accessible counter / preparation for full Sarvangasana.
   setuBandhaSarvangasana: {
     id: 'setuBandhaSarvangasana',
@@ -1890,7 +2142,7 @@ export const ASANAS = {
     aliases: ['Setu Bandhasana', 'Supported Bridge'],
     source: {
       text: 'modern',
-      note: 'Modern hatha asana. Often taught as the accessible alternative or preparation for Sarvangasana (which itself is a modern derivation of the HYP Viparita Karani mudra family).',
+      note: 'Modern hatha asana. Often taught as the accessible alternative or preparation for Sarvangasana (which itself is a modern derivation of the Hatha Yoga Pradipika Viparita Karani mudra family).',
     },
     category: 'backbend',
     level: 'beginner',
@@ -1939,7 +2191,7 @@ export const ASANAS = {
   },
 
   // ── Dhanurasana ────────────────────────────────────────────────────────
-  // HYP 1.25 names "Dhanurasana" explicitly — one of the few asanas
+  // Hatha Yoga Pradipika 1.25 names "Dhanurasana" explicitly — one of the few asanas
   // the text enumerates by name. The Sanskrit "dhanus" = bow; the body
   // forms an archer's bow when the hands hold the ankles and the chest
   // and thighs lift simultaneously.
@@ -1950,7 +2202,7 @@ export const ASANAS = {
     iast: 'dhanurāsana',
     english: 'Bow Pose',
     aliases: ['Bow'],
-    source: { text: 'HYP', verse: '1.25', note: 'Named explicitly in HYP Ch. 1. The Sanskrit "dhanus" means archer\'s bow — the body forms a bow shape with the arms acting as the string.' },
+    source: { text: 'HYP', verse: '1.25', note: 'Named explicitly in the Hatha Yoga Pradipika Ch. 1. The Sanskrit "dhanus" means archer\'s bow — the body forms a bow shape with the arms acting as the string.' },
     category: 'backbend',
     level: 'intermediate',
     poseKey: 'dhanurasana',
@@ -1958,6 +2210,15 @@ export const ASANAS = {
     durationSeconds: 30,
     breathPattern: 'paced',
     breathCues: { enter: 'inhale', notes: 'Inhale to lift; exhale to settle. Don\'t hold the breath under the lift — it\'s tempting but wrong.' },
+    instructions: [
+      'Lie face down on a soft surface. Forehead resting on the mat.',
+      'Bend both knees, bringing your heels toward your buttocks.',
+      'Reach back with both hands and grasp the OUTSIDES of your ankles.',
+      'Knees stay roughly hip-width apart — they tend to splay; bring them in.',
+      'Inhale and press your feet back into your hands as you lift the chest off the floor.',
+      'The body forms a bow — chest and thighs lift, the arms are the bowstring.',
+      "Each breath rocks the bow gently. Use a yoga strap looped between the ankles if your hands don't reach.",
+    ],
     voiceCues: {
       enter: 'Lie face down. Bend both knees and reach the hands back to grasp the outsides of the ankles. Knees stay hip-width apart.',
       hold: 'Inhale and press the feet back into the hands as you lift the chest and thighs off the floor. The bow shape — the body curves, the arms are the bowstring.',
@@ -2037,7 +2298,7 @@ export const ASANAS = {
   // ── Inversions ──────────────────────────────────────────────────────────
   // ── Pilot 2: Adho Mukha Svanasana ──────────────────────────────────────
   // Modern hatha. "Adho mukha" = facing downward; "svana" = dog. Not
-  // in HYP Ch. 1 — codified in 20th-century vinyasa. Functions as
+  // in the Hatha Yoga Pradipika Ch. 1 — codified in 20th-century vinyasa. Functions as
   // both an active strengthener and a resting transition.
   adhoMukhaSvanasana: {
     id: 'adhoMukhaSvanasana',
@@ -2048,7 +2309,7 @@ export const ASANAS = {
     aliases: ['Down Dog', 'Inverted-V Pose'],
     source: {
       text: 'modern',
-      note: 'Modern asana, codified in 20th-century vinyasa lineages (Krishnamacharya, Ashtanga). Not enumerated in HYP Ch. 1.',
+      note: 'Modern asana, codified in 20th-century vinyasa lineages (Krishnamacharya, Ashtanga). Not enumerated in the Hatha Yoga Pradipika Ch. 1.',
     },
     category: 'inversion',
     level: 'beginner',
@@ -2096,8 +2357,8 @@ export const ASANAS = {
   },
 
   // ── Legs Up the Wall ───────────────────────────────────────────────────
-  // Modern restorative simplification of the HYP 3.78-83 Viparita
-  // Karani — which in HYP is a *mudra* involving inversion to reverse
+  // Modern restorative simplification of the Hatha Yoga Pradipika 3.78-83 Viparita
+  // Karani — which in the Hatha Yoga Pradipika it is a *mudra* involving inversion to reverse
   // bindu (subtle essence) flow. We ship the passive wall variant as
   // an asana; the original mudra is a stretch goal.
   legsUpTheWall: {
@@ -2107,7 +2368,7 @@ export const ASANAS = {
     iast: 'viparīta karaṇī',
     english: 'Legs Up the Wall',
     aliases: ['Inverted Action', 'Wall Pose'],
-    source: { text: 'modern', verse: '3.78-83', note: 'Modern restorative pose. The original HYP 3.78-83 Viparita Karani is a mudra (not an asana) involving inversion to reverse the flow of bindu. We ship the simplified wall variant; the mudra itself is a stretch goal.' },
+    source: { text: 'modern', verse: '3.78-83', note: 'Modern restorative pose. The original Hatha Yoga Pradipika 3.78-83 Viparita Karani is a mudra (not an asana) involving inversion to reverse the flow of bindu. We ship the simplified wall variant; the mudra itself is a stretch goal.' },
     category: 'restorative',
     level: 'beginner',
     poseKey: 'legsUpWall',
@@ -2115,6 +2376,15 @@ export const ASANAS = {
     durationSeconds: 300,
     breathPattern: 'natural',
     breathCues: { notes: 'Natural breath. The pose itself is a long exhale for the nervous system — let the breath find its own slow rhythm.' },
+    instructions: [
+      'Sit on the floor with your right hip touching a wall.',
+      'Lower yourself onto your back and swing your legs up the wall as you turn your body 90 degrees.',
+      "Scoot your hips as close to the wall as feels comfortable. They don't have to touch.",
+      'Optional: place a folded blanket under your hips for a slight pelvic tilt.',
+      'Rest your arms by your sides, palms up. Or one hand on the belly, one on the heart.',
+      'Cover your eyes with a soft cloth or eye pillow if you have one.',
+      'Soften everything. Stay 5-15 minutes.',
+    ],
     voiceCues: {
       enter: 'Sit with the right hip against the wall. Swing the legs up the wall as you lie down on the back. Scoot the hips as close to the wall as comfortable — they don\'t have to touch.',
       hold: 'Let the arms rest out to the sides, palms up, or one hand on the belly and one on the heart. Close the eyes. Let the wall hold the legs entirely.',

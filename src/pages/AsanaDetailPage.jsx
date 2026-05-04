@@ -137,11 +137,23 @@ function BottomSheet({ open, onClose, title, children }) {
 
 // Step-by-step instructions derived from voice cues with more detail
 function getSteps(asana) {
+  // If the entry has granular `instructions` (numbered setup steps),
+  // surface them as individual numbered items. Otherwise fall back to
+  // collapsing `voiceCues.enter` into a single Setup step. Either way,
+  // Hold / Breathe / Release come from voiceCues for audio fidelity.
+  const setupSteps = Array.isArray(asana.instructions) && asana.instructions.length
+    ? asana.instructions.map((text, i) => ({
+        phase: i === 0 ? 'Setup' : '',     // group label only on first step
+        icon:  i === 0 ? 'login' : 'arrow_right',
+        text,
+      }))
+    : [{ phase: 'Setup', icon: 'login', text: asana.voiceCues.enter }]
+
   return [
-    { phase: 'Setup', icon: 'login', text: asana.voiceCues.enter },
-    { phase: 'Hold', icon: 'timer', text: asana.voiceCues.hold },
+    ...setupSteps,
+    { phase: 'Hold',    icon: 'timer',   text: asana.voiceCues.hold },
     { phase: 'Breathe', icon: 'airwave', text: asana.voiceCues.breathe },
-    { phase: 'Release', icon: 'logout', text: asana.voiceCues.exit },
+    { phase: 'Release', icon: 'logout',  text: asana.voiceCues.exit },
   ]
 }
 
