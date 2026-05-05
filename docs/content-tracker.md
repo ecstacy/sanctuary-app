@@ -150,12 +150,12 @@ in batch 9).
 
 | # | ID | English | Source | D | I | R | S | L |
 |---|---|---|---|---|---|---|---|---|
-| P1 | `nadiShodhana` | Alternate Nostril | **HYP 2.7-10** | | n/a | | | |
-| P2 | `ujjayi` | Victorious Breath | **HYP 2.51-53** | | n/a | | | |
-| P3 | `bhramari` | Humming Bee | **HYP 2.68** | | n/a | | | |
-| P4 | `sheetali` | Cooling | **HYP 2.57-58** | | n/a | | | |
-| P5 | `bhastrika` | Bellows | **HYP 2.61-67** | | n/a | | | |
-| P6 | `kapalabhati` | Skull-Shining | **HYP 2.36-37** | | n/a | | | |
+| P1 | `nadiShodhana` | Alternate Nostril | modern (HYP 2.7-10 lineage) | ✓ | n/a | | | |
+| P2 | `ujjayi` | Victorious Breath | **HYP 2.51-53** | ✓ | n/a | | | |
+| P3 | `bhramari` | Humming Bee | **HYP 2.68** | ✓ | n/a | | | |
+| P4 | `sheetali` | Cooling | **HYP 2.57-58** | ✓ | n/a | | | |
+| P5 | `bhastrika` | Bellows | **HYP 2.61-67** | ✓ | n/a | | | |
+| P6 | `kapalabhati` | Skull-Shining (kriya in HYP) | **HYP 2.36-37** | ✓ | n/a | | | |
 
 Pranayamas don't get full pose-figure imagery — they get a small
 illustrated breath diagram per technique (drawn separately, not via
