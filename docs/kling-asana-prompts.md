@@ -435,6 +435,687 @@ Over 5 seconds, starting from Tadasana (frame 1), she: steps her LEFT foot out t
 
 ---
 
+### 19. Utkatasana — Chair Pose
+
+**Pose key:** `utkatasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Utkatasana (Chair Pose), facing camera head-on, feet together (or hip-width apart) at the front of the mat. Both knees bent deeply as if sitting back into an invisible chair behind her — thighs angling toward parallel with the floor, weight clearly in the heels (you can see the toes can lift if she chose). Torso leans forward slightly so the chest stays open. Both arms reach straight up overhead, biceps near the ears, palms facing each other or palms together, fingertips reaching toward the ceiling. Spine long. Shoulders soft and away from the ears.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: inhales and sweeps both arms straight up overhead, then exhales bending both knees deeply and sitting the hips back as if into a chair, leaning the torso slightly forward to keep the chest open — arriving at the peak around second 2. She holds for 1 breath (seconds 2 to 3). Then she reverses: inhales to straighten the legs, exhales lowering the arms, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+### 20. Virabhadrasana III — Warrior III
+
+**Pose key:** `warrior3` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Warrior III. Body turned in profile to face camera-left, balancing on her LEFT leg. Standing left leg straight and strong (slight micro-bend in the standing knee for stability is fine). The right leg is extended straight back behind her, lifted to be parallel to the floor — thigh, knee, ankle, foot all in one horizontal line at hip height. Both arms reach straight forward at shoulder height, parallel to the floor, palms facing each other. From fingertips to back foot the body forms one long horizontal line. Hips are level — not rotated open. Gaze a foot in front of the standing toe.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: shifts her weight onto her LEFT foot, hinges forward at the hip while extending her right leg straight back behind her parallel to the floor, and reaches both arms straight forward at shoulder height — forming one long horizontal T-line — arriving at the peak around second 2. She holds the balance steady for 1 breath (seconds 2 to 3). Then she reverses: lowers the right foot back to the mat as the torso rises, lowers the arms, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+### 21. Parsvakonasana — Side Angle Pose
+
+**Pose key:** `parsvakonasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Extended Side Angle Pose. Wide stance along the mat, body in profile facing camera-left. Right (front) foot at the left end of the mat pointing camera-left, right knee bent to 90 degrees with the thigh parallel to the floor. Left (back) leg straight, back foot at the right end of the mat parallel to the back edge. Right forearm rests on the right thigh just above the knee; left arm reaches up and over in line with the spine, palm facing the floor, the underside of the left arm parallel to the floor. The body forms one long diagonal line from the back heel through the fingertips of the top arm. Chest opens up toward the ceiling. Gaze up under the top arm.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: steps her LEFT foot back about 3.5 feet into a wide stance, turns to face camera-left in profile, bends the right knee to 90 degrees with the thigh parallel, lowers the right forearm to rest on the right thigh, and sweeps the left arm up and over in line with the spine palm-down — arriving at the peak around second 2. She holds for 1 breath (seconds 2 to 3). Then she reverses: presses through both feet to rise back up, lowers the arms, steps feet together, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+### 22. Parsvottanasana — Pyramid Pose
+
+**Pose key:** `parsvottanasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Pyramid Pose. Body in profile facing camera-left, with right foot forward at the left end of the mat and left foot back at the right end, feet about 3 feet apart along the length of the mat. Right (front) foot points camera-left; left (back) foot turned out about 45 degrees, both feet flat on the floor. Hips squared toward the front (camera-left direction). Front leg straight (or micro-bent), torso folded forward over the front leg from the hip — chest reaching toward the front shin, spine long, NOT rounded. Hands rest on the front shin, on yoga blocks beside the front foot, OR are clasped behind the back in reverse prayer (mudra). Crown of the head reaches forward toward the front toes.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: steps her LEFT foot back about 3 feet, turns the back foot out 45 degrees, squares her hips forward, brings her hands behind her back in reverse prayer (or to her hips), inhales tall, then exhales hinging forward over the front leg with a long spine — chest moving toward the front shin — arriving at the peak around second 2.5. She holds for 1 breath (seconds 2.5 to 3.5). Then she reverses: inhales to rise back up, releases the hands, steps the left foot forward, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+### 23. Prasarita Padottanasana — Wide-Legged Forward Fold
+
+**Pose key:** `prasaritaPadottanasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Wide-Legged Standing Forward Fold. Body facing camera head-on, feet wide apart along the back of the mat — about a leg-length wide — both feet parallel and pointing forward toward camera. Both legs straight, thighs engaged. Torso fully folded forward at the hips, crown of the head reaching toward the floor between the feet. Hands rest flat on the floor between the feet, fingertips in line with the toes, elbows bending back if accessible. Spine long, NOT rounded. The pose looks symmetrical and grounded.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: steps both feet wide apart to about a leg-length, hands on hips, inhales lengthening the spine tall, then exhales hinging forward at the hips with a long spine, lowering both hands to the floor between the feet — arriving at the peak around second 2.5. She holds for 1 breath (seconds 2.5 to 3.5). Then she reverses: hands on hips, inhales to rise back up with a flat back, steps feet together, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+### 24. Anjaneyasana — Low Lunge
+
+**Pose key:** `anjaneyasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Low Lunge (Anjaneyasana), body facing camera head-on. Right foot at the front of the mat with the right knee bent deeply and stacked over the right ankle. Left knee on the floor at the back of the mat, top of the left foot flat on the floor (toes untucked, foot pointing back). Hips sink down toward the floor and square forward. Both arms reach straight up overhead, biceps near the ears, palms facing each other, fingertips toward the ceiling. Spine long, slight backbend through the upper back. Heart open. Gaze forward and slightly up.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: bends her knees and steps her LEFT foot back into a long lunge, lowering the back left knee and the top of the left foot to the floor, then inhales sweeping both arms straight up overhead — arriving at the peak around second 2.5 with hips sinking toward the floor. She holds for 1 breath (seconds 2.5 to 3.5). Then she reverses: lowers the arms, steps the left foot forward to meet the right, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+### 25. Utthita Hasta Padangusthasana — Hand-to-Big-Toe
+
+**Pose key:** `utthitaHastaPadangusthasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Standing Hand-to-Big-Toe Pose. Body facing camera head-on, balancing on the LEFT leg with the standing left leg straight and strong. Right leg lifted and extended straight forward in front of her at hip height (or as high as flexibility allows; thigh roughly parallel to the floor, lower leg extending forward). The right hand holds the BIG TOE of the right foot with the index and middle fingers wrapped around the toe (yogi toe-lock). Left hand rests on the left hip. Spine tall, shoulders relaxed and level, hips level. Gaze steady forward.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: shifts weight onto her LEFT foot, lifts the right knee toward the chest, hooks the right big toe with the right index and middle fingers, places the left hand on the left hip, then slowly extends the right leg straight forward at hip height — arriving at the peak around second 3. She holds the balance steady for 1 breath (seconds 3 to 4). Then she reverses: bends the right knee back in, releases the toe, lowers the right foot to the mat, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+### 26. Garudasana — Eagle Pose
+
+**Pose key:** `garudasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Eagle Pose. Body facing camera head-on, sitting low into a single-leg squat on the LEFT standing leg with both knees bent. Right thigh crosses over the left thigh; right foot wraps behind the left calf, toes pointing down (or right toes lightly touching the floor as a kickstand if the wrap isn't accessible). Both arms cross in front of the chest at the elbows — left elbow under right elbow — and the forearms wrap so the palms come together (or backs of hands together if palms don't reach). Elbows lifted to shoulder height. Spine long. Gaze steady forward.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: bends both knees slightly and shifts weight onto the LEFT leg, crosses the right thigh over the left and hooks the right foot behind the left calf, extends both arms forward, then crosses the left elbow under the right and wraps the forearms so the palms touch in front of the face — arriving at the peak around second 3. She holds the balance steady for 1 breath (seconds 3 to 4). Then she reverses: unwinds the arms, releases the right foot to the floor, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+### 27. Natarajasana — Dancer's Pose
+
+**Pose key:** `natarajasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Dancer's Pose. Body in profile facing camera-left, balancing on the LEFT leg with the standing left leg straight (slight micro-bend acceptable). Right leg bent at the knee, lifted up and behind her so the right thigh extends back and the right foot points up toward the ceiling. The right hand grasps the inside of the right ankle from below (palm facing forward, thumb hooked around the ankle). Left arm extends straight forward at shoulder height as a counterbalance. Chest opens forward and slightly upward. Front body in a long arc from the lifted right foot through the right hip, chest, and left fingertips. Gaze forward.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: shifts weight onto the LEFT leg, bends the right knee and lifts the right foot toward the buttocks, reaches back with the right hand and grasps the inside of the right ankle, extends the left arm straight forward, then presses the right foot back into the right hand, lifting the leg up and back and opening the chest forward — arriving at the peak around second 3. She holds the balance steady for 1 breath (seconds 3 to 4). Then she reverses: lowers the right foot back to the mat, releases the arms, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+### 28. Parivrtta Trikonasana — Revolved Triangle
+
+**Pose key:** `parivrttaTrikonasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Revolved Triangle. Body in profile facing camera-left, feet about 3 feet apart along the mat. Right (front) foot at the left end of the mat pointing camera-left; left (back) foot at the right end, turned out about 45 degrees. Both legs straight. Hips squared forward (toward camera-left direction). Torso rotated to the right so the chest faces the BACK of the mat. The LEFT hand rests on the floor (or a yoga block) outside the right foot. Right arm reaches straight up toward the ceiling, palm facing forward, fingers active. Both arms form one long vertical line from the floor block up through the right hand. Head turns to gaze up under the top arm. Spine long, no rounding.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: steps her LEFT foot back 3 feet, squares her hips toward the front (camera-left), inhales lengthening the spine, then exhales rotating the torso to the right and lowering the LEFT hand to a yoga block outside the right foot while the right arm reaches up to the ceiling — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she reverses: inhales rising back up, lowers the arms, steps the left foot forward, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+## Hold-only seated, restorative, and inverted poses (peak-image loop)
+
+These poses use the same approach as Sukhasana (#5) and Savasana (#11): the peak image is uploaded as both the start AND end frame in Kling, and only breath animates over the 5 seconds.
+
+---
+
+### 29. Padmasana — Lotus Pose  *(hold-only, no entry)*
+
+**Pose key:** `padmasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Sitting in full Lotus Pose (Padmasana) on the center of the mat, facing the camera. Both legs are crossed: right foot resting on top of the left thigh, sole facing up; left foot resting on top of the right thigh, sole facing up. Both knees on the floor. Spine tall and long. Shoulders relaxed. Hands rest on the knees, palms up, thumb and index finger lightly touching in gyan mudra. Eyes softly closed, face serene.
+```
+
+**🎬 Kling motion prompt:** *(upload Padmasana peak image as both start and end frame)*
+```
+The subject holds this exact Lotus position for the full 5 seconds. The only motion is slow, subtle breath — one full breath cycle, visible as a gentle rise and fall of the chest and belly. No change in body or hand position. Eyes remain softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 30. Siddhasana — Accomplished Pose  *(hold-only, no entry)*
+
+**Pose key:** `siddhasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Sitting in Siddhasana on the center of the mat, facing the camera. Left heel tucked in close to the perineum; right foot resting on top of the left ankle so the right heel sits just above the pubic bone area. Both knees rest on the floor. Spine tall and long. Hands rest on the knees, palms up in gyan mudra. Eyes softly closed, face serene.
+```
+
+**🎬 Kling motion prompt:** *(upload Siddhasana peak image as both start and end frame)*
+```
+The subject holds this exact seated position for the full 5 seconds. The only motion is slow, subtle breath. No change in body or hand position. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 31. Vajrasana — Thunderbolt Pose  *(hold-only, no entry)*
+
+**Pose key:** `vajrasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Kneeling on the mat in Vajrasana, facing the camera. Knees together, big toes touching, heels apart enough to cradle the sit bones — sitting back on the heels. Tops of the feet flat on the floor, toes pointing back. Spine tall. Hands rest on the thighs, palms down. Shoulders relaxed. Eyes softly closed, face calm.
+```
+
+**🎬 Kling motion prompt:** *(upload Vajrasana peak image as both start and end frame)*
+```
+The subject holds this exact kneeling position for the full 5 seconds. The only motion is slow, subtle breath. No change in body or hand position. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 32. Ardha Padmasana — Half Lotus  *(hold-only, no entry)*
+
+**Pose key:** `ardhaPadmasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Sitting in Half Lotus on the center of the mat, facing the camera. Right foot rests on top of the left thigh, sole facing up; left foot tucked under the right thigh, foot resting on the floor. Right knee touches the floor (or rests close to it on a small cushion if the user can't reach the floor). Spine tall. Hands rest on the knees, palms up in gyan mudra. Eyes softly closed.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this exact seated position for the full 5 seconds. Slow subtle breath only. No change in body or hand position. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 33. Baddha Konasana — Bound Angle Pose  *(hold-only, no entry)*
+
+**Pose key:** `baddhaKonasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Sitting in Baddha Konasana on a folded blanket at the center of the mat, facing the camera. Soles of the feet pressed together; knees fall apart to the sides toward the floor (a small cushion or block under each knee for support). Both hands hold the feet, fingers laced around the outer edges of the feet. Spine tall and long, NOT rounded forward. Shoulders relaxed. Eyes softly closed, face calm.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this seated bound-angle position for the full 5 seconds. Slow subtle breath only. No movement of the legs or hands. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 34. Upavishta Konasana — Wide-Angle Seated Forward Bend
+
+**Pose key:** `upavishtaKonasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Sitting on a folded blanket at the center of the mat, facing the camera. Both legs extended out wide to the sides as wide as comfortable — kneecaps pointing straight up, feet flexed. Torso folded forward with a long spine, hinging from the hips. Both hands rest on the floor between the legs (or on shins/feet) palms down, arms reaching forward. Crown of the head reaches forward (NOT down — spine stays long, not rounded).
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a seated position with both legs extended forward (from Sukhasana → legs straight forward), she: opens her legs out wide to the sides, flexes both feet, places hands on the floor in front of her, inhales lengthening the spine, then exhales walking the hands forward and folding from the hips with a long spine — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she reverses: walks the hands back, rises tall, brings the legs back together. Final frame matches the seated start. Static camera.
+```
+
+---
+
+### 35. Janu Sirsasana — Head-to-Knee Pose
+
+**Pose key:** `januSirsasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Seated on a folded blanket at the center of the mat, body slightly turned in profile facing camera-left. Left leg extends straight out to the side (camera-left), foot flexed, kneecap pointing up. Right knee bent and the right sole pressed against the inner left thigh, right knee opening toward the floor on the camera-right side. Torso folds forward over the LEFT (extended) leg, hinging from the hips with a long spine. Both hands hold the left shin, ankle, or foot. Crown of the head reaches forward toward the front foot.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a seated position with both legs extended forward, she: bends her right knee and brings the right sole to the inner left thigh, inhales tall, exhales hinging forward over the extended left leg, holding the shin or foot — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she reverses: rises back up, extends the right leg forward to match. Final frame matches the seated start. Static camera.
+```
+
+---
+
+### 36. Gomukhasana — Cow Face Pose
+
+**Pose key:** `gomukhasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Seated on a folded blanket on the center of the mat, facing the camera. Legs in the cow-face stack: left leg crosses under the right; left foot rests beside the right hip; right thigh stacks directly on top of the left thigh, right knee in front of the left knee in the center; right foot rests beside the left hip. The two feet flare out to opposite sides of the body. Right arm reaches up overhead, bends at the elbow, and the right hand falls down the back between the shoulder blades. Left arm comes behind the back from below, the left hand reaching up to clasp the right hand (or holding a yoga strap between the hands if they don't meet). Both elbows lift — top elbow toward the ceiling, bottom elbow toward the floor. Spine tall.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a seated position, she: folds the legs into the cow-face stack with right thigh on top of left, reaches the right arm up overhead, bends the elbow letting the right hand fall down the back, then brings the left arm behind the back from below and clasps the hands (or a strap) between the shoulder blades — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she reverses: releases the arms, unwinds the legs back to a simple seated position. Static camera.
+```
+
+---
+
+### 37. Marichyasana A — Marichi's Pose A
+
+**Pose key:** `marichyasanaA` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Seated on a folded blanket facing camera. Left leg extends straight forward, foot flexed. Right knee bent with the right foot flat on the floor close to the right sit bone, right knee pointing up at the ceiling. Right arm wraps AROUND the right shin from outside to inside; left arm reaches behind the back to clasp the right hand (or a strap) — forming a bind. Torso folds forward over the extended LEFT leg with a long spine, chest reaching toward the front shin. Crown of the head reaches forward.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a seated position, she: extends the left leg forward, bends the right knee with the foot flat on the floor close to the right sit bone, wraps the right arm around the right shin, reaches the left arm behind the back and clasps the hands in a bind, then exhales folding forward over the extended left leg — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she reverses: rises tall, releases the bind, extends the right leg. Static camera.
+```
+
+---
+
+### 38. Marichyasana C — Marichi's Pose C  *(seated twist)*
+
+**Pose key:** `marichyasanaC` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Seated on a folded blanket. Left leg extends straight forward, foot flexed. Right knee bent, right foot flat on the floor close to the right sit bone, knee pointing up. Torso ROTATES to the right. Left elbow hooks on the OUTSIDE of the right knee, pressing the elbow into the knee to deepen the rotation. Right hand rests on the floor behind the body for support, arm long and active. Spine tall, NOT rounded. Gaze over the right shoulder.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a seated position, she: extends the left leg forward, bends the right knee with the foot flat close to the right sit bone, places the right hand behind her on the floor, then inhales tall and exhales rotating to the right, hooking the left elbow on the outside of the right knee — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she reverses: releases the twist back to center, extends the right leg. Static camera.
+```
+
+---
+
+### 39. Bharadvajasana — Bharadvaja's Twist
+
+**Pose key:** `bharadvajasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Seated on a folded blanket. Both legs are bent and swung to the LEFT side of the body — knees pointing to the left, right ankle resting on the left arch (legs stacked). Torso rotates to the RIGHT, AWAY from the legs. Left hand rests on the right knee or thigh; right hand rests on the floor behind her on the right side for support. Spine tall. Gaze over the right shoulder.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a seated position, she: bends both knees and swings the legs to the left side stacking the right ankle on the left arch, places the right hand on the floor behind her, then inhales tall and exhales rotating the torso to the right while bringing the left hand to the right knee — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she releases the twist back to center. Static camera.
+```
+
+---
+
+### 40. Virasana — Hero Pose  *(hold-only, no entry)*
+
+**Pose key:** `virasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Kneeling in Virasana on the mat, facing the camera. Knees together; feet wider than the hips with the tops of the feet flat on the floor, toes pointing back. Sit bones rest BETWEEN the heels (on a yoga block placed between the heels if needed for height — most users need this). Spine tall. Hands rest on the thighs, palms down. Eyes softly closed, face calm.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this kneeling Hero seat for the full 5 seconds. Slow subtle breath only. No movement. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 41. Malasana — Garland Pose / Yogic Squat
+
+**Pose key:** `malasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Deep Yogic Squat (Malasana), facing the camera. Feet slightly wider than hip-width apart, toes turned out about 30 degrees. Hips lowered all the way down, knees bent deeply over the toes. Heels stay on the floor (a folded blanket under each heel if they don't reach). Hands together in prayer at the heart, elbows pressed lightly against the inner knees, drawing the chest forward and up between the knees. Spine long, chest open, NOT collapsed. Gaze forward and slightly up.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana (frame 1), she: steps the feet slightly wider than hip-width and turns the toes out, then bends the knees deeply lowering the hips all the way down into a deep squat, bringing the hands together in prayer at the heart and pressing the elbows against the inner knees — arriving at the peak around second 2.5. She holds for 1 breath (seconds 2.5 to 3.5). Then she reverses: places the hands on the floor and presses up to standing, returning to Tadasana. Final frame matches frame 1. Static camera.
+```
+
+---
+
+### 42. Mandukasana — Frog Pose  *(hold-only, no entry)*
+
+**Pose key:** `mandukasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Frog Pose. Subject is on hands and knees, then forearms-down — forearms rest parallel on the mat, body weight in the forearms. Knees out wide to the sides as wide as comfortable, with a folded blanket under each knee for cushioning. Inner edges of the feet press into the floor, feet flexed and turned out so inner ankles, inner knees, and the front of the hips form a square shape. Hips are pressed slightly back toward the heels. Forehead rests on the stacked forearms. View is from above-front, three-quarter angle.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this frog position for the full 5 seconds. Slow deep breath only — visible as a gentle rise and fall of the back rib cage. No movement of the legs. Static camera. Seamless loop.
+```
+
+---
+
+### 43. Supta Baddha Konasana — Reclined Bound Angle  *(hold-only, no entry)*
+
+**Pose key:** `suptaBaddhaKonasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Lying on the back on the mat, head resting on the floor (or a folded blanket under the head). Soles of the feet pressed together; knees fall apart to the sides toward the floor with a yoga block or cushion under each knee for support. Arms rest comfortably alongside the body, palms up. Eyes softly closed, face peaceful. View from directly above (top-down) or from the side at low angle.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this reclined position for the full 5 seconds. The only motion is slow, deep belly breath — visible as a gentle rise and fall of the lower belly. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 44. Supta Padangusthasana — Reclined Hand-to-Big-Toe
+
+**Pose key:** `suptaPadangusthasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Lying on the back on the mat. Left leg extends long along the floor, foot flexed and pressing forward. Right leg lifted straight up toward the ceiling, leg as straight as possible. A yoga strap is looped around the ball of the right foot; both hands hold the ends of the strap, drawing the leg gently toward the head. Both shoulders rest on the floor — not lifted. View from the side.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a flat reclined position (Savasana base), she: bends the right knee toward the chest, loops a yoga strap around the ball of the right foot, then extends the right leg straight up toward the ceiling holding the strap — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she reverses: bends the knee back in, lowers the foot, returns to the reclined start. Static camera.
+```
+
+---
+
+### 45. Apanasana — Knees-to-Chest  *(hold-only, no entry)*
+
+**Pose key:** `apanasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Lying on the back on the mat. Both knees drawn in close to the chest. Arms wrap around the shins, hands holding opposite elbows OR clasping the shins. Lower back releases gently into the floor. Head rests on the mat (or a folded blanket). Eyes softly closed, face calm. View from the side.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this knees-to-chest position for the full 5 seconds. The only motion is slow breath — gentle pressure of the thighs against the belly on the inhale. Static camera. Seamless loop.
+```
+
+---
+
+### 46. Jathara Parivartanasana — Belly Twist  *(hold-only, no entry)*
+
+**Pose key:** `jatharaParivartanasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Lying on the back on the mat. Both knees bent and drawn in toward the chest, then lowered to the RIGHT side together — both knees stacked, resting on the floor on the right side. Arms extended out wide to the sides at shoulder height, palms up — making a T-shape with the body. Both shoulders stay on the floor. Head turned to gaze LEFT (away from the knees). Optional: a cushion supports the moving knees if they don't reach the floor.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this supine twist for the full 5 seconds. The only motion is slow breath — soft expansion of the side ribs. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 47. Ardha Pigeon Forward Fold — Sleeping Pigeon  *(hold-only, no entry)*
+
+**Pose key:** `ardhaPigeonForwardFold` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Half Pigeon with the torso folded forward over the front shin. Right knee forward toward the right wrist with the right shin angled diagonally across the mat (NOT parallel — closer to a 45-degree angle, gentler version). Left leg extended straight back, top of the left foot on the floor. A folded blanket supports the right hip if it doesn't reach the floor (essential — keeps pelvis level). Torso folds forward, forearms stacked on the floor in front of the front shin, forehead resting on the stacked forearms (or on a yoga block). Arms can also extend straight forward. Pose looks restful, surrendered. View from above-side.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this sleeping-pigeon fold for the full 5 seconds. The only motion is slow deep breath. Body completely relaxed, no muscular tension visible. Static camera. Seamless loop.
+```
+
+---
+
+### 48. Makarasana — Crocodile Pose  *(hold-only, no entry)*
+
+**Pose key:** `makarasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Lying face-down on the mat. Forearms stacked on top of each other in front of the face — left forearm on top of right (or vice versa) — and forehead rests on the top forearm. Legs extended back, feet slightly wider than hip-width apart, heels falling out to the sides naturally. Body completely relaxed into the floor. Pose looks like a crocodile resting. View from the side.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this prone resting position for the full 5 seconds. The only motion is slow belly breath — visible as a gentle rise and fall of the back as the belly presses into the floor on each inhale. Static camera. Seamless loop.
+```
+
+---
+
+### 49. Supta Virasana — Reclined Hero  *(hold-only, no entry)*
+
+**Pose key:** `suptaVirasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Reclined Hero Pose. Knees together on the mat; feet wider than the hips with the tops of the feet flat on the floor, toes pointing back. Hips rest between the heels. Body reclines back onto a long bolster (essential support) placed lengthwise along the spine, head supported by the bolster. Arms rest out to the sides, palms up, OR overhead resting on the bolster. Quads and hip flexors lengthen visibly. Eyes softly closed, face peaceful. View from the side.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this reclined hero position for the full 5 seconds. Slow deep breath only. No body movement. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 50. Supta Sukhasana — Reclined Easy Pose  *(hold-only, no entry)*
+
+**Pose key:** `suptaSukhasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Reclined Easy Pose. Lying on the back with a long bolster lengthwise behind the spine — head and shoulders elevated by the bolster. Legs comfortably crossed in Sukhasana style, knees fall toward the floor naturally. Arms rest out to the sides, palms up. Eyes softly closed, face peaceful. View from the side.
+```
+
+**🎬 Kling motion prompt:** *(upload peak image as both start and end frame)*
+```
+The subject holds this reclined cross-legged position for the full 5 seconds. Slow deep breath only. No body movement. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 51. Dhanurasana — Bow Pose
+
+**Pose key:** `dhanurasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Bow Pose, lying face-down on the mat with the body curved into a bow shape. Both knees bent so heels lift toward the buttocks; both hands reach back to grasp the OUTSIDES of the ankles. Knees stay roughly hip-width apart (not splayed wide). Inhale lifts the chest off the floor and the thighs off the floor simultaneously — body forms an arc with the arms acting as the bowstring. Head lifts forward, gaze slightly up. View from the side, showing the full bow curve.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a flat prone position face-down, she: bends both knees bringing the heels toward the buttocks, reaches back with both hands and grasps the outsides of the ankles, then inhales pressing the feet back into the hands and lifting the chest and thighs off the floor — arriving at the bow peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she reverses: lowers the chest and thighs to the floor, releases the ankles. Static camera.
+```
+
+---
+
+### 52. Salabhasana — Locust Pose
+
+**Pose key:** `salabhasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Locust Pose, lying face-down on the mat. Arms extended alongside the body, palms down or palms up. Both legs straight, feet hip-width apart. On the inhale, chest lifts off the floor, arms lift off the floor reaching back, and BOTH legs lift off the floor simultaneously — back of the body engaging together. Reach forward through the crown of the head and back through the toes. Gaze at the floor a foot ahead (back of the neck stays long). View from the side.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a flat prone position face-down, she: extends the arms alongside the body, then inhales lifting the chest, arms, and both legs off the floor simultaneously into Locust — arriving at the peak around second 2.5. She holds for 1 breath (seconds 2.5 to 3.5). Then she exhales lowering everything to the floor. Static camera.
+```
+
+---
+
+### 53. Ardha Salabhasana — Half Locust
+
+**Pose key:** `ardhaSalabhasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Half Locust. Lying face-down with arms extended alongside the body, palms down beneath the hips. Forehead rests on the mat (chin slightly tucked to lengthen the back of the neck). Right leg extended back, lifted straight up off the floor — knee straight, foot pointed. Left leg stays on the floor. Hips stay even on the floor (not tilted up on one side). View from the side or three-quarter, showing the asymmetric leg lift.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a flat prone position face-down, she: extends the arms alongside the body palms down under the hips, presses the chin gently into the mat, then inhales lifting only the right leg straight up behind her — arriving at the peak around second 2. She holds for 1 breath (seconds 2 to 3). Then she lowers the right leg. (For the left side, the same motion mirrored.) Static camera.
+```
+
+---
+
+### 54. Halasana — Plow Pose
+
+**Pose key:** `halasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Plow Pose. Body inverted: shoulders on a stack of folded blankets (essential — protects the cervical spine), back of the head on the mat below the blankets, neck floating in the gap. Hips are above the shoulders. Both legs are extended OVER the head, toes touching the floor behind the head (or resting on a chair seat or stack of blocks behind the head if toes don't reach). Hands support the lower back — or are interlaced behind on the floor with arms straight, pressing into the floor. Body forms an inverted curve resembling a plow. View from the side.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a flat reclined position (Savasana base), she: presses the hands into the floor and lifts both legs straight up toward the ceiling, then continues to swing the legs over the head lowering the toes toward the floor behind her, supporting the lower back with the hands — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she rolls down slowly with the hands supporting the lower back. Static camera.
+```
+
+---
+
+### 55. Sarvangasana — Shoulder Stand
+
+**Pose key:** `sarvangasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Shoulder Stand. Body inverted vertically: shoulders rest on a stack of folded blankets (essential), back of the head on the floor below the blankets, neck floating in the gap. Both legs extended STRAIGHT UP toward the ceiling, body forming one long vertical line from shoulders to feet. Hands placed on the lower back, fingers pointing toward the spine — supporting the lift. Hips stack over the shoulders, ankles over the hips. Gaze at the toes. View from the side, full body in frame.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Halasana with shoulders on blankets, she: places her hands on the lower back and slowly lifts both legs up toward the ceiling, stacking the hips over the shoulders — arriving at the vertical peak around second 3. She holds the inverted line for 1 breath (seconds 3 to 4). Then she lowers the legs back into Halasana to exit. Static camera.
+```
+
+---
+
+### 56. Sirsasana — Headstand
+
+**Pose key:** `sirsasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Tripod-supported Headstand near a wall (the heels could touch the wall if she leaned back). Forearms on the mat, fingers interlaced; the back of the head cradles into the interlaced hands and the crown of the head presses lightly into the floor. Body forms one long vertical line: forearms-shoulders-hips-legs all stacked. Both legs extended straight up toward the ceiling, ankles together. MOST OF THE WEIGHT in the forearms (about 80-90%); only a small percentage in the head. Body inverted but stable, calm, controlled. Engaged core visible. View from the side.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from a kneeling position near a wall, she: interlaces the fingers and places the forearms on the mat, lowers the crown of the head into the cradled hands, lifts the hips up like Down Dog, walks the feet in toward the elbows, then bends the knees toward the chest and slowly extends the legs straight up overhead — arriving at the inverted peak around second 4. She holds steady for 1 breath. Then slowly lowers down with control. Static camera.
+```
+
+---
+
+### 57. Sasangasana — Rabbit Pose
+
+**Pose key:** `sasangasana` · **Duration:** 5s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Rabbit Pose. Subject kneeling on the mat with knees together. Heels touching the buttocks. Both hands reach back and grasp the heels with thumbs on the OUTSIDES of the feet. Crown of the head presses lightly into the mat in front of the knees. Hips lift up high, body curling forward — forehead approaches the knees, spine in deep flexion (rounded). Most of the weight in the legs and hands; only about 10-20% on the crown. View from the side.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Vajrasana (sitting on the heels), she: reaches back and grasps both heels with the hands, tucks the chin and places the crown of the head on the mat in front of the knees, then inhales lifting the hips up and rolling forward onto the crown — arriving at the peak around second 3. She holds for 1 breath. Then she lowers the hips back to the heels and rests. Static camera.
+```
+
+---
+
+### 58. Surya Namaskar B — Sun Salutation B  *(sequence, longer clip)*
+
+**Pose key:** `suryaNamaskarB` · **Duration:** 12s
+
+Like the existing Surya Namaskar A entry (#15), this is a flowing sequence rather than a single pose. The Kling clip is longer (12s instead of 5s) and shows the full vinyasa one round.
+
+**📸 Reference still — peak alignment moments to check (Nano Banana):**
+
+Generate three reference stills for QA: peak Utkatasana (deep chair with arms overhead), peak Warrior I right side (deep lunge with arms up), peak Down Dog (inverted V, holding for 5 breaths). These don't need to be in the app — they're just QA references for the Kling sequence.
+
+**🎬 Kling motion prompt:**
+```
+Over 12 seconds, starting from Tadasana (frame 1), she flows through Sun Salutation B in one breath-led sequence: (1) inhale bending the knees and sweeping the arms overhead into UTKATASANA / Chair, (2) exhale folding forward to UTTANASANA, (3) inhale halfway lift, (4) exhale stepping back into a CHATURANGA push-up, (5) inhale rolling over the toes into UPWARD DOG, (6) exhale pressing back into DOWN DOG, (7) inhale stepping the right foot forward into WARRIOR I right side with arms overhead, (8) exhale Chaturanga, (9) inhale Up Dog, (10) exhale Down Dog, (11) inhale stepping the left foot forward into WARRIOR I left side, (12) exhale Chaturanga, Up Dog, Down Dog (held briefly), then jump or step forward, halfway lift, fold, inhale rising to UTKATASANA, exhale to TADASANA. Final frame matches frame 1. Smooth, continuous, breath-linked. Static camera.
+```
+
+---
+
+### 59. Chandra Namaskar — Moon Salutation  *(sequence, longer clip)*
+
+**Pose key:** `chandraNamaskar` · **Duration:** 12s
+
+**🎬 Kling motion prompt:**
+```
+Over 12 seconds, starting from Tadasana (frame 1), she flows through a Moon Salutation: (1) inhale arms overhead palms touching, (2) exhale side-bend to the right, (3) inhale center, (4) exhale side-bend to the left, (5) inhale center, (6) exhale stepping the LEFT foot back into a wide low lunge, (7) inhale opening into GODDESS POSE (both knees wide, both arms cactus), (8) exhale side-bend right from Goddess, (9) inhale center, (10) exhale side-bend left from Goddess, (11) inhale center, (12) step the RIGHT foot back to mirror the lunge on the left side, then reverse the whole flow back to Tadasana. Final frame matches frame 1. Slow, meditative pace — slower than Sun Salutation. Static camera.
+```
+
+---
+
+### 60. Cardiac Warmup — Cat-Cow Flow  *(sequence, gentle)*
+
+**Pose key:** `cardiacWarmup` · **Duration:** 8s
+
+**📸 Peak-pose mechanics (Nano Banana edit):** *(generate two reference stills — one for Cat, one for Cow)*
+
+**Cow (peak inhale):**
+```
+On all fours on the mat — wrists under shoulders, knees under hips, fingers spread wide. Spine in deep extension (arched / sway-back): belly drops toward the floor, chest lifts forward and up, tailbone tips up toward the ceiling. Gaze slightly up. View from the side.
+```
+
+**Cat (peak exhale):**
+```
+On all fours on the mat — wrists under shoulders, knees under hips. Spine rounds toward the ceiling in deep flexion: belly draws toward the spine, the upper back rises high, tailbone tucks under, chin draws toward the chest. Gaze toward the navel. View from the side.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 8 seconds, starting on all fours in a neutral spine position, she flows breath-linked between Cow and Cat: inhale into Cow (belly drops, chest lifts, tailbone up, gaze up), exhale into Cat (spine rounds, tailbone tucks, chin to chest). Repeat the cycle 3 full breath cycles total. One breath, one movement — slow and steady. Final frame returns to neutral all fours. Static camera.
+```
+
+---
+
 ## QA checklist before adding a clip to the app
 
 **Image stage:**
