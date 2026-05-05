@@ -173,9 +173,9 @@ Lives in `src/data/ayurveda/`:
 
 | # | File | Source | D | R | L |
 |---|---|---|---|---|---|
-| A1 | dosha-prakriti.js | CS Sutrasthana 8 | | | |
-| A2 | dietary.js | CS Sutrasthana 25-27 | | | |
-| A3 | dinacharya.js | CS Sutrasthana 5 | | | |
+| A1 | dosha-prakriti.js | CS Sutrasthana 1, 12, 17, 21 + Vim 8 | ✓ | | |
+| A2 | dietary.js | CS Sutrasthana 26-27 + Vim 1.21 | ✓ | | |
+| A3 | dinacharya.js | CS Sutrasthana 5 + Sutrasthana 7 | ✓ | | |
 
 ---
 
