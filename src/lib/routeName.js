@@ -39,6 +39,7 @@ const STATIC = {
 // the canonical route_name string (or null).
 const PATTERNS = [
   [/^\/asana\/[^/]+$/,            'asana_detail'],
+  [/^\/pranayama\/[^/]+$/,        'pranayama_detail'],
   [/^\/practice\/asana\/[^/]+$/,  'practice_single'],
   [/^\/practice\/[^/]+$/,         'practice'],
 ]
