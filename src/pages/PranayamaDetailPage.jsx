@@ -5,6 +5,7 @@ import { PRANAYAMAS } from '../data/pranayamas'
 import { ASANAS } from '../data/asanas'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
+import PranayamaPracticeOverlay from '../components/PranayamaPractice'
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  PranayamaDetailPage — mirrors AsanaDetailPage but for breath techniques.
@@ -69,116 +70,6 @@ function BottomSheet({ open, onClose, title, children }) {
         </button>
         <p className="font-headline text-base text-on-surface mb-3 pr-8">{title}</p>
         {children}
-      </div>
-    </div>,
-    document.body,
-  )
-}
-
-// ─── Self-paced practice timer ─────────────────────────────────────────
-// Minimal full-screen overlay: countdown + the steps from instructions[].
-// Voice-guided practice (with TTS or audio cues) lands in a follow-up
-// chunk; this is the v1 placeholder so the CTA isn't dead.
-function PracticeTimerOverlay({ pranayama, onClose }) {
-  const total = pranayama.durationSeconds || 300
-  const [remaining, setRemaining] = useState(total)
-  const [paused, setPaused] = useState(false)
-  const intervalRef = useRef(null)
-
-  useEffect(() => {
-    if (paused) return
-    intervalRef.current = setInterval(() => {
-      setRemaining(s => Math.max(0, s - 1))
-    }, 1000)
-    return () => clearInterval(intervalRef.current)
-  }, [paused])
-
-  useEffect(() => {
-    track(EVENTS.PRACTICE_STARTED, {
-      kind: 'pranayama',
-      pranayama_id: pranayama.id,
-      duration_seconds: total,
-    })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  function handleClose(reason) {
-    if (reason === 'completed') {
-      track(EVENTS.PRACTICE_COMPLETED, { kind: 'pranayama', pranayama_id: pranayama.id })
-    } else {
-      track(EVENTS.PRACTICE_ABANDONED, {
-        kind: 'pranayama',
-        pranayama_id: pranayama.id,
-        time_remaining_seconds: remaining,
-      })
-    }
-    onClose()
-  }
-
-  // Auto-close when timer hits 0
-  useEffect(() => {
-    if (remaining === 0) handleClose('completed')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [remaining])
-
-  const mins = Math.floor(remaining / 60)
-  const secs = remaining % 60
-  const pct  = ((total - remaining) / total) * 100
-
-  return createPortal(
-    <div className="fixed inset-0 z-[70] bg-background flex flex-col">
-      {/* Top bar */}
-      <div className="flex items-center justify-between px-5 pt-4 pb-2 flex-shrink-0">
-        <button
-          onClick={() => handleClose('abandoned')}
-          aria-label="End practice"
-          className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90"
-        >
-          <span aria-hidden="true" className="material-symbols-outlined">close</span>
-        </button>
-        <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant">{pranayama.sanskrit}</p>
-        <button
-          onClick={() => setPaused(p => !p)}
-          aria-label={paused ? 'Resume' : 'Pause'}
-          className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90"
-        >
-          <span aria-hidden="true" className="material-symbols-outlined">{paused ? 'play_arrow' : 'pause'}</span>
-        </button>
-      </div>
-
-      {/* Hero — circular countdown */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6">
-        <div className="relative w-56 h-56">
-          <svg viewBox="0 0 200 200" className="w-full h-full -rotate-90">
-            <circle cx="100" cy="100" r="92" stroke="currentColor" strokeWidth="6" fill="none" className="text-surface-container-high" />
-            <circle
-              cx="100" cy="100" r="92" stroke="currentColor" strokeWidth="6" fill="none"
-              className="text-primary"
-              strokeDasharray={`${(2 * Math.PI * 92).toFixed(0)} ${(2 * Math.PI * 92).toFixed(0)}`}
-              strokeDashoffset={`${((2 * Math.PI * 92) * (1 - pct / 100)).toFixed(0)}`}
-              strokeLinecap="round"
-            />
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <p className="font-headline text-5xl text-on-surface tabular-nums">
-              {mins}:{secs.toString().padStart(2, '0')}
-            </p>
-            <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">{paused ? 'Paused' : 'Remaining'}</p>
-          </div>
-        </div>
-
-        <p className="font-body text-sm text-on-surface-variant text-center mt-8 max-w-xs">
-          Follow the steps from the previous screen. The timer rings when the session is complete.
-        </p>
-      </div>
-
-      <div className="px-6 pb-6 pt-2 flex-shrink-0" style={{ paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}>
-        <button
-          onClick={() => handleClose('abandoned')}
-          className="w-full py-4 rounded-full bg-surface-container text-on-surface-variant font-label text-sm font-semibold tracking-wide"
-        >
-          End Practice Early
-        </button>
       </div>
     </div>,
     document.body,
@@ -576,9 +467,9 @@ export default function PranayamaDetailPage() {
         )}
       </BottomSheet>
 
-      {/* ── Practice timer overlay ───────────────────────────────────────── */}
+      {/* ── Voice-guided practice overlay ───────────────────────────────── */}
       {practicing && (
-        <PracticeTimerOverlay
+        <PranayamaPracticeOverlay
           pranayama={pranayama}
           onClose={() => setPracticing(false)}
         />
