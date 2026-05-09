@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { POPULAR_SEARCHES } from '../data/recommendations'
 import { ASANAS } from '../data/asanas'
+import { PRANAYAMAS } from '../data/pranayamas'
 import PoseFigure from '../components/PoseFigure'
 import { track, EVENTS } from '../lib/track'
 import useScrollDepth from '../hooks/useScrollDepth'
@@ -47,6 +48,45 @@ function ExploreAsanaCard({ asana, position, onTap }) {
       </div>
       <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{asana.english}</p>
       <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{asana.sanskrit}</p>
+    </button>
+  )
+}
+
+// ─── PranayamaCard ────────────────────────────────────────────────────────
+// One card per breath technique on the Discover Breathwork row. Same
+// impression-tracking pattern as ExploreAsanaCard.
+function PranayamaCard({ pranayama, position, onTap }) {
+  const ref = useImpression({
+    surface:     'discover_breathwork',
+    contentType: 'pranayama',
+    contentId:   pranayama.id,
+    position,
+  })
+  const minutes = Math.round((pranayama.durationSeconds || 0) / 60)
+  return (
+    <button
+      ref={ref}
+      onClick={onTap}
+      aria-label={`${pranayama.english} (${pranayama.sanskrit})`}
+      className="flex-shrink-0 w-44 snap-start active:scale-[0.97] transition-all text-left"
+    >
+      <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/40 to-primary/10 flex items-center justify-center">
+        <span aria-hidden="true" className="material-symbols-outlined text-primary text-7xl">{pranayama.icon || 'air'}</span>
+        {pranayama.level && pranayama.level !== 'beginner' && (
+          <div className="absolute top-2 left-2">
+            <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-primary uppercase tracking-wide">
+              {pranayama.level}
+            </span>
+          </div>
+        )}
+        <div className="absolute bottom-2 right-2">
+          <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-on-surface-variant uppercase tracking-wide">
+            {minutes} min
+          </span>
+        </div>
+      </div>
+      <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{pranayama.english}</p>
+      <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{pranayama.sanskrit}</p>
     </button>
   )
 }
@@ -291,6 +331,30 @@ export default function DiscoverPage() {
                 onTap={() => {
                   track(EVENTS.ASANA_CARD_TAPPED, { asana_id: asana.id, source: 'discover_explore_grid' })
                   navigate(`/asana/${asana.id}`)
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* ── Breathwork ── */}
+        <div className="stagger-5">
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Breathwork</p>
+          <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+            {Object.values(PRANAYAMAS).map((p, i) => (
+              <PranayamaCard
+                key={p.id}
+                pranayama={p}
+                position={i}
+                onTap={() => {
+                  track(EVENTS.CONTENT_IMPRESSION, { surface: 'discover_breathwork', content_type: 'pranayama', content_id: p.id, action: 'tap' })
+                  track(EVENTS.CTA_CLICKED, {
+                    cta_id:        'pranayama_card',
+                    route_name:    'discover',
+                    pranayama_id:  p.id,
+                    label:         p.english,
+                  })
+                  navigate(`/pranayama/${p.id}`)
                 }}
               />
             ))}
