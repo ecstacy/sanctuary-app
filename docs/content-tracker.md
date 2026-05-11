@@ -121,21 +121,21 @@ Empty rows pre-filled so we can fill in the columns as we go.
 
 | # | ID | English | Source | D | I | R | S | L |
 |---|---|---|---|---|---|---|---|---|
-| 61 | `kapotasana` | King Pigeon | modern | | | | | |
-| 62 | `bakasana` | Crow | modern | | | | | |
-| 63 | `kakasana` | Crane | modern | | | | | |
-| 64 | `chaturangaDandasana` | Four-Limbed Staff | modern | | | | | |
-| 65 | `vasishthasana` | Side Plank | modern | | | | | |
-| 66 | `astavakrasana` | Eight-Angle | modern | | | | | |
-| 67 | `pasasana` | Noose | modern | | | | | |
-| 68 | `adhoMukhaVrksasana` | Handstand | modern | | | | | |
-| 69 | `kurmasana` | Tortoise | **HYP 1.22** | | | | | |
-| 70 | `kukkutasana` | Cock | **HYP 1.23** | | | | | |
-| 71 | `mayurasana` | Peacock | **HYP 1.30** *(separate from Paschimottanasana 1.30-31)* | | | | | |
-| 72 | `simhasana` | Lion | **HYP 1.50-52** | | | | | |
-| 73 | `bhadrasana` | Auspicious | **HYP 1.53-54** | | | | | |
-| 74 | `swastikasana` | Swastika | **HYP 1.19** | | | | | |
-| 75 | `uttanaKurmasana` | Stretched Tortoise | **HYP 1.24** | | | | | |
+| 61 | `kapotasana` | King Pigeon | modern | ✓ | | | | |
+| 62 | `bakasana` | Crow | modern | ✓ | | | | |
+| 63 | `kakasana` | Crane | modern | ✓ | | | | |
+| 64 | `chaturangaDandasana` | Four-Limbed Staff | modern | ✓ | | | | |
+| 65 | `vasishthasana` | Side Plank | modern | ✓ | | | | |
+| 66 | `astavakrasana` | Eight-Angle | modern | ✓ | | | | |
+| 67 | `pasasana` | Noose | modern | ✓ | | | | |
+| 68 | `adhoMukhaVrksasana` | Handstand | modern | ✓ | | | | |
+| 69 | `kurmasana` | Tortoise | **HYP 1.22** | ✓ | | | | |
+| 70 | `kukkutasana` | Cock | **HYP 1.23** | ✓ | | | | |
+| 71 | `mayurasana` | Peacock | **HYP 1.32-33** | ✓ | | | | |
+| 72 | `simhasana` | Lion | **HYP 1.50-52** | ✓ | | | | |
+| 73 | `bhadrasana` | Gracious | **HYP 1.53-54** | ✓ | | | | |
+| 74 | `swastikasana` | Auspicious | **HYP 1.19** | ✓ | | | | |
+| 75 | `uttanaKurmasana` | Stretched Tortoise | **HYP 1.24** | ✓ | | | | |
 
 *Stretch-tier 11 entries plus 4 stretches from earlier categories =
 ~80 total target.* If we cap v1 at 65 LIVE, the Charaka-side content
