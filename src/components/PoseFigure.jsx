@@ -83,6 +83,12 @@ const POSE_IMAGES = {
   bharadvajasana:      '/poses/bharadvajasana.png',
   marichyasanaA:       '/poses/marichyasanaA.png',
   parivrttaTrikonasana:'/poses/parivrttaTrikonasana.png',
+
+  // Batch 3 — inversions
+  halasana:     '/poses/halasana.png',
+  sarvangasana: '/poses/sarvangasana.png',
+  sirsasana:    '/poses/sirsasana.png',
+  sasangasana:  '/poses/sasangasana.png',
 }
 
 const POSE_VIDEOS = {
