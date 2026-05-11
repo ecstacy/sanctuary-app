@@ -1140,6 +1140,261 @@ Over 8 seconds, starting on all fours in a neutral spine position, she flows bre
 
 ---
 
+## Advanced & stretch tier (entries 61-75)
+
+The 15 asanas in this tier are HYP-named meditation seats plus modern
+advanced shapes (arm balances, inversions, deep backbends). Most are
+hold-only when they're seats; the arm balances and active shapes get
+short Kling clips with cautious entries — many practitioners can't
+actually achieve these poses, so the videos serve as visual aspiration
++ alignment reference more than instructional walk-throughs.
+
+For the advanced arm balances and inversions in particular, generate
+the peak still even if the Kling motion clip is unstable — the still
+is what users will see day-to-day in the catalog.
+
+---
+
+### 61. Swastikasana — Auspicious Seat  *(hold-only, no entry)*
+
+**Pose key:** `swastikasana` · **Duration:** 5s · **Source:** HYP 1.19
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Sitting on a folded blanket in Swastikasana on the center of the mat, facing the camera. Legs in a tidy interlocked cross-legged seat: the right foot tucked UNDER the left thigh (visible just at the calf), the left foot tucked BETWEEN the right calf and right thigh — feet hidden, ankles symmetric. Both knees rest on the floor or just above. Spine tall and long. Hands rest on the knees in jnana mudra (thumb and index lightly touching, other fingers extended), palms facing up. Eyes softly closed, face serene. This is the first asana HYP names — depict it with quiet dignity.
+```
+
+**🎬 Kling motion prompt:** *(upload peak as both start and end frame)*
+```
+The subject holds this exact Swastikasana seat for the full 5 seconds. The only motion is slow, subtle breath — one full breath cycle, visible as a gentle rise and fall of the chest. No change in body or hand position. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 62. Kurmasana — Tortoise Pose
+
+**Pose key:** `kurmasana` · **Duration:** 5s · **Source:** HYP 1.22 · **Level:** Advanced
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Kurmasana (Tortoise Pose), on the mat facing the camera at a three-quarter overhead angle. Legs extended wide in a V, knees mostly straight but with a slight bend acceptable, feet flexed. Torso folded fully forward over the legs from the hips — chest reaches toward the floor between the legs. Both arms threaded UNDER the corresponding knee, walked out to the sides so the shoulders sit beneath the upper thighs. Forearms rest flat on the floor pointing outward. Forehead or chin gently touching the floor. The body is closed inward like a tortoise withdrawn into its shell — quiet, contained, contemplative. Spine long, not rounded.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Dandasana (seated with legs forward, hands by hips), she: opens her legs into a wide V, bends both knees up, threads each arm UNDER the bent knees and walks the hands out to the sides until the shoulders sit beneath the thighs, then slowly extends the legs and lowers the torso fully forward toward the floor — arriving at the peak around second 3. She holds the deep fold for 1 breath (seconds 3 to 4). Then she reverses: bends the knees, walks the hands back, sits up tall. Static camera.
+```
+
+---
+
+### 63. Kukkutasana — Cock Pose
+
+**Pose key:** `kukkutasana` · **Duration:** 5s · **Source:** HYP 1.23 · **Level:** Advanced
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Kukkutasana (Cock Pose), on a folded blanket on the mat, view from a three-quarter angle. Legs locked in full Padmasana (right foot on left thigh, left foot on right thigh, soles up). Both arms threaded down between the corresponding calf and thigh, up to the elbows. Palms flat on the floor on either side of the body, fingers spread wide. The entire lotus base lifted up off the floor — only the palms support the body weight. Forearms vertical, body suspended above the ground. Spine tall, gaze forward and steady. The pose looks like a rooster perched — defiant balance.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from full Padmasana seated on the mat, she: threads the right arm between the right calf and right thigh up to the elbow, then the left arm between the left calf and thigh, plants both palms flat on the floor, then presses down strongly and lifts the entire lotus base off the floor — arriving at the float around second 3. She holds steady for 1 breath (seconds 3 to 4). Then she lowers down slowly, unthreads the arms, releases Padmasana. Static camera.
+```
+
+---
+
+### 64. Uttana Kurmasana — Stretched Tortoise
+
+**Pose key:** `uttanaKurmasana` · **Duration:** 5s · **Source:** HYP 1.24 · **Level:** Advanced
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Uttana Kurmasana — view from a three-quarter angle. Body reclined on the upper back, legs in full Padmasana resting on the chest. Both arms still threaded through the lotus legs (between calf and thigh on each side), reaching up to clasp the ears or the back of the head — the hands gently cup the head. The lotus knees point upward toward the ceiling. The shape is curled inward like a tortoise on its back — closed sphere geometry. Eyes softly closed. Body weight rests on the upper back and shoulders. Quiet, withdrawn quality.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Kukkutasana, she: lowers down slowly with the arms still threaded through the legs, rolls back onto the upper back, reaches the hands up to clasp the ears (or back of the head) — arriving at the curled peak around second 3. She holds the closed shape for 1 breath. Then she rolls back up to Kukkutasana, lowers down, releases. Static camera.
+```
+
+---
+
+### 65. Mayurasana — Peacock Pose
+
+**Pose key:** `mayurasana` · **Duration:** 5s · **Source:** HYP 1.32-33 · **Level:** Advanced
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Mayurasana (Peacock Pose), on the mat viewed from a three-quarter angle. Body completely horizontal, parallel to the floor about 6-12 inches above it, balanced entirely on the elbows pressed firmly into the lower abdomen near the navel. Palms flat on the floor, fingers pointing back TOWARD the body. Forearms vertical, elbows hugging together against the belly. Legs fully extended straight back behind the body, feet pointed, legs together. Chest open and forward. Head lifts slightly to lengthen the spine. Strong, suspended, like a peacock with tail-feathers fanned. Engaged core visible.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from kneeling on the mat, she: places the palms flat on the floor with fingers pointing back, lowers onto the forearms with elbows hugged together pressing into the belly, extends the legs back, shifts the weight forward over the elbows, then lifts the feet off the floor and floats the body parallel to the ground — arriving at the peak around second 3. She holds the float for 1 breath. Then she lowers the feet, pushes back to sit on the heels. Static camera.
+```
+
+---
+
+### 66. Simhasana — Lion Pose
+
+**Pose key:** `simhasana` · **Duration:** 6s
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Simhasana (Lion Pose), kneeling on the mat in Vajrasana (knees together, sitting back on heels), facing the camera head-on. Palms placed flat on the knees, fingers SPREAD WIDE like lion's claws. Mouth opened wide, tongue extended fully downward toward the chin. Eyes wide open, gaze directed up toward the third-eye point (between the eyebrows) OR down at the tip of the nose. Face expression: vivid, intense, releasing — a lion's roar. Spine tall, shoulders open. The expression is the pose — let it look like a real roar.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 6 seconds, starting from Vajrasana with palms on knees and a neutral face, she: inhales deeply through the nose lifting the chest slightly, then on the exhale she opens the mouth WIDE, extends the tongue fully down, widens the eyes and looks up — the lion's roar — for about a second. Then she closes the mouth, draws the tongue in, and softens the eyes back to neutral. This cycle repeats twice in the 6 seconds (two roars). Final frame matches frame 1 (neutral face). Static camera.
+```
+
+---
+
+### 67. Bhadrasana — Gracious Pose  *(hold-only, no entry)*
+
+**Pose key:** `bhadrasana` · **Duration:** 5s · **Source:** HYP 1.53-54
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Sitting on a folded blanket on the mat in Bhadrasana, facing the camera. Soles of the feet pressed firmly together, heels drawn close to the perineum. Both hands grasp the feet firmly, fingers wrapping around the outer edges, thumbs on top of the feet. Knees release toward the floor, supported lightly by small cushions if needed. Spine tall — crown of the head reaches up, sit bones root down. Shoulders relaxed. Eyes softly closed, face calm. The pose looks regal — Bhadrasana is also called Throne Pose. Steady, grounded, contemplative.
+```
+
+**🎬 Kling motion prompt:** *(upload peak as both start and end frame)*
+```
+The subject holds this seated Bhadrasana for the full 5 seconds. Slow subtle breath only. No movement of the legs or hands. Eyes softly closed. Static camera. Seamless loop.
+```
+
+---
+
+### 68. Kapotasana — King Pigeon Pose
+
+**Pose key:** `kapotasana` · **Duration:** 5s · **Level:** Advanced
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Kapotasana (full King Pigeon), kneeling on the mat in profile to camera-left. Knees hip-width apart, thighs vertical and pressing forward. Spine in deep arching extension — the entire torso curves backward into a powerful backbend. Both hands grasp the heels or the toes, the elbows resting on the floor on either side of the head. Head dropped back gently, the crown approaching the floor between the elbows. Chest fully opened toward the ceiling. Front body in one long arc from the knees through the chest. Quadriceps and hip flexors visibly lengthened. The shape is dramatic — full backbend with hands clasping the feet, in line with the spine.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from kneeling with the thighs vertical, she: inhales and reaches both arms overhead, then exhales and arches deeply back, walking the hands down toward the feet, eventually grasping the heels or toes — arriving at the deep backbend around second 3.5. She holds the bend for half a breath. Then she walks the hands back, lifts the chest, sits up on the heels in Vajrasana. Static camera.
+```
+
+---
+
+### 69. Bakasana — Crow Pose
+
+**Pose key:** `bakasana` · **Duration:** 5s · **Level:** Intermediate
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Bakasana (Crow Pose), on the mat facing camera head-on. Body balanced entirely on both palms. Elbows bent (chaturanga-style, tracking over the wrists, not flared wide). Knees rest on the back of the upper arms, just above the elbows. Heels lifted off the floor, feet curled in close to the body, hips lifted. Body weight shifted forward over the hands. Gaze directed FORWARD — out and slightly down — not at the floor. Spine slightly rounded but engaged. Strong, contained, focused. The compact arm balance.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Malasana (deep squat with knees wide), she: places the palms flat on the floor in front of the feet shoulder-width apart, bends the elbows slightly outward, presses the knees against the back of the upper arms, shifts the weight forward over the hands, then slowly lifts the feet off the floor — arriving at the lifted Crow around second 3. She holds the balance for 1 breath. Then she lowers the feet back to the floor, stands up. Static camera.
+```
+
+---
+
+### 70. Kakasana — Crane Pose
+
+**Pose key:** `kakasana` · **Duration:** 5s · **Level:** Advanced
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Kakasana (Crane Pose), on the mat facing camera head-on. Body balanced on both palms, ARMS FULLY STRAIGHT (this is what distinguishes Crane from Crow). Knees placed HIGH on the upper arms, close to the armpits. Hips lifted higher than in Crow — the body looks more vertical and lifted. Feet curled in toward the body. Spine straighter, more elegant than Crow. Gaze directed forward. The straight arms make this more demanding but more graceful than its bent-arm sibling.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Bakasana (Crow), she: places the knees higher on the upper arms near the armpits, then presses the floor away strongly and STRAIGHTENS the arms — the hips lift higher, the body lengthens upward — arriving at the lifted Crane around second 3. She holds for 1 breath. Then she bends the arms back to Crow, lowers the feet, stands up. Static camera.
+```
+
+---
+
+### 71. Chaturanga Dandasana — Four-Limbed Staff Pose
+
+**Pose key:** `chaturangaDandasana` · **Duration:** 4s · **Level:** Intermediate
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Chaturanga Dandasana on the mat, body in profile facing camera-left. Body in one straight line from heels to crown, parallel to and a few inches above the floor. Palms flat on the floor shoulder-width apart. Elbows bent at exactly 90 degrees, hugging close to the rib cage (NOT flared out to the sides). Shoulders directly over (or slightly forward of) the wrists. Heels stacked over the balls of the feet. Core engaged. Gaze forward a foot ahead of the hands. The whole body holding in a controlled hover — strong, contained, vinyasa-ready.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 4 seconds, starting from Plank Pose (high plank, shoulders over wrists, body in one line), she: exhales and shifts the body slightly forward so the shoulders move past the wrists, then bends the elbows straight back hugging them close to the ribs, lowering until the upper arms are parallel to the floor (90-degree elbow bend) — arriving at Chaturanga around second 2.5. She holds the controlled hover for 1 breath (seconds 2.5 to 3.5). Then she inhales, presses forward and up into Upward-Facing Dog. Static camera.
+```
+
+---
+
+### 72. Vasishthasana — Side Plank
+
+**Pose key:** `vasishthasana` · **Duration:** 5s · **Level:** Intermediate
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Vasishthasana (Side Plank) on the mat, body in side profile to camera. Body in one perfectly straight line from the soles of the feet through the crown of the head. Balancing on the right hand and the outer edge of the right foot. Left foot stacked directly on top of the right foot. Right arm fully extended straight, right shoulder directly over the right wrist. Left arm extended straight UP toward the ceiling, perpendicular to the body. Hips lifted — no sag. Core engaged. Gaze either straight ahead or up toward the top hand.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Plank Pose, she: shifts the body weight onto the right hand, rolls onto the outer edge of the right foot stacking the left foot on top, lifts the left arm straight up toward the ceiling — arriving at Side Plank around second 2.5. She holds the balance for 1 breath. Then she lowers back to Plank, then (in a clip showing the other side) repeats on the left. Static camera.
+```
+
+---
+
+### 73. Astavakrasana — Eight-Angle Pose
+
+**Pose key:** `astavakrasana` · **Duration:** 5s · **Level:** Advanced
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Astavakrasana (Eight-Angle Pose) on the mat, body in profile to camera-left. The right thigh hooked HIGH over the right shoulder from behind. Both legs locked together, ankles crossed (left over right). Both palms flat on the floor beside the hips, fingers spread. Arms bent like Chaturanga, elbows tracking back. The locked legs extended out HORIZONTALLY to the right side of the body — body floating above the floor with legs cantilevered. The shape is asymmetric and dramatic — a one-sided lift with the legs out to the side. Hips and shoulders both fully engaged. Gaze forward.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from seated with legs forward, she: bends the right knee and hooks the right thigh high over the right shoulder from behind, crosses the left ankle over the right ankle, places both palms on the floor beside the hips, leans forward, lifts the body and extends the locked legs out to the right side — arriving at the lifted Eight-Angle around second 3.5. She holds the balance briefly. Then she brings the legs back to center, lowers down, unwinds. Static camera.
+```
+
+---
+
+### 74. Pasasana — Noose Pose
+
+**Pose key:** `pasasana` · **Duration:** 5s · **Level:** Advanced
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Pasasana (Noose Pose), in a deep yogic squat with both heels grounded on the mat (or on a folded blanket if needed), feet together, body facing the camera at a three-quarter angle. Torso fully rotated to the right. The LEFT arm wrapped around the OUTSIDE of both thighs and across the front of the body; the RIGHT arm reaches behind the back and the two hands clasp at the wrist or fingers — forming the noose-like bind around the legs. Spine tall, NOT rounded. Head turned to gaze over the right shoulder. The shape is compact and bound — the body wrapped on itself.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 5 seconds, starting from Tadasana, she: squats down into Malasana with the heels grounded, inhales tall, then exhales rotating the torso to the right, wraps the left arm around the outside of both thighs, reaches the right hand behind the back to clasp — arriving at the bound Noose around second 3.5. She holds for 1 breath. Then she releases the bind, rotates back to center, stands up. Static camera.
+```
+
+---
+
+### 75. Adho Mukha Vrksasana — Handstand
+
+**Pose key:** `adhoMukhaVrksasana` · **Duration:** 6s · **Level:** Advanced
+
+**📸 Peak-pose mechanics (Nano Banana edit):**
+```
+Adho Mukha Vrksasana (Handstand) on the mat near a sage-green wall. Body fully inverted in a straight vertical line: palms flat on the floor about 6 inches from the wall, fingers spread wide. Wrists, shoulders, hips, and ankles stacked in one vertical column. Both legs extended fully upward, heels touching the wall lightly (the wall as a safety stop, not a heavy lean). Core engaged. Gaze directed between the palms toward the floor. Strong, controlled, vertical — the body inverted but stable. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench. The wall behind is the same sage tone as the mat.
+```
+
+**🎬 Kling motion prompt:**
+```
+Over 6 seconds, starting from Adho Mukha Svanasana near a wall, she: walks the feet in toward the hands, lifts one leg up high, then kicks the other leg up to meet it — the heels touch the wall lightly. The body settles into a vertical inverted line. She holds the handstand for 2 breaths. Then she lowers one leg slowly, then the other, returning to Down Dog. Static camera.
+```
+
+---
+
 ## QA checklist before adding a clip to the app
 
 **Image stage:**
