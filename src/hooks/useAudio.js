@@ -9,11 +9,28 @@ export function useAudio() {
 
   function getCtx() {
     if (!ctxRef.current) {
-      ctxRef.current = new (window.AudioContext || window.webkitAudioContext)()
+      const ctx = new (window.AudioContext || window.webkitAudioContext)()
+      ctxRef.current = ctx
+
+      // ── Unlock the audio context (Android WebView + iOS Safari) ──
+      // AudioContext starts in 'suspended' state and requires a user
+      // gesture to begin producing sound. Playing a silent 1-sample
+      // buffer inside the same gesture frame forces the unlock — this
+      // is the canonical pattern, more reliable than `.resume()` alone
+      // because `resume()` is async and the gesture token is consumed
+      // before the promise resolves.
+      try {
+        const buffer = ctx.createBuffer(1, 1, 22050)
+        const source = ctx.createBufferSource()
+        source.buffer = buffer
+        source.connect(ctx.destination)
+        source.start(0)
+      } catch { /* unlock failed — non-fatal */ }
     }
-    // Resume if suspended (Android WebView requires user gesture)
+    // Best-effort resume in case the OS suspended the context (e.g.
+    // backgrounded the app). Safe to call even when already running.
     if (ctxRef.current.state === 'suspended') {
-      ctxRef.current.resume()
+      ctxRef.current.resume().catch(() => {})
     }
     return ctxRef.current
   }
