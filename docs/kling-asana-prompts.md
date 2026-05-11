@@ -1071,9 +1071,17 @@ Over 5 seconds, starting from Vajrasana (sitting on the heels), she: reaches bac
 
 Like the existing Surya Namaskar A entry (#15), this is a flowing sequence rather than a single pose. The Kling clip is longer (12s instead of 5s) and shows the full vinyasa one round.
 
-**📸 Reference still — peak alignment moments to check (Nano Banana):**
+**📸 Single representative still — for the app thumbnail (Nano Banana edit):**
 
-Generate three reference stills for QA: peak Utkatasana (deep chair with arms overhead), peak Warrior I right side (deep lunge with arms up), peak Down Dog (inverted V, holding for 5 breaths). These don't need to be in the app — they're just QA references for the Kling sequence.
+The most iconic moment of Sun Salutation B is the peak Warrior I — the only sustained shape in the otherwise flowing vinyasa. Generate ONE still that the app uses as the asana thumbnail:
+
+```
+Sun Salutation B — captured at the peak Warrior I (Virabhadrasana I) moment, mid-flow. Standing on the mat facing the camera head-on at a slight three-quarter angle, right foot forward at the front of the mat with the right knee deeply bent (right thigh parallel to the floor, knee stacked over the ankle). Left leg extended straight back to the back of the mat, back foot planted flat and turned out about 45 degrees. Both hip points face forward, square to the front of the mat. Both arms reach straight up overhead, biceps by the ears, palms facing each other, fingertips reaching for the ceiling. Spine long and upright. Chin level, gaze forward and slightly up — a warrior's expression of focused calm. The subject's pose suggests motion just paused: the body is fully arrived in the shape but the energy still feels flowing. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench.
+```
+
+**📸 Reference stills for video QA only (not for the app):**
+
+Generate three reference stills to check the Kling video against: peak Utkatasana (deep chair with arms overhead), peak Warrior I right side (deep lunge with arms up), peak Down Dog (inverted V, holding for 5 breaths). These don't need to be in the app — they're just QA references for the Kling sequence.
 
 **🎬 Kling motion prompt:**
 ```
@@ -1086,6 +1094,14 @@ Over 12 seconds, starting from Tadasana (frame 1), she flows through Sun Salutat
 
 **Pose key:** `chandraNamaskar` · **Duration:** 12s
 
+**📸 Single representative still — for the app thumbnail (Nano Banana edit):**
+
+Moon Salutation's centerpiece is Goddess Pose (Utkata Konasana) — the wide-stance squat with arms in cactus shape. Generate ONE still for the app thumbnail:
+
+```
+Moon Salutation — captured at the peak Goddess Pose (Utkata Konasana) moment, mid-flow. Standing on the mat facing the camera head-on, feet wide apart (about a leg-length), toes turned out 45 degrees. Both knees bend deeply, tracking over the toes, thighs angling toward parallel with the floor. Hips squared toward the camera, pelvis tucked under slightly. Both arms lifted out to the sides at shoulder height, elbows bent 90 degrees so the forearms come straight up — cactus or goalpost arms. Palms facing forward, fingers active. Spine tall, chest open. Chin level, gaze steady forward — a grounded, lunar quality. The pose is wide and stable, suggesting strength held softly. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench.
+```
+
 **🎬 Kling motion prompt:**
 ```
 Over 12 seconds, starting from Tadasana (frame 1), she flows through a Moon Salutation: (1) inhale arms overhead palms touching, (2) exhale side-bend to the right, (3) inhale center, (4) exhale side-bend to the left, (5) inhale center, (6) exhale stepping the LEFT foot back into a wide low lunge, (7) inhale opening into GODDESS POSE (both knees wide, both arms cactus), (8) exhale side-bend right from Goddess, (9) inhale center, (10) exhale side-bend left from Goddess, (11) inhale center, (12) step the RIGHT foot back to mirror the lunge on the left side, then reverse the whole flow back to Tadasana. Final frame matches frame 1. Slow, meditative pace — slower than Sun Salutation. Static camera.
@@ -1097,7 +1113,15 @@ Over 12 seconds, starting from Tadasana (frame 1), she flows through a Moon Salu
 
 **Pose key:** `cardiacWarmup` · **Duration:** 8s
 
-**📸 Peak-pose mechanics (Nano Banana edit):** *(generate two reference stills — one for Cat, one for Cow)*
+**📸 Single representative still — for the app thumbnail (Nano Banana edit):**
+
+Cat-Cow's most visually distinctive moment is the Cow position — the open, lifted shape that pairs well with a thumbnail. Generate ONE still for the app:
+
+```
+Cat-Cow Warmup — captured at the peak Cow position (Bitilasana). On all fours on the mat, viewed from the side (profile to camera-left). Wrists directly under shoulders, knees under hips, fingers spread wide and pressing into the mat. Spine in deep extension: belly drops gently toward the floor, the upper back and chest lift forward and up, tailbone tips up toward the ceiling, creating an open arching curve from tailbone to crown. Gaze lifts slightly up and forward. Shoulders draw away from the ears. Face relaxed, breath drawing in. The shape suggests warming the spine to begin practice. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench.
+```
+
+**📸 Per-frame reference stills (for the Kling motion clip QA only):**
 
 **Cow (peak inhale):**
 ```
