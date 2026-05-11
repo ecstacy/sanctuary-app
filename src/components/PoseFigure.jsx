@@ -34,6 +34,55 @@ const POSE_IMAGES = {
   legsUpWall: '/poses/legUpWall.png',
   legUpWall: '/poses/legUpWall.png',
   trikonasana: '/poses/trikonasana.png',
+
+  // Batch 2 — standing
+  utkatasana:                  '/poses/utkatasana.png',
+  warrior3:                    '/poses/warrior3.png',
+  parsvakonasana:              '/poses/parsvakonasana.png',
+  parsvottanasana:             '/poses/parsvottanasana.png',
+  prasaritaPadottanasana:      '/poses/prasaritaPadottanasana.png',
+  anjaneyasana:                '/poses/anjaneyasana.png',
+  utthitaHastaPadangusthasana: '/poses/utthitaHastaPadangusthasana.png',
+  garudasana:                  '/poses/garudasana.png',
+  natarajasana:                '/poses/natarajasana.png',
+
+  // Batch 2 — seated
+  padmasana:        '/poses/padmasana.png',
+  siddhasana:       '/poses/siddhasana.png',
+  vajrasana:        '/poses/vajrasana.png',
+  ardhaPadmasana:   '/poses/ardhaPadmasana.png',
+  baddhaKonasana:   '/poses/baddhaKonasana.png',
+  upavishtaKonasana:'/poses/upavishtaKonasana.png',
+  januSirsasana:    '/poses/januSirsasana.png',
+  gomukhasana:      '/poses/gomukhasana.png',
+  marichyasanaC:    '/poses/marichyasanaC.png',
+  virasana:         '/poses/virasana.png',
+
+  // Batch 2 — supine
+  suptaBaddhaKonasana:    '/poses/suptaBaddhaKonasana.png',
+  suptaPadangusthasana:   '/poses/suptaPadangusthasana.png',
+  apanasana:              '/poses/apanasana.png',
+  jatharaParivartanasana: '/poses/jatharaParivartanasana.png',
+  dhanurasana:            '/poses/dhanurasana.png',
+
+  // Batch 3 — backbends
+  salabhasana:      '/poses/salabhasana.png',
+  ardhaSalabhasana: '/poses/ardhaSalabhasana.png',
+
+  // Batch 3 — hip openers
+  malasana:               '/poses/malasana.png',
+  mandukasana:            '/poses/mandukasana.png',
+  ardhaPigeonForwardFold: '/poses/ardhaPigeonForwardFold.png',
+
+  // Batch 3 — restorative
+  makarasana:    '/poses/makarasana.png',
+  suptaVirasana: '/poses/suptaVirasana.png',
+  suptaSukhasana:'/poses/suptaSukhasana.png',
+
+  // Batch 3 — twists
+  bharadvajasana:      '/poses/bharadvajasana.png',
+  marichyasanaA:       '/poses/marichyasanaA.png',
+  parivrttaTrikonasana:'/poses/parivrttaTrikonasana.png',
 }
 
 const POSE_VIDEOS = {
