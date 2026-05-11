@@ -44,7 +44,12 @@ export function useVoiceGuidance() {
     if (speakingRef.current || !queueRef.current.length) return
     if (!('speechSynthesis' in window)) return
 
-    const text = queueRef.current.shift()
+    // Queue holds either bare strings (legacy callers) or {text, onEnd}
+    // objects. Normalize at the dequeue site so internal logic doesn't
+    // care about the shape.
+    const item = queueRef.current.shift()
+    const text  = typeof item === 'string' ? item : item.text
+    const onEnd = typeof item === 'string' ? null : item.onEnd
     speakingRef.current = true
     setSpeaking(true)
 
@@ -61,25 +66,29 @@ export function useVoiceGuidance() {
     const done = () => {
       speakingRef.current = false
       setSpeaking(false)
+      // Fire the per-utterance callback BEFORE processing the next item
+      // so callers see a deterministic "this one is done" signal.
+      try { onEnd?.() } catch (err) { console.error('[voice] onEnd threw:', err?.message || err) }
       // Process next in queue after a small pause
       setTimeout(() => processQueue(), 300)
     }
 
-    utterance.onend = done
-    utterance.onerror = done
-
     // Android WebView safety: if utterance doesn't fire onend within 30s, force done
     const safety = setTimeout(done, 30000)
-    const originalDone = done
-    utterance.onend = () => { clearTimeout(safety); originalDone() }
-    utterance.onerror = () => { clearTimeout(safety); originalDone() }
+    utterance.onend = () => { clearTimeout(safety); done() }
+    utterance.onerror = () => { clearTimeout(safety); done() }
 
     speechSynthesis.speak(utterance)
   }, [])
 
-  const speak = useCallback((text) => {
+  /**
+   * Queue a single phrase. Optional `onEnd` callback fires after this
+   * specific utterance finishes (or errors), BEFORE the next item is
+   * processed. Use it to sequence multi-step instructions.
+   */
+  const speak = useCallback((text, onEnd) => {
     if (!enabled || !text) return
-    queueRef.current.push(text)
+    queueRef.current.push(onEnd ? { text, onEnd } : text)
     processQueue()
   }, [enabled, processQueue])
 
