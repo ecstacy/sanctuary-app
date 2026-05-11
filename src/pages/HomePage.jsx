@@ -229,9 +229,9 @@ export default function HomePage() {
     // Morning: energizing poses
     if (h < 12) {
       rules.push('slot:morning')
-      if (checkedIn === 'energy')       { rules.push('checkin:energy');       return { asana: ASANAS.suryaNamaskar, rules, userDosha } }
-      if (checkedIn === 'flexibility')  { rules.push('checkin:flexibility');  return { asana: ASANAS.downwardDog,   rules, userDosha } }
-      if (userDosha === 'kapha')        { rules.push('dosha:kapha');          return { asana: ASANAS.suryaNamaskar, rules, userDosha } }
+      if (checkedIn === 'energy')       { rules.push('checkin:energy');       return { asana: ASANAS.suryaNamaskarA, rules, userDosha } }
+      if (checkedIn === 'flexibility')  { rules.push('checkin:flexibility');  return { asana: ASANAS.adhoMukhaSvanasana, rules, userDosha } }
+      if (userDosha === 'kapha')        { rules.push('dosha:kapha');          return { asana: ASANAS.suryaNamaskarA, rules, userDosha } }
       rules.push('default:morning')
       return { asana: ASANAS.tadasana, rules, userDosha }
     }
@@ -239,20 +239,24 @@ export default function HomePage() {
     if (h < 17) {
       rules.push('slot:afternoon')
       if (checkedIn === 'stress')       { rules.push('checkin:stress');       return { asana: ASANAS.uttanasana, rules, userDosha } }
-      if (checkedIn === 'flexibility')  { rules.push('checkin:flexibility');  return { asana: ASANAS.pigeon,     rules, userDosha } }
-      if (userDosha === 'pitta')        { rules.push('dosha:pitta');          return { asana: ASANAS.tree,       rules, userDosha } }
+      if (checkedIn === 'flexibility')  { rules.push('checkin:flexibility');  return { asana: ASANAS.ekaPadaRajakapotasana, rules, userDosha } }
+      if (userDosha === 'pitta')        { rules.push('dosha:pitta');          return { asana: ASANAS.vrksasana, rules, userDosha } }
       rules.push('default:afternoon')
-      return { asana: ASANAS.warrior2, rules, userDosha }
+      return { asana: ASANAS.virabhadrasanaII, rules, userDosha }
     }
     // Evening: restorative and calming
     rules.push('slot:evening')
-    if (checkedIn === 'sleep')   { rules.push('checkin:sleep');   return { asana: ASANAS.legUpWall,  rules, userDosha } }
+    if (checkedIn === 'sleep')   { rules.push('checkin:sleep');   return { asana: ASANAS.legsUpTheWall, rules, userDosha } }
     if (checkedIn === 'stress')  { rules.push('checkin:stress');  return { asana: ASANAS.balasana,   rules, userDosha } }
     if (userDosha === 'vata')    { rules.push('dosha:vata');      return { asana: ASANAS.sukhasana,  rules, userDosha } }
     rules.push('default:evening')
-    return { asana: ASANAS.supinetwist, rules, userDosha }
+    return { asana: ASANAS.suptaMatsyendrasana, rules, userDosha }
   }
-  const { asana: suggestedAsana, rules: suggestedAsanaRules, userDosha: suggestedAsanaUserDosha } = pickAsana()
+  // Defensive fallback — if a rule above references a renamed/missing
+  // asana, fall back to tadasana so the page never crashes on undefined.
+  const picked = pickAsana()
+  const suggestedAsana = picked.asana || ASANAS.tadasana
+  const { rules: suggestedAsanaRules, userDosha: suggestedAsanaUserDosha } = picked
 
   // Impression ref for the suggested-asana card. Fires `content_impression`
   // once the card has been ≥50% visible for 1s — the CTR denominator we'll
