@@ -376,6 +376,33 @@ export default function DoshaProfilePage() {
           </div>
         </div>
 
+        {/* ── Deeper Ayurveda content ── */}
+        <div className="mb-6">
+          <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-widest mb-3 px-1">Live by your dosha</p>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              onClick={() => navigate('/dietary')}
+              className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2"
+            >
+              <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">restaurant</span>
+              </div>
+              <p className="font-body font-semibold text-sm text-on-surface leading-tight">Your Diet</p>
+              <p className="font-body text-xs text-on-surface-variant/70 leading-snug">Foods to favor and avoid, paced by the six tastes</p>
+            </button>
+            <button
+              onClick={() => navigate('/dinacharya')}
+              className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2"
+            >
+              <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">schedule</span>
+              </div>
+              <p className="font-body font-semibold text-sm text-on-surface leading-tight">Daily Routine</p>
+              <p className="font-body text-xs text-on-surface-variant/70 leading-snug">Charaka's 13 practices — align the day with the body's rhythm</p>
+            </button>
+          </div>
+        </div>
+
         {/* Retake quiz */}
         <div className="text-center mb-8">
           <button

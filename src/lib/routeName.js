@@ -33,6 +33,8 @@ const STATIC = {
   '/vikriti':          'vikriti_quiz',
   '/journey':          'journey',
   '/routine':          'routine',
+  '/dietary':          'dietary_guidance',
+  '/dinacharya':       'dinacharya',
 }
 
 // Patterns for parameterized routes. First match wins. Each tester returns

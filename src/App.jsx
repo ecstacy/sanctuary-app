@@ -26,6 +26,8 @@ const DoshaQuizPage = lazy(() => import('./pages/DoshaQuizPage'))
 const VikritiQuizPage = lazy(() => import('./pages/VikritiQuizPage'))
 const RecommendationsPage = lazy(() => import('./pages/RecommendationsPage'))
 const DoshaProfilePage = lazy(() => import('./pages/DoshaProfilePage'))
+const DietaryGuidancePage = lazy(() => import('./pages/DietaryGuidancePage'))
+const DinacharyaPage = lazy(() => import('./pages/DinacharyaPage'))
 const RoutinePage = lazy(() => import('./pages/RoutinePage'))
 const PracticePage = lazy(() => import('./pages/PracticePage'))
 const JourneyPage = lazy(() => import('./pages/JourneyPage'))
@@ -210,6 +212,8 @@ function AppRoutes() {
           <Route path="/quiz" element={<PrivateRoute><DoshaQuizPage /></PrivateRoute>} />
           <Route path="/vikriti" element={<PrivateRoute><VikritiQuizPage /></PrivateRoute>} />
           <Route path="/dosha" element={<PrivateRoute><DoshaProfilePage /></PrivateRoute>} />
+          <Route path="/dietary" element={<PrivateRoute><DietaryGuidancePage /></PrivateRoute>} />
+          <Route path="/dinacharya" element={<PrivateRoute><DinacharyaPage /></PrivateRoute>} />
           <Route path="/routine" element={<PrivateRoute><RoutinePage /></PrivateRoute>} />
           <Route path="/asana/:id" element={<PrivateRoute><AsanaDetailPage /></PrivateRoute>} />
           <Route path="/pranayama/:id" element={<PrivateRoute><PranayamaDetailPage /></PrivateRoute>} />
