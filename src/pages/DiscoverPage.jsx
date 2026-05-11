@@ -319,6 +319,28 @@ export default function DiscoverPage() {
           </div>
         </div>
 
+        {/* ── Programs — curated sequences for specific outcomes ── */}
+        <div className="stagger-4">
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Programs</p>
+          <div className="flex flex-col gap-2.5">
+            {[
+              { key: 'morning7Day',     label: 'Morning Reset',     desc: 'Wake the body, warm the spine, ground the day',            icon: 'wb_twilight',  time: '12 min' },
+              { key: 'backPainSeries',  label: 'Back Pain Relief',  desc: 'Decompress, mobilize, ease lower-back tension',            icon: 'healing',      time: '12 min' },
+              { key: 'preBedWindDown',  label: 'Pre-Bed Wind-Down', desc: 'Long, restorative holds — prepare for deep sleep',         icon: 'nights_stay',  time: '20 min' },
+            ].map((r, i) => (
+              <QuickRoutineCard
+                key={r.key}
+                routine={r}
+                position={i}
+                onTap={() => {
+                  track(EVENTS.ROUTINE_CARD_TAPPED, { routine_key: r.key, source: 'discover_programs' })
+                  navigate('/routine', { state: { routineKey: r.key } })
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
         {/* ── Explore all Asanas ── */}
         <div className="stagger-5">
           <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Explore Asanas</p>

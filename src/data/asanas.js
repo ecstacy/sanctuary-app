@@ -3659,6 +3659,73 @@ const ROUTINE_TEMPLATES = {
       { id: 'savasana', time: '07:20', customDuration: 180 },
     ],
   },
+
+  // ── Morning Reset ──────────────────────────────────────────────────────
+  // ~12 minutes. Designed to wake the body without overstimulating.
+  // Warms the spine, builds gentle heat, opens the hips and chest, ends
+  // with a brief integration. Suitable for daily use over a 7-day commit.
+  morning7Day: {
+    label: 'Morning Reset',
+    description: 'A balanced 12-minute flow to wake the body, warm the spine, and start the day grounded.',
+    icon: 'wb_twilight',
+    gradient: 'from-[#c47a3a] to-[#f0c987]',
+    asanas: [
+      { id: 'cardiacWarmup',       time: '06:30', customDuration: 60  },
+      { id: 'suryaNamaskarA',      time: '06:31', customDuration: 300 },
+      { id: 'virabhadrasanaI',     time: '06:36', customDuration: 45  },
+      { id: 'virabhadrasanaII',    time: '06:37', customDuration: 45  },
+      { id: 'trikonasana',         time: '06:38', customDuration: 45  },
+      { id: 'adhoMukhaSvanasana',  time: '06:39', customDuration: 60  },
+      { id: 'vrksasana',           time: '06:40', customDuration: 45  },
+      { id: 'balasana',            time: '06:41', customDuration: 60  },
+      { id: 'savasana',            time: '06:42', customDuration: 90  },
+    ],
+  },
+
+  // ── Back Pain Relief Series ────────────────────────────────────────────
+  // ~12 minutes. Decompress, mobilize, then gently strengthen — the
+  // standard physical-therapy arc for non-acute lower-back tension.
+  // Order matters: passive decompression FIRST, strengthening LAST.
+  backPainSeries: {
+    label: 'Back Pain Relief',
+    description: 'A gentle 12-minute sequence to decompress the spine, mobilize the back, and ease lower-back tension.',
+    icon: 'healing',
+    gradient: 'from-[#6b8f5e] to-[#a8c8a0]',
+    asanas: [
+      { id: 'apanasana',                time: '12:00', customDuration: 60  },
+      { id: 'cardiacWarmup',            time: '12:01', customDuration: 90  },
+      { id: 'bhujangasana',             time: '12:03', customDuration: 45  },
+      { id: 'salabhasana',              time: '12:04', customDuration: 30  },
+      { id: 'adhoMukhaSvanasana',       time: '12:05', customDuration: 60  },
+      { id: 'setuBandhaSarvangasana',   time: '12:06', customDuration: 60  },
+      { id: 'suptaMatsyendrasana',      time: '12:08', customDuration: 90  },
+      { id: 'balasana',                 time: '12:10', customDuration: 60  },
+      { id: 'savasana',                 time: '12:12', customDuration: 180 },
+    ],
+  },
+
+  // ── Pre-Bed Wind-Down ──────────────────────────────────────────────────
+  // ~20 minutes. Long holds, restorative postures, intentional time
+  // under inversion (legs up the wall) and Savasana. The arc moves
+  // from seated awareness → gentle forward folds → restorative hip
+  // opening → inversion → final rest. Designed to be done in bed-
+  // adjacent clothes; the user should be ready to crawl into bed
+  // immediately after.
+  preBedWindDown: {
+    label: 'Pre-Bed Wind-Down',
+    description: 'A restorative 20-minute sequence with long holds to settle the nervous system and prepare for deep sleep.',
+    icon: 'nights_stay',
+    gradient: 'from-[#5c4e8a] to-[#9b8fd4]',
+    asanas: [
+      { id: 'sukhasana',                time: '21:30', customDuration: 120 },
+      { id: 'balasana',                 time: '21:32', customDuration: 120 },
+      { id: 'paschimottanasana',        time: '21:34', customDuration: 120 },
+      { id: 'suptaBaddhaKonasana',      time: '21:36', customDuration: 180 },
+      { id: 'suptaMatsyendrasana',      time: '21:39', customDuration: 60  },
+      { id: 'legsUpTheWall',            time: '21:40', customDuration: 300 },
+      { id: 'savasana',                 time: '21:45', customDuration: 300 },
+    ],
+  },
 }
 
 // ─── Routine Builder ────────────────────────────────────────────────────────

@@ -185,9 +185,9 @@ Lives in `src/data/ayurveda/`:
 
 | ID | Title | Asanas pulled from | D | R | L |
 |---|---|---|---|---|---|
-| `morning7Day` | 7-Day Morning Reset | Standing + sun salutations + breath | | | |
-| `backPainSeries` | Back Pain Relief Series | Bridge, Cobra, Bhujangasana, Down Dog, twists | | | |
-| `preBedWindDown` | Pre-Bed Wind-Down | Forward folds, supported bridge, child, savasana | | | |
+| `morning7Day` | Morning Reset (12 min) | Cat-Cow, Sun Sal A, Warriors I+II, Trikonasana, Down Dog, Tree, Child, Savasana | ✓ | | |
+| `backPainSeries` | Back Pain Relief (12 min) | Apanasana, Cat-Cow, Cobra, Locust, Down Dog, Bridge, supine twist, Child, Savasana | ✓ | | |
+| `preBedWindDown` | Pre-Bed Wind-Down (20 min) | Sukhasana, Child, Paschimottanasana, Reclined Bound Angle, supine twist, Legs Up Wall, Savasana | ✓ | | |
 
 ---
 
