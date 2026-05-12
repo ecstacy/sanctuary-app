@@ -18,6 +18,7 @@
 const STATIC = {
   '/':                 'welcome',
   '/welcome':          'welcome',
+  '/onboarding':       'onboarding',
   '/login':            'login',
   '/signup':           'signup',
   '/forgot-password':  'forgot_password',

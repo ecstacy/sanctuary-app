@@ -86,12 +86,18 @@ export default function SignupPage() {
       if (struggleError) console.error('Struggles save failed:', struggleError.message)
     }
 
+    // Note: any anonymous dosha quiz result stashed in localStorage is
+    // migrated by AuthContext.fetchProfile() as soon as the new
+    // session resolves — that way Google/Apple OAuth signups get the
+    // same migration without duplicating the logic here.
+
     if (userId) identify(userId, { language })
     track(EVENTS.SIGNUP_COMPLETED, {
       method: 'email',
       language,
       has_struggles: struggles.length > 0,
       struggle_count: struggles.length,
+      had_pending_dosha: !!localStorage.getItem('sanctuary.pending.dosha'),
     })
 
     setLoading(false)

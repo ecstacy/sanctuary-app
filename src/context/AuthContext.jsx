@@ -86,6 +86,69 @@ export function AuthProvider({ children }) {
     // doesn't exist yet (undefined → no-op).
     if (data?.analytics_consent) hydrateConsentFromProfile(data.analytics_consent)
 
+    // ── Migrate anonymous dosha quiz result, if present ──────────────
+    // The Dosha Quiz is publicly accessible; first-time users can take
+    // it before creating an account. The result is stashed in
+    // localStorage under `sanctuary.pending.dosha`. Once they sign in
+    // (any method — email, Google, Apple), pull it into their profile
+    // here. Only migrate if the profile doesn't already have a dosha,
+    // so this is safe to call on every fetch.
+    if (data && !data.dosha) {
+      try {
+        const raw = localStorage.getItem('sanctuary.pending.dosha')
+        if (raw) {
+          const pending = JSON.parse(raw)
+          if (pending?.primary) {
+            const { error: doshaErr } = await supabase
+              .from('profiles')
+              .update({
+                dosha: pending.label,
+                dosha_details: {
+                  percentages: pending.percentages,
+                  primary:     pending.primary,
+                  secondary:   pending.secondary,
+                  tertiary:    pending.tertiary,
+                },
+              })
+              .eq('id', userId)
+            if (doshaErr) console.error('Pending dosha migrate failed:', doshaErr.message)
+            else {
+              // Mutate the cached `data` so the rest of fetchProfile
+              // (analytics identify, super-props) sees the fresh values
+              // without an extra round-trip.
+              data.dosha = pending.label
+              data.dosha_details = {
+                percentages: pending.percentages,
+                primary:     pending.primary,
+                secondary:   pending.secondary,
+                tertiary:    pending.tertiary,
+              }
+            }
+
+            // Append the historical assessment row so the user's quiz
+            // history shows the date they actually took it (not signup).
+            const { error: assessErr } = await supabase
+              .from('dosha_assessments')
+              .insert({
+                user_id:         userId,
+                assessment_type: 'prakriti',
+                primary_dosha:   pending.primary,
+                secondary_dosha: pending.secondary,
+                vata_score:      pending.scores?.vata,
+                pitta_score:     pending.scores?.pitta,
+                kapha_score:     pending.scores?.kapha,
+                quiz_version:    'v1',
+                raw_details:     pending,
+              })
+            if (assessErr) console.error('Pending assessment insert failed:', assessErr.message)
+          }
+          localStorage.removeItem('sanctuary.pending.dosha')
+        }
+      } catch (err) {
+        console.error('Pending dosha migrate threw:', err?.message || err)
+      }
+    }
+
     // ── Bind product analytics identity ────────────────────────────────
     // Identify aliases the prior anonymous distinct_id to the user's id,
     // so events fired before login (e.g. signup_started) get attributed

@@ -278,6 +278,20 @@ export default function DoshaQuizPage() {
   const startedAtRef = useRef(null)
   useEffect(() => { phaseRef.current = phase }, [phase])
   useEffect(() => { currentQRef.current = currentQ }, [currentQ])
+
+  // Fire the signup-nudge impression once when an anonymous user lands
+  // on the result screen. Gives us a CTR denominator vs SIGNUP_NUDGE_TAPPED.
+  const nudgeShownRef = useRef(false)
+  useEffect(() => {
+    if (phase === 'result' && !user && doshaResult && !nudgeShownRef.current) {
+      nudgeShownRef.current = true
+      track(EVENTS.SIGNUP_NUDGE_SHOWN, {
+        source:        'dosha_quiz_result',
+        primary_dosha: doshaResult.primary,
+        secondary_dosha: doshaResult.secondary,
+      })
+    }
+  }, [phase, user, doshaResult])
   useEffect(() => {
     startedAtRef.current = Date.now()   // lazy-init avoids impure-call-in-render lint
     return () => {
@@ -364,8 +378,38 @@ export default function DoshaQuizPage() {
   }, [phase])
 
   // Save dosha to database
+  // localStorage key for pending dosha when user is anonymous. Picked
+  // up by SignupPage during signup and migrated to the profile.
+  const PENDING_DOSHA_KEY = 'sanctuary.pending.dosha'
+
   async function saveDosha() {
-    if (!user || !doshaResult) return
+    if (!doshaResult) return
+
+    // ── Anonymous path ──
+    // No user yet — stash the result in localStorage and bounce to
+    // signup. SignupPage will migrate this into the profile on
+    // successful account creation.
+    if (!user) {
+      setSaving(true)
+      try {
+        localStorage.setItem(PENDING_DOSHA_KEY, JSON.stringify({
+          label: doshaResult.label,
+          percentages: doshaResult.percentages,
+          primary: doshaResult.primary,
+          secondary: doshaResult.secondary,
+          tertiary: doshaResult.tertiary,
+          scores: doshaResult.scores,
+          completed_at: new Date().toISOString(),
+        }))
+      } catch (err) {
+        console.error('Failed to stash pending dosha:', err?.message || err)
+      }
+      track(EVENTS.ANONYMOUS_DOSHA_SAVED, { primary: doshaResult.primary, secondary: doshaResult.secondary })
+      track(EVENTS.SIGNUP_NUDGE_TAPPED, { source: 'dosha_quiz_result', primary: doshaResult.primary })
+      navigate('/signup', { replace: true })
+      return
+    }
+
     setSaving(true)
 
     // 1) Update denormalized cache on profiles (fast reads everywhere else)
@@ -735,17 +779,32 @@ export default function DoshaQuizPage() {
             </div>
           </div>
 
-          {/* Save button */}
+          {/* ── Result CTA ─────────────────────────────────────────────
+              Anonymous users see "Create account to save" — leads to
+              /signup where the localStorage'd dosha gets migrated.
+              Signed-in users see the direct save action. */}
+          {!user && (
+            <div className="bg-primary-container/40 border border-primary/15 rounded-xl px-4 py-3 mb-3 animate-quiz-slide-up" style={{ animationDelay: '0.28s' }}>
+              <p className="font-label text-[10px] uppercase tracking-wider text-primary mb-1">Save your result</p>
+              <p className="font-body text-xs text-on-surface leading-relaxed">
+                Create a free account to keep your dosha, track your practice, and personalize every recommendation.
+              </p>
+            </div>
+          )}
           <button
             onClick={() => {
-              track(EVENTS.CTA_CLICKED, { cta_id: 'dosha_save', primary_dosha: doshaResult?.primary })
+              track(EVENTS.CTA_CLICKED, {
+                cta_id:       user ? 'dosha_save' : 'dosha_signup_to_save',
+                primary_dosha: doshaResult?.primary,
+                anonymous:    !user,
+              })
               saveDosha()
             }}
             disabled={saving}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mb-3 animate-quiz-slide-up"
             style={{ animationDelay: '0.31s' }}
           >
-            {saving ? 'Saving...' : 'Save My Dosha Profile'}
+            {saving ? 'Saving...' : (user ? 'Save My Dosha Profile' : 'Create Account to Save')}
           </button>
 
           <button

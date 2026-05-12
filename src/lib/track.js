@@ -53,6 +53,15 @@ export const EVENTS = Object.freeze({
   SESSION_STARTED:          'session_started',
   SESSION_ENDED:            'session_ended',
 
+  // Onboarding (first-time user)
+  ONBOARDING_STARTED:       'onboarding_started',
+  ONBOARDING_SLIDE_VIEWED:  'onboarding_slide_viewed',
+  ONBOARDING_COMPLETED:     'onboarding_completed',
+  ONBOARDING_SKIPPED:       'onboarding_skipped',
+  SIGNUP_NUDGE_SHOWN:       'signup_nudge_shown',
+  SIGNUP_NUDGE_TAPPED:      'signup_nudge_tapped',
+  ANONYMOUS_DOSHA_SAVED:    'anonymous_dosha_saved',
+
   // Auth & onboarding (§5.2)
   SIGNUP_STARTED:           'signup_started',
   SIGNUP_STEP_COMPLETED:    'signup_step_completed',

@@ -23,6 +23,7 @@ const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'))
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
 const ProfilePage = lazy(() => import('./pages/ProfilePage'))
 const DoshaQuizPage = lazy(() => import('./pages/DoshaQuizPage'))
+const OnboardingPage = lazy(() => import('./pages/OnboardingPage'))
 const VikritiQuizPage = lazy(() => import('./pages/VikritiQuizPage'))
 const RecommendationsPage = lazy(() => import('./pages/RecommendationsPage'))
 const DoshaProfilePage = lazy(() => import('./pages/DoshaProfilePage'))
@@ -229,7 +230,11 @@ function AppRoutes() {
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
-          <Route path="/quiz" element={<PrivateRoute><DoshaQuizPage /></PrivateRoute>} />
+          <Route path="/onboarding" element={<OnboardingPage />} />
+          {/* Quiz is intentionally PUBLIC — first-time users take it
+              anonymously and we nudge them to create an account
+              afterwards to save the result. */}
+          <Route path="/quiz" element={<DoshaQuizPage />} />
           <Route path="/vikriti" element={<PrivateRoute><VikritiQuizPage /></PrivateRoute>} />
           <Route path="/dosha" element={<PrivateRoute><DoshaProfilePage /></PrivateRoute>} />
           <Route path="/dietary" element={<PrivateRoute><DietaryGuidancePage /></PrivateRoute>} />

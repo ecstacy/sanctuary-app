@@ -1,9 +1,22 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 
+const ONBOARDING_SEEN_KEY = 'sanctuary.onboarding.seen'
+
 export default function WelcomePage() {
   const navigate = useNavigate()
   const heroRef = useRef(null)
+
+  // First-time visitors get the value-prop tour. Returning visitors
+  // (or anyone who tapped Skip on the tour) see the regular landing.
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(ONBOARDING_SEEN_KEY) !== '1') {
+        navigate('/onboarding', { replace: true })
+      }
+    } catch { /* localStorage unavailable — show welcome as normal */ }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
