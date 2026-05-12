@@ -63,6 +63,13 @@ export function AuthProvider({ children }) {
   }, [])
 
   async function fetchProfile(userId) {
+    // Unblock the UI as soon as we know the user is authenticated.
+    // The profile network call below proceeds in the background; pages
+    // like HomePage gracefully render skeletons until `profile` arrives.
+    // This is the primary fix for the multi-second "loading…" delay
+    // after Google OAuth — we used to block on this query.
+    setLoading(false)
+
     const { data, error } = await supabase
       .from('profiles')
       .select('*')
@@ -113,8 +120,8 @@ export function AuthProvider({ children }) {
         console.error('analytics identify failed:', err?.message || err)
       }
     }
-
-    setLoading(false)
+    // Loading was cleared at the top of fetchProfile so the UI shows
+    // immediately on session — no need to flip it again here.
   }
 
   async function signUp({ email, password, fullName, language }) {
@@ -137,14 +144,13 @@ export function AuthProvider({ children }) {
   }
 
   async function signInWithGoogle() {
-    // On native, redirect through a static page hosted on GitHub Pages.
-    // This page reads the implicit flow tokens from the URL fragment,
-    // then shows a button linking to the app with tokens as query params.
-    // (Supabase Edge Functions can't serve HTML; Android 12+ requires
-    //  user-tapped links for custom scheme navigation)
+    // PKCE flow: Supabase redirects the OAuth response directly back to
+    // the app via the custom scheme (declared in AndroidManifest.xml).
+    // No GitHub-Pages middleman, no user-tap-to-continue. DeepLinkHandler
+    // catches the `?code=…` param and calls exchangeCodeForSession.
     const redirectTo = Capacitor.isNativePlatform()
-      ? 'https://ecstacy.github.io/sanctuary-app/oauth-callback.html'
-      : window.location.origin
+      ? 'com.sanctuary.app://auth-callback'
+      : `${window.location.origin}/auth-callback`
 
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
@@ -156,8 +162,10 @@ export function AuthProvider({ children }) {
 
     if (error) return { error }
 
-    // On native, open in the system browser (not CCT).
-    // CCTs block custom-scheme redirects on some Android devices.
+    // On native, open Google's OAuth page in the system browser. Custom
+    // Chrome Tabs (CCT) used to block custom-scheme redirects on some
+    // Android 12+ devices; modern WebView versions handle it, but the
+    // external browser is still the most reliable surface.
     if (Capacitor.isNativePlatform() && data?.url) {
       await ExternalBrowser.open({ url: data.url })
     }
