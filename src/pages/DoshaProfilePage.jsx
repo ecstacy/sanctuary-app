@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { DOSHAS } from '../data/ayurveda/dosha-prakriti'
+import { track, EVENTS } from '../lib/track'
 
 
 // ─── Dosha Data ─────────────────────────────────────────────────────────────
@@ -71,6 +74,68 @@ function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
+// ─── ExpandableSection ─────────────────────────────────────────────────
+// Tap-to-expand card. Lets us layer deeper content (body type, mind
+// type, imbalance signs, etc.) under the surface so the page stays
+// scannable for users who don't want the full Charaka digest.
+function ExpandableSection({ id, icon, label, summary, accentClass = 'text-on-surface-variant', isOpen, onToggle, children }) {
+  return (
+    <div className="bg-surface-container-low rounded-lg overflow-hidden mb-3">
+      <button
+        onClick={onToggle}
+        className="w-full px-5 py-4 flex items-center gap-3 text-left active:bg-surface-container/50"
+        aria-expanded={isOpen}
+        aria-controls={`exp-${id}`}
+      >
+        <div className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0">
+          <span aria-hidden="true" className={`material-symbols-outlined text-base ${accentClass}`}>{icon}</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="font-body font-semibold text-sm text-on-surface leading-tight">{label}</p>
+          {summary && (
+            <p className="font-body text-xs text-on-surface-variant/70 mt-0.5 leading-snug">{summary}</p>
+          )}
+        </div>
+        <span
+          aria-hidden="true"
+          className={`material-symbols-outlined text-on-surface-variant/40 text-sm transition-transform ${isOpen ? 'rotate-180' : ''}`}
+        >
+          expand_more
+        </span>
+      </button>
+      {isOpen && (
+        <div id={`exp-${id}`} className="px-5 pb-5 pt-1 border-t border-outline-variant/10">
+          {children}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── Section renderers — small reusable building blocks ──────────────
+function LabelValueRow({ label, value }) {
+  return (
+    <div className="flex gap-3 py-2 border-b border-outline-variant/10 last:border-0">
+      <p className="font-label text-[10px] uppercase tracking-wider text-on-surface-variant/70 min-w-[72px] flex-shrink-0 mt-0.5">{label}</p>
+      <p className="font-body text-sm text-on-surface leading-relaxed flex-1">{value}</p>
+    </div>
+  )
+}
+
+function BulletList({ items, iconName = 'check_circle', iconClass = 'text-primary' }) {
+  return (
+    <ul className="space-y-2">
+      {items.map((item, i) => (
+        <li key={i} className="flex items-start gap-2">
+          <span aria-hidden="true" className={`material-symbols-outlined text-[14px] mt-0.5 ${iconClass}`}>{iconName}</span>
+          <span className="font-body text-sm text-on-surface leading-relaxed">{item}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export default function DoshaProfilePage() {
@@ -120,6 +185,34 @@ export default function DoshaProfilePage() {
   const tertiaryData = tertiary ? DOSHA_DATA[tertiary] : null
   const isTridoshic = doshaLabel === 'Tridoshic'
   const isDual = doshaLabel.includes('-')
+
+  // Rich Charaka-sourced data for the primary dosha. Provides the
+  // Sanskrit gunas, body type, mind characteristics, imbalance signs,
+  // triggers, and pacification approach that the local DOSHA_DATA
+  // didn't capture. Falls back to null for Tridoshic prakriti
+  // (which doesn't map to a single dosha in DOSHAS).
+  const richDosha = DOSHAS[primary] || null
+
+  // Expandable section state — Set of section ids currently open.
+  // Tracking it as a Set lets multiple sections stay open if the
+  // user wants to compare body + mind side by side.
+  const [expanded, setExpanded] = useState(new Set())
+  function toggle(id) {
+    setExpanded(prev => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else {
+        next.add(id)
+        track(EVENTS.CONTENT_IMPRESSION, {
+          surface:      'dosha_profile',
+          content_type: 'deep_dive',
+          content_id:   id,
+          primary_dosha: primary,
+        })
+      }
+      return next
+    })
+  }
 
   return (
     <div className="min-h-screen bg-background text-on-surface font-body pb-20">
@@ -244,22 +337,161 @@ export default function DoshaProfilePage() {
           </div>
         )}
 
-        {/* Qualities */}
+        {/* ── Qualities (Gunas) — Sanskrit + English + meaning ─────────
+            Rich source data lives in DOSHAS[primary].qualities.
+            Each guna is a foundational Ayurvedic concept; showing the
+            Sanskrit name + the translated meaning helps users build
+            real vocabulary instead of just memorizing English
+            adjectives. Falls back to the legacy chips for Tridoshic. */}
         <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-4">
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
             {primaryData.name} Qualities (Gunas)
           </p>
-          <div className="flex flex-wrap gap-2">
-            {primaryData.qualities.map((q, i) => (
-              <span
-                key={i}
-                className={`${primaryData.bgColor} ${primaryData.textColor} px-3 py-1.5 rounded-full font-label text-xs font-medium`}
-              >
-                {q}
-              </span>
-            ))}
-          </div>
+          {richDosha?.qualities ? (
+            <div className="space-y-2">
+              {richDosha.qualities.map((q, i) => (
+                <div key={i} className={`rounded-xl px-3 py-2 ${primaryData.bgColor}`}>
+                  <div className="flex items-baseline justify-between gap-3 mb-0.5">
+                    <p className={`font-body font-semibold text-sm ${primaryData.textColor}`}>
+                      {capitalize(q.english)}
+                    </p>
+                    <p className={`font-label text-[10px] uppercase tracking-wider italic ${primaryData.textColor} opacity-70`}>
+                      {q.sanskrit}
+                    </p>
+                  </div>
+                  {q.note && (
+                    <p className="font-body text-xs text-on-surface-variant leading-relaxed">{q.note}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-2">
+              {primaryData.qualities.map((q, i) => (
+                <span key={i} className={`${primaryData.bgColor} ${primaryData.textColor} px-3 py-1.5 rounded-full font-label text-xs font-medium`}>
+                  {q}
+                </span>
+              ))}
+            </div>
+          )}
+          {richDosha?.source?.verse && (
+            <p className="font-label text-[10px] text-on-surface-variant/50 leading-relaxed mt-3">
+              Source: Charaka Samhita {richDosha.source.verse}
+            </p>
+          )}
         </div>
+
+        {/* ── Deep dive — tap to learn more about your nature ────────
+            Three expandable cards layered under one heading. The
+            top-level page stays scannable; users who want the full
+            picture can open any/all of these. Each renders Charaka-
+            sourced content from src/data/ayurveda/dosha-prakriti.js. */}
+        {richDosha && !isTridoshic && (
+          <div className="mb-5 stagger-5">
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3 px-1">
+              Learn more about your nature
+            </p>
+
+            <ExpandableSection
+              id="body"
+              icon="accessibility_new"
+              label={`Your ${primaryData.name} body`}
+              summary="Build, skin, hair, digestion, sleep, energy"
+              accentClass={primaryData.textColor}
+              isOpen={expanded.has('body')}
+              onToggle={() => toggle('body')}
+            >
+              <div className="pt-3">
+                {richDosha.body && (
+                  <>
+                    {richDosha.body.build      && <LabelValueRow label="Build"     value={richDosha.body.build} />}
+                    {richDosha.body.skin       && <LabelValueRow label="Skin"      value={richDosha.body.skin} />}
+                    {richDosha.body.hair       && <LabelValueRow label="Hair"      value={richDosha.body.hair} />}
+                    {richDosha.body.face       && <LabelValueRow label="Face"      value={richDosha.body.face} />}
+                    {richDosha.body.digestion  && <LabelValueRow label="Digestion" value={richDosha.body.digestion} />}
+                    {richDosha.body.sleep      && <LabelValueRow label="Sleep"     value={richDosha.body.sleep} />}
+                    {richDosha.body.energy     && <LabelValueRow label="Energy"    value={richDosha.body.energy} />}
+                  </>
+                )}
+              </div>
+            </ExpandableSection>
+
+            <ExpandableSection
+              id="mind"
+              icon="psychology"
+              label={`Your ${primaryData.name} mind`}
+              summary="How you show up — at your best and when you're off"
+              accentClass={primaryData.textColor}
+              isOpen={expanded.has('mind')}
+              onToggle={() => toggle('mind')}
+            >
+              <div className="pt-3 space-y-4">
+                <div>
+                  <p className={`font-label text-[10px] uppercase tracking-wider mb-2 ${primaryData.textColor}`}>In balance</p>
+                  <BulletList items={richDosha.mind.balanced} iconName="check_circle" iconClass={primaryData.textColor} />
+                </div>
+                <div>
+                  <p className="font-label text-[10px] uppercase tracking-wider mb-2 text-on-surface-variant/60">When out of balance</p>
+                  <BulletList items={richDosha.mind.imbalanced} iconName="error" iconClass="text-on-surface-variant/40" />
+                </div>
+              </div>
+            </ExpandableSection>
+
+            <ExpandableSection
+              id="signs"
+              icon="health_and_safety"
+              label="Signs to watch for"
+              summary={`Common ${primaryData.name} imbalance symptoms`}
+              accentClass={primaryData.textColor}
+              isOpen={expanded.has('signs')}
+              onToggle={() => toggle('signs')}
+            >
+              <div className="pt-3">
+                <p className="font-body text-xs text-on-surface-variant leading-relaxed mb-3">
+                  When your dominant dosha runs high, these are the early signals. None require alarm — they're invitations to lean into the balancing practices below.
+                </p>
+                <BulletList items={richDosha.imbalanceSigns} iconName="circle" iconClass="text-on-surface-variant/40" />
+              </div>
+            </ExpandableSection>
+
+            <ExpandableSection
+              id="triggers"
+              icon="warning"
+              label="What aggravates you"
+              summary="Habits and seasons that push you out of balance"
+              accentClass={primaryData.textColor}
+              isOpen={expanded.has('triggers')}
+              onToggle={() => toggle('triggers')}
+            >
+              <div className="pt-3">
+                <BulletList items={richDosha.triggers} iconName="trending_up" iconClass="text-on-surface-variant/50" />
+              </div>
+            </ExpandableSection>
+
+            <ExpandableSection
+              id="pacify"
+              icon="spa"
+              label="How to find balance"
+              summary={richDosha.pacification?.principle ? richDosha.pacification.principle.split('.')[0] + '.' : 'Lifestyle adjustments to pacify your dosha'}
+              accentClass={primaryData.textColor}
+              isOpen={expanded.has('pacify')}
+              onToggle={() => toggle('pacify')}
+            >
+              <div className="pt-3 space-y-3">
+                {richDosha.pacification?.principle && (
+                  <div className={`rounded-xl px-4 py-3 ${primaryData.bgColor}`}>
+                    <p className={`font-body text-sm leading-relaxed ${primaryData.textColor}`}>
+                      {richDosha.pacification.principle}
+                    </p>
+                  </div>
+                )}
+                {richDosha.pacification?.lifestyle && (
+                  <BulletList items={richDosha.pacification.lifestyle} iconName="check_circle" iconClass={primaryData.textColor} />
+                )}
+              </div>
+            </ExpandableSection>
+          </div>
+        )}
 
         {/* Natural Strengths */}
         <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-5">
