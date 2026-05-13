@@ -113,11 +113,14 @@ function ExpandableSection({ id, icon, label, summary, accentClass = 'text-on-su
 }
 
 // ─── Section renderers — small reusable building blocks ──────────────
+// Label stacks ABOVE the value so long values don't wrap awkwardly
+// against a narrow label column. Each block reads like a glossary
+// entry rather than a squished 2-column grid.
 function LabelValueRow({ label, value }) {
   return (
-    <div className="flex gap-3 py-2 border-b border-outline-variant/10 last:border-0">
-      <p className="font-label text-[10px] uppercase tracking-wider text-on-surface-variant/70 min-w-[72px] flex-shrink-0 mt-0.5">{label}</p>
-      <p className="font-body text-sm text-on-surface leading-relaxed flex-1">{value}</p>
+    <div className="py-3 border-b border-outline-variant/10 last:border-0 last:pb-0 first:pt-1">
+      <p className="font-label text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/60 mb-1">{label}</p>
+      <p className="font-body text-sm text-on-surface leading-relaxed">{value}</p>
     </div>
   )
 }
@@ -348,14 +351,19 @@ export default function DoshaProfilePage() {
             {primaryData.name} Qualities (Gunas)
           </p>
           {richDosha?.qualities ? (
-            <div className="space-y-2">
+            // Glossary-style list: Sanskrit and English on one line,
+            // brief note underneath. Each entry separated by a thin
+            // divider — feels like reading a definition list, not 7
+            // stacked tiles. Much lighter visual weight.
+            <div className="divide-y divide-outline-variant/10">
               {richDosha.qualities.map((q, i) => (
-                <div key={i} className={`rounded-xl px-3 py-2 ${primaryData.bgColor}`}>
-                  <div className="flex items-baseline justify-between gap-3 mb-0.5">
+                <div key={i} className="py-3 first:pt-1 last:pb-1">
+                  <div className="flex items-baseline gap-2 mb-0.5">
                     <p className={`font-body font-semibold text-sm ${primaryData.textColor}`}>
                       {capitalize(q.english)}
                     </p>
-                    <p className={`font-label text-[10px] uppercase tracking-wider italic ${primaryData.textColor} opacity-70`}>
+                    <span className="font-label text-[10px] text-on-surface-variant/40">·</span>
+                    <p className="font-body text-xs italic text-on-surface-variant/70">
                       {q.sanskrit}
                     </p>
                   </div>
@@ -375,7 +383,7 @@ export default function DoshaProfilePage() {
             </div>
           )}
           {richDosha?.source?.verse && (
-            <p className="font-label text-[10px] text-on-surface-variant/50 leading-relaxed mt-3">
+            <p className="font-label text-[10px] text-on-surface-variant/50 leading-relaxed mt-4 pt-3 border-t border-outline-variant/10">
               Source: Charaka Samhita {richDosha.source.verse}
             </p>
           )}
