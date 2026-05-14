@@ -239,9 +239,30 @@ export default function usePracticeStats() {
       setSessions(readLocalCache(user.id))
     } else {
       const normalized = (data || []).map(normalize)
-      setSessions(normalized)
-      // Keep local cache in sync, tagged with the owning user
-      writeLocalCache(normalized, user.id)
+      // ── Merge with local cache, don't clobber ────────────────────────
+      // A remote fetch can race a recent local save when the Supabase
+      // insert is slow, fails silently (RLS, network blip), or the user
+      // moves between pages faster than the network round-trip. Without
+      // the union below, fetchSessions would overwrite localStorage with
+      // a result that's MISSING the just-saved session — which then
+      // wipes the HomePage "pickup where you left" picker's view of
+      // what's been done today.
+      //
+      // Union strategy: take all remote rows + any LOCAL rows for today
+      // that don't have a matching remote row (same routine_key +
+      // timestamp). Today-only because older local-only rows have
+      // almost certainly already been migrated, and we don't want a
+      // disagreement to persist forever.
+      const today = toDateStr(new Date())
+      const local = readLocalCache(user.id)
+      const remoteKeys = new Set(normalized.map(r => `${r.date}|${r.routineKey}|${r.timestamp}`))
+      const localOnlyToday = local.filter(s =>
+        s?.date === today &&
+        !remoteKeys.has(`${s.date}|${s.routineKey}|${s.timestamp}`)
+      )
+      const merged = [...normalized, ...localOnlyToday]
+      setSessions(merged)
+      writeLocalCache(merged, user.id)
     }
     setLoading(false)
   }, [user])
