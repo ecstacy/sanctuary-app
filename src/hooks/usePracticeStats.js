@@ -141,6 +141,16 @@ export async function savePracticeSession(session, userId) {
   })
   writeLocalCache(cached, userId)
 
+  // Same-window broadcast — the browser's built-in `storage` event only
+  // fires across DIFFERENT windows/tabs, never the one that wrote the
+  // value. Without this, any usePracticeStats already mounted (e.g. the
+  // HomePage tab that the user nav'd back to after a session) keeps
+  // showing pre-save state until the Supabase fetch lands or the page
+  // remounts. The hook listens for this on mount.
+  try {
+    window.dispatchEvent(new CustomEvent('sanctuary:practice-saved'))
+  } catch { /* SSR / non-browser environment */ }
+
   return sessionRowId
 }
 
@@ -239,6 +249,19 @@ export default function usePracticeStats() {
   useEffect(() => {
     fetchSessions()
   }, [fetchSessions])
+
+  // Listen for in-window practice-saved broadcasts and refresh from the
+  // local cache. Critical for the HomePage "pickup where you left"
+  // picker — the user finishes a pose, returns to /home, and the picker
+  // re-evaluates against today's freshly-cached sessions without
+  // waiting for the Supabase round-trip.
+  useEffect(() => {
+    const onSaved = () => {
+      setSessions(readLocalCache(user?.id))
+    }
+    window.addEventListener('sanctuary:practice-saved', onSaved)
+    return () => window.removeEventListener('sanctuary:practice-saved', onSaved)
+  }, [user?.id])
 
   const refresh = useCallback(() => {
     fetchSessions()
