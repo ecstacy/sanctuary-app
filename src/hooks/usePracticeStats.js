@@ -151,6 +151,17 @@ export async function savePracticeSession(session, userId) {
     window.dispatchEvent(new CustomEvent('sanctuary:practice-saved'))
   } catch { /* SSR / non-browser environment */ }
 
+  // DIAG — surfaces in Android Studio logcat (tag: Capacitor/Console).
+  // Remove once we've confirmed the rotation works end-to-end.
+  // eslint-disable-next-line no-console
+  console.log('[SANCTUARY][save]', {
+    userId,
+    supabaseRowId: sessionRowId,
+    dateStr,
+    poseIds: (session.asanas || []).map(a => a?.id),
+    totalCached: cached.length,
+  })
+
   return sessionRowId
 }
 
@@ -281,15 +292,22 @@ export default function usePracticeStats() {
   // Supabase fetch lands — the entire reason the "pickup where you left"
   // suggestion was stuck on the same asana.
   useEffect(() => {
-    const refreshLocal = () => setSessions(readLocalCache(user?.id))
-    const refreshOnVisible = () => { if (!document.hidden) refreshLocal() }
-    window.addEventListener('sanctuary:practice-saved', refreshLocal)
-    window.addEventListener('focus', refreshLocal)
-    document.addEventListener('visibilitychange', refreshOnVisible)
+    const refreshLocal = (reason) => {
+      const fresh = readLocalCache(user?.id)
+      // eslint-disable-next-line no-console
+      console.log('[SANCTUARY][stats-refresh]', { reason, userId: user?.id, count: fresh.length, todayIds: fresh.filter(s => s.date === toDateStr(new Date())).flatMap(s => (s.asanas || []).map(a => a?.id)) })
+      setSessions(fresh)
+    }
+    const onSaved   = () => refreshLocal('practice-saved')
+    const onFocus   = () => refreshLocal('focus')
+    const onVisible = () => { if (!document.hidden) refreshLocal('visible') }
+    window.addEventListener('sanctuary:practice-saved', onSaved)
+    window.addEventListener('focus', onFocus)
+    document.addEventListener('visibilitychange', onVisible)
     return () => {
-      window.removeEventListener('sanctuary:practice-saved', refreshLocal)
-      window.removeEventListener('focus', refreshLocal)
-      document.removeEventListener('visibilitychange', refreshOnVisible)
+      window.removeEventListener('sanctuary:practice-saved', onSaved)
+      window.removeEventListener('focus', onFocus)
+      document.removeEventListener('visibilitychange', onVisible)
     }
   }, [user?.id])
 

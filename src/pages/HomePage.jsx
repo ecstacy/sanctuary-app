@@ -339,6 +339,8 @@ export default function HomePage() {
     // Walk in priority order, return first not done today.
     for (const c of candidates) {
       if (!completedTodayIds.has(c.id)) {
+        // eslint-disable-next-line no-console
+        console.log('[SANCTUARY][pick]', { slot, picked: c.id, source: c.source, completedToday: Array.from(completedTodayIds), candidateCount: candidates.length })
         return {
           asana: ASANAS[c.id],
           rules: [...rules, `pick:${c.source}:${c.id}`],
@@ -351,6 +353,8 @@ export default function HomePage() {
     // hides — "you've done what makes sense right now, come back later"
     // is more useful than a stale cool-down recommendation that just
     // re-suggests something they already finished.
+    // eslint-disable-next-line no-console
+    console.log('[SANCTUARY][pick] no-suggestion', { slot, completedToday: Array.from(completedTodayIds), candidates: candidates.map(c => c.id) })
     return null
   }, [checkedIn, profile?.dosha_details?.primary, profile?.dosha, completedTodayIds])
 
