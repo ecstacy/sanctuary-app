@@ -99,9 +99,10 @@ export function useVoiceGuidance() {
     if (speakingRef.current || !queueRef.current.length) return
 
     const item = queueRef.current.shift()
-    const text    = typeof item === 'string' ? item : item.text
-    const onEnd   = typeof item === 'string' ? null : item.onEnd
-    const fileKey = typeof item === 'string' ? null : item.fileKey
+    const text        = typeof item === 'string' ? item : item.text
+    const onEnd       = typeof item === 'string' ? null : item.onEnd
+    const fileKey     = typeof item === 'string' ? null : item.fileKey
+    const requireFile = typeof item === 'string' ? false : !!item.requireFile
     if (!text && !fileKey) { setTimeout(() => processQueue(), 0); return }
 
     speakingRef.current = true
@@ -140,9 +141,15 @@ export function useVoiceGuidance() {
       el.onended = () => { clearTimeout(safety); done() }
       el.onerror = () => {
         clearTimeout(safety)
+        if (requireFile) {
+          // Caller signalled "silence is better than TTS fallback" — drop
+          // the cue, advance the queue. Important for the practice
+          // completion message: a robot voice ruins the soothing close.
+          console.warn('[voice] audio file failed; silencing (requireFile):', src)
+          done()
+          return
+        }
         console.warn('[voice] audio file failed, falling back to TTS:', src)
-        // Re-queue the same text without the fileKey so the next pass
-        // takes the TTS branch. Keeps the onEnd contract intact.
         speakingRef.current = false
         setSpeaking(false)
         queueRef.current.unshift({ text, onEnd })
@@ -150,6 +157,11 @@ export function useVoiceGuidance() {
       }
       el.play().catch(err => {
         clearTimeout(safety)
+        if (requireFile) {
+          console.warn('[voice] audio play() rejected; silencing (requireFile):', err?.message)
+          done()
+          return
+        }
         console.warn('[voice] audio play() rejected, falling back to TTS:', err?.message)
         speakingRef.current = false
         setSpeaking(false)
@@ -227,7 +239,7 @@ export function useVoiceGuidance() {
       try { onEnd?.() } catch { /* swallow */ }
       return
     }
-    queueRef.current.push({ text, onEnd, fileKey })
+    queueRef.current.push({ text, onEnd, fileKey, requireFile })
     processQueue()
   }, [enabled, processQueue])
 

@@ -87,11 +87,14 @@ function buildJobs() {
   }
 
   // ── Session-level static phrases ───────────────────────────────────────
-  // Reserved keys prefixed `_session__` so they never collide with a pose
-  // id. The practice page passes these via opts.fileKey + requireFile to
-  // suppress the TTS fallback — we'd rather have silence than robot voice
-  // for these pivotal moments.
-  push('_session__complete', 'Practice complete. Namaste. Your body and mind thank you.')
+  // Reserved keys prefixed `session__` so they never collide with a pose
+  // id. NOTE: avoid leading underscores — Android's aapt build tool
+  // silently skips assets starting with `_` when packaging the APK, so
+  // the file would be missing in production builds. The practice page
+  // passes these via opts.fileKey + requireFile to suppress the TTS
+  // fallback — we'd rather have silence than robot voice for these
+  // pivotal moments.
+  push('session__complete', 'Practice complete. Namaste. Your body and mind thank you.')
 
   const everything = [
     ...Object.values(ASANAS).map(a => ({ ...a, kind: 'asana' })),

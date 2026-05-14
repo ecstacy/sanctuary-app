@@ -312,7 +312,7 @@ export default function PracticePage() {
 
   // ── Completion ──────────────────────────────────────────────────────────
   // Plays the static completion phrase via the pre-recorded MP3 (added
-  // to the audio bank under the reserved `_session__complete` key). If
+  // to the audio bank under the reserved `session__complete` key). If
   // the file isn't in the manifest yet (older bundles), the voice hook
   // falls back to TTS — but the user has signalled they prefer silence
   // over robot voice, so we only speak when the pre-recorded clip is
@@ -323,7 +323,7 @@ export default function PracticePage() {
       voice.speak(
         'Practice complete. Namaste. Your body and mind thank you.',
         null,
-        { fileKey: '_session__complete', requireFile: true },
+        { fileKey: 'session__complete', requireFile: true },
       )
     }
   }, [status])
