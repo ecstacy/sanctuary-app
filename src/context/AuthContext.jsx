@@ -17,6 +17,36 @@ const ExternalBrowser = registerPlugin('ExternalBrowser', {
 
 const AuthContext = createContext({})
 
+// ─── Profile cache ────────────────────────────────────────────────────
+// Persists the most-recent profile snapshot per user so the next app
+// open hydrates the dosha-theme + display name + stats SYNCHRONOUSLY
+// instead of flashing the default sage palette + missing name for
+// 500-1500ms while the background fetch resolves. Same pattern as
+// useVikritiSchedule / usePracticeStats.
+const PROFILE_CACHE_KEY = 'sanctuary.profile.v1'
+
+function readProfileCache(userId) {
+  if (!userId) return null
+  try {
+    const raw = localStorage.getItem(PROFILE_CACHE_KEY)
+    if (!raw) return null
+    const cached = JSON.parse(raw)
+    if (cached?.userId !== userId) return null   // different user → don't leak
+    return cached.profile || null
+  } catch { return null }
+}
+
+function writeProfileCache(userId, profile) {
+  if (!userId || !profile) return
+  try {
+    localStorage.setItem(PROFILE_CACHE_KEY, JSON.stringify({ userId, profile }))
+  } catch { /* quota — non-fatal */ }
+}
+
+function clearProfileCache() {
+  try { localStorage.removeItem(PROFILE_CACHE_KEY) } catch { /* ignore */ }
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [profile, setProfile] = useState(null)
@@ -26,18 +56,39 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-      if (session?.user) fetchProfile(session.user.id)
+      const sessionUser = session?.user ?? null
+      setUser(sessionUser)
+      if (sessionUser) {
+        // ── Synchronous hydration ────────────────────────────────────
+        // Read the cached profile snapshot for THIS user and apply it
+        // before the network fetch runs. The DoshaThemeProvider and
+        // HomePage now render with real data on first paint — no flash
+        // from default sage palette to dosha palette, no missing name
+        // for half a second. Fresh data overrides this once it arrives.
+        const cached = readProfileCache(sessionUser.id)
+        if (cached) {
+          setProfile(cached)
+          setLoading(false)
+        }
+        fetchProfile(sessionUser.id)
+      }
       else setLoading(false)
     })
 
     // Listen for auth changes (login, logout, token refresh)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        setUser(session?.user ?? null)
+        const newUser = session?.user ?? null
+        setUser(newUser)
         setAuthTransitioning(false)
-        if (session?.user) {
-          fetchProfile(session.user.id)
+        if (newUser) {
+          // Same hydration pattern for token-refresh / SIGNED_IN events
+          const cached = readProfileCache(newUser.id)
+          if (cached) {
+            setProfile(cached)
+            setLoading(false)
+          }
+          fetchProfile(newUser.id)
           // Surface real-auth events to the product analytics layer.
           // SIGNED_IN fires on every page load with a valid token, so we
           // gate by event to avoid double-counting; PostHog itself dedupes
@@ -52,6 +103,7 @@ export function AuthProvider({ children }) {
           // Logout — clear the analytics identity so the next anon session
           // can't be back-joined to the prior user.
           if (event === 'SIGNED_OUT') {
+            clearProfileCache()
             resetAnalytics()
             resetCrash()
           }
@@ -77,6 +129,9 @@ export function AuthProvider({ children }) {
       .single()
     if (error) console.error('Failed to fetch profile:', error.message)
     setProfile(data)
+    // Cache the fresh profile so the next app open hydrates instantly
+    // — no theme flash, no missing-name flash. Cleared on signOut.
+    if (data) writeProfileCache(userId, data)
     // Apply the account-level language preference if one is stored on the
     // profile. Falls through silently when the column isn't present yet
     // (the migration is optional — see docs/i18n.md).

@@ -107,6 +107,10 @@ export async function deleteAllUserData(userId) {
       'sanctuary.consent.v1',
       'sanctuary.lang',
       'sanctuary.anon_id',
+      'sanctuary.profile.v1',
+      'sanctuary.vikritiSchedule.v1',
+      'sanctuary.pending.dosha',
+      'sanctuary.onboarding.seen',
     ]
     keys.forEach(k => localStorage.removeItem(k))
   } catch { /* storage unavailable */ }
