@@ -225,7 +225,13 @@ export default function HomePage() {
   // happens on first paint after the user finishes practising — no wait
   // for the Supabase fetch.
   const completedTodayIds = useMemo(() => {
-    const todayStr = new Date().toISOString().slice(0, 10)
+    // Match the local-time YYYY-MM-DD that usePracticeStats stamps on
+    // each saved session (see `toDateStr` there). Using
+    // toISOString().slice(0,10) here gave the UTC date instead, which
+    // could disagree at the day boundary for non-UTC users and silently
+    // hide "completed today" sessions.
+    const d = new Date()
+    const todayStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
     const ids = new Set()
     for (const s of stats.sessions || []) {
       if (s?.date !== todayStr) continue

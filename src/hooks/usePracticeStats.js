@@ -124,15 +124,22 @@ export async function savePracticeSession(session, userId) {
     }
   }
 
-  // 3) Update local cache for instant UI update / offline fallback
-  const cached = readLocalCache()
+  // 3) Update local cache for instant UI update / offline fallback.
+  //
+  // IMPORTANT — read AND write tagged with the same userId. Earlier this
+  // wrote with userId=null while usePracticeStats reads with the real
+  // userId, so the strict-equality check inside readLocalCache always
+  // returned [] and any "did the user complete this today?" derived
+  // state (HomePage suggested-asana swap, today minutes, streaks) saw
+  // an empty session list until the next Supabase fetch landed.
+  const cached = readLocalCache(userId)
   cached.push({
     ...session,
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
     date: dateStr,
     timestamp: Date.now(),
   })
-  writeLocalCache(cached)
+  writeLocalCache(cached, userId)
 
   return sessionRowId
 }
