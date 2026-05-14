@@ -138,6 +138,26 @@ function BulletList({ items, iconName = 'check_circle', iconClass = 'text-primar
   )
 }
 
+// ─── ThemeSection ─────────────────────────────────────────────────────
+// Top-level chapter heading for the dosha profile page. Establishes
+// clear "chapters" so the page reads as a guided progression instead
+// of a flat stack of cards. Generous top padding gives breathing
+// room between themes.
+function ThemeSection({ kicker, title, lede, children }) {
+  return (
+    <section className="mb-6">
+      <div className="px-1 mb-4 mt-3">
+        <p className="font-label text-[10px] uppercase tracking-[0.2em] text-primary/70 mb-1.5">{kicker}</p>
+        <h2 className="font-headline text-2xl text-on-surface leading-tight">{title}</h2>
+        {lede && (
+          <p className="font-body text-sm text-on-surface-variant mt-2 leading-relaxed max-w-prose">{lede}</p>
+        )}
+      </div>
+      {children}
+    </section>
+  )
+}
+
 
 // ─── Component ──────────────────────────────────────────────────────────────
 
@@ -257,6 +277,17 @@ export default function DoshaProfilePage() {
       </div>
 
       <div className="px-6 -mt-8">
+
+        {/* ═══════════════════════════════════════════════════════════
+            THEME 1 — WHO YOU ARE
+            Identity content: composition, primary description, secondary
+            description, qualities, body, mind, natural strengths.
+            ═══════════════════════════════════════════════════════════ */}
+        <ThemeSection
+          kicker="Chapter 1"
+          title="Who you are"
+          lede="The elements, qualities, and patterns that shape your constitution."
+        >
 
         {/* Dosha Composition Card */}
         {percentages && (
@@ -394,12 +425,9 @@ export default function DoshaProfilePage() {
             top-level page stays scannable; users who want the full
             picture can open any/all of these. Each renders Charaka-
             sourced content from src/data/ayurveda/dosha-prakriti.js. */}
+        {/* ── Body + Mind expandables (still part of Chapter 1) ─── */}
         {richDosha && !isTridoshic && (
           <div className="mb-5 stagger-5">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3 px-1">
-              Learn more about your nature
-            </p>
-
             <ExpandableSection
               id="body"
               icon="accessibility_new"
@@ -444,7 +472,42 @@ export default function DoshaProfilePage() {
                 </div>
               </div>
             </ExpandableSection>
+          </div>
+        )}
 
+        {/* Natural Strengths — closes out "Who you are" with the
+            inspirational identity list. */}
+        <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-5">
+          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
+            Your natural strengths
+          </p>
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              ...primaryData.strengths,
+              ...(secondaryData && isDual ? secondaryData.strengths.slice(0, 2) : []),
+            ].map((strength, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-sm">check_circle</span>
+                <span className="font-body text-xs text-on-surface">{strength}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        </ThemeSection>
+        {/* ═══════════════════════════════════════════════════════════
+            THEME 2 — STAYING IN BALANCE
+            What to watch for, what aggravates, and how to find the
+            balanced state. The actionable arc of the page.
+            ═══════════════════════════════════════════════════════════ */}
+        <ThemeSection
+          kicker="Chapter 2"
+          title="Staying in balance"
+          lede="Early signs of imbalance, common triggers, and Charaka's guidance for returning to centre."
+        >
+
+        {richDosha && !isTridoshic && (
+          <div className="mb-5">
             <ExpandableSection
               id="signs"
               icon="health_and_safety"
@@ -501,24 +564,6 @@ export default function DoshaProfilePage() {
           </div>
         )}
 
-        {/* Natural Strengths */}
-        <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-5">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
-            Your Natural Strengths
-          </p>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              ...primaryData.strengths,
-              ...(secondaryData && isDual ? secondaryData.strengths.slice(0, 2) : []),
-            ].map((strength, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                <span className="font-body text-xs text-on-surface">{strength}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Stay In Balance */}
         <div className="bg-surface-container-low rounded-lg p-6 mb-5 stagger-5">
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
@@ -534,15 +579,48 @@ export default function DoshaProfilePage() {
           </div>
         </div>
 
-        {/* Ayurvedic Lifestyle — Season, Time, Taste */}
-        <div className="bg-surface-container rounded-lg overflow-hidden mb-5 stagger-6">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-6 pt-6 pb-4">
-            Ayurvedic Lifestyle Guide
+        {/* Yoga & Movement — practice prescription, still in Chapter 2 */}
+        <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5`}>
+          <div className="flex items-center gap-2 mb-3">
+            <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>self_care</span>
+            <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
+              Yoga & Movement
+            </p>
+          </div>
+          <p className="font-body text-sm text-on-surface leading-relaxed">
+            {primaryData.yoga}
           </p>
+        </div>
 
-          <div className="flex items-start gap-4 px-6 py-4 border-t border-surface-container-high">
+        {/* Meditation & Breathwork — closes Chapter 2 */}
+        <div className="bg-surface-container rounded-lg p-6 mb-5">
+          <div className="flex items-center gap-2 mb-3">
+            <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">air</span>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+              Meditation & Breathwork
+            </p>
+          </div>
+          <p className="font-body text-sm text-on-surface leading-relaxed">
+            {primaryData.meditation}
+          </p>
+        </div>
+
+        </ThemeSection>
+        {/* ═══════════════════════════════════════════════════════════
+            THEME 3 — LIVE BY YOUR DOSHA
+            Daily integration: lifestyle guide + deep-dive pages.
+            ═══════════════════════════════════════════════════════════ */}
+        <ThemeSection
+          kicker="Chapter 3"
+          title="Live by your dosha"
+          lede="Translate this knowledge into daily life — the season, the hour of the day, the food on your plate."
+        >
+
+        {/* Ayurvedic Lifestyle — Season, Time, Taste */}
+        <div className="bg-surface-container rounded-lg overflow-hidden mb-5">
+          <div className="flex items-start gap-4 px-6 py-4">
             <div className={`w-10 h-10 rounded-full ${primaryData.bgColor} flex items-center justify-center flex-shrink-0`}>
-              <span className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>calendar_month</span>
+              <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>calendar_month</span>
             </div>
             <div>
               <p className="font-body font-semibold text-sm text-on-surface mb-0.5">Peak Season</p>
@@ -554,7 +632,7 @@ export default function DoshaProfilePage() {
 
           <div className="flex items-start gap-4 px-6 py-4 border-t border-surface-container-high">
             <div className={`w-10 h-10 rounded-full ${primaryData.bgColor} flex items-center justify-center flex-shrink-0`}>
-              <span className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>schedule</span>
+              <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>schedule</span>
             </div>
             <div>
               <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{primaryData.name} Hours</p>
@@ -566,7 +644,7 @@ export default function DoshaProfilePage() {
 
           <div className="flex items-start gap-4 px-6 py-4 border-t border-surface-container-high">
             <div className={`w-10 h-10 rounded-full ${primaryData.bgColor} flex items-center justify-center flex-shrink-0`}>
-              <span className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>restaurant</span>
+              <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>restaurant</span>
             </div>
             <div>
               <p className="font-body font-semibold text-sm text-on-surface mb-0.5">Balancing Tastes</p>
@@ -577,35 +655,36 @@ export default function DoshaProfilePage() {
           </div>
         </div>
 
-        {/* Yoga & Movement */}
-        <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5 stagger-6`}>
-          <div className="flex items-center gap-2 mb-3">
-            <span className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>self_care</span>
-            <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
-              Yoga & Movement
-            </p>
-          </div>
-          <p className="font-body text-sm text-on-surface leading-relaxed">
-            {primaryData.yoga}
-          </p>
+        {/* Diet + Daily Routine deep-dive CTAs */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          <button
+            onClick={() => navigate('/dietary')}
+            className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2"
+          >
+            <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">restaurant</span>
+            </div>
+            <p className="font-body font-semibold text-sm text-on-surface leading-tight">Your diet</p>
+            <p className="font-body text-xs text-on-surface-variant/70 leading-snug">Foods to favor and avoid, by the six tastes</p>
+          </button>
+          <button
+            onClick={() => navigate('/dinacharya')}
+            className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2"
+          >
+            <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">schedule</span>
+            </div>
+            <p className="font-body font-semibold text-sm text-on-surface leading-tight">Daily routine</p>
+            <p className="font-body text-xs text-on-surface-variant/70 leading-snug">Charaka's 13 practices — align the day with the body's rhythm</p>
+          </button>
         </div>
 
-        {/* Meditation & Breathwork */}
-        <div className="bg-surface-container rounded-lg p-6 mb-5">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="material-symbols-outlined text-primary text-lg">air</span>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
-              Meditation & Breathwork
-            </p>
-          </div>
-          <p className="font-body text-sm text-on-surface leading-relaxed">
-            {primaryData.meditation}
-          </p>
-        </div>
+        </ThemeSection>
 
+        {/* ── Footer — meta context + retake ─────────────────────── */}
         {/* About Prakriti */}
         <div className="bg-surface-container-low rounded-lg p-5 mb-5 flex items-start gap-3">
-          <span className="material-symbols-outlined text-primary text-base mt-0.5">auto_awesome</span>
+          <span aria-hidden="true" className="material-symbols-outlined text-primary text-base mt-0.5">auto_awesome</span>
           <div>
             <p className="font-body font-semibold text-sm text-on-surface mb-1">
               Understanding Prakriti
@@ -613,33 +692,6 @@ export default function DoshaProfilePage() {
             <p className="font-body text-xs text-on-surface-variant leading-relaxed">
               In Ayurveda, your Prakriti is your birth constitution — the unique ratio of Vata, Pitta, and Kapha you were born with. It remains stable throughout life. When doshas shift due to diet, stress, or seasons, that temporary state is called Vikriti. The goal of Ayurveda is to bring Vikriti back in alignment with Prakriti.
             </p>
-          </div>
-        </div>
-
-        {/* ── Deeper Ayurveda content ── */}
-        <div className="mb-6">
-          <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-widest mb-3 px-1">Live by your dosha</p>
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              onClick={() => navigate('/dietary')}
-              className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2"
-            >
-              <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
-                <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">restaurant</span>
-              </div>
-              <p className="font-body font-semibold text-sm text-on-surface leading-tight">Your Diet</p>
-              <p className="font-body text-xs text-on-surface-variant/70 leading-snug">Foods to favor and avoid, paced by the six tastes</p>
-            </button>
-            <button
-              onClick={() => navigate('/dinacharya')}
-              className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2"
-            >
-              <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
-                <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">schedule</span>
-              </div>
-              <p className="font-body font-semibold text-sm text-on-surface leading-tight">Daily Routine</p>
-              <p className="font-body text-xs text-on-surface-variant/70 leading-snug">Charaka's 13 practices — align the day with the body's rhythm</p>
-            </button>
           </div>
         </div>
 
