@@ -250,17 +250,26 @@ export default function usePracticeStats() {
     fetchSessions()
   }, [fetchSessions])
 
-  // Listen for in-window practice-saved broadcasts and refresh from the
-  // local cache. Critical for the HomePage "pickup where you left"
-  // picker — the user finishes a pose, returns to /home, and the picker
-  // re-evaluates against today's freshly-cached sessions without
-  // waiting for the Supabase round-trip.
+  // Refresh from local cache when:
+  //   • A practice save broadcasts in-window (sanctuary:practice-saved
+  //     CustomEvent from savePracticeSession)
+  //   • The window regains focus (user returns from another app)
+  //   • The document becomes visible (foregrounded on mobile)
+  // Without these, an already-mounted HomePage that the user returns to
+  // after completing a practice keeps showing pre-save state until the
+  // Supabase fetch lands — the entire reason the "pickup where you left"
+  // suggestion was stuck on the same asana.
   useEffect(() => {
-    const onSaved = () => {
-      setSessions(readLocalCache(user?.id))
+    const refreshLocal = () => setSessions(readLocalCache(user?.id))
+    const refreshOnVisible = () => { if (!document.hidden) refreshLocal() }
+    window.addEventListener('sanctuary:practice-saved', refreshLocal)
+    window.addEventListener('focus', refreshLocal)
+    document.addEventListener('visibilitychange', refreshOnVisible)
+    return () => {
+      window.removeEventListener('sanctuary:practice-saved', refreshLocal)
+      window.removeEventListener('focus', refreshLocal)
+      document.removeEventListener('visibilitychange', refreshOnVisible)
     }
-    window.addEventListener('sanctuary:practice-saved', onSaved)
-    return () => window.removeEventListener('sanctuary:practice-saved', onSaved)
   }, [user?.id])
 
   const refresh = useCallback(() => {
