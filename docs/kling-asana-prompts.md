@@ -1395,6 +1395,80 @@ Over 6 seconds, starting from Adho Mukha Svanasana near a wall, she: walks the f
 
 ---
 
+## Pranayama stills — hold-only single images (no Kling clip)
+
+Pranayama is an internal practice; what matters visually is the **seat + the identifying hand/mouth gesture**. We generate a single still per technique using the same Nano Banana edit-from-Tadasana workflow. No video — the figure stays still on the detail page, breath is conveyed by the in-app breathing animation, not by the asset. Drop each PNG into `/public/poses/{poseKey}.png` and register it in `POSE_IMAGES` in `src/components/PoseFigure.jsx`.
+
+Use the Nano Banana preserve block above every prompt so the face, body, outfit, and studio stay consistent with the asana set.
+
+---
+
+### 76. Nadi Shodhana — Alternate Nostril Breath
+
+**Pose key:** `nadiShodhana` · **Still only** · **Source:** HYP 2.7
+
+**📸 Mechanics (Nano Banana edit from Sukhasana):**
+```
+Sitting in Sukhasana on the mat facing the camera. Spine tall. Left hand rests on the left knee in jnana mudra (thumb and index lightly touching, palm up). Right hand raised to the face in Vishnu mudra: index and middle fingers curled into the palm, ring and little fingers extended, thumb extended. The right thumb lightly closes the right nostril; the ring finger hovers just beside the left nostril, ready to switch. Elbow relaxed, not lifted. Eyes softly closed, face calm. Mouth gently closed.
+```
+
+---
+
+### 77. Ujjayi — Victorious / Ocean Breath
+
+**Pose key:** `ujjayi` · **Still only** · **Source:** HYP 2.51
+
+**📸 Mechanics:**
+```
+Sitting in Sukhasana on the mat facing the camera. Spine tall, chest broad. Both hands rest on the knees in chin mudra (thumb and index lightly touching, other fingers extended, palms facing DOWN onto the knees). Throat is subtly engaged — chin slightly drawn back into a soft jalandhara, not tucked aggressively. Eyes softly closed. Lips closed. The whole figure looks composed and contained — Ujjayi is the steady, oceanic breath behind every asana practice.
+```
+
+---
+
+### 78. Bhramari — Humming Bee Breath
+
+**Pose key:** `bhramari` · **Still only** · **Source:** HYP 2.68
+
+**📸 Mechanics:**
+```
+Sitting in Sukhasana on the mat facing the camera. Spine tall. Both hands lifted to the face in Shanmukhi mudra: thumbs gently close the ear tragus, index fingers rest lightly above the closed eyelids, middle fingers beside the nostrils (not pressing), ring fingers above the upper lip, little fingers below the lower lip. Elbows lifted softly to shoulder height. Lips closed. Face peaceful, fully turned inward — the gesture seals the senses so the hum resonates inside the skull.
+```
+
+---
+
+### 79. Sheetali — Cooling Breath
+
+**Pose key:** `sheetali` · **Still only** · **Source:** HYP 2.57
+
+**📸 Mechanics:**
+```
+Sitting in Sukhasana on the mat facing the camera. Spine tall. Both hands rest on the knees in chin mudra, palms up. Mouth open in a soft "O". The tongue is extended past the lips and CURLED LENGTHWISE into a tube shape (sides of the tongue rolled upward to meet — the characteristic Sheetali tongue). The inhalation is drawn through the curled tongue. Eyes softly closed. Expression neutral, not strained. Render the tongue curl clearly so the technique is identifiable at a glance.
+```
+
+---
+
+### 80. Bhastrika — Bellows Breath
+
+**Pose key:** `bhastrika` · **Still only** · **Source:** HYP 2.59
+
+**📸 Mechanics:**
+```
+Sitting in Sukhasana on the mat facing the camera. Spine VERY tall and upright, crown lifting, chest broad and open — the posture itself looks energetic and ready. Shoulders soft and down. Both hands rest firmly on the knees in jnana mudra, palms down. Eyes open with a soft, focused gaze straight ahead (Bhastrika is energizing, not introspective). Mouth closed. Slight engagement through the lower belly. The whole figure communicates contained power.
+```
+
+---
+
+### 81. Kapalabhati — Skull-Shining Breath
+
+**Pose key:** `kapalabhati` · **Still only** · **Source:** HYP 2.35
+
+**📸 Mechanics (edit to Vajrasana, not Sukhasana):**
+```
+Kneeling in Vajrasana on the mat facing the camera — shins folded under, sitting on the heels, knees together. Spine tall, chest open. Both hands rest on the thighs just above the knees in jnana mudra, palms down. Lower belly is drawn IN slightly (mid-exhalation snap — the defining Kapalabhati action). Face calm and clear, forehead bright. Eyes softly closed or with a soft downcast gaze. Mouth closed. The posture should read as alert, light, and contained — skull-shining breath is sharp but the body around it stays composed.
+```
+
+---
+
 ## QA checklist before adding a clip to the app
 
 **Image stage:**

@@ -6,6 +6,7 @@ import { ASANAS } from '../data/asanas'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
 import PranayamaPracticeOverlay from '../components/PranayamaPractice'
+import PoseFigure, { hasPoseImage } from '../components/PoseFigure'
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  PranayamaDetailPage — mirrors AsanaDetailPage but for breath techniques.
@@ -252,10 +253,15 @@ export default function PranayamaDetailPage() {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <div ref={heroRef} className="px-6 pt-2 pb-4">
         <div className="flex justify-center mb-5">
-          {/* Simple icon hero — pranayama is internal practice, not a posture */}
-          <div className="w-32 h-32 rounded-full bg-primary-container/30 flex items-center justify-center">
-            <span aria-hidden="true" className="material-symbols-outlined text-primary text-6xl">{pranayama.icon || 'air'}</span>
-          </div>
+          {/* Real figure when registered (showing the practiceSeat + mudra);
+              icon fallback while the still hasn't been generated yet. */}
+          {pranayama.poseKey && hasPoseImage(pranayama.poseKey) ? (
+            <PoseFigure poseKey={pranayama.poseKey} size="lg" breathing={false} objectPosition="center" />
+          ) : (
+            <div className="w-32 h-32 rounded-full bg-primary-container/30 flex items-center justify-center">
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-6xl">{pranayama.icon || 'air'}</span>
+            </div>
+          )}
         </div>
 
         <div className="text-center">

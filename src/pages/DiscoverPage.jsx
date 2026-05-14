@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { POPULAR_SEARCHES } from '../data/recommendations'
 import { ASANAS } from '../data/asanas'
 import { PRANAYAMAS } from '../data/pranayamas'
-import PoseFigure from '../components/PoseFigure'
+import PoseFigure, { hasPoseImage } from '../components/PoseFigure'
 import { track, EVENTS } from '../lib/track'
 import useScrollDepth from '../hooks/useScrollDepth'
 import useImpression from '../hooks/useImpression'
@@ -71,7 +71,16 @@ function PranayamaCard({ pranayama, position, onTap }) {
       className="flex-shrink-0 w-44 snap-start active:scale-[0.97] transition-all text-left"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/40 to-primary/10 flex items-center justify-center">
-        <span aria-hidden="true" className="material-symbols-outlined text-primary text-7xl">{pranayama.icon || 'air'}</span>
+        {/* Card auto-upgrades from icon to real image the moment a
+            /poses/{poseKey}.png file is uploaded and registered in
+            PoseFigure.POSE_IMAGES. Until then, fall back to the
+            Material icon — better than the generic SVG stick figure
+            PoseFigure shows for unregistered keys. */}
+        {pranayama.poseKey && hasPoseImage(pranayama.poseKey) ? (
+          <PoseFigure poseKey={pranayama.poseKey} size="sm" breathing={false} objectPosition="center" />
+        ) : (
+          <span aria-hidden="true" className="material-symbols-outlined text-primary text-7xl">{pranayama.icon || 'air'}</span>
+        )}
         {pranayama.level && pranayama.level !== 'beginner' && (
           <div className="absolute top-2 left-2">
             <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-primary uppercase tracking-wide">

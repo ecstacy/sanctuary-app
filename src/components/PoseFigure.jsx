@@ -11,6 +11,13 @@ import { createPortal } from 'react-dom'
 // drifted historically (e.g. `forwardBend` in data, `paschimottanasana.png`
 // on disk; `legsUpWall` in data, `legUpWall.png` on disk).
 
+// Exposed via hasPoseImage() below so call sites can decide between
+// "render PoseFigure" and "fall back to a custom placeholder/icon"
+// when no real image exists for a given poseKey.
+export function hasPoseImage(poseKey) {
+  return !!POSE_IMAGES[poseKey]
+}
+
 const POSE_IMAGES = {
   tadasana: '/poses/tadasana.png',
   warrior1: '/poses/warrior1.png',
@@ -112,6 +119,14 @@ const POSE_IMAGES = {
   astavakrasana:       '/poses/astavakrasana.png',
   pasasana:            '/poses/pasasana.png',
   adhoMukhaVrksasana:  '/poses/adhoMukhaVrksasana.png',
+
+  // ── Pranayama stills ─────────────────────────────────────────────────
+  nadiShodhana:        '/poses/nadiShodhana.png',
+  ujjayi:              '/poses/ujjayi.png',
+  bhramari:            '/poses/bhramari.png',
+  sheetali:            '/poses/sheetali.png',
+  bhastrika:           '/poses/bhastrika.png',
+  kapalabhati:         '/poses/kapalabhati.png',
 }
 
 const POSE_VIDEOS = {
