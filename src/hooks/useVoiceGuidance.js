@@ -207,11 +207,26 @@ export function useVoiceGuidance() {
    * Azure HD voice catalogue. Falls back to TTS automatically when the
    * key isn't in the manifest, so callers don't need to know what's
    * pre-recorded vs not.
+   *
+   * If `opts.requireFile` is true, the call is dropped silently when
+   * the fileKey isn't in the manifest. Used by call-sites that prefer
+   * silence over a robot TTS fallback (e.g. practice completion message
+   * — we'd rather say nothing than break the soothing-teacher feel).
+   * The optional `onEnd` still fires synchronously so callers can keep
+   * their state machine moving.
    */
   const speak = useCallback((text, onEnd, opts) => {
     if (!enabled) return
-    const fileKey = opts?.fileKey || null
+    const fileKey     = opts?.fileKey || null
+    const requireFile = !!opts?.requireFile
     if (!text && !fileKey) return
+    if (requireFile && (!fileKey || !manifestRef.current[fileKey])) {
+      // Manifest hasn't loaded yet OR the clip isn't recorded. Fire the
+      // onEnd anyway so sequenced callers don't stall waiting for a
+      // utterance that will never play.
+      try { onEnd?.() } catch { /* swallow */ }
+      return
+    }
     queueRef.current.push({ text, onEnd, fileKey })
     processQueue()
   }, [enabled, processQueue])

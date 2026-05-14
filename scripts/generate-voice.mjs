@@ -86,6 +86,13 @@ function buildJobs() {
     jobs.push({ key, text: text.trim() })
   }
 
+  // ── Session-level static phrases ───────────────────────────────────────
+  // Reserved keys prefixed `_session__` so they never collide with a pose
+  // id. The practice page passes these via opts.fileKey + requireFile to
+  // suppress the TTS fallback — we'd rather have silence than robot voice
+  // for these pivotal moments.
+  push('_session__complete', 'Practice complete. Namaste. Your body and mind thank you.')
+
   const everything = [
     ...Object.values(ASANAS).map(a => ({ ...a, kind: 'asana' })),
     ...Object.values(PRANAYAMAS).map(p => ({ ...p, kind: 'pranayama' })),

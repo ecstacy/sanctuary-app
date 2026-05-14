@@ -302,26 +302,29 @@ export default function PracticePage() {
   // eslint-disable-next-line no-unused-vars
   const _coachCuesDisabledUntilPreRecorded = true
 
-  // Rest-period narration — announces the next pose so the user can keep
-  // their eyes closed. Speaks once, near the start of the rest, so the
-  // user has time to absorb it before the next entry cue fires.
-  useEffect(() => {
-    if (status !== 'resting' || !nextAsana) return
-    const key = `rest-${currentIndex}`
-    // Trigger on the first full tick of rest so it doesn't collide with
-    // the just-played exit cue from the prior pose.
-    if (restTime === 13 && !voicePlayedRef.current[key]) {
-      voicePlayedRef.current[key] = true
-      const text = restNarration({ nextAsana, restSeconds: restTime })
-      if (text) voice.speak(text)
-    }
-  }, [status, restTime, currentIndex, nextAsana])
+  // Rest-period narration — DISABLED.
+  // The text was dynamic ("Rest. Soften the body. Next: Tree Pose.") and
+  // not in the pre-recorded Azure HD bank, so it played in robot TTS
+  // between poses — the exact "second iteration robotic voice" users
+  // reported. The next pose's pre-recorded __name + instructions fire as
+  // soon as NEXT_ASANA dispatches, which already announces what's next.
+  // The brief silence + bell during rest is calming, not jarring.
 
-  // ── Completion sound ────────────────────────────────────────────────────
+  // ── Completion ──────────────────────────────────────────────────────────
+  // Plays the static completion phrase via the pre-recorded MP3 (added
+  // to the audio bank under the reserved `_session__complete` key). If
+  // the file isn't in the manifest yet (older bundles), the voice hook
+  // falls back to TTS — but the user has signalled they prefer silence
+  // over robot voice, so we only speak when the pre-recorded clip is
+  // available. The completion chime always plays.
   useEffect(() => {
     if (status === 'complete') {
       audio.complete()
-      voice.speak('Practice complete. Namaste. Your body and mind thank you.')
+      voice.speak(
+        'Practice complete. Namaste. Your body and mind thank you.',
+        null,
+        { fileKey: '_session__complete', requireFile: true },
+      )
     }
   }, [status])
 
@@ -925,34 +928,38 @@ export default function PracticePage() {
             <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={140} />
 
             {/* ── Inline instruction subtitle ───────────────────────────────
-                Visible only while voice narrates a step (instructionIndex >= 0).
-                Tracks the line currently being spoken so users glancing at the
-                phone can follow along. Hidden once narration finishes — the
-                pose canvas, name, and timer get to breathe. */}
-            {voice.enabled
-              && instructionIndex >= 0
-              && Array.isArray(currentAsana.instructions)
-              && currentAsana.instructions[instructionIndex] && (
-              <div
-                className="mt-5 w-full max-w-sm px-4"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <p className="font-body text-sm text-on-surface-variant text-center leading-relaxed">
-                  {currentAsana.instructions[instructionIndex]}
-                </p>
-                <button
-                  onClick={() => {
-                    voice.stop()
-                    dispatch({ type: 'SKIP_NARRATION' })
-                  }}
-                  className="block mx-auto mt-3 font-label text-[10px] text-on-surface-variant/70 uppercase tracking-widest"
-                  aria-label="Skip narration"
-                >
-                  Skip narration
-                </button>
-              </div>
-            )}
+                Reserved fixed-height slot below the timer so the layout
+                does not jump as the spoken line transitions between
+                short and long instructions (1 → 2 → 3 → 2 lines). The
+                content fades in/out within this slot. The "Skip narration"
+                tap also lives here, but only while narration is active. */}
+            <div
+              className="mt-5 w-full max-w-sm px-4 flex flex-col items-center justify-start"
+              style={{ minHeight: '6.5rem' }}
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {voice.enabled
+                && instructionIndex >= 0
+                && Array.isArray(currentAsana.instructions)
+                && currentAsana.instructions[instructionIndex] && (
+                <>
+                  <p className="font-body text-sm text-on-surface-variant text-center leading-relaxed line-clamp-3">
+                    {currentAsana.instructions[instructionIndex]}
+                  </p>
+                  <button
+                    onClick={() => {
+                      voice.stop()
+                      dispatch({ type: 'SKIP_NARRATION' })
+                    }}
+                    className="mt-3 font-label text-[10px] text-on-surface-variant/70 uppercase tracking-widest"
+                    aria-label="Skip narration"
+                  >
+                    Skip narration
+                  </button>
+                </>
+              )}
+            </div>
           </>
         ) : (
           <div className="w-full max-w-sm overflow-y-auto px-1 py-2" style={{ maxHeight: '55vh' }}>
