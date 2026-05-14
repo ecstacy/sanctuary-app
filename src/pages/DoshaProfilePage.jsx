@@ -145,12 +145,14 @@ function BulletList({ items, iconName = 'check_circle', iconClass = 'text-primar
 // room between themes.
 function ThemeSection({ kicker, title, lede, children }) {
   return (
-    <section className="mb-6">
-      <div className="px-1 mb-4 mt-3">
-        <p className="font-label text-[10px] uppercase tracking-[0.2em] text-primary/70 mb-1.5">{kicker}</p>
-        <h2 className="font-headline text-2xl text-on-surface leading-tight">{title}</h2>
+    <section className="mb-10">
+      <div className="px-1 mb-5 mt-6">
+        {kicker && (
+          <p className="font-label text-[10px] font-semibold uppercase tracking-[0.22em] text-primary mb-2">{kicker}</p>
+        )}
+        <h2 className="font-headline text-[28px] text-on-surface leading-tight mb-2">{title}</h2>
         {lede && (
-          <p className="font-body text-sm text-on-surface-variant mt-2 leading-relaxed max-w-prose">{lede}</p>
+          <p className="font-body text-[15px] text-on-surface-variant/90 leading-relaxed max-w-prose">{lede}</p>
         )}
       </div>
       {children}
@@ -655,12 +657,17 @@ export default function DoshaProfilePage() {
           </div>
         </div>
 
-        {/* Diet + Daily Routine deep-dive CTAs */}
+        {/* Diet + Daily Routine deep-dive CTAs.
+            Chevron in the top-right reinforces that these tiles navigate,
+            not just decorative cards. Tap target spans the whole tile via
+            <button>, but the affordance was easy to miss without the arrow. */}
         <div className="grid grid-cols-2 gap-3 mb-6">
           <button
             onClick={() => navigate('/dietary')}
-            className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2"
+            aria-label="Open dietary guidance"
+            className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2 relative"
           >
+            <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base absolute top-3 right-3">chevron_right</span>
             <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">restaurant</span>
             </div>
@@ -669,8 +676,10 @@ export default function DoshaProfilePage() {
           </button>
           <button
             onClick={() => navigate('/dinacharya')}
-            className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2"
+            aria-label="Open daily routine"
+            className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2 relative"
           >
+            <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base absolute top-3 right-3">chevron_right</span>
             <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">schedule</span>
             </div>

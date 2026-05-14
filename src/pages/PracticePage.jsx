@@ -25,6 +25,9 @@ const INITIAL_STATE = {
   isPaused: false,
   showInfo: false,
   instructionIndex: 0,
+  // Bumped on REPEAT so the narration effect (keyed on pose id) can
+  // detect "same pose, but the user wants a fresh start" and re-fire.
+  repeatNonce: 0,
 }
 
 function reducer(state, action) {
@@ -68,7 +71,10 @@ function reducer(state, action) {
       // inline during the first part of the hold (see narration effect).
       return { ...state, status: 'active', currentIndex: state.currentIndex + 1, instructionIndex: 0, timeRemaining: action.duration, restTime: 0, isPaused: false, showInfo: false }
     case 'REPEAT':
-      return { ...state, timeRemaining: action.duration, isPaused: false }
+      // Reset the inline-narration subtitle index too, so the on-screen
+      // text restarts from line 1 along with the voice. Bump nonce so
+      // the narration effect re-runs even though currentIndex is unchanged.
+      return { ...state, timeRemaining: action.duration, isPaused: false, instructionIndex: 0, repeatNonce: state.repeatNonce + 1 }
     case 'TOGGLE_INFO':
       return { ...state, showInfo: !state.showInfo }
     case 'SKIP_REST':
@@ -142,7 +148,7 @@ export default function PracticePage() {
   const voicePlayedRef = useRef({})
   const userDosha = profile?.dosha_details?.primary || profile?.dosha?.toLowerCase() || null
 
-  const { status, currentIndex, timeRemaining, restTime, totalElapsed, completedAsanas, isPaused, showInfo, instructionIndex } = state
+  const { status, currentIndex, timeRemaining, restTime, totalElapsed, completedAsanas, isPaused, showInfo, instructionIndex, repeatNonce } = state
   const currentAsana = routine.asanas[currentIndex]
   const isLast = currentIndex >= routine.asanas.length - 1
   const nextAsana = !isLast ? routine.asanas[currentIndex + 1] : null
@@ -253,7 +259,7 @@ export default function PracticePage() {
       // `cancelled` guard above to silently drop late onEnd callbacks.
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status, currentAsana?.id, voice.enabled])
+  }, [status, currentAsana?.id, voice.enabled, repeatNonce])
 
   // ── Voice coach schedule — built once per pose, driven by tick ─────────
   // Replaces the old fixed 4-cue effect with a richer, phase-based teacher
@@ -281,21 +287,20 @@ export default function PracticePage() {
     })
   }, [status, currentIndex, currentAsana?.id, userDosha])
 
-  // Fire any cue whose `atRemaining` we just crossed. We compare against
-  // timeRemaining each tick; the schedule's keys are namespaced by pose so
-  // the `voicePlayedRef` set safely persists across the routine.
-  useEffect(() => {
-    if (status !== 'active') return
-    const schedule = cueScheduleRef.current
-    if (!schedule.length) return
-
-    for (const item of schedule) {
-      if (timeRemaining === item.atRemaining && !voicePlayedRef.current[item.key]) {
-        voicePlayedRef.current[item.key] = true
-        voice.speak(item.text)
-      }
-    }
-  }, [status, timeRemaining])
+  // Fire any cue whose `atRemaining` we just crossed.
+  //
+  // GATED — currently disabled. The voiceCoach schedule produces dynamic
+  // / templated lines (milestone countdowns, randomized alignment hints,
+  // dosha nudges) that are NOT in the pre-recorded Azure HD bank yet, so
+  // firing them means a robot TTS voice cuts in mid-hold and ruins the
+  // soothing-teacher feel. The pre-recorded narration effect above
+  // already covers pose announcement + every instruction line with Nova
+  // HD, which is plenty of guidance for a single hold. We'll bring this
+  // back once scripts/generate-voice.mjs is extended to cover the coach
+  // bank (per-pose hold/breathe/exit cues + universal alignment/breath/
+  // presence variants + milestones + dosha nudges).
+  // eslint-disable-next-line no-unused-vars
+  const _coachCuesDisabledUntilPreRecorded = true
 
   // Rest-period narration — announces the next pose so the user can keep
   // their eyes closed. Speaks once, near the start of the rest, so the
@@ -440,6 +445,10 @@ export default function PracticePage() {
   }, [currentAsana, isLast, voice, currentIndex, timeRemaining, routineKey, routine])
 
   const handleRepeat = useCallback(() => {
+    // Cancel any in-flight cue first — without this, a milestone like
+    // "Fifteen seconds. Three more breaths." keeps playing even though
+    // the timer just reset to full duration, which feels broken.
+    voice.stop()
     voicePlayedRef.current = {}
     audio.chime()
     track(EVENTS.POSE_REPEATED, {
@@ -448,7 +457,7 @@ export default function PracticePage() {
       routine_key: routineKey || routine.key,
     })
     dispatch({ type: 'REPEAT', duration: currentAsana.durationSeconds })
-  }, [currentAsana, audio, currentIndex, routineKey, routine])
+  }, [currentAsana, audio, voice, currentIndex, routineKey, routine])
 
   const handleExit = useCallback(() => {
     voice.stop()
