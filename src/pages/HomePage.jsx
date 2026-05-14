@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getRoutine, ASANAS } from '../data/asanas'
@@ -218,6 +218,34 @@ export default function HomePage() {
   const routineKey = checkedIn || 'stress'
   const routine = getRoutine(routineKey)
 
+  // ── Today's completed asana ids ───────────────────────────────────────
+  // Drives the "skip what they already did today" fallback below the rule
+  // engine. Sourced from the local-cached practice history (already
+  // hydrated synchronously by usePracticeStats on mount) so the swap
+  // happens on first paint after the user finishes practising — no wait
+  // for the Supabase fetch.
+  const completedTodayIds = useMemo(() => {
+    const todayStr = new Date().toISOString().slice(0, 10)
+    const ids = new Set()
+    for (const s of stats.sessions || []) {
+      if (s?.date !== todayStr) continue
+      for (const a of s.asanas || []) {
+        if (a?.id) ids.add(a.id)
+      }
+    }
+    return ids
+  }, [stats.sessions])
+
+  // Curated rotation per time slot — used as the fallback chain when the
+  // primary pick has already been completed today. Picked to feel calming
+  // and unlikely-to-stack-with-the-primary (e.g. don't suggest two
+  // sun-salutations in one morning).
+  const FALLBACK_BY_SLOT = {
+    morning:   ['vrksasana',          'tadasana',     'adhoMukhaSvanasana', 'virabhadrasanaII', 'sukhasana'],
+    afternoon: ['virabhadrasanaII',   'vrksasana',    'uttanasana',         'sukhasana',        'tadasana'],
+    evening:   ['balasana',           'sukhasana',    'suptaMatsyendrasana','legsUpTheWall',    'savasana'],
+  }
+
   // Pick a single contextual asana based on time of day, check-in, and dosha.
   // Returns both the asana and the reasoning (which rules fired) so the
   // recommendation log can answer "why did we suggest this?".
@@ -255,8 +283,31 @@ export default function HomePage() {
   // Defensive fallback — if a rule above references a renamed/missing
   // asana, fall back to tadasana so the page never crashes on undefined.
   const picked = pickAsana()
-  const suggestedAsana = picked.asana || ASANAS.tadasana
-  const { rules: suggestedAsanaRules, userDosha: suggestedAsanaUserDosha } = picked
+
+  // "Pickup where you left off" — if the rule engine's pick has already
+  // been completed today, walk the curated rotation for the matching
+  // slot and grab the first one the user hasn't done yet. Falls back to
+  // the original pick if every alternative is also completed (great
+  // problem to have).
+  const swappedPick = (() => {
+    const primary = picked.asana || ASANAS.tadasana
+    if (!completedTodayIds.has(primary.id)) return picked
+    const slot = picked.rules.find(r => r.startsWith('slot:'))?.split(':')[1]
+    const rotation = FALLBACK_BY_SLOT[slot] || []
+    for (const id of rotation) {
+      if (id === primary.id) continue
+      if (!completedTodayIds.has(id) && ASANAS[id]) {
+        return {
+          asana:     ASANAS[id],
+          rules:     [...picked.rules, 'swap:already_completed_today'],
+          userDosha: picked.userDosha,
+        }
+      }
+    }
+    return picked
+  })()
+  const suggestedAsana = swappedPick.asana || ASANAS.tadasana
+  const { rules: suggestedAsanaRules, userDosha: suggestedAsanaUserDosha } = swappedPick
 
   // Impression ref for the suggested-asana card. Fires `content_impression`
   // once the card has been ≥50% visible for 1s — the CTR denominator we'll

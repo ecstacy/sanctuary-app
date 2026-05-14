@@ -153,6 +153,50 @@ export default function PracticePage() {
   const isLast = currentIndex >= routine.asanas.length - 1
   const nextAsana = !isLast ? routine.asanas[currentIndex + 1] : null
 
+  // ── Lifecycle: silence the voice whenever the practice surface goes
+  //     away. Three triggers all need to call voice.stop():
+  //       1. The component unmounts (user navigates away — browser back,
+  //          gesture back, deeplink to another route). handleExit covers
+  //          the explicit close button, but not the other paths.
+  //       2. The page is hidden (tab switch / app backgrounded on
+  //          Android — the OS doesn't pause HTMLAudio or system TTS
+  //          on its own, so the voice keeps narrating into a locked
+  //          phone or behind another app).
+  //       3. Capacitor's App pause event (native lock + home button on
+  //          Android, where visibilitychange isn't always reliable in
+  //          the WebView depending on OEM customizations).
+  //     We also stop on resume-when-hidden to be safe — if the user
+  //     comes back to a locked-then-unlocked session, they shouldn't
+  //     hear cues that were scheduled minutes ago.
+  useEffect(() => {
+    const handleHidden = () => {
+      if (typeof document !== 'undefined' && document.hidden) voice.stop()
+    }
+    document.addEventListener('visibilitychange', handleHidden)
+
+    // Capacitor App plugin — fires on native pause/resume. Imported
+    // dynamically so the web build doesn't fail if the plugin's web
+    // shim isn't bundled.
+    let appListenerHandle = null
+    let cancelled = false
+    ;(async () => {
+      try {
+        const { App } = await import('@capacitor/app')
+        if (cancelled) return
+        appListenerHandle = await App.addListener('pause', () => voice.stop())
+      } catch { /* web — plugin not available, visibilitychange handles it */ }
+    })()
+
+    return () => {
+      cancelled = true
+      document.removeEventListener('visibilitychange', handleHidden)
+      try { appListenerHandle?.remove?.() } catch { /* ignore */ }
+      // Final stop on actual unmount — covers gesture-back, deeplinks,
+      // any path that bypasses handleExit.
+      voice.stop()
+    }
+  }, [voice])
+
   // ── Timer ───────────────────────────────────────────────────────────────
   useEffect(() => {
     if (status === 'active' || status === 'resting') {
