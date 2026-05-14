@@ -89,6 +89,29 @@ const POSE_IMAGES = {
   sarvangasana: '/poses/sarvangasana.png',
   sirsasana:    '/poses/sirsasana.png',
   sasangasana:  '/poses/sasangasana.png',
+
+  // Batch 3 — sequences (single representative still each)
+  suryaNamaskarB:   '/poses/suryaNamaskarB.png',
+  chandraNamaskar:  '/poses/chandraNamaskar.png',
+  cardiacWarmup:    '/poses/cardiacWarmup.png',
+
+  // Stretch tier — HYP-named seats + advanced poses
+  swastikasana:        '/poses/swastikasana.png',
+  kurmasana:           '/poses/kurmasana.png',
+  kukkutasana:         '/poses/kukkutasana.png',
+  // uttanaKurmasana: image deferred — too complex a shape for current
+  // generator. Falls back to the Material icon via PoseFigure default.
+  mayurasana:          '/poses/mayurasana.png',
+  simhasana:           '/poses/simhasana.png',
+  bhadrasana:          '/poses/bhadrasana.png',
+  kapotasana:          '/poses/kapotasana.png',
+  bakasana:            '/poses/bakasana.png',
+  kakasana:            '/poses/kakasana.png',
+  chaturangaDandasana: '/poses/chaturangaDandasana.png',
+  vasishthasana:       '/poses/vasishthasana.png',
+  astavakrasana:       '/poses/astavakrasana.png',
+  pasasana:            '/poses/pasasana.png',
+  adhoMukhaVrksasana:  '/poses/adhoMukhaVrksasana.png',
 }
 
 const POSE_VIDEOS = {

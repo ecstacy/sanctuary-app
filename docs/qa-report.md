@@ -159,3 +159,4 @@ These would polish the catalog but are not gates:
 | Date | Change |
 |---|---|
 | 2026-05-11 | Initial report; registered 4 already-on-disk images (halasana, sarvangasana, sirsasana, sasangasana). |
+| 2026-05-14 | 17 of 18 remaining images uploaded + wired (3 sequences + 14 stretch-tier). Imagery coverage now **74/75 poseKeys (98.7%)**. `uttanaKurmasana` remains icon-only by design — the inverted-lotus geometry is too complex for current image generation; revisit later. |
