@@ -216,13 +216,17 @@ export default function PracticePage() {
 
     let cancelled = false
     // Soft entry chime + pose name so the user knows what just started.
+    // fileKey routes to the pre-recorded Azure HD voice clip when
+    // generation has been run; falls back to TTS otherwise.
     audio.bell()
-    voice.speak(`${currentAsana.english}.`)
+    voice.speak(`${currentAsana.english}.`, null, { fileKey: `${currentAsana.id}__name` })
 
     if (instructions.length === 0) {
       // Pose has no granular instructions — just announce and let the
       // voiceCoach schedule take it from here.
-      if (currentAsana.voiceCues?.enter) voice.speak(currentAsana.voiceCues.enter)
+      if (currentAsana.voiceCues?.enter) {
+        voice.speak(currentAsana.voiceCues.enter, null, { fileKey: `${currentAsana.id}__enter` })
+      }
       return () => { cancelled = true }
     }
 
@@ -237,7 +241,7 @@ export default function PracticePage() {
           // Finished narrating — hide the subtitle so the timer breathes.
           dispatch({ type: 'INSTRUCTION_PROGRESS', index: -1 })
         }
-      })
+      }, { fileKey: `${currentAsana.id}__i${i}` })
     })
 
     return () => {
