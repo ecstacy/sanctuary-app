@@ -347,20 +347,20 @@ export default function HomePage() {
       }
     }
 
-    // Everything in the pool is done today — congratulations. Show a
-    // restorative anchor as a cool-down even if also completed (it's
-    // less of a "do this" and more "you've earned a pause"). We still
-    // need to return a real asana so the card renders.
-    const fallbackId = pool.anchor[0] || 'tadasana'
-    return {
-      asana: ASANAS[fallbackId] || ASANAS.tadasana,
-      rules: [...rules, 'pick:all_completed_today'],
-      userDosha,
-    }
+    // Every pool entry has been done today. Return null so the section
+    // hides — "you've done what makes sense right now, come back later"
+    // is more useful than a stale cool-down recommendation that just
+    // re-suggests something they already finished.
+    return null
   }, [checkedIn, profile?.dosha_details?.primary, profile?.dosha, completedTodayIds])
 
-  const suggestedAsana = suggestedPick.asana || ASANAS.tadasana
-  const { rules: suggestedAsanaRules, userDosha: suggestedAsanaUserDosha } = suggestedPick
+  // Render-safe fallbacks for the analytics / impression refs below —
+  // they expect a real asana shape and we don't want to crash the
+  // logging paths when the suggestion section is hidden.
+  const suggestedAsana = suggestedPick?.asana || ASANAS.tadasana
+  const suggestedAsanaRules    = suggestedPick?.rules || []
+  const suggestedAsanaUserDosha = suggestedPick?.userDosha || null
+  const hasSuggestion          = !!suggestedPick
 
   // Impression ref for the suggested-asana card. Fires `content_impression`
   // once the card has been ≥50% visible for 1s — the CTR denominator we'll
@@ -381,7 +381,10 @@ export default function HomePage() {
   // ── Log recommendation when the suggested asana card renders ──
   // Guarded by a ref so we only write one row per unique
   // (asana, time_of_day, checkedIn) combination within this session.
+  // Skip entirely when the section is hidden (everything done today) —
+  // we don't want a spurious "we recommended X" row in the log.
   useEffect(() => {
+    if (!hasSuggestion) return
     if (!user?.id || !suggestedAsana?.id) return
     const key = `${suggestedAsana.id}|${timeOfDay}|${checkedIn || 'none'}`
     if (lastLoggedKeyRef.current === key) return
@@ -404,7 +407,7 @@ export default function HomePage() {
       if (!cancelled) setSuggestedAsanaRecId(recId)
     })()
     return () => { cancelled = true }
-  }, [user?.id, suggestedAsana?.id, timeOfDay, checkedIn, suggestedAsanaRules, suggestedAsanaUserDosha])
+  }, [hasSuggestion, user?.id, suggestedAsana?.id, timeOfDay, checkedIn, suggestedAsanaRules, suggestedAsanaUserDosha])
 
   // ── Handler for tapping the suggested asana card ──
   const handleSuggestedAsanaClick = () => {
@@ -627,26 +630,28 @@ export default function HomePage() {
         </div>
 
         {/* ── Suggested Asana — single-tap card nudging into the Routine tab ── */}
-        <section className="stagger-3">
-          <h3 className="font-headline text-lg text-on-surface leading-tight mb-2 px-1">
-            Pick up where you left off
-          </h3>
-          <button
-            ref={suggestedAsanaImpressionRef}
-            onClick={handleSuggestedAsanaClick}
-            className="bg-surface-container rounded-xl p-5 flex items-center gap-4 w-full border border-primary-container/40 text-left active:scale-[0.98] transition-all"
-          >
-            <div className="w-16 h-16 rounded-xl bg-primary-container/50 flex items-center justify-center flex-shrink-0 overflow-hidden pointer-events-none">
-              <PoseFigure poseKey={suggestedAsana.poseKey} size="xs" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">{asanaContext}</p>
-              <p className="font-body font-semibold text-sm text-on-surface">{suggestedAsana.sanskrit}</p>
-              <p className="font-body text-xs text-on-surface-variant mt-0.5">{suggestedAsana.english} · {Math.ceil(suggestedAsana.durationSeconds / 60)} min</p>
-            </div>
-            <span className="material-symbols-outlined text-primary text-xl flex-shrink-0">arrow_forward</span>
-          </button>
-        </section>
+        {hasSuggestion && (
+          <section className="stagger-3">
+            <h3 className="font-headline text-lg text-on-surface leading-tight mb-2 px-1">
+              Pick up where you left off
+            </h3>
+            <button
+              ref={suggestedAsanaImpressionRef}
+              onClick={handleSuggestedAsanaClick}
+              className="bg-surface-container rounded-xl p-5 flex items-center gap-4 w-full border border-primary-container/40 text-left active:scale-[0.98] transition-all"
+            >
+              <div className="w-16 h-16 rounded-xl bg-primary-container/50 flex items-center justify-center flex-shrink-0 overflow-hidden pointer-events-none">
+                <PoseFigure poseKey={suggestedAsana.poseKey} size="xs" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">{asanaContext}</p>
+                <p className="font-body font-semibold text-sm text-on-surface">{suggestedAsana.sanskrit}</p>
+                <p className="font-body text-xs text-on-surface-variant mt-0.5">{suggestedAsana.english} · {Math.ceil(suggestedAsana.durationSeconds / 60)} min</p>
+              </div>
+              <span className="material-symbols-outlined text-primary text-xl flex-shrink-0">arrow_forward</span>
+            </button>
+          </section>
+        )}
 
         {/* ── Daily Ritual — Breathing (redesigned with staggered breath rings) ── */}
         <button
