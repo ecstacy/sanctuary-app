@@ -239,6 +239,13 @@ export default function HomePage() {
         if (a?.id) ids.add(a.id)
       }
     }
+    // Diagnostic: surface what the picker is filtering against. Helps
+    // confirm in-app that the broadcast is wiring through and the
+    // suggested-asana swap has the data it needs.
+    if (typeof window !== 'undefined') {
+      window.__sanctuary_completedTodayIds = Array.from(ids)
+      window.__sanctuary_today = todayStr
+    }
     return ids
   }, [stats.sessions])
 
@@ -320,6 +327,14 @@ export default function HomePage() {
       add(pool[userDosha], `dosha:${userDosha}`)
     }
     add(pool.anchor, 'anchor')
+
+    // Diagnostic: dump the actual ordered candidate list so we can verify
+    // in-app why a particular asana surfaced. Inspectable via
+    // window.__sanctuary_lastCandidates / window.__sanctuary_lastSlot.
+    if (typeof window !== 'undefined') {
+      window.__sanctuary_lastSlot = slot
+      window.__sanctuary_lastCandidates = candidates.map(c => `${c.id} (${c.source})`)
+    }
 
     // Walk in priority order, return first not done today.
     for (const c of candidates) {
