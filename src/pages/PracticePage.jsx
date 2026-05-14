@@ -928,14 +928,17 @@ export default function PracticePage() {
             <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={140} />
 
             {/* ── Inline instruction subtitle ───────────────────────────────
-                Reserved fixed-height slot below the timer so the layout
-                does not jump as the spoken line transitions between
-                short and long instructions (1 → 2 → 3 → 2 lines). The
-                content fades in/out within this slot. The "Skip narration"
-                tap also lives here, but only while narration is active. */}
+                FIXED-HEIGHT slot — not min-height. The parent flex column
+                uses justify-center, so any size change here re-centres
+                the timer + pose-name above, which the user saw as a jump
+                as the spoken line cycled between 1 and 2 lines. Height
+                sized for the worst case (3 clamped lines + skip button)
+                so even the longest instruction fits without overflow,
+                and the slot is invisible-but-present when narration is
+                done (instructionIndex === -1). */}
             <div
-              className="mt-5 w-full max-w-sm px-4 flex flex-col items-center justify-start"
-              style={{ minHeight: '6.5rem' }}
+              className="mt-5 w-full max-w-sm px-4 flex flex-col items-center justify-start overflow-hidden"
+              style={{ height: '7.5rem' }}
               aria-live="polite"
               aria-atomic="true"
             >
