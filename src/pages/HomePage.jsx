@@ -242,78 +242,110 @@ export default function HomePage() {
     return ids
   }, [stats.sessions])
 
-  // Curated rotation per time slot — used as the fallback chain when the
-  // primary pick has already been completed today. Picked to feel calming
-  // and unlikely-to-stack-with-the-primary (e.g. don't suggest two
-  // sun-salutations in one morning).
-  const FALLBACK_BY_SLOT = {
-    morning:   ['vrksasana',          'tadasana',     'adhoMukhaSvanasana', 'virabhadrasanaII', 'sukhasana'],
-    afternoon: ['virabhadrasanaII',   'vrksasana',    'uttanasana',         'sukhasana',        'tadasana'],
-    evening:   ['balasana',           'sukhasana',    'suptaMatsyendrasana','legsUpTheWall',    'savasana'],
+  // ── "Pickup where you left" — candidate pool walker ──────────────────
+  //
+  // Goal: when the user opens the app, surface ONE asana that:
+  //   • Fits the moment (morning = energizing, afternoon = grounding,
+  //     evening = restorative)
+  //   • Respects their check-in (low energy → restorative, stressed → calming)
+  //   • Leans into their dosha (kapha gets stimulating, pitta gets
+  //     cooling, vata gets grounding)
+  //   • Hasn't already been done today
+  //
+  // Implementation: each slot has a curated CANDIDATE pool listed in
+  // recommended priority. We layer the check-in pool and the dosha pool
+  // on top (those go first), then the slot's default order, deduped.
+  // Walk the combined list and return the first asana NOT in the user's
+  // completedTodayIds. If everything is completed, fall back to a
+  // restorative anchor for that slot — "well done, here's a cool-down".
+  const SLOT_POOLS = {
+    morning: {
+      energy:       ['suryaNamaskarA', 'suryaNamaskarB', 'virabhadrasanaI', 'adhoMukhaSvanasana', 'utkatasana'],
+      flexibility:  ['adhoMukhaSvanasana', 'uttanasana', 'paschimottanasana', 'ekaPadaRajakapotasana', 'januSirsasana'],
+      stress:       ['balasana', 'sukhasana', 'tadasana', 'cardiacWarmup', 'apanasana'],
+      sleep:        ['cardiacWarmup', 'sukhasana', 'tadasana', 'balasana'],
+      vata:         ['tadasana', 'vrksasana', 'virabhadrasanaII', 'sukhasana'],
+      pitta:        ['vrksasana', 'tadasana', 'baddhaKonasana', 'paschimottanasana'],
+      kapha:        ['suryaNamaskarA', 'virabhadrasanaI', 'utkatasana', 'adhoMukhaSvanasana'],
+      anchor:       ['tadasana', 'adhoMukhaSvanasana', 'vrksasana', 'cardiacWarmup'],
+    },
+    afternoon: {
+      energy:       ['virabhadrasanaII', 'utkatasana', 'trikonasana', 'parsvakonasana'],
+      flexibility:  ['ekaPadaRajakapotasana', 'paschimottanasana', 'januSirsasana', 'gomukhasana'],
+      stress:       ['uttanasana', 'balasana', 'paschimottanasana', 'apanasana'],
+      sleep:        ['legsUpTheWall', 'balasana', 'suptaBaddhaKonasana'],
+      vata:         ['virabhadrasanaII', 'vrksasana', 'sukhasana', 'tadasana'],
+      pitta:        ['vrksasana', 'trikonasana', 'baddhaKonasana', 'januSirsasana'],
+      kapha:        ['virabhadrasanaII', 'trikonasana', 'utkatasana', 'parsvakonasana'],
+      anchor:       ['virabhadrasanaII', 'uttanasana', 'vrksasana', 'tadasana'],
+    },
+    evening: {
+      energy:       ['vrksasana', 'tadasana', 'setuBandhaSarvangasana'],
+      flexibility:  ['paschimottanasana', 'januSirsasana', 'baddhaKonasana', 'gomukhasana'],
+      stress:       ['balasana', 'sukhasana', 'suptaMatsyendrasana', 'apanasana', 'cardiacWarmup'],
+      sleep:        ['legsUpTheWall', 'savasana', 'suptaBaddhaKonasana', 'balasana'],
+      vata:         ['sukhasana', 'balasana', 'suptaMatsyendrasana', 'savasana'],
+      pitta:        ['legsUpTheWall', 'baddhaKonasana', 'balasana', 'savasana'],
+      kapha:        ['setuBandhaSarvangasana', 'vrksasana', 'sukhasana', 'balasana'],
+      anchor:       ['balasana', 'suptaMatsyendrasana', 'savasana', 'legsUpTheWall'],
+    },
   }
 
-  // Pick a single contextual asana based on time of day, check-in, and dosha.
-  // Returns both the asana and the reasoning (which rules fired) so the
-  // recommendation log can answer "why did we suggest this?".
-  const pickAsana = () => {
+  const suggestedPick = useMemo(() => {
     const h = new Date().getHours()
-    const userDosha = profile?.dosha_details?.primary || null
-    const rules = []
+    const slot = h < 12 ? 'morning' : h < 17 ? 'afternoon' : 'evening'
+    const pool = SLOT_POOLS[slot]
+    const userDosha = profile?.dosha_details?.primary || profile?.dosha?.toLowerCase() || null
+    const rules = [`slot:${slot}`]
 
-    // Morning: energizing poses
-    if (h < 12) {
-      rules.push('slot:morning')
-      if (checkedIn === 'energy')       { rules.push('checkin:energy');       return { asana: ASANAS.suryaNamaskarA, rules, userDosha } }
-      if (checkedIn === 'flexibility')  { rules.push('checkin:flexibility');  return { asana: ASANAS.adhoMukhaSvanasana, rules, userDosha } }
-      if (userDosha === 'kapha')        { rules.push('dosha:kapha');          return { asana: ASANAS.suryaNamaskarA, rules, userDosha } }
-      rules.push('default:morning')
-      return { asana: ASANAS.tadasana, rules, userDosha }
+    // Build the prioritized candidate list. Order matters:
+    //   1. Check-in pool (matches how the user feels right now)
+    //   2. Dosha pool (matches their constitution)
+    //   3. Slot anchor (the safe-bet rotation for this time)
+    // De-duplicated by id, preserving first-seen order.
+    const candidates = []
+    const seen = new Set()
+    const add = (ids, source) => {
+      for (const id of ids || []) {
+        if (seen.has(id) || !ASANAS[id]) continue
+        seen.add(id)
+        candidates.push({ id, source })
+      }
     }
-    // Afternoon: grounding and focus
-    if (h < 17) {
-      rules.push('slot:afternoon')
-      if (checkedIn === 'stress')       { rules.push('checkin:stress');       return { asana: ASANAS.uttanasana, rules, userDosha } }
-      if (checkedIn === 'flexibility')  { rules.push('checkin:flexibility');  return { asana: ASANAS.ekaPadaRajakapotasana, rules, userDosha } }
-      if (userDosha === 'pitta')        { rules.push('dosha:pitta');          return { asana: ASANAS.vrksasana, rules, userDosha } }
-      rules.push('default:afternoon')
-      return { asana: ASANAS.virabhadrasanaII, rules, userDosha }
+    if (checkedIn && pool[checkedIn]) {
+      rules.push(`checkin:${checkedIn}`)
+      add(pool[checkedIn], `checkin:${checkedIn}`)
     }
-    // Evening: restorative and calming
-    rules.push('slot:evening')
-    if (checkedIn === 'sleep')   { rules.push('checkin:sleep');   return { asana: ASANAS.legsUpTheWall, rules, userDosha } }
-    if (checkedIn === 'stress')  { rules.push('checkin:stress');  return { asana: ASANAS.balasana,   rules, userDosha } }
-    if (userDosha === 'vata')    { rules.push('dosha:vata');      return { asana: ASANAS.sukhasana,  rules, userDosha } }
-    rules.push('default:evening')
-    return { asana: ASANAS.suptaMatsyendrasana, rules, userDosha }
-  }
-  // Defensive fallback — if a rule above references a renamed/missing
-  // asana, fall back to tadasana so the page never crashes on undefined.
-  const picked = pickAsana()
+    if (userDosha && pool[userDosha]) {
+      add(pool[userDosha], `dosha:${userDosha}`)
+    }
+    add(pool.anchor, 'anchor')
 
-  // "Pickup where you left off" — if the rule engine's pick has already
-  // been completed today, walk the curated rotation for the matching
-  // slot and grab the first one the user hasn't done yet. Falls back to
-  // the original pick if every alternative is also completed (great
-  // problem to have).
-  const swappedPick = (() => {
-    const primary = picked.asana || ASANAS.tadasana
-    if (!completedTodayIds.has(primary.id)) return picked
-    const slot = picked.rules.find(r => r.startsWith('slot:'))?.split(':')[1]
-    const rotation = FALLBACK_BY_SLOT[slot] || []
-    for (const id of rotation) {
-      if (id === primary.id) continue
-      if (!completedTodayIds.has(id) && ASANAS[id]) {
+    // Walk in priority order, return first not done today.
+    for (const c of candidates) {
+      if (!completedTodayIds.has(c.id)) {
         return {
-          asana:     ASANAS[id],
-          rules:     [...picked.rules, 'swap:already_completed_today'],
-          userDosha: picked.userDosha,
+          asana: ASANAS[c.id],
+          rules: [...rules, `pick:${c.source}:${c.id}`],
+          userDosha,
         }
       }
     }
-    return picked
-  })()
-  const suggestedAsana = swappedPick.asana || ASANAS.tadasana
-  const { rules: suggestedAsanaRules, userDosha: suggestedAsanaUserDosha } = swappedPick
+
+    // Everything in the pool is done today — congratulations. Show a
+    // restorative anchor as a cool-down even if also completed (it's
+    // less of a "do this" and more "you've earned a pause"). We still
+    // need to return a real asana so the card renders.
+    const fallbackId = pool.anchor[0] || 'tadasana'
+    return {
+      asana: ASANAS[fallbackId] || ASANAS.tadasana,
+      rules: [...rules, 'pick:all_completed_today'],
+      userDosha,
+    }
+  }, [checkedIn, profile?.dosha_details?.primary, profile?.dosha, completedTodayIds])
+
+  const suggestedAsana = suggestedPick.asana || ASANAS.tadasana
+  const { rules: suggestedAsanaRules, userDosha: suggestedAsanaUserDosha } = suggestedPick
 
   // Impression ref for the suggested-asana card. Fires `content_impression`
   // once the card has been ≥50% visible for 1s — the CTR denominator we'll
