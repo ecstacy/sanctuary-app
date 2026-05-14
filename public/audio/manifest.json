@@ -3668,5 +3668,1360 @@
     "hash": "9eeadae6fb9b",
     "text": "Practice complete. Namaste. Your body and mind thank you.",
     "bytes": 26064
+  },
+  "tadasana__hold": {
+    "hash": "7b7f7d1fa126",
+    "text": "Lift the kneecaps without locking the knees. Lengthen the spine. Crown of the head reaches toward the ceiling. Shoulders relaxed away from the ears.",
+    "bytes": 51696
+  },
+  "tadasana__breathe": {
+    "hash": "ea6c44db5fd0",
+    "text": "Breathe naturally. Feel rooted through the soles of the feet, light through the crown.",
+    "bytes": 28944
+  },
+  "tadasana__exit": {
+    "hash": "e10484aad80e",
+    "text": "Soften the legs. Take a breath and notice how you feel.",
+    "bytes": 20880
+  },
+  "virabhadrasanaI__hold": {
+    "hash": "b01cb5dbb80b",
+    "text": "Bend the front knee over the ankle, thigh moving toward parallel with the floor. Press the back foot firmly down. Lift through the side ribs and reach the fingertips up.",
+    "bytes": 60336
+  },
+  "virabhadrasanaI__breathe": {
+    "hash": "b7294396b501",
+    "text": "Each inhale lengthens the spine; each exhale grounds the back foot. Soften the shoulders away from the ears.",
+    "bytes": 46512
+  },
+  "virabhadrasanaI__exit": {
+    "hash": "60ccfd9eefeb",
+    "text": "Lower the arms. Step the front foot back to meet the back foot. We will repeat on the other side.",
+    "bytes": 36144
+  },
+  "virabhadrasanaII__hold": {
+    "hash": "3ea0e3d9924c",
+    "text": "Bend the right knee toward ninety degrees, tracking it over the second toe. Press the outer edge of the back foot down. Gaze over the right fingertips. Shoulders relaxed away from the ears.",
+    "bytes": 70848
+  },
+  "virabhadrasanaII__breathe": {
+    "hash": "49ed8a0e4a93",
+    "text": "Breathe steadily. Each inhale broadens the collarbones; each exhale roots the back foot.",
+    "bytes": 36144
+  },
+  "virabhadrasanaII__exit": {
+    "hash": "237dbbe09f11",
+    "text": "Straighten the front leg and step the feet together. We will repeat on the other side.",
+    "bytes": 29376
+  },
+  "vrksasana__hold": {
+    "hash": "77f52aa0b40c",
+    "text": "Pick a single still point at eye level and let the gaze rest there. Press the standing foot firmly into the floor. If steady, extend the arms overhead like branches.",
+    "bytes": 68688
+  },
+  "vrksasana__breathe": {
+    "hash": "f09d1457480b",
+    "text": "Breathe slowly. If you wobble, that's the pose working — trees sway too. Soften the standing knee if it hyperextends.",
+    "bytes": 51552
+  },
+  "vrksasana__exit": {
+    "hash": "5ecc045c490b",
+    "text": "Lower the arms and the foot. Pause for a breath, then switch sides.",
+    "bytes": 26640
+  },
+  "trikonasana__hold": {
+    "hash": "40ef42f3bca6",
+    "text": "Tilt from the hip, lowering the right hand to the shin, ankle, or a block. The left arm extends straight up. Gaze up toward the top hand.",
+    "bytes": 60192
+  },
+  "trikonasana__breathe": {
+    "hash": "4344aa4bf0b5",
+    "text": "Each inhale broadens the chest open to the side wall; each exhale lengthens out through the crown of the head.",
+    "bytes": 40176
+  },
+  "trikonasana__exit": {
+    "hash": "20e19d692f48",
+    "text": "Inhale and rise back to standing, leading with the top arm. Step the feet together. We will repeat on the other side.",
+    "bytes": 44352
+  },
+  "utkatasana__hold": {
+    "hash": "b75dad3754da",
+    "text": "Exhale and bend the knees as if sitting back into a chair. Press the weight into the heels — you should be able to wiggle the toes. Lift through the side ribs.",
+    "bytes": 55008
+  },
+  "utkatasana__breathe": {
+    "hash": "3cbe8c2cb8d9",
+    "text": "Each inhale lengthens the spine; each exhale grounds the heels. The thighs work hard — that's the pose.",
+    "bytes": 43344
+  },
+  "utkatasana__exit": {
+    "hash": "2acc1eed4032",
+    "text": "Inhale to straighten the legs. Lower the arms and shake out the legs.",
+    "bytes": 23616
+  },
+  "virabhadrasanaIII__hold": {
+    "hash": "6d9bb1c2c455",
+    "text": "Form one long line from fingertips through the back heel. Hips stay level — don't let the lifted hip rotate up. Gaze a foot in front of the standing toe.",
+    "bytes": 56304
+  },
+  "virabhadrasanaIII__breathe": {
+    "hash": "de74709c0fab",
+    "text": "Each breath steadies the line. The smaller the breath, the easier the balance.",
+    "bytes": 28944
+  },
+  "virabhadrasanaIII__exit": {
+    "hash": "f40644b4f67c",
+    "text": "Step the back foot forward to meet the standing foot. Pause for a breath. We will repeat on the other side.",
+    "bytes": 39888
+  },
+  "parsvakonasana__hold": {
+    "hash": "15ef04f911b9",
+    "text": "Reach the left arm overhead in line with the spine, palm facing the floor. Open the chest toward the ceiling. Gaze up under the top arm if the neck allows.",
+    "bytes": 54720
+  },
+  "parsvakonasana__breathe": {
+    "hash": "34fe70a6224a",
+    "text": "Each inhale broadens the underside ribs; each exhale roots the back foot.",
+    "bytes": 30240
+  },
+  "parsvakonasana__exit": {
+    "hash": "d4a8523ffa54",
+    "text": "Press through both feet to return to standing. We will repeat on the other side.",
+    "bytes": 28512
+  },
+  "parsvottanasana__hold": {
+    "hash": "41d29762e484",
+    "text": "Inhale to lengthen the spine. Exhale and hinge forward from the hips, keeping the front leg straight. Lead with the chest, not the head.",
+    "bytes": 47952
+  },
+  "parsvottanasana__breathe": {
+    "hash": "1df53bcb2cf1",
+    "text": "Each inhale lengthens; each exhale folds a touch deeper. The front leg engages — don't hyperextend the knee.",
+    "bytes": 44928
+  },
+  "parsvottanasana__exit": {
+    "hash": "fa88df80e55e",
+    "text": "Inhale and rise back to standing. We will repeat on the other side.",
+    "bytes": 24624
+  },
+  "prasaritaPadottanasana__hold": {
+    "hash": "deb84d434da7",
+    "text": "Exhale and hinge forward from the hips. Bring the hands to the floor between the feet, fingers in line with the toes. Let the crown of the head reach toward the floor.",
+    "bytes": 55728
+  },
+  "prasaritaPadottanasana__breathe": {
+    "hash": "6abd8fa4709e",
+    "text": "Each exhale releases the head a little lower. The legs stay strong — engage the thighs to protect the lower back.",
+    "bytes": 46224
+  },
+  "prasaritaPadottanasana__exit": {
+    "hash": "13dffad1287f",
+    "text": "Hands to the hips. Inhale and rise back to standing with a flat back. Step the feet together.",
+    "bytes": 37872
+  },
+  "anjaneyasana__hold": {
+    "hash": "066c7f9d24ea",
+    "text": "Inhale and sweep the arms overhead, fingertips reaching for the ceiling. Square the hips forward and let them sink toward the floor.",
+    "bytes": 48960
+  },
+  "anjaneyasana__breathe": {
+    "hash": "47994231a59c",
+    "text": "Each inhale lifts through the chest and arms; each exhale grounds the back knee.",
+    "bytes": 29664
+  },
+  "anjaneyasana__exit": {
+    "hash": "33d1df78f116",
+    "text": "Lower the hands to the floor and step back to all fours. We will repeat on the other side.",
+    "bytes": 36432
+  },
+  "utthitaHastaPadangusthasana__hold": {
+    "hash": "b30461feee81",
+    "text": "Slowly extend the right leg straight forward. Lengthen the spine. Keep the left standing leg active, kneecap lifted.",
+    "bytes": 44640
+  },
+  "utthitaHastaPadangusthasana__breathe": {
+    "hash": "731d29d266fd",
+    "text": "Each breath stabilizes the standing foot. Don't worry if the lifted leg won't straighten — height isn't the goal.",
+    "bytes": 37872
+  },
+  "utthitaHastaPadangusthasana__exit": {
+    "hash": "ca14c36cc7fe",
+    "text": "Bend the right knee back in. Lower the foot. Pause. Switch sides.",
+    "bytes": 32544
+  },
+  "garudasana__hold": {
+    "hash": "910c4e1c9bfe",
+    "text": "Extend the arms forward. Cross the left elbow over the right at right angles. Wrap the forearms and bring the palms to touch (or backs of hands). Lift the elbows to shoulder height.",
+    "bytes": 67104
+  },
+  "garudasana__breathe": {
+    "hash": "1cea6850a403",
+    "text": "Each breath spreads through the upper back. The shape is a hug for the body — let it feel that way.",
+    "bytes": 32832
+  },
+  "garudasana__exit": {
+    "hash": "37e41fceba51",
+    "text": "Unwind the arms. Uncross the leg. Stand on both feet for a breath. Switch sides.",
+    "bytes": 40752
+  },
+  "natarajasana__hold": {
+    "hash": "52ef1029005f",
+    "text": "Press the right foot back into the right hand, lifting the leg up and back. The chest opens forward. Keep the standing knee soft.",
+    "bytes": 49680
+  },
+  "natarajasana__breathe": {
+    "hash": "66ca6741489d",
+    "text": "Each breath finds the suspended balance. The lift comes from the foot pressing back into the hand, not the hand pulling.",
+    "bytes": 44640
+  },
+  "natarajasana__exit": {
+    "hash": "9830f36b5cc8",
+    "text": "Release the foot to the floor slowly. Stand on both feet. Switch sides.",
+    "bytes": 31824
+  },
+  "mindfulRespiration__hold": {
+    "hash": "5d5a6ff4f5d7",
+    "text": "Inhale slowly through the nose for four counts. Pause. Exhale gently for six counts.",
+    "bytes": 35568
+  },
+  "mindfulRespiration__breathe": {
+    "hash": "0e0fcac9f5c5",
+    "text": "Let the exhale be longer than the inhale — that is what tells your body it is safe.",
+    "bytes": 25776
+  },
+  "mindfulRespiration__exit": {
+    "hash": "ec74058ad359",
+    "text": "Allow your breath to return to its natural rhythm. Notice how you feel now.",
+    "bytes": 32112
+  },
+  "sukhasana__hold": {
+    "hash": "b5e9fc4cbd3b",
+    "text": "Lengthen the spine — crown of the head reaches up while the sit bones root down. Soften the shoulders, soften the jaw.",
+    "bytes": 50688
+  },
+  "sukhasana__breathe": {
+    "hash": "4864f1e28845",
+    "text": "Breathe naturally. Each exhale releases another layer of tension from the shoulders, the face, the belly.",
+    "bytes": 42048
+  },
+  "sukhasana__exit": {
+    "hash": "93697b43b268",
+    "text": "Gently open the eyes. Stretch the legs forward and shake them out.",
+    "bytes": 29376
+  },
+  "padmasana__hold": {
+    "hash": "273fdce458a7",
+    "text": "Rest the hands on the knees, palms up or down. Lengthen the spine — the lotus seat is a vertical line from the sacrum through the crown.",
+    "bytes": 47808
+  },
+  "padmasana__breathe": {
+    "hash": "c63ee0cc5517",
+    "text": "Breathe naturally. The pose itself produces stillness; the breath only confirms it.",
+    "bytes": 38016
+  },
+  "padmasana__exit": {
+    "hash": "c8842f210053",
+    "text": "Carefully unfold one leg at a time. Massage the knees if they feel tight.",
+    "bytes": 28368
+  },
+  "siddhasana__hold": {
+    "hash": "359ef96d18fd",
+    "text": "Rest the hands on the knees, palms up. Lengthen the spine. The seat creates a stable energetic lock at the pelvic floor.",
+    "bytes": 48240
+  },
+  "siddhasana__breathe": {
+    "hash": "40329084010c",
+    "text": "Breathe through the nose in a slow, even rhythm. Siddhasana is the traditional seat for pranayama practice.",
+    "bytes": 38160
+  },
+  "siddhasana__exit": {
+    "hash": "c5d89b52bc3c",
+    "text": "Slowly unfold the legs. Massage the knees if needed.",
+    "bytes": 21024
+  },
+  "vajrasana__hold": {
+    "hash": "cd0894e904ba",
+    "text": "Rest the hands on the thighs, palms down. Lengthen the spine. Soften the shoulders, soften the jaw.",
+    "bytes": 34848
+  },
+  "vajrasana__breathe": {
+    "hash": "10adb46a2579",
+    "text": "Breathe naturally. Each exhale releases another layer of effort.",
+    "bytes": 30672
+  },
+  "vajrasana__exit": {
+    "hash": "b1dc032851db",
+    "text": "Lean forward, walk the hands out, and unfold the legs back to seated. Massage the knees if needed.",
+    "bytes": 37440
+  },
+  "ardhaPadmasana__hold": {
+    "hash": "4ae00d543578",
+    "text": "Rest the hands on the knees, palms up or down. Lengthen the spine. Periodically alternate which foot is on top.",
+    "bytes": 46224
+  },
+  "ardhaPadmasana__breathe": {
+    "hash": "9939dada63b6",
+    "text": "Breathe naturally. Notice if the asymmetry pulls the spine — adjust to find verticality.",
+    "bytes": 34848
+  },
+  "ardhaPadmasana__exit": {
+    "hash": "70b1fbe517ac",
+    "text": "Carefully unfold the legs. Massage the knees if they feel compressed.",
+    "bytes": 27072
+  },
+  "baddhaKonasana__hold": {
+    "hash": "e229a95e79b3",
+    "text": "Lengthen the spine. Don't round forward to bring the knees down — keep the back long and let the hips do the work.",
+    "bytes": 40752
+  },
+  "baddhaKonasana__breathe": {
+    "hash": "6289d408fde3",
+    "text": "Each exhale, soften the inner thighs. The knees release at their own pace — never pressed.",
+    "bytes": 34416
+  },
+  "baddhaKonasana__exit": {
+    "hash": "4692018902fd",
+    "text": "Gently bring the knees back together. Extend the legs forward.",
+    "bytes": 23328
+  },
+  "upavishtaKonasana__hold": {
+    "hash": "7394a35f550d",
+    "text": "Inhale to lengthen the spine. Exhale and walk the hands forward, hinging from the hips. Keep the spine long — don't round to reach the floor.",
+    "bytes": 57456
+  },
+  "upavishtaKonasana__breathe": {
+    "hash": "048d99361fb4",
+    "text": "Each exhale folds a touch deeper. The legs stay strong, kneecaps lifting.",
+    "bytes": 34128
+  },
+  "upavishtaKonasana__exit": {
+    "hash": "b53289a17b1b",
+    "text": "Walk the hands back to the hips. Inhale and rise. Bring the legs back together.",
+    "bytes": 32976
+  },
+  "januSirsasana__hold": {
+    "hash": "17e5c1c642a2",
+    "text": "Inhale and lengthen the spine. Exhale and hinge forward over the extended left leg. Hold the shin, ankle, or foot — wherever you can without rounding the spine.",
+    "bytes": 57024
+  },
+  "januSirsasana__breathe": {
+    "hash": "5cabd3dc9395",
+    "text": "Each exhale releases the left hamstring a touch deeper. The right knee continues to release toward the floor.",
+    "bytes": 38448
+  },
+  "januSirsasana__exit": {
+    "hash": "4483508ef34d",
+    "text": "Inhale and rise. Switch sides.",
+    "bytes": 16848
+  },
+  "gomukhasana__hold": {
+    "hash": "f3e730ae5e4a",
+    "text": "Stack the spine vertically. Lift the bottom elbow up; lift the top elbow up. Soften the lifted shoulder away from the ear.",
+    "bytes": 46512
+  },
+  "gomukhasana__breathe": {
+    "hash": "6fe93d711f04",
+    "text": "Each breath spreads through the upper back and the outer hips.",
+    "bytes": 21456
+  },
+  "gomukhasana__exit": {
+    "hash": "aec652fc04d9",
+    "text": "Release the arms. Uncross the legs and shake them out. Switch sides — both leg AND arm positions reverse.",
+    "bytes": 48528
+  },
+  "marichyasanaC__hold": {
+    "hash": "7693dd356d9b",
+    "text": "Inhale to lengthen the spine. Exhale and rotate the torso to the right. Hook the left elbow on the outside of the right knee. Right hand behind you for support.",
+    "bytes": 56304
+  },
+  "marichyasanaC__breathe": {
+    "hash": "562f371b7795",
+    "text": "Each inhale lengthens; each exhale rotates a touch deeper. The left leg stays engaged.",
+    "bytes": 35280
+  },
+  "marichyasanaC__exit": {
+    "hash": "3923247ecfbb",
+    "text": "Release the twist slowly. Switch sides.",
+    "bytes": 19152
+  },
+  "virasana__hold": {
+    "hash": "98762465a230",
+    "text": "Rest the hands on the thighs. Lengthen the spine. Soften the shoulders, soften the jaw.",
+    "bytes": 31248
+  },
+  "virasana__breathe": {
+    "hash": "10adb46a2579",
+    "text": "Breathe naturally. Each exhale releases another layer of effort.",
+    "bytes": 27072
+  },
+  "virasana__exit": {
+    "hash": "f20205087dd6",
+    "text": "Lean to one side, swing the legs out, and unfold them forward. Massage the knees if needed.",
+    "bytes": 39312
+  },
+  "ardhaMatsyendrasana__hold": {
+    "hash": "b3ba64c6637c",
+    "text": "Inhale to lengthen the spine. Exhale and rotate to the right. The right hand rests behind you for support; the left elbow hooks outside the right knee.",
+    "bytes": 56016
+  },
+  "ardhaMatsyendrasana__breathe": {
+    "hash": "ed53005b9231",
+    "text": "Each inhale grows the spine taller. Each exhale deepens the rotation a little — never force.",
+    "bytes": 39744
+  },
+  "ardhaMatsyendrasana__exit": {
+    "hash": "5f9d50ad988a",
+    "text": "Release the twist slowly to center, breath by breath. Switch legs and repeat on the other side.",
+    "bytes": 38448
+  },
+  "bharadvajasana__hold": {
+    "hash": "cdb0c1742324",
+    "text": "Inhale and lengthen the spine. Exhale and rotate the torso to the right, away from the legs. Right hand on the floor behind you, left hand on the right knee.",
+    "bytes": 54144
+  },
+  "bharadvajasana__breathe": {
+    "hash": "6882cb2b190e",
+    "text": "Each inhale lengthens; each exhale rotates a touch deeper.",
+    "bytes": 22752
+  },
+  "bharadvajasana__exit": {
+    "hash": "c5f139e1a6bb",
+    "text": "Release the twist. Swing the legs to the other side and repeat.",
+    "bytes": 24768
+  },
+  "marichyasanaA__hold": {
+    "hash": "daea93dec7a4",
+    "text": "Inhale to lengthen. Exhale and fold forward over the extended left leg. The bind keeps the spine engaged.",
+    "bytes": 46944
+  },
+  "marichyasanaA__breathe": {
+    "hash": "404428348c50",
+    "text": "Each exhale folds a touch deeper. The bind doesn't deepen the fold by force — the breath does.",
+    "bytes": 40176
+  },
+  "marichyasanaA__exit": {
+    "hash": "fbbfde7c8da0",
+    "text": "Inhale and rise. Release the bind. Switch sides.",
+    "bytes": 23616
+  },
+  "parivrttaTrikonasana__hold": {
+    "hash": "951ccf510519",
+    "text": "Exhale and rotate to the right. Left hand to the floor outside the right foot, or onto a block. Right arm straight up. Look up under the top arm.",
+    "bytes": 53280
+  },
+  "parivrttaTrikonasana__breathe": {
+    "hash": "6882cb2b190e",
+    "text": "Each inhale lengthens; each exhale rotates a touch deeper.",
+    "bytes": 26064
+  },
+  "parivrttaTrikonasana__exit": {
+    "hash": "b009c9acb3aa",
+    "text": "Inhale and rise back to standing. Bring the feet together briefly. Switch sides.",
+    "bytes": 32832
+  },
+  "uttanasana__hold": {
+    "hash": "feabad5293cd",
+    "text": "Let the head hang heavy. Hold opposite elbows and gently sway side to side, or rest the hands on shins, ankles, or the floor. Soften the neck completely.",
+    "bytes": 65232
+  },
+  "uttanasana__breathe": {
+    "hash": "3e5eaf2b80d1",
+    "text": "Each exhale lets the torso melt a little closer to the thighs. Each inhale broadens across the upper back.",
+    "bytes": 42336
+  },
+  "uttanasana__exit": {
+    "hash": "9f48f953fea8",
+    "text": "Bend the knees generously. Roll up to standing slowly, vertebra by vertebra. The head comes up last.",
+    "bytes": 41040
+  },
+  "paschimottanasana__hold": {
+    "hash": "d6d64b077994",
+    "text": "Exhale and hinge forward from the hips — not the waist. Reach for the shins, ankles, or feet, wherever you can hold without rounding the lower back.",
+    "bytes": 52416
+  },
+  "paschimottanasana__breathe": {
+    "hash": "5425a2f3b42e",
+    "text": "Each inhale lengthens; each exhale releases a little deeper. Let gravity do the work — never pull yourself forward.",
+    "bytes": 46080
+  },
+  "paschimottanasana__exit": {
+    "hash": "f0458755ecf5",
+    "text": "Inhale and roll up slowly, vertebra by vertebra. The head comes up last.",
+    "bytes": 25776
+  },
+  "balasana__hold": {
+    "hash": "d5077ba16ae7",
+    "text": "Rest the forehead on the mat. Arms can extend forward or rest alongside the body, palms up. Soften the jaw, soften the eyes.",
+    "bytes": 54144
+  },
+  "balasana__breathe": {
+    "hash": "99a932e3c503",
+    "text": "Breathe into the back of the rib cage. Each inhale expands the lower back outward; each exhale lets you sink a little deeper.",
+    "bytes": 49536
+  },
+  "balasana__exit": {
+    "hash": "d4995c39df96",
+    "text": "Walk the hands back slowly. Roll up to seated, head coming up last.",
+    "bytes": 26928
+  },
+  "suptaMatsyendrasana__hold": {
+    "hash": "123fe2ced001",
+    "text": "Guide the right knee across the body toward the left, letting it drop toward the floor. Extend the right arm out at shoulder height. Turn the head to the right if the neck allows.",
+    "bytes": 62208
+  },
+  "suptaMatsyendrasana__breathe": {
+    "hash": "c0412da40efe",
+    "text": "Each exhale lets the right knee sink deeper. Don't force the shoulder down — let the breath do the unwinding.",
+    "bytes": 39456
+  },
+  "suptaMatsyendrasana__exit": {
+    "hash": "5ad8be7df4a7",
+    "text": "Inhale and bring the knee back to center. Hug both knees in for a breath, then switch sides.",
+    "bytes": 34560
+  },
+  "savasana__hold": {
+    "hash": "b621283acd7b",
+    "text": "Release all effort. The floor is holding you completely. There is nothing to fix, nothing to perform. Soften the face, soften the throat, soften the belly.",
+    "bytes": 61344
+  },
+  "savasana__breathe": {
+    "hash": "31680c5092df",
+    "text": "Let the breath become whatever it wants to be. Don't count it, don't shape it. Just notice it.",
+    "bytes": 29808
+  },
+  "savasana__exit": {
+    "hash": "def54871b45b",
+    "text": "Begin to deepen the breath. Gently wiggle the fingers and toes. Roll to the right side and rest there for a breath. Press yourself up to seated, head coming up last.",
+    "bytes": 65808
+  },
+  "suptaBaddhaKonasana__hold": {
+    "hash": "6e4b329b62f6",
+    "text": "Rest one hand on the belly, one on the heart. Or rest the arms by the sides, palms up. Soften the jaw, soften the eyes.",
+    "bytes": 49680
+  },
+  "suptaBaddhaKonasana__breathe": {
+    "hash": "a3c70d9257ba",
+    "text": "Breathe softly into the lower belly. Each exhale is a quiet release.",
+    "bytes": 28656
+  },
+  "suptaBaddhaKonasana__exit": {
+    "hash": "690e3dad9572",
+    "text": "Use the hands to bring the knees back together. Roll to the right side and rest there for a breath. Press up to seated slowly.",
+    "bytes": 47664
+  },
+  "suptaPadangusthasana__hold": {
+    "hash": "9bcace9cdc73",
+    "text": "Press the right foot up into the strap, drawing the leg slightly closer to the chest. Soften the right hip down. Both shoulders stay on the floor.",
+    "bytes": 55440
+  },
+  "suptaPadangusthasana__breathe": {
+    "hash": "aae2e767a97f",
+    "text": "Each exhale brings the leg a touch closer to the chest. Don't pull — let the strap be the bridge.",
+    "bytes": 38016
+  },
+  "suptaPadangusthasana__exit": {
+    "hash": "1f8e3a13692b",
+    "text": "Lower the right leg to the floor. Pause. Switch sides.",
+    "bytes": 23760
+  },
+  "apanasana__hold": {
+    "hash": "a77e82ea7816",
+    "text": "Hug the knees in. Soften the shoulders to the floor. Let the lower back release into the floor with each exhale.",
+    "bytes": 44928
+  },
+  "apanasana__breathe": {
+    "hash": "74c637314656",
+    "text": "Each inhale, the belly presses gently against the thighs. Each exhale, draw the knees a touch closer.",
+    "bytes": 38736
+  },
+  "apanasana__exit": {
+    "hash": "b309545f2438",
+    "text": "Release the legs to the floor and rest for a breath.",
+    "bytes": 19152
+  },
+  "jatharaParivartanasana__hold": {
+    "hash": "c719f44a5700",
+    "text": "Lower both knees to the right toward the floor. Turn the head to the left. Both shoulders stay on the floor.",
+    "bytes": 40464
+  },
+  "jatharaParivartanasana__breathe": {
+    "hash": "1ea07a00e3fc",
+    "text": "Each exhale, let the knees sink a touch closer to the floor. Don't force the shoulder down.",
+    "bytes": 33408
+  },
+  "jatharaParivartanasana__exit": {
+    "hash": "ccbcffdb88c3",
+    "text": "Inhale and bring the knees back to center. Hug them in for a breath. Switch sides.",
+    "bytes": 31824
+  },
+  "makarasana__hold": {
+    "hash": "fdf43e614f85",
+    "text": "Let the body soften completely into the floor. Soften the jaw and the eyes.",
+    "bytes": 29088
+  },
+  "makarasana__breathe": {
+    "hash": "42e71d389137",
+    "text": "Breathe naturally into the belly. Each inhale presses the belly gently against the mat — the floor teaches diaphragmatic breath.",
+    "bytes": 46944
+  },
+  "makarasana__exit": {
+    "hash": "dc2e9e61b6df",
+    "text": "Bring the arms by the sides. Slowly press up to all fours and rest in Child's Pose for a breath.",
+    "bytes": 38016
+  },
+  "suptaVirasana__hold": {
+    "hash": "93a7f724a0b7",
+    "text": "Place a bolster behind the spine for support. Arms rest by the sides or overhead. The quads and hip flexors stretch deeply.",
+    "bytes": 47232
+  },
+  "suptaVirasana__breathe": {
+    "hash": "19d8fc87ec36",
+    "text": "Slow deep breath. Each exhale releases the quads a touch deeper.",
+    "bytes": 27648
+  },
+  "suptaVirasana__exit": {
+    "hash": "064cdfb12029",
+    "text": "Press up onto the elbows first, then to the hands, then sit up. Move slowly — the quads will be tight.",
+    "bytes": 39312
+  },
+  "suptaSukhasana__hold": {
+    "hash": "43cee94d0294",
+    "text": "Crossed legs stay folded. Arms rest out to the sides, palms up. Soften everything that can soften.",
+    "bytes": 41184
+  },
+  "suptaSukhasana__breathe": {
+    "hash": "b4fde0f9866b",
+    "text": "Slow deep breath. The reclined position lets the breath sink low and easy.",
+    "bytes": 28656
+  },
+  "suptaSukhasana__exit": {
+    "hash": "4fd477db822c",
+    "text": "Press up onto the elbows first, then to the hands, then sit up. Switch which leg is in front and repeat.",
+    "bytes": 44064
+  },
+  "bhujangasana__hold": {
+    "hash": "45456ea958a7",
+    "text": "Inhale and peel the chest off the floor using the back muscles, not the hands. Elbows stay slightly bent. Shoulders draw away from the ears.",
+    "bytes": 55440
+  },
+  "bhujangasana__breathe": {
+    "hash": "7f584f260452",
+    "text": "Breathe into the open chest. Each inhale lengthens the spine; each exhale softens the lower back.",
+    "bytes": 42336
+  },
+  "bhujangasana__exit": {
+    "hash": "3aaf23d127d0",
+    "text": "Exhale and lower the chest. Turn one cheek to the floor and rest with the arms by your sides.",
+    "bytes": 34704
+  },
+  "setuBandhaSarvangasana__hold": {
+    "hash": "38ce2be95e84",
+    "text": "Press through the feet and lift the hips toward the ceiling. Roll the shoulders under and interlace the fingers beneath you if it feels available. Keep the chin slightly away from the chest.",
+    "bytes": 58608
+  },
+  "setuBandhaSarvangasana__breathe": {
+    "hash": "bdd5c6c5e530",
+    "text": "Each inhale broadens the collarbones; each exhale presses the feet a little firmer into the floor.",
+    "bytes": 38160
+  },
+  "setuBandhaSarvangasana__exit": {
+    "hash": "c270c43124f2",
+    "text": "Release the hands. Lower the spine vertebra by vertebra, from upper back to tailbone. Hug the knees in briefly.",
+    "bytes": 44640
+  },
+  "dhanurasana__hold": {
+    "hash": "27dcb81a13be",
+    "text": "Inhale and press the feet back into the hands as you lift the chest and thighs off the floor. The bow shape — the body curves, the arms are the bowstring.",
+    "bytes": 51696
+  },
+  "dhanurasana__breathe": {
+    "hash": "0dfdaa472243",
+    "text": "Each breath rocks the bow gently. The lift comes from the legs pressing back into the hands, not from the arm strength.",
+    "bytes": 42048
+  },
+  "dhanurasana__exit": {
+    "hash": "8ff91e467877",
+    "text": "Exhale and release the feet. Lower the chest and thighs to the floor. Turn one cheek down and rest with the arms by your sides.",
+    "bytes": 49248
+  },
+  "salabhasana__hold": {
+    "hash": "4db4ac5e705b",
+    "text": "Inhale and lift the chest, arms, and legs off the floor simultaneously. Reach forward through the crown, back through the toes.",
+    "bytes": 43200
+  },
+  "salabhasana__breathe": {
+    "hash": "545467b794fd",
+    "text": "Each inhale lifts a touch higher; each exhale stays steady.",
+    "bytes": 26784
+  },
+  "salabhasana__exit": {
+    "hash": "6f5d87b453d4",
+    "text": "Exhale and lower everything to the floor. Rest one cheek on the mat.",
+    "bytes": 24480
+  },
+  "ardhaSalabhasana__hold": {
+    "hash": "622698ce5c07",
+    "text": "Inhale and lift the right leg straight up behind you, keeping the hips even on the floor.",
+    "bytes": 26064
+  },
+  "ardhaSalabhasana__breathe": {
+    "hash": "7f622f281f3f",
+    "text": "Each breath stabilizes the lift. The lifted leg stays active and long.",
+    "bytes": 30816
+  },
+  "ardhaSalabhasana__exit": {
+    "hash": "856832f42530",
+    "text": "Exhale and lower the right leg slowly. Rest a breath. Switch to the left leg.",
+    "bytes": 28944
+  },
+  "ekaPadaRajakapotasana__hold": {
+    "hash": "e5be709a0ba1",
+    "text": "Square the hips as much as possible. Walk the hands forward and fold over the front leg if comfortable. Otherwise stay upright with the hands on the floor.",
+    "bytes": 51840
+  },
+  "ekaPadaRajakapotasana__breathe": {
+    "hash": "560c19f29245",
+    "text": "Breathe into any sensation. This pose brings up emotion sometimes — let it pass through. Don't grip.",
+    "bytes": 39456
+  },
+  "ekaPadaRajakapotasana__exit": {
+    "hash": "f0d06013d17d",
+    "text": "Walk the hands back. Tuck the back toes and press back to all fours. Switch sides.",
+    "bytes": 33552
+  },
+  "malasana__hold": {
+    "hash": "b7f4f0e238f6",
+    "text": "Bring the hands to prayer at the heart. Press the elbows lightly against the inner knees, drawing the chest forward and up.",
+    "bytes": 42624
+  },
+  "malasana__breathe": {
+    "hash": "de03f29bc791",
+    "text": "Each exhale sinks the hips a touch lower. Each inhale lengthens the spine tall.",
+    "bytes": 33264
+  },
+  "malasana__exit": {
+    "hash": "539294ec13d5",
+    "text": "Place the hands on the floor and press up to standing. Shake out the legs.",
+    "bytes": 24048
+  },
+  "mandukasana__hold": {
+    "hash": "077e09b42fea",
+    "text": "Slide the knees out wide to the sides. Flex the feet so the inner edges press down. Press the hips slightly back toward the heels.",
+    "bytes": 49248
+  },
+  "mandukasana__breathe": {
+    "hash": "0911925f9e13",
+    "text": "Breathe slowly. This pose is intense; the breath keeps you here. Don't push past sharp pain.",
+    "bytes": 36720
+  },
+  "mandukasana__exit": {
+    "hash": "c94479da6296",
+    "text": "Slowly draw the knees back together. Press up to all fours and rest.",
+    "bytes": 31392
+  },
+  "ardhaPigeonForwardFold__hold": {
+    "hash": "c3b8f9634aaf",
+    "text": "Stay 2-5 minutes. The deep release happens with time, not effort. Soften everything that can soften.",
+    "bytes": 44064
+  },
+  "ardhaPigeonForwardFold__breathe": {
+    "hash": "0f97d606560e",
+    "text": "Each long exhale lets you sink a touch deeper. The body unwinds in its own time.",
+    "bytes": 34704
+  },
+  "ardhaPigeonForwardFold__exit": {
+    "hash": "268a64b0d92f",
+    "text": "Walk the hands back slowly. Press to all fours. Pause for a breath. Switch sides.",
+    "bytes": 39024
+  },
+  "suryaNamaskarA__hold": {
+    "hash": "3f586a8af334",
+    "text": "Flow with the breath: inhale arms up, exhale fold forward, inhale halfway lift, exhale step back and lower, inhale Up Dog, exhale Down Dog. Hold Down Dog for five breaths.",
+    "bytes": 83376
+  },
+  "suryaNamaskarA__breathe": {
+    "hash": "19a42737e38b",
+    "text": "One breath, one movement. The breath leads the body, not the other way around.",
+    "bytes": 31536
+  },
+  "suryaNamaskarA__exit": {
+    "hash": "400ce197592f",
+    "text": "Step or jump forward. Halfway lift, fold, rise to standing, hands to heart. Repeat 3-10 rounds.",
+    "bytes": 51840
+  },
+  "suryaNamaskarB__hold": {
+    "hash": "35583709c3de",
+    "text": "Flow: halfway lift, Chaturanga, Up Dog, Down Dog. Step into Warrior I right side. Vinyasa back. Warrior I left side. Vinyasa back. Hold Down Dog 5 breaths.",
+    "bytes": 71856
+  },
+  "suryaNamaskarB__breathe": {
+    "hash": "75daa8f316bf",
+    "text": "One breath, one movement. The flow is more demanding than Sun A — the breath is the throttle.",
+    "bytes": 37152
+  },
+  "suryaNamaskarB__exit": {
+    "hash": "cad700f823d4",
+    "text": "Step forward, halfway lift, fold. Inhale rise into Chair. Exhale to Tadasana. Repeat 3-5 rounds.",
+    "bytes": 47952
+  },
+  "chandraNamaskar__hold": {
+    "hash": "869754f20894",
+    "text": "Side bend right, return, side bend left, return. Step back into low lunge, open to Goddess. Side bend right and left from Goddess. Mirror to the other side.",
+    "bytes": 65520
+  },
+  "chandraNamaskar__breathe": {
+    "hash": "5891aab985be",
+    "text": "Slow, long breaths — slower than Sun Salutation. The moon flow is meditative, not aerobic.",
+    "bytes": 41328
+  },
+  "chandraNamaskar__exit": {
+    "hash": "8288fe4be432",
+    "text": "Reverse the flow back to Tadasana. Hands to heart. Repeat 3-5 rounds.",
+    "bytes": 30672
+  },
+  "cardiacWarmup__hold": {
+    "hash": "26cba1fa3e38",
+    "text": "Inhale, drop the belly, lift the chest and tailbone — Cow. Exhale, round the spine, tuck the tailbone, chin to chest — Cat. Continue for 8-12 rounds.",
+    "bytes": 65088
+  },
+  "cardiacWarmup__breathe": {
+    "hash": "f2d681b30773",
+    "text": "One full breath per round. The breath leads the spine. Move slowly.",
+    "bytes": 29664
+  },
+  "cardiacWarmup__exit": {
+    "hash": "eb8ae865b139",
+    "text": "Settle in neutral all-fours for a breath. Then move to Child's Pose or Down Dog.",
+    "bytes": 30528
+  },
+  "adhoMukhaSvanasana__hold": {
+    "hash": "9cbd28413146",
+    "text": "Press the palms firmly into the mat, fingers spread wide. Let the head hang heavy between the arms. Bend the knees if the hamstrings are tight — a long spine matters more than straight legs.",
+    "bytes": 70416
+  },
+  "adhoMukhaSvanasana__breathe": {
+    "hash": "6a82abd33302",
+    "text": "Each exhale presses the chest a little closer to the thighs. Each inhale lifts the hips a little higher.",
+    "bytes": 36000
+  },
+  "adhoMukhaSvanasana__exit": {
+    "hash": "86a92a579367",
+    "text": "Bend the knees and lower to all fours. Sit back into Child's Pose for a breath.",
+    "bytes": 27648
+  },
+  "legsUpTheWall__hold": {
+    "hash": "39e816e53d23",
+    "text": "Let the arms rest out to the sides, palms up, or one hand on the belly and one on the heart. Close the eyes. Let the wall hold the legs entirely.",
+    "bytes": 56736
+  },
+  "legsUpTheWall__breathe": {
+    "hash": "c30ba357580e",
+    "text": "Breathe softly. Feel the blood circulating back from the feet toward the heart. There is nothing to do here.",
+    "bytes": 38160
+  },
+  "legsUpTheWall__exit": {
+    "hash": "50feebc76516",
+    "text": "Bend the knees and roll to the right side. Rest there for a breath. Press up to seated slowly — the head comes up last.",
+    "bytes": 44928
+  },
+  "halasana__hold": {
+    "hash": "388dc2058b9b",
+    "text": "Support the lower back with the hands. If the toes don't reach the floor, rest the feet on a chair behind the head. Chin slightly tucked. Don't turn the head.",
+    "bytes": 54864
+  },
+  "halasana__breathe": {
+    "hash": "85fc6414de9f",
+    "text": "Slow steady breath. Each exhale releases the toes a touch closer to the floor.",
+    "bytes": 32544
+  },
+  "halasana__exit": {
+    "hash": "015d1307d6e2",
+    "text": "Support the lower back with the hands. Roll down slowly, vertebra by vertebra. Rest in Savasana.",
+    "bytes": 36864
+  },
+  "sarvangasana__hold": {
+    "hash": "acd58eccc4e9",
+    "text": "Stack the hips over the shoulders. Body forms one long line. Gaze at the toes. The hands stay on the lower back for support.",
+    "bytes": 51984
+  },
+  "sarvangasana__breathe": {
+    "hash": "90f4979dd6b9",
+    "text": "Slow even breath through the nose. Don't hold the breath against the throat compression.",
+    "bytes": 32544
+  },
+  "sarvangasana__exit": {
+    "hash": "ed942cf900fc",
+    "text": "Lower the legs back into Halasana. Support the lower back with the hands and roll down slowly. Rest in Savasana.",
+    "bytes": 44640
+  },
+  "sirsasana__hold": {
+    "hash": "9522ec9c589a",
+    "text": "Bring the knees toward the chest, then extend the legs up. Most of the weight in the forearms, not the head. Soft, even breath.",
+    "bytes": 44640
+  },
+  "sirsasana__breathe": {
+    "hash": "baf1edeadba1",
+    "text": "Slow nasal breath. If the breath gets ragged, come down. The pose is the breath check.",
+    "bytes": 29376
+  },
+  "sirsasana__exit": {
+    "hash": "4a0063af57be",
+    "text": "Slowly bend the knees and lower the feet to the floor with control. Rest in Child's Pose for at least 60 seconds before lifting the head.",
+    "bytes": 50112
+  },
+  "sasangasana__hold": {
+    "hash": "c42a207f6bf2",
+    "text": "Inhale and lift the hips up, rolling forward onto the crown. The forehead approaches the knees. Most of the weight in the hands, not the head.",
+    "bytes": 49824
+  },
+  "sasangasana__breathe": {
+    "hash": "b362d876b1a7",
+    "text": "Slow even breath. The throat compresses — keep the breath small and steady.",
+    "bytes": 29520
+  },
+  "sasangasana__exit": {
+    "hash": "297de3b24ce2",
+    "text": "Lower the hips back to the heels. Rest with the forehead on the mat for a breath before sitting up.",
+    "bytes": 33552
+  },
+  "swastikasana__hold": {
+    "hash": "5b53dd345526",
+    "text": "Hands rest on the knees. Spine tall — crown of the head reaching toward the ceiling.",
+    "bytes": 32976
+  },
+  "swastikasana__breathe": {
+    "hash": "f70a6ce48ace",
+    "text": "Breathe naturally. Each exhale releases another layer of tension.",
+    "bytes": 26784
+  },
+  "swastikasana__exit": {
+    "hash": "6de4f7525d10",
+    "text": "Gently unfold the legs and stretch them out in front of you.",
+    "bytes": 20160
+  },
+  "kurmasana__hold": {
+    "hash": "0e4b8fdb41b9",
+    "text": "Straighten the legs slowly. Let the torso melt toward the floor. The forehead or chin rests on the floor.",
+    "bytes": 39600
+  },
+  "kurmasana__breathe": {
+    "hash": "13b232272453",
+    "text": "Each exhale releases a touch deeper. Don't force — let gravity do the work.",
+    "bytes": 33120
+  },
+  "kurmasana__exit": {
+    "hash": "be2db35a07c1",
+    "text": "Bend the knees. Walk the hands back. Sit up slowly.",
+    "bytes": 23184
+  },
+  "kukkutasana__hold": {
+    "hash": "9f7314ec45c9",
+    "text": "Press the palms strongly. Lift the lotus off the floor. Engage the core.",
+    "bytes": 28944
+  },
+  "kukkutasana__breathe": {
+    "hash": "4fecfd3d6fbe",
+    "text": "Steady breath. Don't hold the breath under the lift.",
+    "bytes": 17280
+  },
+  "kukkutasana__exit": {
+    "hash": "9d07f69f2423",
+    "text": "Lower the lotus slowly. Unthread the arms. Release the legs.",
+    "bytes": 29088
+  },
+  "uttanaKurmasana__hold": {
+    "hash": "1cbfed7ace3b",
+    "text": "Grasp the ears or back of the head. The lotus rests on the chest. Curl inward.",
+    "bytes": 32544
+  },
+  "uttanaKurmasana__breathe": {
+    "hash": "6188ea617b4c",
+    "text": "Slow steady breath. The shape is contemplative withdrawal.",
+    "bytes": 22752
+  },
+  "uttanaKurmasana__exit": {
+    "hash": "69f483064923",
+    "text": "Roll back up to seated. Unthread the arms. Release the legs.",
+    "bytes": 27936
+  },
+  "mayurasana__hold": {
+    "hash": "47ab5c0bfa3e",
+    "text": "Stretch the legs back. Shift the weight forward. Lift the feet — body floating parallel to the floor.",
+    "bytes": 39024
+  },
+  "mayurasana__breathe": {
+    "hash": "d9a61c0c340d",
+    "text": "Steady breath. Engage the core to hold the float.",
+    "bytes": 25056
+  },
+  "mayurasana__exit": {
+    "hash": "71d0a882abed",
+    "text": "Lower the feet down. Push back to seated. Rest the wrists by shaking them out.",
+    "bytes": 31536
+  },
+  "simhasana__hold": {
+    "hash": "f9b20f7c6093",
+    "text": "Inhale through the nose. Open the mouth wide, stick the tongue out, exhale with a HAA sound. Widen the eyes.",
+    "bytes": 42336
+  },
+  "simhasana__breathe": {
+    "hash": "0643caaabbfc",
+    "text": "Five rounds. Each roar releases more tension from the face and throat.",
+    "bytes": 31680
+  },
+  "simhasana__exit": {
+    "hash": "d983aa8baec9",
+    "text": "After the last round, close the eyes and rest. Notice the warmth in the face.",
+    "bytes": 33120
+  },
+  "bhadrasana__hold": {
+    "hash": "ed61ac2e41de",
+    "text": "Let the knees release toward the floor. Lengthen the spine — crown reaches up.",
+    "bytes": 31968
+  },
+  "bhadrasana__breathe": {
+    "hash": "c7528a51de5b",
+    "text": "Natural breath. This is a meditation seat — let the body settle.",
+    "bytes": 28080
+  },
+  "bhadrasana__exit": {
+    "hash": "f146ca881680",
+    "text": "Release the feet. Extend the legs and gently shake them out.",
+    "bytes": 23616
+  },
+  "kapotasana__hold": {
+    "hash": "84dc0d03eb65",
+    "text": "Exhale and arch back. Walk the hands toward the heels, then toward the feet.",
+    "bytes": 29232
+  },
+  "kapotasana__breathe": {
+    "hash": "2b031cf89414",
+    "text": "Steady breath. Each inhale opens the chest a little more.",
+    "bytes": 23904
+  },
+  "kapotasana__exit": {
+    "hash": "99fd524de720",
+    "text": "Walk the hands back. Inhale and lift the chest. Rest in Balasana.",
+    "bytes": 28800
+  },
+  "bakasana__hold": {
+    "hash": "eccab25e64c9",
+    "text": "Knees press against the back of the upper arms. Shift weight forward. Lift the feet.",
+    "bytes": 32256
+  },
+  "bakasana__breathe": {
+    "hash": "b63bc356c7b9",
+    "text": "Gaze forward, not down. Breath steady. The gaze is what makes the balance possible.",
+    "bytes": 37440
+  },
+  "bakasana__exit": {
+    "hash": "8c03b9b2cbd0",
+    "text": "Lower the feet to the floor. Stand up slowly. Shake out the wrists.",
+    "bytes": 27360
+  },
+  "kakasana__hold": {
+    "hash": "f6d034dd530f",
+    "text": "Press the floor away and straighten the arms. The hips lift; the body lengthens upward.",
+    "bytes": 33840
+  },
+  "kakasana__breathe": {
+    "hash": "b5fde4e74d69",
+    "text": "Steady. The straight arms make it more elegant but more demanding.",
+    "bytes": 27360
+  },
+  "kakasana__exit": {
+    "hash": "2ee3e1c277cd",
+    "text": "Bend the arms back to Crow. Lower the feet. Shake out the wrists.",
+    "bytes": 27504
+  },
+  "chaturangaDandasana__hold": {
+    "hash": "a84df157622f",
+    "text": "Exhale and bend the elbows straight back, hugging them to the ribs. Upper arms parallel to the floor.",
+    "bytes": 36720
+  },
+  "chaturangaDandasana__breathe": {
+    "hash": "cb807f0ae5c8",
+    "text": "Steady. Body in one line. Elbows in.",
+    "bytes": 20880
+  },
+  "chaturangaDandasana__exit": {
+    "hash": "6cec7342426a",
+    "text": "Inhale, press up to Upward Dog, OR lower fully to the floor and rest.",
+    "bytes": 28080
+  },
+  "vasishthasana__hold": {
+    "hash": "23d388093541",
+    "text": "Right shoulder stacks over right wrist. Lift the left arm straight up. Body in one line.",
+    "bytes": 34560
+  },
+  "vasishthasana__breathe": {
+    "hash": "3bbe4a896284",
+    "text": "Steady breath. Lift through the hips — don't let them sag.",
+    "bytes": 26352
+  },
+  "vasishthasana__exit": {
+    "hash": "ee21f63d9572",
+    "text": "Lower back to plank. Switch sides.",
+    "bytes": 17280
+  },
+  "astavakrasana__hold": {
+    "hash": "3c6d6c77c8ee",
+    "text": "Palms on the floor. Lean forward. Lift the body, extend the legs out to the side.",
+    "bytes": 33696
+  },
+  "astavakrasana__breathe": {
+    "hash": "c14b585ac247",
+    "text": "Steady. The breath is the anchor — don't hold it.",
+    "bytes": 21168
+  },
+  "astavakrasana__exit": {
+    "hash": "b25e5cf72fa3",
+    "text": "Bring the legs back to center. Lower the body. Unwind the legs.",
+    "bytes": 26784
+  },
+  "pasasana__hold": {
+    "hash": "caefc92ca912",
+    "text": "Exhale and rotate right. Wrap the left arm outside the right thigh. Reach the right hand behind the back to clasp.",
+    "bytes": 41616
+  },
+  "pasasana__breathe": {
+    "hash": "d163351bd35e",
+    "text": "Each exhale deepens the twist. The bind is intense — don't force.",
+    "bytes": 33552
+  },
+  "pasasana__exit": {
+    "hash": "22e14b5d809e",
+    "text": "Release the bind. Rotate back to center. Switch sides.",
+    "bytes": 24624
+  },
+  "adhoMukhaVrksasana__hold": {
+    "hash": "49ce5130663e",
+    "text": "Kick one leg up, then the other. Heels touch the wall lightly. Press the palms into the floor.",
+    "bytes": 36864
+  },
+  "adhoMukhaVrksasana__breathe": {
+    "hash": "178ddd447489",
+    "text": "Steady breath. Engage the core. The whole body is one straight line.",
+    "bytes": 32256
+  },
+  "adhoMukhaVrksasana__exit": {
+    "hash": "4297426fb0d8",
+    "text": "Lower one leg at a time. Rest in Down Dog. Then Child's Pose.",
+    "bytes": 27792
+  },
+  "nadiShodhana__hold": {
+    "hash": "c4627d09e7c7",
+    "text": "Close the right nostril with the thumb. Inhale slowly through the left. Close the left with the ring finger. Release the thumb. Exhale through the right.",
+    "bytes": 51552
+  },
+  "nadiShodhana__breathe": {
+    "hash": "5f309d7abdfa",
+    "text": "Inhale right, close right, exhale left. Inhale left, close left, exhale right. One full round. Stay with the count — equal in, equal out.",
+    "bytes": 64368
+  },
+  "nadiShodhana__exit": {
+    "hash": "56b6abcdf647",
+    "text": "Always finish on an exhale through the left nostril. Lower the right hand. Sit for one breath in stillness before opening the eyes.",
+    "bytes": 54576
+  },
+  "ujjayi__hold": {
+    "hash": "b789109eee24",
+    "text": "Close the mouth. Keep the same throat shape. Breathe through the nose. Listen for the soft ocean sound — gentle, not forced.",
+    "bytes": 48528
+  },
+  "ujjayi__breathe": {
+    "hash": "fdeda0451fd3",
+    "text": "Inhale 4 counts with the ocean sound. Exhale 6 counts. Each breath is slow, audible to yourself only.",
+    "bytes": 43344
+  },
+  "ujjayi__exit": {
+    "hash": "008145777ae8",
+    "text": "Release the throat constriction. Take three soft natural breaths. Notice the warmth in the chest.",
+    "bytes": 38160
+  },
+  "bhramari__hold": {
+    "hash": "2d8a7ba5c3b4",
+    "text": "Inhale slowly through the nose. Close the lips. Exhale with a long humming sound.",
+    "bytes": 32256
+  },
+  "bhramari__breathe": {
+    "hash": "b26a6557977f",
+    "text": "The hum resonates in the front of the skull. Feel the vibration behind the eyes. Each exhale is twice as long as the inhale.",
+    "bytes": 45360
+  },
+  "bhramari__exit": {
+    "hash": "e409d66f3417",
+    "text": "After the last round, drop the hum and sit silently. Listen to the quiet behind the breath.",
+    "bytes": 35712
+  },
+  "sheetali__hold": {
+    "hash": "41e6e18de527",
+    "text": "Inhale slowly through the curled tongue — feel the cool air on the surface of the tongue.",
+    "bytes": 34272
+  },
+  "sheetali__breathe": {
+    "hash": "8c4e8ac4f575",
+    "text": "Pull the tongue in. Close the lips. Exhale through the nose. The cooling builds with each round.",
+    "bytes": 40320
+  },
+  "sheetali__exit": {
+    "hash": "8a512145606c",
+    "text": "Release the tongue. Rest the lips lightly closed. Take three natural breaths. Notice the cool sensation in the throat and chest.",
+    "bytes": 52416
+  },
+  "bhastrika__hold": {
+    "hash": "13b235ddd2b9",
+    "text": "Begin: forceful inhale, forceful exhale, both through the nose. Equal effort. Belly expands on inhale, contracts on exhale.",
+    "bytes": 55440
+  },
+  "bhastrika__breathe": {
+    "hash": "ad3ec00e531a",
+    "text": "Stay rhythmic — about one breath per second. 30 seconds. Stop if dizzy.",
+    "bytes": 34560
+  },
+  "bhastrika__exit": {
+    "hash": "c82be5d563bf",
+    "text": "Stop. Sit silently. Watch the breath return to natural. Notice the warmth in the chest and the alertness in the mind.",
+    "bytes": 43920
+  },
+  "kapalabhati__hold": {
+    "hash": "89a15bad084f",
+    "text": "Sharp exhale through the nose — belly snaps inward. Let the inhale happen by itself as the belly relaxes.",
+    "bytes": 45072
+  },
+  "kapalabhati__breathe": {
+    "hash": "0581682845c9",
+    "text": "Stay rhythmic — about one exhale per second. Focus only on the sharp exhale; the inhale takes care of itself.",
+    "bytes": 40176
+  },
+  "kapalabhati__exit": {
+    "hash": "796412d59525",
+    "text": "Stop. Sit silently. Watch the breath return to natural. Notice the brightness behind the eyes — the \"skull-shining\" effect.",
+    "bytes": 54864
+  },
+  "coach__align_0": {
+    "hash": "d90fd9a8a9ab",
+    "text": "Soften your jaw. Drop your shoulders away from your ears.",
+    "bytes": 21744
+  },
+  "coach__align_1": {
+    "hash": "3c5e0c9b964e",
+    "text": "Lengthen through the crown of your head.",
+    "bytes": 11664
+  },
+  "coach__align_2": {
+    "hash": "236a85c8b6d7",
+    "text": "Engage your core gently — supportive, not gripping.",
+    "bytes": 22752
+  },
+  "coach__align_3": {
+    "hash": "f4f9aded0ad9",
+    "text": "Press evenly through both feet. Or both sit bones.",
+    "bytes": 23472
+  },
+  "coach__align_4": {
+    "hash": "3364fe040381",
+    "text": "Roll your shoulders back. Open your collarbones.",
+    "bytes": 19152
+  },
+  "coach__align_5": {
+    "hash": "171f007bd5e3",
+    "text": "Relax your forehead. Let the eyes be soft.",
+    "bytes": 17856
+  },
+  "coach__align_6": {
+    "hash": "129ec0d9b033",
+    "text": "Notice where you are holding tension. Let it go.",
+    "bytes": 17136
+  },
+  "coach__breath_0": {
+    "hash": "8fcc8735ef4c",
+    "text": "Inhale slowly through the nose. Exhale fully.",
+    "bytes": 18864
+  },
+  "coach__breath_1": {
+    "hash": "0b5dc14d05ba",
+    "text": "Make your exhale a little longer than the inhale.",
+    "bytes": 17136
+  },
+  "coach__breath_2": {
+    "hash": "7293ffe33b64",
+    "text": "Breathe into the part of you that feels tight.",
+    "bytes": 12672
+  },
+  "coach__breath_3": {
+    "hash": "39e6ed963591",
+    "text": "Five long breaths from here.",
+    "bytes": 9648
+  },
+  "coach__breath_4": {
+    "hash": "530a84146f3b",
+    "text": "Steady the breath, and the mind follows.",
+    "bytes": 15696
+  },
+  "coach__breath_5": {
+    "hash": "1d0708efc8a2",
+    "text": "Let each exhale soften the pose a little deeper.",
+    "bytes": 19008
+  },
+  "coach__presence_0": {
+    "hash": "0c3f37bce068",
+    "text": "You are doing beautifully. Stay with it.",
+    "bytes": 15984
+  },
+  "coach__presence_1": {
+    "hash": "202de97a9bf1",
+    "text": "Stay with the breath. Stay with the body.",
+    "bytes": 15552
+  },
+  "coach__presence_2": {
+    "hash": "5e478f6404c8",
+    "text": "Notice what is here, without judgment.",
+    "bytes": 12960
+  },
+  "coach__presence_3": {
+    "hash": "87a092a084fb",
+    "text": "You belong on this mat. Right here, right now.",
+    "bytes": 19584
+  },
+  "coach__presence_4": {
+    "hash": "38a419d9bb17",
+    "text": "No need to rush. The pose meets you where you are.",
+    "bytes": 21600
+  },
+  "coach__presence_5": {
+    "hash": "3fa15b2d1b5a",
+    "text": "Soften the effort. Find the ease inside the work.",
+    "bytes": 20448
+  },
+  "coach__dosha_vata": {
+    "hash": "7cd7f4971842",
+    "text": "Stay grounded. Slow and steady. Nothing to chase.",
+    "bytes": 22896
+  },
+  "coach__dosha_pitta": {
+    "hash": "9571c2fd2257",
+    "text": "Soften the effort. This is not a contest.",
+    "bytes": 16992
+  },
+  "coach__dosha_kapha": {
+    "hash": "a809543115c7",
+    "text": "Stay engaged. Light up the body from within.",
+    "bytes": 17424
+  },
+  "coach__milestone_halfway": {
+    "hash": "110f5308c488",
+    "text": "Halfway through the hold. Stay with it.",
+    "bytes": 12816
+  },
+  "coach__milestone_thirty": {
+    "hash": "e8b96ab8eea8",
+    "text": "Thirty seconds. Stay with the breath.",
+    "bytes": 12384
+  },
+  "coach__milestone_fifteen": {
+    "hash": "bcc6873b86a0",
+    "text": "Fifteen seconds. Three more breaths.",
+    "bytes": 15264
   }
 }
