@@ -74,6 +74,30 @@ function pick(bank, seed) {
   return bank[Math.abs(seed) % bank.length]
 }
 
+// Index-into-bank variant — same picker math, but returns the index so we
+// can build a stable fileKey alongside the text (e.g. `coach__align_3`).
+function pickIndex(bank, seed) {
+  if (!bank || !bank.length) return -1
+  return Math.abs(seed) % bank.length
+}
+
+// Exported so the generator script can enumerate every coach phrase the
+// runtime might pick. Each entry is { key, text } — the key matches what
+// `buildSchedule` stamps on its cue items, which is also what the audio
+// manifest is indexed by. Editing a phrase here → re-running the
+// generator → only the changed clip re-synthesizes (hash-keyed).
+export const COACH_PHRASES = (() => {
+  const items = []
+  ALIGNMENT_CUES.forEach((t, i) => items.push({ key: `coach__align_${i}`,    text: t }))
+  BREATH_CUES   .forEach((t, i) => items.push({ key: `coach__breath_${i}`,   text: t }))
+  PRESENCE_CUES .forEach((t, i) => items.push({ key: `coach__presence_${i}`, text: t }))
+  Object.entries(DOSHA_NUDGE).forEach(([d, t]) => items.push({ key: `coach__dosha_${d}`, text: t }))
+  items.push({ key: 'coach__milestone_halfway', text: 'Halfway through the hold. Stay with it.' })
+  items.push({ key: 'coach__milestone_thirty',  text: 'Thirty seconds. Stay with the breath.' })
+  items.push({ key: 'coach__milestone_fifteen', text: 'Fifteen seconds. Three more breaths.' })
+  return items
+})()
+
 // ── Schedule ────────────────────────────────────────────────────────────────
 // For a given pose duration D, return an array of milestones the coach
 // should hit. Each milestone is `{ atRemaining, key, text }`. We compute
@@ -97,7 +121,11 @@ export function buildSchedule({ asana, poseIndex, userDosha }) {
   const D = asana.durationSeconds
   const items = []
 
-  const cue = (atRemaining, key, text) => {
+  // `fileKey` points the runtime at the pre-recorded Nova HD MP3 to play
+  // for this cue. Per-pose cues use `${asanaId}__{slot}`; universal bank
+  // cues use the indexed coach__* keys mirrored in COACH_PHRASES so the
+  // generator can pre-record exactly what the runtime will request.
+  const cue = (atRemaining, key, text, fileKey) => {
     if (!text) return
     items.push({
       atRemaining: Math.max(0, Math.min(D, atRemaining)),
@@ -105,63 +133,70 @@ export function buildSchedule({ asana, poseIndex, userDosha }) {
       text,
       priority: PRIORITY[key] ?? 10,
       kind: key,
+      fileKey,
     })
   }
 
   // ── Entry (immediately on start) ──
-  cue(D, 'enter', `${asana.english}. ${asana.voiceCues.enter}`)
+  // The narration effect in PracticePage now handles entry (pose name +
+  // instructions[] read inline during the hold), so we no longer schedule
+  // an 'enter' cue here — it would double up. Kept the slot in PRIORITY
+  // for historical compatibility with stored schedules.
 
   // ── Hold cue from the pose itself — landed once the user has had a
   //     moment to arrive. ~15% in, but never before 4 seconds and only
   //     for poses long enough to settle (≥20s).
   if (D >= 20) {
-    cue(D - Math.max(4, Math.floor(D * 0.15)), 'hold', asana.voiceCues.hold)
+    cue(D - Math.max(4, Math.floor(D * 0.15)), 'hold', asana.voiceCues.hold, `${asana.id}__hold`)
   }
 
   // ── Pose-specific breath instruction at ~35% ──
   if (D >= 30) {
-    cue(D - Math.floor(D * 0.35), 'breathe-pose', asana.voiceCues.breathe)
+    cue(D - Math.floor(D * 0.35), 'breathe-pose', asana.voiceCues.breathe, `${asana.id}__breathe`)
   }
 
   // ── Universal alignment refinement at ~45% (long poses only) ──
   if (D >= 45) {
-    cue(D - Math.floor(D * 0.45), 'align', pick(ALIGNMENT_CUES, poseIndex))
+    const i = pickIndex(ALIGNMENT_CUES, poseIndex)
+    cue(D - Math.floor(D * 0.45), 'align', ALIGNMENT_CUES[i], `coach__align_${i}`)
   }
 
   // ── Halfway flag for ≥60s holds ──
   if (D >= 60) {
-    cue(Math.floor(D / 2), 'halfway', 'Halfway through the hold. Stay with it.')
+    cue(Math.floor(D / 2), 'halfway', 'Halfway through the hold. Stay with it.', 'coach__milestone_halfway')
   }
 
   // ── Dosha tonal nudge at ~60% (long poses) ──
   if (D >= 60 && userDosha && DOSHA_NUDGE[userDosha]) {
-    cue(D - Math.floor(D * 0.6), 'dosha', DOSHA_NUDGE[userDosha])
+    cue(D - Math.floor(D * 0.6), 'dosha', DOSHA_NUDGE[userDosha], `coach__dosha_${userDosha}`)
   }
 
   // ── Universal breath cue at ~72% ──
   if (D >= 45) {
-    cue(D - Math.floor(D * 0.72), 'breath-univ', pick(BREATH_CUES, poseIndex + 1))
+    const i = pickIndex(BREATH_CUES, poseIndex + 1)
+    cue(D - Math.floor(D * 0.72), 'breath-univ', BREATH_CUES[i], `coach__breath_${i}`)
   }
 
   // ── Presence / encouragement — only when there is enough room before
   //     the 15s and 8s exit cues, otherwise it just doubles up.
   if (D >= 75) {
-    cue(D - Math.floor(D * 0.82), 'presence', pick(PRESENCE_CUES, poseIndex + 2))
+    const i = pickIndex(PRESENCE_CUES, poseIndex + 2)
+    cue(D - Math.floor(D * 0.82), 'presence', PRESENCE_CUES[i], `coach__presence_${i}`)
   }
 
   // ── Time milestones ──
   // 30s remaining for very long poses (≥120s)
   if (D >= 120) {
-    cue(30, 'thirty', 'Thirty seconds. Stay with the breath.')
+    cue(30, 'thirty', 'Thirty seconds. Stay with the breath.', 'coach__milestone_thirty')
   }
   // 15s remaining for medium+ poses
   if (D >= 60) {
-    cue(15, 'fifteen', 'Fifteen seconds. Three more breaths.')
+    cue(15, 'fifteen', 'Fifteen seconds. Three more breaths.', 'coach__milestone_fifteen')
   }
   // ── Exit prep ──
   // Pose-authored exit cue arrives ~8s out so the user has time to begin
   // releasing as the bell sounds.
-  cue(8, 'exit', asana.voiceCues.exit)
+  cue(8, 'exit', asana.voiceCues.exit, `${asana.id}__exit`)
 
   // Sort latest-first (entry → exit by timeline) so the dedupe pass below
   // walks the practice in order.

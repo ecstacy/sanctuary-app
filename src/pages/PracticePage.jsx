@@ -289,18 +289,26 @@ export default function PracticePage() {
 
   // Fire any cue whose `atRemaining` we just crossed.
   //
-  // GATED — currently disabled. The voiceCoach schedule produces dynamic
-  // / templated lines (milestone countdowns, randomized alignment hints,
-  // dosha nudges) that are NOT in the pre-recorded Azure HD bank yet, so
-  // firing them means a robot TTS voice cuts in mid-hold and ruins the
-  // soothing-teacher feel. The pre-recorded narration effect above
-  // already covers pose announcement + every instruction line with Nova
-  // HD, which is plenty of guidance for a single hold. We'll bring this
-  // back once scripts/generate-voice.mjs is extended to cover the coach
-  // bank (per-pose hold/breathe/exit cues + universal alignment/breath/
-  // presence variants + milestones + dosha nudges).
-  // eslint-disable-next-line no-unused-vars
-  const _coachCuesDisabledUntilPreRecorded = true
+  // Every scheduled cue carries a `fileKey` pointing at its pre-recorded
+  // Nova HD MP3. We pass `requireFile: true` so the hook will silence the
+  // cue (instead of falling back to robot TTS) if a clip is somehow
+  // missing — silence is always preferable to breaking the soothing-
+  // teacher feel mid-hold. We DO want the dynamic narration effect above
+  // to keep playing during the first part of the hold; voiceCoach cues
+  // start at ~15% into the hold so they layer naturally after the
+  // instructions[] read-out has finished or nearly so.
+  useEffect(() => {
+    if (status !== 'active') return
+    const schedule = cueScheduleRef.current
+    if (!schedule.length) return
+
+    for (const item of schedule) {
+      if (timeRemaining !== item.atRemaining) continue
+      if (voicePlayedRef.current[item.key]) continue
+      voicePlayedRef.current[item.key] = true
+      voice.speak(item.text, null, { fileKey: item.fileKey, requireFile: true })
+    }
+  }, [status, timeRemaining, voice])
 
   // Rest-period narration — DISABLED.
   // The text was dynamic ("Rest. Soften the body. Next: Tree Pose.") and

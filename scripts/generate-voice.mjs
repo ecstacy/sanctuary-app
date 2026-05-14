@@ -69,8 +69,10 @@ if (!KEY && !DRY) {
 // ── Load canonical content (ESM dynamic import so we don't duplicate data) ─
 const asanasModule    = await import(pathToFileURL(join(REPO_ROOT, 'src', 'data', 'asanas.js')).href)
 const pranayamasModule = await import(pathToFileURL(join(REPO_ROOT, 'src', 'data', 'pranayamas.js')).href)
-const { ASANAS }    = asanasModule
-const { PRANAYAMAS } = pranayamasModule
+const coachModule      = await import(pathToFileURL(join(REPO_ROOT, 'src', 'lib', 'voiceCoach.js')).href)
+const { ASANAS }       = asanasModule
+const { PRANAYAMAS }   = pranayamasModule
+const { COACH_PHRASES } = coachModule
 
 // ── Build the job list ─────────────────────────────────────────────────────
 // Each entry: { key, text } — the key is what the client looks up. We use
@@ -111,10 +113,27 @@ function buildJobs() {
     //    no granular instructions[].
     if (entry.voiceCues?.enter) push(`${entry.id}__enter`, entry.voiceCues.enter)
 
-    // 3. Granular instructions[] — main narration during the hold.
+    // 3. Mid-hold pose-specific coach cues — landed by voiceCoach.js at
+    //    ~15% (hold), ~35% (breathe), and ~8s before exit. Previously
+    //    these went through robot TTS because they weren't pre-recorded;
+    //    now they share the Nova HD bank with the entry/name cues.
+    if (entry.voiceCues?.hold)    push(`${entry.id}__hold`,    entry.voiceCues.hold)
+    if (entry.voiceCues?.breathe) push(`${entry.id}__breathe`, entry.voiceCues.breathe)
+    if (entry.voiceCues?.exit)    push(`${entry.id}__exit`,    entry.voiceCues.exit)
+
+    // 4. Granular instructions[] — main narration during the hold.
     if (Array.isArray(entry.instructions)) {
       entry.instructions.forEach((step, i) => push(`${entry.id}__i${i}`, step))
     }
+  }
+
+  // ── Universal coach bank (alignment / breath / presence / dosha /
+  //    milestones). Enumerated by voiceCoach.js so the generator and the
+  //    runtime stay in lockstep — editing a phrase in voiceCoach.js
+  //    re-runs only that one clip on the next generator pass.
+  for (const phrase of COACH_PHRASES) {
+    if (ONLY && !ONLY.has(phrase.key)) continue
+    push(phrase.key, phrase.text)
   }
   return jobs
 }
