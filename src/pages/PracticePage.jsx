@@ -165,12 +165,19 @@ export default function PracticePage() {
   //       3. Capacitor's App pause event (native lock + home button on
   //          Android, where visibilitychange isn't always reliable in
   //          the WebView depending on OEM customizations).
-  //     We also stop on resume-when-hidden to be safe — if the user
-  //     comes back to a locked-then-unlocked session, they shouldn't
-  //     hear cues that were scheduled minutes ago.
+  //
+  // DEP NOTE: depending on `voice` here is wrong — useVoiceGuidance
+  // returns a fresh object literal each render, so the effect would
+  // re-run on every state tick and the cleanup's voice.stop() would
+  // kill every queued cue. `voice.stop` itself is wrapped in useCallback
+  // with stable deps, so it's a safe identity. Capturing it once in a
+  // ref keeps the effect mount-only.
+  const voiceStopRef = useRef(voice.stop)
+  useEffect(() => { voiceStopRef.current = voice.stop }, [voice.stop])
   useEffect(() => {
+    const stop = () => voiceStopRef.current?.()
     const handleHidden = () => {
-      if (typeof document !== 'undefined' && document.hidden) voice.stop()
+      if (typeof document !== 'undefined' && document.hidden) stop()
     }
     document.addEventListener('visibilitychange', handleHidden)
 
@@ -183,7 +190,7 @@ export default function PracticePage() {
       try {
         const { App } = await import('@capacitor/app')
         if (cancelled) return
-        appListenerHandle = await App.addListener('pause', () => voice.stop())
+        appListenerHandle = await App.addListener('pause', stop)
       } catch { /* web — plugin not available, visibilitychange handles it */ }
     })()
 
@@ -193,9 +200,9 @@ export default function PracticePage() {
       try { appListenerHandle?.remove?.() } catch { /* ignore */ }
       // Final stop on actual unmount — covers gesture-back, deeplinks,
       // any path that bypasses handleExit.
-      voice.stop()
+      stop()
     }
-  }, [voice])
+  }, [])
 
   // ── Timer ───────────────────────────────────────────────────────────────
   useEffect(() => {
