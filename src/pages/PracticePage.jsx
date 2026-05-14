@@ -29,16 +29,14 @@ const INITIAL_STATE = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'BEGIN_INSTRUCTING':
-      // Setup phase before the hold timer starts. Voice reads the
-      // granular `instructions[]` so the user can position themselves
-      // hands-free. Auto-advances to 'active' (via START) when the last
-      // instruction finishes.
-      return { ...state, status: 'instructing', instructionIndex: 0, timeRemaining: 0, isPaused: false }
     case 'INSTRUCTION_PROGRESS':
+      // Drives the subtitle line under the timer during the active phase
+      // — voice narration advances this as each instruction finishes.
       return { ...state, instructionIndex: action.index }
     case 'START':
-      return { ...state, status: 'active', timeRemaining: action.duration, isPaused: false }
+      // Entering active. instructionIndex resets so the subtitle starts
+      // from the first cue of the new pose's instructions[].
+      return { ...state, status: 'active', timeRemaining: action.duration, isPaused: false, instructionIndex: 0 }
     case 'TICK':
       if (state.isPaused) return state
       return {
@@ -66,19 +64,20 @@ function reducer(state, action) {
       return { ...state, status: 'resting', restTime: 10, timeRemaining: 0, completedAsanas: completed }
     }
     case 'NEXT_ASANA':
-      // Each new pose goes through the instructing phase first so the
-      // user gets hands-free setup guidance, then the timer starts.
-      return { ...state, status: 'instructing', currentIndex: state.currentIndex + 1, instructionIndex: 0, timeRemaining: 0, restTime: 0, isPaused: false, showInfo: false }
+      // Each new pose goes straight to active — voice narration plays
+      // inline during the first part of the hold (see narration effect).
+      return { ...state, status: 'active', currentIndex: state.currentIndex + 1, instructionIndex: 0, timeRemaining: action.duration, restTime: 0, isPaused: false, showInfo: false }
     case 'REPEAT':
       return { ...state, timeRemaining: action.duration, isPaused: false }
     case 'TOGGLE_INFO':
       return { ...state, showInfo: !state.showInfo }
     case 'SKIP_REST':
-      return { ...state, status: 'instructing', currentIndex: state.currentIndex + 1, instructionIndex: 0, timeRemaining: 0, restTime: 0, isPaused: false, showInfo: false }
-    case 'SKIP_INSTRUCTIONS':
-      // User taps "Skip to start" — bypass remaining setup cues and
-      // start the timer immediately.
-      return { ...state, status: 'active', timeRemaining: action.duration, isPaused: false }
+      return { ...state, status: 'active', currentIndex: state.currentIndex + 1, instructionIndex: 0, timeRemaining: action.duration, restTime: 0, isPaused: false, showInfo: false }
+    case 'SKIP_NARRATION':
+      // User tapped "Skip narration" — flush voice queue, hide subtitle.
+      // The timer keeps running; only the inline instruction read-out is
+      // suppressed for the remainder of this pose.
+      return { ...state, instructionIndex: -1 }
     default:
       return state
   }
@@ -198,51 +197,56 @@ export default function PracticePage() {
     }
   }, [status, restTime])
 
-  // ── Instructing phase: read instructions[] aloud before the hold ──────
-  // Each new pose enters this phase first (via BEGIN_INSTRUCTING or
-  // NEXT_ASANA). Voice queues each step with a per-utterance onEnd
-  // callback; the last onEnd auto-dispatches START to begin the timer.
-  // If voice is off or the pose lacks granular instructions, we skip
-  // straight to the active phase after a brief settle.
+  // ── Inline instruction narration during the hold ──────────────────────
+  // The dedicated "Step X of N" pre-hold screen has been removed — every
+  // pose drops the user straight into the active timer. Voice now reads
+  // instructions[] while the timer is already running, with the current
+  // line rendered as a subtitle under the pose name so users glancing at
+  // the phone can follow along. The schedule-based voiceCoach cues take
+  // over after instructions finish (settle → deepen → exit), so there's
+  // no overlap with the entry walkthrough.
+  //
+  // We key the effect on (currentIndex + status === 'active') so it
+  // fires exactly once per pose entry — and is cancelled cleanly on pose
+  // change, skip, done, voice toggle, or unmount via voice.stop().
   useEffect(() => {
-    if (status !== 'instructing' || !currentAsana) return
-    let cancelled = false
-
+    if (status !== 'active' || !currentAsana) return
+    if (!voice.enabled) return
     const instructions = Array.isArray(currentAsana.instructions) ? currentAsana.instructions : []
 
-    // Fast path: no voice or no instructions → tiny settle, then START.
-    if (!voice.enabled || instructions.length === 0) {
-      const fallbackMs = voice.enabled ? 1500 : 800
-      if (voice.enabled && currentAsana.voiceCues?.enter) {
-        voice.speak(`${currentAsana.english}. ${currentAsana.voiceCues.enter}`)
-      }
-      const t = setTimeout(() => {
-        if (!cancelled) dispatch({ type: 'START', duration: currentAsana.durationSeconds })
-      }, fallbackMs)
-      return () => { cancelled = true; clearTimeout(t) }
-    }
-
-    // Voice ON + instructions present: full setup walkthrough.
+    let cancelled = false
+    // Soft entry chime + pose name so the user knows what just started.
     audio.bell()
     voice.speak(`${currentAsana.english}.`)
+
+    if (instructions.length === 0) {
+      // Pose has no granular instructions — just announce and let the
+      // voiceCoach schedule take it from here.
+      if (currentAsana.voiceCues?.enter) voice.speak(currentAsana.voiceCues.enter)
+      return () => { cancelled = true }
+    }
 
     instructions.forEach((step, i) => {
       voice.speak(step, () => {
         if (cancelled) return
+        // Advance the subtitle to the NEXT line when this one finishes,
+        // so the on-screen text tracks what the voice is about to say.
         if (i < instructions.length - 1) {
           dispatch({ type: 'INSTRUCTION_PROGRESS', index: i + 1 })
         } else {
-          // Last instruction done — short breath, then START.
-          setTimeout(() => {
-            if (!cancelled) dispatch({ type: 'START', duration: currentAsana.durationSeconds })
-          }, 1200)
+          // Finished narrating — hide the subtitle so the timer breathes.
+          dispatch({ type: 'INSTRUCTION_PROGRESS', index: -1 })
         }
       })
     })
 
     return () => {
       cancelled = true
-      voice.stop()
+      // Flush queued instructions — voiceCoach schedule effect will queue
+      // its own cues for the remainder of the hold. We don't stop()
+      // outright here because that would also kill in-flight coach cues
+      // when the user simply pauses; instead we rely on the per-utterance
+      // `cancelled` guard above to silently drop late onEnd callbacks.
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, currentAsana?.id, voice.enabled])
@@ -403,14 +407,10 @@ export default function PracticePage() {
       })()
     }
 
-    // If voice guidance is on AND the asana has granular instructions,
-    // walk the user through the setup hands-free before starting the
-    // timer. Otherwise jump straight to the active hold.
-    if (voice.enabled && Array.isArray(currentAsana.instructions) && currentAsana.instructions.length > 0) {
-      dispatch({ type: 'BEGIN_INSTRUCTING' })
-    } else {
-      dispatch({ type: 'START', duration: currentAsana.durationSeconds })
-    }
+    // Drop straight into the active hold. If voice is on, the narration
+    // effect picks it up and reads instructions[] inline while the timer
+    // runs (no more dead "Step 1 of N" screen pre-hold).
+    dispatch({ type: 'START', duration: currentAsana.durationSeconds })
   }, [currentAsana, audio, voice.enabled, user?.id, preEnergy, preStress, routineKey, routine, single, profile?.dosha_details?.primary])
 
   const handleDone = useCallback(() => {
@@ -881,9 +881,8 @@ export default function PracticePage() {
                 className="h-full bg-primary rounded-full transition-all duration-1000"
                 style={{
                   width: i < currentIndex ? '100%'
-                    : i === currentIndex ? (status === 'instructing'
-                        ? '2%' // not started yet — show a thin sliver
-                        : `${Math.max(2, (1 - timeRemaining / currentAsana.durationSeconds) * 100)}%`)
+                    : i === currentIndex
+                        ? `${Math.max(2, (1 - timeRemaining / currentAsana.durationSeconds) * 100)}%`
                     : '0%',
                 }}
               />
@@ -910,31 +909,36 @@ export default function PracticePage() {
             </div>
             <h2 className="font-headline text-2xl text-on-surface text-center mb-0.5">{currentAsana.sanskrit}</h2>
             <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">{currentAsana.english}</p>
-            {status === 'instructing' ? (
-              // ── Setup walkthrough — voice reads each step; UI highlights the
-              //    one currently being spoken so users glancing at the phone
-              //    can follow along too.
-              <div className="w-full max-w-sm flex flex-col items-center">
-                <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-3">
-                  Step {Math.min(instructionIndex + 1, currentAsana.instructions?.length || 1)} of {currentAsana.instructions?.length || 1}
+            <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={140} />
+
+            {/* ── Inline instruction subtitle ───────────────────────────────
+                Visible only while voice narrates a step (instructionIndex >= 0).
+                Tracks the line currently being spoken so users glancing at the
+                phone can follow along. Hidden once narration finishes — the
+                pose canvas, name, and timer get to breathe. */}
+            {voice.enabled
+              && instructionIndex >= 0
+              && Array.isArray(currentAsana.instructions)
+              && currentAsana.instructions[instructionIndex] && (
+              <div
+                className="mt-5 w-full max-w-sm px-4"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <p className="font-body text-sm text-on-surface-variant text-center leading-relaxed">
+                  {currentAsana.instructions[instructionIndex]}
                 </p>
-                <div className="bg-surface-container-low rounded-2xl p-4 w-full mb-4 min-h-[7rem] flex items-center">
-                  <p className="font-body text-base text-on-surface leading-relaxed">
-                    {currentAsana.instructions?.[instructionIndex] || 'Get ready…'}
-                  </p>
-                </div>
                 <button
                   onClick={() => {
                     voice.stop()
-                    dispatch({ type: 'SKIP_INSTRUCTIONS', duration: currentAsana.durationSeconds })
+                    dispatch({ type: 'SKIP_NARRATION' })
                   }}
-                  className="font-label text-xs text-on-surface-variant uppercase tracking-wider underline underline-offset-4"
+                  className="block mx-auto mt-3 font-label text-[10px] text-on-surface-variant/70 uppercase tracking-widest"
+                  aria-label="Skip narration"
                 >
-                  Skip to start
+                  Skip narration
                 </button>
               </div>
-            ) : (
-              <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={140} />
             )}
           </>
         ) : (
@@ -998,7 +1002,7 @@ export default function PracticePage() {
            transform containing block so position:fixed actually pins to
            the viewport on Android. Replaces the previously-flex-pinned bar
            which was being clipped on shorter viewports. ── */}
-      {status !== 'instructing' && createPortal(
+      {createPortal(
         <div
           className="px-5 pt-2 bg-background/85 backdrop-blur-xl border-t border-outline-variant/10"
           style={{
