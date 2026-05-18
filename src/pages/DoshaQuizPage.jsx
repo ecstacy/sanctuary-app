@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
 import { track, EVENTS } from '../lib/track'
+import DoshaProfileContent from '../components/DoshaProfileContent'
 
 // ─── Quiz Data ───────────────────────────────────────────────────────────────
 
@@ -616,214 +617,60 @@ export default function DoshaQuizPage() {
 
   if (phase === 'result' && doshaResult) {
     const { label, percentages, primary, secondary, tertiary } = doshaResult
-    const primaryData = DOSHA_RESULTS[primary]
-    const secondaryData = DOSHA_RESULTS[secondary]
-    const tertiaryData = DOSHA_RESULTS[tertiary]
-    const isTridoshic = label === 'Tridoshic'
-    const isDual = label.includes('-')
 
-    const DOSHA_BAR_COLORS = {
-      vata: 'bg-[#7b93a8]',
-      pitta: 'bg-[#c47a3a]',
-      kapha: 'bg-[#6b8f5e]',
-    }
-
-    return (
-      <div className="min-h-screen bg-background text-on-surface font-body">
-
-        {/* Gradient hero */}
-        <div className={`relative bg-gradient-to-b ${primaryData.color} px-6 pt-12 pb-16 overflow-hidden`}>
-          <div className="absolute top-8 right-8 w-32 h-32 rounded-full bg-white/10 animate-quiz-float" />
-          <div className="absolute bottom-12 left-4 w-20 h-20 rounded-full bg-white/10 animate-quiz-float-delay" />
-
-          <div className="relative z-10 text-center">
-            <div className="animate-quiz-reveal">
-              <p className="font-label text-xs text-white/70 uppercase tracking-widest mb-3">Your Dosha Type</p>
-              <h1 className="font-headline text-5xl text-white leading-none mb-2">{label}</h1>
-              <p className="font-headline italic text-lg text-white/80 mb-4">
-                {isTridoshic ? 'The Rare Equilibrium' : primaryData.tagline}
-              </p>
-              <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-4 py-2">
-                <span className="material-symbols-outlined text-white text-sm">{primaryData.emoji}</span>
-                <span className="font-label text-xs text-white/90 uppercase tracking-wider">
-                  {isTridoshic ? 'All Five Elements' : primaryData.element}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="px-6 -mt-6">
-
-          {/* 1. Dosha Composition */}
-          <div className="bg-surface rounded-lg p-6 shadow-md mb-5 animate-quiz-slide-up">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-5">Your Dosha Composition</p>
-            {[
-              { key: primary, data: primaryData, pct: percentages[primary] },
-              { key: secondary, data: secondaryData, pct: percentages[secondary] },
-              { key: tertiary, data: tertiaryData, pct: percentages[tertiary] },
-            ].map(({ key, data, pct }, i) => (
-              <div key={key} className="mb-4 last:mb-0">
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-sm" style={{ color: DOSHA_BAR_COLORS[key].replace('bg-[', '').replace(']', '') }}>{data.emoji}</span>
-                    <span className="font-body font-semibold text-sm text-on-surface">{data.name}</span>
-                    <span className="font-label text-[9px] text-on-surface-variant/50 uppercase">{data.element}</span>
-                  </div>
-                  <span className="font-headline text-lg text-on-surface">{pct}%</span>
-                </div>
-                <div className="h-2.5 bg-surface-container-high rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full ${DOSHA_BAR_COLORS[key]} transition-all duration-1000 ease-out`}
-                    style={{ width: `${pct}%`, transitionDelay: `${i * 200}ms` }}
-                  />
-                </div>
-              </div>
-            ))}
-            <p className="font-body text-xs text-on-surface-variant/50 italic mt-4 leading-relaxed">
-              {getCompositionDescription(label, percentages, primary, secondary, isTridoshic, isDual)}
+    const resultFooter = (
+      <div className="pb-2">
+        {!user && (
+          <div className="bg-primary-container/40 border border-primary/15 rounded-xl px-4 py-3 mb-3">
+            <p className="font-label text-[10px] uppercase tracking-wider text-primary mb-1">Save your result</p>
+            <p className="font-body text-xs text-on-surface leading-relaxed">
+              Create a free account to keep your dosha, track your practice, and personalize every recommendation.
             </p>
           </div>
-
-          {/* 2. What this means — primary description */}
-          <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5 animate-quiz-slide-up`} style={{ animationDelay: '0.1s' }}>
-            <div className="flex items-center gap-2 mb-3">
-              <span className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>{primaryData.emoji}</span>
-              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
-                {isTridoshic ? 'Your Balanced Nature' : `Dominant: ${primaryData.name}`}
-              </p>
-            </div>
-            <p className="font-body text-sm text-on-surface leading-relaxed">{primaryData.description}</p>
-          </div>
-
-          {/* 3. Qualities */}
-          <div className="bg-surface-container rounded-lg p-6 mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.13s' }}>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
-              {primaryData.name} Qualities (Gunas)
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {primaryData.qualities.map((q, i) => (
-                <span key={i} className={`${primaryData.bgColor} ${primaryData.textColor} px-3 py-1.5 rounded-full font-label text-xs font-medium`}>{q}</span>
-              ))}
-            </div>
-          </div>
-
-          {/* 4. Strengths */}
-          <div className="bg-surface-container rounded-lg p-6 mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.16s' }}>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">Your Natural Strengths</p>
-            <div className="grid grid-cols-2 gap-3">
-              {[...primaryData.strengths, ...(isDual ? secondaryData.strengths.slice(0, 2) : [])].map((strength, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                  <span className="font-body text-xs text-on-surface">{strength}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 5. Stay In Balance — actionable */}
-          <div className="bg-surface-container-low rounded-lg p-6 mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.19s' }}>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">Stay In Balance</p>
-            <div className="flex flex-col gap-3">
-              {primaryData.balanceTips.map((tip, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <span className={`material-symbols-outlined text-base mt-0.5 ${primaryData.textColor}`}>spa</span>
-                  <p className="font-body text-xs text-on-surface leading-relaxed">{tip}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 6. Lifestyle Guide — season, time, taste */}
-          <div className="bg-surface-container rounded-lg overflow-hidden mb-5 animate-quiz-slide-up" style={{ animationDelay: '0.22s' }}>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-6 pt-6 pb-4">Ayurvedic Lifestyle Guide</p>
-            {[
-              { icon: 'calendar_month', title: 'Peak Season', text: `${primaryData.season} \u2014 ${primaryData.name} is naturally elevated during this time. Extra care is needed.` },
-              { icon: 'schedule', title: `${primaryData.name} Hours`, text: `${primaryData.timeOfDay} \u2014 These are the hours when ${primaryData.name} energy peaks.` },
-              { icon: 'restaurant', title: 'Balancing Tastes', text: primaryData.taste },
-            ].map((item, i) => (
-              <div key={i} className="flex items-start gap-4 px-6 py-4 border-t border-surface-container-high">
-                <div className={`w-10 h-10 rounded-full ${primaryData.bgColor} flex items-center justify-center flex-shrink-0`}>
-                  <span className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>{item.icon}</span>
-                </div>
-                <div>
-                  <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{item.title}</p>
-                  <p className="font-body text-xs text-on-surface-variant leading-relaxed">{item.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* 7. Yoga & Meditation */}
-          <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5 animate-quiz-slide-up`} style={{ animationDelay: '0.25s' }}>
-            <div className="flex items-center gap-2 mb-3">
-              <span className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>self_care</span>
-              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>Yoga & Movement</p>
-            </div>
-            <p className="font-body text-sm text-on-surface leading-relaxed mb-4">{primaryData.yoga}</p>
-            <div className="flex items-center gap-2 mb-2">
-              <span className={`material-symbols-outlined text-base ${primaryData.textColor}`}>air</span>
-              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>Meditation & Breathwork</p>
-            </div>
-            <p className="font-body text-sm text-on-surface leading-relaxed">{primaryData.meditation}</p>
-          </div>
-
-          {/* 8. About Prakriti — educational */}
-          <div className="bg-surface-container-low rounded-lg p-5 mb-5 flex items-start gap-3 animate-quiz-slide-up" style={{ animationDelay: '0.28s' }}>
-            <span className="material-symbols-outlined text-primary text-base mt-0.5">auto_awesome</span>
-            <div>
-              <p className="font-body font-semibold text-sm text-on-surface mb-1">Understanding Prakriti</p>
-              <p className="font-body text-xs text-on-surface-variant leading-relaxed">
-                In Ayurveda, your Prakriti is your birth constitution \u2014 the unique ratio of Vata, Pitta, and Kapha you were born with. It remains stable throughout life. When doshas shift due to diet, stress, or seasons, that temporary state is called Vikriti. The goal is to bring Vikriti back in alignment with Prakriti.
-              </p>
-            </div>
-          </div>
-
-          {/* ── Result CTA ─────────────────────────────────────────────
-              Anonymous users see "Create account to save" — leads to
-              /signup where the localStorage'd dosha gets migrated.
-              Signed-in users see the direct save action. */}
-          {!user && (
-            <div className="bg-primary-container/40 border border-primary/15 rounded-xl px-4 py-3 mb-3 animate-quiz-slide-up" style={{ animationDelay: '0.28s' }}>
-              <p className="font-label text-[10px] uppercase tracking-wider text-primary mb-1">Save your result</p>
-              <p className="font-body text-xs text-on-surface leading-relaxed">
-                Create a free account to keep your dosha, track your practice, and personalize every recommendation.
-              </p>
-            </div>
-          )}
-          <button
-            onClick={() => {
-              track(EVENTS.CTA_CLICKED, {
-                cta_id:       user ? 'dosha_save' : 'dosha_signup_to_save',
-                primary_dosha: doshaResult?.primary,
-                anonymous:    !user,
-              })
-              saveDosha()
-            }}
-            disabled={saving}
-            className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mb-3 animate-quiz-slide-up"
-            style={{ animationDelay: '0.31s' }}
-          >
-            {saving ? 'Saving...' : (user ? 'Save My Dosha Profile' : 'Create Account to Save')}
-          </button>
-
-          <button
-            onClick={() => {
-              setPhase('intro')
-              setCurrentQ(0)
-              setAnswers({})
-              setSelectedOption(null)
-              setDoshaResult(null)
-              setCalcStep(0)
-            }}
-            className="w-full py-3 text-center text-xs text-on-surface-variant/50 font-label uppercase tracking-widest mb-8"
-          >
-            Retake the quiz
-          </button>
-        </div>
+        )}
+        <button
+          onClick={() => {
+            track(EVENTS.CTA_CLICKED, {
+              cta_id:        user ? 'dosha_save' : 'dosha_signup_to_save',
+              primary_dosha: doshaResult?.primary,
+              anonymous:     !user,
+            })
+            saveDosha()
+          }}
+          disabled={saving}
+          className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mb-3"
+        >
+          {saving ? 'Saving...' : (user ? 'Save My Dosha Profile' : 'Create Account to Save')}
+        </button>
+        <button
+          onClick={() => {
+            setPhase('intro')
+            setCurrentQ(0)
+            setAnswers({})
+            setSelectedOption(null)
+            setDoshaResult(null)
+            setCalcStep(0)
+          }}
+          className="w-full py-3 text-center text-xs text-on-surface-variant/50 font-label uppercase tracking-widest mb-8"
+        >
+          Retake the quiz
+        </button>
       </div>
     )
+
+    return (
+      <DoshaProfileContent
+        doshaLabel={label}
+        primary={primary}
+        secondary={secondary}
+        tertiary={tertiary}
+        percentages={percentages}
+        onBack={() => setPhase('intro')}
+        footerSlot={resultFooter}
+      />
+    )
   }
+
 
   // ── Quiz Screen ───────────────────────────────────────────────────────────
 
