@@ -250,37 +250,76 @@ export default function DoshaProfileContent({
           lede="The elements, qualities, and patterns that shape your constitution."
         >
 
-          {/* Dosha Composition */}
+          {/* Dosha Composition
+              ─────────────────
+              Redesigned: a single horizontal segmented bar (Strava-style)
+              for instant proportional reading, then a clean three-row
+              legend with large tabular-nums percentages. Replaces three
+              stacked progress bars which read as repetitive and made the
+              card feel "rudimentary." */}
           {percentages && (
-            <div className="bg-surface rounded-lg p-6 shadow-md mb-5 stagger-2">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-5">
-                Your Dosha Composition
-              </p>
-              {[
-                { key: primary, data: primaryData, pct: percentages[primary] },
-                ...(secondaryData ? [{ key: secondary, data: secondaryData, pct: percentages[secondary] }] : []),
-                ...(tertiaryData  ? [{ key: tertiary,  data: tertiaryData,  pct: percentages[tertiary]  }] : []),
-              ].map(({ key, data, pct }, i) => (
-                <div key={key} className="mb-4 last:mb-0">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <div className="flex items-center gap-2">
-                      <span className="material-symbols-outlined text-sm" style={{ color: data.accentHex }} aria-hidden="true">
-                        {data.emoji}
-                      </span>
+            <div className="bg-surface rounded-2xl p-6 shadow-md mb-5 stagger-2">
+              <div className="flex items-baseline justify-between mb-6">
+                <p className="font-label text-[10px] font-semibold text-on-surface-variant uppercase tracking-[0.22em]">
+                  Your Constitution
+                </p>
+                <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-wider">
+                  V · P · K
+                </p>
+              </div>
+
+              {/* Segmented bar — proportional split across all three doshas.
+                  Renders in dominance order so the primary color sits left.
+                  A tiny gap between segments (gap-px) lets each band breathe
+                  visually without losing the "stacked total = 100%" read. */}
+              <div className="h-3 rounded-full overflow-hidden flex gap-px mb-6 bg-surface-container-high">
+                {[
+                  { key: primary, data: primaryData, pct: percentages[primary] },
+                  ...(secondaryData ? [{ key: secondary, data: secondaryData, pct: percentages[secondary] }] : []),
+                  ...(tertiaryData  ? [{ key: tertiary,  data: tertiaryData,  pct: percentages[tertiary]  }] : []),
+                ].map(({ key, data, pct }, i) => (
+                  <div
+                    key={key}
+                    className={`h-full ${data.barColor} transition-all duration-1000 ease-out`}
+                    style={{ width: `${pct}%`, transitionDelay: `${i * 150}ms` }}
+                    role="img"
+                    aria-label={`${data.name} ${pct} percent`}
+                  />
+                ))}
+              </div>
+
+              {/* Legend — dot · name · element on the left, big % on the right.
+                  Tabular-nums + large headline weight gives the numbers
+                  presence; the secondary/tertiary rows fade slightly so the
+                  dominant dosha reads first. */}
+              <div className="space-y-3.5">
+                {[
+                  { key: primary, data: primaryData, pct: percentages[primary], opacity: 1 },
+                  ...(secondaryData ? [{ key: secondary, data: secondaryData, pct: percentages[secondary], opacity: 0.85 }] : []),
+                  ...(tertiaryData  ? [{ key: tertiary,  data: tertiaryData,  pct: percentages[tertiary],  opacity: 0.6  }] : []),
+                ].map(({ key, data, pct, opacity }) => (
+                  <div key={key} className="flex items-baseline justify-between gap-4" style={{ opacity }}>
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span
+                        aria-hidden="true"
+                        className={`w-2.5 h-2.5 rounded-full ${data.barColor} flex-shrink-0`}
+                      />
                       <span className="font-body font-semibold text-sm text-on-surface">{data.name}</span>
-                      <span className="font-label text-[9px] text-on-surface-variant/50 uppercase">{data.element}</span>
+                      <span className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-wider truncate">
+                        {data.element}
+                      </span>
                     </div>
-                    <span className="font-headline text-lg text-on-surface">{pct}%</span>
+                    <span className="font-headline text-2xl text-on-surface tabular-nums leading-none">
+                      {pct}
+                      <span className="font-body text-sm text-on-surface-variant/60 ml-0.5">%</span>
+                    </span>
                   </div>
-                  <div className="h-2.5 bg-surface-container-high rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full ${data.barColor} transition-all duration-1000 ease-out`}
-                      style={{ width: `${pct}%`, transitionDelay: `${i * 200}ms` }}
-                    />
-                  </div>
-                </div>
-              ))}
-              <p className="font-body text-xs text-on-surface-variant/50 italic mt-4 leading-relaxed">
+                ))}
+              </div>
+
+              {/* Footnote — interpretation. Separated by a hairline so the
+                  composition reads as the headline and the prose as context. */}
+              <p className="font-body text-xs text-on-surface-variant/60 italic mt-6 pt-5 border-t border-outline-variant/15 leading-relaxed">
                 {isTridoshic
                   ? 'A rare and balanced constitution. All three doshas are equally expressed in your nature.'
                   : isDual
