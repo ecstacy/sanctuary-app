@@ -20,8 +20,35 @@ export default function ProfilePage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { user, profile, signOut, refreshProfile } = useAuth()
-  const { isPremium, source: premiumSource, expiresAt: premiumExpiresAt } = useIsPremium()
+  const {
+    isPremium,
+    source: premiumSource,
+    expiresAt: premiumExpiresAt,
+    inDunning,
+    cancelAtPeriodEnd,
+  } = useIsPremium()
   const [profilePaywall, setProfilePaywall] = useState({ open: false, surface: 'settings' })
+  const [portalLoading, setPortalLoading] = useState(false)
+
+  // Open Stripe Customer Portal — self-serve cancel + update card + see
+  // invoices. Calls our Edge Function which mints a one-time URL. Also
+  // satisfies the German Kündigungsbutton requirement (cancel in ≤2
+  // clicks from the app).
+  async function openCustomerPortal() {
+    if (portalLoading) return
+    setPortalLoading(true)
+    try {
+      track(EVENTS.CTA_CLICKED, { cta_id: 'manage_subscription', route_name: 'profile' })
+      const { data, error } = await supabase.functions.invoke('create-customer-portal-session')
+      if (error || !data?.ok || !data?.url) {
+        alert("We couldn't open the billing portal. Please try again or email support.")
+        return
+      }
+      window.location.href = data.url
+    } finally {
+      setPortalLoading(false)
+    }
+  }
   const fileInputRef = useRef(null)
   useScrollDepth('profile')
 
@@ -590,20 +617,71 @@ export default function ProfilePage() {
           )}
 
           {isPremium && (
-            <div className="flex items-center gap-4 px-5 py-4">
-              <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">workspace_premium</span>
-              <div className="flex-1">
-                <p className="font-body text-sm font-semibold text-on-surface">Sanctuary Plus is active</p>
-                <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
-                  {premiumSource === 'promo' ? 'Granted via code' :
-                   premiumSource === 'stripe' ? 'Billed via Stripe' :
-                   premiumSource === 'apple' ? 'Billed via App Store' :
-                   premiumSource === 'google' ? 'Billed via Google Play' :
-                   premiumSource === 'grant'  ? 'Team grant' : 'Active subscription'}
-                  {premiumExpiresAt ? ` · until ${premiumExpiresAt.toLocaleDateString()}` : ' · lifetime'}
-                </p>
+            <>
+              {/* Dunning banner — Stripe couldn't charge the latest
+                  renewal. Surfaced first so the user actually sees it;
+                  links straight to the portal to update card. */}
+              {inDunning && (
+                <button
+                  onClick={openCustomerPortal}
+                  disabled={portalLoading}
+                  className="flex items-center gap-3 px-5 py-4 w-full text-left bg-error-container/40 border-b border-surface-container-high active:bg-error-container/60 transition-colors disabled:opacity-50"
+                  role="alert"
+                >
+                  <span aria-hidden="true" className="material-symbols-outlined text-error text-lg flex-shrink-0">warning</span>
+                  <div className="flex-1">
+                    <p className="font-body text-sm font-semibold text-on-surface">Payment failed</p>
+                    <p className="font-label text-[11px] text-on-surface-variant/80 mt-0.5">
+                      Update your payment method to keep Sanctuary Plus.
+                    </p>
+                  </div>
+                  <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
+                </button>
+              )}
+
+              <div className="flex items-center gap-4 px-5 py-4">
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">workspace_premium</span>
+                <div className="flex-1">
+                  <p className="font-body text-sm font-semibold text-on-surface">
+                    {cancelAtPeriodEnd ? 'Sanctuary Plus ends soon' : 'Sanctuary Plus is active'}
+                  </p>
+                  <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
+                    {premiumSource === 'promo' ? 'Granted via code' :
+                     premiumSource === 'stripe' ? (cancelAtPeriodEnd ? 'Cancellation scheduled' : 'Billed via Stripe') :
+                     premiumSource === 'apple' ? 'Billed via App Store' :
+                     premiumSource === 'google' ? 'Billed via Google Play' :
+                     premiumSource === 'grant'  ? 'Team grant' : 'Active subscription'}
+                    {premiumExpiresAt ? ` · ${cancelAtPeriodEnd ? 'access until' : 'until'} ${premiumExpiresAt.toLocaleDateString()}` : ' · lifetime'}
+                  </p>
+                </div>
               </div>
-            </div>
+
+              {/* Manage Subscription — only for Stripe-sourced Plus. Promo
+                  grants, team grants, and (future) App Store / Play Store
+                  subscriptions have no Stripe customer record so the
+                  portal can't help; they're managed elsewhere. */}
+              {premiumSource === 'stripe' && (
+                <button
+                  onClick={openCustomerPortal}
+                  disabled={portalLoading}
+                  className="flex items-center gap-4 px-5 py-4 border-t border-surface-container-high w-full text-left active:bg-surface-container-high/50 transition-colors disabled:opacity-50"
+                  aria-label="Manage subscription"
+                >
+                  <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">credit_card</span>
+                  <div className="flex-1">
+                    <p className="font-body text-sm text-on-surface">
+                      {portalLoading ? 'Opening...' : 'Manage subscription'}
+                    </p>
+                    <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
+                      {cancelAtPeriodEnd
+                        ? 'Resume, update card, or view invoices'
+                        : 'Cancel, update card, or view invoices'}
+                    </p>
+                  </div>
+                  <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
+                </button>
+              )}
+            </>
           )}
         </div>
 

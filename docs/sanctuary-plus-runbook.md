@@ -242,16 +242,51 @@ with `{duplicate: true}`.
 
 ---
 
+## Customer Portal (self-serve management)
+
+Plus users with `premium_source = 'stripe'` see a "Manage subscription"
+row in Settings. It calls `create-customer-portal-session`, which mints
+a one-time Stripe portal URL scoped to their `stripe_customer_id`.
+
+This also satisfies Germany's **Kündigungsbutton** law (cancel-in-2-clicks)
+without extra UI work.
+
+### Deploy
+
+```bash
+supabase functions deploy create-customer-portal-session
+
+# Optional — set the return URL the portal sends users back to.
+# Falls back to the request Origin if unset (works in dev).
+supabase secrets set PORTAL_RETURN_URL=https://sanctuary.com/profile
+```
+
+### Stripe Dashboard config
+
+In **Settings → Billing → Customer Portal**, enable:
+
+- Cancellation (immediate or at period end — pick "at period end")
+- Update payment method
+- Update billing address
+- View invoices
+
+Save. Without this, the portal session creation will succeed but the
+returned page will be empty.
+
+### Dunning UI
+
+When the Stripe webhook receives `invoice.payment_failed`, it sets
+`profiles.premium_payment_failed_at`. The `useIsPremium()` hook exposes
+`inDunning: boolean`, which Settings uses to render a red banner above
+the Plus status row, prompting an immediate portal visit to update card.
+
+The flag clears automatically when the next `invoice.paid` event lands.
+
 ## What's deliberately not built yet
 
 These are 2–3 day items each, mark them up before scaling beyond a few
 hundred subscribers:
 
-- **Customer Portal link** — let Plus users self-manage (cancel, update
-  card, change plan) from a "Manage subscription" button in Settings.
-  Needs one more Edge Function: `create-customer-portal-session`.
-- **Dunning UI** — when `premium_payment_failed_at` is set, surface a banner
-  prompting the user to update their payment method (deeplink to Portal).
 - **Native IAP** — only worth doing once web-flow conversion has been
   measured. Add via RevenueCat to unify the entitlement source of truth.
 - **PPP pricing for India** — second set of Payment Links per locale, IP

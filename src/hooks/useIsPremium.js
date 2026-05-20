@@ -64,12 +64,28 @@ export function useIsPremium() {
       ? Math.max(0, Math.ceil((expiresAt.getTime() - Date.now()) / 86_400_000))
       : null
 
+    // Dunning state: Stripe couldn't charge the renewal. We don't flip
+    // is_premium yet (Stripe is still retrying) but surface the flag so
+    // UI can prompt the user to update their payment method.
+    const paymentFailedAt = profile?.premium_payment_failed_at
+      ? new Date(profile.premium_payment_failed_at)
+      : null
+    const inDunning = isPremium && !!paymentFailedAt
+
+    // Cancel-at-period-end: user has cancelled but still has paid access.
+    // Useful for surfacing "Resubscribe?" UI without making them feel
+    // already-locked-out.
+    const cancelAtPeriodEnd = profile?.premium_cancel_at_period_end === true
+
     return {
       isPremium,
-      isLoading:      false,
-      source:         isPremium ? (profile?.premium_source || null) : null,
+      isLoading:           false,
+      source:              isPremium ? (profile?.premium_source || null) : null,
       expiresAt,
       daysRemaining,
+      paymentFailedAt,
+      inDunning,
+      cancelAtPeriodEnd,
     }
   }, [profile, loading])
 }
