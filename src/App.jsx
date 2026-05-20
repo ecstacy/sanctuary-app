@@ -11,6 +11,7 @@ import { supabase } from './lib/supabase'
 import { init as initAnalytics, track, EVENTS } from './lib/track'
 import { init as initCrash, recordError as crashRecordError } from './lib/crash'
 import { routeNameFor } from './lib/routeName'
+import { useNotifications } from './hooks/useNotifications'
 
 // Lazy-load pages for code-splitting
 const WelcomePage = lazy(() => import('./pages/WelcomePage'))
@@ -201,6 +202,23 @@ function PrivateRoute({ children }) {
 // from the task and also overlap their CTAs, so they're excluded.
 const NAV_PAGES = ['/home', '/discover', '/profile', '/routine', '/dosha', '/journey', '/recommendations']
 
+// Re-applies the user's notification schedule from the persisted pref on
+// app launch. Local notifications can be lost in three common ways:
+//   • app reinstall (OS schedule gone, DB pref preserved)
+//   • Android battery-optimizer killed our process between launches
+//   • user toggled the pref on another device (server pref ≠ local OS)
+// One reapply per (user, prefs-blob) covers all three with no UI cost.
+function NotificationReapplyOnBoot() {
+  const { reapplyFromProfile } = useNotifications()
+  useEffect(() => {
+    // Hook returns a stable function reference per prefs change. Any in-
+    // app toggle goes through setPracticeReminder which re-schedules
+    // eagerly; this effect catches the boot + cross-device cases.
+    reapplyFromProfile?.()
+  }, [reapplyFromProfile])
+  return null
+}
+
 function ShowBottomNav() {
   const { user } = useAuth()
   const { pathname } = useLocation()
@@ -219,6 +237,12 @@ function AppRoutes() {
       <DoshaThemeProvider />
       <DeepLinkHandler />
       <BackButtonHandler />
+      {/* Re-apply persisted notification schedule on every app launch.
+          Local notifications are lost when the app is uninstalled and on
+          some Android OEMs they're aggressively trimmed by battery
+          optimizers — the cheapest fix is to re-schedule once per
+          launch from the saved pref. No-op on web. */}
+      {user && <NotificationReapplyOnBoot />}
       <Suspense fallback={<LoadingScreen />}>
       <PageTransition>
         <Routes>

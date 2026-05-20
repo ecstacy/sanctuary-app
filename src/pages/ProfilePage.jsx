@@ -12,6 +12,7 @@ import { deleteAllUserData } from '../lib/accountDeletion'
 import { track, reset as resetAnalytics, EVENTS } from '../lib/track'
 import { _forceTestCrash, recordError as crashRecordError } from '../lib/crash'
 import { useIsPremium } from '../hooks/useIsPremium'
+import { useNotifications } from '../hooks/useNotifications'
 import PaywallSheet from '../components/PaywallSheet'
 
 import GoogleIcon from '../components/GoogleIcon'
@@ -29,6 +30,17 @@ export default function ProfilePage() {
   } = useIsPremium()
   const [profilePaywall, setProfilePaywall] = useState({ open: false, surface: 'settings' })
   const [portalLoading, setPortalLoading] = useState(false)
+
+  // Notifications — local-scheduled reminders. The hook is safe on web
+  // (returns isSupported=false) so the settings UI works in the browser
+  // but only schedules on native.
+  const {
+    prefs:           notifPrefs,
+    permissionState: notifPermission,
+    busy:            notifBusy,
+    setPracticeReminder,
+    isSupported:     notifSupported,
+  } = useNotifications()
 
   // Open Stripe Customer Portal — self-serve cancel + update card + see
   // invoices. Calls our Edge Function which mints a one-time URL. Also
@@ -691,6 +703,99 @@ export default function ProfilePage() {
                 </button>
               )}
             </>
+          )}
+        </div>
+
+        {/* ── Notifications ─────────────────────────────────────────────
+            Local notifications only in v1 (practice reminder). Push
+            notifications for server-driven contextual nudges (vikriti
+            drift, streak save) land in a later iteration. The pref
+            schema in notification_prefs is future-proofed for both. */}
+        <div className="bg-surface-container rounded-lg overflow-hidden stagger-3 mb-5">
+          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
+            Notifications
+          </p>
+
+          {/* Practice reminder toggle */}
+          <div className="px-5 py-4 border-b border-surface-container-high">
+            <div className="flex items-center gap-4">
+              <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">notifications</span>
+              <div className="flex-1 min-w-0">
+                <p className="font-body text-sm font-semibold text-on-surface">Daily practice reminder</p>
+                <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
+                  A gentle nudge at your chosen time
+                </p>
+              </div>
+              {/* Toggle — fully accessible, role=switch + aria-checked.
+                  Disabled while the hook is mid-flight to prevent races
+                  between rapid taps. */}
+              <button
+                role="switch"
+                aria-checked={notifPrefs.practice_reminder.enabled}
+                aria-label="Toggle daily practice reminder"
+                disabled={notifBusy}
+                onClick={async () => {
+                  await setPracticeReminder({
+                    enabled: !notifPrefs.practice_reminder.enabled,
+                    time:    notifPrefs.practice_reminder.time,
+                  })
+                }}
+                className={`relative w-12 h-7 rounded-full transition-colors flex-shrink-0 disabled:opacity-50 ${
+                  notifPrefs.practice_reminder.enabled ? 'bg-primary' : 'bg-surface-container-high'
+                }`}
+              >
+                <span
+                  aria-hidden="true"
+                  className={`absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-surface shadow transition-transform ${
+                    notifPrefs.practice_reminder.enabled ? 'translate-x-5' : 'translate-x-0'
+                  }`}
+                />
+              </button>
+            </div>
+
+            {/* Time picker — shown only when enabled. Uses native time
+                input for OS-consistent picker on iOS + Android. Saving
+                fires the time-changed analytics event automatically. */}
+            {notifPrefs.practice_reminder.enabled && (
+              <div className="flex items-center gap-4 mt-4 pl-9">
+                <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base">schedule</span>
+                <div className="flex-1">
+                  <p className="font-label text-[11px] text-on-surface-variant/70 uppercase tracking-wider mb-1">Time</p>
+                  <input
+                    type="time"
+                    value={notifPrefs.practice_reminder.time}
+                    onChange={async (e) => {
+                      const next = e.target.value
+                      if (!next || next === notifPrefs.practice_reminder.time) return
+                      await setPracticeReminder({ enabled: true, time: next })
+                    }}
+                    disabled={notifBusy}
+                    className="bg-surface rounded-lg px-3 py-2 font-body text-sm text-on-surface tabular-nums focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
+                    aria-label="Reminder time"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* State explainers — surface the unhappy paths so the user
+              knows why a toggle isn't behaving. Three cases:
+                1. permission denied (asked + said no)
+                2. unsupported (browser — they need the mobile app)
+                3. all good — nothing to show */}
+          {notifPermission === 'denied' && notifSupported && (
+            <div className="px-5 py-3 bg-error-container/30">
+              <p className="font-label text-[11px] text-on-surface-variant/80 leading-snug">
+                Notifications are blocked. Enable them in your device settings to receive reminders.
+              </p>
+            </div>
+          )}
+          {!notifSupported && (
+            <div className="px-5 py-3 bg-surface-container-low">
+              <p className="font-label text-[11px] text-on-surface-variant/70 leading-snug">
+                Notifications work in the Sanctuary mobile app — your preferences will apply once installed.
+              </p>
+            </div>
           )}
         </div>
 

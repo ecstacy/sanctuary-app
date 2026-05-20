@@ -2,6 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Android 13+ (API 33) requires runtime permission for notifications.
+         The @capacitor/local-notifications plugin requests this at the time
+         we schedule the first notification; manifest declaration is required
+         for the system to surface the prompt at all. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Required for daily-repeating local notifications to survive
+         device reboots. Without this, the user's morning reminder
+         disappears every time they restart their phone. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Schedule exact alarms (Android 12+). Local notifications use this
+         to fire at the user's chosen time accurately rather than being
+         batched by the system into a "sometime that hour" window. -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"

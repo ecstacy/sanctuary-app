@@ -159,6 +159,20 @@ export const EVENTS = Object.freeze({
   PROTOCOL_DAY_COMPLETED:    'protocol_day_completed',
   PROTOCOL_DAY_UNMARKED:     'protocol_day_unmarked',
   PROTOCOL_FINISHED:         'protocol_finished',
+
+  // Notifications — local-scheduled reminders + (later) push events.
+  // PERMISSION_REQUESTED + _RESULT track the OS-prompt funnel
+  //   (impression denominator + grant rate). On Android 13+ this is the
+  //   single biggest drop-off point for any notification feature, so
+  //   we measure it directly.
+  // _ENABLED / _DISABLED fire on each toggle change; _TIME_CHANGED fires
+  //   when the user picks a different reminder time (separate event so
+  //   "how often do users tweak the time?" is a single PostHog query).
+  NOTIFICATION_PERMISSION_REQUESTED:'notification_permission_requested',
+  NOTIFICATION_PERMISSION_RESULT:   'notification_permission_result',
+  NOTIFICATION_REMINDER_ENABLED:    'notification_reminder_enabled',
+  NOTIFICATION_REMINDER_DISABLED:   'notification_reminder_disabled',
+  NOTIFICATION_REMINDER_TIME_CHANGED:'notification_reminder_time_changed',
 })
 
 // ─── Internal state ──────────────────────────────────────────────────────
