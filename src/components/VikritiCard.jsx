@@ -71,9 +71,10 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
       is_premium: isPremium,
     })
     if (isPremium) {
-      // Plus users land on the full dosha profile for now. Phase 2: deep-
-      // link to a dedicated protocol page when those exist.
-      navigate('/dosha')
+      // Plus users land directly on the full 3-day protocol for their
+      // current vikriti. The page itself also enforces the Plus gate as
+      // a safety net for deep-links.
+      navigate(`/protocol/${vikriti}`)
     } else {
       onOpenPaywall?.()
     }

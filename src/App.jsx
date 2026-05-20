@@ -34,6 +34,7 @@ const PracticePage = lazy(() => import('./pages/PracticePage'))
 const JourneyPage = lazy(() => import('./pages/JourneyPage'))
 const AsanaDetailPage = lazy(() => import('./pages/AsanaDetailPage'))
 const PranayamaDetailPage = lazy(() => import('./pages/PranayamaDetailPage'))
+const ProtocolPage = lazy(() => import('./pages/ProtocolPage'))
 
 function DeepLinkHandler() {
   const navigate = useNavigate()
@@ -242,6 +243,7 @@ function AppRoutes() {
           <Route path="/routine" element={<PrivateRoute><RoutinePage /></PrivateRoute>} />
           <Route path="/asana/:id" element={<PrivateRoute><AsanaDetailPage /></PrivateRoute>} />
           <Route path="/pranayama/:id" element={<PrivateRoute><PranayamaDetailPage /></PrivateRoute>} />
+          <Route path="/protocol/:vikriti" element={<PrivateRoute><ProtocolPage /></PrivateRoute>} />
           <Route path="/practice/:id" element={<PrivateRoute><PracticePage /></PrivateRoute>} />
           <Route path="/practice/asana/:asanaId" element={<PrivateRoute><PracticePage /></PrivateRoute>} />
           <Route path="/journey" element={<PrivateRoute><JourneyPage /></PrivateRoute>} />

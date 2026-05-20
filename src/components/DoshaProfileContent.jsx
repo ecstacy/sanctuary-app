@@ -683,6 +683,47 @@ export default function DoshaProfileContent({
             </div>
           </div>
 
+          {/* Pacifying protocol — surfaced for non-Tridoshic Plus users.
+              Lands on the 3-day plan for the user's primary dosha; most
+              useful when their current vikriti matches their prakriti
+              (the common "I am Vata and I'm feeling like a worse Vata"
+              case). Doesn't overlap with Diet/Dinacharya — those are
+              evergreen reference; this is acute pacification. */}
+          {!isTridoshic && (
+            <button
+              onClick={() => {
+                track(EVENTS.CTA_CLICKED, {
+                  cta_id:         'dosha_chapter3_protocol',
+                  primary_dosha:  primary,
+                })
+                navigate(`/protocol/${primary}`)
+              }}
+              className={`block w-full text-left rounded-2xl p-5 mb-6 ${primaryData.bgColor} active:scale-[0.99] transition-all`}
+              aria-label={`Open ${primaryData.name}-pacifying protocol`}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <span
+                  aria-hidden="true"
+                  className={`material-symbols-outlined text-base ${primaryData.textColor}`}
+                >
+                  {primaryData.emoji}
+                </span>
+                <p
+                  className="font-label text-[10px] font-semibold uppercase tracking-[0.22em]"
+                  style={{ color: primaryData.accentHex }}
+                >
+                  When your {primaryData.name} runs high
+                </p>
+              </div>
+              <p className="font-headline text-lg text-on-surface leading-tight mb-1">
+                Your 3-day {primaryData.name}-pacifying protocol
+              </p>
+              <p className="font-body text-xs text-on-surface-variant/80 leading-snug">
+                Food, movement, breath, and rest — for the days when your dominant dosha is also your imbalance.
+              </p>
+            </button>
+          )}
+
           {/* Diet + Daily Routine deep-dive CTAs */}
           <div className="grid grid-cols-2 gap-3 mb-6">
             <button
