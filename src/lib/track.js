@@ -134,6 +134,16 @@ export const EVENTS = Object.freeze({
   PROMO_CODE_SUBMITTED:    'promo_code_submitted',
   PROMO_CODE_REDEEMED:     'promo_code_redeemed',
   PROMO_CODE_FAILED:       'promo_code_failed',
+
+  // Vikriti drift detection — the contextual nudge engine.
+  // SHOWN fires when the home card appears for a user with a real signal;
+  // FREE_ACTION/PLUS_ACTION distinguish which tap converted, so we can
+  // measure both the engagement (free action → practice) and conversion
+  // (plus action → paywall) outcomes from the same surface.
+  VIKRITI_SIGNAL_SHOWN:        'vikriti_signal_shown',
+  VIKRITI_FREE_ACTION_TAPPED:  'vikriti_free_action_tapped',
+  VIKRITI_PLUS_ACTION_TAPPED:  'vikriti_plus_action_tapped',
+  VIKRITI_SIGNAL_DISMISSED:    'vikriti_signal_dismissed',
 })
 
 // ─── Internal state ──────────────────────────────────────────────────────

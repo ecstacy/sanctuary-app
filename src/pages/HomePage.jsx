@@ -6,7 +6,11 @@ import usePracticeStats from '../hooks/usePracticeStats'
 import useScrollDepth from '../hooks/useScrollDepth'
 import useImpression from '../hooks/useImpression'
 import useVikritiSchedule from '../hooks/useVikritiSchedule'
+import { useVikritiSignal } from '../hooks/useVikritiSignal'
+import { useIsPremium } from '../hooks/useIsPremium'
 import PoseFigure from '../components/PoseFigure'
+import VikritiCard from '../components/VikritiCard'
+import PaywallSheet from '../components/PaywallSheet'
 import * as analytics from '../lib/analytics'
 import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
@@ -366,6 +370,15 @@ export default function HomePage() {
   const suggestedAsanaUserDosha = suggestedPick?.userDosha || null
   const hasSuggestion          = !!suggestedPick
 
+  // ── Vikriti drift detection + paywall sheet ─────────────────────────────
+  // Reads the last 14 days of pre/post-practice checkins, maps the
+  // energy/stress pattern to a vikriti dosha, and surfaces a contextual
+  // nudge above the Pickup card. Plus action opens the same paywall
+  // sheet used everywhere else so PostHog can rank conversion by source.
+  const vikritiSignal = useVikritiSignal()
+  const { isPremium } = useIsPremium()
+  const [vikritiPaywallOpen, setVikritiPaywallOpen] = useState(false)
+
   // Impression ref for the suggested-asana card. Fires `content_impression`
   // once the card has been ≥50% visible for 1s — the CTR denominator we'll
   // pair with `asana_card_tapped` from the click handler.
@@ -633,6 +646,18 @@ export default function HomePage() {
           )}
         </div>
 
+        {/* ── Vikriti drift reading — only renders when the last 14 days
+              of checkins produce a clear signal. Conservative thresholds
+              keep this off most users' screens most of the time, which
+              is the point — when it DOES fire, it should feel meaningful. */}
+        {vikritiSignal.hasSignal && (
+          <VikritiCard
+            signal={vikritiSignal}
+            isPremium={isPremium}
+            onOpenPaywall={() => setVikritiPaywallOpen(true)}
+          />
+        )}
+
         {/* ── Suggested Asana — single-tap card nudging into the Routine tab ── */}
         {hasSuggestion && (
           <section className="stagger-3">
@@ -842,6 +867,17 @@ export default function HomePage() {
         </div>
 
       </div>
+
+      {/* Paywall sheet for the Vikriti card's Plus action. Surface is
+          dosha-tagged so PostHog can compare conversion across vikriti
+          types — useful for tuning recommendation depth per dosha. */}
+      <PaywallSheet
+        open={vikritiPaywallOpen}
+        onClose={() => setVikritiPaywallOpen(false)}
+        surface={`vikriti_${vikritiSignal.vikriti || 'unknown'}`}
+        headline="The full protocol awaits"
+        subhead="Plus gives you the daily plan — food, movement, sleep — that brings your dosha back to centre."
+      />
 
     </div>
   )
