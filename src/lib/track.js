@@ -144,6 +144,21 @@ export const EVENTS = Object.freeze({
   VIKRITI_FREE_ACTION_TAPPED:  'vikriti_free_action_tapped',
   VIKRITI_PLUS_ACTION_TAPPED:  'vikriti_plus_action_tapped',
   VIKRITI_SIGNAL_DISMISSED:    'vikriti_signal_dismissed',
+
+  // Pacifying protocol — the Plus content destination.
+  // OPENED is the impression denominator (every visit to /protocol/:vikriti).
+  // DAY_VIEWED fires on day-tab switches (engagement depth).
+  // DAY_COMPLETED + DAY_UNMARKED track the actual progress mechanic; the
+  //   `attempt_days_completed` prop on COMPLETED tells us if this was the
+  //   1st, 2nd, or 3rd day of the current attempt — useful for cohort
+  //   funnels ("how many users finish all three days?").
+  // PROTOCOL_FINISHED fires when the 3rd day of an attempt is completed
+  //   (the meaningful completion event for retention analysis).
+  PROTOCOL_OPENED:           'protocol_opened',
+  PROTOCOL_DAY_VIEWED:       'protocol_day_viewed',
+  PROTOCOL_DAY_COMPLETED:    'protocol_day_completed',
+  PROTOCOL_DAY_UNMARKED:     'protocol_day_unmarked',
+  PROTOCOL_FINISHED:         'protocol_finished',
 })
 
 // ─── Internal state ──────────────────────────────────────────────────────

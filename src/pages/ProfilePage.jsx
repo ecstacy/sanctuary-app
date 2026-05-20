@@ -34,11 +34,20 @@ export default function ProfilePage() {
   // invoices. Calls our Edge Function which mints a one-time URL. Also
   // satisfies the German Kündigungsbutton requirement (cancel in ≤2
   // clicks from the app).
-  async function openCustomerPortal() {
+  //
+  // `source` distinguishes the two entry points in analytics:
+  //   'dunning_banner' — high-urgency churn-prevention path
+  //   'manage_row'     — routine account management
+  // Same URL, different funnels.
+  async function openCustomerPortal(source = 'manage_row') {
     if (portalLoading) return
     setPortalLoading(true)
     try {
-      track(EVENTS.CTA_CLICKED, { cta_id: 'manage_subscription', route_name: 'profile' })
+      track(EVENTS.CTA_CLICKED, {
+        cta_id:     source === 'dunning_banner' ? 'dunning_update_payment' : 'manage_subscription',
+        route_name: 'profile',
+        source,
+      })
       const { data, error } = await supabase.functions.invoke('create-customer-portal-session')
       if (error || !data?.ok || !data?.url) {
         alert("We couldn't open the billing portal. Please try again or email support.")
@@ -623,7 +632,7 @@ export default function ProfilePage() {
                   links straight to the portal to update card. */}
               {inDunning && (
                 <button
-                  onClick={openCustomerPortal}
+                  onClick={() => openCustomerPortal('dunning_banner')}
                   disabled={portalLoading}
                   className="flex items-center gap-3 px-5 py-4 w-full text-left bg-error-container/40 border-b border-surface-container-high active:bg-error-container/60 transition-colors disabled:opacity-50"
                   role="alert"
@@ -662,7 +671,7 @@ export default function ProfilePage() {
                   portal can't help; they're managed elsewhere. */}
               {premiumSource === 'stripe' && (
                 <button
-                  onClick={openCustomerPortal}
+                  onClick={() => openCustomerPortal('manage_row')}
                   disabled={portalLoading}
                   className="flex items-center gap-4 px-5 py-4 border-t border-surface-container-high w-full text-left active:bg-surface-container-high/50 transition-colors disabled:opacity-50"
                   aria-label="Manage subscription"

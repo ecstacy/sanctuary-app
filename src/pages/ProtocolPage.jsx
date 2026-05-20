@@ -33,10 +33,11 @@
 //  specific day and back/forward navigation works.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom'
 import { getProtocol, SECTION_ICONS } from '../data/protocols'
 import { useIsPremium } from '../hooks/useIsPremium'
+import { useProtocolProgress } from '../hooks/useProtocolProgress'
 import { track, EVENTS } from '../lib/track'
 import PaywallSheet from '../components/PaywallSheet'
 
@@ -80,6 +81,35 @@ export default function ProtocolPage() {
   const [paywallOpen, setPaywallOpen] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams()
 
+  // ── Progress (Plus-gated, but the hook is safe to call always —
+  //    it short-circuits when there's no user / vikriti) ──────────────
+  const {
+    isLoading:            progressLoading,
+    currentAttempt,
+    currentDaysCompleted,
+    history,
+    totalAttempts,
+    markDayComplete,
+    unmarkDay,
+  } = useProtocolProgress(vikriti)
+
+  // PROTOCOL_OPENED — impression denominator. Fires once per (mount,
+  // vikriti) pair so the impression-count matches actual visits, not
+  // re-renders from a day-tab change.
+  const openFiredRef = useRef(false)
+  useEffect(() => {
+    if (openFiredRef.current) return
+    if (!protocol || !theme) return
+    if (!isPremium) return  // Non-Plus impressions tracked by PAYWALL_SHOWN
+    openFiredRef.current = true
+    track(EVENTS.PROTOCOL_OPENED, {
+      vikriti,
+      total_attempts:    totalAttempts,
+      days_completed:    currentDaysCompleted,
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [vikriti, isPremium])
+
   // Active day — URL-backed so back/forward + deep links work.
   // Clamp to [1, days.length] to defang weird query strings.
   const dayParam = parseInt(searchParams.get('day') || '1', 10)
@@ -94,11 +124,40 @@ export default function ProtocolPage() {
       next.set('day', String(d))
       return next
     }, { replace: true })
-    track(EVENTS.CTA_CLICKED, {
-      cta_id:  'protocol_day_tab',
+    track(EVENTS.PROTOCOL_DAY_VIEWED, {
       vikriti,
-      day:     d,
+      day:               d,
+      day_completed:     !!currentAttempt[d],
     })
+  }
+
+  // Mark/unmark the active day. Fires CTA_CLICKED (for surface comparison
+  // against other CTAs) AND the protocol-specific lifecycle event (for
+  // funnel analysis: opened → day viewed → day completed → finished).
+  async function handleMarkDay(day) {
+    if (currentAttempt[day]) {
+      track(EVENTS.PROTOCOL_DAY_UNMARKED, { vikriti, day })
+      await unmarkDay(day)
+      return
+    }
+    const result = await markDayComplete(day, { source: 'protocol_page' })
+    if (!result) return  // failure — already logged + rolled back
+
+    const newDaysCompleted = currentDaysCompleted + 1
+    track(EVENTS.PROTOCOL_DAY_COMPLETED, {
+      vikriti,
+      day,
+      attempt_days_completed: newDaysCompleted,
+      total_attempts:         totalAttempts + (currentDaysCompleted === 0 ? 1 : 0),
+    })
+
+    // Did completing this day finish the protocol?
+    if (newDaysCompleted >= (protocol?.days?.length || 3)) {
+      track(EVENTS.PROTOCOL_FINISHED, {
+        vikriti,
+        attempt_number: totalAttempts + 1,
+      })
+    }
   }
 
   // Unknown vikriti slug — back to the home card. Shouldn't happen via
@@ -236,19 +295,32 @@ export default function ProtocolPage() {
           <div className="flex gap-2" role="tablist" aria-label="Protocol days">
             {protocol.days.map((d) => {
               const active = d.day === activeDay
+              const completed = !!currentAttempt[d.day]
               return (
                 <button
                   key={d.day}
                   onClick={() => setActiveDay(d.day)}
                   role="tab"
                   aria-selected={active}
-                  className={`flex-1 py-2.5 rounded-full font-label text-xs font-semibold uppercase tracking-wider transition-all ${
+                  aria-label={`Day ${d.day}${completed ? ' (completed)' : ''}`}
+                  className={`flex-1 py-2.5 rounded-full font-label text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
                     active
                       ? 'bg-primary text-on-primary'
                       : 'bg-surface-container text-on-surface-variant active:scale-[0.97]'
                   }`}
                 >
-                  Day {d.day}
+                  {/* Status dot — ✓ when this day is complete in the
+                      current attempt. Doesn't move when active, so the
+                      tab geometry stays stable across taps. */}
+                  {completed && (
+                    <span
+                      aria-hidden="true"
+                      className={`material-symbols-outlined text-[14px] ${active ? 'text-on-primary' : 'text-primary'}`}
+                    >
+                      check_circle
+                    </span>
+                  )}
+                  <span>Day {d.day}</span>
                 </button>
               )
             })}
@@ -275,14 +347,57 @@ export default function ProtocolPage() {
           ))}
         </div>
 
-        {/* Day-end nav — primary "next day" CTA + secondary "back to today's
-            reading" link. Keeps users in the protocol, not bounced back
-            to home where the same VikritiCard would re-tease them. */}
-        <div className="mt-8 mb-4 flex flex-col gap-3">
+        {/* Mark-complete tile — the day's commitment moment. After the
+            sections, the user marks it done. Toggles between "Mark Day N
+            complete" and a celebratory completed state with timestamp +
+            quiet unmark affordance. The two visual states share geometry
+            so the page doesn't jump on tap. */}
+        <div className="mt-8 mb-4">
+          {currentAttempt[activeDay] ? (
+            <div
+              className={`${theme.bgColor} rounded-2xl p-5 flex items-center gap-4`}
+              role="status"
+              aria-live="polite"
+            >
+              <div className={`w-11 h-11 rounded-full bg-surface flex items-center justify-center flex-shrink-0`}>
+                <span aria-hidden="true" className={`material-symbols-outlined text-xl ${theme.textColor}`}>check_circle</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-body font-semibold text-sm text-on-surface leading-tight">
+                  Day {activeDay} complete
+                </p>
+                <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
+                  Marked {formatRelative(currentAttempt[activeDay])}
+                </p>
+              </div>
+              <button
+                onClick={() => handleMarkDay(activeDay)}
+                disabled={progressLoading}
+                className="font-label text-[11px] text-on-surface-variant/70 uppercase tracking-wider px-3 py-1.5 active:scale-95"
+                aria-label="Unmark this day"
+              >
+                Undo
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => handleMarkDay(activeDay)}
+              disabled={progressLoading}
+              className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50"
+            >
+              Mark Day {activeDay} complete
+            </button>
+          )}
+        </div>
+
+        {/* Day-end nav — primary "next day" CTA + back link. Keeps users
+            in the protocol, not bounced back to home where the same
+            VikritiCard would re-tease them. */}
+        <div className="mt-2 mb-4 flex flex-col gap-3">
           {activeDay < protocol.days.length && (
             <button
               onClick={() => setActiveDay(activeDay + 1)}
-              className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
+              className="w-full py-3.5 bg-surface-container text-on-surface rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
               Continue to Day {activeDay + 1}
             </button>
@@ -290,7 +405,7 @@ export default function ProtocolPage() {
           {activeDay === protocol.days.length && (
             <button
               onClick={() => navigate('/home')}
-              className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
+              className="w-full py-3.5 bg-surface-container text-on-surface rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
               Back to home
             </button>
@@ -304,6 +419,44 @@ export default function ProtocolPage() {
             </button>
           )}
         </div>
+
+        {/* History rollup — only renders if there's history. A user
+            returning to a familiar protocol sees their own track record.
+            Builds identity ("I'm someone who does this") which is the
+            single highest retention force in habit apps. */}
+        {history.length > 0 && (
+          <div className="bg-surface-container rounded-2xl p-5 mt-6 mb-4">
+            <div className="flex items-baseline justify-between mb-4">
+              <p className="font-label text-[10px] font-semibold uppercase tracking-[0.22em] text-on-surface-variant">
+                Your history
+              </p>
+              <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-wider tabular-nums">
+                {history.length === 1 ? '1 previous attempt' : `${history.length} previous attempts`}
+              </p>
+            </div>
+            <ul className="space-y-3">
+              {history.slice(0, 5).map((a, i) => (
+                <li key={i} className="flex items-center gap-3">
+                  <span
+                    aria-hidden="true"
+                    className={`w-2 h-2 rounded-full ${theme.bgColor} flex-shrink-0`}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="font-body text-sm text-on-surface leading-tight">
+                      {formatDateShort(a.startedAt)}
+                      {a.completedAt !== a.startedAt && ` – ${formatDateShort(a.completedAt)}`}
+                    </p>
+                    <p className="font-label text-[11px] text-on-surface-variant/60 mt-0.5">
+                      {a.daysCompleted === protocol.days.length
+                        ? 'Completed all days'
+                        : `${a.daysCompleted} of ${protocol.days.length} days`}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
       </div>
     </div>
@@ -356,4 +509,27 @@ function ProtocolSection({ section, theme }) {
       )}
     </div>
   )
+}
+
+// ── Date formatting helpers ─────────────────────────────────────────────────
+// Kept inline rather than a shared util — these are only used by the
+// completed-tile and history list here, with very specific wording. The
+// "Marked just now / 2 hours ago / yesterday / 3 days ago" cadence is the
+// language a person would use when looking back at their own work.
+function formatRelative(iso) {
+  if (!iso) return ''
+  const then = new Date(iso).getTime()
+  const diff = Date.now() - then
+  if (diff < 60_000)          return 'just now'
+  if (diff < 3_600_000)       return `${Math.round(diff / 60_000)} min ago`
+  if (diff < 86_400_000)      return `${Math.round(diff / 3_600_000)} hr ago`
+  if (diff < 2 * 86_400_000)  return 'yesterday'
+  if (diff < 7 * 86_400_000)  return `${Math.round(diff / 86_400_000)} days ago`
+  return formatDateShort(iso)
+}
+
+function formatDateShort(iso) {
+  if (!iso) return ''
+  const d = new Date(iso)
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
 }
