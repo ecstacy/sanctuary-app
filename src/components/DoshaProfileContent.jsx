@@ -17,6 +17,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DOSHAS } from '../data/ayurveda/dosha-prakriti'
 import { track, EVENTS } from '../lib/track'
+import { useIsPremium } from '../hooks/useIsPremium'
+import PaywallSheet from './PaywallSheet'
 
 // ── Shared dosha display data ────────────────────────────────────────────────
 export const DOSHA_DATA = {
@@ -182,6 +184,18 @@ export default function DoshaProfileContent({
   const richDosha = DOSHAS[primary] || null
 
   const [expanded, setExpanded] = useState(new Set())
+
+  // ── Paywall: Chapter 3 ("Live by your dosha") is Plus-gated. Free users
+  // see the kicker + lede as a teaser, then a single CTA tile that opens
+  // the paywall sheet. The Charaka deep dives (body/mind/signs/triggers/
+  // pacify in Chapter 2) and the headline composition stay free — Plus
+  // unlocks the daily lifestyle integration layer.
+  const { isPremium } = useIsPremium()
+  const [paywallOpen, setPaywallOpen] = useState(false)
+  function openPaywall() {
+    setPaywallOpen(true)
+  }
+
   function toggle(id) {
     setExpanded(prev => {
       const next = new Set(prev)
@@ -576,7 +590,7 @@ export default function DoshaProfileContent({
         </ThemeSection>
 
         {/* ═══════════════════════════════════════════════════════════
-            CHAPTER 3 — LIVE BY YOUR DOSHA
+            CHAPTER 3 — LIVE BY YOUR DOSHA  (Plus-gated)
             ═══════════════════════════════════════════════════════════ */}
         <ThemeSection
           kicker="Chapter 3"
@@ -584,6 +598,54 @@ export default function DoshaProfileContent({
           lede="Translate this knowledge into daily life — the season, the hour of the day, the food on your plate."
         >
 
+          {/* Free users see a single teaser tile here instead of the full
+              chapter. Designed to feel like a polished invitation, not a
+              cold paywall — same accent color as the dosha, a brief list
+              of what's behind it, one CTA. */}
+          {!isPremium && (
+            <button
+              onClick={() => {
+                track(EVENTS.CTA_CLICKED, {
+                  cta_id:        'dosha_chapter3_unlock',
+                  primary_dosha: primary,
+                })
+                openPaywall()
+              }}
+              className={`block w-full text-left rounded-2xl p-6 mb-5 ${primaryData.bgColor} active:scale-[0.99] transition-all`}
+              aria-label="Unlock Chapter 3 — Live by your dosha"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <span aria-hidden="true" className={`material-symbols-outlined text-base ${primaryData.textColor}`}>auto_awesome</span>
+                <span className="font-label text-[10px] font-semibold uppercase tracking-[0.22em]" style={{ color: primaryData.accentHex }}>
+                  Sanctuary Plus
+                </span>
+              </div>
+              <p className="font-headline text-xl text-on-surface leading-tight mb-2">
+                The daily practice of being {capitalize(primary)}.
+              </p>
+              <p className="font-body text-sm text-on-surface-variant/85 leading-relaxed mb-4">
+                Your season-by-season protocol, dosha-aware diet, and full Dinacharya — the daily rituals that translate Ayurveda into how you actually live.
+              </p>
+              <ul className="space-y-1.5 mb-5">
+                {['Peak season + dosha hours protocol', 'Full 6-taste dietary guide', "Charaka's 13 daily practices"].map((line) => (
+                  <li key={line} className="flex items-center gap-2">
+                    <span aria-hidden="true" className={`material-symbols-outlined text-[14px] ${primaryData.textColor}`}>check_circle</span>
+                    <span className="font-body text-xs text-on-surface">{line}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex items-center justify-between">
+                <span className={`font-label text-xs font-semibold uppercase tracking-wider ${primaryData.textColor}`}>
+                  Unlock Chapter 3
+                </span>
+                <span aria-hidden="true" className={`material-symbols-outlined text-base ${primaryData.textColor}`}>arrow_forward</span>
+              </div>
+            </button>
+          )}
+
+          {/* ── Below: the full chapter, only rendered for Plus members ── */}
+          {isPremium && (
+          <>
           {/* Ayurvedic Lifestyle — Season, Time, Taste */}
           <div className="bg-surface-container rounded-lg overflow-hidden mb-5">
             <div className="flex items-start gap-4 px-6 py-4">
@@ -648,6 +710,8 @@ export default function DoshaProfileContent({
               <p className="font-body text-xs text-on-surface-variant/70 leading-snug">Charaka's 13 practices — align the day with the body's rhythm</p>
             </button>
           </div>
+          </>
+          )}
 
         </ThemeSection>
 
@@ -666,6 +730,17 @@ export default function DoshaProfileContent({
         {footerSlot}
 
       </div>
+
+      {/* Paywall sheet — opens from the Chapter 3 teaser tile. Re-uses the
+          same component as DiscoverPage so the upgrade experience is one
+          consistent surface no matter where the user enters from. */}
+      <PaywallSheet
+        open={paywallOpen}
+        onClose={() => setPaywallOpen(false)}
+        surface="dosha_chapter3"
+        headline={`Live by your ${capitalize(primary)} nature`}
+        subhead="Unlock Chapter 3 and your full Ayurvedic lifestyle protocol."
+      />
     </div>
   )
 }

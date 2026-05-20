@@ -7,6 +7,9 @@ import PoseFigure, { hasPoseImage } from '../components/PoseFigure'
 import { track, EVENTS } from '../lib/track'
 import useScrollDepth from '../hooks/useScrollDepth'
 import useImpression from '../hooks/useImpression'
+import { useIsPremium } from '../hooks/useIsPremium'
+import { isAsanaFree, isPranayamaFree } from '../lib/premiumTiers'
+import PaywallSheet from '../components/PaywallSheet'
 
 
 const ALL_ASANAS = Object.values(ASANAS)
@@ -16,7 +19,7 @@ const ALL_ASANAS = Object.values(ASANAS)
 // card can call `useImpression` legally (one hook per component). With the
 // strip being horizontally-scrolled, off-screen cards never fire — exactly
 // what we want for an honest CTR denominator.
-function ExploreAsanaCard({ asana, position, onTap }) {
+function ExploreAsanaCard({ asana, position, locked, onTap }) {
   const ref = useImpression({
     surface:     'discover_explore_asanas',
     contentType: 'asana',
@@ -27,22 +30,32 @@ function ExploreAsanaCard({ asana, position, onTap }) {
     <button
       ref={ref}
       onClick={onTap}
-      aria-label={`${asana.english} (${asana.sanskrit})`}
+      aria-label={locked
+        ? `${asana.english} — Sanctuary Plus`
+        : `${asana.english} (${asana.sanskrit})`}
       className="flex-shrink-0 w-36 snap-start active:scale-[0.97] transition-all text-left"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className={`absolute inset-0 flex items-center justify-center pointer-events-none ${locked ? 'opacity-50' : ''}`}>
           {asana.poseKey ? (
             <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} objectPosition="center" />
           ) : (
             <span aria-hidden="true" className="material-symbols-outlined text-primary/30 text-6xl">{asana.icon}</span>
           )}
         </div>
-        {asana.level && asana.level !== 'Beginner' && (
+        {asana.level && asana.level !== 'Beginner' && !locked && (
           <div className="absolute top-2 left-2">
             <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-primary uppercase tracking-wide">
               {asana.level}
             </span>
+          </div>
+        )}
+        {/* Plus lock badge — visible curiosity hook. Tapping the card
+            opens the paywall (handled by parent's onTap). */}
+        {locked && (
+          <div className="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 bg-surface/95 backdrop-blur-sm rounded-full">
+            <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px]">lock</span>
+            <span className="font-label text-[9px] text-primary uppercase tracking-wide font-semibold">Plus</span>
           </div>
         )}
       </div>
@@ -55,7 +68,7 @@ function ExploreAsanaCard({ asana, position, onTap }) {
 // ─── PranayamaCard ────────────────────────────────────────────────────────
 // One card per breath technique on the Discover Breathwork row. Same
 // impression-tracking pattern as ExploreAsanaCard.
-function PranayamaCard({ pranayama, position, onTap }) {
+function PranayamaCard({ pranayama, position, locked, onTap }) {
   const ref = useImpression({
     surface:     'discover_breathwork',
     contentType: 'pranayama',
@@ -67,25 +80,30 @@ function PranayamaCard({ pranayama, position, onTap }) {
     <button
       ref={ref}
       onClick={onTap}
-      aria-label={`${pranayama.english} (${pranayama.sanskrit})`}
+      aria-label={locked
+        ? `${pranayama.english} — Sanctuary Plus`
+        : `${pranayama.english} (${pranayama.sanskrit})`}
       className="flex-shrink-0 w-44 snap-start active:scale-[0.97] transition-all text-left"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/40 to-primary/10 flex items-center justify-center">
-        {/* Card auto-upgrades from icon to real image the moment a
-            /poses/{poseKey}.png file is uploaded and registered in
-            PoseFigure.POSE_IMAGES. Until then, fall back to the
-            Material icon — better than the generic SVG stick figure
-            PoseFigure shows for unregistered keys. */}
-        {pranayama.poseKey && hasPoseImage(pranayama.poseKey) ? (
-          <PoseFigure poseKey={pranayama.poseKey} size="sm" breathing={false} objectPosition="center" />
-        ) : (
-          <span aria-hidden="true" className="material-symbols-outlined text-primary text-7xl">{pranayama.icon || 'air'}</span>
-        )}
-        {pranayama.level && pranayama.level !== 'beginner' && (
+        <div className={locked ? 'opacity-50' : ''}>
+          {pranayama.poseKey && hasPoseImage(pranayama.poseKey) ? (
+            <PoseFigure poseKey={pranayama.poseKey} size="sm" breathing={false} objectPosition="center" />
+          ) : (
+            <span aria-hidden="true" className="material-symbols-outlined text-primary text-7xl">{pranayama.icon || 'air'}</span>
+          )}
+        </div>
+        {pranayama.level && pranayama.level !== 'beginner' && !locked && (
           <div className="absolute top-2 left-2">
             <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-primary uppercase tracking-wide">
               {pranayama.level}
             </span>
+          </div>
+        )}
+        {locked && (
+          <div className="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 bg-surface/95 backdrop-blur-sm rounded-full">
+            <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px]">lock</span>
+            <span className="font-label text-[9px] text-primary uppercase tracking-wide font-semibold">Plus</span>
           </div>
         )}
         <div className="absolute bottom-2 right-2">
@@ -148,6 +166,18 @@ export default function DiscoverPage() {
   const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState('')
   useScrollDepth('discover')
+
+  // ── Premium entitlement + paywall sheet state ────────────────────────
+  // `isPremium` gates which cards render the "Plus" lock badge and routes
+  // their taps to the paywall instead of the detail page. Anonymous users
+  // are treated as free — they see locks too, which doubles as a soft
+  // signup nudge (the paywall asks them to sign in first).
+  const { isPremium } = useIsPremium()
+  const [paywall, setPaywall] = useState({ open: false, surface: null })
+
+  function openPaywall(surface) {
+    setPaywall({ open: true, surface })
+  }
 
   // Filter asanas matching the search query
   const matchedAsanas = useMemo(() => {
@@ -354,17 +384,30 @@ export default function DiscoverPage() {
         <div className="stagger-5">
           <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Explore Asanas</p>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
-            {ALL_ASANAS.map((asana, i) => (
-              <ExploreAsanaCard
-                key={asana.id}
-                asana={asana}
-                position={i}
-                onTap={() => {
-                  track(EVENTS.ASANA_CARD_TAPPED, { asana_id: asana.id, source: 'discover_explore_grid' })
-                  navigate(`/asana/${asana.id}`)
-                }}
-              />
-            ))}
+            {ALL_ASANAS.map((asana, i) => {
+              const locked = !isPremium && !isAsanaFree(asana.id)
+              return (
+                <ExploreAsanaCard
+                  key={asana.id}
+                  asana={asana}
+                  position={i}
+                  locked={locked}
+                  onTap={() => {
+                    if (locked) {
+                      track(EVENTS.CTA_CLICKED, {
+                        cta_id: 'locked_asana_card',
+                        asana_id: asana.id,
+                        source: 'discover_explore_grid',
+                      })
+                      openPaywall('library_asana_card')
+                      return
+                    }
+                    track(EVENTS.ASANA_CARD_TAPPED, { asana_id: asana.id, source: 'discover_explore_grid' })
+                    navigate(`/asana/${asana.id}`)
+                  }}
+                />
+              )
+            })}
           </div>
         </div>
 
@@ -372,23 +415,36 @@ export default function DiscoverPage() {
         <div className="stagger-5">
           <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Breathwork</p>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
-            {Object.values(PRANAYAMAS).map((p, i) => (
-              <PranayamaCard
-                key={p.id}
-                pranayama={p}
-                position={i}
-                onTap={() => {
-                  track(EVENTS.CONTENT_IMPRESSION, { surface: 'discover_breathwork', content_type: 'pranayama', content_id: p.id, action: 'tap' })
-                  track(EVENTS.CTA_CLICKED, {
-                    cta_id:        'pranayama_card',
-                    route_name:    'discover',
-                    pranayama_id:  p.id,
-                    label:         p.english,
-                  })
-                  navigate(`/pranayama/${p.id}`)
-                }}
-              />
-            ))}
+            {Object.values(PRANAYAMAS).map((p, i) => {
+              const locked = !isPremium && !isPranayamaFree(p.id)
+              return (
+                <PranayamaCard
+                  key={p.id}
+                  pranayama={p}
+                  position={i}
+                  locked={locked}
+                  onTap={() => {
+                    if (locked) {
+                      track(EVENTS.CTA_CLICKED, {
+                        cta_id: 'locked_pranayama_card',
+                        pranayama_id: p.id,
+                        source: 'discover_breathwork',
+                      })
+                      openPaywall('library_pranayama_card')
+                      return
+                    }
+                    track(EVENTS.CONTENT_IMPRESSION, { surface: 'discover_breathwork', content_type: 'pranayama', content_id: p.id, action: 'tap' })
+                    track(EVENTS.CTA_CLICKED, {
+                      cta_id:        'pranayama_card',
+                      route_name:    'discover',
+                      pranayama_id:  p.id,
+                      label:         p.english,
+                    })
+                    navigate(`/pranayama/${p.id}`)
+                  }}
+                />
+              )
+            })}
           </div>
         </div>
 
@@ -406,6 +462,17 @@ export default function DiscoverPage() {
         </div>
 
       </div>
+
+      {/* Paywall sheet — opens when any Plus-locked card is tapped. The
+          `surface` prop carries the placement id so PostHog can compare
+          conversion by surface in one funnel report. */}
+      <PaywallSheet
+        open={paywall.open}
+        onClose={() => setPaywall({ open: false, surface: null })}
+        surface={paywall.surface}
+        headline="The full library awaits"
+        subhead="Unlock every asana and pranayama, plus your personalized routine."
+      />
 
     </div>
   )

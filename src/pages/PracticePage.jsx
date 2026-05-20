@@ -12,6 +12,8 @@ import PoseFigure from '../components/PoseFigure'
 import CircularTimer from '../components/CircularTimer'
 import * as analytics from '../lib/analytics'
 import { track, EVENTS } from '../lib/track'
+import { useIsPremium } from '../hooks/useIsPremium'
+import PaywallSheet from '../components/PaywallSheet'
 
 // ─── State Machine ──────────────────────────────────────────────────────────
 
@@ -103,6 +105,14 @@ export default function PracticePage() {
   const asanaId = params.asanaId // present when route is /practice/asana/:asanaId
   const single = !!asanaId
   const { profile, user } = useAuth()
+  const { isPremium } = useIsPremium()
+
+  // Practice complete is the highest-emotion moment in the entire app —
+  // endorphins are up, the voice has just said Namaste. A single soft Plus
+  // nudge here (dismissible, not a takeover) converts well without
+  // breaking the brand. State is local because the prompt only ever
+  // surfaces inside the complete screen.
+  const [practicePaywallOpen, setPracticePaywallOpen] = useState(false)
 
   // ── Pre-practice 2-tap check-in (Chunk 13) ──
   // Optional ratings captured on the ready screen, before the first pose.
@@ -826,7 +836,42 @@ export default function PracticePage() {
             </div>
           )}
 
+          {/* Post-practice Plus nudge — peak emotional moment, soft prompt */}
+          {user?.id && !isPremium && (
+            <button
+              onClick={() => {
+                track(EVENTS.CTA_CLICKED, {
+                  cta_id: 'post_practice_plus_nudge',
+                  routine_key: routineKey,
+                })
+                setPracticePaywallOpen(true)
+              }}
+              className="w-full text-left bg-primary-container/40 border border-primary/20 rounded-2xl p-4 mb-4 active:scale-[0.99] transition-all stagger-6"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">
+                  <span aria-hidden="true" className="material-symbols-outlined text-primary text-base">self_improvement</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-body font-semibold text-sm text-on-surface leading-tight">Loved this practice?</p>
+                  <p className="font-body text-xs text-on-surface-variant/80 leading-snug mt-0.5">
+                    Unlock the full library + your personalized weekly plan.
+                  </p>
+                </div>
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-base flex-shrink-0">arrow_forward</span>
+              </div>
+            </button>
+          )}
+
         </div>
+
+        <PaywallSheet
+          open={practicePaywallOpen}
+          onClose={() => setPracticePaywallOpen(false)}
+          surface="post_practice"
+          headline="Keep this feeling, every day"
+          subhead="Plus gives you a routine that meets you where you are — every season, every day."
+        />
 
         {/* ── Floating CTAs — portaled past PageTransition's transform so
              position:fixed actually pins to the viewport. Keeps Back to Home

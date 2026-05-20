@@ -11,6 +11,8 @@ import { exportUserData } from '../lib/dataExport'
 import { deleteAllUserData } from '../lib/accountDeletion'
 import { track, reset as resetAnalytics, EVENTS } from '../lib/track'
 import { _forceTestCrash, recordError as crashRecordError } from '../lib/crash'
+import { useIsPremium } from '../hooks/useIsPremium'
+import PaywallSheet from '../components/PaywallSheet'
 
 import GoogleIcon from '../components/GoogleIcon'
 
@@ -18,6 +20,8 @@ export default function ProfilePage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { user, profile, signOut, refreshProfile } = useAuth()
+  const { isPremium, source: premiumSource, expiresAt: premiumExpiresAt } = useIsPremium()
+  const [profilePaywall, setProfilePaywall] = useState({ open: false, surface: 'settings' })
   const fileInputRef = useRef(null)
   useScrollDepth('profile')
 
@@ -536,6 +540,73 @@ export default function ProfilePage() {
           )}
         </div>
 
+        {/* ── Sanctuary Plus ───────────────────────────────────────────
+            Above Account because monetization status is the most
+            important account-level fact. Two variants:
+              • non-premium → Upgrade row + Have a code row (both open the
+                same paywall sheet, different starting pane)
+              • premium     → status row showing source + expiry, no CTAs */}
+        <div className="bg-surface-container rounded-lg overflow-hidden stagger-3 mb-5">
+          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
+            Sanctuary Plus
+          </p>
+
+          {!isPremium && (
+            <>
+              <button
+                onClick={() => {
+                  track(EVENTS.CTA_CLICKED, { cta_id: 'settings_upgrade', route_name: 'profile' })
+                  setProfilePaywall({ open: true, surface: 'settings_upgrade' })
+                }}
+                className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high w-full text-left active:bg-surface-container-high/50 transition-colors"
+              >
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">workspace_premium</span>
+                <div className="flex-1">
+                  <p className="font-body text-sm font-semibold text-on-surface">Upgrade to Plus</p>
+                  <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">Full library, personalized routine, Charaka deep-dives</p>
+                </div>
+                <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  track(EVENTS.PROMO_CODE_OPENED, { surface: 'settings' })
+                  // Open the paywall and ideally land on the promo pane.
+                  // The sheet defaults to plans; opening "Have a code"
+                  // directly is a future polish — for v1 a one-tap detour
+                  // from the plans screen is acceptable.
+                  setProfilePaywall({ open: true, surface: 'settings_have_code' })
+                }}
+                className="flex items-center gap-4 px-5 py-4 w-full text-left active:bg-surface-container-high/50 transition-colors"
+              >
+                <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">redeem</span>
+                <div className="flex-1">
+                  <p className="font-body text-sm text-on-surface">Have a code?</p>
+                  <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">Redeem a campaign or invite code</p>
+                </div>
+                <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
+              </button>
+            </>
+          )}
+
+          {isPremium && (
+            <div className="flex items-center gap-4 px-5 py-4">
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">workspace_premium</span>
+              <div className="flex-1">
+                <p className="font-body text-sm font-semibold text-on-surface">Sanctuary Plus is active</p>
+                <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
+                  {premiumSource === 'promo' ? 'Granted via code' :
+                   premiumSource === 'stripe' ? 'Billed via Stripe' :
+                   premiumSource === 'apple' ? 'Billed via App Store' :
+                   premiumSource === 'google' ? 'Billed via Google Play' :
+                   premiumSource === 'grant'  ? 'Team grant' : 'Active subscription'}
+                  {premiumExpiresAt ? ` · until ${premiumExpiresAt.toLocaleDateString()}` : ' · lifetime'}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Account info */}
         <div className="bg-surface-container rounded-lg overflow-hidden stagger-3">
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
@@ -1023,6 +1094,16 @@ export default function ProfilePage() {
           </div>
         </div>
       )}
+
+      {/* Paywall sheet — settings entry point. Same component as Discover
+          and Practice; the `surface` carries the original tap source for
+          PostHog so we can see whether settings or in-app surfaces convert
+          better. */}
+      <PaywallSheet
+        open={profilePaywall.open}
+        onClose={() => setProfilePaywall({ open: false, surface: 'settings' })}
+        surface={profilePaywall.surface}
+      />
 
     </div>
   )

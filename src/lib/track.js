@@ -118,6 +118,22 @@ export const EVENTS = Object.freeze({
 
   // Errors (§5.9)
   ERROR_CAUGHT:           'error_caught',
+
+  // Monetization — Sanctuary Plus paywall funnel.
+  // PAYWALL_SHOWN fires every time the sheet (or an inline lock) is rendered;
+  // the `surface` prop disambiguates which placement converted (e.g.
+  // 'library_card', 'dosha_chapter3', 'post_practice', 'settings').
+  // PLAN_SELECTED → CHECKOUT_STARTED → CHECKOUT_COMPLETED is the upgrade
+  // sub-funnel; PROMO_REDEEMED is the no-payment grant path.
+  PAYWALL_SHOWN:           'paywall_shown',
+  PAYWALL_DISMISSED:       'paywall_dismissed',
+  PAYWALL_PLAN_SELECTED:   'paywall_plan_selected',
+  PAYWALL_CHECKOUT_STARTED:'paywall_checkout_started',
+  PAYWALL_CHECKOUT_COMPLETED:'paywall_checkout_completed',
+  PROMO_CODE_OPENED:       'promo_code_opened',
+  PROMO_CODE_SUBMITTED:    'promo_code_submitted',
+  PROMO_CODE_REDEEMED:     'promo_code_redeemed',
+  PROMO_CODE_FAILED:       'promo_code_failed',
 })
 
 // ─── Internal state ──────────────────────────────────────────────────────
