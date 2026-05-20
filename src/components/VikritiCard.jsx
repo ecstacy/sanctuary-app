@@ -31,12 +31,25 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { track, EVENTS } from '../lib/track'
+import { useProtocolProgress } from '../hooks/useProtocolProgress'
 
 export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
   const navigate = useNavigate()
   const { vikriti, evidence, recommendations: r } = signal
   const [dismissed, setDismissed] = useState(false)
   const impressionFiredRef = useRef(false)
+
+  // ── Returning-user context ──────────────────────────────────────────────
+  // If the user has run this protocol before, the Plus tile gains a
+  // "Returning · 3rd time" kicker so the card acknowledges them. Stronger
+  // identity hook than starting from scratch every reading.
+  //
+  // For non-Plus users this is always 0 (they can't access the protocol
+  // to begin with), so the kicker only shows up for Plus members anyway.
+  // The hook is safe to call even when vikriti is null — it short-circuits.
+  const { totalAttempts } = useProtocolProgress(vikriti)
+  const nextAttemptNumber = totalAttempts + 1  // i.e. "what would this attempt count as"
+  const isReturning = isPremium && totalAttempts >= 1
 
   // Fire SHOWN once per (mount, vikriti, dismissed=false) — guarded so a
   // re-render from parent state doesn't double-count an impression. This
@@ -46,13 +59,19 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
     impressionFiredRef.current = true
     track(EVENTS.VIKRITI_SIGNAL_SHOWN, {
       vikriti,
-      matching_days: evidence?.matchingDays,
-      total_days:    evidence?.totalDays,
-      avg_energy:    evidence?.avgEnergy,
-      avg_stress:    evidence?.avgStress,
-      is_premium:    isPremium,
+      matching_days:          evidence?.matchingDays,
+      total_days:             evidence?.totalDays,
+      avg_energy:             evidence?.avgEnergy,
+      avg_stress:             evidence?.avgStress,
+      is_premium:             isPremium,
+      // Attempt context — lets us segment "first-time vs returning" in
+      // the conversion funnel without an extra join. Returning Plus users
+      // are the most valuable cohort to study (they got value once, are
+      // they coming back to repeat?).
+      total_protocol_attempts: totalAttempts,
+      is_returning:            isReturning,
     })
-  }, [vikriti, evidence, isPremium, dismissed])
+  }, [vikriti, evidence, isPremium, dismissed, totalAttempts, isReturning])
 
   if (dismissed) return null
 
@@ -68,7 +87,9 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
   function handlePlusAction() {
     track(EVENTS.VIKRITI_PLUS_ACTION_TAPPED, {
       vikriti,
-      is_premium: isPremium,
+      is_premium:             isPremium,
+      total_protocol_attempts: totalAttempts,
+      is_returning:            isReturning,
     })
     if (isPremium) {
       // Plus users land directly on the full 3-day protocol for their
@@ -160,17 +181,28 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
       </button>
 
       {/* Plus action — secondary, slightly understated. For non-Plus this
-          is the upgrade hook; for Plus this is the deep-protocol entry. */}
+          is the upgrade hook; for Plus this is the deep-protocol entry.
+          Returning Plus users get a "Picking it back up · 3rd time"
+          kicker and warmer sub-copy ("You know what to do") instead of
+          the first-timer's prescription list. */}
       <button
         onClick={handlePlusAction}
-        className="w-full px-4 py-3 rounded-full text-left flex items-center justify-between bg-surface/50 active:scale-[0.98] transition-all"
+        className="w-full px-4 py-3 rounded-2xl text-left flex items-center justify-between bg-surface/50 active:scale-[0.98] transition-all"
       >
         <div className="min-w-0">
+          {isReturning && (
+            <p
+              className="font-label text-[10px] font-semibold uppercase tracking-[0.18em] mb-0.5"
+              style={{ color: r.accentHex }}
+            >
+              Picking it back up · {ordinal(nextAttemptNumber)} time
+            </p>
+          )}
           <p className="font-body text-sm text-on-surface leading-tight truncate">
             {r.plus.label}
           </p>
           <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5 truncate">
-            {r.plus.sub}
+            {isReturning ? 'You know what to do.' : r.plus.sub}
           </p>
         </div>
         {!isPremium && (
@@ -199,4 +231,17 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
       </button>
     </section>
   )
+}
+
+// English ordinal suffix — 1st, 2nd, 3rd, 4th, … 11th, 12th, 13th, … 21st.
+// Used only on this surface so kept inline rather than promoted to a util.
+// If we need ordinals elsewhere (Journey page, etc.) extract then.
+function ordinal(n) {
+  const mod100 = n % 100
+  if (mod100 >= 11 && mod100 <= 13) return `${n}th`
+  const mod10 = n % 10
+  if (mod10 === 1) return `${n}st`
+  if (mod10 === 2) return `${n}nd`
+  if (mod10 === 3) return `${n}rd`
+  return `${n}th`
 }
