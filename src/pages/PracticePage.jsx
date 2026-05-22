@@ -13,6 +13,8 @@ import CircularTimer from '../components/CircularTimer'
 import * as analytics from '../lib/analytics'
 import { track, EVENTS } from '../lib/track'
 import { useIsPremium } from '../hooks/useIsPremium'
+import { useVikritiSignal } from '../hooks/useVikritiSignal'
+import { useProtocolProgress } from '../hooks/useProtocolProgress'
 import PaywallSheet from '../components/PaywallSheet'
 
 // ─── State Machine ──────────────────────────────────────────────────────────
@@ -96,6 +98,62 @@ function formatDuration(seconds) {
   return m < 60 ? `${m} min` : `${Math.floor(m / 60)}h ${m % 60}m`
 }
 
+// ─── PostPracticeProtocolTile ─────────────────────────────────────────────
+// Plus-member contextual continuation tile shown on the practice-complete
+// screen when there's an active vikriti signal. Three states based on
+// protocol progress:
+//
+//   no days yet      → "Start your Vata protocol"
+//   1-2 days done    → "Continue your Vata protocol · Day 2 of 3"
+//   all days done    → "Pick up your Vata protocol again"
+//
+// The vikriti theme color (accentHex / textColor) ties this back visually
+// to the home VikritiCard so the user feels one continuous prescription
+// across surfaces, not three disconnected nudges.
+function PostPracticeProtocolTile({ vikriti, recommendations: r, progress, onTap }) {
+  const days   = progress.currentDaysCompleted || 0
+  const total  = 3  // matches protocols data — all three are 3-day
+
+  let label, sub
+  if (days === 0) {
+    label = `Start your ${capitalize(vikriti)} protocol`
+    sub   = r.summary || 'Three days of food, movement, and rest tailored to your reading.'
+  } else if (days >= total) {
+    label = `Pick up your ${capitalize(vikriti)} protocol again`
+    sub   = "Last time helped — your latest reading suggests another round."
+  } else {
+    label = `Continue your ${capitalize(vikriti)} protocol`
+    sub   = `Day ${days + 1} of ${total} — keep the rhythm.`
+  }
+
+  return (
+    <button
+      onClick={onTap}
+      className={`w-full text-left ${r.bgColor} border border-primary/20 rounded-2xl p-4 mb-4 active:scale-[0.99] transition-all stagger-6`}
+    >
+      <div className="flex items-center gap-3">
+        <div className="w-9 h-9 rounded-full bg-surface/70 flex items-center justify-center flex-shrink-0">
+          <span aria-hidden="true" className={`material-symbols-outlined text-base ${r.textColor}`}>
+            {r.emoji}
+          </span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="font-body font-semibold text-sm text-on-surface leading-tight">{label}</p>
+          <p className="font-body text-xs text-on-surface-variant/80 leading-snug mt-0.5">{sub}</p>
+        </div>
+        <span aria-hidden="true" className={`material-symbols-outlined text-base flex-shrink-0 ${r.textColor}`}>
+          arrow_forward
+        </span>
+      </div>
+    </button>
+  )
+}
+
+function capitalize(s) {
+  if (!s) return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export default function PracticePage() {
@@ -108,11 +166,22 @@ export default function PracticePage() {
   const { isPremium } = useIsPremium()
 
   // Practice complete is the highest-emotion moment in the entire app —
-  // endorphins are up, the voice has just said Namaste. A single soft Plus
-  // nudge here (dismissible, not a takeover) converts well without
-  // breaking the brand. State is local because the prompt only ever
-  // surfaces inside the complete screen.
+  // endorphins are up, the voice has just said Namaste. Free users see a
+  // soft Plus nudge here; Plus users see contextual continuation content
+  // (the protocol tied to their current vikriti reading, if any).
+  // State is local because the prompt only ever surfaces inside the
+  // complete screen.
   const [practicePaywallOpen, setPracticePaywallOpen] = useState(false)
+
+  // Vikriti signal + protocol progress drive the Plus-member version
+  // of the post-practice slot. Both hooks short-circuit safely when
+  // there's no user or no signal — no extra DB calls for non-eligible
+  // users. Hook MUST be called unconditionally (rules of hooks), so we
+  // pass null vikriti when the signal hasn't fired and the protocol
+  // hook treats it as a no-op.
+  const vikritiSignal      = useVikritiSignal()
+  const vikritiKey         = vikritiSignal.hasSignal ? vikritiSignal.vikriti : null
+  const protocolProgress   = useProtocolProgress(vikritiKey)
 
   // ── Pre-practice 2-tap check-in (Chunk 13) ──
   // Optional ratings captured on the ready screen, before the first pose.
@@ -836,7 +905,13 @@ export default function PracticePage() {
             </div>
           )}
 
-          {/* Post-practice Plus nudge — peak emotional moment, soft prompt */}
+          {/* Post-practice slot — different content per entitlement.
+              ─────────────────────────────────────────────────────────
+              Free user → soft Plus nudge (existing).
+              Plus user with active vikriti reading → contextual protocol
+                continuation. The progress mechanic ("Day N of 3") gives
+                them a clear next action that LEVERAGES their Plus
+                content, reinforcing the upgrade was worth it. */}
           {user?.id && !isPremium && (
             <button
               onClick={() => {
@@ -861,6 +936,23 @@ export default function PracticePage() {
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-base flex-shrink-0">arrow_forward</span>
               </div>
             </button>
+          )}
+
+          {user?.id && isPremium && vikritiSignal.hasSignal && (
+            <PostPracticeProtocolTile
+              vikriti={vikritiSignal.vikriti}
+              recommendations={vikritiSignal.recommendations}
+              progress={protocolProgress}
+              onTap={() => {
+                track(EVENTS.CTA_CLICKED, {
+                  cta_id:      'post_practice_protocol_continue',
+                  vikriti:     vikritiSignal.vikriti,
+                  routine_key: routineKey,
+                  days_completed: protocolProgress.currentDaysCompleted,
+                })
+                navigate(`/protocol/${vikritiSignal.vikriti}`)
+              }}
+            />
           )}
 
         </div>
