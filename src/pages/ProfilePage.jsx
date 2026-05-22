@@ -48,16 +48,21 @@ export default function ProfilePage() {
   // satisfies the German Kündigungsbutton requirement (cancel in ≤2
   // clicks from the app).
   //
-  // `source` distinguishes the two entry points in analytics:
+  // `source` distinguishes the entry points in analytics:
   //   'dunning_banner' — high-urgency churn-prevention path
+  //   'resume_row'     — user is mid-cancel, primary intent is restart
   //   'manage_row'     — routine account management
-  // Same URL, different funnels.
+  // Same URL, different funnels — each is its own retention lever.
   async function openCustomerPortal(source = 'manage_row') {
     if (portalLoading) return
     setPortalLoading(true)
     try {
+      const ctaId =
+        source === 'dunning_banner' ? 'dunning_update_payment' :
+        source === 'resume_row'     ? 'resume_subscription'    :
+                                      'manage_subscription'
       track(EVENTS.CTA_CLICKED, {
-        cta_id:     source === 'dunning_banner' ? 'dunning_update_payment' : 'manage_subscription',
+        cta_id:     ctaId,
         route_name: 'profile',
         source,
       })
@@ -692,19 +697,34 @@ export default function ProfilePage() {
                   portal can't help; they're managed elsewhere. */}
               {premiumSource === 'stripe' && (
                 <button
-                  onClick={() => openCustomerPortal('manage_row')}
+                  onClick={() => openCustomerPortal(cancelAtPeriodEnd ? 'resume_row' : 'manage_row')}
                   disabled={portalLoading}
                   className="flex items-center gap-4 px-5 py-4 border-t border-surface-container-high w-full text-left active:bg-surface-container-high/50 transition-colors disabled:opacity-50"
-                  aria-label="Manage subscription"
+                  aria-label={cancelAtPeriodEnd ? 'Resume Sanctuary Plus' : 'Manage subscription'}
                 >
-                  <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">credit_card</span>
+                  {/* The icon + label both shift when the subscription is
+                      mid-cancel. Most users in that state want to RESUME,
+                      not "manage" — leading with the right verb removes a
+                      mental step. The `replay` icon (Material's circular
+                      arrow) hints continuation without committing to an
+                      undo metaphor. */}
+                  <span
+                    aria-hidden="true"
+                    className={`material-symbols-outlined text-lg ${
+                      cancelAtPeriodEnd ? 'text-primary' : 'text-on-surface-variant'
+                    }`}
+                  >
+                    {cancelAtPeriodEnd ? 'replay' : 'credit_card'}
+                  </span>
                   <div className="flex-1">
-                    <p className="font-body text-sm text-on-surface">
-                      {portalLoading ? 'Opening...' : 'Manage subscription'}
+                    <p className={`font-body text-sm ${cancelAtPeriodEnd ? 'font-semibold text-on-surface' : 'text-on-surface'}`}>
+                      {portalLoading
+                        ? 'Opening...'
+                        : (cancelAtPeriodEnd ? 'Resume Sanctuary Plus' : 'Manage subscription')}
                     </p>
                     <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
                       {cancelAtPeriodEnd
-                        ? 'Resume, update card, or view invoices'
+                        ? "Restart, update card, or view invoices"
                         : 'Cancel, update card, or view invoices'}
                     </p>
                   </div>
