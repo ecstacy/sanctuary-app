@@ -215,9 +215,13 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
   }
 
   // ── Render ──────────────────────────────────────────────────────────────
+  // z-index above BottomNav (which is z=50). The BottomNav otherwise paints
+  // over the modal's Apply/Continue CTAs on phones where the modal is
+  // tall, since the nav is rendered later in the tree and the two share
+  // a z-index. Bumping to 60 keeps the modal CTA always reachable.
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm"
+      className="fixed inset-0 z-[60] flex items-end justify-center bg-black/40 backdrop-blur-sm"
       onClick={handleDismiss}
       role="dialog"
       aria-modal="true"
@@ -242,7 +246,13 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
         </button>
 
         {pane === 'plans' && (
-          <div className="px-6 pb-8">
+          <div
+            className="px-6 pb-8"
+            // Honor the home indicator inset on iPhone — otherwise the
+            // "Have a code?" link at the bottom of this pane lands under
+            // the home-bar swipe area on tall iPhones.
+            style={{ paddingBottom: 'calc(2rem + env(safe-area-inset-bottom))' }}
+          >
             {/* Hero */}
             <div className="text-center mt-2 mb-8">
               <p className="font-label text-[10px] font-semibold text-primary uppercase tracking-[0.22em] mb-3">
@@ -316,8 +326,67 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
           </div>
         )}
 
-        {pane === 'promo' && (
-          <div className="px-6 pb-8">
+        {/* Success pane — full takeover after a code is redeemed.
+            Replaces the prior subtle inline tile (which users missed
+            entirely on small screens). Larger icon, clearer copy,
+            single prominent Continue CTA. */}
+        {pane === 'promo' && promoSuccess && (
+          <div
+            className="px-6 pb-8 text-center"
+            style={{ paddingBottom: 'calc(2rem + env(safe-area-inset-bottom))' }}
+          >
+            <div className="mt-6 mb-6 inline-flex items-center justify-center">
+              <div className="relative w-24 h-24 rounded-full bg-primary-container flex items-center justify-center">
+                {/* Subtle pulse ring for a celebratory feel without
+                    becoming animated noise. The animation is keyframed
+                    in the global stylesheet (animate-quiz-pulse). */}
+                <div className="absolute inset-0 rounded-full bg-primary/20 animate-quiz-pulse" />
+                <span
+                  aria-hidden="true"
+                  className="material-symbols-outlined text-primary text-5xl relative z-10"
+                  style={{ fontVariationSettings: "'FILL' 1" }}
+                >
+                  workspace_premium
+                </span>
+              </div>
+            </div>
+
+            <p className="font-label text-[10px] font-semibold text-primary uppercase tracking-[0.22em] mb-3">
+              Code Applied
+            </p>
+            <h2 className="font-headline text-3xl text-on-surface leading-tight mb-3">
+              Welcome to Sanctuary Plus
+            </h2>
+            <p className="font-body text-sm text-on-surface-variant/80 leading-relaxed max-w-xs mx-auto mb-2">
+              {promoSuccess.grantedUntil
+                ? `Your premium access is active until ${new Date(promoSuccess.grantedUntil).toLocaleDateString()}.`
+                : 'Your premium access is granted for life.'}
+            </p>
+            <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-wider mb-8 tabular-nums">
+              {promoSuccess.code}
+            </p>
+
+            <button
+              type="button"
+              onClick={() => {
+                onClose?.()
+                // Soft refresh — reload so every gated surface re-reads
+                // the updated profile. Cheaper than threading a global
+                // entitlement-changed event through the React tree.
+                window.location.reload()
+              }}
+              className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
+            >
+              Continue
+            </button>
+          </div>
+        )}
+
+        {pane === 'promo' && !promoSuccess && (
+          <div
+            className="px-6 pb-8"
+            style={{ paddingBottom: 'calc(2rem + env(safe-area-inset-bottom))' }}
+          >
             <div className="flex items-center gap-3 mt-2 mb-6">
               <button
                 onClick={() => setPane('plans')}
@@ -349,7 +418,10 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                   setPromoError(null)
                   setPromoSuccess(null)
                 }}
-                placeholder="SANCTUARY-TEAM"
+                // Neutral placeholder — we used to echo "SANCTUARY-TEAM"
+                // which was the seeded internal lifetime grant. Showing it
+                // to every user effectively published it.
+                placeholder="Enter your code"
                 autoCapitalize="characters"
                 autoCorrect="off"
                 spellCheck="false"
@@ -367,48 +439,13 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                 </p>
               )}
 
-              {promoSuccess && (
-                <div
-                  className="bg-primary-container/40 border border-primary/20 rounded-xl px-4 py-3"
-                  role="status"
-                  aria-live="polite"
-                >
-                  <p className="font-body font-semibold text-sm text-on-surface mb-0.5">
-                    Code applied — welcome to Plus.
-                  </p>
-                  <p className="font-body text-xs text-on-surface-variant leading-relaxed">
-                    {promoSuccess.grantedUntil
-                      ? `Premium until ${new Date(promoSuccess.grantedUntil).toLocaleDateString()}.`
-                      : 'Premium access granted for life.'}
-                  </p>
-                </div>
-              )}
-
-              {!promoSuccess && (
-                <button
-                  type="submit"
-                  disabled={promoBusy || !promoCode.trim()}
-                  className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50"
-                >
-                  {promoBusy ? 'Checking...' : 'Apply code'}
-                </button>
-              )}
-
-              {promoSuccess && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    onClose?.()
-                    // Soft refresh — reload so every gated surface re-reads
-                    // the updated profile. Cheaper than threading a global
-                    // entitlement-changed event through the React tree.
-                    window.location.reload()
-                  }}
-                  className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
-                >
-                  Continue
-                </button>
-              )}
+              <button
+                type="submit"
+                disabled={promoBusy || !promoCode.trim()}
+                className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50"
+              >
+                {promoBusy ? 'Checking...' : 'Apply code'}
+              </button>
             </form>
           </div>
         )}
