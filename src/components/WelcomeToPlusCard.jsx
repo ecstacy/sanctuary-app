@@ -25,7 +25,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { track, EVENTS } from '../lib/track'
@@ -60,19 +60,37 @@ const CTAS = [
 ]
 
 export default function WelcomeToPlusCard() {
-  const navigate         = useNavigate()
-  const { user }         = useAuth()
-  const { isPremium }    = useIsPremium()
-  const [show, setShow]  = useState(false)
-  const impressionRef    = useRef(false)
+  const navigate                          = useNavigate()
+  const { user }                          = useAuth()
+  const { isPremium }                     = useIsPremium()
+  const [searchParams, setSearchParams]   = useSearchParams()
+  const [show, setShow]                   = useState(false)
+  const impressionRef                     = useRef(false)
+
+  // Stripe success-redirects can target `/home?welcome=1` so the welcome
+  // shows even if the user opens the app from a fresh device (or the
+  // localStorage flag is stale for any reason). The query param is the
+  // belt-and-suspenders trigger; once handled we strip it from the URL
+  // so a refresh doesn't repeat the welcome on every reload.
+  const welcomeForced = searchParams.get('welcome') === '1'
 
   // ── Eligibility ─────────────────────────────────────────────────────────
-  // Show iff: signed in + Plus active + we haven't shown this device.
-  // The localStorage read is synchronous so we don't get a flash of the
-  // card before the dismiss-state catches up.
+  // Show iff: signed in + Plus active + (forced by query param OR we
+  // haven't shown this device yet). The localStorage read is synchronous
+  // so we don't get a flash of the card before the dismiss-state catches up.
   useEffect(() => {
     if (!user?.id || !isPremium) {
       setShow(false)
+      return
+    }
+    if (welcomeForced) {
+      setShow(true)
+      // Strip the param immediately so a reload doesn't keep re-triggering
+      // the welcome — once it's shown, it should follow normal dismiss
+      // rules (localStorage flag set on close).
+      const next = new URLSearchParams(searchParams)
+      next.delete('welcome')
+      setSearchParams(next, { replace: true })
       return
     }
     try {
@@ -84,15 +102,20 @@ export default function WelcomeToPlusCard() {
       // on every page load.
       setShow(false)
     }
-  }, [user?.id, isPremium])
+  }, [user?.id, isPremium, welcomeForced, searchParams, setSearchParams])
 
   // Fire SHOWN once per (mount, eligible) pair so impressions match
-  // unique-user-day, not re-render count.
+  // unique-user-day, not re-render count. The `triggered_by` prop lets
+  // us split the funnel by entry path — Stripe-redirect welcomes
+  // (?welcome=1) typically convert higher because the user just
+  // finished a payment flow vs. seeing it the next time they open the app.
   useEffect(() => {
     if (!show || impressionRef.current) return
     impressionRef.current = true
-    track(EVENTS.WELCOME_TO_PLUS_SHOWN, {})
-  }, [show])
+    track(EVENTS.WELCOME_TO_PLUS_SHOWN, {
+      triggered_by: welcomeForced ? 'stripe_redirect' : 'first_open',
+    })
+  }, [show, welcomeForced])
 
   function persistDismissed() {
     if (!user?.id) return
