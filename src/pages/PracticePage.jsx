@@ -15,6 +15,7 @@ import { track, EVENTS } from '../lib/track'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { useProtocolProgress } from '../hooks/useProtocolProgress'
+import { isAsanaFree } from '../lib/premiumTiers'
 import PaywallSheet from '../components/PaywallSheet'
 
 // ─── State Machine ──────────────────────────────────────────────────────────
@@ -222,6 +223,27 @@ export default function PracticePage() {
     }
     return getRoutine(routineKey || 'stress')
   }, [single, asanaId, routineKey])
+
+  // ── Deep-link entitlement guard ─────────────────────────────────────
+  // The detail pages gate Start Practice — but a URL like
+  // `/practice/asana/sirsasana` lands here directly without ever
+  // touching the detail screen. Without this guard, that's a clean
+  // bypass of the paywall. Redirect locked single-asana practice to
+  // the detail page (which shows the teaser + paywall CTA properly)
+  // so the user lands somewhere they can understand the gate.
+  useEffect(() => {
+    if (isPremium) return  // Plus users always pass
+    if (!single) return    // routine mode is internal-only, not a deep-link vector
+    if (!asanaId) return
+    if (isAsanaFree(asanaId)) return  // free asana, no gate
+    track(EVENTS.CTA_CLICKED, {
+      cta_id:     'practice_deeplink_blocked',
+      route_name: 'practice',
+      asana_id:   asanaId,
+    })
+    navigate(`/asana/${asanaId}`, { replace: true })
+  }, [isPremium, single, asanaId, navigate])
+
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
   const timerRef = useRef(null)
   const voicePlayedRef = useRef({})

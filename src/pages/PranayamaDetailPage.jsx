@@ -7,6 +7,9 @@ import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
 import PranayamaPracticeOverlay from '../components/PranayamaPractice'
 import PoseFigure, { hasPoseImage } from '../components/PoseFigure'
+import { useIsPremium } from '../hooks/useIsPremium'
+import { isPranayamaFree } from '../lib/premiumTiers'
+import PaywallSheet from '../components/PaywallSheet'
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  PranayamaDetailPage — mirrors AsanaDetailPage but for breath techniques.
@@ -181,6 +184,14 @@ export default function PranayamaDetailPage() {
   const [sticky, setSticky] = useState(false)
   const heroRef = useRef(null)
 
+  // Entitlement gate — same model as AsanaDetailPage: free users can
+  // VIEW any pranayama detail (teaser content); the practice overlay
+  // is what's actually gated. Preserves deep-links to free pranayama
+  // (Nadi Shodhana / Ujjayi / Bhramari from VikritiCard free actions).
+  const { isPremium } = useIsPremium()
+  const isLocked = pranayama && !isPremium && !isPranayamaFree(pranayama.id)
+  const [paywallOpen, setPaywallOpen] = useState(false)
+
   // Sticky mini-header on scroll past hero
   useEffect(() => {
     const el = heroRef.current
@@ -266,6 +277,17 @@ export default function PranayamaDetailPage() {
 
         <div className="text-center">
           <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">Pranayama</p>
+          {/* Plus badge — only when this pranayama is Plus-gated for
+              the viewing user. Sets expectation before they reach
+              the practice CTA at the bottom. */}
+          {isLocked && (
+            <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary-container/60 rounded-full mb-2">
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px]">lock</span>
+              <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider">
+                Sanctuary Plus
+              </span>
+            </div>
+          )}
           <h1 className="font-headline text-3xl text-on-surface mb-1">{pranayama.sanskrit}</h1>
           {(pranayama.devanagari || pranayama.iast) && (
             <p className="font-body text-[13px] text-on-surface-variant/70 mb-1" lang="sa">
@@ -446,6 +468,16 @@ export default function PranayamaDetailPage() {
         >
           <button
             onClick={() => {
+              if (isLocked) {
+                track(EVENTS.CTA_CLICKED, {
+                  cta_id: 'pranayama_detail_locked_practice',
+                  route_name: 'pranayama_detail',
+                  pranayama_id: pranayama.id,
+                  label: 'Unlock to practice',
+                })
+                setPaywallOpen(true)
+                return
+              }
               track(EVENTS.CTA_CLICKED, {
                 cta_id: 'pranayama_detail_practice',
                 route_name: 'pranayama_detail',
@@ -456,8 +488,10 @@ export default function PranayamaDetailPage() {
             }}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label text-sm font-semibold tracking-wide active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(78,99,85,0.15)]"
           >
-            <span aria-hidden="true" className="material-symbols-outlined text-lg">play_arrow</span>
-            Start Practice · {minutes} min
+            <span aria-hidden="true" className="material-symbols-outlined text-lg">
+              {isLocked ? 'lock' : 'play_arrow'}
+            </span>
+            {isLocked ? `Unlock ${pranayama.sanskrit}` : `Start Practice · ${minutes} min`}
           </button>
         </div>,
         document.body,
@@ -480,6 +514,14 @@ export default function PranayamaDetailPage() {
           onClose={() => setPracticing(false)}
         />
       )}
+
+      <PaywallSheet
+        open={paywallOpen}
+        onClose={() => setPaywallOpen(false)}
+        surface="pranayama_detail_locked"
+        headline={`Practice ${pranayama.sanskrit} with Plus`}
+        subhead="Unlock advanced pranayama, your personalized routine, and the wisdom of Charaka."
+      />
     </div>
   )
 }

@@ -6,6 +6,9 @@ import { ASANAS, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
+import { useIsPremium } from '../hooks/useIsPremium'
+import { isAsanaFree } from '../lib/premiumTiers'
+import PaywallSheet from '../components/PaywallSheet'
 
 const DOSHA_INFO = {
   vata: { label: 'Vata', icon: 'air', color: 'text-[#7b93a8]', bg: 'bg-[#7b93a8]/10' },
@@ -164,6 +167,20 @@ export default function AsanaDetailPage() {
   const asana = ASANAS[id]
   useScrollDepth('asana_detail')
 
+  // ── Entitlement gate ────────────────────────────────────────────────
+  // Free users can VIEW any asana detail page (this is the teaser — they
+  // can read about the pose, see the image, learn the benefits). What
+  // they can't do is start practicing it. The "Practice" CTA below
+  // intercepts and opens the paywall for free users on Plus-only asanas.
+  //
+  // This preserves deep-links (from emails, search results, VikritiCard
+  // free recommendations all still work — those point to free asanas).
+  // The leak we're closing is the case where a free user pasted the URL
+  // of a Plus-only asana and could just hit Practice anyway.
+  const { isPremium } = useIsPremium()
+  const isLocked = asana && !isPremium && !isAsanaFree(asana.id)
+  const [paywallOpen, setPaywallOpen] = useState(false)
+
   if (!asana) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -265,6 +282,17 @@ export default function AsanaDetailPage() {
         {/* Name */}
         <div className="px-6 text-center">
           <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{asana.category}</p>
+          {/* Plus badge when this asana is gated for the viewing user.
+              Visible above the title so it's the first thing read —
+              sets expectation before they read the content + tap CTA. */}
+          {isLocked && (
+            <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary-container/60 rounded-full mb-2">
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px]">lock</span>
+              <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider">
+                Sanctuary Plus
+              </span>
+            </div>
+          )}
           <h1 className="font-headline text-3xl text-on-surface mb-1">{asana.sanskrit}</h1>
           {/* Devanagari + IAST — only render when the schema-rich fields
               are present. Subtle styling so the romanized title still reads
@@ -589,6 +617,16 @@ export default function AsanaDetailPage() {
         >
           <button
             onClick={() => {
+              if (isLocked) {
+                track(EVENTS.CTA_CLICKED, {
+                  cta_id:     'asana_detail_locked_practice',
+                  route_name: 'asana_detail',
+                  asana_id:   asana.id,
+                  label:      'Unlock to practice',
+                })
+                setPaywallOpen(true)
+                return
+              }
               track(EVENTS.CTA_CLICKED, {
                 cta_id:     'asana_detail_practice',
                 route_name: 'asana_detail',
@@ -599,12 +637,22 @@ export default function AsanaDetailPage() {
             }}
             className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-full font-label text-sm font-semibold tracking-wide active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(78,99,85,0.15)]"
           >
-            <span aria-hidden="true" className="material-symbols-outlined text-lg">play_arrow</span>
-            Practice {asana.sanskrit}
+            <span aria-hidden="true" className="material-symbols-outlined text-lg">
+              {isLocked ? 'lock' : 'play_arrow'}
+            </span>
+            {isLocked ? `Unlock to practice ${asana.sanskrit}` : `Practice ${asana.sanskrit}`}
           </button>
         </div>,
         document.body
       )}
+
+      <PaywallSheet
+        open={paywallOpen}
+        onClose={() => setPaywallOpen(false)}
+        surface="asana_detail_locked"
+        headline={`Practice ${asana.sanskrit} with Plus`}
+        subhead="Unlock the full asana library, your personalized routine, and the wisdom of Charaka."
+      />
 
     </div>
   )
