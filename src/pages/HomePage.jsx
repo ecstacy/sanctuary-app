@@ -11,6 +11,7 @@ import { useIsPremium } from '../hooks/useIsPremium'
 import PoseFigure from '../components/PoseFigure'
 import VikritiCard from '../components/VikritiCard'
 import PaywallSheet from '../components/PaywallSheet'
+import WelcomeToPlusCard from '../components/WelcomeToPlusCard'
 import * as analytics from '../lib/analytics'
 import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
@@ -645,6 +646,14 @@ export default function HomePage() {
             </button>
           )}
         </div>
+
+        {/* ── Welcome-to-Plus — the moment-of-joining card. Shown once
+              per device after isPremium activates, then permanently
+              dismissed via localStorage. Renders ABOVE the Vikriti card
+              because a brand-new Plus user's first job is to discover
+              what they just unlocked, not to read a vikriti reading
+              (which will still be there tomorrow). */}
+        <WelcomeToPlusCard />
 
         {/* ── Vikriti drift reading — only renders when the last 14 days
               of checkins produce a clear signal. Conservative thresholds

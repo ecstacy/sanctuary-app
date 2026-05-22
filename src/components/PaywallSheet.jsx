@@ -66,7 +66,7 @@ const BENEFITS = [
 ]
 
 export default function PaywallSheet({ open, onClose, surface, headline, subhead }) {
-  const { user } = useAuth()
+  const { user, refreshProfile } = useAuth()
 
   // Two-pane sheet: 'plans' (default) and 'promo' (when user taps "Have a code").
   const [pane, setPane]               = useState('plans')
@@ -192,8 +192,9 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
         track(EVENTS.PROMO_CODE_FAILED, { surface, reason: data?.error || 'unknown' })
         return
       }
-      // Success — show confirmation, refresh the profile so is_premium
-      // flips immediately everywhere in the app.
+      // Success — show confirmation, then refresh the profile in-place
+      // so is_premium flips for every consumer of useAuth() / useIsPremium()
+      // without a jarring full-page reload.
       setPromoSuccess({
         grantedUntil: data.granted_until,
         code:         data.code,
@@ -203,12 +204,11 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
         code:          data.code,
         granted_until: data.granted_until,
       })
-      // Force a profile re-fetch by calling getSession → AuthContext
-      // doesn't expose refreshProfile via context for the sheet directly,
-      // so we hit Supabase from here. The fetchProfile in AuthContext
-      // also re-runs when the SIGNED_IN event fires on token refresh,
-      // but here we just do a silent select and write the cache too.
-      await refreshProfileCache(user.id)
+      // refreshProfile() updates AuthContext state synchronously after
+      // the supabase fetch resolves. All downstream useIsPremium()
+      // consumers re-render with isPremium=true. No window.reload(),
+      // no flash of unlocked content — the locks just disappear.
+      await refreshProfile()
     } finally {
       setPromoBusy(false)
     }
@@ -368,16 +368,10 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
 
             <button
               type="button"
-              onClick={() => {
-                onClose?.()
-                // Soft refresh — reload so every gated surface re-reads
-                // the updated profile. Cheaper than threading a global
-                // entitlement-changed event through the React tree.
-                window.location.reload()
-              }}
+              onClick={() => onClose?.()}
               className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
-              Continue
+              Start exploring
             </button>
           </div>
         )}
@@ -487,21 +481,7 @@ function appendQuery(url, params) {
   }
 }
 
-// Quick profile re-fetch for the in-flight promo redemption flow. We can't
-// import refreshProfile from AuthContext cleanly without a hook reorg, so
-// this fetches + writes the localStorage cache that AuthContext reads on
-// next render. Plus the window.location.reload() below ensures the rest
-// of the app sees the change without subtle ordering bugs.
-async function refreshProfileCache(userId) {
-  try {
-    const { data } = await supabase.from('profiles').select('*').eq('id', userId).single()
-    if (data) {
-      localStorage.setItem(
-        'sanctuary.profile.v1',
-        JSON.stringify({ userId, profile: data })
-      )
-    }
-  } catch {
-    // Non-fatal — reload below will fetch fresh anyway.
-  }
-}
+// (refreshProfileCache removed — we now call useAuth().refreshProfile()
+// directly, which updates AuthContext state in-place. The old localStorage-
+// poke-then-window-reload pattern was a workaround for not wiring the
+// proper refresh; the cleaner path is just to use the context API.)

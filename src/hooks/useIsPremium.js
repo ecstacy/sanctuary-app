@@ -53,6 +53,9 @@ export function useIsPremium() {
     const expiresAt = profile?.premium_expires_at
       ? new Date(profile.premium_expires_at)
       : null
+    const startedAt = profile?.premium_started_at
+      ? new Date(profile.premium_started_at)
+      : null
 
     // Client-side expiry guard. Server cron is canonical, this just covers
     // the gap between actual expiry and the sweep.
@@ -81,6 +84,7 @@ export function useIsPremium() {
       isPremium,
       isLoading:           false,
       source:              isPremium ? (profile?.premium_source || null) : null,
+      startedAt,            // when Plus first activated — for "Member since" UI
       expiresAt,
       daysRemaining,
       paymentFailedAt,

@@ -173,6 +173,14 @@ export const EVENTS = Object.freeze({
   NOTIFICATION_REMINDER_ENABLED:    'notification_reminder_enabled',
   NOTIFICATION_REMINDER_DISABLED:   'notification_reminder_disabled',
   NOTIFICATION_REMINDER_TIME_CHANGED:'notification_reminder_time_changed',
+
+  // Welcome-to-Plus moment — the dedicated celebratory card shown on home
+  // for the user's first session after Plus activates. Single-shot (we
+  // persist a localStorage flag so it never repeats), so SHOWN is the
+  // unique-user denominator for everything that follows.
+  WELCOME_TO_PLUS_SHOWN:        'welcome_to_plus_shown',
+  WELCOME_TO_PLUS_DISMISSED:    'welcome_to_plus_dismissed',
+  WELCOME_TO_PLUS_CTA_TAPPED:   'welcome_to_plus_cta_tapped',
 })
 
 // ─── Internal state ──────────────────────────────────────────────────────

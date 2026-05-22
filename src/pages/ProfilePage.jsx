@@ -24,6 +24,7 @@ export default function ProfilePage() {
   const {
     isPremium,
     source: premiumSource,
+    startedAt: premiumStartedAt,
     expiresAt: premiumExpiresAt,
     inDunning,
     cancelAtPeriodEnd,
@@ -674,6 +675,14 @@ export default function ProfilePage() {
                      premiumSource === 'grant'  ? 'Team grant' : 'Active subscription'}
                     {premiumExpiresAt ? ` · ${cancelAtPeriodEnd ? 'access until' : 'until'} ${premiumExpiresAt.toLocaleDateString()}` : ' · lifetime'}
                   </p>
+                  {/* Member-since — small warmth touch. Reinforces "I am
+                      part of this thing" identity which is the strongest
+                      retention force in subscription products. */}
+                  {premiumStartedAt && (
+                    <p className="font-label text-[11px] text-on-surface-variant/50 mt-0.5">
+                      Member since {premiumStartedAt.toLocaleDateString(undefined, { month: 'short', year: 'numeric' })}
+                    </p>
+                  )}
                 </div>
               </div>
 
