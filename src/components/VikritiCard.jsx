@@ -163,74 +163,121 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
         {evidence.totalDays === 1 ? '' : ' days'}.
       </p>
 
-      {/* Free action — full-width primary button. Always opens free
-          content; clear immediate value. */}
-      <button
-        onClick={handleFreeAction}
-        className={`w-full px-4 py-3 rounded-full text-left flex items-center justify-between bg-surface active:scale-[0.98] transition-all mb-3`}
-      >
-        <span className={`font-body text-sm font-semibold ${r.textColor}`}>
-          {r.free.label}
-        </span>
-        <span
-          aria-hidden="true"
-          className={`material-symbols-outlined text-base ${r.textColor}`}
-        >
-          arrow_forward
-        </span>
-      </button>
+      {/* Action area — branches on entitlement.
+          ─────────────────────────────────────────────────────────────
+          FREE USERS (default below):
+            • Primary  : free single-asana action (immediate value)
+            • Secondary: locked Plus tile (upsell to the protocol)
+          PLUS USERS:
+            • Primary  : protocol page (the deeper experience they paid for)
+            • Secondary: free single-asana as a quick alternative
+              ("only have 5 min today? do this")
+          The protocol page IS the value-prop they purchased; surfacing
+          the single asana as the primary call to action for Plus would
+          waste the upgrade. */}
 
-      {/* Plus action — secondary, slightly understated. For non-Plus this
-          is the upgrade hook; for Plus this is the deep-protocol entry.
-          Returning Plus users get a "Picking it back up · 3rd time"
-          kicker and warmer sub-copy ("You know what to do") instead of
-          the first-timer's prescription list. */}
-      <button
-        onClick={handlePlusAction}
-        className="w-full px-4 py-3 rounded-2xl text-left flex items-center justify-between bg-surface/50 active:scale-[0.98] transition-all"
-      >
-        <div className="min-w-0">
+      {isPremium ? (
+        <>
+          {/* Returning-user kicker — sits ABOVE the primary CTA now, so
+              it reads as a header rather than an ornament on a tile. */}
           {isReturning && (
             <p
-              className="font-label text-[10px] font-semibold uppercase tracking-[0.18em] mb-0.5"
+              className="font-label text-[10px] font-semibold uppercase tracking-[0.18em] mb-2"
               style={{ color: r.accentHex }}
             >
               Picking it back up · {ordinal(nextAttemptNumber)} time
             </p>
           )}
-          <p className="font-body text-sm text-on-surface leading-tight truncate">
-            {r.plus.label}
-          </p>
-          <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5 truncate">
-            {isReturning ? 'You know what to do.' : r.plus.sub}
-          </p>
-        </div>
-        {!isPremium && (
-          <div className="flex items-center gap-1 px-2 py-0.5 bg-surface rounded-full ml-3 flex-shrink-0">
+
+          {/* Primary CTA — the protocol. Full-width primary styling,
+              same visual weight a free user's free-action CTA gets,
+              so the page composition stays balanced regardless of
+              entitlement. */}
+          <button
+            onClick={handlePlusAction}
+            className="w-full px-4 py-3 rounded-full text-left flex items-center justify-between bg-surface active:scale-[0.98] transition-all mb-2"
+          >
+            <span className={`font-body text-sm font-semibold ${r.textColor}`}>
+              {isReturning
+                ? `Continue your ${capitalize(vikriti)} protocol`
+                : `Start your ${capitalize(vikriti)} protocol`}
+            </span>
             <span
               aria-hidden="true"
-              className={`material-symbols-outlined text-[11px] ${r.textColor}`}
+              className={`material-symbols-outlined text-base ${r.textColor}`}
             >
-              lock
+              arrow_forward
+            </span>
+          </button>
+
+          {/* Secondary — the single-asana quick option. Plain text link
+              styling so it doesn't compete with the primary CTA. Useful
+              for "I only have 5 minutes tonight" days. */}
+          <button
+            onClick={handleFreeAction}
+            className="w-full px-2 py-2 text-center font-body text-xs text-on-surface-variant/70 active:scale-95 transition-all"
+          >
+            Or just {r.free.label.replace(/^Tonight: |^Try /, '').toLowerCase()}
+          </button>
+        </>
+      ) : (
+        <>
+          {/* Free user — primary CTA is the free single-asana action.
+              Real, immediate, no paywall trap. */}
+          <button
+            onClick={handleFreeAction}
+            className={`w-full px-4 py-3 rounded-full text-left flex items-center justify-between bg-surface active:scale-[0.98] transition-all mb-3`}
+          >
+            <span className={`font-body text-sm font-semibold ${r.textColor}`}>
+              {r.free.label}
             </span>
             <span
-              className={`font-label text-[9px] font-semibold uppercase tracking-wide ${r.textColor}`}
+              aria-hidden="true"
+              className={`material-symbols-outlined text-base ${r.textColor}`}
             >
-              Plus
+              arrow_forward
             </span>
-          </div>
-        )}
-        {isPremium && (
-          <span
-            aria-hidden="true"
-            className={`material-symbols-outlined text-base ${r.textColor} ml-3 flex-shrink-0`}
+          </button>
+
+          {/* Free user — secondary is the locked Plus tile. The paywall
+              hook, with the 🔒 Plus badge for clear affordance. */}
+          <button
+            onClick={handlePlusAction}
+            className="w-full px-4 py-3 rounded-2xl text-left flex items-center justify-between bg-surface/50 active:scale-[0.98] transition-all"
           >
-            arrow_forward
-          </span>
-        )}
-      </button>
+            <div className="min-w-0">
+              <p className="font-body text-sm text-on-surface leading-tight truncate">
+                {r.plus.label}
+              </p>
+              <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5 truncate">
+                {r.plus.sub}
+              </p>
+            </div>
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-surface rounded-full ml-3 flex-shrink-0">
+              <span
+                aria-hidden="true"
+                className={`material-symbols-outlined text-[11px] ${r.textColor}`}
+              >
+                lock
+              </span>
+              <span
+                className={`font-label text-[9px] font-semibold uppercase tracking-wide ${r.textColor}`}
+              >
+                Plus
+              </span>
+            </div>
+          </button>
+        </>
+      )}
     </section>
   )
+}
+
+// Capitalize first letter — used for inline dosha names in CTA copy
+// ("Continue your Vata protocol"). Inlined since it's only used here.
+function capitalize(s) {
+  if (!s) return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
 // English ordinal suffix — 1st, 2nd, 3rd, 4th, … 11th, 12th, 13th, … 21st.
