@@ -29,6 +29,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { track, EVENTS } from '../lib/track'
+import Confetti from './Confetti'
 
 const STORAGE_KEY = (userId) => `sanctuary.welcomedToPlus.${userId}`
 
@@ -139,11 +140,18 @@ export default function WelcomeToPlusCard() {
   if (!show) return null
 
   return (
-    <section
-      className="relative rounded-2xl p-6 mb-5 stagger-1 overflow-hidden"
-      role="region"
-      aria-labelledby="welcome-to-plus-headline"
-    >
+    <>
+      {/* One-shot confetti — mounts alongside the welcome card the first
+          time a user lands in Plus, self-unmounts after ~3s. Reduced-
+          motion users see no animation at all (Confetti returns null
+          when matchMedia signals 'reduce'). */}
+      <Confetti durationMs={3000} />
+
+      <section
+        className="relative rounded-2xl p-6 mb-5 stagger-1 overflow-hidden"
+        role="region"
+        aria-labelledby="welcome-to-plus-headline"
+      >
       {/* Premium gradient backdrop — gold-warmth to communicate "this is
           the special tier" without crossing into kitsch. Layered with a
           subtle pulse ring behind the icon. */}
@@ -226,6 +234,7 @@ export default function WelcomeToPlusCard() {
           ))}
         </ul>
       </div>
-    </section>
+      </section>
+    </>
   )
 }
