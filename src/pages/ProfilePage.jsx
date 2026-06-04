@@ -13,6 +13,8 @@ import { track, reset as resetAnalytics, EVENTS } from '../lib/track'
 import { _forceTestCrash, recordError as crashRecordError } from '../lib/crash'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { useNotifications } from '../hooks/useNotifications'
+import { useProtocolStats } from '../hooks/useProtocolStats'
+import usePracticeStats from '../hooks/usePracticeStats'
 import PaywallSheet from '../components/PaywallSheet'
 
 import GoogleIcon from '../components/GoogleIcon'
@@ -42,6 +44,13 @@ export default function ProfilePage() {
     setPracticeReminder,
     isSupported:     notifSupported,
   } = useNotifications()
+
+  // Plus member small-wins surface — practice + protocol stats. Only
+  // surfaced inside the Plus block in Settings (rendered conditionally
+  // on isPremium below) so we're paying the hook cost only when we'll
+  // actually use the data.
+  const protocolStats = useProtocolStats()
+  const practiceStats = usePracticeStats()
 
   // Open Stripe Customer Portal — self-serve cancel + update card + see
   // invoices. Calls our Edge Function which mints a one-time URL. Also
@@ -690,6 +699,41 @@ export default function ProfilePage() {
                   )}
                 </div>
               </div>
+
+              {/* Your journey — small-wins surface that makes the Plus
+                  value visible. Three stats, big tabular numbers, small
+                  labels. The identity marker on the avatar says "you're
+                  Plus"; this says "and here's what Plus has done with
+                  you." Hidden when there's literally nothing to show
+                  (brand new member) — surfacing zeros feels accusatory. */}
+              {(practiceStats.totalSessions > 0 || protocolStats.protocolsStarted > 0) && (
+                <div className="px-5 py-4 border-t border-surface-container-high grid grid-cols-3 gap-2">
+                  <div className="text-center">
+                    <p className="font-headline text-2xl text-on-surface tabular-nums leading-none">
+                      {practiceStats.totalSessions}
+                    </p>
+                    <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1.5">
+                      {practiceStats.totalSessions === 1 ? 'Practice' : 'Practices'}
+                    </p>
+                  </div>
+                  <div className="text-center border-l border-r border-surface-container-high">
+                    <p className="font-headline text-2xl text-on-surface tabular-nums leading-none">
+                      {practiceStats.totalMinutes}
+                    </p>
+                    <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1.5">
+                      Minutes
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <p className="font-headline text-2xl text-on-surface tabular-nums leading-none">
+                      {protocolStats.protocolsFinished}
+                    </p>
+                    <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1.5">
+                      {protocolStats.protocolsFinished === 1 ? 'Protocol' : 'Protocols'}
+                    </p>
+                  </div>
+                </div>
+              )}
 
               {/* Manage Subscription — only for Stripe-sourced Plus. Promo
                   grants, team grants, and (future) App Store / Play Store
