@@ -225,24 +225,46 @@ export default function PracticePage() {
   }, [single, asanaId, routineKey])
 
   // ── Deep-link entitlement guard ─────────────────────────────────────
-  // The detail pages gate Start Practice — but a URL like
-  // `/practice/asana/sirsasana` lands here directly without ever
-  // touching the detail screen. Without this guard, that's a clean
-  // bypass of the paywall. Redirect locked single-asana practice to
-  // the detail page (which shows the teaser + paywall CTA properly)
-  // so the user lands somewhere they can understand the gate.
+  // The detail + routine pages gate Start Practice — but URLs like
+  // `/practice/asana/sirsasana` or `/practice/morning7Day` land here
+  // directly without touching either of those screens. Without these
+  // guards, that's a clean bypass of the paywall. Two cases:
+  //
+  //   single-asana mode: redirect to the asana detail page (which
+  //     surfaces the proper paywall hook).
+  //   routine mode:      every routine bundles at least one Plus-only
+  //     asana, so any non-Plus user practicing a routine is leaking
+  //     content. Redirect to the routine page (which now gates start).
   useEffect(() => {
     if (isPremium) return  // Plus users always pass
-    if (!single) return    // routine mode is internal-only, not a deep-link vector
-    if (!asanaId) return
-    if (isAsanaFree(asanaId)) return  // free asana, no gate
-    track(EVENTS.CTA_CLICKED, {
-      cta_id:     'practice_deeplink_blocked',
-      route_name: 'practice',
-      asana_id:   asanaId,
-    })
-    navigate(`/asana/${asanaId}`, { replace: true })
-  }, [isPremium, single, asanaId, navigate])
+
+    if (single && asanaId) {
+      if (isAsanaFree(asanaId)) return  // free asana, no gate
+      track(EVENTS.CTA_CLICKED, {
+        cta_id:     'practice_deeplink_blocked',
+        route_name: 'practice',
+        asana_id:   asanaId,
+      })
+      navigate(`/asana/${asanaId}`, { replace: true })
+      return
+    }
+
+    if (!single && routineKey) {
+      // Routine mode — does this routine include any locked asana? If so
+      // bounce to the routine page where the paywall hook is properly
+      // surfaced. The `route_name` Routine page lives at /routine and
+      // reads its target from location.state, so we use the state to
+      // route correctly rather than a path param.
+      const routineHasLocked = routine.asanas.some(a => !isAsanaFree(a.id))
+      if (!routineHasLocked) return
+      track(EVENTS.CTA_CLICKED, {
+        cta_id:      'practice_routine_deeplink_blocked',
+        route_name:  'practice',
+        routine_key: routineKey,
+      })
+      navigate('/routine', { replace: true, state: { routineKey } })
+    }
+  }, [isPremium, single, asanaId, routineKey, routine, navigate])
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
   const timerRef = useRef(null)

@@ -5,6 +5,9 @@ import { useAuth } from '../context/AuthContext'
 import { getRoutine, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
 import { track, EVENTS } from '../lib/track'
+import { useIsPremium } from '../hooks/useIsPremium'
+import { isAsanaFree } from '../lib/premiumTiers'
+import PaywallSheet from '../components/PaywallSheet'
 
 
 function formatDuration(seconds) {
@@ -33,6 +36,20 @@ export default function RoutinePage() {
   const userDosha = profile?.dosha_details?.primary || profile?.dosha?.toLowerCase() || null
 
   const [expanded, setExpanded] = useState(null)
+
+  // ── Entitlement gate ────────────────────────────────────────────────
+  // Every routine bundles at least one Plus-only asana (the free tier
+  // covers 6 individual asanas; routines are richer sequences). A routine
+  // is locked iff the user isn't Plus AND the routine contains any non-
+  // free asana — almost always true for free users.
+  //
+  // Free users still see the full routine layout (pose previews,
+  // outcomes, the whole pitch) — that's the teaser. The Start Practice
+  // button is what's gated. Same pattern as AsanaDetailPage.
+  const { isPremium } = useIsPremium()
+  const routineHasLockedAsana = routine.asanas.some(a => !isAsanaFree(a.id))
+  const isLocked = !isPremium && routineHasLockedAsana
+  const [paywallOpen, setPaywallOpen] = useState(false)
 
   const firstAsana = routine.asanas[0]
   const outcomes = ROUTINE_OUTCOMES[routineKey] || ROUTINE_OUTCOMES.stress
@@ -114,6 +131,15 @@ export default function RoutinePage() {
         </p>
         <button
           onClick={() => {
+            if (isLocked) {
+              track(EVENTS.CTA_CLICKED, {
+                cta_id:      'routine_locked_up_next',
+                route_name:  'routine',
+                routine_key: routineKey,
+              })
+              setPaywallOpen(true)
+              return
+            }
             track(EVENTS.CTA_CLICKED, {
               cta_id:      'routine_up_next',
               route_name:  'routine',
@@ -279,6 +305,15 @@ export default function RoutinePage() {
         >
           <button
             onClick={() => {
+              if (isLocked) {
+                track(EVENTS.CTA_CLICKED, {
+                  cta_id:      'routine_locked_start',
+                  route_name:  'routine',
+                  routine_key: routineKey,
+                })
+                setPaywallOpen(true)
+                return
+              }
               track(EVENTS.CTA_CLICKED, {
                 cta_id:      'routine_start',
                 route_name:  'routine',
@@ -289,12 +324,24 @@ export default function RoutinePage() {
             }}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all shadow-lg flex items-center justify-center gap-2"
           >
-            <span aria-hidden="true" className="material-symbols-outlined text-lg">play_arrow</span>
-            Start Practice · {Math.round(routine.totalDuration / 60)} min
+            <span aria-hidden="true" className="material-symbols-outlined text-lg">
+              {isLocked ? 'lock' : 'play_arrow'}
+            </span>
+            {isLocked
+              ? `Unlock with Plus`
+              : `Start Practice · ${Math.round(routine.totalDuration / 60)} min`}
           </button>
         </div>,
         document.body
       )}
+
+      <PaywallSheet
+        open={paywallOpen}
+        onClose={() => setPaywallOpen(false)}
+        surface="routine_locked"
+        headline={`Start "${routine.label}" with Plus`}
+        subhead="Unlock the full routine library, your personalized protocol, and every asana inside."
+      />
 
     </div>
   )
