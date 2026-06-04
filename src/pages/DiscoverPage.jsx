@@ -36,7 +36,7 @@ function ExploreAsanaCard({ asana, position, locked, onTap }) {
       className="flex-shrink-0 w-36 snap-start active:scale-[0.97] transition-all text-left"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
-        <div className={`absolute inset-0 flex items-center justify-center pointer-events-none ${locked ? 'opacity-50' : ''}`}>
+        <div className={`absolute inset-0 flex items-center justify-center pointer-events-none ${locked ? 'opacity-40' : ''}`}>
           {asana.poseKey ? (
             <PoseFigure poseKey={asana.poseKey} size="sm" breathing={false} objectPosition="center" />
           ) : (
@@ -50,13 +50,27 @@ function ExploreAsanaCard({ asana, position, locked, onTap }) {
             </span>
           </div>
         )}
-        {/* Plus lock badge — visible curiosity hook. Tapping the card
-            opens the paywall (handled by parent's onTap). */}
+        {/* Locked-card treatment — a darker gradient fade at the bottom +
+            a prominent "Unlock with Plus" band that reads as an action
+            hint rather than a passive badge. The previous tiny top-left
+            chip was easy to miss; this gives the eye a clear answer to
+            "what is this card asking me to do". */}
         {locked && (
-          <div className="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 bg-surface/95 backdrop-blur-sm rounded-full">
-            <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px]">lock</span>
-            <span className="font-label text-[9px] text-primary uppercase tracking-wide font-semibold">Plus</span>
-          </div>
+          <>
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-on-surface/35 to-transparent pointer-events-none"
+            />
+            <div className="absolute inset-x-2 bottom-2 flex items-center justify-between gap-1 px-2.5 py-1 rounded-full bg-surface/95 backdrop-blur-sm shadow-sm">
+              <div className="flex items-center gap-1 min-w-0">
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">lock</span>
+                <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider truncate">
+                  Unlock with Plus
+                </span>
+              </div>
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">arrow_forward</span>
+            </div>
+          </>
         )}
       </div>
       <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{asana.english}</p>
@@ -86,7 +100,7 @@ function PranayamaCard({ pranayama, position, locked, onTap }) {
       className="flex-shrink-0 w-44 snap-start active:scale-[0.97] transition-all text-left"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/40 to-primary/10 flex items-center justify-center">
-        <div className={locked ? 'opacity-50' : ''}>
+        <div className={locked ? 'opacity-40' : ''}>
           {pranayama.poseKey && hasPoseImage(pranayama.poseKey) ? (
             <PoseFigure poseKey={pranayama.poseKey} size="sm" breathing={false} objectPosition="center" />
           ) : (
@@ -100,17 +114,40 @@ function PranayamaCard({ pranayama, position, locked, onTap }) {
             </span>
           </div>
         )}
-        {locked && (
-          <div className="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 bg-surface/95 backdrop-blur-sm rounded-full">
-            <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px]">lock</span>
-            <span className="font-label text-[9px] text-primary uppercase tracking-wide font-semibold">Plus</span>
+        {/* For unlocked cards: minutes badge in bottom-right.
+            For locked cards: the bottom is taken over by the Unlock band,
+            so the minutes-chip moves up to the top-right to stay visible
+            without competing with the call to action. */}
+        {!locked && (
+          <div className="absolute bottom-2 right-2">
+            <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-on-surface-variant uppercase tracking-wide">
+              {minutes} min
+            </span>
           </div>
         )}
-        <div className="absolute bottom-2 right-2">
-          <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-on-surface-variant uppercase tracking-wide">
-            {minutes} min
-          </span>
-        </div>
+        {locked && (
+          <>
+            <div
+              aria-hidden="true"
+              className="absolute top-2 right-2 px-2 py-0.5 bg-surface/80 backdrop-blur-sm rounded-full font-label text-[9px] text-on-surface-variant uppercase tracking-wide"
+            >
+              {minutes} min
+            </div>
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-on-surface/35 to-transparent pointer-events-none"
+            />
+            <div className="absolute inset-x-2 bottom-2 flex items-center justify-between gap-1 px-2.5 py-1 rounded-full bg-surface/95 backdrop-blur-sm shadow-sm">
+              <div className="flex items-center gap-1 min-w-0">
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">lock</span>
+                <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider truncate">
+                  Unlock with Plus
+                </span>
+              </div>
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">arrow_forward</span>
+            </div>
+          </>
+        )}
       </div>
       <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{pranayama.english}</p>
       <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{pranayama.sanskrit}</p>
