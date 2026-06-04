@@ -451,12 +451,32 @@ export default function HomePage() {
           <span className="material-symbols-outlined text-primary">spa</span>
           <span className="font-headline italic text-primary text-base">The Sanctuary</span>
         </div>
+        {/* Profile button — gains a subtle Plus identity marker when the
+            user is a Plus member. A 2px ring around the avatar, plus a
+            small filled workspace_premium star in the corner. Every time
+            the user opens the app they see "I'm Plus" without reading a
+            single word. That's the identity-as-asset retention play. */}
         <button
           onClick={() => navigate('/profile')}
-          className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center"
-          aria-label="Open profile"
+          className={`relative w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center ${
+            isPremium ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''
+          }`}
+          aria-label={isPremium ? 'Open profile (Sanctuary Plus member)' : 'Open profile'}
         >
           <span className="material-symbols-outlined text-on-surface-variant text-lg">person</span>
+          {isPremium && (
+            <span
+              aria-hidden="true"
+              className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary flex items-center justify-center shadow-sm"
+            >
+              <span
+                className="material-symbols-outlined text-on-primary text-[10px]"
+                style={{ fontVariationSettings: "'FILL' 1" }}
+              >
+                workspace_premium
+              </span>
+            </span>
+          )}
         </button>
       </div>
 
