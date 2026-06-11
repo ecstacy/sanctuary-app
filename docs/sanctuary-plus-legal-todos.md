@@ -120,3 +120,32 @@ Defer until any of these triggers:
 - A regulator contacts you
 
 Before any of those, templates + this doc are sufficient defense.
+
+---
+
+## Tax registration — in progress (German Einzelunternehmen)
+
+Filing the *Fragebogen zur steuerlichen Erfassung* via ELSTER. Decisions
+locked in during the form:
+
+- **Entity:** Einzelunternehmen (sole proprietor), added to existing
+  `(Betriebs-)Steuernummer`.
+- **Classification:** Gewerbebetrieb (line 106) — a B2C subscription app
+  is a commercial product business, not Freiberufler professional service.
+- **VAT:** Kleinunternehmer (§19 UStG) — no VAT charged while under
+  €22k/year revenue. Zahllast declared as €0.
+- **USt-IdNr:** requested (needed for app stores / Stripe / EU cross-border).
+- **OSS:** under the €10k cross-border threshold — ticked box 164, did NOT
+  enrol in OSS (box 163 left unchecked).
+- **Profit method:** EÜR (§4 Abs. 3 EStG), calendar-year basis.
+
+### Open follow-up actions (triggered by the registration)
+
+| # | Action | Trigger / deadline | Notes |
+|---|--------|-------------------|-------|
+| T1 | **File Gewerbeanmeldung** at the local Gewerbeamt | Right after the Fragebogen — required for any Gewerbe | ~€20–60, one form, often online. Finanzamt + Gewerbeamt cross-notify. |
+| T2 | **Steuerberater consult on prior unfiled consulting income** | Before next annual tax return | Small side-consulting income from last year wasn't filed. Likely under the §46 EStG Härteausgleich (€410 secondary-income allowance) = nothing owed; if above, a quick amended return fixes it. 1hr consult (~€100–150) confirms which. |
+| T3 | **Register for VAT OSS with the BZSt** | When cross-border EU sales (Plus to non-German EU residents) approach €10k/year | Until then, box 164 (under-threshold) covers you. After €10k you must handle per-country VAT via OSS. |
+| T4 | **Exit Kleinunternehmer planning** | When total revenue approaches €22k/year | At that point you start charging VAT. For B2C this means either absorbing 19% or raising prices — plan the transition before you cross. |
+| T5 | **Open a separate business bank account** | When revenue is non-trivial | Currently using the personal Deutsche Bank salary account (legal for a sole proprietor, but check the account's T&C re: business use). Wise / N26 / Kontist business accounts are free options. Keeps bookkeeping clean. |
+| T6 | **Keep receipts from `Beginn der Tätigkeit`** | Ongoing | All Sanctuary costs (hosting, Azure, Supabase, domain, dev tools) from the declared start date are deductible. File them for the EÜR. |
