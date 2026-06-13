@@ -29,6 +29,7 @@ import { registerPlugin } from '@capacitor/core'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import { track, EVENTS } from '../lib/track'
+import { isPlusPurchaseRestricted, getCoarseRegion } from '../lib/region'
 
 const ExternalBrowser = registerPlugin('ExternalBrowser', {
   web: { async open({ url }) { window.open(url, '_blank') } }
@@ -77,12 +78,23 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
 
   const shownRef = useRef(false)
 
+  // Region gate — don't offer paid plans where we can't yet sell (India /
+  // OIDAR for v1). Promo redemption stays available everywhere, so a gated
+  // user can still be granted Plus via a code. Computed once per render;
+  // cheap (a single Intl lookup).
+  const purchaseRestricted = isPlusPurchaseRestricted()
+
   // Fire PAYWALL_SHOWN once per open. Reset on close so the next open
   // counts as a new impression.
   useEffect(() => {
     if (open && !shownRef.current) {
       shownRef.current = true
-      track(EVENTS.PAYWALL_SHOWN, { surface, anonymous: !user })
+      track(EVENTS.PAYWALL_SHOWN, {
+        surface,
+        anonymous: !user,
+        region: getCoarseRegion(),
+        purchase_restricted: purchaseRestricted,
+      })
     }
     if (!open) {
       shownRef.current = false
@@ -92,7 +104,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
       setPromoError(null)
       setPromoSuccess(null)
     }
-  }, [open, surface, user])
+  }, [open, surface, user, purchaseRestricted])
 
   if (!open) return null
 
@@ -279,39 +291,57 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               ))}
             </ul>
 
-            {/* Plans */}
-            <div className="space-y-3 mb-5">
-              {PLANS.map((plan) => (
-                <button
-                  key={plan.id}
-                  onClick={() => handlePlan(plan)}
-                  className={`w-full rounded-2xl p-4 text-left relative active:scale-[0.98] transition-all ${
-                    plan.highlight
-                      ? 'bg-primary-container border-2 border-primary'
-                      : 'bg-surface-container border-2 border-transparent'
-                  }`}
-                  aria-label={`Choose ${plan.label} plan`}
-                >
-                  {plan.savings && (
-                    <span className="absolute -top-2 right-4 bg-primary text-on-primary font-label text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">
-                      {plan.savings}
-                    </span>
-                  )}
-                  <div className="flex items-baseline justify-between mb-1">
-                    <span className="font-body font-semibold text-base text-on-surface">{plan.label}</span>
-                    <span className="font-headline text-2xl text-on-surface tabular-nums">
-                      {plan.price}
-                      <span className="font-body text-xs text-on-surface-variant ml-0.5">{plan.cadence}</span>
-                    </span>
-                  </div>
-                  <p className="font-body text-xs text-on-surface-variant/70 leading-snug">{plan.sub}</p>
-                </button>
-              ))}
-            </div>
+            {/* Plans — OR a region-not-supported notice. In gated regions
+                (India / OIDAR for v1) we don't surface paid plans at all;
+                the user can still redeem a code below. */}
+            {purchaseRestricted ? (
+              <div className="bg-surface-container rounded-2xl p-5 mb-5 text-center">
+                <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-2xl mb-2">public</span>
+                <p className="font-body font-semibold text-sm text-on-surface mb-1">
+                  Plus isn&apos;t available in your region yet
+                </p>
+                <p className="font-body text-xs text-on-surface-variant/70 leading-relaxed">
+                  We&apos;re working on bringing paid plans to your country. In the
+                  meantime, everything in the free tier is fully yours — and if
+                  you have an invite code, you can redeem it below.
+                </p>
+              </div>
+            ) : (
+              <>
+                <div className="space-y-3 mb-5">
+                  {PLANS.map((plan) => (
+                    <button
+                      key={plan.id}
+                      onClick={() => handlePlan(plan)}
+                      className={`w-full rounded-2xl p-4 text-left relative active:scale-[0.98] transition-all ${
+                        plan.highlight
+                          ? 'bg-primary-container border-2 border-primary'
+                          : 'bg-surface-container border-2 border-transparent'
+                      }`}
+                      aria-label={`Choose ${plan.label} plan`}
+                    >
+                      {plan.savings && (
+                        <span className="absolute -top-2 right-4 bg-primary text-on-primary font-label text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">
+                          {plan.savings}
+                        </span>
+                      )}
+                      <div className="flex items-baseline justify-between mb-1">
+                        <span className="font-body font-semibold text-base text-on-surface">{plan.label}</span>
+                        <span className="font-headline text-2xl text-on-surface tabular-nums">
+                          {plan.price}
+                          <span className="font-body text-xs text-on-surface-variant ml-0.5">{plan.cadence}</span>
+                        </span>
+                      </div>
+                      <p className="font-body text-xs text-on-surface-variant/70 leading-snug">{plan.sub}</p>
+                    </button>
+                  ))}
+                </div>
 
-            <p className="font-body text-[10px] text-on-surface-variant/50 text-center leading-relaxed mb-5">
-              Renews automatically. Cancel anytime in your account settings.
-            </p>
+                <p className="font-body text-[10px] text-on-surface-variant/50 text-center leading-relaxed mb-5">
+                  Renews automatically. Cancel anytime in your account settings.
+                </p>
+              </>
+            )}
 
             {/* Promo code entry */}
             <button

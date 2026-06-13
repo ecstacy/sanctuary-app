@@ -112,6 +112,7 @@ export const EVENTS = Object.freeze({
   // consent to process dosha/wellness data — gated at the dosha quiz entry.
   // `surface` + `version` let us audit which consent text was agreed to.
   HEALTH_CONSENT_GRANTED: 'health_consent_granted',
+  HEALTH_CONSENT_REVOKED: 'health_consent_revoked',
 
   // Engagement & attention (§5.8)
   SCROLL_DEPTH_REACHED:  'scroll_depth_reached',

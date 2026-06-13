@@ -6,6 +6,7 @@ import { supabase } from '../lib/supabase'
 import i18n from '../i18n'
 import { SUPPORTED_LANGUAGES, writeStoredLanguage } from '../i18n/detect'
 import useConsent from '../hooks/useConsent'
+import { useHealthConsent } from '../hooks/useHealthConsent'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { exportUserData } from '../lib/dataExport'
 import { deleteAllUserData } from '../lib/accountDeletion'
@@ -95,6 +96,11 @@ export default function ProfilePage() {
   // ── Privacy / analytics consent ──
   const { consent, setAggregate, setCrash } = useConsent()
   const [privacyExpanded, setPrivacyExpanded] = useState(false)
+
+  // ── Health-data consent (GDPR Art. 9) — withdrawal control ──
+  // Only the withdraw direction lives here; granting happens in context
+  // at the dosha quiz. GDPR requires withdrawal be as easy as giving.
+  const { hasConsent: hasHealthConsent, revoke: revokeHealthConsent } = useHealthConsent()
 
   // ── Data export / account deletion (GDPR Art. 15/17) ──
   const [exporting, setExporting] = useState(false)
@@ -1113,6 +1119,37 @@ export default function ProfilePage() {
               />
             </button>
           </div>
+
+          {/* Health-data consent (GDPR Art. 9) — withdrawal only. Shown
+              when consent is currently on file. Granting happens in context
+              at the dosha quiz; here the user can withdraw it as easily as
+              they gave it (a GDPR requirement). Withdrawal stops further
+              processing — it doesn't delete already-collected data; that's
+              the separate "Export / Delete my data" controls below. */}
+          {hasHealthConsent && (
+            <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
+              <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">favorite</span>
+              <div className="flex-1 min-w-0">
+                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Health-data processing</p>
+                <p className="font-body text-xs text-on-surface-variant/80 mt-0.5 leading-snug">
+                  On — your dosha &amp; wellness inputs personalize your practice. Withdrawing stops further processing (your existing data stays until you export or delete it).
+                </p>
+              </div>
+              <button
+                onClick={async () => {
+                  if (window.confirm('Withdraw consent for health-data processing? Your dosha and wellness inputs will no longer be used to personalize your practice. This does not delete already-collected data.')) {
+                    await revokeHealthConsent()
+                  }
+                }}
+                role="switch"
+                aria-checked={true}
+                aria-label="Health-data processing consent"
+                className="relative w-11 h-6 rounded-full transition-colors flex-shrink-0 bg-primary"
+              >
+                <span className="absolute top-0.5 left-[22px] w-5 h-5 rounded-full bg-on-primary shadow-sm transition-all" />
+              </button>
+            </div>
+          )}
 
           {/* Dev-only test buttons. Gated by the developer email so they
               never render for real users in production. Used to verify

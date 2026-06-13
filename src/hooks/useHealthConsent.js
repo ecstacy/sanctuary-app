@@ -16,6 +16,7 @@ import {
   getHealthConsent,
   hasHealthConsent,
   grantHealthConsent,
+  revokeHealthConsent,
   subscribe,
   CONSENT_VERSION,
 } from '../lib/healthConsent'
@@ -52,9 +53,29 @@ export function useHealthConsent() {
     return next
   }, [user])
 
+  // Withdrawal — GDPR requires this be as easy as giving consent. Stops the
+  // basis for further processing; does NOT delete already-collected data
+  // (that's the separate account-deletion / export path). Mirrors grant():
+  // localStorage + profile + analytics.
+  const revoke = useCallback(async () => {
+    const next = revokeHealthConsent()
+
+    track(EVENTS.HEALTH_CONSENT_REVOKED, { anonymous: !user })
+
+    if (user?.id) {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ health_data_consent: next })
+        .eq('id', user.id)
+      if (error) console.error('[healthConsent] revoke write failed:', error.message)
+    }
+    return next
+  }, [user])
+
   return {
     consent:    state,
     hasConsent: hasHealthConsent(),
     grant,
+    revoke,
   }
 }
