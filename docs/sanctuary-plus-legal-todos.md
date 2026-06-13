@@ -123,10 +123,11 @@ Before any of those, templates + this doc are sufficient defense.
 
 ---
 
-## Tax registration — in progress (German Einzelunternehmen)
+## Tax registration — Fragebogen SUBMITTED ✅ (German Einzelunternehmen)
 
-Filing the *Fragebogen zur steuerlichen Erfassung* via ELSTER. Decisions
-locked in during the form:
+The *Fragebogen zur steuerlichen Erfassung* was submitted via ELSTER.
+Awaiting the Finanzamt to process it and (if needed) confirm the
+Steuernummer + issue the USt-IdNr. Decisions locked in during the form:
 
 - **Entity:** Einzelunternehmen (sole proprietor), added to existing
   `(Betriebs-)Steuernummer`.
@@ -141,9 +142,25 @@ locked in during the form:
 
 ### Open follow-up actions (triggered by the registration)
 
+**👉 ACTIVE NEXT STEP: T1 — Gewerbeanmeldung.** Do this now; a Gewerbe
+legally requires it (§14 GewO) and the Fragebogen alone doesn't cover it.
+
+Berlin how-to:
+1. service.berlin.de → search "Gewerbeanmeldung" → online submission
+   (or book a Termin at your Bezirksamt).
+2. Form **GewA 1**. Need: ID + Meldebescheinigung, activity description
+   ("Entwicklung und Betrieb einer Software-as-a-Service-Anwendung
+   (Ayurveda- und Yoga-App)"), residential address, same
+   `Beginn der Tätigkeit` date as the Fragebogen.
+3. Key fields: *Nebenerwerb* = **Ja** (employed full-time, side business);
+   *Handelsregistereintragung* = **Nein**.
+4. Cost ~€15–31 one-time. Gewerbeamt auto-notifies Finanzamt + IHK.
+5. IHK will send a membership letter — exempt/reduced while profit is
+   low; request the Befreiung/Ermäßigung für Kleingewerbe if billed.
+
 | # | Action | Trigger / deadline | Notes |
 |---|--------|-------------------|-------|
-| T1 | **File Gewerbeanmeldung** at the local Gewerbeamt | Right after the Fragebogen — required for any Gewerbe | ~€20–60, one form, often online. Finanzamt + Gewerbeamt cross-notify. |
+| T1 | **File Gewerbeanmeldung** at the local Gewerbeamt | ⏳ NOW — required for any Gewerbe | ~€15–31, GewA 1, online via service.berlin.de. Nebenerwerb=Ja, no Handelsregister. Auto-notifies Finanzamt + IHK. |
 | T2 | **Steuerberater consult on prior unfiled consulting income** | Before next annual tax return | Small side-consulting income from last year wasn't filed. Likely under the §46 EStG Härteausgleich (€410 secondary-income allowance) = nothing owed; if above, a quick amended return fixes it. 1hr consult (~€100–150) confirms which. |
 | T3 | **Register for VAT OSS with the BZSt** | When cross-border EU sales (Plus to non-German EU residents) approach €10k/year | Until then, box 164 (under-threshold) covers you. After €10k you must handle per-country VAT via OSS. |
 | T4 | **Exit Kleinunternehmer planning** | When total revenue approaches €22k/year | At that point you start charging VAT. For B2C this means either absorbing 19% or raising prices — plan the transition before you cross. |
