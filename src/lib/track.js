@@ -108,6 +108,10 @@ export const EVENTS = Object.freeze({
   DATA_EXPORTED:      'data_exported',
   PASSWORD_CHANGED:   'password_changed',
   ACCOUNT_DELETED:    'account_deleted',
+  // Health-data consent (GDPR Art. 9). Fired when the user gives explicit
+  // consent to process dosha/wellness data — gated at the dosha quiz entry.
+  // `surface` + `version` let us audit which consent text was agreed to.
+  HEALTH_CONSENT_GRANTED: 'health_consent_granted',
 
   // Engagement & attention (§5.8)
   SCROLL_DEPTH_REACHED:  'scroll_depth_reached',

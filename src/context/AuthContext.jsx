@@ -4,6 +4,11 @@ import { Capacitor } from '@capacitor/core'
 import { registerPlugin } from '@capacitor/core'
 import { syncLanguageFromProfile } from '../i18n'
 import { hydrateFromProfile as hydrateConsentFromProfile } from '../lib/consent'
+import {
+  hydrateFromProfile as hydrateHealthConsentFromProfile,
+  getHealthConsent,
+  hasHealthConsent,
+} from '../lib/healthConsent'
 import { identify, setSuperProps, reset as resetAnalytics, track, EVENTS } from '../lib/track'
 import { setUserId as crashSetUserId, setCustomKey as crashSetCustomKey, reset as resetCrash } from '../lib/crash'
 
@@ -140,6 +145,26 @@ export function AuthProvider({ children }) {
     // module keeps whichever decision is newer — safe if the column
     // doesn't exist yet (undefined → no-op).
     if (data?.analytics_consent) hydrateConsentFromProfile(data.analytics_consent)
+
+    // ── Health-data consent (GDPR Art. 9) — hydrate + migrate ──────────
+    // Pull the server-side consent record into the local module (covers
+    // the cross-device case). Then handle the anonymous→account migration:
+    // if the user consented while anonymous (localStorage) but the profile
+    // has no record yet, persist it so the server can demonstrate consent.
+    if (data?.health_data_consent) hydrateHealthConsentFromProfile(data.health_data_consent)
+    if (data && hasHealthConsent() && !data.health_data_consent?.granted) {
+      try {
+        const local = getHealthConsent()
+        const { error: hcErr } = await supabase
+          .from('profiles')
+          .update({ health_data_consent: local })
+          .eq('id', userId)
+        if (hcErr) console.error('Health-consent migrate failed:', hcErr.message)
+        else data.health_data_consent = local
+      } catch (err) {
+        console.error('Health-consent migrate threw:', err?.message || err)
+      }
+    }
 
     // ── Migrate anonymous dosha quiz result, if present ──────────────
     // The Dosha Quiz is publicly accessible; first-time users can take

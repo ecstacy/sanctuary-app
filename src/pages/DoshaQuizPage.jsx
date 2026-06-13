@@ -25,6 +25,7 @@ import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
 import { track, EVENTS } from '../lib/track'
 import DoshaProfileContent from '../components/DoshaProfileContent'
+import { useHealthConsent } from '../hooks/useHealthConsent'
 import {
   TRAIT_QUESTIONS,
   ANSWER_OPTIONS,
@@ -61,6 +62,13 @@ export default function DoshaQuizPage() {
   const [doshaResult, setDoshaResult] = useState(null)
   const [saving, setSaving]           = useState(false)
   const [calcStep, setCalcStep]       = useState(0)
+
+  // ── Health-data consent (GDPR Art. 9) ──────────────────────────────────
+  // The quiz is the first health-adjacent data we collect, so we gate its
+  // start on explicit consent. Users who already consented (returning, or
+  // synced from another device) skip the checkbox entirely.
+  const { hasConsent, grant: grantHealthConsent } = useHealthConsent()
+  const [consentChecked, setConsentChecked] = useState(false)
 
   const totalQuestions = TRAIT_QUESTIONS.length
   const question       = TRAIT_QUESTIONS[currentQ]
@@ -363,12 +371,45 @@ export default function DoshaQuizPage() {
             </p>
           </div>
 
+          {/* Health-data consent (GDPR Art. 9). Only shown when the user
+              hasn't already consented. Unticked by default — explicit
+              consent requires an affirmative action; a pre-ticked box is
+              not valid consent. The start button stays disabled until
+              ticked. */}
+          {!hasConsent && (
+            <label className="flex items-start gap-3 mb-4 px-1 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={consentChecked}
+                onChange={(e) => setConsentChecked(e.target.checked)}
+                className="mt-0.5 w-5 h-5 flex-shrink-0 accent-primary rounded"
+                aria-describedby="health-consent-text"
+              />
+              {/* NOTE: "Privacy Policy" is plain text until the policy is
+                  live (tracked in sanctuary-plus-legal-todos.md). Once the
+                  /privacy route exists, make this a link — informed consent
+                  should reference an accessible policy. */}
+              <span id="health-consent-text" className="font-body text-[12px] text-on-surface-variant/90 leading-relaxed">
+                I consent to The Sanctuary processing my dosha results and
+                wellness inputs (mood, energy, sleep) to personalize my
+                practice, as described in the Privacy Policy. This is
+                health-related data; I can withdraw consent anytime in Settings.
+              </span>
+            </label>
+          )}
+
           <button
-            onClick={() => {
+            onClick={async () => {
+              // Record consent (local + profile + analytics) before the
+              // first health-data collection if it isn't already on file.
+              if (!hasConsent) {
+                await grantHealthConsent({ surface: 'dosha_quiz' })
+              }
               track(EVENTS.DOSHA_QUIZ_STARTED, { version: 'v2' })
               setPhase('quiz')
             }}
-            className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
+            disabled={!hasConsent && !consentChecked}
+            className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-40 disabled:active:scale-100"
           >
             Discover My Dosha
           </button>
