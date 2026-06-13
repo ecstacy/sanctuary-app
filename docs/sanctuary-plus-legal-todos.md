@@ -142,25 +142,24 @@ Steuernummer + issue the USt-IdNr. Decisions locked in during the form:
 
 ### Open follow-up actions (triggered by the registration)
 
-**👉 ACTIVE NEXT STEP: T1 — Gewerbeanmeldung.** Do this now; a Gewerbe
-legally requires it (§14 GewO) and the Fragebogen alone doesn't cover it.
+**Core registration COMPLETE ✅** — both the Fragebogen (Finanzamt) and the
+Gewerbeanmeldung (Gewerbeamt, GewA 1) are submitted. WZ category chosen:
+"Other professional, scientific and technical activities n.e.c." (keeps
+IHK assignment, software-business framing).
 
-Berlin how-to:
-1. service.berlin.de → search "Gewerbeanmeldung" → online submission
-   (or book a Termin at your Bezirksamt).
-2. Form **GewA 1**. Need: ID + Meldebescheinigung, activity description
-   ("Entwicklung und Betrieb einer Software-as-a-Service-Anwendung
-   (Ayurveda- und Yoga-App)"), residential address, same
-   `Beginn der Tätigkeit` date as the Fragebogen.
-3. Key fields: *Nebenerwerb* = **Ja** (employed full-time, side business);
-   *Handelsregistereintragung* = **Nein**.
-4. Cost ~€15–31 one-time. Gewerbeamt auto-notifies Finanzamt + IHK.
-5. IHK will send a membership letter — exempt/reduced while profit is
-   low; request the Befreiung/Ermäßigung für Kleingewerbe if billed.
+**👉 NEXT: watch the mail.** Expect over the coming weeks:
+- Finanzamt: confirmation of Steuernummer + the requested USt-IdNr.
+- Gewerbeamt: the Gewerbeschein (trade certificate).
+- IHK: a membership letter — request the Befreiung/Ermäßigung für
+  Kleingewerbe if they try to bill while profit is low.
+
+Once the docs land, the next *active* track is the pre-launch legal docs
+(Privacy / ToS / Refund / Impressum) → then Stripe activation.
 
 | # | Action | Trigger / deadline | Notes |
 |---|--------|-------------------|-------|
-| T1 | **File Gewerbeanmeldung** at the local Gewerbeamt | ⏳ NOW — required for any Gewerbe | ~€15–31, GewA 1, online via service.berlin.de. Nebenerwerb=Ja, no Handelsregister. Auto-notifies Finanzamt + IHK. |
+| T1 | ~~File Gewerbeanmeldung~~ | ✅ DONE | Submitted via service.berlin.de. Awaiting Gewerbeschein. |
+| T1b | **Handle the IHK letter** when it arrives | On receipt | Request Kleingewerbe exemption/reduction if billed while profit low. |
 | T2 | **Steuerberater consult on prior unfiled consulting income** | Before next annual tax return | Small side-consulting income from last year wasn't filed. Likely under the §46 EStG Härteausgleich (€410 secondary-income allowance) = nothing owed; if above, a quick amended return fixes it. 1hr consult (~€100–150) confirms which. |
 | T3 | **Register for VAT OSS with the BZSt** | When cross-border EU sales (Plus to non-German EU residents) approach €10k/year | Until then, box 164 (under-threshold) covers you. After €10k you must handle per-country VAT via OSS. |
 | T4 | **Exit Kleinunternehmer planning** | When total revenue approaches €22k/year | At that point you start charging VAT. For B2C this means either absorbing 19% or raising prices — plan the transition before you cross. |
