@@ -40,6 +40,7 @@ import { useIsPremium } from '../hooks/useIsPremium'
 import { useProtocolProgress } from '../hooks/useProtocolProgress'
 import { track, EVENTS } from '../lib/track'
 import PaywallSheet from '../components/PaywallSheet'
+import MedicalDisclaimer from '../components/MedicalDisclaimer'
 
 // Dosha visual identity — kept in sync with DoshaProfileContent.DOSHA_DATA
 // so the user lands on a page that feels visually continuous with the
@@ -457,6 +458,11 @@ export default function ProtocolPage() {
             </ul>
           </div>
         )}
+
+        {/* Not-medical-advice notice — protocols give the most explicit
+            food / movement / breath guidance in the app, so the disclaimer
+            belongs here in context. */}
+        <MedicalDisclaimer className="mt-6 mb-4" />
 
       </div>
     </div>

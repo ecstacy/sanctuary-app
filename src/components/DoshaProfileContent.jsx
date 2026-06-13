@@ -19,6 +19,7 @@ import { DOSHAS } from '../data/ayurveda/dosha-prakriti'
 import { track, EVENTS } from '../lib/track'
 import { useIsPremium } from '../hooks/useIsPremium'
 import PaywallSheet from './PaywallSheet'
+import MedicalDisclaimer from './MedicalDisclaimer'
 
 // ── Shared dosha display data ────────────────────────────────────────────────
 export const DOSHA_DATA = {
@@ -769,6 +770,10 @@ export default function DoshaProfileContent({
 
         {/* Page-specific footer slot (save CTA, retake button, etc.) */}
         {footerSlot}
+
+        {/* Not-medical-advice notice — this page gives dosha-based lifestyle
+            guidance, so the disclaimer sits in context at the foot of it. */}
+        <MedicalDisclaimer className="mb-6" />
 
       </div>
 

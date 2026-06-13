@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { track, EVENTS } from '../lib/track'
+import MedicalDisclaimer from '../components/MedicalDisclaimer'
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  OnboardingPage — first-time visitor's value-proposition tour
@@ -46,7 +47,7 @@ const SLIDES = [
     icon: 'auto_awesome',
     eyebrow: 'Step 3 of 3',
     title: 'Let\'s find your dosha',
-    body: 'A short 8-question quiz reveals your Ayurvedic constitution — the foundation everything else builds on. Takes about 3 minutes.',
+    body: 'A short 15-question quiz reveals your Ayurvedic constitution — the foundation everything else builds on. Takes about 90 seconds.',
     accent: 'from-[#5c4e8a] to-[#9b8fd4]',
     isFinal: true,
   },
@@ -197,6 +198,14 @@ export default function OnboardingPage() {
           >
             I already have an account
           </button>
+        )}
+
+        {/* One-time not-medical-advice notice — surfaced once at the entry
+            to the experience, before any health guidance is given. The
+            persistent in-context disclaimers live on the dosha + protocol
+            pages; this is the upfront acknowledgement. */}
+        {slide.isFinal && (
+          <MedicalDisclaimer variant="inline" className="mt-5 text-center px-2" />
         )}
       </div>
     </div>
