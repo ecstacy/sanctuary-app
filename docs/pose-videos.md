@@ -64,18 +64,44 @@ That's it — the clip now resolves in-app via
 
 `predev` / `prebuild` run `npm run poses` automatically.
 
-## Local masters
+## ⚠️ Local masters — BACK THESE UP
 
-Keep your `media/pose-videos/*.mp4` masters backed up — they're gitignored,
-so they live only on your machine + in Storage. Storage is the production
-source of truth; the local dir is your working copy + re-upload source.
+Two `media/` folders are **gitignored, so they exist only on this machine** —
+git is no longer their backup. A disk loss = losing the masters.
+
+| Folder | What | Source of truth elsewhere? |
+|---|---|---|
+| `media/pose-videos/` | `.mp4` video masters | Yes — also in Supabase Storage after `poses:sync` |
+| `media/pose-source-png/` | pristine 840×840 source PNGs (pre-WebP), used as Kling/Nano Banana inputs | **No — only here.** Recoverable from git history (commit `e7a2740`) only until that history is ever purged. |
+
+**Copy both to a backup** (cloud drive / external disk). The
+`pose-source-png` folder especially — it's the only convenient copy of the
+Kling source images; losing it means regenerating or re-extracting from
+history.
+
+Recover `pose-source-png` from history if needed:
+```bash
+mkdir -p media/pose-source-png
+git ls-tree --name-only e7a2740 public/poses/ | grep '\.png$' | while read -r p; do
+  git show "e7a2740:$p" > "media/pose-source-png/$(basename "$p")"
+done
+```
+
+## Stills are WebP
+
+`public/poses/*.png` were converted to `.webp` (q80, 158 MB → 3.8 MB) and
+the source PNGs removed from the repo — see `scripts/convert-poses-webp.mjs`
+/ `npm run poses:webp`. The in-app stills are WebP; the pristine PNGs for
+image-generation tools live in `media/pose-source-png/` (above). **Kling and
+most image tools don't accept WebP** — always upload from `pose-source-png/`,
+not `public/poses/`.
 
 ## Follow-ups (not done yet)
 
-- **Stills are ~158 MB of PNG.** Converting `public/poses/*.png` → WebP would
-  cut that ~70% and meaningfully shrink the app binary. Separate task.
-- **Git history** still contains the ~90 MB of videos committed before this
-  change. Purging them needs a history rewrite (git-filter-repo / BFG) +
-  force-push — do it only if repo size becomes a real problem.
+- **Git history** still contains the ~90 MB of videos + ~120 MB of PNGs
+  committed before these changes. Purging needs a history rewrite
+  (git-filter-repo / BFG) + force-push — do it only if repo size becomes a
+  real problem. (Note: a purge would also remove the `e7a2740` PNG-recovery
+  path above, so back up `pose-source-png` first.)
 - **CDN**: Supabase Storage egress is fine at launch; put Cloudflare in front
   if video bandwidth grows.
