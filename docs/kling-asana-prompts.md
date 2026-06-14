@@ -651,13 +651,13 @@ Over 5 seconds, starting from Tadasana (frame 1), she: bends both knees slightly
 **📸 Peak-pose mechanics (Nano Banana edit):**
 
 ```
-Dancer's Pose. Body in profile facing camera-left, balancing on the LEFT leg with the standing left leg straight (slight micro-bend acceptable). Right leg bent at the knee, lifted up and behind her so the right thigh extends back and the right foot points up toward the ceiling. The right hand grasps the inside of the right ankle from below (palm facing forward, thumb hooked around the ankle). Left arm extends straight forward at shoulder height as a counterbalance. Chest opens forward and slightly upward. Front body in a long arc from the lifted right foot through the right hip, chest, and left fingertips. Gaze forward.
+Dancer's Pose, full expression. Body in profile facing camera-left, balancing on a straight LEFT leg (slight micro-bend acceptable). Right leg bent deeply at the knee and lifted high behind her, the right foot rising up toward head height. The RIGHT arm is raised OVERHEAD, the elbow bent and pointing up and forward, the right hand catching the right foot from above (overhead grip, not a low reach-back). Left arm extends straight forward at about shoulder height as a counterbalance. Upper back in a graceful backbend, chest lifting forward and slightly up — the body forming a deep bow shape from the lifted right foot, over the head, through the chest, to the left fingertips. Gaze forward over the front hand.
 ```
 
 **🎬 Kling motion prompt:**
 
 ```
-Over 5 seconds, starting from Tadasana (frame 1), she: shifts weight onto the LEFT leg, bends the right knee and lifts the right foot toward the buttocks, reaches back with the right hand and grasps the inside of the right ankle, extends the left arm straight forward, then presses the right foot back into the right hand, lifting the leg up and back and opening the chest forward — arriving at the peak around second 3. She holds the balance steady for 1 breath (seconds 3 to 4). Then she reverses: lowers the right foot back to the mat, releases the arms, returning to Tadasana. Final frame matches frame 1. Static camera.
+Over 5 seconds, starting from Tadasana (frame 1), she: shifts weight onto a straight LEFT leg, bends the right knee and lifts the right foot behind her, reaches the RIGHT arm up and overhead to catch the right foot from above (overhead grip, elbow pointing up), and extends the left arm forward at shoulder height; she then draws the right foot upward toward head height as the chest lifts into a backbend — arriving at the full peak around second 3 (foot high, right arm overhead, deep bow shape, matching the reference peak image). She holds the balance for 1 breath (seconds 3 to 4). Then she reverses: releases the foot, lowers the right leg to the mat, lowers both arms, returning to Tadasana. Final frame matches frame 1. Static camera.
 ```
 
 ---
