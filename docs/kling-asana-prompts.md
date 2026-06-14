@@ -6,7 +6,7 @@ Short looping reference animations for each asana in The Sanctuary. Users with a
 
 Every per-asana heading below is tagged **✅ DONE** (an `.mp4` exists in `public/poses/`) or **⬜ PENDING**. The badges are the source of truth — **▶ continue from the first ⬜ PENDING heading** (search the page for "PENDING").
 
-**How a video registers (no code edit needed):** drop `{poseKey}.mp4` into `public/poses/`. The manifest (`src/data/poseManifest.js`) regenerates on every `npm run dev` / `npm run build` — or run `npm run poses` manually — and `PoseFigure` reads it, so the clip appears in-app automatically. Name the file exactly after the pose key shown in each section's `**Pose key:**` line.
+**How a video registers (no code edit needed):** drop `{poseKey}.mp4` into `media/pose-videos/`, then run `npm run poses:sync` to upload it to Supabase Storage + refresh the manifest. The clip then streams in-app automatically. Name the file exactly after the pose key shown in each section's `**Pose key:**` line. Full workflow + setup: [docs/pose-videos.md](pose-videos.md).
 
 > The pranayama clips (final 6 headings) add the least value — seated breathwork that already has stills + voice. Defer them; the asana clips are the real worklist.
 

@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "poses": "node scripts/build-pose-manifest.mjs",
+    "poses:upload": "node scripts/upload-pose-videos.mjs",
+    "poses:sync": "node scripts/upload-pose-videos.mjs && node scripts/build-pose-manifest.mjs",
     "predev": "node scripts/build-pose-manifest.mjs",
     "prebuild": "node scripts/build-pose-manifest.mjs",
     "dev": "vite",

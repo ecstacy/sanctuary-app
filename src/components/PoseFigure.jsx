@@ -23,17 +23,34 @@ const POSE_ALIASES = {
   legsUpWall:  'legUpWall',           // data key 'legsUpWall' → legUpWall.{png,mp4}
 }
 
-// Resolve a poseKey to a public URL for the given media map, or null if no
-// such file exists on disk. Case-insensitive; honors POSE_ALIASES.
-function resolveMedia(poseKey, fileMap) {
+// Look up the actual on-disk/in-bucket filename for a poseKey, or null.
+// Case-insensitive; honors POSE_ALIASES.
+function resolveFile(poseKey, fileMap) {
   if (!poseKey) return null
   const base = (POSE_ALIASES[poseKey] || poseKey).toLowerCase()
-  const file = fileMap[base]
+  return fileMap[base] || null
+}
+
+// Images are bundled under /poses/.
+function resolveImage(poseKey) {
+  const file = resolveFile(poseKey, IMAGE_FILES)
   return file ? `/poses/${file}` : null
 }
 
-function resolveImage(poseKey) { return resolveMedia(poseKey, IMAGE_FILES) }
-function resolveVideo(poseKey) { return resolveMedia(poseKey, VIDEO_FILES) }
+// Videos are NOT bundled — they're served from the Supabase Storage public
+// `poses` bucket (keeps them out of the app binary / store size limits).
+// Base URL is derived from the Supabase URL the app already uses, so there's
+// no extra config. If that env var is somehow missing we return null and the
+// UI falls back to the still image.
+const STORAGE_VIDEO_BASE = import.meta.env.VITE_SUPABASE_URL
+  ? `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/poses`
+  : null
+
+function resolveVideo(poseKey) {
+  if (!STORAGE_VIDEO_BASE) return null
+  const file = resolveFile(poseKey, VIDEO_FILES)
+  return file ? `${STORAGE_VIDEO_BASE}/${file}` : null
+}
 
 // Exposed so call sites can decide between "render PoseFigure" and "fall back
 // to a custom placeholder/icon" when no real image exists for a poseKey.
@@ -75,14 +92,18 @@ function PoseMedia({ poseKey, width, height, variant, breathing, rounded = true,
   const imageSrc = resolveImage(poseKey)
   const videoSrc = resolveVideo(poseKey)
   const [imgBroken, setImgBroken] = useState(false)
+  const [videoBroken, setVideoBroken] = useState(false)
 
-  // Reset broken flag if poseKey changes
-  useEffect(() => { setImgBroken(false) }, [poseKey])
+  // Reset broken flags if poseKey changes
+  useEffect(() => { setImgBroken(false); setVideoBroken(false) }, [poseKey])
 
   const boxStyle = { width, height }
   const roundedCls = rounded ? 'rounded-2xl' : ''
 
-  if (variant === 'video' && videoSrc) {
+  // Video streams from Supabase Storage. If it fails to load (e.g. a clip
+  // not uploaded yet, or offline), fall through to the still image rather
+  // than showing a broken player.
+  if (variant === 'video' && videoSrc && !videoBroken) {
     return (
       <div className={`${roundedCls} overflow-hidden bg-surface-container shadow-lg`} style={boxStyle}>
         <video
@@ -95,6 +116,7 @@ function PoseMedia({ poseKey, width, height, variant, breathing, rounded = true,
           className={`w-full h-full outline-none`}
           style={{ objectFit, objectPosition, pointerEvents: 'none', WebkitTapHighlightColor: 'transparent' }}
           tabIndex={-1}
+          onError={() => setVideoBroken(true)}
         />
       </div>
     )
@@ -142,9 +164,10 @@ function PoseMedia({ poseKey, width, height, variant, breathing, rounded = true,
 // when an ancestor (e.g. PageTransition) creates a transform containing block.
 function PoseExpandedOverlay({ poseKey, onClose }) {
   const [playing, setPlaying] = useState(false)
+  const [videoBroken, setVideoBroken] = useState(false)
   const videoSrc = resolveVideo(poseKey)
   const imageSrc = resolveImage(poseKey)
-  const hasVideo = !!videoSrc
+  const hasVideo = !!videoSrc && !videoBroken
 
   // Escape key + body scroll lock
   useEffect(() => {
@@ -219,6 +242,7 @@ function PoseExpandedOverlay({ poseKey, onClose }) {
             muted
             playsInline
             controls={false}
+            onError={() => { setVideoBroken(true); setPlaying(false) }}
             style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#111' }}
           />
         ) : imageSrc ? (
