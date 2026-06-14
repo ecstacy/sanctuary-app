@@ -29,3 +29,6 @@ supabase/.temp/
 # Pose videos — hosted in Supabase Storage, not bundled (see docs/pose-videos.md)
 media/pose-videos/
 public/poses/*.mp4
+
+# Recovered source PNGs for Kling/Nano Banana (local only, not bundled)
+media/pose-source-png/
