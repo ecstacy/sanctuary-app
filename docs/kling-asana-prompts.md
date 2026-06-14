@@ -28,6 +28,26 @@ Two exceptions:
 - **Tadasana itself** — no entry needed. It's a 5s still hold of Mountain Pose with breath.
 - **Surya Namaskar (Sun Salutation)** — already a flowing sequence, start=end=Tadasana by nature. 10s, full flow.
 
+## Camera angle — frame the pose's key action, then lock it
+
+Pick the camera angle that *reveals what the pose is teaching*, and keep it
+fixed. Two rules that came out of real Kling failures:
+
+1. **Match the start frame's orientation to the peak.** Side-profile poses
+   (Dancer, the Warriors, Triangle, Side Angle, Pyramid) must start from a
+   **side-profile Tadasana**, not the front-facing one — Kling won't rotate
+   the body 90° mid-clip and will fake an awkward front-facing version
+   instead. Keep one `tadasana-profile.png` for this whole class.
+2. **Behind-the-back binds → rear three-quarter.** If the defining action is
+   hidden from the front (e.g. Gomukhasana's clasp between the shoulder
+   blades), film from behind-and-to-the-side and generate the peak image at
+   that angle. A front view of a back-bind teaches nothing.
+
+Always **lock the destination with the peak image as Kling's end/mid
+keyframe** — start-frame + text alone lets Kling drift. Matching keyframes +
+"static camera, she never turns to face the camera" is what keeps the shape
+on-model.
+
 ---
 
 ## Why the two-stage workflow
@@ -816,16 +836,21 @@ Over 5 seconds, starting from a seated position with both legs extended forward,
 
 **Pose key:** `gomukhasana` · **Duration:** 5s
 
+**📸 Camera angle: rear three-quarter.** The defining action — the hands
+clasping between the shoulder blades — is invisible from the front, so this
+pose is filmed from behind-and-slightly-to-the-side. Generate the peak image
+at that angle so it can anchor the video.
+
 **📸 Peak-pose mechanics (Nano Banana edit):**
 
 ```
-Seated on a folded blanket on the center of the mat, facing the camera. Legs in the cow-face stack: left leg crosses under the right; left foot rests beside the right hip; right thigh stacks directly on top of the left thigh, right knee in front of the left knee in the center; right foot rests beside the left hip. The two feet flare out to opposite sides of the body. Right arm reaches up overhead, bends at the elbow, and the right hand falls down the back between the shoulder blades. Left arm comes behind the back from below, the left hand reaching up to clasp the right hand (or holding a yoga strap between the hands if they don't meet). Both elbows lift — top elbow toward the ceiling, bottom elbow toward the floor. Spine tall.
+Seated Gomukhasana (Cow Face Pose), filmed from a THREE-QUARTER angle BEHIND her, looking at her back and slightly to one side so the arm bind is clearly visible. Legs in the cow-face stack: knees stacked one directly above the other in front, feet flaring out to opposite sides of the hips. The right arm reaches up overhead, bends at the elbow, and the right hand drops down the back between the shoulder blades; the left arm comes up from below behind the back and the left hand clasps the right (or holds a strap between them). Both elbows lift — top elbow toward the ceiling, bottom elbow toward the floor. The clasped hands at the mid-back are the focal point, clearly in view. Spine tall, seated on a folded blanket.
 ```
 
 **🎬 Kling motion prompt:**
 
 ```
-Over 5 seconds, starting from a seated position, she: folds the legs into the cow-face stack with right thigh on top of left, reaches the right arm up overhead, bends the elbow letting the right hand fall down the back, then brings the left arm behind the back from below and clasps the hands (or a strap) between the shoulder blades — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she reverses: releases the arms, unwinds the legs back to a simple seated position. Static camera.
+Filmed from a fixed three-quarter angle BEHIND her, looking at her back so the hands between the shoulder blades stay clearly visible. Over 5 seconds, starting from a simple cross-legged seat seen from this rear-three-quarter angle, she: stacks the legs into the cow-face position with one knee directly above the other, reaches the right arm up overhead and bends the elbow so the right hand drops down between the shoulder blades, then sweeps the left arm behind the lower back and upward to clasp the fingers between the shoulder blades — the bind forming clearly in view around second 3. She holds, breathing, for about 1 second. Then she releases the hands and unwinds the arms and legs back to a simple seat. Static camera, fixed rear-three-quarter framing.
 ```
 
 ---
