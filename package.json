@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "poses": "node scripts/build-pose-manifest.mjs",
+    "predev": "node scripts/build-pose-manifest.mjs",
+    "prebuild": "node scripts/build-pose-manifest.mjs",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",

@@ -2,16 +2,13 @@
 
 Short looping reference animations for each asana in The Sanctuary. Users with a visual-learning preference watch these in-app to **learn how to enter the pose** and **practice alongside**.
 
-## Generation status — 22 done · 59 pending
+## Generation status
 
-Every per-asana heading below is tagged **✅ DONE** (an `.mp4` exists in `public/poses/`) or **⬜ PENDING** (still to generate). Re-run the tagging check after adding videos; it matches each section's `**Pose key:**` against the files on disk (case-insensitive).
+Every per-asana heading below is tagged **✅ DONE** (an `.mp4` exists in `public/poses/`) or **⬜ PENDING**. The badges are the source of truth — **▶ continue from the first ⬜ PENDING heading** (search the page for "PENDING").
 
-**▶ Continue from #22 (Parsvottanasana).** Sections 1–21 + 74 (Pasasana) are done; everything from 22 onward is pending except 74.
+**How a video registers (no code edit needed):** drop `{poseKey}.mp4` into `public/poses/`. The manifest (`src/data/poseManifest.js`) regenerates on every `npm run dev` / `npm run build` — or run `npm run poses` manually — and `PoseFigure` reads it, so the clip appears in-app automatically. Name the file exactly after the pose key shown in each section's `**Pose key:**` line.
 
-- **Done (22):** 1 Tadasana · 2 Warrior I · 3 Warrior II · 4 Tree · 5 Sukhasana · 6 Seated Twist · 7 Uttanasana · 8 Paschimottanasana · 9 Balasana · 10 Supine Twist · 11 Savasana · 12 Cobra · 13 Bridge · 14 Pigeon · 15 Surya Namaskar · 16 Downward Dog · 17 Legs Up Wall · 18 Trikonasana · 19 Utkatasana · 20 Warrior III · 21 Parsvakonasana · 74 Pasasana
-- **Pending (59):** 22–73, 75 (asanas) + 76–81 (pranayama — lowest priority; seated breathwork, already have stills + voice).
-
-> Tip: the 6 pranayama clips (76–81) add the least value — defer unless you want visual breath-pacing demos. That leaves **53 asana clips** as the real worklist.
+> The pranayama clips (final 6 headings) add the least value — seated breathwork that already has stills + voice. Defer them; the asana clips are the real worklist.
 
 ## What we're generating
 
@@ -494,7 +491,7 @@ Over 5 seconds, starting from Tadasana (frame 1), she: steps her LEFT foot back 
 
 ---
 
-### 22. Parsvottanasana — Pyramid Pose  ⬜ PENDING
+### 22. Parsvottanasana — Pyramid Pose  ✅ DONE
 
 **Pose key:** `parsvottanasana` · **Duration:** 5s
 

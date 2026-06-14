@@ -5,153 +5,43 @@
 
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { VIDEO_FILES, IMAGE_FILES } from '../data/poseManifest'
 
-// ─── Asset maps ──────────────────────────────────────────────────────────────
-// Keys include both the data poseKey AND the disk filename, in case those
-// drifted historically (e.g. `forwardBend` in data, `paschimottanasana.png`
-// on disk; `legsUpWall` in data, `legUpWall.png` on disk).
+// ─── Asset resolution ──────────────────────────────────────────────────────
+// Pose media lives in public/poses/. The set of files on disk is captured in
+// src/data/poseManifest.js, regenerated on every `npm run dev` / `npm run
+// build` by scripts/build-pose-manifest.mjs. Dropping a new {poseKey}.mp4 (or
+// .png) into public/poses/ therefore registers it automatically — no manual
+// map edit, so a new video can't silently fail to appear.
+//
+// POSE_ALIASES handles the few cases where the data poseKey differs from the
+// on-disk filename by more than casing (case is folded automatically). These
+// are code-level naming decisions, not facts about the disk, so they live
+// here rather than in the generated manifest.
+const POSE_ALIASES = {
+  forwardBend: 'paschimottanasana',   // data key → paschimottanasana.{png,mp4}
+  legsUpWall:  'legUpWall',           // data key 'legsUpWall' → legUpWall.{png,mp4}
+}
 
-// Exposed via hasPoseImage() below so call sites can decide between
-// "render PoseFigure" and "fall back to a custom placeholder/icon"
-// when no real image exists for a given poseKey.
+// Resolve a poseKey to a public URL for the given media map, or null if no
+// such file exists on disk. Case-insensitive; honors POSE_ALIASES.
+function resolveMedia(poseKey, fileMap) {
+  if (!poseKey) return null
+  const base = (POSE_ALIASES[poseKey] || poseKey).toLowerCase()
+  const file = fileMap[base]
+  return file ? `/poses/${file}` : null
+}
+
+function resolveImage(poseKey) { return resolveMedia(poseKey, IMAGE_FILES) }
+function resolveVideo(poseKey) { return resolveMedia(poseKey, VIDEO_FILES) }
+
+// Exposed so call sites can decide between "render PoseFigure" and "fall back
+// to a custom placeholder/icon" when no real image exists for a poseKey.
 export function hasPoseImage(poseKey) {
-  return !!POSE_IMAGES[poseKey]
+  return !!resolveImage(poseKey)
 }
 
-const POSE_IMAGES = {
-  tadasana: '/poses/tadasana.png',
-  warrior1: '/poses/warrior1.png',
-  warrior2: '/poses/warrior2.png',
-  tree: '/poses/tree.png',
-  sukhasana: '/poses/sukhasana.png',
-  seatedTwist: '/poses/seatedTwist.png',
-  uttanasana: '/poses/uttanasana.png',
-  forwardBend: '/poses/paschimottanasana.png',
-  paschimottanasana: '/poses/paschimottanasana.png',
-  balasana: '/poses/balasana.png',
-  supineTwist: '/poses/supinetwist.png',
-  supinetwist: '/poses/supinetwist.png',
-  savasana: '/poses/savasana.png',
-  cobra: '/poses/Cobra.png',
-  Cobra: '/poses/Cobra.png',
-  bridge: '/poses/bridge.png',
-  pigeon: '/poses/pigeon.png',
-  suryaNamaskar: '/poses/suryaNamaskar.png',
-  downwardDog: '/poses/downwardDog.png',
-  legsUpWall: '/poses/legUpWall.png',
-  legUpWall: '/poses/legUpWall.png',
-  trikonasana: '/poses/trikonasana.png',
 
-  // Batch 2 — standing
-  utkatasana:                  '/poses/utkatasana.png',
-  warrior3:                    '/poses/warrior3.png',
-  parsvakonasana:              '/poses/parsvakonasana.png',
-  parsvottanasana:             '/poses/parsvottanasana.png',
-  prasaritaPadottanasana:      '/poses/prasaritaPadottanasana.png',
-  anjaneyasana:                '/poses/anjaneyasana.png',
-  utthitaHastaPadangusthasana: '/poses/utthitaHastaPadangusthasana.png',
-  garudasana:                  '/poses/garudasana.png',
-  natarajasana:                '/poses/natarajasana.png',
-
-  // Batch 2 — seated
-  padmasana:        '/poses/padmasana.png',
-  siddhasana:       '/poses/siddhasana.png',
-  vajrasana:        '/poses/vajrasana.png',
-  ardhaPadmasana:   '/poses/ardhaPadmasana.png',
-  baddhaKonasana:   '/poses/baddhaKonasana.png',
-  upavishtaKonasana:'/poses/upavishtaKonasana.png',
-  januSirsasana:    '/poses/januSirsasana.png',
-  gomukhasana:      '/poses/gomukhasana.png',
-  marichyasanaC:    '/poses/marichyasanaC.png',
-  virasana:         '/poses/virasana.png',
-
-  // Batch 2 — supine
-  suptaBaddhaKonasana:    '/poses/suptaBaddhaKonasana.png',
-  suptaPadangusthasana:   '/poses/suptaPadangusthasana.png',
-  apanasana:              '/poses/apanasana.png',
-  jatharaParivartanasana: '/poses/jatharaParivartanasana.png',
-  dhanurasana:            '/poses/dhanurasana.png',
-
-  // Batch 3 — backbends
-  salabhasana:      '/poses/salabhasana.png',
-  ardhaSalabhasana: '/poses/ardhaSalabhasana.png',
-
-  // Batch 3 — hip openers
-  malasana:               '/poses/malasana.png',
-  mandukasana:            '/poses/mandukasana.png',
-  ardhaPigeonForwardFold: '/poses/ardhaPigeonForwardFold.png',
-
-  // Batch 3 — restorative
-  makarasana:    '/poses/makarasana.png',
-  suptaVirasana: '/poses/suptaVirasana.png',
-  suptaSukhasana:'/poses/suptaSukhasana.png',
-
-  // Batch 3 — twists
-  bharadvajasana:      '/poses/bharadvajasana.png',
-  marichyasanaA:       '/poses/marichyasanaA.png',
-  parivrttaTrikonasana:'/poses/parivrttaTrikonasana.png',
-
-  // Batch 3 — inversions
-  halasana:     '/poses/halasana.png',
-  sarvangasana: '/poses/sarvangasana.png',
-  sirsasana:    '/poses/sirsasana.png',
-  sasangasana:  '/poses/sasangasana.png',
-
-  // Batch 3 — sequences (single representative still each)
-  suryaNamaskarB:   '/poses/suryaNamaskarB.png',
-  chandraNamaskar:  '/poses/chandraNamaskar.png',
-  cardiacWarmup:    '/poses/cardiacWarmup.png',
-
-  // Stretch tier — HYP-named seats + advanced poses
-  swastikasana:        '/poses/swastikasana.png',
-  kurmasana:           '/poses/kurmasana.png',
-  kukkutasana:         '/poses/kukkutasana.png',
-  // uttanaKurmasana: image deferred — too complex a shape for current
-  // generator. Falls back to the Material icon via PoseFigure default.
-  mayurasana:          '/poses/mayurasana.png',
-  simhasana:           '/poses/simhasana.png',
-  bhadrasana:          '/poses/bhadrasana.png',
-  kapotasana:          '/poses/kapotasana.png',
-  bakasana:            '/poses/bakasana.png',
-  kakasana:            '/poses/kakasana.png',
-  chaturangaDandasana: '/poses/chaturangaDandasana.png',
-  vasishthasana:       '/poses/vasishthasana.png',
-  astavakrasana:       '/poses/astavakrasana.png',
-  pasasana:            '/poses/pasasana.png',
-  adhoMukhaVrksasana:  '/poses/adhoMukhaVrksasana.png',
-
-  // ── Pranayama stills ─────────────────────────────────────────────────
-  nadiShodhana:        '/poses/nadiShodhana.png',
-  ujjayi:              '/poses/ujjayi.png',
-  bhramari:            '/poses/bhramari.png',
-  sheetali:            '/poses/sheetali.png',
-  bhastrika:           '/poses/bhastrika.png',
-  kapalabhati:         '/poses/kapalabhati.png',
-}
-
-const POSE_VIDEOS = {
-  tadasana: '/poses/tadasana.mp4',
-  warrior1: '/poses/warrior1.mp4',
-  warrior2: '/poses/warrior2.mp4',
-  tree: '/poses/tree.mp4',
-  sukhasana: '/poses/sukhasana.mp4',
-  seatedTwist: '/poses/seatedTwist.mp4',
-  uttanasana: '/poses/uttanasana.mp4',
-  forwardBend: '/poses/paschimottanasana.mp4',
-  paschimottanasana: '/poses/paschimottanasana.mp4',
-  balasana: '/poses/balasana.mp4',
-  supineTwist: '/poses/supinetwist.mp4',
-  supinetwist: '/poses/supinetwist.mp4',
-  savasana: '/poses/savasana.mp4',
-  cobra: '/poses/Cobra.mp4',
-  Cobra: '/poses/Cobra.mp4',
-  bridge: '/poses/bridge.mp4',
-  pigeon: '/poses/pigeon.mp4',
-  suryaNamaskar: '/poses/suryaNamaskar.mp4',
-  downwardDog: '/poses/downwardDog.mp4',
-  legsUpWall: '/poses/legUpWall.mp4',
-  legUpWall: '/poses/legUpWall.mp4',
-}
 
 // ─── SVG fallback (used only if a pose has no image on disk) ────────────────
 function PoseIllustration({ poseKey }) {
@@ -182,8 +72,8 @@ function dimensionFor(size) {
 
 // ─── Inline media (image / video / svg) ─────────────────────────────────────
 function PoseMedia({ poseKey, width, height, variant, breathing, rounded = true, objectFit = 'cover', objectPosition = 'center' }) {
-  const imageSrc = POSE_IMAGES[poseKey]
-  const videoSrc = POSE_VIDEOS[poseKey]
+  const imageSrc = resolveImage(poseKey)
+  const videoSrc = resolveVideo(poseKey)
   const [imgBroken, setImgBroken] = useState(false)
 
   // Reset broken flag if poseKey changes
@@ -252,9 +142,9 @@ function PoseMedia({ poseKey, width, height, variant, breathing, rounded = true,
 // when an ancestor (e.g. PageTransition) creates a transform containing block.
 function PoseExpandedOverlay({ poseKey, onClose }) {
   const [playing, setPlaying] = useState(false)
-  const hasVideo = !!POSE_VIDEOS[poseKey]
-  const imageSrc = POSE_IMAGES[poseKey]
-  const videoSrc = POSE_VIDEOS[poseKey]
+  const videoSrc = resolveVideo(poseKey)
+  const imageSrc = resolveImage(poseKey)
+  const hasVideo = !!videoSrc
 
   // Escape key + body scroll lock
   useEffect(() => {
