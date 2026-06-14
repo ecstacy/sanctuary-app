@@ -42,6 +42,16 @@ function collect(dir, ext) {
   return Object.fromEntries(Object.entries(map).sort(([a], [b]) => a.localeCompare(b)))
 }
 
+// Images may be .webp (preferred — smaller) or .png (until converted). Collect
+// both and prefer the WebP when a pose has both, so a freshly-dropped PNG
+// still renders and swaps to WebP automatically once `npm run poses:webp` runs.
+function collectImages(dir) {
+  const png  = collect(dir, '.png')
+  const webp = collect(dir, '.webp')
+  const merged = { ...png, ...webp }   // webp wins on key collision
+  return Object.fromEntries(Object.entries(merged).sort(([a], [b]) => a.localeCompare(b)))
+}
+
 // Read the VIDEO_FILES already committed in the manifest, so we can preserve
 // them when no local video masters are present.
 function existingVideoFiles() {
@@ -54,7 +64,7 @@ function existingVideoFiles() {
   }
 }
 
-const images = collect(IMG_DIR, '.png')
+const images = collectImages(IMG_DIR)
 
 const localVideos = collect(VID_DIR, '.mp4')
 const videos = Object.keys(localVideos).length > 0 ? localVideos : existingVideoFiles()

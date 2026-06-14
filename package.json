@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "poses": "node scripts/build-pose-manifest.mjs",
+    "poses:webp": "node scripts/convert-poses-webp.mjs",
     "poses:upload": "node scripts/upload-pose-videos.mjs",
     "poses:sync": "node scripts/upload-pose-videos.mjs && node scripts/build-pose-manifest.mjs",
     "predev": "node scripts/build-pose-manifest.mjs",
@@ -48,6 +49,7 @@
     "patch-package": "^8.0.1",
     "postcss": "^8.5.8",
     "postinstall-postinstall": "^2.1.0",
+    "sharp": "^0.35.1",
     "tailwindcss": "^3.4.19",
     "vite": "^8.0.1"
   }
