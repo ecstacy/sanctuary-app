@@ -664,7 +664,7 @@ Over 5 seconds, starting from Tadasana (frame 1), she: bends both knees slightly
 
 ---
 
-### 27. Natarajasana — Dancer's Pose  ⬜ PENDING
+### 27. Natarajasana — Dancer's Pose  ✅ DONE
 
 **Pose key:** `natarajasana` · **Duration:** 5s
 
@@ -682,7 +682,7 @@ Over 5 seconds, starting from Tadasana (frame 1), she: shifts weight onto a stra
 
 ---
 
-### 28. Parivrtta Trikonasana — Revolved Triangle  ⬜ PENDING
+### 28. Parivrtta Trikonasana — Revolved Triangle  ✅ DONE
 
 **Pose key:** `parivrttaTrikonasana` · **Duration:** 5s
 
@@ -706,7 +706,7 @@ These poses use the same approach as Sukhasana (#5) and Savasana (#11): the peak
 
 ---
 
-### 29. Padmasana — Lotus Pose  *(hold-only, no entry)*  ⬜ PENDING
+### 29. Padmasana — Lotus Pose  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `padmasana` · **Duration:** 5s
 
@@ -724,7 +724,7 @@ The subject holds this exact Lotus position for the full 5 seconds. The only mot
 
 ---
 
-### 30. Siddhasana — Accomplished Pose  *(hold-only, no entry)*  ⬜ PENDING
+### 30. Siddhasana — Accomplished Pose  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `siddhasana` · **Duration:** 5s
 
@@ -742,7 +742,7 @@ The subject holds this exact seated position for the full 5 seconds. The only mo
 
 ---
 
-### 31. Vajrasana — Thunderbolt Pose  *(hold-only, no entry)*  ⬜ PENDING
+### 31. Vajrasana — Thunderbolt Pose  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `vajrasana` · **Duration:** 5s
 
@@ -760,7 +760,7 @@ The subject holds this exact kneeling position for the full 5 seconds. The only 
 
 ---
 
-### 32. Ardha Padmasana — Half Lotus  *(hold-only, no entry)*  ⬜ PENDING
+### 32. Ardha Padmasana — Half Lotus  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `ardhaPadmasana` · **Duration:** 5s
 
@@ -778,7 +778,7 @@ The subject holds this exact seated position for the full 5 seconds. Slow subtle
 
 ---
 
-### 33. Baddha Konasana — Bound Angle Pose  *(hold-only, no entry)*  ⬜ PENDING
+### 33. Baddha Konasana — Bound Angle Pose  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `baddhaKonasana` · **Duration:** 5s
 
@@ -796,7 +796,7 @@ The subject holds this seated bound-angle position for the full 5 seconds. Slow 
 
 ---
 
-### 34. Upavishta Konasana — Wide-Angle Seated Forward Bend  ⬜ PENDING
+### 34. Upavishta Konasana — Wide-Angle Seated Forward Bend  ✅ DONE
 
 **Pose key:** `upavishtaKonasana` · **Duration:** 5s
 
@@ -814,7 +814,7 @@ Over 5 seconds, starting from a seated position with both legs extended forward 
 
 ---
 
-### 35. Janu Sirsasana — Head-to-Knee Pose  ⬜ PENDING
+### 35. Janu Sirsasana — Head-to-Knee Pose  ✅ DONE
 
 **Pose key:** `januSirsasana` · **Duration:** 5s
 
@@ -832,7 +832,7 @@ Over 5 seconds, starting from a seated position with both legs extended forward,
 
 ---
 
-### 36. Gomukhasana — Cow Face Pose  ⬜ PENDING
+### 36. Gomukhasana — Cow Face Pose  ✅ DONE
 
 **Pose key:** `gomukhasana` · **Duration:** 5s
 
@@ -855,7 +855,7 @@ Filmed from a fixed three-quarter angle BEHIND her, looking at her back so the h
 
 ---
 
-### 37. Marichyasana A — Marichi's Pose A  ⬜ PENDING
+### 37. Marichyasana A — Marichi's Pose A  ✅ DONE
 
 **Pose key:** `marichyasanaA` · **Duration:** 5s
 
@@ -873,7 +873,7 @@ Over 5 seconds, starting from a seated position, she: extends the left leg forwa
 
 ---
 
-### 38. Marichyasana C — Marichi's Pose C  *(seated twist)*  ⬜ PENDING
+### 38. Marichyasana C — Marichi's Pose C  *(seated twist)*  ✅ DONE
 
 **Pose key:** `marichyasanaC` · **Duration:** 5s
 
@@ -891,7 +891,7 @@ Over 5 seconds, starting from a seated position, she: extends the left leg forwa
 
 ---
 
-### 39. Bharadvajasana — Bharadvaja's Twist  ⬜ PENDING
+### 39. Bharadvajasana — Bharadvaja's Twist  ✅ DONE
 
 **Pose key:** `bharadvajasana` · **Duration:** 5s
 
@@ -909,7 +909,7 @@ Over 5 seconds, starting from a seated position, she: bends both knees and swing
 
 ---
 
-### 40. Virasana — Hero Pose  *(hold-only, no entry)*  ⬜ PENDING
+### 40. Virasana — Hero Pose  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `virasana` · **Duration:** 5s
 
@@ -927,7 +927,7 @@ The subject holds this kneeling Hero seat for the full 5 seconds. Slow subtle br
 
 ---
 
-### 41. Malasana — Garland Pose / Yogic Squat  ⬜ PENDING
+### 41. Malasana — Garland Pose / Yogic Squat  ✅ DONE
 
 **Pose key:** `malasana` · **Duration:** 5s
 
@@ -945,7 +945,7 @@ Over 5 seconds, starting from Tadasana (frame 1), she: steps the feet slightly w
 
 ---
 
-### 42. Mandukasana — Frog Pose  *(hold-only, no entry)*  ⬜ PENDING
+### 42. Mandukasana — Frog Pose  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `mandukasana` · **Duration:** 5s
 
@@ -963,7 +963,7 @@ The subject holds this frog position for the full 5 seconds. Slow deep breath on
 
 ---
 
-### 43. Supta Baddha Konasana — Reclined Bound Angle  *(hold-only, no entry)*  ⬜ PENDING
+### 43. Supta Baddha Konasana — Reclined Bound Angle  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `suptaBaddhaKonasana` · **Duration:** 5s
 
@@ -981,7 +981,7 @@ The subject holds this reclined position for the full 5 seconds. The only motion
 
 ---
 
-### 44. Supta Padangusthasana — Reclined Hand-to-Big-Toe  ⬜ PENDING
+### 44. Supta Padangusthasana — Reclined Hand-to-Big-Toe  ✅ DONE
 
 **Pose key:** `suptaPadangusthasana` · **Duration:** 5s
 
@@ -999,7 +999,7 @@ Over 5 seconds, starting from a flat reclined position (Savasana base), she: ben
 
 ---
 
-### 45. Apanasana — Knees-to-Chest  *(hold-only, no entry)*  ⬜ PENDING
+### 45. Apanasana — Knees-to-Chest  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `apanasana` · **Duration:** 5s
 
