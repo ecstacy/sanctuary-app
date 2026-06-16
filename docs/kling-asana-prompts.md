@@ -34,12 +34,12 @@ Pick the camera angle that *reveals what the pose is teaching*, and keep it
 fixed. Two rules that came out of real Kling failures:
 
 1. **Match the start frame's orientation to the peak.** Side-profile poses
-   (Dancer, the Warriors, Triangle, Side Angle, Pyramid) must start from a
+  (Dancer, the Warriors, Triangle, Side Angle, Pyramid) must start from a
    **side-profile Tadasana**, not the front-facing one — Kling won't rotate
    the body 90° mid-clip and will fake an awkward front-facing version
    instead. Keep one `tadasana-profile.png` for this whole class.
 2. **Behind-the-back binds → rear three-quarter.** If the defining action is
-   hidden from the front (e.g. Gomukhasana's clasp between the shoulder
+  hidden from the front (e.g. Gomukhasana's clasp between the shoulder
    blades), film from behind-and-to-the-side and generate the peak image at
    that angle. A front view of a back-bind teaches nothing.
 
@@ -1017,7 +1017,7 @@ The subject holds this knees-to-chest position for the full 5 seconds. The only 
 
 ---
 
-### 46. Jathara Parivartanasana — Belly Twist  *(hold-only, no entry)*  ⬜ PENDING
+### 46. Jathara Parivartanasana — Belly Twist  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `jatharaParivartanasana` · **Duration:** 5s
 
@@ -1035,7 +1035,7 @@ The subject holds this supine twist for the full 5 seconds. The only motion is s
 
 ---
 
-### 47. Ardha Pigeon Forward Fold — Sleeping Pigeon  *(hold-only, no entry)*  ⬜ PENDING
+### 47. Ardha Pigeon Forward Fold — Sleeping Pigeon  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `ardhaPigeonForwardFold` · **Duration:** 5s
 
@@ -1053,7 +1053,7 @@ The subject holds this sleeping-pigeon fold for the full 5 seconds. The only mot
 
 ---
 
-### 48. Makarasana — Crocodile Pose  *(hold-only, no entry)*  ⬜ PENDING
+### 48. Makarasana — Crocodile Pose  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `makarasana` · **Duration:** 5s
 
@@ -1071,7 +1071,7 @@ The subject holds this prone resting position for the full 5 seconds. The only m
 
 ---
 
-### 49. Supta Virasana — Reclined Hero  *(hold-only, no entry)*  ⬜ PENDING
+### 49. Supta Virasana — Reclined Hero  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `suptaVirasana` · **Duration:** 5s
 
@@ -1089,7 +1089,7 @@ The subject holds this reclined hero position for the full 5 seconds. Slow deep 
 
 ---
 
-### 50. Supta Sukhasana — Reclined Easy Pose  *(hold-only, no entry)*  ⬜ PENDING
+### 50. Supta Sukhasana — Reclined Easy Pose  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `suptaSukhasana` · **Duration:** 5s
 
@@ -1107,7 +1107,7 @@ The subject holds this reclined cross-legged position for the full 5 seconds. Sl
 
 ---
 
-### 51. Dhanurasana — Bow Pose  ⬜ PENDING
+### 51. Dhanurasana — Bow Pose  ✅ DONE
 
 **Pose key:** `dhanurasana` · **Duration:** 5s
 
@@ -1125,7 +1125,7 @@ Over 5 seconds, starting from a flat prone position face-down, she: bends both k
 
 ---
 
-### 52. Salabhasana — Locust Pose  ⬜ PENDING
+### 52. Salabhasana — Locust Pose  ✅ DONE
 
 **Pose key:** `salabhasana` · **Duration:** 5s
 
@@ -1143,7 +1143,7 @@ Over 5 seconds, starting from a flat prone position face-down, she: extends the 
 
 ---
 
-### 53. Ardha Salabhasana — Half Locust  ⬜ PENDING
+### 53. Ardha Salabhasana — Half Locust   ✅ DONE
 
 **Pose key:** `ardhaSalabhasana` · **Duration:** 5s
 
@@ -1179,7 +1179,7 @@ Over 5 seconds, starting from a flat reclined position (Savasana base), she: pre
 
 ---
 
-### 55. Sarvangasana — Shoulder Stand  ⬜ PENDING
+### 55. Sarvangasana — Shoulder Stand  ✅ DONE
 
 **Pose key:** `sarvangasana` · **Duration:** 5s
 
@@ -1197,7 +1197,7 @@ Over 5 seconds, starting from Halasana with shoulders on blankets, she: places h
 
 ---
 
-### 56. Sirsasana — Headstand  ⬜ PENDING
+### 56. Sirsasana — Headstand  ✅ DONE
 
 **Pose key:** `sirsasana` · **Duration:** 5s
 
@@ -1215,7 +1215,7 @@ Over 5 seconds, starting from a kneeling position, she: interlaces the fingers a
 
 ---
 
-### 57. Sasangasana — Rabbit Pose  ⬜ PENDING
+### 57. Sasangasana — Rabbit Pose  ✅ DONE
 
 **Pose key:** `sasangasana` · **Duration:** 5s
 
@@ -1251,10 +1251,31 @@ Sun Salutation B — captured at the peak Warrior I (Virabhadrasana I) moment, m
 
 Generate three reference stills to check the Kling video against: peak Utkatasana (deep chair with arms overhead), peak Warrior I right side (deep lunge with arms up), peak Down Dog (inverted V, holding for 5 breaths). These don't need to be in the app — they're just QA references for the Kling sequence.
 
+**📷 Camera + keyframes — SIDE PROFILE, static.** A vinyasa flow must be shot
+from the side: Chaturanga, Up Dog, Down Dog, the folds and the step-back/
+step-forward lunges all collapse into ambiguous shapes from the front. No
+camera rotation (Kling can't do camera moves on a long clip).
+
+- **Start frame:** `tadasana-profile.png` (a LEFT-side-profile Tadasana — you
+  don't have one yet; generate it once with Nano Banana and reuse it for all
+  profile poses). Prompt: *"Same woman, same studio, same outfit and lighting.
+  Full LEFT-SIDE PROFILE, body facing the left edge of the frame, standing in
+  Mountain Pose: tall spine, weight even on both feet, arms relaxed at the
+  sides. Clean side-on view, full body head-to-toe, plain bright studio."*
+- **End frame:** `tadasana-profile.png` again (closes the loop, start = end).
+- **Optional mid-anchor** (only if your tier has a mid-keyframe slot):
+  `downwardDog.png` — the pose the flow passes through most.
+- The other constituent stills (Chair, Chaturanga, Warrior I) are **QA
+  references only**, not Kling inputs — Kling can't sequence keyframes.
+
+> Reality check: 12s / ~16 transitions is the hardest clip in the set. If the
+> first take rushes or drops a step, split it (Chair→Down Dog as clip A; the
+> two Warrior I cycles + close as clip B) rather than re-rolling the whole thing.
+
 **🎬 Kling motion prompt:**
 
 ```
-Over 12 seconds, starting from Tadasana (frame 1), she flows through Sun Salutation B in one breath-led sequence: (1) inhale bending the knees and sweeping the arms overhead into UTKATASANA / Chair, (2) exhale folding forward to UTTANASANA, (3) inhale halfway lift, (4) exhale stepping back into a CHATURANGA push-up, (5) inhale rolling over the toes into UPWARD DOG, (6) exhale pressing back into DOWN DOG, (7) inhale stepping the right foot forward into WARRIOR I right side with arms overhead, (8) exhale Chaturanga, (9) inhale Up Dog, (10) exhale Down Dog, (11) inhale stepping the left foot forward into WARRIOR I left side, (12) exhale Chaturanga, Up Dog, Down Dog (held briefly), then jump or step forward, halfway lift, fold, inhale rising to UTKATASANA, exhale to TADASANA. Final frame matches frame 1. Smooth, continuous, breath-linked. Static camera.
+Filmed from the side in profile, her body facing the left edge of the frame the entire time; the camera never moves, rotates, or zooms — static, fixed side view. Over 12 seconds, starting from Tadasana (frame 1), she flows through Sun Salutation B in one continuous breath-led sequence, always staying in side profile: (1) inhale, bend the knees and sweep both arms overhead into Utkatasana (Chair); (2) exhale, fold forward to Uttanasana; (3) inhale, halfway lift with a long flat back; (4) exhale, step back to a Chaturanga low push-up, elbows hugging the ribs; (5) inhale, roll over the toes to Upward-Facing Dog, chest open and thighs lifted off the mat; (6) exhale, press back to Downward-Facing Dog, clean inverted-V; (7) inhale, step the right foot forward into Warrior I, arms reaching overhead; (8) exhale, hands down, step back to Chaturanga; (9) inhale, Upward Dog; (10) exhale, Downward Dog; (11) inhale, step the left foot forward into Warrior I on the left side; (12) exhale, Chaturanga, inhale Upward Dog, exhale Downward Dog; then step both feet forward, inhale halfway lift, exhale fold, inhale rise bending the knees back through Utkatasana, exhale stand tall to Tadasana. Final frame identical to frame 1. Smooth, continuous, unhurried, breath-linked; no cuts, no speed ramps. She stays in side profile facing left throughout.
 ```
 
 ---
