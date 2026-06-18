@@ -1,6 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import usePracticeStats from '../hooks/usePracticeStats'
+import { useIsPremium } from '../hooks/useIsPremium'
+import { useVikritiHistory } from '../hooks/useVikritiHistory'
+import VikritiHistoryChart from '../components/VikritiHistoryChart'
+import PaywallSheet from '../components/PaywallSheet'
+import { track, EVENTS } from '../lib/track'
 
 
 const PERIODS = [
@@ -150,6 +155,30 @@ export default function JourneyPage() {
   const navigate = useNavigate()
   const [period, setPeriod] = useState('1w')
   const stats = usePracticeStats()
+
+  // ── Vikriti history (Plus insight) ──────────────────────────────────────
+  // Free users get today's reading on home; Plus users also get the
+  // longitudinal pattern here. Teaser → paywall for non-Plus.
+  const { isPremium } = useIsPremium()
+  const vikritiHistory = useVikritiHistory(30)
+  const [historyPaywallOpen, setHistoryPaywallOpen] = useState(false)
+
+  // Impression denominator for the Plus chart (fires once it has data), so
+  // the unlock CTA (free) and the rendered chart (Plus) are both measurable.
+  const histImpressionRef = useRef(false)
+  useEffect(() => {
+    if (histImpressionRef.current) return
+    if (isPremium && !vikritiHistory.isLoading && vikritiHistory.daysTracked > 0) {
+      histImpressionRef.current = true
+      track(EVENTS.CONTENT_IMPRESSION, {
+        surface:       'vikriti_history',
+        content_type:  'insight',
+        is_premium:    true,
+        days_tracked:  vikritiHistory.daysTracked,
+        dominant:      vikritiHistory.dominant,
+      })
+    }
+  }, [isPremium, vikritiHistory.isLoading, vikritiHistory.daysTracked, vikritiHistory.dominant])
 
   const dailyData = stats.getDailyData(period)
   const filteredSessions = stats.getFilteredSessions(period)
@@ -308,6 +337,35 @@ export default function JourneyPage() {
           </div>
         </div>
 
+        {/* ── Vikriti pattern over time (Plus insight) ── */}
+        <div className="bg-surface-container rounded-xl p-5 stagger-4">
+          <div className="flex items-center gap-2 mb-4">
+            <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">insights</span>
+            <h3 className="font-headline text-base text-on-surface leading-tight">Your dosha over time</h3>
+          </div>
+
+          {isPremium ? (
+            <VikritiHistoryChart history={vikritiHistory} />
+          ) : (
+            <button
+              onClick={() => {
+                track(EVENTS.CTA_CLICKED, { cta_id: 'vikriti_history_unlock', route_name: 'journey' })
+                setHistoryPaywallOpen(true)
+              }}
+              className="w-full text-left"
+              aria-label="Unlock your dosha history with Sanctuary Plus"
+            >
+              <p className="font-body text-sm text-on-surface-variant/85 leading-relaxed mb-3">
+                See how your Vata, Pitta, and Kapha have shifted across the month — your check-ins, read back as a pattern.
+              </p>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-container/60">
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-[13px]">lock</span>
+                <span className="font-label text-[11px] font-semibold text-primary uppercase tracking-wide">Unlock with Plus</span>
+              </span>
+            </button>
+          )}
+        </div>
+
         {/* ── Lifetime Stats ── */}
         <div className="bg-surface-container-low rounded-xl p-5 stagger-4">
           <h3 className="font-headline text-lg text-on-surface mb-4">Lifetime</h3>
@@ -388,6 +446,14 @@ export default function JourneyPage() {
         )}
 
       </div>
+
+      <PaywallSheet
+        open={historyPaywallOpen}
+        onClose={() => setHistoryPaywallOpen(false)}
+        surface="vikriti_history"
+        headline="See your dosha over time"
+        subhead="Plus turns your check-ins into a month-long pattern — and the protocols to act on it."
+      />
 
     </div>
   )

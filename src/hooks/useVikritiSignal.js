@@ -60,6 +60,18 @@ const WINDOW_DAYS = 14
 const HIGH = 3.5
 const LOW  = 2.5
 
+// Single source of truth for the energy×stress → vikriti quadrant mapping.
+// Returns 'vata' | 'pitta' | 'kapha' | null (null = balanced / no clear
+// quadrant). Used by detectVikriti here AND by useVikritiHistory for the
+// per-day timeline, so both surfaces classify identically.
+export function classifyVikriti(avgEnergy, avgStress) {
+  if (avgEnergy == null || avgStress == null) return null
+  if (avgEnergy <= LOW  && avgStress >= HIGH) return 'vata'
+  if (avgEnergy >= HIGH && avgStress >= HIGH) return 'pitta'
+  if (avgEnergy <= LOW  && avgStress <= LOW)  return 'kapha'
+  return null
+}
+
 // Minimums. The same user reporting the same low/high day five times
 // in a row is one data point in disguise; we want at least 3 distinct
 // days AND at least 3 valid samples before we'll trust the pattern.
@@ -221,11 +233,7 @@ export function detectVikriti(checkins) {
   const avgStress = mean(valid.map(c => c.stress_level))
 
   // ── 2-D quadrant assignment ──
-  let vikriti = null
-  if (avgEnergy <= LOW  && avgStress >= HIGH) vikriti = 'vata'
-  else if (avgEnergy >= HIGH && avgStress >= HIGH) vikriti = 'pitta'
-  else if (avgEnergy <= LOW  && avgStress <= LOW)  vikriti = 'kapha'
-
+  const vikriti = classifyVikriti(avgEnergy, avgStress)
   if (!vikriti) return null
 
   // Evidence: how many of the distinct days actually matched the pattern?
