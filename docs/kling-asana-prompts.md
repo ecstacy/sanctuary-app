@@ -1143,7 +1143,7 @@ Over 5 seconds, starting from a flat prone position face-down, she: extends the 
 
 ---
 
-### 53. Ardha Salabhasana — Half Locust   ✅ DONE
+### 53. Ardha Salabhasana — Half Locust  ✅ DONE
 
 **Pose key:** `ardhaSalabhasana` · **Duration:** 5s
 
@@ -1300,7 +1300,7 @@ Over 12 seconds, starting from Tadasana (frame 1), she flows through a Moon Salu
 
 ---
 
-### 60. Cardiac Warmup — Cat-Cow Flow  *(sequence, gentle)*  ⬜ PENDING
+### 60. Cardiac Warmup — Cat-Cow Flow  *(sequence, gentle)*  ✅ DONE
 
 **Pose key:** `cardiacWarmup` · **Duration:** 8s
 
