@@ -240,6 +240,15 @@ marked `*` is required; others are best-effort.
 - **Where**: ProfilePage Delete Account final confirm.
 - **Notes**: Last event before `reset()` is called and tracking stops.
 
+#### `health_consent_granted` / `health_consent_revoked`
+- **Where**: granted at the dosha-quiz consent checkbox (gates quiz start);
+  revoked from Settings → Privacy → "Health-data processing".
+- **Props**: granted `surface*` (e.g. `dosha_quiz`), `version*` (consent text
+  version, bumped to re-prompt), `anonymous*: bool`. Revoked `anonymous*`.
+- **Notes**: GDPR Art. 9 explicit-consent record for dosha/wellness data.
+  Also persisted to `profiles.health_data_consent` so consent is
+  demonstrable server-side.
+
 ### 5.8 Engagement & attention
 
 These events power scroll-depth, CTR, and engagement personalization.
@@ -307,6 +316,113 @@ every component.
 - **Props**: `where*` (component or function name), `kind*: 'render' \| 'fetch' \| 'auth' \| 'storage'`,
   `message` (truncated 200 chars, no stack).
 
+### 5.10 Monetization — Sanctuary Plus
+
+The paywall funnel + promo path + the joining moment. `surface` is the
+through-line on every paywall event — it names the placement so conversion
+can be compared across entry points in one funnel.
+
+#### `paywall_shown`
+- **Where**: `PaywallSheet` render (any surface), once per open.
+- **Props**: `surface*` (`library_asana_card`, `library_pranayama_card`,
+  `dosha_chapter3`, `post_practice`, `settings_upgrade`, `settings_have_code`,
+  `routine_locked`, `asana_detail_locked`, `pranayama_detail_locked`,
+  `protocol_{vikriti}`, `vikriti_{dosha}`), `anonymous*: bool`,
+  `region*` (coarse, from timezone, e.g. `Europe`/`IN`), `purchase_restricted*: bool`.
+
+#### `paywall_dismissed`
+- **Props**: `surface*`, `pane*: 'plans' \| 'promo'`.
+
+#### `paywall_plan_selected`
+- **Where**: tap on a plan card.
+- **Props**: `surface*`, `plan*: 'monthly' \| 'annual'`.
+
+#### `paywall_checkout_started`
+- **Where**: after plan select, before redirecting to the Stripe Payment Link
+  (only fires when a checkout URL env var is configured).
+- **Props**: `surface*`, `plan*`.
+
+#### `paywall_checkout_completed`
+- **Where**: reserved for the Stripe success return. Entitlement itself is
+  set by the `stripe-webhook` Edge Function, not the client — this event is
+  for funnel completeness only.
+- **Props**: `surface`, `plan`.
+
+#### `promo_code_opened` / `promo_code_submitted` / `promo_code_redeemed` / `promo_code_failed`
+- **Where**: the "Have a code?" pane.
+- **Props**: opened `{surface*}`; submitted `{surface*, code_length}`;
+  redeemed `{surface*, code*, granted_until}`; failed `{surface*, reason*}`
+  (reason from the `redeem_promo_code` RPC: `not_found`, `expired`,
+  `exhausted`, `already_redeemed`, `inactive`, `kind_not_supported`, …).
+
+#### `welcome_to_plus_shown` / `welcome_to_plus_dismissed` / `welcome_to_plus_cta_tapped`
+- **Where**: `WelcomeToPlusCard` on home, first session after Plus activates
+  (once per device).
+- **Props**: shown `{triggered_by*: 'stripe_redirect' \| 'first_open'}`;
+  cta_tapped `{cta_id*: 'explore_library' \| 'open_dosha' \| 'set_reminder'}`.
+
+#### Subscription management (via `cta_clicked`)
+Self-serve billing taps reuse `cta_clicked` with distinct `cta_id`s so each
+retention lever is measurable: `manage_subscription` (active),
+`resume_subscription` (cancel-at-period-end state), `dunning_update_payment`
+(payment-failed banner). All open the Stripe Customer Portal.
+
+### 5.11 Vikriti drift & pacifying protocols
+
+The personalization → Plus-content engine: a 14-day check-in pattern surfaces
+a dosha-imbalance reading, which routes to a 3-day protocol (Plus) or a single
+free practice.
+
+#### `vikriti_signal_shown`
+- **Where**: `VikritiCard` on home when the last 14 days of check-ins yield a
+  clear signal (≥3 check-ins across ≥3 days).
+- **Props**: `vikriti*: 'vata' \| 'pitta' \| 'kapha'`, `matching_days*`,
+  `total_days*`, `avg_energy*`, `avg_stress*`, `is_premium*`,
+  `total_protocol_attempts*`, `is_returning*: bool`.
+
+#### `vikriti_free_action_tapped`
+- **Props**: `vikriti*`, `destination*` (free asana/pranayama route),
+  `is_premium*`.
+
+#### `vikriti_plus_action_tapped`
+- **Where**: the protocol CTA. Plus → `/protocol/{vikriti}`; non-Plus → paywall.
+- **Props**: `vikriti*`, `is_premium*`, `total_protocol_attempts*`, `is_returning*`.
+
+#### `vikriti_signal_dismissed`
+- **Props**: `vikriti*`, `is_premium*`.
+
+#### `protocol_opened`
+- **Where**: `ProtocolPage` mount for a Plus user (non-Plus impressions are
+  `paywall_shown` instead).
+- **Props**: `vikriti*`, `total_attempts*`, `days_completed*`.
+
+#### `protocol_day_viewed`
+- **Where**: day-tab switch.
+- **Props**: `vikriti*`, `day*`, `day_completed*: bool`.
+
+#### `protocol_day_completed` / `protocol_day_unmarked`
+- **Where**: the mark-complete toggle.
+- **Props**: completed `{vikriti*, day*, attempt_days_completed*, total_attempts*}`;
+  unmarked `{vikriti*, day*}`.
+
+#### `protocol_finished`
+- **Where**: completing the final day of an attempt — the meaningful
+  retention event.
+- **Props**: `vikriti*`, `attempt_number*`.
+
+### 5.12 Notifications
+
+Local-scheduled reminders today; the schema anticipates server push later.
+
+#### `notification_permission_requested` / `notification_permission_result`
+- **Where**: first enable of a local notification (OS permission prompt).
+  Android 13+ grant rate is the biggest drop-off, so it's measured directly.
+- **Props**: requested `{platform*}`; result `{platform*, granted*: bool, raw_state}`.
+
+#### `notification_reminder_enabled` / `notification_reminder_disabled` / `notification_reminder_time_changed`
+- **Where**: Settings → Notifications (toggle + time picker).
+- **Props**: enabled `{time*}`; disabled `{time*}`; time_changed `{from*, to*}`.
+
 ## 6. What we already track in Supabase (preserved as-is)
 
 These continue firing into the personalization layer. Where a parallel
@@ -332,6 +448,12 @@ product-analytics event makes sense, it's listed in §5 above.
   + `reset()` locally.
 - PII scrubbing remains at the façade level — same allowlist approach
   that `stripLikelyPII` uses today, generalized.
+- **Health-data consent (Art. 9)** is a separate, stricter basis from
+  aggregate-analytics consent. Processing dosha/wellness data requires the
+  explicit `health_consent_granted` opt-in (recorded in
+  `profiles.health_data_consent`); it is independent of the analytics flag.
+  Analytics events about the consent itself (`health_consent_granted/revoked`)
+  still ride the normal aggregate-consent gate.
 
 ## 8. Decisions & open questions
 
@@ -362,3 +484,4 @@ product-analytics event makes sense, it's listed in §5 above.
 |---|---|---|
 | 2026-04-27 | initial draft | Chunk 1 — full taxonomy proposed |
 | 2026-04-27 | review pass | Added §5.8 Engagement & attention (scroll, CTR, impressions, heartbeat, sessions) and `screen_left`. Vendor decision: PostHog EU cloud. |
+| 2026-06-17 | Plus + media | Documented all events added during the Sanctuary Plus + personalization build: §5.10 Monetization (paywall funnel, promo, welcome-to-Plus, subscription mgmt), §5.11 Vikriti drift & protocols, §5.12 Notifications, and `health_consent_granted/revoked` in §5.7. Updated §7 for Art. 9 health-data consent. |
