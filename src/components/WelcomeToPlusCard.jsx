@@ -169,7 +169,7 @@ export default function WelcomeToPlusCard() {
         <button
           onClick={handleDismiss}
           aria-label="Dismiss welcome"
-          className="absolute top-0 right-0 w-7 h-7 rounded-full flex items-center justify-center active:scale-95"
+          className="absolute -top-1 -right-1 w-11 h-11 rounded-full flex items-center justify-center active:scale-95"
         >
           <span
             aria-hidden="true"

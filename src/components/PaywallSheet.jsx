@@ -251,7 +251,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
         {/* Close button */}
         <button
           onClick={handleDismiss}
-          className="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface-container flex items-center justify-center active:scale-95 transition-all"
+          className="absolute top-3 right-3 w-11 h-11 rounded-full bg-surface-container flex items-center justify-center active:scale-95 transition-all"
           aria-label="Close"
         >
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">close</span>
@@ -414,7 +414,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
             <div className="flex items-center gap-3 mt-2 mb-6">
               <button
                 onClick={() => setPane('plans')}
-                className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center active:scale-95"
+                className="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center active:scale-95"
                 aria-label="Back to plans"
               >
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">arrow_back</span>

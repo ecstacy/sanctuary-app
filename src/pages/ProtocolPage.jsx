@@ -190,7 +190,7 @@ export default function ProtocolPage() {
           <button
             onClick={() => navigate(-1)}
             aria-label="Go back"
-            className="absolute top-5 left-5 z-20 w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center"
+            className="absolute top-3 left-3 z-20 w-11 h-11 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center"
           >
             <span aria-hidden="true" className="material-symbols-outlined text-white text-lg">arrow_back</span>
           </button>

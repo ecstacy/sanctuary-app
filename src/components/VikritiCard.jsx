@@ -116,7 +116,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
       <button
         onClick={handleDismiss}
         aria-label="Dismiss reading"
-        className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center active:scale-95 transition-all"
+        className="absolute top-1 right-1 w-11 h-11 rounded-full flex items-center justify-center active:scale-95 transition-all"
       >
         <span
           aria-hidden="true"
