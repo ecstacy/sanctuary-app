@@ -21,7 +21,23 @@
     "greeting": "Willkommen bei",
     "intro": "Ein stiller Ort, um dich wieder mit deinem Körper, Atem und Rhythmus zu verbinden.",
     "getStarted": "Loslegen",
-    "signIn": "Ich habe bereits ein Konto"
+    "signIn": "Ich habe bereits ein Konto",
+    "navSignIn": "Anmelden",
+    "heroTitle1": "Dein Weg zur",
+    "heroTitleAccent": "Balance.",
+    "heroSubtitle": "Eine ganzheitliche Reise, um durch Yoga und ayurvedische Prinzipien Harmonie in Körper und Geist zu finden.",
+    "startJourney": "Deine Reise beginnen",
+    "login": "Anmelden",
+    "dailyRituals": "Tägliche Rituale",
+    "ayurvedaTitle": "Personalisiertes Ayurveda",
+    "ayurvedaBody": "Entdecke dein Dosha und erhalte tägliche Ernährungs- und Wohlfühl-Empfehlungen, abgestimmt auf deine einzigartige Konstitution.",
+    "explorePractices": "Praktiken entdecken",
+    "mindfulTitle": "Achtsame Momente",
+    "mindfulBody": "Kurze, geführte Meditationen für die geschäftige moderne Seele.",
+    "breathTitle": "Das Atem-Labor",
+    "breathBody": "Meistere die Kunst des Pranayama (yogische Atmung), um dein Nervensystem zu regulieren und sofortige Ruhe zu finden.",
+    "matWaiting": "Deine Matte wartet.",
+    "alreadyHaveAccount": "Schon ein Konto? Anmelden"
   },
   "signup": {
     "step1": {
@@ -62,7 +78,22 @@
     "forgotPassword": "Passwort vergessen?",
     "noAccount": "Neu bei The Sanctuary?",
     "signUp": "Konto erstellen",
-    "googleCta": "Mit Google anmelden"
+    "googleCta": "Mit Google anmelden",
+    "goBack": "Zurück",
+    "heading1": "Kehre zu deiner",
+    "headingAccent": "Praxis zurück.",
+    "emailPlaceholder": "du@beispiel.de",
+    "passwordPlaceholder": "••••••••",
+    "emailAria": "E-Mail-Adresse",
+    "passwordAria": "Passwort",
+    "continueWithGoogle": "Mit Google fortfahren",
+    "biometric": "Biometrische Anmeldung verwenden",
+    "haveResetLink": "Ich habe einen Link zum Zurücksetzen des Passworts",
+    "newHere": "Neu hier?",
+    "startJourney": "Deine Reise beginnen",
+    "biometricUnavailable": "Biometrische Authentifizierung ist auf diesem Gerät nicht verfügbar.",
+    "noSavedCreds": "Keine gespeicherten Anmeldedaten gefunden. Bitte melde dich zuerst mit E-Mail und Passwort an.",
+    "biometricFailed": "Biometrische Authentifizierung fehlgeschlagen. Bitte verwende E-Mail und Passwort."
   },
   "nav": {
     "home": "Home",

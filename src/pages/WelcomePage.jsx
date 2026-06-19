@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const ONBOARDING_SEEN_KEY = 'sanctuary.onboarding.seen'
 
 export default function WelcomePage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const heroRef = useRef(null)
 
   // First-time visitors get the value-prop tour. Returning visitors
@@ -42,7 +44,7 @@ export default function WelcomePage() {
             onClick={() => navigate('/login')}
             className="text-sm font-semibold text-primary font-label tracking-wide"
           >
-            Sign in
+            {t('welcome.navSignIn')}
           </button>
         </div>
       </nav>
@@ -61,24 +63,24 @@ export default function WelcomePage() {
 
         <div className="relative z-10 w-full max-w-sm text-center mb-8">
           <h1 className="font-headline text-5xl text-on-surface leading-tight mb-5 stagger-1">
-            Your Path to{' '}
-            <span className="italic font-normal text-primary">Balance.</span>
+            {t('welcome.heroTitle1')}{' '}
+            <span className="italic font-normal text-primary">{t('welcome.heroTitleAccent')}</span>
           </h1>
           <p className="font-body text-base text-on-surface-variant leading-relaxed mb-10 stagger-2">
-            A holistic journey to find harmony in your body and mind through yoga and Ayurvedic principles.
+            {t('welcome.heroSubtitle')}
           </p>
           <div className="flex flex-col gap-3 stagger-3">
             <button
               onClick={() => navigate('/discover')}
               className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
-              Start Your Journey
+              {t('welcome.startJourney')}
             </button>
             <button
               onClick={() => navigate('/login')}
               className="w-full py-4 bg-secondary-container text-on-secondary-container rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
-              Login
+              {t('welcome.login')}
             </button>
           </div>
         </div>
@@ -90,17 +92,17 @@ export default function WelcomePage() {
         {/* Personalized Ayurveda */}
         <div className="bg-surface-container rounded-lg p-8 relative overflow-hidden group stagger-4">
           <span className="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-[10px] font-label uppercase tracking-widest mb-5 inline-block">
-            Daily Rituals
+            {t('welcome.dailyRituals')}
           </span>
-          <h3 className="font-headline text-2xl text-on-surface mb-3">Personalized Ayurveda</h3>
+          <h3 className="font-headline text-2xl text-on-surface mb-3">{t('welcome.ayurvedaTitle')}</h3>
           <p className="text-on-surface-variant text-sm leading-relaxed">
-            Discover your Dosha and receive daily nutrition and wellness guidance tailored to your unique constitution.
+            {t('welcome.ayurvedaBody')}
           </p>
           <button
             onClick={() => navigate('/discover')}
             className="mt-6 text-primary font-label font-semibold text-sm flex items-center gap-1 border-b border-primary/20 pb-0.5"
           >
-            Explore Practices
+            {t('welcome.explorePractices')}
             <span className="material-symbols-outlined text-sm">arrow_forward</span>
           </button>
           <div className="absolute -right-6 -bottom-6 opacity-[0.07] group-hover:scale-110 transition-transform duration-700">
@@ -114,9 +116,9 @@ export default function WelcomePage() {
             <div className="w-14 h-14 bg-tertiary-fixed-dim rounded-full flex items-center justify-center mb-4">
               <span className="material-symbols-outlined text-on-tertiary-container">self_care</span>
             </div>
-            <h3 className="font-headline text-base text-on-surface mb-2">Mindful Moments</h3>
+            <h3 className="font-headline text-base text-on-surface mb-2">{t('welcome.mindfulTitle')}</h3>
             <p className="text-on-surface-variant text-xs leading-relaxed">
-              Short, guided meditations for the busy modern soul.
+              {t('welcome.mindfulBody')}
             </p>
           </div>
         </div>
@@ -124,9 +126,9 @@ export default function WelcomePage() {
         {/* Breath Lab */}
         <div className="bg-surface-container-highest rounded-lg p-8 flex items-center justify-between gap-6 stagger-6">
           <div className="flex-1">
-            <h3 className="font-headline text-2xl text-on-surface mb-3">The Breath Lab</h3>
+            <h3 className="font-headline text-2xl text-on-surface mb-3">{t('welcome.breathTitle')}</h3>
             <p className="text-on-surface-variant text-sm leading-relaxed">
-              Master the art of Pranayama (yogic breathing) to regulate your nervous system and find instant calm.
+              {t('welcome.breathBody')}
             </p>
           </div>
           <div className="relative w-20 h-20 flex-shrink-0 flex items-center justify-center">
@@ -160,18 +162,18 @@ export default function WelcomePage() {
         >
           <span className="material-symbols-outlined text-2xl">self_care</span>
         </div>
-        <h3 className="font-headline text-xl text-on-surface-variant mb-8">Your mat is waiting.</h3>
+        <h3 className="font-headline text-xl text-on-surface-variant mb-8">{t('welcome.matWaiting')}</h3>
         <button
           onClick={() => navigate('/discover')}
           className="px-12 py-4 bg-primary text-on-primary rounded-full font-label text-xs tracking-[0.15em] uppercase font-semibold active:scale-95 transition-all"
         >
-          Start Your Journey
+          {t('welcome.startJourney')}
         </button>
         <button
           onClick={() => navigate('/login')}
           className="mt-6 font-label text-xs text-on-surface-variant/60 hover:text-primary transition-colors uppercase tracking-widest"
         >
-          Already have an account? Sign in
+          {t('welcome.alreadyHaveAccount')}
         </button>
       </section>
 

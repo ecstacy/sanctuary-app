@@ -21,7 +21,23 @@
     "greeting": "Welcome to",
     "intro": "A quiet place to reconnect with your body, breath and rhythm.",
     "getStarted": "Get started",
-    "signIn": "I already have an account"
+    "signIn": "I already have an account",
+    "navSignIn": "Sign in",
+    "heroTitle1": "Your Path to",
+    "heroTitleAccent": "Balance.",
+    "heroSubtitle": "A holistic journey to find harmony in your body and mind through yoga and Ayurvedic principles.",
+    "startJourney": "Start Your Journey",
+    "login": "Login",
+    "dailyRituals": "Daily Rituals",
+    "ayurvedaTitle": "Personalized Ayurveda",
+    "ayurvedaBody": "Discover your Dosha and receive daily nutrition and wellness guidance tailored to your unique constitution.",
+    "explorePractices": "Explore Practices",
+    "mindfulTitle": "Mindful Moments",
+    "mindfulBody": "Short, guided meditations for the busy modern soul.",
+    "breathTitle": "The Breath Lab",
+    "breathBody": "Master the art of Pranayama (yogic breathing) to regulate your nervous system and find instant calm.",
+    "matWaiting": "Your mat is waiting.",
+    "alreadyHaveAccount": "Already have an account? Sign in"
   },
   "signup": {
     "step1": {
@@ -62,7 +78,22 @@
     "forgotPassword": "Forgot password?",
     "noAccount": "New to The Sanctuary?",
     "signUp": "Create an account",
-    "googleCta": "Sign in with Google"
+    "googleCta": "Sign in with Google",
+    "goBack": "Go back",
+    "heading1": "Return to your",
+    "headingAccent": "practice.",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "••••••••",
+    "emailAria": "Email address",
+    "passwordAria": "Password",
+    "continueWithGoogle": "Continue with Google",
+    "biometric": "Use Biometric Login",
+    "haveResetLink": "I have a password reset link",
+    "newHere": "New here?",
+    "startJourney": "Start your journey",
+    "biometricUnavailable": "Biometric authentication is not available on this device.",
+    "noSavedCreds": "No saved credentials found. Please sign in with email and password first.",
+    "biometricFailed": "Biometric authentication failed. Please use email and password."
   },
   "nav": {
     "home": "Home",
