@@ -206,6 +206,24 @@
       "deletePartial": "Der Großteil deiner Daten wurde entfernt, einige Einträge konnten jedoch nicht gelöscht werden. Bitte kontaktiere den Support."
     }
   },
+  "recommendations": {
+    "goBack": "Zurück",
+    "searchPlaceholder": "Beschreibe, wie du dich fühlst...",
+    "searchAria": "Empfehlungen suchen",
+    "clearSearch": "Suche löschen",
+    "popularSearches": "Beliebte Suchen",
+    "tellUsHurts": "Sag uns, was schmerzt.",
+    "typePrompt": "Gib dein Symptom oder Anliegen ein, und wir empfehlen dir die passenden Yoga- und Ayurveda-Praktiken.",
+    "noMatches": "Keine Treffer für „{{query}}“",
+    "tryDifferent": "Versuche andere Wörter — zum Beispiel „Rückenschmerzen“, „Kopfschmerzen“, „Angst“ oder „kann nicht schlafen“.",
+    "tryInstead": "Versuche stattdessen diese",
+    "recommendedForYou": "Für dich empfohlen",
+    "recommendedPractices": "Empfohlene Praktiken · {{count}} Posen",
+    "ayurvedicInsight": "Ayurvedischer Einblick",
+    "alsoRelated": "Ebenfalls passend",
+    "practicesBreathwork": "{{count}} Praktiken · Atemarbeit",
+    "disclaimer": "Diese Empfehlungen dienen nur dem allgemeinen Wohlbefinden. Wenn du eine Erkrankung hast, konsultiere bitte eine medizinische Fachkraft, bevor du mit einem Übungsprogramm beginnst."
+  },
   "practice": {
     "close": "Schließen",
     "voiceOn": "Sprachführung ausschalten",

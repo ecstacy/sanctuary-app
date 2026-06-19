@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { searchRecommendations, POPULAR_SEARCHES } from '../data/recommendations'
 import * as analytics from '../lib/analytics'
@@ -7,6 +8,7 @@ import useScrollDepth from '../hooks/useScrollDepth'
 
 export default function RecommendationsPage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const location = useLocation()
   const inputRef = useRef(null)
   useScrollDepth('recommendations')
@@ -137,7 +139,7 @@ export default function RecommendationsPage() {
 
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-5">
-        <button onClick={() => navigate('/home')} className="text-on-surface-variant" aria-label="Go back">
+        <button onClick={() => navigate('/home')} className="text-on-surface-variant" aria-label={t('recommendations.goBack')}>
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
         <span className="font-headline italic text-primary text-base">The Sanctuary</span>
@@ -157,15 +159,15 @@ export default function RecommendationsPage() {
             value={query}
             onChange={e => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Describe what you're feeling..."
+            placeholder={t('recommendations.searchPlaceholder')}
             className="w-full bg-surface-container rounded-full pl-11 pr-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container-high transition-colors placeholder:text-on-surface-variant/40"
-            aria-label="Search recommendations"
+            aria-label={t('recommendations.searchAria')}
           />
           {query.length > 0 && (
             <button
               onClick={() => { setQuery(''); setResults([]); setHasSearched(false); inputRef.current?.focus() }}
               className="absolute right-4 top-1/2 -translate-y-1/2"
-              aria-label="Clear search"
+              aria-label={t('recommendations.clearSearch')}
             >
               <span className="material-symbols-outlined text-on-surface-variant/40 text-lg">close</span>
             </button>
@@ -176,7 +178,7 @@ export default function RecommendationsPage() {
         {!hasSearched && (
           <div className="stagger-2">
             <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
-              Popular Searches
+              {t('recommendations.popularSearches')}
             </p>
             <div className="flex flex-wrap gap-2 mb-8">
               {POPULAR_SEARCHES.map((item, i) => (
@@ -194,11 +196,10 @@ export default function RecommendationsPage() {
             <div className="bg-surface-container-low rounded-lg p-6 text-center">
               <span className="material-symbols-outlined text-primary/30 text-4xl mb-3 block">self_care</span>
               <p className="font-headline italic text-lg text-on-surface-variant/60 mb-2">
-                Tell us what hurts.
+                {t('recommendations.tellUsHurts')}
               </p>
               <p className="font-body text-xs text-on-surface-variant/40 leading-relaxed">
-                Type your symptom or concern and we'll recommend<br />
-                the right yoga and Ayurvedic practices for you.
+                {t('recommendations.typePrompt')}
               </p>
             </div>
           </div>
@@ -211,13 +212,13 @@ export default function RecommendationsPage() {
               <span className="material-symbols-outlined text-on-surface-variant/40 text-2xl">search_off</span>
             </div>
             <h3 className="font-headline text-xl text-on-surface mb-2">
-              No matches for "{query}"
+              {t('recommendations.noMatches', { query })}
             </h3>
             <p className="font-body text-xs text-on-surface-variant leading-relaxed max-w-xs mb-6">
-              Try different words — for example "back pain", "headache", "anxiety", or "can't sleep".
+              {t('recommendations.tryDifferent')}
             </p>
             <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">
-              Try these instead
+              {t('recommendations.tryInstead')}
             </p>
             <div className="flex flex-wrap justify-center gap-2">
               {POPULAR_SEARCHES.slice(0, 4).map((item, i) => (
@@ -247,7 +248,7 @@ export default function RecommendationsPage() {
                 <div className="flex items-center gap-2 mb-3">
                   <span className="material-symbols-outlined text-white/80 text-lg">{topResult.icon}</span>
                   <p className="font-label text-[10px] text-white/70 uppercase tracking-widest">
-                    Recommended for you
+                    {t('recommendations.recommendedForYou')}
                   </p>
                 </div>
                 <h2 className="font-headline text-2xl text-white mb-2">
@@ -262,7 +263,7 @@ export default function RecommendationsPage() {
             {/* Practice cards */}
             <div className="mb-5 stagger-3">
               <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
-                Recommended Practices · {topResult.practices.length} poses
+                {t('recommendations.recommendedPractices', { count: topResult.practices.length })}
               </p>
               <div className="flex flex-col gap-3">
                 {topResult.practices.map((practice, i) => {
@@ -325,7 +326,7 @@ export default function RecommendationsPage() {
                 <span className="material-symbols-outlined text-primary text-base mt-0.5">spa</span>
                 <div>
                   <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-2">
-                    Ayurvedic Insight
+                    {t('recommendations.ayurvedicInsight')}
                   </p>
                   <p className="font-body text-xs text-on-surface leading-relaxed italic">
                     {topResult.ayurvedicTip}
@@ -338,7 +339,7 @@ export default function RecommendationsPage() {
             {otherResults.length > 0 && (
               <div className="mb-6 stagger-6">
                 <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
-                  Also Related
+                  {t('recommendations.alsoRelated')}
                 </p>
                 <div className="flex flex-col gap-3">
                   {otherResults.map((rec, i) => (
@@ -353,7 +354,7 @@ export default function RecommendationsPage() {
                       <div className="flex-1">
                         <p className="font-body font-semibold text-sm text-on-surface">{rec.label}</p>
                         <p className="font-label text-[10px] text-on-surface-variant mt-0.5">
-                          {rec.practices.length} practices · Breathwork
+                          {t('recommendations.practicesBreathwork', { count: rec.practices.length })}
                         </p>
                       </div>
                       <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
@@ -367,7 +368,7 @@ export default function RecommendationsPage() {
             <div className="flex items-start gap-2 py-4 border-t border-surface-container-high">
               <span className="material-symbols-outlined text-on-surface-variant/30 text-sm mt-0.5">info</span>
               <p className="font-label text-[9px] text-on-surface-variant/40 leading-relaxed">
-                These recommendations are for general wellness only. If you have a medical condition, please consult a healthcare professional before starting any exercise program.
+                {t('recommendations.disclaimer')}
               </p>
             </div>
 

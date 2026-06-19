@@ -206,6 +206,24 @@
       "deletePartial": "Most of your data was removed, but some entries couldn't be deleted. Please contact support."
     }
   },
+  "recommendations": {
+    "goBack": "Go back",
+    "searchPlaceholder": "Describe what you're feeling...",
+    "searchAria": "Search recommendations",
+    "clearSearch": "Clear search",
+    "popularSearches": "Popular Searches",
+    "tellUsHurts": "Tell us what hurts.",
+    "typePrompt": "Type your symptom or concern and we'll recommend the right yoga and Ayurvedic practices for you.",
+    "noMatches": "No matches for \"{{query}}\"",
+    "tryDifferent": "Try different words — for example \"back pain\", \"headache\", \"anxiety\", or \"can't sleep\".",
+    "tryInstead": "Try these instead",
+    "recommendedForYou": "Recommended for you",
+    "recommendedPractices": "Recommended Practices · {{count}} poses",
+    "ayurvedicInsight": "Ayurvedic Insight",
+    "alsoRelated": "Also Related",
+    "practicesBreathwork": "{{count}} practices · Breathwork",
+    "disclaimer": "These recommendations are for general wellness only. If you have a medical condition, please consult a healthcare professional before starting any exercise program."
+  },
   "practice": {
     "close": "Close",
     "voiceOn": "Turn voice guidance off",
