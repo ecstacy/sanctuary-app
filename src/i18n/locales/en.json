@@ -187,6 +187,21 @@
       "reminderSub": "A gentle nudge at your chosen time"
     }
   },
+  "disclaimer": {
+    "body": "The Sanctuary offers general wellness and educational content rooted in yoga and Ayurveda. It is not medical advice, diagnosis, or treatment. Consult a qualified healthcare provider before changing your diet, exercise, or health routine — especially if you are pregnant or managing a medical condition."
+  },
+  "vikritiChart": {
+    "empty": "No check-ins yet",
+    "emptyHint": "A pre-practice check-in starts your timeline",
+    "balanced": "Balanced",
+    "summaryDominant_one": "Mostly {{label}} over your last {{count}} check-in day",
+    "summaryDominant_other": "Mostly {{label}} over your last {{count}} check-in days",
+    "summaryBalanced_one": "Balanced over your last {{count}} check-in day",
+    "summaryBalanced_other": "Balanced over your last {{count}} check-in days",
+    "cellHint": "Each cell is one day, colored by the dosha your energy & stress pointed to.",
+    "ariaDays": "{{label}} {{count}} days",
+    "tooltip": "{{date}} — {{label}} (energy {{energy}}, stress {{stress}})"
+  },
   "consent": {
     "card": {
       "title": "A quiet ask.",

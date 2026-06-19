@@ -187,6 +187,21 @@
       "reminderSub": "Ein sanfter Hinweis zu deiner gewählten Zeit"
     }
   },
+  "disclaimer": {
+    "body": "The Sanctuary bietet allgemeine Wellness- und Bildungsinhalte auf Basis von Yoga und Ayurveda. Es handelt sich nicht um medizinische Beratung, Diagnose oder Behandlung. Konsultiere eine qualifizierte medizinische Fachkraft, bevor du deine Ernährung, Bewegung oder Gesundheitsroutine änderst — besonders während einer Schwangerschaft oder bei einer bestehenden Erkrankung."
+  },
+  "vikritiChart": {
+    "empty": "Noch keine Check-ins",
+    "emptyHint": "Ein Check-in vor der Praxis startet deine Zeitleiste",
+    "balanced": "Ausgeglichen",
+    "summaryDominant_one": "Überwiegend {{label}} an deinem letzten {{count}} Check-in-Tag",
+    "summaryDominant_other": "Überwiegend {{label}} an deinen letzten {{count}} Check-in-Tagen",
+    "summaryBalanced_one": "Ausgeglichen an deinem letzten {{count}} Check-in-Tag",
+    "summaryBalanced_other": "Ausgeglichen an deinen letzten {{count}} Check-in-Tagen",
+    "cellHint": "Jede Zelle ist ein Tag, eingefärbt nach dem Dosha, auf das deine Energie & dein Stress hindeuteten.",
+    "ariaDays": "{{label}} {{count}} Tage",
+    "tooltip": "{{date}} — {{label}} (Energie {{energy}}, Stress {{stress}})"
+  },
   "consent": {
     "card": {
       "title": "Eine leise Bitte.",

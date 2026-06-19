@@ -12,26 +12,30 @@
 
 // Dosha palette — matches DOSHA_DATA / DoshaProfileContent so colors mean the
 // same thing everywhere in the app.
+import { useTranslation } from 'react-i18next'
+
 const COLOR = {
   vata:     '#7b93a8',
   pitta:    '#c47a3a',
   kapha:    '#6b8f5e',
   balanced: '#cbd2cc',
 }
-const LABEL = { vata: 'Vata', pitta: 'Pitta', kapha: 'Kapha', balanced: 'Balanced' }
-
-function capitalize(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : '' }
 
 export default function VikritiHistoryChart({ history }) {
+  const { t } = useTranslation()
   const { days, counts, dominant, daysTracked, windowDays } = history
+
+  // Dosha names (vata/pitta/kapha) are proper nouns kept as-is; only
+  // "balanced" is localized.
+  const LABEL = { vata: 'Vata', pitta: 'Pitta', kapha: 'Kapha', balanced: t('vikritiChart.balanced') }
 
   if (daysTracked === 0) {
     return (
       <div className="h-32 flex items-center justify-center text-center">
         <div>
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/20 text-4xl mb-2 block">insights</span>
-          <p className="font-body text-sm text-on-surface-variant/40">No check-ins yet</p>
-          <p className="font-body text-xs text-on-surface-variant/25 mt-1">A pre-practice check-in starts your timeline</p>
+          <p className="font-body text-sm text-on-surface-variant/40">{t('vikritiChart.empty')}</p>
+          <p className="font-body text-xs text-on-surface-variant/25 mt-1">{t('vikritiChart.emptyHint')}</p>
         </div>
       </div>
     )
@@ -51,8 +55,8 @@ export default function VikritiHistoryChart({ history }) {
 
   // Summary sentence.
   const summary = dominant
-    ? `Mostly ${LABEL[dominant]} over your last ${daysTracked} check-in ${daysTracked === 1 ? 'day' : 'days'}`
-    : `Balanced over your last ${daysTracked} check-in ${daysTracked === 1 ? 'day' : 'days'}`
+    ? t('vikritiChart.summaryDominant', { count: daysTracked, label: LABEL[dominant] })
+    : t('vikritiChart.summaryBalanced', { count: daysTracked })
 
   // Which quadrants to show in the legend — only those that occurred.
   const legendKeys = ['vata', 'pitta', 'kapha', 'balanced'].filter(k => counts[k] > 0)
@@ -61,7 +65,7 @@ export default function VikritiHistoryChart({ history }) {
     <div>
       <p className="font-body text-sm text-on-surface mb-1">{summary}</p>
       <p className="font-label text-[11px] text-on-surface-variant/60 mb-4">
-        Each cell is one day, colored by the dosha your energy &amp; stress pointed to.
+        {t('vikritiChart.cellHint')}
       </p>
 
       <div className="overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
@@ -70,7 +74,7 @@ export default function VikritiHistoryChart({ history }) {
           height={cellH + 22}
           className="block"
           role="img"
-          aria-label={`${summary}. ${legendKeys.map(k => `${LABEL[k]} ${counts[k]} days`).join(', ')}.`}
+          aria-label={`${summary}. ${legendKeys.map(k => t('vikritiChart.ariaDays', { label: LABEL[k], count: counts[k] })).join(', ')}.`}
         >
           {days.map((d, i) => {
             const x = i * (cellW + gap)
@@ -86,7 +90,7 @@ export default function VikritiHistoryChart({ history }) {
                   fill={COLOR[key]}
                   opacity={d.vikriti ? 0.9 : 0.45}
                 >
-                  <title>{`${fmt(d.date)} — ${LABEL[key]} (energy ${d.energy}, stress ${d.stress})`}</title>
+                  <title>{t('vikritiChart.tooltip', { date: fmt(d.date), label: LABEL[key], energy: d.energy, stress: d.stress })}</title>
                 </rect>
                 {i % labelEvery === 0 && (
                   <text
