@@ -127,6 +127,31 @@
       "deletePartial": "Most of your data was removed, but some entries couldn't be deleted. Please contact support."
     }
   },
+  "vikritiCard": {
+    "dismiss": "Dismiss reading",
+    "todaysReading": "Today's Reading",
+    "evidence_one": "Based on {{matching}} of your last {{total}} check-in.",
+    "evidence_other": "Based on {{matching}} of your last {{total}} check-in days.",
+    "returningKicker": "Picking it back up · attempt {{n}}",
+    "startProtocol": "Start your {{dosha}} protocol",
+    "continueProtocol": "Continue your {{dosha}} protocol",
+    "orJust": "Or just {{action}}",
+    "plusBadge": "Plus"
+  },
+  "welcomePlus": {
+    "dismiss": "Dismiss welcome",
+    "kicker": "You're in",
+    "title": "Welcome to Sanctuary Plus",
+    "body": "The full library, your personalized protocols, and the wisdom of Charaka — all yours now.",
+    "ctas": {
+      "exploreLabel": "Explore the full library",
+      "exploreSub": "60+ asanas, advanced pranayama",
+      "doshaLabel": "Read Chapter 3 of your dosha",
+      "doshaSub": "Live by your nature — season, hour, plate",
+      "reminderLabel": "Set a daily practice reminder",
+      "reminderSub": "A gentle nudge at your chosen time"
+    }
+  },
   "consent": {
     "card": {
       "title": "A quiet ask.",

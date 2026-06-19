@@ -127,6 +127,31 @@
       "deletePartial": "आपका अधिकांश डेटा हटा दिया गया, पर कुछ प्रविष्टियाँ नहीं हट सकीं। कृपया सहायता से संपर्क करें।"
     }
   },
+  "vikritiCard": {
+    "dismiss": "रीडिंग बंद करें",
+    "todaysReading": "आज की रीडिंग",
+    "evidence_one": "आपके पिछले {{total}} में से {{matching}} चेक-इन के आधार पर।",
+    "evidence_other": "आपके पिछले {{total}} चेक-इन दिनों में से {{matching}} के आधार पर।",
+    "returningKicker": "फिर से शुरू · प्रयास {{n}}",
+    "startProtocol": "अपना {{dosha}} प्रोटोकॉल शुरू करें",
+    "continueProtocol": "अपना {{dosha}} प्रोटोकॉल जारी रखें",
+    "orJust": "या बस {{action}}",
+    "plusBadge": "Plus"
+  },
+  "welcomePlus": {
+    "dismiss": "स्वागत बंद करें",
+    "kicker": "आप शामिल हैं",
+    "title": "Sanctuary Plus में आपका स्वागत है",
+    "body": "पूरी लाइब्रेरी, आपके व्यक्तिगत प्रोटोकॉल और चरक का ज्ञान — अब सब आपका है।",
+    "ctas": {
+      "exploreLabel": "पूरी लाइब्रेरी देखें",
+      "exploreSub": "60+ आसन, उन्नत प्राणायाम",
+      "doshaLabel": "अपने दोष का अध्याय 3 पढ़ें",
+      "doshaSub": "अपनी प्रकृति के अनुसार जिएँ — मौसम, समय, थाली",
+      "reminderLabel": "रोज़ अभ्यास की याद सेट करें",
+      "reminderSub": "आपके चुने समय पर एक कोमल संकेत"
+    }
+  },
   "consent": {
     "card": {
       "title": "एक शांत अनुरोध।",

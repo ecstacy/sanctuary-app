@@ -26,6 +26,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { track, EVENTS } from '../lib/track'
@@ -39,22 +40,22 @@ const STORAGE_KEY = (userId) => `sanctuary.welcomedToPlus.${userId}`
 const CTAS = [
   {
     id:       'explore_library',
-    label:    'Explore the full library',
-    sub:      '60+ asanas, advanced pranayama',
+    labelKey: 'welcomePlus.ctas.exploreLabel',
+    subKey:   'welcomePlus.ctas.exploreSub',
     icon:     'library_books',
     route:    '/discover',
   },
   {
     id:       'open_dosha',
-    label:    'Read Chapter 3 of your dosha',
-    sub:      'Live by your nature — season, hour, plate',
+    labelKey: 'welcomePlus.ctas.doshaLabel',
+    subKey:   'welcomePlus.ctas.doshaSub',
     icon:     'auto_awesome',
     route:    '/dosha',
   },
   {
     id:       'set_reminder',
-    label:    'Set a daily practice reminder',
-    sub:      'A gentle nudge at your chosen time',
+    labelKey: 'welcomePlus.ctas.reminderLabel',
+    subKey:   'welcomePlus.ctas.reminderSub',
     icon:     'notifications',
     route:    '/profile',  // Notifications section lives here
   },
@@ -62,11 +63,13 @@ const CTAS = [
 
 export default function WelcomeToPlusCard() {
   const navigate                          = useNavigate()
+  const { t }                             = useTranslation()
   const { user }                          = useAuth()
   const { isPremium }                     = useIsPremium()
   const [searchParams, setSearchParams]   = useSearchParams()
   const [show, setShow]                   = useState(false)
   const impressionRef                     = useRef(false)
+  const decidedRef                        = useRef(false)
 
   // Stripe success-redirects can target `/home?welcome=1` so the welcome
   // shows even if the user opens the app from a fresh device (or the
@@ -76,34 +79,35 @@ export default function WelcomeToPlusCard() {
   const welcomeForced = searchParams.get('welcome') === '1'
 
   // ── Eligibility ─────────────────────────────────────────────────────────
-  // Show iff: signed in + Plus active + (forced by query param OR we
-  // haven't shown this device yet). The localStorage read is synchronous
-  // so we don't get a flash of the card before the dismiss-state catches up.
+  // Decide show/hide ONCE per mount, keyed on auth + premium only. We
+  // deliberately don't depend on searchParams: stripping `?welcome=1`
+  // below mutates it, and re-running this effect would re-read the
+  // (now-written) seen flag and hide a card we just chose to show. The
+  // `decidedRef` guard makes the decision sticky for the session.
   useEffect(() => {
     if (!user?.id || !isPremium) {
       setShow(false)
+      decidedRef.current = false   // re-evaluate if they later become Plus
       return
     }
+    if (decidedRef.current) return
+    decidedRef.current = true
+
     if (welcomeForced) {
       setShow(true)
-      // Strip the param immediately so a reload doesn't keep re-triggering
-      // the welcome — once it's shown, it should follow normal dismiss
-      // rules (localStorage flag set on close).
+      // Strip the param so a reload doesn't re-trigger the welcome.
       const next = new URLSearchParams(searchParams)
       next.delete('welcome')
       setSearchParams(next, { replace: true })
       return
     }
     try {
-      const seen = localStorage.getItem(STORAGE_KEY(user.id))
-      setShow(!seen)
+      setShow(!localStorage.getItem(STORAGE_KEY(user.id)))
     } catch {
-      // Storage unavailable (Safari private mode etc.) — don't show, but
-      // also don't crash. Better than spamming the user with the welcome
-      // on every page load.
-      setShow(false)
+      setShow(false)   // storage unavailable — fail closed (don't spam)
     }
-  }, [user?.id, isPremium, welcomeForced, searchParams, setSearchParams])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id, isPremium])
 
   // Fire SHOWN once per (mount, eligible) pair so impressions match
   // unique-user-day, not re-render count. The `triggered_by` prop lets
@@ -116,13 +120,24 @@ export default function WelcomeToPlusCard() {
     track(EVENTS.WELCOME_TO_PLUS_SHOWN, {
       triggered_by: welcomeForced ? 'stripe_redirect' : 'first_open',
     })
+    // Mark seen the instant it shows — NOT only on dismiss. Otherwise a
+    // user who never taps dismiss/CTA (just scrolls past or closes the
+    // app) never sets the flag, and the card + confetti replay on every
+    // launch. One display = welcomed for good.
+    markSeen()
   }, [show, welcomeForced])
 
-  function persistDismissed() {
+  // Persist the once-per-device flag. Separate from hiding so we can mark
+  // seen on first show while the card stays visible for the session.
+  function markSeen() {
     if (!user?.id) return
     try {
       localStorage.setItem(STORAGE_KEY(user.id), new Date().toISOString())
     } catch { /* non-fatal */ }
+  }
+
+  function persistDismissed() {
+    markSeen()
     setShow(false)
   }
 
@@ -168,7 +183,7 @@ export default function WelcomeToPlusCard() {
         {/* Dismiss */}
         <button
           onClick={handleDismiss}
-          aria-label="Dismiss welcome"
+          aria-label={t('welcomePlus.dismiss')}
           className="absolute -top-1 -right-1 w-11 h-11 rounded-full flex items-center justify-center active:scale-95"
         >
           <span
@@ -191,16 +206,16 @@ export default function WelcomeToPlusCard() {
         </div>
 
         <p className="font-label text-[10px] font-semibold uppercase tracking-[0.22em] text-primary mb-2">
-          You&apos;re in
+          {t('welcomePlus.kicker')}
         </p>
         <h2
           id="welcome-to-plus-headline"
           className="font-headline text-2xl text-on-surface leading-tight mb-2 pr-8"
         >
-          Welcome to Sanctuary Plus
+          {t('welcomePlus.title')}
         </h2>
         <p className="font-body text-sm text-on-surface-variant/85 leading-relaxed mb-5 pr-2">
-          The full library, your personalized protocols, and the wisdom of Charaka — all yours now.
+          {t('welcomePlus.body')}
         </p>
 
         {/* Three CTAs — pick one or all. Each is a tap-to-explore. */}
@@ -220,8 +235,8 @@ export default function WelcomeToPlusCard() {
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-body font-semibold text-sm text-on-surface leading-tight">{cta.label}</p>
-                  <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5 leading-snug">{cta.sub}</p>
+                  <p className="font-body font-semibold text-sm text-on-surface leading-tight">{t(cta.labelKey)}</p>
+                  <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5 leading-snug">{t(cta.subKey)}</p>
                 </div>
                 <span
                   aria-hidden="true"

@@ -30,11 +30,13 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { track, EVENTS } from '../lib/track'
 import { useProtocolProgress } from '../hooks/useProtocolProgress'
 
 export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { vikriti, evidence, recommendations: r } = signal
   const [dismissed, setDismissed] = useState(false)
   const impressionFiredRef = useRef(false)
@@ -115,7 +117,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
       {/* Dismiss — small, top-right. Doesn't compete with the actions. */}
       <button
         onClick={handleDismiss}
-        aria-label="Dismiss reading"
+        aria-label={t('vikritiCard.dismiss')}
         className="absolute top-1 right-1 w-11 h-11 rounded-full flex items-center justify-center active:scale-95 transition-all"
       >
         <span
@@ -140,7 +142,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
           className="font-label text-[10px] font-semibold uppercase tracking-[0.22em]"
           style={{ color: r.accentHex }}
         >
-          Today's Reading
+          {t('vikritiCard.todaysReading')}
         </p>
       </div>
 
@@ -159,8 +161,11 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
           this. "We're not guessing — you told us." This factual back-up
           is what separates a teacher's nudge from a horoscope. */}
       <p className="font-label text-[11px] text-on-surface-variant/60 mb-5">
-        Based on {evidence.matchingDays} of your last {evidence.totalDays} check-in
-        {evidence.totalDays === 1 ? '' : ' days'}.
+        {t('vikritiCard.evidence', {
+          count:    evidence.totalDays,
+          matching: evidence.matchingDays,
+          total:    evidence.totalDays,
+        })}
       </p>
 
       {/* Action area — branches on entitlement.
@@ -185,7 +190,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
               className="font-label text-[10px] font-semibold uppercase tracking-[0.18em] mb-2"
               style={{ color: r.accentHex }}
             >
-              Picking it back up · {ordinal(nextAttemptNumber)} time
+              {t('vikritiCard.returningKicker', { n: nextAttemptNumber })}
             </p>
           )}
 
@@ -199,8 +204,8 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
           >
             <span className={`font-body text-sm font-semibold ${r.textColor}`}>
               {isReturning
-                ? `Continue your ${capitalize(vikriti)} protocol`
-                : `Start your ${capitalize(vikriti)} protocol`}
+                ? t('vikritiCard.continueProtocol', { dosha: capitalize(vikriti) })
+                : t('vikritiCard.startProtocol', { dosha: capitalize(vikriti) })}
             </span>
             <span
               aria-hidden="true"
@@ -217,7 +222,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
             onClick={handleFreeAction}
             className="w-full px-2 py-2 text-center font-body text-xs text-on-surface-variant/70 active:scale-95 transition-all"
           >
-            Or just {r.free.label.replace(/^Tonight: |^Try /, '').toLowerCase()}
+            {t('vikritiCard.orJust', { action: r.free.label.replace(/^Tonight: |^Try /, '').toLowerCase() })}
           </button>
         </>
       ) : (
@@ -263,7 +268,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
               <span
                 className={`font-label text-[9px] font-semibold uppercase tracking-wide ${r.textColor}`}
               >
-                Plus
+                {t('vikritiCard.plusBadge')}
               </span>
             </div>
           </button>
@@ -278,17 +283,4 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
 function capitalize(s) {
   if (!s) return ''
   return s.charAt(0).toUpperCase() + s.slice(1)
-}
-
-// English ordinal suffix — 1st, 2nd, 3rd, 4th, … 11th, 12th, 13th, … 21st.
-// Used only on this surface so kept inline rather than promoted to a util.
-// If we need ordinals elsewhere (Journey page, etc.) extract then.
-function ordinal(n) {
-  const mod100 = n % 100
-  if (mod100 >= 11 && mod100 <= 13) return `${n}th`
-  const mod10 = n % 10
-  if (mod10 === 1) return `${n}st`
-  if (mod10 === 2) return `${n}nd`
-  if (mod10 === 3) return `${n}rd`
-  return `${n}th`
 }

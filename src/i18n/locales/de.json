@@ -127,6 +127,31 @@
       "deletePartial": "Der Großteil deiner Daten wurde entfernt, einige Einträge konnten jedoch nicht gelöscht werden. Bitte kontaktiere den Support."
     }
   },
+  "vikritiCard": {
+    "dismiss": "Lesung schließen",
+    "todaysReading": "Deine heutige Lesung",
+    "evidence_one": "Basierend auf {{matching}} deiner letzten {{total}} Check-ins.",
+    "evidence_other": "Basierend auf {{matching}} deiner letzten {{total}} Check-in-Tage.",
+    "returningKicker": "Wieder aufgenommen · Versuch {{n}}",
+    "startProtocol": "Starte dein {{dosha}}-Protokoll",
+    "continueProtocol": "Setze dein {{dosha}}-Protokoll fort",
+    "orJust": "Oder einfach {{action}}",
+    "plusBadge": "Plus"
+  },
+  "welcomePlus": {
+    "dismiss": "Willkommen schließen",
+    "kicker": "Du bist dabei",
+    "title": "Willkommen bei Sanctuary Plus",
+    "body": "Die komplette Bibliothek, deine persönlichen Protokolle und die Weisheit der Charaka — ab jetzt alles deins.",
+    "ctas": {
+      "exploreLabel": "Die komplette Bibliothek entdecken",
+      "exploreSub": "60+ Asanas, fortgeschrittenes Pranayama",
+      "doshaLabel": "Lies Kapitel 3 deines Doshas",
+      "doshaSub": "Lebe nach deiner Natur — Jahreszeit, Stunde, Teller",
+      "reminderLabel": "Tägliche Übungserinnerung einrichten",
+      "reminderSub": "Ein sanfter Hinweis zu deiner gewählten Zeit"
+    }
+  },
   "consent": {
     "card": {
       "title": "Eine leise Bitte.",
