@@ -127,6 +127,41 @@
       "deletePartial": "आपका अधिकांश डेटा हटा दिया गया, पर कुछ प्रविष्टियाँ नहीं हट सकीं। कृपया सहायता से संपर्क करें।"
     }
   },
+  "protocol": {
+    "notFound": "प्रोटोकॉल नहीं मिला।",
+    "backToHome": "होम पर वापस",
+    "goBack": "वापस",
+    "plusKicker": "Sanctuary Plus",
+    "threeDayKicker": "Sanctuary Plus · 3-दिन का प्रोटोकॉल",
+    "unlock": "Plus के साथ अनलॉक करें",
+    "unlockHeadline": "अपना {{dosha}} प्रोटोकॉल अनलॉक करें",
+    "unlockSubhead": "अपने दोष को फिर से संतुलन में लाने के लिए तीन दिन का आहार, गति, श्वास और विश्राम।",
+    "source": "स्रोत: {{source}}",
+    "daysTablistLabel": "प्रोटोकॉल दिन",
+    "dayTab": "दिन {{n}}",
+    "dayTabAria": "दिन {{n}}",
+    "dayTabAriaCompleted": "दिन {{n}} (पूर्ण)",
+    "dayHeader": "दिन {{n}} · {{title}}",
+    "dayComplete": "दिन {{n}} पूर्ण",
+    "markedRelative": "चिह्नित {{when}}",
+    "undo": "पूर्ववत करें",
+    "unmarkAria": "इस दिन का चिह्न हटाएँ",
+    "markDay": "दिन {{n}} पूर्ण के रूप में चिह्नित करें",
+    "continueToDay": "दिन {{n}} पर जारी रखें",
+    "backToDay": "दिन {{n}} पर वापस",
+    "yourHistory": "आपका इतिहास",
+    "previousAttempts_one": "1 पिछला प्रयास",
+    "previousAttempts_other": "{{count}} पिछले प्रयास",
+    "completedAllDays": "सभी दिन पूर्ण",
+    "daysOfTotal": "{{total}} में से {{done}} दिन",
+    "rel": {
+      "justNow": "अभी-अभी",
+      "minAgo": "{{n}} मिनट पहले",
+      "hrAgo": "{{n}} घंटे पहले",
+      "yesterday": "कल",
+      "daysAgo": "{{n}} दिन पहले"
+    }
+  },
   "vikritiCard": {
     "dismiss": "रीडिंग बंद करें",
     "todaysReading": "आज की रीडिंग",

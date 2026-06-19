@@ -127,6 +127,41 @@
       "deletePartial": "Most of your data was removed, but some entries couldn't be deleted. Please contact support."
     }
   },
+  "protocol": {
+    "notFound": "Protocol not found.",
+    "backToHome": "Back to home",
+    "goBack": "Go back",
+    "plusKicker": "Sanctuary Plus",
+    "threeDayKicker": "Sanctuary Plus · 3-day protocol",
+    "unlock": "Unlock with Plus",
+    "unlockHeadline": "Unlock your {{dosha}} protocol",
+    "unlockSubhead": "Three days of food, movement, breath, and rest to bring your dosha back to centre.",
+    "source": "Source: {{source}}",
+    "daysTablistLabel": "Protocol days",
+    "dayTab": "Day {{n}}",
+    "dayTabAria": "Day {{n}}",
+    "dayTabAriaCompleted": "Day {{n}} (completed)",
+    "dayHeader": "Day {{n}} · {{title}}",
+    "dayComplete": "Day {{n}} complete",
+    "markedRelative": "Marked {{when}}",
+    "undo": "Undo",
+    "unmarkAria": "Unmark this day",
+    "markDay": "Mark Day {{n}} complete",
+    "continueToDay": "Continue to Day {{n}}",
+    "backToDay": "Back to Day {{n}}",
+    "yourHistory": "Your history",
+    "previousAttempts_one": "1 previous attempt",
+    "previousAttempts_other": "{{count}} previous attempts",
+    "completedAllDays": "Completed all days",
+    "daysOfTotal": "{{done}} of {{total}} days",
+    "rel": {
+      "justNow": "just now",
+      "minAgo": "{{n}} min ago",
+      "hrAgo": "{{n}} hr ago",
+      "yesterday": "yesterday",
+      "daysAgo": "{{n}} days ago"
+    }
+  },
   "vikritiCard": {
     "dismiss": "Dismiss reading",
     "todaysReading": "Today's Reading",

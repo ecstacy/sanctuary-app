@@ -127,6 +127,41 @@
       "deletePartial": "Der Großteil deiner Daten wurde entfernt, einige Einträge konnten jedoch nicht gelöscht werden. Bitte kontaktiere den Support."
     }
   },
+  "protocol": {
+    "notFound": "Protokoll nicht gefunden.",
+    "backToHome": "Zurück zur Startseite",
+    "goBack": "Zurück",
+    "plusKicker": "Sanctuary Plus",
+    "threeDayKicker": "Sanctuary Plus · 3-Tage-Protokoll",
+    "unlock": "Mit Plus freischalten",
+    "unlockHeadline": "Schalte dein {{dosha}}-Protokoll frei",
+    "unlockSubhead": "Drei Tage Ernährung, Bewegung, Atem und Ruhe, um dein Dosha wieder ins Gleichgewicht zu bringen.",
+    "source": "Quelle: {{source}}",
+    "daysTablistLabel": "Protokolltage",
+    "dayTab": "Tag {{n}}",
+    "dayTabAria": "Tag {{n}}",
+    "dayTabAriaCompleted": "Tag {{n}} (abgeschlossen)",
+    "dayHeader": "Tag {{n}} · {{title}}",
+    "dayComplete": "Tag {{n}} abgeschlossen",
+    "markedRelative": "Markiert {{when}}",
+    "undo": "Rückgängig",
+    "unmarkAria": "Diesen Tag abwählen",
+    "markDay": "Tag {{n}} als erledigt markieren",
+    "continueToDay": "Weiter zu Tag {{n}}",
+    "backToDay": "Zurück zu Tag {{n}}",
+    "yourHistory": "Dein Verlauf",
+    "previousAttempts_one": "1 früherer Versuch",
+    "previousAttempts_other": "{{count}} frühere Versuche",
+    "completedAllDays": "Alle Tage abgeschlossen",
+    "daysOfTotal": "{{done}} von {{total}} Tagen",
+    "rel": {
+      "justNow": "gerade eben",
+      "minAgo": "vor {{n}} Min.",
+      "hrAgo": "vor {{n}} Std.",
+      "yesterday": "gestern",
+      "daysAgo": "vor {{n}} Tagen"
+    }
+  },
   "vikritiCard": {
     "dismiss": "Lesung schließen",
     "todaysReading": "Deine heutige Lesung",
