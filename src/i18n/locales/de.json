@@ -206,6 +206,37 @@
       "deletePartial": "Der Großteil deiner Daten wurde entfernt, einige Einträge konnten jedoch nicht gelöscht werden. Bitte kontaktiere den Support."
     }
   },
+  "doshaQuiz": {
+    "goBack": "Zurück",
+    "introKicker": "Dosha-Entdeckung",
+    "titleLine1": "Wer bist du",
+    "titleLine2": "wirklich?",
+    "introBody": "Im Ayurveda ist dein Dosha deine einzigartige Blaupause — die elementaren Kräfte, die deinen Körper, Geist und deine Seele formen.",
+    "honestyPrimer": "Antworte danach, wie du den Großteil deines Lebens warst — nicht danach, wie du dich diese Woche fühlst.",
+    "introMeta": "15 Fragen · etwa 90 Sekunden",
+    "consentText": "Ich stimme zu, dass The Sanctuary meine Dosha-Ergebnisse und Wohlbefindens-Angaben (Stimmung, Energie, Schlaf) verarbeitet, um meine Praxis zu personalisieren, wie in der Datenschutzerklärung beschrieben. Dies sind gesundheitsbezogene Daten; ich kann meine Einwilligung jederzeit in den Einstellungen widerrufen.",
+    "startCta": "Mein Dosha entdecken",
+    "keepCurrent": "Aktuelles Ergebnis behalten: {{dosha}}",
+    "calc": {
+      "reading": "Deine elementare Signatur wird gelesen...",
+      "vata": "Die Winde des Vata werden gewogen...",
+      "pitta": "Das Feuer des Pitta wird gemessen...",
+      "kapha": "Erdung im Kapha-Boden..."
+    },
+    "quickCheck": "Kurze Prüfung",
+    "tiebreakerContext": "Deine beiden stärksten Doshas liegen nah beieinander. Ein paar weitere Fragen zur Feinabstimmung.",
+    "saveResultKicker": "Ergebnis speichern",
+    "saveResultBody": "Erstelle ein kostenloses Konto, um dein Dosha zu behalten, deine Praxis zu verfolgen und jede Empfehlung zu personalisieren.",
+    "saving": "Wird gespeichert...",
+    "saveCta": "Mein Dosha-Profil speichern",
+    "createAccountCta": "Konto erstellen zum Speichern",
+    "retake": "Quiz wiederholen",
+    "prevQuestion": "Vorherige Frage",
+    "discovery": "Entdeckung",
+    "progressAria": "Quiz-Fortschritt",
+    "primerShort": "Lebenslange Tendenz, nicht diese Woche.",
+    "saveFailed": "Speichern fehlgeschlagen: {{error}}"
+  },
   "journey": {
     "title": "Deine Reise",
     "goBack": "Zurück",

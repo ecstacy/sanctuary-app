@@ -206,6 +206,37 @@
       "deletePartial": "Most of your data was removed, but some entries couldn't be deleted. Please contact support."
     }
   },
+  "doshaQuiz": {
+    "goBack": "Go back",
+    "introKicker": "Dosha Discovery",
+    "titleLine1": "Who are you,",
+    "titleLine2": "really?",
+    "introBody": "In Ayurveda, your Dosha is your unique blueprint — the elemental forces that shape your body, mind, and spirit.",
+    "honestyPrimer": "Answer based on how you've been most of your life — not how you feel this week.",
+    "introMeta": "15 questions · about 90 seconds",
+    "consentText": "I consent to The Sanctuary processing my dosha results and wellness inputs (mood, energy, sleep) to personalize my practice, as described in the Privacy Policy. This is health-related data; I can withdraw consent anytime in Settings.",
+    "startCta": "Discover My Dosha",
+    "keepCurrent": "Keep current result: {{dosha}}",
+    "calc": {
+      "reading": "Reading your elemental signature...",
+      "vata": "Weighing the winds of Vata...",
+      "pitta": "Measuring the fire of Pitta...",
+      "kapha": "Grounding into Kapha earth..."
+    },
+    "quickCheck": "Quick Check",
+    "tiebreakerContext": "Your top two doshas are close. A few more questions to dial it in.",
+    "saveResultKicker": "Save your result",
+    "saveResultBody": "Create a free account to keep your dosha, track your practice, and personalize every recommendation.",
+    "saving": "Saving...",
+    "saveCta": "Save My Dosha Profile",
+    "createAccountCta": "Create Account to Save",
+    "retake": "Retake the quiz",
+    "prevQuestion": "Previous question",
+    "discovery": "Discovery",
+    "progressAria": "Quiz progress",
+    "primerShort": "Lifelong tendency, not this week.",
+    "saveFailed": "Failed to save: {{error}}"
+  },
   "journey": {
     "title": "Your Journey",
     "goBack": "Go back",
