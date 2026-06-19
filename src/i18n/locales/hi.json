@@ -206,6 +206,22 @@
       "deletePartial": "आपका अधिकांश डेटा हटा दिया गया, पर कुछ प्रविष्टियाँ नहीं हट सकीं। कृपया सहायता से संपर्क करें।"
     }
   },
+  "dietary": {
+    "goBack": "वापस",
+    "title": "आहार मार्गदर्शन",
+    "forConstitution": "आपकी {{dosha}} प्रकृति के लिए",
+    "eatToBalance": "संतुलन के लिए खाएँ",
+    "tastesRasa": "स्वाद (रस)",
+    "favor": "प्राथमिकता दें",
+    "avoidExcess": "अधिकता में से बचें",
+    "foodsToFavor": "इन्हें खाएँ",
+    "foodsToAvoid": "इनसे बचें",
+    "howToEat": "कैसे खाएँ",
+    "seasonalNote": "मौसमी सुझाव",
+    "sixTastes": "छह रस (चरक संदर्भ)",
+    "unknownDosha": "अज्ञात दोष: {{dosha}}",
+    "sourceLabel": "स्रोत:"
+  },
   "recommendations": {
     "goBack": "वापस",
     "searchPlaceholder": "बताएँ कि आप क्या महसूस कर रहे हैं...",

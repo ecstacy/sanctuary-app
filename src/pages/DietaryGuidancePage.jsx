@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { DIETARY_GUIDANCE, RASAS } from '../data/ayurveda/dietary'
 import { track, screen, EVENTS } from '../lib/track'
@@ -42,6 +43,7 @@ function CategoryList({ items, accent }) {
 
 export default function DietaryGuidancePage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { profile } = useAuth()
   useScrollDepth('dietary_guidance')
 
@@ -57,7 +59,7 @@ export default function DietaryGuidancePage() {
   if (!guide) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <p className="font-body text-on-surface-variant">Unknown dosha: {activeDosha}</p>
+        <p className="font-body text-on-surface-variant">{t('dietary.unknownDosha', { dosha: activeDosha })}</p>
       </div>
     )
   }
@@ -70,19 +72,19 @@ export default function DietaryGuidancePage() {
       <div className="flex items-center justify-between px-5 pt-3 pb-1">
         <button
           onClick={() => navigate(-1)}
-          aria-label="Go back"
+          aria-label={t('dietary.goBack')}
           className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90"
         >
           <span aria-hidden="true" className="material-symbols-outlined">arrow_back</span>
         </button>
-        <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant">Dietary Guidance</p>
+        <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant">{t('dietary.title')}</p>
         <div className="w-9 h-9" />
       </div>
 
       {/* Hero */}
       <div className={`mx-5 mt-2 rounded-2xl bg-gradient-to-br ${colors.gradient} px-5 py-6 text-white stagger-1`}>
-        <p className="font-label text-[10px] uppercase tracking-widest opacity-80 mb-1">For your {DOSHA_LABELS[activeDosha]} constitution</p>
-        <h1 className="font-headline text-2xl leading-tight mb-2">Eat to balance</h1>
+        <p className="font-label text-[10px] uppercase tracking-widest opacity-80 mb-1">{t('dietary.forConstitution', { dosha: DOSHA_LABELS[activeDosha] })}</p>
+        <h1 className="font-headline text-2xl leading-tight mb-2">{t('dietary.eatToBalance')}</h1>
         <p className="font-body text-sm opacity-95 leading-relaxed">{guide.principle}</p>
       </div>
 
@@ -113,10 +115,10 @@ export default function DietaryGuidancePage() {
 
       {/* Tastes */}
       <div className="px-5 mt-6 stagger-3">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">Tastes (Rasa)</p>
+        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.tastesRasa')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5">
           <div className="mb-4">
-            <p className={`font-label text-[10px] uppercase tracking-wider mb-2 ${colors.accent}`}>Favor</p>
+            <p className={`font-label text-[10px] uppercase tracking-wider mb-2 ${colors.accent}`}>{t('dietary.favor')}</p>
             <div className="flex flex-wrap gap-2">
               {guide.tastes.favor.map(t => (
                 <span key={t} className={`px-3 py-1 rounded-full text-xs ${colors.bg} ${colors.accent} font-medium`}>
@@ -126,7 +128,7 @@ export default function DietaryGuidancePage() {
             </div>
           </div>
           <div>
-            <p className="font-label text-[10px] uppercase tracking-wider mb-2 text-on-surface-variant/60">Avoid in excess</p>
+            <p className="font-label text-[10px] uppercase tracking-wider mb-2 text-on-surface-variant/60">{t('dietary.avoidExcess')}</p>
             <div className="flex flex-wrap gap-2">
               {guide.tastes.avoid.map(t => (
                 <span key={t} className="px-3 py-1 rounded-full text-xs bg-surface-container text-on-surface-variant">
@@ -140,7 +142,7 @@ export default function DietaryGuidancePage() {
 
       {/* Foods to Favor */}
       <div className="px-5 mt-6 stagger-4">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">Foods to Favor</p>
+        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.foodsToFavor')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5">
           <CategoryList items={guide.favor} accent={colors.accent} />
         </div>
@@ -148,7 +150,7 @@ export default function DietaryGuidancePage() {
 
       {/* Foods to Avoid */}
       <div className="px-5 mt-6 stagger-4">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">Foods to Avoid</p>
+        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.foodsToAvoid')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5 space-y-3">
           <p className="font-body text-sm text-on-surface-variant leading-relaxed italic">{guide.avoid.generally}</p>
           <ul className="space-y-1.5">
@@ -164,7 +166,7 @@ export default function DietaryGuidancePage() {
 
       {/* Eating habits */}
       <div className="px-5 mt-6 stagger-5">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">How to Eat</p>
+        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.howToEat')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5">
           <ul className="space-y-2">
             {guide.eatingHabits.map((item, i) => (
@@ -180,14 +182,14 @@ export default function DietaryGuidancePage() {
       {/* Seasonal note */}
       <div className="px-5 mt-6 stagger-5">
         <div className={`rounded-2xl p-5 ${colors.bg}`}>
-          <p className={`font-label text-[10px] uppercase tracking-widest mb-2 ${colors.accent}`}>Seasonal Note</p>
+          <p className={`font-label text-[10px] uppercase tracking-widest mb-2 ${colors.accent}`}>{t('dietary.seasonalNote')}</p>
           <p className="font-body text-sm text-on-surface leading-relaxed">{guide.seasonal}</p>
         </div>
       </div>
 
       {/* Six tastes reference */}
       <div className="px-5 mt-6 stagger-5">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">The Six Tastes (Charaka Reference)</p>
+        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.sixTastes')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5 space-y-3">
           {Object.entries(RASAS).map(([key, r]) => (
             <div key={key} className="border-b border-outline-variant/15 last:border-0 pb-3 last:pb-0">
@@ -206,7 +208,7 @@ export default function DietaryGuidancePage() {
       {/* Source citation */}
       <div className="px-5 mt-6 mb-2">
         <p className="font-label text-[10px] text-on-surface-variant/60 leading-relaxed">
-          Source: {guide.source.text} {guide.source.verse}. {guide.source.note}
+          {t('dietary.sourceLabel')} {guide.source.text} {guide.source.verse}. {guide.source.note}
         </p>
       </div>
     </div>

@@ -206,6 +206,22 @@
       "deletePartial": "Most of your data was removed, but some entries couldn't be deleted. Please contact support."
     }
   },
+  "dietary": {
+    "goBack": "Go back",
+    "title": "Dietary Guidance",
+    "forConstitution": "For your {{dosha}} constitution",
+    "eatToBalance": "Eat to balance",
+    "tastesRasa": "Tastes (Rasa)",
+    "favor": "Favor",
+    "avoidExcess": "Avoid in excess",
+    "foodsToFavor": "Foods to Favor",
+    "foodsToAvoid": "Foods to Avoid",
+    "howToEat": "How to Eat",
+    "seasonalNote": "Seasonal Note",
+    "sixTastes": "The Six Tastes (Charaka Reference)",
+    "unknownDosha": "Unknown dosha: {{dosha}}",
+    "sourceLabel": "Source:"
+  },
   "recommendations": {
     "goBack": "Go back",
     "searchPlaceholder": "Describe what you're feeling...",

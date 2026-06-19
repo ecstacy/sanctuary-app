@@ -206,6 +206,22 @@
       "deletePartial": "Der Großteil deiner Daten wurde entfernt, einige Einträge konnten jedoch nicht gelöscht werden. Bitte kontaktiere den Support."
     }
   },
+  "dietary": {
+    "goBack": "Zurück",
+    "title": "Ernährungsleitfaden",
+    "forConstitution": "Für deine {{dosha}}-Konstitution",
+    "eatToBalance": "Iss für dein Gleichgewicht",
+    "tastesRasa": "Geschmäcker (Rasa)",
+    "favor": "Bevorzugen",
+    "avoidExcess": "In Maßen meiden",
+    "foodsToFavor": "Empfohlene Lebensmittel",
+    "foodsToAvoid": "Zu meidende Lebensmittel",
+    "howToEat": "Wie man isst",
+    "seasonalNote": "Saisonaler Hinweis",
+    "sixTastes": "Die sechs Geschmäcker (Charaka-Referenz)",
+    "unknownDosha": "Unbekanntes Dosha: {{dosha}}",
+    "sourceLabel": "Quelle:"
+  },
   "recommendations": {
     "goBack": "Zurück",
     "searchPlaceholder": "Beschreibe, wie du dich fühlst...",
