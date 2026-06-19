@@ -206,6 +206,25 @@
       "deletePartial": "Der Großteil deiner Daten wurde entfernt, einige Einträge konnten jedoch nicht gelöscht werden. Bitte kontaktiere den Support."
     }
   },
+  "dinacharya": {
+    "goBack": "Zurück",
+    "title": "Tagesroutine",
+    "heading": "Dinacharya",
+    "subtitle": "Charakas Tagesroutine — 13 Praktiken, die den Tag mit dem Rhythmus des Körpers und der Jahreszeiten in Einklang bringen.",
+    "rightNow": "Gerade jetzt",
+    "doshaTimeLabel": "{{dosha}}-Zeit",
+    "learnClock": "Mehr über die Dosha-Uhr erfahren",
+    "thePractices": "Die Praktiken",
+    "total": "{{count}} gesamt",
+    "why": "Warum",
+    "how": "Wie",
+    "tools": "Hilfsmittel",
+    "caution": "Vorsicht",
+    "safetyAria": "Sicherheitshinweise",
+    "doshaClock": "Die Dosha-Uhr",
+    "sourceLabel": "Quelle:",
+    "clockSource": "Quelle: Charaka Samhita Sutrasthana 5 (primär) + Sutrasthana 7 (natürliche Bedürfnisse) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel)."
+  },
   "dietary": {
     "goBack": "Zurück",
     "title": "Ernährungsleitfaden",

@@ -206,6 +206,25 @@
       "deletePartial": "Most of your data was removed, but some entries couldn't be deleted. Please contact support."
     }
   },
+  "dinacharya": {
+    "goBack": "Go back",
+    "title": "Daily Routine",
+    "heading": "Dinacharya",
+    "subtitle": "Charaka's daily routine — 13 practices that align the day with the rhythm of the body and the seasons.",
+    "rightNow": "Right now",
+    "doshaTimeLabel": "{{dosha}} time",
+    "learnClock": "Learn about the dosha clock",
+    "thePractices": "The practices",
+    "total": "{{count}} total",
+    "why": "Why",
+    "how": "How",
+    "tools": "Tools",
+    "caution": "Caution",
+    "safetyAria": "Safety considerations",
+    "doshaClock": "The Dosha Clock",
+    "sourceLabel": "Source:",
+    "clockSource": "Source: Charaka Samhita Sutrasthana 5 (primary) + Sutrasthana 7 (natural urges) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel)."
+  },
   "dietary": {
     "goBack": "Go back",
     "title": "Dietary Guidance",
