@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
 import { ASANAS, getDoshaTag } from '../data/asanas'
@@ -85,6 +86,7 @@ function holdScalePct(seconds) {
 
 // ── Bottom-sheet modal ──
 function BottomSheet({ open, onClose, title, children }) {
+  const { t } = useTranslation()
   useEffect(() => {
     if (!open) return
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
@@ -123,7 +125,7 @@ function BottomSheet({ open, onClose, title, children }) {
           <h3 className="font-headline text-lg text-on-surface">{title}</h3>
           <button
             onClick={onClose}
-            aria-label="Close"
+            aria-label={t('asanaDetail.close')}
             className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center active:scale-90 transition-all"
           >
             <span className="material-symbols-outlined text-on-surface-variant text-sm">close</span>
@@ -163,6 +165,7 @@ function getSteps(asana) {
 export default function AsanaDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { profile } = useAuth()
   const asana = ASANAS[id]
   useScrollDepth('asana_detail')
@@ -186,9 +189,9 @@ export default function AsanaDetailPage() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center px-6">
           <span className="material-symbols-outlined text-5xl text-outline-variant mb-4 block">search_off</span>
-          <h2 className="font-headline text-xl text-on-surface mb-2">Asana not found</h2>
-          <p className="font-body text-sm text-on-surface-variant mb-6">The pose you're looking for doesn't exist.</p>
-          <button onClick={() => navigate(-1)} className="px-6 py-3 bg-primary text-on-primary rounded-full font-label text-xs tracking-wide">Go Back</button>
+          <h2 className="font-headline text-xl text-on-surface mb-2">{t('asanaDetail.notFoundTitle')}</h2>
+          <p className="font-body text-sm text-on-surface-variant mb-6">{t('asanaDetail.notFoundBody')}</p>
+          <button onClick={() => navigate(-1)} className="px-6 py-3 bg-primary text-on-primary rounded-full font-label text-xs tracking-wide">{t('asanaDetail.goBackBtn')}</button>
         </div>
       </div>
     )
@@ -197,6 +200,14 @@ export default function AsanaDetailPage() {
   const userDosha = profile?.dosha?.toLowerCase()
   const precautions = PRECAUTIONS[asana.id] || []
   const steps = getSteps(asana)
+
+  // Localize the step phase label ('Setup'/'Hold'/'Breathe'/'Release');
+  // empty phase (continuation instruction steps) stays empty.
+  const PHASE_KEYS = { Setup: 'phaseSetup', Hold: 'phaseHold', Breathe: 'phaseBreathe', Release: 'phaseRelease' }
+  const phaseLabel = (phase) => (phase ? t(`asanaDetail.${PHASE_KEYS[phase] || ''}`, phase) : '')
+  // Localized enum helpers (data values stay as keys).
+  const categoryLabel = t(`asanaDetail.categories.${asana.category}`, CATEGORY_LABELS[asana.category] || asana.category)
+  const levelLabel = (lvl) => t(`asanaDetail.levels.${String(lvl || '').toLowerCase()}`, lvl)
 
   const [sticky, setSticky] = useState(false)
   const [sheet, setSheet] = useState(null) // 'hold' | 'level' | 'areas' | null
@@ -261,15 +272,15 @@ export default function AsanaDetailPage() {
       <div ref={heroRef} className="relative bg-primary-container/20 pb-6">
         {/* Back button */}
         <div className="flex items-center justify-between px-4 pt-3 pb-2">
-          <button onClick={() => navigate(-1)} className="w-10 h-10 rounded-full bg-surface/80 flex items-center justify-center active:scale-90 transition-all" aria-label="Go back">
+          <button onClick={() => navigate(-1)} className="w-10 h-10 rounded-full bg-surface/80 flex items-center justify-center active:scale-90 transition-all" aria-label={t('asanaDetail.goBack')}>
             <span className="material-symbols-outlined text-on-surface text-lg">arrow_back</span>
           </button>
           <div className="flex gap-2">
             <span className="px-3 py-1 bg-surface-container-high rounded-full font-label text-[10px] text-on-surface-variant uppercase tracking-widest shadow-sm border border-outline-variant/20">
-              {CATEGORY_LABELS[asana.category] || asana.category}
+              {categoryLabel}
             </span>
             <span className="px-3 py-1 bg-primary text-on-primary rounded-full font-label text-[10px] uppercase tracking-widest shadow-sm">
-              {asana.level}
+              {levelLabel(asana.level)}
             </span>
           </div>
         </div>
@@ -281,7 +292,7 @@ export default function AsanaDetailPage() {
 
         {/* Name */}
         <div className="px-6 text-center">
-          <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{asana.category}</p>
+          <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{categoryLabel}</p>
           {/* Plus badge when this asana is gated for the viewing user.
               Visible above the title so it's the first thing read —
               sets expectation before they read the content + tap CTA. */}
@@ -289,7 +300,7 @@ export default function AsanaDetailPage() {
             <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary-container/60 rounded-full mb-2">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px]">lock</span>
               <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider">
-                Sanctuary Plus
+                {t('asanaDetail.plusBadge')}
               </span>
             </div>
           )}
@@ -318,15 +329,15 @@ export default function AsanaDetailPage() {
           >
             <span className="material-symbols-outlined text-primary text-lg mb-1 block">timer</span>
             <p className="font-headline text-lg text-on-surface">{asana.durationSeconds >= 60 ? `${Math.ceil(asana.durationSeconds / 60)}m` : `${asana.durationSeconds}s`}</p>
-            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Hold</p>
+            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('asanaDetail.hold')}</p>
           </button>
           <button
             onClick={() => setSheet('level')}
             className="flex-1 bg-surface-container-low rounded-xl p-3 text-center active:scale-95 transition-all"
           >
             <span className="material-symbols-outlined text-primary text-lg mb-1 block">fitness_center</span>
-            <p className="font-headline text-lg text-on-surface">{asana.level}</p>
-            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Level</p>
+            <p className="font-headline text-lg text-on-surface">{levelLabel(asana.level)}</p>
+            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('asanaDetail.level')}</p>
           </button>
           <button
             onClick={() => setSheet('areas')}
@@ -334,7 +345,7 @@ export default function AsanaDetailPage() {
           >
             <span className="material-symbols-outlined text-primary text-lg mb-1 block">body_system</span>
             <p className="font-headline text-lg text-on-surface">{asana.bodyParts.length}</p>
-            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Areas</p>
+            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('asanaDetail.areas')}</p>
           </button>
         </div>
 
@@ -342,7 +353,7 @@ export default function AsanaDetailPage() {
         <div className="bg-surface-container-low rounded-xl p-5">
           <div className="flex items-center gap-2 mb-3">
             <span className="material-symbols-outlined text-primary text-lg">auto_stories</span>
-            <h3 className="font-headline text-lg text-on-surface">About this Asana</h3>
+            <h3 className="font-headline text-lg text-on-surface">{t('asanaDetail.about')}</h3>
           </div>
           <p className="font-body text-sm text-on-surface-variant leading-relaxed">{asana.reasoning}</p>
         </div>
@@ -351,7 +362,7 @@ export default function AsanaDetailPage() {
         <div>
           <div className="flex items-center gap-2 mb-4">
             <span className="material-symbols-outlined text-primary text-lg">school</span>
-            <h3 className="font-headline text-lg text-on-surface">How to Perform</h3>
+            <h3 className="font-headline text-lg text-on-surface">{t('asanaDetail.howToPerform')}</h3>
           </div>
           <div className="flex flex-col gap-3">
             {steps.map((step, i) => (
@@ -363,7 +374,7 @@ export default function AsanaDetailPage() {
                   {i < steps.length - 1 && <div className="w-px flex-1 bg-primary/10 mt-1" />}
                 </div>
                 <div className="pb-4 flex-1">
-                  <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{step.phase}</p>
+                  <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{phaseLabel(step.phase)}</p>
                   <p className="font-body text-sm text-on-surface-variant leading-relaxed">{step.text}</p>
                 </div>
               </div>
@@ -375,7 +386,7 @@ export default function AsanaDetailPage() {
         <div className="bg-primary-container/15 rounded-xl p-5">
           <div className="flex items-center gap-2 mb-3">
             <span className="material-symbols-outlined text-primary text-lg">favorite</span>
-            <h3 className="font-headline text-lg text-on-surface">Benefits</h3>
+            <h3 className="font-headline text-lg text-on-surface">{t('asanaDetail.benefits')}</h3>
           </div>
           <div className="flex flex-col gap-2.5">
             {asana.benefits.map((benefit, i) => (
@@ -391,7 +402,7 @@ export default function AsanaDetailPage() {
         <div>
           <div className="flex items-center gap-2 mb-3">
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">body_system</span>
-            <h3 className="font-headline text-lg text-on-surface">Body Focus</h3>
+            <h3 className="font-headline text-lg text-on-surface">{t('asanaDetail.bodyFocus')}</h3>
           </div>
           <div className="flex flex-wrap gap-2">
             {asana.bodyParts.map((part, i) => (
@@ -407,7 +418,7 @@ export default function AsanaDetailPage() {
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">tune</span>
-              <h3 className="font-headline text-lg text-on-surface">Modifications</h3>
+              <h3 className="font-headline text-lg text-on-surface">{t('asanaDetail.modifications')}</h3>
             </div>
             <div className="flex flex-col gap-2.5">
               {asana.modifications.map((mod, i) => (
@@ -422,10 +433,10 @@ export default function AsanaDetailPage() {
 
         {/* ── Contraindications — safety surface, prominent styling ── */}
         {asana.contraindications && asana.contraindications.length > 0 && (
-          <div className="bg-error-container/30 border border-error/20 rounded-xl p-5" role="region" aria-label="Safety considerations">
+          <div className="bg-error-container/30 border border-error/20 rounded-xl p-5" role="region" aria-label={t('asanaDetail.safetyAria')}>
             <div className="flex items-center gap-2 mb-3">
               <span aria-hidden="true" className="material-symbols-outlined text-error text-lg">health_and_safety</span>
-              <h3 className="font-headline text-lg text-on-surface">Important Safety Considerations</h3>
+              <h3 className="font-headline text-lg text-on-surface">{t('asanaDetail.safetyTitle')}</h3>
             </div>
             <div className="flex flex-col gap-2.5">
               {asana.contraindications.map((item, i) => (
@@ -436,7 +447,7 @@ export default function AsanaDetailPage() {
               ))}
             </div>
             <p className="font-body text-[11px] text-on-surface-variant/60 italic mt-3 pt-3 border-t border-error/15">
-              Consult a teacher or healthcare provider if any of the above apply to you.
+              {t('asanaDetail.safetyFooter')}
             </p>
           </div>
         )}
@@ -447,11 +458,11 @@ export default function AsanaDetailPage() {
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base">menu_book</span>
             <p className="font-body text-xs text-on-surface-variant">
               <span className="font-semibold">
-                {asana.source.text === 'HYP'    ? 'Hatha Yoga Pradipika'
-                 : asana.source.text === 'GS'   ? 'Gheranda Samhita'
-                 : 'Modern hatha tradition'}
+                {asana.source.text === 'HYP'    ? t('asanaDetail.sourceHYP')
+                 : asana.source.text === 'GS'   ? t('asanaDetail.sourceGS')
+                 : t('asanaDetail.sourceModern')}
               </span>
-              {asana.source.verse && <span> · verse {asana.source.verse}</span>}
+              {asana.source.verse && <span> · {t('asanaDetail.verse', { verse: asana.source.verse })}</span>}
               {asana.source.note && <span className="block mt-1 text-[11px] text-on-surface-variant/70 italic">{asana.source.note}</span>}
             </p>
           </div>
@@ -461,7 +472,7 @@ export default function AsanaDetailPage() {
         <div className="bg-surface-container-low rounded-xl p-5">
           <div className="flex items-center gap-2 mb-4">
             <span className="material-symbols-outlined text-primary text-lg">spa</span>
-            <h3 className="font-headline text-lg text-on-surface">Dosha Compatibility</h3>
+            <h3 className="font-headline text-lg text-on-surface">{t('asanaDetail.doshaCompat')}</h3>
           </div>
 
           <div className="flex flex-col gap-3">
@@ -479,13 +490,13 @@ export default function AsanaDetailPage() {
                     <div className="flex items-center gap-2">
                       <p className="font-body text-sm font-semibold text-on-surface">{info.label}</p>
                       {isUser && (
-                        <span className="px-2 py-0.5 bg-primary/10 rounded-full font-label text-[8px] text-primary uppercase tracking-widest">Your Dosha</span>
+                        <span className="px-2 py-0.5 bg-primary/10 rounded-full font-label text-[8px] text-primary uppercase tracking-widest">{t('asanaDetail.yourDosha')}</span>
                       )}
                     </div>
                     <p className="font-body text-xs text-on-surface-variant mt-0.5">
-                      {affinity === 'balancing' && `This asana is excellent for balancing ${info.label} energy. It helps bring ${info.label} dosha into harmony.`}
-                      {affinity === 'neutral' && `This asana has a neutral effect on ${info.label} energy. Safe to practice without significant impact.`}
-                      {affinity === 'aggravating' && `This asana may aggravate ${info.label} energy. Practice with caution and shorter holds.`}
+                      {affinity === 'balancing' && t('asanaDetail.affinityBalancing', { dosha: info.label })}
+                      {affinity === 'neutral' && t('asanaDetail.affinityNeutral', { dosha: info.label })}
+                      {affinity === 'aggravating' && t('asanaDetail.affinityAggravating', { dosha: info.label })}
                     </p>
                   </div>
                   <span className={`px-2.5 py-1 rounded-full font-label text-[9px] ${tag.color}`}>{tag.label}</span>
@@ -499,7 +510,7 @@ export default function AsanaDetailPage() {
               onClick={() => navigate('/quiz')}
               className="w-full mt-4 py-3 bg-primary/10 text-primary rounded-full font-label text-xs tracking-wide active:scale-95 transition-all"
             >
-              Take the Dosha Quiz for personalized insights
+              {t('asanaDetail.takeQuiz')}
             </button>
           )}
         </div>
@@ -509,7 +520,7 @@ export default function AsanaDetailPage() {
           <div className="bg-secondary-container/15 rounded-xl p-5">
             <div className="flex items-center gap-2 mb-3">
               <span className="material-symbols-outlined text-secondary text-lg">warning</span>
-              <h3 className="font-headline text-lg text-on-surface">Things to Take Care Of</h3>
+              <h3 className="font-headline text-lg text-on-surface">{t('asanaDetail.precautionsTitle')}</h3>
             </div>
             <div className="flex flex-col gap-2.5">
               {precautions.map((item, i) => (
@@ -525,9 +536,9 @@ export default function AsanaDetailPage() {
       </div>
 
       {/* ── Hold Sheet ── */}
-      <BottomSheet open={sheet === 'hold'} onClose={() => setSheet(null)} title="Hold Duration">
+      <BottomSheet open={sheet === 'hold'} onClose={() => setSheet(null)} title={t('asanaDetail.holdSheetTitle')}>
         <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-5">
-          This pose is held for <span className="text-on-surface font-semibold">{asana.durationSeconds}s</span>. Here's where that sits on the beginner-to-expert scale.
+          {t('asanaDetail.holdSheetBody', { seconds: asana.durationSeconds })}
         </p>
 
         <div className="relative mb-3 pt-8">
@@ -544,22 +555,22 @@ export default function AsanaDetailPage() {
         </div>
 
         <div className="flex justify-between font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-5">
-          <span>Beginner</span>
-          <span>Intermediate</span>
-          <span>Expert</span>
+          <span>{t('asanaDetail.scaleBeginner')}</span>
+          <span>{t('asanaDetail.scaleIntermediate')}</span>
+          <span>{t('asanaDetail.scaleExpert')}</span>
         </div>
 
         <div className="bg-surface-container-low rounded-xl p-4">
           <p className="font-body text-xs text-on-surface-variant leading-relaxed">
-            Longer holds build deeper stillness and strength — but only when the shorter ones feel natural. Don't rush the scale.
+            {t('asanaDetail.holdSheetNote')}
           </p>
         </div>
       </BottomSheet>
 
       {/* ── Level Sheet ── */}
-      <BottomSheet open={sheet === 'level'} onClose={() => setSheet(null)} title="Practice Level">
+      <BottomSheet open={sheet === 'level'} onClose={() => setSheet(null)} title={t('asanaDetail.levelSheetTitle')}>
         <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-4">
-          This pose is rated <span className="text-on-surface font-semibold">{asana.level}</span>. Hold times grow as you progress.
+          {t('asanaDetail.levelSheetBody', { level: levelLabel(asana.level) })}
         </p>
         <div className="flex flex-col gap-2.5 mb-2">
           {LEVELS.map((lvl) => {
@@ -579,12 +590,12 @@ export default function AsanaDetailPage() {
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
-                    <p className="font-body text-sm font-semibold text-on-surface">{lvl.name}</p>
+                    <p className="font-body text-sm font-semibold text-on-surface">{levelLabel(lvl.name)}</p>
                     {isCurrent && (
-                      <span className="px-2 py-0.5 bg-primary/10 rounded-full font-label text-[8px] text-primary uppercase tracking-widest">This Pose</span>
+                      <span className="px-2 py-0.5 bg-primary/10 rounded-full font-label text-[8px] text-primary uppercase tracking-widest">{t('asanaDetail.thisPose')}</span>
                     )}
                   </div>
-                  <p className="font-body text-xs text-on-surface-variant mt-0.5">Typical hold · {lvl.range}</p>
+                  <p className="font-body text-xs text-on-surface-variant mt-0.5">{t('asanaDetail.typicalHold', { range: lvl.range })}</p>
                 </div>
               </div>
             )
@@ -593,9 +604,9 @@ export default function AsanaDetailPage() {
       </BottomSheet>
 
       {/* ── Areas Sheet ── */}
-      <BottomSheet open={sheet === 'areas'} onClose={() => setSheet(null)} title="Areas Worked">
+      <BottomSheet open={sheet === 'areas'} onClose={() => setSheet(null)} title={t('asanaDetail.areasSheetTitle')}>
         <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-4">
-          This pose engages <span className="text-on-surface font-semibold">{asana.bodyParts.length}</span> areas of your body.
+          {t('asanaDetail.areasSheetBody', { count: asana.bodyParts.length })}
         </p>
         <div className="grid grid-cols-2 gap-2.5">
           {asana.bodyParts.map((part, i) => (
@@ -640,7 +651,7 @@ export default function AsanaDetailPage() {
             <span aria-hidden="true" className="material-symbols-outlined text-lg">
               {isLocked ? 'lock' : 'play_arrow'}
             </span>
-            {isLocked ? `Unlock to practice ${asana.sanskrit}` : `Practice ${asana.sanskrit}`}
+            {isLocked ? t('asanaDetail.unlockPractice', { name: asana.sanskrit }) : t('asanaDetail.practice', { name: asana.sanskrit })}
           </button>
         </div>,
         document.body
@@ -650,8 +661,8 @@ export default function AsanaDetailPage() {
         open={paywallOpen}
         onClose={() => setPaywallOpen(false)}
         surface="asana_detail_locked"
-        headline={`Practice ${asana.sanskrit} with Plus`}
-        subhead="Unlock the full asana library, your personalized routine, and the wisdom of Charaka."
+        headline={t('asanaDetail.paywallHeadline', { name: asana.sanskrit })}
+        subhead={t('asanaDetail.paywallSubhead')}
       />
 
     </div>
