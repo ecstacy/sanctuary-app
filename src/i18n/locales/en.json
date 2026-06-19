@@ -136,5 +136,54 @@
       "notNow": "Not now",
       "neverAsk": "Don't ask again"
     }
+  },
+  "paywall": {
+    "kicker": "Sanctuary Plus",
+    "defaultHeadline": "A practice that knows you",
+    "defaultSubhead": "Unlock the full library, your personalized protocol, and the wisdom of Charaka.",
+    "benefits": {
+      "library": "The full asana & pranayama library",
+      "routine": "Your personalized routine, tuned to dosha + season",
+      "charaka": "Charaka deep-dives + Chapter 3: Live by your dosha",
+      "diet": "Full 6-taste dietary protocol & all 13 Dinacharya practices",
+      "voice": "Multiple HD voices + offline downloads"
+    },
+    "planAnnual": "Annual",
+    "planMonthly": "Monthly",
+    "cadenceYear": "/ year",
+    "cadenceMonth": "/ month",
+    "annualSavings": "Save 45%",
+    "annualSub": "About €4.92 / month, billed yearly",
+    "monthlySub": "Cancel anytime",
+    "renewNote": "Renews automatically. Cancel anytime in your account settings.",
+    "haveCode": "Have a code?",
+    "comingSoon": "Sanctuary Plus is launching soon. We'll send you an invite — meanwhile, internal codes work via \"Have a code?\".",
+    "signInToSubscribe": "Please sign in or create an account to subscribe.",
+    "regionTitle": "Plus isn't available in your region yet",
+    "regionBody": "We're working on bringing paid plans to your country. In the meantime, everything in the free tier is fully yours — and if you have an invite code, you can redeem it below.",
+    "promo": {
+      "kicker": "Redeem a code",
+      "title": "Enter your invite code",
+      "body": "Got an invite from a campaign, a teacher, or our team? Enter it below.",
+      "placeholder": "Enter your code",
+      "checking": "Checking…",
+      "apply": "Apply code",
+      "successKicker": "Code Applied",
+      "successTitle": "Welcome to Sanctuary Plus",
+      "successUntil": "Your premium access is active until {{date}}.",
+      "successLifetime": "Your premium access is granted for life.",
+      "startExploring": "Start exploring",
+      "errEmpty": "Enter your code to continue.",
+      "errNeedAccount": "Please sign in or create an account first.",
+      "errGeneric": "Something went wrong. Please try again.",
+      "errNotFound": "We couldn't find that code.",
+      "errInactive": "That code is no longer active.",
+      "errExpired": "That code has expired.",
+      "errNotYetValid": "That code isn't active yet — try again later.",
+      "errExhausted": "That code has reached its redemption limit.",
+      "errAlreadyRedeemed": "You've already redeemed this code.",
+      "errKindUnsupported": "That code can't be redeemed here yet.",
+      "errDefault": "That code couldn't be redeemed."
+    }
   }
 }

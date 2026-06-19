@@ -136,5 +136,54 @@
       "notNow": "Nicht jetzt",
       "neverAsk": "Nicht mehr fragen"
     }
+  },
+  "paywall": {
+    "kicker": "Sanctuary Plus",
+    "defaultHeadline": "Eine Praxis, die dich kennt",
+    "defaultSubhead": "Schalte die vollständige Bibliothek, dein persönliches Protokoll und die Weisheit der Charaka frei.",
+    "benefits": {
+      "library": "Die komplette Asana- & Pranayama-Bibliothek",
+      "routine": "Deine persönliche Routine, abgestimmt auf Dosha + Jahreszeit",
+      "charaka": "Charaka-Vertiefungen + Kapitel 3: Lebe nach deinem Dosha",
+      "diet": "Vollständiges 6-Geschmacks-Ernährungsprotokoll & alle 13 Dinacharya-Praktiken",
+      "voice": "Mehrere HD-Stimmen + Offline-Downloads"
+    },
+    "planAnnual": "Jährlich",
+    "planMonthly": "Monatlich",
+    "cadenceYear": "/ Jahr",
+    "cadenceMonth": "/ Monat",
+    "annualSavings": "45 % sparen",
+    "annualSub": "Etwa 4,92 € / Monat, jährliche Abrechnung",
+    "monthlySub": "Jederzeit kündbar",
+    "renewNote": "Verlängert sich automatisch. Jederzeit in den Kontoeinstellungen kündbar.",
+    "haveCode": "Hast du einen Code?",
+    "comingSoon": "Sanctuary Plus startet bald. Wir senden dir eine Einladung — interne Codes funktionieren bereits über „Hast du einen Code?“.",
+    "signInToSubscribe": "Bitte melde dich an oder erstelle ein Konto, um zu abonnieren.",
+    "regionTitle": "Plus ist in deiner Region noch nicht verfügbar",
+    "regionBody": "Wir arbeiten daran, kostenpflichtige Pläne in dein Land zu bringen. In der Zwischenzeit gehört dir alles im kostenlosen Tarif vollständig — und wenn du einen Einladungscode hast, kannst du ihn unten einlösen.",
+    "promo": {
+      "kicker": "Code einlösen",
+      "title": "Gib deinen Einladungscode ein",
+      "body": "Eine Einladung von einer Kampagne, einer Lehrerin oder unserem Team erhalten? Gib sie unten ein.",
+      "placeholder": "Code eingeben",
+      "checking": "Wird geprüft…",
+      "apply": "Code anwenden",
+      "successKicker": "Code angewendet",
+      "successTitle": "Willkommen bei Sanctuary Plus",
+      "successUntil": "Dein Premium-Zugang ist aktiv bis {{date}}.",
+      "successLifetime": "Dein Premium-Zugang gilt lebenslang.",
+      "startExploring": "Loslegen",
+      "errEmpty": "Gib deinen Code ein, um fortzufahren.",
+      "errNeedAccount": "Bitte melde dich zuerst an oder erstelle ein Konto.",
+      "errGeneric": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+      "errNotFound": "Wir konnten diesen Code nicht finden.",
+      "errInactive": "Dieser Code ist nicht mehr aktiv.",
+      "errExpired": "Dieser Code ist abgelaufen.",
+      "errNotYetValid": "Dieser Code ist noch nicht aktiv — versuche es später erneut.",
+      "errExhausted": "Dieser Code hat sein Einlöselimit erreicht.",
+      "errAlreadyRedeemed": "Du hast diesen Code bereits eingelöst.",
+      "errKindUnsupported": "Dieser Code kann hier noch nicht eingelöst werden.",
+      "errDefault": "Dieser Code konnte nicht eingelöst werden."
+    }
   }
 }

@@ -26,6 +26,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Capacitor } from '@capacitor/core'
 import { registerPlugin } from '@capacitor/core'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import { track, EVENTS } from '../lib/track'
@@ -35,39 +36,40 @@ const ExternalBrowser = registerPlugin('ExternalBrowser', {
   web: { async open({ url }) { window.open(url, '_blank') } }
 })
 
-// Pricing display data. Source of truth is Stripe; these are presentation
-// strings only so the sheet renders without hitting Stripe on open.
+// Pricing display data. Prices/cadence are presentation strings (numbers
+// stay as-is across locales); label/savings/sub resolve via i18n keys.
 const PLANS = [
   {
-    id:        'annual',
-    label:     'Annual',
-    price:     '€59',
-    cadence:   '/ year',
-    savings:   'Save 45%',
-    sub:       'About €4.92 / month, billed yearly',
-    envKey:    'VITE_STRIPE_CHECKOUT_ANNUAL',
-    highlight: true,
+    id:         'annual',
+    price:      '€59',
+    cadenceKey: 'paywall.cadenceYear',
+    labelKey:   'paywall.planAnnual',
+    savingsKey: 'paywall.annualSavings',
+    subKey:     'paywall.annualSub',
+    envKey:     'VITE_STRIPE_CHECKOUT_ANNUAL',
+    highlight:  true,
   },
   {
-    id:        'monthly',
-    label:     'Monthly',
-    price:     '€8.99',
-    cadence:   '/ month',
-    sub:       'Cancel anytime',
-    envKey:    'VITE_STRIPE_CHECKOUT_MONTHLY',
+    id:         'monthly',
+    price:      '€8.99',
+    cadenceKey: 'paywall.cadenceMonth',
+    labelKey:   'paywall.planMonthly',
+    subKey:     'paywall.monthlySub',
+    envKey:     'VITE_STRIPE_CHECKOUT_MONTHLY',
   },
 ]
 
 const BENEFITS = [
-  { icon: 'library_books',  text: 'The full asana & pranayama library' },
-  { icon: 'self_improvement', text: 'Your personalized routine, tuned to dosha + season' },
-  { icon: 'menu_book',      text: 'Charaka deep-dives + Chapter 3: Live by your dosha' },
-  { icon: 'restaurant_menu',text: 'Full 6-taste dietary protocol & all 13 Dinacharya practices' },
-  { icon: 'graphic_eq',     text: 'Multiple HD voices + offline downloads' },
+  { icon: 'library_books',    key: 'paywall.benefits.library' },
+  { icon: 'self_improvement', key: 'paywall.benefits.routine' },
+  { icon: 'menu_book',        key: 'paywall.benefits.charaka' },
+  { icon: 'restaurant_menu',  key: 'paywall.benefits.diet' },
+  { icon: 'graphic_eq',       key: 'paywall.benefits.voice' },
 ]
 
 export default function PaywallSheet({ open, onClose, surface, headline, subhead }) {
   const { user, refreshProfile } = useAuth()
+  const { t } = useTranslation()
 
   // Two-pane sheet: 'plans' (default) and 'promo' (when user taps "Have a code").
   const [pane, setPane]               = useState('plans')
@@ -120,7 +122,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
     const baseUrl = import.meta.env[plan.envKey]
     if (!baseUrl) {
       // Stripe not wired yet — show the stub.
-      alert('Sanctuary Plus is launching soon. We\'ll send you an invite — meanwhile, internal codes work via "Have a code?".')
+      alert(t('paywall.comingSoon'))
       return
     }
 
@@ -138,7 +140,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
     // get_checkout_attribution RPC, which returns their id + email from
     // a security-definer function so we don't trust client-set values.
     if (!user) {
-      alert('Please sign in or create an account to subscribe.')
+      alert(t('paywall.signInToSubscribe'))
       return
     }
 
@@ -180,11 +182,11 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
 
     const code = promoCode.trim()
     if (!code) {
-      setPromoError('Enter your code to continue.')
+      setPromoError(t('paywall.promo.errEmpty'))
       return
     }
     if (!user) {
-      setPromoError('Please sign in or create an account first.')
+      setPromoError(t('paywall.promo.errNeedAccount'))
       return
     }
 
@@ -194,13 +196,13 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
     try {
       const { data, error } = await supabase.rpc('redeem_promo_code', { input_code: code })
       if (error) {
-        setPromoError('Something went wrong. Please try again.')
+        setPromoError(t('paywall.promo.errGeneric'))
         track(EVENTS.PROMO_CODE_FAILED, { surface, reason: 'rpc_error', message: error.message })
         return
       }
       if (!data?.ok) {
-        const friendly = ERROR_MESSAGES[data?.error] || 'That code couldn\'t be redeemed.'
-        setPromoError(friendly)
+        const key = ERROR_KEYS[data?.error] || 'paywall.promo.errDefault'
+        setPromoError(t(key))
         track(EVENTS.PROMO_CODE_FAILED, { surface, reason: data?.error || 'unknown' })
         return
       }
@@ -252,7 +254,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
         <button
           onClick={handleDismiss}
           className="absolute top-3 right-3 w-11 h-11 rounded-full bg-surface-container flex items-center justify-center active:scale-95 transition-all"
-          aria-label="Close"
+          aria-label={t('common.cancel')}
         >
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">close</span>
         </button>
@@ -268,13 +270,13 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
             {/* Hero */}
             <div className="text-center mt-2 mb-8">
               <p className="font-label text-[10px] font-semibold text-primary uppercase tracking-[0.22em] mb-3">
-                Sanctuary Plus
+                {t('paywall.kicker')}
               </p>
               <h2 id="paywall-title" className="font-headline text-3xl text-on-surface leading-tight mb-3">
-                {headline || 'A practice that knows you'}
+                {headline || t('paywall.defaultHeadline')}
               </h2>
               <p className="font-body text-sm text-on-surface-variant/80 leading-relaxed max-w-xs mx-auto">
-                {subhead || 'Unlock the full library, your personalized protocol, and the wisdom of Charaka.'}
+                {subhead || t('paywall.defaultSubhead')}
               </p>
             </div>
 
@@ -286,7 +288,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                     aria-hidden="true"
                     className="material-symbols-outlined text-primary text-base mt-0.5 flex-shrink-0"
                   >{b.icon}</span>
-                  <span className="font-body text-sm text-on-surface leading-snug">{b.text}</span>
+                  <span className="font-body text-sm text-on-surface leading-snug">{t(b.key)}</span>
                 </li>
               ))}
             </ul>
@@ -298,12 +300,10 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               <div className="bg-surface-container rounded-2xl p-5 mb-5 text-center">
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-2xl mb-2">public</span>
                 <p className="font-body font-semibold text-sm text-on-surface mb-1">
-                  Plus isn&apos;t available in your region yet
+                  {t('paywall.regionTitle')}
                 </p>
                 <p className="font-body text-xs text-on-surface-variant/70 leading-relaxed">
-                  We&apos;re working on bringing paid plans to your country. In the
-                  meantime, everything in the free tier is fully yours — and if
-                  you have an invite code, you can redeem it below.
+                  {t('paywall.regionBody')}
                 </p>
               </div>
             ) : (
@@ -318,27 +318,27 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                           ? 'bg-primary-container border-2 border-primary'
                           : 'bg-surface-container border-2 border-transparent'
                       }`}
-                      aria-label={`Choose ${plan.label} plan`}
+                      aria-label={t(plan.labelKey)}
                     >
-                      {plan.savings && (
+                      {plan.savingsKey && (
                         <span className="absolute -top-2 right-4 bg-primary text-on-primary font-label text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">
-                          {plan.savings}
+                          {t(plan.savingsKey)}
                         </span>
                       )}
                       <div className="flex items-baseline justify-between mb-1">
-                        <span className="font-body font-semibold text-base text-on-surface">{plan.label}</span>
+                        <span className="font-body font-semibold text-base text-on-surface">{t(plan.labelKey)}</span>
                         <span className="font-headline text-2xl text-on-surface tabular-nums">
                           {plan.price}
-                          <span className="font-body text-xs text-on-surface-variant ml-0.5">{plan.cadence}</span>
+                          <span className="font-body text-xs text-on-surface-variant ml-0.5">{t(plan.cadenceKey)}</span>
                         </span>
                       </div>
-                      <p className="font-body text-xs text-on-surface-variant/70 leading-snug">{plan.sub}</p>
+                      <p className="font-body text-xs text-on-surface-variant/70 leading-snug">{t(plan.subKey)}</p>
                     </button>
                   ))}
                 </div>
 
                 <p className="font-body text-[10px] text-on-surface-variant/50 text-center leading-relaxed mb-5">
-                  Renews automatically. Cancel anytime in your account settings.
+                  {t('paywall.renewNote')}
                 </p>
               </>
             )}
@@ -351,7 +351,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               }}
               className="w-full py-3 text-center font-label text-xs text-on-surface-variant/70 uppercase tracking-widest active:scale-95 transition-all"
             >
-              Have a code?
+              {t('paywall.haveCode')}
             </button>
           </div>
         )}
@@ -382,15 +382,15 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
             </div>
 
             <p className="font-label text-[10px] font-semibold text-primary uppercase tracking-[0.22em] mb-3">
-              Code Applied
+              {t('paywall.promo.successKicker')}
             </p>
             <h2 className="font-headline text-3xl text-on-surface leading-tight mb-3">
-              Welcome to Sanctuary Plus
+              {t('paywall.promo.successTitle')}
             </h2>
             <p className="font-body text-sm text-on-surface-variant/80 leading-relaxed max-w-xs mx-auto mb-2">
               {promoSuccess.grantedUntil
-                ? `Your premium access is active until ${new Date(promoSuccess.grantedUntil).toLocaleDateString()}.`
-                : 'Your premium access is granted for life.'}
+                ? t('paywall.promo.successUntil', { date: new Date(promoSuccess.grantedUntil).toLocaleDateString() })
+                : t('paywall.promo.successLifetime')}
             </p>
             <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-wider mb-8 tabular-nums">
               {promoSuccess.code}
@@ -401,7 +401,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               onClick={() => onClose?.()}
               className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
-              Start exploring
+              {t('paywall.promo.startExploring')}
             </button>
           </div>
         )}
@@ -415,24 +415,24 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               <button
                 onClick={() => setPane('plans')}
                 className="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center active:scale-95"
-                aria-label="Back to plans"
+                aria-label={t('common.back')}
               >
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">arrow_back</span>
               </button>
               <p className="font-label text-[10px] font-semibold text-primary uppercase tracking-[0.22em]">
-                Redeem a code
+                {t('paywall.promo.kicker')}
               </p>
             </div>
 
             <h2 className="font-headline text-2xl text-on-surface leading-tight mb-2">
-              Enter your invite code
+              {t('paywall.promo.title')}
             </h2>
             <p className="font-body text-sm text-on-surface-variant/80 leading-relaxed mb-6">
-              Got an invite from a campaign, a teacher, or our team? Enter it below.
+              {t('paywall.promo.body')}
             </p>
 
             <form onSubmit={handlePromoSubmit} className="space-y-4">
-              <label htmlFor="promo-input" className="sr-only">Promo code</label>
+              <label htmlFor="promo-input" className="sr-only">{t('paywall.promo.kicker')}</label>
               <input
                 id="promo-input"
                 type="text"
@@ -445,7 +445,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                 // Neutral placeholder — we used to echo "SANCTUARY-TEAM"
                 // which was the seeded internal lifetime grant. Showing it
                 // to every user effectively published it.
-                placeholder="Enter your code"
+                placeholder={t('paywall.promo.placeholder')}
                 autoCapitalize="characters"
                 autoCorrect="off"
                 spellCheck="false"
@@ -468,7 +468,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                 disabled={promoBusy || !promoCode.trim()}
                 className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50"
               >
-                {promoBusy ? 'Checking...' : 'Apply code'}
+                {promoBusy ? t('paywall.promo.checking') : t('paywall.promo.apply')}
               </button>
             </form>
           </div>
@@ -478,16 +478,16 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
   )
 }
 
-// Map server-side RPC error codes to user-friendly strings.
-const ERROR_MESSAGES = {
-  not_authenticated:  'Please sign in or create an account first.',
-  not_found:          "We couldn't find that code.",
-  inactive:           'That code is no longer active.',
-  expired:            'That code has expired.',
-  not_yet_valid:      "That code isn't active yet — try again later.",
-  exhausted:          'That code has reached its redemption limit.',
-  already_redeemed:   "You've already redeemed this code.",
-  kind_not_supported: "That code can't be redeemed here yet.",
+// Map server-side RPC error codes to i18n keys (resolved at render via t()).
+const ERROR_KEYS = {
+  not_authenticated:  'paywall.promo.errNeedAccount',
+  not_found:          'paywall.promo.errNotFound',
+  inactive:           'paywall.promo.errInactive',
+  expired:            'paywall.promo.errExpired',
+  not_yet_valid:      'paywall.promo.errNotYetValid',
+  exhausted:          'paywall.promo.errExhausted',
+  already_redeemed:   'paywall.promo.errAlreadyRedeemed',
+  kind_not_supported: 'paywall.promo.errKindUnsupported',
 }
 
 // Append query params to a URL, preserving any existing query string the
