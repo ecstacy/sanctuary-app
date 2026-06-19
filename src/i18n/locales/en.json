@@ -80,7 +80,86 @@
     "checkinPrompt": "How are you feeling right now?",
     "weeklyCheckinTitle": "Weekly check-in",
     "weeklyCheckinBody": "Take 2 minutes to see how your doshas are trending this week.",
-    "weeklyCheckinCta": "Start check-in"
+    "weeklyCheckinCta": "Start check-in",
+    "namaste": "Namaste",
+    "defaultFirstName": "Friend",
+    "subtitleMorning": "The morning is still. Your practice awaits.",
+    "subtitleAfternoon": "The afternoon calls for stillness.",
+    "subtitleEvening": "The evening is here. Time to restore.",
+    "profileAria": "Open profile",
+    "profileAriaPlus": "Open profile (Sanctuary Plus member)",
+    "dayStreak": "Day Streak",
+    "streakOneDay": "1 day so far",
+    "streakDays": "consecutive days",
+    "thisWeek": "This Week",
+    "minutesPracticed": "minutes practiced",
+    "checkinFirstKicker": "First Check-in",
+    "checkinWeeklyKicker": "Weekly Check-in",
+    "checkinFirstPrompt": "How have you been lately?",
+    "checkinWeeklyPrompt": "It's been {{days}} days — how are you now?",
+    "checkinMeta": "5 questions · 60 seconds",
+    "feelingToday": "How are you feeling today?",
+    "searchPlaceholder": "Lower back pain, headache...",
+    "searchAria": "Search",
+    "getMyPractice": "Get My Practice",
+    "checkinOptions": {
+      "stress": "Stressed",
+      "sleep": "Tired",
+      "energy": "Low energy",
+      "flexibility": "Stiff"
+    },
+    "pickUpWhereLeft": "Pick up where you left off",
+    "contextMorning": "Start your day grounded",
+    "contextAfternoon": "Reset your afternoon",
+    "contextEvening": "Wind down gently",
+    "minSuffix": "min",
+    "dailyRitual": "Daily Ritual · 2 min",
+    "mindfulRespiration": "Mindful Respiration",
+    "inhaleHoldExhale": "Inhale · Hold · Exhale",
+    "begin": "Begin",
+    "avoid": {
+      "title": "What to avoid",
+      "reminder": "Gentle reminder: Balance is a practice, not a destination.",
+      "badge": {
+        "morning": "morning",
+        "afternoon": "afternoon",
+        "evening": "evening"
+      },
+      "tips": {
+        "morning": [
+          "Checking your phone before getting out of bed",
+          "Skipping breakfast or drinking coffee on an empty stomach",
+          "Intense cardio without warming up first"
+        ],
+        "afternoon": [
+          "Heavy meals that cause afternoon sluggishness",
+          "Stressful work emails during your break",
+          "Sitting without moving for more than 90 minutes"
+        ],
+        "evening": [
+          "Strenuous exercise after 7 PM",
+          "Screen time and blue light before sleep",
+          "Caffeine or processed sugars in the late afternoon",
+          "Heavy meals within 3 hours of sleep"
+        ]
+      }
+    },
+    "dosha": {
+      "type": "Dosha Type",
+      "undiscovered": "Undiscovered",
+      "suffix": "{{dosha}} Dosha",
+      "quizPrompt": "Take the Dosha quiz to unlock personalized recommendations and theme your app.",
+      "elevatedThisWeek": "This week: elevated {{dosha}}",
+      "inRhythm": "In rhythm this week",
+      "seeRebalance": "See how to rebalance",
+      "exploreDosha": "Explore my Dosha",
+      "takeQuiz": "Take the quiz",
+      "vata": { "element": "Air + Ether", "tagline": "Creative, quick-thinking, and adaptable" },
+      "pitta": { "element": "Fire + Water", "tagline": "Focused, driven, and naturally radiant" },
+      "kapha": { "element": "Earth + Water", "tagline": "Grounded, nurturing, and steady" }
+    },
+    "paywallHeadline": "The full protocol awaits",
+    "paywallSubhead": "Plus gives you the daily plan — food, movement, sleep — that brings your dosha back to centre."
   },
   "profile": {
     "title": "Profile",

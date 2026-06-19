@@ -80,7 +80,86 @@
     "checkinPrompt": "अभी आप कैसा महसूस कर रहे हैं?",
     "weeklyCheckinTitle": "साप्ताहिक चेक-इन",
     "weeklyCheckinBody": "2 मिनट में देखें कि इस सप्ताह आपके दोष कैसे चल रहे हैं।",
-    "weeklyCheckinCta": "चेक-इन शुरू करें"
+    "weeklyCheckinCta": "चेक-इन शुरू करें",
+    "namaste": "नमस्ते",
+    "defaultFirstName": "मित्र",
+    "subtitleMorning": "सुबह शांत है। आपका अभ्यास प्रतीक्षारत है।",
+    "subtitleAfternoon": "दोपहर ठहराव का आह्वान करती है।",
+    "subtitleEvening": "शाम आ गई है। पुनः स्फूर्त होने का समय।",
+    "profileAria": "प्रोफ़ाइल खोलें",
+    "profileAriaPlus": "प्रोफ़ाइल खोलें (Sanctuary Plus सदस्य)",
+    "dayStreak": "दिनों की लय",
+    "streakOneDay": "अब तक 1 दिन",
+    "streakDays": "लगातार दिन",
+    "thisWeek": "इस सप्ताह",
+    "minutesPracticed": "मिनट अभ्यास किया",
+    "checkinFirstKicker": "पहला चेक-इन",
+    "checkinWeeklyKicker": "साप्ताहिक चेक-इन",
+    "checkinFirstPrompt": "हाल ही में आप कैसे रहे हैं?",
+    "checkinWeeklyPrompt": "{{days}} दिन हो गए — अब आप कैसे हैं?",
+    "checkinMeta": "5 प्रश्न · 60 सेकंड",
+    "feelingToday": "आज आप कैसा महसूस कर रहे हैं?",
+    "searchPlaceholder": "पीठ के निचले हिस्से में दर्द, सिरदर्द...",
+    "searchAria": "खोजें",
+    "getMyPractice": "मेरा अभ्यास पाएँ",
+    "checkinOptions": {
+      "stress": "तनावग्रस्त",
+      "sleep": "थका हुआ",
+      "energy": "कम ऊर्जा",
+      "flexibility": "अकड़न"
+    },
+    "pickUpWhereLeft": "जहाँ छोड़ा था वहीं से जारी रखें",
+    "contextMorning": "अपना दिन स्थिरता से शुरू करें",
+    "contextAfternoon": "अपनी दोपहर को रीसेट करें",
+    "contextEvening": "धीरे-धीरे शांत हों",
+    "minSuffix": "मिनट",
+    "dailyRitual": "दैनिक अनुष्ठान · 2 मिनट",
+    "mindfulRespiration": "सचेत श्वसन",
+    "inhaleHoldExhale": "श्वास लें · रोकें · छोड़ें",
+    "begin": "शुरू करें",
+    "avoid": {
+      "title": "किनसे बचें",
+      "reminder": "कोमल अनुस्मारक: संतुलन एक अभ्यास है, मंज़िल नहीं।",
+      "badge": {
+        "morning": "सुबह",
+        "afternoon": "दोपहर",
+        "evening": "शाम"
+      },
+      "tips": {
+        "morning": [
+          "बिस्तर से उठने से पहले फ़ोन देखना",
+          "नाश्ता छोड़ना या खाली पेट कॉफ़ी पीना",
+          "बिना वार्म-अप के तीव्र कार्डियो"
+        ],
+        "afternoon": [
+          "भारी भोजन जो दोपहर में सुस्ती लाता है",
+          "ब्रेक के दौरान तनावपूर्ण कार्य-ईमेल",
+          "90 मिनट से अधिक बिना हिले बैठना"
+        ],
+        "evening": [
+          "शाम 7 बजे के बाद कठिन व्यायाम",
+          "सोने से पहले स्क्रीन और नीली रोशनी",
+          "दोपहर बाद कैफ़ीन या प्रसंस्कृत शर्करा",
+          "सोने के 3 घंटे के भीतर भारी भोजन"
+        ]
+      }
+    },
+    "dosha": {
+      "type": "दोष प्रकार",
+      "undiscovered": "अज्ञात",
+      "suffix": "{{dosha}} दोष",
+      "quizPrompt": "व्यक्तिगत सुझाव अनलॉक करने और अपने ऐप को थीम देने के लिए दोष क्विज़ लें।",
+      "elevatedThisWeek": "इस सप्ताह: बढ़ा हुआ {{dosha}}",
+      "inRhythm": "इस सप्ताह लय में",
+      "seeRebalance": "फिर से संतुलित कैसे हों, देखें",
+      "exploreDosha": "मेरा दोष देखें",
+      "takeQuiz": "क्विज़ लें",
+      "vata": { "element": "वायु + आकाश", "tagline": "रचनात्मक, तेज़ सोच वाले और अनुकूलनशील" },
+      "pitta": { "element": "अग्नि + जल", "tagline": "केंद्रित, प्रेरित और स्वाभाविक रूप से तेजस्वी" },
+      "kapha": { "element": "पृथ्वी + जल", "tagline": "स्थिर, पोषक और दृढ़" }
+    },
+    "paywallHeadline": "पूरा प्रोटोकॉल प्रतीक्षारत है",
+    "paywallSubhead": "Plus आपको दैनिक योजना देता है — आहार, गति, नींद — जो आपके दोष को फिर से संतुलन में लाती है।"
   },
   "profile": {
     "title": "प्रोफ़ाइल",

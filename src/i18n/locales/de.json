@@ -80,7 +80,86 @@
     "checkinPrompt": "Wie fühlst du dich gerade?",
     "weeklyCheckinTitle": "Wöchentlicher Check-in",
     "weeklyCheckinBody": "Nimm dir 2 Minuten, um zu sehen, wie sich deine Doshas diese Woche entwickeln.",
-    "weeklyCheckinCta": "Check-in starten"
+    "weeklyCheckinCta": "Check-in starten",
+    "namaste": "Namaste",
+    "defaultFirstName": "Freund*in",
+    "subtitleMorning": "Der Morgen ist still. Deine Praxis wartet.",
+    "subtitleAfternoon": "Der Nachmittag lädt zur Stille ein.",
+    "subtitleEvening": "Der Abend ist da. Zeit, dich zu erholen.",
+    "profileAria": "Profil öffnen",
+    "profileAriaPlus": "Profil öffnen (Sanctuary Plus-Mitglied)",
+    "dayStreak": "Tagesserie",
+    "streakOneDay": "1 Tag bisher",
+    "streakDays": "Tage in Folge",
+    "thisWeek": "Diese Woche",
+    "minutesPracticed": "Minuten geübt",
+    "checkinFirstKicker": "Erster Check-in",
+    "checkinWeeklyKicker": "Wöchentlicher Check-in",
+    "checkinFirstPrompt": "Wie ging es dir in letzter Zeit?",
+    "checkinWeeklyPrompt": "Es ist {{days}} Tage her — wie geht es dir jetzt?",
+    "checkinMeta": "5 Fragen · 60 Sekunden",
+    "feelingToday": "Wie fühlst du dich heute?",
+    "searchPlaceholder": "Rückenschmerzen, Kopfschmerzen...",
+    "searchAria": "Suche",
+    "getMyPractice": "Meine Praxis abrufen",
+    "checkinOptions": {
+      "stress": "Gestresst",
+      "sleep": "Müde",
+      "energy": "Wenig Energie",
+      "flexibility": "Steif"
+    },
+    "pickUpWhereLeft": "Mach dort weiter, wo du aufgehört hast",
+    "contextMorning": "Beginne deinen Tag geerdet",
+    "contextAfternoon": "Setze deinen Nachmittag zurück",
+    "contextEvening": "Komm sanft zur Ruhe",
+    "minSuffix": "Min.",
+    "dailyRitual": "Tägliches Ritual · 2 Min.",
+    "mindfulRespiration": "Achtsames Atmen",
+    "inhaleHoldExhale": "Einatmen · Halten · Ausatmen",
+    "begin": "Beginnen",
+    "avoid": {
+      "title": "Was du vermeiden solltest",
+      "reminder": "Sanfte Erinnerung: Balance ist eine Praxis, kein Ziel.",
+      "badge": {
+        "morning": "Morgen",
+        "afternoon": "Nachmittag",
+        "evening": "Abend"
+      },
+      "tips": {
+        "morning": [
+          "Aufs Handy schauen, bevor du aufstehst",
+          "Frühstück auslassen oder Kaffee auf nüchternen Magen trinken",
+          "Intensives Cardio ohne vorheriges Aufwärmen"
+        ],
+        "afternoon": [
+          "Schwere Mahlzeiten, die am Nachmittag träge machen",
+          "Stressige Arbeits-E-Mails während deiner Pause",
+          "Mehr als 90 Minuten ohne Bewegung sitzen"
+        ],
+        "evening": [
+          "Anstrengender Sport nach 19 Uhr",
+          "Bildschirmzeit und blaues Licht vor dem Schlafen",
+          "Koffein oder verarbeiteter Zucker am späten Nachmittag",
+          "Schwere Mahlzeiten innerhalb von 3 Stunden vor dem Schlafen"
+        ]
+      }
+    },
+    "dosha": {
+      "type": "Dosha-Typ",
+      "undiscovered": "Unentdeckt",
+      "suffix": "{{dosha}}-Dosha",
+      "quizPrompt": "Mach das Dosha-Quiz, um personalisierte Empfehlungen freizuschalten und deine App zu gestalten.",
+      "elevatedThisWeek": "Diese Woche: erhöhtes {{dosha}}",
+      "inRhythm": "Diese Woche im Rhythmus",
+      "seeRebalance": "So findest du dein Gleichgewicht",
+      "exploreDosha": "Mein Dosha entdecken",
+      "takeQuiz": "Quiz starten",
+      "vata": { "element": "Luft + Äther", "tagline": "Kreativ, schnell denkend und anpassungsfähig" },
+      "pitta": { "element": "Feuer + Wasser", "tagline": "Fokussiert, zielstrebig und natürlich strahlend" },
+      "kapha": { "element": "Erde + Wasser", "tagline": "Geerdet, fürsorglich und beständig" }
+    },
+    "paywallHeadline": "Das vollständige Protokoll wartet",
+    "paywallSubhead": "Plus gibt dir den täglichen Plan — Ernährung, Bewegung, Schlaf — der dein Dosha wieder ins Gleichgewicht bringt."
   },
   "profile": {
     "title": "Profil",
