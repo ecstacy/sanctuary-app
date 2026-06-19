@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import usePracticeStats from '../hooks/usePracticeStats'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { useVikritiHistory } from '../hooks/useVikritiHistory'
@@ -8,22 +9,18 @@ import PaywallSheet from '../components/PaywallSheet'
 import { track, EVENTS } from '../lib/track'
 
 
-const PERIODS = [
-  { key: '1d', label: 'Today' },
-  { key: '1w', label: '7 Days' },
-  { key: '1m', label: '30 Days' },
-  { key: 'all', label: 'All Time' },
-]
+const PERIOD_KEYS = ['1d', '1w', '1m', 'all']
 
-// ── Yogi level system (future-ready) ──
+// ── Yogi level system. title/subtitle are localized at render via
+// journey.levels.<level>; this table holds thresholds + icons only. ──
 const YOGI_LEVELS = [
-  { level: 1, title: 'Beginner', subtitle: 'Curious Soul', minMinutes: 0, icon: 'spa' },
-  { level: 2, title: 'Student', subtitle: 'Seeker of Stillness', minMinutes: 60, icon: 'self_improvement' },
-  { level: 3, title: 'Practitioner', subtitle: 'Steady Flame', minMinutes: 300, icon: 'local_fire_department' },
-  { level: 4, title: 'Devoted', subtitle: 'Rooted in Practice', minMinutes: 900, icon: 'park' },
-  { level: 5, title: 'Adept', subtitle: 'Flowing with Ease', minMinutes: 1800, icon: 'water' },
-  { level: 6, title: 'Master', subtitle: 'Inner Light', minMinutes: 3600, icon: 'light_mode' },
-  { level: 7, title: 'Guru', subtitle: 'The Sanctuary Within', minMinutes: 7200, icon: 'auto_awesome' },
+  { level: 1, minMinutes: 0, icon: 'spa' },
+  { level: 2, minMinutes: 60, icon: 'self_improvement' },
+  { level: 3, minMinutes: 300, icon: 'local_fire_department' },
+  { level: 4, minMinutes: 900, icon: 'park' },
+  { level: 5, minMinutes: 1800, icon: 'water' },
+  { level: 6, minMinutes: 3600, icon: 'light_mode' },
+  { level: 7, minMinutes: 7200, icon: 'auto_awesome' },
 ]
 
 function getCurrentLevel(totalMinutes) {
@@ -44,13 +41,15 @@ function getNextLevel(totalMinutes) {
 
 // ── Mini chart component (pure SVG) ──
 function ActivityChart({ data, period }) {
+  const { t, i18n } = useTranslation()
+  const locale = i18n.language || 'en'
   if (data.length === 0) {
     return (
       <div className="h-44 flex items-center justify-center">
         <div className="text-center">
           <span className="material-symbols-outlined text-on-surface-variant/20 text-4xl mb-2 block">bar_chart</span>
-          <p className="font-body text-sm text-on-surface-variant/40">No practice data yet</p>
-          <p className="font-body text-xs text-on-surface-variant/25 mt-1">Complete a session to see your chart</p>
+          <p className="font-body text-sm text-on-surface-variant/40">{t('journey.chartEmpty')}</p>
+          <p className="font-body text-xs text-on-surface-variant/25 mt-1">{t('journey.chartEmptyHint')}</p>
         </div>
       </div>
     )
@@ -66,10 +65,10 @@ function ActivityChart({ data, period }) {
   const formatLabel = (dateStr) => {
     const d = new Date(dateStr + 'T00:00:00')
     if (period === '1d') {
-      return d.toLocaleDateString('en', { weekday: 'short' })
+      return d.toLocaleDateString(locale, { weekday: 'short' })
     }
     if (data.length <= 7) {
-      return d.toLocaleDateString('en', { weekday: 'short' })
+      return d.toLocaleDateString(locale, { weekday: 'short' })
     }
     return `${d.getDate()}/${d.getMonth() + 1}`
   }
@@ -153,6 +152,7 @@ function ActivityChart({ data, period }) {
 
 export default function JourneyPage() {
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
   const [period, setPeriod] = useState('1w')
   const stats = usePracticeStats()
 
@@ -189,6 +189,9 @@ export default function JourneyPage() {
 
   const currentLevel = getCurrentLevel(stats.totalMinutes)
   const nextLevel = getNextLevel(stats.totalMinutes)
+  // Localized title/subtitle for any level row.
+  const levelTitle = (lvl) => t(`journey.levels.${lvl.level}.title`)
+  const levelSubtitle = (lvl) => t(`journey.levels.${lvl.level}.subtitle`)
   const progressToNext = nextLevel
     ? Math.min(((stats.totalMinutes - currentLevel.minMinutes) / (nextLevel.minMinutes - currentLevel.minMinutes)) * 100, 100)
     : 100
@@ -198,10 +201,10 @@ export default function JourneyPage() {
 
       {/* Header */}
       <div className="px-6 pt-3 pb-2 flex items-center gap-3">
-        <button onClick={() => navigate(-1)} className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center" aria-label="Go back">
+        <button onClick={() => navigate(-1)} className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center" aria-label={t('journey.goBack')}>
           <span className="material-symbols-outlined text-on-surface-variant text-lg">arrow_back</span>
         </button>
-        <h1 className="font-headline text-xl text-on-surface">Your Journey</h1>
+        <h1 className="font-headline text-xl text-on-surface">{t('journey.title')}</h1>
       </div>
 
       <div className="px-6 flex flex-col gap-5">
@@ -212,19 +215,19 @@ export default function JourneyPage() {
             <div className="absolute -right-4 -bottom-4 opacity-10">
               <span className="material-symbols-outlined text-6xl">local_fire_department</span>
             </div>
-            <p className="font-label text-[9px] uppercase tracking-widest text-on-primary/60 mb-1">Day Streak</p>
+            <p className="font-label text-[9px] uppercase tracking-widest text-on-primary/60 mb-1">{t('journey.dayStreak')}</p>
             <p className="font-headline text-4xl leading-none">{stats.streak}</p>
             <p className="font-body text-xs text-on-primary/60 mt-1">
-              {stats.streak === 0 ? 'Start today!' : stats.streak === 1 ? 'day' : 'days'}
+              {stats.streak === 0 ? t('journey.streakStart') : stats.streak === 1 ? t('journey.streakDay') : t('journey.streakDays')}
             </p>
           </div>
           <div className="bg-secondary-container/30 rounded-xl p-5 relative overflow-hidden">
             <div className="absolute -right-4 -bottom-4 opacity-10">
               <span className="material-symbols-outlined text-6xl">schedule</span>
             </div>
-            <p className="font-label text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-1">This Week</p>
+            <p className="font-label text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-1">{t('journey.thisWeek')}</p>
             <p className="font-headline text-4xl text-on-surface leading-none">{stats.weekMinutes}</p>
-            <p className="font-body text-xs text-on-surface-variant/60 mt-1">minutes</p>
+            <p className="font-body text-xs text-on-surface-variant/60 mt-1">{t('journey.minutes')}</p>
           </div>
         </div>
 
@@ -235,9 +238,9 @@ export default function JourneyPage() {
               <span className="material-symbols-outlined text-primary text-2xl">{currentLevel.icon}</span>
             </div>
             <div className="flex-1">
-              <p className="font-label text-[9px] text-primary uppercase tracking-widest">Level {currentLevel.level}</p>
-              <h3 className="font-headline text-xl text-on-surface">{currentLevel.title}</h3>
-              <p className="font-body text-xs text-on-surface-variant">{currentLevel.subtitle}</p>
+              <p className="font-label text-[9px] text-primary uppercase tracking-widest">{t('journey.level', { n: currentLevel.level })}</p>
+              <h3 className="font-headline text-xl text-on-surface">{levelTitle(currentLevel)}</h3>
+              <p className="font-body text-xs text-on-surface-variant">{levelSubtitle(currentLevel)}</p>
             </div>
           </div>
 
@@ -245,10 +248,10 @@ export default function JourneyPage() {
             <>
               <div className="flex justify-between mb-1.5">
                 <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-widest">
-                  Progress to {nextLevel.title}
+                  {t('journey.progressTo', { title: levelTitle(nextLevel) })}
                 </p>
                 <p className="font-label text-[9px] text-primary uppercase tracking-widest">
-                  {stats.totalMinutes}/{nextLevel.minMinutes} min
+                  {t('journey.minProgress', { current: stats.totalMinutes, total: nextLevel.minMinutes })}
                 </p>
               </div>
               <div className="h-2 bg-surface-container-high rounded-full overflow-hidden">
@@ -260,14 +263,14 @@ export default function JourneyPage() {
             </>
           ) : (
             <p className="font-body text-xs text-primary text-center italic">
-              You have achieved the highest level. Namaste.
+              {t('journey.highestLevel')}
             </p>
           )}
 
           {/* Future levels preview */}
           {nextLevel && (
             <div className="mt-4 pt-3 border-t border-surface-container-high/50">
-              <p className="font-label text-[9px] text-on-surface-variant/40 uppercase tracking-widest mb-2.5">Coming Up</p>
+              <p className="font-label text-[9px] text-on-surface-variant/40 uppercase tracking-widest mb-2.5">{t('journey.comingUp')}</p>
               <div className="flex gap-3 overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
                 {YOGI_LEVELS.filter(l => l.level > currentLevel.level).slice(0, 3).map(lvl => (
                   <div
@@ -284,8 +287,8 @@ export default function JourneyPage() {
                     <div>
                       <p className={`font-label text-[10px] font-medium ${
                         lvl.level === currentLevel.level + 1 ? 'text-on-surface' : 'text-on-surface-variant/40'
-                      }`}>{lvl.title}</p>
-                      <p className="font-label text-[8px] text-on-surface-variant/30">{lvl.minMinutes} min</p>
+                      }`}>{levelTitle(lvl)}</p>
+                      <p className="font-label text-[8px] text-on-surface-variant/30">{t('journey.minShort', { n: lvl.minMinutes })}</p>
                     </div>
                   </div>
                 ))}
@@ -297,22 +300,22 @@ export default function JourneyPage() {
         {/* ── Activity Chart ── */}
         <div className="bg-surface-container-low rounded-xl p-5 stagger-3">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-headline text-lg text-on-surface">Activity</h3>
+            <h3 className="font-headline text-lg text-on-surface">{t('journey.activity')}</h3>
           </div>
 
           {/* Period filter tabs */}
           <div className="flex gap-2 mb-5">
-            {PERIODS.map(p => (
+            {PERIOD_KEYS.map(key => (
               <button
-                key={p.key}
-                onClick={() => setPeriod(p.key)}
+                key={key}
+                onClick={() => setPeriod(key)}
                 className={`px-3.5 py-1.5 rounded-full font-label text-[10px] uppercase tracking-widest transition-all ${
-                  period === p.key
+                  period === key
                     ? 'bg-primary text-on-primary font-semibold'
                     : 'bg-surface-container-high text-on-surface-variant'
                 }`}
               >
-                {p.label}
+                {t(`journey.periods.${key}`)}
               </button>
             ))}
           </div>
@@ -324,15 +327,15 @@ export default function JourneyPage() {
           <div className="grid grid-cols-3 gap-3 mt-4 pt-4 border-t border-surface-container-high/30">
             <div className="text-center">
               <p className="font-headline text-xl text-on-surface">{periodMinutes}</p>
-              <p className="font-label text-[8px] text-on-surface-variant/50 uppercase tracking-widest">Minutes</p>
+              <p className="font-label text-[8px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.summaryMinutes')}</p>
             </div>
             <div className="text-center">
               <p className="font-headline text-xl text-on-surface">{periodSessions}</p>
-              <p className="font-label text-[8px] text-on-surface-variant/50 uppercase tracking-widest">Sessions</p>
+              <p className="font-label text-[8px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.summarySessions')}</p>
             </div>
             <div className="text-center">
               <p className="font-headline text-xl text-on-surface">{periodPoses}</p>
-              <p className="font-label text-[8px] text-on-surface-variant/50 uppercase tracking-widest">Poses</p>
+              <p className="font-label text-[8px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.summaryPoses')}</p>
             </div>
           </div>
         </div>
@@ -341,7 +344,7 @@ export default function JourneyPage() {
         <div className="bg-surface-container rounded-xl p-5 stagger-4">
           <div className="flex items-center gap-2 mb-4">
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">insights</span>
-            <h3 className="font-headline text-base text-on-surface leading-tight">Your dosha over time</h3>
+            <h3 className="font-headline text-base text-on-surface leading-tight">{t('journey.doshaOverTime')}</h3>
           </div>
 
           {isPremium ? (
@@ -353,14 +356,14 @@ export default function JourneyPage() {
                 setHistoryPaywallOpen(true)
               }}
               className="w-full text-left"
-              aria-label="Unlock your dosha history with Sanctuary Plus"
+              aria-label={t('journey.unlockAria')}
             >
               <p className="font-body text-sm text-on-surface-variant/85 leading-relaxed mb-3">
-                See how your Vata, Pitta, and Kapha have shifted across the month — your check-ins, read back as a pattern.
+                {t('journey.doshaTeaser')}
               </p>
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-container/60">
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-[13px]">lock</span>
-                <span className="font-label text-[11px] font-semibold text-primary uppercase tracking-wide">Unlock with Plus</span>
+                <span className="font-label text-[11px] font-semibold text-primary uppercase tracking-wide">{t('journey.unlockWithPlus')}</span>
               </span>
             </button>
           )}
@@ -368,27 +371,27 @@ export default function JourneyPage() {
 
         {/* ── Lifetime Stats ── */}
         <div className="bg-surface-container-low rounded-xl p-5 stagger-4">
-          <h3 className="font-headline text-lg text-on-surface mb-4">Lifetime</h3>
+          <h3 className="font-headline text-lg text-on-surface mb-4">{t('journey.lifetime')}</h3>
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-surface-container rounded-lg p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">schedule</span>
               <p className="font-headline text-2xl text-on-surface">{stats.totalMinutes}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">Total Minutes</p>
+              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.totalMinutes')}</p>
             </div>
             <div className="bg-surface-container rounded-lg p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">self_improvement</span>
               <p className="font-headline text-2xl text-on-surface">{stats.totalSessions}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">Total Sessions</p>
+              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.totalSessions')}</p>
             </div>
             <div className="bg-surface-container rounded-lg p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">local_fire_department</span>
               <p className="font-headline text-2xl text-on-surface">{stats.longestStreak}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">Best Streak</p>
+              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.bestStreak')}</p>
             </div>
             <div className="bg-surface-container rounded-lg p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">today</span>
               <p className="font-headline text-2xl text-on-surface">{stats.todayMinutes}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">Today</p>
+              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.today')}</p>
             </div>
           </div>
         </div>
@@ -396,7 +399,7 @@ export default function JourneyPage() {
         {/* ── Recent Sessions ── */}
         {stats.sessions.length > 0 && (
           <div className="bg-surface-container-low rounded-xl p-5 stagger-5">
-            <h3 className="font-headline text-lg text-on-surface mb-4">Recent Sessions</h3>
+            <h3 className="font-headline text-lg text-on-surface mb-4">{t('journey.recentSessions')}</h3>
             <div className="flex flex-col gap-2">
               {[...stats.sessions].reverse().slice(0, 10).map(session => {
                 const d = new Date(session.timestamp)
@@ -410,15 +413,15 @@ export default function JourneyPage() {
                         {session.routineLabel || session.routineKey}
                       </p>
                       <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">
-                        {d.toLocaleDateString('en', { weekday: 'short', day: 'numeric', month: 'short' })} · {d.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' })}
+                        {d.toLocaleDateString(i18n.language, { weekday: 'short', day: 'numeric', month: 'short' })} · {d.toLocaleTimeString(i18n.language, { hour: '2-digit', minute: '2-digit' })}
                       </p>
                     </div>
                     <div className="text-right flex-shrink-0">
                       <p className="font-headline text-sm text-on-surface">
-                        {Math.round(session.durationSeconds / 60)}m
+                        {Math.round(session.durationSeconds / 60)}{t('journey.minAbbrev')}
                       </p>
                       <p className="font-label text-[8px] text-on-surface-variant/40 uppercase">
-                        {session.completedCount}/{session.totalPoses} poses
+                        {t('journey.posesCount', { done: session.completedCount, total: session.totalPoses })}
                       </p>
                     </div>
                   </div>
@@ -432,15 +435,15 @@ export default function JourneyPage() {
         {stats.totalSessions === 0 && (
           <div className="bg-primary-container/20 rounded-xl p-6 text-center stagger-3">
             <span className="material-symbols-outlined text-primary text-4xl mb-3 block">self_improvement</span>
-            <h3 className="font-headline text-xl text-on-surface mb-2">Begin Your Journey</h3>
+            <h3 className="font-headline text-xl text-on-surface mb-2">{t('journey.beginTitle')}</h3>
             <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-4">
-              Complete your first practice session to start tracking your progress and building your streak.
+              {t('journey.beginBody')}
             </p>
             <button
               onClick={() => navigate('/routine', { state: { routineKey: 'stress' } })}
               className="px-6 py-3 bg-primary text-on-primary rounded-full font-label text-xs font-semibold tracking-wide active:scale-95 transition-all"
             >
-              Start Your First Session
+              {t('journey.beginCta')}
             </button>
           </div>
         )}
@@ -451,8 +454,8 @@ export default function JourneyPage() {
         open={historyPaywallOpen}
         onClose={() => setHistoryPaywallOpen(false)}
         surface="vikriti_history"
-        headline="See your dosha over time"
-        subhead="Plus turns your check-ins into a month-long pattern — and the protocols to act on it."
+        headline={t('journey.paywallHeadline')}
+        subhead={t('journey.paywallSubhead')}
       />
 
     </div>
