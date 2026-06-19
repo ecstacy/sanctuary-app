@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { POPULAR_SEARCHES } from '../data/recommendations'
 import { ASANAS } from '../data/asanas'
 import { PRANAYAMAS } from '../data/pranayamas'
@@ -20,6 +21,7 @@ const ALL_ASANAS = Object.values(ASANAS)
 // strip being horizontally-scrolled, off-screen cards never fire — exactly
 // what we want for an honest CTR denominator.
 function ExploreAsanaCard({ asana, position, locked, onTap }) {
+  const { t } = useTranslation()
   const ref = useImpression({
     surface:     'discover_explore_asanas',
     contentType: 'asana',
@@ -31,8 +33,8 @@ function ExploreAsanaCard({ asana, position, locked, onTap }) {
       ref={ref}
       onClick={onTap}
       aria-label={locked
-        ? `${asana.english} — Sanctuary Plus`
-        : `${asana.english} (${asana.sanskrit})`}
+        ? t('discover.plusAria', { name: asana.english })
+        : t('discover.itemAria', { english: asana.english, sanskrit: asana.sanskrit })}
       className="flex-shrink-0 w-36 snap-start active:scale-[0.97] transition-all text-left"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
@@ -65,7 +67,7 @@ function ExploreAsanaCard({ asana, position, locked, onTap }) {
               <div className="flex items-center gap-1 min-w-0">
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">lock</span>
                 <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider truncate">
-                  Unlock with Plus
+                  {t('discover.unlockWithPlus')}
                 </span>
               </div>
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">arrow_forward</span>
@@ -83,6 +85,7 @@ function ExploreAsanaCard({ asana, position, locked, onTap }) {
 // One card per breath technique on the Discover Breathwork row. Same
 // impression-tracking pattern as ExploreAsanaCard.
 function PranayamaCard({ pranayama, position, locked, onTap }) {
+  const { t } = useTranslation()
   const ref = useImpression({
     surface:     'discover_breathwork',
     contentType: 'pranayama',
@@ -95,8 +98,8 @@ function PranayamaCard({ pranayama, position, locked, onTap }) {
       ref={ref}
       onClick={onTap}
       aria-label={locked
-        ? `${pranayama.english} — Sanctuary Plus`
-        : `${pranayama.english} (${pranayama.sanskrit})`}
+        ? t('discover.plusAria', { name: pranayama.english })
+        : t('discover.itemAria', { english: pranayama.english, sanskrit: pranayama.sanskrit })}
       className="flex-shrink-0 w-44 snap-start active:scale-[0.97] transition-all text-left"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/40 to-primary/10 flex items-center justify-center">
@@ -121,7 +124,7 @@ function PranayamaCard({ pranayama, position, locked, onTap }) {
         {!locked && (
           <div className="absolute bottom-2 right-2">
             <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-on-surface-variant uppercase tracking-wide">
-              {minutes} min
+              {minutes} {t('discover.minSuffix')}
             </span>
           </div>
         )}
@@ -131,7 +134,7 @@ function PranayamaCard({ pranayama, position, locked, onTap }) {
               aria-hidden="true"
               className="absolute top-2 right-2 px-2 py-0.5 bg-surface/80 backdrop-blur-sm rounded-full font-label text-[9px] text-on-surface-variant uppercase tracking-wide"
             >
-              {minutes} min
+              {minutes} {t('discover.minSuffix')}
             </div>
             <div
               aria-hidden="true"
@@ -141,7 +144,7 @@ function PranayamaCard({ pranayama, position, locked, onTap }) {
               <div className="flex items-center gap-1 min-w-0">
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">lock</span>
                 <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider truncate">
-                  Unlock with Plus
+                  {t('discover.unlockWithPlus')}
                 </span>
               </div>
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">arrow_forward</span>
@@ -188,21 +191,49 @@ function QuickRoutineCard({ routine, position, onTap }) {
 }
 
 // Browse categories — map to recommendation engine topics
+// `query` is the recommendation-engine key (stays English); `labelKey`
+// is the localized display label.
 const CATEGORIES = [
-  { query: 'Lower back pain', label: 'Back & Spine', icon: 'accessibility_new', gradient: 'from-[#6b8f5e] to-[#b8d4a8]' },
-  { query: 'Neck pain', label: 'Neck & Shoulders', icon: 'self_care', gradient: 'from-[#a87b5e] to-[#e8c8a8]' },
-  { query: 'Anxiety', label: 'Stress & Anxiety', icon: 'cloud', gradient: 'from-[#8b7ba8] to-[#c8b8e8]' },
-  { query: 'Can\'t sleep', label: 'Sleep & Rest', icon: 'bedtime', gradient: 'from-[#5e6b8f] to-[#a8b8d4]' },
-  { query: 'Low energy', label: 'Energy & Vitality', icon: 'bolt', gradient: 'from-[#c4873a] to-[#f0d087]' },
-  { query: 'Tight hips', label: 'Hips & Mobility', icon: 'self_care', gradient: 'from-[#8f5e6b] to-[#d4a8b8]' },
-  { query: 'Bloating', label: 'Digestion', icon: 'gastroenterology', gradient: 'from-[#8f8b5e] to-[#d4d0a8]' },
-  { query: 'Posture', label: 'Posture', icon: 'straighten', gradient: 'from-[#5e7b8f] to-[#a8c8d4]' },
+  { query: 'Lower back pain', labelKey: 'discover.categories.back', icon: 'accessibility_new', gradient: 'from-[#6b8f5e] to-[#b8d4a8]' },
+  { query: 'Neck pain', labelKey: 'discover.categories.neck', icon: 'self_care', gradient: 'from-[#a87b5e] to-[#e8c8a8]' },
+  { query: 'Anxiety', labelKey: 'discover.categories.anxiety', icon: 'cloud', gradient: 'from-[#8b7ba8] to-[#c8b8e8]' },
+  { query: 'Can\'t sleep', labelKey: 'discover.categories.sleep', icon: 'bedtime', gradient: 'from-[#5e6b8f] to-[#a8b8d4]' },
+  { query: 'Low energy', labelKey: 'discover.categories.energy', icon: 'bolt', gradient: 'from-[#c4873a] to-[#f0d087]' },
+  { query: 'Tight hips', labelKey: 'discover.categories.hips', icon: 'self_care', gradient: 'from-[#8f5e6b] to-[#d4a8b8]' },
+  { query: 'Bloating', labelKey: 'discover.categories.digestion', icon: 'gastroenterology', gradient: 'from-[#8f8b5e] to-[#d4d0a8]' },
+  { query: 'Posture', labelKey: 'discover.categories.posture', icon: 'straighten', gradient: 'from-[#5e7b8f] to-[#a8c8d4]' },
 ]
 
 export default function DiscoverPage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [searchQuery, setSearchQuery] = useState('')
   useScrollDepth('discover')
+
+  // Localized quick-routine + program lists. `key` routes the request and
+  // keys the i18n strings; `min` formats with the localized unit.
+  const QUICK_ROUTINES = [
+    { key: 'stress', icon: 'psychiatry', min: 15 },
+    { key: 'sleep', icon: 'bedtime', min: 12 },
+    { key: 'energy', icon: 'bolt', min: 18 },
+    { key: 'flexibility', icon: 'self_care', min: 20 },
+  ].map(r => ({
+    ...r,
+    label: t(`discover.routines.${r.key}.label`),
+    desc:  t(`discover.routines.${r.key}.desc`),
+    time:  `${r.min} ${t('discover.minSuffix')}`,
+  }))
+
+  const PROGRAMS = [
+    { key: 'morning7Day', icon: 'wb_twilight', min: 12 },
+    { key: 'backPainSeries', icon: 'healing', min: 12 },
+    { key: 'preBedWindDown', icon: 'nights_stay', min: 20 },
+  ].map(r => ({
+    ...r,
+    label: t(`discover.programsList.${r.key}.label`),
+    desc:  t(`discover.programsList.${r.key}.desc`),
+    time:  `${r.min} ${t('discover.minSuffix')}`,
+  }))
 
   // ── Premium entitlement + paywall sheet state ────────────────────────
   // `isPremium` gates which cards render the "Plus" lock badge and routes
@@ -245,12 +276,12 @@ export default function DiscoverPage() {
       <div className="flex items-center justify-between px-6 pt-3 pb-2">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-primary">explore</span>
-          <span className="font-headline italic text-primary text-base">Discover</span>
+          <span className="font-headline italic text-primary text-base">{t('discover.title')}</span>
         </div>
         <button
           onClick={() => navigate('/profile')}
           className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center"
-          aria-label="Open profile"
+          aria-label={t('discover.profileAria')}
         >
           <span className="material-symbols-outlined text-on-surface-variant text-lg">person</span>
         </button>
@@ -261,10 +292,10 @@ export default function DiscoverPage() {
         {/* ── Search — hero element ── */}
         <div className="stagger-1">
           <h1 className="font-headline text-2xl text-on-surface mb-1">
-            What do you need?
+            {t('discover.heroTitle')}
           </h1>
           <p className="font-body text-sm text-on-surface-variant mb-4">
-            Describe how you feel and we'll find the right practice.
+            {t('discover.heroSubtitle')}
           </p>
 
           <div className="relative">
@@ -281,15 +312,15 @@ export default function DiscoverPage() {
                   handleSearch()
                 }
               }}
-              placeholder="Back pain, headache, can't sleep..."
+              placeholder={t('discover.searchPlaceholder')}
               className="w-full bg-surface-container-low rounded-2xl pl-11 pr-12 py-4 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
-              aria-label="Search asanas"
+              aria-label={t('discover.searchAria')}
             />
             {searchQuery.length > 0 ? (
               <button
                 onClick={() => handleSearch()}
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-primary flex items-center justify-center active:scale-90 transition-all"
-                aria-label="Search"
+                aria-label={t('discover.searchSubmitAria')}
               >
                 <span className="material-symbols-outlined text-on-primary text-sm">arrow_forward</span>
               </button>
@@ -301,7 +332,7 @@ export default function DiscoverPage() {
         {showAsanaResults && (
           <div className="stagger-2">
             <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2.5">
-              Asanas matching "{searchQuery.trim()}"
+              {t('discover.asanasMatching', { query: searchQuery.trim() })}
             </p>
             <div className="flex flex-col gap-2">
               {matchedAsanas.map(asana => (
@@ -335,7 +366,7 @@ export default function DiscoverPage() {
 
         {/* ── Popular search pills ── */}
         <div className="stagger-2">
-          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2.5">Popular searches</p>
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2.5">{t('discover.popularSearches')}</p>
           <div className="flex flex-wrap gap-2">
             {POPULAR_SEARCHES.map((item, i) => (
               <button
@@ -352,7 +383,7 @@ export default function DiscoverPage() {
 
         {/* ── Browse by Category ── */}
         <div className="stagger-3">
-          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Browse by category</p>
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">{t('discover.browseByCategory')}</p>
           <div className="grid grid-cols-2 gap-3">
             {CATEGORIES.map((cat, i) => (
               <button
@@ -365,7 +396,7 @@ export default function DiscoverPage() {
                   <div className="w-10 h-10 rounded-full bg-surface/80 flex items-center justify-center mb-3">
                     <span className="material-symbols-outlined text-primary text-lg">{cat.icon}</span>
                   </div>
-                  <p className="font-body text-sm font-semibold text-on-surface">{cat.label}</p>
+                  <p className="font-body text-sm font-semibold text-on-surface">{t(cat.labelKey)}</p>
                 </div>
               </button>
             ))}
@@ -374,14 +405,9 @@ export default function DiscoverPage() {
 
         {/* ── Quick routines ── */}
         <div className="stagger-4">
-          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Quick routines</p>
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">{t('discover.quickRoutines')}</p>
           <div className="flex flex-col gap-2.5">
-            {[
-              { key: 'stress', label: 'Stress Relief', desc: 'Calm your mind and release tension', icon: 'psychiatry', time: '15 min' },
-              { key: 'sleep', label: 'Better Sleep', desc: 'Wind down and prepare for deep rest', icon: 'bedtime', time: '12 min' },
-              { key: 'energy', label: 'Energy Boost', desc: 'Wake up your body and revitalize', icon: 'bolt', time: '18 min' },
-              { key: 'flexibility', label: 'Flexibility Flow', desc: 'Release stiffness and improve mobility', icon: 'self_care', time: '20 min' },
-            ].map((r, i) => (
+            {QUICK_ROUTINES.map((r, i) => (
               <QuickRoutineCard
                 key={r.key}
                 routine={r}
@@ -397,13 +423,9 @@ export default function DiscoverPage() {
 
         {/* ── Programs — curated sequences for specific outcomes ── */}
         <div className="stagger-4">
-          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Programs</p>
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">{t('discover.programs')}</p>
           <div className="flex flex-col gap-2.5">
-            {[
-              { key: 'morning7Day',     label: 'Morning Reset',     desc: 'Wake the body, warm the spine, ground the day',            icon: 'wb_twilight',  time: '12 min' },
-              { key: 'backPainSeries',  label: 'Back Pain Relief',  desc: 'Decompress, mobilize, ease lower-back tension',            icon: 'healing',      time: '12 min' },
-              { key: 'preBedWindDown',  label: 'Pre-Bed Wind-Down', desc: 'Long, restorative holds — prepare for deep sleep',         icon: 'nights_stay',  time: '20 min' },
-            ].map((r, i) => (
+            {PROGRAMS.map((r, i) => (
               <QuickRoutineCard
                 key={r.key}
                 routine={r}
@@ -419,7 +441,7 @@ export default function DiscoverPage() {
 
         {/* ── Explore all Asanas ── */}
         <div className="stagger-5">
-          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Explore Asanas</p>
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">{t('discover.exploreAsanas')}</p>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
             {ALL_ASANAS.map((asana, i) => {
               const locked = !isPremium && !isAsanaFree(asana.id)
@@ -450,7 +472,7 @@ export default function DiscoverPage() {
 
         {/* ── Breathwork ── */}
         <div className="stagger-5">
-          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">Breathwork</p>
+          <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3">{t('discover.breathwork')}</p>
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
             {Object.values(PRANAYAMAS).map((p, i) => {
               const locked = !isPremium && !isPranayamaFree(p.id)
@@ -490,9 +512,9 @@ export default function DiscoverPage() {
           <div className="flex items-start gap-3">
             <span className="material-symbols-outlined text-primary text-lg mt-0.5">local_florist</span>
             <div>
-              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">Ayurvedic Wisdom</p>
+              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">{t('discover.ayurvedicWisdom')}</p>
               <p className="font-body text-sm text-on-surface-variant leading-relaxed">
-                The body heals with play, the mind heals with laughter, and the spirit heals with silence. Take a moment today to embrace all three.
+                {t('discover.ayurvedicTip')}
               </p>
             </div>
           </div>
@@ -507,8 +529,8 @@ export default function DiscoverPage() {
         open={paywall.open}
         onClose={() => setPaywall({ open: false, surface: null })}
         surface={paywall.surface}
-        headline="The full library awaits"
-        subhead="Unlock every asana and pranayama, plus your personalized routine."
+        headline={t('discover.paywallHeadline')}
+        subhead={t('discover.paywallSubhead')}
       />
 
     </div>

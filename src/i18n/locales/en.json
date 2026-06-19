@@ -206,6 +206,51 @@
       "deletePartial": "Most of your data was removed, but some entries couldn't be deleted. Please contact support."
     }
   },
+  "discover": {
+    "title": "Discover",
+    "profileAria": "Open profile",
+    "heroTitle": "What do you need?",
+    "heroSubtitle": "Describe how you feel and we'll find the right practice.",
+    "searchPlaceholder": "Back pain, headache, can't sleep...",
+    "searchAria": "Search asanas",
+    "searchSubmitAria": "Search",
+    "asanasMatching": "Asanas matching \"{{query}}\"",
+    "popularSearches": "Popular searches",
+    "browseByCategory": "Browse by category",
+    "quickRoutines": "Quick routines",
+    "programs": "Programs",
+    "exploreAsanas": "Explore Asanas",
+    "breathwork": "Breathwork",
+    "unlockWithPlus": "Unlock with Plus",
+    "plusAria": "{{name}} — Sanctuary Plus",
+    "itemAria": "{{english}} ({{sanskrit}})",
+    "minSuffix": "min",
+    "ayurvedicWisdom": "Ayurvedic Wisdom",
+    "ayurvedicTip": "The body heals with play, the mind heals with laughter, and the spirit heals with silence. Take a moment today to embrace all three.",
+    "paywallHeadline": "The full library awaits",
+    "paywallSubhead": "Unlock every asana and pranayama, plus your personalized routine.",
+    "categories": {
+      "back": "Back & Spine",
+      "neck": "Neck & Shoulders",
+      "anxiety": "Stress & Anxiety",
+      "sleep": "Sleep & Rest",
+      "energy": "Energy & Vitality",
+      "hips": "Hips & Mobility",
+      "digestion": "Digestion",
+      "posture": "Posture"
+    },
+    "routines": {
+      "stress": { "label": "Stress Relief", "desc": "Calm your mind and release tension" },
+      "sleep": { "label": "Better Sleep", "desc": "Wind down and prepare for deep rest" },
+      "energy": { "label": "Energy Boost", "desc": "Wake up your body and revitalize" },
+      "flexibility": { "label": "Flexibility Flow", "desc": "Release stiffness and improve mobility" }
+    },
+    "programsList": {
+      "morning7Day": { "label": "Morning Reset", "desc": "Wake the body, warm the spine, ground the day" },
+      "backPainSeries": { "label": "Back Pain Relief", "desc": "Decompress, mobilize, ease lower-back tension" },
+      "preBedWindDown": { "label": "Pre-Bed Wind-Down", "desc": "Long, restorative holds — prepare for deep sleep" }
+    }
+  },
   "protocol": {
     "notFound": "Protocol not found.",
     "backToHome": "Back to home",

@@ -206,6 +206,51 @@
       "deletePartial": "Der Großteil deiner Daten wurde entfernt, einige Einträge konnten jedoch nicht gelöscht werden. Bitte kontaktiere den Support."
     }
   },
+  "discover": {
+    "title": "Entdecken",
+    "profileAria": "Profil öffnen",
+    "heroTitle": "Was brauchst du?",
+    "heroSubtitle": "Beschreibe, wie du dich fühlst, und wir finden die passende Praxis.",
+    "searchPlaceholder": "Rückenschmerzen, Kopfschmerzen, kann nicht schlafen...",
+    "searchAria": "Asanas suchen",
+    "searchSubmitAria": "Suchen",
+    "asanasMatching": "Asanas für „{{query}}“",
+    "popularSearches": "Beliebte Suchen",
+    "browseByCategory": "Nach Kategorie stöbern",
+    "quickRoutines": "Schnelle Routinen",
+    "programs": "Programme",
+    "exploreAsanas": "Asanas entdecken",
+    "breathwork": "Atemarbeit",
+    "unlockWithPlus": "Mit Plus freischalten",
+    "plusAria": "{{name}} — Sanctuary Plus",
+    "itemAria": "{{english}} ({{sanskrit}})",
+    "minSuffix": "Min.",
+    "ayurvedicWisdom": "Ayurvedische Weisheit",
+    "ayurvedicTip": "Der Körper heilt durch Spiel, der Geist heilt durch Lachen und die Seele heilt durch Stille. Nimm dir heute einen Moment, um alle drei anzunehmen.",
+    "paywallHeadline": "Die vollständige Bibliothek wartet",
+    "paywallSubhead": "Schalte jede Asana und jedes Pranayama frei, dazu deine persönliche Routine.",
+    "categories": {
+      "back": "Rücken & Wirbelsäule",
+      "neck": "Nacken & Schultern",
+      "anxiety": "Stress & Angst",
+      "sleep": "Schlaf & Ruhe",
+      "energy": "Energie & Vitalität",
+      "hips": "Hüften & Mobilität",
+      "digestion": "Verdauung",
+      "posture": "Haltung"
+    },
+    "routines": {
+      "stress": { "label": "Stressabbau", "desc": "Beruhige deinen Geist und löse Spannungen" },
+      "sleep": { "label": "Besserer Schlaf", "desc": "Komm zur Ruhe und bereite dich auf tiefe Erholung vor" },
+      "energy": { "label": "Energieschub", "desc": "Wecke deinen Körper und tanke neue Kraft" },
+      "flexibility": { "label": "Beweglichkeits-Flow", "desc": "Löse Steifheit und verbessere die Mobilität" }
+    },
+    "programsList": {
+      "morning7Day": { "label": "Morgen-Reset", "desc": "Den Körper wecken, die Wirbelsäule wärmen, den Tag erden" },
+      "backPainSeries": { "label": "Rückenschmerz-Linderung", "desc": "Entlasten, mobilisieren, Spannungen im unteren Rücken lösen" },
+      "preBedWindDown": { "label": "Entspannung vor dem Schlafen", "desc": "Lange, erholsame Haltungen — bereite dich auf tiefen Schlaf vor" }
+    }
+  },
   "protocol": {
     "notFound": "Protokoll nicht gefunden.",
     "backToHome": "Zurück zur Startseite",
