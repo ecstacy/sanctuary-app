@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { PRANAYAMAS } from '../data/pranayamas'
 import { ASANAS } from '../data/asanas'
+import { localizeAsana } from '../i18n/contentI18n'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
 import PranayamaPracticeOverlay from '../components/PranayamaPractice'
@@ -226,7 +227,7 @@ export default function PranayamaDetailPage() {
   }
 
   const steps = getSteps(pranayama)
-  const seatAsana = pranayama.practiceSeat ? ASANAS[pranayama.practiceSeat] : null
+  const seatAsana = pranayama.practiceSeat ? localizeAsana(ASANAS[pranayama.practiceSeat]) : null
   const levelInfo = LEVELS[pranayama.level] || LEVELS.beginner
   const minutes = Math.round((pranayama.durationSeconds || 0) / 60)
 

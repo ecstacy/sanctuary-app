@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
-import { ASANAS, getDoshaTag } from '../data/asanas'
+import { getAsana, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
@@ -167,7 +167,7 @@ export default function AsanaDetailPage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { profile } = useAuth()
-  const asana = ASANAS[id]
+  const asana = getAsana(id)
   useScrollDepth('asana_detail')
 
   // ── Entitlement gate ────────────────────────────────────────────────

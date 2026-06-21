@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { POPULAR_SEARCHES } from '../data/recommendations'
 import { ASANAS } from '../data/asanas'
+import { localizeAsana } from '../i18n/contentI18n'
 import { PRANAYAMAS } from '../data/pranayamas'
 import PoseFigure, { hasPoseImage } from '../components/PoseFigure'
 import { track, EVENTS } from '../lib/track'
@@ -22,6 +23,7 @@ const ALL_ASANAS = Object.values(ASANAS)
 // what we want for an honest CTR denominator.
 function ExploreAsanaCard({ asana, position, locked, onTap }) {
   const { t } = useTranslation()
+  const la = localizeAsana(asana)
   const ref = useImpression({
     surface:     'discover_explore_asanas',
     contentType: 'asana',
@@ -33,8 +35,8 @@ function ExploreAsanaCard({ asana, position, locked, onTap }) {
       ref={ref}
       onClick={onTap}
       aria-label={locked
-        ? t('discover.plusAria', { name: asana.english })
-        : t('discover.itemAria', { english: asana.english, sanskrit: asana.sanskrit })}
+        ? t('discover.plusAria', { name: la.english })
+        : t('discover.itemAria', { english: la.english, sanskrit: la.sanskrit })}
       className="flex-shrink-0 w-36 snap-start active:scale-[0.97] transition-all text-left"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
@@ -75,8 +77,8 @@ function ExploreAsanaCard({ asana, position, locked, onTap }) {
           </>
         )}
       </div>
-      <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{asana.english}</p>
-      <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{asana.sanskrit}</p>
+      <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{la.english}</p>
+      <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{la.sanskrit}</p>
     </button>
   )
 }
@@ -335,7 +337,9 @@ export default function DiscoverPage() {
               {t('discover.asanasMatching', { query: searchQuery.trim() })}
             </p>
             <div className="flex flex-col gap-2">
-              {matchedAsanas.map(asana => (
+              {matchedAsanas.map(asana => {
+                const la = localizeAsana(asana)
+                return (
                 <button
                   key={asana.id}
                   onClick={() => {
@@ -348,8 +352,8 @@ export default function DiscoverPage() {
                     <span className="material-symbols-outlined text-primary text-2xl">{asana.icon}</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-body text-sm font-semibold text-on-surface">{asana.sanskrit}</p>
-                    <p className="font-body text-xs text-on-surface-variant/60">{asana.english}</p>
+                    <p className="font-body text-sm font-semibold text-on-surface">{la.sanskrit}</p>
+                    <p className="font-body text-xs text-on-surface-variant/60">{la.english}</p>
                     <div className="flex gap-1.5 mt-1">
                       {asana.level && asana.level !== 'Beginner' && (
                         <span className="px-2 py-0.5 bg-primary-fixed rounded-full font-label text-[8px] text-primary uppercase">{asana.level}</span>
@@ -359,7 +363,8 @@ export default function DiscoverPage() {
                   </div>
                   <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
                 </button>
-              ))}
+                )
+              })}
             </div>
           </div>
         )}

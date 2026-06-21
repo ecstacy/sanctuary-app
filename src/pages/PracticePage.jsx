@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
-import { getRoutine, getDoshaTag, ASANAS } from '../data/asanas'
+import { getRoutine, getDoshaTag, getAsana } from '../data/asanas'
 import { useVoiceGuidance } from '../hooks/useVoiceGuidance'
 import { useAudio } from '../hooks/useAudio'
 import { buildSchedule, restNarration } from '../lib/voiceCoach'
@@ -217,7 +217,7 @@ export default function PracticePage() {
   // state machine, voice cues, and stats pipeline keep working unchanged.
   const routine = useMemo(() => {
     if (single) {
-      const a = ASANAS[asanaId]
+      const a = getAsana(asanaId)
       if (!a) return getRoutine('stress') // graceful fallback
       return {
         key: `asana-${a.id}`,

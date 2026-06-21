@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { getRoutine, ASANAS } from '../data/asanas'
+import { localizeAsana } from '../i18n/contentI18n'
 import usePracticeStats from '../hooks/usePracticeStats'
 import useScrollDepth from '../hooks/useScrollDepth'
 import useImpression from '../hooks/useImpression'
@@ -355,7 +356,7 @@ export default function HomePage() {
   // Render-safe fallbacks for the analytics / impression refs below —
   // they expect a real asana shape and we don't want to crash the
   // logging paths when the suggestion section is hidden.
-  const suggestedAsana = suggestedPick?.asana || ASANAS.tadasana
+  const suggestedAsana = localizeAsana(suggestedPick?.asana || ASANAS.tadasana)
   const suggestedAsanaRules    = suggestedPick?.rules || []
   const suggestedAsanaUserDosha = suggestedPick?.userDosha || null
   const hasSuggestion          = !!suggestedPick

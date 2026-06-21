@@ -1,0 +1,243 @@
+{
+  "doshaTags": { "balancing": "Ausgleichend", "caution": "Vorsicht", "neutral": "Neutral" },
+  "routines": {
+    "stress": { "label": "Stressabbau", "description": "Eine beruhigende Abfolge, um dein Nervensystem zu besänftigen und Spannungen zu lösen." },
+    "sleep": { "label": "Schlafvorbereitung", "description": "Eine sanfte Abendpraxis, um den Geist zu beruhigen und dich auf tiefe Erholung vorzubereiten." },
+    "energy": { "label": "Energieschub", "description": "Ein belebender Flow, um deinen Körper zu wecken und deinen Fokus zu schärfen." },
+    "flexibility": { "label": "Flexibilität & Mobilität", "description": "Gezielte Dehnungen, um Verspannungen zu lösen und deinen Bewegungsumfang wiederherzustellen." },
+    "morning7Day": { "label": "Morgen-Reset", "description": "Ein ausgewogener 12-minütiger Flow, um den Körper zu wecken, die Wirbelsäule zu wärmen und geerdet in den Tag zu starten." },
+    "backPainSeries": { "label": "Rückenschmerz-Linderung", "description": "Eine sanfte 12-minütige Abfolge, um die Wirbelsäule zu entlasten, den Rücken zu mobilisieren und Spannungen im unteren Rücken zu lösen." },
+    "preBedWindDown": { "label": "Entspannung vor dem Schlafen", "description": "Eine erholsame 20-minütige Abfolge mit langen Haltephasen, um das Nervensystem zu beruhigen und sich auf tiefen Schlaf vorzubereiten." }
+  },
+  "asanas": {
+    "tadasana": {
+      "english": "Berghaltung",
+      "aliases": ["Palmenhaltung", "Samasthiti"],
+      "source": { "note": "Moderne grundlegende Haltung, im Hatha-Yoga des 20. Jahrhunderts kodifiziert. Nicht im Hatha Yoga Pradipika Kap. 1 benannt." },
+      "instructions": [
+        "Stelle dich an den vorderen Rand deiner Matte, Füße zusammen, große Zehen berühren sich, Fersen leicht auseinander.",
+        "Verteile dein Gewicht gleichmäßig auf beide Füße — vorne, hinten und an den Rändern.",
+        "Hebe die Kniescheiben sanft an, ohne die Knie durchzudrücken. Aktiviere die Oberschenkel.",
+        "Rolle die Schultern nach hinten und unten, weg von den Ohren.",
+        "Lass die Arme natürlich an den Seiten hängen, Handflächen zum Körper oder nach vorne.",
+        "Verlängere die Wirbelsäule — der Scheitel strebt zur Decke.",
+        "Entspanne den Kiefer, entspanne die Augen. Atme natürlich."
+      ],
+      "voiceCues": {
+        "enter": "Stelle dich mit zusammenstehenden Füßen hin, die Innenkanten berühren sich. Die Arme ruhen an den Seiten. Verteile das Gewicht gleichmäßig auf beide Füße.",
+        "hold": "Hebe die Kniescheiben, ohne die Knie durchzudrücken. Verlängere die Wirbelsäule. Der Scheitel strebt zur Decke. Die Schultern entspannt, weg von den Ohren.",
+        "breathe": "Atme natürlich. Spüre die Verwurzelung durch die Fußsohlen, die Leichtigkeit durch den Scheitel.",
+        "exit": "Entspanne die Beine. Atme ein und nimm wahr, wie du dich fühlst."
+      },
+      "contraindications": [
+        "Übe nicht bei starkem Schwindel oder Gleichgewichtsstörungen — nutze eine Wand zur Unterstützung",
+        "Vermeide die Haltung bei einer kürzlichen Knöchel- oder Fußverletzung",
+        "Bei niedrigem Blutdruck oder Schwindelgefühl: richte dich danach langsam auf"
+      ],
+      "modifications": [
+        "Stelle die Füße hüftbreit auf für mehr Stabilität",
+        "Übe mit dem Rücken zur Wand für propriozeptives Feedback",
+        "Wenn Stehen schwerfällt, übe liegend als Supta Tadasana"
+      ],
+      "benefits": [
+        "Etabliert die neutrale Wirbelsäulenausrichtung, die in allen Standhaltungen verwendet wird",
+        "Stärkt Oberschenkel, Knie und Knöchel",
+        "Verbessert Gleichgewicht und Propriozeption",
+        "Reduziert das Zusammensacken der Haltung und die Vorwärtskopfhaltung"
+      ],
+      "reasoning": "Tadasana ist die Referenzhaltung für alles andere — die Ausrichtungsvorlage, zu der der Körper zwischen den Asanas zurückkehrt. Für Menschen mit unruhigem Geist (vata-betont) ist die Aufforderung, still zu stehen und zu beobachten, selbst die Praxis."
+    },
+    "virabhadrasanaII": {
+      "english": "Krieger II",
+      "aliases": ["Krieger 2", "Heldenhaltung II"],
+      "source": { "note": "Benannt nach der Krieger-Inkarnation Virabhadra. Moderne Asana, im Hatha-Yoga des 20. Jahrhunderts kodifiziert (Krishnamacharya-Linie)." },
+      "instructions": [
+        "Stelle dich an den vorderen Rand der Matte.",
+        "Tritt mit den Füßen weit auseinander, etwa eine Beinlänge.",
+        "Drehe den rechten Fuß 90 Grad nach außen, sodass die Zehen nach rechts zeigen.",
+        "Drehe den linken Fuß leicht nach innen, etwa 30 Grad.",
+        "Beuge das rechte Knie Richtung 90 Grad, das Knie über der zweiten Zehe.",
+        "Drücke die Außenkante des hinteren Fußes fest in den Boden.",
+        "Strecke die Arme auf Schulterhöhe zur Seite aus. Blicke über die rechten Fingerspitzen. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Tritt aus dem Stand mit den Füßen weit auseinander, etwa eine Beinlänge. Drehe den rechten Fuß neunzig Grad nach außen, den linken leicht nach innen. Strecke die Arme auf Schulterhöhe zur Seite aus.",
+        "hold": "Beuge das rechte Knie Richtung neunzig Grad, über der zweiten Zehe. Drücke die Außenkante des hinteren Fußes nach unten. Blicke über die rechten Fingerspitzen. Schultern entspannt, weg von den Ohren.",
+        "breathe": "Atme gleichmäßig. Jedes Einatmen weitet die Schlüsselbeine; jedes Ausatmen verwurzelt den hinteren Fuß.",
+        "exit": "Strecke das vordere Bein und stelle die Füße zusammen. Wir wiederholen auf der anderen Seite."
+      },
+      "contraindications": [
+        "Schwangere im dritten Trimester sollten die Stellung schmaler machen und die tiefe Kniebeugung auslassen",
+        "Vermeide die Haltung bei einer kürzlichen Knie- oder Hüftverletzung",
+        "Übe nicht bei starkem Bluthochdruck",
+        "Bei chronischer Schulterverletzung auslassen — halte die Arme stattdessen an den Seiten"
+      ],
+      "modifications": [
+        "Verkürze die Stellung, wenn sich das Knie nicht ohne Anstrengung über den Knöchel beugen lässt",
+        "Hände in die Hüften bei Schulterverletzung oder Ermüdung",
+        "Übe an einer Wand — hintere Ferse an der Wand für Stabilitäts-Feedback"
+      ],
+      "benefits": [
+        "Baut Kraft und Ausdauer in Quadrizeps, Gesäß und Waden auf",
+        "Öffnet Innenschenkel und Leiste und löst Hüftverspannungen vom Sitzen",
+        "Verbessert Schulterausdauer und Haltungsbewusstsein",
+        "Schult die fokussierte Aufmerksamkeit — der Blick über die Fingerspitzen trainiert Drishti"
+      ],
+      "reasoning": "Krieger II ist Ausdauerarbeit, getarnt als Ausrichtungsarbeit. Für träge Kapha-Morgen oder unkonzentriertes Vata ist die Aufforderung, eine kräftige Form mit ruhigem Atem zu halten, die Praxis. Wir halten absichtlich länger, als es bequem ist."
+    },
+    "sukhasana": {
+      "english": "Bequemer Sitz",
+      "aliases": ["Einfacher Sitz", "Bequeme Haltung"],
+      "source": { "note": "Moderner Begriff für den einfachen Schneidersitz zur Meditation. Das Hatha Yoga Pradipika Kap. 1 nennt Padmasana, Siddhasana, Swastikasana und Bhadrasana als Meditationssitze; Sukhasana ist der zugängliche Standard." },
+      "instructions": [
+        "Setze dich auf den Boden. Lege eine gefaltete Decke oder ein Kissen unter die Hüften.",
+        "Kreuze die Schienbeine bequem, eins vor dem anderen.",
+        "Lass die Knie zum Boden sinken. Sie müssen den Boden nicht berühren.",
+        "Lege die Hände auf die Knie, Handflächen nach oben oder unten.",
+        "Verlängere die Wirbelsäule — die Sitzbeinhöcker wurzeln nach unten, der Scheitel strebt nach oben.",
+        "Entspanne die Schultern, den Kiefer und die Augen.",
+        "Wechsle gelegentlich, welches Schienbein vorne liegt, um die Hüften auszugleichen."
+      ],
+      "voiceCues": {
+        "enter": "Komm in einen bequemen Schneidersitz. Lass die Knie zum Boden sinken. Lege die Hände auf die Knie, Handflächen nach oben oder unten.",
+        "hold": "Verlängere die Wirbelsäule — der Scheitel strebt nach oben, während die Sitzbeinhöcker nach unten wurzeln. Entspanne die Schultern, entspanne den Kiefer.",
+        "breathe": "Atme natürlich. Jedes Ausatmen löst eine weitere Schicht Spannung aus den Schultern, dem Gesicht, dem Bauch.",
+        "exit": "Öffne sanft die Augen. Strecke die Beine nach vorne aus und schüttle sie aus."
+      },
+      "contraindications": [
+        "Übe nicht bei schwerer Knieverletzung — stütze dich ab oder sitze stattdessen auf einem Stuhl",
+        "Vermeide die Haltung bei akuter Hüftverletzung oder kürzlicher Hüftoperation",
+        "Bei starken Rückenschmerzen, die sich durch ungestütztes Sitzen verschlimmern, setze dich an eine Wand"
+      ],
+      "modifications": [
+        "Sitze auf der vorderen Kante einer gefalteten Decke oder eines Kissens — die meisten brauchen 8-10 cm Erhöhung",
+        "Lege Blöcke oder Kissen unter jedes Knie, wenn sie weit über dem Boden schweben",
+        "Setze dich an eine Wand, wenn der Rücken ermüdet",
+        "Übe auf einem Stuhl mit beiden Füßen flach am Boden als einfachste Variante"
+      ],
+      "benefits": [
+        "Etabliert den grundlegenden Meditationssitz — das Tor zu jeder Atempraxis",
+        "Öffnet mit der Zeit sanft Hüften und Knöchel, ohne Anstrengung",
+        "Trainiert die aufrechte Haltungsausdauer — besonders wertvoll für vom Schreibtisch zusammengesackte Wirbelsäulen",
+        "Dient als kanonische Haltung für den Übergang in die Stille"
+      ],
+      "reasoning": "Sukhasana ist der Sitz, auf dem die übrige sitzende Praxis ruht. Unterschätze ihn nicht — der schwierigste Teil der Meditation ist für die meisten Anfänger, eine Haltung zu finden, die sie zehn Minuten ohne Zappeln halten können. Mach das richtig, und Pranayama, Meditation und die ganze innere Praxis öffnen sich."
+    },
+    "balasana": {
+      "english": "Haltung des Kindes",
+      "aliases": ["Ruhehaltung"],
+      "source": { "note": "Moderne regenerative Haltung, nicht im Hatha Yoga Pradipika Kap. 1 aufgeführt. Über alle Hatha-Linien hinweg als Ruheposition verbreitet." },
+      "instructions": [
+        "Komm auf einer weichen Unterlage in den Vierfüßlerstand.",
+        "Bring die großen Zehen zusammen. Spreize die Knie so weit, wie es sich angenehm anfühlt.",
+        "Setze die Hüften zurück Richtung Fersen.",
+        "Wandere mit den Händen nach vorne und lege die Stirn auf der Matte ab.",
+        "Die Arme können nach vorne ausgestreckt sein oder neben dem Körper ruhen, Handflächen nach oben.",
+        "Entspanne den Kiefer. Entspanne die Augen.",
+        "Atme in den hinteren Brustkorb. Jedes Einatmen weitet den unteren Rücken nach außen."
+      ],
+      "voiceCues": {
+        "enter": "Komm in den Vierfüßlerstand. Bring die großen Zehen zusammen und lass die Knie so weit wie angenehm auseinander. Setze die Hüften zurück Richtung Fersen.",
+        "hold": "Lege die Stirn auf der Matte ab. Die Arme können nach vorne reichen oder neben dem Körper ruhen, Handflächen nach oben. Entspanne den Kiefer, entspanne die Augen.",
+        "breathe": "Atme in den hinteren Brustkorb. Jedes Einatmen weitet den unteren Rücken nach außen; jedes Ausatmen lässt dich ein wenig tiefer sinken.",
+        "exit": "Wandere mit den Händen langsam zurück. Rolle dich zum Sitzen auf, der Kopf kommt zuletzt."
+      },
+      "contraindications": [
+        "Schwangere sollten den Bauch nicht zusammendrücken — spreize die Knie weit und lege ein Bolster zwischen die Oberschenkel",
+        "Übe nicht bei einer kürzlichen Knieverletzung oder einem Meniskusriss",
+        "Vermeide die Haltung bei schwerer Knöchelverletzung — die Fußrücken drücken in den Boden",
+        "Bei Bluthochdruck lege die Stirn auf gestapelte Fäuste statt auf die Matte"
+      ],
+      "modifications": [
+        "Lege ein Bolster längs unter den Oberkörper für die voll-regenerative Version",
+        "Lege eine gefaltete Decke zwischen Waden und Oberschenkel, wenn die Fersen die Hüften nicht erreichen",
+        "Staple die Fäuste unter der Stirn, wenn der Kopf den Boden nicht erreicht"
+      ],
+      "benefits": [
+        "Aktiviert das parasympathische Nervensystem — direkter Stressabbau",
+        "Löst den unteren Rücken und öffnet die Lendenwirbelsäule in der Beugung",
+        "Fördert die Zwerchfellatmung in den hinteren Körper",
+        "Dient als Übergang / Reset zwischen anspruchsvolleren Asanas"
+      ],
+      "reasoning": "Balasana ist die Haltung des Loslassens. Wenn der Körper genug hatte — zu viel Intensität, zu viel Stehen, zu viel Denken — kehre hierher zurück und lass den Boden die Arbeit tun. Besonders nützlich als Erholung zwischen kräftigen Asanas oder als vollständige Praxis an einem energiearmen Tag."
+    },
+    "savasana": {
+      "english": "Totenhaltung",
+      "aliases": ["Mrtasana (alternativer Name in einigen Texten)"],
+      "source": { "note": "Im Hatha Yoga Pradipika Kap. 1 ausdrücklich benannt. Der Text beschreibt eine Rückenlage wie ein Leichnam, die Ermüdung beseitigt und den Geist beruhigt." },
+      "instructions": [
+        "Lege dich flach auf den Rücken auf eine weiche Unterlage.",
+        "Lass die Füße nach außen fallen, etwas breiter als die Hüften.",
+        "Lege die Arme neben den Körper, Handflächen nach oben. Die Schultern sinken zum Boden.",
+        "Schließe die Augen oder richte den Blick weich zur Decke.",
+        "Optional: lege eine gefaltete Decke unter Kopf oder Knie.",
+        "Optional: bedecke die Augen mit einem weichen Tuch.",
+        "Lass alle Anstrengung los. Lass den Boden dich vollständig tragen. Bleibe 5-15 Minuten."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich flach auf den Rücken. Lass die Füße natürlich nach außen fallen. Die Arme ruhen an den Seiten, Handflächen nach oben. Lass die Augen sich schließen.",
+        "hold": "Lass alle Anstrengung los. Der Boden trägt dich vollständig. Es gibt nichts zu richten, nichts zu leisten. Entspanne das Gesicht, entspanne den Hals, entspanne den Bauch.",
+        "breathe": "Lass den Atem werden, was immer er will. Zähle ihn nicht, forme ihn nicht. Nimm ihn einfach wahr.",
+        "exit": "Beginne, den Atem zu vertiefen. Bewege sanft Finger und Zehen. Rolle dich auf die rechte Seite und ruhe dort einen Atemzug. Drücke dich zum Sitzen hoch, der Kopf kommt zuletzt."
+      },
+      "contraindications": [
+        "Schwangere im dritten Trimester sollten auf der linken Seite statt flach auf dem Rücken liegen",
+        "Liege nicht flach bei starkem Sodbrennen — stütze Kopf und Brust hoch",
+        "Bei Rückenschmerzen, die sich im flachen Liegen verschlimmern, lege ein Bolster unter die Knie",
+        "Lass die lange Haltephase nach einer schweren Mahlzeit aus"
+      ],
+      "modifications": [
+        "Lege eine gerollte Decke unter die Knie, um den unteren Rücken zu entlasten",
+        "Bedecke die Augen mit einem weichen Tuch oder Augenkissen, um den parasympathischen Wechsel zu vertiefen",
+        "Lege eine gefaltete Decke unter den Kopf, um die Halswirbelsäule zu stützen",
+        "Übe auf der Seite mit einem Kissen zwischen den Knien, wenn flaches Liegen unangenehm ist"
+      ],
+      "benefits": [
+        "Aktiviert einen tiefen parasympathischen Zustand — messbarer Abfall von Herzfrequenz und Blutdruck",
+        "Lässt das Nervensystem die Wirkung der vorangegangenen Praxis integrieren",
+        "Reduziert Cortisol und unterstützt die Erholung zwischen körperlich anspruchsvollen Asanas",
+        "Bietet direkte Schlaflosigkeitslinderung, wenn 10+ Minuten vor dem Schlafen gehalten"
+      ],
+      "reasoning": "Savasana ist die wichtigste Haltung jeder Praxis. Die Arbeit, die der Körper während der Asanas geleistet hat, kommt nur dann voll an, wenn du anhältst und das System sie verarbeiten lässt. Für Menschen mit Schlaflosigkeit, Angst oder chronischer Überforderung ist ein langes Savasana vor dem Schlafen die Praxis — alles andere ist Vorbereitung."
+    },
+    "suptaMatsyendrasana": {
+      "english": "Liegender Drehsitz",
+      "aliases": ["Liegende Drehung", "Bauchdrehung (umgangssprachlich)"],
+      "source": { "note": "Moderne liegende Variante des Matsyendrasana aus Hatha Yoga Pradipika 1.27, benannt nach dem Weisen Matsyendranath." },
+      "instructions": [
+        "Lege dich auf einer weichen Unterlage auf den Rücken.",
+        "Umarme das rechte Knie mit beiden Händen zur Brust.",
+        "Strecke das linke Bein lang am Boden aus.",
+        "Strecke den rechten Arm auf Schulterhöhe zur Seite aus, Handfläche nach oben.",
+        "Führe mit der linken Hand das rechte Knie sanft über den Körper nach links.",
+        "Drehe den Kopf nach rechts, wenn dein Nacken es zulässt.",
+        "Lege ein Kissen unter das bewegte Knie, wenn es den Boden nicht erreicht. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Rücken. Umarme das rechte Knie zur Brust. Strecke das linke Bein lang am Boden aus.",
+        "hold": "Führe das rechte Knie über den Körper nach links und lass es zum Boden sinken. Strecke den rechten Arm auf Schulterhöhe aus. Drehe den Kopf nach rechts, wenn der Nacken es zulässt.",
+        "breathe": "Jedes Ausatmen lässt das rechte Knie tiefer sinken. Drücke die Schulter nicht herunter — lass den Atem das Lösen übernehmen.",
+        "exit": "Atme ein und bring das Knie zurück zur Mitte. Umarme beide Knie für einen Atemzug, dann wechsle die Seite."
+      },
+      "contraindications": [
+        "Schwangere sollten keine tiefen geschlossenen Drehungen üben — versuche eine offene Variante mit gestrecktem unterem Bein",
+        "Übe nicht bei einem Bandscheibenvorfall oder ISG-Instabilität",
+        "Vermeide die Haltung nach einer kürzlichen Bauch-, Rücken- oder Hüftoperation",
+        "Lass sie bei einem akuten Reizdarm-Schub oder akutem Krampf im unteren Rücken aus"
+      ],
+      "modifications": [
+        "Lege ein Bolster oder Kissen unter das bewegte Knie, damit es nicht zum Boden strebt",
+        "Halte das untere Bein gebeugt, wenn das Strecken den unteren Rücken belastet",
+        "Lass das Drehen des Kopfes aus, wenn der Nacken empfindlich ist — halte den Blick nach oben",
+        "Für eine tiefere Variante: schlage das obere Bein vor dem Drehen über das untere"
+      ],
+      "benefits": [
+        "Löst die Muskeln um die Lendenwirbelsäule und das ISG-Gelenk",
+        "Komprimiert und löst die Bauchorgane — unterstützt die Verdauung",
+        "Aktiviert die parasympathische Reaktion — zuverlässige Haltung vor dem Schlafen",
+        "Zugängliche Wirbelsäulendrehung für alle, die für die aufrechte Version nicht auf dem Boden sitzen können"
+      ],
+      "reasoning": "Von allen Drehungen im Katalog ist die liegende Version die, zu der man am Ende eines langen Tages greift. Die Schwerkraft macht die Arbeit; der Körper willigt nur ein. Die 60-90 Sekunden pro Seite sind der Moment, in dem der parasympathische Wechsel tatsächlich ankommt."
+    }
+  }
+}
