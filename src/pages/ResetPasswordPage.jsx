@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../lib/supabase'
 import ErrorAlert from '../components/ErrorAlert'
 
 export default function ResetPasswordPage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
   const [loading, setLoading] = useState(false)
@@ -18,7 +20,7 @@ export default function ResetPasswordPage() {
         setSessionReady(true)
         return
       }
-      setError('Please tap the reset link in your email first, then return here.')
+      setError(t('auth.reset.needLink'))
     })
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -38,11 +40,11 @@ export default function ResetPasswordPage() {
     setError('')
 
     if (password !== confirm) {
-      setError('Passwords do not match.')
+      setError(t('auth.reset.passwordsMismatch'))
       return
     }
     if (password.length < 8) {
-      setError('Password must be at least 8 characters.')
+      setError(t('auth.reset.passwordTooShort'))
       return
     }
 
@@ -78,13 +80,13 @@ export default function ResetPasswordPage() {
               <span className="material-symbols-outlined text-2xl text-primary">mark_email_read</span>
             </div>
             <p className="font-label text-xs text-primary uppercase tracking-widest mb-3">
-              One more step
+              {t('auth.reset.oneMoreStep')}
             </p>
             <h2 className="font-headline text-3xl text-on-surface mb-4">
-              Check your email first.
+              {t('auth.reset.checkEmailTitle')}
             </h2>
             <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-8">
-              Tap the reset link in your email. It will open in your browser and verify your identity. Then come back here.
+              {t('auth.reset.checkEmailBody')}
             </p>
             {error && (
               <div className="bg-surface-container-low rounded-lg px-4 py-3 w-full">
@@ -95,7 +97,7 @@ export default function ResetPasswordPage() {
               onClick={() => navigate('/login')}
               className="mt-6 text-xs text-primary font-label uppercase tracking-widest"
             >
-              Back to sign in
+              {t('auth.reset.backToSignIn')}
             </button>
           </div>
 
@@ -103,13 +105,13 @@ export default function ResetPasswordPage() {
           <>
             <div className="mb-10">
               <p className="font-label text-xs text-primary uppercase tracking-widest mb-2">
-                New Password
+                {t('auth.reset.kicker')}
               </p>
               <h1 className="font-headline text-4xl text-on-surface leading-tight">
-                Choose a new <span className="italic font-normal">password.</span>
+                {t('auth.reset.heading1')} <span className="italic font-normal">{t('auth.reset.headingAccent')}</span>
               </h1>
               <p className="text-on-surface-variant text-sm mt-3 leading-relaxed">
-                Make it strong and something you'll remember.
+                {t('auth.reset.subtitle')}
               </p>
             </div>
 
@@ -117,41 +119,41 @@ export default function ResetPasswordPage() {
 
               <div className="flex flex-col gap-1.5">
                 <label className="font-label text-xs text-on-surface-variant uppercase tracking-widest">
-                  New Password
+                  {t('auth.reset.newPasswordLabel')}
                 </label>
                 <input
                   type="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
-                  placeholder="Min. 8 characters"
+                  placeholder={t('auth.reset.newPasswordPlaceholder')}
                   minLength={8}
                   required
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
-                  aria-label="New password"
+                  aria-label={t('auth.reset.newPasswordAria')}
                 />
               </div>
 
               <div className="flex flex-col gap-1.5">
                 <label className="font-label text-xs text-on-surface-variant uppercase tracking-widest">
-                  Confirm Password
+                  {t('auth.reset.confirmLabel')}
                 </label>
                 <input
                   type="password"
                   value={confirm}
                   onChange={e => setConfirm(e.target.value)}
-                  placeholder="Repeat your password"
+                  placeholder={t('auth.reset.confirmPlaceholder')}
                   minLength={8}
                   required
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
-                  aria-label="Confirm password"
+                  aria-label={t('auth.reset.confirmAria')}
                 />
               </div>
 
               <div className="flex flex-col gap-2">
                 {[
-                  { check: password.length >= 8, label: 'At least 8 characters' },
-                  { check: /[A-Z]/.test(password), label: 'One uppercase letter' },
-                  { check: /[0-9]/.test(password), label: 'One number' },
+                  { check: password.length >= 8, label: t('auth.reset.req8') },
+                  { check: /[A-Z]/.test(password), label: t('auth.reset.reqUpper') },
+                  { check: /[0-9]/.test(password), label: t('auth.reset.reqNumber') },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2">
                     <span className={`material-symbols-outlined text-sm ${
@@ -175,7 +177,7 @@ export default function ResetPasswordPage() {
                 disabled={loading}
                 className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mt-2"
               >
-                {loading ? 'Updating...' : 'Set New Password'}
+                {loading ? t('auth.reset.updating') : t('auth.reset.setNewPassword')}
               </button>
             </form>
           </>
@@ -191,8 +193,8 @@ export default function ResetPasswordPage() {
             >
               <span className="material-symbols-outlined text-2xl">check</span>
             </div>
-            <h2 className="font-headline text-3xl text-on-surface mb-3">Password updated.</h2>
-            <p className="text-on-surface-variant text-sm">Taking you home...</p>
+            <h2 className="font-headline text-3xl text-on-surface mb-3">{t('auth.reset.updatedTitle')}</h2>
+            <p className="text-on-surface-variant text-sm">{t('auth.reset.takingHome')}</p>
           </div>
         )}
 

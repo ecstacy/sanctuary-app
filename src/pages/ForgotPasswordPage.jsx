@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { supabase } from '../lib/supabase'
 import ErrorAlert from '../components/ErrorAlert'
 import { track, EVENTS } from '../lib/track'
 
 export default function ForgotPasswordPage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
@@ -39,7 +41,7 @@ export default function ForgotPasswordPage() {
         <button
           onClick={() => navigate('/login')}
           className="text-on-surface-variant"
-          aria-label="Back to login"
+          aria-label={t('auth.forgot.backToLogin')}
         >
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
@@ -55,29 +57,29 @@ export default function ForgotPasswordPage() {
             {/* Heading */}
             <div className="mb-10">
               <p className="font-label text-xs text-primary uppercase tracking-widest mb-2">
-                Password Reset
+                {t('auth.forgot.kicker')}
               </p>
               <h1 className="font-headline text-4xl text-on-surface leading-tight">
-                Restore your <span className="italic font-normal">access.</span>
+                {t('auth.forgot.heading1')} <span className="italic font-normal">{t('auth.forgot.headingAccent')}</span>
               </h1>
               <p className="text-on-surface-variant text-sm mt-3 leading-relaxed">
-                Enter your email address and we'll send you a secure link to reset your password. The link expires in 1 hour.
+                {t('auth.forgot.subtitle')}
               </p>
             </div>
 
             <form onSubmit={handleReset} className="flex flex-col gap-5">
               <div className="flex flex-col gap-1.5">
                 <label className="font-label text-xs text-on-surface-variant uppercase tracking-widest">
-                  Email Address
+                  {t('auth.forgot.emailLabel')}
                 </label>
                 <input
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder={t('auth.forgot.emailPlaceholder')}
                   required
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
-                  aria-label="Email address"
+                  aria-label={t('auth.forgot.emailAria')}
                 />
               </div>
 
@@ -85,7 +87,7 @@ export default function ForgotPasswordPage() {
               <div className="flex items-start gap-3 bg-surface-container-low rounded-lg p-4">
                 <span className="material-symbols-outlined text-primary text-base mt-0.5">lock</span>
                 <p className="text-xs text-on-surface-variant leading-relaxed">
-                  For your security, the reset link is single-use and expires after 1 hour. If you didn't request this, you can safely ignore it.
+                  {t('auth.forgot.securityNote')}
                 </p>
               </div>
 
@@ -96,7 +98,7 @@ export default function ForgotPasswordPage() {
                 disabled={loading}
                 className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mt-2"
               >
-                {loading ? 'Sending...' : 'Send Reset Link'}
+                {loading ? t('auth.forgot.sending') : t('auth.forgot.sendLink')}
               </button>
             </form>
           </>
@@ -114,19 +116,19 @@ export default function ForgotPasswordPage() {
             </div>
 
             <p className="font-label text-xs text-primary uppercase tracking-widest mb-3">
-              Check your inbox
+              {t('auth.forgot.checkInbox')}
             </p>
             <h2 className="font-headline text-3xl text-on-surface mb-4">
-              Reset link sent.
+              {t('auth.forgot.sentTitle')}
             </h2>
             <p className="text-on-surface-variant text-sm leading-relaxed mb-2">
-              We've sent a secure reset link to
+              {t('auth.forgot.sentTo')}
             </p>
             <p className="font-body font-semibold text-on-surface text-sm mb-6">
               {email}
             </p>
             <p className="text-on-surface-variant text-xs leading-relaxed mb-10 max-w-xs">
-                Open the link in your email — it will verify your identity in the browser. Then come back to the app and tap <strong className="text-on-surface">"I have a reset link"</strong> on the sign in screen.
+                {t('auth.forgot.sentInstr')}
                 </p>
 
             {/* Resend option */}
@@ -134,14 +136,14 @@ export default function ForgotPasswordPage() {
               onClick={() => setSent(false)}
               className="text-xs text-primary font-label uppercase tracking-widest"
             >
-              Didn't receive it? Try again
+              {t('auth.forgot.tryAgain')}
             </button>
 
             <button
               onClick={() => navigate('/login')}
               className="mt-6 w-full py-4 bg-surface-container text-on-surface rounded-full font-label text-sm tracking-wide"
             >
-              Back to Sign In
+              {t('auth.forgot.backToSignIn')}
             </button>
           </div>
         )}
