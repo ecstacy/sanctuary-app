@@ -534,7 +534,7 @@ export default function DoshaQuizPage() {
           )}
 
           <h2 className="font-headline text-2xl text-on-surface leading-snug mb-10 max-w-prose">
-            {tb.prompt}
+            {t(`doshaQuizContent.tiebreakers.${tb.id}.prompt`)}
           </h2>
 
           <div className="mt-auto flex flex-col gap-3">
@@ -553,7 +553,7 @@ export default function DoshaQuizPage() {
                       : 'bg-surface-container active:scale-[0.98]'
                   }`}
                 >
-                  {option.label}
+                  {t(`doshaQuizContent.tiebreakers.${tb.id}.${option.dosha}`)}
                 </button>
               )
             })}
@@ -669,7 +669,7 @@ export default function DoshaQuizPage() {
 
         {/* The statement */}
         <h2 className="font-headline text-2xl text-on-surface leading-snug mb-10 max-w-prose">
-          {question.text}
+          {t(`doshaQuizContent.questions.${question.id}`)}
         </h2>
 
         {/* Three answer buttons, big & tappable, auto-advance on tap.
@@ -683,7 +683,7 @@ export default function DoshaQuizPage() {
                 key={option.value}
                 onClick={() => handleSelect(option.value)}
                 disabled={animating}
-                aria-label={option.label}
+                aria-label={t(`doshaQuizContent.answers.${option.value}`)}
                 className={`w-full py-4 rounded-full font-label font-semibold text-sm tracking-wide transition-all duration-300 ${
                   isSelected
                     ? 'bg-primary text-on-primary scale-[0.98]'
@@ -692,7 +692,7 @@ export default function DoshaQuizPage() {
                     : 'bg-surface-container active:scale-[0.98]'
                 }`}
               >
-                {option.label}
+                {t(`doshaQuizContent.answers.${option.value}`)}
               </button>
             )
           })}

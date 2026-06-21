@@ -770,6 +770,37 @@
     "tilePickupSub": "Letztes Mal hat es geholfen — deine neueste Lesung legt eine weitere Runde nahe.",
     "tileContinueSub": "Tag {{day}} von {{total}} — bleib im Rhythmus."
   },
+  "doshaQuizContent": {
+    "questions": {
+      "v_frame_slim": "Ich bin von Natur aus schlank und nehme nur schwer zu.",
+      "p_frame_athletic": "Ich habe einen mittleren, athletischen Körperbau — Muskeln kommen leicht.",
+      "k_frame_solid": "Ich habe einen festen, kräftigen Körperbau, der leicht Gewicht hält.",
+      "v_skin_dry": "Meine Haut neigt zu Trockenheit, besonders im Winter.",
+      "p_skin_flush": "Meine Haut wird leicht rot, errötet oder bekommt schnell Sonnenbrand.",
+      "k_skin_smooth": "Meine Haut ist von Natur aus glatt, dick oder leicht ölig.",
+      "v_cold_hands": "Meine Hände und Füße fühlen sich oft kalt an.",
+      "p_runs_warm": "Mir ist wärmer als den Menschen um mich herum, sogar in kühlen Räumen.",
+      "k_handles_cold": "Ich vertrage kaltes Wetter gut und überhitze selten.",
+      "v_stress_anxious": "Unter Stress neige ich zu Sorge oder Angst.",
+      "p_stress_irritable": "Unter Stress neige ich zu Frust oder Schärfe.",
+      "k_stress_withdraw": "Unter Stress ziehe ich mich eher zurück oder mache zu.",
+      "v_appetite_irreg": "Mein Appetit ist unregelmäßig — mal heißhungrig, mal vergesse ich zu essen.",
+      "p_appetite_strong": "Ich habe einen starken, pünktlichen Appetit — eine ausgelassene Mahlzeit macht mich gereizt.",
+      "k_sleep_deep": "Ich schlafe schnell ein und tief — manchmal schwer aufzuwachen."
+    },
+    "answers": { "yes": "Ja", "somewhat": "Etwas", "no": "Eher nicht" },
+    "tiebreakers": {
+      "tb_vp_stress": { "prompt": "Unter echtem Druck fühlst du dich eher —", "vata": "Zerstreut und ängstlich", "pitta": "Scharf und frustriert" },
+      "tb_vp_sleepless": { "prompt": "Wenn du nicht schlafen kannst, dein Geist —", "vata": "Rast zwischen vielen Dingen", "pitta": "Konzentriert sich aufs Problemlösen" },
+      "tb_vp_cold": { "prompt": "Kaltes Wetter ist —", "vata": "Schwer zu ertragen für dich", "pitta": "Eine willkommene Erleichterung" },
+      "tb_vk_freetime": { "prompt": "In der Freizeit bevorzugst du —", "vata": "Abwechslung und neue Erfahrungen", "kapha": "Vertraute Annehmlichkeiten und Ruhe" },
+      "tb_vk_weight": { "prompt": "Dein Körpergewicht —", "vata": "Bleibt niedrig und schwankt", "kapha": "Bleibt stabil oder steigt langsam" },
+      "tb_vk_mind": { "prompt": "Deinen Geist würdest du beschreiben als —", "vata": "Schnell und kreativ", "kapha": "Beständig und bedacht" },
+      "tb_pk_hangry": { "prompt": "Wenn eine Mahlzeit sich verzögert —", "pitta": "Wirst du gereizt und „hangry“", "kapha": "Merkst du es kaum" },
+      "tb_pk_conflict": { "prompt": "In einem Konflikt neigst du dazu —", "pitta": "Direkt zu konfrontieren", "kapha": "Auszuweichen und es sich legen zu lassen" },
+      "tb_pk_stamina": { "prompt": "Deine Ausdauer ist —", "pitta": "Intensiv und verzehrend", "kapha": "Langsam brennend und ausdauernd" }
+    }
+  },
   "doshaQuiz": {
     "goBack": "Zurück",
     "introKicker": "Dosha-Entdeckung",

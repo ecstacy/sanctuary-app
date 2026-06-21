@@ -770,6 +770,37 @@
     "tilePickupSub": "Last time helped — your latest reading suggests another round.",
     "tileContinueSub": "Day {{day}} of {{total}} — keep the rhythm."
   },
+  "doshaQuizContent": {
+    "questions": {
+      "v_frame_slim": "I am naturally slim and find it hard to gain weight.",
+      "p_frame_athletic": "I have a medium, athletic build — muscle comes easily.",
+      "k_frame_solid": "I have a solid, sturdy frame that holds weight easily.",
+      "v_skin_dry": "My skin tends to be dry, especially in winter.",
+      "p_skin_flush": "My skin flushes, reddens, or sunburns easily.",
+      "k_skin_smooth": "My skin is naturally smooth, thick, or slightly oily.",
+      "v_cold_hands": "My hands and feet often feel cold.",
+      "p_runs_warm": "I feel warmer than people around me, even in cool rooms.",
+      "k_handles_cold": "I tolerate cold weather well and rarely overheat.",
+      "v_stress_anxious": "Under stress, I tend toward worry or anxiety.",
+      "p_stress_irritable": "Under stress, I tend toward frustration or sharpness.",
+      "k_stress_withdraw": "Under stress, I tend to withdraw or shut down.",
+      "v_appetite_irreg": "My appetite is irregular — sometimes ravenous, sometimes I forget to eat.",
+      "p_appetite_strong": "I have a strong, punctual appetite — missing a meal makes me irritable.",
+      "k_sleep_deep": "I fall asleep quickly and sleep deeply — sometimes hard to wake."
+    },
+    "answers": { "yes": "Yes", "somewhat": "Somewhat", "no": "Not really" },
+    "tiebreakers": {
+      "tb_vp_stress": { "prompt": "Under real pressure, you feel more —", "vata": "Scattered and anxious", "pitta": "Sharp and frustrated" },
+      "tb_vp_sleepless": { "prompt": "When you can't sleep, your mind —", "vata": "Races between many things", "pitta": "Focuses on solving a problem" },
+      "tb_vp_cold": { "prompt": "Cold weather is —", "vata": "Hard for you to tolerate", "pitta": "A welcome relief" },
+      "tb_vk_freetime": { "prompt": "With free time, you prefer —", "vata": "Variety and new experiences", "kapha": "Familiar comforts and rest" },
+      "tb_vk_weight": { "prompt": "Your body weight —", "vata": "Stays low and fluctuates", "kapha": "Stays steady or slowly creeps up" },
+      "tb_vk_mind": { "prompt": "You'd describe your mind as —", "vata": "Quick and creative", "kapha": "Steady and deliberate" },
+      "tb_pk_hangry": { "prompt": "If a meal is delayed —", "pitta": "You get irritable and hangry", "kapha": "You barely notice" },
+      "tb_pk_conflict": { "prompt": "In a conflict, you tend to —", "pitta": "Confront directly", "kapha": "Avoid and let it settle" },
+      "tb_pk_stamina": { "prompt": "Your stamina is —", "pitta": "Intense and consuming", "kapha": "Slow-burning and lasting" }
+    }
+  },
   "doshaQuiz": {
     "goBack": "Go back",
     "introKicker": "Dosha Discovery",
