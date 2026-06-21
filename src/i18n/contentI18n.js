@@ -22,8 +22,11 @@
 import i18n from './index'
 import deAsanas from './content/de/asanas.json'
 import hiAsanas from './content/hi/asanas.json'
+import deDietary from './content/de/dietary.json'
+import hiDietary from './content/hi/dietary.json'
 
 const ASANA_OVERLAYS = { de: deAsanas, hi: hiAsanas }
+const DIETARY_OVERLAYS = { de: deDietary, hi: hiDietary }
 
 // Shallow-merge the language overlay over a base asana. voiceCues/source are
 // nested so we merge them one level deep — a partial overlay (e.g. only
@@ -53,4 +56,33 @@ export function localizeDoshaTagLabel(label) {
   const map = ASANA_OVERLAYS[i18n.language]?.doshaTags
   if (!map) return label
   return map[DOSHA_TAG_KEYS[label]] || label
+}
+
+// ── Dietary ──────────────────────────────────────────────────────────────
+// Deep-merge the per-dosha guidance overlay (principle, tastes, favor/avoid,
+// eatingHabits, seasonal, source.note) over the English base.
+export function localizeDietaryGuidance(guide) {
+  if (!guide) return guide
+  const ov = DIETARY_OVERLAYS[i18n.language]?.guidance?.[guide.dosha]
+  if (!ov) return guide
+  return {
+    ...guide,
+    ...ov,
+    tastes: ov.tastes ? { ...guide.tastes, ...ov.tastes } : guide.tastes,
+    favor:  ov.favor  ? { ...guide.favor,  ...ov.favor }  : guide.favor,
+    avoid:  ov.avoid  ? { ...guide.avoid,  ...ov.avoid }  : guide.avoid,
+    source: ov.source ? { ...guide.source, ...ov.source } : guide.source,
+  }
+}
+
+export function localizeRasa(taste, rasa) {
+  if (!rasa) return rasa
+  const ov = DIETARY_OVERLAYS[i18n.language]?.rasas?.[taste]
+  return ov ? { ...rasa, ...ov } : rasa
+}
+
+// Localized label for a favor-category key (grains/vegetables/…); falls back
+// to the raw key (matches the English display).
+export function localizeDietCategory(key) {
+  return DIETARY_OVERLAYS[i18n.language]?.categories?.[key] || key
 }

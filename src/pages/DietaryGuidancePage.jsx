@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { DIETARY_GUIDANCE, RASAS } from '../data/ayurveda/dietary'
+import { localizeDietaryGuidance, localizeRasa, localizeDietCategory } from '../i18n/contentI18n'
 import { track, screen, EVENTS } from '../lib/track'
 import useScrollDepth from '../hooks/useScrollDepth'
 
@@ -32,7 +33,7 @@ function CategoryList({ items, accent }) {
       {Object.entries(items).map(([category, text]) => (
         <div key={category} className="flex gap-3">
           <p className={`font-label text-[10px] uppercase tracking-wider min-w-[78px] flex-shrink-0 mt-0.5 ${accent}`}>
-            {category}
+            {localizeDietCategory(category)}
           </p>
           <p className="font-body text-sm text-on-surface-variant leading-relaxed flex-1">{text}</p>
         </div>
@@ -49,7 +50,7 @@ export default function DietaryGuidancePage() {
 
   const userDosha = profile?.dosha_details?.primary || profile?.dosha?.toLowerCase() || 'vata'
   const [activeDosha, setActiveDosha] = useState(userDosha)
-  const guide = DIETARY_GUIDANCE[activeDosha]
+  const guide = localizeDietaryGuidance(DIETARY_GUIDANCE[activeDosha])
 
   useEffect(() => {
     screen('dietary_guidance', { dosha_primary: userDosha })
@@ -191,7 +192,9 @@ export default function DietaryGuidancePage() {
       <div className="px-5 mt-6 stagger-5">
         <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.sixTastes')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5 space-y-3">
-          {Object.entries(RASAS).map(([key, r]) => (
+          {Object.entries(RASAS).map(([key, r]) => {
+            const lr = localizeRasa(key, r)
+            return (
             <div key={key} className="border-b border-outline-variant/15 last:border-0 pb-3 last:pb-0">
               <div className="flex items-baseline justify-between mb-1">
                 <p className="font-body font-semibold text-sm text-on-surface">
@@ -199,9 +202,10 @@ export default function DietaryGuidancePage() {
                 </p>
                 <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider capitalize">{key}</p>
               </div>
-              <p className="font-body text-xs text-on-surface-variant leading-relaxed">{r.examples}</p>
+              <p className="font-body text-xs text-on-surface-variant leading-relaxed">{lr.examples}</p>
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
 

@@ -1,0 +1,167 @@
+{
+  "categories": {
+    "grains": "Getreide",
+    "vegetables": "Gemüse",
+    "fruits": "Obst",
+    "proteins": "Proteine",
+    "dairy": "Milchprodukte",
+    "oils": "Öle",
+    "spices": "Gewürze",
+    "drinks": "Getränke"
+  },
+  "rasas": {
+    "sweet": {
+      "examples": "Reis, Weizen, Milch, Ghee, Honig (in Maßen), reife süße Früchte, Wurzelgemüse",
+      "note": "Beruhigt Vata und Pitta; verstärkt Kapha im Übermaß. Die meisten unserer Lieblingsspeisen sind süß — Charaka warnt vor dem Übermaß."
+    },
+    "sour": {
+      "examples": "Zitrone, Limette, Joghurt, Essig, fermentierte Speisen, saure Früchte",
+      "note": "Beruhigt Vata; verstärkt Pitta und Kapha im Übermaß."
+    },
+    "salty": {
+      "examples": "Salz, Sojasauce, Algen, salzige Snacks",
+      "note": "Beruhigt Vata; verstärkt Pitta und Kapha. Moderne Ernährung enthält meist zu viel davon."
+    },
+    "pungent": {
+      "examples": "Chili, Ingwer, schwarzer Pfeffer, Senf, rohe Zwiebeln, Knoblauch",
+      "note": "Beruhigt Kapha; verstärkt Vata und Pitta. Der „scharfe“ Geschmack."
+    },
+    "bitter": {
+      "examples": "Blattgemüse (Grünkohl, Löwenzahn, Rucola), Bittermelone, Neem, Kurkuma, Kaffee",
+      "note": "Beruhigt Pitta und Kapha; verstärkt Vata. Moderne Ernährung enthält meist zu wenig davon."
+    },
+    "astringent": {
+      "examples": "unreife Banane, Granatapfel, Bohnen, Linsen, Kichererbsen, grüner Tee, Brokkoli",
+      "note": "Beruhigt Pitta und Kapha; verstärkt Vata im Übermaß. Das „zusammenziehende“ Empfinden."
+    }
+  },
+  "guidance": {
+    "vata": {
+      "principle": "Vata ist kalt, trocken, leicht und unregelmäßig. Beruhige es mit warmer, feuchter, öliger, erdender Nahrung — zu REGELMÄSSIGEN Zeiten in ruhiger Umgebung gegessen.",
+      "source": { "note": "Vata-beruhigende Speisen zeichnen sich durch süße, saure und salzige Geschmäcker aus; warme, feuchte und erdende Eigenschaften." },
+      "tastes": {
+        "favor": ["süß (Madhura)", "sauer (Amla)", "salzig (Lavana)"],
+        "avoid": ["bitter (Tikta) im Übermaß", "zusammenziehend (Kashaya) im Übermaß", "scharf (Katu) im Übermaß"]
+      },
+      "favor": {
+        "grains": "Gekochtes Getreide: Reis (Basmati, Vollkorn), Hafer, Weizen, Quinoa.",
+        "vegetables": "Gekocht, warm, ölig: Süßkartoffel, Karotte, Rote Bete, Kürbis, Zucchini, Spargel.",
+        "fruits": "Süße, reife Früchte: Bananen, Datteln, Mangos, Pfirsiche, Pflaumen, gekochte Äpfel, eingeweichte Rosinen.",
+        "proteins": "Mung Dal, Urad Dal (gut gekocht), Eier, Bio-Hühnchen oder Fisch (in Maßen).",
+        "dairy": "Warme Milch, Ghee, frischer Paneer, Lassi (süß, zimmerwarm).",
+        "oils": "Großzügig verwenden — Sesam (am besten), Ghee, Olivenöl. Öl ist Medizin für Vata.",
+        "spices": "Wärmende, erdende Gewürze: Ingwer, Zimt, Kardamom, Kreuzkümmel, Fenchel, Asafoetida (Hing), Muskat, Nelke.",
+        "drinks": "Warmes Wasser, Kräutertees (Kamille, Ingwer, Süßholz, Fenchel), warme Milch mit Kardamom und Safran."
+      },
+      "avoid": {
+        "generally": "Kalte, rohe, trockene, leichte und raue Speisen. Speisen, die Blähungen fördern.",
+        "specific": [
+          "Rohe Salate, besonders bei kaltem Wetter",
+          "Kalte Getränke, Eiscreme, gefrorener Joghurt",
+          "Trockene Cracker, Popcorn, Reiswaffeln (ohne Ghee)",
+          "Zu viele Bohnen (besonders schwarze Bohnen, Kidneybohnen, Kichererbsen — bevorzuge Mung Dal)",
+          "Rohe Kohlgewächse (roher Brokkoli, roher Blumenkohl, roher Grünkohl)",
+          "Übermäßiges Koffein",
+          "Kohlensäurehaltige Getränke",
+          "Bittere Blattgemüse im Übermaß"
+        ]
+      },
+      "eatingHabits": [
+        "Iss zu REGELMÄSSIGEN Zeiten — Vata sehnt sich nach Rhythmus und profitiert davon",
+        "Iss sitzend, in ruhiger Umgebung — nicht unterwegs",
+        "Iss warme Speisen, nicht kalt aus dem Kühlschrank",
+        "Kaue gründlich und langsam",
+        "Lass keine Mahlzeiten aus — Vata verstärkt sich schnell, wenn der Blutzucker fällt",
+        "Nimm die größte Mahlzeit mittags zu dir (12-13 Uhr, höchstes Agni / Verdauungsfeuer)",
+        "Leichtes Abendessen, idealerweise vor 19 Uhr",
+        "Trinke warmes Wasser zu und um die Mahlzeiten; kaltes Wasser dämpft die Verdauung"
+      ],
+      "seasonal": "Im Herbst (Vata-Zeit) sei besonders achtsam: meide alle kalten Rohkost, trinke warmen Gewürztee, erhöhe die Öle."
+    },
+    "pitta": {
+      "principle": "Pitta ist heiß, scharf und leicht ölig. Beruhige es mit kühler, milder, leicht trockener Nahrung — und lass KEINE Mahlzeiten aus.",
+      "source": { "note": "Pitta-beruhigende Speisen zeichnen sich durch süße, bittere und zusammenziehende Geschmäcker aus; kühle, leicht trockene und nicht zu ölige Eigenschaften." },
+      "tastes": {
+        "favor": ["süß (Madhura)", "bitter (Tikta)", "zusammenziehend (Kashaya)"],
+        "avoid": ["sauer (Amla) im Übermaß", "salzig (Lavana) im Übermaß", "scharf (Katu)"]
+      },
+      "favor": {
+        "grains": "Basmati-Reis, Hafer (gekocht), Weizen (in Maßen), Gerste, weißer Quinoa.",
+        "vegetables": "Kühlend und bitter: Blattgemüse (Grünkohl, Salat, Spinat), Zucchini, Gurke, Koriander, Fenchel, Spargel, Brokkoli, Süßkartoffel.",
+        "fruits": "Süß, reif, NICHT sauer: Melonen (sehr kühlend), Trauben, Birnen, Äpfel, Mangos (süße), Kokosnuss.",
+        "proteins": "Mung Dal, Spalterbsen, Tofu, weißes Fleisch in Maßen, Süßwasserfisch.",
+        "dairy": "Kühle Milch (NICHT heiß), Ghee (in Maßen), frischer Paneer, süßer Lassi (mit Rosenwasser oder Kardamom).",
+        "oils": "Kokos, Sonnenblume, Ghee — kühlende Öle. Vermeide starken Gebrauch von Sesam.",
+        "spices": "Kühlend: Koriander, Fenchel, Minze, Dill, Kardamom, frische Kurkuma, kleine Mengen Kreuzkümmel und Koriandersamen.",
+        "drinks": "Kokoswasser, zimmerwarmes Wasser, Minz- oder Rosentee, Milch mit Rosenwasser oder Kardamom."
+      },
+      "avoid": {
+        "generally": "Heiße, saure, salzige, scharfe, ölige und fermentierte Speisen. Alles, was Hitze aufbaut.",
+        "specific": [
+          "Chili, Cayenne, Paprika, scharfe Saucen",
+          "Rohe Zwiebeln, roher Knoblauch, Senf",
+          "Essig, Eingelegtes, fermentierte Speisen (Kombucha, Kimchi, Sauerkraut im Übermaß)",
+          "Saure Früchte: Zitronen (im Übermaß), Tamarinde, Sauerkirschen, grüne Äpfel",
+          "Tomaten (besonders roh, besonders im Sommer)",
+          "Alkohol (sehr erhitzend), übermäßiges Koffein",
+          "Rotes Fleisch, besonders frittiert",
+          "Gereifte oder scharfe Käse",
+          "Joghurt am Abend gegessen (sauer und erwärmend beim Verdauen)"
+        ]
+      },
+      "eatingHabits": [
+        "ISS ZU REGELMÄSSIGEN ZEITEN — lass nie das Mittagessen aus, die Mahlzeit, die Pitta am meisten braucht",
+        "Iss nicht, wenn du wütend, gehetzt oder gestresst bist — Pitta verdaut seine Emotionen",
+        "Nimm die größte Mahlzeit mittags zu dir, wenn Agni am stärksten ist",
+        "Kühle Flüssigkeiten (zimmerwarm, nicht eisgekühlt)",
+        "Vermeide es, im Sommer direkt in der Sonne zu essen",
+        "Warte mindestens 3 Stunden zwischen den Mahlzeiten",
+        "Iss im Sommer nicht nach 20 Uhr; die Pitta-Zeit beginnt um 22 Uhr"
+      ],
+      "seasonal": "Der Sommer ist Pitta-Zeit — sei streng mit kühlenden Speisen. Im Winter kannst du die Kühlungsregeln etwas lockern und kleine Mengen Wärme hinzufügen."
+    },
+    "kapha": {
+      "principle": "Kapha ist schwer, kalt, ölig und langsam. Beruhige es mit leichter, warmer, trockener, würziger Nahrung — in KLEINEREN Mengen gegessen.",
+      "source": { "note": "Kapha-beruhigende Speisen zeichnen sich durch scharfe, bittere und zusammenziehende Geschmäcker aus; leichte, trockene und wärmende Eigenschaften." },
+      "tastes": {
+        "favor": ["scharf (Katu)", "bitter (Tikta)", "zusammenziehend (Kashaya)"],
+        "avoid": ["süß (Madhura) im Übermaß", "sauer (Amla) im Übermaß", "salzig (Lavana) im Übermaß"]
+      },
+      "favor": {
+        "grains": "Leichtes Getreide: Gerste, Hirse, Buchweizen, Quinoa, Basmati-Reis (in Maßen), Mais. Vermeide Weizen im Übermaß.",
+        "vegetables": "Scharf und bitter: Blattgemüse, Kohlgewächse (gekocht), Bittergurke, Daikon, Rettich, Knoblauch, Zwiebeln, Ingwer.",
+        "fruits": "Zusammenziehend und leichter: Äpfel, Birnen, Granatapfel, Beeren, Trockenfrüchte in kleinen Mengen. Vermeide Bananen, Datteln, Avocados.",
+        "proteins": "Mung Dal, Linsen, Limabohnen, schwarze Bohnen (gut gewürzt). Hühnchen ohne Haut oder Süßwasserfisch in kleinen Mengen.",
+        "dairy": "MINIMIEREN — kleine Mengen fettarme warme Milch nur mit Ingwer oder Kurkuma. Vermeide Käse, Joghurt, Eiscreme.",
+        "oils": "MINIMIEREN — kleine Mengen Senföl, Maisöl, Ghee. Vermeide schwere Öle.",
+        "spices": "GROSSZÜGIGER Gebrauch wärmender Gewürze: Ingwer (frisch und getrocknet), schwarzer Pfeffer, Kurkuma, Senfsamen, Bockshornklee, Kreuzkümmel, Kardamom, Nelke, Cayenne, Asafoetida (Hing).",
+        "drinks": "Heißer Ingwertee, Tulsi-Tee (Heiliges Basilikum), heißes Wasser mit Zitrone und Honig (1 TL), heiße Gewürzmilch in kleinen Mengen."
+      },
+      "avoid": {
+        "generally": "Schwere, ölige, kalte, süße, frittierte Speisen. Übermäßige Milchprodukte. Alles, was Gewicht oder Verschleimung hinzufügt.",
+        "specific": [
+          "Weizen im Übermaß (Brot, Pasta, Gebäck)",
+          "Milchprodukte: Käse, Eiscreme, Butter (im Übermaß), Sahne",
+          "Süße Desserts, raffinierter Zucker, Süßigkeiten",
+          "Frittierte Speisen",
+          "Kalte Getränke, besonders mit Eis",
+          "Bananen, Avocados, Kokosnuss, Datteln (zu schwer und süß)",
+          "Rind, Schwein, schwere rote Fleischsorten",
+          "Übermäßiges Salz",
+          "Essen zwischen den Mahlzeiten (Snacks verstärken Kapha)"
+        ]
+      },
+      "eatingHabits": [
+        "Iss WENIGER, als dir danach ist — Kaphas Verdauung ist langsam",
+        "Lass das Frühstück aus ODER iss ein sehr leichtes (warmer Gewürztee, vielleicht eine kleine Schale gedünstete Äpfel mit Zimt)",
+        "Nimm die Hauptmahlzeit mittags — moderate Portion",
+        "Leichtes Abendessen vor 19 Uhr",
+        "Iss nicht zwischen den Mahlzeiten — gib der Verdauung 4-6 Stunden",
+        "Intermittierendes Fasten KANN für Kapha funktionieren; versuche ein 14-16-stündiges nächtliches Fasten",
+        "Heiße Getränke über den Tag verteilt, besonders mit Ingwer",
+        "KEIN Essen vor Bildschirmen — Kapha isst unbewusst"
+      ],
+      "seasonal": "Spätwinter bis Frühling ist Kapha-Zeit — sei dann am strengsten. Leichte, warme, gewürzte Speisen. Meide die schweren Wohlfühlspeisen des Winters, sobald der Februar kommt."
+    }
+  }
+}
