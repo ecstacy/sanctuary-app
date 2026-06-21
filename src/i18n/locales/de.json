@@ -168,6 +168,13 @@
       }
     ]
   },
+  "doshaProfile": {
+    "awaitTitle": "Dein Dosha wartet",
+    "awaitBody": "Entdecke deine einzigartige ayurvedische Konstitution durch unser geführtes Quiz und schalte personalisierte Wohlfühl-Einblicke frei.",
+    "takeQuiz": "Dosha-Quiz starten",
+    "goBack": "Zurück",
+    "retakeQuiz": "Quiz wiederholen"
+  },
   "onboarding": {
     "skip": "Überspringen",
     "prevSlide": "Vorherige Folie",

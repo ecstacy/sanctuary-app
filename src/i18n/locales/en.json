@@ -168,6 +168,13 @@
       }
     ]
   },
+  "doshaProfile": {
+    "awaitTitle": "Your Dosha Awaits",
+    "awaitBody": "Discover your unique Ayurvedic constitution through our guided quiz and unlock personalized wellness insights.",
+    "takeQuiz": "Take the Dosha Quiz",
+    "goBack": "Go back",
+    "retakeQuiz": "Retake the Quiz"
+  },
   "onboarding": {
     "skip": "Skip",
     "prevSlide": "Previous slide",
