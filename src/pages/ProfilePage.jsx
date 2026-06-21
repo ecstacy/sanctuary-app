@@ -368,15 +368,15 @@ export default function ProfilePage() {
     setPasswordMsg(null)
 
     if (!newPassword || !confirmPassword) {
-      setPasswordMsg({ type: 'error', text: 'Please fill in all fields.' })
+      setPasswordMsg({ type: 'error', text: t('profile.account.pwFillAll') })
       return
     }
     if (newPassword.length < 6) {
-      setPasswordMsg({ type: 'error', text: 'New password must be at least 6 characters.' })
+      setPasswordMsg({ type: 'error', text: t('profile.account.pwTooShort') })
       return
     }
     if (newPassword !== confirmPassword) {
-      setPasswordMsg({ type: 'error', text: 'Passwords do not match.' })
+      setPasswordMsg({ type: 'error', text: t('profile.account.pwMismatch') })
       return
     }
 
@@ -388,7 +388,7 @@ export default function ProfilePage() {
         password: currentPassword,
       })
       if (signInError) {
-        setPasswordMsg({ type: 'error', text: 'Current password is incorrect.' })
+        setPasswordMsg({ type: 'error', text: t('profile.account.pwCurrentWrong') })
         setSavingPassword(false)
         return
       }
@@ -397,14 +397,14 @@ export default function ProfilePage() {
       const { error } = await supabase.auth.updateUser({ password: newPassword })
       if (error) throw error
 
-      setPasswordMsg({ type: 'success', text: 'Password updated successfully.' })
+      setPasswordMsg({ type: 'success', text: t('profile.account.pwUpdated') })
       setCurrentPassword('')
       setNewPassword('')
       setConfirmPassword('')
       setTimeout(() => setChangingPassword(false), 1500)
     } catch (err) {
       console.error('Password change failed:', err.message)
-      setPasswordMsg({ type: 'error', text: err.message || 'Could not update password.' })
+      setPasswordMsg({ type: 'error', text: err.message || t('profile.account.pwUpdateFailed') })
     } finally {
       setSavingPassword(false)
     }
@@ -437,7 +437,7 @@ export default function ProfilePage() {
         <button
           onClick={() => navigate('/home')}
           className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center"
-          aria-label="Close profile"
+          aria-label={t('profile.closeProfile')}
         >
           <span className="material-symbols-outlined text-on-surface-variant text-lg">close</span>
         </button>
@@ -467,7 +467,7 @@ export default function ProfilePage() {
               onClick={() => fileInputRef.current?.click()}
               disabled={uploadingPhoto}
               className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-primary flex items-center justify-center shadow-md active:scale-90 transition-all disabled:opacity-50"
-              aria-label="Upload profile photo"
+              aria-label={t('profile.uploadPhotoAria')}
             >
               {uploadingPhoto ? (
                 <div className="w-4 h-4 border-2 border-on-primary border-t-transparent rounded-full animate-spin" />
@@ -498,13 +498,13 @@ export default function ProfilePage() {
                 autoFocus
                 maxLength={60}
                 className="flex-1 bg-surface-container-low rounded-xl px-4 py-2.5 text-center font-headline text-xl text-on-surface outline-none focus:ring-1 focus:ring-primary/30 transition-all"
-                aria-label="Display name"
+                aria-label={t('profile.displayNameAria')}
               />
               <button
                 onClick={handleSaveName}
                 disabled={savingName}
                 className="w-10 h-10 rounded-full bg-primary flex items-center justify-center active:scale-90 transition-all disabled:opacity-50"
-                aria-label="Save name"
+                aria-label={t('profile.saveNameAria')}
               >
                 {savingName ? (
                   <div className="w-4 h-4 border-2 border-on-primary border-t-transparent rounded-full animate-spin" />
@@ -515,7 +515,7 @@ export default function ProfilePage() {
               <button
                 onClick={() => { setEditingName(false); setNameValue(fullName) }}
                 className="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center active:scale-90 transition-all"
-                aria-label="Cancel"
+                aria-label={t('profile.cancelAria')}
               >
                 <span className="material-symbols-outlined text-on-surface-variant text-sm">close</span>
               </button>
@@ -534,7 +534,7 @@ export default function ProfilePage() {
           {isGoogle && (
             <div className="flex items-center gap-1.5 mt-2 px-3 py-1 bg-surface-container rounded-full">
               <GoogleIcon className="w-3.5 h-3.5" />
-              <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Google</span>
+              <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.googleLabel')}</span>
             </div>
           )}
         </div>
@@ -545,15 +545,15 @@ export default function ProfilePage() {
           className="bg-primary-container rounded-lg p-5 text-left w-full active:scale-[0.98] transition-all stagger-2"
         >
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-2">
-            Dosha Type
+            {t('profile.doshaType')}
           </p>
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-headline text-xl text-on-surface">
-                {doshaLabel || 'Undiscovered'}
+                {doshaLabel || t('profile.undiscovered')}
               </h3>
               <p className="font-body text-xs text-on-surface-variant mt-1">
-                {doshaLabel ? 'Tap to view your Dosha profile' : 'Take the quiz to discover your dosha'}
+                {doshaLabel ? t('profile.tapToView') : t('profile.takeQuizDiscover')}
               </p>
             </div>
             <span className="material-symbols-outlined text-primary text-3xl opacity-40">spa</span>
@@ -617,7 +617,7 @@ export default function ProfilePage() {
               • premium     → status row showing source + expiry, no CTAs */}
         <div className="bg-surface-container rounded-lg overflow-hidden stagger-3 mb-5">
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
-            Sanctuary Plus
+            {t('profile.plus.section')}
           </p>
 
           {!isPremium && (
@@ -631,8 +631,8 @@ export default function ProfilePage() {
               >
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">workspace_premium</span>
                 <div className="flex-1">
-                  <p className="font-body text-sm font-semibold text-on-surface">Upgrade to Plus</p>
-                  <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">Full library, personalized routine, Charaka deep-dives</p>
+                  <p className="font-body text-sm font-semibold text-on-surface">{t('profile.plus.upgradeTitle')}</p>
+                  <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">{t('profile.plus.upgradeSub')}</p>
                 </div>
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
               </button>
@@ -650,8 +650,8 @@ export default function ProfilePage() {
               >
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">redeem</span>
                 <div className="flex-1">
-                  <p className="font-body text-sm text-on-surface">Have a code?</p>
-                  <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">Redeem a campaign or invite code</p>
+                  <p className="font-body text-sm text-on-surface">{t('profile.plus.haveCode')}</p>
+                  <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">{t('profile.plus.haveCodeSub')}</p>
                 </div>
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
               </button>
@@ -672,9 +672,9 @@ export default function ProfilePage() {
                 >
                   <span aria-hidden="true" className="material-symbols-outlined text-error text-lg flex-shrink-0">warning</span>
                   <div className="flex-1">
-                    <p className="font-body text-sm font-semibold text-on-surface">Payment failed</p>
+                    <p className="font-body text-sm font-semibold text-on-surface">{t('profile.plus.paymentFailed')}</p>
                     <p className="font-label text-[11px] text-on-surface-variant/80 mt-0.5">
-                      Update your payment method to keep Sanctuary Plus.
+                      {t('profile.plus.paymentFailedSub')}
                     </p>
                   </div>
                   <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
@@ -685,22 +685,22 @@ export default function ProfilePage() {
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">workspace_premium</span>
                 <div className="flex-1">
                   <p className="font-body text-sm font-semibold text-on-surface">
-                    {cancelAtPeriodEnd ? 'Sanctuary Plus ends soon' : 'Sanctuary Plus is active'}
+                    {cancelAtPeriodEnd ? t('profile.plus.endsSoon') : t('profile.plus.active')}
                   </p>
                   <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
-                    {premiumSource === 'promo' ? 'Granted via code' :
-                     premiumSource === 'stripe' ? (cancelAtPeriodEnd ? 'Cancellation scheduled' : 'Billed via Stripe') :
-                     premiumSource === 'apple' ? 'Billed via App Store' :
-                     premiumSource === 'google' ? 'Billed via Google Play' :
-                     premiumSource === 'grant'  ? 'Team grant' : 'Active subscription'}
-                    {premiumExpiresAt ? ` · ${cancelAtPeriodEnd ? 'access until' : 'until'} ${premiumExpiresAt.toLocaleDateString()}` : ' · lifetime'}
+                    {premiumSource === 'promo' ? t('profile.plus.srcPromo') :
+                     premiumSource === 'stripe' ? (cancelAtPeriodEnd ? t('profile.plus.srcStripeCancel') : t('profile.plus.srcStripe')) :
+                     premiumSource === 'apple' ? t('profile.plus.srcApple') :
+                     premiumSource === 'google' ? t('profile.plus.srcGoogle') :
+                     premiumSource === 'grant'  ? t('profile.plus.srcGrant') : t('profile.plus.srcDefault')}
+                    {premiumExpiresAt ? ` · ${cancelAtPeriodEnd ? t('profile.plus.accessUntil') : t('profile.plus.until')} ${premiumExpiresAt.toLocaleDateString(i18n.language)}` : ` · ${t('profile.plus.lifetime')}`}
                   </p>
                   {/* Member-since — small warmth touch. Reinforces "I am
                       part of this thing" identity which is the strongest
                       retention force in subscription products. */}
                   {premiumStartedAt && (
                     <p className="font-label text-[11px] text-on-surface-variant/50 mt-0.5">
-                      Member since {premiumStartedAt.toLocaleDateString(undefined, { month: 'short', year: 'numeric' })}
+                      {t('profile.plus.memberSince', { date: premiumStartedAt.toLocaleDateString(i18n.language, { month: 'short', year: 'numeric' }) })}
                     </p>
                   )}
                 </div>
@@ -719,7 +719,7 @@ export default function ProfilePage() {
                       {practiceStats.totalSessions}
                     </p>
                     <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1.5">
-                      {practiceStats.totalSessions === 1 ? 'Practice' : 'Practices'}
+                      {practiceStats.totalSessions === 1 ? t('profile.plus.statPractice') : t('profile.plus.statPractices')}
                     </p>
                   </div>
                   <div className="text-center border-l border-r border-surface-container-high">
@@ -727,7 +727,7 @@ export default function ProfilePage() {
                       {practiceStats.totalMinutes}
                     </p>
                     <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1.5">
-                      Minutes
+                      {t('profile.plus.statMinutes')}
                     </p>
                   </div>
                   <div className="text-center">
@@ -735,7 +735,7 @@ export default function ProfilePage() {
                       {protocolStats.protocolsFinished}
                     </p>
                     <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1.5">
-                      {protocolStats.protocolsFinished === 1 ? 'Protocol' : 'Protocols'}
+                      {protocolStats.protocolsFinished === 1 ? t('profile.plus.statProtocol') : t('profile.plus.statProtocols')}
                     </p>
                   </div>
                 </div>
@@ -750,7 +750,7 @@ export default function ProfilePage() {
                   onClick={() => openCustomerPortal(cancelAtPeriodEnd ? 'resume_row' : 'manage_row')}
                   disabled={portalLoading}
                   className="flex items-center gap-4 px-5 py-4 border-t border-surface-container-high w-full text-left active:bg-surface-container-high/50 transition-colors disabled:opacity-50"
-                  aria-label={cancelAtPeriodEnd ? 'Resume Sanctuary Plus' : 'Manage subscription'}
+                  aria-label={cancelAtPeriodEnd ? t('profile.plus.resume') : t('profile.plus.manage')}
                 >
                   {/* The icon + label both shift when the subscription is
                       mid-cancel. Most users in that state want to RESUME,
@@ -769,13 +769,13 @@ export default function ProfilePage() {
                   <div className="flex-1">
                     <p className={`font-body text-sm ${cancelAtPeriodEnd ? 'font-semibold text-on-surface' : 'text-on-surface'}`}>
                       {portalLoading
-                        ? 'Opening...'
-                        : (cancelAtPeriodEnd ? 'Resume Sanctuary Plus' : 'Manage subscription')}
+                        ? t('profile.plus.opening')
+                        : (cancelAtPeriodEnd ? t('profile.plus.resume') : t('profile.plus.manage'))}
                     </p>
                     <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
                       {cancelAtPeriodEnd
-                        ? "Restart, update card, or view invoices"
-                        : 'Cancel, update card, or view invoices'}
+                        ? t('profile.plus.manageResumeSub')
+                        : t('profile.plus.manageSub')}
                     </p>
                   </div>
                   <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
@@ -792,7 +792,7 @@ export default function ProfilePage() {
             schema in notification_prefs is future-proofed for both. */}
         <div className="bg-surface-container rounded-lg overflow-hidden stagger-3 mb-5">
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
-            Notifications
+            {t('profile.notif.section')}
           </p>
 
           {/* Practice reminder toggle */}
@@ -800,9 +800,9 @@ export default function ProfilePage() {
             <div className="flex items-center gap-4">
               <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">notifications</span>
               <div className="flex-1 min-w-0">
-                <p className="font-body text-sm font-semibold text-on-surface">Daily practice reminder</p>
+                <p className="font-body text-sm font-semibold text-on-surface">{t('profile.notif.practiceReminder')}</p>
                 <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
-                  A gentle nudge at your chosen time
+                  {t('profile.notif.practiceReminderSub')}
                 </p>
               </div>
               {/* Toggle — fully accessible, role=switch + aria-checked.
@@ -811,7 +811,7 @@ export default function ProfilePage() {
               <button
                 role="switch"
                 aria-checked={notifPrefs.practice_reminder.enabled}
-                aria-label="Toggle daily practice reminder"
+                aria-label={t('profile.notif.toggleAria')}
                 disabled={notifBusy}
                 onClick={async () => {
                   await setPracticeReminder({
@@ -839,7 +839,7 @@ export default function ProfilePage() {
               <div className="flex items-center gap-4 mt-4 pl-9">
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base">schedule</span>
                 <div className="flex-1">
-                  <p className="font-label text-[11px] text-on-surface-variant/70 uppercase tracking-wider mb-1">Time</p>
+                  <p className="font-label text-[11px] text-on-surface-variant/70 uppercase tracking-wider mb-1">{t('profile.notif.timeLabel')}</p>
                   <input
                     type="time"
                     value={notifPrefs.practice_reminder.time}
@@ -850,7 +850,7 @@ export default function ProfilePage() {
                     }}
                     disabled={notifBusy}
                     className="bg-surface rounded-lg px-3 py-2 font-body text-sm text-on-surface tabular-nums focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
-                    aria-label="Reminder time"
+                    aria-label={t('profile.notif.timeAria')}
                   />
                 </div>
               </div>
@@ -865,14 +865,14 @@ export default function ProfilePage() {
           {notifPermission === 'denied' && notifSupported && (
             <div className="px-5 py-3 bg-error-container/30">
               <p className="font-label text-[11px] text-on-surface-variant/80 leading-snug">
-                Notifications are blocked. Enable them in your device settings to receive reminders.
+                {t('profile.notif.blocked')}
               </p>
             </div>
           )}
           {!notifSupported && (
             <div className="px-5 py-3 bg-surface-container-low">
               <p className="font-label text-[11px] text-on-surface-variant/70 leading-snug">
-                Notifications work in the Sanctuary mobile app — your preferences will apply once installed.
+                {t('profile.notif.unsupported')}
               </p>
             </div>
           )}
@@ -881,7 +881,7 @@ export default function ProfilePage() {
         {/* Account info */}
         <div className="bg-surface-container rounded-lg overflow-hidden stagger-3">
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
-            Account
+            {t('profile.account.section')}
           </p>
 
           <button
@@ -890,7 +890,7 @@ export default function ProfilePage() {
           >
             <span className="material-symbols-outlined text-on-surface-variant text-lg">person</span>
             <div className="flex-1">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Name</p>
+              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.name')}</p>
               <p className="font-body text-sm text-on-surface">{fullName}</p>
             </div>
             <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">edit</span>
@@ -899,7 +899,7 @@ export default function ProfilePage() {
           <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
             <span className="material-symbols-outlined text-on-surface-variant text-lg">mail</span>
             <div className="flex-1">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Email</p>
+              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.email')}</p>
               <p className="font-body text-sm text-on-surface">{email}</p>
             </div>
           </div>
@@ -911,9 +911,9 @@ export default function ProfilePage() {
           >
             <span className="material-symbols-outlined text-on-surface-variant text-lg">photo_camera</span>
             <div className="flex-1">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Profile Photo</p>
+              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.profilePhoto')}</p>
               <p className="font-body text-sm text-on-surface">
-                {uploadingPhoto ? 'Uploading...' : avatarUrl ? 'Change photo' : 'Upload a photo'}
+                {uploadingPhoto ? t('profile.account.uploading') : avatarUrl ? t('profile.account.changePhoto') : t('profile.account.uploadPhoto')}
               </p>
             </div>
             <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">upload</span>
@@ -924,8 +924,8 @@ export default function ProfilePage() {
             <div className="flex items-center gap-4 mb-3">
               <span className="material-symbols-outlined text-on-surface-variant text-lg">wc</span>
               <div className="flex-1">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Gender</p>
-                <p className="font-body text-[10px] text-on-surface-variant/40 mt-0.5">Optional · helps personalize recommendations</p>
+                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.gender')}</p>
+                <p className="font-body text-[10px] text-on-surface-variant/40 mt-0.5">{t('profile.account.genderOptional')}</p>
               </div>
               {savingGender && (
                 <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
@@ -933,9 +933,9 @@ export default function ProfilePage() {
             </div>
             <div className="flex gap-2">
               {[
-                { value: 'male', label: 'Male', icon: 'male' },
-                { value: 'female', label: 'Female', icon: 'female' },
-                { value: 'other', label: 'Other', icon: 'diversity_1' },
+                { value: 'male', label: t('profile.account.genderMale'), icon: 'male' },
+                { value: 'female', label: t('profile.account.genderFemale'), icon: 'female' },
+                { value: 'other', label: t('profile.account.genderOther'), icon: 'diversity_1' },
               ].map(opt => (
                 <button
                   key={opt.value}
@@ -958,15 +958,15 @@ export default function ProfilePage() {
             <div className="flex items-center gap-4 px-5 py-4">
               <span className="material-symbols-outlined text-on-surface-variant text-lg">key</span>
               <div className="flex-1">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Sign-in method</p>
-                <p className="font-body text-sm text-on-surface">Google</p>
+                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.signInMethod')}</p>
+                <p className="font-body text-sm text-on-surface">{t('profile.googleLabel')}</p>
               </div>
             </div>
           ) : changingPassword ? (
             <div className="px-5 py-4">
               <div className="flex items-center justify-between mb-4">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Change Password</p>
-                <button onClick={resetPasswordForm} className="text-on-surface-variant/40 active:scale-90 transition-all" aria-label="Close password form">
+                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.changePasswordTitle')}</p>
+                <button onClick={resetPasswordForm} className="text-on-surface-variant/40 active:scale-90 transition-all" aria-label={t('profile.account.closePwForm')}>
                   <span className="material-symbols-outlined text-sm">close</span>
                 </button>
               </div>
@@ -977,15 +977,15 @@ export default function ProfilePage() {
                   type={showCurrentPw ? 'text' : 'password'}
                   value={currentPassword}
                   onChange={e => setCurrentPassword(e.target.value)}
-                  placeholder="Current password"
+                  placeholder={t('profile.account.currentPassword')}
                   className="w-full bg-surface-container-low rounded-xl px-4 py-3 pr-11 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
-                  aria-label="Current password"
+                  aria-label={t('profile.account.currentPassword')}
                 />
                 <button
                   type="button"
                   onClick={() => setShowCurrentPw(!showCurrentPw)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant/30"
-                  aria-label="Toggle password visibility"
+                  aria-label={t('profile.account.togglePwVisibility')}
                 >
                   <span className="material-symbols-outlined text-lg">{showCurrentPw ? 'visibility_off' : 'visibility'}</span>
                 </button>
@@ -997,15 +997,15 @@ export default function ProfilePage() {
                   type={showNewPw ? 'text' : 'password'}
                   value={newPassword}
                   onChange={e => setNewPassword(e.target.value)}
-                  placeholder="New password"
+                  placeholder={t('profile.account.newPassword')}
                   className="w-full bg-surface-container-low rounded-xl px-4 py-3 pr-11 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
-                  aria-label="New password"
+                  aria-label={t('profile.account.newPassword')}
                 />
                 <button
                   type="button"
                   onClick={() => setShowNewPw(!showNewPw)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant/30"
-                  aria-label="Toggle password visibility"
+                  aria-label={t('profile.account.togglePwVisibility')}
                 >
                   <span className="material-symbols-outlined text-lg">{showNewPw ? 'visibility_off' : 'visibility'}</span>
                 </button>
@@ -1017,9 +1017,9 @@ export default function ProfilePage() {
                   type={showNewPw ? 'text' : 'password'}
                   value={confirmPassword}
                   onChange={e => setConfirmPassword(e.target.value)}
-                  placeholder="Confirm new password"
+                  placeholder={t('profile.account.confirmNewPassword')}
                   className="w-full bg-surface-container-low rounded-xl px-4 py-3 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
-                  aria-label="Confirm new password"
+                  aria-label={t('profile.account.confirmNewPassword')}
                 />
               </div>
 
@@ -1038,10 +1038,10 @@ export default function ProfilePage() {
                 {savingPassword ? (
                   <>
                     <div className="w-4 h-4 border-2 border-on-primary border-t-transparent rounded-full animate-spin" />
-                    Updating...
+                    {t('profile.account.updating')}
                   </>
                 ) : (
-                  'Update Password'
+                  t('profile.account.updatePassword')
                 )}
               </button>
             </div>
@@ -1052,8 +1052,8 @@ export default function ProfilePage() {
             >
               <span className="material-symbols-outlined text-on-surface-variant text-lg">lock</span>
               <div className="flex-1">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Password</p>
-                <p className="font-body text-sm text-on-surface">Change password</p>
+                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.passwordLabel')}</p>
+                <p className="font-body text-sm text-on-surface">{t('profile.account.changePassword')}</p>
               </div>
               <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
             </button>
@@ -1076,7 +1076,7 @@ export default function ProfilePage() {
               onClick={() => handleToggleAggregate(!consent.aggregate)}
               role="switch"
               aria-checked={consent.aggregate}
-              aria-label="Aggregate analytics"
+              aria-label={t('profile.aggregateAria')}
               className={`relative w-11 h-6 rounded-full transition-colors flex-shrink-0 ${
                 consent.aggregate ? 'bg-primary' : 'bg-surface-container-high'
               }`}
@@ -1096,18 +1096,16 @@ export default function ProfilePage() {
           <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">bug_report</span>
             <div className="flex-1 min-w-0">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Crash reporting</p>
+              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.crash.title')}</p>
               <p className="font-body text-xs text-on-surface-variant/80 mt-0.5 leading-snug">
-                {consent.crash
-                  ? 'On — stack traces sent to Firebase Crashlytics so we can fix bugs faster.'
-                  : 'Off — no crash data leaves your device.'}
+                {consent.crash ? t('profile.crash.on') : t('profile.crash.off')}
               </p>
             </div>
             <button
               onClick={() => handleToggleCrash(!consent.crash)}
               role="switch"
               aria-checked={consent.crash}
-              aria-label="Crash reporting"
+              aria-label={t('profile.crash.aria')}
               className={`relative w-11 h-6 rounded-full transition-colors flex-shrink-0 ${
                 consent.crash ? 'bg-primary' : 'bg-surface-container-high'
               }`}
@@ -1130,20 +1128,20 @@ export default function ProfilePage() {
             <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
               <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">favorite</span>
               <div className="flex-1 min-w-0">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">Health-data processing</p>
+                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.health.title')}</p>
                 <p className="font-body text-xs text-on-surface-variant/80 mt-0.5 leading-snug">
-                  On — your dosha &amp; wellness inputs personalize your practice. Withdrawing stops further processing (your existing data stays until you export or delete it).
+                  {t('profile.health.on')}
                 </p>
               </div>
               <button
                 onClick={async () => {
-                  if (window.confirm('Withdraw consent for health-data processing? Your dosha and wellness inputs will no longer be used to personalize your practice. This does not delete already-collected data.')) {
+                  if (window.confirm(t('profile.health.withdrawConfirm'))) {
                     await revokeHealthConsent()
                   }
                 }}
                 role="switch"
                 aria-checked={true}
-                aria-label="Health-data processing consent"
+                aria-label={t('profile.health.aria')}
                 className="relative w-11 h-6 rounded-full transition-colors flex-shrink-0 bg-primary"
               >
                 <span className="absolute top-0.5 left-[22px] w-5 h-5 rounded-full bg-on-primary shadow-sm transition-all" />
@@ -1225,10 +1223,10 @@ export default function ProfilePage() {
                   privacy policy so the user can read the full DPA. */}
               <div className="pt-2 border-t border-outline-variant/15">
                 <p className="font-label text-[10px] text-on-surface-variant/70 uppercase tracking-wider mb-1.5">
-                  Analytics provider
+                  {t('profile.analyticsProvider')}
                 </p>
                 <p className="font-body text-[12px] text-on-surface-variant leading-relaxed">
-                  Aggregate analytics are processed by{' '}
+                  {t('profile.analyticsProviderPre')}{' '}
                   <a
                     href="https://posthog.com/privacy"
                     target="_blank"
@@ -1237,9 +1235,7 @@ export default function ProfilePage() {
                   >
                     PostHog
                   </a>
-                  {' '}on EU-hosted infrastructure (Frankfurt). No PII is sent;
-                  events use a per-install pseudonymous id. Turn the toggle
-                  above off at any time and we stop sending anything.
+                  {' '}{t('profile.analyticsProviderPost')}
                 </p>
               </div>
             </div>
@@ -1257,7 +1253,7 @@ export default function ProfilePage() {
             onClick={handleExport}
             disabled={exporting}
             className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high w-full text-left active:bg-surface-container-high/50 transition-colors disabled:opacity-60"
-            aria-label="Export your data"
+            aria-label={t('profile.exportAria')}
           >
             <span className="material-symbols-outlined text-on-surface-variant text-lg">download</span>
             <div className="flex-1 min-w-0">
@@ -1363,7 +1359,7 @@ export default function ProfilePage() {
                     value={deleteConfirmText}
                     onChange={e => setDeleteConfirmText(e.target.value)}
                     placeholder={t('profile.yourData.deleteConfirmPlaceholder')}
-                    aria-label="Type DELETE to confirm"
+                    aria-label={t('profile.deleteConfirmAria')}
                     autoFocus
                     autoCapitalize="characters"
                     className="w-full bg-surface-container-low rounded-lg px-4 py-3 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-error/40 transition-all placeholder:text-on-surface-variant/35"
