@@ -95,6 +95,37 @@
     "noSavedCreds": "No saved credentials found. Please sign in with email and password first.",
     "biometricFailed": "Biometric authentication failed. Please use email and password."
   },
+  "onboarding": {
+    "skip": "Skip",
+    "prevSlide": "Previous slide",
+    "skipAria": "Skip onboarding",
+    "slideAria": "Slide {{n}} of {{total}}",
+    "findDosha": "Find My Dosha",
+    "next": "Next",
+    "haveAccount": "I already have an account",
+    "slides": [
+      {
+        "eyebrow": "Welcome to The Sanctuary",
+        "title": "A practice as unique as you",
+        "body": "We blend ancient yogic tradition with Ayurvedic wisdom — then tailor it to your body, your day, and your goals."
+      },
+      {
+        "eyebrow": "Step 1 of 3",
+        "title": "Yoga that meets you where you are",
+        "body": "Hatha Yoga Pradipika postures, voice-guided so you can practice eyes-closed. Pranayama, asanas, and full routines — all paced to your level."
+      },
+      {
+        "eyebrow": "Step 2 of 3",
+        "title": "Eat and live by your nature",
+        "body": "Foods to favour, daily routines, seasonal guidance — drawn directly from Charaka Samhita and made practical for modern life."
+      },
+      {
+        "eyebrow": "Step 3 of 3",
+        "title": "Let's find your dosha",
+        "body": "A short 15-question quiz reveals your Ayurvedic constitution — the foundation everything else builds on. Takes about 90 seconds."
+      }
+    ]
+  },
   "auth": {
     "forgot": {
       "backToLogin": "Back to login",

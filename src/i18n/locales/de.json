@@ -95,6 +95,37 @@
     "noSavedCreds": "Keine gespeicherten Anmeldedaten gefunden. Bitte melde dich zuerst mit E-Mail und Passwort an.",
     "biometricFailed": "Biometrische Authentifizierung fehlgeschlagen. Bitte verwende E-Mail und Passwort."
   },
+  "onboarding": {
+    "skip": "Überspringen",
+    "prevSlide": "Vorherige Folie",
+    "skipAria": "Onboarding überspringen",
+    "slideAria": "Folie {{n}} von {{total}}",
+    "findDosha": "Mein Dosha finden",
+    "next": "Weiter",
+    "haveAccount": "Ich habe bereits ein Konto",
+    "slides": [
+      {
+        "eyebrow": "Willkommen bei The Sanctuary",
+        "title": "Eine Praxis so einzigartig wie du",
+        "body": "Wir verbinden alte yogische Tradition mit ayurvedischer Weisheit — und passen sie dann an deinen Körper, deinen Tag und deine Ziele an."
+      },
+      {
+        "eyebrow": "Schritt 1 von 3",
+        "title": "Yoga, das dich dort abholt, wo du bist",
+        "body": "Haltungen aus dem Hatha Yoga Pradipika, sprachgeführt, sodass du mit geschlossenen Augen üben kannst. Pranayama, Asanas und ganze Routinen — alle auf dein Niveau abgestimmt."
+      },
+      {
+        "eyebrow": "Schritt 2 von 3",
+        "title": "Iss und lebe nach deiner Natur",
+        "body": "Empfohlene Lebensmittel, Tagesabläufe, saisonale Hinweise — direkt aus der Charaka Samhita und für das moderne Leben praktisch gemacht."
+      },
+      {
+        "eyebrow": "Schritt 3 von 3",
+        "title": "Finden wir dein Dosha",
+        "body": "Ein kurzes Quiz mit 15 Fragen zeigt deine ayurvedische Konstitution — das Fundament, auf dem alles andere aufbaut. Dauert etwa 90 Sekunden."
+      }
+    ]
+  },
   "auth": {
     "forgot": {
       "backToLogin": "Zurück zur Anmeldung",
