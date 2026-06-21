@@ -237,6 +237,35 @@
       "deletePartial": "Most of your data was removed, but some entries couldn't be deleted. Please contact support."
     }
   },
+  "routinePage": {
+    "back": "Back",
+    "switchRoutine": "Switch routine",
+    "todaysGoal": "Today's Goal",
+    "poses": "Poses",
+    "minutes": "Minutes",
+    "streakDay": "Streak day",
+    "upNext": "Up Next",
+    "poseProgress": "Pose {{n}} of {{total}}",
+    "yourPath": "Your Path",
+    "tapPreview": "Tap to preview",
+    "benefits": "Benefits",
+    "bodyFocus": "Body Focus",
+    "finishLine": "Finish line",
+    "finishSub": "Practice complete · +1 day on streak",
+    "whatYoullFeel": "What you'll feel after",
+    "unlockWithPlus": "Unlock with Plus",
+    "startPractice": "Start Practice · {{min}} min",
+    "paywallHeadline": "Start \"{{label}}\" with Plus",
+    "paywallSubhead": "Unlock the full routine library, your personalized protocol, and every asana inside.",
+    "durationMin": "{{m}} min",
+    "durationHm": "{{h}}h {{m}}m",
+    "outcomes": {
+      "stress": ["Calmer mind", "Lower cortisol", "Released shoulders", "Steadier breath"],
+      "sleep": ["Quieter mind", "Slower heart rate", "Loosened spine", "Deeper rest"],
+      "energy": ["Awakened body", "Sharper focus", "Open chest", "Lifted mood"],
+      "flexibility": ["Open hips", "Mobile spine", "Eased tightness", "Better range"]
+    }
+  },
   "pranayamaDetail": {
     "goBack": "Go back",
     "label": "Pranayama",

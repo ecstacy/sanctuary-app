@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
 import { getRoutine, getDoshaTag } from '../data/asanas'
@@ -10,24 +11,16 @@ import { isAsanaFree } from '../lib/premiumTiers'
 import PaywallSheet from '../components/PaywallSheet'
 
 
-function formatDuration(seconds) {
+function formatDuration(seconds, t) {
   const m = Math.floor(seconds / 60)
-  return m < 60 ? `${m} min` : `${Math.floor(m / 60)}h ${m % 60}m`
-}
-
-// Outcomes shown as gamified "rewards" the user unlocks by completing the
-// routine. Pulled per-routine so the user understands what the practice
-// is *for* before committing to it. (One-line each — these are reward
-// chips, not paragraphs.)
-const ROUTINE_OUTCOMES = {
-  stress:      ['Calmer mind', 'Lower cortisol', 'Released shoulders', 'Steadier breath'],
-  sleep:       ['Quieter mind', 'Slower heart rate', 'Loosened spine', 'Deeper rest'],
-  energy:      ['Awakened body', 'Sharper focus', 'Open chest', 'Lifted mood'],
-  flexibility: ['Open hips', 'Mobile spine', 'Eased tightness', 'Better range'],
+  return m < 60
+    ? t('routinePage.durationMin', { m })
+    : t('routinePage.durationHm', { h: Math.floor(m / 60), m: m % 60 })
 }
 
 export default function RoutinePage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const location = useLocation()
   const { profile } = useAuth()
 
@@ -52,7 +45,8 @@ export default function RoutinePage() {
   const [paywallOpen, setPaywallOpen] = useState(false)
 
   const firstAsana = routine.asanas[0]
-  const outcomes = ROUTINE_OUTCOMES[routineKey] || ROUTINE_OUTCOMES.stress
+  const outcomesRaw = t(`routinePage.outcomes.${routineKey}`, { returnObjects: true })
+  const outcomes = Array.isArray(outcomesRaw) ? outcomesRaw : t('routinePage.outcomes.stress', { returnObjects: true })
   const totalPoses = routine.asanas.length
 
   return (
@@ -70,7 +64,7 @@ export default function RoutinePage() {
         <div className="relative z-20 flex items-center justify-between mb-4">
           <button
             onClick={() => navigate(-1)}
-            aria-label="Back"
+            aria-label={t('routinePage.back')}
             className="w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center active:scale-90 transition-all"
           >
             <span className="material-symbols-outlined text-white text-lg">arrow_back</span>
@@ -83,7 +77,7 @@ export default function RoutinePage() {
             className="flex items-center gap-1.5 h-9 px-4 rounded-full bg-white/20 backdrop-blur-sm text-white active:scale-95 transition-all"
           >
             <span className="material-symbols-outlined text-base">swap_horiz</span>
-            <span className="font-label text-[11px] uppercase tracking-wider font-semibold">Switch routine</span>
+            <span className="font-label text-[11px] uppercase tracking-wider font-semibold">{t('routinePage.switchRoutine')}</span>
           </button>
         </div>
 
@@ -106,20 +100,20 @@ export default function RoutinePage() {
         <div className="bg-surface rounded-2xl p-4 shadow-lg border border-outline-variant/20 stagger-2 mb-5">
           <div className="flex items-center gap-2 mb-3">
             <span className="material-symbols-outlined text-primary text-base">flag</span>
-            <p className="font-label text-[10px] text-primary uppercase tracking-widest font-semibold">Today's Goal</p>
+            <p className="font-label text-[10px] text-primary uppercase tracking-widest font-semibold">{t('routinePage.todaysGoal')}</p>
           </div>
           <div className="grid grid-cols-3 gap-2">
             <div className="text-center">
               <p className="font-headline text-2xl text-on-surface leading-none">{totalPoses}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1">Poses</p>
+              <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1">{t('routinePage.poses')}</p>
             </div>
             <div className="text-center border-x border-outline-variant/20">
               <p className="font-headline text-2xl text-on-surface leading-none">{Math.round(routine.totalDuration / 60)}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1">Minutes</p>
+              <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1">{t('routinePage.minutes')}</p>
             </div>
             <div className="text-center">
               <p className="font-headline text-2xl text-on-surface leading-none">+1</p>
-              <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1">Streak day</p>
+              <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1">{t('routinePage.streakDay')}</p>
             </div>
           </div>
         </div>
@@ -127,7 +121,7 @@ export default function RoutinePage() {
         {/* ── Up Next — the first asana, hero treatment so the user knows
              exactly what's coming and feels ready to begin. ── */}
         <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-2 px-1 stagger-2">
-          Up Next
+          {t('routinePage.upNext')}
         </p>
         <button
           onClick={() => {
@@ -154,17 +148,17 @@ export default function RoutinePage() {
             <PoseFigure poseKey={firstAsana.poseKey} size={80} breathing={false} objectPosition="top" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-label text-[9px] text-primary uppercase tracking-widest font-semibold mb-0.5">Pose 1 of {totalPoses}</p>
+            <p className="font-label text-[9px] text-primary uppercase tracking-widest font-semibold mb-0.5">{t('routinePage.poseProgress', { n: 1, total: totalPoses })}</p>
             <p className="font-body font-semibold text-base text-on-surface leading-tight">{firstAsana.sanskrit}</p>
-            <p className="font-body text-xs text-on-surface-variant mt-0.5">{firstAsana.english} · {formatDuration(firstAsana.durationSeconds)}</p>
+            <p className="font-body text-xs text-on-surface-variant mt-0.5">{firstAsana.english} · {formatDuration(firstAsana.durationSeconds, t)}</p>
           </div>
           <span className="material-symbols-outlined text-primary text-xl flex-shrink-0">play_circle</span>
         </button>
 
         {/* ── Path — gamified vertical timeline of poses ── */}
         <div className="flex items-center justify-between mb-3 px-1 stagger-3">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Your Path</p>
-          <span className="font-label text-[10px] text-on-surface-variant/50 tracking-wider">Tap to preview</span>
+          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{t('routinePage.yourPath')}</p>
+          <span className="font-label text-[10px] text-on-surface-variant/50 tracking-wider">{t('routinePage.tapPreview')}</span>
         </div>
 
         <div className="relative stagger-3">
@@ -204,7 +198,7 @@ export default function RoutinePage() {
                     <div className="flex-1 min-w-0">
                       <p className="font-body font-semibold text-sm text-on-surface leading-tight">{asana.sanskrit}</p>
                       <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">
-                        {asana.english} · {formatDuration(asana.durationSeconds)}
+                        {asana.english} · {formatDuration(asana.durationSeconds, t)}
                       </p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
@@ -230,7 +224,7 @@ export default function RoutinePage() {
                     </p>
 
                     <div className="mb-3">
-                      <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2">Benefits</p>
+                      <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2">{t('routinePage.benefits')}</p>
                       <div className="flex flex-wrap gap-1.5">
                         {asana.benefits.map((b, j) => (
                           <span key={j} className="bg-primary-container text-on-primary-container font-label text-[10px] px-2.5 py-1 rounded-full">
@@ -241,7 +235,7 @@ export default function RoutinePage() {
                     </div>
 
                     <div className="mb-3">
-                      <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2">Body Focus</p>
+                      <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2">{t('routinePage.bodyFocus')}</p>
                       <div className="flex flex-wrap gap-1.5">
                         {asana.bodyParts.map((bp, j) => (
                           <span key={j} className="bg-surface-container-high text-on-surface-variant font-label text-[10px] px-2.5 py-1 rounded-full">
@@ -262,9 +256,9 @@ export default function RoutinePage() {
               <span className="material-symbols-outlined text-primary text-lg">emoji_events</span>
             </div>
             <div className="flex-1 bg-primary-container/30 rounded-xl p-3.5 border border-primary/15">
-              <p className="font-body font-semibold text-sm text-primary leading-tight">Finish line</p>
+              <p className="font-body font-semibold text-sm text-primary leading-tight">{t('routinePage.finishLine')}</p>
               <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">
-                Practice complete · +1 day on streak
+                {t('routinePage.finishSub')}
               </p>
             </div>
           </div>
@@ -274,7 +268,7 @@ export default function RoutinePage() {
         <div className="mt-7 stagger-4">
           <div className="flex items-center gap-2 mb-3 px-1">
             <span className="material-symbols-outlined text-primary text-base">favorite</span>
-            <p className="font-label text-[10px] text-primary uppercase tracking-widest font-semibold">What you'll feel after</p>
+            <p className="font-label text-[10px] text-primary uppercase tracking-widest font-semibold">{t('routinePage.whatYoullFeel')}</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {outcomes.map((o, i) => (
@@ -328,8 +322,8 @@ export default function RoutinePage() {
               {isLocked ? 'lock' : 'play_arrow'}
             </span>
             {isLocked
-              ? `Unlock with Plus`
-              : `Start Practice · ${Math.round(routine.totalDuration / 60)} min`}
+              ? t('routinePage.unlockWithPlus')
+              : t('routinePage.startPractice', { min: Math.round(routine.totalDuration / 60) })}
           </button>
         </div>,
         document.body
@@ -339,8 +333,8 @@ export default function RoutinePage() {
         open={paywallOpen}
         onClose={() => setPaywallOpen(false)}
         surface="routine_locked"
-        headline={`Start "${routine.label}" with Plus`}
-        subhead="Unlock the full routine library, your personalized protocol, and every asana inside."
+        headline={t('routinePage.paywallHeadline', { label: routine.label })}
+        subhead={t('routinePage.paywallSubhead')}
       />
 
     </div>

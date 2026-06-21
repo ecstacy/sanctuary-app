@@ -237,6 +237,35 @@
       "deletePartial": "Der Großteil deiner Daten wurde entfernt, einige Einträge konnten jedoch nicht gelöscht werden. Bitte kontaktiere den Support."
     }
   },
+  "routinePage": {
+    "back": "Zurück",
+    "switchRoutine": "Routine wechseln",
+    "todaysGoal": "Heutiges Ziel",
+    "poses": "Posen",
+    "minutes": "Minuten",
+    "streakDay": "Serientag",
+    "upNext": "Als Nächstes",
+    "poseProgress": "Pose {{n}} von {{total}}",
+    "yourPath": "Dein Weg",
+    "tapPreview": "Zum Vorschauen tippen",
+    "benefits": "Vorteile",
+    "bodyFocus": "Körperfokus",
+    "finishLine": "Ziellinie",
+    "finishSub": "Praxis abgeschlossen · +1 Tag in der Serie",
+    "whatYoullFeel": "Wie du dich danach fühlst",
+    "unlockWithPlus": "Mit Plus freischalten",
+    "startPractice": "Praxis starten · {{min}} Min.",
+    "paywallHeadline": "„{{label}}“ mit Plus starten",
+    "paywallSubhead": "Schalte die komplette Routine-Bibliothek, dein persönliches Protokoll und jede Asana darin frei.",
+    "durationMin": "{{m}} Min.",
+    "durationHm": "{{h}} Std. {{m}} Min.",
+    "outcomes": {
+      "stress": ["Ruhigerer Geist", "Weniger Cortisol", "Gelöste Schultern", "Ruhigerer Atem"],
+      "sleep": ["Stillerer Geist", "Langsamerer Puls", "Gelockerte Wirbelsäule", "Tiefere Ruhe"],
+      "energy": ["Erwachter Körper", "Schärferer Fokus", "Offene Brust", "Gehobene Stimmung"],
+      "flexibility": ["Offene Hüften", "Bewegliche Wirbelsäule", "Gelöste Spannung", "Größere Reichweite"]
+    }
+  },
   "pranayamaDetail": {
     "goBack": "Zurück",
     "label": "Pranayama",
