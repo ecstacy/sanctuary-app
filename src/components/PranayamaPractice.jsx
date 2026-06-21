@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { createPortal } from 'react-dom'
+import { useTranslation } from 'react-i18next'
 import { useVoiceGuidance } from '../hooks/useVoiceGuidance'
 import { useAudio } from '../hooks/useAudio'
 import { track, EVENTS } from '../lib/track'
@@ -30,10 +31,10 @@ import { track, EVENTS } from '../lib/track'
 
 function buildPacedPhases(pattern, pranayamaId) {
   const phases = []
-  if (pattern.inhale) phases.push({ name: 'inhale', label: 'Inhale', duration: pattern.inhale })
-  if (pattern.holdAfterIn) phases.push({ name: 'hold-in', label: 'Hold', duration: pattern.holdAfterIn })
-  if (pattern.exhale) phases.push({ name: 'exhale', label: 'Exhale', duration: pattern.exhale })
-  if (pattern.holdAfterEx) phases.push({ name: 'hold-out', label: 'Hold', duration: pattern.holdAfterEx })
+  if (pattern.inhale) phases.push({ name: 'inhale', duration: pattern.inhale })
+  if (pattern.holdAfterIn) phases.push({ name: 'hold-in', duration: pattern.holdAfterIn })
+  if (pattern.exhale) phases.push({ name: 'exhale', duration: pattern.exhale })
+  if (pattern.holdAfterEx) phases.push({ name: 'hold-out', duration: pattern.holdAfterEx })
 
   // Nadi Shodhana alternates nostrils — annotate the labels so the voice
   // coach can announce side. Other paced practices use both nostrils.
@@ -55,22 +56,26 @@ function buildRateRounds(pattern) {
   return rounds
 }
 
-// ─── Side-aware label for Nadi Shodhana ──────────────────────────────────
-// Cycle: in-LEFT → out-RIGHT → in-RIGHT → out-LEFT (one full nadi shodhana round)
-function nadiShodhanaSideLabel(phaseIndex, halfRoundIndex, basePhaseName, baseLabel) {
-  // halfRoundIndex 0 = left-side half, 1 = right-side half
-  // basePhaseName ∈ {'inhale','exhale'}
-  const startsLeft = halfRoundIndex === 0
-  if (basePhaseName === 'inhale')  return startsLeft ? 'Inhale through the left' : 'Inhale through the right'
-  if (basePhaseName === 'exhale')  return startsLeft ? 'Exhale through the right' : 'Exhale through the left'
-  return baseLabel
-}
+// ─── Phase-name → i18n key ───────────────────────────────────────────────
+const PHASE_KEY = { inhale: 'phaseInhale', 'hold-in': 'phaseHold', exhale: 'phaseExhale', 'hold-out': 'phaseHold' }
 
 // ─── Main overlay ───────────────────────────────────────────────────────
 
 export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
+  const { t } = useTranslation()
   const voice = useVoiceGuidance()
   const audio = useAudio()
+
+  // Localized phase label. For Nadi Shodhana, inhale/exhale annotate the
+  // active nostril, alternating per half-round (0 = left-side, 1 = right).
+  function phaseLabel(phase, half) {
+    if (phase.alternates && pranayama.id === 'nadiShodhana') {
+      const startsLeft = half === 0
+      if (phase.name === 'inhale') return t(startsLeft ? 'pranayamaPractice.inhaleLeft' : 'pranayamaPractice.inhaleRight')
+      if (phase.name === 'exhale') return t(startsLeft ? 'pranayamaPractice.exhaleRight' : 'pranayamaPractice.exhaleLeft')
+    }
+    return t(`pranayamaPractice.${PHASE_KEY[phase.name] || 'phaseHold'}`)
+  }
 
   const isPaced = pranayama.breathPattern === 'paced'
   const isRate  = pranayama.breathPattern === 'rate'
@@ -113,7 +118,7 @@ export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
   useEffect(() => {
     if (started) return
     let cancelled = false
-    voice.speak(`Begin ${pranayama.english}. Find a comfortable seat.`)
+    voice.speak(t('pranayamaPractice.spokenBegin', { name: pranayama.english }))
     const settle = setTimeout(() => {
       if (cancelled) return
       setStarted(true)
@@ -205,21 +210,17 @@ export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
   }, [roundRemaining, isRate, started])
 
   // ── Voice helpers ──────────────────────────────────────────────────
-  function speakPhase(phase, idx) {
-    let label = phase.label
-    if (phase.alternates && pranayama.id === 'nadiShodhana') {
-      label = nadiShodhanaSideLabel(idx, halfRoundRef.current, phase.name, label)
-    }
-    voice.speak(label)
+  function speakPhase(phase) {
+    voice.speak(phaseLabel(phase, halfRoundRef.current))
   }
 
   function speakRoundCue(round, idx) {
     if (round.kind === 'active') {
       const isLast = idx === rateRounds.length - 1
-      if (isLast) voice.speak(`Final round. Begin.`)
-      else        voice.speak(`Round ${round.index}. Begin.`)
+      if (isLast) voice.speak(t('pranayamaPractice.spokenFinalRound'))
+      else        voice.speak(t('pranayamaPractice.spokenRound', { n: round.index }))
     } else {
-      voice.speak('Slow down. Rest naturally.')
+      voice.speak(t('pranayamaPractice.spokenRest'))
     }
   }
 
@@ -228,7 +229,7 @@ export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
     voice.stop()
     if (reason === 'completed') {
       audio.bell()
-      voice.speak('Practice complete.')
+      voice.speak(t('pranayamaPractice.spokenComplete'))
       track(EVENTS.PRACTICE_COMPLETED, { kind: 'pranayama', pranayama_id: pranayama.id })
       // Give the closing speech a moment, then close.
       setTimeout(onClose, 1500)
@@ -269,7 +270,7 @@ export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
       >
         <button
           onClick={() => handleClose('abandoned')}
-          aria-label="End practice"
+          aria-label={t('pranayamaPractice.endPractice')}
           className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90"
         >
           <span aria-hidden="true" className="material-symbols-outlined">close</span>
@@ -278,14 +279,14 @@ export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
         <div className="flex items-center gap-1">
           <button
             onClick={voice.toggle}
-            aria-label={voice.enabled ? 'Mute voice' : 'Unmute voice'}
+            aria-label={voice.enabled ? t('pranayamaPractice.muteVoice') : t('pranayamaPractice.unmuteVoice')}
             className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90"
           >
             <span aria-hidden="true" className="material-symbols-outlined text-lg">{voice.enabled ? 'volume_up' : 'volume_off'}</span>
           </button>
           <button
             onClick={() => setPaused(p => !p)}
-            aria-label={paused ? 'Resume' : 'Pause'}
+            aria-label={paused ? t('pranayamaPractice.resume') : t('pranayamaPractice.pause')}
             className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90"
           >
             <span aria-hidden="true" className="material-symbols-outlined">{paused ? 'play_arrow' : 'pause'}</span>
@@ -323,26 +324,24 @@ export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
           <div className="relative flex flex-col items-center justify-center text-center px-4">
             {!started ? (
               <>
-                <p className="font-headline text-2xl text-on-surface mb-1">Get ready</p>
-                <p className="font-body text-xs text-on-surface-variant">Find your seat</p>
+                <p className="font-headline text-2xl text-on-surface mb-1">{t('pranayamaPractice.getReady')}</p>
+                <p className="font-body text-xs text-on-surface-variant">{t('pranayamaPractice.findYourSeat')}</p>
               </>
             ) : isPaced ? (
               <>
                 <p className="font-headline text-3xl text-on-surface mb-1">
-                  {currentPhase?.alternates && pranayama.id === 'nadiShodhana'
-                    ? nadiShodhanaSideLabel(phaseIndex, halfRoundRef.current, currentPhase.name, currentPhase.label)
-                    : currentPhase?.label || ''}
+                  {currentPhase ? phaseLabel(currentPhase, halfRoundRef.current) : ''}
                 </p>
                 <p className="font-headline text-5xl text-primary tabular-nums">{phaseRemaining}</p>
               </>
             ) : isRate ? (
               <>
                 <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">
-                  {rateRounds[roundIndex]?.kind === 'active' ? `Round ${rateRounds[roundIndex].index} of ${pranayama.pattern.rounds}` : 'Rest'}
+                  {rateRounds[roundIndex]?.kind === 'active' ? t('pranayamaPractice.roundOfTotal', { n: rateRounds[roundIndex].index, total: pranayama.pattern.rounds }) : t('pranayamaPractice.rest')}
                 </p>
                 <p className="font-headline text-5xl text-primary tabular-nums">{roundRemaining}s</p>
                 <p className="font-body text-xs text-on-surface-variant mt-2">
-                  {rateRounds[roundIndex]?.kind === 'active' ? 'Vigorous breathing' : 'Breathe naturally'}
+                  {rateRounds[roundIndex]?.kind === 'active' ? t('pranayamaPractice.vigorous') : t('pranayamaPractice.breatheNaturally')}
                 </p>
               </>
             ) : null}
@@ -351,11 +350,11 @@ export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
 
         {/* Total time remaining strip */}
         <div className="mt-8 flex items-baseline gap-2">
-          <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Total</p>
+          <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">{t('pranayamaPractice.total')}</p>
           <p className="font-headline text-2xl text-on-surface tabular-nums">
             {mins}:{secs.toString().padStart(2, '0')}
           </p>
-          <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">{paused ? '(Paused)' : 'remaining'}</p>
+          <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">{paused ? t('pranayamaPractice.paused') : t('pranayamaPractice.remaining')}</p>
         </div>
       </div>
 
@@ -368,7 +367,7 @@ export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
           onClick={() => handleClose('abandoned')}
           className="w-full py-4 rounded-full bg-surface-container text-on-surface-variant font-label text-sm font-semibold tracking-wide"
         >
-          End Practice Early
+          {t('pranayamaPractice.endEarly')}
         </button>
       </div>
     </div>,
