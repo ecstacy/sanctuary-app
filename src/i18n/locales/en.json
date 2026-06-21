@@ -930,6 +930,32 @@
       "daysAgo": "{{n}} days ago"
     }
   },
+  "vikritiSignal": {
+    "vata": {
+      "headline": "Your Vata is running high.",
+      "summary": "Anxiety, scattered focus, light sleep — your week reads as Vata aggravation. Grounding helps.",
+      "freeLabel": "Tonight: 5 minutes in Child's Pose",
+      "freeAction": "Start now",
+      "plusLabel": "Your 3-day Vata-pacifying protocol",
+      "plusSub": "Warm food, slow stretches, screens off by 9pm."
+    },
+    "pitta": {
+      "headline": "Your Pitta is running high.",
+      "summary": "Irritability, intensity, heat — your week reads as Pitta aggravation. Cool it down.",
+      "freeLabel": "Try 5 minutes of Nadi Shodhana",
+      "freeAction": "Begin breath",
+      "plusLabel": "Your 3-day Pitta-cooling protocol",
+      "plusSub": "Cooling foods, moon-salutation flows, evening Sheetali breath."
+    },
+    "kapha": {
+      "headline": "Your Kapha is running high.",
+      "summary": "Heaviness, slow starts, withdrawal — your week reads as Kapha aggravation. Spark some heat.",
+      "freeLabel": "Stand in Tadasana — wake the body",
+      "freeAction": "Start now",
+      "plusLabel": "Your 3-day Kapha-energizing protocol",
+      "plusSub": "Sun salutations, pungent spices, early wake, no daytime naps."
+    }
+  },
   "vikritiCard": {
     "dismiss": "Dismiss reading",
     "todaysReading": "Today's Reading",

@@ -930,6 +930,32 @@
       "daysAgo": "vor {{n}} Tagen"
     }
   },
+  "vikritiSignal": {
+    "vata": {
+      "headline": "Dein Vata ist erhöht.",
+      "summary": "Angst, zerstreuter Fokus, leichter Schlaf — deine Woche liest sich als Vata-Aggravation. Erdung hilft.",
+      "freeLabel": "Heute Abend: 5 Minuten in der Haltung des Kindes",
+      "freeAction": "Jetzt starten",
+      "plusLabel": "Dein 3-Tage-Vata-beruhigendes Protokoll",
+      "plusSub": "Warmes Essen, langsame Dehnungen, Bildschirme aus ab 21 Uhr."
+    },
+    "pitta": {
+      "headline": "Dein Pitta ist erhöht.",
+      "summary": "Reizbarkeit, Intensität, Hitze — deine Woche liest sich als Pitta-Aggravation. Kühl es ab.",
+      "freeLabel": "Versuche 5 Minuten Nadi Shodhana",
+      "freeAction": "Atem beginnen",
+      "plusLabel": "Dein 3-Tage-Pitta-kühlendes Protokoll",
+      "plusSub": "Kühlende Speisen, Mond-Gruß-Flows, abends Sheetali-Atmung."
+    },
+    "kapha": {
+      "headline": "Dein Kapha ist erhöht.",
+      "summary": "Schwere, träge Starts, Rückzug — deine Woche liest sich als Kapha-Aggravation. Entfache etwas Hitze.",
+      "freeLabel": "Steh in Tadasana — wecke den Körper",
+      "freeAction": "Jetzt starten",
+      "plusLabel": "Dein 3-Tage-Kapha-belebendes Protokoll",
+      "plusSub": "Sonnengrüße, scharfe Gewürze, früh aufstehen, keine Nickerchen tagsüber."
+    }
+  },
   "vikritiCard": {
     "dismiss": "Lesung schließen",
     "todaysReading": "Deine heutige Lesung",

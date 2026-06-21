@@ -38,6 +38,9 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { vikriti, evidence, recommendations: r } = signal
+  // Localized signal copy (headline/summary/free/plus text). Colors, emoji,
+  // and routes still come from the hook's recommendations object.
+  const sig = (k) => t(`vikritiSignal.${vikriti}.${k}`)
   const [dismissed, setDismissed] = useState(false)
   const impressionFiredRef = useRef(false)
 
@@ -150,11 +153,11 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
         id="vikriti-headline"
         className="font-headline text-xl text-on-surface leading-tight mb-2 pr-6"
       >
-        {r.headline}
+        {sig('headline')}
       </h3>
 
       <p className="font-body text-sm text-on-surface-variant/90 leading-relaxed mb-3 pr-6">
-        {r.summary}
+        {sig('summary')}
       </p>
 
       {/* Evidence line — small, honest. Tells the user WHY we're saying
@@ -222,7 +225,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
             onClick={handleFreeAction}
             className="w-full px-2 py-2 text-center font-body text-xs text-on-surface-variant/70 active:scale-95 transition-all"
           >
-            {t('vikritiCard.orJust', { action: r.free.label.replace(/^Tonight: |^Try /, '').toLowerCase() })}
+            {t('vikritiCard.orJust', { action: sig('freeLabel').replace(/^Tonight: |^Try /, '').toLowerCase() })}
           </button>
         </>
       ) : (
@@ -234,7 +237,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
             className={`w-full px-4 py-3 rounded-full text-left flex items-center justify-between bg-surface active:scale-[0.98] transition-all mb-3`}
           >
             <span className={`font-body text-sm font-semibold ${r.textColor}`}>
-              {r.free.label}
+              {sig('freeLabel')}
             </span>
             <span
               aria-hidden="true"
@@ -252,10 +255,10 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
           >
             <div className="min-w-0">
               <p className="font-body text-sm text-on-surface leading-tight truncate">
-                {r.plus.label}
+                {sig('plusLabel')}
               </p>
               <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5 truncate">
-                {r.plus.sub}
+                {sig('plusSub')}
               </p>
             </div>
             <div className="flex items-center gap-1 px-2 py-0.5 bg-surface rounded-full ml-3 flex-shrink-0">

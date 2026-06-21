@@ -123,7 +123,7 @@ function PostPracticeProtocolTile({ vikriti, recommendations: r, progress, onTap
   let label, sub
   if (days === 0) {
     label = t('practice.tileStart', { dosha })
-    sub   = r.summary || t('practice.tileStartSub')
+    sub   = t(`vikritiSignal.${vikriti}.summary`, t('practice.tileStartSub'))
   } else if (days >= total) {
     label = t('practice.tilePickup', { dosha })
     sub   = t('practice.tilePickupSub')
