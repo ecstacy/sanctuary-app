@@ -95,6 +95,79 @@
     "noSavedCreds": "No saved credentials found. Please sign in with email and password first.",
     "biometricFailed": "Biometric authentication failed. Please use email and password."
   },
+  "vikritiQuiz": {
+    "goBack": "Go back",
+    "close": "Close",
+    "weeklyCheckin": "Weekly Check-in",
+    "prevQuestion": "Previous question",
+    "introTitle1": "How have you",
+    "introTitleAccent": "been lately?",
+    "introBody": "Vikriti is your current state — how your doshas have shifted this week.",
+    "baselineNote": "Your baseline is {{dosha}}.",
+    "introMeta": "5 questions · 60 seconds.",
+    "begin": "Begin Check-in",
+    "notNow": "Not now",
+    "thisWeek": "This Week",
+    "currentState": "Your current state",
+    "aggravated": "{{dosha}} aggravated",
+    "trending": "Currently trending {{dosha}}",
+    "narrShifted": "Your baseline is {{baseline}}, but this week {{current}} is elevated at {{pct}}%. Favor practices that pacify {{current}}.",
+    "narrSameAggravated": "Your baseline is {{baseline}}, and right now it's running high at {{pct}}%. Same dosha, but aggravated — favor cooling, grounding practices that pacify {{current}}.",
+    "narrInRhythm": "You're in rhythm with your {{baseline}} baseline ({{pct}}%). Keep doing what's working.",
+    "narrAggravatedNoBase": "Your {{current}} is elevated at {{pct}}%. Favor practices that pacify {{current}}.",
+    "narrDominant": "Your {{current}} is currently dominant at {{pct}}%.",
+    "save": "Save Check-in",
+    "saving": "Saving...",
+    "retake": "Retake",
+    "saveFailed": "Failed to save: {{error}}",
+    "questions": [
+      {
+        "question": "Your body has felt...",
+        "subtitle": "Think about the past few days.",
+        "options": [
+          { "label": "Dry, cold, or achy", "desc": "Stiff joints, dry skin, feeling the cold more than usual" },
+          { "label": "Warm or inflamed", "desc": "Running hot, irritation, maybe some skin sensitivity" },
+          { "label": "Heavy, sluggish, congested", "desc": "Slower movement, puffiness, thicker sinuses" }
+        ]
+      },
+      {
+        "question": "Your mind has been...",
+        "subtitle": "How has your head felt in the last few days?",
+        "options": [
+          { "label": "Racing or anxious", "desc": "Many thoughts, hard to settle, overthinking" },
+          { "label": "Sharp but irritable", "desc": "Focused, productive — but short fuse" },
+          { "label": "Dull or foggy", "desc": "Slow-starting, low motivation, a little checked-out" }
+        ]
+      },
+      {
+        "question": "Your sleep this week has been...",
+        "subtitle": "Quality, not quantity.",
+        "options": [
+          { "label": "Restless & broken", "desc": "Trouble falling or staying asleep" },
+          { "label": "Short & intense", "desc": "Falling asleep late, waking early, feeling wired" },
+          { "label": "Heavy & hard to leave", "desc": "Sleeping long and still feeling groggy" }
+        ]
+      },
+      {
+        "question": "Your energy pattern has been...",
+        "subtitle": "How does your day actually feel?",
+        "options": [
+          { "label": "Spiky — peaks and crashes", "desc": "Quick bursts followed by sudden fatigue" },
+          { "label": "Hot-burning", "desc": "Strong drive all day, risking burnout" },
+          { "label": "Low and slow", "desc": "Hard to get going, prefers to stay still" }
+        ]
+      },
+      {
+        "question": "Your appetite lately has been...",
+        "subtitle": "Digestion is the dashboard of dosha balance.",
+        "options": [
+          { "label": "Unpredictable or low", "desc": "Forgetting meals, bloating, gas" },
+          { "label": "Very strong & urgent", "desc": "\"Hangry\" if meals are late, strong cravings" },
+          { "label": "Heavy or dull", "desc": "Rarely hungry, feels weighed down after meals" }
+        ]
+      }
+    ]
+  },
   "onboarding": {
     "skip": "Skip",
     "prevSlide": "Previous slide",

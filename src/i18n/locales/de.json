@@ -95,6 +95,79 @@
     "noSavedCreds": "Keine gespeicherten Anmeldedaten gefunden. Bitte melde dich zuerst mit E-Mail und Passwort an.",
     "biometricFailed": "Biometrische Authentifizierung fehlgeschlagen. Bitte verwende E-Mail und Passwort."
   },
+  "vikritiQuiz": {
+    "goBack": "Zurück",
+    "close": "Schließen",
+    "weeklyCheckin": "Wöchentlicher Check-in",
+    "prevQuestion": "Vorherige Frage",
+    "introTitle1": "Wie ging es dir",
+    "introTitleAccent": "in letzter Zeit?",
+    "introBody": "Vikriti ist dein aktueller Zustand — wie sich deine Doshas diese Woche verschoben haben.",
+    "baselineNote": "Dein Ausgangswert ist {{dosha}}.",
+    "introMeta": "5 Fragen · 60 Sekunden.",
+    "begin": "Check-in beginnen",
+    "notNow": "Nicht jetzt",
+    "thisWeek": "Diese Woche",
+    "currentState": "Dein aktueller Zustand",
+    "aggravated": "{{dosha}} erhöht",
+    "trending": "Tendiert derzeit zu {{dosha}}",
+    "narrShifted": "Dein Ausgangswert ist {{baseline}}, aber diese Woche ist {{current}} mit {{pct}}% erhöht. Bevorzuge Praktiken, die {{current}} beruhigen.",
+    "narrSameAggravated": "Dein Ausgangswert ist {{baseline}}, und gerade läuft es mit {{pct}}% hoch. Gleiches Dosha, aber erhöht — bevorzuge kühlende, erdende Praktiken, die {{current}} beruhigen.",
+    "narrInRhythm": "Du bist im Einklang mit deinem {{baseline}}-Ausgangswert ({{pct}}%). Mach weiter so.",
+    "narrAggravatedNoBase": "Dein {{current}} ist mit {{pct}}% erhöht. Bevorzuge Praktiken, die {{current}} beruhigen.",
+    "narrDominant": "Dein {{current}} ist derzeit mit {{pct}}% dominant.",
+    "save": "Check-in speichern",
+    "saving": "Wird gespeichert...",
+    "retake": "Wiederholen",
+    "saveFailed": "Speichern fehlgeschlagen: {{error}}",
+    "questions": [
+      {
+        "question": "Dein Körper hat sich angefühlt...",
+        "subtitle": "Denk an die letzten Tage.",
+        "options": [
+          { "label": "Trocken, kalt oder schmerzend", "desc": "Steife Gelenke, trockene Haut, mehr Kälteempfinden als sonst" },
+          { "label": "Warm oder entzündet", "desc": "Läuft heiß, Reizungen, vielleicht empfindliche Haut" },
+          { "label": "Schwer, träge, verschleimt", "desc": "Langsamere Bewegung, Schwellungen, dickere Nebenhöhlen" }
+        ]
+      },
+      {
+        "question": "Dein Geist war...",
+        "subtitle": "Wie hat sich dein Kopf in den letzten Tagen angefühlt?",
+        "options": [
+          { "label": "Rasend oder ängstlich", "desc": "Viele Gedanken, schwer zur Ruhe zu kommen, Grübeln" },
+          { "label": "Scharf, aber gereizt", "desc": "Fokussiert, produktiv — aber dünnhäutig" },
+          { "label": "Stumpf oder benebelt", "desc": "Schwerer Start, wenig Motivation, etwas abwesend" }
+        ]
+      },
+      {
+        "question": "Dein Schlaf war diese Woche...",
+        "subtitle": "Qualität, nicht Quantität.",
+        "options": [
+          { "label": "Unruhig & unterbrochen", "desc": "Schwer einzuschlafen oder durchzuschlafen" },
+          { "label": "Kurz & intensiv", "desc": "Spät einschlafen, früh aufwachen, aufgedreht" },
+          { "label": "Schwer & schwer zu verlassen", "desc": "Lange schlafen und trotzdem benommen" }
+        ]
+      },
+      {
+        "question": "Dein Energiemuster war...",
+        "subtitle": "Wie fühlt sich dein Tag tatsächlich an?",
+        "options": [
+          { "label": "Sprunghaft — Höhen und Tiefs", "desc": "Kurze Schübe gefolgt von plötzlicher Müdigkeit" },
+          { "label": "Heiß brennend", "desc": "Starker Antrieb den ganzen Tag, Burnout-Gefahr" },
+          { "label": "Niedrig und langsam", "desc": "Schwer in Gang zu kommen, bleibt lieber ruhig" }
+        ]
+      },
+      {
+        "question": "Dein Appetit war in letzter Zeit...",
+        "subtitle": "Die Verdauung ist das Armaturenbrett der Dosha-Balance.",
+        "options": [
+          { "label": "Unberechenbar oder gering", "desc": "Mahlzeiten vergessen, Blähungen, Gas" },
+          { "label": "Sehr stark & dringend", "desc": "„Hangry“, wenn Mahlzeiten spät kommen, starke Gelüste" },
+          { "label": "Schwer oder stumpf", "desc": "Selten hungrig, fühlt sich nach dem Essen schwer an" }
+        ]
+      }
+    ]
+  },
   "onboarding": {
     "skip": "Überspringen",
     "prevSlide": "Vorherige Folie",
