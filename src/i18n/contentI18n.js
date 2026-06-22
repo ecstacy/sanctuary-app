@@ -28,11 +28,14 @@ import deRecs from './content/de/recommendations.json'
 import hiRecs from './content/hi/recommendations.json'
 import deDina from './content/de/dinacharya.json'
 import hiDina from './content/hi/dinacharya.json'
+import deProtocols from './content/de/protocols.json'
+import hiProtocols from './content/hi/protocols.json'
 
 const ASANA_OVERLAYS = { de: deAsanas, hi: hiAsanas }
 const DIETARY_OVERLAYS = { de: deDietary, hi: hiDietary }
 const REC_OVERLAYS = { de: deRecs, hi: hiRecs }
 const DINA_OVERLAYS = { de: deDina, hi: hiDina }
+const PROTOCOL_OVERLAYS = { de: deProtocols, hi: hiProtocols }
 
 // Shallow-merge the language overlay over a base asana. voiceCues/source are
 // nested so we merge them one level deep — a partial overlay (e.g. only
@@ -130,4 +133,35 @@ export function localizeDinacharyaPractice(p) {
 // Localized dosha-clock note for a time window string (or the base note).
 export function localizeDoshaTimeNote(window, note) {
   return DINA_OVERLAYS[i18n.language]?.doshaTimes?.[window] || note
+}
+
+// ── Protocols ────────────────────────────────────────────────────────────
+// Deep-merge a 3-day protocol's prose (title/subtitle/why + each day's
+// title/lede + each section's title/items/note) over the English base.
+// days and sections are matched by index; section.kind, id, vikriti,
+// source citation, day numbers stay from the base.
+export function localizeProtocol(p) {
+  if (!p) return p
+  const ov = PROTOCOL_OVERLAYS[i18n.language]?.[p.vikriti]
+  if (!ov) return p
+  return {
+    ...p,
+    title:    ov.title    ?? p.title,
+    subtitle: ov.subtitle ?? p.subtitle,
+    why:      ov.why      ?? p.why,
+    days: p.days.map((d, i) => {
+      const od = ov.days?.[i]
+      if (!od) return d
+      return {
+        ...d,
+        title: od.title ?? d.title,
+        lede:  od.lede  ?? d.lede,
+        sections: d.sections.map((s, j) => {
+          const os = od.sections?.[j]
+          if (!os) return s
+          return { ...s, title: os.title ?? s.title, items: os.items ?? s.items, note: os.note ?? s.note }
+        }),
+      }
+    }),
+  }
 }

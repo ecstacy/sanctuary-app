@@ -1233,7 +1233,7 @@ Over 5 seconds, starting from Vajrasana (sitting on the heels), she: reaches bac
 
 ---
 
-### 58. Surya Namaskar B — Sun Salutation B  *(sequence, longer clip)*  ⬜ PENDING
+### 58. Surya Namaskar B — Sun Salutation B  *(sequence, longer clip)*  ✅ DONE
 
 **Pose key:** `suryaNamaskarB` · **Duration:** 12s
 
@@ -1257,16 +1257,16 @@ step-forward lunges all collapse into ambiguous shapes from the front. No
 camera rotation (Kling can't do camera moves on a long clip).
 
 - **Start frame:** `tadasana-profile.png` (a LEFT-side-profile Tadasana — you
-  don't have one yet; generate it once with Nano Banana and reuse it for all
-  profile poses). Prompt: *"Same woman, same studio, same outfit and lighting.
-  Full LEFT-SIDE PROFILE, body facing the left edge of the frame, standing in
-  Mountain Pose: tall spine, weight even on both feet, arms relaxed at the
-  sides. Clean side-on view, full body head-to-toe, plain bright studio."*
+don't have one yet; generate it once with Nano Banana and reuse it for all
+profile poses). Prompt: *"Same woman, same studio, same outfit and lighting.
+Full LEFT-SIDE PROFILE, body facing the left edge of the frame, standing in
+Mountain Pose: tall spine, weight even on both feet, arms relaxed at the
+sides. Clean side-on view, full body head-to-toe, plain bright studio."*
 - **End frame:** `tadasana-profile.png` again (closes the loop, start = end).
 - **Optional mid-anchor** (only if your tier has a mid-keyframe slot):
-  `downwardDog.png` — the pose the flow passes through most.
+`downwardDog.png` — the pose the flow passes through most.
 - The other constituent stills (Chair, Chaturanga, Warrior I) are **QA
-  references only**, not Kling inputs — Kling can't sequence keyframes.
+references only**, not Kling inputs — Kling can't sequence keyframes.
 
 > Reality check: 12s / ~16 transitions is the hardest clip in the set. If the
 > first take rushes or drops a step, split it (Chair→Down Dog as clip A; the
@@ -1350,7 +1350,7 @@ is what users will see day-to-day in the catalog.
 
 ---
 
-### 61. Swastikasana — Auspicious Seat  *(hold-only, no entry)*  ⬜ PENDING
+### 61. Swastikasana — Auspicious Seat  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `swastikasana` · **Duration:** 5s · **Source:** HYP 1.19
 
@@ -1368,7 +1368,7 @@ The subject holds this exact Swastikasana seat for the full 5 seconds. The only 
 
 ---
 
-### 62. Kurmasana — Tortoise Pose  ⬜ PENDING
+### 62. Kurmasana — Tortoise Pose  ✅ DONE
 
 **Pose key:** `kurmasana` · **Duration:** 5s · **Source:** HYP 1.22 · **Level:** Advanced
 
@@ -1386,7 +1386,7 @@ Over 5 seconds, starting from Dandasana (seated with legs forward, hands by hips
 
 ---
 
-### 63. Kukkutasana — Cock Pose  ⬜ PENDING
+### 63. Kukkutasana — Cock Pose  ✅ DONE
 
 **Pose key:** `kukkutasana` · **Duration:** 5s · **Source:** HYP 1.23 · **Level:** Advanced
 
