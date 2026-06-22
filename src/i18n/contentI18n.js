@@ -24,9 +24,12 @@ import deAsanas from './content/de/asanas.json'
 import hiAsanas from './content/hi/asanas.json'
 import deDietary from './content/de/dietary.json'
 import hiDietary from './content/hi/dietary.json'
+import deRecs from './content/de/recommendations.json'
+import hiRecs from './content/hi/recommendations.json'
 
 const ASANA_OVERLAYS = { de: deAsanas, hi: hiAsanas }
 const DIETARY_OVERLAYS = { de: deDietary, hi: hiDietary }
+const REC_OVERLAYS = { de: deRecs, hi: hiRecs }
 
 // Shallow-merge the language overlay over a base asana. voiceCues/source are
 // nested so we merge them one level deep — a partial overlay (e.g. only
@@ -85,4 +88,23 @@ export function localizeRasa(taste, rasa) {
 // to the raw key (matches the English display).
 export function localizeDietCategory(key) {
   return DIETARY_OVERLAYS[i18n.language]?.categories?.[key] || key
+}
+
+// ── Recommendations ──────────────────────────────────────────────────────
+// Overlay a recommendation's display prose (label, description, ayurvedicTip,
+// breathwork sub/description, per-practice title/description) over the base.
+// Sanskrit practice subtitles, breathwork titles, durations, levels, icons,
+// keywords/synonyms (search engine) all stay from the base.
+export function localizeRecommendation(rec) {
+  if (!rec) return rec
+  const ov = REC_OVERLAYS[i18n.language]?.[rec.id]
+  if (!ov) return rec
+  return {
+    ...rec,
+    ...ov,
+    breathwork: ov.breathwork ? { ...rec.breathwork, ...ov.breathwork } : rec.breathwork,
+    practices: Array.isArray(ov.practices)
+      ? rec.practices.map((p, i) => ov.practices[i] ? { ...p, ...ov.practices[i] } : p)
+      : rec.practices,
+  }
 }

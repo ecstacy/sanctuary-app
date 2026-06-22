@@ -1,0 +1,148 @@
+{
+  "lower-back": {
+    "label": "Linderung im unteren Rücken",
+    "description": "Sanfte Haltungen, die die Wirbelsäule entlasten, Spannungen im Lendenbereich lösen und die Körpermitte stärken, um künftigen Beschwerden vorzubeugen.",
+    "ayurvedicTip": "Eine Selbstmassage mit warmem Sesamöl (Abhyanga) auf dem unteren Rücken vor der Praxis beruhigt Vata und lindert Steifheit.",
+    "breathwork": { "subtitle": "Drei-Phasen-Atem · 3 Min.", "description": "Tiefe Bauchatmung, die den Psoas und die Muskeln des unteren Rückens entspannt." },
+    "practices": [
+      { "title": "Katze-Kuh-Dehnung", "description": "Sanfte Beugung und Streckung der Wirbelsäule, um den unteren Rücken aufzuwärmen und Steifheit zu lösen." },
+      { "title": "Liegende Drehung", "description": "Eine liegende Drehung, die den unteren Rücken löst und die Wirbelsäule mithilfe der Schwerkraft entlastet." },
+      { "title": "Haltung des Kindes", "description": "Eine Ruhehaltung, die den unteren Rücken und die Hüften sanft dehnt und das Nervensystem beruhigt." },
+      { "title": "Brückenhaltung", "description": "Stärkt Gesäß und Körpermitte zur Stützung des unteren Rückens und öffnet sanft die Brust." },
+      { "title": "Taubenhaltung", "description": "Ein tiefer Hüftöffner, der Spannungen löst, die oft Schmerzen in den unteren Rücken ausstrahlen." }
+    ]
+  },
+  "headache": {
+    "label": "Linderung bei Kopfschmerzen",
+    "description": "Beruhigende Praktiken, die Spannung aus Nacken, Schultern und Schädel lösen — der Hauptursache der meisten Kopfschmerzen.",
+    "ayurvedicTip": "Gib einen Tropfen Pfefferminz- oder Eukalyptusöl auf die Schläfen. Pitta-Kopfschmerzen profitieren von kühlenden Gurkenscheiben auf den geschlossenen Augen.",
+    "breathwork": { "subtitle": "Kühlender Atem · 3 Min.", "description": "Eine kühlende Atemtechnik, die Hitze im Kopf reduziert und Pitta-Aggravation besänftigt." },
+    "practices": [
+      { "title": "Nackenrollen", "description": "Sanfte kreisende Nackenbewegungen, um Spannung in der Halswirbelsäule und im Kiefer zu lösen." },
+      { "title": "Vorwärtsbeuge", "description": "Der umgekehrte Blutfluss zum Kopf lindert Druck und beruhigt das Nervensystem." },
+      { "title": "Beine an der Wand", "description": "Eine regenerative Umkehrhaltung, die den Blutdruck senkt und den Geist beruhigt." },
+      { "title": "Sitzende Adlerarme", "description": "Tiefe Dehnung zwischen den Schulterblättern, die Spannung im oberen Rücken und Nacken löst." }
+    ]
+  },
+  "anxiety": {
+    "label": "Angst beruhigen",
+    "description": "Erdende Praktiken, die dich im gegenwärtigen Moment verankern und den Vata-getriebenen Wirbelsturm des ängstlichen Geistes beruhigen.",
+    "ayurvedicTip": "Ashwagandha in warmer Milch mit einer Prise Muskat beruhigt Vata. Vermeide Koffein und kalte Speisen, die Angst verstärken.",
+    "breathwork": { "subtitle": "Wechselatmung · 5 Min.", "description": "Gleicht die linke und rechte Gehirnhälfte aus und beruhigt das Nervensystem augenblicklich." },
+    "practices": [
+      { "title": "Erdende Berghaltung", "description": "Steh verwurzelt und spüre die Schwerkraft. Eine einfache, aber kraftvolle Praxis der Gegenwärtigkeit." },
+      { "title": "Haltung des Kindes", "description": "Das Einwärtsfalten aktiviert das parasympathische Nervensystem und signalisiert Sicherheit." },
+      { "title": "Krieger II", "description": "Eine starke, geerdete Haltung, die Selbstvertrauen aufbaut und ängstliche Energie kanalisiert." },
+      { "title": "Yoga Nidra", "description": "Geführte Tiefenentspannung, die die natürliche Ruhereaktion des Körpers aktiviert. Tiefgreifend wirksam." }
+    ]
+  },
+  "neck-shoulder": {
+    "label": "Nacken- & Schulterlösung",
+    "description": "Gezielte Dehnungen für Nacken, Schultern und oberen Rücken — wo die meisten von uns das Gewicht ihres digitalen Lebens tragen.",
+    "ayurvedicTip": "Trage vor dem Schlafen warmes Rizinusöl auf Nacken und Schultern auf. Eine warme Kompresse für 5 Minuten wirkt Wunder.",
+    "breathwork": { "subtitle": "Ozean-Atem · 3 Min.", "description": "Die sanfte Verengung der Kehle löst Kiefer- und Nackenspannung und beruhigt den Geist." },
+    "practices": [
+      { "title": "Nackendehnungen", "description": "Einfache seitliche Nackendehnungen, die den SCM und den oberen Trapezmuskel lösen." },
+      { "title": "Nadel einfädeln", "description": "Eine sanfte Drehung, die die Schultern öffnet und tiefe Spannung zwischen den Schulterblättern löst." },
+      { "title": "Adlerarme", "description": "Das Umwickeln der Arme erzeugt eine tiefe Dehnung über den gesamten oberen Rücken und die Schultern." },
+      { "title": "Gestützte Fischhaltung", "description": "Ein regenerativer Herzöffner, der den nach vorne gebeugten Rücken des Schreibtischlebens umkehrt." }
+    ]
+  },
+  "insomnia": {
+    "label": "Vorbereitung auf tiefen Schlaf",
+    "description": "Eine Abfolge zum Herunterfahren, die deinem Nervensystem sagt, dass es Zeit ist loszulassen. Am besten 30 Minuten vor dem Schlafen geübt.",
+    "ayurvedicTip": "Goldene Milch (Kurkuma + warme Milch + Kardamom) 30 Minuten vor dem Schlafen. Massiere die Fußsohlen mit warmem Ghee.",
+    "breathwork": { "subtitle": "Summender-Bienen-Atem · 5 Min.", "description": "Die Vibration des Summens aktiviert das parasympathische Nervensystem und macht schläfrig." },
+    "practices": [
+      { "title": "Beine an der Wand", "description": "Entwässert die Lymphe, beruhigt die Herzfrequenz und signalisiert dem Körper, dass Ruhe sicher ist." },
+      { "title": "Liegender Schmetterling", "description": "Öffnet Hüften und Brust und löst die angesammelte Spannung des Tages." },
+      { "title": "Vorwärtsbeuge", "description": "Eine beruhigende sitzende Beuge, die den Bauch komprimiert und den Vagusnerv aktiviert." },
+      { "title": "Yoga Nidra", "description": "Geführte Körperscan-Meditation, die dich an den Rand des Schlafs führt. Viele schlafen während der Praxis ein." }
+    ]
+  },
+  "digestion": {
+    "label": "Verdauungswohl",
+    "description": "Drehungen, Kompressionen und Atemtechniken, die Agni (das Verdauungsfeuer) anregen und die Dinge auf natürliche Weise in Bewegung bringen.",
+    "ayurvedicTip": "Trinke 20 Minuten vor den Mahlzeiten warmes Wasser mit frischem Ingwer und Zitrone. Vermeide kalte Getränke während und nach dem Essen.",
+    "breathwork": { "subtitle": "Schädelleuchtender Atem · 3 Min.", "description": "Schnelle Bauchkontraktionen, die das Verdauungsfeuer schüren und Stagnation auflösen." },
+    "practices": [
+      { "title": "Sitzende Drehung", "description": "Das Auswringen der Bauchorgane regt die Verdauung an und löst eingeschlossene Gase." },
+      { "title": "Windbefreiende Haltung", "description": "Genau das, wonach es klingt. Komprimiert den auf- und absteigenden Dickdarm." },
+      { "title": "Katze-Kuh", "description": "Rhythmische Bauchbewegung, die die inneren Organe massiert und die Motilität verbessert." },
+      { "title": "Liegende Drehung", "description": "Eine sanfte liegende Drehung, die Leber, Milz und Darm anregt." }
+    ]
+  },
+  "hip-pain": {
+    "label": "Hüftöffnung",
+    "description": "Tiefe Hüftöffner, die gespeicherte Spannung und Emotionen lösen. Die Hüften sind die emotionale Kramschublade des Körpers — räumen wir sie aus.",
+    "ayurvedicTip": "Eine Massage mit warmem Sesamöl auf Hüften und unterem Rücken vor der Praxis fördert die Durchblutung und lindert Steifheit.",
+    "breathwork": { "subtitle": "Drei-Phasen-Atem · 3 Min.", "description": "Tiefe Bauchatmung, die den Psoas entspannt und Raum im Becken schafft." },
+    "practices": [
+      { "title": "Taubenhaltung", "description": "Der König der Hüftöffner. Löst den Piriformis und die tiefen Außenrotatoren." },
+      { "title": "Echsenhaltung", "description": "Ein tiefer Ausfallschritt, der die Hüftbeuger und die innere Leiste anspricht." },
+      { "title": "Liegender Schmetterling", "description": "Ein sanfter, schwerkraftunterstützter innerer Hüftöffner. Lass die Knie offen fallen und atme." },
+      { "title": "Glückliches Baby", "description": "Öffnet die Hüften und die innere Leiste und entlastet sanft den unteren Rücken." },
+      { "title": "Tiefer Ausfallschritt", "description": "Dehnt die Hüftbeuger und den Psoas — den Muskel, der am meisten unter dem Sitzen leidet." }
+    ]
+  },
+  "focus": {
+    "label": "Geistige Klarheit",
+    "description": "Praktiken, die den Geist schärfen, geistigen Nebel auflösen und Laserfokus schaffen. Dein Pitta-betriebenes Konzentrations-Toolkit.",
+    "ayurvedicTip": "Brahmi-Tee oder in Ghee geröstete Mandeln stärken Medhya (den Intellekt). Vermeide schwere Mahlzeiten vor konzentrationsfordernder Arbeit.",
+    "breathwork": { "subtitle": "Schädelleuchtender Atem · 3 Min.", "description": "Schnelle Ausatmungen, die das Gehirn mit Sauerstoff versorgen und geistigen Nebel durchbrennen." },
+    "practices": [
+      { "title": "Sonnengruß", "description": "Ein rhythmischer Flow, der den ganzen Körper weckt und das Gehirn mit Sauerstoff flutet." },
+      { "title": "Adlerhaltung", "description": "Erfordert intensive Konzentration zum Balancieren — trainiert den einpunktigen Fokus." },
+      { "title": "Baumhaltung", "description": "Eine Gleichgewichtshaltung, die den Geist zwingt, still und gegenwärtig zu werden." },
+      { "title": "Trataka", "description": "Meditation mit fixiertem Blick auf eine Kerzenflamme. Die klassische yogische Konzentrationstechnik." }
+    ]
+  },
+  "knee-pain": {
+    "label": "Knie- & Gelenkpflege",
+    "description": "Sanfte Bewegungen, die die Muskeln um das Knie stärken und die Zirkulation der Gelenkflüssigkeit verbessern — ohne Belastung.",
+    "ayurvedicTip": "Eine warme Rizinusöl-Packung auf dem Knie für 20 Minuten reduziert Vata-Gelenkschmerzen. Kurkuma-Milch (Golden Latte) reduziert Entzündungen.",
+    "breathwork": { "subtitle": "Drei-Phasen-Atem · 3 Min.", "description": "Tiefe Entspannungsatmung, die die Schmerzwahrnehmung reduziert und die Heilung fördert." },
+    "practices": [
+      { "title": "Stuhlhaltung", "description": "Eine sanfte Kniebeuge an der Wand, die den Quadrizeps zur Stützung des Knies stärkt." },
+      { "title": "Krieger I", "description": "Stärkt die Muskeln um das Kniegelenk mit kontrollierter Ausrichtung." },
+      { "title": "Liegende Beindehnung", "description": "Dehnt die Kniesehnen ohne jede Belastung des Kniegelenks." },
+      { "title": "Sitzende Beinstreckungen", "description": "Isometrische Quadrizepsstärkung, die den VMO-Muskel für Kniestabilität aufbaut." }
+    ]
+  },
+  "energy-boost": {
+    "label": "Energie-Aktivierung",
+    "description": "Entfache dein Prana (deine Lebenskraft) mit belebenden Praktiken, die Trägheit in lebendige Energie verwandeln.",
+    "ayurvedicTip": "Ingwer-Honig-Zitronen-Wasser als Erstes am Morgen entfacht Agni. Vermeide Nickerchen tagsüber — sie erhöhen Kapha.",
+    "breathwork": { "subtitle": "Blasebalg-Atem · 3 Min.", "description": "Schnelle, kräftige Atmung, die das System mit Sauerstoff und Prana flutet. Sofortige Energie." },
+    "practices": [
+      { "title": "Sonnengruß", "description": "5 Runden des klassischen energetisierenden Flows. Jede Runde baut Hitze und Vitalität auf." },
+      { "title": "Krieger III", "description": "Eine kraftvolle Gleichgewichtshaltung, die vollen Körpereinsatz und Präsenz verlangt." },
+      { "title": "Kamelhaltung", "description": "Eine tiefe Rückbeuge, die die Brust öffnet und die Nebennieren stimuliert." },
+      { "title": "Stuhlhaltung", "description": "Brennt durch Kapha-Trägheit und aktiviert Beine, Körpermitte und Willenskraft." }
+    ]
+  },
+  "posture": {
+    "label": "Haltungskorrektur",
+    "description": "Stärke die Muskeln der guten Haltung und löse jene, die dich nach vorne ziehen. Mach Jahre der Bildschirmzeit rückgängig.",
+    "ayurvedicTip": "Verbringe nach jeder Stunde Sitzen 2 Minuten in Tadasana (Berghaltung). Bewusstheit ist die erste Medizin.",
+    "breathwork": { "subtitle": "Ozean-Atem · 3 Min.", "description": "Fördert eine aufrechte, stolze Haltung durch das natürliche Anheben der tiefen Brustatmung." },
+    "practices": [
+      { "title": "Kobrahaltung", "description": "Stärkt die Rückenstrecker und öffnet die Brust, um dem Vorwärtsrunden entgegenzuwirken." },
+      { "title": "Heuschreckenhaltung", "description": "Stärkt die gesamte hintere Kette — die Muskeln, die dich aufrecht halten." },
+      { "title": "Gestützte Fischhaltung", "description": "Ein passiver Brustöffner mit einem gerollten Handtuch. Kehrt die Schreibtischhaltung mühelos um." },
+      { "title": "Wand-Engel", "description": "Trainiert die Schulterblätter, flach am Brustkorb zu sitzen. Einfach, aber transformativ." }
+    ]
+  },
+  "period-pain": {
+    "label": "Menstruationskomfort",
+    "description": "Sanfte, regenerative Praktiken, die deinen Zyklus ehren und Krämpfe, Blähungen und Stimmungsschwankungen auf natürliche Weise lindern.",
+    "ayurvedicTip": "Warmer Kreuzkümmel-Koriander-Fenchel-Tee reduziert Vata und lindert Krämpfe. Eine Wärmflasche auf dem Unterbauch ist Ayurvedas ältester Freund.",
+    "breathwork": { "subtitle": "Wechselatmung · 5 Min.", "description": "Gleicht hormonelle Schwankungen aus und bringt während deines Zyklus ein Gefühl des Gleichgewichts." },
+    "practices": [
+      { "title": "Liegender Schmetterling", "description": "Öffnet das Becken und fördert die Durchblutung. Nutze ein Bolster unter dem Rücken für extra Komfort." },
+      { "title": "Haltung des Kindes", "description": "Eine Weitknie-Variante, die Raum für den Bauch schafft und den unteren Rücken sanft dehnt." },
+      { "title": "Liegende Drehung", "description": "Eine sanfte Drehung, die Schmerzen im unteren Rücken lindert und Blähungen reduziert." },
+      { "title": "Beine an der Wand", "description": "Reduziert die Beckenkongestion und beruhigt das Nervensystem. Zutiefst regenerativ." }
+    ]
+  }
+}

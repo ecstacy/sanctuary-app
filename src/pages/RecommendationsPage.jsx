@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { searchRecommendations, POPULAR_SEARCHES } from '../data/recommendations'
+import { localizeRecommendation } from '../i18n/contentI18n'
 import * as analytics from '../lib/analytics'
 import useScrollDepth from '../hooks/useScrollDepth'
 
@@ -131,7 +132,7 @@ export default function RecommendationsPage() {
     }
   }
 
-  const topResult = results[0]
+  const topResult = localizeRecommendation(results[0])
   const otherResults = results.slice(1)
 
   return (
@@ -352,7 +353,7 @@ export default function RecommendationsPage() {
                         <span className="material-symbols-outlined text-white text-lg">{rec.icon}</span>
                       </div>
                       <div className="flex-1">
-                        <p className="font-body font-semibold text-sm text-on-surface">{rec.label}</p>
+                        <p className="font-body font-semibold text-sm text-on-surface">{localizeRecommendation(rec).label}</p>
                         <p className="font-label text-[10px] text-on-surface-variant mt-0.5">
                           {t('recommendations.practicesBreathwork', { count: rec.practices.length })}
                         </p>
