@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
-import { PRANAYAMAS } from '../data/pranayamas'
+import { PRANAYAMAS, getPranayama } from '../data/pranayamas'
 import { ASANAS } from '../data/asanas'
 import { localizeAsana } from '../i18n/contentI18n'
 import useScrollDepth from '../hooks/useScrollDepth'
@@ -181,7 +181,7 @@ export default function PranayamaDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const pranayama = PRANAYAMAS[id]
+  const pranayama = getPranayama(id)
   useScrollDepth('pranayama_detail')
 
   // Localize the step phase label; empty phase stays empty.

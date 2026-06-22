@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { POPULAR_SEARCHES } from '../data/recommendations'
 import { ASANAS } from '../data/asanas'
-import { localizeAsana } from '../i18n/contentI18n'
+import { localizeAsana, localizePranayama } from '../i18n/contentI18n'
 import { PRANAYAMAS } from '../data/pranayamas'
 import PoseFigure, { hasPoseImage } from '../components/PoseFigure'
 import { track, EVENTS } from '../lib/track'
@@ -88,6 +88,7 @@ function ExploreAsanaCard({ asana, position, locked, onTap }) {
 // impression-tracking pattern as ExploreAsanaCard.
 function PranayamaCard({ pranayama, position, locked, onTap }) {
   const { t } = useTranslation()
+  const lp = localizePranayama(pranayama)
   const ref = useImpression({
     surface:     'discover_breathwork',
     contentType: 'pranayama',
@@ -100,8 +101,8 @@ function PranayamaCard({ pranayama, position, locked, onTap }) {
       ref={ref}
       onClick={onTap}
       aria-label={locked
-        ? t('discover.plusAria', { name: pranayama.english })
-        : t('discover.itemAria', { english: pranayama.english, sanskrit: pranayama.sanskrit })}
+        ? t('discover.plusAria', { name: lp.english })
+        : t('discover.itemAria', { english: lp.english, sanskrit: lp.sanskrit })}
       className="flex-shrink-0 w-44 snap-start active:scale-[0.97] transition-all text-left"
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/40 to-primary/10 flex items-center justify-center">
@@ -154,8 +155,8 @@ function PranayamaCard({ pranayama, position, locked, onTap }) {
           </>
         )}
       </div>
-      <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{pranayama.english}</p>
-      <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{pranayama.sanskrit}</p>
+      <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{lp.english}</p>
+      <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{lp.sanskrit}</p>
     </button>
   )
 }

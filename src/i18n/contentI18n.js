@@ -30,12 +30,15 @@ import deDina from './content/de/dinacharya.json'
 import hiDina from './content/hi/dinacharya.json'
 import deProtocols from './content/de/protocols.json'
 import hiProtocols from './content/hi/protocols.json'
+import dePranayamas from './content/de/pranayamas.json'
+import hiPranayamas from './content/hi/pranayamas.json'
 
 const ASANA_OVERLAYS = { de: deAsanas, hi: hiAsanas }
 const DIETARY_OVERLAYS = { de: deDietary, hi: hiDietary }
 const REC_OVERLAYS = { de: deRecs, hi: hiRecs }
 const DINA_OVERLAYS = { de: deDina, hi: hiDina }
 const PROTOCOL_OVERLAYS = { de: deProtocols, hi: hiProtocols }
+const PRANAYAMA_OVERLAYS = { de: dePranayamas, hi: hiPranayamas }
 
 // Shallow-merge the language overlay over a base asana. voiceCues/source are
 // nested so we merge them one level deep — a partial overlay (e.g. only
@@ -133,6 +136,25 @@ export function localizeDinacharyaPractice(p) {
 // Localized dosha-clock note for a time window string (or the base note).
 export function localizeDoshaTimeNote(window, note) {
   return DINA_OVERLAYS[i18n.language]?.doshaTimes?.[window] || note
+}
+
+// ── Pranayamas ───────────────────────────────────────────────────────────
+// Overlay a breath technique's prose. Sanskrit/devanagari/iast, numeric
+// pattern fields (inhale/exhale/rate/rounds/ratio), doshaAffinity, tags,
+// icon, poseKey, practiceSeat, durationSeconds stay from the base. Only
+// pattern.notes / breathCues.notes / source.note text is overlaid.
+export function localizePranayama(p) {
+  if (!p) return p
+  const ov = PRANAYAMA_OVERLAYS[i18n.language]?.[p.id]
+  if (!ov) return p
+  return {
+    ...p,
+    ...ov,
+    pattern:    ov.pattern    ? { ...p.pattern,    ...ov.pattern }    : p.pattern,
+    breathCues: ov.breathCues ? { ...p.breathCues, ...ov.breathCues } : p.breathCues,
+    voiceCues:  ov.voiceCues  ? { ...p.voiceCues,  ...ov.voiceCues }  : p.voiceCues,
+    source:     ov.source     ? { ...p.source,     ...ov.source }     : p.source,
+  }
 }
 
 // ── Protocols ────────────────────────────────────────────────────────────

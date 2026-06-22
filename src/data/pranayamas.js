@@ -22,6 +22,8 @@
 // (kriya) but modern usage treats it as pranayama. Nadi Shodhana is
 // modern but consistent with HYP 2.7-10 preparatory description.
 
+import { localizePranayama } from '../i18n/contentI18n'
+
 export const PRANAYAMAS = {
 
   // ── Nadi Shodhana — Alternate Nostril Breathing ────────────────────────
@@ -481,7 +483,7 @@ export const PRANAYAMAS = {
 // ─── Pranayama lookup helpers ────────────────────────────────────────────
 
 export function getPranayama(id) {
-  return PRANAYAMAS[id]
+  return localizePranayama(PRANAYAMAS[id])
 }
 
 export function getAllPranayamaIds() {
