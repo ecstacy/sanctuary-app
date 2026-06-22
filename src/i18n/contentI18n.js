@@ -26,10 +26,13 @@ import deDietary from './content/de/dietary.json'
 import hiDietary from './content/hi/dietary.json'
 import deRecs from './content/de/recommendations.json'
 import hiRecs from './content/hi/recommendations.json'
+import deDina from './content/de/dinacharya.json'
+import hiDina from './content/hi/dinacharya.json'
 
 const ASANA_OVERLAYS = { de: deAsanas, hi: hiAsanas }
 const DIETARY_OVERLAYS = { de: deDietary, hi: hiDietary }
 const REC_OVERLAYS = { de: deRecs, hi: hiRecs }
+const DINA_OVERLAYS = { de: deDina, hi: hiDina }
 
 // Shallow-merge the language overlay over a base asana. voiceCues/source are
 // nested so we merge them one level deep — a partial overlay (e.g. only
@@ -107,4 +110,24 @@ export function localizeRecommendation(rec) {
       ? rec.practices.map((p, i) => ov.practices[i] ? { ...p, ...ov.practices[i] } : p)
       : rec.practices,
   }
+}
+
+// ── Dinacharya ───────────────────────────────────────────────────────────
+// Overlay a daily-routine practice's prose (name, timeWindow, duration,
+// benefits, howTo, tools, contraindications, source.note). Sanskrit/
+// devanagari/iast, doshaTime, source.verse, icons stay from the base.
+export function localizeDinacharyaPractice(p) {
+  if (!p) return p
+  const ov = DINA_OVERLAYS[i18n.language]?.practices?.[p.id]
+  if (!ov) return p
+  return {
+    ...p,
+    ...ov,
+    source: ov.source ? { ...p.source, ...ov.source } : p.source,
+  }
+}
+
+// Localized dosha-clock note for a time window string (or the base note).
+export function localizeDoshaTimeNote(window, note) {
+  return DINA_OVERLAYS[i18n.language]?.doshaTimes?.[window] || note
 }

@@ -1,0 +1,333 @@
+{
+  "doshaTimes": {
+    "6:00–10:00 AM": "Schwere, langsame Zeit. Am besten für erdende Routinen und Bewegung. Liegenbleiben nach 7 Uhr vertieft die Trägheit.",
+    "10:00 AM–2:00 PM": "Scharfe, feurige, produktive Zeit. Höchste Verdauung am Mittag — iss hier die größte Mahlzeit des Tages.",
+    "2:00–6:00 PM": "Leichte, bewegliche, kreative Zeit. Gut für Kunst, Gespräche, Problemlösung.",
+    "6:00–10:00 PM": "Wieder schwer und langsam. Komm zur Ruhe. Leichte Mahlzeit früh in diesem Fenster.",
+    "10:00 PM–2:00 AM": "Pitta-Zeit — wer hier wach bleibt, treibt den Stoffwechsel in Hochtouren. Idealerweise bis 22 Uhr schlafen.",
+    "2:00–6:00 AM": "Vata-Zeit — leichter Schlaf, Träume, natürlich zur Bewusstheit geneigt. Brahma Muhurta, 1,5 Stunden vor Sonnenaufgang (~4:30), ist der spirituell empfänglichste Moment des Tages."
+  },
+  "practices": {
+    "wakeUp": {
+      "name": "Aufwachen zur Brahma Muhurta",
+      "timeWindow": "~4:30–5:30 Uhr (90 Minuten vor Sonnenaufgang)",
+      "duration": "einmalig",
+      "source": { "note": "Brahma Muhurta ist das 48-minütige Fenster, das ~96 Minuten vor Sonnenaufgang beginnt. Die alten Texte (Charaka, Sushruta, Yoga-Sutra-Kommentare) empfehlen es alle." },
+      "benefits": [
+        "Vata überwiegt — natürlich zu subtiler Bewusstheit und Meditation geneigt",
+        "Der Geist ist vor Sonnenaufgang ruhiger als zu jeder anderen Zeit",
+        "Bringt das Aufwachen in Einklang mit dem Rhythmus der Natur",
+        "Lässt Zeit für die übrige Morgenpraxis ohne Hast"
+      ],
+      "howTo": [
+        "Stelle einen Wecker 90 Minuten vor den lokalen Sonnenaufgang — für die meisten 4:30–5:30 Uhr.",
+        "Drücke nicht die Schlummertaste. Sobald du wach bist, setz dich sofort auf.",
+        "Trinke innerhalb von 5 Minuten nach dem Aufwachen ein Glas warmes Wasser.",
+        "Beginne die übrige Morgenpraxis der Reihe nach."
+      ],
+      "tools": ["Wecker (außer Reichweite aufgestellt hilft)", "warmes Wasser"],
+      "contraindications": [
+        "Wenn du unter Schlafmangel leidest, priorisiere 7+ Stunden Schlaf über das frühe Aufstehen. Nähere dich der Brahma Muhurta allmählich.",
+        "Schwangere im dritten Trimester brauchen evtl. mehr Ruhe; folge dem Körper.",
+        "Schichtarbeiter können dies nicht wörtlich umsetzen — das Prinzip (konstante Aufwachzeit, vor dem Kapha-Höhepunkt) gilt dennoch."
+      ]
+    },
+    "eliminate": {
+      "name": "Morgendliche Ausscheidung",
+      "timeWindow": "innerhalb von 30 Min. nach dem Aufwachen",
+      "duration": "5-10 Min.",
+      "source": { "note": "Charaka Sutrasthana 7 (Naveganadharaniya) listet die natürlichen Bedürfnisse auf, die nie unterdrückt werden sollten; die Darmentleerung am Morgen ist das wichtigste." },
+      "benefits": [
+        "Klärt Apana Vata — die abwärts gerichtete Energie, die für die Ausscheidung zuständig ist",
+        "Gibt den Verdauungston für den Tag vor",
+        "Indikator der Verdauungsgesundheit — ein täglicher geformter Stuhlgang ist im Ayurveda ein Gesundheitsmarker"
+      ],
+      "howTo": [
+        "Trinke beim Aufstehen ein Glas warmes Wasser (oder warmes Wasser mit Zitrone).",
+        "Warte 5-15 Minuten, bis der gastrokolische Reflex einsetzt.",
+        "Setz dich ohne Hast auf die Toilette. Ein kleiner Hocker, der die Knie anhebt, kann helfen.",
+        "Presse nicht. Wenn nach 5 Minuten nichts kommt, steh auf und versuch es später."
+      ],
+      "tools": ["warmes Wasser", "optional: kleiner Fußhocker"],
+      "contraindications": [
+        "Chronische Verstopfung braucht ärztliche Abklärung, nicht nur Lebensstiländerungen.",
+        "Schwangerschaft — sanft, nie pressen."
+      ]
+    },
+    "tongueScraping": {
+      "name": "Zungenreinigung",
+      "timeWindow": "morgens, vor dem Zähneputzen",
+      "duration": "30 Sek.",
+      "source": { "note": "Charaka verordnet tägliche Zungenreinigung mit einem Metallschaber. Die nächtliche Ablagerung auf der Zunge ist „Ama“ (Verdauungsrückstand) — sie zu entfernen ist eine grundlegende ayurvedische Praxis." },
+      "benefits": [
+        "Entfernt nächtliches Ama (giftigen Rückstand) von der Zunge",
+        "Verbessert die Geschmackswahrnehmung — Essen schmeckt den Tag über lebendiger",
+        "Stimuliert über Reflexpunkte auf der Zunge die Verdauungsorgane",
+        "Reduziert Mundbakterien; unterstützt frischen Atem"
+      ],
+      "howTo": [
+        "Stell dich vor den Badezimmerspiegel. Strecke die Zunge heraus.",
+        "Setze den U-förmigen Schaber am hinteren Teil der Zunge an.",
+        "Zieh den Schaber sanft nach vorne, mit leichtem Druck.",
+        "Spüle den Schaber zwischen den Zügen ab. Wiederhole 5-7 Mal.",
+        "Spüle den Mund mit warmem Wasser.",
+        "Putze nun die Zähne."
+      ],
+      "tools": [
+        "Kupfer-Zungenschaber (traditionell, antibakteriell). Edelstahl ist akzeptabel.",
+        "Plastikschaber und der Rücken eines Löffels sind minderwertig — lass sie weg, wenn nur diese verfügbar sind."
+      ],
+      "contraindications": [
+        "Vermeide es bei schwerer Mundverletzung, Mundgeschwüren oder kürzlicher Zungenoperation.",
+        "Nur leichter Druck — aggressives Schaben kann die Geschmacksknospen schädigen."
+      ]
+    },
+    "oilPulling": {
+      "name": "Ölziehen",
+      "timeWindow": "morgens, nach der Zungenreinigung",
+      "duration": "5-15 Min.",
+      "source": { "note": "Charaka unterscheidet Gandusha (den Mund vollständig füllen) von Kavala (ein kleinerer Mundvoll). Sesamöl ist das traditionelle Medium; moderne Anwender ersetzen es oft durch Kokos wegen des Geschmacks." },
+      "benefits": [
+        "Zieht fettlösliche Bakterien und Ama aus Zahnfleisch und Zähnen",
+        "Stärkt Kiefer, Zahnfleisch und Zähne",
+        "Verbessert die Stimmklarheit und frischen Atem",
+        "Gilt als reinigend für Kopf und Nebenhöhlen"
+      ],
+      "howTo": [
+        "Nimm 1 Esslöffel warmes Sesamöl (oder Kokosöl) in den Mund.",
+        "Spüle sanft und kontinuierlich 5-15 Minuten. Bewege das Öl durch alle Bereiche des Mundes.",
+        "NICHT schlucken. Das Öl sammelt Bakterien und Giftstoffe.",
+        "Spucke das Öl in den Mülleimer (NICHT ins Waschbecken — es kann Abflüsse verstopfen).",
+        "Spüle den Mund mit warmem Wasser. Putze die Zähne wie gewohnt."
+      ],
+      "tools": [
+        "Kaltgepresstes Sesamöl (traditionell) oder natives Kokosöl",
+        "Mülleimer (NICHT das Waschbecken)"
+      ],
+      "contraindications": [
+        "Lass es bei schweren Mundgeschwüren, kürzlicher Zahnoperation oder aktiver Mundinfektion weg.",
+        "Nicht schlucken — das Öl enthält herausgezogene Bakterien.",
+        "Kokosöl: es wird unter 24 °C fest. Vor Gebrauch leicht erwärmen.",
+        "Schwangerschaft: sicher."
+      ]
+    },
+    "warmWater": {
+      "name": "Warmes Wasser beim Aufstehen",
+      "timeWindow": "innerhalb von 5 Min. nach dem Aufwachen; erneut 30 Min. vor jeder Mahlzeit",
+      "duration": "1-2 Min.",
+      "source": { "note": "Charaka betont warmes Wasser (Ushna Jala) gegenüber kaltem für Verdauung und Entgiftung. Moderne Praxis: ein Glas beim Aufstehen und vor jeder Mahlzeit." },
+      "benefits": [
+        "Stimuliert den gastrokolischen Reflex — unterstützt die morgendliche Ausscheidung",
+        "Hydriert nach dem langen nächtlichen Fasten",
+        "Wärmt das Verdauungsfeuer (Agni)",
+        "Hilft, über Nacht angesammeltes Ama zu lösen"
+      ],
+      "howTo": [
+        "Erhitze 1-2 Tassen Wasser, bis es angenehm warm ist (nicht kochend, nicht lauwarm).",
+        "Optional: gib einen Spritzer Zitrone hinzu (vata-ausgleichend, unterstützt die Verdauung).",
+        "Optional: gib eine Prise frisch geriebenen Ingwer oder Kreuzkümmel an Kapha-Aggravationstagen hinzu.",
+        "Trinke langsam über 2-3 Minuten. Nicht hinunterstürzen.",
+        "Wiederhole 30 Min. vor jeder Mahlzeit."
+      ],
+      "tools": ["Wasserkocher, Tasse, optional: Zitrone, Ingwer, Kreuzkümmel"],
+      "contraindications": [
+        "Pitta-Typen im Sommer — verwende lauwarmes statt heißes Wasser.",
+        "Heißes Zitronenwasser im Übermaß kann den Zahnschmelz angreifen; danach spülen."
+      ]
+    },
+    "abhyanga": {
+      "name": "Selbst-Ölmassage",
+      "timeWindow": "morgens, vor dem Baden",
+      "duration": "10-20 Min.",
+      "source": { "note": "Charaka preist Abhyanga als Eckpfeiler der Tagesroutine. Die Verse beschreiben Öle für jedes Dosha, die Streichungen (lang an den Gliedern, kreisend an den Gelenken) und das Baden nach der Massage." },
+      "benefits": [
+        "Beruhigt Vata — das warme Öl wirkt Trockenheit und Instabilität entgegen",
+        "Unterstützt Haut, Gelenke und Lymphfluss",
+        "Beruhigt das Nervensystem, bevor der Tag beginnt",
+        "Verlangsamt sichtbares Altern (eine Aussage aus CS Sutrasthana 5, gestützt von moderner dermatologischer Forschung zu Gesichtsölen)"
+      ],
+      "howTo": [
+        "Erwärme 2-4 Esslöffel Öl — Sesam für Vata/Kapha, Kokos für Pitta — auf knapp über Körpertemperatur.",
+        "Setz dich auf ein Handtuch, das ölig werden darf.",
+        "Trage das Öl zuerst auf den Scheitel auf. Sanfte kreisende Bewegung.",
+        "Geh zu Gesicht, Ohren, Nacken über. Lange Streichungen an den Gliedern (Arme, Beine); kreisend an den Gelenken (Schultern, Ellbogen, Hüften, Knie, Knöchel).",
+        "Verbringe extra Zeit an den Fußsohlen — vata-reich und erdend.",
+        "Ruhe 10-15 Minuten zur Aufnahme (ein guter Moment zum Meditieren oder stillen Sitzen).",
+        "Bade in warmem (nicht heißem) Wasser. Nutze ein mildes Reinigungsmittel; etwas Öl sollte danach auf der Haut bleiben."
+      ],
+      "tools": [
+        "Warmes Sesam-, Kokos- oder Mandelöl (~10 € für 500 ml, hält Monate)",
+        "Altes Handtuch für den Boden; ein „Yoga-Handtuch“ geht auch",
+        "Warmes Badezimmer"
+      ],
+      "contraindications": [
+        "Lass es bei Fieber, schwerer Erkältung oder schwerer Verdauungsstörung weg",
+        "Lass es während der Menstruation weg (manche Traditionen; andere sagen, es sei in Ordnung — höre auf den Körper)",
+        "Lass es bei schwerem Ama (übler Körpergeruch, dick belegte Zunge, schwere Lethargie) weg — Abhyanga kann Ama tiefer treiben. Löse erst die Verdauungsprobleme.",
+        "Schwangere: lass die tiefe Bauchmassage weg; nur leichte Streichungen.",
+        "Lass Bereiche mit verletzter Haut, frischen Wunden oder aktiver Infektion aus."
+      ]
+    },
+    "morningAsana": {
+      "name": "Morgendliche Asana-Praxis",
+      "timeWindow": "morgens, nach dem Baden",
+      "duration": "20-60 Min.",
+      "source": { "note": "Charaka verordnet keine Asana an sich (die systematische Asana-Tradition ist nach dem Hatha Yoga Pradipika). Moderne Dinacharya integriert die morgendliche Yoga-Einheit als nahezu universelle Praxis." },
+      "benefits": [
+        "Wirkt Kaphas Schwere durch Bewegung entgegen",
+        "Baut Hitze nach der kühlen Nachtphase auf",
+        "Mobilisiert Wirbelsäule, Hüften und Schultern für den Tag",
+        "Gibt den Ton des Körpers vor jedem anderen Input vor"
+      ],
+      "howTo": [
+        "Rolle die Matte in einem ruhigen Raum aus.",
+        "Beginne mit 2-3 Runden Katze-Kuh (`cardiacWarmup`), um die Wirbelsäule zu wecken.",
+        "Mache 3-5 Runden Sonnengruß A (`suryaNamaskarA`).",
+        "Füge Standhaltungen passend zu deinem Dosha hinzu (siehe DOSHAS-Beruhigungshinweise).",
+        "Schließe mit der sitzenden Vorwärtsbeuge (`paschimottanasana`) und Savasana ab."
+      ],
+      "tools": ["Yogamatte", "optional: Blöcke, Gurt, Bolster"],
+      "contraindications": [
+        "Lass Sonnengrüße in der Schwangerschaft nach dem ersten Trimester weg — ersetze sie durch den sanfteren reinen Stand-Flow.",
+        "Lass kräftigen Flow bei einer aktiven Verletzung, Krankheit oder Fieber weg."
+      ]
+    },
+    "morningPranayama": {
+      "name": "Morgendliches Pranayama",
+      "timeWindow": "morgens, nach der Asana",
+      "duration": "5-15 Min.",
+      "source": { "note": "Pranayama nach der Asana ist eine Hatha-Yoga-Pradipika-Abfolge (Kap. 1 bereitet mit Asana vor, Kap. 2 führt Pranayama ein). Hier mit der Tagesroutine kombiniert." },
+      "benefits": [
+        "Etabliert den Atemrhythmus für den Tag",
+        "Beruhigt das autonome Nervensystem, bevor die Arbeit beginnt",
+        "Vata: Nadi Shodhana zum Ausgleich. Pitta: Sheetali im Sommer. Kapha: Bhastrika oder Kapalabhati zum Energetisieren."
+      ],
+      "howTo": [
+        "Setz dich in eine bequeme Sitzhaltung (Sukhasana, Padmasana oder Vajrasana).",
+        "Beginne mit 3-5 Minuten Nadi Shodhana — dem universell sicheren Einstieg.",
+        "Füge eine 1-2-minütige Runde dosha-spezifisches Pranayama hinzu, falls passend.",
+        "Schließe mit 1 Minute natürlicher Atembeobachtung ab."
+      ],
+      "tools": ["Kissen oder gefaltete Decke zum Sitzen"],
+      "contraindications": [
+        "Pranayamas mit Atemanhalten oder kräftigem Atem (Bhastrika, Kapalabhati) haben starke Kontraindikationen — siehe pranayamas.js.",
+        "Schwangere: bleib bei Nadi Shodhana und Bhramari. Lass Atemanhalten, Bhastrika, Kapalabhati weg."
+      ]
+    },
+    "meditation": {
+      "name": "Morgendliche Meditation",
+      "timeWindow": "morgens, nach dem Pranayama",
+      "duration": "10-30 Min.",
+      "source": { "note": "Charaka erwähnt die Kultivierung des Geistes neben dem physischen Körper im Kapitel über die Körper-Geist-Konstitution. Die systematische Meditationsanleitung stammt aus Patanjalis Yoga-Sutras (~2. Jh. v. Chr.) und ist hier als Teil der Dinacharya integriert." },
+      "benefits": [
+        "Etabliert die geistige Ausrichtung für den Tag",
+        "Krönt die autonome Regulation, die das Pranayama begonnen hat",
+        "Baut über Wochen konsequenter Praxis Konzentrationsfähigkeit auf",
+        "Reduziert messbare Stressmarker"
+      ],
+      "howTo": [
+        "Bleib nach dem Pranayama sitzen — wechsle nicht den Körper auf ein anderes Kissen.",
+        "Wähle einen Fokus: Atembeobachtung (am zugänglichsten), Mantra-Wiederholung oder offenes Gewahrsein.",
+        "Beginne mit 10 Minuten; steigere über Wochen auf 20-30.",
+        "Wenn der Geist abschweift (das wird er), kehre sanft und ohne Urteil zum Fokus zurück."
+      ],
+      "tools": ["Kissen oder gefaltete Decke", "optional: Timer"],
+      "contraindications": [
+        "Eine schwere Traumageschichte kann längere stille Meditation destabilisierend machen — arbeite mit einer Lehrkraft.",
+        "Akute psychische Krise (Suizidalität, Psychose): suche klinische Unterstützung, keine ausgedehnte Solo-Meditation."
+      ]
+    },
+    "breakfast": {
+      "name": "Leichtes Frühstück",
+      "timeWindow": "7-9 Uhr (Kapha-Zeit)",
+      "duration": "15-30 Min.",
+      "source": { "note": "Charaka beschreibt die richtige Zeit, Menge und Qualität der Mahlzeiten. Das Frühstück sollte leicht und leicht verdaulich sein, besonders für Kapha-Typen." },
+      "benefits": [
+        "Liefert Energie für den Morgen",
+        "Für Vata-Typen: stabilisiert den Blutzucker nach dem nächtlichen Fasten",
+        "Für Kapha-Typen: ein kleines Frühstück oder das Auslassen ist oft besser",
+        "Für Pitta-Typen: nicht auslassen — Pitta wird gereizt"
+      ],
+      "howTo": [
+        "Vata: warmer gekochter Haferbrei mit Ghee, Datteln und Zimt. Oder gedünstete Äpfel mit Kardamom.",
+        "Pitta: gekochter Haferbrei mit Milch und Kardamom. Oder süßes reifes Obst mit Rosentee.",
+        "Kapha: kleine Portion gedünsteter Äpfel mit Ingwer. Oder eine Tasse warmer Gewürztee — optional ganz auslassen.",
+        "Iss sitzend. Kaue gründlich."
+      ],
+      "tools": ["warme Speisen, nicht aus dem Kühlschrank"],
+      "contraindications": [
+        "Das Auslassen des Frühstücks verstärkt Vata und Pitta — versuche mindestens warme Gewürzmilch oder gedünstetes Obst."
+      ]
+    },
+    "lunch": {
+      "name": "Mittagessen (Hauptmahlzeit)",
+      "timeWindow": "12-13 Uhr (Pitta-Höhepunkt — Agni-Höhepunkt)",
+      "duration": "20-40 Min.",
+      "source": { "note": "Charaka legt die größte Mahlzeit auf den Mittag, wenn das Verdauungsfeuer (Agni) am stärksten ist. Dies ist eine der konkretesten und wirkungsvollsten ayurvedischen Ernährungsregeln." },
+      "benefits": [
+        "Stimmt mit dem Agni-Höhepunkt überein — die leichteste Verdauung des Tages",
+        "Liefert Energie für den produktiven Nachmittag",
+        "Reduziert das Muster des späten abendlichen Überessens"
+      ],
+      "howTo": [
+        "Iss zu dieser Zeit die GRÖSSTE Mahlzeit des Tages.",
+        "Sitze, iss ohne Bildschirme, kaue gründlich.",
+        "Schließe nach Möglichkeit alle sechs Geschmäcker ein (besonders bei Vata-Typen).",
+        "Mach nach dem Essen einen 5-10-minütigen Spaziergang — unterstützt die Verdauung."
+      ],
+      "tools": ["ein richtiger Teller, kein Schreibtisch"],
+      "contraindications": [
+        "Moderne Arbeitspläne machen dies oft schwierig; tu dein Bestes.",
+        "Lass es bei schwerer akuter Krankheit weg; iss leicht."
+      ]
+    },
+    "dinner": {
+      "name": "Leichtes Abendessen",
+      "timeWindow": "18-19 Uhr (vor Sonnenuntergang, Kapha-Zeit beginnt)",
+      "duration": "20-30 Min.",
+      "source": { "note": "Charaka empfiehlt, die letzte Mahlzeit vor Sonnenuntergang zu beenden, wenn Agni für die Nacht nachlässt. Moderne Lehre passt dies an „bevor die Kapha-Zeit sich vertieft“ an — etwa 19 Uhr." },
+      "benefits": [
+        "Erlaubt vollständige Verdauung vor dem Schlafen",
+        "Reduziert nächtliche Gärung und Ama-Aufbau",
+        "Verbessert Schlafqualität und morgendliche Ausscheidung",
+        "Unterstützt ein 12-14-stündiges nächtliches Fastenfenster — moderne Forschung stützt dies für die metabolische Gesundheit"
+      ],
+      "howTo": [
+        "Iss idealerweise bis 19 Uhr; auf keinen Fall später als 21 Uhr.",
+        "Wähle leicht verdauliche Speisen: Kitchari (Reis + Mung Dal), Suppe, gedünstetes Gemüse.",
+        "Vermeide Rohkost, schweren Käse, rotes Fleisch zum Abendessen.",
+        "Mach nach dem Essen einen 5-10-minütigen langsamen Spaziergang."
+      ],
+      "tools": ["kochbare Speisen, keine Pizza zum Mitnehmen"],
+      "contraindications": [
+        "Das Auslassen des Abendessens verstärkt Vata — iss eine kleine leichte Mahlzeit, auch wenn du keinen Hunger hast.",
+        "Späte Schichten erfordern evtl. Flexibilität; ziele auf das Prinzip „leichter als das Mittagessen“, wenn nicht auf das Timing."
+      ]
+    },
+    "sleep": {
+      "name": "Schlaf bis 22 Uhr",
+      "timeWindow": "Beginn 22 Uhr (bevor die Pitta-Zeit um 22 Uhr beginnt)",
+      "duration": "7-9 Stunden",
+      "source": { "note": "Charaka unterscheidet richtigen Schlaf (rechtzeitig, ausreichend) von falschem Schlaf (tagsüber, im Übermaß oder zur falschen Zeit). Schlaf ist eine der drei Säulen des Lebens (neben Ernährung und Brahmacharya / diszipliniertem Verhalten)." },
+      "benefits": [
+        "Stimmt mit Kaphas natürlichem Zur-Ruhe-Kommen überein — Einschlafen ist im Fenster 18-22 Uhr leichter",
+        "Verhindert den „zweiten Wind“, der um 22 Uhr mit Beginn der Pitta-Zeit einsetzt",
+        "Erlaubt einen vollen 7-9-Stunden-Zyklus und dennoch das Aufstehen zur Brahma Muhurta",
+        "Schlaf vor Mitternacht ist empirisch erholsamer als Schlaf nach Mitternacht (moderne Forschung und Ayurveda stimmen überein)"
+      ],
+      "howTo": [
+        "Beginne die Entspannungspraktiken um 21 Uhr — gedämpftes Licht, keine Bildschirme, ruhige Tätigkeit.",
+        "Optional: Fußmassage mit warmem Öl (sehr beruhigend für Vata).",
+        "Optional: 5 Min. Nadi Shodhana oder Bhramari Pranayama.",
+        "Bett bis 22 Uhr. Wenn du nicht innerhalb von 20 Minuten schläfst, steh auf und lies, bis du schläfrig bist — bleib von Bildschirmen fern.",
+        "Schlafzimmer kühl, dunkel, ruhig."
+      ],
+      "tools": ["Abendroutine", "optional: Fußöl, Augenkissen"],
+      "contraindications": [
+        "Schlaflosigkeit ist manchmal medizinisch — chronische Schlaflosigkeit rechtfertigt eine ärztliche Abklärung.",
+        "Schichtarbeiter können dies nicht wörtlich umsetzen; die Prinzipien (konstante Schlafenszeit, dunkler kühler Raum, Entspannungspraktiken) helfen dennoch.",
+        "Frischgebackene Eltern: lass das vorgeschriebene Timing weg; schlafe, wann immer möglich."
+      ]
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { DINACHARYA_PRACTICES, DOSHA_TIMES } from '../data/ayurveda/dinacharya'
+import { localizeDinacharyaPractice, localizeDoshaTimeNote } from '../i18n/contentI18n'
 import { track, screen, EVENTS } from '../lib/track'
 import useScrollDepth from '../hooks/useScrollDepth'
 
@@ -224,7 +225,7 @@ export default function DinacharyaPage() {
         {DINACHARYA_PRACTICES.map((p, i) => (
           <PracticeCard
             key={p.id}
-            practice={p}
+            practice={localizeDinacharyaPractice(p)}
             index={i}
             isOpen={openId === p.id}
             onToggle={() => toggle(p.id)}
@@ -241,7 +242,7 @@ export default function DinacharyaPage() {
               <span className={`material-symbols-outlined text-base ${DOSHA_COLORS[slot.dosha].split(' ')[1]}`} aria-hidden="true">{DOSHA_ICON[slot.dosha]}</span>
               <div className="flex-1">
                 <p className="font-body font-semibold text-sm text-on-surface capitalize">{slot.dosha} · {slot.window}</p>
-                <p className="font-body text-xs text-on-surface-variant leading-relaxed mt-0.5">{slot.note}</p>
+                <p className="font-body text-xs text-on-surface-variant leading-relaxed mt-0.5">{localizeDoshaTimeNote(slot.window, slot.note)}</p>
               </div>
             </div>
           ))}
