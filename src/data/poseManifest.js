@@ -25,6 +25,7 @@ export const VIDEO_FILES = {
   "bharadvajasana": "bharadvajasana.mp4",
   "bridge": "bridge.mp4",
   "cardiacwarmup": "cardiacWarmup.mp4",
+  "chandranamaskar": "chandraNamaskar.mp4",
   "chaturangadandasana": "chaturangaDandasana.mp4",
   "cobra": "Cobra.mp4",
   "dhanurasana": "dhanurasana.mp4",

@@ -2,12 +2,11 @@
 
 Short looping reference animations for each asana in The Sanctuary. Users with a visual-learning preference watch these in-app to **learn how to enter the pose** and **practice alongside**.
 
-## Generation status — 74 done · 1 pending clip · 6 pranayama stills
+## Generation status — 75 done · 0 pending clips · 6 pranayama stills
 
-Every per-asana heading below is tagged **✅ DONE** (an `.mp4` exists in `media/pose-videos/`) or **⬜ PENDING**. Status verified against files on disk (74 `.mp4`s present).
+Every per-asana heading below is tagged **✅ DONE** (an `.mp4` exists in `media/pose-videos/`) or **⬜ PENDING**. Status verified against files on disk (75 `.mp4`s present).
 
-- **Done (74):** sections 1–58, 60–75 — the full asana set, including the four hard ones solved via the reverse-exit tactic (54 Halasana, 65 Mayurasana, 73 Astavakrasana, 75 Handstand) plus both Sun Salutations and the Cat-Cow flow.
-- **Pending clip (1):** **59 Chandra Namaskar** — the multi-pose Moon Salutation flow (segment-and-stitch, or ship the Goddess hold-only fallback). Reference still in `media/pose-source-png/`.
+- **Done (75):** sections 1–75 — the full asana set, including the four hard ones solved via the reverse-exit tactic (54 Halasana, 65 Mayurasana, 73 Astavakrasana, 75 Handstand) plus both Sun Salutations, the Cat-Cow flow, and **59 Chandra Namaskar** (built from 4 keyframe-referenced segments + h-flip/reverse derivation + reversed back-half — see that section).
 - **Pranayama (76–81):** **stills only, not video** — the section is intentionally image-only (seat + hand/mouth gesture; breath is conveyed by the in-app breathing animation). They are not part of the video worklist.
 
 ## Hard-pose tactics — start+end keyframes & reverse
@@ -1297,7 +1296,7 @@ Filmed from the side in profile, her body facing the left edge of the frame the 
 
 ---
 
-### 59. Chandra Namaskar — Moon Salutation  *(sequence, longer clip)*  ⬜ PENDING
+### 59. Chandra Namaskar — Moon Salutation  *(sequence, longer clip)*  ✅ DONE
 
 **Pose key:** `chandraNamaskar` · **Duration:** 12s
 
@@ -1309,21 +1308,92 @@ Moon Salutation's centerpiece is Goddess Pose (Utkata Konasana) — the wide-sta
 Moon Salutation — captured at the peak Goddess Pose (Utkata Konasana) moment, mid-flow. Standing on the mat facing the camera head-on, feet wide apart (about a leg-length), toes turned out 45 degrees. Both knees bend deeply, tracking over the toes, thighs angling toward parallel with the floor. Hips squared toward the camera, pelvis tucked under slightly. Both arms lifted out to the sides at shoulder height, elbows bent 90 degrees so the forearms come straight up — cactus or goalpost arms. Palms facing forward, fingers active. Spine tall, chest open. Chin level, gaze steady forward — a grounded, lunar quality. The pose is wide and stable, suggesting strength held softly. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench.
 ```
 
-**🧠 Tactic — SEGMENT & STITCH (a 12s flow won't survive one generation).** A full salutation morphs in a single clip. Produce it as short **2–3s segments between consecutive key poses**, each generated with **start + end keyframes** (the two adjacent pose stills), then concatenate:
+**🧠 Tactic — STANDING-LATERAL VARIANT + KEYFRAME-REFERENCED SEGMENTS.** Two changes to beat Kling's hallucination:
+
+1. **Use the standing lateral variant** (no floor lunges). Every pose is front-facing and mirror-symmetric, so Kling never has to render limbs threading past each other, and the second half is a literal **reverse** of the first. This removes the morphing that killed the lunge versions.
+2. **Drive it with Kling's keyframe/comment reference feature.** Generate one still per *unique* key pose (4 below), then in Kling reference those exact stills as the start/end of each short segment so the model interpolates between known frames instead of inventing the path. Generate **3s segments (Kling's minimum clip length)**, then stitch:
 
 ```
 ffmpeg -f concat -safe 0 -i segments.txt -c copy chandra_namaskar.mp4
 ```
 
-Key poses to bridge: Tadasana → arms overhead → side-bend R → center → side-bend L → Goddess (Utkata Konasana) → step-back lunge R → … → back to Tadasana. Generate one still per key pose (Nano Banana, same workflow), then one clip per gap with start=poseA, end=poseB. Mirror-symmetric halves can be **reversed** to save generations.
+**Unique key-pose stills needed (only 4 — mirror pairs reuse the same still flipped):**
 
-**Ship-now fallback:** if the stitched flow is too costly, use a **hold-only Goddess Pose loop** (the still below) as the app asset — gentle arm pulse + breath, single start frame. It conveys the practice's signature without the full flow.
+| # | Still file | Pose |
+|---|-----------|------|
+| A | `cn_tadasana.png`   | Mountain, palms together at heart (Pranamasana) |
+| B | `cn_armsoverhead.png` | Arms overhead, palms touching (Urdhva Hastasana) |
+| C | `cn_crescent.png`   | Standing crescent side-bend to the RIGHT (Indudalasana) — flip horizontally for the LEFT bend |
+| E | `cn_wide.png`       | Wide-legged stance, legs straight, toes turned out, arms cactus (the stance *before* sinking into Goddess) |
+| D | `chandraNamaskar.png` | Goddess Pose (Utkata Konasana) — the existing thumbnail still |
 
-**🎬 Kling motion prompt (single-shot attempt — expect morphing; prefer segments above):**
+**Keyframe map — segment list (each clip = start still → end still, 3s = Kling minimum):**
 
 ```
-Over 12 seconds, starting from Tadasana (frame 1), she flows through a Moon Salutation: (1) inhale arms overhead palms touching, (2) exhale side-bend to the right, (3) inhale center, (4) exhale side-bend to the left, (5) inhale center, (6) exhale stepping the LEFT foot back into a wide low lunge, (7) inhale opening into GODDESS POSE (both knees wide, both arms cactus), (8) exhale side-bend right from Goddess, (9) inhale center, (10) exhale side-bend left from Goddess, (11) inhale center, (12) step the RIGHT foot back to mirror the lunge on the left side, then reverse the whole flow back to Tadasana. Final frame matches frame 1. Slow, meditative pace — slower than Sun Salutation. Static camera.
+seg1  A → B   arms sweep up overhead
+seg2  B → C   side-bend right
+seg3  C → B   return to center (= reverse of seg2)
+seg4  B → C(flip)  side-bend left   (flip still C horizontally)
+seg5  C(flip) → B  return to center (= reverse of seg4)
+seg6a B → E   step the RIGHT foot out wide (one foot at a time), arms open to cactus — legs stay straight
+seg6b E → D   bend both knees and sink straight down into Goddess
+   --- hold D 1s ---
+seg7..  reverse of seg6b..seg1 back to A   (ffmpeg -vf reverse on the first half)
 ```
+
+Only **seg1, seg2, seg6a, seg6b** need true generation; seg3/seg5 are reverses, seg4 reuses seg2 with the flipped still, and the entire back half is the front half reversed. Splitting the Goddess entry into seg6a (step wide) + seg6b (bend down) is what stops Kling from lifting both legs at once — the legs only change width while straight in 6a, then only bend in place in 6b. Build `segments.txt` in order and concat.
+
+**📸 Key-pose still prompts (Nano Banana — same studio backdrop as all others):**
+
+**A — `cn_tadasana.png` (Pranamasana, start/end frame):**
+
+```
+Standing tall in Tadasana at the center of the mat, facing the camera head-on. Feet together (or hip-width), weight even, legs active. Spine long, shoulders relaxed down and back, chest open. Both palms pressed together in prayer (anjali mudra) at the center of the chest, thumbs lightly touching the sternum, elbows soft and level. Chin level, gaze calm and forward, face serene. A grounded, lunar stillness — the quiet opening of the Moon Salutation. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench.
+```
+
+**B — `cn_armsoverhead.png` (Urdhva Hastasana, the recurring "center" frame):**
+
+```
+Standing tall in Tadasana at the center of the mat, facing the camera head-on, feet together. Both arms sweep straight overhead, biceps framing the ears, palms pressed together with index fingers pointing to the ceiling (upward salute). Spine long with a gentle lift through the whole front body, a very slight backbend, ribs lifted but not flared. Hips square to the camera, legs firm. Chin slightly lifted, gaze toward the thumbs, face calm. Symmetric and vertical — the tall neutral the side-bends return to. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench.
+```
+
+**C — `cn_crescent.png` (Indudalasana, side-bend RIGHT — flip for left):**
+
+```
+Standing at the center of the mat, facing the camera head-on, feet together, legs firm. Both arms are extended overhead with palms pressed together, and the whole upper body arcs smoothly to the RIGHT (the practitioner's right, camera-left), forming a long crescent-moon curve from the left foot all the way up through the lifted left ribs to the hands. Hips stay level and squared to the camera, pressing gently to the left as a counterweight; no twist, the chest stays open to the front. The side-bend is even and graceful through the whole spine, not a hinge at the waist. Gaze soft, neck long, face calm. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench.
+```
+
+**E — `cn_wide.png` (wide stance, legs straight — the step *before* Goddess):**
+
+```
+Standing at the center of the mat, facing the camera head-on. Feet are planted WIDE apart, about a leg-length, with the toes turned out about 45 degrees and the heels turned slightly in — but both legs are STRAIGHT and fully extended, knees not yet bent, weight even between the feet. Hips squared to the camera. Both arms are out to the sides at shoulder height with elbows bent 90 degrees, forearms rising vertically, palms facing forward — cactus / goalpost arms. Spine tall, chest open, chin level, gaze forward and calm. This is the stable wide stance taken just before bending the knees into Goddess Pose. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench.
+```
+
+**D — Goddess Pose still:** use the existing thumbnail prompt below.
+
+**Ship-now fallback:** if the stitched flow is too costly, use a **hold-only Goddess Pose loop** (still D) as the app asset — gentle arm pulse + breath, single start frame. It conveys the practice's signature without the full flow.
+
+**🎬 Kling motion prompt (per-segment, with explicit keyframe references):**
+
+Generate each segment separately, attaching the named stills as start/end keyframes in Kling's reference panel and stating the constraint in the prompt. Templates:
+
+```
+seg1 (start: cn_tadasana, end: cn_armsoverhead):
+Over 3 seconds she inhales and sweeps both arms out and up overhead until the palms meet above the head (upward salute). Feet stay together, spine lifts tall. Smooth, slow, meditative. The first and last frames must exactly match the two reference images. Static camera.
+
+seg2 (start: cn_armsoverhead, end: cn_crescent):
+Over 3 seconds she exhales and arcs the whole upper body smoothly to her right into a standing crescent side-bend, arms staying overhead with palms together, hips level and squared forward as a counterweight — no twist. The first and last frames must exactly match the two reference images. Slow and graceful. Static camera.
+
+seg6a (start: cn_armsoverhead, end: cn_wide):
+Over 3 seconds she steps into a wide stance ONE FOOT AT A TIME. Step by step: first she shifts her weight onto her LEFT foot; then she lifts her RIGHT foot off the floor and steps it out to the right about a leg-length, planting it with the toes turned out 45 degrees; then she rebalances her weight evenly between both feet so she stands square in a wide stance. At the same time her arms lower from overhead out to the sides into a cactus shape (elbows bent 90 degrees, palms forward). Both legs stay STRAIGHT the whole time — the knees do NOT bend yet, and only one foot moves at a time (never both feet sliding out together). The first and last frames must exactly match the two reference images. Slow and deliberate. Static camera.
+
+seg6b (start: cn_wide, end: chandraNamaskar / Goddess):
+Over 3 seconds, from the stable wide stance, she exhales and bends BOTH knees straight down, tracking them out over the toes, sinking the hips down toward knee height into Goddess Pose. The feet stay exactly where they are planted — she does not step or shift the feet, she only lowers straight down by bending the knees, like sitting down between her heels. The arms hold the cactus shape. The first and last frames must exactly match the two reference images. Grounded and strong. Static camera.
+```
+
+For the return-to-center segments (seg3, seg5) and the entire second half, do NOT regenerate — reverse the corresponding clips: `ffmpeg -i segIN.mp4 -vf reverse -an segOUT.mp4`. Concat all segments in order into the final flow.
+
+**Runtime note:** at Kling's 3s minimum per clip, the round-trip flow lands at ~35s (6 segments + ~1s Goddess hold per half), not the 12s in the header. That's acceptable for a flow asset. To shorten, either drop the left-side side-bend pair (seg4/seg5) or speed the stitched master uniformly with `ffmpeg -i in.mp4 -filter:v "setpts=0.5*PTS" -an out.mp4` to taste.
 
 ---
 
