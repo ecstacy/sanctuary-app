@@ -2,16 +2,29 @@
 
 Short looping reference animations for each asana in The Sanctuary. Users with a visual-learning preference watch these in-app to **learn how to enter the pose** and **practice alongside**.
 
-## Generation status — 22 done · 59 pending
+## Generation status — 74 done · 1 pending clip · 6 pranayama stills
 
-Every per-asana heading below is tagged **✅ DONE** (an `.mp4` exists in `public/poses/`) or **⬜ PENDING** (still to generate). Re-run the tagging check after adding videos; it matches each section's `**Pose key:`** against the files on disk (case-insensitive).
+Every per-asana heading below is tagged **✅ DONE** (an `.mp4` exists in `media/pose-videos/`) or **⬜ PENDING**. Status verified against files on disk (74 `.mp4`s present).
 
-**▶ Continue from #22 (Parsvottanasana).** Sections 1–21 + 74 (Pasasana) are done; everything from 22 onward is pending except 74.
+- **Done (74):** sections 1–58, 60–75 — the full asana set, including the four hard ones solved via the reverse-exit tactic (54 Halasana, 65 Mayurasana, 73 Astavakrasana, 75 Handstand) plus both Sun Salutations and the Cat-Cow flow.
+- **Pending clip (1):** **59 Chandra Namaskar** — the multi-pose Moon Salutation flow (segment-and-stitch, or ship the Goddess hold-only fallback). Reference still in `media/pose-source-png/`.
+- **Pranayama (76–81):** **stills only, not video** — the section is intentionally image-only (seat + hand/mouth gesture; breath is conveyed by the in-app breathing animation). They are not part of the video worklist.
 
-- **Done (22):** 1 Tadasana · 2 Warrior I · 3 Warrior II · 4 Tree · 5 Sukhasana · 6 Seated Twist · 7 Uttanasana · 8 Paschimottanasana · 9 Balasana · 10 Supine Twist · 11 Savasana · 12 Cobra · 13 Bridge · 14 Pigeon · 15 Surya Namaskar · 16 Downward Dog · 17 Legs Up Wall · 18 Trikonasana · 19 Utkatasana · 20 Warrior III · 21 Parsvakonasana · 74 Pasasana
-- **Pending (59):** 22–73, 75 (asanas) + 76–81 (pranayama — lowest priority; seated breathwork, already have stills + voice).
+## Hard-pose tactics — start+end keyframes & reverse
 
-> Tip: the 6 pranayama clips (76–81) add the least value — defer unless you want visual breath-pacing demos. That leaves **53 asana clips** as the real worklist.
+Two capabilities now available that solve the cases Kling kept failing (it cheats a balance into a plank, or clips a limb through a leg because it has no volume model):
+
+1. **Start + End keyframe.** Upload both a START frame and an END frame; Kling interpolates a *constrained* path between them instead of inventing one. Use whenever the pose has a clear ground/prep position and a clear peak — it stops the "drift to the wrong shape" problem (e.g. Mayurasana → plank).
+2. **Reverse the clip.** For anything where *achieving the balance/inversion is the hard part* (handstand kick-up, peacock float, arm balances, plow lift-over), generate the **EXIT** instead — start frame = the peak, animate the body **lowering down to the ground** — then flip it:
+  ```
+   ffmpeg -i kling_exit.mp4 -vf reverse pose_entry.mp4
+  ```
+   Lowering/un-stacking is renderable; "levitate into balance from scratch" is not. Reversed, it reads as the entry.
+3. **Combine both** for max control: start = peak still, end = a grounded still, generate the exit, then reverse. The two keyframes lock both ends so the middle can't morph.
+
+**Known limit:** deep *threading* binds (a limb passing between/through legs — Uttana Kurmasana, Astavakrasana leg-hook) still clip in the mid-frames in either direction, because the limb takes the shortest path through the leg. Mitigate by sequencing the legs to clear first, generating 3–4 seeds, and keeping the least-bad — or teach the threading with captioned stills and animate only the clean settle (see §64 note).
+
+Per-pending sections below carry a **🧠 Tactic** line with the specific recipe.
 
 ## What we're generating
 
@@ -1161,7 +1174,7 @@ Over 5 seconds, starting from a flat prone position face-down, she: extends the 
 
 ---
 
-### 54. Halasana — Plow Pose  ⬜ PENDING
+### 54. Halasana — Plow Pose  ✅ DONE
 
 **Pose key:** `halasana` · **Duration:** 5s
 
@@ -1171,11 +1184,15 @@ Over 5 seconds, starting from a flat prone position face-down, she: extends the 
 Plow Pose. Body inverted: shoulders on a stack of folded blankets (essential — protects the cervical spine), back of the head on the mat below the blankets, neck floating in the gap. Hips are above the shoulders. Both legs are extended OVER the head, toes touching the floor behind the head (or resting on a chair seat or stack of blocks behind the head if toes don't reach). Hands support the lower back — or are interlaced behind on the floor with arms straight, pressing into the floor. Body forms an inverted curve resembling a plow. View from the side.
 ```
 
-**🎬 Kling motion prompt:**
+**🧠 Tactic — REVERSE-EXIT.** Forward (lifting legs overhead into an inversion) drifts. Instead generate the **exit** from the peak and flip it. Start frame = `halasana.png` (peak). End frame (optional) = a supine-flat still. Then `ffmpeg -vf reverse`.
+
+**🎬 Kling motion prompt (generates the EXIT — reverse it after):**
 
 ```
-Over 5 seconds, starting from a flat reclined position (Savasana base), she: presses the hands into the floor and lifts both legs straight up toward the ceiling, then continues to swing the legs over the head lowering the toes toward the floor behind her, supporting the lower back with the hands — arriving at the peak around second 3. She holds for 1 breath (seconds 3 to 4). Then she rolls down slowly with the hands supporting the lower back. Static camera.
+Start in Plow Pose, shoulders on folded blankets, both legs extended over the head with toes on the floor behind. Over 5 seconds she slowly rolls the spine down vertebra by vertebra, bringing the legs up and over and then lowering them down to the floor, finishing lying flat on her back in a reclined rest. Hands support the lower back as she rolls down. Slow and controlled. Static camera, side profile, no zoom, no pan.
 ```
+
+Reversed, this reads as: lying flat → legs lift and swing overhead → settle into Plow.
 
 ---
 
@@ -1292,7 +1309,17 @@ Moon Salutation's centerpiece is Goddess Pose (Utkata Konasana) — the wide-sta
 Moon Salutation — captured at the peak Goddess Pose (Utkata Konasana) moment, mid-flow. Standing on the mat facing the camera head-on, feet wide apart (about a leg-length), toes turned out 45 degrees. Both knees bend deeply, tracking over the toes, thighs angling toward parallel with the floor. Hips squared toward the camera, pelvis tucked under slightly. Both arms lifted out to the sides at shoulder height, elbows bent 90 degrees so the forearms come straight up — cactus or goalpost arms. Palms facing forward, fingers active. Spine tall, chest open. Chin level, gaze steady forward — a grounded, lunar quality. The pose is wide and stable, suggesting strength held softly. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench.
 ```
 
-**🎬 Kling motion prompt:**
+**🧠 Tactic — SEGMENT & STITCH (a 12s flow won't survive one generation).** A full salutation morphs in a single clip. Produce it as short **2–3s segments between consecutive key poses**, each generated with **start + end keyframes** (the two adjacent pose stills), then concatenate:
+
+```
+ffmpeg -f concat -safe 0 -i segments.txt -c copy chandra_namaskar.mp4
+```
+
+Key poses to bridge: Tadasana → arms overhead → side-bend R → center → side-bend L → Goddess (Utkata Konasana) → step-back lunge R → … → back to Tadasana. Generate one still per key pose (Nano Banana, same workflow), then one clip per gap with start=poseA, end=poseB. Mirror-symmetric halves can be **reversed** to save generations.
+
+**Ship-now fallback:** if the stitched flow is too costly, use a **hold-only Goddess Pose loop** (the still below) as the app asset — gentle arm pulse + breath, single start frame. It conveys the practice's signature without the full flow.
+
+**🎬 Kling motion prompt (single-shot attempt — expect morphing; prefer segments above):**
 
 ```
 Over 12 seconds, starting from Tadasana (frame 1), she flows through a Moon Salutation: (1) inhale arms overhead palms touching, (2) exhale side-bend to the right, (3) inhale center, (4) exhale side-bend to the left, (5) inhale center, (6) exhale stepping the LEFT foot back into a wide low lunge, (7) inhale opening into GODDESS POSE (both knees wide, both arms cactus), (8) exhale side-bend right from Goddess, (9) inhale center, (10) exhale side-bend left from Goddess, (11) inhale center, (12) step the RIGHT foot back to mirror the lunge on the left side, then reverse the whole flow back to Tadasana. Final frame matches frame 1. Slow, meditative pace — slower than Sun Salutation. Static camera.
@@ -1404,7 +1431,7 @@ Over 5 seconds, starting from full Padmasana seated on the mat, she: threads the
 
 ---
 
-### 64. Uttana Kurmasana — Stretched Tortoise  ⬜ PENDING
+### 64. Uttana Kurmasana — Stretched Tortoise  ✅ DONE
 
 **Pose key:** `uttanaKurmasana` · **Duration:** 5s · **Source:** HYP 1.24 · **Level:** Advanced
 
@@ -1422,7 +1449,7 @@ Over 5 seconds, starting from Kukkutasana, she: lowers down slowly with the arms
 
 ---
 
-### 65. Mayurasana — Peacock Pose  ⬜ PENDING
+### 65. Mayurasana — Peacock Pose  ✅ DONE
 
 **Pose key:** `mayurasana` · **Duration:** 5s · **Source:** HYP 1.32-33 · **Level:** Advanced
 
@@ -1432,15 +1459,19 @@ Over 5 seconds, starting from Kukkutasana, she: lowers down slowly with the arms
 Mayurasana (Peacock Pose), on the mat viewed from a three-quarter angle. Body completely horizontal, parallel to the floor about 6-12 inches above it, balanced entirely on the elbows pressed firmly into the lower abdomen near the navel. Palms flat on the floor, fingers pointing back TOWARD the body. Forearms vertical, elbows hugging together against the belly. Legs fully extended straight back behind the body, feet pointed, legs together. Chest open and forward. Head lifts slightly to lengthen the spine. Strong, suspended, like a peacock with tail-feathers fanned. Engaged core visible.
 ```
 
-**🎬 Kling motion prompt:**
+**🧠 Tactic — REVERSE-EXIT.** Forward (lifting into the float) makes Kling cheat the balance into a plank. Generate the **exit** from the peak float and flip it. Start frame = the peak still (the one that nails fingers-pointing-back + elbows-in-belly + body parallel). Then `ffmpeg -vf reverse`. The signature must hold the whole clip: **palms flat, fingers pointing back, elbows tucked into the belly — this is NOT a forearm plank.**
+
+**🎬 Kling motion prompt (generates the EXIT — reverse it after):**
 
 ```
-Over 5 seconds, starting from kneeling on the mat, she: places the palms flat on the floor with fingers pointing back, lowers onto the forearms with elbows hugged together pressing into the belly, extends the legs back, shifts the weight forward over the elbows, then lifts the feet off the floor and floats the body parallel to the ground — arriving at the peak around second 3. She holds the float for 1 breath. Then she lowers the feet, pushes back to sit on the heels. Static camera.
+The woman is balanced in Peacock Pose, body floating horizontally on her two hands, palms flat with fingers pointing back, bent elbows tucked into her belly. Slowly and with control she lowers her feet down to the mat, bends her knees, and pushes her weight back to sit kneeling on her heels, lifting her hands off the floor and resting upright. Her hands stay flat with fingers pointing back the whole time she is lifted. One smooth slow motion. Static locked camera, side profile, eye-level, no zoom, no pan.
 ```
+
+Reversed: kneeling → hands plant fingers-back → body tips forward over the elbows → feet float up into the peacock.
 
 ---
 
-### 66. Simhasana — Lion Pose  ⬜ PENDING
+### 66. Simhasana — Lion Pose  ✅ DONE
 
 **Pose key:** `simhasana` · **Duration:** 6s
 
@@ -1458,7 +1489,7 @@ Over 6 seconds, starting from Vajrasana with palms on knees and a neutral face, 
 
 ---
 
-### 67. Bhadrasana — Gracious Pose  *(hold-only, no entry)*  ⬜ PENDING
+### 67. Bhadrasana — Gracious Pose  *(hold-only, no entry)*  ✅ DONE
 
 **Pose key:** `bhadrasana` · **Duration:** 5s · **Source:** HYP 1.53-54
 
@@ -1476,7 +1507,7 @@ The subject holds this seated Bhadrasana for the full 5 seconds. Slow subtle bre
 
 ---
 
-### 68. Kapotasana — King Pigeon Pose  ⬜ PENDING
+### 68. Kapotasana — King Pigeon Pose  ✅ DONE
 
 **Pose key:** `kapotasana` · **Duration:** 5s · **Level:** Advanced
 
@@ -1494,7 +1525,7 @@ Over 5 seconds, starting from kneeling with the thighs vertical, she: inhales an
 
 ---
 
-### 69. Bakasana — Crow Pose  ⬜ PENDING
+### 69. Bakasana — Crow Pose  ✅ DONE
 
 **Pose key:** `bakasana` · **Duration:** 5s · **Level:** Intermediate
 
@@ -1512,7 +1543,7 @@ Over 5 seconds, starting from Malasana (deep squat with knees wide), she: places
 
 ---
 
-### 70. Kakasana — Crane Pose  ⬜ PENDING
+### 70. Kakasana — Crane Pose  ✅ DONE
 
 **Pose key:** `kakasana` · **Duration:** 5s · **Level:** Advanced
 
@@ -1530,7 +1561,7 @@ Over 5 seconds, starting from Bakasana (Crow), she: places the knees higher on t
 
 ---
 
-### 71. Chaturanga Dandasana — Four-Limbed Staff Pose  ⬜ PENDING
+### 71. Chaturanga Dandasana — Four-Limbed Staff Pose  ✅ DONE
 
 **Pose key:** `chaturangaDandasana` · **Duration:** 4s · **Level:** Intermediate
 
@@ -1548,7 +1579,7 @@ Over 4 seconds, starting from Plank Pose (high plank, shoulders over wrists, bod
 
 ---
 
-### 72. Vasishthasana — Side Plank  ⬜ PENDING
+### 72. Vasishthasana — Side Plank  ✅ DONE
 
 **Pose key:** `vasishthasana` · **Duration:** 5s · **Level:** Intermediate
 
@@ -1566,7 +1597,7 @@ Over 5 seconds, starting from Plank Pose, she: shifts the body weight onto the r
 
 ---
 
-### 73. Astavakrasana — Eight-Angle Pose  ⬜ PENDING
+### 73. Astavakrasana — Eight-Angle Pose  ✅ DONE
 
 **Pose key:** `astavakrasana` · **Duration:** 5s · **Level:** Advanced
 
@@ -1576,11 +1607,15 @@ Over 5 seconds, starting from Plank Pose, she: shifts the body weight onto the r
 Astavakrasana (Eight-Angle Pose) on the mat, body in profile to camera-left. The right thigh hooked HIGH over the right shoulder from behind. Both legs locked together, ankles crossed (left over right). Both palms flat on the floor beside the hips, fingers spread. Arms bent like Chaturanga, elbows tracking back. The locked legs extended out HORIZONTALLY to the right side of the body — body floating above the floor with legs cantilevered. The shape is asymmetric and dramatic — a one-sided lift with the legs out to the side. Hips and shoulders both fully engaged. Gaze forward.
 ```
 
-**🎬 Kling motion prompt:**
+**🧠 Tactic — REVERSE-EXIT (+ expect threading clip; multi-seed).** Start frame = `astavakrasana.png` (peak). Animate the exit (legs back to center, lower down, sit). Reverse it. This is a deep leg-hook bind, so the un-hooking mid-frames may clip through the arm/leg in either direction — generate **3–4 seeds and keep the least-bad**, or fall back to the §64 hybrid (captioned stills for the hook + animate only the lift/lower). Two-frame helps: end frame = a simple seated-knees-bent still so the legs have a defined target.
+
+**🎬 Kling motion prompt (generates the EXIT — reverse it after):**
 
 ```
-Over 5 seconds, starting from seated with legs forward, she: bends the right knee and hooks the right thigh high over the right shoulder from behind, crosses the left ankle over the right ankle, places both palms on the floor beside the hips, leans forward, lifts the body and extends the locked legs out to the right side — arriving at the lifted Eight-Angle around second 3.5. She holds the balance briefly. Then she brings the legs back to center, lowers down, unwinds. Static camera.
+Start in Eight-Angle Pose, body lifted on both hands with the locked legs hooked over the right upper arm and cantilevered out to the right. Over 5 seconds she lowers her hips, brings the legs back toward center, lowers her seat to the floor, unhooks the right leg from the shoulder, and ends sitting upright with both knees bent, feet on the floor, hands resting. Slow and controlled. Static camera, side profile, no zoom, no pan.
 ```
+
+Reversed: seated → hands plant, leg hooks over the shoulder → body lifts and floats the legs out to the side.
 
 ---
 
@@ -1602,7 +1637,7 @@ Over 5 seconds, starting from Tadasana, she: squats down into Malasana with the 
 
 ---
 
-### 75. Adho Mukha Vrksasana — Handstand  ⬜ PENDING
+### 75. Adho Mukha Vrksasana — Handstand  ✅ DONE
 
 **Pose key:** `adhoMukhaVrksasana` · **Duration:** 6s · **Level:** Advanced
 
@@ -1612,11 +1647,15 @@ Over 5 seconds, starting from Tadasana, she: squats down into Malasana with the 
 Adho Mukha Vrksasana (Handstand) on the mat near a sage-green wall. Body fully inverted in a straight vertical line: palms flat on the floor about 6 inches from the wall, fingers spread wide. Wrists, shoulders, hips, and ankles stacked in one vertical column. Both legs extended fully upward, heels touching the wall lightly (the wall as a safety stop, not a heavy lean). Core engaged. Gaze directed between the palms toward the floor. Strong, controlled, vertical — the body inverted but stable. Studio backdrop: pale wood floor, sage-green mat, sheer-curtained windows, plant bench. The wall behind is the same sage tone as the mat.
 ```
 
-**🎬 Kling motion prompt:**
+**🧠 Tactic — REVERSE-EXIT (textbook case).** A kick-up is the hardest thing for Kling (it won't levitate into a balance). Generate the **exit** from the handstand and flip it. Start frame = `adhoMukhaVrksasana.png` (peak at the wall). Optional end frame = a standing forward-fold still. Then `ffmpeg -vf reverse`.
+
+**🎬 Kling motion prompt (generates the EXIT — reverse it after):**
 
 ```
-Over 6 seconds, starting from Adho Mukha Svanasana near a wall, she: walks the feet in toward the hands, lifts one leg up high, then kicks the other leg up to meet it — the heels touch the wall lightly. The body settles into a vertical inverted line. She holds the handstand for 2 breaths. Then she lowers one leg slowly, then the other, returning to Down Dog. Static camera.
+Start in a handstand against a sage-green wall, body fully inverted in a straight vertical line, heels resting lightly on the wall. Over 6 seconds she slowly lowers one leg with control down toward the floor, then the other, coming down through a standing forward fold with the hands still on the mat, until both feet are planted and she folds over her legs. Slow and controlled, balanced. Static camera, side profile, no zoom, no pan.
 ```
+
+Reversed: standing forward fold → one leg lifts and kicks up → the second follows → vertical handstand, heels to the wall.
 
 ---
 
@@ -1628,7 +1667,7 @@ Use the Nano Banana preserve block above every prompt so the face, body, outfit,
 
 ---
 
-### 76. Nadi Shodhana — Alternate Nostril Breath  ⬜ PENDING
+### 76. Nadi Shodhana — Alternate Nostril Breath  🖼 STILL ONLY (no clip)
 
 **Pose key:** `nadiShodhana` · **Still only** · **Source:** HYP 2.7
 
@@ -1640,7 +1679,7 @@ Sitting in Sukhasana on the mat facing the camera. Spine tall. Left hand rests o
 
 ---
 
-### 77. Ujjayi — Victorious / Ocean Breath  ⬜ PENDING
+### 77. Ujjayi — Victorious / Ocean Breath  🖼 STILL ONLY (no clip)
 
 **Pose key:** `ujjayi` · **Still only** · **Source:** HYP 2.51
 
@@ -1652,7 +1691,7 @@ Sitting in Sukhasana on the mat facing the camera. Spine tall, chest broad. Both
 
 ---
 
-### 78. Bhramari — Humming Bee Breath  ⬜ PENDING
+### 78. Bhramari — Humming Bee Breath  🖼 STILL ONLY (no clip)
 
 **Pose key:** `bhramari` · **Still only** · **Source:** HYP 2.68
 
@@ -1664,7 +1703,7 @@ Sitting in Sukhasana on the mat facing the camera. Spine tall. Both hands lifted
 
 ---
 
-### 79. Sheetali — Cooling Breath  ⬜ PENDING
+### 79. Sheetali — Cooling Breath  🖼 STILL ONLY (no clip)
 
 **Pose key:** `sheetali` · **Still only** · **Source:** HYP 2.57
 
@@ -1676,7 +1715,7 @@ Sitting in Sukhasana on the mat facing the camera. Spine tall. Both hands rest o
 
 ---
 
-### 80. Bhastrika — Bellows Breath  ⬜ PENDING
+### 80. Bhastrika — Bellows Breath  🖼 STILL ONLY (no clip)
 
 **Pose key:** `bhastrika` · **Still only** · **Source:** HYP 2.59
 
@@ -1688,7 +1727,7 @@ Sitting in Sukhasana on the mat facing the camera. Spine VERY tall and upright, 
 
 ---
 
-### 81. Kapalabhati — Skull-Shining Breath  ⬜ PENDING
+### 81. Kapalabhati — Skull-Shining Breath  🖼 STILL ONLY (no clip)
 
 **Pose key:** `kapalabhati` · **Still only** · **Source:** HYP 2.35
 
