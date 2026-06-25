@@ -238,6 +238,269 @@
         "Zugängliche Wirbelsäulendrehung für alle, die für die aufrechte Version nicht auf dem Boden sitzen können"
       ],
       "reasoning": "Von allen Drehungen im Katalog ist die liegende Version die, zu der man am Ende eines langen Tages greift. Die Schwerkraft macht die Arbeit; der Körper willigt nur ein. Die 60-90 Sekunden pro Seite sind der Moment, in dem der parasympathische Wechsel tatsächlich ankommt."
+    },
+    "virabhadrasanaI": {
+      "english": "Krieger I",
+      "aliases": [
+        "Krieger 1",
+        "Heldenhaltung I"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung, in den Linien des 20. Jahrhunderts kodifiziert. Nicht im Hatha Yoga Pradipika Kap. 1 benannt."
+      },
+      "instructions": [
+        "Stelle dich an den vorderen Rand deiner Matte, Füße zusammen.",
+        "Mach mit dem rechten Fuß einen Schritt nach vorne, etwa eine Beinlänge weit. Beide Füße bleiben am Boden.",
+        "Drehe den hinteren linken Fuß etwa 45 Grad nach außen, die Ferse fest am Boden.",
+        "Richte die Hüften zur Vorderseite der Matte aus.",
+        "Beuge das rechte Knie, bis es senkrecht über dem rechten Knöchel steht.",
+        "Atme ein und hebe beide Arme über den Kopf, die Oberarme nahe den Ohren.",
+        "Drücke den hinteren Fuß fest in den Boden. Hebe dich durch die seitlichen Rippen. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Mach mit dem rechten Fuß einen Schritt nach vorne, etwa eine Beinlänge weit, das Knie gebeugt. Drehe den hinteren Fuß fünfundvierzig Grad nach außen, die Ferse am Boden. Richte die Hüften nach vorne aus. Atme ein und strecke die Arme über den Kopf.",
+        "hold": "Beuge das vordere Knie über den Knöchel, der Oberschenkel strebt zur Parallele mit dem Boden. Drücke den hinteren Fuß fest in den Boden. Hebe dich durch die seitlichen Rippen und strecke die Fingerspitzen nach oben.",
+        "breathe": "Jedes Einatmen verlängert die Wirbelsäule; jedes Ausatmen verwurzelt den hinteren Fuß. Lass die Schultern weg von den Ohren sinken.",
+        "exit": "Senke die Arme. Setze den vorderen Fuß zurück zum hinteren. Wir wiederholen die Übung auf der anderen Seite."
+      },
+      "contraindications": [
+        "Schwangere in der Spätschwangerschaft sollten den Stand schmaler stellen und die tiefe Kniebeuge auslassen",
+        "Übe nicht bei einer kürzlichen Knieverletzung oder einem Meniskusriss",
+        "Vermeide die Haltung bei starkem Bluthochdruck",
+        "Lass sie bei Schulterverletzung aus — halte die Hände an den Hüften statt über dem Kopf"
+      ],
+      "modifications": [
+        "Verkürze den Stand, wenn sich das vordere Knie nicht über den Knöchel beugen lässt",
+        "Hände an den Hüften bei Schulterverletzung, Erschöpfung oder Nackenproblemen",
+        "Übe mit der hinteren Ferse an einer Wand für mehr Stabilität",
+        "Reduziere die Außendrehung des hinteren Fußes auf dreißig Grad, wenn die Hüften eng sind"
+      ],
+      "benefits": [
+        "Baut Kraft im Quadrizeps, in der Gesäßmuskulatur und in den Waden des vorderen Beins auf",
+        "Öffnet die Vorderseite der Hüfte und die Leiste des hinteren Beins",
+        "Verlängert die Körperseite und die Rippen, während die Arme nach oben streben",
+        "Verwurzelt und belebt zugleich — nützlich an antriebslosen Morgen"
+      ],
+      "reasoning": "Krieger I ist die wärmende Haltung der Standserie — Ganzkörperkraft bei gleichzeitiger Verlängerung der Vorderseite. Die Kombination aus Stabilität durch die Beine und Anhebung durch die Arme baut mit der Zeit Haltungsausdauer auf."
+    },
+    "vrksasana": {
+      "english": "Baumhaltung",
+      "aliases": [
+        "Baumstand"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Gleichgewichtshaltung. Nicht im Hatha Yoga Pradipika Kap. 1 aufgeführt."
+      },
+      "instructions": [
+        "Stelle dich mit zusammenstehenden Füßen hin, das Gewicht gleichmäßig auf beiden Füßen.",
+        "Verlagere dein gesamtes Gewicht auf den linken Fuß. Drücke ihn fest in den Boden.",
+        "Beuge das rechte Knie und hebe den rechten Fuß. Setze die Sohle an die Innenseite des linken Oberschenkels oder der Wade — niemals ans Knie.",
+        "Bring die Hände vor der Brust zusammen, wie zum Gebet.",
+        "Suche einen einzigen ruhigen Punkt auf Augenhöhe und lass deinen Blick dort ruhen.",
+        "Wenn du stabil stehst, strecke die Arme langsam über den Kopf. Die Handflächen können sich zugewandt sein oder sich berühren.",
+        "Halte die Haltung. Senke Arme und Fuß, dann wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Verlagere das Gewicht auf den linken Fuß. Hebe den rechten Fuß und setze die Sohle an die Innenseite des linken Oberschenkels oder der Wade — niemals ans Knie. Hände am Herzen, wie zum Gebet.",
+        "hold": "Wähle einen einzigen ruhigen Punkt auf Augenhöhe und lass den Blick dort ruhen. Drücke den Standfuß fest in den Boden. Wenn du stabil stehst, strecke die Arme wie Äste über den Kopf.",
+        "breathe": "Atme langsam. Wenn du wackelst, arbeitet die Haltung — auch Bäume schwanken. Entspanne das Standknie, wenn es überstreckt.",
+        "exit": "Senke die Arme und den Fuß. Halte für einen Atemzug inne, dann wechsle die Seite."
+      },
+      "contraindications": [
+        "Schwangere in der Spätschwangerschaft sollten mit dem Rücken zur Wand üben für mehr Stabilität",
+        "Übe nicht bei starkem Schwindel oder Gleichgewichtsstörungen ohne eine Wand im Rücken",
+        "Setze den angehobenen Fuß niemals ans Knie — immer darüber oder darunter",
+        "Lass die Haltung bei schwerer Knöchelverletzung im Standbein aus"
+      ],
+      "modifications": [
+        "Setze den angehobenen Fuß an den Knöchel (die Zehen berühren noch den Boden) für die einfachste Variante",
+        "Halte die Zehen leicht am Boden als Stütze, wenn das Gleichgewicht unsicher ist",
+        "Übe mit einer Hand an einer Wand oder Stuhllehne",
+        "Hände am Herzen statt über dem Kopf verringert die Gleichgewichtsanforderung"
+      ],
+      "benefits": [
+        "Trainiert die Einbeinstabilität — überträgt sich direkt auf Gehen, Treppensteigen und Sturzprävention",
+        "Stärkt die kleinen stabilisierenden Muskeln des Knöchels und des Fußgewölbes",
+        "Konzentrative Praxis — Blick und Atem werden zu einem einzigen Anker",
+        "Ein verlässlicher mentaler Fokus-Reset an Tagen mit rasendem Geist"
+      ],
+      "reasoning": "Gleichgewichtsarbeit ist Medizin für den zerstreuten Geist. Die Baumhaltung erzwingt einen einpunktigen Blick und einen langsamen Atem — dieselbe Kombination, die die Meditation kultiviert, aber leichter zugänglich für alle, die noch nicht still sitzen können."
+    },
+    "trikonasana": {
+      "english": "Dreieckshaltung",
+      "aliases": [
+        "Utthita Trikonasana (Erweitertes Dreieck)"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. In den Iyengar- und Krishnamacharya-Linien des 20. Jahrhunderts kodifiziert. Nicht im Hatha Yoga Pradipika Kap. 1 aufgeführt."
+      },
+      "instructions": [
+        "Stelle die Füße weit auseinander auf der Matte, etwa eine Beinlänge.",
+        "Drehe den rechten Fuß 90 Grad nach außen, sodass die Zehen nach rechts zeigen. Drehe den linken Fuß leicht nach innen.",
+        "Strecke beide Arme auf Schulterhöhe zur Seite, die Handflächen nach unten.",
+        "Strecke den rechten Arm so weit wie möglich nach vorne über das rechte Bein und verlängere die Körperseite.",
+        "Senke die rechte Hand zum Schienbein, Knöchel oder einem Yogablock — dorthin, wo deine Wirbelsäule lang bleibt.",
+        "Strecke den linken Arm gerade zur Decke. Staple die Schultern übereinander.",
+        "Schau unter dem oberen Arm nach oben, wenn der Nacken es zulässt. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Stelle die Füße weit auseinander, etwa eine Beinlänge. Drehe den rechten Fuß neunzig Grad nach außen, den linken Fuß leicht nach innen. Strecke die Arme auf Schulterhöhe zur Seite. Strecke den rechten Arm lang über das vordere Bein.",
+        "hold": "Neige dich aus der Hüfte und senke die rechte Hand zum Schienbein, Knöchel oder einem Block. Der linke Arm streckt sich gerade nach oben. Der Blick wandert hoch zur oberen Hand.",
+        "breathe": "Jedes Einatmen weitet die Brust zur Seitenwand; jedes Ausatmen verlängert hinaus durch den Scheitel.",
+        "exit": "Atme ein und richte dich zurück zum Stand auf, geführt vom oberen Arm. Stelle die Füße zusammen. Wir wiederholen die Übung auf der anderen Seite."
+      },
+      "contraindications": [
+        "Schwangere in der Spätschwangerschaft sollten den Stand schmaler stellen und die tiefe Seitneige vermeiden",
+        "Übe nicht bei einer kürzlichen Nackenverletzung — halte den Blick geradeaus statt nach oben",
+        "Vermeide die Haltung bei starkem Bluthochdruck oder niedrigem Blutdruck",
+        "Lass sie bei Durchfall oder akuter Migräne aus",
+        "Bei Herzerkrankungen halte den oberen Arm an der Hüfte statt über dem Kopf"
+      ],
+      "modifications": [
+        "Setze die untere Hand auf einen Block in beliebiger Höhe — greife nicht zum Knöchel, wenn das die Brust nach unten zwingt",
+        "Übe mit der hinteren Ferse an einer Wand für Stabilitäts-Feedback",
+        "Schau geradeaus statt nach oben, wenn der Nacken sich anspannt",
+        "Verkürze den Stand, wenn sich das vordere Bein überlastet anfühlt"
+      ],
+      "benefits": [
+        "Verlängert die Körperseite — schräge Bauchmuskeln, Zwischenrippenmuskeln und den Quadratus lumborum",
+        "Öffnet Hüften und Leiste in seitlicher Beugung (anders als die Vorwärtsbeuge)",
+        "Stärkt die Beine bei gleichzeitiger Verbesserung der seitlichen Wirbelsäulenbeweglichkeit",
+        "Vereint fast jedes Ausrichtungsprinzip in einer Haltung — eine Lehrhaltung für die Propriozeption"
+      ],
+      "reasoning": "Trikonasana arbeitet mit der Körperseite — einer Region, die das moderne Leben fast nie erreicht. Für Menschen mit chronischer Schulter- und Nackenspannung durch Schreibtischarbeit ist die seitliche Öffnung hier das, was Stunden des Faszienrollens nicht ersetzen können. Verwende ohne Scham einen Block unter der unteren Hand; fast jeder braucht einen."
+    },
+    "utkatasana": {
+      "english": "Stuhlhaltung",
+      "aliases": [
+        "Wilde Haltung",
+        "Kraftvolle Haltung"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. \"Utkata\" = wild, kraftvoll. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Stelle dich mit zusammenstehenden oder hüftbreiten Füßen hin, die Zehen zeigen nach vorne.",
+        "Atme ein und strecke beide Arme gerade über den Kopf, die Oberarme nahe den Ohren.",
+        "Atme aus und beuge die Knie, senke die Hüften, als würdest du dich auf einen Stuhl hinter dir setzen.",
+        "Verlagere dein Gewicht in die Fersen — du solltest mit den Zehen wackeln können.",
+        "Lehne den Oberkörper leicht nach vorne, damit die Brust offen bleibt.",
+        "Hebe die Fingerspitzen zur Decke. Lass die Schultern weg von den Ohren sinken.",
+        "Halte und atme. Einatmen zum Verlängern, Ausatmen zum Setzen."
+      ],
+      "voiceCues": {
+        "enter": "Stelle dich mit zusammenstehenden oder hüftbreiten Füßen hin. Atme ein und strecke die Arme über den Kopf, die Oberarme nahe den Ohren.",
+        "hold": "Atme aus und beuge die Knie, als würdest du dich auf einen Stuhl setzen. Verlagere das Gewicht in die Fersen — du solltest mit den Zehen wackeln können. Hebe dich durch die seitlichen Rippen.",
+        "breathe": "Jedes Einatmen verlängert die Wirbelsäule; jedes Ausatmen verwurzelt die Fersen. Die Oberschenkel arbeiten hart — das ist die Haltung.",
+        "exit": "Atme ein und strecke die Beine. Senke die Arme und schüttle die Beine aus."
+      },
+      "contraindications": [
+        "Übe nicht bei schwerer Knieverletzung oder einem kürzlichen Meniskusriss",
+        "Schwangere in der Spätschwangerschaft sollten die Tiefe der Hocke verringern",
+        "Vermeide die Haltung bei chronischer Schulterverletzung — halte die Hände an den Hüften statt über dem Kopf",
+        "Lass sie bei starkem niedrigem Blutdruck oder einer kürzlichen Knöchelverletzung aus"
+      ],
+      "modifications": [
+        "Hände an den Hüften oder im Gebet am Herzen bei Schulterproblemen",
+        "Setze dich auf die vordere Kante eines Stuhls, wenn das Standgleichgewicht unsicher ist",
+        "Verringere die Tiefe der Hocke — halb gebeugte Knie zählen auch",
+        "Lege einen Block zwischen die inneren Oberschenkel, um die Beine gleichmäßig zu aktivieren"
+      ],
+      "benefits": [
+        "Baut isometrische Kraft im Quadrizeps und in der Gesäßmuskulatur auf",
+        "Aktiviert die Körpermitte tief, um die Wirbelsäule unter Last aufrecht zu halten",
+        "Wirkt dem Haltungskollaps langen Sitzens entgegen",
+        "Wärmebildend — nützlich an kalten Morgen oder trägen, kapha-betonten Tagen"
+      ],
+      "reasoning": "Die Stuhlhaltung ist trügerisch anstrengend — 30 Sekunden fühlen sich wie eine Minute an, und genau das ist der Sinn. Wird in Vinyasa-Flows als kräftigende Klammer eingesetzt. Für Menschen, die sich unterbaut fühlen, ist dies die Haltung, die ihnen ihren Körper zurückgibt."
+    },
+    "virabhadrasanaIII": {
+      "english": "Krieger III",
+      "aliases": [
+        "Krieger 3",
+        "Flugzeughaltung"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. Die volle Gleichgewichtsvariante der Virabhadra-Trilogie. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Stelle dich mit hüftbreiten Füßen hin.",
+        "Verlagere dein gesamtes Gewicht auf den rechten Fuß. Beuge das rechte Knie leicht für mehr Stabilität.",
+        "Klappe aus der Hüfte nach vorne und hebe das linke Bein gerade nach hinten.",
+        "Strecke die Arme gerade nach vorne, wie ein Flugzeug.",
+        "Bilde eine lange Linie von den Fingerspitzen bis zur hinteren Ferse.",
+        "Halte beide Hüften auf gleicher Höhe — lass die angehobene Hüfte nicht nach oben drehen.",
+        "Richte den Blick auf einen Punkt am Boden, etwa einen Fuß vor dir. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Verlagere aus dem Stand das Gewicht auf den rechten Fuß. Klappe aus der Hüfte nach vorne und strecke das linke Bein nach hinten, parallel zum Boden. Strecke die Arme nach vorne wie ein Flugzeug.",
+        "hold": "Bilde eine lange Linie von den Fingerspitzen bis zur hinteren Ferse. Die Hüften bleiben auf gleicher Höhe — lass die angehobene Hüfte nicht nach oben drehen. Der Blick ruht einen Fuß vor dem Standzeh.",
+        "breathe": "Jeder Atemzug stabilisiert die Linie. Je kleiner der Atem, desto leichter das Gleichgewicht.",
+        "exit": "Setze den hinteren Fuß nach vorne zum Standfuß. Halte für einen Atemzug inne. Wir wiederholen die Übung auf der anderen Seite."
+      },
+      "contraindications": [
+        "Schwangere sollten ab dem zweiten Trimester nicht üben",
+        "Übe nicht bei starkem Bluthochdruck",
+        "Vermeide die Haltung bei einer kürzlichen Knie-, Hüft- oder Knöchelverletzung im Standbein",
+        "Lass sie bei starken Schmerzen im unteren Rücken aus"
+      ],
+      "modifications": [
+        "Übe mit den Fingerspitzen an einer Wand vor dir zur Gleichgewichtsstütze",
+        "Hände am Herzen statt über dem Kopf",
+        "Senke das hintere Bein zum Boden — die Höhe ist nicht das Ziel",
+        "Nutze einen Stuhl hinter dir, auf dem das angehobene Bein ruhen kann"
+      ],
+      "benefits": [
+        "Stärkt die Rückseite des Standbeins, die Gesäßmuskulatur und die Körpermitte",
+        "Trainiert die Propriozeption auf Hüfthöhe (ein waagerechtes Becken unter Einbeinlast)",
+        "Einpunktige Konzentration — großartig für Menschen mit Aufmerksamkeitsdrift",
+        "Baut die Haltungsausdauer für längere Halte und Umkehrhaltungen auf"
+      ],
+      "reasoning": "Krieger III ist die Integrationshaltung der Virabhadra-Trilogie — Gleichgewicht, Kraft und Konzentration in einer Form. Mach dir keine Sorgen, wenn sich das hintere Bein nicht zur Parallele heben lässt; die Praxis ist die stabile waagerechte Linie, nicht die Höhe."
+    },
+    "parsvakonasana": {
+      "english": "Seitwinkelhaltung",
+      "aliases": [
+        "Erweiterter Seitwinkel",
+        "Utthita Parsvakonasana"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. \"Parsva\" = Seite, \"kona\" = Winkel. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Stelle die Füße weit auseinander auf der Matte, etwa eine Beinlänge.",
+        "Drehe den rechten Fuß 90 Grad nach außen. Drehe den linken Fuß leicht nach innen.",
+        "Beuge das rechte Knie Richtung 90 Grad, das Knie folgt der Linie über dem Knöchel.",
+        "Senke den rechten Unterarm auf den rechten Oberschenkel, ODER setze die rechte Hand auf einen Block außerhalb des rechten Fußes.",
+        "Strecke den linken Arm über den Kopf, in einer Linie mit der Wirbelsäule. Die Handfläche zeigt zum Boden.",
+        "Öffne die Brust zur Decke und drehe den Oberkörper leicht nach oben.",
+        "Schau unter dem oberen Arm nach oben, wenn dein Nacken es zulässt. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Drehe aus einem weiten Stand den rechten Fuß neunzig Grad nach außen. Beuge das rechte Knie Richtung neunzig Grad. Senke den rechten Unterarm auf den rechten Oberschenkel oder die rechte Hand auf einen Block außerhalb des rechten Fußes.",
+        "hold": "Strecke den linken Arm über den Kopf, in einer Linie mit der Wirbelsäule, die Handfläche zum Boden. Öffne die Brust zur Decke. Der Blick wandert unter dem oberen Arm nach oben, wenn der Nacken es zulässt.",
+        "breathe": "Jedes Einatmen weitet die unteren Rippen; jedes Ausatmen verwurzelt den hinteren Fuß.",
+        "exit": "Drücke durch beide Füße, um zum Stand zurückzukehren. Wir wiederholen die Übung auf der anderen Seite."
+      },
+      "contraindications": [
+        "Schwangere in der Spätschwangerschaft sollten den Stand schmaler stellen und einen Block verwenden",
+        "Übe nicht bei schwerer Knieverletzung im vorderen Bein",
+        "Vermeide die Haltung bei Nackenverletzung — halte den Blick geradeaus",
+        "Lass sie bei Schlaflosigkeit aus (diese Haltung belebt — keine Wahl vor dem Schlafengehen)"
+      ],
+      "modifications": [
+        "Unterarm auf dem vorderen Oberschenkel statt der Hand am Boden",
+        "Block unter der unteren Hand in beliebiger Höhe",
+        "Oberer Arm an der Hüfte, wenn die Schulter ermüdet",
+        "Verkürze den Stand, wenn das vordere Knie nicht über den Knöchel folgen kann"
+      ],
+      "benefits": [
+        "Verlängert die gesamte Körperseite vom äußeren Fuß bis zu den Fingerspitzen",
+        "Stärkt das vordere Bein durch den langen Halt",
+        "Öffnet die Brust in seitlicher Beugung — eine andere Dehnung als bei Vorwärtsbeugen",
+        "Vereint Ausdauer, Kraft und seitliche Beweglichkeit in einer Form"
+      ],
+      "reasoning": "Im Seitwinkel lernen Menschen, wie sich eine 'lange Körperseite' tatsächlich anfühlt. Die Geometrie zwingt die unteren Rippen zur Verlängerung — kaum eine andere Haltung erreicht dieselbe seitliche Dehnung mit einer so stabilen Basis."
     }
   }
 }
