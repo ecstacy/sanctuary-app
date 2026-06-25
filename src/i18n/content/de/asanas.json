@@ -501,6 +501,266 @@
         "Vereint Ausdauer, Kraft und seitliche Beweglichkeit in einer Form"
       ],
       "reasoning": "Im Seitwinkel lernen Menschen, wie sich eine 'lange Körperseite' tatsächlich anfühlt. Die Geometrie zwingt die unteren Rippen zur Verlängerung — kaum eine andere Haltung erreicht dieselbe seitliche Dehnung mit einer so stabilen Basis."
+    },
+    "parsvottanasana": {
+      "english": "Pyramidenhaltung",
+      "aliases": [
+        "Intensive Seitdehnung"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. \"Parsva\" = Seite, \"ut-tāna\" = intensive Dehnung. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Stelle dich an den vorderen Rand deiner Matte, Füße zusammen.",
+        "Mach mit dem linken Fuß einen Schritt nach hinten, etwa einen Meter. Beide Füße bleiben flach.",
+        "Drehe den hinteren Fuß leicht nach außen, etwa 45 Grad.",
+        "Richte die Hüften zur Vorderseite der Matte aus.",
+        "Lege die Hände auf die Hüften ODER bring sie hinter dem Rücken ins umgekehrte Gebet.",
+        "Atme ein und verlängere die Wirbelsäule nach oben.",
+        "Atme aus und klappe aus der Hüfte nach vorne, senke die Brust über das vordere Bein. Halte das vordere Bein gestreckt (oder leicht gebeugt). Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Mach mit dem rechten Fuß einen Schritt nach vorne, etwa einen Meter. Richte die Hüften nach vorne aus. Hände auf den Hüften oder im umgekehrten Gebet hinter dem Rücken.",
+        "hold": "Atme ein, um die Wirbelsäule zu verlängern. Atme aus und klappe aus der Hüfte nach vorne, das vordere Bein bleibt gestreckt. Führe mit der Brust, nicht mit dem Kopf.",
+        "breathe": "Jedes Einatmen verlängert; jedes Ausatmen faltet eine Spur tiefer. Das vordere Bein arbeitet — überstrecke das Knie nicht.",
+        "exit": "Atme ein und richte dich zurück zum Stand auf. Wir wiederholen die Übung auf der anderen Seite."
+      },
+      "contraindications": [
+        "Schwangere sollten sich nicht tief falten — halte eine lange Wirbelsäule und eine flache Beuge",
+        "Übe nicht bei Bandscheibenvorfall oder schwerer Verletzung des unteren Rückens",
+        "Vermeide die Haltung bei sehr engen hinteren Oberschenkeln, die den unteren Rücken ins Runden ziehen",
+        "Lass sie bei starkem Bluthochdruck aus"
+      ],
+      "modifications": [
+        "Lege Blöcke unter die Hände neben dem vorderen Fuß",
+        "Beuge das vordere Knie großzügig, um die Wirbelsäule lang zu halten",
+        "Hände durchgehend auf den Hüften — lass das umgekehrte Gebet aus",
+        "Übe mit der hinteren Ferse an einer Wand für mehr Stabilität"
+      ],
+      "benefits": [
+        "Tiefe Dehnung des hinteren Oberschenkels des vorderen Beins",
+        "Öffnet den Hüftbeuger und den inneren Oberschenkel des hinteren Beins",
+        "Bei umgekehrtem Gebet: öffnet Handgelenke, Unterarme und Schultern",
+        "Engerer Fokus als die stehende Vorwärtsbeuge — Fehlhaltungen sind leichter zu erkennen"
+      ],
+      "reasoning": "Die Pyramide ist die stehende Vorwärtsbeuge mit Asymmetrie — sie isoliert die hintere Kette eines Beins nach dem anderen, was für Menschen mit einer engeren Seite wirksamer ist. Verwende bedingungslos Blöcke; das Erreichen des Bodens ist nicht die Praxis."
+    },
+    "prasaritaPadottanasana": {
+      "english": "Grätsch-Vorwärtsbeuge",
+      "aliases": [
+        "Weitbeinige stehende Vorwärtsbeuge"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. \"Prasarita\" = gespreizt, \"pāda\" = Fuß. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Stelle dich in die Mitte deiner Matte.",
+        "Stelle die Füße weit auseinander, etwa eine Beinlänge, beide Füße parallel und nach vorne zeigend.",
+        "Drücke das Gewicht gleichmäßig in beide Füße. Aktiviere die Oberschenkel sanft.",
+        "Lege die Hände auf die Hüften. Atme ein und verlängere die Wirbelsäule nach oben.",
+        "Atme aus und klappe aus der Hüfte nach vorne, der Rücken bleibt lang.",
+        "Bring die Hände zum Boden zwischen die Füße, die Finger in einer Linie mit den Zehen.",
+        "Lass den Scheitel zum Boden streben. Beuge die Knie, wenn sich die hinteren Oberschenkel eng anfühlen."
+      ],
+      "voiceCues": {
+        "enter": "Stelle die Füße weit auseinander, etwa eine Beinlänge, beide Füße parallel und nach vorne zeigend. Hände auf den Hüften. Atme ein und verlängere die Wirbelsäule.",
+        "hold": "Atme aus und klappe aus der Hüfte nach vorne. Bring die Hände zum Boden zwischen die Füße, die Finger in einer Linie mit den Zehen. Lass den Scheitel zum Boden streben.",
+        "breathe": "Jedes Ausatmen lässt den Kopf ein wenig tiefer sinken. Die Beine bleiben stark — aktiviere die Oberschenkel, um den unteren Rücken zu schützen.",
+        "exit": "Hände auf die Hüften. Atme ein und richte dich mit flachem Rücken zum Stand auf. Stelle die Füße zusammen."
+      },
+      "contraindications": [
+        "Schwangere sollten sich nicht tief falten — übe stattdessen mit den Händen auf einer Stuhlfläche",
+        "Übe nicht bei Bandscheibenvorfall oder schwerer Verletzung des unteren Rückens",
+        "Lass sie bei starkem Bluthochdruck oder einer kürzlichen Augenoperation aus",
+        "Vermeide die Haltung, wenn dir schwindelig wird, sobald der Kopf unter dem Herzen ist"
+      ],
+      "modifications": [
+        "Hände auf Yogablöcken, wenn der Boden weit entfernt ist",
+        "Beuge die Knie nach Bedarf, um die Wirbelsäule lang zu halten",
+        "Nutze eine Stuhlfläche unter der Brust als vollständig gestützte Variante",
+        "Wandere mit den Händen nach vorne (nicht nach unten) für eine leichtere Variante, die die Wirbelsäulenlänge betont"
+      ],
+      "benefits": [
+        "Löst die inneren Oberschenkel und Adduktoren — eine andere Dehnung als bei Beugen mit geschlossenen Füßen",
+        "Die leichte Umkehrhaltung beruhigt das Nervensystem",
+        "Entlastet die Wirbelsäule durch die Schwerkraft",
+        "Stabile breite Basis — geringere Gleichgewichtsanforderung als andere Beugen, für die meisten zugänglich"
+      ],
+      "reasoning": "Die weitbeinige Variante ist bei engen hinteren Oberschenkeln zugänglicher als Uttanasana — die breitere Basis verringert die Anforderung an jedes Bein. Nützlich in Abfolgen zum Stressabbau als beruhigende Haltung mit weiterhin aktiven Beinen."
+    },
+    "anjaneyasana": {
+      "english": "Tiefer Ausfallschritt",
+      "aliases": [
+        "Halbmond-Ausfallschritt (ähnlich)"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung, benannt nach Anjaneya (einem Namen Hanumans). Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Komme in den Vierfüßlerstand auf Hände und Knie.",
+        "Mach mit dem rechten Fuß einen Schritt nach vorne zwischen die Hände.",
+        "Senke das hintere linke Knie sanft zum Boden. Lege den Fußrücken auf die Matte, indem du die Zehen aufrollst.",
+        "Schiebe das hintere Knie ein paar Zentimeter zurück, wenn es sich intensiv anfühlt. Polstere das Knie bei Unbehagen mit einer gefalteten Decke.",
+        "Drücke beide Hände in den Boden und richte den Oberkörper auf.",
+        "Atme ein und schwinge beide Arme über den Kopf, die Fingerspitzen streben zur Decke.",
+        "Senke die Hüften zum Boden, während du dich durch die Brust hebst. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Mach aus dem Vierfüßlerstand mit dem rechten Fuß einen Schritt nach vorne zwischen die Hände. Senke das hintere Knie zum Boden und rolle die Zehen aus.",
+        "hold": "Atme ein und schwinge die Arme über den Kopf, die Fingerspitzen streben zur Decke. Richte die Hüften nach vorne aus und lass sie zum Boden sinken.",
+        "breathe": "Jedes Einatmen hebt dich durch Brust und Arme; jedes Ausatmen verwurzelt das hintere Knie.",
+        "exit": "Senke die Hände zum Boden und tritt zurück in den Vierfüßlerstand. Wir wiederholen die Übung auf der anderen Seite."
+      },
+      "contraindications": [
+        "Schwangere in der Spätschwangerschaft sollten die Hände an den Hüften halten und die Tiefe des Ausfallschritts verringern",
+        "Übe nicht bei Knieschmerzen — polstere das hintere Knie mit einer gefalteten Decke",
+        "Lass sie bei sehr hohem Blutdruck aus",
+        "Vermeide die Haltung bei einer kürzlichen Schulteroperation — halte die Hände an den Hüften"
+      ],
+      "modifications": [
+        "Lege eine gefaltete Decke unter das hintere Knie zur Polsterung",
+        "Hände auf dem vorderen Oberschenkel statt über dem Kopf bei Schulterproblemen",
+        "Verringere die Tiefe des Ausfallschritts, wenn das vordere Knie sich anspannt",
+        "Nutze Blöcke unter den Händen für eine tiefere Hüftdehnung mit Armstütze"
+      ],
+      "benefits": [
+        "Dehnt die Hüftbeuger — der chronische Übeltäter hinter schreibtischbedingten Schmerzen im unteren Rücken",
+        "Öffnet den vorderen Quadrizeps des hinteren Beins",
+        "Verlängert durch Wirbelsäule und Brust",
+        "Belebend, ohne aggressiv zu sein — eine großartige Morgenhaltung"
+      ],
+      "reasoning": "Wenn du am Schreibtisch sitzt, sind deine Hüftbeuger verkürzt. Anjaneyasana ist die direkteste Maßnahme dagegen. Der 45-Sekunden-Halt pro Seite ist der Moment, in dem die fasziale Lösung tatsächlich ankommt."
+    },
+    "utthitaHastaPadangusthasana": {
+      "english": "Hand-zu-großem-Zeh-Haltung",
+      "aliases": [
+        "Stehende Hand-zu-großem-Zeh"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. \"Utthita\" = ausgestreckt, \"hasta\" = Hand, \"pāda-aṅguṣṭha\" = großer Zeh. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Stelle dich auf beide Füße, das Gewicht gleichmäßig verteilt.",
+        "Verlagere dein gesamtes Gewicht auf den linken Fuß. Beuge das Standknie leicht für das Gleichgewicht.",
+        "Hebe das rechte Knie zur Brust, bis der Oberschenkel parallel zum Boden ist.",
+        "Lege einen Yogagurt um den Fußballen des rechten Fußes und halte beide Enden mit der rechten Hand. (Oder hake den großen Zeh mit Zeige- und Mittelfinger ein.)",
+        "Strecke das rechte Bein langsam gerade nach vorne. Verlängere die Wirbelsäule nach oben.",
+        "Halte die Schultern entspannt und den Blick geradeaus.",
+        "Das angehobene Bein muss sich nicht strecken — die Höhe ist nicht das Ziel, die Länge ist es. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Verlagere aus dem Stand das Gewicht auf den linken Fuß. Hebe das rechte Knie auf Hüfthöhe. Hake den rechten großen Zeh mit dem rechten Zeige- und Mittelfinger ein (oder nutze einen Gurt um den Fuß).",
+        "hold": "Strecke das rechte Bein langsam gerade nach vorne. Verlängere die Wirbelsäule. Halte das linke Standbein aktiv, die Kniescheibe angehoben.",
+        "breathe": "Jeder Atemzug stabilisiert den Standfuß. Mach dir keine Sorgen, wenn sich das angehobene Bein nicht strecken lässt — die Höhe ist nicht das Ziel.",
+        "exit": "Beuge das rechte Knie wieder heran. Senke den Fuß. Halte inne. Wechsle die Seite."
+      },
+      "contraindications": [
+        "Übe nicht bei schwerer Verletzung des unteren Rückens",
+        "Lass sie bei einem Riss des hinteren Oberschenkels oder schwerem Ischias aus",
+        "Vermeide die Haltung bei Gleichgewichtsstörungen ohne eine Wand im Rücken",
+        "Schwangere sollten eine Wand nutzen und das angehobene Bein niedrig halten"
+      ],
+      "modifications": [
+        "Nutze einen Yogagurt um den angehobenen Fuß, wenn die Hand den Zeh nicht erreicht",
+        "Halte das angehobene Knie gebeugt — die Höhe ist nicht das Ziel, die Länge ist es",
+        "Übe mit dem Rücken zur Wand für Gleichgewichtsstütze",
+        "Leichtere Variante: setze den angehobenen Fuß auf eine Stuhlfläche vor dir"
+      ],
+      "benefits": [
+        "Vereint Gleichgewicht + Beweglichkeit + Rumpfkraft in einer fordernden Form",
+        "Tiefe Dehnung des hinteren Oberschenkels mit aktiver Beteiligung (bei engen Menschen besser als passive Beugen)",
+        "Trainiert das gesamte propriozeptive System des Standbeins",
+        "Entwickelt den fokussierten Blick, der für Umkehrhaltungen und Armbalancen nötig ist"
+      ],
+      "reasoning": "Diese Haltung lehrt, dass Beweglichkeit ohne Kraft Vorführung ist und Kraft ohne Beweglichkeit Starrheit — du brauchst beides. Nutze den Gurt, kämpfe nicht um den Zeh; der Gurt macht die Haltung nicht leichter, er macht die richtige erst möglich."
+    },
+    "garudasana": {
+      "english": "Adlerhaltung",
+      "aliases": [
+        "Adler"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung, benannt nach Garuda, dem göttlichen Adler Vishnus. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Stelle dich auf beide Füße. Beuge beide Knie leicht.",
+        "Verlagere dein Gewicht auf den linken Fuß.",
+        "Kreuze den rechten Oberschenkel über den linken, als würdest du mit überschlagenen Beinen auf einem Stuhl sitzen.",
+        "Wenn zugänglich, hake den rechten Fuß hinter der linken Wade ein. Andernfalls halte die rechten Zehen für das Gleichgewicht leicht am Boden.",
+        "Strecke die Arme gerade nach vorne auf Schulterhöhe.",
+        "Kreuze den linken Ellbogen im rechten Winkel über den rechten. Verwickle die Unterarme und bring die Handflächen zur Berührung (oder die Handrücken, wenn die Handflächen sich nicht erreichen).",
+        "Hebe die Ellbogen auf Schulterhöhe. Setze dich etwas tiefer ins Standbein. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Stehe auf dem linken Fuß mit leicht gebeugtem Knie. Kreuze den rechten Oberschenkel über den linken. Wenn zugänglich, hake den rechten Fuß hinter der linken Wade ein.",
+        "hold": "Strecke die Arme nach vorne. Kreuze den linken Ellbogen im rechten Winkel über den rechten. Verwickle die Unterarme und bring die Handflächen zur Berührung (oder die Handrücken). Hebe die Ellbogen auf Schulterhöhe.",
+        "breathe": "Jeder Atemzug breitet sich durch den oberen Rücken aus. Die Form ist eine Umarmung für den Körper — lass sie sich so anfühlen.",
+        "exit": "Entwirre die Arme. Löse die Beinkreuzung. Stehe für einen Atemzug auf beiden Füßen. Wechsle die Seite."
+      },
+      "contraindications": [
+        "Übe nicht bei einer Knie-, Hüft- oder Schulterverletzung",
+        "Schwangere sollten die Beinverschlingung ganz auslassen",
+        "Vermeide die Haltung bei einer Schultersteife oder Rotatorenmanschettenverletzung",
+        "Lass sie bei schweren Gleichgewichtsstörungen aus"
+      ],
+      "modifications": [
+        "Kreuze die Beine, ohne den Fuß hinter der Wade einzuhaken (Stützvariante)",
+        "Hände am Herzen im Gebet statt der vollen Armverschlingung",
+        "Halte die gegenüberliegenden Schultern, wenn die Armverschlingung nicht reicht",
+        "Übe neben einer Wand für Gleichgewichtsstütze"
+      ],
+      "benefits": [
+        "Löst die Rautenmuskeln und den oberen Trapezmuskel — genau den Bereich, den Schreibtischarbeit überspannt",
+        "Baut Einbeinstabilität mit einer asymmetrischen Last auf",
+        "Konzentrationsübung — die Verschlingung verlangt einen ruhigen Blick und langsamen Atem",
+        "Erzeugt eine Kompression, die beim Lösen eine spürbare Welle von Wärme bringt"
+      ],
+      "reasoning": "Der Adler ist die effizienteste Lösung für den oberen Rücken in der Standserie. Die Armverschlingung zielt genau dorthin, wo Tastaturarbeit verspannt. Nutze die Modifikationen ohne Scham — Hände-am-Herzen ist eine legitime Haltung; du erhältst den Großteil des Nutzens weiterhin durch die Beine."
+    },
+    "natarajasana": {
+      "english": "Haltung des Tänzers",
+      "aliases": [
+        "Herr des Tanzes",
+        "Stehender Bogen"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung, benannt nach Nataraja (Shiva als kosmischer Tänzer). Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Stelle dich auf beide Füße, das Gewicht gleichmäßig verteilt.",
+        "Verlagere dein Gewicht auf den linken Fuß. Beuge das linke Knie leicht für Stabilität.",
+        "Beuge das rechte Knie und hebe den rechten Fuß hinter dir an.",
+        "Greife mit der rechten Hand nach hinten und fasse den rechten Knöchel von innen. (Nutze einen um den Fuß gelegten Yogagurt, wenn deine Hand nicht reicht.)",
+        "Strecke den linken Arm nach vorne auf Schulterhöhe als Gegengewicht.",
+        "Drücke den rechten Fuß zurück in die rechte Hand und hebe das Bein nach oben und hinten.",
+        "Öffne die Brust nach vorne. Finde deinen Blick auf einem ruhigen Punkt. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Stehe auf dem linken Fuß. Beuge das rechte Knie und fasse mit der rechten Hand den rechten Knöchel von innen (oder einen um den Fuß gelegten Gurt). Strecke den linken Arm als Gegengewicht nach vorne.",
+        "hold": "Drücke den rechten Fuß zurück in die rechte Hand und hebe das Bein nach oben und hinten. Die Brust öffnet sich nach vorne. Halte das Standknie weich.",
+        "breathe": "Jeder Atemzug findet die schwebende Balance. Die Anhebung entsteht aus dem Fuß, der gegen die Hand drückt, nicht aus der ziehenden Hand.",
+        "exit": "Löse den Fuß langsam zum Boden. Stehe auf beiden Füßen. Wechsle die Seite."
+      },
+      "contraindications": [
+        "Übe nicht bei schwerer Verletzung des unteren Rückens",
+        "Lass sie bei einer Schulterverletzung aus, die die Außenrotation einschränkt",
+        "Schwangere sollten nicht üben — die Tiefe der Rückbeuge und die Gleichgewichtsanforderung sind nicht sicher",
+        "Vermeide die Haltung bei starkem Bluthochdruck",
+        "Lass sie bei Schwindel oder Gleichgewichtsstörungen aus"
+      ],
+      "modifications": [
+        "Nutze einen Yogagurt um den angehobenen Fuß, wenn die Hand nicht reicht",
+        "Übe neben einer Wand, die Fingerspitzen berühren sie für das Gleichgewicht",
+        "Verringere die Tiefe — halte die Brust näher zur Aufrechten, wenn der untere Rücken sich meldet",
+        "Anfängervariante: halte den angehobenen Fuß, aber lass die Bewegung des Zurück-und-Hochdrückens aus"
+      ],
+      "benefits": [
+        "Vereint Gleichgewicht + Rückbeuge + Hüftbeugerdehnung in einer Form",
+        "Öffnet die Vorderseite der Hüfte des Standbeins auf dynamische Weise",
+        "Konzentration + Ausdauer — die Haltung lehrt anhaltenden Fokus",
+        "Erzeugt eine kardiovaskuläre Reaktion ohne aerobes Training"
+      ],
+      "reasoning": "Die Haltung des Tänzers ist eine der wenigen, die fast jede Fähigkeit der Standhaltungen vereint — Gleichgewicht, Beweglichkeit, Kraft und Rückbeuge. Hebe sie dir für Menschen auf, die bereits ein stabiles Vrksasana und Trikonasana haben. Nutze einen Gurt; das Greifen des Fußes ist theatralisch, nicht therapeutisch."
     }
   }
 }
