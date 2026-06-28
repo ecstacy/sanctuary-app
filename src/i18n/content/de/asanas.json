@@ -1780,6 +1780,269 @@
         "Zugänglicher als Supta Baddha Konasana für Menschen mit sehr engen Hüften"
       ],
       "reasoning": "Die liegende bequeme Haltung ist der sanfteste liegende Hüftöffner im Katalog. Nutze sie als Schlusshaltung in Abfolgen zum Stressabbau oder als Ersatz für Savasana an Tagen, an denen sich das volle liegende Savasana zu entblößt anfühlt. Das Bolster hinter der Wirbelsäule macht sie erholsam statt nur liegend."
+    },
+    "bhujangasana": {
+      "english": "Kobrahaltung",
+      "aliases": [
+        "Sarpasana (Schlangenhaltung, einfachere Variante)"
+      ],
+      "source": {
+        "note": "Gehört zur weiteren Hatha-Tradition; das Hatha Yoga Pradipika Kap. 1 führt sie nicht direkt auf. Moderne Asana-Linien (Krishnamacharya, Sivananda) behandeln sie als grundlegende Rückbeuge."
+      },
+      "instructions": [
+        "Lege dich auf einer weichen Unterlage auf den Bauch. Die Stirn ruht auf der Matte.",
+        "Bring die Handflächen unter die Schultern, die Ellbogen nah an die Rippen.",
+        "Drücke die Fußrücken in den Boden, die Beine hüftbreit auseinander.",
+        "Atme ein und löse die Brust mit der Rückenmuskulatur vom Boden, NICHT mit den Händen.",
+        "Halte die Ellbogen leicht gebeugt. Die Schultern ziehen weg von den Ohren.",
+        "Hebe nur so hoch, wie es sich im unteren Rücken bequem anfühlt.",
+        "Jedes Einatmen verlängert die Wirbelsäule; jedes Ausatmen mildert die Anhebung leicht."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Bauch. Bring die Handflächen unter die Schultern, die Ellbogen nah an die Rippen. Die Fußrücken drücken in den Boden.",
+        "hold": "Atme ein und löse die Brust mit der Rückenmuskulatur vom Boden, nicht mit den Händen. Die Ellbogen bleiben leicht gebeugt. Die Schultern ziehen weg von den Ohren.",
+        "breathe": "Atme in die offene Brust. Jedes Einatmen verlängert die Wirbelsäule; jedes Ausatmen lässt den unteren Rücken weicher werden.",
+        "exit": "Atme aus und senke die Brust. Drehe eine Wange zum Boden und ruhe mit den Armen an den Seiten."
+      },
+      "contraindications": [
+        "Schwangere sollten nicht über das erste Trimester hinaus üben",
+        "Vermeide die Haltung nach einer kürzlichen Bauch-, Rippen- oder Brustoperation",
+        "Übe nicht bei einem Bandscheibenvorfall oder einer akuten Verletzung des unteren Rückens",
+        "Bei Karpaltunnelsyndrom oder Handgelenksschmerzen übe stattdessen die Sphinx (auf den Unterarmen)",
+        "Lass sie bei akuten Kopfschmerzen oder Migräne aus"
+      ],
+      "modifications": [
+        "Sphinx-Haltung (Unterarme auf der Matte) bei empfindlichen Handgelenken",
+        "Hebe nur so hoch, wie es bequem ist — eine Mini-Kobra ist eine legitime Version",
+        "Lege eine gefaltete Decke unter das Becken, um die Kompression des unteren Rückens zu verringern"
+      ],
+      "benefits": [
+        "Stärkt die Rückenstrecker und entlastet die Brustwirbelsäule",
+        "Wirkt der Vorwärtskopfhaltung von langem Sitzen entgegen",
+        "Stimuliert die Bauchorgane und unterstützt die Verdauung",
+        "Belebend, ohne aerob zu sein — nützlich, wenn niedrige Energie die Beschwerde ist"
+      ],
+      "reasoning": "Rückbeugen sind Herzöffner, die dem Haltungskollaps langen Sitzens und der Schwere eines Kapha-Ungleichgewichts entgegenwirken. Bhujangasana ist der sanfteste Einstieg in die Wirbelsäulenstreckung, für die meisten Übenden am ersten Tag zugänglich."
+    },
+    "setuBandhaSarvangasana": {
+      "english": "Brückenhaltung",
+      "aliases": [
+        "Setu Bandhasana",
+        "Gestützte Brücke"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. Oft als zugängliche Alternative oder Vorbereitung auf Sarvangasana gelehrt (das selbst eine moderne Ableitung der Viparita-Karani-Mudra-Familie des Hatha Yoga Pradipika ist)."
+      },
+      "instructions": [
+        "Lege dich auf einer weichen Unterlage auf den Rücken.",
+        "Beuge beide Knie und stelle die Füße flach auf den Boden, hüftbreit auseinander.",
+        "Bring die Fersen nah an die Sitzbeine — nah genug, dass deine Fingerspitzen die Fersen gerade streifen.",
+        "Lass die Arme an den Seiten ruhen, die Handflächen nach unten.",
+        "Atme ein und drücke die Füße fest in den Boden. Hebe die Hüften zur Decke.",
+        "Rolle die Schultern darunter und verschränke die Hände unter dir, ODER lass die Handflächen unten.",
+        "Hebe die Brust zum Kinn (nicht das Kinn zur Brust). Für die erholsame Variante: lege einen Yogablock unter das Kreuzbein."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Rücken. Beuge die Knie und stelle die Füße flach, hüftbreit auseinander, die Fersen nah an den Sitzbeinen. Die Arme ruhen an den Seiten, die Handflächen nach unten.",
+        "hold": "Drücke durch die Füße und hebe die Hüften zur Decke. Rolle die Schultern darunter und verschränke die Finger unter dir, wenn es sich anbietet. Halte das Kinn leicht von der Brust entfernt.",
+        "breathe": "Jedes Einatmen weitet die Schlüsselbeine; jedes Ausatmen drückt die Füße ein wenig fester in den Boden.",
+        "exit": "Löse die Hände. Senke die Wirbelsäule Wirbel für Wirbel, vom oberen Rücken bis zum Steißbein. Umarme kurz die Knie."
+      },
+      "contraindications": [
+        "Schwangere sollten nach dem ersten Trimester nicht flach auf dem Rücken liegen",
+        "Übe nicht bei einer kürzlichen Nackenverletzung — drehe den Kopf in der Haltung niemals",
+        "Vermeide die Haltung bei akutem Bandscheibenvorfall oder starken Schmerzen im unteren Rücken",
+        "Lass sie aus, wenn du starken Reflux hast, der sich im Liegen verschlimmert"
+      ],
+      "modifications": [
+        "Lege einen Yogablock unter das Kreuzbein (gestützte Brücke) für eine vollständig passive, erholsame Version",
+        "Lass die Arme an den Seiten, wenn das Rollen auf die Schultern unangenehm ist",
+        "Drücke einen Block zwischen die inneren Oberschenkel, um zu aktivieren, ohne dich anzustrengen",
+        "Verringere die Anhebung, wenn der untere Rücken sich eingeklemmt anfühlt — die Höhe ist nicht das Ziel"
+      ],
+      "benefits": [
+        "Stärkt die Gesäßmuskulatur, die hinteren Oberschenkel und die hintere Kette",
+        "Öffnet die Brust und die Vorderlinie und gleicht die Vorwärtskopfhaltung aus",
+        "Leichte Umkehrhaltung — das Herz liegt über dem Kopf und unterstützt ruhigen Fokus",
+        "Die gestützte Variante (Block unter dem Kreuzbein) ist eine der verlässlichsten abendlichen Haltungen zum Stressabbau"
+      ],
+      "reasoning": "Die Brücke ist die vielseitigste Haltung in unserem Katalog — sie wirkt als belebende Morgenpraxis (aktiv, angehoben) oder als zutiefst erholsame Abendpraxis (auf einem Block gestützt). Nützlich, wenn du die Vorteile der Wirbelsäulenstreckung willst, ohne dich auf eine tiefere Rückbeuge festzulegen. Die gestützte Variante vor dem Schlafengehen ist zuverlässig besser als eine Schlaftablette."
+    },
+    "dhanurasana": {
+      "english": "Bogenhaltung",
+      "aliases": [
+        "Bogen"
+      ],
+      "source": {
+        "note": "Ausdrücklich im Hatha Yoga Pradipika Kap. 1 benannt. Das Sanskrit \"dhanus\" bedeutet Schützenbogen — der Körper bildet eine Bogenform, die Arme wirken als Sehne."
+      },
+      "instructions": [
+        "Lege dich auf einer weichen Unterlage auf den Bauch. Die Stirn ruht auf der Matte.",
+        "Beuge beide Knie und bring die Fersen zum Gesäß.",
+        "Greife mit beiden Händen nach hinten und fasse die AUSSENSEITEN deiner Knöchel.",
+        "Die Knie bleiben etwa hüftbreit auseinander — sie neigen zum Spreizen; bring sie heran.",
+        "Atme ein und drücke die Füße zurück in die Hände, während du die Brust vom Boden hebst.",
+        "Der Körper bildet einen Bogen — Brust und Oberschenkel heben sich, die Arme sind die Bogensehne.",
+        "Jeder Atemzug wiegt den Bogen sanft. Nutze einen zwischen die Knöchel gelegten Yogagurt, wenn deine Hände nicht reichen."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Bauch. Beuge beide Knie und greife mit den Händen nach hinten, um die Außenseiten der Knöchel zu fassen. Die Knie bleiben hüftbreit auseinander.",
+        "hold": "Atme ein und drücke die Füße zurück in die Hände, während du Brust und Oberschenkel vom Boden hebst. Die Bogenform — der Körper krümmt sich, die Arme sind die Bogensehne.",
+        "breathe": "Jeder Atemzug wiegt den Bogen sanft. Die Anhebung kommt davon, dass die Beine in die Hände drücken, nicht von der Armkraft.",
+        "exit": "Atme aus und löse die Füße. Senke Brust und Oberschenkel zum Boden. Drehe eine Wange nach unten und ruhe mit den Armen an den Seiten."
+      },
+      "contraindications": [
+        "Schwangere sollten nicht üben — die Bauchlage ist unsicher",
+        "Übe nicht bei Bandscheibenvorfall, schwerer Verletzung des unteren Rückens oder einer kürzlichen Bauchoperation",
+        "Lass sie bei hohem oder niedrigem Blutdruck aus",
+        "Vermeide die Haltung bei Nackenverletzung",
+        "Übe nicht bei akuter Migräne oder starken Kopfschmerzen",
+        "Lass sie nach dem Essen aus — warte 3-4 Stunden"
+      ],
+      "modifications": [
+        "Halber Bogen (Ardha Dhanurasana) — halte jeweils einen Knöchel",
+        "Nutze einen um beide Knöchel gelegten Yogagurt, wenn die Hände nicht reichen",
+        "Verringere die Anhebung — ein Mini-Bogen ist eine legitime Haltung für neuere Rücken",
+        "Übe auf einer gefalteten Decke unter den Hüftknochen, um den Bodendruck zu verringern"
+      ],
+      "benefits": [
+        "Die stärkste Wirbelsäulenstreckung der Bauchserie — öffnet den gesamten Vorderkörper",
+        "Dehnt gleichzeitig die Quadrizeps und die Hüftbeuger — beides selten",
+        "Komprimiert und stimuliert die Bauchorgane",
+        "HYP-benannt — verbindet moderne Menschen mit einer der grundlegenden Formen, die die ursprüngliche Tradition vorschrieb"
+      ],
+      "reasoning": "Dhanurasana ist eine echte Rückbeuge — nicht die sanfte Kobra der Anfängerabfolgen. Die Kombination aus Beinhub, Brusthub und Handgriff arbeitet mit der gesamten hinteren Kette in Streckung. Nutze einen Gurt, wenn die Hände die Knöchel nicht erreichen; der Gurt macht die Haltung nicht leicht. Hebe sie dir für Menschen auf, die bereits ein stabiles Bhujangasana und Setu Bandha haben."
+    },
+    "salabhasana": {
+      "english": "Heuschreckenhaltung",
+      "aliases": [
+        "Heuschrecke"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. \"Śalabha\" = Heuschrecke. Nicht im Hatha Yoga Pradipika Kap. 1 aufgeführt."
+      },
+      "instructions": [
+        "Lege dich auf einer weichen Unterlage auf den Bauch. Die Stirn ruht auf der Matte.",
+        "Strecke die Arme an den Körperseiten aus, die Handflächen nach unten oder nach oben.",
+        "Drücke die Fußrücken in den Boden, die Beine hüftbreit auseinander.",
+        "Atme ein und hebe Brust, Arme und Beine gleichzeitig vom Boden.",
+        "Strecke dich nach vorne durch den Scheitel und nach hinten durch die Zehen.",
+        "Halte den Nacken lang — blicke auf den Boden einen Fuß vor dir.",
+        "Atme aus und senke alles ab. Ruhe mit einer Wange auf der Matte zwischen den Runden."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Bauch. Strecke die Arme an den Körperseiten aus. Drücke die Fußrücken in den Boden.",
+        "hold": "Atme ein und hebe Brust, Arme und Beine gleichzeitig vom Boden. Strecke dich nach vorne durch den Scheitel, nach hinten durch die Zehen.",
+        "breathe": "Jedes Einatmen hebt eine Spur höher; jedes Ausatmen bleibt stabil.",
+        "exit": "Atme aus und senke alles zum Boden. Ruhe eine Wange auf der Matte."
+      },
+      "contraindications": [
+        "Schwangere sollten nicht üben — die Bauchlage ist unsicher",
+        "Übe nicht bei Bandscheibenvorfall, schwerer Verletzung des unteren Rückens oder einer kürzlichen Bauchoperation",
+        "Lass sie bei hohem oder niedrigem Blutdruck aus",
+        "Vermeide die Haltung bei Nackenverletzung — halte den Blick auf dem Boden",
+        "Lass sie nach dem Essen aus — warte 3-4 Stunden"
+      ],
+      "modifications": [
+        "Halbe Heuschrecke (Ardha Salabhasana) — hebe jeweils ein Bein",
+        "Hebe nur die Brust ODER nur die Beine, nicht beides",
+        "Lege die Hände unter die Hüften, die Handflächen nach unten, für Unterstützung des unteren Rückens",
+        "Übe auf einer gefalteten Decke unter den Hüftknochen"
+      ],
+      "benefits": [
+        "Stärkt die gesamte hintere Kette — unteren Rücken, Gesäßmuskulatur, hintere Oberschenkel, oberen Rücken",
+        "Wirkt der Vorwärtskopfhaltung und runden Schultern entgegen",
+        "Baut die Haltungsausdauer für längere Rückbeugen auf",
+        "Stimuliert die Bauchorgane durch die Kompression in Bauchlage"
+      ],
+      "reasoning": "Die Heuschrecke ist die kräftigende Rückbeuge. Während die Kobra die Wirbelsäulenflexibilität betont, arbeitet Salabhasana mit den Muskeln, die die Wirbelsäule in Streckung halten — der chronischen Schwäche hinter den meisten schreibtischbedingten Rückenschmerzen. Drei Runden von je 30 Sekunden, mit einem Atemzug Pause dazwischen, sind nützlicher als ein langer Halt."
+    },
+    "ardhaSalabhasana": {
+      "english": "Halbe Heuschreckenhaltung",
+      "aliases": [
+        "Halbe Heuschrecke"
+      ],
+      "source": {
+        "note": "Moderne Halb-Variante des Salabhasana, mit jeweils einem Bein. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Lege dich auf einer weichen Unterlage auf den Bauch. Die Stirn ruht auf der Matte.",
+        "Strecke die Arme an den Körperseiten aus, die Handflächen nach unten unter den Hüften.",
+        "Drücke das Kinn sanft in die Matte, um den Nacken zu verlängern.",
+        "Atme ein und hebe nur das rechte Bein hinter dir an. Halte das Bein gestreckt.",
+        "Hebe aus der Beinrückseite und der Gesäßmuskulatur — nicht durch Hochkippen der Hüfte.",
+        "Halte für die Dauer, dann atme aus und senke das Bein.",
+        "Halte für einen Atemzug inne. Wechsle zum linken Bein."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Bauch. Strecke die Arme an den Körperseiten aus, die Handflächen nach unten unter den Hüften. Drücke das Kinn sanft in die Matte.",
+        "hold": "Atme ein und hebe das rechte Bein gerade hinter dir an, die Hüften bleiben gleichmäßig auf dem Boden.",
+        "breathe": "Jeder Atemzug stabilisiert die Anhebung. Das angehobene Bein bleibt aktiv und lang.",
+        "exit": "Atme aus und senke das rechte Bein langsam. Ruhe einen Atemzug. Wechsle zum linken Bein."
+      },
+      "contraindications": [
+        "Schwangere sollten nicht üben — die Bauchlage ist unsicher",
+        "Übe nicht bei Bandscheibenvorfall oder schwerer Verletzung des unteren Rückens",
+        "Lass sie nach einer kürzlichen Bauchoperation aus",
+        "Vermeide die Haltung bei starkem Bluthochdruck"
+      ],
+      "modifications": [
+        "Lege eine gefaltete Decke unter die Hüftknochen zur Polsterung",
+        "Hebe das Bein niedriger, wenn der untere Rücken sich meldet — die Höhe ist nicht das Ziel, die Aktivierung ist es",
+        "Übe mit nach vorne über den Kopf ausgestreckten Armen (Superman-Variante) für mehr Anforderung",
+        "Lass sie aus, wenn die Bauchlage selbst unangenehm ist"
+      ],
+      "benefits": [
+        "Zugänglicher Einstieg in die Rückenkräftigung für Menschen, die für die volle Heuschrecke noch nicht bereit sind",
+        "Isoliert eine Seite nach der anderen — Ungleichgewicht zwischen links und rechts ist leichter zu erkennen",
+        "Stärkt die Gesäßmuskulatur und die hinteren Oberschenkel in Streckung",
+        "Nützlich in physiotherapeutischen Kontexten zur Rehabilitation des leichten unteren Rückens"
+      ],
+      "reasoning": "Bei der halben Heuschrecke beginnen Menschen, wenn die volle Heuschrecke zu viel ist. Die asymmetrische Last ist schonender für den unteren Rücken, und das Anheben eines Beins lässt dich entdecken, dass eine Seite fast immer schwächer ist als die andere — nützliche Information."
+    },
+    "ekaPadaRajakapotasana": {
+      "english": "Taubenhaltung",
+      "aliases": [
+        "Taube",
+        "Schlafende Taube (Vorwärtsbeugen-Variante)"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. Das volle Rajakapotasana (Königstaube-Rückbeuge) gibt es in modernen Linien, aber es ist nicht im Hatha Yoga Pradipika Kap. 1 aufgeführt; die einbeinige Vorwärtsbeugen-Variante ist die standardmäßige zugängliche Form."
+      },
+      "instructions": [
+        "Beginne im Vierfüßlerstand, Hände und Knie auf einer weichen Unterlage.",
+        "Schiebe dein rechtes Knie nach vorne zum rechten Handgelenk.",
+        "Das rechte Schienbein verläuft quer über die Matte — näher an der Parallele zur Vorderkante bedeutet mehr Empfindung; diagonal angewinkelt ist sanfter.",
+        "Strecke das linke Bein gerade nach hinten. Der Rücken des hinteren Fußes ruht auf der Matte.",
+        "Richte die Hüften so weit wie möglich zum Boden aus. Lege eine gefaltete Decke unter die rechte Hüfte, wenn sie den Boden nicht erreicht.",
+        "Bleibe aufrecht mit den Händen auf dem Boden, ODER wandere mit den Händen nach vorne und falte dich über das vordere Bein.",
+        "Halte für die Dauer. Drücke zurück in den Vierfüßlerstand. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Schiebe aus dem Vierfüßlerstand das rechte Knie nach vorne zum rechten Handgelenk. Strecke das linke Bein gerade nach hinten. Lege eine Decke unter die rechte Hüfte, wenn sie vom Boden abhebt.",
+        "hold": "Richte die Hüften so weit wie möglich aus. Wandere mit den Händen nach vorne und falte dich über das vordere Bein, wenn es bequem ist. Andernfalls bleibe aufrecht mit den Händen auf dem Boden.",
+        "breathe": "Atme in jede Empfindung. Diese Haltung weckt manchmal Emotionen — lass sie durch dich hindurchziehen. Verkrampfe dich nicht.",
+        "exit": "Wandere mit den Händen zurück. Stelle die hinteren Zehen auf und drücke zurück in den Vierfüßlerstand. Wechsle die Seite."
+      },
+      "contraindications": [
+        "Übe nicht bei Knie- oder Hüftverletzung — besonders bei kürzlichen Meniskus-, Kreuzband- oder Labrum-Problemen",
+        "Schwangere in der Spätschwangerschaft sollten eine aufrechtere Variante nutzen oder ganz auslassen",
+        "Vermeide die Haltung bei schwerer Instabilität des ISG-Gelenks — nutze eine gefaltete Decke unter der vorderen Hüfte, um das Becken auszurichten",
+        "Lass sie bei akutem Piriformis-Schub oder schwerem, sich verschlimmerndem Ischias aus"
+      ],
+      "modifications": [
+        "Lege eine gefaltete Decke unter die vordere Hüfte, wenn sie den Boden nicht erreicht — für die meisten nicht verhandelbar",
+        "Bleibe aufrecht mit den Händen auf Blöcken, wenn die Vorwärtsbeuge zu intensiv ist",
+        "Übe liegend: lege dich auf den Rücken, kreuze den rechten Knöchel über den linken Oberschenkel, ziehe den linken Oberschenkel heran (Liegende Taube / Vierer)",
+        "Verringere den Winkel des vorderen Schienbeins, wenn das vordere Knie sich meldet"
+      ],
+      "benefits": [
+        "Tiefe Lösung für die tiefen Hüftrotatoren (Piriformis, Gemelli) — chronische Übeltäter hinter Schmerzen in der Gesäßregion",
+        "Dehnt die Hüftbeuger und den Psoas des hinteren Beins",
+        "Eine der verlässlichsten Haltungen bei Ischias durch Piriformis-Enge",
+        "Tri-doshisch — wirkt bei Vata-Angst, Pitta-Spannung und Kapha-Stagnation"
+      ],
+      "reasoning": "Die Taube ist eine der meistgefragten Haltungen bei Menschen mit schreibtischbedingter Hüft- und Rückenenge. Die tiefe Gesäßlösung landet irgendwo, wohin die meisten Dehnungen nicht reichen. Nutze die Decke unter der vorderen Hüfte ausnahmslos — ein waagerechtes Becken macht dies zu einer Hüftdehnung statt einer Kompression des ISG-Gelenks."
     }
   }
 }
