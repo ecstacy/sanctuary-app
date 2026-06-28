@@ -2307,6 +2307,279 @@
         "Nützlich als eigenständiger 2-3-minütiger Reset zwischen Schreibtisch-Arbeitsblöcken"
       ],
       "reasoning": "Katze-Kuh ist die universellste Aufwärmung im Katalog — wirkt für jeden, jeden Tag, vor jeder Praxis. Nutze sie als Eröffnungsfluss, wenn die Wirbelsäule steif ist, zwischen tieferen Haltungen als Reset oder als eigenständige Bewegungspause während eines langen Arbeitstages."
+    },
+    "chandraNamaskar": {
+      "english": "Mondgruß",
+      "aliases": [
+        "Lunarer Gruß"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Abfolge, vom Sonnengruß inspiriert, aber kühlend statt wärmend. Es gibt mehrere Varianten; wir liefern eine verbreitete, von Iyengar beeinflusste Form."
+      },
+      "instructions": [
+        "Stehe am vorderen Rand der Matte, die Hände am Herzen, die Füße zusammen (Tadasana).",
+        "EINATMEN: schwinge die Arme nach außen und über den Kopf, die Handflächen berühren sich.",
+        "AUSATMEN: Seitneige nach rechts.",
+        "EINATMEN: zurück zur Mitte.",
+        "AUSATMEN: Seitneige nach links. EINATMEN zurück zur Mitte.",
+        "AUSATMEN: tritt den linken Fuß zurück in einen weiten tiefen Ausfallschritt (Halbmond oder Anjaneyasana).",
+        "EINATMEN: öffne in die Göttinnenhaltung mit beiden Knien weit. AUSATMEN Seitneige rechts, EINATMEN Mitte, AUSATMEN Seitneige links, EINATMEN Mitte.",
+        "Tritt den rechten Fuß zurück, um den Ausfallschritt auf der anderen Seite zu spiegeln. Kehre den Fluss zurück zum Stand um. Wiederhole 3-5 Runden."
+      ],
+      "voiceCues": {
+        "enter": "Stehe in Tadasana, die Füße zusammen. Atme ein, die Arme über den Kopf, die Handflächen berühren sich über dem Kopf.",
+        "hold": "Seitneige rechts, zurück, Seitneige links, zurück. Tritt zurück in den tiefen Ausfallschritt, öffne in die Göttinnenhaltung. Seitneige rechts und links aus der Göttinnenhaltung. Spiegle auf die andere Seite.",
+        "breathe": "Langsame, lange Atemzüge — langsamer als beim Sonnengruß. Der Mondfluss ist meditativ, nicht aerob.",
+        "exit": "Kehre den Fluss zurück zu Tadasana um. Die Hände zum Herzen. Wiederhole 3-5 Runden."
+      },
+      "contraindications": [
+        "Schwangere in der Spätschwangerschaft sollten die Tiefe der Seitneigen und Ausfallschritte verringern",
+        "Übe nicht bei schwerer Knie-, Hüft- oder Rückenverletzung",
+        "Lass sie bei schwerer Zerrung des hinteren Oberschenkels oder der Leiste aus",
+        "Vermeide die Abfolge bei Schwindel durch die Seitneige-Phasen"
+      ],
+      "modifications": [
+        "Nutze eine Wand im Rücken für Stabilität, wenn das Gleichgewicht in den Ausfallschritt-Phasen unsicher ist",
+        "Verringere die Tiefe der Seitneigen — eine Mini-Neige ist in Ordnung",
+        "Übe die Göttinnenhaltung mit dem Rücken zur Wand",
+        "Lass die Ausfallschritte ganz aus und übe die Tadasana-Seitneigen als eigenständige kühlende Abfolge"
+      ],
+      "benefits": [
+        "Kühlend und erdend — das energetische Gegenstück zum wärmenden Sonnengruß",
+        "Fokus auf seitliche Beweglichkeit — anders als die Beugungs-/Streckungsdominanz der Sonne",
+        "Beruhigender Fluss, nützlich für die Abendpraxis oder stressreiche Tage",
+        "Ehrt die Energie des Mondes in der traditionellen Paarung mit den Sonnengrüßen"
+      ],
+      "reasoning": "Chandra Namaskar ist das abendliche Gegenstück zu Surya Namaskar. Derselbe Vinyasa-artige Fluss, aber langsamer und kühlend. Nützlich für pitta-betonte Menschen, die sich von morgendlichen Sonnengrüßen überreizt fühlen, und für die Abendpraxis, wenn Wärmeaufbau nicht das Ziel ist."
+    },
+    "adhoMukhaSvanasana": {
+      "english": "Herabschauender Hund",
+      "aliases": [
+        "Herabschauendes Hundegesicht",
+        "Umgekehrtes V"
+      ],
+      "source": {
+        "note": "Moderne Haltung, in den Vinyasa-Linien des 20. Jahrhunderts kodifiziert (Krishnamacharya, Ashtanga). Nicht im Hatha Yoga Pradipika Kap. 1 aufgeführt."
+      },
+      "instructions": [
+        "Komme in den Vierfüßlerstand auf Hände und Knie.",
+        "Lege die Handgelenke direkt unter die Schultern. Spreize die Finger weit.",
+        "Stelle die Zehen auf, sodass die Fußballen in die Matte drücken.",
+        "Atme ein. Mit dem Ausatmen hebe die Hüften nach oben und hinten und strecke die Beine so weit, wie es bequem ist.",
+        "Der Körper bildet ein umgekehrtes V — die Hüften hoch, Hände und Füße verwurzeln sich nach unten.",
+        "Beuge die Knie so viel wie nötig, um die Wirbelsäule lang zu halten.",
+        "Drücke die Brust sanft zu den Oberschenkeln. Lass den Kopf natürlich zwischen den Armen hängen."
+      ],
+      "voiceCues": {
+        "enter": "Beginne auf Händen und Knien, die Handgelenke unter den Schultern, die Knie unter den Hüften. Stelle die Zehen auf. Atme ein. Mit dem Ausatmen hebe die Hüften nach oben und hinten und strecke die Beine so weit, wie es sich gut anfühlt.",
+        "hold": "Drücke die Handflächen fest in die Matte, die Finger weit gespreizt. Lass den Kopf schwer zwischen den Armen hängen. Beuge die Knie, wenn die hinteren Oberschenkel eng sind — eine lange Wirbelsäule ist wichtiger als gestreckte Beine.",
+        "breathe": "Jedes Ausatmen drückt die Brust ein wenig näher zu den Oberschenkeln. Jedes Einatmen hebt die Hüften ein wenig höher.",
+        "exit": "Beuge die Knie und senke dich in den Vierfüßlerstand. Setze dich für einen Atemzug in die Haltung des Kindes zurück."
+      },
+      "contraindications": [
+        "Schwangere in der Spätschwangerschaft sollten den langen Halt vermeiden — die Umkehrhaltung ist unbequem",
+        "Übe nicht bei einer kürzlichen Handgelenks-, Schulter- oder Armverletzung",
+        "Vermeide die Haltung bei starkem Bluthochdruck oder einer Netzhautablösung",
+        "Lass sie bei akuter Migräne aus — Kopf unter Herz verschlimmert sie",
+        "Warte nach einer Karpaltunneloperation mindestens drei Monate"
+      ],
+      "modifications": [
+        "Beuge die Knie großzügig — gestreckte Beine sind nicht das Ziel",
+        "Übe mit den Händen auf einer Stuhlfläche bei empfindlichen Handgelenken (halber Herabschauender Hund)",
+        "Nutze eine gefaltete Matte oder einen Keil unter den Handballen, um den Druck auf die Handgelenke zu verringern",
+        "Wechsle mit der Haltung des Kindes, wenn sich 60 Sekunden anfangs zu lang anfühlen"
+      ],
+      "benefits": [
+        "Stärkt Schultern, Arme und Handgelenke und verlängert zugleich die gesamte hintere Kette",
+        "Leichte Umkehrhaltung — erfrischt das Gehirn und wirkt der Schwere langen Sitzens entgegen",
+        "Funktioniert als Übergangshaltung und lässt den Atem zwischen kräftigeren Asanas nachkommen",
+        "Häufige Einstiegs-Umkehrhaltung für Menschen, die für Kopf- oder Schulterstand noch nicht bereit sind"
+      ],
+      "reasoning": "Der Herabschauende Hund ist das Schweizer-Taschenmesser-Asana — kräftigend, dehnend und eine leichte Umkehrhaltung zugleich. Deshalb kehrt nahezu jeder moderne Fluss immer wieder zu ihm zurück. Für den typischen schreibtischgebundenen Menschen stellt ein 60-Sekunden-Halt mehr Haltung wieder her als zehn Einzelatemzug-Besuche je könnten."
+    },
+    "legsUpTheWall": {
+      "english": "Beine an der Wand",
+      "aliases": [
+        "Umgekehrte Handlung",
+        "Wandhaltung"
+      ],
+      "source": {
+        "note": "Moderne erholsame Haltung. Das ursprüngliche Viparita Karani aus Hatha Yoga Pradipika 3.78-83 ist ein Mudra (keine Asana), das eine Umkehrung beinhaltet, um den Fluss des Bindu umzukehren. Wir liefern die vereinfachte Wandvariante; das Mudra selbst ist ein höheres Ziel."
+      },
+      "instructions": [
+        "Sitze auf dem Boden, die rechte Hüfte berührt eine Wand.",
+        "Senke dich auf den Rücken und schwinge die Beine die Wand hinauf, während du den Körper um 90 Grad drehst.",
+        "Rutsche mit den Hüften so nah an die Wand, wie es sich bequem anfühlt. Sie müssen sie nicht berühren.",
+        "Optional: lege eine gefaltete Decke unter die Hüften für eine leichte Beckenneigung.",
+        "Lass die Arme an den Seiten ruhen, die Handflächen nach oben. Oder eine Hand auf dem Bauch, eine aufs Herz.",
+        "Bedecke die Augen mit einem weichen Tuch oder einem Augenkissen, falls du eines hast.",
+        "Lass alles weich werden. Bleibe 5-15 Minuten."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit der rechten Hüfte an der Wand. Schwinge die Beine die Wand hinauf, während du dich auf den Rücken legst. Rutsche mit den Hüften so nah an die Wand, wie es bequem ist — sie müssen sie nicht berühren.",
+        "hold": "Lass die Arme zu den Seiten ruhen, die Handflächen nach oben, oder eine Hand auf den Bauch und eine aufs Herz. Schließe die Augen. Lass die Wand die Beine vollständig halten.",
+        "breathe": "Atme sanft. Spüre, wie das Blut von den Füßen zum Herzen zurückzirkuliert. Hier gibt es nichts zu tun.",
+        "exit": "Beuge die Knie und rolle dich auf die rechte Seite. Ruhe dort für einen Atemzug. Drücke dich langsam zum Sitz hoch — der Kopf kommt zuletzt hoch."
+      },
+      "contraindications": [
+        "Schwangere im dritten Trimester sollten nicht flach auf dem Rücken liegen — übe stattdessen auf der Seite",
+        "Übe während der Menstruation nicht, wenn du Umkehrhaltungen unangenehm findest (kulturelle / persönliche Präferenz, keine strenge medizinische)",
+        "Vermeide die Haltung bei schwerem Grünem Star, kürzlicher Netzhautablösung oder unbehandeltem Bluthochdruck",
+        "Lass sie bei starken Kopfschmerzen oder Nebenhöhlenverstopfung aus",
+        "Übe nicht bei einer kürzlichen Nackenverletzung"
+      ],
+      "modifications": [
+        "Lege eine gefaltete Decke unter die Hüften für eine leichte Beckenneigung (die klassische Iyengar-Version)",
+        "Bewege die Hüften ein paar Zentimeter von der Wand weg, wenn die hinteren Oberschenkel eng sind",
+        "Bedecke die Augen mit einem weichen Tuch oder Augenkissen, um den parasympathischen Wechsel zu vertiefen",
+        "Beuge die Knie, wenn das Strecken der Beine unbequem ist — halte die Fußsohlen an der Wand"
+      ],
+      "benefits": [
+        "Kehrt den venösen Rückfluss um — leitet Flüssigkeit aus den Beinen ab und verringert Schwellungen",
+        "Aktiviert das parasympathische Nervensystem — ein messbarer Abfall der Herzfrequenz innerhalb von Minuten",
+        "Löst den unteren Rücken und die hinteren Oberschenkel ohne aktives Dehnen",
+        "Eine der verlässlichsten Haltungen vor dem Schlafen für Menschen mit Schlaflosigkeit oder rasenden Gedanken in der Nacht"
+      ],
+      "reasoning": "Beine an der Wand ist die ultimative mühelose erholsame Haltung. Für Menschen, die sagen, sie 'können nicht entspannen' oder 'können nicht schlafen', ist dies das Rezept. Fünf bis fünfzehn Minuten hier, die Augen bedeckt, keine Musik — das Nervensystem erledigt den Rest der Arbeit von selbst."
+    },
+    "halasana": {
+      "english": "Pflughaltung",
+      "aliases": [
+        "Pflug"
+      ],
+      "source": {
+        "note": "Moderne Haltung mit Abstammung aus der Viparita-Karani-Mudra-Familie des Hatha Yoga Pradipika 3.69. Das Sanskrit 'hala' bedeutet Pflug — der Körper ähnelt der Krümmung eines von Ochsen gezogenen Pflugs."
+      },
+      "instructions": [
+        "Lege dich auf den Rücken. Bring die Arme an die Seiten, die Handflächen nach unten.",
+        "Drücke Hände und Arme in den Boden, während du die Beine gerade zur Decke hebst.",
+        "Hebe weiter und bring die Beine über den Kopf, senke die Zehen zum Boden hinter dir.",
+        "Stütze den unteren Rücken mit den Händen, die Finger zeigen zur Wirbelsäule.",
+        "Wenn die Zehen den Boden nicht erreichen, stelle einen Stuhl oder einen Stapel Blöcke hinter deinen Kopf, um die Füße darauf abzulegen.",
+        "Halte das Kinn leicht eingezogen, aber DREHE den Kopf NICHT — der Nacken bleibt neutral.",
+        "Zum Lösen: stütze den unteren Rücken mit den Händen und rolle langsam Wirbel für Wirbel ab."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Rücken, die Arme an den Seiten, die Handflächen nach unten. Drücke die Hände in den Boden und hebe die Beine nach oben und hinten über den Kopf, senke die Zehen zum Boden.",
+        "hold": "Stütze den unteren Rücken mit den Händen. Wenn die Zehen den Boden nicht erreichen, lege die Füße auf einen Stuhl hinter dem Kopf ab. Das Kinn leicht eingezogen. Drehe den Kopf nicht.",
+        "breathe": "Langsamer, stetiger Atem. Jedes Ausatmen löst die Zehen eine Spur näher zum Boden.",
+        "exit": "Stütze den unteren Rücken mit den Händen. Rolle langsam ab, Wirbel für Wirbel. Ruhe in Savasana."
+      },
+      "contraindications": [
+        "Übe nicht bei Nackenverletzung, Bandscheibenvorfall oder einer kürzlichen Nackenoperation",
+        "Schwangere sollten nicht üben — die Tiefe der Wirbelsäulenbeugung ist nicht sicher",
+        "Lass sie während der Menstruation aus, wenn du Umkehrhaltungen unangenehm findest (kulturell / persönlich)",
+        "Vermeide die Haltung bei Bluthochdruck, Grünem Star oder einer kürzlichen Netzhautablösung",
+        "Lass sie bei schwerem Asthma oder einem Zwerchfellbruch aus",
+        "Übe nicht auf vollen Magen — warte 3-4 Stunden nach dem Essen"
+      ],
+      "modifications": [
+        "Stelle einen Stuhl hinter deinen Kopf und lege die Füße auf die Stuhlfläche — der sicherere Standard für die meisten",
+        "Stapele gefaltete Decken unter den Schultern, damit der Nacken kein Gewicht trägt (schützt die Halswirbelsäule)",
+        "Übe stattdessen Beine an der Wand, wenn Halasana unzugänglich erscheint",
+        "Lass sie aus und ersetze sie durch Setu Bandha Sarvangasana für eine ähnliche Wirkung aufs Nervensystem ohne die Nackenanforderung"
+      ],
+      "benefits": [
+        "Dehnt die gesamte hintere Kette — hintere Oberschenkel, Waden, unteren Rücken, oberen Rücken, Nacken",
+        "Beruhigt das Nervensystem durch Umkehrhaltung + Wirbelsäulenbeugung",
+        "Stimuliert die Schilddrüse durch die Kompression der Kehle",
+        "Traditionell als schlaffördernde Haltung in der erholsamen Praxis mit langem Halt gelehrt"
+      ],
+      "reasoning": "Halasana sieht dramatisch aus, ist aber tatsächlich eine ruhige Haltung, wenn der Nacken mit Decken geschützt und die Füße auf einem Stuhl gestützt sind. Für Menschen mit chronischer Spannung zwischen den Schulterblättern durch Schreibtischarbeit ist die Lösung des oberen Rückens hier unübertroffen. Hebe dir die ungestützte Version für Menschen auf, die zuerst Sarvangasana sicher bewältigen können."
+    },
+    "sarvangasana": {
+      "english": "Schulterstand",
+      "aliases": [
+        "Kerze",
+        "Königin der Asanas (Iyengar)"
+      ],
+      "source": {
+        "note": "Moderne Ableitung der Viparita-Karani-Mudra-Familie des Hatha Yoga Pradipika 3.78. Sarvangasana als eigenständige Asana wurde in den Linien des 20. Jahrhunderts kodifiziert (Krishnamacharya, Iyengar)."
+      },
+      "instructions": [
+        "Stapele 2-3 gefaltete Decken am oberen Ende deiner Matte. Lege dich so hin, dass deine Schultern auf den Decken und dein Kopf auf der Matte darunter liegt — das schützt die Halswirbelsäule.",
+        "Bring die Arme an die Seiten, die Handflächen nach unten.",
+        "Drücke die Arme in den Boden und schwinge die Beine nach oben und über den Kopf in Halasana.",
+        "Beuge die Ellbogen und lege die Hände auf den unteren Rücken, die Finger zeigen zur Wirbelsäule.",
+        "Hebe die Beine langsam zur Decke und stapele die Hüften über die Schultern.",
+        "Der Körper bildet eine lange Linie von den Schultern bis zu den Füßen. Blicke zu den Zehen.",
+        "Zum Lösen: senke die Beine zurück in Halasana, stütze dann den unteren Rücken mit den Händen und rolle langsam ab."
+      ],
+      "voiceCues": {
+        "enter": "Lege aus Halasana mit auf Decken gestützten Schultern die Hände auf den unteren Rücken und hebe die Beine langsam zur Decke.",
+        "hold": "Stapele die Hüften über die Schultern. Der Körper bildet eine lange Linie. Blicke zu den Zehen. Die Hände bleiben zur Stütze auf dem unteren Rücken.",
+        "breathe": "Langsamer, gleichmäßiger Atem durch die Nase. Halte den Atem nicht gegen die Kompression der Kehle an.",
+        "exit": "Senke die Beine zurück in Halasana. Stütze den unteren Rücken mit den Händen und rolle langsam ab. Ruhe in Savasana."
+      },
+      "contraindications": [
+        "Übe nicht bei Nackenverletzung, Bandscheibenvorfall oder einer kürzlichen Nackenoperation — und übe niemals ohne den Schulter-Decken-Aufbau",
+        "Schwangere sollten diese eigenständige Umkehrhaltung nicht üben",
+        "Lass sie während der Menstruation nach persönlicher Präferenz aus",
+        "Vermeide die Haltung bei Bluthochdruck, Grünem Star oder einer kürzlichen Netzhautablösung",
+        "Lass sie bei schwerem Asthma, einem Zwerchfellbruch oder Schilddrüsenproblemen aus",
+        "Übe nicht auf vollen Magen — warte 3-4 Stunden nach dem Essen"
+      ],
+      "modifications": [
+        "Übe stattdessen Beine an der Wand — dieselbe Wirkung aufs Nervensystem, keine Nackenanforderung",
+        "Übe mit einer Wand im Rücken — die Füße ruhen an der Wand als halber Schulterstand",
+        "Baue dich mit Halasana zuerst zur vollen Haltung auf; mache erst weiter, wenn Halasana sich stabil anfühlt",
+        "Nutze für die erste Praxis nach Möglichkeit die praktische Anleitung einer Yogalehrerin"
+      ],
+      "benefits": [
+        "Kraftvoller Reset des Nervensystems durch tiefe Umkehrhaltung",
+        "Stimuliert die Schilddrüse über die Kompression der Kehle",
+        "Stärkt Schultern, oberen Rücken und Körpermitte",
+        "Traditionell in modernen Linien \"die Königin der Asanas\" genannt — gepaart mit Sirsasana, dem König"
+      ],
+      "reasoning": "Sarvangasana ist eine echte Haltung — keine Anfängerform. Der Decken-Aufbau ist zum Schutz der Halswirbelsäule nicht verhandelbar. Die meisten erhalten den Großteil des Nutzens aus Halasana mit den Füßen auf einem Stuhl oder aus Beine an der Wand — empfiehl diese zuerst."
+    },
+    "sirsasana": {
+      "english": "Kopfstand",
+      "aliases": [
+        "Salamba Sirsasana (gestützt)",
+        "König der Asanas (Iyengar)"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. Einige Kommentatoren verbinden Sirsasana mit Versen über das Viparita-Karani-Mudra im Hatha Yoga Pradipika; die eigenständige Asana ist eine Kodifizierung des 20. Jahrhunderts."
+      },
+      "instructions": [
+        "WARNUNG: Dies ist eine fortgeschrittene Umkehrhaltung. Übe sie zuerst mit einer Lehrerin. Falsche Form kann eine Verletzung der Halswirbelsäule verursachen.",
+        "Knie nahe einer Wand. Verschränke die Finger und lege die Unterarme auf die Matte, die Ellbogen schulterbreit auseinander.",
+        "Lege den Scheitel des Kopfes auf die Matte, den Hinterkopf in den verschränkten Händen gebettet.",
+        "Hebe die Hüften wie im Herabschauenden Hund. Wandere mit den Füßen zu den Ellbogen.",
+        "Beuge die Knie zur Brust, dann strecke die Beine langsam gerade zur Decke.",
+        "Das meiste Gewicht sollte in den Unterarmen liegen, NICHT im Kopf — nur 10-20 % auf dem Scheitel.",
+        "Halte für neue Übende höchstens 30-60 Sekunden. Komme mit derselben Kontrolle langsam herunter."
+      ],
+      "voiceCues": {
+        "enter": "Verschränke aus dem Knien nahe einer Wand die Finger und lege die Unterarme ab. Der Scheitel des Kopfes auf der Matte, der Kopf in den Händen gebettet. Hebe die Hüften wie im Herabschauenden Hund und wandere mit den Füßen heran.",
+        "hold": "Bring die Knie zur Brust, dann strecke die Beine nach oben. Das meiste Gewicht in den Unterarmen, nicht im Kopf. Weicher, gleichmäßiger Atem.",
+        "breathe": "Langsamer Nasenatem. Wenn der Atem holprig wird, komme herunter. Die Haltung ist die Atemprüfung.",
+        "exit": "Beuge langsam die Knie und senke die Füße kontrolliert zum Boden. Ruhe mindestens 60 Sekunden in der Haltung des Kindes, bevor du den Kopf hebst."
+      },
+      "contraindications": [
+        "Übe sie für mindestens den ersten Monat NICHT ohne die Anleitung einer Lehrerin",
+        "Übe nicht bei Nackenverletzung, Bandscheibenvorfall oder einem Problem der Halswirbelsäule",
+        "Schwangere sollten nicht üben",
+        "Lass sie bei Bluthochdruck, Grünem Star, Netzhautablösung oder unbehandelten Herzerkrankungen aus",
+        "Lass sie während der Menstruation nach persönlicher Präferenz aus",
+        "Übe nicht bei schwerem Asthma oder einem Zwerchfellbruch",
+        "Übe nicht auf vollen Magen",
+        "Wenn du den Herabschauenden Hund nicht 60 Sekunden mit stabiler Form halten kannst, bist du noch nicht bereit für Sirsasana"
+      ],
+      "modifications": [
+        "Übe in den ersten sechs Monaten mit einer Wand im Rücken",
+        "Übe den Dreibein-Kopfstand (Kopf + zwei Hände bilden ein Dreieck) — für manche Körper schonender für die Halswirbelsäule",
+        "Nutze eine Kopfstandbank / einen Sirsasana-Hocker — überhaupt kein Druck auf den Kopf",
+        "Ersetze sie durch Sarvangasana oder Beine an der Wand für eine ähnliche Wirkung aufs Nervensystem ohne Druck auf den Kopf"
+      ],
+      "benefits": [
+        "Tiefgreifende Umkehrhaltung — kehrt den venösen Fluss um, entlastet die Wirbelsäule",
+        "Baut extreme Kraft in Körpermitte, Schultern und Unterarmen auf",
+        "Konzentrationsübung — die meisten erfahren erst nach ihrem ersten 60-Sekunden-Kopfstand, wie sich echter Fokus anfühlt",
+        "Iyengar nannte ihn den König der Asanas, gepaart mit Sarvangasana der Königin"
+      ],
+      "reasoning": "Sirsasana ist die folgenreichste Haltung im Katalog — der Nutzen ist real und das Verletzungsrisiko ist real. Bestehe für neue Übende auf der Anleitung einer Lehrerin. Für Menschen, die nur die App nutzen, empfiehl Beine an der Wand als wirksame Alternative, bis sie mit jemandem persönlich arbeiten."
     }
   }
 }
