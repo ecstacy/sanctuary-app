@@ -997,6 +997,265 @@
         "Kann viele Minuten passiv gehalten werden — nützlich als Meditationssitz für Menschen mit engen Schneidersitzen"
       ],
       "reasoning": "Die gebundene Winkelhaltung ist der zugänglichste Hüftöffner im Katalog — funktioniert für fast jeden. Drücke die Knie nicht nach unten; das ist die Lehrbuchverletzung. Die Lösung geschieht mit der Zeit durch die Schwerkraft, nicht durch Kraft."
+    },
+    "upavishtaKonasana": {
+      "english": "Sitzende Grätsch-Vorwärtsbeuge",
+      "aliases": [
+        "Sitzende weitbeinige Vorwärtsbeuge"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. \"Upaviṣṭa\" = sitzend, \"kona\" = Winkel. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Sitze auf einer gefalteten Decke auf dem Boden.",
+        "Strecke beide Beine weit zu den Seiten aus — so weit, wie es deine hinteren Oberschenkel bequem zulassen.",
+        "Flexe beide Füße, sodass die Zehen gerade nach oben zeigen. Aktiviere die Oberschenkel sanft.",
+        "Lege die Hände vor dir auf den Boden. Atme ein und verlängere die Wirbelsäule nach oben.",
+        "Atme aus und wandere mit den Händen nach vorne, klappe aus der Hüfte.",
+        "Führe mit der Brust, nicht mit dem Kopf. Halte dort an, wo der Rücken runden möchte.",
+        "Beuge die Knie, wenn die hinteren Oberschenkel sich gezogen anfühlen."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit weit auseinander gestreckten Beinen, so weit, wie es die hinteren Oberschenkel zulassen. Flexe die Füße, die Kniescheiben zeigen nach oben. Sitze auf einer Decke, wenn der untere Rücken rundet.",
+        "hold": "Atme ein, um die Wirbelsäule zu verlängern. Atme aus und wandere mit den Händen nach vorne, klappe aus der Hüfte. Halte die Wirbelsäule lang — runde dich nicht, um den Boden zu erreichen.",
+        "breathe": "Jedes Ausatmen faltet eine Spur tiefer. Die Beine bleiben stark, die Kniescheiben angehoben.",
+        "exit": "Wandere mit den Händen zurück zu den Hüften. Atme ein und richte dich auf. Bring die Beine wieder zusammen."
+      },
+      "contraindications": [
+        "Schwangere sollten sich nicht tief falten — halte eine lange Wirbelsäule und eine flache Beuge",
+        "Übe nicht bei Bandscheibenvorfall oder akuter Verletzung des unteren Rückens",
+        "Vermeide die Haltung bei einem Riss des hinteren Oberschenkels oder der Leiste",
+        "Lass sie bei schwerem Ischias aus"
+      ],
+      "modifications": [
+        "Sitze auf einer gefalteten Decke, um das Becken nach vorne zu neigen — die meisten brauchen das",
+        "Beuge die Knie, wenn die hinteren Oberschenkel eng sind",
+        "Wandere mit den Händen nur so weit nach vorne, wie die Wirbelsäule lang bleibt",
+        "Lege ein Bolster quer über die Beine, um die Brust abzulegen (erholsame Variante)"
+      ],
+      "benefits": [
+        "Dehnt die inneren Oberschenkel (Adduktoren) — anders als Vorwärtsbeugen mit geschlossenen Füßen",
+        "Löst die hinteren Oberschenkel beider Beine gleichzeitig",
+        "Beruhigt das Nervensystem durch die Geometrie der Vorwärtsbeuge",
+        "Wird im Yin-Yoga oft als 3-5-minütige Hüftlösung eingesetzt"
+      ],
+      "reasoning": "Die sitzende Grätsch-Vorwärtsbeuge ist das sitzende Gegenstück zu Prasarita Padottanasana — aber mit der Stütze des Bodens unter den Beinen. Halte sie 1-3 Minuten für eine fasziale Lösung der inneren Oberschenkel. Nutze ausnahmslos eine gefaltete Decke unter dem Sitz."
+    },
+    "januSirsasana": {
+      "english": "Kopf-zum-Knie-Haltung",
+      "aliases": [
+        "Kopf-zum-Knie-Vorwärtsbeuge"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. \"Jānu\" = Knie, \"śīrṣa\" = Kopf. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Sitze auf einer gefalteten Decke mit beiden Beinen nach vorne ausgestreckt.",
+        "Beuge das rechte Knie und lege die rechte Sohle an die Innenseite des linken Oberschenkels.",
+        "Das rechte Knie öffnet sich zur Seite zum Boden hin. Lege einen Block darunter, wenn es hoch schwebt.",
+        "Richte die Schultern zum ausgestreckten linken Bein aus.",
+        "Atme ein und verlängere die Wirbelsäule nach oben.",
+        "Atme aus und klappe über das linke Bein nach vorne. Halte das Schienbein, den Knöchel oder den Fuß — dort, wo dein Rücken lang bleibt.",
+        "Beuge das ausgestreckte Knie, falls nötig. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie und lege die rechte Sohle an die Innenseite des linken Oberschenkels. Das rechte Knie öffnet sich zur Seite zum Boden hin.",
+        "hold": "Atme ein und verlängere die Wirbelsäule. Atme aus und klappe über das ausgestreckte linke Bein nach vorne. Halte das Schienbein, den Knöchel oder den Fuß — dort, wo du nicht in der Wirbelsäule rundest.",
+        "breathe": "Jedes Ausatmen löst den linken hinteren Oberschenkel eine Spur tiefer. Das rechte Knie löst sich weiter zum Boden hin.",
+        "exit": "Atme ein und richte dich auf. Wechsle die Seite."
+      },
+      "contraindications": [
+        "Schwangere sollten sich nicht tief falten — übe nur mit gestrecktem offenem Bein und einer langen Wirbelsäule",
+        "Übe nicht bei Bandscheibenvorfall oder schwerer Verletzung des unteren Rückens",
+        "Lass sie bei Knieverletzung im gebeugten Bein aus",
+        "Vermeide die Haltung bei schwerem Ischias"
+      ],
+      "modifications": [
+        "Sitze auf einer gefalteten Decke, um die Hüften zu erhöhen",
+        "Beuge das ausgestreckte Knie großzügig, um die Wirbelsäule lang zu halten",
+        "Nutze einen Gurt um den ausgestreckten Fuß, wenn die Hände nicht reichen",
+        "Lege ein Bolster auf das ausgestreckte Bein, um die Brust abzulegen (erholsame Variante)"
+      ],
+      "benefits": [
+        "Die asymmetrische Dehnung isoliert einen hinteren Oberschenkel nach dem anderen — Engeunterschiede sind leichter zu erkennen",
+        "Vereint Hüftöffnung (gebeugtes Bein) mit Dehnung des hinteren Oberschenkels (ausgestrecktes Bein)",
+        "Beruhigt das Nervensystem durch die Geometrie der Vorwärtsbeuge",
+        "Weniger fordernd als Paschimottanasana für Menschen mit engen hinteren Oberschenkeln"
+      ],
+      "reasoning": "Janu Sirsasana ist der sanftere Verwandte von Paschimottanasana — die Asymmetrie lässt jedes Bein in seinem eigenen Tempo arbeiten. Nützlich für Menschen, denen Vorwärtsbeugen mit beiden gestreckten Beinen unzugänglich sind. Die Seite des gebeugten Beins öffnet sich oft schneller als die des gestreckten — was Menschen überrascht, die das Gegenteil annahmen."
+    },
+    "gomukhasana": {
+      "english": "Kuhgesichtshaltung",
+      "aliases": [
+        "Kuhkopfhaltung"
+      ],
+      "source": {
+        "note": "Ausdrücklich im Hatha Yoga Pradipika Kap. 1 benannt. Die Beine in der Haltung sollen einem Kuhgesicht ähneln — die Knie übereinander wie die Schnauze, die Füße ausgestellt wie die Ohren."
+      },
+      "instructions": [
+        "Sitze auf einer gefalteten Decke mit ausgestreckten Beinen.",
+        "Beuge das linke Knie. Lege den linken Fuß neben die rechte Hüfte, das Knie zeigt nach vorne.",
+        "Kreuze den rechten Oberschenkel über den linken, die Knie übereinander. Der rechte Fuß kommt neben die linke Hüfte.",
+        "Sitze gleichmäßig auf beiden Sitzbeinen — passe die Decke an, falls nötig.",
+        "Strecke den rechten Arm über den Kopf. Beuge den rechten Ellbogen und lass die rechte Hand deinen Rücken hinunterfallen.",
+        "Bring den linken Arm von unten hinter den Rücken. Wenn zugänglich, hake die Finger ineinander. Andernfalls halte einen Gurt oder ein Handtuch zwischen den Händen.",
+        "Hebe den unteren Ellbogen an. Hebe den oberen Ellbogen an. Wechsle BEIDE Arme und Beine für die zweite Seite."
+      ],
+      "voiceCues": {
+        "enter": "Kreuze aus dem Sitz den rechten Oberschenkel über den linken, sodass die Knie übereinander liegen. Die Füße stellen sich zu den Seiten der Hüften aus. Strecke den rechten Arm über den Kopf, beuge den Ellbogen und lass die rechte Hand den Rücken hinunterfallen. Bring den linken Arm von unten hinter den Rücken; wenn zugänglich, hake die Finger ineinander. Andernfalls halte einen Gurt zwischen den Händen.",
+        "hold": "Staple die Wirbelsäule senkrecht. Hebe den unteren Ellbogen an; hebe den oberen Ellbogen an. Lass die angehobene Schulter weg vom Ohr sinken.",
+        "breathe": "Jeder Atemzug breitet sich durch den oberen Rücken und die äußeren Hüften aus.",
+        "exit": "Löse die Arme. Löse die Beinkreuzung und schüttle die Beine aus. Wechsle die Seite — sowohl Bein- ALS AUCH Armstellung kehren sich um."
+      },
+      "contraindications": [
+        "Übe nicht bei Schulterverletzung, Schultersteife oder Rotatorenmanschettenriss",
+        "Lass sie bei Knieverletzung aus — die Beinkreuzung ist intensiv",
+        "Schwangere sollten die Beinkreuzung auslassen und mit einem einfachen Schneidersitz abwandeln",
+        "Vermeide die Haltung bei starken Nackenschmerzen"
+      ],
+      "modifications": [
+        "Nutze einen Gurt oder ein Handtuch zwischen den Händen, wenn sie sich hinter dem Rücken nicht treffen",
+        "Sitze auf einer Decke, wenn die Knie nicht bequem übereinander liegen",
+        "Übe die Nur-Arme-Version mit den Beinen in Sukhasana",
+        "Übe die Nur-Beine-Version mit den Händen auf dem oberen Knie"
+      ],
+      "benefits": [
+        "Löst die tiefen äußeren Hüftrotatoren und das Iliotibialband — nützlich für Läufer und Radfahrer",
+        "Öffnet die Schultern in entgegengesetzte Richtungen (Ausgleich der Rotatorenmanschette)",
+        "Macht die Asymmetrie zwischen beiden Seiten sichtbar — fast jeder hat einen 'engen' und einen 'lockeren' Arm",
+        "Das HYP führt sie als einen der grundlegenden Sitze — kurze Übung fügt sich gut in eine Sitzpraxis ein"
+      ],
+      "reasoning": "Gomukhasana ist zwei Dehnungen in einer — äußere Hüften und Schultern. Die Asymmetrie ist aufschlussreich: Die meisten entdecken, dass ihr Arm der dominanten Seite weiter hinter den Rücken reicht als der der nicht-dominanten. Diese Haltung macht das Ungleichgewicht sichtbar, was der erste Schritt zu seiner Korrektur ist."
+    },
+    "marichyasanaC": {
+      "english": "Marichis Haltung C",
+      "aliases": [
+        "Drehung des Weisen Marichi"
+      ],
+      "source": {
+        "note": "Moderne Iyengar-/Ashtanga-Buchstabenfolge sitzender Drehungen, benannt nach dem Weisen Marichi (einem Sohn Brahmas). Das Hatha Yoga Pradipika führt die mit Buchstaben bezeichneten Varianten nicht auf."
+      },
+      "instructions": [
+        "Sitze mit beiden Beinen nach vorne ausgestreckt.",
+        "Beuge das rechte Knie. Stelle den rechten Fuß flach auf den Boden, die Ferse nah am rechten Sitzbein.",
+        "Halte das linke Bein lang und aktiv, den Fuß geflext.",
+        "Atme ein und verlängere die Wirbelsäule nach oben.",
+        "Atme aus und drehe den Oberkörper nach rechts. Lege die rechte Hand zur Stütze hinter dich auf den Boden.",
+        "Hake den linken Ellbogen an der AUSSENSEITE des rechten Knies ein.",
+        "Drücke den Ellbogen sanft ins Knie, um die Drehung zu vertiefen. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie und stelle den rechten Fuß flach auf den Boden, die Ferse nah am rechten Sitzbein. Halte das linke Bein lang und aktiv.",
+        "hold": "Atme ein, um die Wirbelsäule zu verlängern. Atme aus und drehe den Oberkörper nach rechts. Hake den linken Ellbogen an der Außenseite des rechten Knies ein. Die rechte Hand zur Stütze hinter dir.",
+        "breathe": "Jedes Einatmen verlängert; jedes Ausatmen dreht eine Spur tiefer. Das linke Bein bleibt aktiv.",
+        "exit": "Löse die Drehung langsam. Wechsle die Seite."
+      },
+      "contraindications": [
+        "Schwangere sollten nur eine offene Variante üben — komprimiere den Bauch nicht",
+        "Übe nicht bei Bandscheibenvorfall oder Instabilität des ISG-Gelenks",
+        "Vermeide die Haltung nach einer kürzlichen Bauch-, Rücken- oder Hüftoperation",
+        "Lass sie bei einem akuten Reizdarm-Schub oder nach einer schweren Mahlzeit aus"
+      ],
+      "modifications": [
+        "Sitze auf einer gefalteten Decke, um die Hüften zu erhöhen",
+        "Halte die untere Hand zur Stütze auf einem Block, wenn der Boden weit entfernt ist",
+        "Halte das gebeugte Knie statt des Ellbogen-Einhakens für eine leichtere Drehung",
+        "Übe die offene Drehvariante während der Schwangerschaft"
+      ],
+      "benefits": [
+        "Tiefere Drehung als Ardha Matsyendrasana — arbeitet direkter mit der Lendenwirbelsäule",
+        "Komprimiert und stimuliert die Verdauungsorgane",
+        "Löst den unteren Rücken und die ISG-Region",
+        "Entwickelt die Drehung, die später für Armbalancen und bindende Haltungen nötig ist"
+      ],
+      "reasoning": "Marichyasana C ist eine Stufe tiefer als Ardha Matsyendrasana — die Drehung kommt mehr aus der Lendenwirbelsäule, weil das untere Bein gestreckt bleibt. Ziehe nicht am Knie, um die Drehung zu vertiefen; lass den Atem und das Ellbogen-Einhaken die Arbeit machen."
+    },
+    "virasana": {
+      "english": "Heldenhaltung",
+      "aliases": [
+        "Heldensitz"
+      ],
+      "source": {
+        "note": "Im Hatha Yoga Pradipika Kap. 1 neben anderen Meditationssitzen benannt. Das Sanskrit \"vīra\" bedeutet Held, Krieger."
+      },
+      "instructions": [
+        "Knie auf dem Boden mit zusammenstehenden Knien.",
+        "Stelle die Füße weiter als deine Hüften. Die Fußrücken flach auf dem Boden, die Zehen zeigen nach hinten.",
+        "Sitze zwischen deinen Fersen — deine Sitzbeine landen auf dem Boden oder auf einem Yogablock.",
+        "Die meisten brauchen jahrelang einen Block unter dem Sitz. Beginne hoch, senke den Block über Wochen.",
+        "Wenn die Fußrücken den Boden nicht erreichen, rolle eine dünne Decke unter die Vorderseite der Knöchel.",
+        "Lege die Hände auf die Oberschenkel.",
+        "Verlängere die Wirbelsäule, lass die Schultern sinken."
+      ],
+      "voiceCues": {
+        "enter": "Knie mit zusammenstehenden Knien und den Füßen weiter als die Hüften. Sitze zwischen den Füßen, die Sitzbeine auf dem Boden oder auf einem Block. Die Fußrücken flach auf dem Boden, die Zehen zeigen nach hinten.",
+        "hold": "Lege die Hände auf die Oberschenkel. Verlängere die Wirbelsäule. Lass die Schultern sinken, lass den Kiefer locker.",
+        "breathe": "Atme natürlich. Jedes Ausatmen löst eine weitere Schicht Anstrengung.",
+        "exit": "Lehne dich zur Seite, schwinge die Beine heraus und falte sie nach vorne aus. Massiere die Knie, falls nötig."
+      },
+      "contraindications": [
+        "Übe nicht bei Knieverletzung, Meniskusriss oder einer kürzlichen Knieoperation",
+        "Lass sie bei Knöchelverletzung aus",
+        "Schwangere sollten auf einem hohen Block oder Bolster zwischen den Fersen sitzen",
+        "Vermeide die Haltung, wenn schon Vajrasana die Knie belastet"
+      ],
+      "modifications": [
+        "Sitze auf einem Yogablock zwischen den Fersen — beginne hoch, senke den Block über Wochen",
+        "Lege eine gefaltete Decke zwischen Waden und Oberschenkel, um die Kniekompression zu verringern",
+        "Rolle eine Decke unter die Vorderseite der Knöchel, wenn sie den Boden nicht erreichen",
+        "Baue die Dauer allmählich auf — 30 Sekunden, dann eine Minute, dann länger"
+      ],
+      "benefits": [
+        "Dehnt den Quadrizeps und die Vorderseite der Knöchel auf eine Weise, die keine andere Haltung erreicht",
+        "Stabiler Sitz für Meditation und Pranayama, besonders für Menschen mit engen Schneidersitzen",
+        "Wie Vajrasana sicher nach Mahlzeiten zu üben",
+        "HYP-benannt — verbindet moderne Menschen mit einem der grundlegenden Sitze der ursprünglichen Tradition"
+      ],
+      "reasoning": "Virasana ist der knieintensivere Verwandte von Vajrasana — die Sitzbeine liegen zwischen den Fersen statt auf ihnen. Die meisten brauchen jahrelang einen Block unter dem Sitz, bevor sie den Boden erreichen. Die Quadrizepsdehnung ist einzigartig; kaum eine andere Haltung erreicht ihn aus diesem Winkel."
+    },
+    "ardhaMatsyendrasana": {
+      "english": "Halber Drehsitz",
+      "aliases": [
+        "Halbe Wirbelsäulendrehung",
+        "Vakrasana (eine verwandte einfachere Drehung)"
+      ],
+      "source": {
+        "note": "Moderne Halb-Variante des Matsyendrasana aus Hatha Yoga Pradipika 1.27, benannt nach dem Weisen Matsyendranath. Die volle Bindung ist mittel- bis fortgeschritten; wir liefern die zugängliche halbe Version."
+      },
+      "instructions": [
+        "Sitze auf einer gefalteten Decke mit beiden Beinen ausgestreckt.",
+        "Beuge das rechte Knie und kreuze den rechten Fuß über den linken Oberschenkel, der Fuß flach auf dem Boden außerhalb des linken Knies.",
+        "Das untere linke Bein kann gestreckt bleiben ODER die Ferse zur rechten Hüfte falten.",
+        "Atme ein und verlängere die Wirbelsäule nach oben.",
+        "Atme aus und drehe dich nach rechts. Lege die rechte Hand zur Stütze hinter dich auf den Boden.",
+        "Hake den linken Ellbogen an der AUSSENSEITE des rechten Knies ein (oder umarme das Knie mit dem linken Arm für eine leichtere Version).",
+        "Jedes Ausatmen vertieft die Drehung eine Spur — niemals erzwingen. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit beiden Beinen ausgestreckt. Beuge das rechte Knie und kreuze den rechten Fuß über den linken Oberschenkel, der Fuß auf dem Boden außerhalb des linken Knies. Das linke Bein kann gestreckt bleiben oder die Ferse zur rechten Hüfte falten.",
+        "hold": "Atme ein, um die Wirbelsäule zu verlängern. Atme aus und drehe dich nach rechts. Die rechte Hand ruht zur Stütze hinter dir; der linke Ellbogen hakt außerhalb des rechten Knies ein.",
+        "breathe": "Jedes Einatmen lässt die Wirbelsäule höher wachsen. Jedes Ausatmen vertieft die Drehung ein wenig — niemals erzwingen.",
+        "exit": "Löse die Drehung langsam zur Mitte, Atemzug für Atemzug. Wechsle die Beine und wiederhole auf der anderen Seite."
+      },
+      "contraindications": [
+        "Schwangere sollten keine tiefen Drehungen üben — versuche stattdessen eine offene Variante",
+        "Vermeide die Haltung nach einer kürzlichen Bauch-, Hüft- oder Rückenoperation",
+        "Übe nicht bei einem Bandscheibenvorfall oder einer Instabilität des ISG-Gelenks",
+        "Lass sie bei einem akuten Reizdarm-Schub oder direkt nach dem Essen aus"
+      ],
+      "modifications": [
+        "Halte das untere Bein gestreckt, wenn die Bindung in der Hüfte unangenehm ist",
+        "Sitze auf einer gefalteten Decke, um die Hüften zu erhöhen und die Belastung zu verringern",
+        "Lege die hintere Hand auf einen Block statt auf den Boden für größere Oberkörper",
+        "Bei engen Hüften: setze dich auf einen Stuhl und drehe dich zur Stuhllehne"
+      ],
+      "benefits": [
+        "Steigert die Drehbeweglichkeit der Brust- und Lendenwirbelsäule",
+        "Komprimiert und löst die Bauchorgane — unterstützt die Verdauung",
+        "Lindert den dumpfen Schmerz, der sich vom langen Sitzen im unteren Rücken aufbaut",
+        "Aktiviert die parasympathische Reaktion, wenn sie mehrere Atemzüge pro Seite gehalten wird"
+      ],
+      "reasoning": "Drehungen sind Wirbelsäulenhygiene — sie wringen Stagnation aus Rücken und Bauch. Besonders nützlich, wenn die Verdauung träge ist oder der untere Rücken sich nach einem langen Tag am Schreibtisch festgefahren anfühlt. Wir liefern die halbe Variante, weil die volle Bindung eine Hüftbeweglichkeit erfordert, die die meisten am ersten Tag schlicht nicht haben."
     }
   }
 }
