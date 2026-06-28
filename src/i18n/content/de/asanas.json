@@ -2843,6 +2843,268 @@
         "Eine der unverwechselbarsten Formen der Asana-Tradition"
       ],
       "reasoning": "Der Pfau ist bekanntlich schwer zugänglich — die meisten brauchen Monate der Handgelenkskonditionierung, bevor sie ihn versuchen. Die Begeisterung des HYP für seine Verdauungswirkung wird durch die Mechanik des Bauchdrucks bestätigt. Hebe ihn dir für Menschen auf, die bereits ein starkes Chaturanga und Bakasana haben."
+    },
+    "simhasana": {
+      "english": "Löwenhaltung",
+      "aliases": [
+        "Löwe",
+        "Löwenatem"
+      ],
+      "source": {
+        "note": "Im HYP Kap. 1 benannt. Der Text beschreibt den weit aufgerissenen Blick, das Herausstrecken der Zunge und das brüllende Ausatmen — ausdrücklich als Teil der Praxis genannt."
+      },
+      "instructions": [
+        "Knie auf der Matte mit zusammenstehenden Knien, auf den Fersen zurücksitzend (Vajrasana-Basis). ODER sitze im Schneidersitz.",
+        "Lege die Handflächen auf die Knie, die Finger weit gespreizt.",
+        "Atme tief durch die Nase ein.",
+        "Öffne den Mund weit, strecke die Zunge so weit wie möglich nach unten zum Kinn.",
+        "Atme kräftig durch den offenen Mund aus und erzeuge ein \"HAAAAA\"-Geräusch aus der Kehle — das Löwengebrüll.",
+        "Reiße die Augen weit auf — blicke nach oben zum dritten Auge oder nach unten zur Nasenspitze.",
+        "Wiederhole 5-8 Runden. Schließe nach der letzten Runde die Augen und ruhe."
+      ],
+      "voiceCues": {
+        "enter": "Knie auf der Matte, die Handflächen auf den Knien, die Finger gespreizt.",
+        "hold": "Atme durch die Nase ein. Öffne den Mund weit, strecke die Zunge heraus, atme mit einem HAA-Geräusch aus. Reiße die Augen weit auf.",
+        "breathe": "Fünf Runden. Jedes Gebrüll löst mehr Spannung aus Gesicht und Kehle.",
+        "exit": "Schließe nach der letzten Runde die Augen und ruhe. Nimm die Wärme im Gesicht wahr."
+      },
+      "contraindications": [
+        "Lass sie bei starken Kieferschmerzen oder einer kürzlichen Zahnoperation aus",
+        "Vermeide die Haltung bei akuter Racheninfektion oder Kehlkopfentzündung",
+        "Schwangere können sie ohne Anstrengung üben",
+        "Bei Tinnitus oder Hörempfindlichkeit brülle leise"
+      ],
+      "modifications": [
+        "Brülle leise, wenn du in einem gemeinsamen Raum übst",
+        "Lass das Herausstrecken der Zunge aus, wenn es Zunge oder Kiefer belastet",
+        "Übe im Schneidersitz, wenn die kniende Basis unbequem ist",
+        "Mache anfangs weniger Runden — 3 Runden bauen das Wohlgefühl auf, um mehr zu machen"
+      ],
+      "benefits": [
+        "Löst Spannung in Kiefer, Kehle und Gesicht — der chronische Sitz des sozialen Stress-Festhaltens",
+        "Das HYP beschreibt sie als Beseitigerin von Krankheiten der Kehle",
+        "Aktiviert das Platysma (Halsmuskel) und die Zunge — selten trainierte Bereiche",
+        "Überraschend emotional — viele finden, dass sie mit der Zeit Hemmungen löst"
+      ],
+      "reasoning": "Simhasana ist die Asana, für die die meisten zu befangen sind, sie in einer öffentlichen Klasse auszuprobieren — und genau deshalb wirkt sie. Die Kombination aus Gesichtsausdruck, Zungenstreckung und kräftigem Ausatmen löst Spannung, von der du nicht wusstest, dass sie da war. Das HYP benennt diese Praxis ausdrücklich; moderne Linien lassen das Herausstrecken der Zunge manchmal weg, um es weniger unangenehm zu machen, doch das Original ist am wirksamsten."
+    },
+    "bhadrasana": {
+      "english": "Anmutige Haltung",
+      "aliases": [
+        "Thronhaltung",
+        "Glückverheißende Haltung",
+        "Schusterhaltung (moderne Deutung)"
+      ],
+      "source": {
+        "note": "Im HYP Kap. 1 benannt. Der Text beschreibt sie als eine der vier primären Asanas für die Meditation. Einige moderne Linien vermengen sie mit Baddha Konasana; wir halten sie getrennt, um die eigenständige Benennung des HYP zu bewahren."
+      },
+      "instructions": [
+        "Sitze auf einer gefalteten Decke mit ausgestreckten Beinen.",
+        "Bring die Fußsohlen zusammen und ziehe die Fersen nah an den Damm.",
+        "Fasse die Füße fest mit beiden Händen — die Finger umschließen die Außenkanten.",
+        "Die Knie lösen sich zum Boden hin, gestützt von Kissen, wenn sie schweben.",
+        "Verlängere die Wirbelsäule — der Scheitel strebt nach oben, die Sitzbeine verwurzeln nach unten.",
+        "Halte den Blick entweder geradeaus oder die Augen sanft geschlossen.",
+        "Bleibe 3-5 Minuten zur Meditation."
+      ],
+      "voiceCues": {
+        "enter": "Sitze aufrecht. Bring die Fußsohlen nah am Körper zusammen. Fasse die Füße mit beiden Händen.",
+        "hold": "Lass die Knie zum Boden hin sinken. Verlängere die Wirbelsäule — der Scheitel strebt nach oben.",
+        "breathe": "Natürlicher Atem. Dies ist ein Meditationssitz — lass den Körper sich setzen.",
+        "exit": "Löse die Füße. Strecke die Beine aus und schüttle sie sanft aus."
+      },
+      "contraindications": [
+        "Übe nicht bei Knie- oder Hüftverletzung",
+        "Vermeide die Haltung bei schwerem Ischias",
+        "Schwangere können mit den Füßen weiter vom Körper entfernt üben (komprimiere den Bauch nicht)"
+      ],
+      "modifications": [
+        "Sitze auf einer gefalteten Decke, um die Hüften zu erhöhen",
+        "Lege Blöcke unter jedes Knie zur Stütze — drücke die Knie niemals nach unten",
+        "Bewege die Füße weiter vom Körper weg für eine leichtere Hüftdehnung",
+        "Wenn das Halten der Füße den unteren Rücken belastet, lege die Hände stattdessen auf die Schienbeine"
+      ],
+      "benefits": [
+        "HYP-benannter Meditationssitz — eine der grundlegenden Sitzpraxen",
+        "Öffnet die Hüften durch Außenrotation, mit der Zeit zugänglich",
+        "Stabil und erdend — für lange Halte geeignet",
+        "Verbindet moderne Menschen mit einer der ursprünglichen vier Meditationshaltungen"
+      ],
+      "reasoning": "Bhadrasana gehört zum Cluster der HYP-benannten Meditationssitze (Padmasana, Siddhasana, Swastikasana, Bhadrasana) — den vier primären Haltungen, die der Text befürwortet. Die moderne Lehre nutzt oft Baddha Konasana austauschbar; wir dokumentieren sie getrennt, um die Benennung des Quelltextes für Menschen zu bewahren, die Treue wünschen."
+    },
+    "kapotasana": {
+      "english": "Königstaubenhaltung",
+      "aliases": [
+        "Taube (volle Ausführung)"
+      ],
+      "source": {
+        "note": "Moderne fortgeschrittene Rückbeuge. Nicht im HYP Kap. 1. Oft mit Eka Pada Rajakapotasana verwechselt; das volle Kapotasana ist eine kniende tiefe Rückbeuge, nicht der asymmetrische Hüftöffner."
+      },
+      "instructions": [
+        "VORAUSSETZUNG: ein etabliertes Ustrasana (Kamelhaltung), Bhujangasana und Setu Bandha.",
+        "Knie mit den Knien hüftbreit auseinander, die Oberschenkel senkrecht.",
+        "Atme ein, hebe die Brust und strecke die Arme über den Kopf.",
+        "Atme aus und beuge dich zurück, geführt von der Brust. Lege die Hände auf die Fersen oder weiter nach vorne.",
+        "Wandere mit den Händen zu den Füßen, fasse schließlich die Zehen oder ziehe den Kopf zu den Füßen.",
+        "Lass den Kopf sanft zurückfallen — die Augen entweder auf die Füße gerichtet oder geschlossen.",
+        "Zum Lösen: wandere mit den Händen zurück, hebe die Brust, setze dich langsam auf."
+      ],
+      "voiceCues": {
+        "enter": "Knie mit senkrechten Oberschenkeln. Atme ein und strecke die Arme über den Kopf.",
+        "hold": "Atme aus und beuge dich zurück. Wandere mit den Händen zu den Fersen, dann zu den Füßen.",
+        "breathe": "Stetiger Atem. Jedes Einatmen öffnet die Brust ein wenig mehr.",
+        "exit": "Wandere mit den Händen zurück. Atme ein und hebe die Brust. Ruhe in Balasana."
+      },
+      "contraindications": [
+        "FORTGESCHRITTENE Haltung — arbeite mit einer Lehrerin, bevor du sie versuchst",
+        "Übe nicht bei schwerer Verletzung des unteren Rückens, Bandscheibenvorfall oder Instabilität des Iliosakralgelenks",
+        "Lass sie bei Nackenverletzung oder einer kürzlichen Schulteroperation aus",
+        "Schwangere sollten nicht üben",
+        "Vermeide die Haltung bei hohem oder niedrigem Blutdruck, Schwindel oder Migräne"
+      ],
+      "modifications": [
+        "Baue Ustrasana monatelang auf, bevor du Kapotasana versuchst",
+        "Nutze eine Wand — beginne mit den Händen an der Wand, wandere sie über Wochen allmählich hinunter",
+        "Lege Blöcke an die Fersen, um den Händen ein höheres Ziel zu geben",
+        "Halte zunächst nur 5-10 Sekunden"
+      ],
+      "benefits": [
+        "Die tiefste Rückbeuge im Katalog — öffnet den gesamten Vorderkörper",
+        "Löst gleichzeitig die Hüftbeuger und die Quadrizeps",
+        "Große Öffnung von Brust und Schultern — wirkt jahrelanger Vorwärtshaltung entgegen",
+        "Kardiovaskuläre Reaktion — erhebliche Adrenalinausschüttung; viele fühlen sich danach euphorisch"
+      ],
+      "reasoning": "Kapotasana ist eine der forderndsten Rückbeugen der modernen Praxis. Die erforderliche Kombination aus Hüftbeuger-Beweglichkeit, Wirbelsäulenstreckung und Schulteröffnung ist selten. Hebe sie dir für fortgeschrittene Übende mit einer regelmäßigen Ustrasana- und gestützten Brücke-Gewohnheit auf."
+    },
+    "bakasana": {
+      "english": "Krähenhaltung",
+      "aliases": [
+        "Krähe"
+      ],
+      "source": {
+        "note": "Moderne Armbalance, benannt nach dem Weisen Baka. Oft mit Kakasana (Kranich) verwechselt; Bakasana hat gebeugte Arme, Kakasana hat gestreckte Arme."
+      },
+      "instructions": [
+        "Hocke in Malasana (tiefe Hocke), die Füße hüftbreit auseinander, die Knie weit.",
+        "Lege die Handflächen auf den Boden vor den Füßen, schulterbreit auseinander, die Finger weit gespreizt.",
+        "Beuge die Ellbogen leicht nach außen (Chaturanga-Stil — die Ellbogen folgen der Linie über den Handgelenken, nicht weit ausgestellt).",
+        "Drücke die Knie gegen die Rückseite der Oberarme, knapp über den Ellbogen.",
+        "Verlagere das Gewicht nach vorne über die Hände. Hebe die Fersen und rolle die Zehen vom Boden.",
+        "Blicke nach vorne — NICHT nach unten. Die Blickrichtung ist die Balance.",
+        "Halte 5-15 Sekunden. Zum Lösen: senke die Füße, hebe den Kopf, stehe auf."
+      ],
+      "voiceCues": {
+        "enter": "Hocke tief. Lege die Handflächen flach auf den Boden davor. Beuge die Ellbogen leicht.",
+        "hold": "Die Knie drücken gegen die Rückseite der Oberarme. Verlagere das Gewicht nach vorne. Hebe die Füße.",
+        "breathe": "Blicke nach vorne, nicht nach unten. Stetiger Atem. Der Blick macht die Balance möglich.",
+        "exit": "Senke die Füße zum Boden. Stehe langsam auf. Schüttle die Handgelenke aus."
+      },
+      "contraindications": [
+        "Übe nicht bei Handgelenks-, Ellbogen- oder Schulterverletzung",
+        "Lass sie bei Karpaltunnelsyndrom aus",
+        "Schwangere sollten nicht über das erste Trimester hinaus üben",
+        "Vermeide die Haltung bei Bluthochdruck",
+        "Lass sie aus, wenn du noch keine kräftige Planke 30 Sekunden halten kannst"
+      ],
+      "modifications": [
+        "Übe mit einem Block unter der Stirn, damit ein Nachvornefallen sicher ist",
+        "Beginne mit jeweils einem Fuß — werde sicher beim Anheben eines, bevor du beide hebst",
+        "Lege eine gefaltete Decke vor die Hände für den Fall eines Sturzes nach vorne",
+        "Baue zuerst Handgelenks- und Rumpfkraft auf: Planke, Seitplanke, Chaturanga"
+      ],
+      "benefits": [
+        "Die zugänglichste Armbalance — der Einstiegspunkt in die weitere Armbalance-Familie",
+        "Baut Handgelenks-, Unterarm- und Schulterkraft dramatisch auf",
+        "Verlangt einpunktigen Fokus — der Blick IST die Praxis",
+        "Selbstvertrauens-Aufbau, sobald gelandet — viele finden ihre erste Armbalance verwandelnd"
+      ],
+      "reasoning": "Die Krähe ist DIE Einstiegs-Armbalance. Die meisten können sie innerhalb von 2-4 Wochen fokussierter Praxis landen, wenn sie die Rumpf- und Handgelenkskraft haben. Der Trick ist die Blickrichtung — nach vorne (nicht nach unten) zu blicken macht die Balance auffindbar. Nutze während der Lernkurve einen Block unter der Stirn."
+    },
+    "kakasana": {
+      "english": "Kranichhaltung",
+      "aliases": [
+        "Kranich"
+      ],
+      "source": {
+        "note": "Moderne Armbalance — das geradearmige Geschwister des Bakasana (Krähe). Die tiefere Version mit vollständig gestreckten Armen."
+      },
+      "instructions": [
+        "VORAUSSETZUNG: ein stabiles Bakasana (Krähe) für 15+ Sekunden.",
+        "Richte dich genau wie im Bakasana ein: tiefe Hocke, Handflächen auf dem Boden, die Knie an den Oberarmen.",
+        "Lege die Knie HÖHER auf die Arme — näher an die Achseln.",
+        "Drücke den Boden weg und STRECKE die Arme vollständig.",
+        "Die Hüften heben sich höher, der Körper ist senkrechter als in der Krähe.",
+        "Halte stabil. Blicke nach vorne. Die Form ist eleganter, weniger komprimiert als die Krähe.",
+        "Zum Lösen: beuge die Arme zurück zur Krähe, senke die Füße, stehe auf."
+      ],
+      "voiceCues": {
+        "enter": "Richte dich wie zur Krähe ein, aber lege die Knie höher auf die Arme, nahe den Achseln.",
+        "hold": "Drücke den Boden weg und strecke die Arme. Die Hüften heben sich; der Körper verlängert sich nach oben.",
+        "breathe": "Stetig. Die gestreckten Arme machen sie eleganter, aber fordernder.",
+        "exit": "Beuge die Arme zurück zur Krähe. Senke die Füße. Schüttle die Handgelenke aus."
+      },
+      "contraindications": [
+        "FORTGESCHRITTEN — übe mit einer Lehrerin",
+        "VORAUSSETZUNG: ein solides Bakasana, bevor du weitergehst",
+        "Übe nicht bei Handgelenks-, Ellbogen- oder Schulterverletzung",
+        "Lass sie bei Karpaltunnelsyndrom aus",
+        "Schwangere sollten nicht üben"
+      ],
+      "modifications": [
+        "Meistere zuerst Bakasana — der Kranich ist seine geradearmige Steigerung",
+        "Halte zunächst 3-5 Sekunden",
+        "Übe das Anheben von einer höheren Basis aus (z. B. ein Block unter jedem Fuß), um die Handgelenksanforderung zu verringern"
+      ],
+      "benefits": [
+        "Tiefere Handgelenks- und Schulterkraft als Bakasana",
+        "Elegantere Armbalance-Form — nützlich für bewegungsbasierte Flows",
+        "Vorbereitung auf Astavakrasana und andere angehobene Armbalancen"
+      ],
+      "reasoning": "Der Kranich ist die natürliche Steigerung von der Krähe, sobald die Krähe mühelos 30+ Sekunden gehalten wird. Die gestreckten Arme verlagern die Last von den Oberarmen auf die Handgelenke und Schultern, was mehr Kraft verlangt, aber mit einer nachhaltigeren Form belohnt."
+    },
+    "chaturangaDandasana": {
+      "english": "Vierfüßige Stockhaltung",
+      "aliases": [
+        "Tiefe Planke",
+        "Yogi-Liegestütz"
+      ],
+      "source": {
+        "note": "Moderne Asana, zentral für die Vinyasa-Flow-Praxis. Nicht im HYP Kap. 1."
+      },
+      "instructions": [
+        "Beginne in der Planke, die Schultern über den Handgelenken, der Körper in einer Linie.",
+        "Verlagere das Gewicht leicht nach vorne — die Schultern bewegen sich über die Handgelenke hinaus.",
+        "Atme aus und beuge die Ellbogen gerade nach hinten, eng an die Rippen geschmiegt.",
+        "Senke dich, bis die Oberarme parallel zum Boden sind (90-Grad-Beuge im Ellbogen).",
+        "Der Körper bleibt in einer geraden Linie — Schultern, Hüften und Fersen ausgerichtet.",
+        "Halte stabil. Schmiege die Ellbogen heran — lass sie nicht ausstellen.",
+        "Zum Lösen: atme ein zum Heraufschauenden Hund oder senke dich ganz zum Boden."
+      ],
+      "voiceCues": {
+        "enter": "Verlagere aus der Planke das Gewicht nach vorne. Die Schultern bewegen sich über die Handgelenke hinaus.",
+        "hold": "Atme aus und beuge die Ellbogen gerade nach hinten, eng an die Rippen geschmiegt. Die Oberarme parallel zum Boden.",
+        "breathe": "Stetig. Der Körper in einer Linie. Die Ellbogen eng.",
+        "exit": "Atme ein, drücke dich hoch in den Heraufschauenden Hund, ODER senke dich ganz zum Boden und ruhe."
+      },
+      "contraindications": [
+        "Übe nicht bei Handgelenks-, Ellbogen- oder Schulterverletzung",
+        "Lass sie bei Rotatorenmanschettenproblemen aus — Chaturanga ist die häufigste Ursache für Schulterverletzungen im modernen Yoga",
+        "Schwangere sollten nicht über das erste Trimester hinaus üben",
+        "Vermeide die Haltung bei Karpaltunnelsyndrom"
+      ],
+      "modifications": [
+        "Senke zuerst die Knie ab — die halbe Chaturanga ist eine legitime dauerhafte Praxis",
+        "Bleibe stattdessen in der Planke und lass das Absenken aus",
+        "Senke dich nur bis zur Ellbogen-bei-90-Grad-Position, NIEMALS tiefer (die Schultern können nicht sicher unter die Ellbogen gehen)",
+        "Nutze einen Yogablock unter der Brust als Sicherheitsboden — senke dich, bis die Brust ihn berührt"
+      ],
+      "benefits": [
+        "Baut die Oberkörperkraft auf, die für Armbalancen und Umkehrhaltungen nötig ist",
+        "Aktiviert die Körpermitte auf eine Weise, die kaum eine andere Haltung erreicht",
+        "Das Bindegewebe in den Schultern passt sich an und stärkt sich",
+        "Fundament der Vinyasa-Übergänge — einmal sitzend, öffnet sich die gesamte Flow-Praxis"
+      ],
+      "reasoning": "Chaturanga ist die am häufigsten verletzte Haltung im modernen Yoga, weil sie Dutzende Male pro Klasse ohne korrekte Form ausgeführt wird. Die Lösung ist einfach: senke die Knie ab ODER senke dich nicht unter 90 Grad. Die halbe Chaturanga ist eine legitime dauerhafte Variante; es gibt keinen Grund, sich dafür zu schämen."
     }
   }
 }
