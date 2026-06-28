@@ -34,6 +34,8 @@ import dePranayamas from './content/de/pranayamas.json'
 import hiPranayamas from './content/hi/pranayamas.json'
 import deDosha from './content/de/dosha.json'
 import hiDosha from './content/hi/dosha.json'
+import dePrecautions from './content/de/precautions.json'
+import hiPrecautions from './content/hi/precautions.json'
 
 const ASANA_OVERLAYS = { de: deAsanas, hi: hiAsanas }
 const DIETARY_OVERLAYS = { de: deDietary, hi: hiDietary }
@@ -42,6 +44,7 @@ const DINA_OVERLAYS = { de: deDina, hi: hiDina }
 const PROTOCOL_OVERLAYS = { de: deProtocols, hi: hiProtocols }
 const PRANAYAMA_OVERLAYS = { de: dePranayamas, hi: hiPranayamas }
 const DOSHA_OVERLAYS = { de: deDosha, hi: hiDosha }
+const PRECAUTION_OVERLAYS = { de: dePrecautions, hi: hiPrecautions }
 
 // Shallow-merge the language overlay over a base asana. voiceCues/source are
 // nested so we merge them one level deep — a partial overlay (e.g. only
@@ -221,4 +224,11 @@ export function localizeDosha(rich) {
     mind: ov.mind ? { ...rich.mind, ...ov.mind } : rich.mind,
     pacification: ov.pacification ? { ...rich.pacification, ...ov.pacification } : rich.pacification,
   }
+}
+
+// ── Precautions ─────────────────────────────────────────────────────────────
+// AsanaDetailPage's static PRECAUTIONS map, keyed by asana id. Returns the
+// localized array for the active language, or the English base array.
+export function localizePrecautions(asanaId, base) {
+  return PRECAUTION_OVERLAYS[i18n.language]?.[asanaId] || base
 }

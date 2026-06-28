@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
 import { getAsana, getDoshaTag } from '../data/asanas'
+import { localizePrecautions } from '../i18n/contentI18n'
 import PoseFigure from '../components/PoseFigure'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
@@ -198,7 +199,7 @@ export default function AsanaDetailPage() {
   }
 
   const userDosha = profile?.dosha?.toLowerCase()
-  const precautions = PRECAUTIONS[asana.id] || []
+  const precautions = localizePrecautions(asana.id, PRECAUTIONS[asana.id] || [])
   const steps = getSteps(asana)
 
   // Localize the step phase label ('Setup'/'Hold'/'Breathe'/'Release');
