@@ -28,24 +28,16 @@ const CATEGORY_LABELS = {
 }
 
 // Precautions per asana — keyed by asana id
+// Keyed by asana id. Only ids that exist in the current ASANAS data render
+// (read via PRECAUTIONS[asana.id]); legacy ids with no matching asana were
+// removed. Localized via localizePrecautions → content/{de,hi}/precautions.json.
 const PRECAUTIONS = {
   tadasana: ['Avoid locking your knees — keep a micro-bend', 'If you feel dizzy, widen your stance slightly', 'Those with low blood pressure should be mindful when holding still'],
-  warrior1: ['Keep your front knee directly over your ankle, not beyond', 'Avoid this pose if you have a hip or knee injury', 'Those with shoulder issues can keep hands on hips instead of overhead', 'Do not let your back knee cave inward'],
-  warrior2: ['Front knee should track over your second toe', 'Avoid if you have severe knee or hip injury', 'Keep your torso centered — do not lean over the front leg', 'Relax your shoulders away from your ears'],
-  tree: ['Never place your foot on the knee joint — above or below only', 'Use a wall for support if balance is difficult', 'Avoid if you have ankle or knee injuries', 'Keep your standing leg slightly bent if needed'],
   sukhasana: ['Place a cushion under your hips if your knees are above your hips', 'Avoid if you have a knee injury — try sitting on a chair instead', 'Do not force your knees down', 'Keep your spine tall, not collapsed'],
-  seatedTwist: ['Never force the twist — let your breath guide the depth', 'Avoid during pregnancy', 'Those with herniated discs should be cautious', 'Always lengthen the spine before twisting'],
   uttanasana: ['Bend your knees generously if your hamstrings are tight', 'Avoid if you have a lower back injury — try half fold instead', 'Do not bounce to go deeper', 'Rise slowly to avoid dizziness'],
   paschimottanasana: ['Use a strap around your feet if you cannot reach', 'Never pull yourself forcefully into the fold', 'Avoid with acute lower back pain or herniated disc', 'Keep a micro-bend in your knees if hamstrings are very tight'],
   balasana: ['Place a pillow between your thighs and calves if knees are sensitive', 'Avoid if you have a knee injury or are pregnant (use wide-knee variation)', 'If your head does not reach the floor, rest it on stacked fists or a block'],
-  supinetwist: ['Keep both shoulders on the floor — the twist comes from the spine', 'Avoid if you have a spinal disc condition', 'Move slowly and never force the knees to the floor', 'Use a pillow between or under your knees for support'],
   savasana: ['Place a bolster under your knees if your lower back is uncomfortable', 'Cover yourself with a blanket — body temperature drops during rest', 'If lying flat is difficult, try a reclined position with props', 'Pregnant practitioners should lie on their left side'],
-  cobra: ['Do not straighten your arms fully — keep elbows slightly bent', 'Avoid if you have a wrist injury or carpal tunnel', 'Do not throw your head back — keep your gaze forward', 'Press the tops of your feet into the mat to protect your lower back'],
-  bridge: ['Keep your knees hip-width apart — do not let them splay', 'Avoid if you have a neck injury', 'Do not turn your head while in the pose', 'Press evenly through both feet'],
-  pigeon: ['Use a block or pillow under your hip if it does not reach the floor', 'Avoid if you have a knee injury — try reclined pigeon instead', 'Never force the stretch — intensity should be manageable', 'Keep your back leg straight and hip points facing forward'],
-  suryaNamaskar: ['Warm up your wrists before beginning', 'Modify chaturanga to knees-down if upper body strength is limited', 'Those with back injuries should skip the deep backbend', 'Move with your breath — never rush the sequence'],
-  downwardDog: ['Bend your knees if your hamstrings are tight', 'Avoid if you have carpal tunnel or wrist pain', 'Do not let your head hang below your heart if you have high blood pressure', 'Spread your fingers wide to distribute weight evenly'],
-  legUpWall: ['Avoid if you have glaucoma or uncontrolled high blood pressure', 'Scoot away from the wall if you feel tingling in your legs', 'Place a folded blanket under your hips for comfort', 'Avoid during menstruation if it causes discomfort'],
 }
 
 // ── Body-part → icon map for the Areas sheet ──
