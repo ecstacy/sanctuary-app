@@ -1519,6 +1519,267 @@
         "Lässt sich gut 5-15 Minuten halten — ideal für erholsame Praxis oder vor dem Schlaf"
       ],
       "reasoning": "Die liegende gebundene Winkelhaltung ist der faule, erholsame Verwandte des Baddha Konasana — der Boden stützt die Wirbelsäule, während die Schwerkraft die Hüften öffnet. Nutze die Kissen unter den Knien ausnahmslos. Dies ist die Haltung, zu der man greift, wenn nichts anderes zugänglich erscheint."
+    },
+    "suptaPadangusthasana": {
+      "english": "Liegende Hand-zu-großem-Zeh-Haltung",
+      "aliases": [
+        "Liegende Hand-zu-großem-Zeh"
+      ],
+      "source": {
+        "note": "Moderne liegende Variante des Utthita Hasta Padangusthasana. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Lege dich auf einer flachen Unterlage auf den Rücken.",
+        "Lege einen Yogagurt (oder einen festen Gürtel oder Schal) um den Fußballen deines rechten Fußes.",
+        "Halte beide Enden des Gurts, je ein Ende in jeder Hand.",
+        "Strecke das rechte Bein zur Decke hinauf.",
+        "Drücke den rechten Fuß in den Gurt. Lass die rechte Hüfte zum Boden hin sinken.",
+        "Halte das linke Bein lang auf dem Boden, den Fuß geflext.",
+        "Beide Schultern bleiben entspannt auf dem Boden. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Rücken. Lege einen Yogagurt um den Fußballen des rechten Fußes. Strecke das rechte Bein zur Decke hinauf und halte den Gurt mit beiden Händen. Halte das linke Bein lang auf dem Boden, den Fuß geflext.",
+        "hold": "Drücke den rechten Fuß in den Gurt und ziehe das Bein eine Spur näher zur Brust. Lass die rechte Hüfte sinken. Beide Schultern bleiben auf dem Boden.",
+        "breathe": "Jedes Ausatmen bringt das Bein eine Spur näher zur Brust. Ziehe nicht — lass den Gurt die Brücke sein.",
+        "exit": "Senke das rechte Bein zum Boden. Halte inne. Wechsle die Seite."
+      },
+      "contraindications": [
+        "Schwangere im dritten Trimester sollten nicht flach liegen — übe stattdessen auf der Seite",
+        "Übe nicht bei einem Riss des hinteren Oberschenkels oder schwerem Ischias, der sich durch die Dehnung verschlimmert",
+        "Vermeide die Haltung bei Bandscheibenvorfall — halte das untere Bein bei Bedarf gebeugt",
+        "Lass sie bei Bluthochdruck aus, wenn das Bein bis zur Senkrechten hebt"
+      ],
+      "modifications": [
+        "Nutze einen Yogagurt, ein Handtuch oder einen Gürtel um den Fuß — greife bei engen hinteren Oberschenkeln nie nach dem Zeh",
+        "Beuge das untere Knie mit dem Fuß auf dem Boden für Unterstützung des unteren Rückens",
+        "Beuge das angehobene Knie — das Ziel ist die Länge des hinteren Oberschenkels, keine gerade Linie",
+        "Öffne das angehobene Bein zur Seite hin für eine Variante der inneren Oberschenkel"
+      ],
+      "benefits": [
+        "Die zugänglichste Dehnung des hinteren Oberschenkels im Katalog — der Boden stützt die Wirbelsäule",
+        "Gezielte Verlängerung der Bahn des Ischiasnervs — nützlich bei leichtem Ischias",
+        "Löst Spannung im unteren Rücken ohne Beugung der Wirbelsäule",
+        "Hervorragende Haltung nach dem Laufen oder Radfahren"
+      ],
+      "reasoning": "Wenn Menschen sagen, ihre hinteren Oberschenkel seien eng, aber stehende Vorwärtsbeugen täten dem Rücken weh, ist dies die Haltung. Die liegende Geometrie nimmt die Last von der Wirbelsäule und liefert dennoch die volle Dehnung. Nutze bedingungslos einen Gurt; das Greifen nach dem Fuß erzeugt genau die Wirbelsäulenkompression, die wir vermeiden wollen."
+    },
+    "apanasana": {
+      "english": "Knie-zur-Brust-Haltung",
+      "aliases": [
+        "Windbefreiende Haltung",
+        "Pavanamuktasana (ähnlich)"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. Benannt nach \"apāna\" — dem abwärts strebenden Prana, das die Ausscheidung steuert. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Lege dich auf einer weichen Unterlage auf den Rücken.",
+        "Beuge beide Knie und ziehe sie zur Brust.",
+        "Schlinge die Arme um die Schienbeine. Die Hände halten die gegenüberliegenden Ellbogen ODER umfassen die Schienbeine.",
+        "Lass die Schultern zum Boden sinken.",
+        "Umarme die Knie mit jedem Ausatmen sanft zur Brust.",
+        "Optional: wiege dich sanft von Seite zu Seite für eine Massage des unteren Rückens.",
+        "Optional: halte jeweils ein Knie (Eka Pada Apanasana) für eine leichtere Variante."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Rücken. Beuge beide Knie und ziehe sie zur Brust. Schlinge die Arme um die Schienbeine, die Hände an den gegenüberliegenden Ellbogen oder an den Schienbeinen.",
+        "hold": "Umarme die Knie. Lass die Schultern zum Boden sinken. Lass den unteren Rücken mit jedem Ausatmen in den Boden hineinsinken.",
+        "breathe": "Mit jedem Einatmen drückt der Bauch sanft gegen die Oberschenkel. Mit jedem Ausatmen ziehe die Knie eine Spur näher.",
+        "exit": "Löse die Beine zum Boden und ruhe einen Atemzug lang."
+      },
+      "contraindications": [
+        "Schwangere sollten den Bauch nicht komprimieren — lass die Haltung aus oder wandle sie ab, indem du die Knie auseinander und um den Bauch herum ziehst",
+        "Übe nicht direkt nach dem Essen — warte 1-2 Stunden",
+        "Vermeide die Haltung bei schwerer Hüft- oder Knieverletzung",
+        "Lass sie bei Bandscheibenvorfall aus, der sich durch Beugung der Wirbelsäule verschlimmert"
+      ],
+      "modifications": [
+        "Halte jeweils ein Knie (Eka Pada Apanasana) — schonender für den unteren Rücken",
+        "Halte die Rückseiten der Oberschenkel statt der Schienbeine bei Schulterproblemen",
+        "Wiege dich sanft von Seite zu Seite für eine Massage-Variante des unteren Rückens",
+        "Lass sie aus, wenn die Kompression Verdauungsbeschwerden verschlimmert"
+      ],
+      "benefits": [
+        "Löst den unteren Rücken durch sanfte Beugung der Wirbelsäule",
+        "Stimuliert den Dickdarm — unterstützt die Ausscheidung ('apāna' bedeutet wörtlich abwärts strebende Energie)",
+        "Nützlich zwischen kräftigeren Asanas als neutralisierender Reset",
+        "Direkte Linderung bei eingeschlossenen Blähungen und Bauchenge"
+      ],
+      "reasoning": "Apanasana ist die einfachste Reset-Haltung — die Wirbelsäule kehrt zur Neutralität zurück, der untere Rücken löst sich, der Bauch erhält sanfte Kompression. Nutze sie frei zwischen tieferen Haltungen. Der Sanskrit-Name würdigt, dass diese Haltung Dinge nach unten und hinaus bewegt, was genau das ist, was die meisten kapha-betonten Morgen brauchen."
+    },
+    "jatharaParivartanasana": {
+      "english": "Bauchdrehung",
+      "aliases": [
+        "Liegende Bauchdrehung",
+        "Gedrehte Bauchhaltung"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. \"Jaṭhara\" = Bauch, \"parivartana\" = drehend. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Lege dich auf einer flachen Unterlage auf den Rücken.",
+        "Ziehe beide Knie zur Brust.",
+        "Strecke die Arme auf Schulterhöhe zu den Seiten aus, die Handflächen nach oben.",
+        "Senke beide Knie nach rechts zum Boden und halte sie übereinander.",
+        "Drehe den Kopf nach links.",
+        "Beide Schultern bleiben auf dem Boden — drücke die sich bewegende Schulter nicht nach unten.",
+        "Lege ein Kissen unter die sich bewegenden Knie, wenn sie den Boden nicht erreichen. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Rücken. Ziehe beide Knie zur Brust. Strecke die Arme auf Schulterhöhe zu den Seiten aus, die Handflächen nach oben.",
+        "hold": "Senke beide Knie nach rechts zum Boden. Drehe den Kopf nach links. Beide Schultern bleiben auf dem Boden.",
+        "breathe": "Lass mit jedem Ausatmen die Knie eine Spur näher zum Boden sinken. Drücke die Schulter nicht nach unten.",
+        "exit": "Atme ein und bring die Knie zurück zur Mitte. Umarme sie einen Atemzug lang. Wechsle die Seite."
+      },
+      "contraindications": [
+        "Schwangere sollten eine offene Variante üben — die Knie auseinander, komprimiere den Bauch nicht",
+        "Übe nicht bei Bandscheibenvorfall oder Instabilität des ISG-Gelenks",
+        "Vermeide die Haltung nach einer kürzlichen Bauch-, Hüft- oder Rückenoperation",
+        "Lass sie bei einem akuten Reizdarm-Schub aus"
+      ],
+      "modifications": [
+        "Lege ein Bolster oder Kissen unter die sich bewegenden Knie, damit sie den Boden nicht erreichen",
+        "Halte die Knie übereinander, statt sie auseinandergleiten zu lassen",
+        "Lass das Drehen des Kopfes aus, wenn der Nacken empfindlich ist — blicke gerade nach oben",
+        "Nutze eine Einbein-Variante: strecke das untere Bein lang aus, nur das obere Knie kreuzt hinüber"
+      ],
+      "benefits": [
+        "Löst die Muskeln um die Lendenwirbelsäule und das ISG-Gelenk",
+        "Stimuliert die Bauchorgane — unterstützt die Verdauung",
+        "Aktiviert die parasympathische Reaktion — ein Favorit vor dem Schlafen",
+        "Tri-doshisch — wirkt für jeden, was selten ist"
+      ],
+      "reasoning": "Die Bauchdrehung ist eine der am universellsten verordneten Haltungen im Katalog — abgesehen von Verletzungen profitiert fast jeder fast täglich von ihr. Besonders nützlich als letzte Haltung vor Savasana, um die Wirbelsäule nach asymmetrischer Arbeit zu neutralisieren."
+    },
+    "makarasana": {
+      "english": "Krokodilshaltung",
+      "aliases": [
+        "Krokodil"
+      ],
+      "source": {
+        "note": "Moderne erholsame Haltung. \"Makara\" = Krokodil. Nicht im Hatha Yoga Pradipika Kap. 1 aufgeführt."
+      },
+      "instructions": [
+        "Lege dich auf einer weichen Unterlage auf den Bauch.",
+        "Staple die Unterarme vor dir und lege die Stirn auf die Unterarme.",
+        "Spreize die Beine etwas weiter als hüftbreit, die Fersen fallen zu den Seiten.",
+        "Lass den Körper vollständig in den Boden hinein weich werden.",
+        "Lass den Kiefer und die Augen weich werden.",
+        "Atme natürlich in den Bauch. Jedes Einatmen drückt den Bauch sanft gegen die Matte.",
+        "Bleibe 3-5 Minuten. Nutze sie zwischen tieferen Rückbeugen oder als Erholungshaltung."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Bauch. Staple die Unterarme vor dir und lege die Stirn auf die Unterarme. Spreize die Beine etwas weiter als hüftbreit.",
+        "hold": "Lass den Körper vollständig in den Boden hinein weich werden. Lass den Kiefer und die Augen weich werden.",
+        "breathe": "Atme natürlich in den Bauch. Jedes Einatmen drückt den Bauch sanft gegen die Matte — der Boden lehrt den Zwerchfellatem.",
+        "exit": "Bring die Arme an die Seiten. Drücke dich langsam in den Vierfüßlerstand hoch und ruhe einen Atemzug lang in der Haltung des Kindes."
+      },
+      "contraindications": [
+        "Schwangere in der mittleren bis späten Schwangerschaft sollten nicht auf dem Bauch liegen",
+        "Lass sie bei starken Schmerzen im unteren Rücken aus — versuche es stattdessen in Seitenlage",
+        "Vermeide die Haltung bei starkem Sodbrennen oder einem Zwerchfellbruch",
+        "Übe nicht direkt nach dem Essen"
+      ],
+      "modifications": [
+        "Lege eine dünne gefaltete Decke unter den Bauch zur Stütze, wenn der untere Rücken sich meldet",
+        "Nutze ein Bolster längs unter der Brust für eine Variante mit angehobenem Oberkörper",
+        "Übe mit zur Seite gedrehtem Kopf statt mit der Stirn nach unten — wechsle regelmäßig die Seite",
+        "Ersetze sie durch die Haltung des Kindes, wenn die Bauchlage nicht zugänglich ist"
+      ],
+      "benefits": [
+        "Die zugänglichste Erholungshaltung im Katalog — wirkt zwischen tieferen Haltungen oder als vollständige Praxis",
+        "Trainiert die Zwerchfellatmung (Bauchatmung) durch propriozeptives Feedback vom Boden",
+        "Entlastet den unteren Rücken durch sanfte schwerkraftbedingte Dehnung",
+        "Still therapeutisch — in einigen Linien zur Rehabilitation des chronischen unteren Rückens genutzt"
+      ],
+      "reasoning": "Das Krokodil ist die Erholungshaltung, die die meisten nie ausprobiert haben. Die Bauchlage ist ungewöhnlich, doch das Training des Zwerchfellatems ist einzigartig — die meisten anderen Haltungen geben dem Bauch nichts, wogegen er drücken kann. Nutze sie als Übergangshaltung oder als 5-minütigen Reset an einem stressigen Tag."
+    },
+    "suptaVirasana": {
+      "english": "Liegende Heldenhaltung",
+      "aliases": [
+        "Liegender Held"
+      ],
+      "source": {
+        "note": "Moderne liegende Variante des Virasana aus Hatha Yoga Pradipika 1.21. Die liegende Version verstärkt die Dehnung von Quadrizeps und Hüftbeuger."
+      },
+      "instructions": [
+        "Beginne in Virasana — kniend mit zusammenstehenden Knien, die Füße weiter als die Hüften, zwischen den Fersen sitzend (nutze bei Bedarf einen Block unter dem Sitz).",
+        "Lege die Hände hinter dir auf den Boden und lehne dich langsam auf die Ellbogen zurück.",
+        "Halte hier inne. Wenn Knie, Hüften oder Quadrizeps sich melden, bleibe auf den Ellbogen oder komme zurück nach oben.",
+        "Wenn zugänglich, senke dich ganz auf den Rücken. Lege ein Bolster längs hinter die Wirbelsäule zur Stütze.",
+        "Die Arme können an den Seiten ruhen, die Handflächen nach oben, oder sich über dem Kopf auf dem Bolster ausstrecken.",
+        "Halte 1-3 Minuten. Die Lösung liegt in der Dauer — überhaste nichts.",
+        "Zum Lösen: drücke dich zuerst auf die Ellbogen hoch, dann auf die Hände, dann setze dich auf."
+      ],
+      "voiceCues": {
+        "enter": "Lege aus Virasana (zwischen den Fersen sitzend) die Hände hinter dich und lehne dich langsam auf die Ellbogen zurück. Wenn zugänglich, senke dich ganz hinunter.",
+        "hold": "Lege ein Bolster hinter die Wirbelsäule zur Stütze. Die Arme ruhen an den Seiten oder über dem Kopf. Die Quadrizeps und Hüftbeuger dehnen sich tief.",
+        "breathe": "Langsamer, tiefer Atem. Jedes Ausatmen löst die Quadrizeps eine Spur tiefer.",
+        "exit": "Drücke dich zuerst auf die Ellbogen hoch, dann auf die Hände, dann setze dich auf. Bewege dich langsam — die Quadrizeps werden eng sein."
+      },
+      "contraindications": [
+        "Übe nicht bei Knieverletzung, Meniskusriss oder einer kürzlichen Knieoperation",
+        "Lass sie bei Knöchelverletzung aus",
+        "Schwangere sollten nicht üben — die Tiefe der Rückbeuge ist nicht sicher",
+        "Lass sie bei Bandscheibenvorfall oder schwerer Verletzung des unteren Rückens aus",
+        "Vermeide die Haltung, wenn schon Virasana selbst die Knie belastet — das ist die Voraussetzung"
+      ],
+      "modifications": [
+        "Bleibe auf die Ellbogen gestützt, statt ganz hinunterzugehen",
+        "Lege ein Bolster längs hinter die Wirbelsäule — die meisten brauchen das",
+        "Lege eine gefaltete Decke unter die Knie, wenn sie schmerzen",
+        "Sitze in Virasana auf einem hohen Block, bevor du dich zurücklehnst — das neigt das Becken nach vorne"
+      ],
+      "benefits": [
+        "Tiefe Dehnung durch Quadrizeps, Hüftbeuger und die Vorderseite der Knöchel — eine Kombination, die keine andere Haltung erreicht",
+        "Die leichte Rückbeuge öffnet die Brust",
+        "Hervorragende Haltung nach dem Training für Läufer, Radfahrer und Schreibtischarbeiter",
+        "Die liegende Version ist zum Öffnen der Brust zugänglicher als Kamel oder Bogen"
+      ],
+      "reasoning": "Supta Virasana ist eine tiefe Quadrizepsdehnung in Verkleidung — die meisten merken erst, wie kurz ihre Quadrizeps vom chronischen Sitzen geworden sind, wenn sie diese Haltung ausprobieren. Das Bolster hinter der Wirbelsäule ist für die meisten Körper nicht verhandelbar. Der 1-3-minütige Halt ist der Moment, in dem die fasziale Lösung tatsächlich ankommt."
+    },
+    "suptaSukhasana": {
+      "english": "Liegende bequeme Haltung",
+      "aliases": [
+        "Liegender Schneidersitz"
+      ],
+      "source": {
+        "note": "Moderne liegende Variante des Sukhasana. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Sitze in Sukhasana — die Beine bequem gekreuzt, die Sitzbeine geerdet.",
+        "Lege die Hände hinter dir auf den Boden und lehne dich langsam auf die Ellbogen zurück.",
+        "Wenn zugänglich, senke dich ganz auf den Rücken. Die gekreuzten Beine bleiben gefaltet.",
+        "Lege ein Bolster oder Kissen unter Kopf und Schultern für eine leichte Anhebung der Brust.",
+        "Die Arme ruhen zu den Seiten in einem beliebigen bequemen Winkel, die Handflächen nach oben.",
+        "Halte 1-3 Minuten pro Seite, dann wechsle, welches Bein vorne liegt, und wiederhole.",
+        "Zum Lösen: drücke dich auf die Ellbogen hoch, dann auf die Hände, dann setze dich auf."
+      ],
+      "voiceCues": {
+        "enter": "Lege aus Sukhasana die Hände hinter dich und lehne dich langsam zurück. Senke dich ganz hinunter auf ein Bolster hinter der Wirbelsäule.",
+        "hold": "Die gekreuzten Beine bleiben gefaltet. Die Arme ruhen zu den Seiten, die Handflächen nach oben. Lass alles weich werden, was weich werden kann.",
+        "breathe": "Langsamer, tiefer Atem. Die liegende Position lässt den Atem tief und leicht hinabsinken.",
+        "exit": "Drücke dich zuerst auf die Ellbogen hoch, dann auf die Hände, dann setze dich auf. Wechsle, welches Bein vorne liegt, und wiederhole."
+      },
+      "contraindications": [
+        "Schwangere in der Spätschwangerschaft sollten den Oberkörper höher stützen (45-Grad-Winkel), statt sich ganz zurückzulehnen",
+        "Lass sie bei Knieverletzung aus, die den Schneidersitz verhindert",
+        "Vermeide die Haltung bei starken Schmerzen im unteren Rücken — versuche es stattdessen mit auf einem Bolster ausgestreckten Beinen",
+        "Übe nicht bei Bandscheibenvorfall"
+      ],
+      "modifications": [
+        "Lege ein Bolster längs unter die Wirbelsäule — fast jeder braucht das",
+        "Stapele Kissen unter jedes Knie, wenn die Hüften sich nicht lösen",
+        "Nutze eine gefaltete Decke unter dem Kopf, um das Kinn neutral zu halten",
+        "Übe mit stärker angehobener Brust (weniger zurückgelehnt) für bequemeres Atmen"
+      ],
+      "benefits": [
+        "Vereint Hüftöffnung mit Brustöffnung — sanft und zugänglich",
+        "Lässt den Atem auf natürliche Weise in den unteren Bauch vertiefen",
+        "Beruhigende Haltung — wirkt als 5-minütiger Reset vor dem Schlaf",
+        "Zugänglicher als Supta Baddha Konasana für Menschen mit sehr engen Hüften"
+      ],
+      "reasoning": "Die liegende bequeme Haltung ist der sanfteste liegende Hüftöffner im Katalog. Nutze sie als Schlusshaltung in Abfolgen zum Stressabbau oder als Ersatz für Savasana an Tagen, an denen sich das volle liegende Savasana zu entblößt anfühlt. Das Bolster hinter der Wirbelsäule macht sie erholsam statt nur liegend."
     }
   }
 }
