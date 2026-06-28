@@ -761,6 +761,242 @@
         "Erzeugt eine kardiovaskuläre Reaktion ohne aerobes Training"
       ],
       "reasoning": "Die Haltung des Tänzers ist eine der wenigen, die fast jede Fähigkeit der Standhaltungen vereint — Gleichgewicht, Beweglichkeit, Kraft und Rückbeuge. Hebe sie dir für Menschen auf, die bereits ein stabiles Vrksasana und Trikonasana haben. Nutze einen Gurt; das Greifen des Fußes ist theatralisch, nicht therapeutisch."
+    },
+    "mindfulRespiration": {
+      "english": "Achtsame Atmung",
+      "voiceCues": {
+        "enter": "Sitze bequem mit aufrechter Wirbelsäule. Lege die Hände auf die Knie. Lass die Schultern weg von den Ohren sinken.",
+        "hold": "Atme langsam durch die Nase ein, vier Zählzeiten lang. Halte inne. Atme sanft aus, sechs Zählzeiten lang.",
+        "breathe": "Lass das Ausatmen länger sein als das Einatmen — das ist es, was deinem Körper sagt, dass er sicher ist.",
+        "exit": "Lass deinen Atem zu seinem natürlichen Rhythmus zurückkehren. Nimm wahr, wie du dich jetzt fühlst."
+      },
+      "benefits": [
+        "Beruhigt Angst schnell",
+        "Senkt die Stressreaktion",
+        "Schärft den Fokus",
+        "Verankert den wandernden Geist"
+      ],
+      "reasoning": "Ein zweiminütiger Reset für das Nervensystem. Langsames, gleichmäßiges Atmen aktiviert den Vagusnerv, senkt die Herzfrequenz und holt dich aus dem Kampf-oder-Flucht-Modus — die schnellste evidenzbasierte Maßnahme bei akutem Stress und akuter Angst."
+    },
+    "padmasana": {
+      "english": "Lotushaltung",
+      "aliases": [
+        "Voller Lotus"
+      ],
+      "source": {
+        "note": "Ausdrücklich im Hatha Yoga Pradipika Kap. 1 benannt. Sechs Verse beschreiben ihren Aufbau und ihren Wert als Meditationssitz."
+      },
+      "instructions": [
+        "WARNUNG: Erzwinge diese Haltung nicht. Wenn sie nicht leicht gelingt, sitze stattdessen in Sukhasana auf einem Kissen — deine Knie werden es dir danken.",
+        "Sitze mit gerade nach vorne ausgestreckten Beinen auf dem Boden.",
+        "Beuge das rechte Knie. Hebe mit den Händen den rechten Fuß und lege ihn auf den linken Oberschenkel, die Sohle nach oben.",
+        "Beuge das linke Knie. Hebe den linken Fuß und lege ihn auf den rechten Oberschenkel, die Sohle nach oben.",
+        "Beide Knie sollten auf dem Boden ruhen. Wenn eines der Knie nach oben schwebt, ist dies noch nicht deine Haltung — geh zurück.",
+        "Lege die Hände auf die Knie, die Handflächen nach oben.",
+        "Verlängere die Wirbelsäule. Der Sitz sollte sich stabil anfühlen, nicht angestrengt."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie und lege den rechten Fuß auf den linken Oberschenkel, die Sohle nach oben. Dann beuge das linke Knie und lege den linken Fuß auf den rechten Oberschenkel.",
+        "hold": "Lege die Hände auf die Knie, die Handflächen nach oben oder unten. Verlängere die Wirbelsäule — der Lotussitz ist eine senkrechte Linie vom Kreuzbein bis zum Scheitel.",
+        "breathe": "Atme natürlich. Die Haltung selbst erzeugt Stille; der Atem bestätigt sie nur.",
+        "exit": "Falte vorsichtig ein Bein nach dem anderen aus. Massiere die Knie, wenn sie sich eng anfühlen."
+      },
+      "contraindications": [
+        "Erzwinge diese Haltung nicht. Enge Hüften übertragen den Lotus in Kniebelastung — und Knie erholen sich davon nicht leicht",
+        "Lass sie bei jeglicher Vorgeschichte von Knieoperationen, Meniskusverletzung oder Kreuzband-/Innenbandverletzung aus",
+        "Schwangere sollten den vollen Lotus nicht üben",
+        "Vermeide die Haltung bei Ischias oder akuter Hüftverletzung",
+        "Übe sie nicht, wenn schon Sukhasana die Knie belastet"
+      ],
+      "modifications": [
+        "Übe Ardha Padmasana (halber Lotus) — ein Fuß auf dem Oberschenkel, der andere darunter",
+        "Übe Sukhasana mit auf Kissen erhöhten Hüften — gleiche Vorteile, kein Knierisiko",
+        "Lege eine gefaltete Decke unter den Sitz, um das Becken nach vorne zu neigen",
+        "Wenn der Lotus zugänglich, aber unbequem ist, halte ihn kürzer und wechsle die Beinstellung"
+      ],
+      "benefits": [
+        "Schafft den stabilsten aufrechten Sitz — Sitzbeine, Knie und ein Knöchel verankern je eine Ecke eines Dreiecks",
+        "Verlängert die Wirbelsäule durch strukturelle Ausrichtung, nicht durch muskuläre Anstrengung",
+        "Der klassische Sitz für Pranayama und Meditation, beschrieben im Hatha Yoga Pradipika und in Patanjalis Yoga-Sutras",
+        "Lange Halte werden möglich, weil der Unterkörper verriegelt ist — nur Wirbelsäule und Atem bleiben zu führen"
+      ],
+      "reasoning": "Der Lotus ist eine Zielhaltung — kein Ausgangspunkt. Das Hatha Yoga Pradipika beschreibt ihn als den Sitz, der 'alle Krankheiten zerstört', doch ihn ohne Verletzung zu erreichen erfordert geduldiges Hüftöffnen über Monate oder Jahre. Wenn deine Hüften heute keinen Lotus zulassen, ist Sukhasana auf einem Kissen für Meditationszwecke funktional identisch. Tausche deine Knie nicht gegen eine Instagram-Haltung."
+    },
+    "siddhasana": {
+      "english": "Vollkommene Haltung",
+      "aliases": [
+        "Haltung des Geübten",
+        "Perfekte Haltung"
+      ],
+      "source": {
+        "note": "Im Hatha Yoga Pradipika Kap. 1 als die vornehmste aller Asanas benannt. Der Text behauptet, ihre beständige Übung reinige die Nadis (feinstofflichen Kanäle) hinreichend zur Befreiung."
+      },
+      "instructions": [
+        "Sitze mit gerade nach vorne ausgestreckten Beinen.",
+        "Beuge das linke Knie und bringe die linke Ferse an den weichen Punkt zwischen Genitalien und After (den Damm).",
+        "Beuge das rechte Knie und lege den rechten Fuß auf den linken Knöchel. Die rechte Ferse ruht knapp über dem Schambeinbereich.",
+        "Lege die Hände auf die Knie, die Handflächen nach oben.",
+        "Verlängere die Wirbelsäule, die Sitzbeine verwurzeln, der Scheitel strebt nach oben.",
+        "Wechsle regelmäßig, welches Bein unten liegt — der Sitz ist asymmetrisch.",
+        "Sitze auf einer gefalteten Decke, wenn Hüften oder Knie protestieren."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit ausgestreckten Beinen. Beuge das linke Knie und lege die linke Ferse an den Damm (den weichen Punkt zwischen Genitalien und After). Beuge das rechte Knie und lege den rechten Fuß auf den linken Knöchel, die rechte Ferse drückt in den Schambeinbereich.",
+        "hold": "Lege die Hände auf die Knie, die Handflächen nach oben. Verlängere die Wirbelsäule. Der Sitz erzeugt einen stabilen energetischen Verschluss am Beckenboden.",
+        "breathe": "Atme durch die Nase in einem langsamen, gleichmäßigen Rhythmus. Siddhasana ist der traditionelle Sitz für die Pranayama-Praxis.",
+        "exit": "Falte die Beine langsam aus. Massiere die Knie, falls nötig."
+      },
+      "contraindications": [
+        "Übe nicht bei einer Knie-, Knöchel- oder Hüftverletzung",
+        "Lass sie bei Ischias aus",
+        "Schwangere sollten stattdessen Sukhasana auf einem Kissen nutzen",
+        "Vermeide die Haltung bei Beckenbodenschmerzen oder einer kürzlichen Beckenoperation"
+      ],
+      "modifications": [
+        "Lege den unteren Fuß unter den Körper (statt an ihn), wenn die Damm-Druck-Variante unangenehm ist",
+        "Sitze auf einer gefalteten Decke, um die Hüften zu erhöhen",
+        "Nutze Sukhasana als völlig akzeptablen Ersatz für die Meditation",
+        "Wechsle regelmäßig, welcher Fuß unten liegt, um die Hüften auszugleichen"
+      ],
+      "benefits": [
+        "Der stabilste Schneidersitz für langes Pranayama und lange Meditation",
+        "Der Fersendruck am Damm soll Mula Bandha (den Wurzelverschluss) auf natürliche Weise aktivieren",
+        "Verlängert die Wirbelsäule durch strukturelle Ausrichtung",
+        "Für viele zugänglich, denen Padmasana noch nicht möglich ist"
+      ],
+      "reasoning": "Siddhasana ist die praktische Alternative zu Padmasana — die meisten Menschen mit angemessener Hüftbeweglichkeit erreichen diesen Sitz. Die Begeisterung des HYP dafür rührt teils daher, dass er den Beckenboden stabilisiert, ohne die Knieanforderung des vollen Lotus. Nutze ihn für die Pranayama-Praxis, sobald Sukhasana sich für lange Halte zu instabil anfühlt."
+    },
+    "vajrasana": {
+      "english": "Donnerkeilhaltung",
+      "aliases": [
+        "Diamanthaltung",
+        "Adamantine Haltung"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Linien führen diese als Meditationssitz. Hatha Yoga Pradipika 1.51 erwähnt einen Sitz ähnlichen Namens in der weiteren Beschreibung der Meditationshaltungen."
+      },
+      "instructions": [
+        "Knie auf dem Boden mit zusammenstehenden Knien.",
+        "Lege die Fußrücken flach auf die Matte, die großen Zehen berühren sich.",
+        "Setze dich zurück, sodass die Hüften auf den Fersen ruhen. Die Sitzbeine betten sich zwischen die Fersen.",
+        "Lege eine gefaltete Decke zwischen Waden und Oberschenkel, wenn sich die Knie eingeklemmt anfühlen.",
+        "Lege die Hände auf die Oberschenkel, die Handflächen nach unten.",
+        "Verlängere die Wirbelsäule. Lass die Schultern sinken.",
+        "Dieser Sitz ist auch 5 Minuten nach einer Mahlzeit sicher zu üben — er unterstützt die Verdauung."
+      ],
+      "voiceCues": {
+        "enter": "Knie auf dem Boden mit zusammenstehenden Knien und flach liegenden Fußrücken. Setze dich zurück auf die Fersen. Die großen Zehen berühren sich, die Fersen weit genug auseinander, um die Sitzbeine zu betten.",
+        "hold": "Lege die Hände auf die Oberschenkel, die Handflächen nach unten. Verlängere die Wirbelsäule. Lass die Schultern sinken, lass den Kiefer locker.",
+        "breathe": "Atme natürlich. Jedes Ausatmen löst eine weitere Schicht Anstrengung.",
+        "exit": "Lehne dich nach vorne, setze die Hände nach vorne ab und falte die Beine zurück in den Sitz. Massiere die Knie, falls nötig."
+      },
+      "contraindications": [
+        "Übe nicht bei einer Knie- oder Knöchelverletzung — die kniende Form komprimiert beide Gelenke",
+        "Lass sie bei Meniskusproblemen oder einer kürzlichen Knieoperation aus",
+        "Vermeide die Haltung bei schweren Hämorrhoiden oder einem Mastdarmvorfall",
+        "Schwangere in der Spätschwangerschaft könnten sie unbequem finden — wechsle zu Sukhasana"
+      ],
+      "modifications": [
+        "Lege eine gefaltete Decke zwischen Waden und Oberschenkel, um die Kniekompression zu verringern",
+        "Setze dich auf einen Yogablock oder ein Bolster zwischen den Fersen (die häufigste Variante bei engen Knöcheln)",
+        "Rolle eine Decke unter die Vorderseite der Knöchel, wenn sie den Boden nicht erreichen",
+        "Übe kürzer und steigere dich allmählich"
+      ],
+      "benefits": [
+        "Eine der wenigen Asanas, die sicher nach Mahlzeiten geübt werden — die kniende Form unterstützt die Verdauung",
+        "Dehnt sanft Knöchel, Knie und Oberschenkel",
+        "Stabile Basis für Meditation und Pranayama",
+        "Leichtere Alternative zu Schneidersitzen für Menschen mit engen Hüften"
+      ],
+      "reasoning": "Vajrasanas Stärke ist, dass du sie nach dem Essen üben kannst, ohne dich übel zu fühlen — nützlich als 5-minütiger Reset nach dem Mittagessen. Die kniende Form komprimiert den Bauch sanft auf eine Weise, die die Magentätigkeit unterstützt. Sitze auf einem Block zwischen den Fersen, wenn die Knöchel sich melden."
+    },
+    "ardhaPadmasana": {
+      "english": "Halber Lotus",
+      "aliases": [
+        "Halbe Lotushaltung"
+      ],
+      "source": {
+        "note": "Moderne Halb-Variante des Padmasana aus Hatha Yoga Pradipika 1.44-49. Die halbe Version ist der praktische Schritt auf dem Weg zum vollen Lotus."
+      },
+      "instructions": [
+        "Sitze mit nach vorne ausgestreckten Beinen.",
+        "Beuge das rechte Knie und lege den rechten Fuß auf den linken Oberschenkel, die Sohle nach oben.",
+        "Beuge das linke Knie und schiebe den linken Fuß UNTER den rechten Oberschenkel.",
+        "Das rechte Knie ruht auf dem Boden oder einem Kissen. Erzwinge es nicht nach unten.",
+        "Lege die Hände auf die Knie, die Handflächen nach oben oder unten.",
+        "Verlängere die Wirbelsäule — die Sitzbeine verwurzeln, der Scheitel strebt nach oben.",
+        "Wechsle bei jeder Übung, welches Bein oben liegt, um die Hüften ausgeglichen zu halten."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie und lege den rechten Fuß auf den linken Oberschenkel, die Sohle nach oben. Beuge das linke Knie und schiebe den linken Fuß unter den rechten Oberschenkel.",
+        "hold": "Lege die Hände auf die Knie, die Handflächen nach oben oder unten. Verlängere die Wirbelsäule. Wechsle regelmäßig, welcher Fuß oben liegt.",
+        "breathe": "Atme natürlich. Achte darauf, ob die Asymmetrie die Wirbelsäule zieht — justiere, um die Senkrechte zu finden.",
+        "exit": "Falte die Beine vorsichtig aus. Massiere die Knie, wenn sie sich komprimiert anfühlen."
+      },
+      "contraindications": [
+        "Erzwinge den oberen Fuß nicht auf den Oberschenkel — wenn das Knie sich anspannt, kehre zu Sukhasana zurück",
+        "Lass sie bei einer Knie- oder Hüftverletzung aus",
+        "Schwangere sollten stattdessen Sukhasana nutzen",
+        "Vermeide die Haltung bei Ischias, der ins obere Bein ausstrahlt"
+      ],
+      "modifications": [
+        "Sitze auf einer gefalteten Decke, um das Becken nach vorne zu neigen",
+        "Lege ein Kissen unter das untere Knie, wenn es den Boden nicht erreicht",
+        "Wechsle bei jeder Übung das obere Bein",
+        "Nutze Sukhasana als Ersatz, wenn der halbe Lotus nicht zugänglich ist"
+      ],
+      "benefits": [
+        "Funktionale Brücke zwischen Sukhasana und Padmasana",
+        "Trainiert mit der Zeit die für den vollen Lotus nötige Hüftrotation",
+        "Stabil genug für Pranayama und Meditation mittlerer Länge",
+        "Schult das Bewusstsein für die Neigung der Wirbelsäule, sich bei asymmetrischer Beinstellung zu verdrehen"
+      ],
+      "reasoning": "Beim halben Lotus landen die meisten Menschen — der volle Lotus erfordert eine Hüftbeweglichkeit, die die meisten modernen Körper nicht haben, doch Sukhasana fehlt die strukturelle Verankerung, die lange Meditation mühelos macht. Der halbe Lotus ist der realistische Sitz für die sich vertiefende Praxis."
+    },
+    "baddhaKonasana": {
+      "english": "Gebundene Winkelhaltung",
+      "aliases": [
+        "Schusterhaltung",
+        "Schmetterlingshaltung"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. Einige Linien verbinden sie mit dem Bhadrasana des HYP (1.53-54), doch die Einordnung variiert."
+      },
+      "instructions": [
+        "Sitze auf der vorderen Kante einer gefalteten Decke.",
+        "Bring die Fußsohlen zusammen. Lass die Knie zu den Seiten fallen.",
+        "Halte mit beiden Händen die Füße oder Knöchel.",
+        "Bewege die Fersen näher zum Körper oder weiter weg — finde, was die Knie auf natürliche Weise loslässt.",
+        "Verlängere die Wirbelsäule — runde dich nicht nach vorne, um die Knie nach unten zu bringen.",
+        "Lass die Knie in ihrem eigenen Tempo zum Boden sinken. Drücke sie niemals.",
+        "Optional: Lege einen Block oder ein Kissen unter jedes Knie zur Stütze."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit aufrechter Wirbelsäule. Bring die Fußsohlen zusammen und lass die Knie zu den Seiten fallen. Halte die Füße oder Knöchel. Die Fersen nah am Körper oder weiter weg — je nachdem, was die Knie loslässt.",
+        "hold": "Verlängere die Wirbelsäule. Runde dich nicht nach vorne, um die Knie nach unten zu bringen — halte den Rücken lang und lass die Hüften die Arbeit machen.",
+        "breathe": "Lass mit jedem Ausatmen die inneren Oberschenkel weicher werden. Die Knie lösen sich in ihrem eigenen Tempo — niemals gedrückt.",
+        "exit": "Bring die Knie sanft wieder zusammen. Strecke die Beine nach vorne aus."
+      },
+      "contraindications": [
+        "Schwangere — übe mit dem Rücken zur Wand und falte dich im dritten Trimester nicht nach vorne",
+        "Übe nicht bei einer Leisten- oder Hüftverletzung",
+        "Lass sie bei schwerer Knieverletzung aus — lass die Knie auf Kissen ruhen",
+        "Vermeide die Haltung bei Ischias, der bei Außenrotation der Hüfte aufflammt"
+      ],
+      "modifications": [
+        "Sitze auf einer gefalteten Decke — die meisten brauchen das, um die Wirbelsäule lang zu halten",
+        "Lege Blöcke oder Kissen unter jedes Knie zur Stütze (drücke die Knie nicht nach unten)",
+        "Bewege die Füße weiter vom Körper weg für eine leichtere Hüftdehnung",
+        "Übe mit dem Rücken zur Wand für Haltungsunterstützung",
+        "Erholsame Variante: lehne dich auf ein Bolster hinter der Wirbelsäule zurück"
+      ],
+      "benefits": [
+        "Löst die inneren Oberschenkel und Adduktoren — anders als Vorwärtsbeugen",
+        "Öffnet die Hüften durch Außenrotation",
+        "Traditionelle Haltung zur Linderung von Menstruationsbeschwerden und zur Unterstützung der Fruchtbarkeit",
+        "Kann viele Minuten passiv gehalten werden — nützlich als Meditationssitz für Menschen mit engen Schneidersitzen"
+      ],
+      "reasoning": "Die gebundene Winkelhaltung ist der zugänglichste Hüftöffner im Katalog — funktioniert für fast jeden. Drücke die Knie nicht nach unten; das ist die Lehrbuchverletzung. Die Lösung geschieht mit der Zeit durch die Schwerkraft, nicht durch Kraft."
     }
   }
 }
