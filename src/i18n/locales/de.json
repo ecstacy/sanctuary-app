@@ -4,9 +4,21 @@
     "tagline": "Dein täglicher Rückzugsort für Körper und Geist"
   },
   "languages": {
-    "en": { "label": "English", "sublabel": "Continue in English", "flag": "🇬🇧" },
-    "hi": { "label": "हिन्दी", "sublabel": "हिन्दी में जारी रखें", "flag": "🇮🇳" },
-    "de": { "label": "Deutsch", "sublabel": "Auf Deutsch fortfahren", "flag": "🇩🇪" }
+    "en": {
+      "label": "English",
+      "sublabel": "Continue in English",
+      "flag": "🇬🇧"
+    },
+    "hi": {
+      "label": "हिन्दी",
+      "sublabel": "हिन्दी में जारी रखें",
+      "flag": "🇮🇳"
+    },
+    "de": {
+      "label": "Deutsch",
+      "sublabel": "Auf Deutsch fortfahren",
+      "flag": "🇩🇪"
+    }
   },
   "common": {
     "continue": "Weiter",
@@ -21,7 +33,23 @@
     "greeting": "Willkommen bei",
     "intro": "Ein stiller Ort, um dich wieder mit deinem Körper, Atem und Rhythmus zu verbinden.",
     "getStarted": "Loslegen",
-    "signIn": "Ich habe bereits ein Konto"
+    "signIn": "Ich habe bereits ein Konto",
+    "navSignIn": "Anmelden",
+    "heroTitle1": "Dein Weg zur",
+    "heroTitleAccent": "Balance.",
+    "heroSubtitle": "Eine ganzheitliche Reise, um durch Yoga und ayurvedische Prinzipien Harmonie in Körper und Geist zu finden.",
+    "startJourney": "Deine Reise beginnen",
+    "login": "Anmelden",
+    "dailyRituals": "Tägliche Rituale",
+    "ayurvedaTitle": "Personalisiertes Ayurveda",
+    "ayurvedaBody": "Entdecke dein Dosha und erhalte tägliche Ernährungs- und Wohlfühl-Empfehlungen, abgestimmt auf deine einzigartige Konstitution.",
+    "explorePractices": "Praktiken entdecken",
+    "mindfulTitle": "Achtsame Momente",
+    "mindfulBody": "Kurze, geführte Meditationen für die geschäftige moderne Seele.",
+    "breathTitle": "Das Atem-Labor",
+    "breathBody": "Meistere die Kunst des Pranayama (yogische Atmung), um dein Nervensystem zu regulieren und sofortige Ruhe zu finden.",
+    "matWaiting": "Deine Matte wartet.",
+    "alreadyHaveAccount": "Schon ein Konto? Anmelden"
   },
   "signup": {
     "step1": {
@@ -62,7 +90,301 @@
     "forgotPassword": "Passwort vergessen?",
     "noAccount": "Neu bei The Sanctuary?",
     "signUp": "Konto erstellen",
-    "googleCta": "Mit Google anmelden"
+    "googleCta": "Mit Google anmelden",
+    "goBack": "Zurück",
+    "heading1": "Kehre zu deiner",
+    "headingAccent": "Praxis zurück.",
+    "emailPlaceholder": "du@beispiel.de",
+    "passwordPlaceholder": "••••••••",
+    "emailAria": "E-Mail-Adresse",
+    "passwordAria": "Passwort",
+    "continueWithGoogle": "Mit Google fortfahren",
+    "biometric": "Biometrische Anmeldung verwenden",
+    "haveResetLink": "Ich habe einen Link zum Zurücksetzen des Passworts",
+    "newHere": "Neu hier?",
+    "startJourney": "Deine Reise beginnen",
+    "biometricUnavailable": "Biometrische Authentifizierung ist auf diesem Gerät nicht verfügbar.",
+    "noSavedCreds": "Keine gespeicherten Anmeldedaten gefunden. Bitte melde dich zuerst mit E-Mail und Passwort an.",
+    "biometricFailed": "Biometrische Authentifizierung fehlgeschlagen. Bitte verwende E-Mail und Passwort."
+  },
+  "vikritiQuiz": {
+    "goBack": "Zurück",
+    "close": "Schließen",
+    "weeklyCheckin": "Wöchentlicher Check-in",
+    "prevQuestion": "Vorherige Frage",
+    "introTitle1": "Wie ging es dir",
+    "introTitleAccent": "in letzter Zeit?",
+    "introBody": "Vikriti ist dein aktueller Zustand — wie sich deine Doshas diese Woche verschoben haben.",
+    "baselineNote": "Dein Ausgangswert ist {{dosha}}.",
+    "introMeta": "5 Fragen · 60 Sekunden.",
+    "begin": "Check-in beginnen",
+    "notNow": "Nicht jetzt",
+    "thisWeek": "Diese Woche",
+    "currentState": "Dein aktueller Zustand",
+    "aggravated": "{{dosha}} erhöht",
+    "trending": "Tendiert derzeit zu {{dosha}}",
+    "narrShifted": "Dein Ausgangswert ist {{baseline}}, aber diese Woche ist {{current}} mit {{pct}}% erhöht. Bevorzuge Praktiken, die {{current}} beruhigen.",
+    "narrSameAggravated": "Dein Ausgangswert ist {{baseline}}, und gerade läuft es mit {{pct}}% hoch. Gleiches Dosha, aber erhöht — bevorzuge kühlende, erdende Praktiken, die {{current}} beruhigen.",
+    "narrInRhythm": "Du bist im Einklang mit deinem {{baseline}}-Ausgangswert ({{pct}}%). Mach weiter so.",
+    "narrAggravatedNoBase": "Dein {{current}} ist mit {{pct}}% erhöht. Bevorzuge Praktiken, die {{current}} beruhigen.",
+    "narrDominant": "Dein {{current}} ist derzeit mit {{pct}}% dominant.",
+    "save": "Check-in speichern",
+    "saving": "Wird gespeichert...",
+    "retake": "Wiederholen",
+    "saveFailed": "Speichern fehlgeschlagen: {{error}}",
+    "questions": [
+      {
+        "question": "Dein Körper hat sich angefühlt...",
+        "subtitle": "Denk an die letzten Tage.",
+        "options": [
+          {
+            "label": "Trocken, kalt oder schmerzend",
+            "desc": "Steife Gelenke, trockene Haut, mehr Kälteempfinden als sonst"
+          },
+          {
+            "label": "Warm oder entzündet",
+            "desc": "Läuft heiß, Reizungen, vielleicht empfindliche Haut"
+          },
+          {
+            "label": "Schwer, träge, verschleimt",
+            "desc": "Langsamere Bewegung, Schwellungen, dickere Nebenhöhlen"
+          }
+        ]
+      },
+      {
+        "question": "Dein Geist war...",
+        "subtitle": "Wie hat sich dein Kopf in den letzten Tagen angefühlt?",
+        "options": [
+          {
+            "label": "Rasend oder ängstlich",
+            "desc": "Viele Gedanken, schwer zur Ruhe zu kommen, Grübeln"
+          },
+          {
+            "label": "Scharf, aber gereizt",
+            "desc": "Fokussiert, produktiv — aber dünnhäutig"
+          },
+          {
+            "label": "Stumpf oder benebelt",
+            "desc": "Schwerer Start, wenig Motivation, etwas abwesend"
+          }
+        ]
+      },
+      {
+        "question": "Dein Schlaf war diese Woche...",
+        "subtitle": "Qualität, nicht Quantität.",
+        "options": [
+          {
+            "label": "Unruhig & unterbrochen",
+            "desc": "Schwer einzuschlafen oder durchzuschlafen"
+          },
+          {
+            "label": "Kurz & intensiv",
+            "desc": "Spät einschlafen, früh aufwachen, aufgedreht"
+          },
+          {
+            "label": "Schwer & schwer zu verlassen",
+            "desc": "Lange schlafen und trotzdem benommen"
+          }
+        ]
+      },
+      {
+        "question": "Dein Energiemuster war...",
+        "subtitle": "Wie fühlt sich dein Tag tatsächlich an?",
+        "options": [
+          {
+            "label": "Sprunghaft — Höhen und Tiefs",
+            "desc": "Kurze Schübe gefolgt von plötzlicher Müdigkeit"
+          },
+          {
+            "label": "Heiß brennend",
+            "desc": "Starker Antrieb den ganzen Tag, Burnout-Gefahr"
+          },
+          {
+            "label": "Niedrig und langsam",
+            "desc": "Schwer in Gang zu kommen, bleibt lieber ruhig"
+          }
+        ]
+      },
+      {
+        "question": "Dein Appetit war in letzter Zeit...",
+        "subtitle": "Die Verdauung ist das Armaturenbrett der Dosha-Balance.",
+        "options": [
+          {
+            "label": "Unberechenbar oder gering",
+            "desc": "Mahlzeiten vergessen, Blähungen, Gas"
+          },
+          {
+            "label": "Sehr stark & dringend",
+            "desc": "„Hangry“, wenn Mahlzeiten spät kommen, starke Gelüste"
+          },
+          {
+            "label": "Schwer oder stumpf",
+            "desc": "Selten hungrig, fühlt sich nach dem Essen schwer an"
+          }
+        ]
+      }
+    ]
+  },
+  "doshaProfile": {
+    "awaitTitle": "Dein Dosha wartet",
+    "awaitBody": "Entdecke deine einzigartige ayurvedische Konstitution durch unser geführtes Quiz und schalte personalisierte Wohlfühl-Einblicke frei.",
+    "takeQuiz": "Dosha-Quiz starten",
+    "goBack": "Zurück",
+    "retakeQuiz": "Quiz wiederholen",
+    "yourDoshaType": "Dein Dosha-Typ",
+    "rareEquilibrium": "Das seltene Gleichgewicht",
+    "allFiveElements": "Alle fünf Elemente",
+    "ch1Kicker": "Kapitel 1",
+    "ch1Title": "Wer du bist",
+    "ch1Lede": "Die Elemente, Qualitäten und Muster, die deine Konstitution prägen.",
+    "yourConstitution": "Deine Konstitution",
+    "vpkShort": "V · P · K",
+    "pctAria": "{{name}} {{pct}} Prozent",
+    "footnoteTridoshic": "Eine seltene und ausgewogene Konstitution. Alle drei Doshas sind in deinem Wesen gleichermaßen ausgeprägt.",
+    "footnoteDual": "Du drückst {{primary}} und {{secondary}} fast gleichermaßen aus. Deine Konstitution verschiebt sich mit Jahreszeiten und Lebensstil.",
+    "footnoteGapHigh": "{{primary}} ist in deiner Konstitution überwältigend dominant. Die anderen Doshas spielen eine untergeordnete, unterstützende Rolle.",
+    "footnoteGapMid": "{{primary}} ist eindeutig dein führendes Dosha. {{secondary}} ({{pct}}%) spielt eine mäßige Hintergrundrolle.",
+    "footnoteGapLow": "{{primary}} führt deine Konstitution an, mit {{secondary}} ({{pct}}%) als bemerkenswertem sekundären Einfluss.",
+    "balancedNature": "Deine ausgewogene Natur",
+    "dominant": "Dominant: {{name}}",
+    "secondary": "Sekundär: {{name}}",
+    "qualitiesGunas": "{{name}}-Qualitäten (Gunas)",
+    "sourceCharaka": "Quelle: Charaka Samhita {{verse}}",
+    "yourBody": "Dein {{name}}-Körper",
+    "bodySummary": "Statur, Haut, Haar, Verdauung, Schlaf, Energie",
+    "labelBuild": "Statur",
+    "labelSkin": "Haut",
+    "labelHair": "Haar",
+    "labelFace": "Gesicht",
+    "labelDigestion": "Verdauung",
+    "labelSleep": "Schlaf",
+    "labelEnergy": "Energie",
+    "yourMind": "Dein {{name}}-Geist",
+    "mindSummary": "Wie du dich zeigst — in deiner besten Form und wenn du aus dem Gleichgewicht bist",
+    "inBalance": "Im Gleichgewicht",
+    "outOfBalance": "Wenn aus dem Gleichgewicht",
+    "naturalStrengths": "Deine natürlichen Stärken",
+    "ch2Kicker": "Kapitel 2",
+    "ch2Title": "Im Gleichgewicht bleiben",
+    "ch2Lede": "Frühe Zeichen eines Ungleichgewichts, häufige Auslöser und Charakas Anleitung, um zur Mitte zurückzukehren.",
+    "signsLabel": "Worauf du achten solltest",
+    "signsSummary": "Häufige Symptome eines {{name}}-Ungleichgewichts",
+    "signsIntro": "Wenn dein dominantes Dosha hoch steht, sind dies die frühen Signale. Keines erfordert Alarm — sie sind Einladungen, dich auf die ausgleichenden Praktiken unten einzulassen.",
+    "triggersLabel": "Was dich aus dem Gleichgewicht bringt",
+    "triggersSummary": "Gewohnheiten und Jahreszeiten, die dich aus dem Gleichgewicht bringen",
+    "pacifyLabel": "Wie du Gleichgewicht findest",
+    "pacifySummaryFallback": "Lebensstil-Anpassungen, um dein Dosha zu beruhigen",
+    "stayInBalance": "Im Gleichgewicht bleiben",
+    "yogaMovement": "Yoga & Bewegung",
+    "meditationBreathwork": "Meditation & Atemarbeit",
+    "ch3Kicker": "Kapitel 3",
+    "ch3Title": "Lebe nach deinem Dosha",
+    "ch3Lede": "Übersetze dieses Wissen in den Alltag — die Jahreszeit, die Stunde des Tages, das Essen auf deinem Teller.",
+    "plusBadge": "Sanctuary Plus",
+    "teaserHeadline": "Die tägliche Praxis, {{primary}} zu sein.",
+    "teaserBody": "Dein Protokoll Jahreszeit für Jahreszeit, eine dosha-bewusste Ernährung und das vollständige Dinacharya — die täglichen Rituale, die Ayurveda in dein tatsächliches Leben übersetzen.",
+    "teaserBullet1": "Protokoll für Hochsaison + Dosha-Stunden",
+    "teaserBullet2": "Vollständiger Ernährungsleitfaden der 6 Geschmacksrichtungen",
+    "teaserBullet3": "Charakas 13 tägliche Praktiken",
+    "unlockChapter3": "Kapitel 3 freischalten",
+    "unlockChapter3Aria": "Kapitel 3 freischalten — Lebe nach deinem Dosha",
+    "peakSeason": "Hochsaison",
+    "peakSeasonBody": "{{season}} — {{name}} ist in dieser Zeit natürlicherweise erhöht. Es braucht zusätzliche Sorgfalt, um im Gleichgewicht zu bleiben.",
+    "doshaHours": "{{name}}-Stunden",
+    "doshaHoursBody": "{{timeOfDay}} — Dies sind die Stunden, in denen die {{name}}-Energie im Körper ihren Höhepunkt erreicht.",
+    "balancingTastes": "Ausgleichende Geschmacksrichtungen",
+    "protocolKicker": "Wenn dein {{name}} hoch steht",
+    "protocolHeadline": "Dein 3-Tage-Protokoll zur {{name}}-Beruhigung",
+    "protocolBody": "Essen, Bewegung, Atem und Ruhe — für die Tage, an denen dein dominantes Dosha auch dein Ungleichgewicht ist.",
+    "protocolAria": "{{name}}-beruhigendes Protokoll öffnen",
+    "dietTitle": "Deine Ernährung",
+    "dietSummary": "Welche Speisen du bevorzugen und meiden solltest, nach den sechs Geschmacksrichtungen",
+    "dietAria": "Ernährungsberatung öffnen",
+    "routineTitle": "Tagesroutine",
+    "routineSummary": "Charakas 13 Praktiken — richte den Tag am Rhythmus des Körpers aus",
+    "routineAria": "Tagesroutine öffnen",
+    "understandingTitle": "Prakriti verstehen",
+    "understandingBody": "Im Ayurveda ist deine Prakriti deine Geburtskonstitution — das einzigartige Verhältnis von Vata, Pitta und Kapha, mit dem du geboren wurdest. Sie bleibt das ganze Leben stabil. Wenn sich die Doshas durch Ernährung, Stress oder Jahreszeiten verschieben, wird dieser vorübergehende Zustand Vikriti genannt. Das Ziel des Ayurveda ist es, die Vikriti wieder mit der Prakriti in Einklang zu bringen.",
+    "paywallHeadline": "Lebe nach deiner {{primary}}-Natur",
+    "paywallSubhead": "Schalte Kapitel 3 und dein vollständiges ayurvedisches Lifestyle-Protokoll frei."
+  },
+  "onboarding": {
+    "skip": "Überspringen",
+    "prevSlide": "Vorherige Folie",
+    "skipAria": "Onboarding überspringen",
+    "slideAria": "Folie {{n}} von {{total}}",
+    "findDosha": "Mein Dosha finden",
+    "next": "Weiter",
+    "haveAccount": "Ich habe bereits ein Konto",
+    "slides": [
+      {
+        "eyebrow": "Willkommen bei The Sanctuary",
+        "title": "Eine Praxis so einzigartig wie du",
+        "body": "Wir verbinden alte yogische Tradition mit ayurvedischer Weisheit — und passen sie dann an deinen Körper, deinen Tag und deine Ziele an."
+      },
+      {
+        "eyebrow": "Schritt 1 von 3",
+        "title": "Yoga, das dich dort abholt, wo du bist",
+        "body": "Haltungen aus dem Hatha Yoga Pradipika, sprachgeführt, sodass du mit geschlossenen Augen üben kannst. Pranayama, Asanas und ganze Routinen — alle auf dein Niveau abgestimmt."
+      },
+      {
+        "eyebrow": "Schritt 2 von 3",
+        "title": "Iss und lebe nach deiner Natur",
+        "body": "Empfohlene Lebensmittel, Tagesabläufe, saisonale Hinweise — direkt aus der Charaka Samhita und für das moderne Leben praktisch gemacht."
+      },
+      {
+        "eyebrow": "Schritt 3 von 3",
+        "title": "Finden wir dein Dosha",
+        "body": "Ein kurzes Quiz mit 15 Fragen zeigt deine ayurvedische Konstitution — das Fundament, auf dem alles andere aufbaut. Dauert etwa 90 Sekunden."
+      }
+    ]
+  },
+  "auth": {
+    "forgot": {
+      "backToLogin": "Zurück zur Anmeldung",
+      "kicker": "Passwort zurücksetzen",
+      "heading1": "Stelle deinen",
+      "headingAccent": "Zugang wieder her.",
+      "subtitle": "Gib deine E-Mail-Adresse ein, und wir senden dir einen sicheren Link zum Zurücksetzen deines Passworts. Der Link läuft in 1 Stunde ab.",
+      "emailLabel": "E-Mail-Adresse",
+      "emailPlaceholder": "du@beispiel.de",
+      "emailAria": "E-Mail-Adresse",
+      "securityNote": "Zu deiner Sicherheit ist der Reset-Link einmalig nutzbar und läuft nach 1 Stunde ab. Wenn du dies nicht angefordert hast, kannst du es bedenkenlos ignorieren.",
+      "sending": "Wird gesendet...",
+      "sendLink": "Reset-Link senden",
+      "checkInbox": "Prüfe dein Postfach",
+      "sentTitle": "Reset-Link gesendet.",
+      "sentTo": "Wir haben einen sicheren Reset-Link gesendet an",
+      "sentInstr": "Öffne den Link in deiner E-Mail — er bestätigt deine Identität im Browser. Komm dann zur App zurück und tippe auf „Ich habe einen Reset-Link“ auf dem Anmeldebildschirm.",
+      "tryAgain": "Nicht erhalten? Erneut versuchen",
+      "backToSignIn": "Zurück zur Anmeldung"
+    },
+    "reset": {
+      "needLink": "Bitte tippe zuerst auf den Reset-Link in deiner E-Mail und kehre dann hierher zurück.",
+      "oneMoreStep": "Noch ein Schritt",
+      "checkEmailTitle": "Prüfe zuerst deine E-Mail.",
+      "checkEmailBody": "Tippe auf den Reset-Link in deiner E-Mail. Er öffnet sich im Browser und bestätigt deine Identität. Komm dann hierher zurück.",
+      "backToSignIn": "Zurück zur Anmeldung",
+      "kicker": "Neues Passwort",
+      "heading1": "Wähle ein neues",
+      "headingAccent": "Passwort.",
+      "subtitle": "Mach es stark und etwas, das du dir merken kannst.",
+      "newPasswordLabel": "Neues Passwort",
+      "newPasswordPlaceholder": "Mind. 8 Zeichen",
+      "newPasswordAria": "Neues Passwort",
+      "confirmLabel": "Passwort bestätigen",
+      "confirmPlaceholder": "Passwort wiederholen",
+      "confirmAria": "Passwort bestätigen",
+      "req8": "Mindestens 8 Zeichen",
+      "reqUpper": "Ein Großbuchstabe",
+      "reqNumber": "Eine Zahl",
+      "passwordsMismatch": "Passwörter stimmen nicht überein.",
+      "passwordTooShort": "Passwort muss mindestens 8 Zeichen lang sein.",
+      "updating": "Wird aktualisiert...",
+      "setNewPassword": "Neues Passwort festlegen",
+      "updatedTitle": "Passwort aktualisiert.",
+      "takingHome": "Du wirst zur Startseite weitergeleitet..."
+    }
   },
   "nav": {
     "home": "Home",
@@ -80,13 +402,202 @@
     "checkinPrompt": "Wie fühlst du dich gerade?",
     "weeklyCheckinTitle": "Wöchentlicher Check-in",
     "weeklyCheckinBody": "Nimm dir 2 Minuten, um zu sehen, wie sich deine Doshas diese Woche entwickeln.",
-    "weeklyCheckinCta": "Check-in starten"
+    "weeklyCheckinCta": "Check-in starten",
+    "namaste": "Namaste",
+    "defaultFirstName": "Freund*in",
+    "subtitleMorning": "Der Morgen ist still. Deine Praxis wartet.",
+    "subtitleAfternoon": "Der Nachmittag lädt zur Stille ein.",
+    "subtitleEvening": "Der Abend ist da. Zeit, dich zu erholen.",
+    "profileAria": "Profil öffnen",
+    "profileAriaPlus": "Profil öffnen (Sanctuary Plus-Mitglied)",
+    "dayStreak": "Tagesserie",
+    "streakOneDay": "1 Tag bisher",
+    "streakDays": "Tage in Folge",
+    "thisWeek": "Diese Woche",
+    "minutesPracticed": "Minuten geübt",
+    "checkinFirstKicker": "Erster Check-in",
+    "checkinWeeklyKicker": "Wöchentlicher Check-in",
+    "checkinFirstPrompt": "Wie ging es dir in letzter Zeit?",
+    "checkinWeeklyPrompt": "Es ist {{days}} Tage her — wie geht es dir jetzt?",
+    "checkinMeta": "5 Fragen · 60 Sekunden",
+    "feelingToday": "Wie fühlst du dich heute?",
+    "searchPlaceholder": "Rückenschmerzen, Kopfschmerzen...",
+    "searchAria": "Suche",
+    "getMyPractice": "Meine Praxis abrufen",
+    "checkinOptions": {
+      "stress": "Gestresst",
+      "sleep": "Müde",
+      "energy": "Wenig Energie",
+      "flexibility": "Steif"
+    },
+    "pickUpWhereLeft": "Mach dort weiter, wo du aufgehört hast",
+    "contextMorning": "Beginne deinen Tag geerdet",
+    "contextAfternoon": "Setze deinen Nachmittag zurück",
+    "contextEvening": "Komm sanft zur Ruhe",
+    "minSuffix": "Min.",
+    "dailyRitual": "Tägliches Ritual · 2 Min.",
+    "mindfulRespiration": "Achtsames Atmen",
+    "inhaleHoldExhale": "Einatmen · Halten · Ausatmen",
+    "begin": "Beginnen",
+    "avoid": {
+      "title": "Was du vermeiden solltest",
+      "reminder": "Sanfte Erinnerung: Balance ist eine Praxis, kein Ziel.",
+      "badge": {
+        "morning": "Morgen",
+        "afternoon": "Nachmittag",
+        "evening": "Abend"
+      },
+      "tips": {
+        "morning": [
+          "Aufs Handy schauen, bevor du aufstehst",
+          "Frühstück auslassen oder Kaffee auf nüchternen Magen trinken",
+          "Intensives Cardio ohne vorheriges Aufwärmen"
+        ],
+        "afternoon": [
+          "Schwere Mahlzeiten, die am Nachmittag träge machen",
+          "Stressige Arbeits-E-Mails während deiner Pause",
+          "Mehr als 90 Minuten ohne Bewegung sitzen"
+        ],
+        "evening": [
+          "Anstrengender Sport nach 19 Uhr",
+          "Bildschirmzeit und blaues Licht vor dem Schlafen",
+          "Koffein oder verarbeiteter Zucker am späten Nachmittag",
+          "Schwere Mahlzeiten innerhalb von 3 Stunden vor dem Schlafen"
+        ]
+      }
+    },
+    "dosha": {
+      "type": "Dosha-Typ",
+      "undiscovered": "Unentdeckt",
+      "suffix": "{{dosha}}-Dosha",
+      "quizPrompt": "Mach das Dosha-Quiz, um personalisierte Empfehlungen freizuschalten und deine App zu gestalten.",
+      "elevatedThisWeek": "Diese Woche: erhöhtes {{dosha}}",
+      "inRhythm": "Diese Woche im Rhythmus",
+      "seeRebalance": "So findest du dein Gleichgewicht",
+      "exploreDosha": "Mein Dosha entdecken",
+      "takeQuiz": "Quiz starten",
+      "vata": {
+        "element": "Luft + Äther",
+        "tagline": "Kreativ, schnell denkend und anpassungsfähig"
+      },
+      "pitta": {
+        "element": "Feuer + Wasser",
+        "tagline": "Fokussiert, zielstrebig und natürlich strahlend"
+      },
+      "kapha": {
+        "element": "Erde + Wasser",
+        "tagline": "Geerdet, fürsorglich und beständig"
+      }
+    },
+    "paywallHeadline": "Das vollständige Protokoll wartet",
+    "paywallSubhead": "Plus gibt dir den täglichen Plan — Ernährung, Bewegung, Schlaf — der dein Dosha wieder ins Gleichgewicht bringt."
   },
   "profile": {
     "title": "Profil",
     "language": "Sprache",
     "languageHint": "Die App wird sofort umgeschaltet.",
     "signOut": "Abmelden",
+    "closeProfile": "Profil schließen",
+    "uploadPhotoAria": "Profilfoto hochladen",
+    "displayNameAria": "Anzeigename",
+    "saveNameAria": "Namen speichern",
+    "cancelAria": "Abbrechen",
+    "googleLabel": "Google",
+    "doshaType": "Dosha-Typ",
+    "undiscovered": "Unentdeckt",
+    "tapToView": "Tippe, um dein Dosha-Profil zu sehen",
+    "takeQuizDiscover": "Mach das Quiz, um dein Dosha zu entdecken",
+    "plus": {
+      "section": "Sanctuary Plus",
+      "upgradeTitle": "Auf Plus upgraden",
+      "upgradeSub": "Volle Bibliothek, persönliche Routine, Charaka-Vertiefungen",
+      "haveCode": "Hast du einen Code?",
+      "haveCodeSub": "Einen Kampagnen- oder Einladungscode einlösen",
+      "paymentFailed": "Zahlung fehlgeschlagen",
+      "paymentFailedSub": "Aktualisiere deine Zahlungsmethode, um Sanctuary Plus zu behalten.",
+      "endsSoon": "Sanctuary Plus endet bald",
+      "active": "Sanctuary Plus ist aktiv",
+      "srcPromo": "Über Code gewährt",
+      "srcStripeCancel": "Kündigung geplant",
+      "srcStripe": "Abgerechnet über Stripe",
+      "srcApple": "Abgerechnet über App Store",
+      "srcGoogle": "Abgerechnet über Google Play",
+      "srcGrant": "Team-Zugang",
+      "srcDefault": "Aktives Abonnement",
+      "accessUntil": "Zugang bis",
+      "until": "bis",
+      "lifetime": "lebenslang",
+      "memberSince": "Mitglied seit {{date}}",
+      "statPractice": "Übung",
+      "statPractices": "Übungen",
+      "statMinutes": "Minuten",
+      "statProtocol": "Protokoll",
+      "statProtocols": "Protokolle",
+      "resume": "Sanctuary Plus fortsetzen",
+      "manage": "Abo verwalten",
+      "opening": "Wird geöffnet...",
+      "manageResumeSub": "Neu starten, Karte aktualisieren oder Rechnungen ansehen",
+      "manageSub": "Kündigen, Karte aktualisieren oder Rechnungen ansehen"
+    },
+    "notif": {
+      "section": "Benachrichtigungen",
+      "practiceReminder": "Tägliche Übungserinnerung",
+      "practiceReminderSub": "Ein sanfter Hinweis zu deiner gewählten Zeit",
+      "toggleAria": "Tägliche Übungserinnerung umschalten",
+      "timeLabel": "Zeit",
+      "timeAria": "Erinnerungszeit",
+      "blocked": "Benachrichtigungen sind blockiert. Aktiviere sie in den Geräteeinstellungen, um Erinnerungen zu erhalten.",
+      "unsupported": "Benachrichtigungen funktionieren in der Sanctuary-App — deine Einstellungen gelten, sobald sie installiert ist."
+    },
+    "account": {
+      "section": "Konto",
+      "name": "Name",
+      "email": "E-Mail",
+      "profilePhoto": "Profilfoto",
+      "uploading": "Wird hochgeladen...",
+      "changePhoto": "Foto ändern",
+      "uploadPhoto": "Foto hochladen",
+      "gender": "Geschlecht",
+      "genderOptional": "Optional · hilft, Empfehlungen zu personalisieren",
+      "genderMale": "Männlich",
+      "genderFemale": "Weiblich",
+      "genderOther": "Andere",
+      "signInMethod": "Anmeldemethode",
+      "changePasswordTitle": "Passwort ändern",
+      "closePwForm": "Passwortformular schließen",
+      "currentPassword": "Aktuelles Passwort",
+      "newPassword": "Neues Passwort",
+      "confirmNewPassword": "Neues Passwort bestätigen",
+      "togglePwVisibility": "Passwort-Sichtbarkeit umschalten",
+      "updating": "Wird aktualisiert...",
+      "updatePassword": "Passwort aktualisieren",
+      "passwordLabel": "Passwort",
+      "changePassword": "Passwort ändern",
+      "pwFillAll": "Bitte fülle alle Felder aus.",
+      "pwTooShort": "Neues Passwort muss mindestens 6 Zeichen lang sein.",
+      "pwMismatch": "Passwörter stimmen nicht überein.",
+      "pwCurrentWrong": "Aktuelles Passwort ist falsch.",
+      "pwUpdated": "Passwort erfolgreich aktualisiert.",
+      "pwUpdateFailed": "Passwort konnte nicht aktualisiert werden."
+    },
+    "crash": {
+      "title": "Absturzberichte",
+      "on": "An — Stack-Traces werden an Firebase Crashlytics gesendet, damit wir Fehler schneller beheben.",
+      "off": "Aus — keine Absturzdaten verlassen dein Gerät.",
+      "aria": "Absturzberichte"
+    },
+    "health": {
+      "title": "Verarbeitung von Gesundheitsdaten",
+      "on": "An — deine Dosha- & Wohlbefindens-Angaben personalisieren deine Praxis. Ein Widerruf stoppt die weitere Verarbeitung (deine vorhandenen Daten bleiben, bis du sie exportierst oder löschst).",
+      "withdrawConfirm": "Einwilligung zur Verarbeitung von Gesundheitsdaten widerrufen? Deine Dosha- und Wohlbefindens-Angaben werden nicht mehr zur Personalisierung deiner Praxis verwendet. Dies löscht keine bereits erfassten Daten.",
+      "aria": "Einwilligung zur Verarbeitung von Gesundheitsdaten"
+    },
+    "aggregateAria": "Aggregierte Analyse",
+    "exportAria": "Deine Daten exportieren",
+    "deleteConfirmAria": "Tippe DELETE zur Bestätigung",
+    "analyticsProvider": "Analyse-Anbieter",
+    "analyticsProviderPre": "Aggregierte Analysen werden verarbeitet von",
+    "analyticsProviderPost": "auf EU-gehosteter Infrastruktur (Frankfurt). Es werden keine personenbezogenen Daten gesendet; Ereignisse nutzen eine pseudonyme ID pro Installation. Schalte den Schalter oben jederzeit aus, und wir senden nichts mehr.",
     "privacy": {
       "section": "Privatsphäre",
       "aggregateTitle": "The Sanctuary verbessern helfen",
@@ -127,6 +638,655 @@
       "deletePartial": "Der Großteil deiner Daten wurde entfernt, einige Einträge konnten jedoch nicht gelöscht werden. Bitte kontaktiere den Support."
     }
   },
+  "routinePage": {
+    "back": "Zurück",
+    "switchRoutine": "Routine wechseln",
+    "todaysGoal": "Heutiges Ziel",
+    "poses": "Posen",
+    "minutes": "Minuten",
+    "streakDay": "Serientag",
+    "upNext": "Als Nächstes",
+    "poseProgress": "Pose {{n}} von {{total}}",
+    "yourPath": "Dein Weg",
+    "tapPreview": "Zum Vorschauen tippen",
+    "benefits": "Vorteile",
+    "bodyFocus": "Körperfokus",
+    "finishLine": "Ziellinie",
+    "finishSub": "Praxis abgeschlossen · +1 Tag in der Serie",
+    "whatYoullFeel": "Wie du dich danach fühlst",
+    "unlockWithPlus": "Mit Plus freischalten",
+    "startPractice": "Praxis starten · {{min}} Min.",
+    "paywallHeadline": "„{{label}}“ mit Plus starten",
+    "paywallSubhead": "Schalte die komplette Routine-Bibliothek, dein persönliches Protokoll und jede Asana darin frei.",
+    "durationMin": "{{m}} Min.",
+    "durationHm": "{{h}} Std. {{m}} Min.",
+    "outcomes": {
+      "stress": [
+        "Ruhigerer Geist",
+        "Weniger Cortisol",
+        "Gelöste Schultern",
+        "Ruhigerer Atem"
+      ],
+      "sleep": [
+        "Stillerer Geist",
+        "Langsamerer Puls",
+        "Gelockerte Wirbelsäule",
+        "Tiefere Ruhe"
+      ],
+      "energy": [
+        "Erwachter Körper",
+        "Schärferer Fokus",
+        "Offene Brust",
+        "Gehobene Stimmung"
+      ],
+      "flexibility": [
+        "Offene Hüften",
+        "Bewegliche Wirbelsäule",
+        "Gelöste Spannung",
+        "Größere Reichweite"
+      ]
+    }
+  },
+  "pranayamaPractice": {
+    "endPractice": "Praxis beenden",
+    "muteVoice": "Stimme stummschalten",
+    "unmuteVoice": "Stimme aktivieren",
+    "resume": "Fortsetzen",
+    "pause": "Pause",
+    "getReady": "Mach dich bereit",
+    "findYourSeat": "Finde deinen Sitz",
+    "phaseInhale": "Einatmen",
+    "phaseHold": "Halten",
+    "phaseExhale": "Ausatmen",
+    "inhaleLeft": "Durch das linke Nasenloch einatmen",
+    "inhaleRight": "Durch das rechte Nasenloch einatmen",
+    "exhaleRight": "Durch das rechte Nasenloch ausatmen",
+    "exhaleLeft": "Durch das linke Nasenloch ausatmen",
+    "roundOfTotal": "Runde {{n}} von {{total}}",
+    "rest": "Pause",
+    "vigorous": "Kräftiges Atmen",
+    "breatheNaturally": "Atme natürlich",
+    "total": "Gesamt",
+    "paused": "(Pausiert)",
+    "remaining": "verbleibend",
+    "endEarly": "Praxis vorzeitig beenden",
+    "spokenBegin": "Beginne {{name}}. Finde einen bequemen Sitz.",
+    "spokenFinalRound": "Letzte Runde. Beginne.",
+    "spokenRound": "Runde {{n}}. Beginne.",
+    "spokenRest": "Verlangsame. Ruhe dich natürlich aus.",
+    "spokenComplete": "Praxis abgeschlossen."
+  },
+  "pranayamaDetail": {
+    "goBack": "Zurück",
+    "label": "Pranayama",
+    "notFoundTitle": "Pranayama nicht gefunden",
+    "notFoundBody": "Die gesuchte Atemtechnik existiert nicht.",
+    "goBackBtn": "Zurück",
+    "plusBadge": "Sanctuary Plus",
+    "breathPattern": "Atemmuster",
+    "rate": "Frequenz",
+    "breathsPerMin": "{{rate}} Atemzüge / Min.",
+    "roundDuration": "Rundendauer",
+    "rounds": "Runden",
+    "restBetween": "Pause dazwischen",
+    "inhale": "Einatmen",
+    "hold": "Halten",
+    "exhale": "Ausatmen",
+    "ratio": "Verhältnis · {{ratio}}",
+    "duration": "Dauer",
+    "seat": "Sitz",
+    "anySeat": "Beliebiger Sitz",
+    "level": "Niveau",
+    "showPatternAria": "Atemmuster-Details anzeigen",
+    "seatAria": "Empfohlener Sitz: {{name}}",
+    "minLabel": "{{min}} Min.",
+    "whyThisPractice": "Warum diese Praxis",
+    "howToPerform": "So führst du sie aus",
+    "benefits": "Vorteile",
+    "modifications": "Anpassungen",
+    "safetyTitle": "Wichtige Sicherheitshinweise",
+    "safetyAria": "Sicherheitshinweise",
+    "safetyFooter": "Pranayama ist kraftvoll. Wenn eine Technik Schwindel, Benommenheit oder Atemnot verursacht, höre sofort auf und atme natürlich. Konsultiere vor regelmäßiger Praxis eine Yogalehrkraft oder medizinische Fachkraft, wenn du Erkrankungen hast.",
+    "sourceLabel": "Quelle · ",
+    "sourceHYP": "Hatha Yoga Pradipika",
+    "sourceCS": "Charaka Samhita",
+    "sourceGS": "Gheranda Samhita",
+    "sourceModern": "Moderne Hatha-Tradition",
+    "verse": "Vers {{verse}}",
+    "close": "Schließen",
+    "unlock": "{{name}} freischalten",
+    "startPractice": "Praxis starten · {{min}} Min.",
+    "paywallHeadline": "{{name}} mit Plus üben",
+    "paywallSubhead": "Schalte fortgeschrittenes Pranayama, deine persönliche Routine und die Weisheit der Charaka frei."
+  },
+  "asanaDetail": {
+    "goBack": "Zurück",
+    "notFoundTitle": "Asana nicht gefunden",
+    "notFoundBody": "Die gesuchte Pose existiert nicht.",
+    "goBackBtn": "Zurück",
+    "plusBadge": "Sanctuary Plus",
+    "hold": "Halten",
+    "level": "Niveau",
+    "areas": "Bereiche",
+    "about": "Über diese Asana",
+    "howToPerform": "So führst du sie aus",
+    "benefits": "Vorteile",
+    "bodyFocus": "Körperfokus",
+    "modifications": "Anpassungen",
+    "safetyTitle": "Wichtige Sicherheitshinweise",
+    "safetyAria": "Sicherheitshinweise",
+    "safetyFooter": "Konsultiere eine Lehrkraft oder medizinische Fachkraft, falls etwas davon auf dich zutrifft.",
+    "verse": "Vers {{verse}}",
+    "sourceHYP": "Hatha Yoga Pradipika",
+    "sourceGS": "Gheranda Samhita",
+    "sourceModern": "Moderne Hatha-Tradition",
+    "doshaCompat": "Dosha-Kompatibilität",
+    "yourDosha": "Dein Dosha",
+    "affinityBalancing": "Diese Asana ist hervorragend, um {{dosha}}-Energie auszugleichen. Sie bringt das {{dosha}}-Dosha in Harmonie.",
+    "affinityNeutral": "Diese Asana hat eine neutrale Wirkung auf die {{dosha}}-Energie. Sicher zu üben ohne nennenswerten Einfluss.",
+    "affinityAggravating": "Diese Asana kann die {{dosha}}-Energie verstärken. Übe mit Vorsicht und kürzeren Haltezeiten.",
+    "takeQuiz": "Mach das Dosha-Quiz für persönliche Einblicke",
+    "precautionsTitle": "Worauf du achten solltest",
+    "phaseSetup": "Vorbereitung",
+    "phaseHold": "Halten",
+    "phaseBreathe": "Atmen",
+    "phaseRelease": "Lösen",
+    "holdSheetTitle": "Haltedauer",
+    "holdSheetBody": "Diese Pose wird {{seconds}}s gehalten. Hier siehst du, wo das auf der Anfänger-bis-Experten-Skala liegt.",
+    "scaleBeginner": "Anfänger",
+    "scaleIntermediate": "Mittel",
+    "scaleExpert": "Experte",
+    "holdSheetNote": "Längere Haltezeiten bauen tiefere Stille und Kraft auf — aber nur, wenn sich die kürzeren natürlich anfühlen. Überstürze die Skala nicht.",
+    "levelSheetTitle": "Übungsniveau",
+    "levelSheetBody": "Diese Pose ist als {{level}} eingestuft. Die Haltezeiten wachsen mit deinem Fortschritt.",
+    "thisPose": "Diese Pose",
+    "typicalHold": "Typische Haltezeit · {{range}}",
+    "areasSheetTitle": "Beanspruchte Bereiche",
+    "areasSheetBody": "Diese Pose beansprucht {{count}} Bereiche deines Körpers.",
+    "unlockPractice": "{{name}} freischalten zum Üben",
+    "practice": "{{name}} üben",
+    "paywallHeadline": "{{name}} mit Plus üben",
+    "paywallSubhead": "Schalte die komplette Asana-Bibliothek, deine persönliche Routine und die Weisheit der Charaka frei.",
+    "close": "Schließen",
+    "scrollTop": "Nach oben scrollen",
+    "categories": {
+      "standing": "Stehend",
+      "seated": "Sitzend",
+      "supine": "Rückenlage",
+      "prone": "Bauchlage",
+      "restorative": "Regenerativ",
+      "inversion": "Umkehrhaltung"
+    },
+    "levels": {
+      "beginner": "Anfänger",
+      "intermediate": "Mittel",
+      "advanced": "Fortgeschritten"
+    }
+  },
+  "dinacharya": {
+    "goBack": "Zurück",
+    "title": "Tagesroutine",
+    "heading": "Dinacharya",
+    "subtitle": "Charakas Tagesroutine — 13 Praktiken, die den Tag mit dem Rhythmus des Körpers und der Jahreszeiten in Einklang bringen.",
+    "rightNow": "Gerade jetzt",
+    "doshaTimeLabel": "{{dosha}}-Zeit",
+    "learnClock": "Mehr über die Dosha-Uhr erfahren",
+    "thePractices": "Die Praktiken",
+    "total": "{{count}} gesamt",
+    "why": "Warum",
+    "how": "Wie",
+    "tools": "Hilfsmittel",
+    "caution": "Vorsicht",
+    "safetyAria": "Sicherheitshinweise",
+    "doshaClock": "Die Dosha-Uhr",
+    "sourceLabel": "Quelle:",
+    "clockSource": "Quelle: Charaka Samhita Sutrasthana 5 (primär) + Sutrasthana 7 (natürliche Bedürfnisse) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel)."
+  },
+  "dietary": {
+    "goBack": "Zurück",
+    "title": "Ernährungsleitfaden",
+    "forConstitution": "Für deine {{dosha}}-Konstitution",
+    "eatToBalance": "Iss für dein Gleichgewicht",
+    "tastesRasa": "Geschmäcker (Rasa)",
+    "favor": "Bevorzugen",
+    "avoidExcess": "In Maßen meiden",
+    "foodsToFavor": "Empfohlene Lebensmittel",
+    "foodsToAvoid": "Zu meidende Lebensmittel",
+    "howToEat": "Wie man isst",
+    "seasonalNote": "Saisonaler Hinweis",
+    "sixTastes": "Die sechs Geschmäcker (Charaka-Referenz)",
+    "unknownDosha": "Unbekanntes Dosha: {{dosha}}",
+    "sourceLabel": "Quelle:"
+  },
+  "recommendations": {
+    "goBack": "Zurück",
+    "searchPlaceholder": "Beschreibe, wie du dich fühlst...",
+    "searchAria": "Empfehlungen suchen",
+    "clearSearch": "Suche löschen",
+    "popularSearches": "Beliebte Suchen",
+    "tellUsHurts": "Sag uns, was schmerzt.",
+    "typePrompt": "Gib dein Symptom oder Anliegen ein, und wir empfehlen dir die passenden Yoga- und Ayurveda-Praktiken.",
+    "noMatches": "Keine Treffer für „{{query}}“",
+    "tryDifferent": "Versuche andere Wörter — zum Beispiel „Rückenschmerzen“, „Kopfschmerzen“, „Angst“ oder „kann nicht schlafen“.",
+    "tryInstead": "Versuche stattdessen diese",
+    "recommendedForYou": "Für dich empfohlen",
+    "recommendedPractices": "Empfohlene Praktiken · {{count}} Posen",
+    "ayurvedicInsight": "Ayurvedischer Einblick",
+    "alsoRelated": "Ebenfalls passend",
+    "practicesBreathwork": "{{count}} Praktiken · Atemarbeit",
+    "disclaimer": "Diese Empfehlungen dienen nur dem allgemeinen Wohlbefinden. Wenn du eine Erkrankung hast, konsultiere bitte eine medizinische Fachkraft, bevor du mit einem Übungsprogramm beginnst."
+  },
+  "practice": {
+    "close": "Schließen",
+    "voiceOn": "Sprachführung ausschalten",
+    "voiceOff": "Sprachführung einschalten",
+    "voiceLabel": "Stimme",
+    "toggleVoice": "Stimme umschalten",
+    "resume": "Fortsetzen",
+    "pause": "Pause",
+    "durationMin": "{{m}} Min.",
+    "durationHm": "{{h}} Std. {{m}} Min.",
+    "startPractice": "Praxis starten",
+    "startSingle": "{{label}} starten",
+    "checkinAria": "Kurzer Check-in, optional",
+    "howDoYouFeel": "Wie fühlst du dich?",
+    "optional": "optional",
+    "energy": "Energie",
+    "body": "Körper",
+    "drained": "Erschöpft",
+    "energized": "Voller Energie",
+    "relaxed": "Entspannt",
+    "tense": "Angespannt",
+    "energyLevel": "Energieniveau",
+    "bodyTension": "Körperspannung",
+    "scaleAria": "{{prefix}} {{n}} von 5",
+    "practiceComplete": "Praxis abgeschlossen",
+    "namaste": "Namaste",
+    "completedRoutine": "Du hast deine {{label}}-Praxis abgeschlossen.",
+    "duration": "Dauer",
+    "completed": "Abgeschlossen",
+    "skipped": "Übersprungen",
+    "summary": "Zusammenfassung",
+    "skippedTag": "Übersprungen",
+    "howFeelNow": "Wie fühlst du dich jetzt?",
+    "worse": "Schlechter",
+    "same": "Gleich",
+    "better": "Besser",
+    "feelAria": "Ich fühle mich {{caption}}",
+    "thanksBetter": "Schön, dass die Praxis geholfen hat.",
+    "thanksSame": "Danke fürs Check-in.",
+    "thanksWorse": "Notiert — daraus lernen wir.",
+    "lovedTitle": "Hat dir diese Praxis gefallen?",
+    "lovedBody": "Schalte die komplette Bibliothek + deinen persönlichen Wochenplan frei.",
+    "paywallHeadline": "Behalte dieses Gefühl, jeden Tag",
+    "paywallSubhead": "Plus gibt dir eine Routine, die dich dort abholt, wo du bist — jede Jahreszeit, jeden Tag.",
+    "backHome": "Zurück zur Startseite",
+    "repeatAsana": "Asana wiederholen",
+    "repeatPractice": "Praxis wiederholen",
+    "rest": "Pause",
+    "nextUp": "Als Nächstes",
+    "skipRest": "Pause überspringen",
+    "whyThisPose": "Warum diese Pose",
+    "showPose": "Pose anzeigen",
+    "doshaCompat": "Dosha-Kompatibilität",
+    "benefits": "Vorteile",
+    "bodyFocus": "Körperfokus",
+    "remaining": "verbleibend",
+    "skip": "Überspringen",
+    "done": "Fertig",
+    "repeatAria": "Praxis wiederholen",
+    "skipNarration": "Erzählung überspringen",
+    "tileStart": "Starte dein {{dosha}}-Protokoll",
+    "tileContinue": "Setze dein {{dosha}}-Protokoll fort",
+    "tilePickup": "Nimm dein {{dosha}}-Protokoll wieder auf",
+    "tileStartSub": "Drei Tage Ernährung, Bewegung und Ruhe, abgestimmt auf deine Lesung.",
+    "tilePickupSub": "Letztes Mal hat es geholfen — deine neueste Lesung legt eine weitere Runde nahe.",
+    "tileContinueSub": "Tag {{day}} von {{total}} — bleib im Rhythmus."
+  },
+  "doshaQuizContent": {
+    "questions": {
+      "v_frame_slim": "Ich bin von Natur aus schlank und nehme nur schwer zu.",
+      "p_frame_athletic": "Ich habe einen mittleren, athletischen Körperbau — Muskeln kommen leicht.",
+      "k_frame_solid": "Ich habe einen festen, kräftigen Körperbau, der leicht Gewicht hält.",
+      "v_skin_dry": "Meine Haut neigt zu Trockenheit, besonders im Winter.",
+      "p_skin_flush": "Meine Haut wird leicht rot, errötet oder bekommt schnell Sonnenbrand.",
+      "k_skin_smooth": "Meine Haut ist von Natur aus glatt, dick oder leicht ölig.",
+      "v_cold_hands": "Meine Hände und Füße fühlen sich oft kalt an.",
+      "p_runs_warm": "Mir ist wärmer als den Menschen um mich herum, sogar in kühlen Räumen.",
+      "k_handles_cold": "Ich vertrage kaltes Wetter gut und überhitze selten.",
+      "v_stress_anxious": "Unter Stress neige ich zu Sorge oder Angst.",
+      "p_stress_irritable": "Unter Stress neige ich zu Frust oder Schärfe.",
+      "k_stress_withdraw": "Unter Stress ziehe ich mich eher zurück oder mache zu.",
+      "v_appetite_irreg": "Mein Appetit ist unregelmäßig — mal heißhungrig, mal vergesse ich zu essen.",
+      "p_appetite_strong": "Ich habe einen starken, pünktlichen Appetit — eine ausgelassene Mahlzeit macht mich gereizt.",
+      "k_sleep_deep": "Ich schlafe schnell ein und tief — manchmal schwer aufzuwachen."
+    },
+    "answers": {
+      "yes": "Ja",
+      "somewhat": "Etwas",
+      "no": "Eher nicht"
+    },
+    "tiebreakers": {
+      "tb_vp_stress": {
+        "prompt": "Unter echtem Druck fühlst du dich eher —",
+        "vata": "Zerstreut und ängstlich",
+        "pitta": "Scharf und frustriert"
+      },
+      "tb_vp_sleepless": {
+        "prompt": "Wenn du nicht schlafen kannst, dein Geist —",
+        "vata": "Rast zwischen vielen Dingen",
+        "pitta": "Konzentriert sich aufs Problemlösen"
+      },
+      "tb_vp_cold": {
+        "prompt": "Kaltes Wetter ist —",
+        "vata": "Schwer zu ertragen für dich",
+        "pitta": "Eine willkommene Erleichterung"
+      },
+      "tb_vk_freetime": {
+        "prompt": "In der Freizeit bevorzugst du —",
+        "vata": "Abwechslung und neue Erfahrungen",
+        "kapha": "Vertraute Annehmlichkeiten und Ruhe"
+      },
+      "tb_vk_weight": {
+        "prompt": "Dein Körpergewicht —",
+        "vata": "Bleibt niedrig und schwankt",
+        "kapha": "Bleibt stabil oder steigt langsam"
+      },
+      "tb_vk_mind": {
+        "prompt": "Deinen Geist würdest du beschreiben als —",
+        "vata": "Schnell und kreativ",
+        "kapha": "Beständig und bedacht"
+      },
+      "tb_pk_hangry": {
+        "prompt": "Wenn eine Mahlzeit sich verzögert —",
+        "pitta": "Wirst du gereizt und „hangry“",
+        "kapha": "Merkst du es kaum"
+      },
+      "tb_pk_conflict": {
+        "prompt": "In einem Konflikt neigst du dazu —",
+        "pitta": "Direkt zu konfrontieren",
+        "kapha": "Auszuweichen und es sich legen zu lassen"
+      },
+      "tb_pk_stamina": {
+        "prompt": "Deine Ausdauer ist —",
+        "pitta": "Intensiv und verzehrend",
+        "kapha": "Langsam brennend und ausdauernd"
+      }
+    }
+  },
+  "doshaQuiz": {
+    "goBack": "Zurück",
+    "introKicker": "Dosha-Entdeckung",
+    "titleLine1": "Wer bist du",
+    "titleLine2": "wirklich?",
+    "introBody": "Im Ayurveda ist dein Dosha deine einzigartige Blaupause — die elementaren Kräfte, die deinen Körper, Geist und deine Seele formen.",
+    "honestyPrimer": "Antworte danach, wie du den Großteil deines Lebens warst — nicht danach, wie du dich diese Woche fühlst.",
+    "introMeta": "15 Fragen · etwa 90 Sekunden",
+    "consentText": "Ich stimme zu, dass The Sanctuary meine Dosha-Ergebnisse und Wohlbefindens-Angaben (Stimmung, Energie, Schlaf) verarbeitet, um meine Praxis zu personalisieren, wie in der Datenschutzerklärung beschrieben. Dies sind gesundheitsbezogene Daten; ich kann meine Einwilligung jederzeit in den Einstellungen widerrufen.",
+    "startCta": "Mein Dosha entdecken",
+    "keepCurrent": "Aktuelles Ergebnis behalten: {{dosha}}",
+    "calc": {
+      "reading": "Deine elementare Signatur wird gelesen...",
+      "vata": "Die Winde des Vata werden gewogen...",
+      "pitta": "Das Feuer des Pitta wird gemessen...",
+      "kapha": "Erdung im Kapha-Boden..."
+    },
+    "quickCheck": "Kurze Prüfung",
+    "tiebreakerContext": "Deine beiden stärksten Doshas liegen nah beieinander. Ein paar weitere Fragen zur Feinabstimmung.",
+    "saveResultKicker": "Ergebnis speichern",
+    "saveResultBody": "Erstelle ein kostenloses Konto, um dein Dosha zu behalten, deine Praxis zu verfolgen und jede Empfehlung zu personalisieren.",
+    "saving": "Wird gespeichert...",
+    "saveCta": "Mein Dosha-Profil speichern",
+    "createAccountCta": "Konto erstellen zum Speichern",
+    "retake": "Quiz wiederholen",
+    "prevQuestion": "Vorherige Frage",
+    "discovery": "Entdeckung",
+    "progressAria": "Quiz-Fortschritt",
+    "primerShort": "Lebenslange Tendenz, nicht diese Woche.",
+    "saveFailed": "Speichern fehlgeschlagen: {{error}}"
+  },
+  "journey": {
+    "title": "Deine Reise",
+    "goBack": "Zurück",
+    "dayStreak": "Tagesserie",
+    "streakStart": "Heute starten!",
+    "streakDay": "Tag",
+    "streakDays": "Tage",
+    "thisWeek": "Diese Woche",
+    "minutes": "Minuten",
+    "level": "Stufe {{n}}",
+    "progressTo": "Fortschritt zu {{title}}",
+    "minProgress": "{{current}}/{{total}} Min.",
+    "highestLevel": "Du hast die höchste Stufe erreicht. Namaste.",
+    "comingUp": "Als Nächstes",
+    "minShort": "{{n}} Min.",
+    "activity": "Aktivität",
+    "periods": {
+      "1d": "Heute",
+      "1w": "7 Tage",
+      "1m": "30 Tage",
+      "all": "Gesamt"
+    },
+    "summaryMinutes": "Minuten",
+    "summarySessions": "Einheiten",
+    "summaryPoses": "Posen",
+    "doshaOverTime": "Dein Dosha im Zeitverlauf",
+    "doshaTeaser": "Sieh, wie sich dein Vata, Pitta und Kapha über den Monat verändert haben — deine Check-ins als Muster gelesen.",
+    "unlockWithPlus": "Mit Plus freischalten",
+    "unlockAria": "Schalte deinen Dosha-Verlauf mit Sanctuary Plus frei",
+    "lifetime": "Gesamt",
+    "totalMinutes": "Minuten insgesamt",
+    "totalSessions": "Einheiten insgesamt",
+    "bestStreak": "Beste Serie",
+    "today": "Heute",
+    "recentSessions": "Letzte Einheiten",
+    "posesCount": "{{done}}/{{total}} Posen",
+    "minAbbrev": "Min.",
+    "beginTitle": "Beginne deine Reise",
+    "beginBody": "Schließe deine erste Übungseinheit ab, um deinen Fortschritt zu verfolgen und deine Serie aufzubauen.",
+    "beginCta": "Erste Einheit starten",
+    "paywallHeadline": "Sieh dein Dosha im Zeitverlauf",
+    "paywallSubhead": "Plus macht aus deinen Check-ins ein monatslanges Muster — und die Protokolle, um darauf zu reagieren.",
+    "chartEmpty": "Noch keine Übungsdaten",
+    "chartEmptyHint": "Schließe eine Einheit ab, um dein Diagramm zu sehen",
+    "levels": {
+      "1": {
+        "title": "Anfänger*in",
+        "subtitle": "Neugierige Seele"
+      },
+      "2": {
+        "title": "Schüler*in",
+        "subtitle": "Suche nach Stille"
+      },
+      "3": {
+        "title": "Praktizierende*r",
+        "subtitle": "Stete Flamme"
+      },
+      "4": {
+        "title": "Hingebungsvoll",
+        "subtitle": "Verwurzelt in der Praxis"
+      },
+      "5": {
+        "title": "Geübt",
+        "subtitle": "Mühelos im Fluss"
+      },
+      "6": {
+        "title": "Meister*in",
+        "subtitle": "Inneres Licht"
+      },
+      "7": {
+        "title": "Guru",
+        "subtitle": "Der Rückzugsort in dir"
+      }
+    }
+  },
+  "discover": {
+    "title": "Entdecken",
+    "profileAria": "Profil öffnen",
+    "heroTitle": "Was brauchst du?",
+    "heroSubtitle": "Beschreibe, wie du dich fühlst, und wir finden die passende Praxis.",
+    "searchPlaceholder": "Rückenschmerzen, Kopfschmerzen, kann nicht schlafen...",
+    "searchAria": "Asanas suchen",
+    "searchSubmitAria": "Suchen",
+    "asanasMatching": "Asanas für „{{query}}“",
+    "popularSearches": "Beliebte Suchen",
+    "browseByCategory": "Nach Kategorie stöbern",
+    "quickRoutines": "Schnelle Routinen",
+    "programs": "Programme",
+    "exploreAsanas": "Asanas entdecken",
+    "breathwork": "Atemarbeit",
+    "unlockWithPlus": "Mit Plus freischalten",
+    "plusAria": "{{name}} — Sanctuary Plus",
+    "itemAria": "{{english}} ({{sanskrit}})",
+    "minSuffix": "Min.",
+    "ayurvedicWisdom": "Ayurvedische Weisheit",
+    "ayurvedicTip": "Der Körper heilt durch Spiel, der Geist heilt durch Lachen und die Seele heilt durch Stille. Nimm dir heute einen Moment, um alle drei anzunehmen.",
+    "paywallHeadline": "Die vollständige Bibliothek wartet",
+    "paywallSubhead": "Schalte jede Asana und jedes Pranayama frei, dazu deine persönliche Routine.",
+    "categories": {
+      "back": "Rücken & Wirbelsäule",
+      "neck": "Nacken & Schultern",
+      "anxiety": "Stress & Angst",
+      "sleep": "Schlaf & Ruhe",
+      "energy": "Energie & Vitalität",
+      "hips": "Hüften & Mobilität",
+      "digestion": "Verdauung",
+      "posture": "Haltung"
+    },
+    "routines": {
+      "stress": {
+        "label": "Stressabbau",
+        "desc": "Beruhige deinen Geist und löse Spannungen"
+      },
+      "sleep": {
+        "label": "Besserer Schlaf",
+        "desc": "Komm zur Ruhe und bereite dich auf tiefe Erholung vor"
+      },
+      "energy": {
+        "label": "Energieschub",
+        "desc": "Wecke deinen Körper und tanke neue Kraft"
+      },
+      "flexibility": {
+        "label": "Beweglichkeits-Flow",
+        "desc": "Löse Steifheit und verbessere die Mobilität"
+      }
+    },
+    "programsList": {
+      "morning7Day": {
+        "label": "Morgen-Reset",
+        "desc": "Den Körper wecken, die Wirbelsäule wärmen, den Tag erden"
+      },
+      "backPainSeries": {
+        "label": "Rückenschmerz-Linderung",
+        "desc": "Entlasten, mobilisieren, Spannungen im unteren Rücken lösen"
+      },
+      "preBedWindDown": {
+        "label": "Entspannung vor dem Schlafen",
+        "desc": "Lange, erholsame Haltungen — bereite dich auf tiefen Schlaf vor"
+      }
+    }
+  },
+  "protocol": {
+    "notFound": "Protokoll nicht gefunden.",
+    "backToHome": "Zurück zur Startseite",
+    "goBack": "Zurück",
+    "plusKicker": "Sanctuary Plus",
+    "threeDayKicker": "Sanctuary Plus · 3-Tage-Protokoll",
+    "unlock": "Mit Plus freischalten",
+    "unlockHeadline": "Schalte dein {{dosha}}-Protokoll frei",
+    "unlockSubhead": "Drei Tage Ernährung, Bewegung, Atem und Ruhe, um dein Dosha wieder ins Gleichgewicht zu bringen.",
+    "source": "Quelle: {{source}}",
+    "daysTablistLabel": "Protokolltage",
+    "dayTab": "Tag {{n}}",
+    "dayTabAria": "Tag {{n}}",
+    "dayTabAriaCompleted": "Tag {{n}} (abgeschlossen)",
+    "dayHeader": "Tag {{n}} · {{title}}",
+    "dayComplete": "Tag {{n}} abgeschlossen",
+    "markedRelative": "Markiert {{when}}",
+    "undo": "Rückgängig",
+    "unmarkAria": "Diesen Tag abwählen",
+    "markDay": "Tag {{n}} als erledigt markieren",
+    "continueToDay": "Weiter zu Tag {{n}}",
+    "backToDay": "Zurück zu Tag {{n}}",
+    "yourHistory": "Dein Verlauf",
+    "previousAttempts_one": "1 früherer Versuch",
+    "previousAttempts_other": "{{count}} frühere Versuche",
+    "completedAllDays": "Alle Tage abgeschlossen",
+    "daysOfTotal": "{{done}} von {{total}} Tagen",
+    "rel": {
+      "justNow": "gerade eben",
+      "minAgo": "vor {{n}} Min.",
+      "hrAgo": "vor {{n}} Std.",
+      "yesterday": "gestern",
+      "daysAgo": "vor {{n}} Tagen"
+    }
+  },
+  "vikritiSignal": {
+    "vata": {
+      "headline": "Dein Vata ist erhöht.",
+      "summary": "Angst, zerstreuter Fokus, leichter Schlaf — deine Woche liest sich als Vata-Aggravation. Erdung hilft.",
+      "freeLabel": "Heute Abend: 5 Minuten in der Haltung des Kindes",
+      "freeAction": "Jetzt starten",
+      "plusLabel": "Dein 3-Tage-Vata-beruhigendes Protokoll",
+      "plusSub": "Warmes Essen, langsame Dehnungen, Bildschirme aus ab 21 Uhr."
+    },
+    "pitta": {
+      "headline": "Dein Pitta ist erhöht.",
+      "summary": "Reizbarkeit, Intensität, Hitze — deine Woche liest sich als Pitta-Aggravation. Kühl es ab.",
+      "freeLabel": "Versuche 5 Minuten Nadi Shodhana",
+      "freeAction": "Atem beginnen",
+      "plusLabel": "Dein 3-Tage-Pitta-kühlendes Protokoll",
+      "plusSub": "Kühlende Speisen, Mond-Gruß-Flows, abends Sheetali-Atmung."
+    },
+    "kapha": {
+      "headline": "Dein Kapha ist erhöht.",
+      "summary": "Schwere, träge Starts, Rückzug — deine Woche liest sich als Kapha-Aggravation. Entfache etwas Hitze.",
+      "freeLabel": "Steh in Tadasana — wecke den Körper",
+      "freeAction": "Jetzt starten",
+      "plusLabel": "Dein 3-Tage-Kapha-belebendes Protokoll",
+      "plusSub": "Sonnengrüße, scharfe Gewürze, früh aufstehen, keine Nickerchen tagsüber."
+    }
+  },
+  "vikritiCard": {
+    "dismiss": "Lesung schließen",
+    "todaysReading": "Deine heutige Lesung",
+    "evidence_one": "Basierend auf {{matching}} deiner letzten {{total}} Check-ins.",
+    "evidence_other": "Basierend auf {{matching}} deiner letzten {{total}} Check-in-Tage.",
+    "returningKicker": "Wieder aufgenommen · Versuch {{n}}",
+    "startProtocol": "Starte dein {{dosha}}-Protokoll",
+    "continueProtocol": "Setze dein {{dosha}}-Protokoll fort",
+    "orJust": "Oder einfach {{action}}",
+    "plusBadge": "Plus"
+  },
+  "welcomePlus": {
+    "dismiss": "Willkommen schließen",
+    "kicker": "Du bist dabei",
+    "title": "Willkommen bei Sanctuary Plus",
+    "body": "Die komplette Bibliothek, deine persönlichen Protokolle und die Weisheit der Charaka — ab jetzt alles deins.",
+    "ctas": {
+      "exploreLabel": "Die komplette Bibliothek entdecken",
+      "exploreSub": "60+ Asanas, fortgeschrittenes Pranayama",
+      "doshaLabel": "Lies Kapitel 3 deines Doshas",
+      "doshaSub": "Lebe nach deiner Natur — Jahreszeit, Stunde, Teller",
+      "reminderLabel": "Tägliche Übungserinnerung einrichten",
+      "reminderSub": "Ein sanfter Hinweis zu deiner gewählten Zeit"
+    }
+  },
+  "disclaimer": {
+    "body": "The Sanctuary bietet allgemeine Wellness- und Bildungsinhalte auf Basis von Yoga und Ayurveda. Es handelt sich nicht um medizinische Beratung, Diagnose oder Behandlung. Konsultiere eine qualifizierte medizinische Fachkraft, bevor du deine Ernährung, Bewegung oder Gesundheitsroutine änderst — besonders während einer Schwangerschaft oder bei einer bestehenden Erkrankung."
+  },
+  "vikritiChart": {
+    "empty": "Noch keine Check-ins",
+    "emptyHint": "Ein Check-in vor der Praxis startet deine Zeitleiste",
+    "balanced": "Ausgeglichen",
+    "summaryDominant_one": "Überwiegend {{label}} an deinem letzten {{count}} Check-in-Tag",
+    "summaryDominant_other": "Überwiegend {{label}} an deinen letzten {{count}} Check-in-Tagen",
+    "summaryBalanced_one": "Ausgeglichen an deinem letzten {{count}} Check-in-Tag",
+    "summaryBalanced_other": "Ausgeglichen an deinen letzten {{count}} Check-in-Tagen",
+    "cellHint": "Jede Zelle ist ein Tag, eingefärbt nach dem Dosha, auf das deine Energie & dein Stress hindeuteten.",
+    "ariaDays": "{{label}} {{count}} Tage",
+    "tooltip": "{{date}} — {{label}} (Energie {{energy}}, Stress {{stress}})"
+  },
   "consent": {
     "card": {
       "title": "Eine leise Bitte.",
@@ -135,6 +1295,55 @@
       "allow": "Erlauben",
       "notNow": "Nicht jetzt",
       "neverAsk": "Nicht mehr fragen"
+    }
+  },
+  "paywall": {
+    "kicker": "Sanctuary Plus",
+    "defaultHeadline": "Eine Praxis, die dich kennt",
+    "defaultSubhead": "Schalte die vollständige Bibliothek, dein persönliches Protokoll und die Weisheit der Charaka frei.",
+    "benefits": {
+      "library": "Die komplette Asana- & Pranayama-Bibliothek",
+      "routine": "Deine persönliche Routine, abgestimmt auf Dosha + Jahreszeit",
+      "charaka": "Charaka-Vertiefungen + Kapitel 3: Lebe nach deinem Dosha",
+      "diet": "Vollständiges 6-Geschmacks-Ernährungsprotokoll & alle 13 Dinacharya-Praktiken",
+      "voice": "Mehrere HD-Stimmen + Offline-Downloads"
+    },
+    "planAnnual": "Jährlich",
+    "planMonthly": "Monatlich",
+    "cadenceYear": "/ Jahr",
+    "cadenceMonth": "/ Monat",
+    "annualSavings": "45 % sparen",
+    "annualSub": "Etwa 4,92 € / Monat, jährliche Abrechnung",
+    "monthlySub": "Jederzeit kündbar",
+    "renewNote": "Verlängert sich automatisch. Jederzeit in den Kontoeinstellungen kündbar.",
+    "haveCode": "Hast du einen Code?",
+    "comingSoon": "Sanctuary Plus startet bald. Wir senden dir eine Einladung — interne Codes funktionieren bereits über „Hast du einen Code?“.",
+    "signInToSubscribe": "Bitte melde dich an oder erstelle ein Konto, um zu abonnieren.",
+    "regionTitle": "Plus ist in deiner Region noch nicht verfügbar",
+    "regionBody": "Wir arbeiten daran, kostenpflichtige Pläne in dein Land zu bringen. In der Zwischenzeit gehört dir alles im kostenlosen Tarif vollständig — und wenn du einen Einladungscode hast, kannst du ihn unten einlösen.",
+    "promo": {
+      "kicker": "Code einlösen",
+      "title": "Gib deinen Einladungscode ein",
+      "body": "Eine Einladung von einer Kampagne, einer Lehrerin oder unserem Team erhalten? Gib sie unten ein.",
+      "placeholder": "Code eingeben",
+      "checking": "Wird geprüft…",
+      "apply": "Code anwenden",
+      "successKicker": "Code angewendet",
+      "successTitle": "Willkommen bei Sanctuary Plus",
+      "successUntil": "Dein Premium-Zugang ist aktiv bis {{date}}.",
+      "successLifetime": "Dein Premium-Zugang gilt lebenslang.",
+      "startExploring": "Loslegen",
+      "errEmpty": "Gib deinen Code ein, um fortzufahren.",
+      "errNeedAccount": "Bitte melde dich zuerst an oder erstelle ein Konto.",
+      "errGeneric": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+      "errNotFound": "Wir konnten diesen Code nicht finden.",
+      "errInactive": "Dieser Code ist nicht mehr aktiv.",
+      "errExpired": "Dieser Code ist abgelaufen.",
+      "errNotYetValid": "Dieser Code ist noch nicht aktiv — versuche es später erneut.",
+      "errExhausted": "Dieser Code hat sein Einlöselimit erreicht.",
+      "errAlreadyRedeemed": "Du hast diesen Code bereits eingelöst.",
+      "errKindUnsupported": "Dieser Code kann hier noch nicht eingelöst werden.",
+      "errDefault": "Dieser Code konnte nicht eingelöst werden."
     }
   }
 }

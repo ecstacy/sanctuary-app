@@ -1,8 +1,10 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
-import { PRANAYAMAS } from '../data/pranayamas'
+import { PRANAYAMAS, getPranayama } from '../data/pranayamas'
 import { ASANAS } from '../data/asanas'
+import { localizeAsana } from '../i18n/contentI18n'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
 import PranayamaPracticeOverlay from '../components/PranayamaPractice'
@@ -40,6 +42,7 @@ const LEVELS = {
 
 // ─── Bottom-sheet modal ────────────────────────────────────────────────
 function BottomSheet({ open, onClose, title, children }) {
+  const { t } = useTranslation()
   useEffect(() => {
     if (!open) return
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
@@ -67,7 +70,7 @@ function BottomSheet({ open, onClose, title, children }) {
       >
         <button
           onClick={onClose}
-          aria-label="Close"
+          aria-label={t('pranayamaDetail.close')}
           className="absolute right-3 top-3 w-8 h-8 rounded-full bg-surface-container flex items-center justify-center"
         >
           <span aria-hidden="true" className="material-symbols-outlined text-base text-on-surface-variant">close</span>
@@ -82,28 +85,29 @@ function BottomSheet({ open, onClose, title, children }) {
 
 // ─── Breath Pattern formatter ──────────────────────────────────────────
 function PatternCard({ pattern, breathPattern }) {
+  const { t } = useTranslation()
   if (!pattern) return null
 
   // Two pattern shapes: paced (counts) vs rate (bpm)
   if (breathPattern === 'rate') {
     return (
       <div className="bg-surface-container rounded-2xl p-5 border border-outline-variant/10">
-        <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-3">Breath Pattern</p>
+        <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-3">{t('pranayamaDetail.breathPattern')}</p>
         <div className="grid grid-cols-2 gap-x-4 gap-y-3">
           <div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">Rate</p>
-            <p className="font-body text-sm font-semibold text-on-surface">{pattern.rate} breaths / min</p>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.rate')}</p>
+            <p className="font-body text-sm font-semibold text-on-surface">{t('pranayamaDetail.breathsPerMin', { rate: pattern.rate })}</p>
           </div>
           <div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">Round duration</p>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.roundDuration')}</p>
             <p className="font-body text-sm font-semibold text-on-surface">{pattern.roundSeconds}s</p>
           </div>
           <div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">Rounds</p>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.rounds')}</p>
             <p className="font-body text-sm font-semibold text-on-surface">{pattern.rounds}</p>
           </div>
           <div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">Rest between</p>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.restBetween')}</p>
             <p className="font-body text-sm font-semibold text-on-surface">{pattern.restBetweenRounds}s</p>
           </div>
         </div>
@@ -119,31 +123,31 @@ function PatternCard({ pattern, breathPattern }) {
   // Default: paced pattern
   return (
     <div className="bg-surface-container rounded-2xl p-5 border border-outline-variant/10">
-      <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-3">Breath Pattern</p>
+      <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-3">{t('pranayamaDetail.breathPattern')}</p>
       <div className="flex items-center justify-around mb-3">
         <div className="text-center">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">Inhale</p>
+          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.inhale')}</p>
           <p className="font-headline text-3xl text-primary tabular-nums">{pattern.inhale ?? '—'}</p>
         </div>
         {pattern.holdAfterIn ? (
           <div className="text-center">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">Hold</p>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.hold')}</p>
             <p className="font-headline text-3xl text-on-surface-variant tabular-nums">{pattern.holdAfterIn}</p>
           </div>
         ) : null}
         <div className="text-center">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">Exhale</p>
+          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.exhale')}</p>
           <p className="font-headline text-3xl text-primary tabular-nums">{pattern.exhale ?? '—'}</p>
         </div>
         {pattern.holdAfterEx ? (
           <div className="text-center">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">Hold</p>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.hold')}</p>
             <p className="font-headline text-3xl text-on-surface-variant tabular-nums">{pattern.holdAfterEx}</p>
           </div>
         ) : null}
       </div>
       {pattern.ratio && (
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest text-center mb-3">Ratio · {pattern.ratio}</p>
+        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest text-center mb-3">{t('pranayamaDetail.ratio', { ratio: pattern.ratio })}</p>
       )}
       {pattern.notes && (
         <p className="font-body text-xs text-on-surface-variant leading-relaxed pt-3 border-t border-outline-variant/15">
@@ -176,8 +180,13 @@ function getSteps(p) {
 export default function PranayamaDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const pranayama = PRANAYAMAS[id]
+  const { t } = useTranslation()
+  const pranayama = getPranayama(id)
   useScrollDepth('pranayama_detail')
+
+  // Localize the step phase label; empty phase stays empty.
+  const PHASE_KEYS = { Setup: 'phaseSetup', Hold: 'phaseHold', Breathe: 'phaseBreathe', Release: 'phaseRelease' }
+  const phaseLabel = (phase) => (phase ? t(`asanaDetail.${PHASE_KEYS[phase] || ''}`, phase) : '')
 
   const [practicing, setPracticing] = useState(false)
   const [sheet, setSheet] = useState(null) // 'pattern' | 'safety' | null
@@ -209,16 +218,16 @@ export default function PranayamaDetailPage() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center px-6">
           <span aria-hidden="true" className="material-symbols-outlined text-5xl text-outline-variant mb-4 block">search_off</span>
-          <h2 className="font-headline text-xl text-on-surface mb-2">Pranayama not found</h2>
-          <p className="font-body text-sm text-on-surface-variant mb-6">The breath technique you're looking for doesn't exist.</p>
-          <button onClick={() => navigate(-1)} className="px-6 py-3 bg-primary text-on-primary rounded-full font-label text-xs tracking-wide">Go Back</button>
+          <h2 className="font-headline text-xl text-on-surface mb-2">{t('pranayamaDetail.notFoundTitle')}</h2>
+          <p className="font-body text-sm text-on-surface-variant mb-6">{t('pranayamaDetail.notFoundBody')}</p>
+          <button onClick={() => navigate(-1)} className="px-6 py-3 bg-primary text-on-primary rounded-full font-label text-xs tracking-wide">{t('pranayamaDetail.goBackBtn')}</button>
         </div>
       </div>
     )
   }
 
   const steps = getSteps(pranayama)
-  const seatAsana = pranayama.practiceSeat ? ASANAS[pranayama.practiceSeat] : null
+  const seatAsana = pranayama.practiceSeat ? localizeAsana(ASANAS[pranayama.practiceSeat]) : null
   const levelInfo = LEVELS[pranayama.level] || LEVELS.beginner
   const minutes = Math.round((pranayama.durationSeconds || 0) / 60)
 
@@ -238,13 +247,13 @@ export default function PranayamaDetailPage() {
         <div className="flex items-center gap-3 px-4 py-3">
           <button
             onClick={() => navigate(-1)}
-            aria-label="Go back"
+            aria-label={t('pranayamaDetail.goBack')}
             className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center"
           >
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-xl">arrow_back</span>
           </button>
           <p className="font-headline text-base text-on-surface flex-1 truncate">{pranayama.sanskrit}</p>
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{minutes} min</p>
+          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.minLabel', { min: minutes })}</p>
         </div>
       </div>
 
@@ -252,12 +261,12 @@ export default function PranayamaDetailPage() {
       <div className="flex items-center justify-between px-4 pt-3 pb-2">
         <button
           onClick={() => navigate(-1)}
-          aria-label="Go back"
+          aria-label={t('pranayamaDetail.goBack')}
           className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center"
         >
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-xl">arrow_back</span>
         </button>
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Pranayama</p>
+        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.label')}</p>
         <div className="w-9" />
       </div>
 
@@ -276,7 +285,7 @@ export default function PranayamaDetailPage() {
         </div>
 
         <div className="text-center">
-          <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">Pranayama</p>
+          <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{t('pranayamaDetail.label')}</p>
           {/* Plus badge — only when this pranayama is Plus-gated for
               the viewing user. Sets expectation before they reach
               the practice CTA at the bottom. */}
@@ -284,7 +293,7 @@ export default function PranayamaDetailPage() {
             <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary-container/60 rounded-full mb-2">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px]">lock</span>
               <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider">
-                Sanctuary Plus
+                {t('pranayamaDetail.plusBadge')}
               </span>
             </div>
           )}
@@ -306,35 +315,35 @@ export default function PranayamaDetailPage() {
           <button
             onClick={() => setSheet('pattern')}
             className="flex flex-col items-center gap-1 p-2 rounded-xl active:bg-surface-container-high/50 transition-colors"
-            aria-label="Show breath pattern details"
+            aria-label={t('pranayamaDetail.showPatternAria')}
           >
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">timer</span>
-            <p className="font-headline text-base text-on-surface">{minutes} min</p>
-            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Duration</p>
+            <p className="font-headline text-base text-on-surface">{t('pranayamaDetail.minLabel', { min: minutes })}</p>
+            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.duration')}</p>
           </button>
 
           {seatAsana ? (
             <button
               onClick={() => navigate(`/asana/${seatAsana.id}`)}
               className="flex flex-col items-center gap-1 p-2 rounded-xl active:bg-surface-container-high/50 transition-colors"
-              aria-label={`Recommended seat: ${seatAsana.sanskrit}`}
+              aria-label={t('pranayamaDetail.seatAria', { name: seatAsana.sanskrit })}
             >
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">self_care</span>
               <p className="font-headline text-base text-on-surface line-clamp-1">{seatAsana.sanskrit}</p>
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Seat</p>
+              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.seat')}</p>
             </button>
           ) : (
             <div className="flex flex-col items-center gap-1 p-2">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">self_care</span>
-              <p className="font-headline text-base text-on-surface">Any seat</p>
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Seat</p>
+              <p className="font-headline text-base text-on-surface">{t('pranayamaDetail.anySeat')}</p>
+              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.seat')}</p>
             </div>
           )}
 
           <div className="flex flex-col items-center gap-1 p-2">
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">{levelInfo.icon}</span>
-            <p className="font-headline text-base text-on-surface">{levelInfo.label}</p>
-            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Level</p>
+            <p className="font-headline text-base text-on-surface">{t(`asanaDetail.levels.${pranayama.level}`, levelInfo.label)}</p>
+            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.level')}</p>
           </div>
         </div>
       </div>
@@ -344,7 +353,7 @@ export default function PranayamaDetailPage() {
         <div>
           <h3 className="font-headline text-lg text-on-surface mb-2 flex items-center gap-2">
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-base">psychology</span>
-            Why This Practice
+            {t('pranayamaDetail.whyThisPractice')}
           </h3>
           <p className="font-body text-sm text-on-surface-variant leading-relaxed">{pranayama.reasoning}</p>
         </div>
@@ -358,7 +367,7 @@ export default function PranayamaDetailPage() {
         <div>
           <h3 className="font-headline text-lg text-on-surface mb-3 flex items-center gap-2">
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-base">format_list_numbered</span>
-            How to Perform
+            {t('pranayamaDetail.howToPerform')}
           </h3>
           <ol className="space-y-2.5">
             {steps.map((step, i) => (
@@ -371,7 +380,7 @@ export default function PranayamaDetailPage() {
                 </div>
                 <div className="flex-1 pt-0.5 pb-3">
                   {step.phase && (
-                    <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{step.phase}</p>
+                    <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{phaseLabel(step.phase)}</p>
                   )}
                   <p className="font-body text-sm text-on-surface leading-relaxed">{step.text}</p>
                 </div>
@@ -385,7 +394,7 @@ export default function PranayamaDetailPage() {
           <div>
             <h3 className="font-headline text-lg text-on-surface mb-3 flex items-center gap-2">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-base">check_circle</span>
-              Benefits
+              {t('pranayamaDetail.benefits')}
             </h3>
             <ul className="space-y-2">
               {pranayama.benefits.map((b, i) => (
@@ -403,7 +412,7 @@ export default function PranayamaDetailPage() {
           <div>
             <h3 className="font-headline text-lg text-on-surface mb-3 flex items-center gap-2">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-base">tune</span>
-              Modifications
+              {t('pranayamaDetail.modifications')}
             </h3>
             <ul className="space-y-2">
               {pranayama.modifications.map((m, i) => (
@@ -420,12 +429,12 @@ export default function PranayamaDetailPage() {
         {pranayama.contraindications && pranayama.contraindications.length > 0 && (
           <section
             role="region"
-            aria-label="Safety considerations"
+            aria-label={t('pranayamaDetail.safetyAria')}
             className="bg-error/5 border border-error/20 rounded-2xl p-5"
           >
             <h3 className="font-headline text-lg text-on-surface mb-3 flex items-center gap-2">
               <span aria-hidden="true" className="material-symbols-outlined text-error text-base">health_and_safety</span>
-              Important Safety Considerations
+              {t('pranayamaDetail.safetyTitle')}
             </h3>
             <ul className="space-y-2">
               {pranayama.contraindications.map((c, i) => (
@@ -436,7 +445,7 @@ export default function PranayamaDetailPage() {
               ))}
             </ul>
             <p className="font-body text-xs text-on-surface-variant/80 leading-relaxed mt-4 pt-3 border-t border-error/15">
-              Pranayama is potent. If a technique produces dizziness, lightheadedness, or breathlessness, stop immediately and breathe naturally. Consult a yoga teacher or healthcare provider before regular practice if you have medical conditions.
+              {t('pranayamaDetail.safetyFooter')}
             </p>
           </section>
         )}
@@ -446,12 +455,12 @@ export default function PranayamaDetailPage() {
           <div className="flex items-start gap-2">
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-base flex-shrink-0 mt-0.5">menu_book</span>
             <p className="font-body text-xs text-on-surface-variant/70 leading-relaxed">
-              <span className="font-label uppercase tracking-widest text-[10px]">Source · </span>
-              {pranayama.source.text === 'HYP'    ? 'Hatha Yoga Pradipika'
-               : pranayama.source.text === 'CS'   ? 'Charaka Samhita'
-               : pranayama.source.text === 'GS'   ? 'Gheranda Samhita'
-                                                  : 'Modern hatha tradition'}
-              {pranayama.source.verse && <span> · verse {pranayama.source.verse}</span>}
+              <span className="font-label uppercase tracking-widest text-[10px]">{t('pranayamaDetail.sourceLabel')}</span>
+              {pranayama.source.text === 'HYP'    ? t('pranayamaDetail.sourceHYP')
+               : pranayama.source.text === 'CS'   ? t('pranayamaDetail.sourceCS')
+               : pranayama.source.text === 'GS'   ? t('pranayamaDetail.sourceGS')
+                                                  : t('pranayamaDetail.sourceModern')}
+              {pranayama.source.verse && <span> · {t('pranayamaDetail.verse', { verse: pranayama.source.verse })}</span>}
               {pranayama.source.note && (
                 <span className="block mt-1 italic">{pranayama.source.note}</span>
               )}
@@ -491,14 +500,14 @@ export default function PranayamaDetailPage() {
             <span aria-hidden="true" className="material-symbols-outlined text-lg">
               {isLocked ? 'lock' : 'play_arrow'}
             </span>
-            {isLocked ? `Unlock ${pranayama.sanskrit}` : `Start Practice · ${minutes} min`}
+            {isLocked ? t('pranayamaDetail.unlock', { name: pranayama.sanskrit }) : t('pranayamaDetail.startPractice', { min: minutes })}
           </button>
         </div>,
         document.body,
       )}
 
       {/* ── Bottom-sheet: full pattern explanation ───────────────────────── */}
-      <BottomSheet open={sheet === 'pattern'} onClose={() => setSheet(null)} title="Breath Pattern">
+      <BottomSheet open={sheet === 'pattern'} onClose={() => setSheet(null)} title={t('pranayamaDetail.breathPattern')}>
         <PatternCard pattern={pranayama.pattern} breathPattern={pranayama.breathPattern} />
         {pranayama.breathCues?.notes && (
           <p className="font-body text-sm text-on-surface-variant leading-relaxed mt-4">
@@ -519,8 +528,8 @@ export default function PranayamaDetailPage() {
         open={paywallOpen}
         onClose={() => setPaywallOpen(false)}
         surface="pranayama_detail_locked"
-        headline={`Practice ${pranayama.sanskrit} with Plus`}
-        subhead="Unlock advanced pranayama, your personalized routine, and the wisdom of Charaka."
+        headline={t('pranayamaDetail.paywallHeadline', { name: pranayama.sanskrit })}
+        subhead={t('pranayamaDetail.paywallSubhead')}
       />
     </div>
   )

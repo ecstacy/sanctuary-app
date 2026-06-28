@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
 import { track, EVENTS } from '../lib/track'
@@ -25,57 +26,14 @@ import { track, EVENTS } from '../lib/track'
 // Each option carries a vata/pitta/kapha weight. Same scoring as prakriti
 // (1 point per answer) so results are directly comparable.
 
+// Per-question icons + per-option dosha/icon. Question/subtitle and option
+// label/desc text come from the vikritiQuiz namespace (questions[i]) by index.
 const VIKRITI_QUESTIONS = [
-  {
-    question: 'Your body has felt...',
-    subtitle: 'Think about the past few days.',
-    icon: 'accessibility_new',
-    options: [
-      { label: 'Dry, cold, or achy',       desc: 'Stiff joints, dry skin, feeling the cold more than usual',   dosha: 'vata',  icon: 'ac_unit' },
-      { label: 'Warm or inflamed',         desc: 'Running hot, irritation, maybe some skin sensitivity',       dosha: 'pitta', icon: 'local_fire_department' },
-      { label: 'Heavy, sluggish, congested', desc: 'Slower movement, puffiness, thicker sinuses',              dosha: 'kapha', icon: 'weight' },
-    ],
-  },
-  {
-    question: 'Your mind has been...',
-    subtitle: 'How has your head felt in the last few days?',
-    icon: 'psychology',
-    options: [
-      { label: 'Racing or anxious',   desc: 'Many thoughts, hard to settle, overthinking',                  dosha: 'vata',  icon: 'cloud' },
-      { label: 'Sharp but irritable', desc: 'Focused, productive — but short fuse',                         dosha: 'pitta', icon: 'flash_on' },
-      { label: 'Dull or foggy',       desc: 'Slow-starting, low motivation, a little checked-out',          dosha: 'kapha', icon: 'do_not_disturb' },
-    ],
-  },
-  {
-    question: 'Your sleep this week has been...',
-    subtitle: 'Quality, not quantity.',
-    icon: 'bedtime',
-    options: [
-      { label: 'Restless & broken',       desc: 'Trouble falling or staying asleep',                    dosha: 'vata',  icon: 'visibility' },
-      { label: 'Short & intense',         desc: 'Falling asleep late, waking early, feeling wired',      dosha: 'pitta', icon: 'schedule' },
-      { label: 'Heavy & hard to leave',   desc: 'Sleeping long and still feeling groggy',                dosha: 'kapha', icon: 'snooze' },
-    ],
-  },
-  {
-    question: 'Your energy pattern has been...',
-    subtitle: 'How does your day actually feel?',
-    icon: 'bolt',
-    options: [
-      { label: 'Spiky — peaks and crashes', desc: 'Quick bursts followed by sudden fatigue',  dosha: 'vata',  icon: 'show_chart' },
-      { label: 'Hot-burning',               desc: 'Strong drive all day, risking burnout',     dosha: 'pitta', icon: 'trending_up' },
-      { label: 'Low and slow',              desc: 'Hard to get going, prefers to stay still',  dosha: 'kapha', icon: 'horizontal_rule' },
-    ],
-  },
-  {
-    question: 'Your appetite lately has been...',
-    subtitle: 'Digestion is the dashboard of dosha balance.',
-    icon: 'restaurant',
-    options: [
-      { label: 'Unpredictable or low', desc: 'Forgetting meals, bloating, gas',               dosha: 'vata',  icon: 'shuffle' },
-      { label: 'Very strong & urgent', desc: '"Hangry" if meals are late, strong cravings',    dosha: 'pitta', icon: 'alarm' },
-      { label: 'Heavy or dull',        desc: 'Rarely hungry, feels weighed down after meals',  dosha: 'kapha', icon: 'timelapse' },
-    ],
-  },
+  { icon: 'accessibility_new', options: [ { dosha: 'vata', icon: 'ac_unit' }, { dosha: 'pitta', icon: 'local_fire_department' }, { dosha: 'kapha', icon: 'weight' } ] },
+  { icon: 'psychology',        options: [ { dosha: 'vata', icon: 'cloud' }, { dosha: 'pitta', icon: 'flash_on' }, { dosha: 'kapha', icon: 'do_not_disturb' } ] },
+  { icon: 'bedtime',           options: [ { dosha: 'vata', icon: 'visibility' }, { dosha: 'pitta', icon: 'schedule' }, { dosha: 'kapha', icon: 'snooze' } ] },
+  { icon: 'bolt',              options: [ { dosha: 'vata', icon: 'show_chart' }, { dosha: 'pitta', icon: 'trending_up' }, { dosha: 'kapha', icon: 'horizontal_rule' } ] },
+  { icon: 'restaurant',        options: [ { dosha: 'vata', icon: 'shuffle' }, { dosha: 'pitta', icon: 'alarm' }, { dosha: 'kapha', icon: 'timelapse' } ] },
 ]
 
 const DOSHA_META = {
@@ -108,6 +66,7 @@ function calculateVikriti(answers) {
 
 export default function VikritiQuizPage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { user, profile } = useAuth()
 
   const [phase, setPhase] = useState('intro') // intro | quiz | result
@@ -142,6 +101,8 @@ export default function VikritiQuizPage() {
   }, [])
 
   const question = VIKRITI_QUESTIONS[currentQ]
+  const questionsText = t('vikritiQuiz.questions', { returnObjects: true })
+  const qText = (Array.isArray(questionsText) ? questionsText[currentQ] : null) || { options: [] }
   const total = VIKRITI_QUESTIONS.length
   const progress = (currentQ / total) * 100
 
@@ -203,7 +164,7 @@ export default function VikritiQuizPage() {
     })
     if (error) {
       console.error('Failed to save vikriti:', error.message)
-      alert('Failed to save: ' + error.message)
+      alert(t('vikritiQuiz.saveFailed', { error: error.message }))
       setSaving(false)
       return
     }
@@ -220,7 +181,7 @@ export default function VikritiQuizPage() {
     return (
       <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
         <div className="flex items-center justify-between px-6 py-5 flex-shrink-0">
-          <button onClick={() => navigate(-1)} className="text-on-surface-variant" aria-label="Go back">
+          <button onClick={() => navigate(-1)} className="text-on-surface-variant" aria-label={t('vikritiQuiz.goBack')}>
             <span className="material-symbols-outlined text-xl">arrow_back</span>
           </button>
           <span className="font-headline italic text-primary text-base">The Sanctuary</span>
@@ -237,16 +198,16 @@ export default function VikritiQuizPage() {
               </div>
             </div>
 
-            <p className="font-label text-xs text-primary uppercase tracking-widest mb-3">Weekly Check-in</p>
+            <p className="font-label text-xs text-primary uppercase tracking-widest mb-3">{t('vikritiQuiz.weeklyCheckin')}</p>
             <h1 className="font-headline text-3xl text-on-surface leading-tight mb-4">
-              How have you<br /><span className="italic font-normal text-primary">been lately?</span>
+              {t('vikritiQuiz.introTitle1')}<br /><span className="italic font-normal text-primary">{t('vikritiQuiz.introTitleAccent')}</span>
             </h1>
             <p className="text-on-surface-variant text-sm leading-relaxed max-w-xs mb-2">
-              Vikriti is your current state — how your doshas have shifted this week.
-              {prakritiPrimary && <> Your baseline is <b className="capitalize text-primary">{prakritiPrimary}</b>.</>}
+              {t('vikritiQuiz.introBody')}
+              {prakritiPrimary && <> {t('vikritiQuiz.baselineNote', { dosha: DOSHA_META[prakritiPrimary]?.name || prakritiPrimary })}</>}
             </p>
             <p className="text-on-surface-variant/60 text-xs leading-relaxed max-w-xs">
-              5 questions · 60 seconds.
+              {t('vikritiQuiz.introMeta')}
             </p>
           </div>
 
@@ -257,13 +218,13 @@ export default function VikritiQuizPage() {
             }}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
           >
-            Begin Check-in
+            {t('vikritiQuiz.begin')}
           </button>
           <button
             onClick={() => navigate(-1)}
             className="mt-4 text-center text-xs text-on-surface-variant/50 font-label uppercase tracking-widest"
           >
-            Not now
+            {t('vikritiQuiz.notNow')}
           </button>
         </div>
       </div>
@@ -294,7 +255,7 @@ export default function VikritiQuizPage() {
     return (
       <div className="min-h-screen bg-background text-on-surface font-body">
         <div className="flex items-center justify-between px-6 py-5">
-          <button onClick={() => navigate(-1)} className="text-on-surface-variant" aria-label="Close">
+          <button onClick={() => navigate(-1)} className="text-on-surface-variant" aria-label={t('vikritiQuiz.close')}>
             <span className="material-symbols-outlined text-xl">close</span>
           </button>
           <span className="font-headline italic text-primary text-base">The Sanctuary</span>
@@ -302,9 +263,9 @@ export default function VikritiQuizPage() {
         </div>
 
         <div className="px-6 pb-10">
-          <p className="font-label text-xs text-primary uppercase tracking-widest mb-2">This Week</p>
+          <p className="font-label text-xs text-primary uppercase tracking-widest mb-2">{t('vikritiQuiz.thisWeek')}</p>
           <h1 className="font-headline text-3xl text-on-surface leading-tight mb-6">
-            Your current state
+            {t('vikritiQuiz.currentState')}
           </h1>
 
           {/* Composition bars — ordered descending so the dominant dosha is
@@ -339,22 +300,20 @@ export default function VikritiQuizPage() {
               <span className={`material-symbols-outlined ${currentMeta.text} text-lg`}>{currentMeta.icon}</span>
               <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: currentMeta.hex }}>
                 {isAggravated
-                  ? `${currentMeta.name} aggravated`
-                  : `Currently trending ${currentMeta.name}`}
+                  ? t('vikritiQuiz.aggravated', { dosha: currentMeta.name })
+                  : t('vikritiQuiz.trending', { dosha: currentMeta.name })}
               </p>
             </div>
             <p className="font-body text-sm text-on-surface leading-relaxed">
-              {shifted ? (
-                <>Your baseline is <b className="capitalize">{baselineMeta.name}</b>, but this week <b>{currentMeta.name}</b> is elevated at {primaryPct}%. Favor practices that pacify {currentMeta.name}.</>
-              ) : prakritiPrimary && isAggravated ? (
-                <>Your baseline is <b className="capitalize">{baselineMeta.name}</b>, and right now it's running high at {primaryPct}%. Same dosha, but aggravated — favor cooling, grounding practices that pacify {currentMeta.name}.</>
-              ) : prakritiPrimary ? (
-                <>You're in rhythm with your <b className="capitalize">{baselineMeta.name}</b> baseline ({primaryPct}%). Keep doing what's working.</>
-              ) : isAggravated ? (
-                <>Your <b>{currentMeta.name}</b> is elevated at {primaryPct}%. Favor practices that pacify {currentMeta.name}.</>
-              ) : (
-                <>Your {currentMeta.name} is currently dominant at {primaryPct}%.</>
-              )}
+              {shifted
+                ? t('vikritiQuiz.narrShifted', { baseline: baselineMeta.name, current: currentMeta.name, pct: primaryPct })
+                : prakritiPrimary && isAggravated
+                ? t('vikritiQuiz.narrSameAggravated', { baseline: baselineMeta.name, current: currentMeta.name, pct: primaryPct })
+                : prakritiPrimary
+                ? t('vikritiQuiz.narrInRhythm', { baseline: baselineMeta.name, pct: primaryPct })
+                : isAggravated
+                ? t('vikritiQuiz.narrAggravatedNoBase', { current: currentMeta.name, pct: primaryPct })
+                : t('vikritiQuiz.narrDominant', { current: currentMeta.name, pct: primaryPct })}
             </p>
           </div>
 
@@ -366,13 +325,13 @@ export default function VikritiQuizPage() {
             disabled={saving}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mb-3"
           >
-            {saving ? 'Saving...' : 'Save Check-in'}
+            {saving ? t('vikritiQuiz.saving') : t('vikritiQuiz.save')}
           </button>
           <button
             onClick={() => { setPhase('intro'); setCurrentQ(0); setAnswers({}); setResult(null); setSelectedOption(null) }}
             className="w-full py-3 text-center text-xs text-on-surface-variant/50 font-label uppercase tracking-widest"
           >
-            Retake
+            {t('vikritiQuiz.retake')}
           </button>
         </div>
       </div>
@@ -383,11 +342,11 @@ export default function VikritiQuizPage() {
   return (
     <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
       <div className="flex items-center justify-between px-6 py-4 flex-shrink-0">
-        <button onClick={handleBack} className="text-on-surface-variant" aria-label="Previous question">
+        <button onClick={handleBack} className="text-on-surface-variant" aria-label={t('vikritiQuiz.prevQuestion')}>
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
         <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
-          Weekly Check-in
+          {t('vikritiQuiz.weeklyCheckin')}
         </span>
         <span className="font-label text-xs text-on-surface-variant/50">{currentQ + 1}/{total}</span>
       </div>
@@ -403,13 +362,14 @@ export default function VikritiQuizPage() {
           <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
             <span className="material-symbols-outlined text-primary text-xl">{question.icon}</span>
           </div>
-          <p className="font-body text-[11px] text-on-surface-variant/60 italic flex-1">{question.subtitle}</p>
+          <p className="font-body text-[11px] text-on-surface-variant/60 italic flex-1">{qText.subtitle}</p>
         </div>
 
-        <h2 className="font-headline text-xl text-on-surface leading-snug mb-4">{question.question}</h2>
+        <h2 className="font-headline text-xl text-on-surface leading-snug mb-4">{qText.question}</h2>
 
         <div className="flex flex-col gap-2.5">
           {question.options.map((option, i) => {
+            const optText = qText.options?.[i] || {}
             const isSelected = selectedOption === option.dosha
             return (
               <button
@@ -431,10 +391,10 @@ export default function VikritiQuizPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className={`font-body font-semibold text-sm leading-tight ${isSelected ? 'text-on-primary' : 'text-on-surface'}`}>
-                    {option.label}
+                    {optText.label}
                   </p>
                   <p className={`font-label text-[10px] mt-0.5 leading-snug ${isSelected ? 'text-on-primary/70' : 'text-on-surface-variant'}`}>
-                    {option.desc}
+                    {optText.desc}
                   </p>
                 </div>
                 {isSelected && (

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { BiometricAuth } from '@aparajita/capacitor-biometric-auth'
 import GoogleIcon from '../components/GoogleIcon'
@@ -8,6 +9,7 @@ import { track, identify, EVENTS } from '../lib/track'
 
 export default function LoginPage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { signIn, signInWithGoogle } = useAuth()
 
   const [email, setEmail] = useState('')
@@ -33,7 +35,7 @@ export default function LoginPage() {
       const info = await BiometricAuth.checkBiometry()
 
       if (!info.isAvailable) {
-        setError('Biometric authentication is not available on this device.')
+        setError(t('login.biometricUnavailable'))
         return
       }
 
@@ -53,7 +55,7 @@ export default function LoginPage() {
       const savedPassword = localStorage.getItem('sanctuary_password')
 
       if (!savedEmail || !savedPassword) {
-        setError('No saved credentials found. Please sign in with email and password first.')
+        setError(t('login.noSavedCreds'))
         return
       }
 
@@ -72,7 +74,7 @@ export default function LoginPage() {
     } catch (err) {
       // User cancelled or biometric failed
       if (err.message !== 'Cancel') {
-        setError('Biometric authentication failed. Please use email and password.')
+        setError(t('login.biometricFailed'))
       }
     }
   }
@@ -112,7 +114,7 @@ export default function LoginPage() {
         <button
           onClick={() => navigate('/')}
           className="text-on-surface-variant"
-          aria-label="Go back"
+          aria-label={t('login.goBack')}
         >
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
@@ -125,9 +127,9 @@ export default function LoginPage() {
 
         {/* Heading */}
         <div className="mb-10 stagger-1">
-          <p className="font-label text-xs text-primary uppercase tracking-widest mb-2">Welcome back</p>
+          <p className="font-label text-xs text-primary uppercase tracking-widest mb-2">{t('login.title')}</p>
           <h1 className="font-headline text-4xl text-on-surface leading-tight">
-            Return to your <span className="italic font-normal">practice.</span>
+            {t('login.heading1')} <span className="italic font-normal">{t('login.headingAccent')}</span>
           </h1>
         </div>
 
@@ -136,31 +138,31 @@ export default function LoginPage() {
 
           <div className="flex flex-col gap-1.5">
             <label className="font-label text-xs text-on-surface-variant uppercase tracking-widest">
-              Email
+              {t('login.email')}
             </label>
             <input
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              placeholder="you@example.com"
+              placeholder={t('login.emailPlaceholder')}
               required
               className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
-              aria-label="Email address"
+              aria-label={t('login.emailAria')}
             />
           </div>
 
           <div className="flex flex-col gap-1.5">
             <label className="font-label text-xs text-on-surface-variant uppercase tracking-widest">
-              Password
+              {t('login.password')}
             </label>
             <input
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              placeholder="••••••••"
+              placeholder={t('login.passwordPlaceholder')}
               required
               className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
-              aria-label="Password"
+              aria-label={t('login.passwordAria')}
             />
           </div>
 
@@ -169,7 +171,7 @@ export default function LoginPage() {
               onClick={() => navigate('/forgot-password')}
               className="text-xs text-primary font-label text-right tracking-wide"
             >
-               Forgot password?
+               {t('login.forgotPassword')}
         </button>
 
           <ErrorAlert message={error} />
@@ -179,7 +181,7 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mt-2"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? t('login.ctaLoading') : t('login.cta')}
           </button>
 
         </form>
@@ -187,7 +189,7 @@ export default function LoginPage() {
         {/* Divider */}
         <div className="flex items-center gap-4 my-8 stagger-3">
           <div className="flex-1 h-px bg-outline-variant/30" />
-          <span className="font-label text-xs text-on-surface-variant/50 uppercase tracking-widest">or</span>
+          <span className="font-label text-xs text-on-surface-variant/50 uppercase tracking-widest">{t('common.or')}</span>
           <div className="flex-1 h-px bg-outline-variant/30" />
         </div>
 
@@ -206,7 +208,7 @@ export default function LoginPage() {
           className="w-full py-4 bg-surface-container flex items-center justify-center gap-3 rounded-full font-label text-sm text-on-surface tracking-wide active:scale-95 transition-all"
         >
           <GoogleIcon />
-          Continue with Google
+          {t('login.continueWithGoogle')}
         </button>
 
         {/* Biometric button */}
@@ -215,7 +217,7 @@ export default function LoginPage() {
           className="w-full py-4 bg-surface-container flex items-center justify-center gap-3 rounded-full font-label text-sm text-on-surface-variant tracking-wide mt-3 active:scale-95 transition-all"
         >
           <span className="material-symbols-outlined text-xl text-primary">fingerprint</span>
-          Use Biometric Login
+          {t('login.biometric')}
         </button>
 
         {/* Reset password entry point */}
@@ -224,16 +226,16 @@ export default function LoginPage() {
           className="w-full py-4 bg-surface-container-low flex items-center justify-center gap-3 rounded-full font-label text-sm text-on-surface-variant tracking-wide mt-3 active:scale-95 transition-all"
         >
           <span className="material-symbols-outlined text-xl text-primary">lock_reset</span>
-          I have a password reset link
+          {t('login.haveResetLink')}
         </button>
 
         <p className="text-center text-xs text-on-surface-variant/60 font-label mt-10">
-          New here?{' '}
+          {t('login.newHere')}{' '}
           <button
             onClick={() => navigate('/signup')}
             className="text-primary font-semibold"
           >
-            Start your journey
+            {t('login.startJourney')}
           </button>
         </p>
 

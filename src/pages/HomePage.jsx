@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { getRoutine, ASANAS } from '../data/asanas'
+import { localizeAsana } from '../i18n/contentI18n'
 import usePracticeStats from '../hooks/usePracticeStats'
 import useScrollDepth from '../hooks/useScrollDepth'
 import useImpression from '../hooks/useImpression'
@@ -35,10 +37,10 @@ function levelFor(totalMinutes) {
 
 
 const CHECKIN_OPTIONS = [
-  { id: 'stress', label: 'Stressed', icon: 'psychiatry' },
-  { id: 'sleep', label: 'Tired', icon: 'bedtime' },
-  { id: 'energy', label: 'Low energy', icon: 'bolt' },
-  { id: 'flexibility', label: 'Stiff', icon: 'self_care' },
+  { id: 'stress', labelKey: 'home.checkinOptions.stress', icon: 'psychiatry' },
+  { id: 'sleep', labelKey: 'home.checkinOptions.sleep', icon: 'bedtime' },
+  { id: 'energy', labelKey: 'home.checkinOptions.energy', icon: 'bolt' },
+  { id: 'flexibility', labelKey: 'home.checkinOptions.flexibility', icon: 'self_care' },
 ]
 
 const QUOTES = [
@@ -115,24 +117,12 @@ const QUOTES = [
   { text: 'In the middle of difficulty lies opportunity.', author: 'Albert Einstein' },
 ]
 
-// ── What to avoid — rotates based on time of day ──
-const AVOID_TIPS = {
-  morning: [
-    { text: 'Checking your phone before getting out of bed', icon: 'smartphone' },
-    { text: 'Skipping breakfast or drinking coffee on an empty stomach', icon: 'coffee' },
-    { text: 'Intense cardio without warming up first', icon: 'directions_run' },
-  ],
-  afternoon: [
-    { text: 'Heavy meals that cause afternoon sluggishness', icon: 'restaurant' },
-    { text: 'Stressful work emails during your break', icon: 'mail' },
-    { text: 'Sitting without moving for more than 90 minutes', icon: 'event_seat' },
-  ],
-  evening: [
-    { text: 'Strenuous exercise after 7 PM', icon: 'fitness_center' },
-    { text: 'Screen time and blue light before sleep', icon: 'screen_lock_portrait' },
-    { text: 'Caffeine or processed sugars in the late afternoon', icon: 'no_drinks' },
-    { text: 'Heavy meals within 3 hours of sleep', icon: 'dinner_dining' },
-  ],
+// ── What to avoid — rotates based on time of day. Icons live here; the
+// tip copy is localized (home.avoid.tips.<slot>) and zipped by index. ──
+const AVOID_ICONS = {
+  morning:   ['smartphone', 'coffee', 'directions_run'],
+  afternoon: ['restaurant', 'mail', 'event_seat'],
+  evening:   ['fitness_center', 'screen_lock_portrait', 'no_drinks', 'dinner_dining'],
 }
 
 function getTimeOfDay() {
@@ -142,16 +132,10 @@ function getTimeOfDay() {
   return 'evening'
 }
 
-function getSubtitle() {
-  const h = new Date().getHours()
-  if (h < 12) return 'The morning is still. Your practice awaits.'
-  if (h < 17) return 'The afternoon calls for stillness.'
-  return 'The evening is here. Time to restore.'
-}
-
 export default function HomePage() {
   const navigate = useNavigate()
   const location = useLocation()
+  const { t } = useTranslation()
   const { profile, user } = useAuth()
   const [checkedIn, setCheckedIn] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
@@ -160,14 +144,20 @@ export default function HomePage() {
   const [suggestedAsanaRecId, setSuggestedAsanaRecId] = useState(null)
   const lastLoggedKeyRef = useRef(null)
 
-  const firstName = profile?.full_name?.split(' ')[0] || 'Friend'
+  const firstName = profile?.full_name?.split(' ')[0] || t('home.defaultFirstName')
   // Rotate quote daily using day-of-year so all quotes cycle through
   const now = new Date()
   const startOfYear = new Date(now.getFullYear(), 0, 0)
   const dayOfYear = Math.floor((now - startOfYear) / 86400000)
   const quote = QUOTES[dayOfYear % QUOTES.length]
   const timeOfDay = getTimeOfDay()
-  const avoidTips = AVOID_TIPS[timeOfDay]
+  const subtitle = t(`home.subtitle${timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)}`)
+  // Zip localized tip copy with the static icon list by index.
+  const avoidTipTexts = t(`home.avoid.tips.${timeOfDay}`, { returnObjects: true })
+  const avoidTips = (Array.isArray(avoidTipTexts) ? avoidTipTexts : []).map((text, i) => ({
+    text,
+    icon: AVOID_ICONS[timeOfDay][i],
+  }))
   const stats = usePracticeStats()
   const vikriti = useVikritiSchedule()
 
@@ -366,7 +356,7 @@ export default function HomePage() {
   // Render-safe fallbacks for the analytics / impression refs below —
   // they expect a real asana shape and we don't want to crash the
   // logging paths when the suggestion section is hidden.
-  const suggestedAsana = suggestedPick?.asana || ASANAS.tadasana
+  const suggestedAsana = localizeAsana(suggestedPick?.asana || ASANAS.tadasana)
   const suggestedAsanaRules    = suggestedPick?.rules || []
   const suggestedAsanaUserDosha = suggestedPick?.userDosha || null
   const hasSuggestion          = !!suggestedPick
@@ -390,9 +380,9 @@ export default function HomePage() {
   })
 
   const ASANA_CONTEXT = {
-    morning: 'Start your day grounded',
-    afternoon: 'Reset your afternoon',
-    evening: 'Wind down gently',
+    morning: t('home.contextMorning'),
+    afternoon: t('home.contextAfternoon'),
+    evening: t('home.contextEvening'),
   }
   const asanaContext = ASANA_CONTEXT[timeOfDay]
 
@@ -461,7 +451,7 @@ export default function HomePage() {
           className={`relative w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center ${
             isPremium ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''
           }`}
-          aria-label={isPremium ? 'Open profile (Sanctuary Plus member)' : 'Open profile'}
+          aria-label={isPremium ? t('home.profileAriaPlus') : t('home.profileAria')}
         >
           <span className="material-symbols-outlined text-on-surface-variant text-lg">person</span>
           {isPremium && (
@@ -485,13 +475,13 @@ export default function HomePage() {
         {/* ── Greeting ── */}
         <div className="stagger-1">
           <p className="font-label text-xs text-primary uppercase tracking-widest mb-1">
-            Namaste
+            {t('home.namaste')}
           </p>
           <h1 className="font-headline text-4xl text-on-surface leading-tight">
             {firstName}.
           </h1>
           <p className="font-body text-sm text-on-surface-variant mt-1">
-            {getSubtitle()}
+            {subtitle}
           </p>
         </div>
 
@@ -514,11 +504,11 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="material-symbols-outlined text-primary text-sm">local_fire_department</span>
-                <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">Day Streak</p>
+                <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('home.dayStreak')}</p>
               </div>
               <p className="font-headline text-3xl text-primary leading-none">{stats.streak}</p>
               <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">
-                {stats.streak === 1 ? '1 day so far' : 'consecutive days'}
+                {stats.streak === 1 ? t('home.streakOneDay') : t('home.streakDays')}
               </p>
             </button>
             <button
@@ -530,10 +520,10 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="material-symbols-outlined text-secondary text-sm">schedule</span>
-                <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">This Week</p>
+                <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('home.thisWeek')}</p>
               </div>
               <p className="font-headline text-3xl text-secondary leading-none">{stats.weekMinutes}</p>
-              <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">minutes practiced</p>
+              <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">{t('home.minutesPracticed')}</p>
             </button>
           </div>
         ) : stats.loading ? (
@@ -576,14 +566,14 @@ export default function HomePage() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-0.5">
-                  {vikriti.vikritiCount === 0 ? 'First Check-in' : 'Weekly Check-in'}
+                  {vikriti.vikritiCount === 0 ? t('home.checkinFirstKicker') : t('home.checkinWeeklyKicker')}
                 </p>
                 <p className="font-body font-semibold text-sm text-on-surface leading-tight">
                   {vikriti.vikritiCount === 0
-                    ? 'How have you been lately?'
-                    : `It's been ${vikriti.daysSinceLast} days — how are you now?`}
+                    ? t('home.checkinFirstPrompt')
+                    : t('home.checkinWeeklyPrompt', { days: vikriti.daysSinceLast })}
                 </p>
-                <p className="font-body text-[11px] text-on-surface-variant mt-0.5">5 questions · 60 seconds</p>
+                <p className="font-body text-[11px] text-on-surface-variant mt-0.5">{t('home.checkinMeta')}</p>
               </div>
               <span className="material-symbols-outlined text-primary text-lg flex-shrink-0">arrow_forward</span>
             </div>
@@ -599,7 +589,7 @@ export default function HomePage() {
         {/* ── Daily Check-in ── */}
         <div className="bg-surface-container-low rounded-xl p-5 stagger-3">
           <p className="font-label text-xs text-on-surface-variant uppercase tracking-widest mb-4">
-            How are you feeling today?
+            {t('home.feelingToday')}
           </p>
 
           {/* Search */}
@@ -616,9 +606,9 @@ export default function HomePage() {
                   navigate('/recommendations', { state: { query: searchQuery.trim(), source: analytics.SEARCH_SOURCES.HOME_SEARCH } })
                 }
               }}
-              placeholder="Lower back pain, headache..."
+              placeholder={t('home.searchPlaceholder')}
               className="w-full bg-background rounded-full pl-10 pr-10 py-3 text-on-surface font-body text-sm outline-none focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-on-surface-variant/35"
-              aria-label="Search"
+              aria-label={t('home.searchAria')}
             />
             {searchQuery.length > 0 && (
               <button
@@ -626,7 +616,7 @@ export default function HomePage() {
                   if (searchQuery.trim().length >= 2) navigate('/recommendations', { state: { query: searchQuery.trim(), source: analytics.SEARCH_SOURCES.HOME_SEARCH } })
                 }}
                 className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-primary flex items-center justify-center active:scale-90 transition-all"
-                aria-label="Search"
+                aria-label={t('home.searchAria')}
               >
                 <span className="material-symbols-outlined text-on-primary text-sm">arrow_forward</span>
               </button>
@@ -650,7 +640,7 @@ export default function HomePage() {
                 }`}>
                   {option.icon}
                 </span>
-                <span className="font-body text-sm font-medium">{option.label}</span>
+                <span className="font-body text-sm font-medium">{t(option.labelKey)}</span>
               </button>
             ))}
           </div>
@@ -662,7 +652,7 @@ export default function HomePage() {
               }}
               className="w-full mt-4 py-3 bg-primary text-on-primary rounded-full font-label text-xs font-semibold tracking-wide active:scale-95 transition-all"
             >
-              Get My Practice
+              {t('home.getMyPractice')}
             </button>
           )}
         </div>
@@ -691,7 +681,7 @@ export default function HomePage() {
         {hasSuggestion && (
           <section className="stagger-3">
             <h3 className="font-headline text-lg text-on-surface leading-tight mb-2 px-1">
-              Pick up where you left off
+              {t('home.pickUpWhereLeft')}
             </h3>
             <button
               ref={suggestedAsanaImpressionRef}
@@ -704,7 +694,7 @@ export default function HomePage() {
               <div className="flex-1 min-w-0">
                 <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">{asanaContext}</p>
                 <p className="font-body font-semibold text-sm text-on-surface">{suggestedAsana.sanskrit}</p>
-                <p className="font-body text-xs text-on-surface-variant mt-0.5">{suggestedAsana.english} · {Math.ceil(suggestedAsana.durationSeconds / 60)} min</p>
+                <p className="font-body text-xs text-on-surface-variant mt-0.5">{suggestedAsana.english} · {Math.ceil(suggestedAsana.durationSeconds / 60)} {t('home.minSuffix')}</p>
               </div>
               <span className="material-symbols-outlined text-primary text-xl flex-shrink-0">arrow_forward</span>
             </button>
@@ -732,14 +722,14 @@ export default function HomePage() {
 
             {/* Text content */}
             <div className="flex-1 min-w-0">
-              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1 font-semibold">Daily Ritual · 2 min</p>
-              <h3 className="font-headline text-xl text-on-surface leading-snug">Mindful Respiration</h3>
-              <p className="font-body text-xs text-on-surface-variant mt-1">Inhale · Hold · Exhale</p>
+              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1 font-semibold">{t('home.dailyRitual')}</p>
+              <h3 className="font-headline text-xl text-on-surface leading-snug">{t('home.mindfulRespiration')}</h3>
+              <p className="font-body text-xs text-on-surface-variant mt-1">{t('home.inhaleHoldExhale')}</p>
             </div>
 
             {/* Begin CTA */}
             <div className="flex items-center gap-1 px-4 py-2.5 bg-primary rounded-full flex-shrink-0 shadow-sm">
-              <span className="font-label text-[11px] text-on-primary uppercase tracking-wider font-semibold">Begin</span>
+              <span className="font-label text-[11px] text-on-primary uppercase tracking-wider font-semibold">{t('home.begin')}</span>
               <span className="material-symbols-outlined text-on-primary text-sm">arrow_forward</span>
             </div>
           </div>
@@ -749,8 +739,8 @@ export default function HomePage() {
         <div className="bg-secondary-container/15 rounded-xl p-5 stagger-5">
           <div className="flex items-center gap-2.5 mb-4">
             <span className="material-symbols-outlined text-secondary text-lg">block</span>
-            <h3 className="font-headline text-lg text-on-surface">What to avoid</h3>
-            <span className="ml-auto font-label text-[10px] text-on-secondary-container uppercase tracking-widest font-semibold bg-secondary-container px-2.5 py-1 rounded-full">{timeOfDay}</span>
+            <h3 className="font-headline text-lg text-on-surface">{t('home.avoid.title')}</h3>
+            <span className="ml-auto font-label text-[10px] text-on-secondary-container uppercase tracking-widest font-semibold bg-secondary-container px-2.5 py-1 rounded-full">{t(`home.avoid.badge.${timeOfDay}`)}</span>
           </div>
           <div className="flex flex-col gap-3">
             {avoidTips.map((tip, i) => (
@@ -764,7 +754,7 @@ export default function HomePage() {
           </div>
           <div className="mt-4 pt-3 border-t border-secondary-container/20">
             <p className="font-label text-[9px] text-secondary/60 uppercase tracking-widest text-center italic">
-              Gentle reminder: Balance is a practice, not a destination.
+              {t('home.avoid.reminder')}
             </p>
           </div>
         </div>
@@ -772,6 +762,7 @@ export default function HomePage() {
         {/* ── Dosha Card — themed per user's dosha, with vikriti delta overlay ── */}
         {(() => {
           const userDosha = (profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
+          // Dosha proper nouns stay literal across locales.
           const DOSHA_LABELS = { vata: 'Vata', pitta: 'Pitta', kapha: 'Kapha' }
           // Delta vs. most recent vikriti check-in. Only meaningful when both
           // prakriti exists AND user has done at least one vikriti recently.
@@ -783,22 +774,22 @@ export default function HomePage() {
             vata: {
               gradient: 'from-[#567b91] to-[#7ba3be]',
               icon: 'wind_power',
-              element: 'Air + Ether',
-              tagline: 'Creative, quick-thinking, and adaptable',
+              element: t('home.dosha.vata.element'),
+              tagline: t('home.dosha.vata.tagline'),
               bgIcon: 'air',
             },
             pitta: {
               gradient: 'from-[#8b6a3e] to-[#c49a5c]',
               icon: 'local_fire_department',
-              element: 'Fire + Water',
-              tagline: 'Focused, driven, and naturally radiant',
+              element: t('home.dosha.pitta.element'),
+              tagline: t('home.dosha.pitta.tagline'),
               bgIcon: 'local_fire_department',
             },
             kapha: {
               gradient: 'from-[#5a7a52] to-[#8aad7e]',
               icon: 'landscape',
-              element: 'Earth + Water',
-              tagline: 'Grounded, nurturing, and steady',
+              element: t('home.dosha.kapha.element'),
+              tagline: t('home.dosha.kapha.tagline'),
               bgIcon: 'water_drop',
             },
           }
@@ -837,12 +828,14 @@ export default function HomePage() {
                     {hasDosha ? theme.icon : 'spa'}
                   </span>
                   <p className="font-label text-[10px] uppercase tracking-widest opacity-70">
-                    {hasDosha ? theme.element : 'Dosha Type'}
+                    {hasDosha ? theme.element : t('home.dosha.type')}
                   </p>
                 </div>
 
                 <h3 className="font-headline text-2xl mb-1">
-                  {hasDosha ? `${userDosha.charAt(0).toUpperCase() + userDosha.slice(1)} Dosha` : 'Undiscovered'}
+                  {hasDosha
+                    ? t('home.dosha.suffix', { dosha: userDosha.charAt(0).toUpperCase() + userDosha.slice(1) })
+                    : t('home.dosha.undiscovered')}
                 </h3>
 
                 {hasDosha ? (
@@ -851,7 +844,7 @@ export default function HomePage() {
                   </p>
                 ) : (
                   <p className="font-body text-xs opacity-70 leading-relaxed mb-4">
-                    Take the Dosha quiz to unlock personalized recommendations and theme your app.
+                    {t('home.dosha.quizPrompt')}
                   </p>
                 )}
 
@@ -866,16 +859,16 @@ export default function HomePage() {
                       </span>
                       <span className="font-label text-[10px] tracking-wide opacity-90">
                         {hasShifted
-                          ? `This week: elevated ${DOSHA_LABELS[vikritiPrimary]}`
-                          : 'In rhythm this week'}
+                          ? t('home.dosha.elevatedThisWeek', { dosha: DOSHA_LABELS[vikritiPrimary] })
+                          : t('home.dosha.inRhythm')}
                       </span>
                     </span>
                   )}
 
                   <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-white/15 backdrop-blur-sm rounded-full font-label text-xs tracking-wide">
                     {hasDosha
-                      ? (hasShifted ? 'See how to rebalance' : 'Explore my Dosha')
-                      : 'Take the quiz'}
+                      ? (hasShifted ? t('home.dosha.seeRebalance') : t('home.dosha.exploreDosha'))
+                      : t('home.dosha.takeQuiz')}
                     <span className="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span>
                   </span>
                 </div>
@@ -904,8 +897,8 @@ export default function HomePage() {
         open={vikritiPaywallOpen}
         onClose={() => setVikritiPaywallOpen(false)}
         surface={`vikriti_${vikritiSignal.vikriti || 'unknown'}`}
-        headline="The full protocol awaits"
-        subhead="Plus gives you the daily plan — food, movement, sleep — that brings your dosha back to centre."
+        headline={t('home.paywallHeadline')}
+        subhead={t('home.paywallSubhead')}
       />
 
     </div>

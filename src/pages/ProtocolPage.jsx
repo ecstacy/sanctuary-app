@@ -35,6 +35,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { getProtocol, SECTION_ICONS } from '../data/protocols'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { useProtocolProgress } from '../hooks/useProtocolProgress'
@@ -74,6 +75,7 @@ const DOSHA_THEME = {
 
 export default function ProtocolPage() {
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
   const { vikriti } = useParams()
   const protocol    = getProtocol(vikriti)
   const theme       = DOSHA_THEME[vikriti]
@@ -167,13 +169,13 @@ export default function ProtocolPage() {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center px-6 text-center">
         <p className="font-body text-sm text-on-surface-variant mb-4">
-          Protocol not found.
+          {t('protocol.notFound')}
         </p>
         <button
           onClick={() => navigate('/home')}
           className="px-5 py-2.5 bg-primary text-on-primary rounded-full font-label text-xs uppercase tracking-widest"
         >
-          Back to home
+          {t('protocol.backToHome')}
         </button>
       </div>
     )
@@ -189,14 +191,14 @@ export default function ProtocolPage() {
         <div className={`relative bg-gradient-to-b ${theme.gradient} px-6 pt-12 pb-16 overflow-hidden`}>
           <button
             onClick={() => navigate(-1)}
-            aria-label="Go back"
+            aria-label={t('protocol.goBack')}
             className="absolute top-3 left-3 z-20 w-11 h-11 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center"
           >
             <span aria-hidden="true" className="material-symbols-outlined text-white text-lg">arrow_back</span>
           </button>
           <div className="relative z-10 text-center mt-4">
             <p className="font-label text-[10px] text-white/60 uppercase tracking-widest mb-2">
-              Sanctuary Plus
+              {t('protocol.plusKicker')}
             </p>
             <h1 className="font-headline text-4xl text-white leading-tight mb-2">
               {protocol.title}
@@ -224,13 +226,13 @@ export default function ProtocolPage() {
             }}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all mb-3"
           >
-            Unlock with Plus
+            {t('protocol.unlock')}
           </button>
           <button
             onClick={() => navigate(-1)}
             className="w-full py-3 text-center font-label text-xs text-on-surface-variant/60 uppercase tracking-widest"
           >
-            Go back
+            {t('protocol.goBack')}
           </button>
         </div>
 
@@ -238,8 +240,8 @@ export default function ProtocolPage() {
           open={paywallOpen}
           onClose={() => setPaywallOpen(false)}
           surface={`protocol_${vikriti}`}
-          headline={`Unlock your ${theme.name} protocol`}
-          subhead="Three days of food, movement, breath, and rest to bring your dosha back to centre."
+          headline={t('protocol.unlockHeadline', { dosha: theme.name })}
+          subhead={t('protocol.unlockSubhead')}
         />
       </div>
     )
@@ -256,7 +258,7 @@ export default function ProtocolPage() {
       <div className={`relative bg-gradient-to-b ${theme.gradient} px-6 pt-12 pb-16 overflow-hidden`}>
         <button
           onClick={() => navigate(-1)}
-          aria-label="Go back"
+          aria-label={t('protocol.goBack')}
           className="absolute top-5 left-5 z-20 w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center"
         >
           <span aria-hidden="true" className="material-symbols-outlined text-white text-lg">arrow_back</span>
@@ -264,7 +266,7 @@ export default function ProtocolPage() {
 
         <div className="relative z-10 text-center mt-4">
           <p className="font-label text-[10px] text-white/60 uppercase tracking-widest mb-2">
-            Sanctuary Plus · 3-day protocol
+            {t('protocol.threeDayKicker')}
           </p>
           <h1 className="font-headline text-4xl text-white leading-tight mb-2">
             {protocol.title}
@@ -284,7 +286,7 @@ export default function ProtocolPage() {
           </p>
           {protocol.source && (
             <p className="font-label text-[10px] text-on-surface-variant/50 mt-3 pt-3 border-t border-outline-variant/15">
-              Source: {protocol.source}
+              {t('protocol.source', { source: protocol.source })}
             </p>
           )}
         </div>
@@ -293,7 +295,7 @@ export default function ProtocolPage() {
             depth in the page. The accent line under the active tab uses
             the dosha's barColor so the navigation IS the visual identity. */}
         <div className="sticky top-0 z-10 bg-background -mx-6 px-6 pt-3 pb-2 mb-4">
-          <div className="flex gap-2" role="tablist" aria-label="Protocol days">
+          <div className="flex gap-2" role="tablist" aria-label={t('protocol.daysTablistLabel')}>
             {protocol.days.map((d) => {
               const active = d.day === activeDay
               const completed = !!currentAttempt[d.day]
@@ -303,7 +305,7 @@ export default function ProtocolPage() {
                   onClick={() => setActiveDay(d.day)}
                   role="tab"
                   aria-selected={active}
-                  aria-label={`Day ${d.day}${completed ? ' (completed)' : ''}`}
+                  aria-label={completed ? t('protocol.dayTabAriaCompleted', { n: d.day }) : t('protocol.dayTabAria', { n: d.day })}
                   className={`flex-1 py-2.5 rounded-full font-label text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 ${
                     active
                       ? 'bg-primary text-on-primary'
@@ -321,7 +323,7 @@ export default function ProtocolPage() {
                       check_circle
                     </span>
                   )}
-                  <span>Day {d.day}</span>
+                  <span>{t('protocol.dayTab', { n: d.day })}</span>
                 </button>
               )
             })}
@@ -334,7 +336,7 @@ export default function ProtocolPage() {
             className="font-label text-[10px] font-semibold uppercase tracking-[0.22em] mb-2"
             style={{ color: theme.accentHex }}
           >
-            Day {day.day} · {day.title}
+            {t('protocol.dayHeader', { n: day.day, title: day.title })}
           </p>
           <p className="font-body text-[15px] text-on-surface-variant/90 leading-relaxed max-w-prose">
             {day.lede}
@@ -365,19 +367,19 @@ export default function ProtocolPage() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-body font-semibold text-sm text-on-surface leading-tight">
-                  Day {activeDay} complete
+                  {t('protocol.dayComplete', { n: activeDay })}
                 </p>
                 <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">
-                  Marked {formatRelative(currentAttempt[activeDay])}
+                  {t('protocol.markedRelative', { when: formatRelative(currentAttempt[activeDay], t, i18n.language) })}
                 </p>
               </div>
               <button
                 onClick={() => handleMarkDay(activeDay)}
                 disabled={progressLoading}
                 className="font-label text-[11px] text-on-surface-variant/70 uppercase tracking-wider px-3 py-1.5 active:scale-95"
-                aria-label="Unmark this day"
+                aria-label={t('protocol.unmarkAria')}
               >
-                Undo
+                {t('protocol.undo')}
               </button>
             </div>
           ) : (
@@ -386,7 +388,7 @@ export default function ProtocolPage() {
               disabled={progressLoading}
               className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50"
             >
-              Mark Day {activeDay} complete
+              {t('protocol.markDay', { n: activeDay })}
             </button>
           )}
         </div>
@@ -400,7 +402,7 @@ export default function ProtocolPage() {
               onClick={() => setActiveDay(activeDay + 1)}
               className="w-full py-3.5 bg-surface-container text-on-surface rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
-              Continue to Day {activeDay + 1}
+              {t('protocol.continueToDay', { n: activeDay + 1 })}
             </button>
           )}
           {activeDay === protocol.days.length && (
@@ -408,7 +410,7 @@ export default function ProtocolPage() {
               onClick={() => navigate('/home')}
               className="w-full py-3.5 bg-surface-container text-on-surface rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
-              Back to home
+              {t('protocol.backToHome')}
             </button>
           )}
           {activeDay > 1 && (
@@ -416,7 +418,7 @@ export default function ProtocolPage() {
               onClick={() => setActiveDay(activeDay - 1)}
               className="w-full py-3 text-center font-label text-xs text-on-surface-variant/60 uppercase tracking-widest active:scale-95"
             >
-              Back to Day {activeDay - 1}
+              {t('protocol.backToDay', { n: activeDay - 1 })}
             </button>
           )}
         </div>
@@ -429,10 +431,10 @@ export default function ProtocolPage() {
           <div className="bg-surface-container rounded-2xl p-5 mt-6 mb-4">
             <div className="flex items-baseline justify-between mb-4">
               <p className="font-label text-[10px] font-semibold uppercase tracking-[0.22em] text-on-surface-variant">
-                Your history
+                {t('protocol.yourHistory')}
               </p>
               <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-wider tabular-nums">
-                {history.length === 1 ? '1 previous attempt' : `${history.length} previous attempts`}
+                {t('protocol.previousAttempts', { count: history.length })}
               </p>
             </div>
             <ul className="space-y-3">
@@ -444,13 +446,13 @@ export default function ProtocolPage() {
                   />
                   <div className="flex-1 min-w-0">
                     <p className="font-body text-sm text-on-surface leading-tight">
-                      {formatDateShort(a.startedAt)}
-                      {a.completedAt !== a.startedAt && ` – ${formatDateShort(a.completedAt)}`}
+                      {formatDateShort(a.startedAt, i18n.language)}
+                      {a.completedAt !== a.startedAt && ` – ${formatDateShort(a.completedAt, i18n.language)}`}
                     </p>
                     <p className="font-label text-[11px] text-on-surface-variant/60 mt-0.5">
                       {a.daysCompleted === protocol.days.length
-                        ? 'Completed all days'
-                        : `${a.daysCompleted} of ${protocol.days.length} days`}
+                        ? t('protocol.completedAllDays')
+                        : t('protocol.daysOfTotal', { done: a.daysCompleted, total: protocol.days.length })}
                     </p>
                   </div>
                 </li>
@@ -522,20 +524,20 @@ function ProtocolSection({ section, theme }) {
 // completed-tile and history list here, with very specific wording. The
 // "Marked just now / 2 hours ago / yesterday / 3 days ago" cadence is the
 // language a person would use when looking back at their own work.
-function formatRelative(iso) {
+function formatRelative(iso, t, locale) {
   if (!iso) return ''
   const then = new Date(iso).getTime()
   const diff = Date.now() - then
-  if (diff < 60_000)          return 'just now'
-  if (diff < 3_600_000)       return `${Math.round(diff / 60_000)} min ago`
-  if (diff < 86_400_000)      return `${Math.round(diff / 3_600_000)} hr ago`
-  if (diff < 2 * 86_400_000)  return 'yesterday'
-  if (diff < 7 * 86_400_000)  return `${Math.round(diff / 86_400_000)} days ago`
-  return formatDateShort(iso)
+  if (diff < 60_000)          return t('protocol.rel.justNow')
+  if (diff < 3_600_000)       return t('protocol.rel.minAgo', { n: Math.round(diff / 60_000) })
+  if (diff < 86_400_000)      return t('protocol.rel.hrAgo', { n: Math.round(diff / 3_600_000) })
+  if (diff < 2 * 86_400_000)  return t('protocol.rel.yesterday')
+  if (diff < 7 * 86_400_000)  return t('protocol.rel.daysAgo', { n: Math.round(diff / 86_400_000) })
+  return formatDateShort(iso, locale)
 }
 
-function formatDateShort(iso) {
+function formatDateShort(iso, locale) {
   if (!iso) return ''
   const d = new Date(iso)
-  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+  return d.toLocaleDateString(locale || undefined, { month: 'short', day: 'numeric', year: 'numeric' })
 }

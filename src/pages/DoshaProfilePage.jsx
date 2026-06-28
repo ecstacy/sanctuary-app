@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import DoshaProfileContent from '../components/DoshaProfileContent'
 
 export default function DoshaProfilePage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { profile } = useAuth()
 
   const doshaLabel = profile?.dosha || null
@@ -22,22 +24,22 @@ export default function DoshaProfilePage() {
           <span className="material-symbols-outlined text-primary text-4xl">spa</span>
         </div>
         <h2 className="font-headline text-2xl text-on-surface text-center mb-3 stagger-2">
-          Your Dosha Awaits
+          {t('doshaProfile.awaitTitle')}
         </h2>
         <p className="font-body text-sm text-on-surface-variant text-center leading-relaxed mb-8 max-w-xs stagger-3">
-          Discover your unique Ayurvedic constitution through our guided quiz and unlock personalized wellness insights.
+          {t('doshaProfile.awaitBody')}
         </p>
         <button
           onClick={() => navigate('/quiz')}
           className="w-full max-w-xs py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all stagger-4"
         >
-          Take the Dosha Quiz
+          {t('doshaProfile.takeQuiz')}
         </button>
         <button
           onClick={() => navigate(-1)}
           className="mt-4 text-xs text-on-surface-variant/50 font-label uppercase tracking-widest stagger-5"
         >
-          Go back
+          {t('doshaProfile.goBack')}
         </button>
       </div>
     )
@@ -58,7 +60,7 @@ export default function DoshaProfilePage() {
             className="inline-flex items-center gap-2 px-6 py-3 bg-surface-container rounded-full font-label text-xs text-on-surface-variant uppercase tracking-widest active:scale-95 transition-all"
           >
             <span className="material-symbols-outlined text-sm" aria-hidden="true">refresh</span>
-            Retake the Quiz
+            {t('doshaProfile.retakeQuiz')}
           </button>
         </div>
       }

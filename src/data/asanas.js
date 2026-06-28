@@ -17,6 +17,8 @@
 // During migration, ASANA_ALIASES at the bottom of this file resolves old
 // English IDs (`cobra`, `bridge`, …) to new ones for backward compatibility.
 
+import { localizeAsana, localizeRoutineMeta, localizeDoshaTagLabel } from '../i18n/contentI18n'
+
 export const ASANAS = {
   // ── Standing Poses ──────────────────────────────────────────────────────
   // ── Pilot 1: Tadasana ─────────────────────────────────────────────────
@@ -4582,10 +4584,12 @@ const ROUTINE_TEMPLATES = {
 
 export function getRoutine(routineKey) {
   const template = ROUTINE_TEMPLATES[routineKey] || ROUTINE_TEMPLATES.stress
+  const meta = localizeRoutineMeta(routineKey)
   return {
     ...template,
+    ...(meta || {}),   // localized label/description overlay (falls back to English)
     key: routineKey,
-    asanas: template.asanas.map(a => ({
+    asanas: template.asanas.map(a => localizeAsana({
       ...ASANAS[a.id],
       scheduledTime: a.time,
       durationSeconds: a.customDuration || ASANAS[a.id].durationSeconds,
@@ -4605,13 +4609,13 @@ export function getDoshaTag(affinity) {
   // and the legacy schema ('balancing' | 'neutral' | 'aggravating'
   // strings). New entries pass numbers; UI helpers normalize here.
   if (typeof affinity === 'number') {
-    if (affinity > 0)  return { label: 'Balancing', color: 'bg-green-100 text-green-700' }
-    if (affinity < 0)  return { label: 'Caution',   color: 'bg-red-100 text-red-700' }
-    return { label: 'Neutral', color: 'bg-gray-100 text-gray-500' }
+    if (affinity > 0)  return { label: localizeDoshaTagLabel('Balancing'), color: 'bg-green-100 text-green-700' }
+    if (affinity < 0)  return { label: localizeDoshaTagLabel('Caution'),   color: 'bg-red-100 text-red-700' }
+    return { label: localizeDoshaTagLabel('Neutral'), color: 'bg-gray-100 text-gray-500' }
   }
-  if (affinity === 'balancing')   return { label: 'Balancing', color: 'bg-green-100 text-green-700' }
-  if (affinity === 'aggravating') return { label: 'Caution',   color: 'bg-red-100 text-red-700' }
-  return { label: 'Neutral', color: 'bg-gray-100 text-gray-500' }
+  if (affinity === 'balancing')   return { label: localizeDoshaTagLabel('Balancing'), color: 'bg-green-100 text-green-700' }
+  if (affinity === 'aggravating') return { label: localizeDoshaTagLabel('Caution'),   color: 'bg-red-100 text-red-700' }
+  return { label: localizeDoshaTagLabel('Neutral'), color: 'bg-gray-100 text-gray-500' }
 }
 
 // ─── Backward-compat alias map ──────────────────────────────────────────
@@ -4642,5 +4646,5 @@ export function resolveAsanaId(id) {
 }
 
 export function getAsana(id) {
-  return ASANAS[resolveAsanaId(id)]
+  return localizeAsana(ASANAS[resolveAsanaId(id)])
 }

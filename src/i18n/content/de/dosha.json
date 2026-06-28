@@ -1,0 +1,256 @@
+{
+  "display": {
+    "vata": {
+      "element": "Luft + Äther",
+      "tagline": "Der kreative Wirbelwind",
+      "description": "Du bist die Bewegung selbst — schnell im Denken, fantasievoll und wunderbar spontan. Wie der Wind bringst du Wandel und Inspiration, wohin du auch gehst.",
+      "strengths": ["Kreativ & künstlerisch", "Schnelle Auffassungsgabe", "Anpassungsfähig & flexibel", "Begeisterungsfähiger Geist"],
+      "balanceTips": ["Erde dich mit warmer, gekochter Nahrung", "Etabliere eine beruhigende Tagesroutine", "Gib Wärme und Ruhe Vorrang", "Übe langsames, erdendes Yoga"],
+      "qualities": ["Leicht", "Trocken", "Kalt", "Beweglich", "Subtil"],
+      "season": "Herbst & Frühwinter",
+      "timeOfDay": "2–6 Uhr & 14–18 Uhr",
+      "taste": "Süße, saure & salzige Speisen besänftigen Vata",
+      "yoga": "Langsame, erdende Flows — Tadasana, Krieger I & II, Haltung des Kindes, Savasana",
+      "meditation": "Body-Scan & erdende Visualisierungen, um den ruhelosen Geist zu verankern"
+    },
+    "pitta": {
+      "element": "Feuer + Wasser",
+      "tagline": "Der feurige Verwandler",
+      "description": "Du bist Feuer in Person — scharf, entschlossen und brillant fokussiert. Deine Intensität verwandelt alles, was sie berührt.",
+      "strengths": ["Geborene Führungskraft", "Scharfer Intellekt", "Mutig & beherzt", "Starke Verdauung"],
+      "balanceTips": ["Kühle dich mit frischer, süßer Nahrung", "Vermeide Überarbeitung — Ruhe ist keine Schwäche", "Verbringe Zeit am Wasser", "Übe kühlende Atemarbeit"],
+      "qualities": ["Heiß", "Scharf", "Leicht", "Ölig", "Flüssig"],
+      "season": "Sommer & Spätfrühling",
+      "timeOfDay": "10–14 Uhr & 22–2 Uhr",
+      "taste": "Süße, bittere & herbe Speisen besänftigen Pitta",
+      "yoga": "Kühlende, nicht-wettbewerbsorientierte Flows — Mondgruß, Vorwärtsbeugen, Drehungen, Taubenhaltung",
+      "meditation": "Liebende Güte & kühlender Atem (Sheetali), um das innere Feuer zu beruhigen"
+    },
+    "kapha": {
+      "element": "Erde + Wasser",
+      "tagline": "Der stetige Berg",
+      "description": "Du bist die verkörperte Erde — beständig, nährend und zutiefst widerstandsfähig. Deine ruhige Präsenz ist ein Zufluchtsort für alle um dich herum.",
+      "strengths": ["Loyal & mitfühlend", "Unglaubliche Ausdauer", "Starkes Gedächtnis", "Geborene Fürsorgekraft"],
+      "balanceTips": ["Umarme Abwechslung und Anregung", "Bewege dich täglich — auch sanfte Spaziergänge zählen", "Bevorzuge warme, gewürzte Speisen", "Wache früh auf und widerstehe dem Ausschlafen"],
+      "qualities": ["Schwer", "Langsam", "Kühl", "Ölig", "Glatt"],
+      "season": "Spätwinter & Frühling",
+      "timeOfDay": "6–10 Uhr & 18–22 Uhr",
+      "taste": "Scharfe, bittere & herbe Speisen besänftigen Kapha",
+      "yoga": "Kräftige, belebende Flows — Sonnengruß, Rückbeugen, Krieger III, Kamelhaltung",
+      "meditation": "Belebende Atemarbeit (Kapalabhati) & Gehmeditation, um Vitalität zu entfachen"
+    }
+  },
+  "prakriti": {
+    "vata": {
+      "tagline": "Kreativ, schnell und anpassungsfähig. Gedeiht durch Routine und Wärme.",
+      "season": "Herbst in den Frühwinter (Oktober-Januar auf der Nordhalbkugel)",
+      "qualities": [
+        { "english": "kalt", "note": "Hände, Füße und Verdauung sind kühl" },
+        { "english": "trocken", "note": "Haut, Haar, Gelenke und Gewebe sind trocken" },
+        { "english": "leicht", "note": "schmale Statur, leichte Knochen, leichte Verdauung" },
+        { "english": "beweglich", "note": "ruheloser Geist, unregelmäßige Bewegung, schwankende Energie" },
+        { "english": "subtil", "note": "durchdringt die kleinsten Kanäle" },
+        { "english": "rau", "note": "raue Haut, brüchige Nägel und Haare" },
+        { "english": "klar", "note": "Klarheit der Wahrnehmung im Gleichgewicht" }
+      ],
+      "body": {
+        "build": "Schmale, leichte Statur. Sichtbare Gelenke und Sehnen. Oft groß oder klein — selten mittelgroß.",
+        "skin": "Trocken, rau, kühl. Kann im Winter aufspringen. Bräunt leicht, altert früh.",
+        "hair": "Trocken, kraus, oft dunkel. Spaltet sich und bricht leicht.",
+        "face": "Feine Züge. Kleine oder eingesunkene Augen. Niedrige oder unregelmäßige Brauen.",
+        "digestion": "Schwankend — mal stark, mal träge. Neigt zu Blähungen und Verstopfung.",
+        "sleep": "Leicht, leicht störbar. Wacht oft 2-4 Uhr auf (Vata-Hochzeit).",
+        "energy": "Energieschübe, gefolgt von Erschöpfung. Schwer aufrechtzuerhalten."
+      },
+      "mind": {
+        "balanced": [
+          "Kreativ und fantasievoll — erzeugt mühelos Ideen",
+          "Schnelle Auffassungsgabe; anpassungsfähig; liebt Abwechslung und Neues",
+          "Begeistert und gesprächig, wenn es sich wohlfühlt",
+          "Spirituell veranlagt — vom Subtilen und Abstrakten angezogen"
+        ],
+        "imbalanced": [
+          "Ängstlich, besorgt, zerstreut, ungeerdet",
+          "Schwierigkeit, Aufgaben abzuschließen — viele Anfänge, wenige Abschlüsse",
+          "Spricht schnell, unterbricht, kann kaum stillhalten",
+          "Schlaflosigkeit, rasende Gedanken, besonders nachts"
+        ]
+      },
+      "imbalanceSigns": [
+        "Angst und Sorge ohne klaren Grund",
+        "Schlaflosigkeit oder fragmentierter Schlaf, besonders Aufwachen 2-4 Uhr",
+        "Verstopfung, Blähungen, Aufgeblähtheit, trockener Stuhl",
+        "Gelenkschmerzen, besonders bei kaltem oder windigem Wetter",
+        "Trockene Haut, rissige Lippen, brüchige Nägel",
+        "Kalte Hände und Füße",
+        "Ruhelosigkeit, Zappeln, Unfähigkeit zur Ruhe zu kommen",
+        "Vergesslichkeit oder zerstreuter Fokus",
+        "Tinnitus oder Geräuschempfindlichkeit"
+      ],
+      "triggers": [
+        "Kaltes Wetter (Herbst in den Frühwinter — Vata-Saison)",
+        "Reisen, besonders lange Flüge oder Jetlag",
+        "Mahlzeiten auslassen oder unregelmäßig essen",
+        "Übermäßig rohe oder kalte Nahrung",
+        "Übermäßige Reizung (lauter Lärm, volle Terminkalender, Überarbeitung)",
+        "Unzureichender Schlaf",
+        "Trockenheit — Umgebungen mit niedriger Luftfeuchtigkeit"
+      ],
+      "pacification": {
+        "principle": "Gleiches verstärkt Gleiches; Gegensätze bringen Gleichgewicht. Vata ist kalt, trocken, leicht und beweglich — besänftige es mit Wärme, Öl, Gewicht und Routine.",
+        "lifestyle": [
+          "Etabliere regelmäßige Tagesroutinen — gleiche Aufwachzeit, Mahlzeiten, Schlafenszeit",
+          "Halte dich warm — Zwiebellook, warme Getränke, warmer Raum",
+          "Tägliches Abhyanga (Selbst-Ölmassage) mit warmem Sesamöl",
+          "Verlangsame — weniger Verpflichtungen, längere Übergänge zwischen Aufgaben",
+          "Gib 7-9 Stunden Schlaf Vorrang; um 22 Uhr im Bett",
+          "Wähle erdendes, erholsames Yoga statt kräftigem Flow",
+          "Pranayama: Nadi Shodhana, Bhramari (vermeide Bhastrika, Kapalabhati)",
+          "Meditation mindestens 10 Min/Tag — wirkt der geistigen Zerstreuung entgegen"
+        ]
+      }
+    },
+    "pitta": {
+      "tagline": "Scharf, fokussiert und ehrgeizig. Kühlt durch Leichtigkeit und Süße.",
+      "season": "Sommer (Juni-September auf der Nordhalbkugel)",
+      "qualities": [
+        { "english": "heiß", "note": "warmer Körper, starke Verdauung, hitzige Emotionen" },
+        { "english": "scharf", "note": "scharfer Intellekt, scharfe Verdauung, scharfe Zunge" },
+        { "english": "leicht (leicht ölig)", "note": "mittlere Statur, nicht schwer" },
+        { "english": "ölig", "note": "ölige Haut, kann zu Unreinheiten neigen" },
+        { "english": "flüssig", "note": "schwitzt stark, leicht durstig" },
+        { "english": "fließend/beweglich", "note": "der Stoffwechsel ist aktiv und in Bewegung" },
+        { "english": "sauer riechend", "note": "Körpergeruch neigt zu sauer oder scharf" }
+      ],
+      "body": {
+        "build": "Mittlere Statur, gut proportioniert. Athletisch in Form.",
+        "skin": "Weich, warm, oft rötlich oder sommersprossig. Bekommt leicht Sonnenbrand. Neigt zu Akne, Ausschlägen, Ekzemen.",
+        "hair": "Fein, oft rötlich, blond oder früh ergraut. Neigt zu frühem Ausdünnen oder Haarausfall.",
+        "face": "Scharfe Züge. Helle, intensive Augen (oft grün, blau oder haselnussbraun). Kräftiger Kiefer.",
+        "digestion": "Stark, manchmal zu stark. Hungrig nach Zeitplan; gereizt, wenn Mahlzeiten sich verzögern (der \"hangry\"-Phänotyp).",
+        "sleep": "Fest, wenn ruhig, aber leicht durch Überhitzung störbar. Wacht eventuell 22-2 Uhr auf (Pitta-Hochzeit).",
+        "energy": "Anhaltend, fokussiert. Treibt hart an; riskiert Burnout."
+      },
+      "mind": {
+        "balanced": [
+          "Scharfer Intellekt, starke analytische und Entscheidungskraft",
+          "Zielorientiert, ehrgeizig, mutig",
+          "Geborene Führungskraft; klare Kommunikation",
+          "Leidenschaftlich, charismatisch"
+        ],
+        "imbalanced": [
+          "Reizbar, ungeduldig, kritisch gegenüber sich und anderen",
+          "Wut, die schnell aufflammt, besonders bei Hunger oder Hitze",
+          "Perfektionismus, der selbstbestrafend wird",
+          "Workaholic-Muster; Schwierigkeit zu ruhen",
+          "Urteilend, wettbewerbsorientiert, eifersüchtig"
+        ]
+      },
+      "imbalanceSigns": [
+        "Sodbrennen, Säurereflux, Geschwüre",
+        "Hautausschläge, Akne, Ekzeme, Hitzewallungen",
+        "Entzündungen — Gelenke, Nebenhöhlen, Darm",
+        "Wut, Reizung, Verkehrswut",
+        "Übermäßiges Schwitzen, Körperhitze, Hitzewallungen",
+        "Durchfall, besonders bei Stress",
+        "Vorzeitiges Ergrauen oder Haarausfall",
+        "Augenbelastung, Rötung, Lichtempfindlichkeit",
+        "Burnout — Erschöpfung nach anhaltendem Antrieb"
+      ],
+      "triggers": [
+        "Hitze — Sommernachmittage, heiße Klimazonen, heiße Küchen",
+        "Scharfe, saure, salzige, frittierte, fermentierte Speisen",
+        "Mahlzeiten auslassen (Hunger löst Wut aus)",
+        "Übermäßiges Koffein, Alkohol",
+        "Wettbewerbsumgebungen, Zeitdruck, Fristen",
+        "Emotionen unterdrücken, besonders Wut",
+        "Übermäßige Sonnenexposition"
+      ],
+      "pacification": {
+        "principle": "Pitta ist heiß, scharf und intensiv — besänftige es mit Kühle, Süße und Leichtigkeit.",
+        "lifestyle": [
+          "Lass keine Mahlzeiten aus — iss zu regelmäßigen Zeiten, besonders zu Mittag",
+          "Bleib kühl — meide die Mittagssonne, bevorzuge kühlere Räume",
+          "Wähle beruhigendes, erholsames Yoga statt heißer Vinyasa-Flows",
+          "Pranayama: Sheetali, Nadi Shodhana, Bhramari",
+          "Verbringe Zeit in der Natur — Wasser, Bäume, Mondlicht",
+          "Verlangsame Ambitionen; beobachte dein Verhältnis zum Zeitdruck",
+          "Schlafenszeit um 22 Uhr (Pitta-Hochzeit läuft 22-2 Uhr)",
+          "Kühle Öle für Abhyanga: Kokos, Sonnenblume (statt Sesam)"
+        ]
+      }
+    },
+    "kapha": {
+      "tagline": "Ruhig, beständig und ausdauernd. Gedeiht durch Bewegung und Leichtigkeit.",
+      "season": "Spätwinter in den Frühling (Februar-Mai auf der Nordhalbkugel)",
+      "qualities": [
+        { "english": "schwer", "note": "solide Statur, langsamer Stoffwechsel" },
+        { "english": "kalt", "note": "neigt dazu, sich kalt zu fühlen, langsame Durchblutung" },
+        { "english": "weich", "note": "weiche Haut, sanftes Wesen" },
+        { "english": "ölig", "note": "ölige/geschmeidige Haut und Gelenke" },
+        { "english": "langsam", "note": "langsame Verdauung, langsame Sprache, langsamer Wandel" },
+        { "english": "stabil", "note": "beständig, verlässlich, schwer aus der Ruhe zu bringen" },
+        { "english": "dicht", "note": "dichtes, schweres Gewebe" },
+        { "english": "klebrig", "note": "neigt zu Verschleimung, Schleim" }
+      ],
+      "body": {
+        "build": "Solide, kräftige Statur. Oft breiter und schwerer als Vata oder Pitta. Leichte Gewichtszunahme, schwerer Gewichtsverlust.",
+        "skin": "Weich, glatt, oft blass oder kühl. Faltet sich langsam. Neigt zu Verschleimung, öliger Haut.",
+        "hair": "Dick, glänzend, oft wellig oder lockig. Starke Wurzeln, ergraut langsam.",
+        "face": "Runde, volle Züge. Große, ruhige Augen. Weicher, oft sanfter Ausdruck.",
+        "digestion": "Langsam, aber stetig. Kann Mahlzeiten problemlos auslassen; verspürt keinen scharfen Hunger.",
+        "sleep": "Tief und reichlich. Neigt zum Verschlafen; träge beim Aufwachen.",
+        "energy": "Stetig und ausdauernd. Kommt langsam in Gang; kraftvoll, einmal in Bewegung. Ausdauer für die lange Strecke."
+      },
+      "mind": {
+        "balanced": [
+          "Ruhig, geduldig, loyal — die stabilisierende Präsenz in jeder Gruppe",
+          "Mitfühlend, nährend, verlässlich",
+          "Langes Gedächtnis, tiefe Speicherung",
+          "Vergebend, langsam zum Zorn"
+        ],
+        "imbalanced": [
+          "Lethargisch, geringe Motivation, schwer in Bewegung zu kommen",
+          "Übermäßige Anhaftung — an Menschen, Besitz, Essen, Routinen",
+          "Widerstand gegen Wandel, selbst wenn Wandel nötig ist",
+          "Traurigkeit, Niedergeschlagenheit, Schwere",
+          "Besitzergreifend oder anhänglich in Beziehungen"
+        ]
+      },
+      "imbalanceSigns": [
+        "Gewichtszunahme, besonders an Brust und Bauch",
+        "Lethargie, Verschlafen, schweres Aufwachen",
+        "Nebenhöhlenverstopfung, Schleim, häufige Erkältungen",
+        "Träge Verdauung, Essen liegt schwer",
+        "Wassereinlagerungen, Schwellungen",
+        "Niedergeschlagenheit, Traurigkeit ohne Auslöser",
+        "Allergien, besonders saisonale",
+        "Langsamer Stoffwechsel, niedrige Körpertemperatur",
+        "Besitzergreifen, Hortungsneigungen"
+      ],
+      "triggers": [
+        "Kaltes, feuchtes Wetter (Spätwinter in den Frühling — Kapha-Saison)",
+        "Schwere, ölige, süße Speisen — besonders Milchprodukte, Zucker, Frittiertes",
+        "Mittagsschlaf am Tag (Schlaf während der Kapha-Stunden 6-10 Uhr stagniert)",
+        "Sitzende Lebensweise, Bewegungsmangel",
+        "Kalte Getränke, Eiscreme",
+        "Wandel unterdrücken, an dem festhalten, was nicht mehr dient",
+        "Überessen, besonders am Abend"
+      ],
+      "pacification": {
+        "principle": "Kapha ist schwer, kalt und langsam — besänftige es mit Wärme, Leichtigkeit und Bewegung.",
+        "lifestyle": [
+          "Wache vor 6 Uhr auf — die Kapha-Zeit beginnt um 6 Uhr, länger zu liegen vertieft die Stagnation",
+          "Tägliche kräftige Bewegung — Bewegung ist Medizin für Kapha",
+          "Wähle dynamisches, wärmendes Yoga: Sonnengrüße, Kriegerserie, Vinyasa",
+          "Pranayama: Bhastrika, Kapalabhati (die wärmenden, belebenden Atemtechniken)",
+          "Lass den Mittagsschlaf aus; wenn müde, geh stattdessen spazieren",
+          "Iss die leichteste Mahlzeit des Tages zum Abendessen; die schwerste zu Mittag",
+          "Würze die Mahlzeiten großzügig — Ingwer, schwarzer Pfeffer, Kurkuma, Kreuzkümmel",
+          "Abwechslung in Routinen — Kapha verlangt nach Gleichförmigkeit; führe Neues ein",
+          "Bleib warm und trocken — meide kalten Regen, feuchte Keller"
+        ]
+      }
+    }
+  }
+}

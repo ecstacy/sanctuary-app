@@ -15,7 +15,9 @@
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { DOSHAS } from '../data/ayurveda/dosha-prakriti'
+import { localizeDoshaDisplay, localizeDosha } from '../i18n/contentI18n'
 import { track, EVENTS } from '../lib/track'
 import { useIsPremium } from '../hooks/useIsPremium'
 import PaywallSheet from './PaywallSheet'
@@ -176,13 +178,17 @@ export default function DoshaProfileContent({
   footerSlot,
 }) {
   const navigate = useNavigate()
-  const primaryData   = DOSHA_DATA[primary]
-  const secondaryData = secondary ? DOSHA_DATA[secondary] : null
-  const tertiaryData  = tertiary  ? DOSHA_DATA[tertiary]  : null
+  const { t, i18n } = useTranslation()
+  // Re-localize on language change: i18n.language in the dep keeps these
+  // memo-free reads fresh when the user switches languages mid-screen.
+  void i18n.language
+  const primaryData   = localizeDoshaDisplay(primary, DOSHA_DATA[primary])
+  const secondaryData = secondary ? localizeDoshaDisplay(secondary, DOSHA_DATA[secondary]) : null
+  const tertiaryData  = tertiary  ? localizeDoshaDisplay(tertiary, DOSHA_DATA[tertiary])  : null
   const isTridoshic   = doshaLabel === 'Tridoshic'
   const isDual        = doshaLabel?.includes('-') ?? false
 
-  const richDosha = DOSHAS[primary] || null
+  const richDosha = localizeDosha(DOSHAS[primary] || null)
 
   const [expanded, setExpanded] = useState(new Set())
 
@@ -229,7 +235,7 @@ export default function DoshaProfileContent({
           <button
             onClick={onBack}
             className="absolute top-5 left-5 z-20 w-9 h-9 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center"
-            aria-label="Go back"
+            aria-label={t('doshaProfile.goBack')}
           >
             <span className="material-symbols-outlined text-white text-lg">arrow_back</span>
           </button>
@@ -237,18 +243,18 @@ export default function DoshaProfileContent({
 
         <div className="relative z-10 text-center mt-4">
           <p className="font-label text-[10px] text-white/60 uppercase tracking-widest mb-2">
-            Your Dosha Type
+            {t('doshaProfile.yourDoshaType')}
           </p>
           <h1 className="font-headline text-5xl text-white leading-none mb-2">
             {doshaLabel}
           </h1>
           <p className="font-headline italic text-lg text-white/80 mb-5">
-            {isTridoshic ? 'The Rare Equilibrium' : primaryData.tagline}
+            {isTridoshic ? t('doshaProfile.rareEquilibrium') : primaryData.tagline}
           </p>
           <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-4 py-2">
             <span className="material-symbols-outlined text-white text-sm" aria-hidden="true">{primaryData.emoji}</span>
             <span className="font-label text-xs text-white/90 uppercase tracking-wider">
-              {isTridoshic ? 'All Five Elements' : primaryData.element}
+              {isTridoshic ? t('doshaProfile.allFiveElements') : primaryData.element}
             </span>
           </div>
         </div>
@@ -260,9 +266,9 @@ export default function DoshaProfileContent({
             CHAPTER 1 — WHO YOU ARE
             ═══════════════════════════════════════════════════════════ */}
         <ThemeSection
-          kicker="Chapter 1"
-          title="Who you are"
-          lede="The elements, qualities, and patterns that shape your constitution."
+          kicker={t('doshaProfile.ch1Kicker')}
+          title={t('doshaProfile.ch1Title')}
+          lede={t('doshaProfile.ch1Lede')}
         >
 
           {/* Dosha Composition
@@ -276,10 +282,10 @@ export default function DoshaProfileContent({
             <div className="bg-surface rounded-2xl p-6 shadow-md mb-5 stagger-2">
               <div className="flex items-baseline justify-between mb-6">
                 <p className="font-label text-[10px] font-semibold text-on-surface-variant uppercase tracking-[0.22em]">
-                  Your Constitution
+                  {t('doshaProfile.yourConstitution')}
                 </p>
                 <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-wider">
-                  V · P · K
+                  {t('doshaProfile.vpkShort')}
                 </p>
               </div>
 
@@ -298,7 +304,7 @@ export default function DoshaProfileContent({
                     className={`h-full ${data.barColor} transition-all duration-1000 ease-out`}
                     style={{ width: `${pct}%`, transitionDelay: `${i * 150}ms` }}
                     role="img"
-                    aria-label={`${data.name} ${pct} percent`}
+                    aria-label={t('doshaProfile.pctAria', { name: data.name, pct })}
                   />
                 ))}
               </div>
@@ -336,16 +342,16 @@ export default function DoshaProfileContent({
                   composition reads as the headline and the prose as context. */}
               <p className="font-body text-xs text-on-surface-variant/60 italic mt-6 pt-5 border-t border-outline-variant/15 leading-relaxed">
                 {isTridoshic
-                  ? 'A rare and balanced constitution. All three doshas are equally expressed in your nature.'
+                  ? t('doshaProfile.footnoteTridoshic')
                   : isDual
-                  ? `You express ${capitalize(primary)} and ${capitalize(secondary)} almost equally. Your constitution shifts with seasons and lifestyle.`
+                  ? t('doshaProfile.footnoteDual', { primary: capitalize(primary), secondary: capitalize(secondary) })
                   : (() => {
                       const pPct = percentages?.[primary] || 0
                       const sPct = percentages?.[secondary] || 0
                       const gap = pPct - sPct
-                      if (gap >= 40) return `${capitalize(primary)} is overwhelmingly dominant in your constitution. The other doshas play a minor supporting role.`
-                      if (gap >= 20) return `${capitalize(primary)} is clearly your leading dosha. ${capitalize(secondary)} (${sPct}%) plays a moderate background role.`
-                      return `${capitalize(primary)} leads your constitution, with ${capitalize(secondary)} (${sPct}%) as a notable secondary influence.`
+                      if (gap >= 40) return t('doshaProfile.footnoteGapHigh', { primary: capitalize(primary) })
+                      if (gap >= 20) return t('doshaProfile.footnoteGapMid', { primary: capitalize(primary), secondary: capitalize(secondary), pct: sPct })
+                      return t('doshaProfile.footnoteGapLow', { primary: capitalize(primary), secondary: capitalize(secondary), pct: sPct })
                     })()
                 }
               </p>
@@ -357,7 +363,7 @@ export default function DoshaProfileContent({
             <div className="flex items-center gap-2 mb-3">
               <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>{primaryData.emoji}</span>
               <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
-                {isTridoshic ? 'Your Balanced Nature' : `Dominant: ${primaryData.name}`}
+                {isTridoshic ? t('doshaProfile.balancedNature') : t('doshaProfile.dominant', { name: primaryData.name })}
               </p>
             </div>
             <p className="font-body text-sm text-on-surface leading-relaxed">{primaryData.description}</p>
@@ -369,7 +375,7 @@ export default function DoshaProfileContent({
               <div className="flex items-center gap-2 mb-3">
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">{secondaryData.emoji}</span>
                 <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
-                  Secondary: {secondaryData.name}
+                  {t('doshaProfile.secondary', { name: secondaryData.name })}
                 </p>
               </div>
               <p className="font-body text-xs text-on-surface-variant leading-relaxed">{secondaryData.description}</p>
@@ -379,7 +385,7 @@ export default function DoshaProfileContent({
           {/* Qualities (Gunas) */}
           <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-4">
             <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
-              {primaryData.name} Qualities (Gunas)
+              {t('doshaProfile.qualitiesGunas', { name: primaryData.name })}
             </p>
             {richDosha?.qualities ? (
               <div className="divide-y divide-outline-variant/10">
@@ -409,7 +415,7 @@ export default function DoshaProfileContent({
             )}
             {richDosha?.source?.verse && (
               <p className="font-label text-[10px] text-on-surface-variant/50 leading-relaxed mt-4 pt-3 border-t border-outline-variant/10">
-                Source: Charaka Samhita {richDosha.source.verse}
+                {t('doshaProfile.sourceCharaka', { verse: richDosha.source.verse })}
               </p>
             )}
           </div>
@@ -420,8 +426,8 @@ export default function DoshaProfileContent({
               <ExpandableSection
                 id="body"
                 icon="accessibility_new"
-                label={`Your ${primaryData.name} body`}
-                summary="Build, skin, hair, digestion, sleep, energy"
+                label={t('doshaProfile.yourBody', { name: primaryData.name })}
+                summary={t('doshaProfile.bodySummary')}
                 accentClass={primaryData.textColor}
                 isOpen={expanded.has('body')}
                 onToggle={() => toggle('body')}
@@ -429,13 +435,13 @@ export default function DoshaProfileContent({
                 <div className="pt-3">
                   {richDosha.body && (
                     <>
-                      {richDosha.body.build     && <LabelValueRow label="Build"     value={richDosha.body.build} />}
-                      {richDosha.body.skin       && <LabelValueRow label="Skin"      value={richDosha.body.skin} />}
-                      {richDosha.body.hair       && <LabelValueRow label="Hair"      value={richDosha.body.hair} />}
-                      {richDosha.body.face       && <LabelValueRow label="Face"      value={richDosha.body.face} />}
-                      {richDosha.body.digestion  && <LabelValueRow label="Digestion" value={richDosha.body.digestion} />}
-                      {richDosha.body.sleep      && <LabelValueRow label="Sleep"     value={richDosha.body.sleep} />}
-                      {richDosha.body.energy     && <LabelValueRow label="Energy"    value={richDosha.body.energy} />}
+                      {richDosha.body.build     && <LabelValueRow label={t('doshaProfile.labelBuild')}     value={richDosha.body.build} />}
+                      {richDosha.body.skin       && <LabelValueRow label={t('doshaProfile.labelSkin')}      value={richDosha.body.skin} />}
+                      {richDosha.body.hair       && <LabelValueRow label={t('doshaProfile.labelHair')}      value={richDosha.body.hair} />}
+                      {richDosha.body.face       && <LabelValueRow label={t('doshaProfile.labelFace')}      value={richDosha.body.face} />}
+                      {richDosha.body.digestion  && <LabelValueRow label={t('doshaProfile.labelDigestion')} value={richDosha.body.digestion} />}
+                      {richDosha.body.sleep      && <LabelValueRow label={t('doshaProfile.labelSleep')}     value={richDosha.body.sleep} />}
+                      {richDosha.body.energy     && <LabelValueRow label={t('doshaProfile.labelEnergy')}    value={richDosha.body.energy} />}
                     </>
                   )}
                 </div>
@@ -444,19 +450,19 @@ export default function DoshaProfileContent({
               <ExpandableSection
                 id="mind"
                 icon="psychology"
-                label={`Your ${primaryData.name} mind`}
-                summary="How you show up — at your best and when you're off"
+                label={t('doshaProfile.yourMind', { name: primaryData.name })}
+                summary={t('doshaProfile.mindSummary')}
                 accentClass={primaryData.textColor}
                 isOpen={expanded.has('mind')}
                 onToggle={() => toggle('mind')}
               >
                 <div className="pt-3 space-y-4">
                   <div>
-                    <p className={`font-label text-[10px] uppercase tracking-wider mb-2 ${primaryData.textColor}`}>In balance</p>
+                    <p className={`font-label text-[10px] uppercase tracking-wider mb-2 ${primaryData.textColor}`}>{t('doshaProfile.inBalance')}</p>
                     <BulletList items={richDosha.mind.balanced} iconName="check_circle" iconClass={primaryData.textColor} />
                   </div>
                   <div>
-                    <p className="font-label text-[10px] uppercase tracking-wider mb-2 text-on-surface-variant/60">When out of balance</p>
+                    <p className="font-label text-[10px] uppercase tracking-wider mb-2 text-on-surface-variant/60">{t('doshaProfile.outOfBalance')}</p>
                     <BulletList items={richDosha.mind.imbalanced} iconName="error" iconClass="text-on-surface-variant/40" />
                   </div>
                 </div>
@@ -467,7 +473,7 @@ export default function DoshaProfileContent({
           {/* Natural Strengths */}
           <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-5">
             <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
-              Your natural strengths
+              {t('doshaProfile.naturalStrengths')}
             </p>
             <div className="grid grid-cols-2 gap-3">
               {[
@@ -488,9 +494,9 @@ export default function DoshaProfileContent({
             CHAPTER 2 — STAYING IN BALANCE
             ═══════════════════════════════════════════════════════════ */}
         <ThemeSection
-          kicker="Chapter 2"
-          title="Staying in balance"
-          lede="Early signs of imbalance, common triggers, and Charaka's guidance for returning to centre."
+          kicker={t('doshaProfile.ch2Kicker')}
+          title={t('doshaProfile.ch2Title')}
+          lede={t('doshaProfile.ch2Lede')}
         >
 
           {richDosha && !isTridoshic && (
@@ -498,15 +504,15 @@ export default function DoshaProfileContent({
               <ExpandableSection
                 id="signs"
                 icon="health_and_safety"
-                label="Signs to watch for"
-                summary={`Common ${primaryData.name} imbalance symptoms`}
+                label={t('doshaProfile.signsLabel')}
+                summary={t('doshaProfile.signsSummary', { name: primaryData.name })}
                 accentClass={primaryData.textColor}
                 isOpen={expanded.has('signs')}
                 onToggle={() => toggle('signs')}
               >
                 <div className="pt-3">
                   <p className="font-body text-xs text-on-surface-variant leading-relaxed mb-3">
-                    When your dominant dosha runs high, these are the early signals. None require alarm — they're invitations to lean into the balancing practices below.
+                    {t('doshaProfile.signsIntro')}
                   </p>
                   <BulletList items={richDosha.imbalanceSigns} iconName="circle" iconClass="text-on-surface-variant/40" />
                 </div>
@@ -515,8 +521,8 @@ export default function DoshaProfileContent({
               <ExpandableSection
                 id="triggers"
                 icon="warning"
-                label="What aggravates you"
-                summary="Habits and seasons that push you out of balance"
+                label={t('doshaProfile.triggersLabel')}
+                summary={t('doshaProfile.triggersSummary')}
                 accentClass={primaryData.textColor}
                 isOpen={expanded.has('triggers')}
                 onToggle={() => toggle('triggers')}
@@ -529,8 +535,8 @@ export default function DoshaProfileContent({
               <ExpandableSection
                 id="pacify"
                 icon="spa"
-                label="How to find balance"
-                summary={richDosha.pacification?.principle ? richDosha.pacification.principle.split('.')[0] + '.' : 'Lifestyle adjustments to pacify your dosha'}
+                label={t('doshaProfile.pacifyLabel')}
+                summary={richDosha.pacification?.principle ? richDosha.pacification.principle.split('.')[0] + '.' : t('doshaProfile.pacifySummaryFallback')}
                 accentClass={primaryData.textColor}
                 isOpen={expanded.has('pacify')}
                 onToggle={() => toggle('pacify')}
@@ -554,7 +560,7 @@ export default function DoshaProfileContent({
           {/* Stay In Balance tips */}
           <div className="bg-surface-container-low rounded-lg p-6 mb-5 stagger-5">
             <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
-              Stay In Balance
+              {t('doshaProfile.stayInBalance')}
             </p>
             <div className="flex flex-col gap-3">
               {primaryData.balanceTips.map((tip, i) => (
@@ -571,7 +577,7 @@ export default function DoshaProfileContent({
             <div className="flex items-center gap-2 mb-3">
               <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>self_care</span>
               <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
-                Yoga & Movement
+                {t('doshaProfile.yogaMovement')}
               </p>
             </div>
             <p className="font-body text-sm text-on-surface leading-relaxed">{primaryData.yoga}</p>
@@ -582,7 +588,7 @@ export default function DoshaProfileContent({
             <div className="flex items-center gap-2 mb-3">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">air</span>
               <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
-                Meditation & Breathwork
+                {t('doshaProfile.meditationBreathwork')}
               </p>
             </div>
             <p className="font-body text-sm text-on-surface leading-relaxed">{primaryData.meditation}</p>
@@ -594,9 +600,9 @@ export default function DoshaProfileContent({
             CHAPTER 3 — LIVE BY YOUR DOSHA  (Plus-gated)
             ═══════════════════════════════════════════════════════════ */}
         <ThemeSection
-          kicker="Chapter 3"
-          title="Live by your dosha"
-          lede="Translate this knowledge into daily life — the season, the hour of the day, the food on your plate."
+          kicker={t('doshaProfile.ch3Kicker')}
+          title={t('doshaProfile.ch3Title')}
+          lede={t('doshaProfile.ch3Lede')}
         >
 
           {/* Free users see a single teaser tile here instead of the full
@@ -613,22 +619,22 @@ export default function DoshaProfileContent({
                 openPaywall()
               }}
               className={`block w-full text-left rounded-2xl p-6 mb-5 ${primaryData.bgColor} active:scale-[0.99] transition-all`}
-              aria-label="Unlock Chapter 3 — Live by your dosha"
+              aria-label={t('doshaProfile.unlockChapter3Aria')}
             >
               <div className="flex items-center gap-2 mb-3">
                 <span aria-hidden="true" className={`material-symbols-outlined text-base ${primaryData.textColor}`}>auto_awesome</span>
                 <span className="font-label text-[10px] font-semibold uppercase tracking-[0.22em]" style={{ color: primaryData.accentHex }}>
-                  Sanctuary Plus
+                  {t('doshaProfile.plusBadge')}
                 </span>
               </div>
               <p className="font-headline text-xl text-on-surface leading-tight mb-2">
-                The daily practice of being {capitalize(primary)}.
+                {t('doshaProfile.teaserHeadline', { primary: capitalize(primary) })}
               </p>
               <p className="font-body text-sm text-on-surface-variant/85 leading-relaxed mb-4">
-                Your season-by-season protocol, dosha-aware diet, and full Dinacharya — the daily rituals that translate Ayurveda into how you actually live.
+                {t('doshaProfile.teaserBody')}
               </p>
               <ul className="space-y-1.5 mb-5">
-                {['Peak season + dosha hours protocol', 'Full 6-taste dietary guide', "Charaka's 13 daily practices"].map((line) => (
+                {[t('doshaProfile.teaserBullet1'), t('doshaProfile.teaserBullet2'), t('doshaProfile.teaserBullet3')].map((line) => (
                   <li key={line} className="flex items-center gap-2">
                     <span aria-hidden="true" className={`material-symbols-outlined text-[14px] ${primaryData.textColor}`}>check_circle</span>
                     <span className="font-body text-xs text-on-surface">{line}</span>
@@ -637,7 +643,7 @@ export default function DoshaProfileContent({
               </ul>
               <div className="flex items-center justify-between">
                 <span className={`font-label text-xs font-semibold uppercase tracking-wider ${primaryData.textColor}`}>
-                  Unlock Chapter 3
+                  {t('doshaProfile.unlockChapter3')}
                 </span>
                 <span aria-hidden="true" className={`material-symbols-outlined text-base ${primaryData.textColor}`}>arrow_forward</span>
               </div>
@@ -654,9 +660,9 @@ export default function DoshaProfileContent({
                 <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>calendar_month</span>
               </div>
               <div>
-                <p className="font-body font-semibold text-sm text-on-surface mb-0.5">Peak Season</p>
+                <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.peakSeason')}</p>
                 <p className="font-body text-xs text-on-surface-variant leading-relaxed">
-                  {primaryData.season} — {primaryData.name} is naturally elevated during this time. Extra care is needed to stay balanced.
+                  {t('doshaProfile.peakSeasonBody', { season: primaryData.season, name: primaryData.name })}
                 </p>
               </div>
             </div>
@@ -666,9 +672,9 @@ export default function DoshaProfileContent({
                 <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>schedule</span>
               </div>
               <div>
-                <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{primaryData.name} Hours</p>
+                <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.doshaHours', { name: primaryData.name })}</p>
                 <p className="font-body text-xs text-on-surface-variant leading-relaxed">
-                  {primaryData.timeOfDay} — These are the hours when {primaryData.name} energy peaks in the body.
+                  {t('doshaProfile.doshaHoursBody', { timeOfDay: primaryData.timeOfDay, name: primaryData.name })}
                 </p>
               </div>
             </div>
@@ -678,7 +684,7 @@ export default function DoshaProfileContent({
                 <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>restaurant</span>
               </div>
               <div>
-                <p className="font-body font-semibold text-sm text-on-surface mb-0.5">Balancing Tastes</p>
+                <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.balancingTastes')}</p>
                 <p className="font-body text-xs text-on-surface-variant leading-relaxed">{primaryData.taste}</p>
               </div>
             </div>
@@ -700,7 +706,7 @@ export default function DoshaProfileContent({
                 navigate(`/protocol/${primary}`)
               }}
               className={`block w-full text-left rounded-2xl p-5 mb-6 ${primaryData.bgColor} active:scale-[0.99] transition-all`}
-              aria-label={`Open ${primaryData.name}-pacifying protocol`}
+              aria-label={t('doshaProfile.protocolAria', { name: primaryData.name })}
             >
               <div className="flex items-center gap-3 mb-2">
                 <span
@@ -713,14 +719,14 @@ export default function DoshaProfileContent({
                   className="font-label text-[10px] font-semibold uppercase tracking-[0.22em]"
                   style={{ color: primaryData.accentHex }}
                 >
-                  When your {primaryData.name} runs high
+                  {t('doshaProfile.protocolKicker', { name: primaryData.name })}
                 </p>
               </div>
               <p className="font-headline text-lg text-on-surface leading-tight mb-1">
-                Your 3-day {primaryData.name}-pacifying protocol
+                {t('doshaProfile.protocolHeadline', { name: primaryData.name })}
               </p>
               <p className="font-body text-xs text-on-surface-variant/80 leading-snug">
-                Food, movement, breath, and rest — for the days when your dominant dosha is also your imbalance.
+                {t('doshaProfile.protocolBody')}
               </p>
             </button>
           )}
@@ -729,27 +735,27 @@ export default function DoshaProfileContent({
           <div className="grid grid-cols-2 gap-3 mb-6">
             <button
               onClick={() => navigate('/dietary')}
-              aria-label="Open dietary guidance"
+              aria-label={t('doshaProfile.dietAria')}
               className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2 relative"
             >
               <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base absolute top-3 right-3">chevron_right</span>
               <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">restaurant</span>
               </div>
-              <p className="font-body font-semibold text-sm text-on-surface leading-tight">Your diet</p>
-              <p className="font-body text-xs text-on-surface-variant/70 leading-snug">Foods to favor and avoid, by the six tastes</p>
+              <p className="font-body font-semibold text-sm text-on-surface leading-tight">{t('doshaProfile.dietTitle')}</p>
+              <p className="font-body text-xs text-on-surface-variant/70 leading-snug">{t('doshaProfile.dietSummary')}</p>
             </button>
             <button
               onClick={() => navigate('/dinacharya')}
-              aria-label="Open daily routine"
+              aria-label={t('doshaProfile.routineAria')}
               className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2 relative"
             >
               <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base absolute top-3 right-3">chevron_right</span>
               <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">schedule</span>
               </div>
-              <p className="font-body font-semibold text-sm text-on-surface leading-tight">Daily routine</p>
-              <p className="font-body text-xs text-on-surface-variant/70 leading-snug">Charaka's 13 practices — align the day with the body's rhythm</p>
+              <p className="font-body font-semibold text-sm text-on-surface leading-tight">{t('doshaProfile.routineTitle')}</p>
+              <p className="font-body text-xs text-on-surface-variant/70 leading-snug">{t('doshaProfile.routineSummary')}</p>
             </button>
           </div>
           </>
@@ -761,9 +767,9 @@ export default function DoshaProfileContent({
         <div className="bg-surface-container-low rounded-lg p-5 mb-5 flex items-start gap-3">
           <span aria-hidden="true" className="material-symbols-outlined text-primary text-base mt-0.5">auto_awesome</span>
           <div>
-            <p className="font-body font-semibold text-sm text-on-surface mb-1">Understanding Prakriti</p>
+            <p className="font-body font-semibold text-sm text-on-surface mb-1">{t('doshaProfile.understandingTitle')}</p>
             <p className="font-body text-xs text-on-surface-variant leading-relaxed">
-              In Ayurveda, your Prakriti is your birth constitution — the unique ratio of Vata, Pitta, and Kapha you were born with. It remains stable throughout life. When doshas shift due to diet, stress, or seasons, that temporary state is called Vikriti. The goal of Ayurveda is to bring Vikriti back in alignment with Prakriti.
+              {t('doshaProfile.understandingBody')}
             </p>
           </div>
         </div>
@@ -784,8 +790,8 @@ export default function DoshaProfileContent({
         open={paywallOpen}
         onClose={() => setPaywallOpen(false)}
         surface="dosha_chapter3"
-        headline={`Live by your ${capitalize(primary)} nature`}
-        subhead="Unlock Chapter 3 and your full Ayurvedic lifestyle protocol."
+        headline={t('doshaProfile.paywallHeadline', { primary: capitalize(primary) })}
+        subhead={t('doshaProfile.paywallSubhead')}
       />
     </div>
   )

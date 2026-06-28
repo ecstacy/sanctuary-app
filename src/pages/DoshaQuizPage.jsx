@@ -21,6 +21,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
 import { track, EVENTS } from '../lib/track'
@@ -41,6 +42,7 @@ const PENDING_DOSHA_KEY = 'sanctuary.pending.dosha'
 
 export default function DoshaQuizPage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { user, profile, refreshProfile } = useAuth()
 
   // ── Phase machine ──────────────────────────────────────────────────────
@@ -275,7 +277,7 @@ export default function DoshaQuizPage() {
 
     if (error) {
       console.error('Failed to save dosha:', error.message)
-      alert('Failed to save: ' + error.message)
+      alert(t('doshaQuiz.saveFailed', { error: error.message }))
       setSaving(false)
       return
     }
@@ -332,7 +334,7 @@ export default function DoshaQuizPage() {
       <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
 
         <div className="flex items-center justify-between px-6 py-5 flex-shrink-0">
-          <button onClick={() => navigate(-1)} className="text-on-surface-variant" aria-label="Go back">
+          <button onClick={() => navigate(-1)} className="text-on-surface-variant" aria-label={t('doshaQuiz.goBack')}>
             <span className="material-symbols-outlined text-xl">arrow_back</span>
           </button>
           <span className="font-headline italic text-primary text-base">The Sanctuary</span>
@@ -352,22 +354,22 @@ export default function DoshaQuizPage() {
             </div>
 
             <p className="font-label text-xs text-primary uppercase tracking-widest mb-3">
-              Dosha Discovery
+              {t('doshaQuiz.introKicker')}
             </p>
             <h1 className="font-headline text-4xl text-on-surface leading-tight mb-4">
-              Who are you,<br />
-              <span className="italic font-normal text-primary">really?</span>
+              {t('doshaQuiz.titleLine1')}<br />
+              <span className="italic font-normal text-primary">{t('doshaQuiz.titleLine2')}</span>
             </h1>
             <p className="text-on-surface-variant text-sm leading-relaxed max-w-xs mb-3">
-              In Ayurveda, your Dosha is your unique blueprint — the elemental forces that shape your body, mind, and spirit.
+              {t('doshaQuiz.introBody')}
             </p>
             {/* Honesty primer: anchors the user to prakriti (lifelong) not
                 vikriti (this week's stress). Single line, soft. */}
             <p className="text-on-surface-variant/70 text-[11px] italic leading-relaxed max-w-xs mb-2">
-              Answer based on how you've been most of your life — not how you feel this week.
+              {t('doshaQuiz.honestyPrimer')}
             </p>
             <p className="text-on-surface-variant/50 text-xs leading-relaxed max-w-xs">
-              15 questions · about 90 seconds
+              {t('doshaQuiz.introMeta')}
             </p>
           </div>
 
@@ -390,10 +392,7 @@ export default function DoshaQuizPage() {
                   /privacy route exists, make this a link — informed consent
                   should reference an accessible policy. */}
               <span id="health-consent-text" className="font-body text-[12px] text-on-surface-variant/90 leading-relaxed">
-                I consent to The Sanctuary processing my dosha results and
-                wellness inputs (mood, energy, sleep) to personalize my
-                practice, as described in the Privacy Policy. This is
-                health-related data; I can withdraw consent anytime in Settings.
+                {t('doshaQuiz.consentText')}
               </span>
             </label>
           )}
@@ -411,7 +410,7 @@ export default function DoshaQuizPage() {
             disabled={!hasConsent && !consentChecked}
             className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-40 disabled:active:scale-100"
           >
-            Discover My Dosha
+            {t('doshaQuiz.startCta')}
           </button>
 
           {profile?.dosha && (
@@ -419,7 +418,7 @@ export default function DoshaQuizPage() {
               onClick={() => navigate(-1)}
               className="mt-4 text-center text-xs text-on-surface-variant/50 font-label uppercase tracking-widest"
             >
-              Keep current result: {profile.dosha}
+              {t('doshaQuiz.keepCurrent', { dosha: profile.dosha })}
             </button>
           )}
         </div>
@@ -432,10 +431,10 @@ export default function DoshaQuizPage() {
   // ═══════════════════════════════════════════════════════════════════════
   if (phase === 'calculating') {
     const CALC_MESSAGES = [
-      { icon: 'auto_awesome',           text: 'Reading your elemental signature...' },
-      { icon: 'air',                    text: 'Weighing the winds of Vata...' },
-      { icon: 'local_fire_department',  text: 'Measuring the fire of Pitta...' },
-      { icon: 'landscape',              text: 'Grounding into Kapha earth...' },
+      { icon: 'auto_awesome',           text: t('doshaQuiz.calc.reading') },
+      { icon: 'air',                    text: t('doshaQuiz.calc.vata') },
+      { icon: 'local_fire_department',  text: t('doshaQuiz.calc.pitta') },
+      { icon: 'landscape',              text: t('doshaQuiz.calc.kapha') },
     ]
     return (
       <div className="min-h-screen bg-background text-on-surface font-body flex flex-col items-center justify-center px-6">
@@ -505,7 +504,7 @@ export default function DoshaQuizPage() {
         <div className="flex items-center justify-between px-6 py-4 flex-shrink-0">
           <div className="w-6" />
           <span className="font-label text-[10px] text-primary uppercase tracking-widest">
-            Quick Check
+            {t('doshaQuiz.quickCheck')}
           </span>
           <span className="font-label text-xs text-on-surface-variant/50 tabular-nums">
             {currentTb + 1} / {tbTotal}
@@ -530,12 +529,12 @@ export default function DoshaQuizPage() {
           {/* Context: only show on the first tiebreaker */}
           {currentTb === 0 && (
             <p className="font-body text-[12px] text-on-surface-variant/70 italic mb-5 max-w-prose leading-relaxed">
-              Your top two doshas are close. A few more questions to dial it in.
+              {t('doshaQuiz.tiebreakerContext')}
             </p>
           )}
 
           <h2 className="font-headline text-2xl text-on-surface leading-snug mb-10 max-w-prose">
-            {tb.prompt}
+            {t(`doshaQuizContent.tiebreakers.${tb.id}.prompt`)}
           </h2>
 
           <div className="mt-auto flex flex-col gap-3">
@@ -554,7 +553,7 @@ export default function DoshaQuizPage() {
                       : 'bg-surface-container active:scale-[0.98]'
                   }`}
                 >
-                  {option.label}
+                  {t(`doshaQuizContent.tiebreakers.${tb.id}.${option.dosha}`)}
                 </button>
               )
             })}
@@ -576,9 +575,9 @@ export default function DoshaQuizPage() {
       <div className="pb-2">
         {!user && (
           <div className="bg-primary-container/40 border border-primary/15 rounded-xl px-4 py-3 mb-3">
-            <p className="font-label text-[10px] uppercase tracking-wider text-primary mb-1">Save your result</p>
+            <p className="font-label text-[10px] uppercase tracking-wider text-primary mb-1">{t('doshaQuiz.saveResultKicker')}</p>
             <p className="font-body text-xs text-on-surface leading-relaxed">
-              Create a free account to keep your dosha, track your practice, and personalize every recommendation.
+              {t('doshaQuiz.saveResultBody')}
             </p>
           </div>
         )}
@@ -594,13 +593,13 @@ export default function DoshaQuizPage() {
           disabled={saving}
           className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mb-3"
         >
-          {saving ? 'Saving...' : (user ? 'Save My Dosha Profile' : 'Create Account to Save')}
+          {saving ? t('doshaQuiz.saving') : (user ? t('doshaQuiz.saveCta') : t('doshaQuiz.createAccountCta'))}
         </button>
         <button
           onClick={resetQuiz}
           className="w-full py-3 text-center text-xs text-on-surface-variant/50 font-label uppercase tracking-widest mb-8"
         >
-          Retake the quiz
+          {t('doshaQuiz.retake')}
         </button>
       </div>
     )
@@ -626,11 +625,11 @@ export default function DoshaQuizPage() {
 
       {/* Top bar */}
       <div className="flex items-center justify-between px-6 py-4 flex-shrink-0">
-        <button onClick={handleBack} className="text-on-surface-variant" aria-label="Previous question">
+        <button onClick={handleBack} className="text-on-surface-variant" aria-label={t('doshaQuiz.prevQuestion')}>
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
         <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
-          Discovery
+          {t('doshaQuiz.discovery')}
         </span>
         <span className="font-label text-xs text-on-surface-variant/50 tabular-nums" aria-live="polite">
           {currentQ + 1} / {totalQuestions}
@@ -645,7 +644,7 @@ export default function DoshaQuizPage() {
           aria-valuenow={Math.round(progress)}
           aria-valuemin={0}
           aria-valuemax={100}
-          aria-label="Quiz progress"
+          aria-label={t('doshaQuiz.progressAria')}
         >
           <div
             className="h-full bg-primary rounded-full transition-all duration-500 ease-out"
@@ -664,13 +663,13 @@ export default function DoshaQuizPage() {
             1 it disappears so the rapid-tap flow isn't slowed down. */}
         {currentQ === 0 && (
           <p className="font-body text-[11px] text-on-surface-variant/60 italic mb-5 max-w-prose leading-relaxed">
-            Lifelong tendency, not this week.
+            {t('doshaQuiz.primerShort')}
           </p>
         )}
 
         {/* The statement */}
         <h2 className="font-headline text-2xl text-on-surface leading-snug mb-10 max-w-prose">
-          {question.text}
+          {t(`doshaQuizContent.questions.${question.id}`)}
         </h2>
 
         {/* Three answer buttons, big & tappable, auto-advance on tap.
@@ -684,7 +683,7 @@ export default function DoshaQuizPage() {
                 key={option.value}
                 onClick={() => handleSelect(option.value)}
                 disabled={animating}
-                aria-label={option.label}
+                aria-label={t(`doshaQuizContent.answers.${option.value}`)}
                 className={`w-full py-4 rounded-full font-label font-semibold text-sm tracking-wide transition-all duration-300 ${
                   isSelected
                     ? 'bg-primary text-on-primary scale-[0.98]'
@@ -693,7 +692,7 @@ export default function DoshaQuizPage() {
                     : 'bg-surface-container active:scale-[0.98]'
                 }`}
               >
-                {option.label}
+                {t(`doshaQuizContent.answers.${option.value}`)}
               </button>
             )
           })}

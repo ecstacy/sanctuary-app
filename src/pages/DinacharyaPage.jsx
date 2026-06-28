@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { DINACHARYA_PRACTICES, DOSHA_TIMES } from '../data/ayurveda/dinacharya'
+import { localizeDinacharyaPractice, localizeDoshaTimeNote } from '../i18n/contentI18n'
 import { track, screen, EVENTS } from '../lib/track'
 import useScrollDepth from '../hooks/useScrollDepth'
 
@@ -36,6 +38,7 @@ function currentDoshaPeriod() {
 }
 
 function PracticeCard({ practice, index, isOpen, onToggle }) {
+  const { t } = useTranslation()
   const colorClass = DOSHA_COLORS[practice.doshaTime] || 'bg-surface-container text-on-surface-variant'
   return (
     <div className="bg-surface-container-low rounded-2xl overflow-hidden">
@@ -66,7 +69,7 @@ function PracticeCard({ practice, index, isOpen, onToggle }) {
           {/* Meta strip */}
           <div className="flex flex-wrap gap-2 pt-3">
             <span className={`px-2 py-1 rounded-full font-label text-[10px] uppercase tracking-wider ${DOSHA_COLORS[practice.doshaTime]}`}>
-              {practice.doshaTime} time
+              {t('dinacharya.doshaTimeLabel', { dosha: practice.doshaTime })}
             </span>
             <span className="px-2 py-1 rounded-full font-label text-[10px] uppercase tracking-wider bg-surface-container-high text-on-surface-variant">
               {practice.duration}
@@ -75,7 +78,7 @@ function PracticeCard({ practice, index, isOpen, onToggle }) {
 
           {/* Benefits */}
           <div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">Why</p>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">{t('dinacharya.why')}</p>
             <ul className="space-y-1.5">
               {practice.benefits.map((b, i) => (
                 <li key={i} className="flex items-start gap-2">
@@ -88,7 +91,7 @@ function PracticeCard({ practice, index, isOpen, onToggle }) {
 
           {/* How to */}
           <div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">How</p>
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">{t('dinacharya.how')}</p>
             <ol className="space-y-1.5">
               {practice.howTo.map((step, i) => (
                 <li key={i} className="flex items-start gap-2">
@@ -102,7 +105,7 @@ function PracticeCard({ practice, index, isOpen, onToggle }) {
           {/* Tools */}
           {practice.tools?.length > 0 && (
             <div>
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">Tools</p>
+              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">{t('dinacharya.tools')}</p>
               <ul className="space-y-1">
                 {practice.tools.map((t, i) => (
                   <li key={i} className="flex items-start gap-2">
@@ -118,12 +121,12 @@ function PracticeCard({ practice, index, isOpen, onToggle }) {
           {practice.contraindications?.length > 0 && (
             <div
               role="region"
-              aria-label="Safety considerations"
+              aria-label={t('dinacharya.safetyAria')}
               className="rounded-xl bg-error-container/30 border border-error/20 px-4 py-3"
             >
               <div className="flex items-center gap-2 mb-1.5">
                 <span aria-hidden="true" className="material-symbols-outlined text-error text-base">health_and_safety</span>
-                <p className="font-label text-[10px] text-error uppercase tracking-wider">Caution</p>
+                <p className="font-label text-[10px] text-error uppercase tracking-wider">{t('dinacharya.caution')}</p>
               </div>
               <ul className="space-y-1">
                 {practice.contraindications.map((c, i) => (
@@ -135,7 +138,7 @@ function PracticeCard({ practice, index, isOpen, onToggle }) {
 
           {/* Source */}
           <p className="font-label text-[10px] text-on-surface-variant/60 leading-relaxed">
-            Source: {practice.source.text}
+            {t('dinacharya.sourceLabel')} {practice.source.text}
             {practice.source.verse ? ` ${practice.source.verse}` : ''}
             {practice.source.note ? ` — ${practice.source.note}` : ''}
           </p>
@@ -147,6 +150,7 @@ function PracticeCard({ practice, index, isOpen, onToggle }) {
 
 export default function DinacharyaPage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [openId, setOpenId] = useState(null)
   useScrollDepth('dinacharya')
 
@@ -175,20 +179,20 @@ export default function DinacharyaPage() {
       <div className="flex items-center justify-between px-5 pt-3 pb-1">
         <button
           onClick={() => navigate(-1)}
-          aria-label="Go back"
+          aria-label={t('dinacharya.goBack')}
           className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90"
         >
           <span aria-hidden="true" className="material-symbols-outlined">arrow_back</span>
         </button>
-        <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant">Daily Routine</p>
+        <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant">{t('dinacharya.title')}</p>
         <div className="w-9 h-9" />
       </div>
 
       {/* Hero */}
       <div className="px-5 mt-2 stagger-1">
-        <h1 className="font-headline text-3xl text-on-surface leading-tight">Dinacharya</h1>
+        <h1 className="font-headline text-3xl text-on-surface leading-tight">{t('dinacharya.heading')}</h1>
         <p className="font-body text-sm text-on-surface-variant mt-1 leading-relaxed">
-          Charaka's daily routine — 13 practices that align the day with the rhythm of the body and the seasons.
+          {t('dinacharya.subtitle')}
         </p>
       </div>
 
@@ -197,12 +201,12 @@ export default function DinacharyaPage() {
         <div className={`flex items-center gap-3 rounded-2xl px-4 py-3 ${DOSHA_COLORS[period.dosha]}`}>
           <span aria-hidden="true" className="material-symbols-outlined text-2xl">{DOSHA_ICON[period.dosha]}</span>
           <div className="flex-1">
-            <p className="font-label text-[10px] uppercase tracking-wider opacity-70">Right now</p>
-            <p className="font-body text-sm font-semibold capitalize">{period.dosha} time · {period.window}</p>
+            <p className="font-label text-[10px] uppercase tracking-wider opacity-70">{t('dinacharya.rightNow')}</p>
+            <p className="font-body text-sm font-semibold capitalize">{t('dinacharya.doshaTimeLabel', { dosha: period.dosha })} · {period.window}</p>
           </div>
           <button
             onClick={() => track(EVENTS.CTA_CLICKED, { cta_id: 'dosha_clock_explain', route_name: 'dinacharya' })}
-            aria-label="Learn about the dosha clock"
+            aria-label={t('dinacharya.learnClock')}
             className="w-7 h-7 rounded-full bg-white/40 flex items-center justify-center"
           >
             <span aria-hidden="true" className="material-symbols-outlined text-base">info</span>
@@ -212,8 +216,8 @@ export default function DinacharyaPage() {
 
       {/* Section label */}
       <div className="px-5 mt-6 mb-3 flex items-baseline justify-between">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">The practices</p>
-        <p className="font-label text-[10px] text-on-surface-variant/60">{DINACHARYA_PRACTICES.length} total</p>
+        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{t('dinacharya.thePractices')}</p>
+        <p className="font-label text-[10px] text-on-surface-variant/60">{t('dinacharya.total', { count: DINACHARYA_PRACTICES.length })}</p>
       </div>
 
       {/* Practices list */}
@@ -221,7 +225,7 @@ export default function DinacharyaPage() {
         {DINACHARYA_PRACTICES.map((p, i) => (
           <PracticeCard
             key={p.id}
-            practice={p}
+            practice={localizeDinacharyaPractice(p)}
             index={i}
             isOpen={openId === p.id}
             onToggle={() => toggle(p.id)}
@@ -231,14 +235,14 @@ export default function DinacharyaPage() {
 
       {/* Dosha clock reference */}
       <div className="px-5 mt-8">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">The Dosha Clock</p>
+        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dinacharya.doshaClock')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5 space-y-3">
           {[...DOSHA_TIMES.morning, ...DOSHA_TIMES.afternoon, ...DOSHA_TIMES.evening].map((slot, i) => (
             <div key={i} className="flex items-baseline gap-3">
               <span className={`material-symbols-outlined text-base ${DOSHA_COLORS[slot.dosha].split(' ')[1]}`} aria-hidden="true">{DOSHA_ICON[slot.dosha]}</span>
               <div className="flex-1">
                 <p className="font-body font-semibold text-sm text-on-surface capitalize">{slot.dosha} · {slot.window}</p>
-                <p className="font-body text-xs text-on-surface-variant leading-relaxed mt-0.5">{slot.note}</p>
+                <p className="font-body text-xs text-on-surface-variant leading-relaxed mt-0.5">{localizeDoshaTimeNote(slot.window, slot.note)}</p>
               </div>
             </div>
           ))}
@@ -246,7 +250,7 @@ export default function DinacharyaPage() {
       </div>
 
       <p className="font-label text-[10px] text-on-surface-variant/60 leading-relaxed px-5 mt-6">
-        Source: Charaka Samhita Sutrasthana 5 (primary) + Sutrasthana 7 (natural urges) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel).
+        {t('dinacharya.clockSource')}
       </p>
     </div>
   )

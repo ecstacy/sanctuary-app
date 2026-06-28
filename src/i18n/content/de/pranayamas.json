@@ -1,0 +1,262 @@
+{
+  "nadiShodhana": {
+    "english": "Wechselatmung",
+    "aliases": ["Kanalreinigender Atem", "Anuloma Viloma"],
+    "source": { "note": "Moderne Formalisierung der Wechselatmungs-Praxis, die im Hatha Yoga Pradipika 2.7-10 als Vorbereitung auf Pranayama beschrieben wird. Die benannte Technik „Nadi Shodhana“ wurde in Linien des 20. Jahrhunderts kodifiziert." },
+    "pattern": { "notes": "Gleich lange Ein- und Ausatmung durch abwechselnde Nasenlöcher. Steigere über Wochen auf längere Zählungen (6:6, 8:8). Erzwinge die Zählung NIE." },
+    "breathCues": { "notes": "Gleich langer Atem durch jeweils ein Nasenloch. Jede Runde = 4 Atemzyklen insgesamt (ein links, aus rechts, ein rechts, aus links)." },
+    "instructions": [
+      "Sitze bequem in Sukhasana auf einer gefalteten Decke. Wirbelsäule lang, Schultern entspannt.",
+      "Forme Vishnu Mudra mit der RECHTEN Hand: falte Zeige- und Mittelfinger in die Handfläche, lass Daumen, Ring- und kleinen Finger ausgestreckt.",
+      "Bring die rechte Hand zum Gesicht. Schließe das RECHTE Nasenloch mit dem rechten Daumen.",
+      "Atme langsam durch das LINKE Nasenloch ein, zähle bis 4.",
+      "Schließe das LINKE Nasenloch mit dem rechten Ringfinger. Löse den Daumen. Atme langsam durch das RECHTE Nasenloch aus, zähle bis 4.",
+      "Atme durch das RECHTE Nasenloch ein (zähle 4). Schließe rechts mit dem Daumen. Löse den Ringfinger. Atme links aus (zähle 4). Das vollendet eine volle Runde.",
+      "Mache 5-10 Minuten weiter. Beende eine Runde immer mit einer Ausatmung durch das LINKE Nasenloch."
+    ],
+    "voiceCues": {
+      "enter": "Sitze bequem mit langer Wirbelsäule. Forme Vishnu Mudra mit der rechten Hand — Zeige- und Mittelfinger eingefaltet, Daumen und Ringfinger ausgestreckt.",
+      "hold": "Schließe das rechte Nasenloch mit dem Daumen. Atme langsam links ein. Schließe links mit dem Ringfinger. Löse den Daumen. Atme rechts aus.",
+      "breathe": "Ein rechts, schließe rechts, aus links. Ein links, schließe links, aus rechts. Eine volle Runde. Bleib bei der Zählung — gleich ein, gleich aus.",
+      "exit": "Beende immer mit einer Ausatmung durch das linke Nasenloch. Senke die rechte Hand. Sitze einen Atemzug in Stille, bevor du die Augen öffnest."
+    },
+    "contraindications": [
+      "Übe nicht mit schwerer Erkältung oder vollständig verstopfter Nase — die Wechselatmung braucht Luft durch beide Seiten",
+      "Lass es bei Nasenscheidewandverkrümmung oder kürzlicher Nasenoperation weg",
+      "Schwangere können frei üben, ohne Atemanhalten",
+      "Bei schwerem Asthma ohne jedes Atemanhalten üben und bei Atemnot aufhören"
+    ],
+    "modifications": [
+      "Übe ohne Hand-Mudra — wechsle einfach den mentalen Fokus vom linken zum rechten Nasenloch",
+      "Reduziere die Zählung auf 2-3, wenn 4 angestrengt wirkt",
+      "Übe kürzere Zeiträume (2-3 Min.) und steigere dich",
+      "Stütze den Ellbogen auf ein Kissen, wenn der Arm bei längeren Sitzungen ermüdet"
+    ],
+    "benefits": [
+      "Balanciert das autonome Nervensystem — das am meisten untersuchte Pranayama für die Herzratenvariabilität",
+      "Beruhigt den Geist — direkte Vorbereitung auf Meditation",
+      "Tri-doshisch — wirkt für alle, in jeder Jahreszeit",
+      "Das zuverlässigste Pranayama für Einsteiger in die Atemarbeit"
+    ],
+    "reasoning": "Nadi Shodhana ist das Einstiegs-Pranayama. Es ist für fast jeden sicher, sofort beruhigend und baut die Atembewusstheit auf, von der alle anderen Pranayamas abhängen. Übe es vor jeder sitzenden Meditation oder als 5-Minuten-Reset an einem stressigen Tag. Das Sanskrit bedeutet „kanalreinigend“ — die Kanäle sind die energetischen Nadis, in modernen Begriffen das autonome Nervensystem."
+  },
+  "ujjayi": {
+    "english": "Siegreicher Atem",
+    "aliases": ["Ozean-Atem", "Kehlatem", "Darth-Vader-Atem"],
+    "source": { "note": "Ausdrücklich im Hatha Yoga Pradipika Kap. 2 benannt. Der Text beschreibt den sanften Klang an der Kehle und seine beruhigende Wirkung auf den Geist." },
+    "pattern": { "notes": "Eine leichte Verengung am hinteren Teil der Kehle erzeugt einen sanften Meereswellen-Klang bei Ein- und Ausatmung. Beide Atemzüge durch die Nase. Wird während der Asana-Praxis (Vinyasa) UND im Sitzen verwendet." },
+    "breathCues": { "notes": "Flüstere „haaa“ mit geschlossenem Mund — die Verengung an der Kehle erzeugt den Ozeanklang. Atme 4 Zählungen ein, 6 Zählungen aus." },
+    "instructions": [
+      "Sitze bequem mit langer Wirbelsäule.",
+      "Um die Kehlverengung zu finden: öffne den Mund und atme ein sanftes „haaaa“ aus, als würdest du einen Spiegel anhauchen.",
+      "Behalte nun die gleiche Kehlform bei, aber schließe den Mund — der Atem geht jetzt durch die Nase mit leicht verengter Kehle.",
+      "Lausche dem sanften Meereswellen- oder „Darth-Vader“-Klang bei jedem Atemzug. Der Klang soll sanft sein, nicht erzwungen.",
+      "Atme durch die Nase mit der Kehlverengung für 4 Zählungen ein.",
+      "Atme durch die Nase aus, gleiche Verengung, für 6 Zählungen. Die Ausatmung ist etwas länger.",
+      "Mache 5-15 Minuten im Sitzen weiter, ODER trage den Atem durch deine Asana-Praxis."
+    ],
+    "voiceCues": {
+      "enter": "Sitze lang. Öffne den Mund und atme ein sanftes „haaaa“ aus, als würdest du einen Spiegel anhauchen. Bemerke die leichte Verengung am hinteren Teil der Kehle.",
+      "hold": "Schließe den Mund. Behalte die gleiche Kehlform. Atme durch die Nase. Lausche dem sanften Ozeanklang — sanft, nicht erzwungen.",
+      "breathe": "Atme 4 Zählungen mit dem Ozeanklang ein. Atme 6 Zählungen aus. Jeder Atemzug ist langsam, nur für dich selbst hörbar.",
+      "exit": "Löse die Kehlverengung. Nimm drei sanfte natürliche Atemzüge. Bemerke die Wärme in der Brust."
+    },
+    "contraindications": [
+      "Übe nicht mit schwerer Atemwegsinfektion, aktivem Asthmaanfall oder COPD",
+      "Lass es weg, wenn die Kehlverengung dich husten lässt oder Atemnot verursacht",
+      "Vermeide es, den Klang zu erzwingen — lauter ist nicht besser; Ujjayi sollte für dich selbst kaum hörbar sein",
+      "Schwangere können frei üben"
+    ],
+    "modifications": [
+      "Übe mit einer leiseren Verengung — der Atem sollte gefühlt, nicht erzwungen werden",
+      "Lass die Zählung weg und halte einfach den Klang stetig — passe ihn an die natürliche Atemlänge an",
+      "Übe während 3-5 Runden Sonnengruß als Vinyasa-Atem",
+      "Wenn die Kehle ermüdet, pausiere und atme eine Minute natürlich"
+    ],
+    "benefits": [
+      "Das meistgenutzte Pranayama in der modernen Asana-Praxis — der Atem, der Bewegung mit Meditation verbindet",
+      "Erzeugt eine Selbst-Feedback-Schleife: das Hören des eigenen Atems hält dich darauf fokussiert",
+      "Verlangsamt die Atemfrequenz und reguliert das sympathische Nervensystem herunter",
+      "Erzeugt innere Hitze — nützlich bei kaltem Wetter oder trägen kapha-lastigen Tagen"
+    ],
+    "reasoning": "Ujjayi ist der Atem des Vinyasa-Yoga — sobald man ihn lernt, wird jede Asana-Praxis zu einer Meditation in Bewegung. Das Sanskrit bedeutet „siegreich“, weil der Atemklang dem Brüllen eines Eroberers ähneln soll; in der Praxis ist es eine sanfte Meereswelle. Nutze ihn bei Sonnengrüßen und längeren Flows ODER im Sitzen 5-10 Minuten als fokussierende Meditation."
+  },
+  "bhramari": {
+    "english": "Summende-Bienen-Atem",
+    "aliases": ["Bienenatem"],
+    "source": { "note": "Benannt im Hatha Yoga Pradipika Kap. 2.68. Der Text beschreibt den Atem als einen tiefen Summton wie eine Biene, der großes inneres Glück bringen soll." },
+    "pattern": { "notes": "Durch die Nase einatmen; mit einem sanften, anhaltenden Summen „M-m-m“ ausatmen, Lippen geschlossen, Kiefer weich. Die Ausatmung ist doppelt so lang wie die Einatmung, um die Vagusstimulation zu maximieren." },
+    "breathCues": { "notes": "Durch die Nase einatmen. Mit einem Summton ausatmen — wie ein sanftes anhaltendes „mmmmmm“ — bis der Atem vollständig draußen ist." },
+    "instructions": [
+      "Sitze bequem mit langer Wirbelsäule. Entspanne den Kiefer.",
+      "Optional: forme Shanmukhi Mudra — schließe die Augen, verschließe beide Ohren mit den Daumen, lege die Zeigefinger über die Augenbrauen, die Mittelfinger an die Augenwinkel, die Ringfinger an die Nasenwinkel, die kleinen Finger an die Lippenwinkel.",
+      "Atme langsam durch die Nase ein, zähle bis 4.",
+      "Schließe die Lippen leicht. Atme durch die Nase mit einem anhaltenden Summen „M-m-m“ für 6-8 Zählungen aus.",
+      "Spüre die Vibration im vorderen Teil des Schädels, hinter den Augen.",
+      "Wiederhole 8-12 Runden oder 5 Minuten insgesamt.",
+      "Nach der letzten Runde sitze einen Atemzug still und bemerke die Stille, die folgt."
+    ],
+    "voiceCues": {
+      "enter": "Sitze lang. Entspanne den Kiefer. Verschließe optional die Ohren mit den Daumen.",
+      "hold": "Atme langsam durch die Nase ein. Schließe die Lippen. Atme mit einem langen Summton aus.",
+      "breathe": "Das Summen schwingt im vorderen Teil des Schädels. Spüre die Vibration hinter den Augen. Jede Ausatmung ist doppelt so lang wie die Einatmung.",
+      "exit": "Nach der letzten Runde lass das Summen los und sitze still. Lausche der Stille hinter dem Atem."
+    },
+    "contraindications": [
+      "Lass es bei aktiver Ohrenentzündung oder schwerer Nebenhöhlenentzündung weg",
+      "Übe nicht während einer Migräne — die Vibration kann den Schmerz verstärken",
+      "Schwangere können frei üben (ausgezeichnet bei Angst in der Spätschwangerschaft)",
+      "Wenn der Klang dir Schwindel verursacht, verkürze die Dauer"
+    ],
+    "modifications": [
+      "Übe ohne Shanmukhi Mudra — summe einfach mit geschlossenen Augen",
+      "Senke die Tonhöhe des Summens — finde die Resonanz, die sich im Kopf am stärksten anfühlt",
+      "Reduziere auf ein leises Summen, wenn du dich in einem gemeinsamen Raum befindest",
+      "Übe kürzere Zeiträume (1-2 Minuten), wenn Schwindel auftritt"
+    ],
+    "benefits": [
+      "Die direkteste Vagustonus-Stimulation im Katalog — messbarer HRV-Anstieg innerhalb von Minuten",
+      "Reduziert Angst und physiologische Stressmarker",
+      "Vor-dem-Schlafen-Favorit für Menschen mit nächtlichen Gedankenkreisen",
+      "Die Vibration beruhigt das Nervensystem ohne Anstrengung oder erforderlichen Fokus"
+    ],
+    "reasoning": "Bhramari ist das unterschätzteste Pranayama — leise kraftvoll bei Angst und Schlaflosigkeit. Das anhaltende Summen auf der Ausatmung stimuliert den Vagusnerv durch Vibration, was das sympathische Nervensystem innerhalb von 5-10 Atemzügen herunterreguliert. Nützlich, wenn andere Meditationsformen unzugänglich erscheinen — es ist schwer, einen rasenden Gedanken beim Summen zu halten."
+  },
+  "sheetali": {
+    "english": "Kühlender Atem",
+    "aliases": ["Sheetkari (Alternative für alle, die die Zunge nicht rollen können)"],
+    "source": { "note": "Benannt im Hatha Yoga Pradipika Kap. 2.57-58. Der Text beschreibt die Praxis als kühlend, Hunger und Durst stillend und überschüssige Hitze besänftigend." },
+    "pattern": { "notes": "Durch eine gerollte Zunge einatmen (wie durch einen Strohhalm saugen). Durch die Nase ausatmen. Die gerollte-Zunge-Einatmung kühlt die in den Körper eintretende Luft." },
+    "breathCues": { "notes": "Durch die gerollte Zunge einatmen. Mund schließen. Durch die Nase ausatmen. Bemerke das kühle Gefühl in der Kehle beim Einatmen." },
+    "instructions": [
+      "Sitze bequem mit langer Wirbelsäule.",
+      "Öffne den Mund und rolle die Seiten der Zunge nach oben und innen zu einer Röhren- oder Strohhalmform. (Wenn du die Zunge nicht rollen kannst — etwa 30 % können das nicht — übe stattdessen Sheetkari: die Zähne leicht zusammenbeißen und durch die Zwischenräume einatmen.)",
+      "Strecke die gerollte Zunge etwas über die Lippen hinaus.",
+      "Atme langsam durch die gerollte Zunge ein, zähle bis 4. Bemerke die kühle Luft auf der Zunge.",
+      "Zieh die Zunge zurück in den Mund. Schließe die Lippen.",
+      "Atme langsam durch die Nase aus, zähle bis 4.",
+      "Wiederhole 8-12 Runden. Übe NIE bei kaltem Wetter — der Körper ist bereits kühl genug."
+    ],
+    "voiceCues": {
+      "enter": "Sitze lang. Öffne den Mund und rolle die Zunge der Länge nach zu einer Röhrenform. Strecke sie etwas über die Lippen hinaus.",
+      "hold": "Atme langsam durch die gerollte Zunge ein — spüre die kühle Luft auf der Zungenoberfläche.",
+      "breathe": "Zieh die Zunge ein. Schließe die Lippen. Atme durch die Nase aus. Die Kühlung baut sich mit jeder Runde auf.",
+      "exit": "Löse die Zunge. Lass die Lippen leicht geschlossen ruhen. Nimm drei natürliche Atemzüge. Bemerke das kühle Gefühl in Kehle und Brust."
+    },
+    "contraindications": [
+      "Übe nicht bei kaltem Wetter oder wenn du fröstelst — Sheetali kühlt aggressiv",
+      "Lass es bei niedrigem Blutdruck weg",
+      "Vermeide es bei chronischer Verstopfung (die Kühlwirkung kann die Verdauung weiter verlangsamen)",
+      "Übe nicht mit schwerem Asthma oder chronischer Bronchitis",
+      "Schwangere können im Sommer üben; lass es bei kaltem Wetter oder Frösteln weg",
+      "Wenn du die Zunge nicht rollen kannst, übe stattdessen Sheetkari (zusammengebissene Zähne, durch die Zwischenräume einatmen)"
+    ],
+    "modifications": [
+      "Sheetkari-Variante: beiße die Zähne leicht zusammen, lächle und atme durch die Zwischenräume ein. Gleiche Kühlwirkung für Nicht-Zungenroller.",
+      "Reduziere die Dauer auf 1-2 Minuten, wenn die Kühlung zu stark wirkt",
+      "Übe mit einer kleinen Einatmung durch gespitzte Lippen, wenn weder Rollen noch Beißen funktioniert",
+      "Beende immer, indem du eine Minute sitzt und den Atem wieder erwärmst"
+    ],
+    "benefits": [
+      "Direkte Kühlwirkung auf das autonome Nervensystem — reduziert die Körperhitze in Minuten",
+      "Beruhigt Pitta — nützlich bei Wut, Reizung oder Überhitzung",
+      "Reduziert die Intensität von Hitzewallungen",
+      "Kann Fieber um einen kleinen, aber spürbaren Betrag senken"
+    ],
+    "reasoning": "Sheetali ist das Pranayama für heiße Sommernachmittage, Abkühlungen nach intensiver Praxis und jede Zeit, in der Pitta hoch läuft (Wut, Reizung, hitzebedingte Schlaflosigkeit). Die gerollte-Zunge-Einatmung kühlt die in die Lunge eintretende Luft physisch. Lass es im Winter weg — der Körper braucht Wärme, nicht Kühlung. Das Sanskrit śītalī bedeutet „kühlend“, und die Wirkung ist innerhalb von 5-8 Runden unverkennbar."
+  },
+  "bhastrika": {
+    "english": "Blasebalg-Atem",
+    "aliases": ["Blasebalg"],
+    "source": { "note": "Benannt im Hatha Yoga Pradipika Kap. 2.61-67. Der Text beschreibt kräftiges blasebalgartiges Atmen gefolgt von Atemanhalten. Moderne Lehre lässt das tiefe Anhalten meist aus Sicherheitsgründen weg." },
+    "pattern": { "notes": "Kräftige Ein- UND Ausatmung durch die Nase, gleiche Anstrengung in beide Richtungen. Wie das Bedienen eines Blasebalgs — stark, hörbar, rhythmisch. Etwa 60 Atemzüge pro Minute. HÖR SOFORT AUF bei Schwindel oder Benommenheit." },
+    "breathCues": { "notes": "Kräftige Ein-, kräftige Ausatmung durch die Nase. Gleiche Anstrengung in beide Richtungen. Der Klang ist laut und rhythmisch — blasebalgartig. 30 Sekunden pro Runde, 3 Runden mit 30-Sekunden-Pausen dazwischen." },
+    "instructions": [
+      "WARNUNG: Bhastrika ist eine kräftige Praxis. Lies die Kontraindikationen sorgfältig vor dem Üben. Hör sofort auf bei Schwindel.",
+      "Sitze bequem mit sehr langer Wirbelsäule. Hände ruhen auf den Knien.",
+      "Nimm 3 normale Atemzüge, um anzukommen.",
+      "Beginne Bhastrika: atme kräftig durch die Nase ein, weite Bauch und Brust. Atme kräftig durch die Nase aus, ziehe den Bauch ein. Beide Richtungen gleich stark.",
+      "Halte einen rhythmischen Takt von etwa 60 Atemzügen pro Minute (ein Atemzug pro Sekunde). Der Klang ist hörbar und rhythmisch.",
+      "Mache 30 Sekunden weiter, dann hör auf und atme 30 Sekunden natürlich. Bemerke die Wärme und Vibration.",
+      "Wiederhole 2 weitere Runden (3 insgesamt). Nach der letzten Runde sitze 1-2 Minuten still, bevor du aufstehst."
+    ],
+    "voiceCues": {
+      "enter": "Sitze sehr lang. Hände auf den Knien. Nimm drei ankommende Atemzüge.",
+      "hold": "Beginne: kräftige Einatmung, kräftige Ausatmung, beide durch die Nase. Gleiche Anstrengung. Bauch weitet sich beim Einatmen, zieht sich beim Ausatmen ein.",
+      "breathe": "Bleib rhythmisch — etwa ein Atemzug pro Sekunde. 30 Sekunden. Hör auf bei Schwindel.",
+      "exit": "Hör auf. Sitze still. Beobachte, wie der Atem zur Natürlichkeit zurückkehrt. Bemerke die Wärme in der Brust und die Wachheit im Geist."
+    },
+    "contraindications": [
+      "Schwangere SOLLTEN NICHT üben — die Bauchkraft ist unsicher",
+      "Lass es bei Bluthochdruck, Herzerkrankung oder kürzlichem Herzereignis weg",
+      "Übe nicht mit Hernie, Bauchverletzung oder kürzlicher Bauchoperation",
+      "Lass es während der Menstruation weg",
+      "Vermeide es bei schwerem Asthma, COPD oder kürzlicher Lungeninfektion",
+      "Übe nicht auf vollem Magen — warte 3-4 Stunden nach dem Essen",
+      "Lass es bei schwerem Schwindel oder Gleichgewichtsstörungen weg",
+      "HÖR SOFORT AUF bei Schwindel, Benommenheit oder Atemnot"
+    ],
+    "modifications": [
+      "Übe mit reduzierter Kraft — nenne es „kräftiges Nasenatmen“ statt echtem Bhastrika, bis der Körper konditioniert ist",
+      "Reduziere die Rundendauer im ersten Monat auf 15 Sekunden",
+      "Reduziere auf 1-2 Runden insgesamt",
+      "Lass es weg und übe Kapalabhati, wenn die Einatmungskraft zu viel ist",
+      "Wenn du neu in der Atemarbeit bist, übe 4-6 Wochen Nadi Shodhana, bevor du Bhastrika versuchst"
+    ],
+    "benefits": [
+      "Das wärmendste Pranayama im Katalog — nützlich für kalte Morgen und träge Kapha-Tage",
+      "Erhöht die Sauerstoffzufuhr und Durchblutung rasch",
+      "Energetisierend ohne Koffein — erzeugt wache Ruhe innerhalb von 1-2 Minuten",
+      "Stärkt die Atemmuskulatur"
+    ],
+    "reasoning": "Bhastrika ist der Espresso unter den Pranayamas — schnell wirkend, energetisierend und nicht für jeden. Die Kontraindikationen sind absichtlich umfangreich: schnelles kräftiges Atmen beeinflusst Herzfrequenz, Blutdruck und Hirndruck. Spare es für Menschen mit gesundem Herz-Kreislauf-System an kalten trägen Morgen auf. Übe es nie spät nachts — die Wachheit ist real und hält stundenlang an."
+  },
+  "kapalabhati": {
+    "english": "Schädelleuchtender Atem",
+    "aliases": ["Schädelleuchten", "Feueratem (umgangssprachlich)"],
+    "source": { "note": "Das Hatha Yoga Pradipika Kap. 2.36-37 führt Kapalabhati als eine der sechs Shatkarmas (Reinigungstechniken) auf, nicht als Pranayama. Moderne Linien lehren es als Pranayama mit ähnlichen Kontraindikationen. Wir ordnen es zur App-Organisation als Pranayama ein und bewahren die HYP-Zitierung." },
+    "pattern": { "notes": "Scharfe kräftige AUSATMUNG durch die Nase mit passiver Einatmung (die Einatmung geschieht automatisch, wenn sich der Bauch entspannt). Der Bauch schnellt bei der Ausatmung nach innen. Etwa 60 Ausatmungen pro Minute. HÖR SOFORT AUF bei Schwindel." },
+    "breathCues": { "notes": "Scharfe Ausatmung durch die Nase, indem der Bauch nach innen schnellt. Die Einatmung ist passiv — geschieht von selbst, wenn sich der Bauch entspannt. Anders als Bhastrika, weil nur die Ausatmung kräftig ist." },
+    "instructions": [
+      "WARNUNG: Kapalabhati ist eine kräftige Praxis. Lies die Kontraindikationen sorgfältig. Hör sofort auf bei Schwindel.",
+      "Sitze sehr lang — Vajrasana eignet sich gut; Sukhasana auf einer gefalteten Decke geht auch. Wirbelsäule gerade.",
+      "Lege eine Hand auf den Bauch, um die Bewegung zu spüren.",
+      "Nimm 3 ankommende Atemzüge.",
+      "Beginne Kapalabhati: atme scharf durch die Nase aus, indem du den Bauch zur Wirbelsäule hin nach innen schnellst. Die Ausatmung ist kurz und scharf.",
+      "Lass den Bauch sich entspannen — die Einatmung geschieht passiv. Atme NICHT aktiv ein.",
+      "Mache mit etwa 60 Ausatmungen pro Minute weiter (eine pro Sekunde). Der Klang ist rhythmisch, hörbar, auf die Ausatmung fokussiert.",
+      "Nach 30 Sekunden hör auf und atme 30 Sekunden natürlich. Wiederhole 3 Runden insgesamt. Sitze nach der letzten Runde 1-2 Minuten still."
+    ],
+    "voiceCues": {
+      "enter": "Sitze sehr lang. Lege eine Hand auf den Bauch. Nimm drei ankommende Atemzüge.",
+      "hold": "Scharfe Ausatmung durch die Nase — der Bauch schnellt nach innen. Lass die Einatmung von selbst geschehen, wenn sich der Bauch entspannt.",
+      "breathe": "Bleib rhythmisch — etwa eine Ausatmung pro Sekunde. Fokussiere nur auf die scharfe Ausatmung; die Einatmung erledigt sich von selbst.",
+      "exit": "Hör auf. Sitze still. Beobachte, wie der Atem zur Natürlichkeit zurückkehrt. Bemerke die Helligkeit hinter den Augen — den „schädelleuchtenden“ Effekt."
+    },
+    "contraindications": [
+      "Schwangere SOLLTEN NICHT üben — die Bauchkraft ist unsicher",
+      "Lass es bei Bluthochdruck, Herzerkrankung oder kürzlichem Herzereignis weg",
+      "Übe nicht mit Hernie, Bauchverletzung oder kürzlicher Bauchoperation",
+      "Lass es während der Menstruation weg — die Bauchbewegung ist kontraindiziert",
+      "Vermeide es bei schwerem Asthma, COPD oder kürzlicher Atemwegsinfektion",
+      "Übe nicht bei Schwindel, schwerer Migräne oder nach einem kürzlichen Schlaganfall",
+      "Lass es bei Epilepsie oder Anfallsleiden weg — die autonome Wirkung kann Episoden auslösen",
+      "Übe nicht auf vollem Magen — warte 3-4 Stunden nach dem Essen",
+      "HÖR SOFORT AUF bei Schwindel, Benommenheit oder wenn die Sicht fleckig wird"
+    ],
+    "modifications": [
+      "Reduziere die Rate im ersten Monat auf 30-40 Ausatmungen pro Minute",
+      "Reduziere die Rundendauer auf 15-20 Sekunden",
+      "Übe 1-2 Runden insgesamt",
+      "Übe mit offenen Augen, wenn Schwindel mit geschlossenen Augen auftritt",
+      "Lass es weg und übe Nadi Shodhana, wenn Kapalabhati überstimulierend wirkt"
+    ],
+    "benefits": [
+      "Reinigt die Nebenhöhlen und die Atemwege",
+      "Aktiviert die Bauchorgane durch rhythmische Kompression",
+      "Erzeugt die „schädelleuchtende“ Klarheit — messbare kognitive Wachheit",
+      "Stärkt das Zwerchfell und die Bauchmuskeln"
+    ],
+    "reasoning": "Kapalabhati ist das am häufigsten falsch benannte Pranayama im modernen Yoga — das Hatha Yoga Pradipika führt es als Shatkarma (Kriya/Reinigungstechnik) auf, nicht als Pranayama. Die Mechanik ähnelt Bhastrika, aber mit passiven Einatmungen — leichter zu lernen, aber mit den gleichen schweren Kontraindikationen, weil die autonome Wirkung real ist. Nutze es als 2-Minuten-Wachmacher am Morgen an kalten trägen Tagen, wenn Koffein nicht infrage kommt."
+  }
+}

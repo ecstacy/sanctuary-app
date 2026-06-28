@@ -22,14 +22,12 @@
 //  two highest-risk cases (esp. for pranayama like Kapalabhati/Bhastrika).
 // ─────────────────────────────────────────────────────────────────────────────
 
-const COPY =
-  'The Sanctuary offers general wellness and educational content rooted in ' +
-  'yoga and Ayurveda. It is not medical advice, diagnosis, or treatment. ' +
-  'Consult a qualified healthcare provider before changing your diet, ' +
-  'exercise, or health routine — especially if you are pregnant or managing ' +
-  'a medical condition.'
+import { useTranslation } from 'react-i18next'
 
 export default function MedicalDisclaimer({ variant = 'card', className = '' }) {
+  const { t } = useTranslation()
+  const COPY = t('disclaimer.body')
+
   if (variant === 'inline') {
     return (
       <p

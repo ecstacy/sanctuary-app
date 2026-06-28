@@ -1,17 +1,19 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const TABS = [
-  { path: '/home', label: 'Home', icon: 'home_max' },
-  { path: '/routine', label: 'Routine', icon: 'self_care', filled: true },
-  { path: '/discover', label: 'Discover', icon: 'explore' },
-  { path: '/profile', label: 'Profile', icon: 'person_2' },
+  { path: '/home', navKey: 'nav.home', icon: 'home_max' },
+  { path: '/routine', navKey: 'nav.routine', icon: 'self_care', filled: true },
+  { path: '/discover', navKey: 'nav.discover', icon: 'explore' },
+  { path: '/profile', navKey: 'nav.profile', icon: 'person_2' },
 ]
 
 const SCROLL_THRESHOLD = 10
 
 export default function BottomNav() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { pathname } = useLocation()
   const [visible, setVisible] = useState(true)
   const lastScrollY = useRef(0)
@@ -59,10 +61,11 @@ export default function BottomNav() {
     >
       {TABS.map(tab => {
         const active = pathname === tab.path || (tab.path === '/routine' && pathname.startsWith('/practice'))
+        const label = t(tab.navKey)
         return (
           <button
             key={tab.path}
-            aria-label={tab.label}
+            aria-label={label}
             aria-current={active ? 'page' : undefined}
             onClick={() => {
               if (tab.path === '/routine') {
@@ -87,7 +90,7 @@ export default function BottomNav() {
             <span className={`font-label text-[10px] uppercase tracking-widest transition-colors duration-200 ${
               active ? 'text-primary font-medium' : 'text-on-surface-variant/50'
             }`}>
-              {tab.label}
+              {label}
             </span>
           </button>
         )

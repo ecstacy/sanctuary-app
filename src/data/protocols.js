@@ -40,6 +40,8 @@
 //  silently skip the section.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { localizeProtocol } from '../i18n/contentI18n'
+
 export const SECTION_ICONS = {
   food:    'restaurant',
   move:    'self_improvement',
@@ -592,5 +594,5 @@ export const PROTOCOLS = {
 }
 
 export function getProtocol(vikriti) {
-  return PROTOCOLS[vikriti] || null
+  return localizeProtocol(PROTOCOLS[vikriti] || null)
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { track, EVENTS } from '../lib/track'
 import MedicalDisclaimer from '../components/MedicalDisclaimer'
@@ -21,42 +22,20 @@ import MedicalDisclaimer from '../components/MedicalDisclaimer'
 //  on final CTA, ONBOARDING_SKIPPED on skip button or back-out.
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Visual config per slide; eyebrow/title/body come from the onboarding
+// namespace (onboarding.slides[i]) so they localize.
 const SLIDES = [
-  {
-    icon: 'spa',
-    eyebrow: 'Welcome to The Sanctuary',
-    title: 'A practice as unique as you',
-    body: 'We blend ancient yogic tradition with Ayurvedic wisdom — then tailor it to your body, your day, and your goals.',
-    accent: 'from-[#6b8f5e] to-[#b8d4a8]',
-  },
-  {
-    icon: 'self_improvement',
-    eyebrow: 'Step 1 of 3',
-    title: 'Yoga that meets you where you are',
-    body: 'Hatha Yoga Pradipika postures, voice-guided so you can practice eyes-closed. Pranayama, asanas, and full routines — all paced to your level.',
-    accent: 'from-[#7b93a8] to-[#b8d4e8]',
-  },
-  {
-    icon: 'restaurant',
-    eyebrow: 'Step 2 of 3',
-    title: 'Eat and live by your nature',
-    body: 'Foods to favour, daily routines, seasonal guidance — drawn directly from Charaka Samhita and made practical for modern life.',
-    accent: 'from-[#c47a3a] to-[#f0c987]',
-  },
-  {
-    icon: 'auto_awesome',
-    eyebrow: 'Step 3 of 3',
-    title: 'Let\'s find your dosha',
-    body: 'A short 15-question quiz reveals your Ayurvedic constitution — the foundation everything else builds on. Takes about 90 seconds.',
-    accent: 'from-[#5c4e8a] to-[#9b8fd4]',
-    isFinal: true,
-  },
+  { icon: 'spa',              accent: 'from-[#6b8f5e] to-[#b8d4a8]' },
+  { icon: 'self_improvement', accent: 'from-[#7b93a8] to-[#b8d4e8]' },
+  { icon: 'restaurant',       accent: 'from-[#c47a3a] to-[#f0c987]' },
+  { icon: 'auto_awesome',     accent: 'from-[#5c4e8a] to-[#9b8fd4]', isFinal: true },
 ]
 
 const SEEN_KEY = 'sanctuary.onboarding.seen'
 
 export default function OnboardingPage() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const { user } = useAuth()
   const [idx, setIdx] = useState(0)
   const startRef = useRef(false)
@@ -117,6 +96,7 @@ export default function OnboardingPage() {
   }
 
   const slide = SLIDES[idx]
+  const slideText = t('onboarding.slides', { returnObjects: true })[idx] || {}
 
   return (
     <div
@@ -129,7 +109,7 @@ export default function OnboardingPage() {
         <button
           onClick={prev}
           disabled={idx === 0}
-          aria-label="Previous slide"
+          aria-label={t('onboarding.prevSlide')}
           className={`w-9 h-9 rounded-full flex items-center justify-center active:scale-90 ${
             idx === 0 ? 'opacity-0 pointer-events-none' : 'text-on-surface-variant'
           }`}
@@ -140,9 +120,9 @@ export default function OnboardingPage() {
         <button
           onClick={skip}
           className="font-label text-[11px] uppercase tracking-wider text-on-surface-variant px-3 py-1"
-          aria-label="Skip onboarding"
+          aria-label={t('onboarding.skipAria')}
         >
-          Skip
+          {t('onboarding.skip')}
         </button>
       </div>
 
@@ -157,20 +137,20 @@ export default function OnboardingPage() {
         </div>
 
         <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-2 stagger-2">
-          {slide.eyebrow}
+          {slideText.eyebrow}
         </p>
         <h1 className="font-headline text-3xl text-on-surface text-center leading-tight mb-4 px-2 stagger-3 max-w-sm">
-          {slide.title}
+          {slideText.title}
         </h1>
         <p className="font-body text-sm text-on-surface-variant text-center leading-relaxed max-w-xs stagger-4">
-          {slide.body}
+          {slideText.body}
         </p>
       </div>
 
       {/* Dots + CTA */}
       <div className="px-6 pb-8 flex-shrink-0" style={{ paddingBottom: 'max(2rem, env(safe-area-inset-bottom))' }}>
         {/* Progress dots */}
-        <div className="flex items-center justify-center gap-1.5 mb-5" aria-label={`Slide ${idx + 1} of ${SLIDES.length}`}>
+        <div className="flex items-center justify-center gap-1.5 mb-5" aria-label={t('onboarding.slideAria', { n: idx + 1, total: SLIDES.length })}>
           {SLIDES.map((_, i) => (
             <span
               key={i}
@@ -187,7 +167,7 @@ export default function OnboardingPage() {
           onClick={next}
           className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-[0.98] transition-all"
         >
-          {slide.isFinal ? 'Find My Dosha' : 'Next'}
+          {slide.isFinal ? t('onboarding.findDosha') : t('onboarding.next')}
         </button>
 
         {/* Already-have-account link on final slide */}
@@ -196,7 +176,7 @@ export default function OnboardingPage() {
             onClick={() => { markSeen(); navigate('/login') }}
             className="w-full mt-3 py-3 font-label text-[11px] text-on-surface-variant uppercase tracking-wider"
           >
-            I already have an account
+            {t('onboarding.haveAccount')}
           </button>
         )}
 
