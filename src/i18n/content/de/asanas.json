@@ -1256,6 +1256,269 @@
         "Aktiviert die parasympathische Reaktion, wenn sie mehrere Atemzüge pro Seite gehalten wird"
       ],
       "reasoning": "Drehungen sind Wirbelsäulenhygiene — sie wringen Stagnation aus Rücken und Bauch. Besonders nützlich, wenn die Verdauung träge ist oder der untere Rücken sich nach einem langen Tag am Schreibtisch festgefahren anfühlt. Wir liefern die halbe Variante, weil die volle Bindung eine Hüftbeweglichkeit erfordert, die die meisten am ersten Tag schlicht nicht haben."
+    },
+    "bharadvajasana": {
+      "english": "Bharadvajas Drehung",
+      "aliases": [
+        "Haltung des Weisen Bharadvaja"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung, benannt nach dem vedischen Weisen Bharadvaja. Nicht im Hatha Yoga Pradipika Kap. 1 aufgeführt."
+      },
+      "instructions": [
+        "Sitze auf einer gefalteten Decke mit beiden Beinen nach vorne ausgestreckt.",
+        "Beuge beide Knie und schwinge die Beine zur linken Seite. Staple die Beine, sodass der rechte Knöchel auf dem linken Fußgewölbe ruht.",
+        "Sitze gleichmäßig auf beiden Sitzbeinen — passe die Decke an, damit die rechte Hüfte sich erden kann.",
+        "Atme ein und verlängere die Wirbelsäule.",
+        "Atme aus und drehe den Oberkörper nach rechts, weg von den Beinen.",
+        "Lege die rechte Hand auf den Boden hinter dir. Bring die linke Hand zum rechten Knie oder Oberschenkel.",
+        "Jedes Ausatmen dreht eine Spur tiefer. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Sitze auf einer gefalteten Decke. Beuge beide Knie und schwinge die Beine zur linken Seite. Staple die Beine, sodass der rechte Knöchel auf dem linken Fußgewölbe ruht.",
+        "hold": "Atme ein und verlängere die Wirbelsäule. Atme aus und drehe den Oberkörper nach rechts, weg von den Beinen. Die rechte Hand auf dem Boden hinter dir, die linke Hand am rechten Knie.",
+        "breathe": "Jedes Einatmen verlängert; jedes Ausatmen dreht eine Spur tiefer.",
+        "exit": "Löse die Drehung. Schwinge die Beine zur anderen Seite und wiederhole."
+      },
+      "contraindications": [
+        "Schwangere sollten nur eine offene Variante üben — komprimiere den Bauch nicht",
+        "Übe nicht bei Bandscheibenvorfall oder schwerer Verletzung des unteren Rückens",
+        "Vermeide die Haltung nach einer kürzlichen Bauch-, Hüft- oder Rückenoperation",
+        "Lass sie bei schwerer Knieverletzung aus — die Beinfaltung ist asymmetrisch"
+      ],
+      "modifications": [
+        "Sitze auf einer höheren gefalteten Decke, wenn eine der Hüften vom Boden abhebt",
+        "Halte beide Hände zur Stütze auf dem Boden, wenn das Greifen zum Knie die Schulter belastet",
+        "Verringere die Drehtiefe — eine halbe Drehung ist in Ordnung",
+        "Übe im Stuhl: schlage ein Bein über, drehe dich zur Stuhllehne"
+      ],
+      "benefits": [
+        "Die sanfteste sitzende Drehung im Katalog — für fast jeden zugänglich",
+        "Die asymmetrische Beinstellung lehrt den Körper, trotz Ungleichgewicht die Senkrechte zu finden",
+        "Regt die Verdauung durch sanfte Bauchkompression an",
+        "Nützlich als Übergangshaltung zwischen tieferen Drehungen und Vorwärtsbeugen"
+      ],
+      "reasoning": "Bharadvajasana ist die sitzende Drehung für Einsteiger — schonender für Hüften und Knie als Ardha Matsyendrasana oder Marichyasana. Nützlich für Menschen, denen die Drehungen im Schneidersitz intensiv sind. Die asymmetrische Beinstellung ist die Überraschung — die meisten haben sich noch nie aus dieser Geometrie gedreht."
+    },
+    "marichyasanaA": {
+      "english": "Marichis Haltung A",
+      "aliases": [
+        "Vorwärtsbeuge des Weisen Marichi"
+      ],
+      "source": {
+        "note": "Moderne Iyengar-/Ashtanga-Buchstabenfolge von Haltungen, benannt nach dem Weisen Marichi (einem Sohn Brahmas). Das Hatha Yoga Pradipika führt die mit Buchstaben bezeichneten Varianten nicht auf."
+      },
+      "instructions": [
+        "Sitze auf einer gefalteten Decke mit beiden Beinen nach vorne ausgestreckt.",
+        "Beuge das rechte Knie und stelle den rechten Fuß flach auf den Boden, die Ferse nah am rechten Sitzbein.",
+        "Halte das linke Bein lang und aktiv, den Fuß geflext.",
+        "Atme ein und verlängere die Wirbelsäule.",
+        "Wickle den rechten Arm um das rechte Schienbein (und um die Rückseite des Körpers), um die linke Hand hinter dem Rücken zu fassen. Oder halte einen Gurt zwischen den Händen.",
+        "Atme aus und falte dich über das ausgestreckte linke Bein nach vorne.",
+        "Halte 30-60 Sekunden. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie, der Fuß flach auf dem Boden nah am rechten Sitzbein. Wickle den rechten Arm um das rechte Schienbein und fasse die linke Hand hinter dem Rücken, oder halte einen Gurt.",
+        "hold": "Atme ein, um dich zu verlängern. Atme aus und falte dich über das ausgestreckte linke Bein nach vorne. Die Bindung hält die Wirbelsäule aktiv.",
+        "breathe": "Jedes Ausatmen faltet eine Spur tiefer. Die Bindung vertieft die Beuge nicht mit Kraft — der Atem tut es.",
+        "exit": "Atme ein und richte dich auf. Löse die Bindung. Wechsle die Seite."
+      },
+      "contraindications": [
+        "Schwangere sollten die Bindung nicht üben — versuche stattdessen eine einfache sitzende Vorwärtsbeuge",
+        "Übe nicht bei Schulterverletzung oder Rotatorenmanschettenproblem — die Verschlingung ist intensiv",
+        "Lass sie bei Bandscheibenvorfall oder schwerer Verletzung des unteren Rückens aus",
+        "Vermeide die Haltung bei einem Riss des hinteren Oberschenkels"
+      ],
+      "modifications": [
+        "Nutze einen Gurt zwischen den Händen, wenn sie sich hinter dem Rücken nicht erreichen",
+        "Lass die Bindung ganz aus — übe wie Janu Sirsasana mit dem gebeugten Knie gerade nach oben statt nach außen",
+        "Sitze auf einer höheren Decke, um das Becken nach vorne zu neigen",
+        "Beuge das ausgestreckte Knie, wenn die hinteren Oberschenkel sich gezogen anfühlen"
+      ],
+      "benefits": [
+        "Vereint Vorwärtsbeuge + Schulteröffner — effizient für schreibtischverspannte Menschen",
+        "Die Bindung lehrt aktive Beteiligung während einer Vorwärtsbeuge (die meisten Beugen sind passiv)",
+        "Dehnt den hinteren Oberschenkel des einen Beins, während sie die Schulter des anderen öffnet",
+        "Nützlich zur Vorbereitung auf bindende Drehungen später"
+      ],
+      "reasoning": "Marichyasana A ist eine bindende Vorwärtsbeuge — sie vereint einzigartig die Länge des hinteren Oberschenkels mit der Schulteröffnung. Hebe sie dir für Menschen auf, die bereits ein stabiles Paschimottanasana und Janu Sirsasana haben. Die Bindung ist nicht der Punkt; die aktive Beteiligung beim Versuch zu binden macht die Beuge tiefer als eine passive."
+    },
+    "parivrttaTrikonasana": {
+      "english": "Gedrehtes Dreieck",
+      "aliases": [
+        "Gedrehte Dreieckshaltung"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Drehvariante des Trikonasana. \"Parivṛtta\" = gedreht. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Stelle die Füße weit auseinander auf der Matte, aber schmaler als für Trikonasana — etwa einen Meter.",
+        "Drehe den rechten Fuß 90 Grad nach außen. Richte die Hüften zum rechten Bein aus.",
+        "Atme ein und strecke den linken Arm nach vorne, während du dich durch die Wirbelsäule verlängerst.",
+        "Atme aus und drehe den Oberkörper nach rechts, senke die linke Hand zum Boden außerhalb des rechten Fußes ODER auf einen Yogablock.",
+        "Strecke den rechten Arm gerade zur Decke und staple die Schultern übereinander.",
+        "Schau unter dem oberen Arm nach oben, wenn der Nacken es zulässt. Drücke beide Füße fest in den Boden.",
+        "Zum Lösen: atme ein und richte dich zurück zum Stand auf. Wechsle die Seite."
+      ],
+      "voiceCues": {
+        "enter": "Stelle die Füße etwa einen Meter auseinander. Drehe den rechten Fuß 90 Grad nach außen. Richte die Hüften zum rechten Bein aus. Atme ein und strecke den linken Arm nach vorne.",
+        "hold": "Atme aus und drehe dich nach rechts. Die linke Hand zum Boden außerhalb des rechten Fußes oder auf einen Block. Der rechte Arm gerade nach oben. Schau unter dem oberen Arm nach oben.",
+        "breathe": "Jedes Einatmen verlängert; jedes Ausatmen dreht eine Spur tiefer.",
+        "exit": "Atme ein und richte dich zurück zum Stand auf. Bring die Füße kurz zusammen. Wechsle die Seite."
+      },
+      "contraindications": [
+        "Schwangere sollten nicht üben — die geschlossene Drehung komprimiert den Bauch",
+        "Übe nicht bei Bandscheibenvorfall oder schwerer Verletzung des unteren Rückens",
+        "Lass sie bei Bluthochdruck oder Migräne aus",
+        "Vermeide die Haltung bei Nackenverletzung — halte den Blick geradeaus",
+        "Lass sie bei schwerem Ischias aus"
+      ],
+      "modifications": [
+        "Setze die untere Hand auf einen Yogablock in beliebiger Höhe — nicht auf den Boden",
+        "Nutze eine Wand hinter dir für Stabilität — die hintere Ferse drückt in die Wand",
+        "Verringere den Fußabstand, um das Gleichgewicht zu erleichtern",
+        "Übe mit dem oberen Arm an der Hüfte statt über dem Kopf"
+      ],
+      "benefits": [
+        "Vereint Dehnung des hinteren Oberschenkels + tiefe Wirbelsäulendrehung in einer Form",
+        "Stärkt das Standbein und die Körpermitte",
+        "Stimuliert die Bauchorgane durch die Drehung",
+        "Fordernder als sitzende Drehungen — nützlich, um die Drehbeweglichkeit voranzutreiben"
+      ],
+      "reasoning": "Das gedrehte Dreieck ist die fordernste Drehung im Katalog auf mittlerem Niveau. Die Kombination aus Länge des hinteren Oberschenkels + Gleichgewicht + Drehung zeigt genau, wie viel Drehbeweglichkeit jemand tatsächlich hat. Nutze immer einen Block unter der unteren Hand — keine Ausnahmen für neue Übende."
+    },
+    "uttanasana": {
+      "english": "Stehende Vorwärtsbeuge",
+      "aliases": [
+        "Stehende Vorbeuge",
+        "Stoffpuppe"
+      ],
+      "source": {
+        "note": "Moderne stehende Vorwärtsbeuge. Das Hatha Yoga Pradipika benennt Paschimottanasana (1.30-31), die sitzende Version; Uttanasana ist ihr stehendes Gegenstück aus dem modernen Hatha."
+      },
+      "instructions": [
+        "Stelle dich mit hüftbreiten Füßen an den vorderen Rand der Matte.",
+        "Atme ein und hebe die Arme über den Kopf, während du die Wirbelsäule verlängerst.",
+        "Atme aus und klappe aus der Hüfte nach vorne, falte dich über die Beine.",
+        "Beuge die Knie so viel, wie du brauchst. Gestreckte Beine sind NICHT das Ziel.",
+        "Lass die Hände auf Schienbeinen, Knöcheln oder dem Boden ruhen — dort, wo dein Rücken lang bleibt.",
+        "Lass den Kopf schwer hängen. Entspanne den Nacken vollständig.",
+        "Optional: halte die gegenüberliegenden Ellbogen und wiege dich sanft von Seite zu Seite."
+      ],
+      "voiceCues": {
+        "enter": "Atme aus dem Stand ein und hebe die Arme über den Kopf, um die Wirbelsäule zu verlängern. Atme aus und klappe aus der Hüfte, falte dich mit langer Wirbelsäule nach vorne. Beuge die Knie so viel wie nötig.",
+        "hold": "Lass den Kopf schwer hängen. Halte die gegenüberliegenden Ellbogen und wiege dich sanft von Seite zu Seite, oder lass die Hände auf Schienbeinen, Knöcheln oder dem Boden ruhen. Entspanne den Nacken vollständig.",
+        "breathe": "Jedes Ausatmen lässt den Oberkörper ein wenig näher zu den Oberschenkeln schmelzen. Jedes Einatmen weitet den oberen Rücken.",
+        "exit": "Beuge die Knie großzügig. Rolle dich langsam Wirbel für Wirbel zum Stand auf. Der Kopf kommt zuletzt hoch."
+      },
+      "contraindications": [
+        "Schwangere sollten sich nicht tief falten — halte stattdessen die Beine auseinander und eine lange Wirbelsäule",
+        "Übe nicht bei einem Bandscheibenvorfall oder einer akuten Verletzung des unteren Rückens",
+        "Lass sie bei schwerem Ischias oder einem Riss des hinteren Oberschenkels aus",
+        "Vermeide die Haltung bei sehr hohem Blutdruck oder einer Netzhautablösung",
+        "Bei Grünem Star lass die Kopf-unter-Herz-Position aus"
+      ],
+      "modifications": [
+        "Beuge die Knie so viel wie nötig — gestreckte Beine sind nicht das Ziel",
+        "Lege die Hände auf Yogablöcke, wenn der Boden weit entfernt ist",
+        "Stelle eine Stuhlfläche unter den Oberkörper für eine vollständig gestützte Version",
+        "Halte die gegenüberliegenden Ellbogen und lass den Oberkörper vollständig hängen"
+      ],
+      "benefits": [
+        "Löst die gesamte hintere Kette — hintere Oberschenkel, Waden, unteren Rücken",
+        "Die leichte Umkehrhaltung beruhigt das sympathische Nervensystem",
+        "Entlastet die Wirbelsäule durch schwerkraftunterstützte Verlängerung",
+        "Häufiger Einstieg in die Pranayama-Praxis — ein paar Minuten hier vor dem Sitzen helfen dem Atem, sich zu beruhigen"
+      ],
+      "reasoning": "Uttanasana ist der einfachste Reset für ein überdrehtes Nervensystem. Die Kombination aus Kopf-unter-Herz (eine leichte Umkehrhaltung) und vollständiger Lösung der hinteren Kette holt den Übenden in 60-90 Sekunden aus dem Kampf-oder-Flucht-Modus. Beuge die Knie großzügig — es gibt keine Extrapunkte für gestreckte Beine."
+    },
+    "paschimottanasana": {
+      "english": "Sitzende Vorwärtsbeuge",
+      "aliases": [
+        "Westdehnung",
+        "Intensive Rückendehnung"
+      ],
+      "source": {
+        "note": "Ausdrücklich im Hatha Yoga Pradipika Kap. 1 benannt. Der Text beschreibt sie als Erwecker des pranischen Flusses entlang der Wirbelsäule."
+      },
+      "instructions": [
+        "Sitze auf einer gefalteten Decke mit beiden Beinen nach vorne ausgestreckt.",
+        "Flexe beide Füße, sodass die Zehen gerade nach oben zeigen.",
+        "Aktiviere die Oberschenkel sanft — die Kniescheiben heben sich.",
+        "Atme ein und hebe beide Arme über den Kopf, während du die Wirbelsäule verlängerst.",
+        "Atme aus und klappe aus der Hüfte nach vorne — nicht aus der Taille.",
+        "Greife nach den Schienbeinen, Knöcheln oder Füßen — dort, wo du halten kannst, ohne den unteren Rücken zu runden.",
+        "Beuge die Knie, wenn die hinteren Oberschenkel sich gezogen anfühlen. Nutze bei Bedarf einen Gurt um die Füße."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit den Beinen nach vorne ausgestreckt. Flexe die Füße, sodass die Zehen nach oben zeigen. Atme ein und hebe die Arme über den Kopf, während du die Wirbelsäule verlängerst.",
+        "hold": "Atme aus und klappe aus der Hüfte nach vorne — nicht aus der Taille. Greife nach den Schienbeinen, Knöcheln oder Füßen, dort, wo du halten kannst, ohne den unteren Rücken zu runden.",
+        "breathe": "Jedes Einatmen verlängert; jedes Ausatmen löst ein wenig tiefer. Lass die Schwerkraft die Arbeit machen — ziehe dich niemals nach vorne.",
+        "exit": "Atme ein und rolle dich langsam Wirbel für Wirbel auf. Der Kopf kommt zuletzt hoch."
+      },
+      "contraindications": [
+        "Schwangere sollten sich nicht tief falten — übe stattdessen mit den Beinen auseinander",
+        "Übe nicht bei einem Bandscheibenvorfall oder einer akuten Verletzung des unteren Rückens",
+        "Vermeide die Haltung im Falle einer kürzlichen Bauchoperation",
+        "Bei schwerem Ischias lass sie aus oder nutze einen Gurt um die Füße, statt zu greifen"
+      ],
+      "modifications": [
+        "Sitze auf einer gefalteten Decke, um das Becken nach vorne zu neigen — die meisten brauchen das",
+        "Beuge die Knie so viel wie nötig, um die Wirbelsäule lang zu halten",
+        "Nutze einen Gurt um die Füße, wenn die Hände nicht reichen",
+        "Lege ein Bolster auf die Oberschenkel, um die Brust abzulegen (erholsame Variante)"
+      ],
+      "benefits": [
+        "Dehnt die hinteren Oberschenkel, Waden und die gesamte hintere Kette tief",
+        "Komprimiert den Bauch — unterstützt die Verdauung und stimuliert die Nieren",
+        "Aktiviert die parasympathische Reaktion — direkte Linderung von Angst",
+        "Das Hatha Yoga Pradipika beschreibt sie als das Bewegen von Prana im zentralen Kanal; moderne Lesart: Regulation des Nervensystems"
+      ],
+      "reasoning": "Paschimottanasana ist die kanonische Haltung für ein überreiztes Nervensystem — aufgedreht-aber-müdes Vata, abendliche Angst, das Herunterfahren vor dem Schlaf. Halte sie länger, als sich bequem anfühlt, um den parasympathischen Wechsel greifen zu lassen."
+    },
+    "suptaBaddhaKonasana": {
+      "english": "Liegende gebundene Winkelhaltung",
+      "aliases": [
+        "Liegende Schusterhaltung",
+        "Liegende Göttin"
+      ],
+      "source": {
+        "note": "Moderne erholsame Variante des Baddha Konasana. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Lege dich auf einer weichen Unterlage auf den Rücken.",
+        "Bring die Fußsohlen zusammen. Lass die Knie zu den Seiten fallen.",
+        "Lege einen Block, ein Kissen oder eine gefaltete Decke unter JEDES Knie zur Stütze — bei engen Hüften nicht verhandelbar.",
+        "Bewege die Füße näher zum Körper oder weiter weg, um zu finden, was sich am besten anfühlt.",
+        "Lege eine Hand auf den Bauch, eine aufs Herz. Oder lege beide Arme an die Seiten, die Handflächen nach oben.",
+        "Bedecke die Augen mit einem weichen Tuch oder einem Augenkissen, falls du eines hast.",
+        "Lass den Kiefer locker, lass die Augen weich werden. Bleibe 5-10 Minuten."
+      ],
+      "voiceCues": {
+        "enter": "Lege dich auf den Rücken. Bring die Fußsohlen zusammen und lass die Knie zu den Seiten fallen. Lege ein Kissen oder einen Block unter jedes Knie zur Stütze.",
+        "hold": "Lege eine Hand auf den Bauch, eine aufs Herz. Oder lege die Arme an die Seiten, die Handflächen nach oben. Lass den Kiefer locker, lass die Augen weich werden.",
+        "breathe": "Atme sanft in den unteren Bauch. Jedes Ausatmen ist ein stilles Loslassen.",
+        "exit": "Bring mit den Händen die Knie wieder zusammen. Rolle dich auf die rechte Seite und ruhe dort für einen Atemzug. Drücke dich langsam zum Sitz hoch."
+      },
+      "contraindications": [
+        "Schwangere im dritten Trimester sollten nicht flach liegen — stütze den Oberkörper auf einem 30-45°-Bolster",
+        "Übe nicht bei einer Leisten- oder Hüftverletzung",
+        "Lass sie bei Knieverletzung aus — achte darauf, dass die Kissen die Knie vollständig stützen",
+        "Vermeide die Haltung bei starken Schmerzen im unteren Rücken — versuche es stattdessen mit gebeugten Knien"
+      ],
+      "modifications": [
+        "Lege Blöcke oder Kissen unter jedes Knie — bei engen Hüften nicht verhandelbar",
+        "Lege ein Bolster längs unter die Wirbelsäule für eine brustöffnende Variante",
+        "Ein Augenkissen über den Augen für tiefere Entspannung",
+        "Ein Bolster unter dem Kopf, wenn das Kinn unbequem nach hinten kippt"
+      ],
+      "benefits": [
+        "Einer der zugänglichsten Hüftöffner — die Schwerkraft macht die Arbeit",
+        "Beruhigt das Nervensystem zuverlässig — konkurriert mit Savasana um den parasympathischen Effekt",
+        "Traditionelle Haltung bei Menstruationsbeschwerden und zur Entspannung des Beckenbodens",
+        "Lässt sich gut 5-15 Minuten halten — ideal für erholsame Praxis oder vor dem Schlaf"
+      ],
+      "reasoning": "Die liegende gebundene Winkelhaltung ist der faule, erholsame Verwandte des Baddha Konasana — der Boden stützt die Wirbelsäule, während die Schwerkraft die Hüften öffnet. Nutze die Kissen unter den Knien ausnahmslos. Dies ist die Haltung, zu der man greift, wenn nichts anderes zugänglich erscheint."
     }
   }
 }
