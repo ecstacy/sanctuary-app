@@ -2580,6 +2580,269 @@
         "Iyengar nannte ihn den König der Asanas, gepaart mit Sarvangasana der Königin"
       ],
       "reasoning": "Sirsasana ist die folgenreichste Haltung im Katalog — der Nutzen ist real und das Verletzungsrisiko ist real. Bestehe für neue Übende auf der Anleitung einer Lehrerin. Für Menschen, die nur die App nutzen, empfiehl Beine an der Wand als wirksame Alternative, bis sie mit jemandem persönlich arbeiten."
+    },
+    "sasangasana": {
+      "english": "Hasenhaltung",
+      "aliases": [
+        "Sasankasana",
+        "Hase"
+      ],
+      "source": {
+        "note": "Moderne Hatha-Haltung. Haltung der Bikram-Linie; erscheint in einigen klassischen Hatha-Aufzählungen. Nicht im Hatha Yoga Pradipika Kap. 1."
+      },
+      "instructions": [
+        "Knie auf dem Boden und sitze auf den Fersen (Vajrasana).",
+        "Greife nach hinten und fasse mit beiden Händen die Fersen deiner Füße.",
+        "Ziehe das Kinn ein und lege den Scheitel des Kopfes auf die Matte vor den Knien.",
+        "Atme ein und hebe die Hüften, rolle den Körper nach vorne auf den Scheitel.",
+        "Das meiste Gewicht bleibt in den Beinen und Händen — nur 10-20 % auf dem Scheitel.",
+        "Die Stirn nähert sich den Knien, während die Wirbelsäule in tiefer Beugung rundet.",
+        "Halte 20-30 Sekunden. Zum Lösen senke die Hüften zurück auf die Fersen und ruhe."
+      ],
+      "voiceCues": {
+        "enter": "Sitze auf deinen Fersen. Greife nach hinten und fasse mit beiden Händen die Fersen. Ziehe das Kinn ein und lege den Scheitel des Kopfes auf die Matte vor den Knien.",
+        "hold": "Atme ein und hebe die Hüften, rolle nach vorne auf den Scheitel. Die Stirn nähert sich den Knien. Das meiste Gewicht in den Händen, nicht im Kopf.",
+        "breathe": "Langsamer, gleichmäßiger Atem. Die Kehle komprimiert — halte den Atem klein und stetig.",
+        "exit": "Senke die Hüften zurück auf die Fersen. Ruhe mit der Stirn auf der Matte für einen Atemzug, bevor du dich aufsetzt."
+      },
+      "contraindications": [
+        "Übe nicht bei Nackenverletzung oder Problemen der Halswirbelsäule",
+        "Lass sie bei Bluthochdruck oder Grünem Star aus",
+        "Schwangere sollten nicht üben",
+        "Vermeide die Haltung bei Knieverletzung, die das Knien verhindert",
+        "Übe nicht auf vollen Magen"
+      ],
+      "modifications": [
+        "Lege eine gefaltete Decke unter die Knie zur Polsterung",
+        "Lege eine gefaltete Decke unter den Kopf für weniger Druck auf den Scheitel",
+        "Lass den Fersengriff aus und lege die Hände stattdessen auf die Matte vor den Knien",
+        "Verringere die Tiefe — halte die Stirn ein paar Zentimeter von den Knien entfernt"
+      ],
+      "benefits": [
+        "Dehnt die gesamte Wirbelsäule in tiefer Beugung — das Gegenteil jeder Rückbeuge",
+        "Löst die Spannung zwischen den Schulterblättern — Magie gegen Schreibtischarbeit",
+        "Leichte Umkehrhaltung beruhigt das Nervensystem",
+        "Leichtere Alternative zu Sirsasana für Menschen, die eine Kopf-unten-Empfindung sicher wollen"
+      ],
+      "reasoning": "Der Hase ist die sanfte Umkehrhaltung, die die meisten nie ausprobiert haben — still kraftvoll für die Lösung des oberen Rückens. Der gestützte Handgelenkgriff bedeutet, dass das meiste Gewicht in den Beinen und Händen bleibt; der Kopf trägt kaum Last. Nützlich als Gegenhaltung zu Rückbeugen in einer Abfolge."
+    },
+    "swastikasana": {
+      "english": "Glückverheißender Sitz",
+      "aliases": [
+        "Glückssitz"
+      ],
+      "source": {
+        "note": "Die erste ausdrücklich benannte Asana im HYP Kap. 1. Das Sanskrit \"svastika\" bedeutet glückverheißend; das alte Symbol geht seiner europäischen Aneignung im 20. Jahrhundert voraus und hat nichts damit zu tun."
+      },
+      "instructions": [
+        "Sitze auf einer gefalteten Decke mit ausgestreckten Beinen.",
+        "Beuge das rechte Knie und schiebe den rechten Fuß unter den linken Oberschenkel, nah an den Körper.",
+        "Beuge das linke Knie und schiebe den linken Fuß zwischen die rechte Wade und den rechten Oberschenkel.",
+        "Die Beine bilden eine ordentliche Verschränkung — die Füße verborgen, die Knöchel symmetrisch.",
+        "Lege die Hände auf die Knie in Jnana Mudra (Daumen und Zeigefinger berühren sich).",
+        "Verlängere die Wirbelsäule — der Scheitel strebt nach oben, die Sitzbeine verwurzeln nach unten.",
+        "Lass den Kiefer locker, lass die Augen weich werden."
+      ],
+      "voiceCues": {
+        "enter": "Sitze bequem. Schiebe den rechten Fuß unter den linken Oberschenkel, dann den linken Fuß zwischen die rechte Wade und den Oberschenkel.",
+        "hold": "Die Hände ruhen auf den Knien. Die Wirbelsäule aufrecht — der Scheitel strebt zur Decke.",
+        "breathe": "Atme natürlich. Jedes Ausatmen löst eine weitere Schicht Spannung.",
+        "exit": "Falte die Beine sanft aus und strecke sie vor dir aus."
+      },
+      "contraindications": [
+        "Übe nicht bei Knie- oder Hüftverletzung",
+        "Vermeide die Haltung bei schwerem Ischias",
+        "Schwangere in der Spätschwangerschaft könnten sie unbequem finden — nutze Sukhasana auf einem hohen Kissen"
+      ],
+      "modifications": [
+        "Sitze auf einer gefalteten Decke, um die Hüften zu erhöhen und die Kniebelastung zu verringern",
+        "Lockere die Fußverschränkung — der einfache Schneidersitz Sukhasana ist genauso gültig",
+        "Lege ein kleines Kissen unter jedes Knie, wenn sie über dem Boden schweben"
+      ],
+      "benefits": [
+        "Die erste benannte Asana des HYP — der ursprüngliche Meditationssitz",
+        "Strukturierter als Sukhasana; weniger fordernd als Padmasana",
+        "Stabile Basis für Atempraxis und stilles Sitzen",
+        "Eine sanfte Außenrotation der Hüften öffnet sie über Wochen beständiger Praxis"
+      ],
+      "reasoning": "Swastikasana ist die leichter-als-Lotus sitzende Meditationshaltung, mit der das HYP sein Asana-Kapitel eröffnet. Die verschränkten Füße machen den Sitz stabiler als Sukhasana, ohne die tiefe Hüftrotation des Padmasana zu verlangen. Lohnt sich zu üben, wenn Sukhasana bei längerem Sitzen wackelig wird."
+    },
+    "kurmasana": {
+      "english": "Schildkrötenhaltung",
+      "aliases": [
+        "Schildkröte"
+      ],
+      "source": {
+        "note": "Im HYP Kap. 1 neben den anderen grundlegenden Asanas benannt. Kurma ist auch der Name von Vishnus zweiter Inkarnation als Schildkröte — die Haltung beschwört einen kontemplativen Rückzug herauf."
+      },
+      "instructions": [
+        "Sitze mit den Beinen in einem weiten V ausgestreckt.",
+        "Beuge die Knie und stelle die Füße flach auf den Boden, etwa eine Beinlänge auseinander, die Knie zeigen nach oben.",
+        "Lehne dich nach vorne und fädle jeden Arm UNTER das entsprechende gebeugte Knie.",
+        "Wandere mit den Händen zu den Seiten unter die Oberschenkel, bis die Schultern unter den Knien sitzen.",
+        "Strecke die Beine langsam, während sich der Oberkörper zum Boden senkt.",
+        "Lege die Stirn oder das Kinn auf den Boden; die Brust strebt zum Boden.",
+        "Halte mehrere Atemzüge. Zum Lösen: beuge die Knie, wandere mit den Händen zurück, setze dich auf."
+      ],
+      "voiceCues": {
+        "enter": "Sitze mit weiten Beinen. Beuge die Knie nach oben. Fädle jeden Arm unter sein Knie und wandere mit den Händen zu den Seiten.",
+        "hold": "Strecke die Beine langsam. Lass den Oberkörper zum Boden schmelzen. Die Stirn oder das Kinn ruht auf dem Boden.",
+        "breathe": "Jedes Ausatmen löst eine Spur tiefer. Erzwinge nichts — lass die Schwerkraft die Arbeit machen.",
+        "exit": "Beuge die Knie. Wandere mit den Händen zurück. Setze dich langsam auf."
+      },
+      "contraindications": [
+        "FORTGESCHRITTENE Haltung — arbeite mit einer Lehrerin, bevor du sie alleine versuchst",
+        "Übe nicht bei Bandscheibenvorfall, akuter Verletzung des unteren Rückens oder schwerem Ischias",
+        "Lass sie bei Knie- oder Hüftverletzung aus",
+        "Schwangere sollten nicht üben — die Kompression ist unsicher",
+        "Vermeide die Haltung nach einer kürzlichen Bauchoperation"
+      ],
+      "modifications": [
+        "Übe zuerst Janu Sirsasana oder Paschimottanasana, um die nötige Länge der hinteren Oberschenkel aufzubauen",
+        "Nutze eine gefaltete Decke unter den Hüften und ein Bolster auf den Beinen für eine erholsame Variante",
+        "Halte die Knie gebeugt — sie zu strecken ist der fortgeschrittene Ausdruck",
+        "Baue die Dauer allmählich auf; beginne mit 15-Sekunden-Halten"
+      ],
+      "benefits": [
+        "Tiefe Lösung durch die gesamte hintere Kette (Rücken, hintere Oberschenkel, Waden)",
+        "Hüftöffner durch Außenrotation unter Last",
+        "Beruhigt das Nervensystem — die nach innen gerichtete Beuge ist kontemplativ",
+        "Verbindet moderne Übende mit einer der grundlegenden Formen des HYP"
+      ],
+      "reasoning": "Kurmasana ist eine jener Haltungen, deren Geometrie dir erst nach Jahren geduldiger Arbeit an den hinteren Oberschenkeln zeigt, was möglich ist. Für die meisten ist sie aspirativ; für jene mit der Beweglichkeit ist sie eine der still verwandelndsten Formen im Katalog — tiefer Rückzug als Praxis."
+    },
+    "kukkutasana": {
+      "english": "Hahnhaltung",
+      "aliases": [
+        "Hahnenhaltung"
+      ],
+      "source": {
+        "note": "Im HYP Kap. 1 benannt. Baut auf Padmasana (HYP 1.44-49) auf — erfordert gleichzeitig den vollen Lotus UND Armbalance-Kraft."
+      },
+      "instructions": [
+        "VORAUSSETZUNG: ein etabliertes Padmasana (voller Lotus) ohne Kniebelastung.",
+        "Sitze in Padmasana auf einer gefalteten Decke.",
+        "Fädle den rechten Arm zwischen die rechte Wade und den rechten Oberschenkel, bis zum Ellbogen. Wiederhole mit dem linken Arm.",
+        "Lege die Handflächen flach auf den Boden, die Finger gespreizt, schulterbreit auseinander.",
+        "Drücke die Handflächen fest in den Boden und hebe die gesamte Lotusbasis vom Boden.",
+        "Halte mehrere Atemzüge mit dem Körper in der Luft schwebend.",
+        "Senke dich langsam ab, fädle die Arme heraus, löse Padmasana."
+      ],
+      "voiceCues": {
+        "enter": "Fädle in Padmasana die Arme auf jeder Seite zwischen Wade und Oberschenkel, die Handflächen flach auf dem Boden.",
+        "hold": "Drücke die Handflächen kräftig. Hebe den Lotus vom Boden. Aktiviere die Körpermitte.",
+        "breathe": "Stetiger Atem. Halte den Atem nicht unter der Anhebung an.",
+        "exit": "Senke den Lotus langsam. Fädle die Arme heraus. Löse die Beine."
+      },
+      "contraindications": [
+        "FORTGESCHRITTENE Haltung — übe mit einer Lehrerin",
+        "VORAUSSETZUNG: ein volles Padmasana, das 5+ Minuten bequem ist",
+        "Übe nicht bei Handgelenks-, Ellbogen- oder Schulterverletzung",
+        "Lass sie bei Knie- oder Hüftverletzung aus, die Padmasana einschränkt",
+        "Schwangere sollten nicht üben",
+        "Vermeide die Haltung bei einem Bruch oder einer kürzlichen Bauchoperation"
+      ],
+      "modifications": [
+        "Baue zuerst Padmasana auf — Monate der Vorbereitung, nicht Tage",
+        "Übe das Arm-Fädeln ohne Anheben (ähnlich wie Garbha Pindasana), bevor du das Anheben hinzufügst",
+        "Hebe zunächst nur kurz an — 2-3 Sekunden, über Wochen steigern"
+      ],
+      "benefits": [
+        "Baut außergewöhnliche Kraft in Körpermitte, Schultern und Handgelenken auf",
+        "Tiefe Hüftrotation, gehalten unter Armbalance-Last",
+        "Das HYP nennt sie als eine der Asanas, die 'Fettleibigkeit und Krankheit zerstören'",
+        "Krönende Integration mehrerer Asana-Fähigkeiten"
+      ],
+      "reasoning": "Kukkutasana ist eine der benannten Asanas des HYP, die moderne Übende am wenigsten wahrscheinlich je erreichen — sie erfordert gleichzeitig Padmasana UND erhebliche Armbalance-Kraft. Dokumentiert der Vollständigkeit und Tradition halber; sehr wenige werden zu ihr vordringen."
+    },
+    "uttanaKurmasana": {
+      "english": "Gestreckte Schildkrötenhaltung",
+      "aliases": [
+        "Aufwärts gerichtete Schildkröte",
+        "Liegender Lotus"
+      ],
+      "source": {
+        "note": "Im HYP Kap. 1 benannt. Die \"gestreckte\" oder aufwärts gerichtete Schildkröte — Kukkutasana rückwärts auf den Rücken gelehnt."
+      },
+      "instructions": [
+        "VORAUSSETZUNG: ein bequemes Kukkutasana.",
+        "Rolle aus Kukkutasana langsam rückwärts auf den oberen Rücken.",
+        "Halte die Arme durch die Beine gefädelt und fasse mit den Händen die Ohren oder den Hinterkopf.",
+        "Die Beine im Lotus, nun auf der Brust ruhend. Der Körper rollt sich nach innen ein wie eine Schildkröte auf dem Rücken.",
+        "Halte stabil. Atme langsam.",
+        "Zum Lösen: rolle sanft zurück hoch in Kukkutasana, senke dich ab, löse Padmasana."
+      ],
+      "voiceCues": {
+        "enter": "Rolle aus Kukkutasana langsam rückwärts auf den oberen Rücken, die Arme weiterhin durch die Beine gefädelt.",
+        "hold": "Fasse die Ohren oder den Hinterkopf. Der Lotus ruht auf der Brust. Rolle dich nach innen ein.",
+        "breathe": "Langsamer, stetiger Atem. Die Form ist kontemplativer Rückzug.",
+        "exit": "Rolle zurück zum Sitz hoch. Fädle die Arme heraus. Löse die Beine."
+      },
+      "contraindications": [
+        "FORTGESCHRITTENE Haltung — übe mit einer Lehrerin",
+        "VORAUSSETZUNG: eine solide Kukkutasana-Praxis",
+        "Übe nicht bei Nacken-, Schulter- oder Verletzung des oberen Rückens",
+        "Lass sie bei Knie- oder Hüftverletzung aus",
+        "Schwangere sollten nicht üben",
+        "Vermeide die Haltung bei Schwindel oder Gleichgewichtsstörungen"
+      ],
+      "modifications": [
+        "Baue zuerst Kukkutasana auf; dies ist seine liegende Erweiterung",
+        "Übe Garbha Pindasana (ähnliche Form, leichterer Einstieg) als Zwischenschritt",
+        "Halte zunächst nur 3-5 Atemzüge"
+      ],
+      "benefits": [
+        "Tiefer Rückzug — der Körper wird zu einer geschlossenen Kugel",
+        "Aktiviert die Bandhas (energetische Verschlüsse) auf natürliche Weise durch die Kompression",
+        "In der klassischen Abfolge als Vorbereitung für Pranayama betrachtet",
+        "Schließt die Schildkröten-Serie des HYP 1.22-24 ab"
+      ],
+      "reasoning": "Wie Kukkutasana ist dies ein dokumentarischer Eintrag — nur wenige werden sie je üben. Ihre Aufnahme bewahrt die vollständige Asana-Liste des HYP Kap. 1 und gibt fortgeschrittenen Übenden ein erkennbares Ziel."
+    },
+    "mayurasana": {
+      "english": "Pfauenhaltung",
+      "aliases": [
+        "Pfau"
+      ],
+      "source": {
+        "note": "Im HYP Kap. 1 benannt. Der Text preist sie als Heilmittel für die Verdauung — fähig, \"sogar Kalakuta-Gift zu verdauen\"."
+      },
+      "instructions": [
+        "Knie auf der Matte, die Knie weit.",
+        "Lege die Handflächen auf den Boden zwischen die Knie, die Finger zeigen ZURÜCK zum Körper.",
+        "Senke dich auf die Unterarme und drücke die Ellbogen zusammen in den unteren Bauch (nahe dem Nabel).",
+        "Strecke die Beine hinter dir aus, die Fußballen auf dem Boden.",
+        "Verlagere das Gewicht nach vorne über die Ellbogen; hebe die Füße vom Boden.",
+        "Der Körper schwebt parallel zum Boden, vollständig auf den in den Bauch gedrückten Ellbogen balanciert.",
+        "Halte mehrere Atemzüge. Zum Lösen: senke die Füße, drücke zurück, setze dich auf."
+      ],
+      "voiceCues": {
+        "enter": "Knie weit. Lege die Handflächen mit nach hinten zeigenden Fingern auf. Senke dich auf die Unterarme, die Ellbogen zusammen gegen den Bauch.",
+        "hold": "Strecke die Beine nach hinten. Verlagere das Gewicht nach vorne. Hebe die Füße — der Körper schwebt parallel zum Boden.",
+        "breathe": "Stetiger Atem. Aktiviere die Körpermitte, um das Schweben zu halten.",
+        "exit": "Senke die Füße ab. Drücke zurück in den Sitz. Schüttle die Handgelenke zur Erholung aus."
+      },
+      "contraindications": [
+        "FORTGESCHRITTENE Haltung — übe mit einer Lehrerin",
+        "Übe nicht bei Handgelenks-, Ellbogen- oder Schulterverletzung",
+        "Lass sie bei einem Bruch, einer kürzlichen Bauchoperation oder schweren Verdauungsproblemen aus",
+        "Schwangere sollten nicht üben",
+        "Vermeide die Haltung bei Bluthochdruck, Herzerkrankungen oder Augenerkrankungen",
+        "Lass sie direkt nach dem Essen aus — warte 3-4 Stunden"
+      ],
+      "modifications": [
+        "Baue mit Chaturanga Handgelenkskraft auf, bevor du sie versuchst",
+        "Übe zuerst die kniende Unterarmposition mit noch auf dem Boden stehenden Füßen",
+        "Hebe jeweils ein Bein, bevor du beide hebst",
+        "Halte zunächst 3-5 Sekunden; baue die Dauer über Monate auf"
+      ],
+      "benefits": [
+        "Baut außergewöhnliche Kraft in Handgelenken, Unterarmen und Körpermitte auf",
+        "Das HYP behauptet erhebliche Verdauungsvorteile — der Bauchdruck stimuliert den Darm",
+        "Mentaler Fokus — die Balance verlangt einpunktige Aufmerksamkeit",
+        "Eine der unverwechselbarsten Formen der Asana-Tradition"
+      ],
+      "reasoning": "Der Pfau ist bekanntlich schwer zugänglich — die meisten brauchen Monate der Handgelenkskonditionierung, bevor sie ihn versuchen. Die Begeisterung des HYP für seine Verdauungswirkung wird durch die Mechanik des Bauchdrucks bestätigt. Hebe ihn dir für Menschen auf, die bereits ein starkes Chaturanga und Bakasana haben."
     }
   }
 }
