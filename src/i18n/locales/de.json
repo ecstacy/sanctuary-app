@@ -4,9 +4,21 @@
     "tagline": "Dein täglicher Rückzugsort für Körper und Geist"
   },
   "languages": {
-    "en": { "label": "English", "sublabel": "Continue in English", "flag": "🇬🇧" },
-    "hi": { "label": "हिन्दी", "sublabel": "हिन्दी में जारी रखें", "flag": "🇮🇳" },
-    "de": { "label": "Deutsch", "sublabel": "Auf Deutsch fortfahren", "flag": "🇩🇪" }
+    "en": {
+      "label": "English",
+      "sublabel": "Continue in English",
+      "flag": "🇬🇧"
+    },
+    "hi": {
+      "label": "हिन्दी",
+      "sublabel": "हिन्दी में जारी रखें",
+      "flag": "🇮🇳"
+    },
+    "de": {
+      "label": "Deutsch",
+      "sublabel": "Auf Deutsch fortfahren",
+      "flag": "🇩🇪"
+    }
   },
   "common": {
     "continue": "Weiter",
@@ -125,45 +137,90 @@
         "question": "Dein Körper hat sich angefühlt...",
         "subtitle": "Denk an die letzten Tage.",
         "options": [
-          { "label": "Trocken, kalt oder schmerzend", "desc": "Steife Gelenke, trockene Haut, mehr Kälteempfinden als sonst" },
-          { "label": "Warm oder entzündet", "desc": "Läuft heiß, Reizungen, vielleicht empfindliche Haut" },
-          { "label": "Schwer, träge, verschleimt", "desc": "Langsamere Bewegung, Schwellungen, dickere Nebenhöhlen" }
+          {
+            "label": "Trocken, kalt oder schmerzend",
+            "desc": "Steife Gelenke, trockene Haut, mehr Kälteempfinden als sonst"
+          },
+          {
+            "label": "Warm oder entzündet",
+            "desc": "Läuft heiß, Reizungen, vielleicht empfindliche Haut"
+          },
+          {
+            "label": "Schwer, träge, verschleimt",
+            "desc": "Langsamere Bewegung, Schwellungen, dickere Nebenhöhlen"
+          }
         ]
       },
       {
         "question": "Dein Geist war...",
         "subtitle": "Wie hat sich dein Kopf in den letzten Tagen angefühlt?",
         "options": [
-          { "label": "Rasend oder ängstlich", "desc": "Viele Gedanken, schwer zur Ruhe zu kommen, Grübeln" },
-          { "label": "Scharf, aber gereizt", "desc": "Fokussiert, produktiv — aber dünnhäutig" },
-          { "label": "Stumpf oder benebelt", "desc": "Schwerer Start, wenig Motivation, etwas abwesend" }
+          {
+            "label": "Rasend oder ängstlich",
+            "desc": "Viele Gedanken, schwer zur Ruhe zu kommen, Grübeln"
+          },
+          {
+            "label": "Scharf, aber gereizt",
+            "desc": "Fokussiert, produktiv — aber dünnhäutig"
+          },
+          {
+            "label": "Stumpf oder benebelt",
+            "desc": "Schwerer Start, wenig Motivation, etwas abwesend"
+          }
         ]
       },
       {
         "question": "Dein Schlaf war diese Woche...",
         "subtitle": "Qualität, nicht Quantität.",
         "options": [
-          { "label": "Unruhig & unterbrochen", "desc": "Schwer einzuschlafen oder durchzuschlafen" },
-          { "label": "Kurz & intensiv", "desc": "Spät einschlafen, früh aufwachen, aufgedreht" },
-          { "label": "Schwer & schwer zu verlassen", "desc": "Lange schlafen und trotzdem benommen" }
+          {
+            "label": "Unruhig & unterbrochen",
+            "desc": "Schwer einzuschlafen oder durchzuschlafen"
+          },
+          {
+            "label": "Kurz & intensiv",
+            "desc": "Spät einschlafen, früh aufwachen, aufgedreht"
+          },
+          {
+            "label": "Schwer & schwer zu verlassen",
+            "desc": "Lange schlafen und trotzdem benommen"
+          }
         ]
       },
       {
         "question": "Dein Energiemuster war...",
         "subtitle": "Wie fühlt sich dein Tag tatsächlich an?",
         "options": [
-          { "label": "Sprunghaft — Höhen und Tiefs", "desc": "Kurze Schübe gefolgt von plötzlicher Müdigkeit" },
-          { "label": "Heiß brennend", "desc": "Starker Antrieb den ganzen Tag, Burnout-Gefahr" },
-          { "label": "Niedrig und langsam", "desc": "Schwer in Gang zu kommen, bleibt lieber ruhig" }
+          {
+            "label": "Sprunghaft — Höhen und Tiefs",
+            "desc": "Kurze Schübe gefolgt von plötzlicher Müdigkeit"
+          },
+          {
+            "label": "Heiß brennend",
+            "desc": "Starker Antrieb den ganzen Tag, Burnout-Gefahr"
+          },
+          {
+            "label": "Niedrig und langsam",
+            "desc": "Schwer in Gang zu kommen, bleibt lieber ruhig"
+          }
         ]
       },
       {
         "question": "Dein Appetit war in letzter Zeit...",
         "subtitle": "Die Verdauung ist das Armaturenbrett der Dosha-Balance.",
         "options": [
-          { "label": "Unberechenbar oder gering", "desc": "Mahlzeiten vergessen, Blähungen, Gas" },
-          { "label": "Sehr stark & dringend", "desc": "„Hangry“, wenn Mahlzeiten spät kommen, starke Gelüste" },
-          { "label": "Schwer oder stumpf", "desc": "Selten hungrig, fühlt sich nach dem Essen schwer an" }
+          {
+            "label": "Unberechenbar oder gering",
+            "desc": "Mahlzeiten vergessen, Blähungen, Gas"
+          },
+          {
+            "label": "Sehr stark & dringend",
+            "desc": "„Hangry“, wenn Mahlzeiten spät kommen, starke Gelüste"
+          },
+          {
+            "label": "Schwer oder stumpf",
+            "desc": "Selten hungrig, fühlt sich nach dem Essen schwer an"
+          }
         ]
       }
     ]
@@ -173,7 +230,83 @@
     "awaitBody": "Entdecke deine einzigartige ayurvedische Konstitution durch unser geführtes Quiz und schalte personalisierte Wohlfühl-Einblicke frei.",
     "takeQuiz": "Dosha-Quiz starten",
     "goBack": "Zurück",
-    "retakeQuiz": "Quiz wiederholen"
+    "retakeQuiz": "Quiz wiederholen",
+    "yourDoshaType": "Dein Dosha-Typ",
+    "rareEquilibrium": "Das seltene Gleichgewicht",
+    "allFiveElements": "Alle fünf Elemente",
+    "ch1Kicker": "Kapitel 1",
+    "ch1Title": "Wer du bist",
+    "ch1Lede": "Die Elemente, Qualitäten und Muster, die deine Konstitution prägen.",
+    "yourConstitution": "Deine Konstitution",
+    "vpkShort": "V · P · K",
+    "pctAria": "{{name}} {{pct}} Prozent",
+    "footnoteTridoshic": "Eine seltene und ausgewogene Konstitution. Alle drei Doshas sind in deinem Wesen gleichermaßen ausgeprägt.",
+    "footnoteDual": "Du drückst {{primary}} und {{secondary}} fast gleichermaßen aus. Deine Konstitution verschiebt sich mit Jahreszeiten und Lebensstil.",
+    "footnoteGapHigh": "{{primary}} ist in deiner Konstitution überwältigend dominant. Die anderen Doshas spielen eine untergeordnete, unterstützende Rolle.",
+    "footnoteGapMid": "{{primary}} ist eindeutig dein führendes Dosha. {{secondary}} ({{pct}}%) spielt eine mäßige Hintergrundrolle.",
+    "footnoteGapLow": "{{primary}} führt deine Konstitution an, mit {{secondary}} ({{pct}}%) als bemerkenswertem sekundären Einfluss.",
+    "balancedNature": "Deine ausgewogene Natur",
+    "dominant": "Dominant: {{name}}",
+    "secondary": "Sekundär: {{name}}",
+    "qualitiesGunas": "{{name}}-Qualitäten (Gunas)",
+    "sourceCharaka": "Quelle: Charaka Samhita {{verse}}",
+    "yourBody": "Dein {{name}}-Körper",
+    "bodySummary": "Statur, Haut, Haar, Verdauung, Schlaf, Energie",
+    "labelBuild": "Statur",
+    "labelSkin": "Haut",
+    "labelHair": "Haar",
+    "labelFace": "Gesicht",
+    "labelDigestion": "Verdauung",
+    "labelSleep": "Schlaf",
+    "labelEnergy": "Energie",
+    "yourMind": "Dein {{name}}-Geist",
+    "mindSummary": "Wie du dich zeigst — in deiner besten Form und wenn du aus dem Gleichgewicht bist",
+    "inBalance": "Im Gleichgewicht",
+    "outOfBalance": "Wenn aus dem Gleichgewicht",
+    "naturalStrengths": "Deine natürlichen Stärken",
+    "ch2Kicker": "Kapitel 2",
+    "ch2Title": "Im Gleichgewicht bleiben",
+    "ch2Lede": "Frühe Zeichen eines Ungleichgewichts, häufige Auslöser und Charakas Anleitung, um zur Mitte zurückzukehren.",
+    "signsLabel": "Worauf du achten solltest",
+    "signsSummary": "Häufige Symptome eines {{name}}-Ungleichgewichts",
+    "signsIntro": "Wenn dein dominantes Dosha hoch steht, sind dies die frühen Signale. Keines erfordert Alarm — sie sind Einladungen, dich auf die ausgleichenden Praktiken unten einzulassen.",
+    "triggersLabel": "Was dich aus dem Gleichgewicht bringt",
+    "triggersSummary": "Gewohnheiten und Jahreszeiten, die dich aus dem Gleichgewicht bringen",
+    "pacifyLabel": "Wie du Gleichgewicht findest",
+    "pacifySummaryFallback": "Lebensstil-Anpassungen, um dein Dosha zu beruhigen",
+    "stayInBalance": "Im Gleichgewicht bleiben",
+    "yogaMovement": "Yoga & Bewegung",
+    "meditationBreathwork": "Meditation & Atemarbeit",
+    "ch3Kicker": "Kapitel 3",
+    "ch3Title": "Lebe nach deinem Dosha",
+    "ch3Lede": "Übersetze dieses Wissen in den Alltag — die Jahreszeit, die Stunde des Tages, das Essen auf deinem Teller.",
+    "plusBadge": "Sanctuary Plus",
+    "teaserHeadline": "Die tägliche Praxis, {{primary}} zu sein.",
+    "teaserBody": "Dein Protokoll Jahreszeit für Jahreszeit, eine dosha-bewusste Ernährung und das vollständige Dinacharya — die täglichen Rituale, die Ayurveda in dein tatsächliches Leben übersetzen.",
+    "teaserBullet1": "Protokoll für Hochsaison + Dosha-Stunden",
+    "teaserBullet2": "Vollständiger Ernährungsleitfaden der 6 Geschmacksrichtungen",
+    "teaserBullet3": "Charakas 13 tägliche Praktiken",
+    "unlockChapter3": "Kapitel 3 freischalten",
+    "unlockChapter3Aria": "Kapitel 3 freischalten — Lebe nach deinem Dosha",
+    "peakSeason": "Hochsaison",
+    "peakSeasonBody": "{{season}} — {{name}} ist in dieser Zeit natürlicherweise erhöht. Es braucht zusätzliche Sorgfalt, um im Gleichgewicht zu bleiben.",
+    "doshaHours": "{{name}}-Stunden",
+    "doshaHoursBody": "{{timeOfDay}} — Dies sind die Stunden, in denen die {{name}}-Energie im Körper ihren Höhepunkt erreicht.",
+    "balancingTastes": "Ausgleichende Geschmacksrichtungen",
+    "protocolKicker": "Wenn dein {{name}} hoch steht",
+    "protocolHeadline": "Dein 3-Tage-Protokoll zur {{name}}-Beruhigung",
+    "protocolBody": "Essen, Bewegung, Atem und Ruhe — für die Tage, an denen dein dominantes Dosha auch dein Ungleichgewicht ist.",
+    "protocolAria": "{{name}}-beruhigendes Protokoll öffnen",
+    "dietTitle": "Deine Ernährung",
+    "dietSummary": "Welche Speisen du bevorzugen und meiden solltest, nach den sechs Geschmacksrichtungen",
+    "dietAria": "Ernährungsberatung öffnen",
+    "routineTitle": "Tagesroutine",
+    "routineSummary": "Charakas 13 Praktiken — richte den Tag am Rhythmus des Körpers aus",
+    "routineAria": "Tagesroutine öffnen",
+    "understandingTitle": "Prakriti verstehen",
+    "understandingBody": "Im Ayurveda ist deine Prakriti deine Geburtskonstitution — das einzigartige Verhältnis von Vata, Pitta und Kapha, mit dem du geboren wurdest. Sie bleibt das ganze Leben stabil. Wenn sich die Doshas durch Ernährung, Stress oder Jahreszeiten verschieben, wird dieser vorübergehende Zustand Vikriti genannt. Das Ziel des Ayurveda ist es, die Vikriti wieder mit der Prakriti in Einklang zu bringen.",
+    "paywallHeadline": "Lebe nach deiner {{primary}}-Natur",
+    "paywallSubhead": "Schalte Kapitel 3 und dein vollständiges ayurvedisches Lifestyle-Protokoll frei."
   },
   "onboarding": {
     "skip": "Überspringen",
@@ -343,9 +476,18 @@
       "seeRebalance": "So findest du dein Gleichgewicht",
       "exploreDosha": "Mein Dosha entdecken",
       "takeQuiz": "Quiz starten",
-      "vata": { "element": "Luft + Äther", "tagline": "Kreativ, schnell denkend und anpassungsfähig" },
-      "pitta": { "element": "Feuer + Wasser", "tagline": "Fokussiert, zielstrebig und natürlich strahlend" },
-      "kapha": { "element": "Erde + Wasser", "tagline": "Geerdet, fürsorglich und beständig" }
+      "vata": {
+        "element": "Luft + Äther",
+        "tagline": "Kreativ, schnell denkend und anpassungsfähig"
+      },
+      "pitta": {
+        "element": "Feuer + Wasser",
+        "tagline": "Fokussiert, zielstrebig und natürlich strahlend"
+      },
+      "kapha": {
+        "element": "Erde + Wasser",
+        "tagline": "Geerdet, fürsorglich und beständig"
+      }
     },
     "paywallHeadline": "Das vollständige Protokoll wartet",
     "paywallSubhead": "Plus gibt dir den täglichen Plan — Ernährung, Bewegung, Schlaf — der dein Dosha wieder ins Gleichgewicht bringt."
@@ -519,10 +661,30 @@
     "durationMin": "{{m}} Min.",
     "durationHm": "{{h}} Std. {{m}} Min.",
     "outcomes": {
-      "stress": ["Ruhigerer Geist", "Weniger Cortisol", "Gelöste Schultern", "Ruhigerer Atem"],
-      "sleep": ["Stillerer Geist", "Langsamerer Puls", "Gelockerte Wirbelsäule", "Tiefere Ruhe"],
-      "energy": ["Erwachter Körper", "Schärferer Fokus", "Offene Brust", "Gehobene Stimmung"],
-      "flexibility": ["Offene Hüften", "Bewegliche Wirbelsäule", "Gelöste Spannung", "Größere Reichweite"]
+      "stress": [
+        "Ruhigerer Geist",
+        "Weniger Cortisol",
+        "Gelöste Schultern",
+        "Ruhigerer Atem"
+      ],
+      "sleep": [
+        "Stillerer Geist",
+        "Langsamerer Puls",
+        "Gelockerte Wirbelsäule",
+        "Tiefere Ruhe"
+      ],
+      "energy": [
+        "Erwachter Körper",
+        "Schärferer Fokus",
+        "Offene Brust",
+        "Gehobene Stimmung"
+      ],
+      "flexibility": [
+        "Offene Hüften",
+        "Bewegliche Wirbelsäule",
+        "Gelöste Spannung",
+        "Größere Reichweite"
+      ]
     }
   },
   "pranayamaPractice": {
@@ -647,8 +809,19 @@
     "paywallSubhead": "Schalte die komplette Asana-Bibliothek, deine persönliche Routine und die Weisheit der Charaka frei.",
     "close": "Schließen",
     "scrollTop": "Nach oben scrollen",
-    "categories": { "standing": "Stehend", "seated": "Sitzend", "supine": "Rückenlage", "prone": "Bauchlage", "restorative": "Regenerativ", "inversion": "Umkehrhaltung" },
-    "levels": { "beginner": "Anfänger", "intermediate": "Mittel", "advanced": "Fortgeschritten" }
+    "categories": {
+      "standing": "Stehend",
+      "seated": "Sitzend",
+      "supine": "Rückenlage",
+      "prone": "Bauchlage",
+      "restorative": "Regenerativ",
+      "inversion": "Umkehrhaltung"
+    },
+    "levels": {
+      "beginner": "Anfänger",
+      "intermediate": "Mittel",
+      "advanced": "Fortgeschritten"
+    }
   },
   "dinacharya": {
     "goBack": "Zurück",
@@ -788,17 +961,57 @@
       "p_appetite_strong": "Ich habe einen starken, pünktlichen Appetit — eine ausgelassene Mahlzeit macht mich gereizt.",
       "k_sleep_deep": "Ich schlafe schnell ein und tief — manchmal schwer aufzuwachen."
     },
-    "answers": { "yes": "Ja", "somewhat": "Etwas", "no": "Eher nicht" },
+    "answers": {
+      "yes": "Ja",
+      "somewhat": "Etwas",
+      "no": "Eher nicht"
+    },
     "tiebreakers": {
-      "tb_vp_stress": { "prompt": "Unter echtem Druck fühlst du dich eher —", "vata": "Zerstreut und ängstlich", "pitta": "Scharf und frustriert" },
-      "tb_vp_sleepless": { "prompt": "Wenn du nicht schlafen kannst, dein Geist —", "vata": "Rast zwischen vielen Dingen", "pitta": "Konzentriert sich aufs Problemlösen" },
-      "tb_vp_cold": { "prompt": "Kaltes Wetter ist —", "vata": "Schwer zu ertragen für dich", "pitta": "Eine willkommene Erleichterung" },
-      "tb_vk_freetime": { "prompt": "In der Freizeit bevorzugst du —", "vata": "Abwechslung und neue Erfahrungen", "kapha": "Vertraute Annehmlichkeiten und Ruhe" },
-      "tb_vk_weight": { "prompt": "Dein Körpergewicht —", "vata": "Bleibt niedrig und schwankt", "kapha": "Bleibt stabil oder steigt langsam" },
-      "tb_vk_mind": { "prompt": "Deinen Geist würdest du beschreiben als —", "vata": "Schnell und kreativ", "kapha": "Beständig und bedacht" },
-      "tb_pk_hangry": { "prompt": "Wenn eine Mahlzeit sich verzögert —", "pitta": "Wirst du gereizt und „hangry“", "kapha": "Merkst du es kaum" },
-      "tb_pk_conflict": { "prompt": "In einem Konflikt neigst du dazu —", "pitta": "Direkt zu konfrontieren", "kapha": "Auszuweichen und es sich legen zu lassen" },
-      "tb_pk_stamina": { "prompt": "Deine Ausdauer ist —", "pitta": "Intensiv und verzehrend", "kapha": "Langsam brennend und ausdauernd" }
+      "tb_vp_stress": {
+        "prompt": "Unter echtem Druck fühlst du dich eher —",
+        "vata": "Zerstreut und ängstlich",
+        "pitta": "Scharf und frustriert"
+      },
+      "tb_vp_sleepless": {
+        "prompt": "Wenn du nicht schlafen kannst, dein Geist —",
+        "vata": "Rast zwischen vielen Dingen",
+        "pitta": "Konzentriert sich aufs Problemlösen"
+      },
+      "tb_vp_cold": {
+        "prompt": "Kaltes Wetter ist —",
+        "vata": "Schwer zu ertragen für dich",
+        "pitta": "Eine willkommene Erleichterung"
+      },
+      "tb_vk_freetime": {
+        "prompt": "In der Freizeit bevorzugst du —",
+        "vata": "Abwechslung und neue Erfahrungen",
+        "kapha": "Vertraute Annehmlichkeiten und Ruhe"
+      },
+      "tb_vk_weight": {
+        "prompt": "Dein Körpergewicht —",
+        "vata": "Bleibt niedrig und schwankt",
+        "kapha": "Bleibt stabil oder steigt langsam"
+      },
+      "tb_vk_mind": {
+        "prompt": "Deinen Geist würdest du beschreiben als —",
+        "vata": "Schnell und kreativ",
+        "kapha": "Beständig und bedacht"
+      },
+      "tb_pk_hangry": {
+        "prompt": "Wenn eine Mahlzeit sich verzögert —",
+        "pitta": "Wirst du gereizt und „hangry“",
+        "kapha": "Merkst du es kaum"
+      },
+      "tb_pk_conflict": {
+        "prompt": "In einem Konflikt neigst du dazu —",
+        "pitta": "Direkt zu konfrontieren",
+        "kapha": "Auszuweichen und es sich legen zu lassen"
+      },
+      "tb_pk_stamina": {
+        "prompt": "Deine Ausdauer ist —",
+        "pitta": "Intensiv und verzehrend",
+        "kapha": "Langsam brennend und ausdauernd"
+      }
     }
   },
   "doshaQuiz": {
@@ -848,7 +1061,12 @@
     "comingUp": "Als Nächstes",
     "minShort": "{{n}} Min.",
     "activity": "Aktivität",
-    "periods": { "1d": "Heute", "1w": "7 Tage", "1m": "30 Tage", "all": "Gesamt" },
+    "periods": {
+      "1d": "Heute",
+      "1w": "7 Tage",
+      "1m": "30 Tage",
+      "all": "Gesamt"
+    },
     "summaryMinutes": "Minuten",
     "summarySessions": "Einheiten",
     "summaryPoses": "Posen",
@@ -872,13 +1090,34 @@
     "chartEmpty": "Noch keine Übungsdaten",
     "chartEmptyHint": "Schließe eine Einheit ab, um dein Diagramm zu sehen",
     "levels": {
-      "1": { "title": "Anfänger*in", "subtitle": "Neugierige Seele" },
-      "2": { "title": "Schüler*in", "subtitle": "Suche nach Stille" },
-      "3": { "title": "Praktizierende*r", "subtitle": "Stete Flamme" },
-      "4": { "title": "Hingebungsvoll", "subtitle": "Verwurzelt in der Praxis" },
-      "5": { "title": "Geübt", "subtitle": "Mühelos im Fluss" },
-      "6": { "title": "Meister*in", "subtitle": "Inneres Licht" },
-      "7": { "title": "Guru", "subtitle": "Der Rückzugsort in dir" }
+      "1": {
+        "title": "Anfänger*in",
+        "subtitle": "Neugierige Seele"
+      },
+      "2": {
+        "title": "Schüler*in",
+        "subtitle": "Suche nach Stille"
+      },
+      "3": {
+        "title": "Praktizierende*r",
+        "subtitle": "Stete Flamme"
+      },
+      "4": {
+        "title": "Hingebungsvoll",
+        "subtitle": "Verwurzelt in der Praxis"
+      },
+      "5": {
+        "title": "Geübt",
+        "subtitle": "Mühelos im Fluss"
+      },
+      "6": {
+        "title": "Meister*in",
+        "subtitle": "Inneres Licht"
+      },
+      "7": {
+        "title": "Guru",
+        "subtitle": "Der Rückzugsort in dir"
+      }
     }
   },
   "discover": {
@@ -915,15 +1154,36 @@
       "posture": "Haltung"
     },
     "routines": {
-      "stress": { "label": "Stressabbau", "desc": "Beruhige deinen Geist und löse Spannungen" },
-      "sleep": { "label": "Besserer Schlaf", "desc": "Komm zur Ruhe und bereite dich auf tiefe Erholung vor" },
-      "energy": { "label": "Energieschub", "desc": "Wecke deinen Körper und tanke neue Kraft" },
-      "flexibility": { "label": "Beweglichkeits-Flow", "desc": "Löse Steifheit und verbessere die Mobilität" }
+      "stress": {
+        "label": "Stressabbau",
+        "desc": "Beruhige deinen Geist und löse Spannungen"
+      },
+      "sleep": {
+        "label": "Besserer Schlaf",
+        "desc": "Komm zur Ruhe und bereite dich auf tiefe Erholung vor"
+      },
+      "energy": {
+        "label": "Energieschub",
+        "desc": "Wecke deinen Körper und tanke neue Kraft"
+      },
+      "flexibility": {
+        "label": "Beweglichkeits-Flow",
+        "desc": "Löse Steifheit und verbessere die Mobilität"
+      }
     },
     "programsList": {
-      "morning7Day": { "label": "Morgen-Reset", "desc": "Den Körper wecken, die Wirbelsäule wärmen, den Tag erden" },
-      "backPainSeries": { "label": "Rückenschmerz-Linderung", "desc": "Entlasten, mobilisieren, Spannungen im unteren Rücken lösen" },
-      "preBedWindDown": { "label": "Entspannung vor dem Schlafen", "desc": "Lange, erholsame Haltungen — bereite dich auf tiefen Schlaf vor" }
+      "morning7Day": {
+        "label": "Morgen-Reset",
+        "desc": "Den Körper wecken, die Wirbelsäule wärmen, den Tag erden"
+      },
+      "backPainSeries": {
+        "label": "Rückenschmerz-Linderung",
+        "desc": "Entlasten, mobilisieren, Spannungen im unteren Rücken lösen"
+      },
+      "preBedWindDown": {
+        "label": "Entspannung vor dem Schlafen",
+        "desc": "Lange, erholsame Haltungen — bereite dich auf tiefen Schlaf vor"
+      }
     }
   },
   "protocol": {

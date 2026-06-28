@@ -4,9 +4,21 @@
     "tagline": "Your daily sanctuary for mind and body"
   },
   "languages": {
-    "en": { "label": "English", "sublabel": "Continue in English", "flag": "🇬🇧" },
-    "hi": { "label": "हिन्दी", "sublabel": "हिन्दी में जारी रखें", "flag": "🇮🇳" },
-    "de": { "label": "Deutsch", "sublabel": "Auf Deutsch fortfahren", "flag": "🇩🇪" }
+    "en": {
+      "label": "English",
+      "sublabel": "Continue in English",
+      "flag": "🇬🇧"
+    },
+    "hi": {
+      "label": "हिन्दी",
+      "sublabel": "हिन्दी में जारी रखें",
+      "flag": "🇮🇳"
+    },
+    "de": {
+      "label": "Deutsch",
+      "sublabel": "Auf Deutsch fortfahren",
+      "flag": "🇩🇪"
+    }
   },
   "common": {
     "continue": "Continue",
@@ -125,45 +137,90 @@
         "question": "Your body has felt...",
         "subtitle": "Think about the past few days.",
         "options": [
-          { "label": "Dry, cold, or achy", "desc": "Stiff joints, dry skin, feeling the cold more than usual" },
-          { "label": "Warm or inflamed", "desc": "Running hot, irritation, maybe some skin sensitivity" },
-          { "label": "Heavy, sluggish, congested", "desc": "Slower movement, puffiness, thicker sinuses" }
+          {
+            "label": "Dry, cold, or achy",
+            "desc": "Stiff joints, dry skin, feeling the cold more than usual"
+          },
+          {
+            "label": "Warm or inflamed",
+            "desc": "Running hot, irritation, maybe some skin sensitivity"
+          },
+          {
+            "label": "Heavy, sluggish, congested",
+            "desc": "Slower movement, puffiness, thicker sinuses"
+          }
         ]
       },
       {
         "question": "Your mind has been...",
         "subtitle": "How has your head felt in the last few days?",
         "options": [
-          { "label": "Racing or anxious", "desc": "Many thoughts, hard to settle, overthinking" },
-          { "label": "Sharp but irritable", "desc": "Focused, productive — but short fuse" },
-          { "label": "Dull or foggy", "desc": "Slow-starting, low motivation, a little checked-out" }
+          {
+            "label": "Racing or anxious",
+            "desc": "Many thoughts, hard to settle, overthinking"
+          },
+          {
+            "label": "Sharp but irritable",
+            "desc": "Focused, productive — but short fuse"
+          },
+          {
+            "label": "Dull or foggy",
+            "desc": "Slow-starting, low motivation, a little checked-out"
+          }
         ]
       },
       {
         "question": "Your sleep this week has been...",
         "subtitle": "Quality, not quantity.",
         "options": [
-          { "label": "Restless & broken", "desc": "Trouble falling or staying asleep" },
-          { "label": "Short & intense", "desc": "Falling asleep late, waking early, feeling wired" },
-          { "label": "Heavy & hard to leave", "desc": "Sleeping long and still feeling groggy" }
+          {
+            "label": "Restless & broken",
+            "desc": "Trouble falling or staying asleep"
+          },
+          {
+            "label": "Short & intense",
+            "desc": "Falling asleep late, waking early, feeling wired"
+          },
+          {
+            "label": "Heavy & hard to leave",
+            "desc": "Sleeping long and still feeling groggy"
+          }
         ]
       },
       {
         "question": "Your energy pattern has been...",
         "subtitle": "How does your day actually feel?",
         "options": [
-          { "label": "Spiky — peaks and crashes", "desc": "Quick bursts followed by sudden fatigue" },
-          { "label": "Hot-burning", "desc": "Strong drive all day, risking burnout" },
-          { "label": "Low and slow", "desc": "Hard to get going, prefers to stay still" }
+          {
+            "label": "Spiky — peaks and crashes",
+            "desc": "Quick bursts followed by sudden fatigue"
+          },
+          {
+            "label": "Hot-burning",
+            "desc": "Strong drive all day, risking burnout"
+          },
+          {
+            "label": "Low and slow",
+            "desc": "Hard to get going, prefers to stay still"
+          }
         ]
       },
       {
         "question": "Your appetite lately has been...",
         "subtitle": "Digestion is the dashboard of dosha balance.",
         "options": [
-          { "label": "Unpredictable or low", "desc": "Forgetting meals, bloating, gas" },
-          { "label": "Very strong & urgent", "desc": "\"Hangry\" if meals are late, strong cravings" },
-          { "label": "Heavy or dull", "desc": "Rarely hungry, feels weighed down after meals" }
+          {
+            "label": "Unpredictable or low",
+            "desc": "Forgetting meals, bloating, gas"
+          },
+          {
+            "label": "Very strong & urgent",
+            "desc": "\"Hangry\" if meals are late, strong cravings"
+          },
+          {
+            "label": "Heavy or dull",
+            "desc": "Rarely hungry, feels weighed down after meals"
+          }
         ]
       }
     ]
@@ -173,7 +230,83 @@
     "awaitBody": "Discover your unique Ayurvedic constitution through our guided quiz and unlock personalized wellness insights.",
     "takeQuiz": "Take the Dosha Quiz",
     "goBack": "Go back",
-    "retakeQuiz": "Retake the Quiz"
+    "retakeQuiz": "Retake the Quiz",
+    "yourDoshaType": "Your Dosha Type",
+    "rareEquilibrium": "The Rare Equilibrium",
+    "allFiveElements": "All Five Elements",
+    "ch1Kicker": "Chapter 1",
+    "ch1Title": "Who you are",
+    "ch1Lede": "The elements, qualities, and patterns that shape your constitution.",
+    "yourConstitution": "Your Constitution",
+    "vpkShort": "V · P · K",
+    "pctAria": "{{name}} {{pct}} percent",
+    "footnoteTridoshic": "A rare and balanced constitution. All three doshas are equally expressed in your nature.",
+    "footnoteDual": "You express {{primary}} and {{secondary}} almost equally. Your constitution shifts with seasons and lifestyle.",
+    "footnoteGapHigh": "{{primary}} is overwhelmingly dominant in your constitution. The other doshas play a minor supporting role.",
+    "footnoteGapMid": "{{primary}} is clearly your leading dosha. {{secondary}} ({{pct}}%) plays a moderate background role.",
+    "footnoteGapLow": "{{primary}} leads your constitution, with {{secondary}} ({{pct}}%) as a notable secondary influence.",
+    "balancedNature": "Your Balanced Nature",
+    "dominant": "Dominant: {{name}}",
+    "secondary": "Secondary: {{name}}",
+    "qualitiesGunas": "{{name}} Qualities (Gunas)",
+    "sourceCharaka": "Source: Charaka Samhita {{verse}}",
+    "yourBody": "Your {{name}} body",
+    "bodySummary": "Build, skin, hair, digestion, sleep, energy",
+    "labelBuild": "Build",
+    "labelSkin": "Skin",
+    "labelHair": "Hair",
+    "labelFace": "Face",
+    "labelDigestion": "Digestion",
+    "labelSleep": "Sleep",
+    "labelEnergy": "Energy",
+    "yourMind": "Your {{name}} mind",
+    "mindSummary": "How you show up — at your best and when you're off",
+    "inBalance": "In balance",
+    "outOfBalance": "When out of balance",
+    "naturalStrengths": "Your natural strengths",
+    "ch2Kicker": "Chapter 2",
+    "ch2Title": "Staying in balance",
+    "ch2Lede": "Early signs of imbalance, common triggers, and Charaka's guidance for returning to centre.",
+    "signsLabel": "Signs to watch for",
+    "signsSummary": "Common {{name}} imbalance symptoms",
+    "signsIntro": "When your dominant dosha runs high, these are the early signals. None require alarm — they're invitations to lean into the balancing practices below.",
+    "triggersLabel": "What aggravates you",
+    "triggersSummary": "Habits and seasons that push you out of balance",
+    "pacifyLabel": "How to find balance",
+    "pacifySummaryFallback": "Lifestyle adjustments to pacify your dosha",
+    "stayInBalance": "Stay In Balance",
+    "yogaMovement": "Yoga & Movement",
+    "meditationBreathwork": "Meditation & Breathwork",
+    "ch3Kicker": "Chapter 3",
+    "ch3Title": "Live by your dosha",
+    "ch3Lede": "Translate this knowledge into daily life — the season, the hour of the day, the food on your plate.",
+    "plusBadge": "Sanctuary Plus",
+    "teaserHeadline": "The daily practice of being {{primary}}.",
+    "teaserBody": "Your season-by-season protocol, dosha-aware diet, and full Dinacharya — the daily rituals that translate Ayurveda into how you actually live.",
+    "teaserBullet1": "Peak season + dosha hours protocol",
+    "teaserBullet2": "Full 6-taste dietary guide",
+    "teaserBullet3": "Charaka's 13 daily practices",
+    "unlockChapter3": "Unlock Chapter 3",
+    "unlockChapter3Aria": "Unlock Chapter 3 — Live by your dosha",
+    "peakSeason": "Peak Season",
+    "peakSeasonBody": "{{season}} — {{name}} is naturally elevated during this time. Extra care is needed to stay balanced.",
+    "doshaHours": "{{name}} Hours",
+    "doshaHoursBody": "{{timeOfDay}} — These are the hours when {{name}} energy peaks in the body.",
+    "balancingTastes": "Balancing Tastes",
+    "protocolKicker": "When your {{name}} runs high",
+    "protocolHeadline": "Your 3-day {{name}}-pacifying protocol",
+    "protocolBody": "Food, movement, breath, and rest — for the days when your dominant dosha is also your imbalance.",
+    "protocolAria": "Open {{name}}-pacifying protocol",
+    "dietTitle": "Your diet",
+    "dietSummary": "Foods to favor and avoid, by the six tastes",
+    "dietAria": "Open dietary guidance",
+    "routineTitle": "Daily routine",
+    "routineSummary": "Charaka's 13 practices — align the day with the body's rhythm",
+    "routineAria": "Open daily routine",
+    "understandingTitle": "Understanding Prakriti",
+    "understandingBody": "In Ayurveda, your Prakriti is your birth constitution — the unique ratio of Vata, Pitta, and Kapha you were born with. It remains stable throughout life. When doshas shift due to diet, stress, or seasons, that temporary state is called Vikriti. The goal of Ayurveda is to bring Vikriti back in alignment with Prakriti.",
+    "paywallHeadline": "Live by your {{primary}} nature",
+    "paywallSubhead": "Unlock Chapter 3 and your full Ayurvedic lifestyle protocol."
   },
   "onboarding": {
     "skip": "Skip",
@@ -343,9 +476,18 @@
       "seeRebalance": "See how to rebalance",
       "exploreDosha": "Explore my Dosha",
       "takeQuiz": "Take the quiz",
-      "vata": { "element": "Air + Ether", "tagline": "Creative, quick-thinking, and adaptable" },
-      "pitta": { "element": "Fire + Water", "tagline": "Focused, driven, and naturally radiant" },
-      "kapha": { "element": "Earth + Water", "tagline": "Grounded, nurturing, and steady" }
+      "vata": {
+        "element": "Air + Ether",
+        "tagline": "Creative, quick-thinking, and adaptable"
+      },
+      "pitta": {
+        "element": "Fire + Water",
+        "tagline": "Focused, driven, and naturally radiant"
+      },
+      "kapha": {
+        "element": "Earth + Water",
+        "tagline": "Grounded, nurturing, and steady"
+      }
     },
     "paywallHeadline": "The full protocol awaits",
     "paywallSubhead": "Plus gives you the daily plan — food, movement, sleep — that brings your dosha back to centre."
@@ -519,10 +661,30 @@
     "durationMin": "{{m}} min",
     "durationHm": "{{h}}h {{m}}m",
     "outcomes": {
-      "stress": ["Calmer mind", "Lower cortisol", "Released shoulders", "Steadier breath"],
-      "sleep": ["Quieter mind", "Slower heart rate", "Loosened spine", "Deeper rest"],
-      "energy": ["Awakened body", "Sharper focus", "Open chest", "Lifted mood"],
-      "flexibility": ["Open hips", "Mobile spine", "Eased tightness", "Better range"]
+      "stress": [
+        "Calmer mind",
+        "Lower cortisol",
+        "Released shoulders",
+        "Steadier breath"
+      ],
+      "sleep": [
+        "Quieter mind",
+        "Slower heart rate",
+        "Loosened spine",
+        "Deeper rest"
+      ],
+      "energy": [
+        "Awakened body",
+        "Sharper focus",
+        "Open chest",
+        "Lifted mood"
+      ],
+      "flexibility": [
+        "Open hips",
+        "Mobile spine",
+        "Eased tightness",
+        "Better range"
+      ]
     }
   },
   "pranayamaPractice": {
@@ -647,8 +809,19 @@
     "paywallSubhead": "Unlock the full asana library, your personalized routine, and the wisdom of Charaka.",
     "close": "Close",
     "scrollTop": "Scroll to top",
-    "categories": { "standing": "Standing", "seated": "Seated", "supine": "Supine", "prone": "Prone", "restorative": "Restorative", "inversion": "Inversion" },
-    "levels": { "beginner": "Beginner", "intermediate": "Intermediate", "advanced": "Advanced" }
+    "categories": {
+      "standing": "Standing",
+      "seated": "Seated",
+      "supine": "Supine",
+      "prone": "Prone",
+      "restorative": "Restorative",
+      "inversion": "Inversion"
+    },
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    }
   },
   "dinacharya": {
     "goBack": "Go back",
@@ -788,17 +961,57 @@
       "p_appetite_strong": "I have a strong, punctual appetite — missing a meal makes me irritable.",
       "k_sleep_deep": "I fall asleep quickly and sleep deeply — sometimes hard to wake."
     },
-    "answers": { "yes": "Yes", "somewhat": "Somewhat", "no": "Not really" },
+    "answers": {
+      "yes": "Yes",
+      "somewhat": "Somewhat",
+      "no": "Not really"
+    },
     "tiebreakers": {
-      "tb_vp_stress": { "prompt": "Under real pressure, you feel more —", "vata": "Scattered and anxious", "pitta": "Sharp and frustrated" },
-      "tb_vp_sleepless": { "prompt": "When you can't sleep, your mind —", "vata": "Races between many things", "pitta": "Focuses on solving a problem" },
-      "tb_vp_cold": { "prompt": "Cold weather is —", "vata": "Hard for you to tolerate", "pitta": "A welcome relief" },
-      "tb_vk_freetime": { "prompt": "With free time, you prefer —", "vata": "Variety and new experiences", "kapha": "Familiar comforts and rest" },
-      "tb_vk_weight": { "prompt": "Your body weight —", "vata": "Stays low and fluctuates", "kapha": "Stays steady or slowly creeps up" },
-      "tb_vk_mind": { "prompt": "You'd describe your mind as —", "vata": "Quick and creative", "kapha": "Steady and deliberate" },
-      "tb_pk_hangry": { "prompt": "If a meal is delayed —", "pitta": "You get irritable and hangry", "kapha": "You barely notice" },
-      "tb_pk_conflict": { "prompt": "In a conflict, you tend to —", "pitta": "Confront directly", "kapha": "Avoid and let it settle" },
-      "tb_pk_stamina": { "prompt": "Your stamina is —", "pitta": "Intense and consuming", "kapha": "Slow-burning and lasting" }
+      "tb_vp_stress": {
+        "prompt": "Under real pressure, you feel more —",
+        "vata": "Scattered and anxious",
+        "pitta": "Sharp and frustrated"
+      },
+      "tb_vp_sleepless": {
+        "prompt": "When you can't sleep, your mind —",
+        "vata": "Races between many things",
+        "pitta": "Focuses on solving a problem"
+      },
+      "tb_vp_cold": {
+        "prompt": "Cold weather is —",
+        "vata": "Hard for you to tolerate",
+        "pitta": "A welcome relief"
+      },
+      "tb_vk_freetime": {
+        "prompt": "With free time, you prefer —",
+        "vata": "Variety and new experiences",
+        "kapha": "Familiar comforts and rest"
+      },
+      "tb_vk_weight": {
+        "prompt": "Your body weight —",
+        "vata": "Stays low and fluctuates",
+        "kapha": "Stays steady or slowly creeps up"
+      },
+      "tb_vk_mind": {
+        "prompt": "You'd describe your mind as —",
+        "vata": "Quick and creative",
+        "kapha": "Steady and deliberate"
+      },
+      "tb_pk_hangry": {
+        "prompt": "If a meal is delayed —",
+        "pitta": "You get irritable and hangry",
+        "kapha": "You barely notice"
+      },
+      "tb_pk_conflict": {
+        "prompt": "In a conflict, you tend to —",
+        "pitta": "Confront directly",
+        "kapha": "Avoid and let it settle"
+      },
+      "tb_pk_stamina": {
+        "prompt": "Your stamina is —",
+        "pitta": "Intense and consuming",
+        "kapha": "Slow-burning and lasting"
+      }
     }
   },
   "doshaQuiz": {
@@ -848,7 +1061,12 @@
     "comingUp": "Coming Up",
     "minShort": "{{n}} min",
     "activity": "Activity",
-    "periods": { "1d": "Today", "1w": "7 Days", "1m": "30 Days", "all": "All Time" },
+    "periods": {
+      "1d": "Today",
+      "1w": "7 Days",
+      "1m": "30 Days",
+      "all": "All Time"
+    },
     "summaryMinutes": "Minutes",
     "summarySessions": "Sessions",
     "summaryPoses": "Poses",
@@ -872,13 +1090,34 @@
     "chartEmpty": "No practice data yet",
     "chartEmptyHint": "Complete a session to see your chart",
     "levels": {
-      "1": { "title": "Beginner", "subtitle": "Curious Soul" },
-      "2": { "title": "Student", "subtitle": "Seeker of Stillness" },
-      "3": { "title": "Practitioner", "subtitle": "Steady Flame" },
-      "4": { "title": "Devoted", "subtitle": "Rooted in Practice" },
-      "5": { "title": "Adept", "subtitle": "Flowing with Ease" },
-      "6": { "title": "Master", "subtitle": "Inner Light" },
-      "7": { "title": "Guru", "subtitle": "The Sanctuary Within" }
+      "1": {
+        "title": "Beginner",
+        "subtitle": "Curious Soul"
+      },
+      "2": {
+        "title": "Student",
+        "subtitle": "Seeker of Stillness"
+      },
+      "3": {
+        "title": "Practitioner",
+        "subtitle": "Steady Flame"
+      },
+      "4": {
+        "title": "Devoted",
+        "subtitle": "Rooted in Practice"
+      },
+      "5": {
+        "title": "Adept",
+        "subtitle": "Flowing with Ease"
+      },
+      "6": {
+        "title": "Master",
+        "subtitle": "Inner Light"
+      },
+      "7": {
+        "title": "Guru",
+        "subtitle": "The Sanctuary Within"
+      }
     }
   },
   "discover": {
@@ -915,15 +1154,36 @@
       "posture": "Posture"
     },
     "routines": {
-      "stress": { "label": "Stress Relief", "desc": "Calm your mind and release tension" },
-      "sleep": { "label": "Better Sleep", "desc": "Wind down and prepare for deep rest" },
-      "energy": { "label": "Energy Boost", "desc": "Wake up your body and revitalize" },
-      "flexibility": { "label": "Flexibility Flow", "desc": "Release stiffness and improve mobility" }
+      "stress": {
+        "label": "Stress Relief",
+        "desc": "Calm your mind and release tension"
+      },
+      "sleep": {
+        "label": "Better Sleep",
+        "desc": "Wind down and prepare for deep rest"
+      },
+      "energy": {
+        "label": "Energy Boost",
+        "desc": "Wake up your body and revitalize"
+      },
+      "flexibility": {
+        "label": "Flexibility Flow",
+        "desc": "Release stiffness and improve mobility"
+      }
     },
     "programsList": {
-      "morning7Day": { "label": "Morning Reset", "desc": "Wake the body, warm the spine, ground the day" },
-      "backPainSeries": { "label": "Back Pain Relief", "desc": "Decompress, mobilize, ease lower-back tension" },
-      "preBedWindDown": { "label": "Pre-Bed Wind-Down", "desc": "Long, restorative holds — prepare for deep sleep" }
+      "morning7Day": {
+        "label": "Morning Reset",
+        "desc": "Wake the body, warm the spine, ground the day"
+      },
+      "backPainSeries": {
+        "label": "Back Pain Relief",
+        "desc": "Decompress, mobilize, ease lower-back tension"
+      },
+      "preBedWindDown": {
+        "label": "Pre-Bed Wind-Down",
+        "desc": "Long, restorative holds — prepare for deep sleep"
+      }
     }
   },
   "protocol": {
