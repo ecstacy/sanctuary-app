@@ -17,6 +17,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { DOSHAS } from '../data/ayurveda/dosha-prakriti'
+import { localizeDoshaDisplay, localizeDosha } from '../i18n/contentI18n'
 import { track, EVENTS } from '../lib/track'
 import { useIsPremium } from '../hooks/useIsPremium'
 import PaywallSheet from './PaywallSheet'
@@ -177,14 +178,17 @@ export default function DoshaProfileContent({
   footerSlot,
 }) {
   const navigate = useNavigate()
-  const { t } = useTranslation()
-  const primaryData   = DOSHA_DATA[primary]
-  const secondaryData = secondary ? DOSHA_DATA[secondary] : null
-  const tertiaryData  = tertiary  ? DOSHA_DATA[tertiary]  : null
+  const { t, i18n } = useTranslation()
+  // Re-localize on language change: i18n.language in the dep keeps these
+  // memo-free reads fresh when the user switches languages mid-screen.
+  void i18n.language
+  const primaryData   = localizeDoshaDisplay(primary, DOSHA_DATA[primary])
+  const secondaryData = secondary ? localizeDoshaDisplay(secondary, DOSHA_DATA[secondary]) : null
+  const tertiaryData  = tertiary  ? localizeDoshaDisplay(tertiary, DOSHA_DATA[tertiary])  : null
   const isTridoshic   = doshaLabel === 'Tridoshic'
   const isDual        = doshaLabel?.includes('-') ?? false
 
-  const richDosha = DOSHAS[primary] || null
+  const richDosha = localizeDosha(DOSHAS[primary] || null)
 
   const [expanded, setExpanded] = useState(new Set())
 

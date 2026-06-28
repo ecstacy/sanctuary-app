@@ -32,6 +32,8 @@ import deProtocols from './content/de/protocols.json'
 import hiProtocols from './content/hi/protocols.json'
 import dePranayamas from './content/de/pranayamas.json'
 import hiPranayamas from './content/hi/pranayamas.json'
+import deDosha from './content/de/dosha.json'
+import hiDosha from './content/hi/dosha.json'
 
 const ASANA_OVERLAYS = { de: deAsanas, hi: hiAsanas }
 const DIETARY_OVERLAYS = { de: deDietary, hi: hiDietary }
@@ -39,6 +41,7 @@ const REC_OVERLAYS = { de: deRecs, hi: hiRecs }
 const DINA_OVERLAYS = { de: deDina, hi: hiDina }
 const PROTOCOL_OVERLAYS = { de: deProtocols, hi: hiProtocols }
 const PRANAYAMA_OVERLAYS = { de: dePranayamas, hi: hiPranayamas }
+const DOSHA_OVERLAYS = { de: deDosha, hi: hiDosha }
 
 // Shallow-merge the language overlay over a base asana. voiceCues/source are
 // nested so we merge them one level deep — a partial overlay (e.g. only
@@ -185,5 +188,37 @@ export function localizeProtocol(p) {
         }),
       }
     }),
+  }
+}
+
+// ── Dosha ──────────────────────────────────────────────────────────────────
+// Two data sources feed the dosha profile screen, so two localizers.
+//
+// localizeDoshaDisplay overlays the inline DOSHA_DATA (display copy: element,
+// tagline, description, strengths, balanceTips, qualities, season, timeOfDay,
+// taste, yoga, meditation), keyed by dosha id. `name` stays literal.
+export function localizeDoshaDisplay(doshaKey, data) {
+  if (!data) return data
+  const ov = DOSHA_OVERLAYS[i18n.language]?.display?.[doshaKey]
+  if (!ov) return data
+  return { ...data, ...ov }
+}
+
+// localizeDosha overlays the rich Charaka DOSHAS data (qualities[].english+note,
+// body.*, mind.balanced/imbalanced, imbalanceSigns, triggers, pacification,
+// tagline, season). sanskrit/devanagari/iast/elements/source stay literal.
+export function localizeDosha(rich) {
+  if (!rich) return rich
+  const ov = DOSHA_OVERLAYS[i18n.language]?.prakriti?.[rich.id]
+  if (!ov) return rich
+  return {
+    ...rich,
+    ...ov,
+    qualities: ov.qualities
+      ? rich.qualities.map((q, i) => ({ ...q, ...(ov.qualities[i] || {}) }))
+      : rich.qualities,
+    body: ov.body ? { ...rich.body, ...ov.body } : rich.body,
+    mind: ov.mind ? { ...rich.mind, ...ov.mind } : rich.mind,
+    pacification: ov.pacification ? { ...rich.pacification, ...ov.pacification } : rich.pacification,
   }
 }
