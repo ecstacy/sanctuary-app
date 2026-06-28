@@ -507,6 +507,11 @@ export default function PracticePage() {
   // available. The completion chime always plays.
   useEffect(() => {
     if (status === 'complete') {
+      // Flush any narration still queued/in-flight from the last pose first.
+      // The timer auto-advance path (and rest→next transitions) queue cues
+      // via voice.speak with onEnd callbacks; finishing before they drain
+      // would otherwise leave them playing over the completion screen.
+      voice.stop()
       audio.complete()
       voice.speak(
         'Practice complete. Namaste. Your body and mind thank you.',
