@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Capacitor } from '@capacitor/core'
 import { TextToSpeech } from '@capacitor-community/text-to-speech'
+import i18n from '../i18n'
 
 // ─── Voice Guidance ─────────────────────────────────────────────────────────
 //
@@ -31,15 +32,25 @@ const IS_NATIVE = typeof window !== 'undefined' && Capacitor?.isNativePlatform?.
 // native/Web TTS so the app stays functional even before generation is
 // complete (or for cues that haven't been pre-recorded, like dynamic
 // timing-based coach lines).
-const AUDIO_BASE = '/audio/poses/'
-const MANIFEST_URL = '/audio/manifest.json'
-let manifestPromise = null
-function loadManifest() {
-  if (manifestPromise) return manifestPromise
-  manifestPromise = fetch(MANIFEST_URL)
+// Language-scoped audio. English keeps the original flat paths for back-compat;
+// other languages live under /audio/poses/{lang}/ with a suffixed manifest, both
+// produced by generate-voice.mjs (VOICE_LANG=de|hi). The TTS fallback language
+// tracks the same map so un-generated lines still speak in the right language.
+const LANG_TTS = { en: 'en-US', de: 'de-DE', hi: 'hi-IN' }
+function audioPathsFor(lang) {
+  const l = LANG_TTS[lang] ? lang : 'en'
+  return l === 'en'
+    ? { base: '/audio/poses/', manifest: '/audio/manifest.json' }
+    : { base: `/audio/poses/${l}/`, manifest: `/audio/manifest.${l}.json` }
+}
+const manifestCache = {} // lang -> Promise<manifest>
+function loadManifest(lang) {
+  const l = LANG_TTS[lang] ? lang : 'en'
+  if (manifestCache[l]) return manifestCache[l]
+  manifestCache[l] = fetch(audioPathsFor(l).manifest)
     .then(r => (r.ok ? r.json() : {}))
     .catch(() => ({}))
-  return manifestPromise
+  return manifestCache[l]
 }
 
 export function useVoiceGuidance() {
@@ -50,14 +61,25 @@ export function useVoiceGuidance() {
   const speakingRef = useRef(false)
   const manifestRef = useRef({})
   const audioElRef = useRef(null)
+  const audioBaseRef = useRef(audioPathsFor(i18n.language).base)
+  const ttsLangRef = useRef(LANG_TTS[i18n.language] || 'en-US')
   // Bumped on stop(); native speak() compares before resolving so a
   // stale onEnd from a cancelled utterance can't advance the queue.
   const generationRef = useRef(0)
 
-  // Prefetch the audio manifest at mount so the first call to speak()
-  // doesn't race a fetch and unnecessarily fall back to TTS.
+  // Prefetch the manifest for the active language at mount (so the first
+  // speak() doesn't race a fetch) AND re-point base/manifest/TTS-language
+  // whenever the user switches languages mid-session.
   useEffect(() => {
-    loadManifest().then(m => { manifestRef.current = m || {} })
+    const apply = (lng) => {
+      const l = lng || i18n.language
+      audioBaseRef.current = audioPathsFor(l).base
+      ttsLangRef.current = LANG_TTS[l] || 'en-US'
+      loadManifest(l).then(m => { manifestRef.current = m || {} })
+    }
+    apply(i18n.language)
+    i18n.on('languageChanged', apply)
+    return () => i18n.off('languageChanged', apply)
   }, [])
 
   // ── Web-only: pick a voice and keep speechSynthesis alive ──────────────
@@ -68,15 +90,19 @@ export function useVoiceGuidance() {
     function pickVoice() {
       const voices = speechSynthesis.getVoices()
       if (!voices.length) return
+      // Prefer a voice matching the active language (e.g. 'de', 'hi'),
+      // then fall back to English, then anything.
+      const pref = (ttsLangRef.current || 'en-US').slice(0, 2)
       voiceRef.current =
-        voices.find(v => v.lang.startsWith('en') && !v.localService) ||
-        voices.find(v => v.lang.startsWith('en-') && v.name.includes('Female')) ||
+        voices.find(v => v.lang.startsWith(pref) && !v.localService) ||
+        voices.find(v => v.lang.startsWith(pref)) ||
         voices.find(v => v.lang.startsWith('en')) ||
         voices[0]
     }
 
     pickVoice()
     speechSynthesis.addEventListener('voiceschanged', pickVoice)
+    i18n.on('languageChanged', pickVoice)
 
     const keepAlive = setInterval(() => {
       if (speechSynthesis.paused) speechSynthesis.resume()
@@ -84,6 +110,7 @@ export function useVoiceGuidance() {
 
     return () => {
       speechSynthesis.removeEventListener('voiceschanged', pickVoice)
+      i18n.off('languageChanged', pickVoice)
       speechSynthesis.cancel()
       clearInterval(keepAlive)
     }
@@ -125,7 +152,7 @@ export function useVoiceGuidance() {
     // it. Plays via HTMLAudioElement — works identically on native (via
     // the WebView's audio stack) and web. No system-TTS robot voice.
     if (fileKey && manifestRef.current[fileKey]) {
-      const src = `${AUDIO_BASE}${fileKey}.mp3`
+      const src = `${audioBaseRef.current}${fileKey}.mp3`
       // Reuse a single Audio element so we don't leak listeners across
       // hundreds of cues over a long session.
       let el = audioElRef.current
@@ -179,7 +206,7 @@ export function useVoiceGuidance() {
       const safety = setTimeout(done, 30000)
       TextToSpeech.speak({
         text,
-        lang: 'en-US',
+        lang: ttsLangRef.current,
         rate: 0.95,           // plugin defaults to 1.0; slight slow-down for instruction clarity
         pitch: 1.0,
         volume: 1.0,
@@ -199,7 +226,7 @@ export function useVoiceGuidance() {
     speechSynthesis.cancel()
     const utterance = new SpeechSynthesisUtterance(text)
     if (voiceRef.current) utterance.voice = voiceRef.current
-    utterance.lang = 'en-US'
+    utterance.lang = ttsLangRef.current
     utterance.rate = 0.88
     utterance.pitch = 1.0
     utterance.volume = 1.0
