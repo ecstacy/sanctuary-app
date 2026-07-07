@@ -1,0 +1,5027 @@
+{
+  "session__complete": {
+    "hash": "318c26ebe111",
+    "text": "Praxis abgeschlossen. Namaste. Dein Körper und Geist danken dir.",
+    "bytes": 31392
+  },
+  "tadasana__name": {
+    "hash": "92bbc16454bc",
+    "text": "Berghaltung.",
+    "bytes": 7488
+  },
+  "tadasana__enter": {
+    "hash": "729514c365c7",
+    "text": "Stelle dich mit zusammenstehenden Füßen hin, die Innenkanten berühren sich. Die Arme ruhen an den Seiten. Verteile das Gewicht gleichmäßig auf beide Füße.",
+    "bytes": 70992
+  },
+  "tadasana__hold": {
+    "hash": "0b075b81ba64",
+    "text": "Hebe die Kniescheiben, ohne die Knie durchzudrücken. Verlängere die Wirbelsäule. Der Scheitel strebt zur Decke. Die Schultern entspannt, weg von den Ohren.",
+    "bytes": 75744
+  },
+  "tadasana__breathe": {
+    "hash": "04b015252c3c",
+    "text": "Atme natürlich. Spüre die Verwurzelung durch die Fußsohlen, die Leichtigkeit durch den Scheitel.",
+    "bytes": 41760
+  },
+  "tadasana__exit": {
+    "hash": "062f82a421f0",
+    "text": "Entspanne die Beine. Atme ein und nimm wahr, wie du dich fühlst.",
+    "bytes": 32400
+  },
+  "tadasana__i0": {
+    "hash": "00b41aad4635",
+    "text": "Stelle dich an den vorderen Rand deiner Matte, Füße zusammen, große Zehen berühren sich, Fersen leicht auseinander.",
+    "bytes": 48528
+  },
+  "tadasana__i1": {
+    "hash": "d251c93414af",
+    "text": "Verteile dein Gewicht gleichmäßig auf beide Füße — vorne, hinten und an den Rändern.",
+    "bytes": 37440
+  },
+  "tadasana__i2": {
+    "hash": "933ffdcdbab8",
+    "text": "Hebe die Kniescheiben sanft an, ohne die Knie durchzudrücken. Aktiviere die Oberschenkel.",
+    "bytes": 42192
+  },
+  "tadasana__i3": {
+    "hash": "5bc89d751ff8",
+    "text": "Rolle die Schultern nach hinten und unten, weg von den Ohren.",
+    "bytes": 25056
+  },
+  "tadasana__i4": {
+    "hash": "7f4ccf2ba632",
+    "text": "Lass die Arme natürlich an den Seiten hängen, Handflächen zum Körper oder nach vorne.",
+    "bytes": 33264
+  },
+  "tadasana__i5": {
+    "hash": "287f27a0cd89",
+    "text": "Verlängere die Wirbelsäule — der Scheitel strebt zur Decke.",
+    "bytes": 26784
+  },
+  "tadasana__i6": {
+    "hash": "28625ce66330",
+    "text": "Entspanne den Kiefer, entspanne die Augen. Atme natürlich.",
+    "bytes": 31536
+  },
+  "virabhadrasanaI__name": {
+    "hash": "380e0c276405",
+    "text": "Krieger I.",
+    "bytes": 7488
+  },
+  "virabhadrasanaI__enter": {
+    "hash": "37073d6218a4",
+    "text": "Mach mit dem rechten Fuß einen Schritt nach vorne, etwa eine Beinlänge weit, das Knie gebeugt. Drehe den hinteren Fuß fünfundvierzig Grad nach außen, die Ferse am Boden. Richte die Hüften nach vorne aus. Atme ein und strecke die Arme über den Kopf.",
+    "bytes": 110592
+  },
+  "virabhadrasanaI__hold": {
+    "hash": "e4897ff89678",
+    "text": "Beuge das vordere Knie über den Knöchel, der Oberschenkel strebt zur Parallele mit dem Boden. Drücke den hinteren Fuß fest in den Boden. Hebe dich durch die seitlichen Rippen und strecke die Fingerspitzen nach oben.",
+    "bytes": 92160
+  },
+  "virabhadrasanaI__breathe": {
+    "hash": "eaaa6f310319",
+    "text": "Jedes Einatmen verlängert die Wirbelsäule; jedes Ausatmen verwurzelt den hinteren Fuß. Lass die Schultern weg von den Ohren sinken.",
+    "bytes": 65520
+  },
+  "virabhadrasanaI__exit": {
+    "hash": "cbda4da5db3d",
+    "text": "Senke die Arme. Setze den vorderen Fuß zurück zum hinteren. Wir wiederholen die Übung auf der anderen Seite.",
+    "bytes": 48096
+  },
+  "virabhadrasanaI__i0": {
+    "hash": "2e8910ac99bc",
+    "text": "Stelle dich an den vorderen Rand deiner Matte, Füße zusammen.",
+    "bytes": 25056
+  },
+  "virabhadrasanaI__i1": {
+    "hash": "cc481c2a8701",
+    "text": "Mach mit dem rechten Fuß einen Schritt nach vorne, etwa eine Beinlänge weit. Beide Füße bleiben am Boden.",
+    "bytes": 45504
+  },
+  "virabhadrasanaI__i2": {
+    "hash": "18e8c524fcdc",
+    "text": "Drehe den hinteren linken Fuß etwa 45 Grad nach außen, die Ferse fest am Boden.",
+    "bytes": 37728
+  },
+  "virabhadrasanaI__i3": {
+    "hash": "4cb5460a5021",
+    "text": "Richte die Hüften zur Vorderseite der Matte aus.",
+    "bytes": 20160
+  },
+  "virabhadrasanaI__i4": {
+    "hash": "4e3e68f3b262",
+    "text": "Beuge das rechte Knie, bis es senkrecht über dem rechten Knöchel steht.",
+    "bytes": 27936
+  },
+  "virabhadrasanaI__i5": {
+    "hash": "bdde1b6f9b1a",
+    "text": "Atme ein und hebe beide Arme über den Kopf, die Oberarme nahe den Ohren.",
+    "bytes": 32256
+  },
+  "virabhadrasanaI__i6": {
+    "hash": "20bc18c58384",
+    "text": "Drücke den hinteren Fuß fest in den Boden. Hebe dich durch die seitlichen Rippen. Wechsle die Seite.",
+    "bytes": 48240
+  },
+  "virabhadrasanaII__name": {
+    "hash": "de59c2988cbf",
+    "text": "Krieger II.",
+    "bytes": 7056
+  },
+  "virabhadrasanaII__enter": {
+    "hash": "ba1ea073569a",
+    "text": "Tritt aus dem Stand mit den Füßen weit auseinander, etwa eine Beinlänge. Drehe den rechten Fuß neunzig Grad nach außen, den linken leicht nach innen. Strecke die Arme auf Schulterhöhe zur Seite aus.",
+    "bytes": 86400
+  },
+  "virabhadrasanaII__hold": {
+    "hash": "83645784cb3e",
+    "text": "Beuge das rechte Knie Richtung neunzig Grad, über der zweiten Zehe. Drücke die Außenkante des hinteren Fußes nach unten. Blicke über die rechten Fingerspitzen. Schultern entspannt, weg von den Ohren.",
+    "bytes": 96480
+  },
+  "virabhadrasanaII__breathe": {
+    "hash": "34e34f5677d6",
+    "text": "Atme gleichmäßig. Jedes Einatmen weitet die Schlüsselbeine; jedes Ausatmen verwurzelt den hinteren Fuß.",
+    "bytes": 52848
+  },
+  "virabhadrasanaII__exit": {
+    "hash": "eae4462f26b9",
+    "text": "Strecke das vordere Bein und stelle die Füße zusammen. Wir wiederholen auf der anderen Seite.",
+    "bytes": 36576
+  },
+  "virabhadrasanaII__i0": {
+    "hash": "b51e2473586a",
+    "text": "Stelle dich an den vorderen Rand der Matte.",
+    "bytes": 16704
+  },
+  "virabhadrasanaII__i1": {
+    "hash": "4d1d5570d500",
+    "text": "Tritt mit den Füßen weit auseinander, etwa eine Beinlänge.",
+    "bytes": 23472
+  },
+  "virabhadrasanaII__i2": {
+    "hash": "ea6aab2eb015",
+    "text": "Drehe den rechten Fuß 90 Grad nach außen, sodass die Zehen nach rechts zeigen.",
+    "bytes": 31824
+  },
+  "virabhadrasanaII__i3": {
+    "hash": "70fd99e97e15",
+    "text": "Drehe den linken Fuß leicht nach innen, etwa 30 Grad.",
+    "bytes": 24912
+  },
+  "virabhadrasanaII__i4": {
+    "hash": "8b00db119af7",
+    "text": "Beuge das rechte Knie Richtung 90 Grad, das Knie über der zweiten Zehe.",
+    "bytes": 34560
+  },
+  "virabhadrasanaII__i5": {
+    "hash": "568c2803b25c",
+    "text": "Drücke die Außenkante des hinteren Fußes fest in den Boden.",
+    "bytes": 25056
+  },
+  "virabhadrasanaII__i6": {
+    "hash": "e1ce333b6f89",
+    "text": "Strecke die Arme auf Schulterhöhe zur Seite aus. Blicke über die rechten Fingerspitzen. Wechsle die Seite.",
+    "bytes": 52704
+  },
+  "vrksasana__name": {
+    "hash": "a58ce68d6019",
+    "text": "Baumhaltung.",
+    "bytes": 7344
+  },
+  "vrksasana__enter": {
+    "hash": "eccbab2eeb7b",
+    "text": "Verlagere das Gewicht auf den linken Fuß. Hebe den rechten Fuß und setze die Sohle an die Innenseite des linken Oberschenkels oder der Wade — niemals ans Knie. Hände am Herzen, wie zum Gebet.",
+    "bytes": 90000
+  },
+  "vrksasana__hold": {
+    "hash": "3715fda0b81d",
+    "text": "Wähle einen einzigen ruhigen Punkt auf Augenhöhe und lass den Blick dort ruhen. Drücke den Standfuß fest in den Boden. Wenn du stabil stehst, strecke die Arme wie Äste über den Kopf.",
+    "bytes": 83520
+  },
+  "vrksasana__breathe": {
+    "hash": "dbb93bb7553a",
+    "text": "Atme langsam. Wenn du wackelst, arbeitet die Haltung — auch Bäume schwanken. Entspanne das Standknie, wenn es überstreckt.",
+    "bytes": 60912
+  },
+  "vrksasana__exit": {
+    "hash": "8814b771a8ab",
+    "text": "Senke die Arme und den Fuß. Halte für einen Atemzug inne, dann wechsle die Seite.",
+    "bytes": 41040
+  },
+  "vrksasana__i0": {
+    "hash": "40fd5da3a611",
+    "text": "Stelle dich mit zusammenstehenden Füßen hin, das Gewicht gleichmäßig auf beiden Füßen.",
+    "bytes": 33840
+  },
+  "vrksasana__i1": {
+    "hash": "b606343c9afd",
+    "text": "Verlagere dein gesamtes Gewicht auf den linken Fuß. Drücke ihn fest in den Boden.",
+    "bytes": 39312
+  },
+  "vrksasana__i2": {
+    "hash": "0e7f1cb188dc",
+    "text": "Beuge das rechte Knie und hebe den rechten Fuß. Setze die Sohle an die Innenseite des linken Oberschenkels oder der Wade — niemals ans Knie.",
+    "bytes": 63792
+  },
+  "vrksasana__i3": {
+    "hash": "78f4afda0f09",
+    "text": "Bring die Hände vor der Brust zusammen, wie zum Gebet.",
+    "bytes": 22464
+  },
+  "vrksasana__i4": {
+    "hash": "29d659803bd7",
+    "text": "Suche einen einzigen ruhigen Punkt auf Augenhöhe und lass deinen Blick dort ruhen.",
+    "bytes": 33552
+  },
+  "vrksasana__i5": {
+    "hash": "eceaebe2be0d",
+    "text": "Wenn du stabil stehst, strecke die Arme langsam über den Kopf. Die Handflächen können sich zugewandt sein oder sich berühren.",
+    "bytes": 58032
+  },
+  "vrksasana__i6": {
+    "hash": "a87f4f2b3ea1",
+    "text": "Halte die Haltung. Senke Arme und Fuß, dann wechsle die Seite.",
+    "bytes": 35568
+  },
+  "trikonasana__name": {
+    "hash": "6eae4a694bb1",
+    "text": "Dreieckshaltung.",
+    "bytes": 8064
+  },
+  "trikonasana__enter": {
+    "hash": "ab11e1d8e804",
+    "text": "Stelle die Füße weit auseinander, etwa eine Beinlänge. Drehe den rechten Fuß neunzig Grad nach außen, den linken Fuß leicht nach innen. Strecke die Arme auf Schulterhöhe zur Seite. Strecke den rechten Arm lang über das vordere Bein.",
+    "bytes": 102672
+  },
+  "trikonasana__hold": {
+    "hash": "87111121979a",
+    "text": "Neige dich aus der Hüfte und senke die rechte Hand zum Schienbein, Knöchel oder einem Block. Der linke Arm streckt sich gerade nach oben. Der Blick wandert hoch zur oberen Hand.",
+    "bytes": 73872
+  },
+  "trikonasana__breathe": {
+    "hash": "9a8fd9bbd4ac",
+    "text": "Jedes Einatmen weitet die Brust zur Seitenwand; jedes Ausatmen verlängert hinaus durch den Scheitel.",
+    "bytes": 44352
+  },
+  "trikonasana__exit": {
+    "hash": "115a9c0d951c",
+    "text": "Atme ein und richte dich zurück zum Stand auf, geführt vom oberen Arm. Stelle die Füße zusammen. Wir wiederholen die Übung auf der anderen Seite.",
+    "bytes": 68112
+  },
+  "trikonasana__i0": {
+    "hash": "b84161176cdf",
+    "text": "Stelle die Füße weit auseinander auf der Matte, etwa eine Beinlänge.",
+    "bytes": 27936
+  },
+  "trikonasana__i1": {
+    "hash": "bb9aedc6745f",
+    "text": "Drehe den rechten Fuß 90 Grad nach außen, sodass die Zehen nach rechts zeigen. Drehe den linken Fuß leicht nach innen.",
+    "bytes": 51264
+  },
+  "trikonasana__i2": {
+    "hash": "fa274ab461ce",
+    "text": "Strecke beide Arme auf Schulterhöhe zur Seite, die Handflächen nach unten.",
+    "bytes": 29520
+  },
+  "trikonasana__i3": {
+    "hash": "38218aa15b3f",
+    "text": "Strecke den rechten Arm so weit wie möglich nach vorne über das rechte Bein und verlängere die Körperseite.",
+    "bytes": 41760
+  },
+  "trikonasana__i4": {
+    "hash": "30d6b2a760d7",
+    "text": "Senke die rechte Hand zum Schienbein, Knöchel oder einem Yogablock — dorthin, wo deine Wirbelsäule lang bleibt.",
+    "bytes": 47088
+  },
+  "trikonasana__i5": {
+    "hash": "5fdfef59f76b",
+    "text": "Strecke den linken Arm gerade zur Decke. Staple die Schultern übereinander.",
+    "bytes": 35856
+  },
+  "trikonasana__i6": {
+    "hash": "33382c02bdd7",
+    "text": "Schau unter dem oberen Arm nach oben, wenn der Nacken es zulässt. Wechsle die Seite.",
+    "bytes": 37584
+  },
+  "utkatasana__name": {
+    "hash": "6aeed534e52e",
+    "text": "Stuhlhaltung.",
+    "bytes": 7488
+  },
+  "utkatasana__enter": {
+    "hash": "e71e504a86ed",
+    "text": "Stelle dich mit zusammenstehenden oder hüftbreiten Füßen hin. Atme ein und strecke die Arme über den Kopf, die Oberarme nahe den Ohren.",
+    "bytes": 59328
+  },
+  "utkatasana__hold": {
+    "hash": "9d7b0b56bf58",
+    "text": "Atme aus und beuge die Knie, als würdest du dich auf einen Stuhl setzen. Verlagere das Gewicht in die Fersen — du solltest mit den Zehen wackeln können. Hebe dich durch die seitlichen Rippen.",
+    "bytes": 78912
+  },
+  "utkatasana__breathe": {
+    "hash": "978ef5511c67",
+    "text": "Jedes Einatmen verlängert die Wirbelsäule; jedes Ausatmen verwurzelt die Fersen. Die Oberschenkel arbeiten hart — das ist die Haltung.",
+    "bytes": 64080
+  },
+  "utkatasana__exit": {
+    "hash": "6d84dcc8c748",
+    "text": "Atme ein und strecke die Beine. Senke die Arme und schüttle die Beine aus.",
+    "bytes": 34704
+  },
+  "utkatasana__i0": {
+    "hash": "2ef3175cb3ef",
+    "text": "Stelle dich mit zusammenstehenden oder hüftbreiten Füßen hin, die Zehen zeigen nach vorne.",
+    "bytes": 34128
+  },
+  "utkatasana__i1": {
+    "hash": "678ad1a5c613",
+    "text": "Atme ein und strecke beide Arme gerade über den Kopf, die Oberarme nahe den Ohren.",
+    "bytes": 35136
+  },
+  "utkatasana__i2": {
+    "hash": "29fc22ca2142",
+    "text": "Atme aus und beuge die Knie, senke die Hüften, als würdest du dich auf einen Stuhl hinter dir setzen.",
+    "bytes": 40032
+  },
+  "utkatasana__i3": {
+    "hash": "7a2c579b894c",
+    "text": "Verlagere dein Gewicht in die Fersen — du solltest mit den Zehen wackeln können.",
+    "bytes": 30240
+  },
+  "utkatasana__i4": {
+    "hash": "4e1923bf9aab",
+    "text": "Lehne den Oberkörper leicht nach vorne, damit die Brust offen bleibt.",
+    "bytes": 25776
+  },
+  "utkatasana__i5": {
+    "hash": "d863c0eab8e6",
+    "text": "Hebe die Fingerspitzen zur Decke. Lass die Schultern weg von den Ohren sinken.",
+    "bytes": 32544
+  },
+  "utkatasana__i6": {
+    "hash": "a921fcebfa02",
+    "text": "Halte und atme. Einatmen zum Verlängern, Ausatmen zum Setzen.",
+    "bytes": 38448
+  },
+  "virabhadrasanaIII__name": {
+    "hash": "f37a25d564f1",
+    "text": "Krieger III.",
+    "bytes": 6480
+  },
+  "virabhadrasanaIII__enter": {
+    "hash": "e2ebd979a115",
+    "text": "Verlagere aus dem Stand das Gewicht auf den rechten Fuß. Klappe aus der Hüfte nach vorne und strecke das linke Bein nach hinten, parallel zum Boden. Strecke die Arme nach vorne wie ein Flugzeug.",
+    "bytes": 82800
+  },
+  "virabhadrasanaIII__hold": {
+    "hash": "0ce8882ad54d",
+    "text": "Bilde eine lange Linie von den Fingerspitzen bis zur hinteren Ferse. Die Hüften bleiben auf gleicher Höhe — lass die angehobene Hüfte nicht nach oben drehen. Der Blick ruht einen Fuß vor dem Standzeh.",
+    "bytes": 90432
+  },
+  "virabhadrasanaIII__breathe": {
+    "hash": "68f64604698f",
+    "text": "Jeder Atemzug stabilisiert die Linie. Je kleiner der Atem, desto leichter das Gleichgewicht.",
+    "bytes": 42336
+  },
+  "virabhadrasanaIII__exit": {
+    "hash": "ec478b406246",
+    "text": "Setze den hinteren Fuß nach vorne zum Standfuß. Halte für einen Atemzug inne. Wir wiederholen die Übung auf der anderen Seite.",
+    "bytes": 58752
+  },
+  "virabhadrasanaIII__i0": {
+    "hash": "5b44c5527cec",
+    "text": "Stelle dich mit hüftbreiten Füßen hin.",
+    "bytes": 15264
+  },
+  "virabhadrasanaIII__i1": {
+    "hash": "3edc76b8b5a9",
+    "text": "Verlagere dein gesamtes Gewicht auf den rechten Fuß. Beuge das rechte Knie leicht für mehr Stabilität.",
+    "bytes": 47952
+  },
+  "virabhadrasanaIII__i2": {
+    "hash": "c9a7d8f0c147",
+    "text": "Klappe aus der Hüfte nach vorne und hebe das linke Bein gerade nach hinten.",
+    "bytes": 28512
+  },
+  "virabhadrasanaIII__i3": {
+    "hash": "f142b23f15d6",
+    "text": "Strecke die Arme gerade nach vorne, wie ein Flugzeug.",
+    "bytes": 23040
+  },
+  "virabhadrasanaIII__i4": {
+    "hash": "a5b7af522b95",
+    "text": "Bilde eine lange Linie von den Fingerspitzen bis zur hinteren Ferse.",
+    "bytes": 28944
+  },
+  "virabhadrasanaIII__i5": {
+    "hash": "5ebc410f29a2",
+    "text": "Halte beide Hüften auf gleicher Höhe — lass die angehobene Hüfte nicht nach oben drehen.",
+    "bytes": 35856
+  },
+  "virabhadrasanaIII__i6": {
+    "hash": "3b8fe320b134",
+    "text": "Richte den Blick auf einen Punkt am Boden, etwa einen Fuß vor dir. Wechsle die Seite.",
+    "bytes": 40032
+  },
+  "parsvakonasana__name": {
+    "hash": "e036b81a398e",
+    "text": "Seitwinkelhaltung.",
+    "bytes": 9792
+  },
+  "parsvakonasana__enter": {
+    "hash": "ef34f79257be",
+    "text": "Drehe aus einem weiten Stand den rechten Fuß neunzig Grad nach außen. Beuge das rechte Knie Richtung neunzig Grad. Senke den rechten Unterarm auf den rechten Oberschenkel oder die rechte Hand auf einen Block außerhalb des rechten Fußes.",
+    "bytes": 101664
+  },
+  "parsvakonasana__hold": {
+    "hash": "e4be9c0d293f",
+    "text": "Strecke den linken Arm über den Kopf, in einer Linie mit der Wirbelsäule, die Handfläche zum Boden. Öffne die Brust zur Decke. Der Blick wandert unter dem oberen Arm nach oben, wenn der Nacken es zulässt.",
+    "bytes": 85392
+  },
+  "parsvakonasana__breathe": {
+    "hash": "78365355b542",
+    "text": "Jedes Einatmen weitet die unteren Rippen; jedes Ausatmen verwurzelt den hinteren Fuß.",
+    "bytes": 40032
+  },
+  "parsvakonasana__exit": {
+    "hash": "db37fc1f6186",
+    "text": "Drücke durch beide Füße, um zum Stand zurückzukehren. Wir wiederholen die Übung auf der anderen Seite.",
+    "bytes": 43056
+  },
+  "parsvakonasana__i0": {
+    "hash": "b84161176cdf",
+    "text": "Stelle die Füße weit auseinander auf der Matte, etwa eine Beinlänge.",
+    "bytes": 25920
+  },
+  "parsvakonasana__i1": {
+    "hash": "e9c0340ae506",
+    "text": "Drehe den rechten Fuß 90 Grad nach außen. Drehe den linken Fuß leicht nach innen.",
+    "bytes": 40464
+  },
+  "parsvakonasana__i2": {
+    "hash": "ad0833e8629a",
+    "text": "Beuge das rechte Knie Richtung 90 Grad, das Knie folgt der Linie über dem Knöchel.",
+    "bytes": 36864
+  },
+  "parsvakonasana__i3": {
+    "hash": "0b622466a29b",
+    "text": "Senke den rechten Unterarm auf den rechten Oberschenkel, ODER setze die rechte Hand auf einen Block außerhalb des rechten Fußes.",
+    "bytes": 52992
+  },
+  "parsvakonasana__i4": {
+    "hash": "04978bdc8ae4",
+    "text": "Strecke den linken Arm über den Kopf, in einer Linie mit der Wirbelsäule. Die Handfläche zeigt zum Boden.",
+    "bytes": 46224
+  },
+  "parsvakonasana__i5": {
+    "hash": "cbc2182a3df1",
+    "text": "Öffne die Brust zur Decke und drehe den Oberkörper leicht nach oben.",
+    "bytes": 27504
+  },
+  "parsvakonasana__i6": {
+    "hash": "1c2f243a40ee",
+    "text": "Schau unter dem oberen Arm nach oben, wenn dein Nacken es zulässt. Wechsle die Seite.",
+    "bytes": 38736
+  },
+  "parsvottanasana__name": {
+    "hash": "15aa97f1f86e",
+    "text": "Pyramidenhaltung.",
+    "bytes": 9792
+  },
+  "parsvottanasana__enter": {
+    "hash": "563fae5f8684",
+    "text": "Mach mit dem rechten Fuß einen Schritt nach vorne, etwa einen Meter. Richte die Hüften nach vorne aus. Hände auf den Hüften oder im umgekehrten Gebet hinter dem Rücken.",
+    "bytes": 72288
+  },
+  "parsvottanasana__hold": {
+    "hash": "3f8af1a7d49e",
+    "text": "Atme ein, um die Wirbelsäule zu verlängern. Atme aus und klappe aus der Hüfte nach vorne, das vordere Bein bleibt gestreckt. Führe mit der Brust, nicht mit dem Kopf.",
+    "bytes": 78768
+  },
+  "parsvottanasana__breathe": {
+    "hash": "eed517ff92b3",
+    "text": "Jedes Einatmen verlängert; jedes Ausatmen faltet eine Spur tiefer. Das vordere Bein arbeitet — überstrecke das Knie nicht.",
+    "bytes": 61344
+  },
+  "parsvottanasana__exit": {
+    "hash": "b3697262662f",
+    "text": "Atme ein und richte dich zurück zum Stand auf. Wir wiederholen die Übung auf der anderen Seite.",
+    "bytes": 43632
+  },
+  "parsvottanasana__i0": {
+    "hash": "2e8910ac99bc",
+    "text": "Stelle dich an den vorderen Rand deiner Matte, Füße zusammen.",
+    "bytes": 24912
+  },
+  "parsvottanasana__i1": {
+    "hash": "145a931ec718",
+    "text": "Mach mit dem linken Fuß einen Schritt nach hinten, etwa einen Meter. Beide Füße bleiben flach.",
+    "bytes": 41472
+  },
+  "parsvottanasana__i2": {
+    "hash": "09816a1dbbeb",
+    "text": "Drehe den hinteren Fuß leicht nach außen, etwa 45 Grad.",
+    "bytes": 28944
+  },
+  "parsvottanasana__i3": {
+    "hash": "4cb5460a5021",
+    "text": "Richte die Hüften zur Vorderseite der Matte aus.",
+    "bytes": 20448
+  },
+  "parsvottanasana__i4": {
+    "hash": "c1aa8d721288",
+    "text": "Lege die Hände auf die Hüften ODER bring sie hinter dem Rücken ins umgekehrte Gebet.",
+    "bytes": 31968
+  },
+  "parsvottanasana__i5": {
+    "hash": "ae07dac01d2c",
+    "text": "Atme ein und verlängere die Wirbelsäule nach oben.",
+    "bytes": 20736
+  },
+  "parsvottanasana__i6": {
+    "hash": "6c60c49f181e",
+    "text": "Atme aus und klappe aus der Hüfte nach vorne, senke die Brust über das vordere Bein. Halte das vordere Bein gestreckt (oder leicht gebeugt). Wechsle die Seite.",
+    "bytes": 75168
+  },
+  "prasaritaPadottanasana__name": {
+    "hash": "e9f8fdf87b36",
+    "text": "Grätsch-Vorwärtsbeuge.",
+    "bytes": 11088
+  },
+  "prasaritaPadottanasana__enter": {
+    "hash": "f940114b6a7e",
+    "text": "Stelle die Füße weit auseinander, etwa eine Beinlänge, beide Füße parallel und nach vorne zeigend. Hände auf den Hüften. Atme ein und verlängere die Wirbelsäule.",
+    "bytes": 76176
+  },
+  "prasaritaPadottanasana__hold": {
+    "hash": "8b147addfa94",
+    "text": "Atme aus und klappe aus der Hüfte nach vorne. Bring die Hände zum Boden zwischen die Füße, die Finger in einer Linie mit den Zehen. Lass den Scheitel zum Boden streben.",
+    "bytes": 71712
+  },
+  "prasaritaPadottanasana__breathe": {
+    "hash": "98cdf1e319f2",
+    "text": "Jedes Ausatmen lässt den Kopf ein wenig tiefer sinken. Die Beine bleiben stark — aktiviere die Oberschenkel, um den unteren Rücken zu schützen.",
+    "bytes": 62928
+  },
+  "prasaritaPadottanasana__exit": {
+    "hash": "1a560548632a",
+    "text": "Hände auf die Hüften. Atme ein und richte dich mit flachem Rücken zum Stand auf. Stelle die Füße zusammen.",
+    "bytes": 50832
+  },
+  "prasaritaPadottanasana__i0": {
+    "hash": "e95b72c67288",
+    "text": "Stelle dich in die Mitte deiner Matte.",
+    "bytes": 13248
+  },
+  "prasaritaPadottanasana__i1": {
+    "hash": "0973de76a8b0",
+    "text": "Stelle die Füße weit auseinander, etwa eine Beinlänge, beide Füße parallel und nach vorne zeigend.",
+    "bytes": 42336
+  },
+  "prasaritaPadottanasana__i2": {
+    "hash": "53b363cc1655",
+    "text": "Drücke das Gewicht gleichmäßig in beide Füße. Aktiviere die Oberschenkel sanft.",
+    "bytes": 38736
+  },
+  "prasaritaPadottanasana__i3": {
+    "hash": "7640173916e2",
+    "text": "Lege die Hände auf die Hüften. Atme ein und verlängere die Wirbelsäule nach oben.",
+    "bytes": 36144
+  },
+  "prasaritaPadottanasana__i4": {
+    "hash": "b5e63f009e53",
+    "text": "Atme aus und klappe aus der Hüfte nach vorne, der Rücken bleibt lang.",
+    "bytes": 26928
+  },
+  "prasaritaPadottanasana__i5": {
+    "hash": "13fd68b00413",
+    "text": "Bring die Hände zum Boden zwischen die Füße, die Finger in einer Linie mit den Zehen.",
+    "bytes": 31536
+  },
+  "prasaritaPadottanasana__i6": {
+    "hash": "f7e1409d439b",
+    "text": "Lass den Scheitel zum Boden streben. Beuge die Knie, wenn sich die hinteren Oberschenkel eng anfühlen.",
+    "bytes": 49104
+  },
+  "anjaneyasana__name": {
+    "hash": "2db899f8fa6e",
+    "text": "Tiefer Ausfallschritt.",
+    "bytes": 10512
+  },
+  "anjaneyasana__enter": {
+    "hash": "ed5ad8eac6a2",
+    "text": "Mach aus dem Vierfüßlerstand mit dem rechten Fuß einen Schritt nach vorne zwischen die Hände. Senke das hintere Knie zum Boden und rolle die Zehen aus.",
+    "bytes": 61776
+  },
+  "anjaneyasana__hold": {
+    "hash": "a504cbf5d2a3",
+    "text": "Atme ein und schwinge die Arme über den Kopf, die Fingerspitzen streben zur Decke. Richte die Hüften nach vorne aus und lass sie zum Boden sinken.",
+    "bytes": 62640
+  },
+  "anjaneyasana__breathe": {
+    "hash": "a8b383f351de",
+    "text": "Jedes Einatmen hebt dich durch Brust und Arme; jedes Ausatmen verwurzelt das hintere Knie.",
+    "bytes": 44064
+  },
+  "anjaneyasana__exit": {
+    "hash": "20dc8c5bc85d",
+    "text": "Senke die Hände zum Boden und tritt zurück in den Vierfüßlerstand. Wir wiederholen die Übung auf der anderen Seite.",
+    "bytes": 51840
+  },
+  "anjaneyasana__i0": {
+    "hash": "6a6d99b5f83a",
+    "text": "Komme in den Vierfüßlerstand auf Hände und Knie.",
+    "bytes": 20880
+  },
+  "anjaneyasana__i1": {
+    "hash": "2036f1da82b7",
+    "text": "Mach mit dem rechten Fuß einen Schritt nach vorne zwischen die Hände.",
+    "bytes": 25344
+  },
+  "anjaneyasana__i2": {
+    "hash": "1bbc107c59b6",
+    "text": "Senke das hintere linke Knie sanft zum Boden. Lege den Fußrücken auf die Matte, indem du die Zehen aufrollst.",
+    "bytes": 48816
+  },
+  "anjaneyasana__i3": {
+    "hash": "b036e36b0b52",
+    "text": "Schiebe das hintere Knie ein paar Zentimeter zurück, wenn es sich intensiv anfühlt. Polstere das Knie bei Unbehagen mit einer gefalteten Decke.",
+    "bytes": 61920
+  },
+  "anjaneyasana__i4": {
+    "hash": "c030a2c75fd7",
+    "text": "Drücke beide Hände in den Boden und richte den Oberkörper auf.",
+    "bytes": 25776
+  },
+  "anjaneyasana__i5": {
+    "hash": "890fdb2b4bf3",
+    "text": "Atme ein und schwinge beide Arme über den Kopf, die Fingerspitzen streben zur Decke.",
+    "bytes": 33840
+  },
+  "anjaneyasana__i6": {
+    "hash": "c9f2f43e184d",
+    "text": "Senke die Hüften zum Boden, während du dich durch die Brust hebst. Wechsle die Seite.",
+    "bytes": 34992
+  },
+  "utthitaHastaPadangusthasana__name": {
+    "hash": "9a01a29f5458",
+    "text": "Hand-zu-großem-Zeh-Haltung.",
+    "bytes": 13824
+  },
+  "utthitaHastaPadangusthasana__enter": {
+    "hash": "c99527465ebd",
+    "text": "Verlagere aus dem Stand das Gewicht auf den linken Fuß. Hebe das rechte Knie auf Hüfthöhe. Hake den rechten großen Zeh mit dem rechten Zeige- und Mittelfinger ein (oder nutze einen Gurt um den Fuß).",
+    "bytes": 87984
+  },
+  "utthitaHastaPadangusthasana__hold": {
+    "hash": "eaa77dd50fd7",
+    "text": "Strecke das rechte Bein langsam gerade nach vorne. Verlängere die Wirbelsäule. Halte das linke Standbein aktiv, die Kniescheibe angehoben.",
+    "bytes": 63216
+  },
+  "utthitaHastaPadangusthasana__breathe": {
+    "hash": "bd28fe52fed5",
+    "text": "Jeder Atemzug stabilisiert den Standfuß. Mach dir keine Sorgen, wenn sich das angehobene Bein nicht strecken lässt — die Höhe ist nicht das Ziel.",
+    "bytes": 64512
+  },
+  "utthitaHastaPadangusthasana__exit": {
+    "hash": "d4d1c77e0826",
+    "text": "Beuge das rechte Knie wieder heran. Senke den Fuß. Halte inne. Wechsle die Seite.",
+    "bytes": 44496
+  },
+  "utthitaHastaPadangusthasana__i0": {
+    "hash": "4b1bcbe8e2ce",
+    "text": "Stelle dich auf beide Füße, das Gewicht gleichmäßig verteilt.",
+    "bytes": 26352
+  },
+  "utthitaHastaPadangusthasana__i1": {
+    "hash": "4bb5d86086b2",
+    "text": "Verlagere dein gesamtes Gewicht auf den linken Fuß. Beuge das Standknie leicht für das Gleichgewicht.",
+    "bytes": 46944
+  },
+  "utthitaHastaPadangusthasana__i2": {
+    "hash": "31034ab62a46",
+    "text": "Hebe das rechte Knie zur Brust, bis der Oberschenkel parallel zum Boden ist.",
+    "bytes": 30240
+  },
+  "utthitaHastaPadangusthasana__i3": {
+    "hash": "199ab9045e31",
+    "text": "Lege einen Yogagurt um den Fußballen des rechten Fußes und halte beide Enden mit der rechten Hand. (Oder hake den großen Zeh mit Zeige- und Mittelfinger ein.)",
+    "bytes": 68400
+  },
+  "utthitaHastaPadangusthasana__i4": {
+    "hash": "9c0f371cbd3c",
+    "text": "Strecke das rechte Bein langsam gerade nach vorne. Verlängere die Wirbelsäule nach oben.",
+    "bytes": 38736
+  },
+  "utthitaHastaPadangusthasana__i5": {
+    "hash": "6e3fc55f833e",
+    "text": "Halte die Schultern entspannt und den Blick geradeaus.",
+    "bytes": 22176
+  },
+  "utthitaHastaPadangusthasana__i6": {
+    "hash": "f86449b25c24",
+    "text": "Das angehobene Bein muss sich nicht strecken — die Höhe ist nicht das Ziel, die Länge ist es. Wechsle die Seite.",
+    "bytes": 48960
+  },
+  "garudasana__name": {
+    "hash": "523a3dd6bba6",
+    "text": "Adlerhaltung.",
+    "bytes": 7920
+  },
+  "garudasana__enter": {
+    "hash": "fb120f3a5d3b",
+    "text": "Stehe auf dem linken Fuß mit leicht gebeugtem Knie. Kreuze den rechten Oberschenkel über den linken. Wenn zugänglich, hake den rechten Fuß hinter der linken Wade ein.",
+    "bytes": 76032
+  },
+  "garudasana__hold": {
+    "hash": "5166665ffd0a",
+    "text": "Strecke die Arme nach vorne. Kreuze den linken Ellbogen im rechten Winkel über den rechten. Verwickle die Unterarme und bring die Handflächen zur Berührung (oder die Handrücken). Hebe die Ellbogen auf Schulterhöhe.",
+    "bytes": 97776
+  },
+  "garudasana__breathe": {
+    "hash": "ff5992fd97b3",
+    "text": "Jeder Atemzug breitet sich durch den oberen Rücken aus. Die Form ist eine Umarmung für den Körper — lass sie sich so anfühlen.",
+    "bytes": 55872
+  },
+  "garudasana__exit": {
+    "hash": "892cd6809fb4",
+    "text": "Entwirre die Arme. Löse die Beinkreuzung. Stehe für einen Atemzug auf beiden Füßen. Wechsle die Seite.",
+    "bytes": 59616
+  },
+  "garudasana__i0": {
+    "hash": "28713e4a2113",
+    "text": "Stelle dich auf beide Füße. Beuge beide Knie leicht.",
+    "bytes": 24480
+  },
+  "garudasana__i1": {
+    "hash": "a3f01300af0c",
+    "text": "Verlagere dein Gewicht auf den linken Fuß.",
+    "bytes": 17568
+  },
+  "garudasana__i2": {
+    "hash": "96c999e4a2b5",
+    "text": "Kreuze den rechten Oberschenkel über den linken, als würdest du mit überschlagenen Beinen auf einem Stuhl sitzen.",
+    "bytes": 41040
+  },
+  "garudasana__i3": {
+    "hash": "c1db9ca02e82",
+    "text": "Wenn zugänglich, hake den rechten Fuß hinter der linken Wade ein. Andernfalls halte die rechten Zehen für das Gleichgewicht leicht am Boden.",
+    "bytes": 59904
+  },
+  "garudasana__i4": {
+    "hash": "db5c276ce408",
+    "text": "Strecke die Arme gerade nach vorne auf Schulterhöhe.",
+    "bytes": 20160
+  },
+  "garudasana__i5": {
+    "hash": "8bdb2f0217db",
+    "text": "Kreuze den linken Ellbogen im rechten Winkel über den rechten. Verwickle die Unterarme und bring die Handflächen zur Berührung (oder die Handrücken, wenn die Handflächen sich nicht erreichen).",
+    "bytes": 77328
+  },
+  "garudasana__i6": {
+    "hash": "129913b515e9",
+    "text": "Hebe die Ellbogen auf Schulterhöhe. Setze dich etwas tiefer ins Standbein. Wechsle die Seite.",
+    "bytes": 48240
+  },
+  "natarajasana__name": {
+    "hash": "9aeb3e3bbac0",
+    "text": "Haltung des Tänzers.",
+    "bytes": 10800
+  },
+  "natarajasana__enter": {
+    "hash": "f0d48a2ffe11",
+    "text": "Stehe auf dem linken Fuß. Beuge das rechte Knie und fasse mit der rechten Hand den rechten Knöchel von innen (oder einen um den Fuß gelegten Gurt). Strecke den linken Arm als Gegengewicht nach vorne.",
+    "bytes": 92880
+  },
+  "natarajasana__hold": {
+    "hash": "62038b9e6e0c",
+    "text": "Drücke den rechten Fuß zurück in die rechte Hand und hebe das Bein nach oben und hinten. Die Brust öffnet sich nach vorne. Halte das Standknie weich.",
+    "bytes": 64224
+  },
+  "natarajasana__breathe": {
+    "hash": "d77d7cd8e029",
+    "text": "Jeder Atemzug findet die schwebende Balance. Die Anhebung entsteht aus dem Fuß, der gegen die Hand drückt, nicht aus der ziehenden Hand.",
+    "bytes": 56736
+  },
+  "natarajasana__exit": {
+    "hash": "8a48d5d049ff",
+    "text": "Löse den Fuß langsam zum Boden. Stehe auf beiden Füßen. Wechsle die Seite.",
+    "bytes": 40176
+  },
+  "natarajasana__i0": {
+    "hash": "4b1bcbe8e2ce",
+    "text": "Stelle dich auf beide Füße, das Gewicht gleichmäßig verteilt.",
+    "bytes": 26064
+  },
+  "natarajasana__i1": {
+    "hash": "a2621a306dd3",
+    "text": "Verlagere dein Gewicht auf den linken Fuß. Beuge das linke Knie leicht für Stabilität.",
+    "bytes": 42768
+  },
+  "natarajasana__i2": {
+    "hash": "159dbeb3b0b8",
+    "text": "Beuge das rechte Knie und hebe den rechten Fuß hinter dir an.",
+    "bytes": 24480
+  },
+  "natarajasana__i3": {
+    "hash": "fc954daa519d",
+    "text": "Greife mit der rechten Hand nach hinten und fasse den rechten Knöchel von innen. (Nutze einen um den Fuß gelegten Yogagurt, wenn deine Hand nicht reicht.)",
+    "bytes": 63216
+  },
+  "natarajasana__i4": {
+    "hash": "fdebd9b5d738",
+    "text": "Strecke den linken Arm nach vorne auf Schulterhöhe als Gegengewicht.",
+    "bytes": 26928
+  },
+  "natarajasana__i5": {
+    "hash": "45b603d94750",
+    "text": "Drücke den rechten Fuß zurück in die rechte Hand und hebe das Bein nach oben und hinten.",
+    "bytes": 33552
+  },
+  "natarajasana__i6": {
+    "hash": "762d0ef49ca4",
+    "text": "Öffne die Brust nach vorne. Finde deinen Blick auf einem ruhigen Punkt. Wechsle die Seite.",
+    "bytes": 46656
+  },
+  "mindfulRespiration__name": {
+    "hash": "7dd598d463c6",
+    "text": "Achtsame Atmung.",
+    "bytes": 8928
+  },
+  "mindfulRespiration__enter": {
+    "hash": "b40e48ef69a4",
+    "text": "Sitze bequem mit aufrechter Wirbelsäule. Lege die Hände auf die Knie. Lass die Schultern weg von den Ohren sinken.",
+    "bytes": 54432
+  },
+  "mindfulRespiration__hold": {
+    "hash": "15933fe7b5a9",
+    "text": "Atme langsam durch die Nase ein, vier Zählzeiten lang. Halte inne. Atme sanft aus, sechs Zählzeiten lang.",
+    "bytes": 57600
+  },
+  "mindfulRespiration__breathe": {
+    "hash": "827e6978f9c3",
+    "text": "Lass das Ausatmen länger sein als das Einatmen — das ist es, was deinem Körper sagt, dass er sicher ist.",
+    "bytes": 44208
+  },
+  "mindfulRespiration__exit": {
+    "hash": "099f7d88ee2b",
+    "text": "Lass deinen Atem zu seinem natürlichen Rhythmus zurückkehren. Nimm wahr, wie du dich jetzt fühlst.",
+    "bytes": 39600
+  },
+  "sukhasana__name": {
+    "hash": "ccef5f80ea94",
+    "text": "Bequemer Sitz.",
+    "bytes": 8784
+  },
+  "sukhasana__enter": {
+    "hash": "b6721d921098",
+    "text": "Komm in einen bequemen Schneidersitz. Lass die Knie zum Boden sinken. Lege die Hände auf die Knie, Handflächen nach oben oder unten.",
+    "bytes": 61344
+  },
+  "sukhasana__hold": {
+    "hash": "f555da036fff",
+    "text": "Verlängere die Wirbelsäule — der Scheitel strebt nach oben, während die Sitzbeinhöcker nach unten wurzeln. Entspanne die Schultern, entspanne den Kiefer.",
+    "bytes": 65952
+  },
+  "sukhasana__breathe": {
+    "hash": "ab80c4334769",
+    "text": "Atme natürlich. Jedes Ausatmen löst eine weitere Schicht Spannung aus den Schultern, dem Gesicht, dem Bauch.",
+    "bytes": 49536
+  },
+  "sukhasana__exit": {
+    "hash": "6a435e247d06",
+    "text": "Öffne sanft die Augen. Strecke die Beine nach vorne aus und schüttle sie aus.",
+    "bytes": 36720
+  },
+  "sukhasana__i0": {
+    "hash": "4f5b3ed58c73",
+    "text": "Setze dich auf den Boden. Lege eine gefaltete Decke oder ein Kissen unter die Hüften.",
+    "bytes": 36720
+  },
+  "sukhasana__i1": {
+    "hash": "62e8fa1e9d29",
+    "text": "Kreuze die Schienbeine bequem, eins vor dem anderen.",
+    "bytes": 23184
+  },
+  "sukhasana__i2": {
+    "hash": "7b110960b881",
+    "text": "Lass die Knie zum Boden sinken. Sie müssen den Boden nicht berühren.",
+    "bytes": 29376
+  },
+  "sukhasana__i3": {
+    "hash": "41d4c6e77205",
+    "text": "Lege die Hände auf die Knie, Handflächen nach oben oder unten.",
+    "bytes": 28944
+  },
+  "sukhasana__i4": {
+    "hash": "2c4df71ae3d3",
+    "text": "Verlängere die Wirbelsäule — die Sitzbeinhöcker wurzeln nach unten, der Scheitel strebt nach oben.",
+    "bytes": 38016
+  },
+  "sukhasana__i5": {
+    "hash": "f5967151df1d",
+    "text": "Entspanne die Schultern, den Kiefer und die Augen.",
+    "bytes": 20160
+  },
+  "sukhasana__i6": {
+    "hash": "62e0ba611d63",
+    "text": "Wechsle gelegentlich, welches Schienbein vorne liegt, um die Hüften auszugleichen.",
+    "bytes": 31824
+  },
+  "padmasana__name": {
+    "hash": "515db28c360e",
+    "text": "Lotushaltung.",
+    "bytes": 7776
+  },
+  "padmasana__enter": {
+    "hash": "fd754e25a4ed",
+    "text": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie und lege den rechten Fuß auf den linken Oberschenkel, die Sohle nach oben. Dann beuge das linke Knie und lege den linken Fuß auf den rechten Oberschenkel.",
+    "bytes": 96768
+  },
+  "padmasana__hold": {
+    "hash": "49a142ac083f",
+    "text": "Lege die Hände auf die Knie, die Handflächen nach oben oder unten. Verlängere die Wirbelsäule — der Lotussitz ist eine senkrechte Linie vom Kreuzbein bis zum Scheitel.",
+    "bytes": 73152
+  },
+  "padmasana__breathe": {
+    "hash": "fa5662d8eeef",
+    "text": "Atme natürlich. Die Haltung selbst erzeugt Stille; der Atem bestätigt sie nur.",
+    "bytes": 38016
+  },
+  "padmasana__exit": {
+    "hash": "946d9034914b",
+    "text": "Falte vorsichtig ein Bein nach dem anderen aus. Massiere die Knie, wenn sie sich eng anfühlen.",
+    "bytes": 41760
+  },
+  "padmasana__i0": {
+    "hash": "b97f251cfabd",
+    "text": "WARNUNG: Erzwinge diese Haltung nicht. Wenn sie nicht leicht gelingt, sitze stattdessen in Sukhasana auf einem Kissen — deine Knie werden es dir danken.",
+    "bytes": 66384
+  },
+  "padmasana__i1": {
+    "hash": "8d0d3ca06876",
+    "text": "Sitze mit gerade nach vorne ausgestreckten Beinen auf dem Boden.",
+    "bytes": 25200
+  },
+  "padmasana__i2": {
+    "hash": "b851e45a3b43",
+    "text": "Beuge das rechte Knie. Hebe mit den Händen den rechten Fuß und lege ihn auf den linken Oberschenkel, die Sohle nach oben.",
+    "bytes": 54432
+  },
+  "padmasana__i3": {
+    "hash": "58e1c5c9d1a4",
+    "text": "Beuge das linke Knie. Hebe den linken Fuß und lege ihn auf den rechten Oberschenkel, die Sohle nach oben.",
+    "bytes": 51984
+  },
+  "padmasana__i4": {
+    "hash": "b6db09513033",
+    "text": "Beide Knie sollten auf dem Boden ruhen. Wenn eines der Knie nach oben schwebt, ist dies noch nicht deine Haltung — geh zurück.",
+    "bytes": 51552
+  },
+  "padmasana__i5": {
+    "hash": "c62a159185d4",
+    "text": "Lege die Hände auf die Knie, die Handflächen nach oben.",
+    "bytes": 22608
+  },
+  "padmasana__i6": {
+    "hash": "f7144c9c9614",
+    "text": "Verlängere die Wirbelsäule. Der Sitz sollte sich stabil anfühlen, nicht angestrengt.",
+    "bytes": 36288
+  },
+  "siddhasana__name": {
+    "hash": "7cedd5514680",
+    "text": "Vollkommene Haltung.",
+    "bytes": 9936
+  },
+  "siddhasana__enter": {
+    "hash": "2e86be5df18c",
+    "text": "Sitze mit ausgestreckten Beinen. Beuge das linke Knie und lege die linke Ferse an den Damm (den weichen Punkt zwischen Genitalien und After). Beuge das rechte Knie und lege den rechten Fuß auf den linken Knöchel, die rechte Ferse drückt in den Schambeinbereich.",
+    "bytes": 121968
+  },
+  "siddhasana__hold": {
+    "hash": "bf5b30277b63",
+    "text": "Lege die Hände auf die Knie, die Handflächen nach oben. Verlängere die Wirbelsäule. Der Sitz erzeugt einen stabilen energetischen Verschluss am Beckenboden.",
+    "bytes": 67104
+  },
+  "siddhasana__breathe": {
+    "hash": "18b40401dd73",
+    "text": "Atme durch die Nase in einem langsamen, gleichmäßigen Rhythmus. Siddhasana ist der traditionelle Sitz für die Pranayama-Praxis.",
+    "bytes": 59904
+  },
+  "siddhasana__exit": {
+    "hash": "e8720cb58e27",
+    "text": "Falte die Beine langsam aus. Massiere die Knie, falls nötig.",
+    "bytes": 31824
+  },
+  "siddhasana__i0": {
+    "hash": "413575cea230",
+    "text": "Sitze mit gerade nach vorne ausgestreckten Beinen.",
+    "bytes": 20736
+  },
+  "siddhasana__i1": {
+    "hash": "e7969991cbe7",
+    "text": "Beuge das linke Knie und bringe die linke Ferse an den weichen Punkt zwischen Genitalien und After (den Damm).",
+    "bytes": 45936
+  },
+  "siddhasana__i2": {
+    "hash": "023472ce09b1",
+    "text": "Beuge das rechte Knie und lege den rechten Fuß auf den linken Knöchel. Die rechte Ferse ruht knapp über dem Schambeinbereich.",
+    "bytes": 54864
+  },
+  "siddhasana__i3": {
+    "hash": "c62a159185d4",
+    "text": "Lege die Hände auf die Knie, die Handflächen nach oben.",
+    "bytes": 22752
+  },
+  "siddhasana__i4": {
+    "hash": "cebf5e5d7a0e",
+    "text": "Verlängere die Wirbelsäule, die Sitzbeine verwurzeln, der Scheitel strebt nach oben.",
+    "bytes": 35280
+  },
+  "siddhasana__i5": {
+    "hash": "2987487715ed",
+    "text": "Wechsle regelmäßig, welches Bein unten liegt — der Sitz ist asymmetrisch.",
+    "bytes": 33408
+  },
+  "siddhasana__i6": {
+    "hash": "aec1356861c2",
+    "text": "Sitze auf einer gefalteten Decke, wenn Hüften oder Knie protestieren.",
+    "bytes": 28368
+  },
+  "vajrasana__name": {
+    "hash": "87ec4fc3040c",
+    "text": "Donnerkeilhaltung.",
+    "bytes": 9792
+  },
+  "vajrasana__enter": {
+    "hash": "cd254250f97d",
+    "text": "Knie auf dem Boden mit zusammenstehenden Knien und flach liegenden Fußrücken. Setze dich zurück auf die Fersen. Die großen Zehen berühren sich, die Fersen weit genug auseinander, um die Sitzbeine zu betten.",
+    "bytes": 87696
+  },
+  "vajrasana__hold": {
+    "hash": "a085631f1868",
+    "text": "Lege die Hände auf die Oberschenkel, die Handflächen nach unten. Verlängere die Wirbelsäule. Lass die Schultern sinken, lass den Kiefer locker.",
+    "bytes": 65232
+  },
+  "vajrasana__breathe": {
+    "hash": "1af464bf813f",
+    "text": "Atme natürlich. Jedes Ausatmen löst eine weitere Schicht Anstrengung.",
+    "bytes": 36864
+  },
+  "vajrasana__exit": {
+    "hash": "781303f86d5f",
+    "text": "Lehne dich nach vorne, setze die Hände nach vorne ab und falte die Beine zurück in den Sitz. Massiere die Knie, falls nötig.",
+    "bytes": 53568
+  },
+  "vajrasana__i0": {
+    "hash": "4cda0826ebb8",
+    "text": "Knie auf dem Boden mit zusammenstehenden Knien.",
+    "bytes": 20736
+  },
+  "vajrasana__i1": {
+    "hash": "da78430e0f75",
+    "text": "Lege die Fußrücken flach auf die Matte, die großen Zehen berühren sich.",
+    "bytes": 30384
+  },
+  "vajrasana__i2": {
+    "hash": "9f4c20916a63",
+    "text": "Setze dich zurück, sodass die Hüften auf den Fersen ruhen. Die Sitzbeine betten sich zwischen die Fersen.",
+    "bytes": 44928
+  },
+  "vajrasana__i3": {
+    "hash": "71467d219f11",
+    "text": "Lege eine gefaltete Decke zwischen Waden und Oberschenkel, wenn sich die Knie eingeklemmt anfühlen.",
+    "bytes": 40032
+  },
+  "vajrasana__i4": {
+    "hash": "4737246c9c27",
+    "text": "Lege die Hände auf die Oberschenkel, die Handflächen nach unten.",
+    "bytes": 25488
+  },
+  "vajrasana__i5": {
+    "hash": "ab4cde9c08a4",
+    "text": "Verlängere die Wirbelsäule. Lass die Schultern sinken.",
+    "bytes": 22320
+  },
+  "vajrasana__i6": {
+    "hash": "a9f27a1475b2",
+    "text": "Dieser Sitz ist auch 5 Minuten nach einer Mahlzeit sicher zu üben — er unterstützt die Verdauung.",
+    "bytes": 38016
+  },
+  "ardhaPadmasana__name": {
+    "hash": "5e826a779bc7",
+    "text": "Halber Lotus.",
+    "bytes": 8208
+  },
+  "ardhaPadmasana__enter": {
+    "hash": "5284107bcc0b",
+    "text": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie und lege den rechten Fuß auf den linken Oberschenkel, die Sohle nach oben. Beuge das linke Knie und schiebe den linken Fuß unter den rechten Oberschenkel.",
+    "bytes": 92448
+  },
+  "ardhaPadmasana__hold": {
+    "hash": "1b157facc825",
+    "text": "Lege die Hände auf die Knie, die Handflächen nach oben oder unten. Verlängere die Wirbelsäule. Wechsle regelmäßig, welcher Fuß oben liegt.",
+    "bytes": 66816
+  },
+  "ardhaPadmasana__breathe": {
+    "hash": "08a637d4fa47",
+    "text": "Atme natürlich. Achte darauf, ob die Asymmetrie die Wirbelsäule zieht — justiere, um die Senkrechte zu finden.",
+    "bytes": 47808
+  },
+  "ardhaPadmasana__exit": {
+    "hash": "9c10607af53f",
+    "text": "Falte die Beine vorsichtig aus. Massiere die Knie, wenn sie sich komprimiert anfühlen.",
+    "bytes": 39312
+  },
+  "ardhaPadmasana__i0": {
+    "hash": "484320600c6d",
+    "text": "Sitze mit nach vorne ausgestreckten Beinen.",
+    "bytes": 18288
+  },
+  "ardhaPadmasana__i1": {
+    "hash": "d2fe8437132b",
+    "text": "Beuge das rechte Knie und lege den rechten Fuß auf den linken Oberschenkel, die Sohle nach oben.",
+    "bytes": 39168
+  },
+  "ardhaPadmasana__i2": {
+    "hash": "9ccf71aa1ed2",
+    "text": "Beuge das linke Knie und schiebe den linken Fuß UNTER den rechten Oberschenkel.",
+    "bytes": 32976
+  },
+  "ardhaPadmasana__i3": {
+    "hash": "7400f17e606a",
+    "text": "Das rechte Knie ruht auf dem Boden oder einem Kissen. Erzwinge es nicht nach unten.",
+    "bytes": 36576
+  },
+  "ardhaPadmasana__i4": {
+    "hash": "97c705fea480",
+    "text": "Lege die Hände auf die Knie, die Handflächen nach oben oder unten.",
+    "bytes": 27936
+  },
+  "ardhaPadmasana__i5": {
+    "hash": "bada95d95bae",
+    "text": "Verlängere die Wirbelsäule — die Sitzbeine verwurzeln, der Scheitel strebt nach oben.",
+    "bytes": 35856
+  },
+  "ardhaPadmasana__i6": {
+    "hash": "2679dbf3bea7",
+    "text": "Wechsle bei jeder Übung, welches Bein oben liegt, um die Hüften ausgeglichen zu halten.",
+    "bytes": 36144
+  },
+  "baddhaKonasana__name": {
+    "hash": "212c3d2e89a1",
+    "text": "Gebundene Winkelhaltung.",
+    "bytes": 11664
+  },
+  "baddhaKonasana__enter": {
+    "hash": "9faaad0ee3f4",
+    "text": "Sitze mit aufrechter Wirbelsäule. Bring die Fußsohlen zusammen und lass die Knie zu den Seiten fallen. Halte die Füße oder Knöchel. Die Fersen nah am Körper oder weiter weg — je nachdem, was die Knie loslässt.",
+    "bytes": 93456
+  },
+  "baddhaKonasana__hold": {
+    "hash": "39c732428b88",
+    "text": "Verlängere die Wirbelsäule. Runde dich nicht nach vorne, um die Knie nach unten zu bringen — halte den Rücken lang und lass die Hüften die Arbeit machen.",
+    "bytes": 63504
+  },
+  "baddhaKonasana__breathe": {
+    "hash": "17c3642ccb83",
+    "text": "Lass mit jedem Ausatmen die inneren Oberschenkel weicher werden. Die Knie lösen sich in ihrem eigenen Tempo — niemals gedrückt.",
+    "bytes": 57888
+  },
+  "baddhaKonasana__exit": {
+    "hash": "caa17202f764",
+    "text": "Bring die Knie sanft wieder zusammen. Strecke die Beine nach vorne aus.",
+    "bytes": 34560
+  },
+  "baddhaKonasana__i0": {
+    "hash": "90ce8e5d9e77",
+    "text": "Sitze auf der vorderen Kante einer gefalteten Decke.",
+    "bytes": 21456
+  },
+  "baddhaKonasana__i1": {
+    "hash": "f9eb1d2c5d7b",
+    "text": "Bring die Fußsohlen zusammen. Lass die Knie zu den Seiten fallen.",
+    "bytes": 29664
+  },
+  "baddhaKonasana__i2": {
+    "hash": "fbd8de436df0",
+    "text": "Halte mit beiden Händen die Füße oder Knöchel.",
+    "bytes": 18576
+  },
+  "baddhaKonasana__i3": {
+    "hash": "36b61e1adeb8",
+    "text": "Bewege die Fersen näher zum Körper oder weiter weg — finde, was die Knie auf natürliche Weise loslässt.",
+    "bytes": 46080
+  },
+  "baddhaKonasana__i4": {
+    "hash": "4410ab9c3bdb",
+    "text": "Verlängere die Wirbelsäule — runde dich nicht nach vorne, um die Knie nach unten zu bringen.",
+    "bytes": 33120
+  },
+  "baddhaKonasana__i5": {
+    "hash": "7a363234e30f",
+    "text": "Lass die Knie in ihrem eigenen Tempo zum Boden sinken. Drücke sie niemals.",
+    "bytes": 36864
+  },
+  "baddhaKonasana__i6": {
+    "hash": "17dae33b56fe",
+    "text": "Optional: Lege einen Block oder ein Kissen unter jedes Knie zur Stütze.",
+    "bytes": 32256
+  },
+  "upavishtaKonasana__name": {
+    "hash": "1d25d4873f19",
+    "text": "Sitzende Grätsch-Vorwärtsbeuge.",
+    "bytes": 15120
+  },
+  "upavishtaKonasana__enter": {
+    "hash": "2a519ab74d7c",
+    "text": "Sitze mit weit auseinander gestreckten Beinen, so weit, wie es die hinteren Oberschenkel zulassen. Flexe die Füße, die Kniescheiben zeigen nach oben. Sitze auf einer Decke, wenn der untere Rücken rundet.",
+    "bytes": 91872
+  },
+  "upavishtaKonasana__hold": {
+    "hash": "e6e337a4dab9",
+    "text": "Atme ein, um die Wirbelsäule zu verlängern. Atme aus und wandere mit den Händen nach vorne, klappe aus der Hüfte. Halte die Wirbelsäule lang — runde dich nicht, um den Boden zu erreichen.",
+    "bytes": 82224
+  },
+  "upavishtaKonasana__breathe": {
+    "hash": "f5d0c9a1fc88",
+    "text": "Jedes Ausatmen faltet eine Spur tiefer. Die Beine bleiben stark, die Kniescheiben angehoben.",
+    "bytes": 41328
+  },
+  "upavishtaKonasana__exit": {
+    "hash": "0a768249451b",
+    "text": "Wandere mit den Händen zurück zu den Hüften. Atme ein und richte dich auf. Bring die Beine wieder zusammen.",
+    "bytes": 51408
+  },
+  "upavishtaKonasana__i0": {
+    "hash": "bee6a48f1f6a",
+    "text": "Sitze auf einer gefalteten Decke auf dem Boden.",
+    "bytes": 19152
+  },
+  "upavishtaKonasana__i1": {
+    "hash": "c7e1330b0fa8",
+    "text": "Strecke beide Beine weit zu den Seiten aus — so weit, wie es deine hinteren Oberschenkel bequem zulassen.",
+    "bytes": 43344
+  },
+  "upavishtaKonasana__i2": {
+    "hash": "030dbf0ca3df",
+    "text": "Flexe beide Füße, sodass die Zehen gerade nach oben zeigen. Aktiviere die Oberschenkel sanft.",
+    "bytes": 43056
+  },
+  "upavishtaKonasana__i3": {
+    "hash": "16095ff68b82",
+    "text": "Lege die Hände vor dir auf den Boden. Atme ein und verlängere die Wirbelsäule nach oben.",
+    "bytes": 39744
+  },
+  "upavishtaKonasana__i4": {
+    "hash": "8544dd7c2b57",
+    "text": "Atme aus und wandere mit den Händen nach vorne, klappe aus der Hüfte.",
+    "bytes": 28656
+  },
+  "upavishtaKonasana__i5": {
+    "hash": "d85cbc233a3a",
+    "text": "Führe mit der Brust, nicht mit dem Kopf. Halte dort an, wo der Rücken runden möchte.",
+    "bytes": 35136
+  },
+  "upavishtaKonasana__i6": {
+    "hash": "57b85e0815f0",
+    "text": "Beuge die Knie, wenn die hinteren Oberschenkel sich gezogen anfühlen.",
+    "bytes": 29232
+  },
+  "januSirsasana__name": {
+    "hash": "2c9336200b8d",
+    "text": "Kopf-zum-Knie-Haltung.",
+    "bytes": 11232
+  },
+  "januSirsasana__enter": {
+    "hash": "e33a95a4ed77",
+    "text": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie und lege die rechte Sohle an die Innenseite des linken Oberschenkels. Das rechte Knie öffnet sich zur Seite zum Boden hin.",
+    "bytes": 84672
+  },
+  "januSirsasana__hold": {
+    "hash": "292cb5e0e3c6",
+    "text": "Atme ein und verlängere die Wirbelsäule. Atme aus und klappe über das ausgestreckte linke Bein nach vorne. Halte das Schienbein, den Knöchel oder den Fuß — dort, wo du nicht in der Wirbelsäule rundest.",
+    "bytes": 90288
+  },
+  "januSirsasana__breathe": {
+    "hash": "bd1b726de849",
+    "text": "Jedes Ausatmen löst den linken hinteren Oberschenkel eine Spur tiefer. Das rechte Knie löst sich weiter zum Boden hin.",
+    "bytes": 54864
+  },
+  "januSirsasana__exit": {
+    "hash": "39e8105d2ad2",
+    "text": "Atme ein und richte dich auf. Wechsle die Seite.",
+    "bytes": 25632
+  },
+  "januSirsasana__i0": {
+    "hash": "15a28d287105",
+    "text": "Sitze auf einer gefalteten Decke mit beiden Beinen nach vorne ausgestreckt.",
+    "bytes": 30672
+  },
+  "januSirsasana__i1": {
+    "hash": "e946b39ea791",
+    "text": "Beuge das rechte Knie und lege die rechte Sohle an die Innenseite des linken Oberschenkels.",
+    "bytes": 39024
+  },
+  "januSirsasana__i2": {
+    "hash": "f5977d3b3892",
+    "text": "Das rechte Knie öffnet sich zur Seite zum Boden hin. Lege einen Block darunter, wenn es hoch schwebt.",
+    "bytes": 41760
+  },
+  "januSirsasana__i3": {
+    "hash": "21abe1169bee",
+    "text": "Richte die Schultern zum ausgestreckten linken Bein aus.",
+    "bytes": 23760
+  },
+  "januSirsasana__i4": {
+    "hash": "ae07dac01d2c",
+    "text": "Atme ein und verlängere die Wirbelsäule nach oben.",
+    "bytes": 20160
+  },
+  "januSirsasana__i5": {
+    "hash": "696754d118b3",
+    "text": "Atme aus und klappe über das linke Bein nach vorne. Halte das Schienbein, den Knöchel oder den Fuß — dort, wo dein Rücken lang bleibt.",
+    "bytes": 59184
+  },
+  "januSirsasana__i6": {
+    "hash": "1c14e424cee7",
+    "text": "Beuge das ausgestreckte Knie, falls nötig. Wechsle die Seite.",
+    "bytes": 32688
+  },
+  "gomukhasana__name": {
+    "hash": "47e50c73c07b",
+    "text": "Kuhgesichtshaltung.",
+    "bytes": 9648
+  },
+  "gomukhasana__enter": {
+    "hash": "694616433b7b",
+    "text": "Kreuze aus dem Sitz den rechten Oberschenkel über den linken, sodass die Knie übereinander liegen. Die Füße stellen sich zu den Seiten der Hüften aus. Strecke den rechten Arm über den Kopf, beuge den Ellbogen und lass die rechte Hand den Rücken hinunterfallen. Bring den linken Arm von unten hinter den Rücken; wenn zugänglich, hake die Finger ineinander. Andernfalls halte einen Gurt zwischen den Händen.",
+    "bytes": 176256
+  },
+  "gomukhasana__hold": {
+    "hash": "440af052a820",
+    "text": "Staple die Wirbelsäule senkrecht. Hebe den unteren Ellbogen an; hebe den oberen Ellbogen an. Lass die angehobene Schulter weg vom Ohr sinken.",
+    "bytes": 70272
+  },
+  "gomukhasana__breathe": {
+    "hash": "d0625149d4bf",
+    "text": "Jeder Atemzug breitet sich durch den oberen Rücken und die äußeren Hüften aus.",
+    "bytes": 32832
+  },
+  "gomukhasana__exit": {
+    "hash": "6a2b00f0e15e",
+    "text": "Löse die Arme. Löse die Beinkreuzung und schüttle die Beine aus. Wechsle die Seite — sowohl Bein- ALS AUCH Armstellung kehren sich um.",
+    "bytes": 63792
+  },
+  "gomukhasana__i0": {
+    "hash": "fa7168821ea0",
+    "text": "Sitze auf einer gefalteten Decke mit ausgestreckten Beinen.",
+    "bytes": 23472
+  },
+  "gomukhasana__i1": {
+    "hash": "61b6a4f4c9f3",
+    "text": "Beuge das linke Knie. Lege den linken Fuß neben die rechte Hüfte, das Knie zeigt nach vorne.",
+    "bytes": 47952
+  },
+  "gomukhasana__i2": {
+    "hash": "ce0c2d18f1ea",
+    "text": "Kreuze den rechten Oberschenkel über den linken, die Knie übereinander. Der rechte Fuß kommt neben die linke Hüfte.",
+    "bytes": 50400
+  },
+  "gomukhasana__i3": {
+    "hash": "84b51091f754",
+    "text": "Sitze gleichmäßig auf beiden Sitzbeinen — passe die Decke an, falls nötig.",
+    "bytes": 32832
+  },
+  "gomukhasana__i4": {
+    "hash": "553de7aa633c",
+    "text": "Strecke den rechten Arm über den Kopf. Beuge den rechten Ellbogen und lass die rechte Hand deinen Rücken hinunterfallen.",
+    "bytes": 53136
+  },
+  "gomukhasana__i5": {
+    "hash": "0d882fe273fd",
+    "text": "Bring den linken Arm von unten hinter den Rücken. Wenn zugänglich, hake die Finger ineinander. Andernfalls halte einen Gurt oder ein Handtuch zwischen den Händen.",
+    "bytes": 64512
+  },
+  "gomukhasana__i6": {
+    "hash": "71d3761e50c3",
+    "text": "Hebe den unteren Ellbogen an. Hebe den oberen Ellbogen an. Wechsle BEIDE Arme und Beine für die zweite Seite.",
+    "bytes": 57456
+  },
+  "marichyasanaC__name": {
+    "hash": "e5f162b715da",
+    "text": "Marichis Haltung C.",
+    "bytes": 11088
+  },
+  "marichyasanaC__enter": {
+    "hash": "071be691149e",
+    "text": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie und stelle den rechten Fuß flach auf den Boden, die Ferse nah am rechten Sitzbein. Halte das linke Bein lang und aktiv.",
+    "bytes": 98496
+  },
+  "marichyasanaC__hold": {
+    "hash": "6c187bccb227",
+    "text": "Atme ein, um die Wirbelsäule zu verlängern. Atme aus und drehe den Oberkörper nach rechts. Hake den linken Ellbogen an der Außenseite des rechten Knies ein. Die rechte Hand zur Stütze hinter dir.",
+    "bytes": 88560
+  },
+  "marichyasanaC__breathe": {
+    "hash": "fa5016fe0b65",
+    "text": "Jedes Einatmen verlängert; jedes Ausatmen dreht eine Spur tiefer. Das linke Bein bleibt aktiv.",
+    "bytes": 46368
+  },
+  "marichyasanaC__exit": {
+    "hash": "e4408c0dd1ab",
+    "text": "Löse die Drehung langsam. Wechsle die Seite.",
+    "bytes": 23760
+  },
+  "marichyasanaC__i0": {
+    "hash": "75898a68bb3d",
+    "text": "Sitze mit beiden Beinen nach vorne ausgestreckt.",
+    "bytes": 20736
+  },
+  "marichyasanaC__i1": {
+    "hash": "0993ed6c0d08",
+    "text": "Beuge das rechte Knie. Stelle den rechten Fuß flach auf den Boden, die Ferse nah am rechten Sitzbein.",
+    "bytes": 48096
+  },
+  "marichyasanaC__i2": {
+    "hash": "609f1057f832",
+    "text": "Halte das linke Bein lang und aktiv, den Fuß geflext.",
+    "bytes": 24768
+  },
+  "marichyasanaC__i3": {
+    "hash": "ae07dac01d2c",
+    "text": "Atme ein und verlängere die Wirbelsäule nach oben.",
+    "bytes": 21168
+  },
+  "marichyasanaC__i4": {
+    "hash": "eb93e963002f",
+    "text": "Atme aus und drehe den Oberkörper nach rechts. Lege die rechte Hand zur Stütze hinter dich auf den Boden.",
+    "bytes": 46512
+  },
+  "marichyasanaC__i5": {
+    "hash": "312de8313eb6",
+    "text": "Hake den linken Ellbogen an der AUSSENSEITE des rechten Knies ein.",
+    "bytes": 26784
+  },
+  "marichyasanaC__i6": {
+    "hash": "1269df26295d",
+    "text": "Drücke den Ellbogen sanft ins Knie, um die Drehung zu vertiefen. Wechsle die Seite.",
+    "bytes": 37296
+  },
+  "virasana__name": {
+    "hash": "af66a5cf4b45",
+    "text": "Heldenhaltung.",
+    "bytes": 8064
+  },
+  "virasana__enter": {
+    "hash": "56de91373681",
+    "text": "Knie mit zusammenstehenden Knien und den Füßen weiter als die Hüften. Sitze zwischen den Füßen, die Sitzbeine auf dem Boden oder auf einem Block. Die Fußrücken flach auf dem Boden, die Zehen zeigen nach hinten.",
+    "bytes": 92880
+  },
+  "virasana__hold": {
+    "hash": "ec79e7abf393",
+    "text": "Lege die Hände auf die Oberschenkel. Verlängere die Wirbelsäule. Lass die Schultern sinken, lass den Kiefer locker.",
+    "bytes": 52128
+  },
+  "virasana__breathe": {
+    "hash": "1af464bf813f",
+    "text": "Atme natürlich. Jedes Ausatmen löst eine weitere Schicht Anstrengung.",
+    "bytes": 35424
+  },
+  "virasana__exit": {
+    "hash": "5e9b2401e670",
+    "text": "Lehne dich zur Seite, schwinge die Beine heraus und falte sie nach vorne aus. Massiere die Knie, falls nötig.",
+    "bytes": 49104
+  },
+  "virasana__i0": {
+    "hash": "4cda0826ebb8",
+    "text": "Knie auf dem Boden mit zusammenstehenden Knien.",
+    "bytes": 20016
+  },
+  "virasana__i1": {
+    "hash": "b57e0f1ea872",
+    "text": "Stelle die Füße weiter als deine Hüften. Die Fußrücken flach auf dem Boden, die Zehen zeigen nach hinten.",
+    "bytes": 47520
+  },
+  "virasana__i2": {
+    "hash": "4c1700bad491",
+    "text": "Sitze zwischen deinen Fersen — deine Sitzbeine landen auf dem Boden oder auf einem Yogablock.",
+    "bytes": 36720
+  },
+  "virasana__i3": {
+    "hash": "6d50c9710a07",
+    "text": "Die meisten brauchen jahrelang einen Block unter dem Sitz. Beginne hoch, senke den Block über Wochen.",
+    "bytes": 42768
+  },
+  "virasana__i4": {
+    "hash": "0dcc0d060b98",
+    "text": "Wenn die Fußrücken den Boden nicht erreichen, rolle eine dünne Decke unter die Vorderseite der Knöchel.",
+    "bytes": 39456
+  },
+  "virasana__i5": {
+    "hash": "5ee5d1022fbc",
+    "text": "Lege die Hände auf die Oberschenkel.",
+    "bytes": 14688
+  },
+  "virasana__i6": {
+    "hash": "f4ca3d69f831",
+    "text": "Verlängere die Wirbelsäule, lass die Schultern sinken.",
+    "bytes": 21888
+  },
+  "ardhaMatsyendrasana__name": {
+    "hash": "6e8413ebdfac",
+    "text": "Halber Drehsitz.",
+    "bytes": 9792
+  },
+  "ardhaMatsyendrasana__enter": {
+    "hash": "cd415485d693",
+    "text": "Sitze mit beiden Beinen ausgestreckt. Beuge das rechte Knie und kreuze den rechten Fuß über den linken Oberschenkel, der Fuß auf dem Boden außerhalb des linken Knies. Das linke Bein kann gestreckt bleiben oder die Ferse zur rechten Hüfte falten.",
+    "bytes": 110448
+  },
+  "ardhaMatsyendrasana__hold": {
+    "hash": "cc2701a1246f",
+    "text": "Atme ein, um die Wirbelsäule zu verlängern. Atme aus und drehe dich nach rechts. Die rechte Hand ruht zur Stütze hinter dir; der linke Ellbogen hakt außerhalb des rechten Knies ein.",
+    "bytes": 85680
+  },
+  "ardhaMatsyendrasana__breathe": {
+    "hash": "d7c7d187d3c3",
+    "text": "Jedes Einatmen lässt die Wirbelsäule höher wachsen. Jedes Ausatmen vertieft die Drehung ein wenig — niemals erzwingen.",
+    "bytes": 56160
+  },
+  "ardhaMatsyendrasana__exit": {
+    "hash": "7904ea18c3d9",
+    "text": "Löse die Drehung langsam zur Mitte, Atemzug für Atemzug. Wechsle die Beine und wiederhole auf der anderen Seite.",
+    "bytes": 54432
+  },
+  "ardhaMatsyendrasana__i0": {
+    "hash": "5aac9af15a85",
+    "text": "Sitze auf einer gefalteten Decke mit beiden Beinen ausgestreckt.",
+    "bytes": 26352
+  },
+  "ardhaMatsyendrasana__i1": {
+    "hash": "557f0dcf7336",
+    "text": "Beuge das rechte Knie und kreuze den rechten Fuß über den linken Oberschenkel, der Fuß flach auf dem Boden außerhalb des linken Knies.",
+    "bytes": 55008
+  },
+  "ardhaMatsyendrasana__i2": {
+    "hash": "a5f43d4f07c0",
+    "text": "Das untere linke Bein kann gestreckt bleiben ODER die Ferse zur rechten Hüfte falten.",
+    "bytes": 34848
+  },
+  "ardhaMatsyendrasana__i3": {
+    "hash": "ae07dac01d2c",
+    "text": "Atme ein und verlängere die Wirbelsäule nach oben.",
+    "bytes": 20736
+  },
+  "ardhaMatsyendrasana__i4": {
+    "hash": "d9b27c26a837",
+    "text": "Atme aus und drehe dich nach rechts. Lege die rechte Hand zur Stütze hinter dich auf den Boden.",
+    "bytes": 43344
+  },
+  "ardhaMatsyendrasana__i5": {
+    "hash": "2a282286784a",
+    "text": "Hake den linken Ellbogen an der AUSSENSEITE des rechten Knies ein (oder umarme das Knie mit dem linken Arm für eine leichtere Version).",
+    "bytes": 57024
+  },
+  "ardhaMatsyendrasana__i6": {
+    "hash": "11fce667aa8e",
+    "text": "Jedes Ausatmen vertieft die Drehung eine Spur — niemals erzwingen. Wechsle die Seite.",
+    "bytes": 46224
+  },
+  "bharadvajasana__name": {
+    "hash": "a53461fb3a8e",
+    "text": "Bharadvajas Drehung.",
+    "bytes": 11232
+  },
+  "bharadvajasana__enter": {
+    "hash": "0564feb39f6b",
+    "text": "Sitze auf einer gefalteten Decke. Beuge beide Knie und schwinge die Beine zur linken Seite. Staple die Beine, sodass der rechte Knöchel auf dem linken Fußgewölbe ruht.",
+    "bytes": 80784
+  },
+  "bharadvajasana__hold": {
+    "hash": "67d03635edab",
+    "text": "Atme ein und verlängere die Wirbelsäule. Atme aus und drehe den Oberkörper nach rechts, weg von den Beinen. Die rechte Hand auf dem Boden hinter dir, die linke Hand am rechten Knie.",
+    "bytes": 84672
+  },
+  "bharadvajasana__breathe": {
+    "hash": "4d59a3e542ce",
+    "text": "Jedes Einatmen verlängert; jedes Ausatmen dreht eine Spur tiefer.",
+    "bytes": 31248
+  },
+  "bharadvajasana__exit": {
+    "hash": "54f6613fc62e",
+    "text": "Löse die Drehung. Schwinge die Beine zur anderen Seite und wiederhole.",
+    "bytes": 32976
+  },
+  "bharadvajasana__i0": {
+    "hash": "15a28d287105",
+    "text": "Sitze auf einer gefalteten Decke mit beiden Beinen nach vorne ausgestreckt.",
+    "bytes": 29520
+  },
+  "bharadvajasana__i1": {
+    "hash": "ca6f17d26937",
+    "text": "Beuge beide Knie und schwinge die Beine zur linken Seite. Staple die Beine, sodass der rechte Knöchel auf dem linken Fußgewölbe ruht.",
+    "bytes": 57600
+  },
+  "bharadvajasana__i2": {
+    "hash": "dbbae5e68bb6",
+    "text": "Sitze gleichmäßig auf beiden Sitzbeinen — passe die Decke an, damit die rechte Hüfte sich erden kann.",
+    "bytes": 40464
+  },
+  "bharadvajasana__i3": {
+    "hash": "5a38d2df7f16",
+    "text": "Atme ein und verlängere die Wirbelsäule.",
+    "bytes": 17424
+  },
+  "bharadvajasana__i4": {
+    "hash": "749284ed8acb",
+    "text": "Atme aus und drehe den Oberkörper nach rechts, weg von den Beinen.",
+    "bytes": 28368
+  },
+  "bharadvajasana__i5": {
+    "hash": "bca4a8e75410",
+    "text": "Lege die rechte Hand auf den Boden hinter dir. Bring die linke Hand zum rechten Knie oder Oberschenkel.",
+    "bytes": 43344
+  },
+  "bharadvajasana__i6": {
+    "hash": "7928711cb5ea",
+    "text": "Jedes Ausatmen dreht eine Spur tiefer. Wechsle die Seite.",
+    "bytes": 31824
+  },
+  "marichyasanaA__name": {
+    "hash": "ba938cd5f9a0",
+    "text": "Marichis Haltung A.",
+    "bytes": 10224
+  },
+  "marichyasanaA__enter": {
+    "hash": "6d297f5d4d85",
+    "text": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie, der Fuß flach auf dem Boden nah am rechten Sitzbein. Wickle den rechten Arm um das rechte Schienbein und fasse die linke Hand hinter dem Rücken, oder halte einen Gurt.",
+    "bytes": 98208
+  },
+  "marichyasanaA__hold": {
+    "hash": "33f09a9d203a",
+    "text": "Atme ein, um dich zu verlängern. Atme aus und falte dich über das ausgestreckte linke Bein nach vorne. Die Bindung hält die Wirbelsäule aktiv.",
+    "bytes": 68112
+  },
+  "marichyasanaA__breathe": {
+    "hash": "793b5d66c699",
+    "text": "Jedes Ausatmen faltet eine Spur tiefer. Die Bindung vertieft die Beuge nicht mit Kraft — der Atem tut es.",
+    "bytes": 44496
+  },
+  "marichyasanaA__exit": {
+    "hash": "0eeb02faeef8",
+    "text": "Atme ein und richte dich auf. Löse die Bindung. Wechsle die Seite.",
+    "bytes": 37440
+  },
+  "marichyasanaA__i0": {
+    "hash": "15a28d287105",
+    "text": "Sitze auf einer gefalteten Decke mit beiden Beinen nach vorne ausgestreckt.",
+    "bytes": 28368
+  },
+  "marichyasanaA__i1": {
+    "hash": "c5dc76240626",
+    "text": "Beuge das rechte Knie und stelle den rechten Fuß flach auf den Boden, die Ferse nah am rechten Sitzbein.",
+    "bytes": 42480
+  },
+  "marichyasanaA__i2": {
+    "hash": "609f1057f832",
+    "text": "Halte das linke Bein lang und aktiv, den Fuß geflext.",
+    "bytes": 25056
+  },
+  "marichyasanaA__i3": {
+    "hash": "5a38d2df7f16",
+    "text": "Atme ein und verlängere die Wirbelsäule.",
+    "bytes": 18144
+  },
+  "marichyasanaA__i4": {
+    "hash": "8433e3ce406b",
+    "text": "Wickle den rechten Arm um das rechte Schienbein (und um die Rückseite des Körpers), um die linke Hand hinter dem Rücken zu fassen. Oder halte einen Gurt zwischen den Händen.",
+    "bytes": 69696
+  },
+  "marichyasanaA__i5": {
+    "hash": "9bcddfde04cd",
+    "text": "Atme aus und falte dich über das ausgestreckte linke Bein nach vorne.",
+    "bytes": 28656
+  },
+  "marichyasanaA__i6": {
+    "hash": "75cac602ba33",
+    "text": "Halte 30-60 Sekunden. Wechsle die Seite.",
+    "bytes": 26784
+  },
+  "parivrttaTrikonasana__name": {
+    "hash": "7512367a0ad9",
+    "text": "Gedrehtes Dreieck.",
+    "bytes": 9648
+  },
+  "parivrttaTrikonasana__enter": {
+    "hash": "16cb6943d900",
+    "text": "Stelle die Füße etwa einen Meter auseinander. Drehe den rechten Fuß 90 Grad nach außen. Richte die Hüften zum rechten Bein aus. Atme ein und strecke den linken Arm nach vorne.",
+    "bytes": 83808
+  },
+  "parivrttaTrikonasana__hold": {
+    "hash": "c04476b0d7ba",
+    "text": "Atme aus und drehe dich nach rechts. Die linke Hand zum Boden außerhalb des rechten Fußes oder auf einen Block. Der rechte Arm gerade nach oben. Schau unter dem oberen Arm nach oben.",
+    "bytes": 92160
+  },
+  "parivrttaTrikonasana__breathe": {
+    "hash": "4d59a3e542ce",
+    "text": "Jedes Einatmen verlängert; jedes Ausatmen dreht eine Spur tiefer.",
+    "bytes": 33264
+  },
+  "parivrttaTrikonasana__exit": {
+    "hash": "1e924046bae9",
+    "text": "Atme ein und richte dich zurück zum Stand auf. Bring die Füße kurz zusammen. Wechsle die Seite.",
+    "bytes": 47520
+  },
+  "parivrttaTrikonasana__i0": {
+    "hash": "f2e6982ac307",
+    "text": "Stelle die Füße weit auseinander auf der Matte, aber schmaler als für Trikonasana — etwa einen Meter.",
+    "bytes": 42192
+  },
+  "parivrttaTrikonasana__i1": {
+    "hash": "bb08503ba9a0",
+    "text": "Drehe den rechten Fuß 90 Grad nach außen. Richte die Hüften zum rechten Bein aus.",
+    "bytes": 38016
+  },
+  "parivrttaTrikonasana__i2": {
+    "hash": "f135b8285662",
+    "text": "Atme ein und strecke den linken Arm nach vorne, während du dich durch die Wirbelsäule verlängerst.",
+    "bytes": 36432
+  },
+  "parivrttaTrikonasana__i3": {
+    "hash": "fd1082920a9c",
+    "text": "Atme aus und drehe den Oberkörper nach rechts, senke die linke Hand zum Boden außerhalb des rechten Fußes ODER auf einen Yogablock.",
+    "bytes": 57024
+  },
+  "parivrttaTrikonasana__i4": {
+    "hash": "eaca2aff11fe",
+    "text": "Strecke den rechten Arm gerade zur Decke und staple die Schultern übereinander.",
+    "bytes": 29520
+  },
+  "parivrttaTrikonasana__i5": {
+    "hash": "b7c9e23077e7",
+    "text": "Schau unter dem oberen Arm nach oben, wenn der Nacken es zulässt. Drücke beide Füße fest in den Boden.",
+    "bytes": 49248
+  },
+  "parivrttaTrikonasana__i6": {
+    "hash": "90c1731777a9",
+    "text": "Zum Lösen: atme ein und richte dich zurück zum Stand auf. Wechsle die Seite.",
+    "bytes": 44208
+  },
+  "uttanasana__name": {
+    "hash": "76ff47291a26",
+    "text": "Stehende Vorwärtsbeuge.",
+    "bytes": 11952
+  },
+  "uttanasana__enter": {
+    "hash": "8d6c378f79ce",
+    "text": "Atme aus dem Stand ein und hebe die Arme über den Kopf, um die Wirbelsäule zu verlängern. Atme aus und klappe aus der Hüfte, falte dich mit langer Wirbelsäule nach vorne. Beuge die Knie so viel wie nötig.",
+    "bytes": 93168
+  },
+  "uttanasana__hold": {
+    "hash": "21362e738945",
+    "text": "Lass den Kopf schwer hängen. Halte die gegenüberliegenden Ellbogen und wiege dich sanft von Seite zu Seite, oder lass die Hände auf Schienbeinen, Knöcheln oder dem Boden ruhen. Entspanne den Nacken vollständig.",
+    "bytes": 92736
+  },
+  "uttanasana__breathe": {
+    "hash": "3d81d86b9b75",
+    "text": "Jedes Ausatmen lässt den Oberkörper ein wenig näher zu den Oberschenkeln schmelzen. Jedes Einatmen weitet den oberen Rücken.",
+    "bytes": 57600
+  },
+  "uttanasana__exit": {
+    "hash": "fa76c240134b",
+    "text": "Beuge die Knie großzügig. Rolle dich langsam Wirbel für Wirbel zum Stand auf. Der Kopf kommt zuletzt hoch.",
+    "bytes": 49824
+  },
+  "uttanasana__i0": {
+    "hash": "d7dd7b32ba31",
+    "text": "Stelle dich mit hüftbreiten Füßen an den vorderen Rand der Matte.",
+    "bytes": 25776
+  },
+  "uttanasana__i1": {
+    "hash": "15a2f6e280c6",
+    "text": "Atme ein und hebe die Arme über den Kopf, während du die Wirbelsäule verlängerst.",
+    "bytes": 31680
+  },
+  "uttanasana__i2": {
+    "hash": "fff20ba10a45",
+    "text": "Atme aus und klappe aus der Hüfte nach vorne, falte dich über die Beine.",
+    "bytes": 28944
+  },
+  "uttanasana__i3": {
+    "hash": "3b44d0eb3c69",
+    "text": "Beuge die Knie so viel, wie du brauchst. Gestreckte Beine sind NICHT das Ziel.",
+    "bytes": 34272
+  },
+  "uttanasana__i4": {
+    "hash": "79e0a189e45a",
+    "text": "Lass die Hände auf Schienbeinen, Knöcheln oder dem Boden ruhen — dort, wo dein Rücken lang bleibt.",
+    "bytes": 38736
+  },
+  "uttanasana__i5": {
+    "hash": "49ba8c997367",
+    "text": "Lass den Kopf schwer hängen. Entspanne den Nacken vollständig.",
+    "bytes": 26784
+  },
+  "uttanasana__i6": {
+    "hash": "8d4549929af0",
+    "text": "Optional: halte die gegenüberliegenden Ellbogen und wiege dich sanft von Seite zu Seite.",
+    "bytes": 39312
+  },
+  "paschimottanasana__name": {
+    "hash": "4062faa054e4",
+    "text": "Sitzende Vorwärtsbeuge.",
+    "bytes": 11664
+  },
+  "paschimottanasana__enter": {
+    "hash": "821704f6b3fd",
+    "text": "Sitze mit den Beinen nach vorne ausgestreckt. Flexe die Füße, sodass die Zehen nach oben zeigen. Atme ein und hebe die Arme über den Kopf, während du die Wirbelsäule verlängerst.",
+    "bytes": 83664
+  },
+  "paschimottanasana__hold": {
+    "hash": "684fcc85a740",
+    "text": "Atme aus und klappe aus der Hüfte nach vorne — nicht aus der Taille. Greife nach den Schienbeinen, Knöcheln oder Füßen, dort, wo du halten kannst, ohne den unteren Rücken zu runden.",
+    "bytes": 76752
+  },
+  "paschimottanasana__breathe": {
+    "hash": "1e17664f1d2b",
+    "text": "Jedes Einatmen verlängert; jedes Ausatmen löst ein wenig tiefer. Lass die Schwerkraft die Arbeit machen — ziehe dich niemals nach vorne.",
+    "bytes": 65808
+  },
+  "paschimottanasana__exit": {
+    "hash": "c310673665b1",
+    "text": "Atme ein und rolle dich langsam Wirbel für Wirbel auf. Der Kopf kommt zuletzt hoch.",
+    "bytes": 39024
+  },
+  "paschimottanasana__i0": {
+    "hash": "15a28d287105",
+    "text": "Sitze auf einer gefalteten Decke mit beiden Beinen nach vorne ausgestreckt.",
+    "bytes": 29952
+  },
+  "paschimottanasana__i1": {
+    "hash": "7c97326393a2",
+    "text": "Flexe beide Füße, sodass die Zehen gerade nach oben zeigen.",
+    "bytes": 25488
+  },
+  "paschimottanasana__i2": {
+    "hash": "fefec6955dd5",
+    "text": "Aktiviere die Oberschenkel sanft — die Kniescheiben heben sich.",
+    "bytes": 27504
+  },
+  "paschimottanasana__i3": {
+    "hash": "0db81af2ee89",
+    "text": "Atme ein und hebe beide Arme über den Kopf, während du die Wirbelsäule verlängerst.",
+    "bytes": 33552
+  },
+  "paschimottanasana__i4": {
+    "hash": "255b6ea1e697",
+    "text": "Atme aus und klappe aus der Hüfte nach vorne — nicht aus der Taille.",
+    "bytes": 27648
+  },
+  "paschimottanasana__i5": {
+    "hash": "339d5bcd27b1",
+    "text": "Greife nach den Schienbeinen, Knöcheln oder Füßen — dort, wo du halten kannst, ohne den unteren Rücken zu runden.",
+    "bytes": 46224
+  },
+  "paschimottanasana__i6": {
+    "hash": "9057ac14bfa0",
+    "text": "Beuge die Knie, wenn die hinteren Oberschenkel sich gezogen anfühlen. Nutze bei Bedarf einen Gurt um die Füße.",
+    "bytes": 50544
+  },
+  "balasana__name": {
+    "hash": "0443fea1f27f",
+    "text": "Haltung des Kindes.",
+    "bytes": 9648
+  },
+  "balasana__enter": {
+    "hash": "6f8bbc3b3f84",
+    "text": "Komm in den Vierfüßlerstand. Bring die großen Zehen zusammen und lass die Knie so weit wie angenehm auseinander. Setze die Hüften zurück Richtung Fersen.",
+    "bytes": 62640
+  },
+  "balasana__hold": {
+    "hash": "29bba6fcb95b",
+    "text": "Lege die Stirn auf der Matte ab. Die Arme können nach vorne reichen oder neben dem Körper ruhen, Handflächen nach oben. Entspanne den Kiefer, entspanne die Augen.",
+    "bytes": 70992
+  },
+  "balasana__breathe": {
+    "hash": "6512dbfa4854",
+    "text": "Atme in den hinteren Brustkorb. Jedes Einatmen weitet den unteren Rücken nach außen; jedes Ausatmen lässt dich ein wenig tiefer sinken.",
+    "bytes": 65808
+  },
+  "balasana__exit": {
+    "hash": "91952959ad24",
+    "text": "Wandere mit den Händen langsam zurück. Rolle dich zum Sitzen auf, der Kopf kommt zuletzt.",
+    "bytes": 40032
+  },
+  "balasana__i0": {
+    "hash": "04f42264ae79",
+    "text": "Komm auf einer weichen Unterlage in den Vierfüßlerstand.",
+    "bytes": 22464
+  },
+  "balasana__i1": {
+    "hash": "9eb959a58043",
+    "text": "Bring die großen Zehen zusammen. Spreize die Knie so weit, wie es sich angenehm anfühlt.",
+    "bytes": 41904
+  },
+  "balasana__i2": {
+    "hash": "1a592bd0c744",
+    "text": "Setze die Hüften zurück Richtung Fersen.",
+    "bytes": 17280
+  },
+  "balasana__i3": {
+    "hash": "6a9ca5d51fb4",
+    "text": "Wandere mit den Händen nach vorne und lege die Stirn auf der Matte ab.",
+    "bytes": 26640
+  },
+  "balasana__i4": {
+    "hash": "edeedc3f40a5",
+    "text": "Die Arme können nach vorne ausgestreckt sein oder neben dem Körper ruhen, Handflächen nach oben.",
+    "bytes": 37440
+  },
+  "balasana__i5": {
+    "hash": "288d285c2e94",
+    "text": "Entspanne den Kiefer. Entspanne die Augen.",
+    "bytes": 26352
+  },
+  "balasana__i6": {
+    "hash": "92f63ac7d28a",
+    "text": "Atme in den hinteren Brustkorb. Jedes Einatmen weitet den unteren Rücken nach außen.",
+    "bytes": 40896
+  },
+  "suptaMatsyendrasana__name": {
+    "hash": "50c1ca146bf3",
+    "text": "Liegender Drehsitz.",
+    "bytes": 10368
+  },
+  "suptaMatsyendrasana__enter": {
+    "hash": "fb6777d949ed",
+    "text": "Lege dich auf den Rücken. Umarme das rechte Knie zur Brust. Strecke das linke Bein lang am Boden aus.",
+    "bytes": 49824
+  },
+  "suptaMatsyendrasana__hold": {
+    "hash": "c3f6ce76f69e",
+    "text": "Führe das rechte Knie über den Körper nach links und lass es zum Boden sinken. Strecke den rechten Arm auf Schulterhöhe aus. Drehe den Kopf nach rechts, wenn der Nacken es zulässt.",
+    "bytes": 74592
+  },
+  "suptaMatsyendrasana__breathe": {
+    "hash": "db3bee0640dd",
+    "text": "Jedes Ausatmen lässt das rechte Knie tiefer sinken. Drücke die Schulter nicht herunter — lass den Atem das Lösen übernehmen.",
+    "bytes": 58032
+  },
+  "suptaMatsyendrasana__exit": {
+    "hash": "1e48245e0e87",
+    "text": "Atme ein und bring das Knie zurück zur Mitte. Umarme beide Knie für einen Atemzug, dann wechsle die Seite.",
+    "bytes": 52848
+  },
+  "suptaMatsyendrasana__i0": {
+    "hash": "1750ecbe79e5",
+    "text": "Lege dich auf einer weichen Unterlage auf den Rücken.",
+    "bytes": 20448
+  },
+  "suptaMatsyendrasana__i1": {
+    "hash": "162f2f8481f9",
+    "text": "Umarme das rechte Knie mit beiden Händen zur Brust.",
+    "bytes": 22320
+  },
+  "suptaMatsyendrasana__i2": {
+    "hash": "f5efe45caf14",
+    "text": "Strecke das linke Bein lang am Boden aus.",
+    "bytes": 18288
+  },
+  "suptaMatsyendrasana__i3": {
+    "hash": "cfdf45015f38",
+    "text": "Strecke den rechten Arm auf Schulterhöhe zur Seite aus, Handfläche nach oben.",
+    "bytes": 30528
+  },
+  "suptaMatsyendrasana__i4": {
+    "hash": "f5695ac3f0d5",
+    "text": "Führe mit der linken Hand das rechte Knie sanft über den Körper nach links.",
+    "bytes": 29520
+  },
+  "suptaMatsyendrasana__i5": {
+    "hash": "3a8ebe494660",
+    "text": "Drehe den Kopf nach rechts, wenn dein Nacken es zulässt.",
+    "bytes": 21168
+  },
+  "suptaMatsyendrasana__i6": {
+    "hash": "df9018f195ad",
+    "text": "Lege ein Kissen unter das bewegte Knie, wenn es den Boden nicht erreicht. Wechsle die Seite.",
+    "bytes": 39888
+  },
+  "savasana__name": {
+    "hash": "fe8d30e879d6",
+    "text": "Totenhaltung.",
+    "bytes": 7776
+  },
+  "savasana__enter": {
+    "hash": "a93becf3b166",
+    "text": "Lege dich flach auf den Rücken. Lass die Füße natürlich nach außen fallen. Die Arme ruhen an den Seiten, Handflächen nach oben. Lass die Augen sich schließen.",
+    "bytes": 70416
+  },
+  "savasana__hold": {
+    "hash": "4f8c370bb76f",
+    "text": "Lass alle Anstrengung los. Der Boden trägt dich vollständig. Es gibt nichts zu richten, nichts zu leisten. Entspanne das Gesicht, entspanne den Hals, entspanne den Bauch.",
+    "bytes": 84528
+  },
+  "savasana__breathe": {
+    "hash": "c6ee136ece98",
+    "text": "Lass den Atem werden, was immer er will. Zähle ihn nicht, forme ihn nicht. Nimm ihn einfach wahr.",
+    "bytes": 46512
+  },
+  "savasana__exit": {
+    "hash": "5734d8524798",
+    "text": "Beginne, den Atem zu vertiefen. Bewege sanft Finger und Zehen. Rolle dich auf die rechte Seite und ruhe dort einen Atemzug. Drücke dich zum Sitzen hoch, der Kopf kommt zuletzt.",
+    "bytes": 79488
+  },
+  "savasana__i0": {
+    "hash": "a13bf569c0e7",
+    "text": "Lege dich flach auf den Rücken auf eine weiche Unterlage.",
+    "bytes": 22752
+  },
+  "savasana__i1": {
+    "hash": "c49a7ab441ec",
+    "text": "Lass die Füße nach außen fallen, etwas breiter als die Hüften.",
+    "bytes": 24768
+  },
+  "savasana__i2": {
+    "hash": "d2c0ce218fdc",
+    "text": "Lege die Arme neben den Körper, Handflächen nach oben. Die Schultern sinken zum Boden.",
+    "bytes": 38736
+  },
+  "savasana__i3": {
+    "hash": "7d9ca200275a",
+    "text": "Schließe die Augen oder richte den Blick weich zur Decke.",
+    "bytes": 21744
+  },
+  "savasana__i4": {
+    "hash": "9e85bfe0a2bd",
+    "text": "Optional: lege eine gefaltete Decke unter Kopf oder Knie.",
+    "bytes": 28800
+  },
+  "savasana__i5": {
+    "hash": "d18ecfb12398",
+    "text": "Optional: bedecke die Augen mit einem weichen Tuch.",
+    "bytes": 22752
+  },
+  "savasana__i6": {
+    "hash": "e96c1234309a",
+    "text": "Lass alle Anstrengung los. Lass den Boden dich vollständig tragen. Bleibe 5-15 Minuten.",
+    "bytes": 48960
+  },
+  "suptaBaddhaKonasana__name": {
+    "hash": "ff3b74f8aea1",
+    "text": "Liegende gebundene Winkelhaltung.",
+    "bytes": 15120
+  },
+  "suptaBaddhaKonasana__enter": {
+    "hash": "c509f544617c",
+    "text": "Lege dich auf den Rücken. Bring die Fußsohlen zusammen und lass die Knie zu den Seiten fallen. Lege ein Kissen oder einen Block unter jedes Knie zur Stütze.",
+    "bytes": 67824
+  },
+  "suptaBaddhaKonasana__hold": {
+    "hash": "8a886943a756",
+    "text": "Lege eine Hand auf den Bauch, eine aufs Herz. Oder lege die Arme an die Seiten, die Handflächen nach oben. Lass den Kiefer locker, lass die Augen weich werden.",
+    "bytes": 72000
+  },
+  "suptaBaddhaKonasana__breathe": {
+    "hash": "bc3628332430",
+    "text": "Atme sanft in den unteren Bauch. Jedes Ausatmen ist ein stilles Loslassen.",
+    "bytes": 40752
+  },
+  "suptaBaddhaKonasana__exit": {
+    "hash": "c80728a1a8b2",
+    "text": "Bring mit den Händen die Knie wieder zusammen. Rolle dich auf die rechte Seite und ruhe dort für einen Atemzug. Drücke dich langsam zum Sitz hoch.",
+    "bytes": 61200
+  },
+  "suptaBaddhaKonasana__i0": {
+    "hash": "1750ecbe79e5",
+    "text": "Lege dich auf einer weichen Unterlage auf den Rücken.",
+    "bytes": 20448
+  },
+  "suptaBaddhaKonasana__i1": {
+    "hash": "f9eb1d2c5d7b",
+    "text": "Bring die Fußsohlen zusammen. Lass die Knie zu den Seiten fallen.",
+    "bytes": 28944
+  },
+  "suptaBaddhaKonasana__i2": {
+    "hash": "e8eb41deab49",
+    "text": "Lege einen Block, ein Kissen oder eine gefaltete Decke unter JEDES Knie zur Stütze — bei engen Hüften nicht verhandelbar.",
+    "bytes": 48528
+  },
+  "suptaBaddhaKonasana__i3": {
+    "hash": "cea4a0cb7674",
+    "text": "Bewege die Füße näher zum Körper oder weiter weg, um zu finden, was sich am besten anfühlt.",
+    "bytes": 39744
+  },
+  "suptaBaddhaKonasana__i4": {
+    "hash": "36d3ad3b9c1a",
+    "text": "Lege eine Hand auf den Bauch, eine aufs Herz. Oder lege beide Arme an die Seiten, die Handflächen nach oben.",
+    "bytes": 47232
+  },
+  "suptaBaddhaKonasana__i5": {
+    "hash": "4dba6f7d7771",
+    "text": "Bedecke die Augen mit einem weichen Tuch oder einem Augenkissen, falls du eines hast.",
+    "bytes": 32544
+  },
+  "suptaBaddhaKonasana__i6": {
+    "hash": "4b6489c4075e",
+    "text": "Lass den Kiefer locker, lass die Augen weich werden. Bleibe 5-10 Minuten.",
+    "bytes": 39168
+  },
+  "suptaPadangusthasana__name": {
+    "hash": "9c443ed20a53",
+    "text": "Liegende Hand-zu-großem-Zeh-Haltung.",
+    "bytes": 16848
+  },
+  "suptaPadangusthasana__enter": {
+    "hash": "f97ccefaefd0",
+    "text": "Lege dich auf den Rücken. Lege einen Yogagurt um den Fußballen des rechten Fußes. Strecke das rechte Bein zur Decke hinauf und halte den Gurt mit beiden Händen. Halte das linke Bein lang auf dem Boden, den Fuß geflext.",
+    "bytes": 101376
+  },
+  "suptaPadangusthasana__hold": {
+    "hash": "70160749fb6b",
+    "text": "Drücke den rechten Fuß in den Gurt und ziehe das Bein eine Spur näher zur Brust. Lass die rechte Hüfte sinken. Beide Schultern bleiben auf dem Boden.",
+    "bytes": 69408
+  },
+  "suptaPadangusthasana__breathe": {
+    "hash": "6db0ce7c53da",
+    "text": "Jedes Ausatmen bringt das Bein eine Spur näher zur Brust. Ziehe nicht — lass den Gurt die Brücke sein.",
+    "bytes": 47520
+  },
+  "suptaPadangusthasana__exit": {
+    "hash": "b2e662b1a54b",
+    "text": "Senke das rechte Bein zum Boden. Halte inne. Wechsle die Seite.",
+    "bytes": 36432
+  },
+  "suptaPadangusthasana__i0": {
+    "hash": "64d3e4d24e12",
+    "text": "Lege dich auf einer flachen Unterlage auf den Rücken.",
+    "bytes": 20304
+  },
+  "suptaPadangusthasana__i1": {
+    "hash": "0fe3f506ea61",
+    "text": "Lege einen Yogagurt (oder einen festen Gürtel oder Schal) um den Fußballen deines rechten Fußes.",
+    "bytes": 41760
+  },
+  "suptaPadangusthasana__i2": {
+    "hash": "2b240008339d",
+    "text": "Halte beide Enden des Gurts, je ein Ende in jeder Hand.",
+    "bytes": 25344
+  },
+  "suptaPadangusthasana__i3": {
+    "hash": "af78ac723b0a",
+    "text": "Strecke das rechte Bein zur Decke hinauf.",
+    "bytes": 16848
+  },
+  "suptaPadangusthasana__i4": {
+    "hash": "a197c97d4f9c",
+    "text": "Drücke den rechten Fuß in den Gurt. Lass die rechte Hüfte zum Boden hin sinken.",
+    "bytes": 34128
+  },
+  "suptaPadangusthasana__i5": {
+    "hash": "7cd20f7e1faa",
+    "text": "Halte das linke Bein lang auf dem Boden, den Fuß geflext.",
+    "bytes": 25488
+  },
+  "suptaPadangusthasana__i6": {
+    "hash": "9a3d4ec398e9",
+    "text": "Beide Schultern bleiben entspannt auf dem Boden. Wechsle die Seite.",
+    "bytes": 30672
+  },
+  "apanasana__name": {
+    "hash": "43a68af83cbc",
+    "text": "Knie-zur-Brust-Haltung.",
+    "bytes": 10656
+  },
+  "apanasana__enter": {
+    "hash": "25b48b1913e2",
+    "text": "Lege dich auf den Rücken. Beuge beide Knie und ziehe sie zur Brust. Schlinge die Arme um die Schienbeine, die Hände an den gegenüberliegenden Ellbogen oder an den Schienbeinen.",
+    "bytes": 79920
+  },
+  "apanasana__hold": {
+    "hash": "66896d74f9bf",
+    "text": "Umarme die Knie. Lass die Schultern zum Boden sinken. Lass den unteren Rücken mit jedem Ausatmen in den Boden hineinsinken.",
+    "bytes": 60336
+  },
+  "apanasana__breathe": {
+    "hash": "0ff2aba6d963",
+    "text": "Mit jedem Einatmen drückt der Bauch sanft gegen die Oberschenkel. Mit jedem Ausatmen ziehe die Knie eine Spur näher.",
+    "bytes": 52416
+  },
+  "apanasana__exit": {
+    "hash": "663697566fc3",
+    "text": "Löse die Beine zum Boden und ruhe einen Atemzug lang.",
+    "bytes": 23472
+  },
+  "apanasana__i0": {
+    "hash": "1750ecbe79e5",
+    "text": "Lege dich auf einer weichen Unterlage auf den Rücken.",
+    "bytes": 20304
+  },
+  "apanasana__i1": {
+    "hash": "1fd6794b2274",
+    "text": "Beuge beide Knie und ziehe sie zur Brust.",
+    "bytes": 21024
+  },
+  "apanasana__i2": {
+    "hash": "b597992e6b82",
+    "text": "Schlinge die Arme um die Schienbeine. Die Hände halten die gegenüberliegenden Ellbogen ODER umfassen die Schienbeine.",
+    "bytes": 45936
+  },
+  "apanasana__i3": {
+    "hash": "5009a6fd3562",
+    "text": "Lass die Schultern zum Boden sinken.",
+    "bytes": 15552
+  },
+  "apanasana__i4": {
+    "hash": "d09e64c1233c",
+    "text": "Umarme die Knie mit jedem Ausatmen sanft zur Brust.",
+    "bytes": 26784
+  },
+  "apanasana__i5": {
+    "hash": "0e92d922502e",
+    "text": "Optional: wiege dich sanft von Seite zu Seite für eine Massage des unteren Rückens.",
+    "bytes": 38160
+  },
+  "apanasana__i6": {
+    "hash": "229b97b32698",
+    "text": "Optional: halte jeweils ein Knie (Eka Pada Apanasana) für eine leichtere Variante.",
+    "bytes": 51408
+  },
+  "jatharaParivartanasana__name": {
+    "hash": "6d1f7f1a332a",
+    "text": "Bauchdrehung.",
+    "bytes": 7776
+  },
+  "jatharaParivartanasana__enter": {
+    "hash": "fa608d8ce1d0",
+    "text": "Lege dich auf den Rücken. Ziehe beide Knie zur Brust. Strecke die Arme auf Schulterhöhe zu den Seiten aus, die Handflächen nach oben.",
+    "bytes": 58752
+  },
+  "jatharaParivartanasana__hold": {
+    "hash": "9d9c01075a7b",
+    "text": "Senke beide Knie nach rechts zum Boden. Drehe den Kopf nach links. Beide Schultern bleiben auf dem Boden.",
+    "bytes": 45360
+  },
+  "jatharaParivartanasana__breathe": {
+    "hash": "806dfd3f0dee",
+    "text": "Lass mit jedem Ausatmen die Knie eine Spur näher zum Boden sinken. Drücke die Schulter nicht nach unten.",
+    "bytes": 48672
+  },
+  "jatharaParivartanasana__exit": {
+    "hash": "e42d75d969e8",
+    "text": "Atme ein und bring die Knie zurück zur Mitte. Umarme sie einen Atemzug lang. Wechsle die Seite.",
+    "bytes": 51120
+  },
+  "jatharaParivartanasana__i0": {
+    "hash": "64d3e4d24e12",
+    "text": "Lege dich auf einer flachen Unterlage auf den Rücken.",
+    "bytes": 20448
+  },
+  "jatharaParivartanasana__i1": {
+    "hash": "88fe370e4bec",
+    "text": "Ziehe beide Knie zur Brust.",
+    "bytes": 12960
+  },
+  "jatharaParivartanasana__i2": {
+    "hash": "9ce3c03570c1",
+    "text": "Strecke die Arme auf Schulterhöhe zu den Seiten aus, die Handflächen nach oben.",
+    "bytes": 30672
+  },
+  "jatharaParivartanasana__i3": {
+    "hash": "a61b119e4513",
+    "text": "Senke beide Knie nach rechts zum Boden und halte sie übereinander.",
+    "bytes": 26640
+  },
+  "jatharaParivartanasana__i4": {
+    "hash": "8019b4478107",
+    "text": "Drehe den Kopf nach links.",
+    "bytes": 11664
+  },
+  "jatharaParivartanasana__i5": {
+    "hash": "840fff5499a8",
+    "text": "Beide Schultern bleiben auf dem Boden — drücke die sich bewegende Schulter nicht nach unten.",
+    "bytes": 34128
+  },
+  "jatharaParivartanasana__i6": {
+    "hash": "c2fdb86ba059",
+    "text": "Lege ein Kissen unter die sich bewegenden Knie, wenn sie den Boden nicht erreichen. Wechsle die Seite.",
+    "bytes": 41616
+  },
+  "makarasana__name": {
+    "hash": "529586bab28e",
+    "text": "Krokodilshaltung.",
+    "bytes": 9936
+  },
+  "makarasana__enter": {
+    "hash": "86775c257323",
+    "text": "Lege dich auf den Bauch. Staple die Unterarme vor dir und lege die Stirn auf die Unterarme. Spreize die Beine etwas weiter als hüftbreit.",
+    "bytes": 63936
+  },
+  "makarasana__hold": {
+    "hash": "5fc7bdbc58be",
+    "text": "Lass den Körper vollständig in den Boden hinein weich werden. Lass den Kiefer und die Augen weich werden.",
+    "bytes": 50544
+  },
+  "makarasana__breathe": {
+    "hash": "c9f917b2a4f6",
+    "text": "Atme natürlich in den Bauch. Jedes Einatmen drückt den Bauch sanft gegen die Matte — der Boden lehrt den Zwerchfellatem.",
+    "bytes": 57024
+  },
+  "makarasana__exit": {
+    "hash": "d34e7d5df0c2",
+    "text": "Bring die Arme an die Seiten. Drücke dich langsam in den Vierfüßlerstand hoch und ruhe einen Atemzug lang in der Haltung des Kindes.",
+    "bytes": 55728
+  },
+  "makarasana__i0": {
+    "hash": "53821f8267f3",
+    "text": "Lege dich auf einer weichen Unterlage auf den Bauch.",
+    "bytes": 19872
+  },
+  "makarasana__i1": {
+    "hash": "7bc837d17d33",
+    "text": "Staple die Unterarme vor dir und lege die Stirn auf die Unterarme.",
+    "bytes": 28944
+  },
+  "makarasana__i2": {
+    "hash": "947f141fd3ce",
+    "text": "Spreize die Beine etwas weiter als hüftbreit, die Fersen fallen zu den Seiten.",
+    "bytes": 32976
+  },
+  "makarasana__i3": {
+    "hash": "ad997d07b65c",
+    "text": "Lass den Körper vollständig in den Boden hinein weich werden.",
+    "bytes": 25776
+  },
+  "makarasana__i4": {
+    "hash": "e8c75a0916c1",
+    "text": "Lass den Kiefer und die Augen weich werden.",
+    "bytes": 16848
+  },
+  "makarasana__i5": {
+    "hash": "7beea491d5df",
+    "text": "Atme natürlich in den Bauch. Jedes Einatmen drückt den Bauch sanft gegen die Matte.",
+    "bytes": 39456
+  },
+  "makarasana__i6": {
+    "hash": "0f508c014ec5",
+    "text": "Bleibe 3-5 Minuten. Nutze sie zwischen tieferen Rückbeugen oder als Erholungshaltung.",
+    "bytes": 39744
+  },
+  "suptaVirasana__name": {
+    "hash": "dc11802424cf",
+    "text": "Liegende Heldenhaltung.",
+    "bytes": 11376
+  },
+  "suptaVirasana__enter": {
+    "hash": "8030837f3ec8",
+    "text": "Lege aus Virasana (zwischen den Fersen sitzend) die Hände hinter dich und lehne dich langsam auf die Ellbogen zurück. Wenn zugänglich, senke dich ganz hinunter.",
+    "bytes": 65088
+  },
+  "suptaVirasana__hold": {
+    "hash": "88376e1fd98c",
+    "text": "Lege ein Bolster hinter die Wirbelsäule zur Stütze. Die Arme ruhen an den Seiten oder über dem Kopf. Die Quadrizeps und Hüftbeuger dehnen sich tief.",
+    "bytes": 68400
+  },
+  "suptaVirasana__breathe": {
+    "hash": "cc8d66b97b10",
+    "text": "Langsamer, tiefer Atem. Jedes Ausatmen löst die Quadrizeps eine Spur tiefer.",
+    "bytes": 41616
+  },
+  "suptaVirasana__exit": {
+    "hash": "043a1382e44a",
+    "text": "Drücke dich zuerst auf die Ellbogen hoch, dann auf die Hände, dann setze dich auf. Bewege dich langsam — die Quadrizeps werden eng sein.",
+    "bytes": 61920
+  },
+  "suptaVirasana__i0": {
+    "hash": "94aae705a42e",
+    "text": "Beginne in Virasana — kniend mit zusammenstehenden Knien, die Füße weiter als die Hüften, zwischen den Fersen sitzend (nutze bei Bedarf einen Block unter dem Sitz).",
+    "bytes": 65520
+  },
+  "suptaVirasana__i1": {
+    "hash": "9ad373ba75b7",
+    "text": "Lege die Hände hinter dir auf den Boden und lehne dich langsam auf die Ellbogen zurück.",
+    "bytes": 32832
+  },
+  "suptaVirasana__i2": {
+    "hash": "92c4ce60c156",
+    "text": "Halte hier inne. Wenn Knie, Hüften oder Quadrizeps sich melden, bleibe auf den Ellbogen oder komme zurück nach oben.",
+    "bytes": 50400
+  },
+  "suptaVirasana__i3": {
+    "hash": "7175ff17011f",
+    "text": "Wenn zugänglich, senke dich ganz auf den Rücken. Lege ein Bolster längs hinter die Wirbelsäule zur Stütze.",
+    "bytes": 47952
+  },
+  "suptaVirasana__i4": {
+    "hash": "d25a60224a29",
+    "text": "Die Arme können an den Seiten ruhen, die Handflächen nach oben, oder sich über dem Kopf auf dem Bolster ausstrecken.",
+    "bytes": 43632
+  },
+  "suptaVirasana__i5": {
+    "hash": "aaeb906c1c7e",
+    "text": "Halte 1-3 Minuten. Die Lösung liegt in der Dauer — überhaste nichts.",
+    "bytes": 35424
+  },
+  "suptaVirasana__i6": {
+    "hash": "38debf2c5a7f",
+    "text": "Zum Lösen: drücke dich zuerst auf die Ellbogen hoch, dann auf die Hände, dann setze dich auf.",
+    "bytes": 41760
+  },
+  "suptaSukhasana__name": {
+    "hash": "1bf33fd988df",
+    "text": "Liegende bequeme Haltung.",
+    "bytes": 11664
+  },
+  "suptaSukhasana__enter": {
+    "hash": "577bb7e24bdf",
+    "text": "Lege aus Sukhasana die Hände hinter dich und lehne dich langsam zurück. Senke dich ganz hinunter auf ein Bolster hinter der Wirbelsäule.",
+    "bytes": 57024
+  },
+  "suptaSukhasana__hold": {
+    "hash": "6ad304c4b874",
+    "text": "Die gekreuzten Beine bleiben gefaltet. Die Arme ruhen zu den Seiten, die Handflächen nach oben. Lass alles weich werden, was weich werden kann.",
+    "bytes": 63216
+  },
+  "suptaSukhasana__breathe": {
+    "hash": "ad2cc7915f85",
+    "text": "Langsamer, tiefer Atem. Die liegende Position lässt den Atem tief und leicht hinabsinken.",
+    "bytes": 46944
+  },
+  "suptaSukhasana__exit": {
+    "hash": "caff7d7fc59a",
+    "text": "Drücke dich zuerst auf die Ellbogen hoch, dann auf die Hände, dann setze dich auf. Wechsle, welches Bein vorne liegt, und wiederhole.",
+    "bytes": 61632
+  },
+  "suptaSukhasana__i0": {
+    "hash": "481beceda4fe",
+    "text": "Sitze in Sukhasana — die Beine bequem gekreuzt, die Sitzbeine geerdet.",
+    "bytes": 34704
+  },
+  "suptaSukhasana__i1": {
+    "hash": "9ad373ba75b7",
+    "text": "Lege die Hände hinter dir auf den Boden und lehne dich langsam auf die Ellbogen zurück.",
+    "bytes": 32256
+  },
+  "suptaSukhasana__i2": {
+    "hash": "2a7ef5a48dd9",
+    "text": "Wenn zugänglich, senke dich ganz auf den Rücken. Die gekreuzten Beine bleiben gefaltet.",
+    "bytes": 34560
+  },
+  "suptaSukhasana__i3": {
+    "hash": "b0e6a9a94a52",
+    "text": "Lege ein Bolster oder Kissen unter Kopf und Schultern für eine leichte Anhebung der Brust.",
+    "bytes": 34416
+  },
+  "suptaSukhasana__i4": {
+    "hash": "01c0f0517718",
+    "text": "Die Arme ruhen zu den Seiten in einem beliebigen bequemen Winkel, die Handflächen nach oben.",
+    "bytes": 37440
+  },
+  "suptaSukhasana__i5": {
+    "hash": "ccfeab837d55",
+    "text": "Halte 1-3 Minuten pro Seite, dann wechsle, welches Bein vorne liegt, und wiederhole.",
+    "bytes": 38448
+  },
+  "suptaSukhasana__i6": {
+    "hash": "50d420323b13",
+    "text": "Zum Lösen: drücke dich auf die Ellbogen hoch, dann auf die Hände, dann setze dich auf.",
+    "bytes": 40464
+  },
+  "bhujangasana__name": {
+    "hash": "ad9667036f41",
+    "text": "Kobrahaltung.",
+    "bytes": 8352
+  },
+  "bhujangasana__enter": {
+    "hash": "62137e014b52",
+    "text": "Lege dich auf den Bauch. Bring die Handflächen unter die Schultern, die Ellbogen nah an die Rippen. Die Fußrücken drücken in den Boden.",
+    "bytes": 56016
+  },
+  "bhujangasana__hold": {
+    "hash": "db066c18fb38",
+    "text": "Atme ein und löse die Brust mit der Rückenmuskulatur vom Boden, nicht mit den Händen. Die Ellbogen bleiben leicht gebeugt. Die Schultern ziehen weg von den Ohren.",
+    "bytes": 70128
+  },
+  "bhujangasana__breathe": {
+    "hash": "3ddb4114dab8",
+    "text": "Atme in die offene Brust. Jedes Einatmen verlängert die Wirbelsäule; jedes Ausatmen lässt den unteren Rücken weicher werden.",
+    "bytes": 60624
+  },
+  "bhujangasana__exit": {
+    "hash": "29af92fac730",
+    "text": "Atme aus und senke die Brust. Drehe eine Wange zum Boden und ruhe mit den Armen an den Seiten.",
+    "bytes": 45648
+  },
+  "bhujangasana__i0": {
+    "hash": "f4bfe3f54aac",
+    "text": "Lege dich auf einer weichen Unterlage auf den Bauch. Die Stirn ruht auf der Matte.",
+    "bytes": 36432
+  },
+  "bhujangasana__i1": {
+    "hash": "1303ea9e2735",
+    "text": "Bring die Handflächen unter die Schultern, die Ellbogen nah an die Rippen.",
+    "bytes": 27360
+  },
+  "bhujangasana__i2": {
+    "hash": "4ef350144845",
+    "text": "Drücke die Fußrücken in den Boden, die Beine hüftbreit auseinander.",
+    "bytes": 28080
+  },
+  "bhujangasana__i3": {
+    "hash": "7991796d9bdd",
+    "text": "Atme ein und löse die Brust mit der Rückenmuskulatur vom Boden, NICHT mit den Händen.",
+    "bytes": 33984
+  },
+  "bhujangasana__i4": {
+    "hash": "06a026cbbf72",
+    "text": "Halte die Ellbogen leicht gebeugt. Die Schultern ziehen weg von den Ohren.",
+    "bytes": 30960
+  },
+  "bhujangasana__i5": {
+    "hash": "9679a11fcc96",
+    "text": "Hebe nur so hoch, wie es sich im unteren Rücken bequem anfühlt.",
+    "bytes": 26064
+  },
+  "bhujangasana__i6": {
+    "hash": "9f5ef48e0c9e",
+    "text": "Jedes Einatmen verlängert die Wirbelsäule; jedes Ausatmen mildert die Anhebung leicht.",
+    "bytes": 38592
+  },
+  "setuBandhaSarvangasana__name": {
+    "hash": "91eb72a46704",
+    "text": "Brückenhaltung.",
+    "bytes": 7488
+  },
+  "setuBandhaSarvangasana__enter": {
+    "hash": "5498cebd4ac0",
+    "text": "Lege dich auf den Rücken. Beuge die Knie und stelle die Füße flach, hüftbreit auseinander, die Fersen nah an den Sitzbeinen. Die Arme ruhen an den Seiten, die Handflächen nach unten.",
+    "bytes": 88704
+  },
+  "setuBandhaSarvangasana__hold": {
+    "hash": "e0ce975dcd64",
+    "text": "Drücke durch die Füße und hebe die Hüften zur Decke. Rolle die Schultern darunter und verschränke die Finger unter dir, wenn es sich anbietet. Halte das Kinn leicht von der Brust entfernt.",
+    "bytes": 74880
+  },
+  "setuBandhaSarvangasana__breathe": {
+    "hash": "8515ae8d1118",
+    "text": "Jedes Einatmen weitet die Schlüsselbeine; jedes Ausatmen drückt die Füße ein wenig fester in den Boden.",
+    "bytes": 42768
+  },
+  "setuBandhaSarvangasana__exit": {
+    "hash": "362bd338e69d",
+    "text": "Löse die Hände. Senke die Wirbelsäule Wirbel für Wirbel, vom oberen Rücken bis zum Steißbein. Umarme kurz die Knie.",
+    "bytes": 59328
+  },
+  "setuBandhaSarvangasana__i0": {
+    "hash": "1750ecbe79e5",
+    "text": "Lege dich auf einer weichen Unterlage auf den Rücken.",
+    "bytes": 20880
+  },
+  "setuBandhaSarvangasana__i1": {
+    "hash": "c28a2169b161",
+    "text": "Beuge beide Knie und stelle die Füße flach auf den Boden, hüftbreit auseinander.",
+    "bytes": 34272
+  },
+  "setuBandhaSarvangasana__i2": {
+    "hash": "90af12ce35e7",
+    "text": "Bring die Fersen nah an die Sitzbeine — nah genug, dass deine Fingerspitzen die Fersen gerade streifen.",
+    "bytes": 42336
+  },
+  "setuBandhaSarvangasana__i3": {
+    "hash": "96cfcead1c0a",
+    "text": "Lass die Arme an den Seiten ruhen, die Handflächen nach unten.",
+    "bytes": 25056
+  },
+  "setuBandhaSarvangasana__i4": {
+    "hash": "5e759d628265",
+    "text": "Atme ein und drücke die Füße fest in den Boden. Hebe die Hüften zur Decke.",
+    "bytes": 37728
+  },
+  "setuBandhaSarvangasana__i5": {
+    "hash": "a521a201eaca",
+    "text": "Rolle die Schultern darunter und verschränke die Hände unter dir, ODER lass die Handflächen unten.",
+    "bytes": 34848
+  },
+  "setuBandhaSarvangasana__i6": {
+    "hash": "740fa9eb4680",
+    "text": "Hebe die Brust zum Kinn (nicht das Kinn zur Brust). Für die erholsame Variante: lege einen Yogablock unter das Kreuzbein.",
+    "bytes": 60624
+  },
+  "dhanurasana__name": {
+    "hash": "213d75b56a16",
+    "text": "Bogenhaltung.",
+    "bytes": 7488
+  },
+  "dhanurasana__enter": {
+    "hash": "ecad2e3ae755",
+    "text": "Lege dich auf den Bauch. Beuge beide Knie und greife mit den Händen nach hinten, um die Außenseiten der Knöchel zu fassen. Die Knie bleiben hüftbreit auseinander.",
+    "bytes": 68976
+  },
+  "dhanurasana__hold": {
+    "hash": "4eb283019db0",
+    "text": "Atme ein und drücke die Füße zurück in die Hände, während du Brust und Oberschenkel vom Boden hebst. Die Bogenform — der Körper krümmt sich, die Arme sind die Bogensehne.",
+    "bytes": 73728
+  },
+  "dhanurasana__breathe": {
+    "hash": "dbab1e859066",
+    "text": "Jeder Atemzug wiegt den Bogen sanft. Die Anhebung kommt davon, dass die Beine in die Hände drücken, nicht von der Armkraft.",
+    "bytes": 52416
+  },
+  "dhanurasana__exit": {
+    "hash": "73cba55f9e3c",
+    "text": "Atme aus und löse die Füße. Senke Brust und Oberschenkel zum Boden. Drehe eine Wange nach unten und ruhe mit den Armen an den Seiten.",
+    "bytes": 65520
+  },
+  "dhanurasana__i0": {
+    "hash": "f4bfe3f54aac",
+    "text": "Lege dich auf einer weichen Unterlage auf den Bauch. Die Stirn ruht auf der Matte.",
+    "bytes": 35280
+  },
+  "dhanurasana__i1": {
+    "hash": "d862dc9b5d98",
+    "text": "Beuge beide Knie und bring die Fersen zum Gesäß.",
+    "bytes": 23472
+  },
+  "dhanurasana__i2": {
+    "hash": "e43fdfbf2454",
+    "text": "Greife mit beiden Händen nach hinten und fasse die AUSSENSEITEN deiner Knöchel.",
+    "bytes": 30960
+  },
+  "dhanurasana__i3": {
+    "hash": "2d2eb5b68283",
+    "text": "Die Knie bleiben etwa hüftbreit auseinander — sie neigen zum Spreizen; bring sie heran.",
+    "bytes": 36288
+  },
+  "dhanurasana__i4": {
+    "hash": "64554572ba19",
+    "text": "Atme ein und drücke die Füße zurück in die Hände, während du die Brust vom Boden hebst.",
+    "bytes": 33840
+  },
+  "dhanurasana__i5": {
+    "hash": "3c9f57232e11",
+    "text": "Der Körper bildet einen Bogen — Brust und Oberschenkel heben sich, die Arme sind die Bogensehne.",
+    "bytes": 39744
+  },
+  "dhanurasana__i6": {
+    "hash": "f5e3e1cb32af",
+    "text": "Jeder Atemzug wiegt den Bogen sanft. Nutze einen zwischen die Knöchel gelegten Yogagurt, wenn deine Hände nicht reichen.",
+    "bytes": 48960
+  },
+  "salabhasana__name": {
+    "hash": "94de353152e5",
+    "text": "Heuschreckenhaltung.",
+    "bytes": 9648
+  },
+  "salabhasana__enter": {
+    "hash": "061cfe328244",
+    "text": "Lege dich auf den Bauch. Strecke die Arme an den Körperseiten aus. Drücke die Fußrücken in den Boden.",
+    "bytes": 49536
+  },
+  "salabhasana__hold": {
+    "hash": "ddcf3522b7f6",
+    "text": "Atme ein und hebe Brust, Arme und Beine gleichzeitig vom Boden. Strecke dich nach vorne durch den Scheitel, nach hinten durch die Zehen.",
+    "bytes": 60192
+  },
+  "salabhasana__breathe": {
+    "hash": "81cc85148e66",
+    "text": "Jedes Einatmen hebt eine Spur höher; jedes Ausatmen bleibt stabil.",
+    "bytes": 34560
+  },
+  "salabhasana__exit": {
+    "hash": "f1319cc7512d",
+    "text": "Atme aus und senke alles zum Boden. Ruhe eine Wange auf der Matte.",
+    "bytes": 34704
+  },
+  "salabhasana__i0": {
+    "hash": "f4bfe3f54aac",
+    "text": "Lege dich auf einer weichen Unterlage auf den Bauch. Die Stirn ruht auf der Matte.",
+    "bytes": 37728
+  },
+  "salabhasana__i1": {
+    "hash": "cbcd462eb05e",
+    "text": "Strecke die Arme an den Körperseiten aus, die Handflächen nach unten oder nach oben.",
+    "bytes": 33264
+  },
+  "salabhasana__i2": {
+    "hash": "4ef350144845",
+    "text": "Drücke die Fußrücken in den Boden, die Beine hüftbreit auseinander.",
+    "bytes": 29376
+  },
+  "salabhasana__i3": {
+    "hash": "e71eab048ad1",
+    "text": "Atme ein und hebe Brust, Arme und Beine gleichzeitig vom Boden.",
+    "bytes": 30096
+  },
+  "salabhasana__i4": {
+    "hash": "60e3f1a5ced2",
+    "text": "Strecke dich nach vorne durch den Scheitel und nach hinten durch die Zehen.",
+    "bytes": 26064
+  },
+  "salabhasana__i5": {
+    "hash": "9b9f72782f35",
+    "text": "Halte den Nacken lang — blicke auf den Boden einen Fuß vor dir.",
+    "bytes": 26352
+  },
+  "salabhasana__i6": {
+    "hash": "a7cf03feba6e",
+    "text": "Atme aus und senke alles ab. Ruhe mit einer Wange auf der Matte zwischen den Runden.",
+    "bytes": 37440
+  },
+  "ardhaSalabhasana__name": {
+    "hash": "18e9d302a6c8",
+    "text": "Halbe Heuschreckenhaltung.",
+    "bytes": 11952
+  },
+  "ardhaSalabhasana__enter": {
+    "hash": "68b9bf0fe56f",
+    "text": "Lege dich auf den Bauch. Strecke die Arme an den Körperseiten aus, die Handflächen nach unten unter den Hüften. Drücke das Kinn sanft in die Matte.",
+    "bytes": 65520
+  },
+  "ardhaSalabhasana__hold": {
+    "hash": "c59ba4fb7db9",
+    "text": "Atme ein und hebe das rechte Bein gerade hinter dir an, die Hüften bleiben gleichmäßig auf dem Boden.",
+    "bytes": 39456
+  },
+  "ardhaSalabhasana__breathe": {
+    "hash": "8456e419be1e",
+    "text": "Jeder Atemzug stabilisiert die Anhebung. Das angehobene Bein bleibt aktiv und lang.",
+    "bytes": 45360
+  },
+  "ardhaSalabhasana__exit": {
+    "hash": "02da7f0d1126",
+    "text": "Atme aus und senke das rechte Bein langsam. Ruhe einen Atemzug. Wechsle zum linken Bein.",
+    "bytes": 54144
+  },
+  "ardhaSalabhasana__i0": {
+    "hash": "f4bfe3f54aac",
+    "text": "Lege dich auf einer weichen Unterlage auf den Bauch. Die Stirn ruht auf der Matte.",
+    "bytes": 38016
+  },
+  "ardhaSalabhasana__i1": {
+    "hash": "fea3bcd8c73e",
+    "text": "Strecke die Arme an den Körperseiten aus, die Handflächen nach unten unter den Hüften.",
+    "bytes": 35568
+  },
+  "ardhaSalabhasana__i2": {
+    "hash": "e1aaaebe1b05",
+    "text": "Drücke das Kinn sanft in die Matte, um den Nacken zu verlängern.",
+    "bytes": 23040
+  },
+  "ardhaSalabhasana__i3": {
+    "hash": "b7d37b63b034",
+    "text": "Atme ein und hebe nur das rechte Bein hinter dir an. Halte das Bein gestreckt.",
+    "bytes": 36864
+  },
+  "ardhaSalabhasana__i4": {
+    "hash": "e2654a0e94db",
+    "text": "Hebe aus der Beinrückseite und der Gesäßmuskulatur — nicht durch Hochkippen der Hüfte.",
+    "bytes": 34272
+  },
+  "ardhaSalabhasana__i5": {
+    "hash": "c4a232c2029f",
+    "text": "Halte für die Dauer, dann atme aus und senke das Bein.",
+    "bytes": 25344
+  },
+  "ardhaSalabhasana__i6": {
+    "hash": "042fdbd0e951",
+    "text": "Halte für einen Atemzug inne. Wechsle zum linken Bein.",
+    "bytes": 27648
+  },
+  "ekaPadaRajakapotasana__name": {
+    "hash": "9d8108bf7bcd",
+    "text": "Taubenhaltung.",
+    "bytes": 10656
+  },
+  "ekaPadaRajakapotasana__enter": {
+    "hash": "2e5ff1507ab5",
+    "text": "Schiebe aus dem Vierfüßlerstand das rechte Knie nach vorne zum rechten Handgelenk. Strecke das linke Bein gerade nach hinten. Lege eine Decke unter die rechte Hüfte, wenn sie vom Boden abhebt.",
+    "bytes": 85104
+  },
+  "ekaPadaRajakapotasana__hold": {
+    "hash": "1d497574593b",
+    "text": "Richte die Hüften so weit wie möglich aus. Wandere mit den Händen nach vorne und falte dich über das vordere Bein, wenn es bequem ist. Andernfalls bleibe aufrecht mit den Händen auf dem Boden.",
+    "bytes": 85680
+  },
+  "ekaPadaRajakapotasana__breathe": {
+    "hash": "7018ddacd6b7",
+    "text": "Atme in jede Empfindung. Diese Haltung weckt manchmal Emotionen — lass sie durch dich hindurchziehen. Verkrampfe dich nicht.",
+    "bytes": 54144
+  },
+  "ekaPadaRajakapotasana__exit": {
+    "hash": "ad4531cef515",
+    "text": "Wandere mit den Händen zurück. Stelle die hinteren Zehen auf und drücke zurück in den Vierfüßlerstand. Wechsle die Seite.",
+    "bytes": 59760
+  },
+  "ekaPadaRajakapotasana__i0": {
+    "hash": "3237e09018ab",
+    "text": "Beginne im Vierfüßlerstand, Hände und Knie auf einer weichen Unterlage.",
+    "bytes": 29952
+  },
+  "ekaPadaRajakapotasana__i1": {
+    "hash": "65924c389bf8",
+    "text": "Schiebe dein rechtes Knie nach vorne zum rechten Handgelenk.",
+    "bytes": 24480
+  },
+  "ekaPadaRajakapotasana__i2": {
+    "hash": "6aef8d94d05b",
+    "text": "Das rechte Schienbein verläuft quer über die Matte — näher an der Parallele zur Vorderkante bedeutet mehr Empfindung; diagonal angewinkelt ist sanfter.",
+    "bytes": 67392
+  },
+  "ekaPadaRajakapotasana__i3": {
+    "hash": "f2a3bbded142",
+    "text": "Strecke das linke Bein gerade nach hinten. Der Rücken des hinteren Fußes ruht auf der Matte.",
+    "bytes": 41904
+  },
+  "ekaPadaRajakapotasana__i4": {
+    "hash": "cba824bd50b8",
+    "text": "Richte die Hüften so weit wie möglich zum Boden aus. Lege eine gefaltete Decke unter die rechte Hüfte, wenn sie den Boden nicht erreicht.",
+    "bytes": 57312
+  },
+  "ekaPadaRajakapotasana__i5": {
+    "hash": "f176a3ecf70a",
+    "text": "Bleibe aufrecht mit den Händen auf dem Boden, ODER wandere mit den Händen nach vorne und falte dich über das vordere Bein.",
+    "bytes": 45360
+  },
+  "ekaPadaRajakapotasana__i6": {
+    "hash": "f8263ec7414f",
+    "text": "Halte für die Dauer. Drücke zurück in den Vierfüßlerstand. Wechsle die Seite.",
+    "bytes": 41328
+  },
+  "malasana__name": {
+    "hash": "8c1c651a4684",
+    "text": "Girlandenhaltung.",
+    "bytes": 9216
+  },
+  "malasana__enter": {
+    "hash": "fe0173711fee",
+    "text": "Stelle die Füße etwas weiter als hüftbreit auseinander, die Zehen etwa dreißig Grad nach außen gedreht. Beuge die Knie und senke die Hüften zum Boden.",
+    "bytes": 65520
+  },
+  "malasana__hold": {
+    "hash": "3ad95a796f71",
+    "text": "Bring die Hände im Gebet ans Herz. Drücke die Ellbogen leicht gegen die Innenseiten der Knie und ziehe die Brust nach vorne und oben.",
+    "bytes": 54432
+  },
+  "malasana__breathe": {
+    "hash": "7b4763913a69",
+    "text": "Jedes Ausatmen senkt die Hüften eine Spur tiefer. Jedes Einatmen verlängert die Wirbelsäule nach oben.",
+    "bytes": 48528
+  },
+  "malasana__exit": {
+    "hash": "6dd778704cbb",
+    "text": "Lege die Hände auf den Boden und drücke dich zum Stand hoch. Schüttle die Beine aus.",
+    "bytes": 37440
+  },
+  "malasana__i0": {
+    "hash": "ba87052baecc",
+    "text": "Stelle dich mit den Füßen etwas weiter als hüftbreit auseinander.",
+    "bytes": 24768
+  },
+  "malasana__i1": {
+    "hash": "ee8fab7db057",
+    "text": "Drehe die Zehen leicht nach außen, etwa 30 Grad.",
+    "bytes": 22176
+  },
+  "malasana__i2": {
+    "hash": "e9eefa19ac91",
+    "text": "Beuge die Knie tief und senke die Hüften zum Boden.",
+    "bytes": 22752
+  },
+  "malasana__i3": {
+    "hash": "e97baf0de9ed",
+    "text": "Bring die Hände im Gebet am Herzen zusammen.",
+    "bytes": 17568
+  },
+  "malasana__i4": {
+    "hash": "eaf6f72058e8",
+    "text": "Drücke die Ellbogen leicht gegen die Innenseiten der Knie und ziehe die Brust nach vorne und oben.",
+    "bytes": 38448
+  },
+  "malasana__i5": {
+    "hash": "c2add2f574fb",
+    "text": "Die Fersen bleiben auf dem Boden, wenn sie können. Wenn nicht, lege eine gefaltete Decke oder eine gerollte Matte unter jede Ferse.",
+    "bytes": 53712
+  },
+  "malasana__i6": {
+    "hash": "e65f5520388d",
+    "text": "Verlängere die Wirbelsäule — die Brust bleibt offen, nicht nach vorne zusammengesunken.",
+    "bytes": 36576
+  },
+  "mandukasana__name": {
+    "hash": "82187724b7e5",
+    "text": "Froschhaltung.",
+    "bytes": 7776
+  },
+  "mandukasana__enter": {
+    "hash": "77411f40901b",
+    "text": "Komme auf gepolsterten Knien in den Vierfüßlerstand. Senke die Unterarme zum Boden.",
+    "bytes": 38160
+  },
+  "mandukasana__hold": {
+    "hash": "6ea4e0d5055c",
+    "text": "Schiebe die Knie weit zu den Seiten. Flexe die Füße, sodass die inneren Kanten nach unten drücken. Drücke die Hüften leicht zurück zu den Fersen.",
+    "bytes": 64512
+  },
+  "mandukasana__breathe": {
+    "hash": "35022ec84937",
+    "text": "Atme langsam. Diese Haltung ist intensiv; der Atem hält dich hier. Geh nicht über scharfen Schmerz hinaus.",
+    "bytes": 55008
+  },
+  "mandukasana__exit": {
+    "hash": "2adab468a931",
+    "text": "Ziehe die Knie langsam wieder zusammen. Drücke dich in den Vierfüßlerstand hoch und ruhe.",
+    "bytes": 38736
+  },
+  "mandukasana__i0": {
+    "hash": "d573f0b518dd",
+    "text": "Komme auf einer weichen Unterlage in den Vierfüßlerstand. Lege eine Polsterung unter die Knie.",
+    "bytes": 42048
+  },
+  "mandukasana__i1": {
+    "hash": "f887ca301119",
+    "text": "Bring die Ellbogen zum Boden, die Unterarme parallel.",
+    "bytes": 22896
+  },
+  "mandukasana__i2": {
+    "hash": "fbbed074c47e",
+    "text": "Schiebe die Knie weit zu den Seiten, so weit wie bequem.",
+    "bytes": 25632
+  },
+  "mandukasana__i3": {
+    "hash": "30ed1d62d6c9",
+    "text": "Flexe die Füße, sodass die inneren Kanten in die Matte drücken.",
+    "bytes": 25056
+  },
+  "mandukasana__i4": {
+    "hash": "2995d352a508",
+    "text": "Innere Knöchel, innere Knie und die Vorderseite der Hüften sollten eine quadratische Form bilden.",
+    "bytes": 42192
+  },
+  "mandukasana__i5": {
+    "hash": "c6c2887db5a1",
+    "text": "Drücke die Hüften leicht zurück zu den Fersen. Die Hüften müssen sich nicht senken — sanfter Druck reicht.",
+    "bytes": 45648
+  },
+  "mandukasana__i6": {
+    "hash": "28474cc84d6b",
+    "text": "Halte 60-90 Sekunden. Ziehe die Knie zum Lösen langsam wieder zusammen.",
+    "bytes": 39744
+  },
+  "ardhaPigeonForwardFold__name": {
+    "hash": "72aef0d08b8d",
+    "text": "Halbe Taube mit Vorwärtsbeuge.",
+    "bytes": 14256
+  },
+  "ardhaPigeonForwardFold__enter": {
+    "hash": "8ee3af5e18e3",
+    "text": "Wandere aus der Taubenhaltung mit dem rechten Bein vorne mit den Händen nach vorne und senke den Oberkörper über das vordere Bein. Lege die Stirn auf gestapelte Fäuste, einen Block oder den Boden.",
+    "bytes": 81216
+  },
+  "ardhaPigeonForwardFold__hold": {
+    "hash": "6f853a850b0d",
+    "text": "Bleibe 2-5 Minuten. Die tiefe Lösung geschieht mit der Zeit, nicht durch Anstrengung. Lass alles weich werden, was weich werden kann.",
+    "bytes": 63792
+  },
+  "ardhaPigeonForwardFold__breathe": {
+    "hash": "bdc58e58df24",
+    "text": "Jedes lange Ausatmen lässt dich eine Spur tiefer sinken. Der Körper löst sich in seinem eigenen Tempo.",
+    "bytes": 47232
+  },
+  "ardhaPigeonForwardFold__exit": {
+    "hash": "672337452bd6",
+    "text": "Wandere mit den Händen langsam zurück. Drücke in den Vierfüßlerstand. Halte für einen Atemzug inne. Wechsle die Seite.",
+    "bytes": 56016
+  },
+  "ardhaPigeonForwardFold__i0": {
+    "hash": "2aa448fa2df1",
+    "text": "Beginne in der Taubenhaltung mit dem rechten Knie vorne.",
+    "bytes": 21888
+  },
+  "ardhaPigeonForwardFold__i1": {
+    "hash": "9469ce6ca037",
+    "text": "Richte die Hüften aus. Lege eine gefaltete Decke unter die rechte Hüfte, wenn sie abhebt.",
+    "bytes": 40752
+  },
+  "ardhaPigeonForwardFold__i2": {
+    "hash": "fdb138447370",
+    "text": "Wandere mit den Händen nach vorne und senke den Oberkörper über das vordere Bein.",
+    "bytes": 32832
+  },
+  "ardhaPigeonForwardFold__i3": {
+    "hash": "7b1deccd9802",
+    "text": "Lege die Stirn auf gestapelte Fäuste, einen Block oder den Boden.",
+    "bytes": 28944
+  },
+  "ardhaPigeonForwardFold__i4": {
+    "hash": "614a5fcb5856",
+    "text": "Die Arme können nach vorne gestreckt oder neben dem Körper nach hinten gefaltet sein.",
+    "bytes": 32256
+  },
+  "ardhaPigeonForwardFold__i5": {
+    "hash": "1086ddd1b1d7",
+    "text": "Halte 2-5 Minuten. Die Lösung geschieht mit der Zeit, nicht durch Anstrengung.",
+    "bytes": 34560
+  },
+  "ardhaPigeonForwardFold__i6": {
+    "hash": "c6563ef40202",
+    "text": "Zum Lösen: wandere mit den Händen zurück, drücke in den Vierfüßlerstand, wechsle die Seite.",
+    "bytes": 47520
+  },
+  "suryaNamaskarA__name": {
+    "hash": "24d32985f128",
+    "text": "Sonnengruß A.",
+    "bytes": 9072
+  },
+  "suryaNamaskarA__enter": {
+    "hash": "5f33e5622df7",
+    "text": "Stehe am vorderen Rand der Matte, die Hände im Gebet am Herzen. Nimm drei zentrierende Atemzüge zu Beginn.",
+    "bytes": 51120
+  },
+  "suryaNamaskarA__hold": {
+    "hash": "ee9f4fce5177",
+    "text": "Fließe mit dem Atem: einatmen Arme hoch, ausatmen Vorwärtsbeuge, einatmen halbe Anhebung, ausatmen zurücktreten und senken, einatmen Heraufschauender Hund, ausatmen Herabschauender Hund. Halte den Herabschauenden Hund fünf Atemzüge.",
+    "bytes": 123408
+  },
+  "suryaNamaskarA__breathe": {
+    "hash": "7da9e8990a01",
+    "text": "Ein Atemzug, eine Bewegung. Der Atem führt den Körper, nicht umgekehrt.",
+    "bytes": 37440
+  },
+  "suryaNamaskarA__exit": {
+    "hash": "cb2718610154",
+    "text": "Tritt oder springe nach vorne. Halbe Anhebung, Vorwärtsbeuge, zum Stand aufrichten, die Hände zum Herzen. Wiederhole 3-10 Runden.",
+    "bytes": 73296
+  },
+  "suryaNamaskarA__i0": {
+    "hash": "323af27c7d53",
+    "text": "Stehe am vorderen Rand der Matte, die Hände im Gebet am Herzen (Tadasana).",
+    "bytes": 33840
+  },
+  "suryaNamaskarA__i1": {
+    "hash": "dcdc9679fa51",
+    "text": "EINATMEN: schwinge die Arme nach außen und über den Kopf, leichte Rückbeuge (Urdhva Hastasana).",
+    "bytes": 48528
+  },
+  "suryaNamaskarA__i2": {
+    "hash": "a08efae2a6de",
+    "text": "AUSATMEN: falte dich über die Beine nach vorne, die Hände zum Boden (Uttanasana).",
+    "bytes": 41328
+  },
+  "suryaNamaskarA__i3": {
+    "hash": "6f94ad1d7ea2",
+    "text": "EINATMEN: hebe die Brust halb an, die Fingerspitzen an den Schienbeinen, langer flacher Rücken (Ardha Uttanasana).",
+    "bytes": 55440
+  },
+  "suryaNamaskarA__i4": {
+    "hash": "9007cf5508db",
+    "text": "AUSATMEN: tritt oder springe zurück in die Planke, senke dich halb hinunter, die Ellbogen nah (Chaturanga).",
+    "bytes": 50112
+  },
+  "suryaNamaskarA__i5": {
+    "hash": "bb922e23f382",
+    "text": "EINATMEN: rolle über die Zehen und hebe die Brust ins Heraufschauende Hundegesicht (oder die tiefe Kobra).",
+    "bytes": 45648
+  },
+  "suryaNamaskarA__i6": {
+    "hash": "5734f6c2e8aa",
+    "text": "AUSATMEN: stelle die Zehen auf und drücke zurück ins Herabschauende Hundegesicht. Halte 5 Atemzüge.",
+    "bytes": 54288
+  },
+  "suryaNamaskarA__i7": {
+    "hash": "facd8ddae120",
+    "text": "EINATMEN: tritt oder springe nach vorne, halbe Anhebung. AUSATMEN: falte dich. EINATMEN: richte dich zum Stand auf, die Arme über dem Kopf. AUSATMEN: die Hände zum Herzen.",
+    "bytes": 113760
+  },
+  "suryaNamaskarB__name": {
+    "hash": "ea255a5a3daf",
+    "text": "Sonnengruß B.",
+    "bytes": 9504
+  },
+  "suryaNamaskarB__enter": {
+    "hash": "b3547ded5966",
+    "text": "Stehe in Tadasana. Atme ein und beuge die Knie, schwinge die Arme über den Kopf in die Stuhlhaltung. Atme aus und falte dich nach vorne.",
+    "bytes": 68112
+  },
+  "suryaNamaskarB__hold": {
+    "hash": "ec7becb1a1ba",
+    "text": "Fließe: halbe Anhebung, Chaturanga, Heraufschauender Hund, Herabschauender Hund. Tritt in Krieger I rechte Seite. Vinyasa zurück. Krieger I linke Seite. Vinyasa zurück. Halte den Herabschauenden Hund 5 Atemzüge.",
+    "bytes": 134064
+  },
+  "suryaNamaskarB__breathe": {
+    "hash": "66f6c4f87349",
+    "text": "Ein Atemzug, eine Bewegung. Der Fluss ist fordernder als Sonnengruß A — der Atem ist die Drossel.",
+    "bytes": 53712
+  },
+  "suryaNamaskarB__exit": {
+    "hash": "a684d85feb8b",
+    "text": "Tritt nach vorne, halbe Anhebung, Vorwärtsbeuge. Atme ein in den Stuhl. Atme aus zu Tadasana. Wiederhole 3-5 Runden.",
+    "bytes": 75024
+  },
+  "suryaNamaskarB__i0": {
+    "hash": "2ea26a886bd2",
+    "text": "Stehe in Tadasana, die Hände am Herzen.",
+    "bytes": 21024
+  },
+  "suryaNamaskarB__i1": {
+    "hash": "403e04e20deb",
+    "text": "EINATMEN: beuge die Knie, schwinge die Arme über den Kopf in Utkatasana (Stuhl).",
+    "bytes": 42480
+  },
+  "suryaNamaskarB__i2": {
+    "hash": "e77e053a4f6d",
+    "text": "AUSATMEN: falte dich nach vorne in Uttanasana.",
+    "bytes": 27072
+  },
+  "suryaNamaskarB__i3": {
+    "hash": "0592574a8b04",
+    "text": "EINATMEN: halbe Anhebung. AUSATMEN: tritt oder springe zurück, senke dich in Chaturanga.",
+    "bytes": 51696
+  },
+  "suryaNamaskarB__i4": {
+    "hash": "ab0a28bdd64b",
+    "text": "EINATMEN: Heraufschauender Hund. AUSATMEN: Herabschauender Hund.",
+    "bytes": 41616
+  },
+  "suryaNamaskarB__i5": {
+    "hash": "f54d6fc94c4d",
+    "text": "EINATMEN: tritt den rechten Fuß nach vorne in Krieger I (rechte Seite). AUSATMEN: die Hände nach unten, tritt zurück, Chaturanga.",
+    "bytes": 73008
+  },
+  "suryaNamaskarB__i6": {
+    "hash": "02b994fd32ba",
+    "text": "EINATMEN: Heraufschauender Hund. AUSATMEN: Herabschauender Hund. Wiederhole die Krieger-I-Abfolge auf der LINKEN Seite.",
+    "bytes": 71712
+  },
+  "suryaNamaskarB__i7": {
+    "hash": "bfe5e93c486b",
+    "text": "Nach Krieger I links: Chaturanga, Heraufschauender Hund, Herabschauender Hund (5 Atemzüge). Tritt nach vorne, halbe Anhebung, Vorwärtsbeuge, EINATMEN in den Stuhl aufrichten, AUSATMEN die Hände zum Herzen in Tadasana.",
+    "bytes": 108432
+  },
+  "chandraNamaskar__name": {
+    "hash": "56353f52cc9a",
+    "text": "Mondgruß.",
+    "bytes": 10656
+  },
+  "chandraNamaskar__enter": {
+    "hash": "21796905c57b",
+    "text": "Stehe in Tadasana, die Füße zusammen. Atme ein, die Arme über den Kopf, die Handflächen berühren sich über dem Kopf.",
+    "bytes": 51120
+  },
+  "chandraNamaskar__hold": {
+    "hash": "7806441a57f0",
+    "text": "Seitneige rechts, zurück, Seitneige links, zurück. Tritt zurück in den tiefen Ausfallschritt, öffne in die Göttinnenhaltung. Seitneige rechts und links aus der Göttinnenhaltung. Spiegle auf die andere Seite.",
+    "bytes": 107136
+  },
+  "chandraNamaskar__breathe": {
+    "hash": "bbaffc8de360",
+    "text": "Langsame, lange Atemzüge — langsamer als beim Sonnengruß. Der Mondfluss ist meditativ, nicht aerob.",
+    "bytes": 57168
+  },
+  "chandraNamaskar__exit": {
+    "hash": "fb9794c40b8a",
+    "text": "Kehre den Fluss zurück zu Tadasana um. Die Hände zum Herzen. Wiederhole 3-5 Runden.",
+    "bytes": 47520
+  },
+  "chandraNamaskar__i0": {
+    "hash": "4a0f4a55d0a0",
+    "text": "Stehe am vorderen Rand der Matte, die Hände am Herzen, die Füße zusammen (Tadasana).",
+    "bytes": 39600
+  },
+  "chandraNamaskar__i1": {
+    "hash": "517defeacd75",
+    "text": "EINATMEN: schwinge die Arme nach außen und über den Kopf, die Handflächen berühren sich.",
+    "bytes": 41616
+  },
+  "chandraNamaskar__i2": {
+    "hash": "592b450df8b4",
+    "text": "AUSATMEN: Seitneige nach rechts.",
+    "bytes": 22176
+  },
+  "chandraNamaskar__i3": {
+    "hash": "6ee216d71777",
+    "text": "EINATMEN: zurück zur Mitte.",
+    "bytes": 16416
+  },
+  "chandraNamaskar__i4": {
+    "hash": "72a1f6b3be14",
+    "text": "AUSATMEN: Seitneige nach links. EINATMEN zurück zur Mitte.",
+    "bytes": 41616
+  },
+  "chandraNamaskar__i5": {
+    "hash": "de6159204505",
+    "text": "AUSATMEN: tritt den linken Fuß zurück in einen weiten tiefen Ausfallschritt (Halbmond oder Anjaneyasana).",
+    "bytes": 49392
+  },
+  "chandraNamaskar__i6": {
+    "hash": "1683e5f9b848",
+    "text": "EINATMEN: öffne in die Göttinnenhaltung mit beiden Knien weit. AUSATMEN Seitneige rechts, EINATMEN Mitte, AUSATMEN Seitneige links, EINATMEN Mitte.",
+    "bytes": 80064
+  },
+  "chandraNamaskar__i7": {
+    "hash": "accd56a7b622",
+    "text": "Tritt den rechten Fuß zurück, um den Ausfallschritt auf der anderen Seite zu spiegeln. Kehre den Fluss zurück zum Stand um. Wiederhole 3-5 Runden.",
+    "bytes": 71712
+  },
+  "cardiacWarmup__name": {
+    "hash": "077d1ae5a68d",
+    "text": "Katze-Kuh-Fluss.",
+    "bytes": 9360
+  },
+  "cardiacWarmup__enter": {
+    "hash": "0fee7585595f",
+    "text": "Komme in den Vierfüßlerstand. Die Handgelenke unter den Schultern, die Knie unter den Hüften.",
+    "bytes": 41328
+  },
+  "cardiacWarmup__hold": {
+    "hash": "c46d55539c20",
+    "text": "Einatmen, lass den Bauch sinken, hebe Brust und Steißbein — Kuh. Ausatmen, runde die Wirbelsäule, rolle das Steißbein ein, Kinn zur Brust — Katze. Setze 8-12 Runden fort.",
+    "bytes": 92592
+  },
+  "cardiacWarmup__breathe": {
+    "hash": "5c0b98328b4d",
+    "text": "Ein voller Atemzug pro Runde. Der Atem führt die Wirbelsäule. Bewege dich langsam.",
+    "bytes": 47232
+  },
+  "cardiacWarmup__exit": {
+    "hash": "4e6a0475d925",
+    "text": "Setze dich für einen Atemzug in den neutralen Vierfüßlerstand. Gehe dann in die Haltung des Kindes oder den Herabschauenden Hund.",
+    "bytes": 54144
+  },
+  "cardiacWarmup__i0": {
+    "hash": "0fee7585595f",
+    "text": "Komme in den Vierfüßlerstand. Die Handgelenke unter den Schultern, die Knie unter den Hüften.",
+    "bytes": 44064
+  },
+  "cardiacWarmup__i1": {
+    "hash": "663a9d9574cf",
+    "text": "EINATMEN: lass den Bauch zum Boden sinken. Hebe Brust und Steißbein zur Decke. Blicke leicht nach oben (Kuh / Bitilasana).",
+    "bytes": 71136
+  },
+  "cardiacWarmup__i2": {
+    "hash": "eaca3d76cf93",
+    "text": "AUSATMEN: runde die Wirbelsäule zur Decke. Rolle das Steißbein ein, ziehe das Kinn zur Brust (Katze / Marjari).",
+    "bytes": 62496
+  },
+  "cardiacWarmup__i3": {
+    "hash": "193812eb903c",
+    "text": "Setze den Fluss 8-12 Runden lang fort, eine Bewegung pro Atemzug.",
+    "bytes": 35280
+  },
+  "cardiacWarmup__i4": {
+    "hash": "2a6e71f490df",
+    "text": "Jedes Einatmen öffnet den Vorderkörper. Jedes Ausatmen öffnet den Rückkörper.",
+    "bytes": 39024
+  },
+  "cardiacWarmup__i5": {
+    "hash": "9f106fdc8ecd",
+    "text": "Bewege dich langsam — der Fluss ist eine Wirbelsäulen-Aufwärmung, nicht aerob.",
+    "bytes": 36432
+  },
+  "cardiacWarmup__i6": {
+    "hash": "c2570d51f9be",
+    "text": "Setze dich nach den Runden für einen Atemzug in eine neutrale Vierfüßlerposition oder gehe in den Herabschauenden Hund oder die Haltung des Kindes über.",
+    "bytes": 59904
+  },
+  "adhoMukhaSvanasana__name": {
+    "hash": "7cddeb631dc3",
+    "text": "Herabschauender Hund.",
+    "bytes": 9648
+  },
+  "adhoMukhaSvanasana__enter": {
+    "hash": "e93bcbb11c9b",
+    "text": "Beginne auf Händen und Knien, die Handgelenke unter den Schultern, die Knie unter den Hüften. Stelle die Zehen auf. Atme ein. Mit dem Ausatmen hebe die Hüften nach oben und hinten und strecke die Beine so weit, wie es sich gut anfühlt.",
+    "bytes": 107136
+  },
+  "adhoMukhaSvanasana__hold": {
+    "hash": "a35c816a624d",
+    "text": "Drücke die Handflächen fest in die Matte, die Finger weit gespreizt. Lass den Kopf schwer zwischen den Armen hängen. Beuge die Knie, wenn die hinteren Oberschenkel eng sind — eine lange Wirbelsäule ist wichtiger als gestreckte Beine.",
+    "bytes": 100224
+  },
+  "adhoMukhaSvanasana__breathe": {
+    "hash": "d9446fb4393d",
+    "text": "Jedes Ausatmen drückt die Brust ein wenig näher zu den Oberschenkeln. Jedes Einatmen hebt die Hüften ein wenig höher.",
+    "bytes": 53280
+  },
+  "adhoMukhaSvanasana__exit": {
+    "hash": "36f86349805b",
+    "text": "Beuge die Knie und senke dich in den Vierfüßlerstand. Setze dich für einen Atemzug in die Haltung des Kindes zurück.",
+    "bytes": 51408
+  },
+  "adhoMukhaSvanasana__i0": {
+    "hash": "6a6d99b5f83a",
+    "text": "Komme in den Vierfüßlerstand auf Hände und Knie.",
+    "bytes": 20592
+  },
+  "adhoMukhaSvanasana__i1": {
+    "hash": "2abc57d15726",
+    "text": "Lege die Handgelenke direkt unter die Schultern. Spreize die Finger weit.",
+    "bytes": 32976
+  },
+  "adhoMukhaSvanasana__i2": {
+    "hash": "50cedbbea3b6",
+    "text": "Stelle die Zehen auf, sodass die Fußballen in die Matte drücken.",
+    "bytes": 23760
+  },
+  "adhoMukhaSvanasana__i3": {
+    "hash": "bfebb7fd652f",
+    "text": "Atme ein. Mit dem Ausatmen hebe die Hüften nach oben und hinten und strecke die Beine so weit, wie es bequem ist.",
+    "bytes": 50544
+  },
+  "adhoMukhaSvanasana__i4": {
+    "hash": "c39a85f20187",
+    "text": "Der Körper bildet ein umgekehrtes V — die Hüften hoch, Hände und Füße verwurzeln sich nach unten.",
+    "bytes": 41760
+  },
+  "adhoMukhaSvanasana__i5": {
+    "hash": "b4107bbe8a06",
+    "text": "Beuge die Knie so viel wie nötig, um die Wirbelsäule lang zu halten.",
+    "bytes": 29376
+  },
+  "adhoMukhaSvanasana__i6": {
+    "hash": "744091a278b7",
+    "text": "Drücke die Brust sanft zu den Oberschenkeln. Lass den Kopf natürlich zwischen den Armen hängen.",
+    "bytes": 44208
+  },
+  "legsUpTheWall__name": {
+    "hash": "8816a0d73f02",
+    "text": "Beine an der Wand.",
+    "bytes": 8784
+  },
+  "legsUpTheWall__enter": {
+    "hash": "dd0960f680c7",
+    "text": "Sitze mit der rechten Hüfte an der Wand. Schwinge die Beine die Wand hinauf, während du dich auf den Rücken legst. Rutsche mit den Hüften so nah an die Wand, wie es bequem ist — sie müssen sie nicht berühren.",
+    "bytes": 84384
+  },
+  "legsUpTheWall__hold": {
+    "hash": "7bf39a04f3e8",
+    "text": "Lass die Arme zu den Seiten ruhen, die Handflächen nach oben, oder eine Hand auf den Bauch und eine aufs Herz. Schließe die Augen. Lass die Wand die Beine vollständig halten.",
+    "bytes": 80640
+  },
+  "legsUpTheWall__breathe": {
+    "hash": "1e59e5b6bd69",
+    "text": "Atme sanft. Spüre, wie das Blut von den Füßen zum Herzen zurückzirkuliert. Hier gibt es nichts zu tun.",
+    "bytes": 55296
+  },
+  "legsUpTheWall__exit": {
+    "hash": "2358ffa0f6ac",
+    "text": "Beuge die Knie und rolle dich auf die rechte Seite. Ruhe dort für einen Atemzug. Drücke dich langsam zum Sitz hoch — der Kopf kommt zuletzt hoch.",
+    "bytes": 61920
+  },
+  "legsUpTheWall__i0": {
+    "hash": "cce2f71ccb1e",
+    "text": "Sitze auf dem Boden, die rechte Hüfte berührt eine Wand.",
+    "bytes": 22752
+  },
+  "legsUpTheWall__i1": {
+    "hash": "a9c4a7bdb2f9",
+    "text": "Senke dich auf den Rücken und schwinge die Beine die Wand hinauf, während du den Körper um 90 Grad drehst.",
+    "bytes": 40608
+  },
+  "legsUpTheWall__i2": {
+    "hash": "f0a9e2bd7304",
+    "text": "Rutsche mit den Hüften so nah an die Wand, wie es sich bequem anfühlt. Sie müssen sie nicht berühren.",
+    "bytes": 43344
+  },
+  "legsUpTheWall__i3": {
+    "hash": "7d3af984d14b",
+    "text": "Optional: lege eine gefaltete Decke unter die Hüften für eine leichte Beckenneigung.",
+    "bytes": 38304
+  },
+  "legsUpTheWall__i4": {
+    "hash": "3a1d2962ad80",
+    "text": "Lass die Arme an den Seiten ruhen, die Handflächen nach oben. Oder eine Hand auf dem Bauch, eine aufs Herz.",
+    "bytes": 48816
+  },
+  "legsUpTheWall__i5": {
+    "hash": "4dba6f7d7771",
+    "text": "Bedecke die Augen mit einem weichen Tuch oder einem Augenkissen, falls du eines hast.",
+    "bytes": 31968
+  },
+  "legsUpTheWall__i6": {
+    "hash": "317d9e35ee97",
+    "text": "Lass alles weich werden. Bleibe 5-15 Minuten.",
+    "bytes": 29376
+  },
+  "halasana__name": {
+    "hash": "511972577ec7",
+    "text": "Pflughaltung.",
+    "bytes": 6768
+  },
+  "halasana__enter": {
+    "hash": "62ceeb79dc70",
+    "text": "Lege dich auf den Rücken, die Arme an den Seiten, die Handflächen nach unten. Drücke die Hände in den Boden und hebe die Beine nach oben und hinten über den Kopf, senke die Zehen zum Boden.",
+    "bytes": 82512
+  },
+  "halasana__hold": {
+    "hash": "189c3cffc88a",
+    "text": "Stütze den unteren Rücken mit den Händen. Wenn die Zehen den Boden nicht erreichen, lege die Füße auf einen Stuhl hinter dem Kopf ab. Das Kinn leicht eingezogen. Drehe den Kopf nicht.",
+    "bytes": 79920
+  },
+  "halasana__breathe": {
+    "hash": "6da365244b08",
+    "text": "Langsamer, stetiger Atem. Jedes Ausatmen löst die Zehen eine Spur näher zum Boden.",
+    "bytes": 44496
+  },
+  "halasana__exit": {
+    "hash": "beadaf2ef5ae",
+    "text": "Stütze den unteren Rücken mit den Händen. Rolle langsam ab, Wirbel für Wirbel. Ruhe in Savasana.",
+    "bytes": 53712
+  },
+  "halasana__i0": {
+    "hash": "fe2921342a3a",
+    "text": "Lege dich auf den Rücken. Bring die Arme an die Seiten, die Handflächen nach unten.",
+    "bytes": 35136
+  },
+  "halasana__i1": {
+    "hash": "410d51cfb336",
+    "text": "Drücke Hände und Arme in den Boden, während du die Beine gerade zur Decke hebst.",
+    "bytes": 31248
+  },
+  "halasana__i2": {
+    "hash": "2156dd2c0ee9",
+    "text": "Hebe weiter und bring die Beine über den Kopf, senke die Zehen zum Boden hinter dir.",
+    "bytes": 37440
+  },
+  "halasana__i3": {
+    "hash": "7ed5e2ce9e5e",
+    "text": "Stütze den unteren Rücken mit den Händen, die Finger zeigen zur Wirbelsäule.",
+    "bytes": 29664
+  },
+  "halasana__i4": {
+    "hash": "a03124906040",
+    "text": "Wenn die Zehen den Boden nicht erreichen, stelle einen Stuhl oder einen Stapel Blöcke hinter deinen Kopf, um die Füße darauf abzulegen.",
+    "bytes": 51696
+  },
+  "halasana__i5": {
+    "hash": "49819d48deb2",
+    "text": "Halte das Kinn leicht eingezogen, aber DREHE den Kopf NICHT — der Nacken bleibt neutral.",
+    "bytes": 36144
+  },
+  "halasana__i6": {
+    "hash": "b11326e1a66d",
+    "text": "Zum Lösen: stütze den unteren Rücken mit den Händen und rolle langsam Wirbel für Wirbel ab.",
+    "bytes": 40032
+  },
+  "sarvangasana__name": {
+    "hash": "d62acc0333cf",
+    "text": "Schulterstand.",
+    "bytes": 7200
+  },
+  "sarvangasana__enter": {
+    "hash": "6107e682d1ab",
+    "text": "Lege aus Halasana mit auf Decken gestützten Schultern die Hände auf den unteren Rücken und hebe die Beine langsam zur Decke.",
+    "bytes": 48240
+  },
+  "sarvangasana__hold": {
+    "hash": "ae8809219fce",
+    "text": "Stapele die Hüften über die Schultern. Der Körper bildet eine lange Linie. Blicke zu den Zehen. Die Hände bleiben zur Stütze auf dem unteren Rücken.",
+    "bytes": 73728
+  },
+  "sarvangasana__breathe": {
+    "hash": "649c9cb1877a",
+    "text": "Langsamer, gleichmäßiger Atem durch die Nase. Halte den Atem nicht gegen die Kompression der Kehle an.",
+    "bytes": 49824
+  },
+  "sarvangasana__exit": {
+    "hash": "0577609379aa",
+    "text": "Senke die Beine zurück in Halasana. Stütze den unteren Rücken mit den Händen und rolle langsam ab. Ruhe in Savasana.",
+    "bytes": 56736
+  },
+  "sarvangasana__i0": {
+    "hash": "5e7e6cdb0032",
+    "text": "Stapele 2-3 gefaltete Decken am oberen Ende deiner Matte. Lege dich so hin, dass deine Schultern auf den Decken und dein Kopf auf der Matte darunter liegt — das schützt die Halswirbelsäule.",
+    "bytes": 77040
+  },
+  "sarvangasana__i1": {
+    "hash": "7b182d43e965",
+    "text": "Bring die Arme an die Seiten, die Handflächen nach unten.",
+    "bytes": 20736
+  },
+  "sarvangasana__i2": {
+    "hash": "3002059d9d63",
+    "text": "Drücke die Arme in den Boden und schwinge die Beine nach oben und über den Kopf in Halasana.",
+    "bytes": 36144
+  },
+  "sarvangasana__i3": {
+    "hash": "3ee9950d9ca5",
+    "text": "Beuge die Ellbogen und lege die Hände auf den unteren Rücken, die Finger zeigen zur Wirbelsäule.",
+    "bytes": 38448
+  },
+  "sarvangasana__i4": {
+    "hash": "239dd90ecb08",
+    "text": "Hebe die Beine langsam zur Decke und stapele die Hüften über die Schultern.",
+    "bytes": 29808
+  },
+  "sarvangasana__i5": {
+    "hash": "6db06bb9138c",
+    "text": "Der Körper bildet eine lange Linie von den Schultern bis zu den Füßen. Blicke zu den Zehen.",
+    "bytes": 42048
+  },
+  "sarvangasana__i6": {
+    "hash": "7fca2c2b45a6",
+    "text": "Zum Lösen: senke die Beine zurück in Halasana, stütze dann den unteren Rücken mit den Händen und rolle langsam ab.",
+    "bytes": 55728
+  },
+  "sirsasana__name": {
+    "hash": "ab93ef55c62a",
+    "text": "Kopfstand.",
+    "bytes": 10656
+  },
+  "sirsasana__enter": {
+    "hash": "100bfed5439a",
+    "text": "Verschränke aus dem Knien nahe einer Wand die Finger und lege die Unterarme ab. Der Scheitel des Kopfes auf der Matte, der Kopf in den Händen gebettet. Hebe die Hüften wie im Herabschauenden Hund und wandere mit den Füßen heran.",
+    "bytes": 99648
+  },
+  "sirsasana__hold": {
+    "hash": "185bab4b84e6",
+    "text": "Bring die Knie zur Brust, dann strecke die Beine nach oben. Das meiste Gewicht in den Unterarmen, nicht im Kopf. Weicher, gleichmäßiger Atem.",
+    "bytes": 64800
+  },
+  "sirsasana__breathe": {
+    "hash": "e40b43fb7a92",
+    "text": "Langsamer Nasenatem. Wenn der Atem holprig wird, komme herunter. Die Haltung ist die Atemprüfung.",
+    "bytes": 51840
+  },
+  "sirsasana__exit": {
+    "hash": "5650d1d82b65",
+    "text": "Beuge langsam die Knie und senke die Füße kontrolliert zum Boden. Ruhe mindestens 60 Sekunden in der Haltung des Kindes, bevor du den Kopf hebst.",
+    "bytes": 65232
+  },
+  "sirsasana__i0": {
+    "hash": "b1891c362fdc",
+    "text": "WARNUNG: Dies ist eine fortgeschrittene Umkehrhaltung. Übe sie zuerst mit einer Lehrerin. Falsche Form kann eine Verletzung der Halswirbelsäule verursachen.",
+    "bytes": 75744
+  },
+  "sirsasana__i1": {
+    "hash": "0c7257b66a81",
+    "text": "Knie nahe einer Wand. Verschränke die Finger und lege die Unterarme auf die Matte, die Ellbogen schulterbreit auseinander.",
+    "bytes": 49104
+  },
+  "sirsasana__i2": {
+    "hash": "2497c79634f3",
+    "text": "Lege den Scheitel des Kopfes auf die Matte, den Hinterkopf in den verschränkten Händen gebettet.",
+    "bytes": 35856
+  },
+  "sirsasana__i3": {
+    "hash": "ac606d40d959",
+    "text": "Hebe die Hüften wie im Herabschauenden Hund. Wandere mit den Füßen zu den Ellbogen.",
+    "bytes": 38736
+  },
+  "sirsasana__i4": {
+    "hash": "02ca7f82f198",
+    "text": "Beuge die Knie zur Brust, dann strecke die Beine langsam gerade zur Decke.",
+    "bytes": 31968
+  },
+  "sirsasana__i5": {
+    "hash": "21daf252e5dd",
+    "text": "Das meiste Gewicht sollte in den Unterarmen liegen, NICHT im Kopf — nur 10-20 % auf dem Scheitel.",
+    "bytes": 44928
+  },
+  "sirsasana__i6": {
+    "hash": "6d571b862978",
+    "text": "Halte für neue Übende höchstens 30-60 Sekunden. Komme mit derselben Kontrolle langsam herunter.",
+    "bytes": 47232
+  },
+  "sasangasana__name": {
+    "hash": "7d51df101beb",
+    "text": "Hasenhaltung.",
+    "bytes": 8064
+  },
+  "sasangasana__enter": {
+    "hash": "1f4429924954",
+    "text": "Sitze auf deinen Fersen. Greife nach hinten und fasse mit beiden Händen die Fersen. Ziehe das Kinn ein und lege den Scheitel des Kopfes auf die Matte vor den Knien.",
+    "bytes": 74304
+  },
+  "sasangasana__hold": {
+    "hash": "db76a73e0334",
+    "text": "Atme ein und hebe die Hüften, rolle nach vorne auf den Scheitel. Die Stirn nähert sich den Knien. Das meiste Gewicht in den Händen, nicht im Kopf.",
+    "bytes": 66096
+  },
+  "sasangasana__breathe": {
+    "hash": "af88486459a2",
+    "text": "Langsamer, gleichmäßiger Atem. Die Kehle komprimiert — halte den Atem klein und stetig.",
+    "bytes": 45504
+  },
+  "sasangasana__exit": {
+    "hash": "b0e6e05aba65",
+    "text": "Senke die Hüften zurück auf die Fersen. Ruhe mit der Stirn auf der Matte für einen Atemzug, bevor du dich aufsetzt.",
+    "bytes": 49824
+  },
+  "sasangasana__i0": {
+    "hash": "f41b938ce848",
+    "text": "Knie auf dem Boden und sitze auf den Fersen (Vajrasana).",
+    "bytes": 27648
+  },
+  "sasangasana__i1": {
+    "hash": "9febcf104410",
+    "text": "Greife nach hinten und fasse mit beiden Händen die Fersen deiner Füße.",
+    "bytes": 28944
+  },
+  "sasangasana__i2": {
+    "hash": "29e77072da43",
+    "text": "Ziehe das Kinn ein und lege den Scheitel des Kopfes auf die Matte vor den Knien.",
+    "bytes": 30240
+  },
+  "sasangasana__i3": {
+    "hash": "cce503bd3a75",
+    "text": "Atme ein und hebe die Hüften, rolle den Körper nach vorne auf den Scheitel.",
+    "bytes": 29664
+  },
+  "sasangasana__i4": {
+    "hash": "0cc1d693d338",
+    "text": "Das meiste Gewicht bleibt in den Beinen und Händen — nur 10-20 % auf dem Scheitel.",
+    "bytes": 37584
+  },
+  "sasangasana__i5": {
+    "hash": "20db118b30aa",
+    "text": "Die Stirn nähert sich den Knien, während die Wirbelsäule in tiefer Beugung rundet.",
+    "bytes": 32832
+  },
+  "sasangasana__i6": {
+    "hash": "6f3670de6e77",
+    "text": "Halte 20-30 Sekunden. Zum Lösen senke die Hüften zurück auf die Fersen und ruhe.",
+    "bytes": 45072
+  },
+  "swastikasana__name": {
+    "hash": "1f5af11b8daa",
+    "text": "Glückverheißender Sitz.",
+    "bytes": 11088
+  },
+  "swastikasana__enter": {
+    "hash": "b8892af6efe7",
+    "text": "Sitze bequem. Schiebe den rechten Fuß unter den linken Oberschenkel, dann den linken Fuß zwischen die rechte Wade und den Oberschenkel.",
+    "bytes": 59760
+  },
+  "swastikasana__hold": {
+    "hash": "ed784f3c0563",
+    "text": "Die Hände ruhen auf den Knien. Die Wirbelsäule aufrecht — der Scheitel strebt zur Decke.",
+    "bytes": 41760
+  },
+  "swastikasana__breathe": {
+    "hash": "ecd25f14a370",
+    "text": "Atme natürlich. Jedes Ausatmen löst eine weitere Schicht Spannung.",
+    "bytes": 30528
+  },
+  "swastikasana__exit": {
+    "hash": "5f5578e79f31",
+    "text": "Falte die Beine sanft aus und strecke sie vor dir aus.",
+    "bytes": 23760
+  },
+  "swastikasana__i0": {
+    "hash": "fa7168821ea0",
+    "text": "Sitze auf einer gefalteten Decke mit ausgestreckten Beinen.",
+    "bytes": 24192
+  },
+  "swastikasana__i1": {
+    "hash": "ff9973aa07fc",
+    "text": "Beuge das rechte Knie und schiebe den rechten Fuß unter den linken Oberschenkel, nah an den Körper.",
+    "bytes": 40320
+  },
+  "swastikasana__i2": {
+    "hash": "a68b75802b5b",
+    "text": "Beuge das linke Knie und schiebe den linken Fuß zwischen die rechte Wade und den rechten Oberschenkel.",
+    "bytes": 38736
+  },
+  "swastikasana__i3": {
+    "hash": "0649c9aca043",
+    "text": "Die Beine bilden eine ordentliche Verschränkung — die Füße verborgen, die Knöchel symmetrisch.",
+    "bytes": 38736
+  },
+  "swastikasana__i4": {
+    "hash": "5a5a9a959b5b",
+    "text": "Lege die Hände auf die Knie in Jnana Mudra (Daumen und Zeigefinger berühren sich).",
+    "bytes": 35568
+  },
+  "swastikasana__i5": {
+    "hash": "4747048f964d",
+    "text": "Verlängere die Wirbelsäule — der Scheitel strebt nach oben, die Sitzbeine verwurzeln nach unten.",
+    "bytes": 39600
+  },
+  "swastikasana__i6": {
+    "hash": "138d83c3becb",
+    "text": "Lass den Kiefer locker, lass die Augen weich werden.",
+    "bytes": 22752
+  },
+  "kurmasana__name": {
+    "hash": "b5d1e314d841",
+    "text": "Schildkrötenhaltung.",
+    "bytes": 10080
+  },
+  "kurmasana__enter": {
+    "hash": "655c34b9cdb9",
+    "text": "Sitze mit weiten Beinen. Beuge die Knie nach oben. Fädle jeden Arm unter sein Knie und wandere mit den Händen zu den Seiten.",
+    "bytes": 57312
+  },
+  "kurmasana__hold": {
+    "hash": "550c9b735c99",
+    "text": "Strecke die Beine langsam. Lass den Oberkörper zum Boden schmelzen. Die Stirn oder das Kinn ruht auf dem Boden.",
+    "bytes": 54000
+  },
+  "kurmasana__breathe": {
+    "hash": "0b2e68802685",
+    "text": "Jedes Ausatmen löst eine Spur tiefer. Erzwinge nichts — lass die Schwerkraft die Arbeit machen.",
+    "bytes": 43344
+  },
+  "kurmasana__exit": {
+    "hash": "143e500c65df",
+    "text": "Beuge die Knie. Wandere mit den Händen zurück. Setze dich langsam auf.",
+    "bytes": 37440
+  },
+  "kurmasana__i0": {
+    "hash": "f8d0ec3b5b3b",
+    "text": "Sitze mit den Beinen in einem weiten V ausgestreckt.",
+    "bytes": 22464
+  },
+  "kurmasana__i1": {
+    "hash": "75c5e0413aed",
+    "text": "Beuge die Knie und stelle die Füße flach auf den Boden, etwa eine Beinlänge auseinander, die Knie zeigen nach oben.",
+    "bytes": 46224
+  },
+  "kurmasana__i2": {
+    "hash": "f48e968e8686",
+    "text": "Lehne dich nach vorne und fädle jeden Arm UNTER das entsprechende gebeugte Knie.",
+    "bytes": 31968
+  },
+  "kurmasana__i3": {
+    "hash": "5fd7570c4296",
+    "text": "Wandere mit den Händen zu den Seiten unter die Oberschenkel, bis die Schultern unter den Knien sitzen.",
+    "bytes": 38016
+  },
+  "kurmasana__i4": {
+    "hash": "19e643e93f9c",
+    "text": "Strecke die Beine langsam, während sich der Oberkörper zum Boden senkt.",
+    "bytes": 27216
+  },
+  "kurmasana__i5": {
+    "hash": "2a79e2b5d849",
+    "text": "Lege die Stirn oder das Kinn auf den Boden; die Brust strebt zum Boden.",
+    "bytes": 31968
+  },
+  "kurmasana__i6": {
+    "hash": "b4724c66b744",
+    "text": "Halte mehrere Atemzüge. Zum Lösen: beuge die Knie, wandere mit den Händen zurück, setze dich auf.",
+    "bytes": 101088
+  },
+  "kukkutasana__name": {
+    "hash": "5d679f9358e0",
+    "text": "Hahnhaltung.",
+    "bytes": 7488
+  },
+  "kukkutasana__enter": {
+    "hash": "9df0de390678",
+    "text": "Fädle in Padmasana die Arme auf jeder Seite zwischen Wade und Oberschenkel, die Handflächen flach auf dem Boden.",
+    "bytes": 47952
+  },
+  "kukkutasana__hold": {
+    "hash": "3261a18329ac",
+    "text": "Drücke die Handflächen kräftig. Hebe den Lotus vom Boden. Aktiviere die Körpermitte.",
+    "bytes": 41760
+  },
+  "kukkutasana__breathe": {
+    "hash": "723bf9279c37",
+    "text": "Stetiger Atem. Halte den Atem nicht unter der Anhebung an.",
+    "bytes": 30960
+  },
+  "kukkutasana__exit": {
+    "hash": "c40e3b07e70b",
+    "text": "Senke den Lotus langsam. Fädle die Arme heraus. Löse die Beine.",
+    "bytes": 36864
+  },
+  "kukkutasana__i0": {
+    "hash": "f43f97b1f3d2",
+    "text": "VORAUSSETZUNG: ein etabliertes Padmasana (voller Lotus) ohne Kniebelastung.",
+    "bytes": 43776
+  },
+  "kukkutasana__i1": {
+    "hash": "1883c43b9d2b",
+    "text": "Sitze in Padmasana auf einer gefalteten Decke.",
+    "bytes": 20736
+  },
+  "kukkutasana__i2": {
+    "hash": "ec0c3c83bf53",
+    "text": "Fädle den rechten Arm zwischen die rechte Wade und den rechten Oberschenkel, bis zum Ellbogen. Wiederhole mit dem linken Arm.",
+    "bytes": 52560
+  },
+  "kukkutasana__i3": {
+    "hash": "c34bc1bf8dea",
+    "text": "Lege die Handflächen flach auf den Boden, die Finger gespreizt, schulterbreit auseinander.",
+    "bytes": 35856
+  },
+  "kukkutasana__i4": {
+    "hash": "126a78b1c825",
+    "text": "Drücke die Handflächen fest in den Boden und hebe die gesamte Lotusbasis vom Boden.",
+    "bytes": 34128
+  },
+  "kukkutasana__i5": {
+    "hash": "3e4d64a6f917",
+    "text": "Halte mehrere Atemzüge mit dem Körper in der Luft schwebend.",
+    "bytes": 24768
+  },
+  "kukkutasana__i6": {
+    "hash": "9bd117ad93cd",
+    "text": "Senke dich langsam ab, fädle die Arme heraus, löse Padmasana.",
+    "bytes": 32112
+  },
+  "uttanaKurmasana__name": {
+    "hash": "ba1495bb6e7f",
+    "text": "Gestreckte Schildkrötenhaltung.",
+    "bytes": 13824
+  },
+  "uttanaKurmasana__enter": {
+    "hash": "8cf9c09a82cb",
+    "text": "Rolle aus Kukkutasana langsam rückwärts auf den oberen Rücken, die Arme weiterhin durch die Beine gefädelt.",
+    "bytes": 44208
+  },
+  "uttanaKurmasana__hold": {
+    "hash": "8c0fe310133f",
+    "text": "Fasse die Ohren oder den Hinterkopf. Der Lotus ruht auf der Brust. Rolle dich nach innen ein.",
+    "bytes": 44928
+  },
+  "uttanaKurmasana__breathe": {
+    "hash": "d5f8eb3405d1",
+    "text": "Langsamer, stetiger Atem. Die Form ist kontemplativer Rückzug.",
+    "bytes": 35856
+  },
+  "uttanaKurmasana__exit": {
+    "hash": "443ce87745dd",
+    "text": "Rolle zurück zum Sitz hoch. Fädle die Arme heraus. Löse die Beine.",
+    "bytes": 37728
+  },
+  "uttanaKurmasana__i0": {
+    "hash": "813e8fa7eaf9",
+    "text": "VORAUSSETZUNG: ein bequemes Kukkutasana.",
+    "bytes": 25200
+  },
+  "uttanaKurmasana__i1": {
+    "hash": "b44372fe2795",
+    "text": "Rolle aus Kukkutasana langsam rückwärts auf den oberen Rücken.",
+    "bytes": 27648
+  },
+  "uttanaKurmasana__i2": {
+    "hash": "8debfb8627d9",
+    "text": "Halte die Arme durch die Beine gefädelt und fasse mit den Händen die Ohren oder den Hinterkopf.",
+    "bytes": 32688
+  },
+  "uttanaKurmasana__i3": {
+    "hash": "ebd9a7535b6b",
+    "text": "Die Beine im Lotus, nun auf der Brust ruhend. Der Körper rollt sich nach innen ein wie eine Schildkröte auf dem Rücken.",
+    "bytes": 53280
+  },
+  "uttanaKurmasana__i4": {
+    "hash": "48c5447b61fe",
+    "text": "Halte stabil. Atme langsam.",
+    "bytes": 18576
+  },
+  "uttanaKurmasana__i5": {
+    "hash": "ca0f58f6d7c7",
+    "text": "Zum Lösen: rolle sanft zurück hoch in Kukkutasana, senke dich ab, löse Padmasana.",
+    "bytes": 46224
+  },
+  "mayurasana__name": {
+    "hash": "614fc318abf6",
+    "text": "Pfauenhaltung.",
+    "bytes": 8064
+  },
+  "mayurasana__enter": {
+    "hash": "c9247549f0ab",
+    "text": "Knie weit. Lege die Handflächen mit nach hinten zeigenden Fingern auf. Senke dich auf die Unterarme, die Ellbogen zusammen gegen den Bauch.",
+    "bytes": 64080
+  },
+  "mayurasana__hold": {
+    "hash": "b1323fb4ac89",
+    "text": "Strecke die Beine nach hinten. Verlagere das Gewicht nach vorne. Hebe die Füße — der Körper schwebt parallel zum Boden.",
+    "bytes": 54864
+  },
+  "mayurasana__breathe": {
+    "hash": "afa6981dd132",
+    "text": "Stetiger Atem. Aktiviere die Körpermitte, um das Schweben zu halten.",
+    "bytes": 33408
+  },
+  "mayurasana__exit": {
+    "hash": "8b9f69ce76d4",
+    "text": "Senke die Füße ab. Drücke zurück in den Sitz. Schüttle die Handgelenke zur Erholung aus.",
+    "bytes": 43344
+  },
+  "mayurasana__i0": {
+    "hash": "6e0023f1d7d2",
+    "text": "Knie auf der Matte, die Knie weit.",
+    "bytes": 16272
+  },
+  "mayurasana__i1": {
+    "hash": "0ac7ba20f99b",
+    "text": "Lege die Handflächen auf den Boden zwischen die Knie, die Finger zeigen ZURÜCK zum Körper.",
+    "bytes": 35136
+  },
+  "mayurasana__i2": {
+    "hash": "4a04d38b29e3",
+    "text": "Senke dich auf die Unterarme und drücke die Ellbogen zusammen in den unteren Bauch (nahe dem Nabel).",
+    "bytes": 38736
+  },
+  "mayurasana__i3": {
+    "hash": "f82149486057",
+    "text": "Strecke die Beine hinter dir aus, die Fußballen auf dem Boden.",
+    "bytes": 25056
+  },
+  "mayurasana__i4": {
+    "hash": "256c8af66c1b",
+    "text": "Verlagere das Gewicht nach vorne über die Ellbogen; hebe die Füße vom Boden.",
+    "bytes": 32256
+  },
+  "mayurasana__i5": {
+    "hash": "0bae532c656d",
+    "text": "Der Körper schwebt parallel zum Boden, vollständig auf den in den Bauch gedrückten Ellbogen balanciert.",
+    "bytes": 42048
+  },
+  "mayurasana__i6": {
+    "hash": "b95e2141f215",
+    "text": "Halte mehrere Atemzüge. Zum Lösen: senke die Füße, drücke zurück, setze dich auf.",
+    "bytes": 52560
+  },
+  "simhasana__name": {
+    "hash": "8d7de3c8e29f",
+    "text": "Löwenhaltung.",
+    "bytes": 10656
+  },
+  "simhasana__enter": {
+    "hash": "8cb52c14a0cd",
+    "text": "Knie auf der Matte, die Handflächen auf den Knien, die Finger gespreizt.",
+    "bytes": 28656
+  },
+  "simhasana__hold": {
+    "hash": "d2ee7783ae6f",
+    "text": "Atme durch die Nase ein. Öffne den Mund weit, strecke die Zunge heraus, atme mit einem HAA-Geräusch aus. Reiße die Augen weit auf.",
+    "bytes": 67392
+  },
+  "simhasana__breathe": {
+    "hash": "b7d802a40a77",
+    "text": "Fünf Runden. Jedes Gebrüll löst mehr Spannung aus Gesicht und Kehle.",
+    "bytes": 36144
+  },
+  "simhasana__exit": {
+    "hash": "dd8d88bc60cd",
+    "text": "Schließe nach der letzten Runde die Augen und ruhe. Nimm die Wärme im Gesicht wahr.",
+    "bytes": 37584
+  },
+  "simhasana__i0": {
+    "hash": "f4e6fc92af5f",
+    "text": "Knie auf der Matte mit zusammenstehenden Knien, auf den Fersen zurücksitzend (Vajrasana-Basis). ODER sitze im Schneidersitz.",
+    "bytes": 62352
+  },
+  "simhasana__i1": {
+    "hash": "0116698d7a45",
+    "text": "Lege die Handflächen auf die Knie, die Finger weit gespreizt.",
+    "bytes": 26064
+  },
+  "simhasana__i2": {
+    "hash": "0c9518679d74",
+    "text": "Atme tief durch die Nase ein.",
+    "bytes": 13968
+  },
+  "simhasana__i3": {
+    "hash": "a7e3be071c8f",
+    "text": "Öffne den Mund weit, strecke die Zunge so weit wie möglich nach unten zum Kinn.",
+    "bytes": 33120
+  },
+  "simhasana__i4": {
+    "hash": "4680b11d43d8",
+    "text": "Atme kräftig durch den offenen Mund aus und erzeuge ein \"HAAAAA\"-Geräusch aus der Kehle — das Löwengebrüll.",
+    "bytes": 44064
+  },
+  "simhasana__i5": {
+    "hash": "59fff9209e18",
+    "text": "Reiße die Augen weit auf — blicke nach oben zum dritten Auge oder nach unten zur Nasenspitze.",
+    "bytes": 42624
+  },
+  "simhasana__i6": {
+    "hash": "31faad34ea0b",
+    "text": "Wiederhole 5-8 Runden. Schließe nach der letzten Runde die Augen und ruhe.",
+    "bytes": 36720
+  },
+  "bhadrasana__name": {
+    "hash": "92b205f47186",
+    "text": "Anmutige Haltung.",
+    "bytes": 10080
+  },
+  "bhadrasana__enter": {
+    "hash": "2e17ab14c7da",
+    "text": "Sitze aufrecht. Bring die Fußsohlen nah am Körper zusammen. Fasse die Füße mit beiden Händen.",
+    "bytes": 51840
+  },
+  "bhadrasana__hold": {
+    "hash": "8f3add678da2",
+    "text": "Lass die Knie zum Boden hin sinken. Verlängere die Wirbelsäule — der Scheitel strebt nach oben.",
+    "bytes": 48816
+  },
+  "bhadrasana__breathe": {
+    "hash": "c22fd2f39830",
+    "text": "Natürlicher Atem. Dies ist ein Meditationssitz — lass den Körper sich setzen.",
+    "bytes": 36864
+  },
+  "bhadrasana__exit": {
+    "hash": "3fda4b9c4946",
+    "text": "Löse die Füße. Strecke die Beine aus und schüttle sie sanft aus.",
+    "bytes": 29520
+  },
+  "bhadrasana__i0": {
+    "hash": "fa7168821ea0",
+    "text": "Sitze auf einer gefalteten Decke mit ausgestreckten Beinen.",
+    "bytes": 23760
+  },
+  "bhadrasana__i1": {
+    "hash": "aabd07bd8216",
+    "text": "Bring die Fußsohlen zusammen und ziehe die Fersen nah an den Damm.",
+    "bytes": 26064
+  },
+  "bhadrasana__i2": {
+    "hash": "bc716ef9ff71",
+    "text": "Fasse die Füße fest mit beiden Händen — die Finger umschließen die Außenkanten.",
+    "bytes": 32688
+  },
+  "bhadrasana__i3": {
+    "hash": "180feb01834a",
+    "text": "Die Knie lösen sich zum Boden hin, gestützt von Kissen, wenn sie schweben.",
+    "bytes": 28656
+  },
+  "bhadrasana__i4": {
+    "hash": "4747048f964d",
+    "text": "Verlängere die Wirbelsäule — der Scheitel strebt nach oben, die Sitzbeine verwurzeln nach unten.",
+    "bytes": 40608
+  },
+  "bhadrasana__i5": {
+    "hash": "8f713451865f",
+    "text": "Halte den Blick entweder geradeaus oder die Augen sanft geschlossen.",
+    "bytes": 29664
+  },
+  "bhadrasana__i6": {
+    "hash": "f9a3942d7346",
+    "text": "Bleibe 3-5 Minuten zur Meditation.",
+    "bytes": 20160
+  },
+  "kapotasana__name": {
+    "hash": "862e9e89303f",
+    "text": "Königstaubenhaltung.",
+    "bytes": 10656
+  },
+  "kapotasana__enter": {
+    "hash": "07fb31660147",
+    "text": "Knie mit senkrechten Oberschenkeln. Atme ein und strecke die Arme über den Kopf.",
+    "bytes": 37152
+  },
+  "kapotasana__hold": {
+    "hash": "2c092ad3965e",
+    "text": "Atme aus und beuge dich zurück. Wandere mit den Händen zu den Fersen, dann zu den Füßen.",
+    "bytes": 41328
+  },
+  "kapotasana__breathe": {
+    "hash": "56ef2cbc8ae0",
+    "text": "Stetiger Atem. Jedes Einatmen öffnet die Brust ein wenig mehr.",
+    "bytes": 34560
+  },
+  "kapotasana__exit": {
+    "hash": "4e30533c6c50",
+    "text": "Wandere mit den Händen zurück. Atme ein und hebe die Brust. Ruhe in Balasana.",
+    "bytes": 44640
+  },
+  "kapotasana__i0": {
+    "hash": "e01a34cc8aeb",
+    "text": "VORAUSSETZUNG: ein etabliertes Ustrasana (Kamelhaltung), Bhujangasana und Setu Bandha.",
+    "bytes": 47520
+  },
+  "kapotasana__i1": {
+    "hash": "e5cec132de74",
+    "text": "Knie mit den Knien hüftbreit auseinander, die Oberschenkel senkrecht.",
+    "bytes": 28080
+  },
+  "kapotasana__i2": {
+    "hash": "d712bdb1b88d",
+    "text": "Atme ein, hebe die Brust und strecke die Arme über den Kopf.",
+    "bytes": 27360
+  },
+  "kapotasana__i3": {
+    "hash": "ff827620b03d",
+    "text": "Atme aus und beuge dich zurück, geführt von der Brust. Lege die Hände auf die Fersen oder weiter nach vorne.",
+    "bytes": 49536
+  },
+  "kapotasana__i4": {
+    "hash": "16207447305c",
+    "text": "Wandere mit den Händen zu den Füßen, fasse schließlich die Zehen oder ziehe den Kopf zu den Füßen.",
+    "bytes": 40608
+  },
+  "kapotasana__i5": {
+    "hash": "90ba2a8c1b26",
+    "text": "Lass den Kopf sanft zurückfallen — die Augen entweder auf die Füße gerichtet oder geschlossen.",
+    "bytes": 39312
+  },
+  "kapotasana__i6": {
+    "hash": "d77d06175a2a",
+    "text": "Zum Lösen: wandere mit den Händen zurück, hebe die Brust, setze dich langsam auf.",
+    "bytes": 38160
+  },
+  "bakasana__name": {
+    "hash": "9098e641e0de",
+    "text": "Krähenhaltung.",
+    "bytes": 8064
+  },
+  "bakasana__enter": {
+    "hash": "ffa524773d84",
+    "text": "Hocke tief. Lege die Handflächen flach auf den Boden davor. Beuge die Ellbogen leicht.",
+    "bytes": 46368
+  },
+  "bakasana__hold": {
+    "hash": "f1beab944933",
+    "text": "Die Knie drücken gegen die Rückseite der Oberarme. Verlagere das Gewicht nach vorne. Hebe die Füße.",
+    "bytes": 44640
+  },
+  "bakasana__breathe": {
+    "hash": "56c37679e61b",
+    "text": "Blicke nach vorne, nicht nach unten. Stetiger Atem. Der Blick macht die Balance möglich.",
+    "bytes": 47376
+  },
+  "bakasana__exit": {
+    "hash": "e48ed0b863bb",
+    "text": "Senke die Füße zum Boden. Stehe langsam auf. Schüttle die Handgelenke aus.",
+    "bytes": 36432
+  },
+  "bakasana__i0": {
+    "hash": "d76df6e33d5e",
+    "text": "Hocke in Malasana (tiefe Hocke), die Füße hüftbreit auseinander, die Knie weit.",
+    "bytes": 37440
+  },
+  "bakasana__i1": {
+    "hash": "028da0ea2a20",
+    "text": "Lege die Handflächen auf den Boden vor den Füßen, schulterbreit auseinander, die Finger weit gespreizt.",
+    "bytes": 41904
+  },
+  "bakasana__i2": {
+    "hash": "439260fa6791",
+    "text": "Beuge die Ellbogen leicht nach außen (Chaturanga-Stil — die Ellbogen folgen der Linie über den Handgelenken, nicht weit ausgestellt).",
+    "bytes": 59328
+  },
+  "bakasana__i3": {
+    "hash": "a67a328824b8",
+    "text": "Drücke die Knie gegen die Rückseite der Oberarme, knapp über den Ellbogen.",
+    "bytes": 29232
+  },
+  "bakasana__i4": {
+    "hash": "73ad809235dd",
+    "text": "Verlagere das Gewicht nach vorne über die Hände. Hebe die Fersen und rolle die Zehen vom Boden.",
+    "bytes": 45936
+  },
+  "bakasana__i5": {
+    "hash": "1a5e4da9e508",
+    "text": "Blicke nach vorne — NICHT nach unten. Die Blickrichtung ist die Balance.",
+    "bytes": 33552
+  },
+  "bakasana__i6": {
+    "hash": "4994b55e5d6f",
+    "text": "Halte 5-15 Sekunden. Zum Lösen: senke die Füße, hebe den Kopf, stehe auf.",
+    "bytes": 53136
+  },
+  "kakasana__name": {
+    "hash": "44cf8ecca04d",
+    "text": "Kranichhaltung.",
+    "bytes": 8064
+  },
+  "kakasana__enter": {
+    "hash": "3223b34a03bf",
+    "text": "Richte dich wie zur Krähe ein, aber lege die Knie höher auf die Arme, nahe den Achseln.",
+    "bytes": 35856
+  },
+  "kakasana__hold": {
+    "hash": "d991e68ecc17",
+    "text": "Drücke den Boden weg und strecke die Arme. Die Hüften heben sich; der Körper verlängert sich nach oben.",
+    "bytes": 48240
+  },
+  "kakasana__breathe": {
+    "hash": "1d8c108f7490",
+    "text": "Stetig. Die gestreckten Arme machen sie eleganter, aber fordernder.",
+    "bytes": 34560
+  },
+  "kakasana__exit": {
+    "hash": "30e7b31374a4",
+    "text": "Beuge die Arme zurück zur Krähe. Senke die Füße. Schüttle die Handgelenke aus.",
+    "bytes": 41328
+  },
+  "kakasana__i0": {
+    "hash": "2584c8b2f277",
+    "text": "VORAUSSETZUNG: ein stabiles Bakasana (Krähe) für 15+ Sekunden.",
+    "bytes": 36576
+  },
+  "kakasana__i1": {
+    "hash": "38d0bba17c49",
+    "text": "Richte dich genau wie im Bakasana ein: tiefe Hocke, Handflächen auf dem Boden, die Knie an den Oberarmen.",
+    "bytes": 48528
+  },
+  "kakasana__i2": {
+    "hash": "684609b0a1ec",
+    "text": "Lege die Knie HÖHER auf die Arme — näher an die Achseln.",
+    "bytes": 25056
+  },
+  "kakasana__i3": {
+    "hash": "d95a41f6b7e9",
+    "text": "Drücke den Boden weg und STRECKE die Arme vollständig.",
+    "bytes": 24768
+  },
+  "kakasana__i4": {
+    "hash": "5f0bead47d2e",
+    "text": "Die Hüften heben sich höher, der Körper ist senkrechter als in der Krähe.",
+    "bytes": 28368
+  },
+  "kakasana__i5": {
+    "hash": "499ca0c56062",
+    "text": "Halte stabil. Blicke nach vorne. Die Form ist eleganter, weniger komprimiert als die Krähe.",
+    "bytes": 50112
+  },
+  "kakasana__i6": {
+    "hash": "54062952a1b3",
+    "text": "Zum Lösen: beuge die Arme zurück zur Krähe, senke die Füße, stehe auf.",
+    "bytes": 39744
+  },
+  "chaturangaDandasana__name": {
+    "hash": "1050c46e45de",
+    "text": "Vierfüßige Stockhaltung.",
+    "bytes": 12672
+  },
+  "chaturangaDandasana__enter": {
+    "hash": "7c316682f22e",
+    "text": "Verlagere aus der Planke das Gewicht nach vorne. Die Schultern bewegen sich über die Handgelenke hinaus.",
+    "bytes": 43776
+  },
+  "chaturangaDandasana__hold": {
+    "hash": "c49b8ea2229f",
+    "text": "Atme aus und beuge die Ellbogen gerade nach hinten, eng an die Rippen geschmiegt. Die Oberarme parallel zum Boden.",
+    "bytes": 51552
+  },
+  "chaturangaDandasana__breathe": {
+    "hash": "dc2811de03d0",
+    "text": "Stetig. Der Körper in einer Linie. Die Ellbogen eng.",
+    "bytes": 35136
+  },
+  "chaturangaDandasana__exit": {
+    "hash": "3b831e8cf5df",
+    "text": "Atme ein, drücke dich hoch in den Heraufschauenden Hund, ODER senke dich ganz zum Boden und ruhe.",
+    "bytes": 37584
+  },
+  "chaturangaDandasana__i0": {
+    "hash": "de77d29afdc0",
+    "text": "Beginne in der Planke, die Schultern über den Handgelenken, der Körper in einer Linie.",
+    "bytes": 31104
+  },
+  "chaturangaDandasana__i1": {
+    "hash": "9f08cebb1ca6",
+    "text": "Verlagere das Gewicht leicht nach vorne — die Schultern bewegen sich über die Handgelenke hinaus.",
+    "bytes": 38448
+  },
+  "chaturangaDandasana__i2": {
+    "hash": "17a8274fb233",
+    "text": "Atme aus und beuge die Ellbogen gerade nach hinten, eng an die Rippen geschmiegt.",
+    "bytes": 33264
+  },
+  "chaturangaDandasana__i3": {
+    "hash": "7446127156cf",
+    "text": "Senke dich, bis die Oberarme parallel zum Boden sind (90-Grad-Beuge im Ellbogen).",
+    "bytes": 36720
+  },
+  "chaturangaDandasana__i4": {
+    "hash": "a8bad3d022e8",
+    "text": "Der Körper bleibt in einer geraden Linie — Schultern, Hüften und Fersen ausgerichtet.",
+    "bytes": 36576
+  },
+  "chaturangaDandasana__i5": {
+    "hash": "8e1f290f3ece",
+    "text": "Halte stabil. Schmiege die Ellbogen heran — lass sie nicht ausstellen.",
+    "bytes": 34560
+  },
+  "chaturangaDandasana__i6": {
+    "hash": "fdb4505260d7",
+    "text": "Zum Lösen: atme ein zum Heraufschauenden Hund oder senke dich ganz zum Boden.",
+    "bytes": 37008
+  },
+  "vasishthasana__name": {
+    "hash": "8c4c3c2c33a8",
+    "text": "Seitliche Planke.",
+    "bytes": 9792
+  },
+  "vasishthasana__enter": {
+    "hash": "5bdc11f17935",
+    "text": "Rolle aus der Planke auf die Außenkante des rechten Fußes und staple den linken Fuß darauf.",
+    "bytes": 38736
+  },
+  "vasishthasana__hold": {
+    "hash": "d686d62c623a",
+    "text": "Die rechte Schulter staple über das rechte Handgelenk. Hebe den linken Arm gerade nach oben. Der Körper in einer Linie.",
+    "bytes": 56448
+  },
+  "vasishthasana__breathe": {
+    "hash": "de62a2baf5e9",
+    "text": "Stetiger Atem. Hebe dich durch die Hüften — lass sie nicht durchhängen.",
+    "bytes": 31392
+  },
+  "vasishthasana__exit": {
+    "hash": "06cbf066a444",
+    "text": "Senke dich zurück in die Planke. Wechsle die Seite.",
+    "bytes": 25344
+  },
+  "vasishthasana__i0": {
+    "hash": "e1030dce6848",
+    "text": "Verlagere aus der Planke das Gewicht auf die rechte Hand.",
+    "bytes": 21888
+  },
+  "vasishthasana__i1": {
+    "hash": "a034af11b00e",
+    "text": "Rolle auf die Außenkante des rechten Fußes und staple den linken Fuß auf den rechten.",
+    "bytes": 34416
+  },
+  "vasishthasana__i2": {
+    "hash": "b466a6144d3e",
+    "text": "Staple die rechte Schulter über das rechte Handgelenk. Halte den rechten Arm gestreckt.",
+    "bytes": 36864
+  },
+  "vasishthasana__i3": {
+    "hash": "0502c68202f6",
+    "text": "Strecke den linken Arm gerade zur Decke. Der Körper bildet eine gerade Linie.",
+    "bytes": 36432
+  },
+  "vasishthasana__i4": {
+    "hash": "194dbad6b16e",
+    "text": "Blicke entweder geradeaus oder hinauf zur oberen Hand.",
+    "bytes": 24048
+  },
+  "vasishthasana__i5": {
+    "hash": "fe445a1dd72b",
+    "text": "Halte stabil. Die Hüften heben sich — lass sie nicht durchhängen.",
+    "bytes": 29952
+  },
+  "vasishthasana__i6": {
+    "hash": "60e02712c621",
+    "text": "Wechsle die Seite. Zum Lösen: senke dich zurück in die Planke.",
+    "bytes": 35712
+  },
+  "astavakrasana__name": {
+    "hash": "8ab39d856686",
+    "text": "Achtwinkelhaltung.",
+    "bytes": 9360
+  },
+  "astavakrasana__enter": {
+    "hash": "e383d72cb178",
+    "text": "Hake den rechten Oberschenkel über die rechte Schulter. Kreuze den linken Knöchel über den rechten und verriegle die Beine.",
+    "bytes": 51552
+  },
+  "astavakrasana__hold": {
+    "hash": "0c72fa229453",
+    "text": "Die Handflächen auf dem Boden. Lehne dich nach vorne. Hebe den Körper, strecke die Beine zur Seite hinaus.",
+    "bytes": 49104
+  },
+  "astavakrasana__breathe": {
+    "hash": "5997783d7133",
+    "text": "Stetig. Der Atem ist der Anker — halte ihn nicht an.",
+    "bytes": 30384
+  },
+  "astavakrasana__exit": {
+    "hash": "cc5abeeaee59",
+    "text": "Bring die Beine zurück zur Mitte. Senke den Körper. Löse die Beine.",
+    "bytes": 39456
+  },
+  "astavakrasana__i0": {
+    "hash": "d83b6477fb7f",
+    "text": "VORAUSSETZUNG: ein stabiles Bakasana, ein starkes Chaturanga, offene hintere Oberschenkel.",
+    "bytes": 49248
+  },
+  "astavakrasana__i1": {
+    "hash": "c73aab282529",
+    "text": "Sitze mit ausgestreckten Beinen. Beuge das rechte Knie und hake den rechten Oberschenkel über die rechte Schulter.",
+    "bytes": 51984
+  },
+  "astavakrasana__i2": {
+    "hash": "929b65067bb5",
+    "text": "Kreuze den linken Knöchel über den rechten Knöchel und verriegle die Beine an den Knöcheln, das Körpergewicht in der rechten Hand und die Beine von der rechten Schulter hängend.",
+    "bytes": 64512
+  },
+  "astavakrasana__i3": {
+    "hash": "26aa42da1a97",
+    "text": "Lege beide Handflächen neben die Hüften auf den Boden.",
+    "bytes": 21312
+  },
+  "astavakrasana__i4": {
+    "hash": "4eb9d262d958",
+    "text": "Lehne dich nach vorne und hebe den Körper vom Boden.",
+    "bytes": 21744
+  },
+  "astavakrasana__i5": {
+    "hash": "178f6d98203f",
+    "text": "Beuge die Ellbogen wie im Chaturanga und strecke die verriegelten Beine zur rechten Seite hinaus.",
+    "bytes": 40320
+  },
+  "astavakrasana__i6": {
+    "hash": "147595788753",
+    "text": "Halte stabil. Zum Lösen: bring die Beine zurück zur Mitte, senke den Körper, löse die Beine.",
+    "bytes": 50256
+  },
+  "pasasana__name": {
+    "hash": "0b64416b9165",
+    "text": "Schlingenhaltung.",
+    "bytes": 8208
+  },
+  "pasasana__enter": {
+    "hash": "be40ec9642cc",
+    "text": "Hocke tief mit den Fersen unten. Atme aufrecht ein.",
+    "bytes": 28080
+  },
+  "pasasana__hold": {
+    "hash": "be618e78f7a8",
+    "text": "Atme aus und drehe dich nach rechts. Wickle den linken Arm außen um den rechten Oberschenkel. Greife mit der rechten Hand hinter den Rücken zum Fassen.",
+    "bytes": 70992
+  },
+  "pasasana__breathe": {
+    "hash": "e6e01c7d2e80",
+    "text": "Jedes Ausatmen vertieft die Drehung. Die Bindung ist intensiv — erzwinge nichts.",
+    "bytes": 39168
+  },
+  "pasasana__exit": {
+    "hash": "4e0382ee4021",
+    "text": "Löse die Bindung. Drehe zurück zur Mitte. Wechsle die Seite.",
+    "bytes": 32832
+  },
+  "pasasana__i0": {
+    "hash": "e5b0d2e0de93",
+    "text": "Hocke in Malasana mit den Fersen auf dem Boden (oder auf einer gefalteten Decke, wenn sie nicht reichen).",
+    "bytes": 39744
+  },
+  "pasasana__i1": {
+    "hash": "b184e94fa179",
+    "text": "Atme ein und drehe den Oberkörper nach rechts.",
+    "bytes": 20736
+  },
+  "pasasana__i2": {
+    "hash": "c944f11b47da",
+    "text": "Atme aus und wickle den linken Arm um die AUSSENSEITE des rechten Oberschenkels und über die Vorderseite des Körpers.",
+    "bytes": 47232
+  },
+  "pasasana__i3": {
+    "hash": "9a75356ba033",
+    "text": "Greife mit dem rechten Arm hinter den Rücken und fasse das linke Handgelenk oder die Finger — die Schlinge bildend.",
+    "bytes": 42624
+  },
+  "pasasana__i4": {
+    "hash": "bfa2dd81864c",
+    "text": "Verlängere die Wirbelsäule. Wende den Blick über die rechte Schulter.",
+    "bytes": 31536
+  },
+  "pasasana__i5": {
+    "hash": "da7dbe36128d",
+    "text": "Halte stabil. Zum Lösen: löse die Bindung, drehe zurück zur Mitte, wechsle die Seite.",
+    "bytes": 45216
+  },
+  "adhoMukhaVrksasana__name": {
+    "hash": "9ebbf0fda020",
+    "text": "Handstand.",
+    "bytes": 6192
+  },
+  "adhoMukhaVrksasana__enter": {
+    "hash": "03d8cb3f9c40",
+    "text": "Die Hände flach auf dem Boden nahe einer Wand. Wandere mit den Füßen zu den Händen.",
+    "bytes": 35136
+  },
+  "adhoMukhaVrksasana__hold": {
+    "hash": "3f76da77ecf4",
+    "text": "Schwinge ein Bein hoch, dann das andere. Die Fersen berühren die Wand leicht. Drücke die Handflächen in den Boden.",
+    "bytes": 56304
+  },
+  "adhoMukhaVrksasana__breathe": {
+    "hash": "630074ae325b",
+    "text": "Stetiger Atem. Aktiviere die Körpermitte. Der ganze Körper ist eine gerade Linie.",
+    "bytes": 41472
+  },
+  "adhoMukhaVrksasana__exit": {
+    "hash": "beb84c10e360",
+    "text": "Senke jeweils ein Bein. Ruhe im Herabschauenden Hund. Dann in der Haltung des Kindes.",
+    "bytes": 43632
+  },
+  "adhoMukhaVrksasana__i0": {
+    "hash": "bba3fc63e788",
+    "text": "VORAUSSETZUNG: ein starker Herabschauender Hund, Planke und Schulterstabilität. Übe an einer Wand.",
+    "bytes": 52416
+  },
+  "adhoMukhaVrksasana__i1": {
+    "hash": "5bbefc9c515e",
+    "text": "Lege die Handflächen etwa 15 cm von einer Wand entfernt auf den Boden, schulterbreit auseinander.",
+    "bytes": 43344
+  },
+  "adhoMukhaVrksasana__i2": {
+    "hash": "5ceef18e942a",
+    "text": "Wandere mit den Füßen zu den Händen, bis die Hüften über den Schultern liegen.",
+    "bytes": 29376
+  },
+  "adhoMukhaVrksasana__i3": {
+    "hash": "43b3ec33a640",
+    "text": "Ein Bein schwingt hoch; das andere folgt. Die Fersen berühren die Wand leicht.",
+    "bytes": 35136
+  },
+  "adhoMukhaVrksasana__i4": {
+    "hash": "c8d24707cdfe",
+    "text": "Staple: Handgelenke → Schultern → Hüften → Fersen in einer senkrechten Linie.",
+    "bytes": 39024
+  },
+  "adhoMukhaVrksasana__i5": {
+    "hash": "859e4d62b581",
+    "text": "Aktiviere die Körpermitte, drücke durch die Handflächen, blicke zwischen die Hände.",
+    "bytes": 33840
+  },
+  "adhoMukhaVrksasana__i6": {
+    "hash": "944ea40e13e4",
+    "text": "Zum Lösen: senke jeweils ein Bein, langsam zurück in den Herabschauenden Hund.",
+    "bytes": 38448
+  },
+  "nadiShodhana__name": {
+    "hash": "06254f1c4319",
+    "text": "Wechselatmung.",
+    "bytes": 8064
+  },
+  "nadiShodhana__enter": {
+    "hash": "c0fcc120bc58",
+    "text": "Sitze bequem mit langer Wirbelsäule. Forme Vishnu Mudra mit der rechten Hand — Zeige- und Mittelfinger eingefaltet, Daumen und Ringfinger ausgestreckt.",
+    "bytes": 65088
+  },
+  "nadiShodhana__hold": {
+    "hash": "8c49e2d67e87",
+    "text": "Schließe das rechte Nasenloch mit dem Daumen. Atme langsam links ein. Schließe links mit dem Ringfinger. Löse den Daumen. Atme rechts aus.",
+    "bytes": 73872
+  },
+  "nadiShodhana__breathe": {
+    "hash": "1cdefa0e74eb",
+    "text": "Ein rechts, schließe rechts, aus links. Ein links, schließe links, aus rechts. Eine volle Runde. Bleib bei der Zählung — gleich ein, gleich aus.",
+    "bytes": 80496
+  },
+  "nadiShodhana__exit": {
+    "hash": "cec6f2b7e972",
+    "text": "Beende immer mit einer Ausatmung durch das linke Nasenloch. Senke die rechte Hand. Sitze einen Atemzug in Stille, bevor du die Augen öffnest.",
+    "bytes": 68832
+  },
+  "nadiShodhana__i0": {
+    "hash": "535e4f0f8d5b",
+    "text": "Sitze bequem in Sukhasana auf einer gefalteten Decke. Wirbelsäule lang, Schultern entspannt.",
+    "bytes": 41328
+  },
+  "nadiShodhana__i1": {
+    "hash": "4118a62a04d3",
+    "text": "Forme Vishnu Mudra mit der RECHTEN Hand: falte Zeige- und Mittelfinger in die Handfläche, lass Daumen, Ring- und kleinen Finger ausgestreckt.",
+    "bytes": 66240
+  },
+  "nadiShodhana__i2": {
+    "hash": "e10f19871b1c",
+    "text": "Bring die rechte Hand zum Gesicht. Schließe das RECHTE Nasenloch mit dem rechten Daumen.",
+    "bytes": 34848
+  },
+  "nadiShodhana__i3": {
+    "hash": "4b0bfc9a1273",
+    "text": "Atme langsam durch das LINKE Nasenloch ein, zähle bis 4.",
+    "bytes": 28224
+  },
+  "nadiShodhana__i4": {
+    "hash": "5facc72a0181",
+    "text": "Schließe das LINKE Nasenloch mit dem rechten Ringfinger. Löse den Daumen. Atme langsam durch das RECHTE Nasenloch aus, zähle bis 4.",
+    "bytes": 63216
+  },
+  "nadiShodhana__i5": {
+    "hash": "5b4fbe32529e",
+    "text": "Atme durch das RECHTE Nasenloch ein (zähle 4). Schließe rechts mit dem Daumen. Löse den Ringfinger. Atme links aus (zähle 4). Das vollendet eine volle Runde.",
+    "bytes": 81360
+  },
+  "nadiShodhana__i6": {
+    "hash": "43c142b7a0bf",
+    "text": "Mache 5-10 Minuten weiter. Beende eine Runde immer mit einer Ausatmung durch das LINKE Nasenloch.",
+    "bytes": 44496
+  },
+  "ujjayi__name": {
+    "hash": "2519ddc5bde6",
+    "text": "Siegreicher Atem.",
+    "bytes": 10656
+  },
+  "ujjayi__enter": {
+    "hash": "246dec5c330f",
+    "text": "Sitze lang. Öffne den Mund und atme ein sanftes „haaaa“ aus, als würdest du einen Spiegel anhauchen. Bemerke die leichte Verengung am hinteren Teil der Kehle.",
+    "bytes": 71712
+  },
+  "ujjayi__hold": {
+    "hash": "b73b02a72d41",
+    "text": "Schließe den Mund. Behalte die gleiche Kehlform. Atme durch die Nase. Lausche dem sanften Ozeanklang — sanft, nicht erzwungen.",
+    "bytes": 80496
+  },
+  "ujjayi__breathe": {
+    "hash": "15750d463164",
+    "text": "Atme 4 Zählungen mit dem Ozeanklang ein. Atme 6 Zählungen aus. Jeder Atemzug ist langsam, nur für dich selbst hörbar.",
+    "bytes": 63648
+  },
+  "ujjayi__exit": {
+    "hash": "78df5e821195",
+    "text": "Löse die Kehlverengung. Nimm drei sanfte natürliche Atemzüge. Bemerke die Wärme in der Brust.",
+    "bytes": 58608
+  },
+  "ujjayi__i0": {
+    "hash": "f2d04401d466",
+    "text": "Sitze bequem mit langer Wirbelsäule.",
+    "bytes": 15984
+  },
+  "ujjayi__i1": {
+    "hash": "cae92e9bca73",
+    "text": "Um die Kehlverengung zu finden: öffne den Mund und atme ein sanftes „haaaa“ aus, als würdest du einen Spiegel anhauchen.",
+    "bytes": 50256
+  },
+  "ujjayi__i2": {
+    "hash": "49e0cacd7d98",
+    "text": "Behalte nun die gleiche Kehlform bei, aber schließe den Mund — der Atem geht jetzt durch die Nase mit leicht verengter Kehle.",
+    "bytes": 48384
+  },
+  "ujjayi__i3": {
+    "hash": "9c2339aa0062",
+    "text": "Lausche dem sanften Meereswellen- oder „Darth-Vader“-Klang bei jedem Atemzug. Der Klang soll sanft sein, nicht erzwungen.",
+    "bytes": 55440
+  },
+  "ujjayi__i4": {
+    "hash": "8b1391504976",
+    "text": "Atme durch die Nase mit der Kehlverengung für 4 Zählungen ein.",
+    "bytes": 25776
+  },
+  "ujjayi__i5": {
+    "hash": "f522e98dd792",
+    "text": "Atme durch die Nase aus, gleiche Verengung, für 6 Zählungen. Die Ausatmung ist etwas länger.",
+    "bytes": 47232
+  },
+  "ujjayi__i6": {
+    "hash": "2c72e9a2cd4e",
+    "text": "Mache 5-15 Minuten im Sitzen weiter, ODER trage den Atem durch deine Asana-Praxis.",
+    "bytes": 40752
+  },
+  "bhramari__name": {
+    "hash": "26dcbbb8d6f7",
+    "text": "Summende-Bienen-Atem.",
+    "bytes": 10944
+  },
+  "bhramari__enter": {
+    "hash": "391b8093b3d8",
+    "text": "Sitze lang. Entspanne den Kiefer. Verschließe optional die Ohren mit den Daumen.",
+    "bytes": 41904
+  },
+  "bhramari__hold": {
+    "hash": "54b920ba7397",
+    "text": "Atme langsam durch die Nase ein. Schließe die Lippen. Atme mit einem langen Summton aus.",
+    "bytes": 45360
+  },
+  "bhramari__breathe": {
+    "hash": "4d13164e7ca9",
+    "text": "Das Summen schwingt im vorderen Teil des Schädels. Spüre die Vibration hinter den Augen. Jede Ausatmung ist doppelt so lang wie die Einatmung.",
+    "bytes": 66096
+  },
+  "bhramari__exit": {
+    "hash": "2e548464b967",
+    "text": "Nach der letzten Runde lass das Summen los und sitze still. Lausche der Stille hinter dem Atem.",
+    "bytes": 41472
+  },
+  "bhramari__i0": {
+    "hash": "5cf1150c166b",
+    "text": "Sitze bequem mit langer Wirbelsäule. Entspanne den Kiefer.",
+    "bytes": 27648
+  },
+  "bhramari__i1": {
+    "hash": "f3dd79146b7d",
+    "text": "Optional: forme Shanmukhi Mudra — schließe die Augen, verschließe beide Ohren mit den Daumen, lege die Zeigefinger über die Augenbrauen, die Mittelfinger an die Augenwinkel, die Ringfinger an die Nasenwinkel, die kleinen Finger an die Lippenwinkel.",
+    "bytes": 101952
+  },
+  "bhramari__i2": {
+    "hash": "af24e3cd027e",
+    "text": "Atme langsam durch die Nase ein, zähle bis 4.",
+    "bytes": 21888
+  },
+  "bhramari__i3": {
+    "hash": "9783d643d8aa",
+    "text": "Schließe die Lippen leicht. Atme durch die Nase mit einem anhaltenden Summen „M-m-m“ für 6-8 Zählungen aus.",
+    "bytes": 51696
+  },
+  "bhramari__i4": {
+    "hash": "3b9205da5ec7",
+    "text": "Spüre die Vibration im vorderen Teil des Schädels, hinter den Augen.",
+    "bytes": 28368
+  },
+  "bhramari__i5": {
+    "hash": "0871a9458908",
+    "text": "Wiederhole 8-12 Runden oder 5 Minuten insgesamt.",
+    "bytes": 26928
+  },
+  "bhramari__i6": {
+    "hash": "0a4151c271a4",
+    "text": "Nach der letzten Runde sitze einen Atemzug still und bemerke die Stille, die folgt.",
+    "bytes": 34848
+  },
+  "sheetali__name": {
+    "hash": "09add0f09ba4",
+    "text": "Kühlender Atem.",
+    "bytes": 10656
+  },
+  "sheetali__enter": {
+    "hash": "e906dcd17047",
+    "text": "Sitze lang. Öffne den Mund und rolle die Zunge der Länge nach zu einer Röhrenform. Strecke sie etwas über die Lippen hinaus.",
+    "bytes": 59328
+  },
+  "sheetali__hold": {
+    "hash": "45670db9d49f",
+    "text": "Atme langsam durch die gerollte Zunge ein — spüre die kühle Luft auf der Zungenoberfläche.",
+    "bytes": 37440
+  },
+  "sheetali__breathe": {
+    "hash": "1e8d7c2365ca",
+    "text": "Zieh die Zunge ein. Schließe die Lippen. Atme durch die Nase aus. Die Kühlung baut sich mit jeder Runde auf.",
+    "bytes": 57888
+  },
+  "sheetali__exit": {
+    "hash": "33e40be4cb32",
+    "text": "Löse die Zunge. Lass die Lippen leicht geschlossen ruhen. Nimm drei natürliche Atemzüge. Bemerke das kühle Gefühl in Kehle und Brust.",
+    "bytes": 73584
+  },
+  "sheetali__i0": {
+    "hash": "f2d04401d466",
+    "text": "Sitze bequem mit langer Wirbelsäule.",
+    "bytes": 17280
+  },
+  "sheetali__i1": {
+    "hash": "9b0d3f59cd81",
+    "text": "Öffne den Mund und rolle die Seiten der Zunge nach oben und innen zu einer Röhren- oder Strohhalmform. (Wenn du die Zunge nicht rollen kannst — etwa 30 % können das nicht — übe stattdessen Sheetkari: die Zähne leicht zusammenbeißen und durch die Zwischenräume einatmen.)",
+    "bytes": 107856
+  },
+  "sheetali__i2": {
+    "hash": "dfe9c9521c56",
+    "text": "Strecke die gerollte Zunge etwas über die Lippen hinaus.",
+    "bytes": 21744
+  },
+  "sheetali__i3": {
+    "hash": "173989c4ac88",
+    "text": "Atme langsam durch die gerollte Zunge ein, zähle bis 4. Bemerke die kühle Luft auf der Zunge.",
+    "bytes": 38448
+  },
+  "sheetali__i4": {
+    "hash": "55d2923ef210",
+    "text": "Zieh die Zunge zurück in den Mund. Schließe die Lippen.",
+    "bytes": 24768
+  },
+  "sheetali__i5": {
+    "hash": "9ea01c832e47",
+    "text": "Atme langsam durch die Nase aus, zähle bis 4.",
+    "bytes": 23472
+  },
+  "sheetali__i6": {
+    "hash": "98bfa0e7079b",
+    "text": "Wiederhole 8-12 Runden. Übe NIE bei kaltem Wetter — der Körper ist bereits kühl genug.",
+    "bytes": 46224
+  },
+  "bhastrika__name": {
+    "hash": "d51f1f6c9e3c",
+    "text": "Blasebalg-Atem.",
+    "bytes": 10080
+  },
+  "bhastrika__enter": {
+    "hash": "f141ffed3a94",
+    "text": "Sitze sehr lang. Hände auf den Knien. Nimm drei ankommende Atemzüge.",
+    "bytes": 43632
+  },
+  "bhastrika__hold": {
+    "hash": "7f636ea8790b",
+    "text": "Beginne: kräftige Einatmung, kräftige Ausatmung, beide durch die Nase. Gleiche Anstrengung. Bauch weitet sich beim Einatmen, zieht sich beim Ausatmen ein.",
+    "bytes": 89424
+  },
+  "bhastrika__breathe": {
+    "hash": "f131638df7d8",
+    "text": "Bleib rhythmisch — etwa ein Atemzug pro Sekunde. 30 Sekunden. Hör auf bei Schwindel.",
+    "bytes": 51840
+  },
+  "bhastrika__exit": {
+    "hash": "a24e1e038126",
+    "text": "Hör auf. Sitze still. Beobachte, wie der Atem zur Natürlichkeit zurückkehrt. Bemerke die Wärme in der Brust und die Wachheit im Geist.",
+    "bytes": 68256
+  },
+  "bhastrika__i0": {
+    "hash": "09072b70efba",
+    "text": "WARNUNG: Bhastrika ist eine kräftige Praxis. Lies die Kontraindikationen sorgfältig vor dem Üben. Hör sofort auf bei Schwindel.",
+    "bytes": 68256
+  },
+  "bhastrika__i1": {
+    "hash": "2f4cbe3592ed",
+    "text": "Sitze bequem mit sehr langer Wirbelsäule. Hände ruhen auf den Knien.",
+    "bytes": 32544
+  },
+  "bhastrika__i2": {
+    "hash": "bb700b2a325a",
+    "text": "Nimm 3 normale Atemzüge, um anzukommen.",
+    "bytes": 19872
+  },
+  "bhastrika__i3": {
+    "hash": "7c0aa74bffb6",
+    "text": "Beginne Bhastrika: atme kräftig durch die Nase ein, weite Bauch und Brust. Atme kräftig durch die Nase aus, ziehe den Bauch ein. Beide Richtungen gleich stark.",
+    "bytes": 79488
+  },
+  "bhastrika__i4": {
+    "hash": "8e9840f5624a",
+    "text": "Halte einen rhythmischen Takt von etwa 60 Atemzügen pro Minute (ein Atemzug pro Sekunde). Der Klang ist hörbar und rhythmisch.",
+    "bytes": 59904
+  },
+  "bhastrika__i5": {
+    "hash": "642473dd743f",
+    "text": "Mache 30 Sekunden weiter, dann hör auf und atme 30 Sekunden natürlich. Bemerke die Wärme und Vibration.",
+    "bytes": 55440
+  },
+  "bhastrika__i6": {
+    "hash": "28723d122291",
+    "text": "Wiederhole 2 weitere Runden (3 insgesamt). Nach der letzten Runde sitze 1-2 Minuten still, bevor du aufstehst.",
+    "bytes": 60768
+  },
+  "kapalabhati__name": {
+    "hash": "214bdb13267c",
+    "text": "Schädelleuchtender Atem.",
+    "bytes": 12528
+  },
+  "kapalabhati__enter": {
+    "hash": "e10cd531a3cd",
+    "text": "Sitze sehr lang. Lege eine Hand auf den Bauch. Nimm drei ankommende Atemzüge.",
+    "bytes": 42912
+  },
+  "kapalabhati__hold": {
+    "hash": "cb3330a265c6",
+    "text": "Scharfe Ausatmung durch die Nase — der Bauch schnellt nach innen. Lass die Einatmung von selbst geschehen, wenn sich der Bauch entspannt.",
+    "bytes": 63792
+  },
+  "kapalabhati__breathe": {
+    "hash": "3ba563b8b40e",
+    "text": "Bleib rhythmisch — etwa eine Ausatmung pro Sekunde. Fokussiere nur auf die scharfe Ausatmung; die Einatmung erledigt sich von selbst.",
+    "bytes": 63216
+  },
+  "kapalabhati__exit": {
+    "hash": "a8453ae28838",
+    "text": "Hör auf. Sitze still. Beobachte, wie der Atem zur Natürlichkeit zurückkehrt. Bemerke die Helligkeit hinter den Augen — den „schädelleuchtenden“ Effekt.",
+    "bytes": 80784
+  },
+  "kapalabhati__i0": {
+    "hash": "b0586ea7e170",
+    "text": "WARNUNG: Kapalabhati ist eine kräftige Praxis. Lies die Kontraindikationen sorgfältig. Hör sofort auf bei Schwindel.",
+    "bytes": 75888
+  },
+  "kapalabhati__i1": {
+    "hash": "7844c164c6ac",
+    "text": "Sitze sehr lang — Vajrasana eignet sich gut; Sukhasana auf einer gefalteten Decke geht auch. Wirbelsäule gerade.",
+    "bytes": 56592
+  },
+  "kapalabhati__i2": {
+    "hash": "3451c53f4b84",
+    "text": "Lege eine Hand auf den Bauch, um die Bewegung zu spüren.",
+    "bytes": 23472
+  },
+  "kapalabhati__i3": {
+    "hash": "c312d4644d2e",
+    "text": "Nimm 3 ankommende Atemzüge.",
+    "bytes": 15264
+  },
+  "kapalabhati__i4": {
+    "hash": "b6818fcd26b3",
+    "text": "Beginne Kapalabhati: atme scharf durch die Nase aus, indem du den Bauch zur Wirbelsäule hin nach innen schnellst. Die Ausatmung ist kurz und scharf.",
+    "bytes": 68256
+  },
+  "kapalabhati__i5": {
+    "hash": "7d2d8f5a3948",
+    "text": "Lass den Bauch sich entspannen — die Einatmung geschieht passiv. Atme NICHT aktiv ein.",
+    "bytes": 38736
+  },
+  "kapalabhati__i6": {
+    "hash": "9615b79bad81",
+    "text": "Mache mit etwa 60 Ausatmungen pro Minute weiter (eine pro Sekunde). Der Klang ist rhythmisch, hörbar, auf die Ausatmung fokussiert.",
+    "bytes": 61200
+  },
+  "kapalabhati__i7": {
+    "hash": "7eef203d4935",
+    "text": "Nach 30 Sekunden hör auf und atme 30 Sekunden natürlich. Wiederhole 3 Runden insgesamt. Sitze nach der letzten Runde 1-2 Minuten still.",
+    "bytes": 72576
+  },
+  "coach__align_0": {
+    "hash": "bab85e45079e",
+    "text": "Entspanne den Kiefer. Lass die Schultern von den Ohren wegsinken.",
+    "bytes": 28080
+  },
+  "coach__align_1": {
+    "hash": "ad7f745a504d",
+    "text": "Verlängere dich durch den Scheitel deines Kopfes.",
+    "bytes": 19440
+  },
+  "coach__align_2": {
+    "hash": "8d3cb2b1c21c",
+    "text": "Aktiviere sanft deine Körpermitte — stützend, nicht verkrampft.",
+    "bytes": 29664
+  },
+  "coach__align_3": {
+    "hash": "e3eb43e91998",
+    "text": "Drücke gleichmäßig durch beide Füße. Oder beide Sitzbeine.",
+    "bytes": 26064
+  },
+  "coach__align_4": {
+    "hash": "c79f9ad9a9f3",
+    "text": "Rolle die Schultern zurück. Öffne die Schlüsselbeine.",
+    "bytes": 23760
+  },
+  "coach__align_5": {
+    "hash": "1a6d659d7969",
+    "text": "Entspanne die Stirn. Lass die Augen weich werden.",
+    "bytes": 24480
+  },
+  "coach__align_6": {
+    "hash": "089a7e32a29f",
+    "text": "Bemerke, wo du Spannung hältst. Lass sie los.",
+    "bytes": 20016
+  },
+  "coach__breath_0": {
+    "hash": "445a85a0f216",
+    "text": "Atme langsam durch die Nase ein. Atme vollständig aus.",
+    "bytes": 29232
+  },
+  "coach__breath_1": {
+    "hash": "d7cba578933c",
+    "text": "Lass dein Ausatmen etwas länger sein als das Einatmen.",
+    "bytes": 24768
+  },
+  "coach__breath_2": {
+    "hash": "4e50292110e2",
+    "text": "Atme in den Teil von dir, der sich eng anfühlt.",
+    "bytes": 21456
+  },
+  "coach__breath_3": {
+    "hash": "b81761a0b49b",
+    "text": "Fünf lange Atemzüge von hier an.",
+    "bytes": 16128
+  },
+  "coach__breath_4": {
+    "hash": "bed64dcc3447",
+    "text": "Beruhige den Atem, und der Geist folgt.",
+    "bytes": 18432
+  },
+  "coach__breath_5": {
+    "hash": "31274a217730",
+    "text": "Lass jedes Ausatmen die Haltung ein wenig tiefer weich werden.",
+    "bytes": 26784
+  },
+  "coach__presence_0": {
+    "hash": "ea852f83e2e2",
+    "text": "Du machst das wunderbar. Bleib dabei.",
+    "bytes": 18432
+  },
+  "coach__presence_1": {
+    "hash": "9692b19799c2",
+    "text": "Bleib beim Atem. Bleib beim Körper.",
+    "bytes": 20160
+  },
+  "coach__presence_2": {
+    "hash": "61bcf291af04",
+    "text": "Bemerke, was hier ist, ohne zu urteilen.",
+    "bytes": 19296
+  },
+  "coach__presence_3": {
+    "hash": "9882192b0771",
+    "text": "Du gehörst auf diese Matte. Genau hier, genau jetzt.",
+    "bytes": 27936
+  },
+  "coach__presence_4": {
+    "hash": "b23f7f5dca95",
+    "text": "Kein Grund zur Eile. Die Haltung trifft dich dort, wo du bist.",
+    "bytes": 24480
+  },
+  "coach__presence_5": {
+    "hash": "4105a700e98a",
+    "text": "Mildere die Anstrengung. Finde die Leichtigkeit in der Arbeit.",
+    "bytes": 28368
+  },
+  "coach__dosha_vata": {
+    "hash": "11c690b24dd5",
+    "text": "Bleib geerdet. Langsam und stetig. Nichts zu jagen.",
+    "bytes": 28656
+  },
+  "coach__dosha_pitta": {
+    "hash": "493f2f9d91fa",
+    "text": "Mildere die Anstrengung. Dies ist kein Wettkampf.",
+    "bytes": 24624
+  },
+  "coach__dosha_kapha": {
+    "hash": "75c2a41ee76f",
+    "text": "Bleib aktiv. Erhelle den Körper von innen.",
+    "bytes": 21744
+  },
+  "coach__milestone_halfway": {
+    "hash": "460bdde6d8b1",
+    "text": "Halbzeit im Halten. Bleib dabei.",
+    "bytes": 20448
+  },
+  "coach__milestone_thirty": {
+    "hash": "41e3ed197ab3",
+    "text": "Dreißig Sekunden. Bleib beim Atem.",
+    "bytes": 22032
+  },
+  "coach__milestone_fifteen": {
+    "hash": "6da07da29dfb",
+    "text": "Fünfzehn Sekunden. Noch drei Atemzüge.",
+    "bytes": 18576
+  }
+}
