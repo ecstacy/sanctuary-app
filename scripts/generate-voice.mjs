@@ -45,20 +45,47 @@
 import { createHash } from 'node:crypto'
 import { mkdir, readFile, writeFile, stat } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
-import { fileURLToPath, pathToFileURL } from 'node:url'
+import { fileURLToPath } from 'node:url'
+import { createRequire } from 'node:module'
+import esbuild from 'esbuild'
 
+const require = createRequire(import.meta.url)
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = join(__dirname, '..')
-const OUT_DIR   = join(REPO_ROOT, 'public', 'audio', 'poses')
-const MANIFEST  = join(REPO_ROOT, 'public', 'audio', 'manifest.json')
+
+// ── Language ────────────────────────────────────────────────────────────────
+// VOICE_LANG selects which language to generate (en | de | hi). We use
+// VOICE_LANG, not LANG — LANG is a standard shell locale var we must not clobber.
+// Non-English passes pull cue text from the i18n overlays (content/{lang}/…),
+// falling back to English for any line without a translation. English stays at
+// the original flat paths for back-compat; other langs get subdirs + suffixed
+// manifests so the runtime can pick per i18n.language.
+const LANG = (process.env.VOICE_LANG || 'en').toLowerCase()
+const LANG_DEFAULTS = {
+  en: { voice: 'en-US-Nova:DragonHDLatestNeural', xmlLang: 'en-US' },
+  de: { voice: 'de-DE-Seraphina:DragonHDLatestNeural', xmlLang: 'de-DE' },
+  hi: { voice: 'hi-IN-SwaraNeural', xmlLang: 'hi-IN' },
+}
+if (!LANG_DEFAULTS[LANG]) {
+  console.error(`✖ Unsupported VOICE_LANG='${LANG}'. Use one of: ${Object.keys(LANG_DEFAULTS).join(', ')}`)
+  process.exit(1)
+}
+
+const OUT_DIR = LANG === 'en'
+  ? join(REPO_ROOT, 'public', 'audio', 'poses')
+  : join(REPO_ROOT, 'public', 'audio', 'poses', LANG)
+const MANIFEST = LANG === 'en'
+  ? join(REPO_ROOT, 'public', 'audio', 'manifest.json')
+  : join(REPO_ROOT, 'public', 'audio', `manifest.${LANG}.json`)
 
 // ── Config (env-driven) ────────────────────────────────────────────────────
-const KEY    = process.env.AZURE_SPEECH_KEY
-const REGION = process.env.AZURE_REGION || 'eastus'
-const VOICE  = process.env.AZURE_VOICE  || 'en-US-Nova:DragonHDLatestNeural'
-const RATE   = process.env.AZURE_RATE   || '0.92'  // slightly slow for clarity
-const DRY    = process.env.DRY_RUN === '1'
-const ONLY   = process.env.ONLY ? new Set(process.env.ONLY.split(',').map(s => s.trim())) : null
+const KEY     = process.env.AZURE_SPEECH_KEY
+const REGION  = process.env.AZURE_REGION || 'eastus'
+const VOICE   = process.env.AZURE_VOICE  || LANG_DEFAULTS[LANG].voice
+const XMLLANG = LANG_DEFAULTS[LANG].xmlLang
+const RATE    = process.env.AZURE_RATE   || '0.92'  // slightly slow for clarity
+const DRY     = process.env.DRY_RUN === '1'
+const ONLY    = process.env.ONLY ? new Set(process.env.ONLY.split(',').map(s => s.trim())) : null
 
 if (!KEY && !DRY) {
   console.error('✖ Missing AZURE_SPEECH_KEY. Set it via env var, e.g.:')
@@ -66,13 +93,55 @@ if (!KEY && !DRY) {
   process.exit(1)
 }
 
-// ── Load canonical content (ESM dynamic import so we don't duplicate data) ─
-const asanasModule    = await import(pathToFileURL(join(REPO_ROOT, 'src', 'data', 'asanas.js')).href)
-const pranayamasModule = await import(pathToFileURL(join(REPO_ROOT, 'src', 'data', 'pranayamas.js')).href)
-const coachModule      = await import(pathToFileURL(join(REPO_ROOT, 'src', 'lib', 'voiceCoach.js')).href)
-const { ASANAS }       = asanasModule
-const { PRANAYAMAS }   = pranayamasModule
-const { COACH_PHRASES } = coachModule
+// ── Load canonical content ──────────────────────────────────────────────────
+// asanas.js / pranayamas.js now import contentI18n (an extensionless, Vite-only
+// specifier) so a raw Node dynamic import() no longer resolves. Bundle the three
+// modules in-memory with esbuild (which resolves like Vite) and eval the CJS to
+// pull the data objects out. Enumerating jobs from the canonical data keeps the
+// key set identical across languages; translation happens after (see translator).
+const { ASANAS, PRANAYAMAS, COACH_PHRASES } = await (async () => {
+  const bundled = await esbuild.build({
+    stdin: {
+      contents:
+        `export { ASANAS } from './src/data/asanas.js'\n` +
+        `export { PRANAYAMAS } from './src/data/pranayamas.js'\n` +
+        `export { COACH_PHRASES } from './src/lib/voiceCoach.js'\n`,
+      resolveDir: REPO_ROOT,
+      loader: 'js',
+    },
+    bundle: true, format: 'cjs', platform: 'node', write: false, logLevel: 'silent',
+  })
+  const mod = { exports: {} }
+  new Function('module', 'exports', 'require', bundled.outputFiles[0].text)(mod, mod.exports, require)
+  return mod.exports
+})()
+
+// ── Translation resolver (non-English passes) ───────────────────────────────
+// Maps a job key (e.g. `tadasana__hold`, `virasana__i2`, `coach__align_3`,
+// `session__complete`) to the localized string from the overlays. Returns null
+// when there's no translation so the caller can fall back to English.
+async function buildTranslator(lang) {
+  if (lang === 'en') return null
+  const load = async (p) => {
+    try { return JSON.parse(await readFile(join(REPO_ROOT, 'src', 'i18n', 'content', lang, p), 'utf8')) }
+    catch { return {} }
+  }
+  const asanas = (await load('asanas.json')).asanas || {}
+  const pranayamas = await load('pranayamas.json')      // top-level keyed by id
+  const coach = await load('voiceCoach.json')
+  return (key) => {
+    if (coach[key] != null) return coach[key]
+    const m = key.match(/^(.+)__(name|enter|hold|breathe|exit|i\d+)$/)
+    if (!m) return null
+    const [, id, slot] = m
+    const src = asanas[id] || pranayamas[id] || null
+    if (!src) return null
+    if (slot === 'name') return src.english ? `${src.english}.` : null
+    if (slot[0] === 'i') return src.instructions?.[Number(slot.slice(1))] ?? null
+    return src.voiceCues?.[slot] ?? null
+  }
+}
+const translate = await buildTranslator(LANG)
 
 // ── Build the job list ─────────────────────────────────────────────────────
 // Each entry: { key, text } — the key is what the client looks up. We use
@@ -172,7 +241,7 @@ function escapeXml(s) {
 
 async function synth(text) {
   const ssml =
-    `<speak version='1.0' xml:lang='en-US'>` +
+    `<speak version='1.0' xml:lang='${XMLLANG}'>` +
       `<voice name='${VOICE}'>` +
         `<prosody rate='${RATE}'>${escapeXml(text)}</prosody>` +
       `</voice>` +
@@ -205,10 +274,25 @@ async function main() {
   const manifest = await readManifest()
   const jobs = buildJobs()
 
+  // Non-English: swap each job's English text for its overlay translation.
+  // Keys stay identical to the English manifest (so the runtime lookup by
+  // fileKey matches); only the spoken text changes. Lines with no translation
+  // fall back to English — counted so a gap is visible.
+  let untranslated = 0
+  if (translate) {
+    for (const job of jobs) {
+      const t = translate(job.key)
+      if (t) job.text = t
+      else untranslated++
+    }
+  }
+
   // Cost preview — useful sanity check against F0 free tier.
   const totalChars = jobs.reduce((s, j) => s + j.text.length, 0)
+  console.log(`▸ Language: ${LANG}`)
   console.log(`▸ ${jobs.length} clips, ${totalChars.toLocaleString()} chars`)
-  console.log(`▸ Voice: ${VOICE} @ rate=${RATE}`)
+  if (translate) console.log(`▸ Untranslated (fell back to English): ${untranslated}`)
+  console.log(`▸ Voice: ${VOICE} @ rate=${RATE} · xml:lang=${XMLLANG}`)
   console.log(`▸ Region: ${REGION}`)
   console.log(`▸ Output: ${OUT_DIR}`)
 
