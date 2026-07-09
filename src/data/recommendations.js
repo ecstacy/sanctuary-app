@@ -202,15 +202,18 @@ const RECOMMENDATIONS = [
 
 // ─── Popular Searches ────────────────────────────────────────────────────────
 
+// `query` stays English — it feeds the keyword/synonym recommendation engine.
+// `labelKey` is a stable id the UI uses to look up a localized display label
+// (discover.popularSearch.<labelKey>) while still searching with `query`.
 export const POPULAR_SEARCHES = [
-  { query: 'Lower back pain', icon: 'accessibility_new' },
-  { query: 'Headache', icon: 'psychology' },
-  { query: 'Can\'t sleep', icon: 'bedtime' },
-  { query: 'Anxiety', icon: 'cloud' },
-  { query: 'Neck pain', icon: 'accessibility_new' },
-  { query: 'Tight hips', icon: 'self_care' },
-  { query: 'Low energy', icon: 'bolt' },
-  { query: 'Bloating', icon: 'gastroenterology' },
+  { query: 'Lower back pain', labelKey: 'lowerBackPain', icon: 'accessibility_new' },
+  { query: 'Headache', labelKey: 'headache', icon: 'psychology' },
+  { query: 'Can\'t sleep', labelKey: 'cantSleep', icon: 'bedtime' },
+  { query: 'Anxiety', labelKey: 'anxiety', icon: 'cloud' },
+  { query: 'Neck pain', labelKey: 'neckPain', icon: 'accessibility_new' },
+  { query: 'Tight hips', labelKey: 'tightHips', icon: 'self_care' },
+  { query: 'Low energy', labelKey: 'lowEnergy', icon: 'bolt' },
+  { query: 'Bloating', labelKey: 'bloating', icon: 'gastroenterology' },
 ]
 
 // ─── Synonym Map ────────────────────────────────────────────────────────────

@@ -1184,6 +1184,16 @@
         "label": "Pre-Bed Wind-Down",
         "desc": "Long, restorative holds — prepare for deep sleep"
       }
+    },
+    "popularSearch": {
+      "lowerBackPain": "Lower back pain",
+      "headache": "Headache",
+      "cantSleep": "Can't sleep",
+      "anxiety": "Anxiety",
+      "neckPain": "Neck pain",
+      "tightHips": "Tight hips",
+      "lowEnergy": "Low energy",
+      "bloating": "Bloating"
     }
   },
   "protocol": {
