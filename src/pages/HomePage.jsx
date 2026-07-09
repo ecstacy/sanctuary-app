@@ -149,7 +149,11 @@ export default function HomePage() {
   const now = new Date()
   const startOfYear = new Date(now.getFullYear(), 0, 0)
   const dayOfYear = Math.floor((now - startOfYear) / 86400000)
-  const quote = QUOTES[dayOfYear % QUOTES.length]
+  // QUOTES stays the English source of truth (and owns the author attribution).
+  // The text is looked up by index in the locale files so it can be translated;
+  // the English entry doubles as the fallback.
+  const quoteIndex = dayOfYear % QUOTES.length
+  const quote = QUOTES[quoteIndex]
   const timeOfDay = getTimeOfDay()
   const subtitle = t(`home.subtitle${timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)}`)
   // Zip localized tip copy with the static icon list by index.
@@ -885,7 +889,7 @@ export default function HomePage() {
         <div className="bg-surface-container-low rounded-xl p-6 text-center stagger-7">
           <span className="material-symbols-outlined text-outline-variant text-3xl mb-3 block">format_quote</span>
           <p className="font-headline italic text-lg text-on-surface-variant leading-relaxed mb-3">
-            "{quote.text}"
+            "{t(`home.quotes.${quoteIndex}`, quote.text)}"
           </p>
           <p className="font-label text-[10px] uppercase tracking-widest text-primary">
             {quote.author}
