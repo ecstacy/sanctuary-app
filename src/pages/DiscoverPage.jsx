@@ -381,7 +381,7 @@ export default function DiscoverPage() {
                 className="flex items-center gap-1.5 bg-surface-container-low rounded-full px-3.5 py-2 active:scale-95 transition-all"
               >
                 <span className="material-symbols-outlined text-primary text-xs">{item.icon}</span>
-                <span className="font-body text-xs text-on-surface">{item.query}</span>
+                <span className="font-body text-xs text-on-surface">{t(`discover.popularSearch.${item.labelKey}`, item.query)}</span>
               </button>
             ))}
           </div>

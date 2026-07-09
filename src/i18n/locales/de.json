@@ -1184,6 +1184,16 @@
         "label": "Entspannung vor dem Schlafen",
         "desc": "Lange, erholsame Haltungen — bereite dich auf tiefen Schlaf vor"
       }
+    },
+    "popularSearch": {
+      "lowerBackPain": "Schmerzen im unteren Rücken",
+      "headache": "Kopfschmerzen",
+      "cantSleep": "Kann nicht schlafen",
+      "anxiety": "Angst",
+      "neckPain": "Nackenschmerzen",
+      "tightHips": "Enge Hüften",
+      "lowEnergy": "Wenig Energie",
+      "bloating": "Blähungen"
     }
   },
   "protocol": {

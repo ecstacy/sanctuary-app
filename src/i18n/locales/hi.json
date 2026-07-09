@@ -1184,6 +1184,16 @@
         "label": "सोने से पहले शांति",
         "desc": "लंबे, आरामदायक आसन — गहरी नींद की तैयारी करें"
       }
+    },
+    "popularSearch": {
+      "lowerBackPain": "निचली पीठ का दर्द",
+      "headache": "सिरदर्द",
+      "cantSleep": "नींद नहीं आती",
+      "anxiety": "चिंता",
+      "neckPain": "गर्दन का दर्द",
+      "tightHips": "कसे कूल्हे",
+      "lowEnergy": "कम ऊर्जा",
+      "bloating": "पेट फूलना"
     }
   },
   "protocol": {

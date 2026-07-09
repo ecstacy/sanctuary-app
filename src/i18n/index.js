@@ -67,9 +67,19 @@ if (typeof document !== 'undefined') {
 // Called by AuthContext once we know the signed-in user's preference.
 // Only applies if the profile explicitly has a language (don't clobber
 // the user's on-device choice with an undefined profile value).
+//
+// Precedence (see header): an explicit on-device choice ALWAYS wins over the
+// profile value. Without this guard, fetchProfile() re-applies the account
+// language on every auth/refresh event — so right after a user picks a new
+// language in Settings (which writes the sticky choice), a stale or
+// un-persisted profile value would snap it back. This was the "switching to
+// Hindi reverts to the previous language" bug: the profiles.language write
+// no-ops when the column is absent (or is rejected by a constraint), leaving
+// the DB on the old value that this function would then re-assert.
 export function syncLanguageFromProfile(profileLanguage) {
   if (!profileLanguage) return
   if (!SUPPORTED_LANGUAGES.includes(profileLanguage)) return
+  if (readStoredLanguage()) return // explicit on-device choice wins
   if (i18n.language === profileLanguage) return
   i18n.changeLanguage(profileLanguage)
 }
