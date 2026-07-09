@@ -319,3 +319,33 @@ select:focus-visible,
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
 }
+
+/* ── Devanagari (Hindi) micro-typography ──────────────────────────────────────
+   The UI's label styling is tuned for Latin: 9–10px type, `uppercase`, and
+   wide `tracking`. None of that survives translation to Devanagari:
+
+     • `uppercase` is a no-op — the script has no letter case.
+     • `tracking-*` (letter-spacing) breaks the shirorekha, the horizontal
+       stroke that joins letters in a word, and pulls conjuncts apart.
+     • 9–10px crushes the matras that sit above and below the base glyph,
+       which is what made the streak labels illegible.
+
+   `html[lang]` is kept in sync by src/i18n/index.js on every languageChanged,
+   so these overrides switch with the language. Icons are exempted — the
+   Material Symbols font is sized deliberately and carries no Devanagari.
+   ────────────────────────────────────────────────────────────────────────── */
+html[lang="hi"] .uppercase {
+  text-transform: none;
+}
+html[lang="hi"] [class*="tracking-"] {
+  letter-spacing: normal;
+}
+html[lang="hi"] .text-\[9px\]:not(.material-symbols-outlined),
+html[lang="hi"] .text-\[10px\]:not(.material-symbols-outlined) {
+  font-size: 0.75rem;   /* 12px — the smallest size Devanagari stays legible at */
+  line-height: 1.6;     /* room for the matras above and below */
+}
+html[lang="hi"] .text-xs:not(.material-symbols-outlined) {
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.6;
+}
