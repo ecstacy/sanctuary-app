@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { PRANAYAMAS, getPranayama } from '../data/pranayamas'
 import { ASANAS } from '../data/asanas'
-import { localizeAsana } from '../i18n/contentI18n'
+import { localizeAsana, sanskritLabel } from '../i18n/contentI18n'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
 import PranayamaPracticeOverlay from '../components/PranayamaPractice'
@@ -252,7 +252,7 @@ export default function PranayamaDetailPage() {
           >
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-xl">arrow_back</span>
           </button>
-          <p className="font-headline text-base text-on-surface flex-1 truncate">{pranayama.sanskrit}</p>
+          <p className="font-headline text-base text-on-surface flex-1 truncate">{sanskritLabel(pranayama)}</p>
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.minLabel', { min: minutes })}</p>
         </div>
       </div>
@@ -297,7 +297,7 @@ export default function PranayamaDetailPage() {
               </span>
             </div>
           )}
-          <h1 className="font-headline text-3xl text-on-surface mb-1">{pranayama.sanskrit}</h1>
+          <h1 className="font-headline text-3xl text-on-surface mb-1">{sanskritLabel(pranayama)}</h1>
           {(pranayama.devanagari || pranayama.iast) && (
             <p className="font-body text-[13px] text-on-surface-variant/70 mb-1" lang="sa">
               {pranayama.devanagari}
@@ -329,7 +329,7 @@ export default function PranayamaDetailPage() {
               aria-label={t('pranayamaDetail.seatAria', { name: seatAsana.sanskrit })}
             >
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">self_care</span>
-              <p className="font-headline text-base text-on-surface line-clamp-1">{seatAsana.sanskrit}</p>
+              <p className="font-headline text-base text-on-surface line-clamp-1">{sanskritLabel(seatAsana)}</p>
               <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.seat')}</p>
             </button>
           ) : (

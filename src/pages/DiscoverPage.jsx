@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { POPULAR_SEARCHES } from '../data/recommendations'
 import { ASANAS } from '../data/asanas'
-import { localizeAsana, localizePranayama } from '../i18n/contentI18n'
+import { localizeAsana, localizePranayama, sanskritLabel } from '../i18n/contentI18n'
 import { PRANAYAMAS } from '../data/pranayamas'
 import PoseFigure, { hasPoseImage } from '../components/PoseFigure'
 import { track, EVENTS } from '../lib/track'
@@ -78,7 +78,7 @@ function ExploreAsanaCard({ asana, position, locked, onTap }) {
         )}
       </div>
       <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{la.english}</p>
-      <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{la.sanskrit}</p>
+      <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{sanskritLabel(la)}</p>
     </button>
   )
 }
@@ -156,7 +156,7 @@ function PranayamaCard({ pranayama, position, locked, onTap }) {
         )}
       </div>
       <p className="font-body text-sm text-on-surface leading-tight line-clamp-1">{lp.english}</p>
-      <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{lp.sanskrit}</p>
+      <p className="font-label text-[10px] text-on-surface-variant/60 leading-tight line-clamp-1 mt-0.5">{sanskritLabel(lp)}</p>
     </button>
   )
 }
@@ -353,7 +353,7 @@ export default function DiscoverPage() {
                     <span className="material-symbols-outlined text-primary text-2xl">{asana.icon}</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-body text-sm font-semibold text-on-surface">{la.sanskrit}</p>
+                    <p className="font-body text-sm font-semibold text-on-surface">{sanskritLabel(la)}</p>
                     <p className="font-body text-xs text-on-surface-variant/60">{la.english}</p>
                     <div className="flex gap-1.5 mt-1">
                       {asana.level && asana.level !== 'Beginner' && (

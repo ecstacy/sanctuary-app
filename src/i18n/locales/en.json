@@ -490,7 +490,8 @@
       }
     },
     "paywallHeadline": "The full protocol awaits",
-    "paywallSubhead": "Plus gives you the daily plan — food, movement, sleep — that brings your dosha back to centre."
+    "paywallSubhead": "Plus gives you the daily plan — food, movement, sleep — that brings your dosha back to centre.",
+    "greetingName": "{{name}}."
   },
   "profile": {
     "title": "Profile",

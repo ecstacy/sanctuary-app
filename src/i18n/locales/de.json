@@ -490,7 +490,8 @@
       }
     },
     "paywallHeadline": "Das vollständige Protokoll wartet",
-    "paywallSubhead": "Plus gibt dir den täglichen Plan — Ernährung, Bewegung, Schlaf — der dein Dosha wieder ins Gleichgewicht bringt."
+    "paywallSubhead": "Plus gibt dir den täglichen Plan — Ernährung, Bewegung, Schlaf — der dein Dosha wieder ins Gleichgewicht bringt.",
+    "greetingName": "{{name}}."
   },
   "profile": {
     "title": "Profil",

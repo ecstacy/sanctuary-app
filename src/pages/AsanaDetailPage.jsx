@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
 import { getAsana, getDoshaTag } from '../data/asanas'
-import { localizePrecautions } from '../i18n/contentI18n'
+import { localizePrecautions, sanskritLabel } from '../i18n/contentI18n'
 import PoseFigure from '../components/PoseFigure'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
@@ -247,7 +247,7 @@ export default function AsanaDetailPage() {
             <PoseFigure poseKey={asana.poseKey} size={44} breathing={false} objectPosition="top" />
           </button>
           <div className="flex-1 min-w-0">
-            <p className="font-body text-sm font-semibold text-on-surface truncate">{asana.sanskrit}</p>
+            <p className="font-body text-sm font-semibold text-on-surface truncate">{sanskritLabel(asana)}</p>
             <p className="font-body text-xs text-on-surface-variant truncate">{asana.english}</p>
           </div>
           <button
@@ -297,7 +297,7 @@ export default function AsanaDetailPage() {
               </span>
             </div>
           )}
-          <h1 className="font-headline text-3xl text-on-surface mb-1">{asana.sanskrit}</h1>
+          <h1 className="font-headline text-3xl text-on-surface mb-1">{sanskritLabel(asana)}</h1>
           {/* Devanagari + IAST — only render when the schema-rich fields
               are present. Subtle styling so the romanized title still reads
               as the primary heading. */}
