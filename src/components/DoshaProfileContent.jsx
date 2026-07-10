@@ -260,7 +260,13 @@ export default function DoshaProfileContent({
         </div>
       </div>
 
-      <div className="px-6 -mt-8">
+      {/* `-mt-8` lifts this content up into the hero. The hero is `relative`,
+          so without a positioning context of its own this block paints BEHIND
+          the gradient and the first kicker gets sliced. `relative z-10` puts
+          it back on top (the hero's own back button is z-20, so it still wins).
+          Only showed up in Hindi — Devanagari rides higher in the line box than
+          Latin cap-height — but the clipping was always there. */}
+      <div className="relative z-10 px-6 -mt-8">
 
         {/* ═══════════════════════════════════════════════════════════
             CHAPTER 1 — WHO YOU ARE
