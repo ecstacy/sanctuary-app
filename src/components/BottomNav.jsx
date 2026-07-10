@@ -16,6 +16,7 @@ export default function BottomNav() {
   const { t } = useTranslation()
   const { pathname } = useLocation()
   const [visible, setVisible] = useState(true)
+  const [keyboardOpen, setKeyboardOpen] = useState(false)
   const lastScrollY = useRef(0)
   const ticking = useRef(false)
 
@@ -51,12 +52,29 @@ export default function BottomNav() {
     lastScrollY.current = 0
   }, [pathname])
 
+  // Hide while the soft keyboard is up. The nav is `fixed bottom-0`, so the
+  // keyboard pushes it up and it eats the viewport right where the user is
+  // reading their search results. We have no @capacitor/keyboard plugin, but
+  // the keyboard shrinks the *visual* viewport without changing layout height
+  // — that gap is the tell. 150px clears browser chrome / URL-bar collapse.
+  useEffect(() => {
+    const vv = window.visualViewport
+    if (!vv) return
+    const onResize = () => setKeyboardOpen(window.innerHeight - vv.height > 150)
+    onResize()
+    vv.addEventListener('resize', onResize)
+    return () => vv.removeEventListener('resize', onResize)
+  }, [])
+
   return (
     <nav
       aria-label="Primary"
       className={`fixed bottom-0 left-0 w-full bg-background/60 backdrop-blur-2xl border-t border-outline-variant/10 px-4 pt-3 flex justify-around items-center transition-transform duration-300 ease-out ${
-        visible ? 'translate-y-0' : 'translate-y-full'
+        visible && !keyboardOpen ? 'translate-y-0' : 'translate-y-full'
       }`}
+      // aria-hidden while off-screen so the tabs aren't reachable by
+      // screen readers / tab focus behind the keyboard.
+      aria-hidden={keyboardOpen || !visible}
       style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))', zIndex: 50 }}
     >
       {TABS.map(tab => {

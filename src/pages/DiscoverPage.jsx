@@ -250,17 +250,32 @@ export default function DiscoverPage() {
     setPaywall({ open: true, surface })
   }
 
-  // Filter asanas matching the search query
+  // Filter asanas matching the search query.
+  //
+  // Names (sanskrit/english) match on a plain substring — people type partial
+  // transliterations ("vrks", "bhuj"). Prose fields (category, bodyParts,
+  // benefits) match only at a WORD BOUNDARY: a raw substring made "mal" match
+  // Tree Pose, because its benefits mention the "small" stabilizing muscles.
+  //
+  // Name hits outrank prose hits so "mal" surfaces Malasana first rather than
+  // whichever pose happens to mention the word in its description.
   const matchedAsanas = useMemo(() => {
     const q = searchQuery.trim().toLowerCase()
     if (q.length < 2) return []
-    return ALL_ASANAS.filter(a =>
-      a.sanskrit.toLowerCase().includes(q) ||
-      a.english.toLowerCase().includes(q) ||
-      a.category.toLowerCase().includes(q) ||
-      a.bodyParts.some(p => p.toLowerCase().includes(q)) ||
-      a.benefits.some(b => b.toLowerCase().includes(q))
-    )
+    const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const atWordStart = new RegExp(`\\b${escaped}`, 'i')
+    const scored = []
+    for (const a of ALL_ASANAS) {
+      const nameHit =
+        a.sanskrit.toLowerCase().includes(q) ||
+        a.english.toLowerCase().includes(q)
+      const proseHit =
+        atWordStart.test(a.category) ||
+        a.bodyParts.some(p => atWordStart.test(p)) ||
+        a.benefits.some(b => atWordStart.test(b))
+      if (nameHit || proseHit) scored.push({ asana: a, score: nameHit ? 2 : 1 })
+    }
+    return scored.sort((x, y) => y.score - x.score).map(s => s.asana)
   }, [searchQuery])
 
   const showAsanaResults = searchQuery.trim().length >= 2 && matchedAsanas.length > 0
@@ -349,8 +364,15 @@ export default function DiscoverPage() {
                   }}
                   className="flex items-center gap-3.5 bg-surface-container-low rounded-xl p-3 text-left active:scale-[0.98] transition-all"
                 >
-                  <div className="w-14 h-14 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0">
-                    <span className="material-symbols-outlined text-primary text-2xl">{asana.icon}</span>
+                  {/* Show the actual pose, not a generic symbol — the figure is
+                      what lets you recognise the asana at a glance. Falls back
+                      to the icon for entries with no image (e.g. breathwork). */}
+                  <div className="w-14 h-14 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    {asana.poseKey && hasPoseImage(asana.poseKey) ? (
+                      <PoseFigure poseKey={asana.poseKey} size="xs" breathing={false} objectPosition="center" />
+                    ) : (
+                      <span aria-hidden="true" className="material-symbols-outlined text-primary text-2xl">{asana.icon}</span>
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-body text-sm font-semibold text-on-surface">{sanskritLabel(la)}</p>
