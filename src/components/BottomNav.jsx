@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import useKeyboardOpen from '../hooks/useKeyboardOpen'
 
 const TABS = [
   { path: '/home', navKey: 'nav.home', icon: 'home_max' },
@@ -16,7 +17,10 @@ export default function BottomNav() {
   const { t } = useTranslation()
   const { pathname } = useLocation()
   const [visible, setVisible] = useState(true)
-  const [keyboardOpen, setKeyboardOpen] = useState(false)
+  // The nav is `fixed bottom-0`; with the keyboard up it would sit on top of
+  // it and eat the viewport. See the hook for why visualViewport can't detect
+  // this (the Android activity is adjustResize).
+  const keyboardOpen = useKeyboardOpen()
   const lastScrollY = useRef(0)
   const ticking = useRef(false)
 
@@ -52,19 +56,6 @@ export default function BottomNav() {
     lastScrollY.current = 0
   }, [pathname])
 
-  // Hide while the soft keyboard is up. The nav is `fixed bottom-0`, so the
-  // keyboard pushes it up and it eats the viewport right where the user is
-  // reading their search results. We have no @capacitor/keyboard plugin, but
-  // the keyboard shrinks the *visual* viewport without changing layout height
-  // — that gap is the tell. 150px clears browser chrome / URL-bar collapse.
-  useEffect(() => {
-    const vv = window.visualViewport
-    if (!vv) return
-    const onResize = () => setKeyboardOpen(window.innerHeight - vv.height > 150)
-    onResize()
-    vv.addEventListener('resize', onResize)
-    return () => vv.removeEventListener('resize', onResize)
-  }, [])
 
   return (
     <nav

@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:9.1.0'
+        classpath 'com.android.tools.build:gradle:9.2.1'
         classpath 'com.google.gms:google-services:4.4.4'
         // Uploads ProGuard/R8 mapping files so release crashes show readable
         // stack traces in the Crashlytics console.
