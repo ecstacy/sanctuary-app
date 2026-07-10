@@ -226,6 +226,29 @@ export function localizeDosha(rich) {
   }
 }
 
+// ── Sanskrit proper nouns ───────────────────────────────────────────────────
+// Asanas, pranayamas and doshas each ship a Devanagari form alongside the
+// Latin transliteration. The transliteration ("Tadasana", "Pitta") exists so
+// Latin-script readers can pronounce the term — inside a Hindi UI it just
+// reads as a foreign word, next to the very script it was transliterated
+// from. So in Hindi we show the Devanagari; every other language keeps the
+// transliteration. Entries without a devanagari form fall back gracefully.
+export function sanskritLabel(entry) {
+  if (!entry) return ''
+  return i18n.language === 'hi' && entry.devanagari ? entry.devanagari : entry.sanskrit
+}
+
+const DOSHA_DEVANAGARI = { vata: 'वात', pitta: 'पित्त', kapha: 'कफ' }
+
+// Display-only name for a dosha key. The key itself stays lowercase English
+// everywhere (it's persisted and used for theming) — this is purely what the
+// user reads.
+export function doshaDisplayName(doshaKey) {
+  if (!doshaKey) return ''
+  if (i18n.language === 'hi' && DOSHA_DEVANAGARI[doshaKey]) return DOSHA_DEVANAGARI[doshaKey]
+  return doshaKey.charAt(0).toUpperCase() + doshaKey.slice(1)
+}
+
 // ── Precautions ─────────────────────────────────────────────────────────────
 // AsanaDetailPage's static PRECAUTIONS map, keyed by asana id. Returns the
 // localized array for the active language, or the English base array.

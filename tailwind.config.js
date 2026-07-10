@@ -33,12 +33,16 @@ export default {
         'outline-variant': '#a8a89e',
         background: '#fdfbf5',
       },
+      // The Devanagari companions sit after the Latin faces: the browser
+      // resolves per-glyph, so Latin still renders in Manrope / Noto Serif
+      // while Devanagari (Hindi) picks up its matching face instead of an
+      // arbitrary system fallback.
       fontFamily: {
-        headline: ['Noto Serif', 'Georgia', 'serif'],
-        body: ['Manrope', 'system-ui', 'sans-serif'],
-        label: ['Manrope', 'system-ui', 'sans-serif'],
-        sans: ['Manrope', 'system-ui', 'sans-serif'],
-        serif: ['Noto Serif', 'Georgia', 'serif'],
+        headline: ['Noto Serif', 'Noto Serif Devanagari', 'Georgia', 'serif'],
+        body: ['Manrope', 'Noto Sans Devanagari', 'system-ui', 'sans-serif'],
+        label: ['Manrope', 'Noto Sans Devanagari', 'system-ui', 'sans-serif'],
+        sans: ['Manrope', 'Noto Sans Devanagari', 'system-ui', 'sans-serif'],
+        serif: ['Noto Serif', 'Noto Serif Devanagari', 'Georgia', 'serif'],
       },
       borderRadius: {
         DEFAULT: '1rem',

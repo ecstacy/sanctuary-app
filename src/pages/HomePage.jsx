@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { getRoutine, ASANAS } from '../data/asanas'
-import { localizeAsana } from '../i18n/contentI18n'
+import { localizeAsana, sanskritLabel, doshaDisplayName } from '../i18n/contentI18n'
 import usePracticeStats from '../hooks/usePracticeStats'
 import useScrollDepth from '../hooks/useScrollDepth'
 import useImpression from '../hooks/useImpression'
@@ -149,7 +149,11 @@ export default function HomePage() {
   const now = new Date()
   const startOfYear = new Date(now.getFullYear(), 0, 0)
   const dayOfYear = Math.floor((now - startOfYear) / 86400000)
-  const quote = QUOTES[dayOfYear % QUOTES.length]
+  // QUOTES stays the English source of truth (and owns the author attribution).
+  // The text is looked up by index in the locale files so it can be translated;
+  // the English entry doubles as the fallback.
+  const quoteIndex = dayOfYear % QUOTES.length
+  const quote = QUOTES[quoteIndex]
   const timeOfDay = getTimeOfDay()
   const subtitle = t(`home.subtitle${timeOfDay.charAt(0).toUpperCase() + timeOfDay.slice(1)}`)
   // Zip localized tip copy with the static icon list by index.
@@ -477,8 +481,12 @@ export default function HomePage() {
           <p className="font-label text-xs text-primary uppercase tracking-widest mb-1">
             {t('home.namaste')}
           </p>
+          {/* Punctuation lives in the locale string: the trailing period is a
+              Latin typographic flourish. Devanagari ends sentences with a
+              danda (।), and a bare name takes no terminal mark at all — so
+              Hindi renders the name on its own. */}
           <h1 className="font-headline text-4xl text-on-surface leading-tight">
-            {firstName}.
+            {t('home.greetingName', { name: firstName })}
           </h1>
           <p className="font-body text-sm text-on-surface-variant mt-1">
             {subtitle}
@@ -693,7 +701,7 @@ export default function HomePage() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">{asanaContext}</p>
-                <p className="font-body font-semibold text-sm text-on-surface">{suggestedAsana.sanskrit}</p>
+                <p className="font-body font-semibold text-sm text-on-surface">{sanskritLabel(suggestedAsana)}</p>
                 <p className="font-body text-xs text-on-surface-variant mt-0.5">{suggestedAsana.english} · {Math.ceil(suggestedAsana.durationSeconds / 60)} {t('home.minSuffix')}</p>
               </div>
               <span className="material-symbols-outlined text-primary text-xl flex-shrink-0">arrow_forward</span>
@@ -834,7 +842,7 @@ export default function HomePage() {
 
                 <h3 className="font-headline text-2xl mb-1">
                   {hasDosha
-                    ? t('home.dosha.suffix', { dosha: userDosha.charAt(0).toUpperCase() + userDosha.slice(1) })
+                    ? t('home.dosha.suffix', { dosha: doshaDisplayName(userDosha) })
                     : t('home.dosha.undiscovered')}
                 </h3>
 
@@ -881,7 +889,7 @@ export default function HomePage() {
         <div className="bg-surface-container-low rounded-xl p-6 text-center stagger-7">
           <span className="material-symbols-outlined text-outline-variant text-3xl mb-3 block">format_quote</span>
           <p className="font-headline italic text-lg text-on-surface-variant leading-relaxed mb-3">
-            "{quote.text}"
+            "{t(`home.quotes.${quoteIndex}`, quote.text)}"
           </p>
           <p className="font-label text-[10px] uppercase tracking-widest text-primary">
             {quote.author}
