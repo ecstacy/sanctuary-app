@@ -1439,5 +1439,11 @@
     "vikritiDueBody": "Ein kurzer Check-in hält deine Praxis auf dich abgestimmt.",
     "slotMorning": "Morgen",
     "slotEvening": "Abend"
+  },
+  "reminderPrompt": {
+    "title": "Verpasse deine Praxis nie",
+    "body": "Du hast zweimal geübt — schön. Möchtest du eine sanfte tägliche Erinnerung, damit es zur Gewohnheit wird?",
+    "enable": "Erinnerungen aktivieren",
+    "notNow": "Nicht jetzt"
   }
 }

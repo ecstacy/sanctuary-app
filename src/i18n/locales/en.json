@@ -1439,5 +1439,11 @@
     "vikritiDueBody": "A quick check-in keeps your practice tuned to you.",
     "slotMorning": "morning",
     "slotEvening": "evening"
+  },
+  "reminderPrompt": {
+    "title": "Never miss your practice",
+    "body": "You’ve practiced twice — nice. Want a gentle daily reminder so it becomes a habit?",
+    "enable": "Enable reminders",
+    "notNow": "Not now"
   }
 }

@@ -187,6 +187,11 @@ export const EVENTS = Object.freeze({
   // wind_down, vikriti_due) — separate from the base reminder enable/disable.
   NOTIFICATION_TYPE_ENABLED:        'notification_type_enabled',
   NOTIFICATION_TYPE_DISABLED:       'notification_type_disabled',
+  // One-time contextual reminder prompt shown after the 2nd completed daily
+  // session (high-intent moment → best grant rate). SHOWN is the denominator.
+  NOTIFICATION_PROMPT_SHOWN:        'notification_prompt_shown',
+  NOTIFICATION_PROMPT_ACCEPTED:     'notification_prompt_accepted',
+  NOTIFICATION_PROMPT_DISMISSED:    'notification_prompt_dismissed',
 
   // Welcome-to-Plus moment — the dedicated celebratory card shown on home
   // for the user's first session after Plus activates. Single-shot (we
