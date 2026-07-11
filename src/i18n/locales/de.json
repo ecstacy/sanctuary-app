@@ -611,7 +611,11 @@
       "timeLabel": "Zeit",
       "timeAria": "Erinnerungszeit",
       "blocked": "Benachrichtigungen sind blockiert. Aktiviere sie in den Geräteeinstellungen, um Erinnerungen zu erhalten.",
-      "unsupported": "Benachrichtigungen funktionieren in der Sanctuary-App — deine Einstellungen gelten, sobald sie installiert ist."
+      "unsupported": "Benachrichtigungen funktionieren in der Sanctuary-App — deine Einstellungen gelten, sobald sie installiert ist.",
+      "streakSave": "Serien-Retter",
+      "streakSaveSub": "Ein Abend-Hinweis, wenn deine Serie in Gefahr ist",
+      "windDown": "Abendliches Ausklingen",
+      "windDownSub": "Eine sanfte Erinnerung zum Ausklingen nach einer Morgenpraxis"
     },
     "account": {
       "section": "Konto",

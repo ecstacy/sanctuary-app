@@ -611,7 +611,11 @@
       "timeLabel": "Time",
       "timeAria": "Reminder time",
       "blocked": "Notifications are blocked. Enable them in your device settings to receive reminders.",
-      "unsupported": "Notifications work in the Sanctuary mobile app — your preferences will apply once installed."
+      "unsupported": "Notifications work in the Sanctuary mobile app — your preferences will apply once installed.",
+      "streakSave": "Streak saver",
+      "streakSaveSub": "An evening nudge when your streak is at risk",
+      "windDown": "Evening wind-down",
+      "windDownSub": "A gentle reminder to unwind after a morning practice"
     },
     "account": {
       "section": "Account",

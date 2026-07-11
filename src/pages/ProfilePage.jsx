@@ -43,6 +43,7 @@ export default function ProfilePage() {
     permissionState: notifPermission,
     busy:            notifBusy,
     setPracticeReminder,
+    setTypeEnabled,
     isSupported:     notifSupported,
   } = useNotifications()
 
@@ -856,6 +857,41 @@ export default function ProfilePage() {
               </div>
             )}
           </div>
+
+          {/* Conditional nudges — streak save + evening wind-down. Simple
+              on/off; they only fire when their condition holds and self-
+              silence once the user practices. */}
+          {[
+            { kind: 'streak_save', icon: 'local_fire_department', label: t('profile.notif.streakSave'), sub: t('profile.notif.streakSaveSub') },
+            { kind: 'wind_down',   icon: 'bedtime',               label: t('profile.notif.windDown'),   sub: t('profile.notif.windDownSub') },
+          ].map(({ kind, icon, label, sub }) => (
+            <div key={kind} className="px-5 py-4 border-b border-surface-container-high">
+              <div className="flex items-center gap-4">
+                <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">{icon}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="font-body text-sm font-semibold text-on-surface">{label}</p>
+                  <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">{sub}</p>
+                </div>
+                <button
+                  role="switch"
+                  aria-checked={notifPrefs[kind].enabled}
+                  aria-label={label}
+                  disabled={notifBusy}
+                  onClick={() => setTypeEnabled(kind, !notifPrefs[kind].enabled)}
+                  className={`relative w-12 h-7 rounded-full transition-colors flex-shrink-0 disabled:opacity-50 ${
+                    notifPrefs[kind].enabled ? 'bg-primary' : 'bg-surface-container-high'
+                  }`}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-surface shadow transition-transform ${
+                      notifPrefs[kind].enabled ? 'translate-x-5' : 'translate-x-0'
+                    }`}
+                  />
+                </button>
+              </div>
+            </div>
+          ))}
 
           {/* State explainers — surface the unhappy paths so the user
               knows why a toggle isn't behaving. Three cases:

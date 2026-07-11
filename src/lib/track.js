@@ -183,6 +183,10 @@ export const EVENTS = Object.freeze({
   // the schedule events to measure whether notifications actually bring users
   // back. The tap handler deep-links by kind.
   NOTIFICATION_TAPPED:              'notification_tapped',
+  // Per-type opt-in toggles for the conditional nudges (streak_save,
+  // wind_down, vikriti_due) — separate from the base reminder enable/disable.
+  NOTIFICATION_TYPE_ENABLED:        'notification_type_enabled',
+  NOTIFICATION_TYPE_DISABLED:       'notification_type_disabled',
 
   // Welcome-to-Plus moment — the dedicated celebratory card shown on home
   // for the user's first session after Plus activates. Single-shot (we
