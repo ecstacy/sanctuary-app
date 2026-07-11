@@ -1,9 +1,11 @@
 import { useReducer, useEffect, useRef, useCallback, useState, useMemo } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
-import { getRoutine, getDoshaTag, getAsana } from '../data/asanas'
+import { getRoutine, getDoshaTag, getAsana, ASANAS } from '../data/asanas'
+import { localizeAsana } from '../i18n/contentI18n'
+import { composeDailySession } from '../lib/dailySession'
 import { useVoiceGuidance } from '../hooks/useVoiceGuidance'
 import { useAudio } from '../hooks/useAudio'
 import { buildSchedule, restNarration } from '../lib/voiceCoach'
@@ -166,9 +168,11 @@ export default function PracticePage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const params = useParams()
+  const location = useLocation()
   const routineKey = params.id
   const asanaId = params.asanaId // present when route is /practice/asana/:asanaId
   const single = !!asanaId
+  const isDaily = routineKey === 'daily' // the composed "Today's Practice" session
   const { profile, user } = useAuth()
   const { isPremium } = useIsPremium()
 
@@ -227,8 +231,46 @@ export default function PracticePage() {
         asanas: [a],
       }
     }
+
+    // ── Today's Practice — the composed daily session ──
+    // Prefer the session the Home card already composed (passed via router
+    // state) so the card and the practice are the exact same arc. On a direct
+    // nav / deep-link with no state, compose in place from what we have here
+    // (deterministic per user+date+slot, so it still matches the card).
+    if (isDaily) {
+      const session = location.state?.session || composeDailySession({
+        profile,
+        vikriti: vikritiSignal,
+        userId: user?.id,
+        now: new Date(),
+      })
+      const asanas = (session.asanaIds || [])
+        .map(id => ASANAS[id] && localizeAsana({ ...ASANAS[id] }))
+        .filter(Boolean)
+      // Defensive: a malformed/empty session should never yield a blank
+      // practice. Fall back to a real routine matched to the time of day.
+      if (asanas.length === 0) {
+        return getRoutine(session.slot === 'evening' ? 'sleep' : 'energy')
+      }
+      const title = t(
+        session.slot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle',
+      )
+      return {
+        key: 'daily',
+        label: title,
+        gradient: 'from-primary-container to-surface-container-low',
+        totalDuration: asanas.reduce((s, a) => s + a.durationSeconds, 0),
+        asanas,
+        dailySession: session, // { slot, reasons, ... } — for the daily_session_* events
+      }
+    }
+
     return getRoutine(routineKey || 'stress')
-  }, [single, asanaId, routineKey])
+    // vikritiSignal intentionally omitted: compose once at mount so the session
+    // is stable for the whole practice (it loads async and would otherwise
+    // recompose the arc mid-view).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [single, asanaId, routineKey, isDaily])
 
   // ── Deep-link entitlement guard ─────────────────────────────────────
   // The detail + routine pages gate Start Practice — but URLs like
@@ -243,6 +285,8 @@ export default function PracticePage() {
   //     content. Redirect to the routine page (which now gates start).
   useEffect(() => {
     if (isPremium) return  // Plus users always pass
+    if (isDaily) return    // the composed daily session is free by design (the
+                           // DAU hook) even when its arc includes Plus poses
 
     if (single && asanaId) {
       if (isAsanaFree(asanaId)) return  // free asana, no gate
@@ -270,7 +314,7 @@ export default function PracticePage() {
       })
       navigate('/routine', { replace: true, state: { routineKey } })
     }
-  }, [isPremium, single, asanaId, routineKey, routine, navigate])
+  }, [isPremium, isDaily, single, asanaId, routineKey, routine, navigate])
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
   const timerRef = useRef(null)
@@ -536,12 +580,22 @@ export default function PracticePage() {
 
     track(EVENTS.PRACTICE_COMPLETED, {
       routine_key: routineKey || routine.key,
-      source: single ? 'single_asana' : 'routine',
+      source: isDaily ? 'daily_session' : single ? 'single_asana' : 'routine',
       completed_count: completedCount,
       skipped_count: skippedCount,
       total_duration_seconds: totalTime,
       pose_count: routine.asanas.length,
     })
+
+    if (isDaily && routine.dailySession) {
+      track(EVENTS.DAILY_SESSION_COMPLETED, {
+        slot: routine.dailySession.slot,
+        completed_count: completedCount,
+        skipped_count: skippedCount,
+        total_poses: routine.asanas.length,
+        duration_s: totalTime,
+      })
+    }
 
     ;(async () => {
       const newSessionId = await savePracticeSession({
@@ -581,11 +635,19 @@ export default function PracticePage() {
 
     track(EVENTS.PRACTICE_STARTED, {
       routine_key: routineKey || routine.key,
-      source: single ? 'single_asana' : 'routine',
+      source: isDaily ? 'daily_session' : single ? 'single_asana' : 'routine',
       pose_count: routine.asanas.length,
       total_duration_seconds: routine.totalDuration,
       has_pre_checkin: preEnergy !== null || preStress !== null,
     })
+
+    if (isDaily && routine.dailySession) {
+      track(EVENTS.DAILY_SESSION_STARTED, {
+        slot: routine.dailySession.slot,
+        pose_count: routine.asanas.length,
+        duration_s: routine.totalDuration,
+      })
+    }
 
     // Fire-and-forget check-in write. Never blocks the start of practice.
     // Only logs if the user actually rated at least one scale — a fully

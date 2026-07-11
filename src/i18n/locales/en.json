@@ -994,7 +994,9 @@
     "tilePickup": "Pick up your {{dosha}} protocol again",
     "tileStartSub": "Three days of food, movement, and rest tailored to your reading.",
     "tilePickupSub": "Last time helped — your latest reading suggests another round.",
-    "tileContinueSub": "Day {{day}} of {{total}} — keep the rhythm."
+    "tileContinueSub": "Day {{day}} of {{total}} — keep the rhythm.",
+    "dailyMorningTitle": "Morning Practice",
+    "dailyEveningTitle": "Evening Wind-Down"
   },
   "doshaQuizContent": {
     "questions": {

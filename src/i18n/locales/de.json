@@ -994,7 +994,9 @@
     "tilePickup": "Nimm dein {{dosha}}-Protokoll wieder auf",
     "tileStartSub": "Drei Tage Ernährung, Bewegung und Ruhe, abgestimmt auf deine Lesung.",
     "tilePickupSub": "Letztes Mal hat es geholfen — deine neueste Lesung legt eine weitere Runde nahe.",
-    "tileContinueSub": "Tag {{day}} von {{total}} — bleib im Rhythmus."
+    "tileContinueSub": "Tag {{day}} von {{total}} — bleib im Rhythmus.",
+    "dailyMorningTitle": "Morgenpraxis",
+    "dailyEveningTitle": "Abendliches Ausklingen"
   },
   "doshaQuizContent": {
     "questions": {

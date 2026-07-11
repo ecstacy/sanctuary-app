@@ -994,7 +994,9 @@
     "tilePickup": "अपना {{dosha}} प्रोटोकॉल फिर से शुरू करें",
     "tileStartSub": "आपकी रीडिंग के अनुरूप तीन दिन का आहार, गति और विश्राम।",
     "tilePickupSub": "पिछली बार मदद मिली — आपकी नवीनतम रीडिंग एक और दौर का सुझाव देती है।",
-    "tileContinueSub": "{{total}} में से दिन {{day}} — लय बनाए रखें।"
+    "tileContinueSub": "{{total}} में से दिन {{day}} — लय बनाए रखें।",
+    "dailyMorningTitle": "प्रातः अभ्यास",
+    "dailyEveningTitle": "सांध्य विश्राम"
   },
   "doshaQuizContent": {
     "questions": {
