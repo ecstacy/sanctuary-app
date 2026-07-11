@@ -219,6 +219,35 @@ function NotificationReapplyOnBoot() {
   return null
 }
 
+// Deep-links a tapped notification to the right place, keyed by the `kind`
+// stamped in its `extra` payload. Registered once for the signed-in session.
+const NOTIFICATION_ROUTES = {
+  practice_reminder: '/practice/daily',
+  wind_down:         '/practice/daily',
+  streak_save:       '/practice/daily',
+  vikriti_due:       '/vikriti',
+}
+function NotificationTapHandler() {
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!CapacitorApp) return
+    let handle
+    import('@capacitor/local-notifications')
+      .then(({ LocalNotifications }) =>
+        LocalNotifications.addListener('localNotificationActionPerformed', (action) => {
+          const kind = action?.notification?.extra?.kind || 'unknown'
+          track(EVENTS.NOTIFICATION_TAPPED, { kind })
+          const dest = NOTIFICATION_ROUTES[kind] || '/home'
+          navigate(dest)
+        }),
+      )
+      .then((h) => { handle = h })
+      .catch(() => { /* web / plugin missing — no-op */ })
+    return () => { handle?.remove?.() }
+  }, [navigate])
+  return null
+}
+
 function ShowBottomNav() {
   const { user } = useAuth()
   const { pathname } = useLocation()
@@ -243,6 +272,7 @@ function AppRoutes() {
           optimizers — the cheapest fix is to re-schedule once per
           launch from the saved pref. No-op on web. */}
       {user && <NotificationReapplyOnBoot />}
+      {user && <NotificationTapHandler />}
       <Suspense fallback={<LoadingScreen />}>
       <PageTransition>
         <Routes>

@@ -1421,5 +1421,19 @@
       "errKindUnsupported": "That code can't be redeemed here yet.",
       "errDefault": "That code couldn't be redeemed."
     }
+  },
+  "notifications": {
+    "practiceReminderTitle": "Time for your practice",
+    "practiceReminderBody": "Your mat is waiting. Five minutes is enough to start.",
+    "dailyReadyTitle": "Your practice is ready",
+    "dailyReadyBody": "A session made for your {{slot}}. Take a few minutes for yourself.",
+    "streakSaveTitle": "Keep your streak alive",
+    "streakSaveBody": "You’re on a {{days}}-day streak. A short practice keeps it going.",
+    "windDownTitle": "Time to wind down",
+    "windDownBody": "An evening session to help you unwind and prepare for rest.",
+    "vikritiDueTitle": "How are you feeling lately?",
+    "vikritiDueBody": "A quick check-in keeps your practice tuned to you.",
+    "slotMorning": "morning",
+    "slotEvening": "evening"
   }
 }

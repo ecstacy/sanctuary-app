@@ -36,15 +36,59 @@ import { LocalNotifications } from '@capacitor/local-notifications'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import { track, EVENTS } from '../lib/track'
+import i18n from '../i18n'
 
 // Stable numeric ids per notification type. Capacitor's API keys schedule
 // + cancel operations by numeric id; we keep them in a small registry so
 // adding a new type doesn't risk colliding with an existing one.
 const NOTIFICATION_IDS = {
   practice_reminder: 1001,
-  // streak_save:     1002,
-  // vikriti_drift:   1003,
-  // seasonal:        1004,
+  streak_save:       1002,
+  wind_down:         1003,
+  vikriti_due:       1004,
+}
+
+// OS-level channels (Android). Grouping by purpose lets the user mute a
+// single kind in system settings instead of killing all notifications.
+// Each notification declares its channelId; iOS ignores this.
+const CHANNELS = [
+  { id: 'reminders', name: 'Practice reminders', description: 'Your daily practice reminder', importance: 4 },
+  { id: 'streaks',   name: 'Streaks',            description: 'Nudges to keep your streak alive', importance: 4 },
+  { id: 'insights',  name: 'Insights',           description: 'Check-in and wind-down nudges',    importance: 3 },
+]
+const KIND_CHANNEL = {
+  practice_reminder: 'reminders',
+  streak_save:       'streaks',
+  wind_down:         'insights',
+  vikriti_due:       'insights',
+}
+
+// Localized copy resolved AT SCHEDULE TIME (the OS bakes the text into the
+// pending notification, so we must re-schedule when the language changes —
+// see the languageChanged effect below). `ctx` carries interpolation values
+// like { slot, days }.
+function notificationContent(kind, ctx = {}) {
+  const t = i18n.t.bind(i18n)
+  switch (kind) {
+    case 'practice_reminder':
+      return { title: t('notifications.practiceReminderTitle'), body: t('notifications.practiceReminderBody') }
+    case 'streak_save':
+      return { title: t('notifications.streakSaveTitle'), body: t('notifications.streakSaveBody', { days: ctx.days ?? '' }) }
+    case 'wind_down':
+      return { title: t('notifications.windDownTitle'), body: t('notifications.windDownBody') }
+    case 'vikriti_due':
+      return { title: t('notifications.vikritiDueTitle'), body: t('notifications.vikritiDueBody') }
+    default:
+      return { title: t('notifications.practiceReminderTitle'), body: t('notifications.practiceReminderBody') }
+  }
+}
+
+async function ensureChannels() {
+  if (Capacitor.getPlatform() !== 'android') return
+  for (const ch of CHANNELS) {
+    try { await LocalNotifications.createChannel(ch) }
+    catch (err) { console.debug('[notifications] createChannel failed:', err?.message) }
+  }
 }
 
 const DEFAULT_REMINDER_TIME = '07:00'
@@ -58,12 +102,13 @@ export function useNotifications() {
   // Current pref blob, with sensible defaults applied for any missing keys.
   const prefs = normalizePrefs(profile?.notification_prefs)
 
-  // ── Initial permission check ────────────────────────────────────────────
+  // ── Initial permission check + channel setup ────────────────────────────
   useEffect(() => {
     if (!Capacitor.isNativePlatform()) {
       setPermissionState('unsupported')
       return
     }
+    ensureChannels()
     LocalNotifications.checkPermissions()
       .then((res) => setPermissionState(res.display === 'granted' ? 'granted' : 'denied'))
       .catch(() => setPermissionState('unknown'))
@@ -147,10 +192,11 @@ export function useNotifications() {
         await cancelNotification(NOTIFICATION_IDS.practice_reminder)
         if (enabled) {
           await scheduleDailyAt({
-            id:    NOTIFICATION_IDS.practice_reminder,
-            title: 'Time for your practice',
-            body:  'Your mat is waiting. Five minutes is enough to start.',
-            time:  nextPrefs.practice_reminder.time,
+            id:        NOTIFICATION_IDS.practice_reminder,
+            ...notificationContent('practice_reminder'),
+            time:      nextPrefs.practice_reminder.time,
+            channelId: KIND_CHANNEL.practice_reminder,
+            extra:     { kind: 'practice_reminder' },
           })
         }
       }
@@ -209,12 +255,23 @@ export function useNotifications() {
     }
     await cancelNotification(NOTIFICATION_IDS.practice_reminder)
     await scheduleDailyAt({
-      id:    NOTIFICATION_IDS.practice_reminder,
-      title: 'Time for your practice',
-      body:  'Your mat is waiting. Five minutes is enough to start.',
-      time:  reminder.time,
+      id:        NOTIFICATION_IDS.practice_reminder,
+      ...notificationContent('practice_reminder'),
+      time:      reminder.time,
+      channelId: KIND_CHANNEL.practice_reminder,
+      extra:     { kind: 'practice_reminder' },
     })
   }, [prefs])
+
+  // ── Re-schedule on language change ──────────────────────────────────────
+  // Scheduled copy is baked in at schedule time, so a language switch leaves
+  // pending notifications in the old language. Re-apply to refresh the text.
+  useEffect(() => {
+    if (!Capacitor.isNativePlatform()) return
+    const onLang = () => { reapplyFromProfile() }
+    i18n.on('languageChanged', onLang)
+    return () => i18n.off('languageChanged', onLang)
+  }, [reapplyFromProfile])
 
   return {
     prefs,
@@ -247,7 +304,7 @@ function normalizePrefs(raw) {
 // Capacitor's "repeats: true" + schedule.on with hour+minute is the
 // supported recipe for daily repeats. We don't use a Date here because
 // then `repeats: true` would mean "every (date interval)" — vague.
-async function scheduleDailyAt({ id, title, body, time }) {
+async function scheduleDailyAt({ id, title, body, time, channelId, extra }) {
   const [h, m] = time.split(':').map(Number)
   if (!Number.isFinite(h) || !Number.isFinite(m)) return
 
@@ -269,13 +326,14 @@ async function scheduleDailyAt({ id, title, body, time }) {
         id,
         title,
         body,
+        channelId,
         schedule: {
           on:      { hour: h, minute: m },
           allowWhileIdle: true,  // Doze-mode safe
           repeats: true,
         },
-        // Optional payload — used when we wire deeplink-on-tap (Phase 2).
-        extra: { kind: 'practice_reminder', scheduled_at: next.toISOString() },
+        // Payload read by the tap handler in App.jsx to deep-link by kind.
+        extra: { ...(extra || {}), scheduled_at: next.toISOString() },
       },
     ],
   })

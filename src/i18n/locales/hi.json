@@ -1421,5 +1421,19 @@
       "errKindUnsupported": "वह कोड अभी यहाँ रिडीम नहीं किया जा सकता।",
       "errDefault": "वह कोड रिडीम नहीं किया जा सका।"
     }
+  },
+  "notifications": {
+    "practiceReminderTitle": "आपके अभ्यास का समय",
+    "practiceReminderBody": "आपकी चटाई इंतज़ार कर रही है। शुरू करने के लिए पाँच मिनट काफ़ी हैं।",
+    "dailyReadyTitle": "आपका अभ्यास तैयार है",
+    "dailyReadyBody": "आपकी {{slot}} के लिए बना एक सत्र। अपने लिए कुछ मिनट निकालें।",
+    "streakSaveTitle": "अपनी लय बनाए रखें",
+    "streakSaveBody": "आप {{days}} दिनों की लय पर हैं। एक छोटा अभ्यास इसे जारी रखता है।",
+    "windDownTitle": "विश्राम का समय",
+    "windDownBody": "शांत होने और विश्राम की तैयारी के लिए एक सांध्य सत्र।",
+    "vikritiDueTitle": "इन दिनों आप कैसा महसूस कर रहे हैं?",
+    "vikritiDueBody": "एक त्वरित चेक-इन आपके अभ्यास को आपके अनुरूप रखता है।",
+    "slotMorning": "प्रातः",
+    "slotEvening": "सांध्य"
   }
 }

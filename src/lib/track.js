@@ -178,6 +178,11 @@ export const EVENTS = Object.freeze({
   NOTIFICATION_REMINDER_ENABLED:    'notification_reminder_enabled',
   NOTIFICATION_REMINDER_DISABLED:   'notification_reminder_disabled',
   NOTIFICATION_REMINDER_TIME_CHANGED:'notification_reminder_time_changed',
+  // Fired when the user taps a delivered notification. `kind` (practice_reminder,
+  // streak_save, wind_down, vikriti_due) is the conversion lever — pairs with
+  // the schedule events to measure whether notifications actually bring users
+  // back. The tap handler deep-links by kind.
+  NOTIFICATION_TAPPED:              'notification_tapped',
 
   // Welcome-to-Plus moment — the dedicated celebratory card shown on home
   // for the user's first session after Plus activates. Single-shot (we

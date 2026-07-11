@@ -423,6 +423,15 @@ Local-scheduled reminders today; the schema anticipates server push later.
 - **Where**: Settings → Notifications (toggle + time picker).
 - **Props**: enabled `{time*}`; disabled `{time*}`; time_changed `{from*, to*}`.
 
+#### `notification_tapped`
+- **Where**: `localNotificationActionPerformed` listener (App.jsx). The
+  conversion lever — pairs with the schedule/enable events to answer "do
+  notifications actually bring users back?". Deep-links by kind.
+- **Props**: `{kind*}` (practice_reminder | streak_save | wind_down | vikriti_due).
+- **Notes**: Copy is localized at schedule time and re-baked on language
+  change (scheduled text can't be updated in place). Android groups by
+  channel (reminders / streaks / insights) so users can mute one kind.
+
 ### 5.13 Today's Practice — composed daily session
 
 The one-tap, profile-tailored daily session on Home — the DAU engine. Composed
