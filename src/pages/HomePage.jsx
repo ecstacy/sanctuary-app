@@ -2,15 +2,14 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
-import { getRoutine, ASANAS } from '../data/asanas'
-import { localizeAsana, sanskritLabel, doshaDisplayName } from '../i18n/contentI18n'
+import { doshaDisplayName } from '../i18n/contentI18n'
+import { composeDailySession } from '../lib/dailySession'
 import usePracticeStats from '../hooks/usePracticeStats'
 import useScrollDepth from '../hooks/useScrollDepth'
 import useImpression from '../hooks/useImpression'
 import useVikritiSchedule from '../hooks/useVikritiSchedule'
 import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { useIsPremium } from '../hooks/useIsPremium'
-import PoseFigure from '../components/PoseFigure'
 import VikritiCard from '../components/VikritiCard'
 import PaywallSheet from '../components/PaywallSheet'
 import WelcomeToPlusCard from '../components/WelcomeToPlusCard'
@@ -139,10 +138,6 @@ export default function HomePage() {
   const { profile, user } = useAuth()
   const [checkedIn, setCheckedIn] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
-  // Recommendation id for the currently-shown suggested asana card.
-  // Refreshed whenever the asana/context changes so clicks link to the right row.
-  const [suggestedAsanaRecId, setSuggestedAsanaRecId] = useState(null)
-  const lastLoggedKeyRef = useRef(null)
 
   const firstName = profile?.full_name?.split(' ')[0] || t('home.defaultFirstName')
   // Rotate quote daily using day-of-year so all quotes cycle through
@@ -215,225 +210,100 @@ export default function HomePage() {
   }, [location.state?.vikritiSavedAt])
 
   const routineKey = checkedIn || 'stress'
-  const routine = getRoutine(routineKey)
 
-  // ── Today's completed asana ids ───────────────────────────────────────
-  // Drives the "skip what they already did today" fallback below the rule
-  // engine. Sourced from the local-cached practice history (already
-  // hydrated synchronously by usePracticeStats on mount) so the swap
-  // happens on first paint after the user finishes practising — no wait
-  // for the Supabase fetch.
-  const completedTodayIds = useMemo(() => {
-    // Match the local-time YYYY-MM-DD that usePracticeStats stamps on
-    // each saved session (see `toDateStr` there). Using
-    // toISOString().slice(0,10) here gave the UTC date instead, which
-    // could disagree at the day boundary for non-UTC users and silently
-    // hide "completed today" sessions.
-    const d = new Date()
-    const todayStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-    const ids = new Set()
-    for (const s of stats.sessions || []) {
-      if (s?.date !== todayStr) continue
-      for (const a of s.asanas || []) {
-        if (a?.id) ids.add(a.id)
-      }
-    }
-    // Diagnostic: surface what the picker is filtering against. Helps
-    // confirm in-app that the broadcast is wiring through and the
-    // suggested-asana swap has the data it needs.
-    if (typeof window !== 'undefined') {
-      window.__sanctuary_completedTodayIds = Array.from(ids)
-      window.__sanctuary_today = todayStr
-    }
-    return ids
-  }, [stats.sessions])
-
-  // ── "Pickup where you left" — candidate pool walker ──────────────────
-  //
-  // Goal: when the user opens the app, surface ONE asana that:
-  //   • Fits the moment (morning = energizing, afternoon = grounding,
-  //     evening = restorative)
-  //   • Respects their check-in (low energy → restorative, stressed → calming)
-  //   • Leans into their dosha (kapha gets stimulating, pitta gets
-  //     cooling, vata gets grounding)
-  //   • Hasn't already been done today
-  //
-  // Implementation: each slot has a curated CANDIDATE pool listed in
-  // recommended priority. We layer the check-in pool and the dosha pool
-  // on top (those go first), then the slot's default order, deduped.
-  // Walk the combined list and return the first asana NOT in the user's
-  // completedTodayIds. If everything is completed, fall back to a
-  // restorative anchor for that slot — "well done, here's a cool-down".
-  const SLOT_POOLS = {
-    morning: {
-      energy:       ['suryaNamaskarA', 'suryaNamaskarB', 'virabhadrasanaI', 'adhoMukhaSvanasana', 'utkatasana'],
-      flexibility:  ['adhoMukhaSvanasana', 'uttanasana', 'paschimottanasana', 'ekaPadaRajakapotasana', 'januSirsasana'],
-      stress:       ['balasana', 'sukhasana', 'tadasana', 'cardiacWarmup', 'apanasana'],
-      sleep:        ['cardiacWarmup', 'sukhasana', 'tadasana', 'balasana'],
-      vata:         ['tadasana', 'vrksasana', 'virabhadrasanaII', 'sukhasana'],
-      pitta:        ['vrksasana', 'tadasana', 'baddhaKonasana', 'paschimottanasana'],
-      kapha:        ['suryaNamaskarA', 'virabhadrasanaI', 'utkatasana', 'adhoMukhaSvanasana'],
-      anchor:       ['tadasana', 'adhoMukhaSvanasana', 'vrksasana', 'cardiacWarmup'],
-    },
-    afternoon: {
-      energy:       ['virabhadrasanaII', 'utkatasana', 'trikonasana', 'parsvakonasana'],
-      flexibility:  ['ekaPadaRajakapotasana', 'paschimottanasana', 'januSirsasana', 'gomukhasana'],
-      stress:       ['uttanasana', 'balasana', 'paschimottanasana', 'apanasana'],
-      sleep:        ['legsUpTheWall', 'balasana', 'suptaBaddhaKonasana'],
-      vata:         ['virabhadrasanaII', 'vrksasana', 'sukhasana', 'tadasana'],
-      pitta:        ['vrksasana', 'trikonasana', 'baddhaKonasana', 'januSirsasana'],
-      kapha:        ['virabhadrasanaII', 'trikonasana', 'utkatasana', 'parsvakonasana'],
-      anchor:       ['virabhadrasanaII', 'uttanasana', 'vrksasana', 'tadasana'],
-    },
-    evening: {
-      energy:       ['vrksasana', 'tadasana', 'setuBandhaSarvangasana'],
-      flexibility:  ['paschimottanasana', 'januSirsasana', 'baddhaKonasana', 'gomukhasana'],
-      stress:       ['balasana', 'sukhasana', 'suptaMatsyendrasana', 'apanasana', 'cardiacWarmup'],
-      sleep:        ['legsUpTheWall', 'savasana', 'suptaBaddhaKonasana', 'balasana'],
-      vata:         ['sukhasana', 'balasana', 'suptaMatsyendrasana', 'savasana'],
-      pitta:        ['legsUpTheWall', 'baddhaKonasana', 'balasana', 'savasana'],
-      kapha:        ['setuBandhaSarvangasana', 'vrksasana', 'sukhasana', 'balasana'],
-      anchor:       ['balasana', 'suptaMatsyendrasana', 'savasana', 'legsUpTheWall'],
-    },
-  }
-
-  const suggestedPick = useMemo(() => {
-    const h = new Date().getHours()
-    const slot = h < 12 ? 'morning' : h < 17 ? 'afternoon' : 'evening'
-    const pool = SLOT_POOLS[slot]
-    const userDosha = profile?.dosha_details?.primary || profile?.dosha?.toLowerCase() || null
-    const rules = [`slot:${slot}`]
-
-    // Build the prioritized candidate list. Order matters:
-    //   1. Check-in pool (matches how the user feels right now)
-    //   2. Dosha pool (matches their constitution)
-    //   3. Slot anchor (the safe-bet rotation for this time)
-    // De-duplicated by id, preserving first-seen order.
-    const candidates = []
-    const seen = new Set()
-    const add = (ids, source) => {
-      for (const id of ids || []) {
-        if (seen.has(id) || !ASANAS[id]) continue
-        seen.add(id)
-        candidates.push({ id, source })
-      }
-    }
-    if (checkedIn && pool[checkedIn]) {
-      rules.push(`checkin:${checkedIn}`)
-      add(pool[checkedIn], `checkin:${checkedIn}`)
-    }
-    if (userDosha && pool[userDosha]) {
-      add(pool[userDosha], `dosha:${userDosha}`)
-    }
-    add(pool.anchor, 'anchor')
-
-    // Diagnostic: dump the actual ordered candidate list so we can verify
-    // in-app why a particular asana surfaced. Inspectable via
-    // window.__sanctuary_lastCandidates / window.__sanctuary_lastSlot.
-    if (typeof window !== 'undefined') {
-      window.__sanctuary_lastSlot = slot
-      window.__sanctuary_lastCandidates = candidates.map(c => `${c.id} (${c.source})`)
-    }
-
-    // Walk in priority order, return first not done today.
-    for (const c of candidates) {
-      if (!completedTodayIds.has(c.id)) {
-        // eslint-disable-next-line no-console
-        console.log('[SANCTUARY][pick]', { slot, picked: c.id, source: c.source, completedToday: Array.from(completedTodayIds), candidateCount: candidates.length })
-        return {
-          asana: ASANAS[c.id],
-          rules: [...rules, `pick:${c.source}:${c.id}`],
-          userDosha,
-        }
-      }
-    }
-
-    // Every pool entry has been done today. Return null so the section
-    // hides — "you've done what makes sense right now, come back later"
-    // is more useful than a stale cool-down recommendation that just
-    // re-suggests something they already finished.
-    // eslint-disable-next-line no-console
-    console.log('[SANCTUARY][pick] no-suggestion', { slot, completedToday: Array.from(completedTodayIds), candidates: candidates.map(c => c.id) })
-    return null
-  }, [checkedIn, profile?.dosha_details?.primary, profile?.dosha, completedTodayIds])
-
-  // Render-safe fallbacks for the analytics / impression refs below —
-  // they expect a real asana shape and we don't want to crash the
-  // logging paths when the suggestion section is hidden.
-  const suggestedAsana = localizeAsana(suggestedPick?.asana || ASANAS.tadasana)
-  const suggestedAsanaRules    = suggestedPick?.rules || []
-  const suggestedAsanaUserDosha = suggestedPick?.userDosha || null
-  const hasSuggestion          = !!suggestedPick
-
-  // ── Vikriti drift detection + paywall sheet ─────────────────────────────
-  // Reads the last 14 days of pre/post-practice checkins, maps the
-  // energy/stress pattern to a vikriti dosha, and surfaces a contextual
-  // nudge above the Pickup card. Plus action opens the same paywall
-  // sheet used everywhere else so PostHog can rank conversion by source.
+  // ── Vikriti drift + entitlement (kept — used by the VikritiCard + paywall) ──
   const vikritiSignal = useVikritiSignal()
   const { isPremium } = useIsPremium()
   const [vikritiPaywallOpen, setVikritiPaywallOpen] = useState(false)
 
-  // Impression ref for the suggested-asana card. Fires `content_impression`
-  // once the card has been ≥50% visible for 1s — the CTR denominator we'll
-  // pair with `asana_card_tapped` from the click handler.
-  const suggestedAsanaImpressionRef = useImpression({
-    surface:     'home_suggested_asana',
-    contentType: 'asana',
-    contentId:   suggestedAsana?.id,
+  // ── Today's Practice — the composed daily session (the DAU hero) ─────────
+  // Replaces the old single-asana "pick up where you left off" card. Instead
+  // of surfacing one pose, we compose a full session (see lib/dailySession)
+  // from the signals we already have and let the user start it in one tap.
+
+  // Which daily slots are already done today — inferred from today's saved
+  // 'daily' sessions by their timestamp. Feeds slot resolution (morning done →
+  // afternoon rolls to evening) and the card's completed state.
+  const doneSlotsToday = useMemo(() => {
+    const d = new Date()
+    const todayStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+    const done = new Set()
+    for (const s of stats.sessions || []) {
+      if (s?.date !== todayStr || s?.routine_key !== 'daily') continue
+      const hr = s.created_at ? new Date(s.created_at).getHours() : 12
+      done.add(hr >= 17 ? 'evening' : 'morning')
+    }
+    return Array.from(done)
+  }, [stats.sessions])
+
+  // Compose for right now. Deterministic per (user, date, slot) — stable all
+  // day and the exact arc the practice runs (we hand it over via router state).
+  const dailySession = useMemo(() => {
+    const history = [...(stats.sessions || [])].sort((a, b) =>
+      String(b.created_at || b.date).localeCompare(String(a.created_at || a.date)))
+    return composeDailySession({
+      profile,
+      vikriti: vikritiSignal,
+      checkin: checkedIn,
+      history,
+      doneSlotsToday,
+      userId: user?.id,
+      now: new Date(),
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profile, vikritiSignal.hasSignal, vikritiSignal.vikriti, checkedIn, stats.sessions, doneSlotsToday, user?.id])
+
+  const dailyDurationMin = Math.max(1, Math.round(dailySession.totalSeconds / 60))
+  const dailyDone = doneSlotsToday.includes(dailySession.slot)
+  const dailyNextSlot = (dailyDone && dailySession.slot === 'morning' && !doneSlotsToday.includes('evening')) ? 'evening' : null
+  const dailyTitleKey = dailySession.slot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle'
+
+  // Localized reason chips (skip the slot reason — that's the headline).
+  const dailyReasonChips = dailySession.reasons
+    .filter(r => !r.code.startsWith('slot:'))
+    .map(r => {
+      const [kind, arg] = r.code.split(':')
+      if (kind === 'pacify')  return t('home.daily.reasonPacify', { dosha: doshaDisplayName(arg) })
+      if (kind === 'dosha')   return t('home.daily.reasonDosha', { dosha: doshaDisplayName(arg) })
+      if (kind === 'checkin') return t('home.daily.reasonCheckin', { mood: t(`home.checkinOptions.${arg}`, arg) })
+      return r.label
+    })
+
+  // Log the composed recipe once per unique session (seed) so we can tune the
+  // composer from real usage without a duplicate every render.
+  const composedLoggedRef = useRef(null)
+  useEffect(() => {
+    if (!user?.id || composedLoggedRef.current === dailySession.seed) return
+    composedLoggedRef.current = dailySession.seed
+    track(EVENTS.DAILY_SESSION_COMPOSED, {
+      surface: 'home',
+      slot: dailySession.slot,
+      pose_count: dailySession.asanaIds.length,
+      duration_s: dailySession.totalSeconds,
+      target_dosha: dailySession.meta.targetDosha,
+      dosha_source: dailySession.meta.doshaSource,
+      checkin: dailySession.meta.checkin,
+      reason_codes: dailySession.reasons.map(r => r.code),
+      seed: dailySession.seed,
+    })
+  }, [user?.id, dailySession])
+
+  // Viewport impression = CTR denominator (same content_impression pattern as
+  // every other card).
+  const dailyImpressionRef = useImpression({
+    surface:     'home_daily_session',
+    contentType: 'daily_session',
+    contentId:   dailySession.slot,
   })
 
-  const ASANA_CONTEXT = {
-    morning: t('home.contextMorning'),
-    afternoon: t('home.contextAfternoon'),
-    evening: t('home.contextEvening'),
-  }
-  const asanaContext = ASANA_CONTEXT[timeOfDay]
-
-  // ── Log recommendation when the suggested asana card renders ──
-  // Guarded by a ref so we only write one row per unique
-  // (asana, time_of_day, checkedIn) combination within this session.
-  // Skip entirely when the section is hidden (everything done today) —
-  // we don't want a spurious "we recommended X" row in the log.
-  useEffect(() => {
-    if (!hasSuggestion) return
-    if (!user?.id || !suggestedAsana?.id) return
-    const key = `${suggestedAsana.id}|${timeOfDay}|${checkedIn || 'none'}`
-    if (lastLoggedKeyRef.current === key) return
-    lastLoggedKeyRef.current = key
-
-    let cancelled = false
-    ;(async () => {
-      const recId = await analytics.logRecommendation({
-        userId: user.id,
-        surface: analytics.SURFACES.HOME_SUGGESTED_ASANA,
-        contentType: analytics.CONTENT_TYPES.ASANA,
-        contentId: suggestedAsana.id,
-        reasoning: {
-          rules_fired: suggestedAsanaRules,
-          time_of_day: timeOfDay,
-          checked_in: checkedIn,
-          user_dosha: suggestedAsanaUserDosha,
-        },
-      })
-      if (!cancelled) setSuggestedAsanaRecId(recId)
-    })()
-    return () => { cancelled = true }
-  }, [hasSuggestion, user?.id, suggestedAsana?.id, timeOfDay, checkedIn, suggestedAsanaRules, suggestedAsanaUserDosha])
-
-  // ── Handler for tapping the suggested asana card ──
-  const handleSuggestedAsanaClick = () => {
-    if (user?.id && suggestedAsana?.id) {
-      analytics.logContentEvent({
-        userId: user.id,
-        eventType: analytics.EVENT_TYPES.CLICKED,
-        contentType: analytics.CONTENT_TYPES.ASANA,
-        contentId: suggestedAsana.id,
-        surface: analytics.SURFACES.HOME_SUGGESTED_ASANA,
-        recommendationId: suggestedAsanaRecId,
-      })
-    }
-    navigate(`/asana/${suggestedAsana.id}`)
+  const handleStartDaily = () => {
+    track(EVENTS.DAILY_SESSION_CTA_TAPPED, {
+      slot: dailySession.slot,
+      pose_count: dailySession.asanaIds.length,
+      duration_s: dailySession.totalSeconds,
+      reason_codes: dailySession.reasons.map(r => r.code),
+    })
+    navigate('/practice/daily', { state: { session: dailySession } })
   }
 
   return (
@@ -685,28 +555,53 @@ export default function HomePage() {
           />
         )}
 
-        {/* ── Suggested Asana — single-tap card nudging into the Routine tab ── */}
-        {hasSuggestion && (
-          <section className="stagger-3">
-            <h3 className="font-headline text-lg text-on-surface leading-tight mb-2 px-1">
-              {t('home.pickUpWhereLeft')}
-            </h3>
-            <button
-              ref={suggestedAsanaImpressionRef}
-              onClick={handleSuggestedAsanaClick}
-              className="bg-surface-container rounded-xl p-5 flex items-center gap-4 w-full border border-primary-container/40 text-left active:scale-[0.98] transition-all"
-            >
-              <div className="w-16 h-16 rounded-xl bg-primary-container/50 flex items-center justify-center flex-shrink-0 overflow-hidden pointer-events-none">
-                <PoseFigure poseKey={suggestedAsana.poseKey} size="xs" />
+        {/* ── Today's Practice — the composed daily-session hero (DAU CTA) ── */}
+        {!dailyDone ? (
+          <button
+            ref={dailyImpressionRef}
+            onClick={handleStartDaily}
+            className="relative overflow-hidden w-full text-left rounded-2xl p-6 stagger-3 bg-gradient-to-br from-primary to-primary-container active:scale-[0.98] transition-all shadow-md"
+          >
+            {/* soft decorative rings echoing the breathwork card */}
+            <div aria-hidden="true" className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-on-primary/5" />
+            <div aria-hidden="true" className="absolute -bottom-10 -left-6 w-28 h-28 rounded-full bg-on-primary/5" />
+            <div className="relative">
+              <p className="font-label text-[10px] uppercase tracking-widest text-on-primary/70 mb-1.5 font-semibold">
+                {t('home.daily.eyebrow')}
+              </p>
+              <h3 className="font-headline text-2xl text-on-primary leading-tight mb-1">
+                {t(dailyTitleKey)}
+              </h3>
+              <p className="font-body text-sm text-on-primary/85 mb-4">
+                {t('home.daily.meta', { min: dailyDurationMin, count: dailySession.asanaIds.length })}
+              </p>
+              {dailyReasonChips.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {dailyReasonChips.map((chip, i) => (
+                    <span key={i} className="px-2.5 py-1 rounded-full bg-on-primary/15 font-label text-[10px] text-on-primary/90 tracking-wide">
+                      {chip}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <div className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-surface rounded-full shadow-sm">
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-base" style={{ fontVariationSettings: "'FILL' 1" }}>play_arrow</span>
+                <span className="font-label text-xs uppercase tracking-wider text-primary font-semibold">{t('home.daily.start')}</span>
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1">{asanaContext}</p>
-                <p className="font-body font-semibold text-sm text-on-surface">{sanskritLabel(suggestedAsana)}</p>
-                <p className="font-body text-xs text-on-surface-variant mt-0.5">{suggestedAsana.english} · {Math.ceil(suggestedAsana.durationSeconds / 60)} {t('home.minSuffix')}</p>
-              </div>
-              <span className="material-symbols-outlined text-primary text-xl flex-shrink-0">arrow_forward</span>
-            </button>
-          </section>
+            </div>
+          </button>
+        ) : (
+          <div ref={dailyImpressionRef} className="rounded-2xl p-6 stagger-3 bg-surface-container border border-primary-container/40">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+              <p className="font-headline text-lg text-on-surface leading-tight">
+                {t('home.daily.doneTitle', { title: t(dailyTitleKey) })}
+              </p>
+            </div>
+            <p className="font-body text-sm text-on-surface-variant leading-relaxed">
+              {dailyNextSlot ? t('home.daily.doneEveningTeaser') : t('home.daily.doneAllBody')}
+            </p>
+          </div>
         )}
 
         {/* ── Daily Ritual — Breathing (redesigned with staggered breath rings) ── */}

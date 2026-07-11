@@ -186,6 +186,19 @@ export const EVENTS = Object.freeze({
   WELCOME_TO_PLUS_SHOWN:        'welcome_to_plus_shown',
   WELCOME_TO_PLUS_DISMISSED:    'welcome_to_plus_dismissed',
   WELCOME_TO_PLUS_CTA_TAPPED:   'welcome_to_plus_cta_tapped',
+
+  // ── Today's Practice — the composed daily session (DAU engine) ──
+  // COMPOSED fires once per composition with the full recipe (slot, pose
+  // count, duration, target dosha + why, check-in, reason codes, seed) — this
+  // is how we tune the composer from real usage. SHOWN/CTA_TAPPED are the card
+  // impression + tap (CTR denominator). STARTED/COMPLETED bracket the session;
+  // the per-pose pose_started events still fire inside the practice. The engine
+  // ships in chunk 1; these are wired at the surfaces in chunks 2–3.
+  DAILY_SESSION_COMPOSED:   'daily_session_composed',
+  DAILY_SESSION_SHOWN:      'daily_session_shown',
+  DAILY_SESSION_CTA_TAPPED: 'daily_session_cta_tapped',
+  DAILY_SESSION_STARTED:    'daily_session_started',
+  DAILY_SESSION_COMPLETED:  'daily_session_completed',
 })
 
 // ─── Internal state ──────────────────────────────────────────────────────

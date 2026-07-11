@@ -423,6 +423,38 @@ Local-scheduled reminders today; the schema anticipates server push later.
 - **Where**: Settings → Notifications (toggle + time picker).
 - **Props**: enabled `{time*}`; disabled `{time*}`; time_changed `{from*, to*}`.
 
+### 5.13 Today's Practice — composed daily session
+
+The one-tap, profile-tailored daily session on Home — the DAU engine. Composed
+client-side by `src/lib/dailySession.js` from signals we already collect
+(prakriti, vikriti, the day's check-in, time slot, recent history). Free.
+
+#### `daily_session_composed`
+- **Where**: each time the composer runs (Home load / slot change). This is the
+  tuning signal — it carries the full recipe so we can see *what* we prescribe.
+- **Props**: `{surface*, slot* ('morning'|'evening'), pose_count*, duration_s*,
+  target_dosha, dosha_source ('vikriti'|'prakriti'|'none'), checkin, reason_codes*
+  (array, e.g. ['slot:evening','pacify:pitta','checkin:stress']), seed}`.
+
+#### `daily_session_shown`
+- **Where**: the Home hero card enters the viewport (impression observer — same
+  50%/1s rule as other impressions). CTR denominator.
+- **Props**: `{slot*, pose_count*, duration_s*, state ('new'|'completed')}`.
+
+#### `daily_session_cta_tapped`
+- **Where**: the card's Start CTA.
+- **Props**: `{slot*, pose_count*, duration_s*, reason_codes*}`.
+
+#### `daily_session_started` / `daily_session_completed`
+- **Where**: practice begins / finishes for a composed daily session. The
+  per-pose `pose_started` events (§5.x) still fire inside.
+- **Props**: started `{slot*, pose_count*, duration_s*}`; completed
+  `{slot*, completed_count*, skipped_count*, total_poses*, duration_s*}`.
+
+> Chunk map: engine + `daily_session_composed` spec land in chunk 1; the card
+> events (shown/cta) in chunk 3; started/completed in chunk 2 alongside the
+> `/practice/daily` route.
+
 ## 6. What we already track in Supabase (preserved as-is)
 
 These continue firing into the personalization layer. Where a parallel
@@ -485,3 +517,4 @@ product-analytics event makes sense, it's listed in §5 above.
 | 2026-04-27 | initial draft | Chunk 1 — full taxonomy proposed |
 | 2026-04-27 | review pass | Added §5.8 Engagement & attention (scroll, CTR, impressions, heartbeat, sessions) and `screen_left`. Vendor decision: PostHog EU cloud. |
 | 2026-06-17 | Plus + media | Documented all events added during the Sanctuary Plus + personalization build: §5.10 Monetization (paywall funnel, promo, welcome-to-Plus, subscription mgmt), §5.11 Vikriti drift & protocols, §5.12 Notifications, and `health_consent_granted/revoked` in §5.7. Updated §7 for Art. 9 health-data consent. |
+| 2026-07-10 | Daily session | Added §5.13 Today's Practice — the composed daily-session DAU feature (daily_session_composed/shown/cta_tapped/started/completed). Engine in chunk 1. |

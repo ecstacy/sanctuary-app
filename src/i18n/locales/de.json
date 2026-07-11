@@ -543,6 +543,17 @@
       "47": "Den Körper gesund zu halten ist eine Pflicht, sonst können wir unseren Geist nicht stark und klar bewahren.",
       "48": "Frieden kommt von innen. Suche ihn nicht außerhalb.",
       "49": "Mitten in der Schwierigkeit liegt die Gelegenheit."
+    },
+    "daily": {
+      "eyebrow": "Heutige Praxis",
+      "meta": "{{min}} Min · {{count}} Haltungen",
+      "start": "Starten",
+      "reasonPacify": "{{dosha}} ausgleichen",
+      "reasonDosha": "Für dein {{dosha}}",
+      "reasonCheckin": "Du sagtest: {{mood}}",
+      "doneTitle": "{{title}} erledigt",
+      "doneEveningTeaser": "Komm heute Abend zum Ausklingen wieder.",
+      "doneAllBody": "Das war deine Praxis für heute. Bis morgen."
     }
   },
   "profile": {
@@ -994,7 +1005,9 @@
     "tilePickup": "Nimm dein {{dosha}}-Protokoll wieder auf",
     "tileStartSub": "Drei Tage Ernährung, Bewegung und Ruhe, abgestimmt auf deine Lesung.",
     "tilePickupSub": "Letztes Mal hat es geholfen — deine neueste Lesung legt eine weitere Runde nahe.",
-    "tileContinueSub": "Tag {{day}} von {{total}} — bleib im Rhythmus."
+    "tileContinueSub": "Tag {{day}} von {{total}} — bleib im Rhythmus.",
+    "dailyMorningTitle": "Morgenpraxis",
+    "dailyEveningTitle": "Abendliches Ausklingen"
   },
   "doshaQuizContent": {
     "questions": {
