@@ -543,6 +543,17 @@
       "47": "To keep the body in good health is a duty, otherwise we shall not be able to keep our mind strong and clear.",
       "48": "Peace comes from within. Do not seek it without.",
       "49": "In the middle of difficulty lies opportunity."
+    },
+    "daily": {
+      "eyebrow": "Today's Practice",
+      "meta": "{{min}} min · {{count}} poses",
+      "start": "Start",
+      "reasonPacify": "Rebalancing {{dosha}}",
+      "reasonDosha": "For your {{dosha}}",
+      "reasonCheckin": "You said: {{mood}}",
+      "doneTitle": "{{title}} done",
+      "doneEveningTeaser": "Come back this evening to wind down.",
+      "doneAllBody": "That's your practice for today. See you tomorrow."
     }
   },
   "profile": {
