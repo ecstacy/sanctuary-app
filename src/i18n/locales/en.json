@@ -611,7 +611,11 @@
       "timeLabel": "Time",
       "timeAria": "Reminder time",
       "blocked": "Notifications are blocked. Enable them in your device settings to receive reminders.",
-      "unsupported": "Notifications work in the Sanctuary mobile app — your preferences will apply once installed."
+      "unsupported": "Notifications work in the Sanctuary mobile app — your preferences will apply once installed.",
+      "streakSave": "Streak saver",
+      "streakSaveSub": "An evening nudge when your streak is at risk",
+      "windDown": "Evening wind-down",
+      "windDownSub": "A gentle reminder to unwind after a morning practice"
     },
     "account": {
       "section": "Account",
@@ -1421,5 +1425,25 @@
       "errKindUnsupported": "That code can't be redeemed here yet.",
       "errDefault": "That code couldn't be redeemed."
     }
+  },
+  "notifications": {
+    "practiceReminderTitle": "Time for your practice",
+    "practiceReminderBody": "Your mat is waiting. Five minutes is enough to start.",
+    "dailyReadyTitle": "Your practice is ready",
+    "dailyReadyBody": "A session made for your {{slot}}. Take a few minutes for yourself.",
+    "streakSaveTitle": "Keep your streak alive",
+    "streakSaveBody": "You’re on a {{days}}-day streak. A short practice keeps it going.",
+    "windDownTitle": "Time to wind down",
+    "windDownBody": "An evening session to help you unwind and prepare for rest.",
+    "vikritiDueTitle": "How are you feeling lately?",
+    "vikritiDueBody": "A quick check-in keeps your practice tuned to you.",
+    "slotMorning": "morning",
+    "slotEvening": "evening"
+  },
+  "reminderPrompt": {
+    "title": "Never miss your practice",
+    "body": "You’ve practiced twice — nice. Want a gentle daily reminder so it becomes a habit?",
+    "enable": "Enable reminders",
+    "notNow": "Not now"
   }
 }

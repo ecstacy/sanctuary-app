@@ -12,6 +12,9 @@ import { init as initAnalytics, track, EVENTS } from './lib/track'
 import { init as initCrash, recordError as crashRecordError } from './lib/crash'
 import { routeNameFor } from './lib/routeName'
 import { useNotifications } from './hooks/useNotifications'
+import usePracticeStats from './hooks/usePracticeStats'
+import useVikritiSchedule from './hooks/useVikritiSchedule'
+import i18n from './i18n'
 
 // Lazy-load pages for code-splitting
 const WelcomePage = lazy(() => import('./pages/WelcomePage'))
@@ -208,14 +211,75 @@ const NAV_PAGES = ['/home', '/discover', '/profile', '/routine', '/dosha', '/jou
 //   • Android battery-optimizer killed our process between launches
 //   • user toggled the pref on another device (server pref ≠ local OS)
 // One reapply per (user, prefs-blob) covers all three with no UI cost.
-function NotificationReapplyOnBoot() {
-  const { reapplyFromProfile } = useNotifications()
+// Reconciles the OS notification schedule from live app state. Local
+// notifications can't check state at fire time, so we recompute the desired
+// one-shots (see lib/notificationPlan) whenever an input changes: boot,
+// practice completed (stats.sessions), prefs (profile), language, vikriti due.
+// The rolling window means a user who never reopens still gets reminders for
+// a few days, and each open refreshes it.
+function NotificationReconciler() {
+  const { syncNotifications } = useNotifications()
+  const stats = usePracticeStats()
+  const vikriti = useVikritiSchedule()
+  const [lang, setLang] = useState(i18n.language)
   useEffect(() => {
-    // Hook returns a stable function reference per prefs change. Any in-
-    // app toggle goes through setPracticeReminder which re-schedules
-    // eagerly; this effect catches the boot + cross-device cases.
-    reapplyFromProfile?.()
-  }, [reapplyFromProfile])
+    const onLang = (l) => setLang(l)
+    i18n.on('languageChanged', onLang)
+    return () => i18n.off('languageChanged', onLang)
+  }, [])
+
+  const sessions = stats.sessions
+  useEffect(() => {
+    if (stats.loading) return
+    const now = new Date()
+    const ymd = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+    const todayStr = ymd(now)
+    const practicedDates = new Set()
+    const doneSlots = new Set()
+    for (const s of sessions || []) {
+      if (s?.date) practicedDates.add(s.date)
+      if (s?.date === todayStr && s?.routine_key === 'daily') {
+        const hr = s.created_at ? new Date(s.created_at).getHours() : 12
+        doneSlots.add(hr >= 17 ? 'evening' : 'morning')
+      }
+    }
+    syncNotifications({
+      practicedDates,
+      streak: stats.streak ?? 0,
+      doneSlotsToday: Array.from(doneSlots),
+      vikritiDue: !!vikriti?.isDue,
+    })
+    // lang in deps so a language switch re-bakes the scheduled copy.
+  }, [syncNotifications, sessions, stats.loading, stats.streak, vikriti?.isDue, lang])
+  return null
+}
+
+// Deep-links a tapped notification to the right place, keyed by the `kind`
+// stamped in its `extra` payload. Registered once for the signed-in session.
+const NOTIFICATION_ROUTES = {
+  practice_reminder: '/practice/daily',
+  wind_down:         '/practice/daily',
+  streak_save:       '/practice/daily',
+  vikriti_due:       '/vikriti',
+}
+function NotificationTapHandler() {
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!CapacitorApp) return
+    let handle
+    import('@capacitor/local-notifications')
+      .then(({ LocalNotifications }) =>
+        LocalNotifications.addListener('localNotificationActionPerformed', (action) => {
+          const kind = action?.notification?.extra?.kind || 'unknown'
+          track(EVENTS.NOTIFICATION_TAPPED, { kind })
+          const dest = NOTIFICATION_ROUTES[kind] || '/home'
+          navigate(dest)
+        }),
+      )
+      .then((h) => { handle = h })
+      .catch(() => { /* web / plugin missing — no-op */ })
+    return () => { handle?.remove?.() }
+  }, [navigate])
   return null
 }
 
@@ -242,7 +306,8 @@ function AppRoutes() {
           some Android OEMs they're aggressively trimmed by battery
           optimizers — the cheapest fix is to re-schedule once per
           launch from the saved pref. No-op on web. */}
-      {user && <NotificationReapplyOnBoot />}
+      {user && <NotificationReconciler />}
+      {user && <NotificationTapHandler />}
       <Suspense fallback={<LoadingScreen />}>
       <PageTransition>
         <Routes>

@@ -611,7 +611,11 @@
       "timeLabel": "Zeit",
       "timeAria": "Erinnerungszeit",
       "blocked": "Benachrichtigungen sind blockiert. Aktiviere sie in den Geräteeinstellungen, um Erinnerungen zu erhalten.",
-      "unsupported": "Benachrichtigungen funktionieren in der Sanctuary-App — deine Einstellungen gelten, sobald sie installiert ist."
+      "unsupported": "Benachrichtigungen funktionieren in der Sanctuary-App — deine Einstellungen gelten, sobald sie installiert ist.",
+      "streakSave": "Serien-Retter",
+      "streakSaveSub": "Ein Abend-Hinweis, wenn deine Serie in Gefahr ist",
+      "windDown": "Abendliches Ausklingen",
+      "windDownSub": "Eine sanfte Erinnerung zum Ausklingen nach einer Morgenpraxis"
     },
     "account": {
       "section": "Konto",
@@ -1421,5 +1425,25 @@
       "errKindUnsupported": "Dieser Code kann hier noch nicht eingelöst werden.",
       "errDefault": "Dieser Code konnte nicht eingelöst werden."
     }
+  },
+  "notifications": {
+    "practiceReminderTitle": "Zeit für deine Praxis",
+    "practiceReminderBody": "Deine Matte wartet. Fünf Minuten genügen für den Anfang.",
+    "dailyReadyTitle": "Deine Praxis ist bereit",
+    "dailyReadyBody": "Eine Sitzung für deinen {{slot}}. Nimm dir ein paar Minuten für dich.",
+    "streakSaveTitle": "Halte deine Serie am Leben",
+    "streakSaveBody": "Du hast eine {{days}}-Tage-Serie. Eine kurze Praxis hält sie am Laufen.",
+    "windDownTitle": "Zeit zum Ausklingen",
+    "windDownBody": "Eine Abendsitzung, um zur Ruhe zu kommen und dich auf den Schlaf vorzubereiten.",
+    "vikritiDueTitle": "Wie fühlst du dich in letzter Zeit?",
+    "vikritiDueBody": "Ein kurzer Check-in hält deine Praxis auf dich abgestimmt.",
+    "slotMorning": "Morgen",
+    "slotEvening": "Abend"
+  },
+  "reminderPrompt": {
+    "title": "Verpasse deine Praxis nie",
+    "body": "Du hast zweimal geübt — schön. Möchtest du eine sanfte tägliche Erinnerung, damit es zur Gewohnheit wird?",
+    "enable": "Erinnerungen aktivieren",
+    "notNow": "Nicht jetzt"
   }
 }

@@ -11,6 +11,7 @@ import useVikritiSchedule from '../hooks/useVikritiSchedule'
 import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { useIsPremium } from '../hooks/useIsPremium'
 import VikritiCard from '../components/VikritiCard'
+import ReminderPrompt from '../components/ReminderPrompt'
 import PaywallSheet from '../components/PaywallSheet'
 import WelcomeToPlusCard from '../components/WelcomeToPlusCard'
 import * as analytics from '../lib/analytics'
@@ -603,6 +604,9 @@ export default function HomePage() {
             </p>
           </div>
         )}
+
+        {/* One-time nudge to enable the daily reminder (after 2 daily sessions). */}
+        <ReminderPrompt />
 
         {/* ── Daily Ritual — Breathing (redesigned with staggered breath rings) ── */}
         <button
