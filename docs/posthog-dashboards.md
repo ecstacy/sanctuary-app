@@ -8,7 +8,28 @@ This is the operator-side companion to the analytics taxonomy. The events
 exist in code; this doc tells you what to assemble in PostHog so they
 become decisions instead of rows in a database.
 
-We recommend **five named insights**, grouped into **two dashboards**.
+**Four dashboards**, plus a set of cross-cutting insights that don't earn
+their own board. Provisioning is scripted — see
+[`scripts/provision-posthog-dashboards.mjs`](../scripts/provision-posthog-dashboards.mjs).
+The sections below are the human-readable spec that script mirrors; when you
+change one, change the other.
+
+- **A — Onboarding & Conversion**
+- **B — Practice Engagement**
+- **C — Daily Session & Habit** *(the DAU feature — its own board)*
+- **D — Plus & Monetization**
+
+## The `app_language` breakdown — read this first
+
+Every board below can be split by `app_language` (`en` / `de` / `hi`), a
+super-property set on every event (see `src/i18n/index.js`). For the de/hi
+rollout this is *the* question: do non-English users onboard, complete
+practices, and retain at the same rate as English users? Add it as a
+secondary breakdown on the funnels and retention charts named below and
+compare cohorts side-by-side. A German-only drop at a specific step almost
+always means a translation is confusing or a layout broke under longer
+strings; a Hindi-only drop is worth pairing with the pending human-review
+gate on the Hindi copy.
 
 ---
 
@@ -32,6 +53,7 @@ Settings:
 - **Conversion window**: 24 hours
 - **Breakdown**: by `method` (email vs google) on step 1 — surfaces whether
   Google sign-in dropoff is different from email
+- **Secondary breakdown**: by `app_language` — the de/hi onboarding health check
 - **Date range**: last 30 days, comparing to previous 30
 
 What to watch:
@@ -106,33 +128,181 @@ Series:
 
 Time-series, last 30 days. Watch the voice-on/off ratio per dosha cohort
 (super-prop breakdown by `dosha_primary`). Vata-heavy users
-typically prefer more cues; pitta-heavy prefer silence.
+typically prefer more cues; pitta-heavy prefer silence. A second cut by
+`app_language` tells you whether the *localized* voice audio lands — if
+Hindi users toggle voice off far more than English, the TTS pronunciation
+of Sanskrit names is probably the culprit (a known review gate).
+
+---
+
+## Dashboard C — "Daily Session & Habit"
+
+The DAU feature. "Today's Practice" is the composed, profile-tailored
+session on Home and the thing notifications drive people back to. This
+board answers two questions: does the composed session convert, and does
+the habit loop (composed → practiced → reminded → returned) actually close?
+
+### C1. Daily-session conversion funnel
+
+`Insights → New → Funnel`
+
+Steps:
+1. `daily_session_composed`
+2. `content_impression` where `surface = 'home_daily_session'`
+3. `daily_session_cta_tapped`
+4. `daily_session_started`
+5. `daily_session_completed`
+
+Settings:
+- **Breakdown**: by `slot` (`morning` / `evening`) — the two sessions have
+  different intent; morning energize vs. evening wind-down convert differently
+- **Conversion window**: 6 hours (a slot is a half-day)
+- **Secondary breakdown**: `app_language`
+
+Reading it:
+- composed → impression near 100% (it renders on Home). A gap means the
+  card is below the fold or a render bug.
+- impression → tap is the *hook* strength. Low tap-through on evening but
+  not morning → the evening card copy isn't compelling after a long day.
+- started → completed is session-length tolerance; pair with
+  `total_duration_seconds` (we target ~13 min).
+
+### C2. Personalization pull-through
+
+`Insights → New → Trends`
+
+Series: `daily_session_completed`, breakdown by `dosha_source`
+(`prakriti` / `vikriti` / `none`) and separately by `reason_codes`.
+
+The question: does a session composed from a *known* dosha complete more
+often than the `none` fallback? If not, the weighting engine isn't earning
+its complexity — either the composer isn't differentiating enough or the
+`reason_codes` we surface ("chosen for your Pitta balance") don't build trust.
+Pin as a table sorted by completion rate.
+
+### C3. Notification → return loop
+
+`Insights → New → Funnel`
+
+Steps:
+1. `notification_tapped` (filter `kind = 'practice_reminder'`)
+2. `daily_session_started`
+3. `daily_session_completed`
+
+**Conversion window**: 2 hours. This is the whole reason notifications
+exist — a tap that doesn't lead to a completed session is a buzz we
+shouldn't have sent. Build the same funnel filtered to `kind = 'streak_save'`
+and `kind = 'wind_down'` to compare which reminder types actually convert;
+retire or retune any type whose tap→complete rate is near zero.
+
+Companion trend: `notification_tapped` broken down by `kind`, over 30 days —
+the raw "are people tapping" signal.
+
+### C4. Reminder adoption & streaks
+
+`Insights → New → Trends`
+
+Series:
+- `notification_permission_result` breakdown by `granted` — OS-level opt-in rate
+- `notification_reminder_enabled` vs `notification_reminder_disabled` — net reminder adoption
+- `notification_prompt_shown` → `notification_prompt_accepted` as a mini-funnel —
+  is the post-2nd-session nudge working, or just annoying? (accept rate <15%
+  means soften or delay it)
+
+Secondary: `streak_days` distribution (super-prop) as a histogram — the
+shape of your habit tail. A spike at exactly `3` is streak-save doing its
+job at the `STREAK_MIN` threshold.
+
+---
+
+## Dashboard D — "Plus & Monetization"
+
+The upgrade funnel. Stripe may still be test-mode at launch — build the
+board now so test-mode traffic validates the wiring and real revenue has
+somewhere to land day one.
+
+### D1. Paywall → checkout funnel
+
+`Insights → New → Funnel`
+
+Steps:
+1. `paywall_shown`
+2. `paywall_plan_selected`
+3. `paywall_checkout_started`
+4. `paywall_checkout_completed`
+
+Settings:
+- **Breakdown**: by `surface` — *which* locked feature drives upgrades
+  (e.g. vikriti history vs. an inline lock). Your highest-converting surface
+  is where the value story lands; the lowest is either mis-placed or the
+  feature behind it isn't worth paying for.
+- **Conversion window**: 1 hour
+- **Secondary breakdown**: `app_language` — willingness-to-pay differs by market
+
+Reading it:
+- shown → plan_selected is *intent*. A big drop means the paywall doesn't
+  make the case; iterate copy/pricing presentation.
+- checkout_started → completed is *friction*. A drop here is a Stripe/UX
+  problem, not a value problem — check the
+  [Plus runbook](./sanctuary-plus-runbook.md) for webhook/checkout failures.
+
+### D2. Promo redemption path
+
+`Insights → New → Funnel`
+
+Steps:
+1. `promo_code_opened`
+2. `promo_code_submitted`
+3. `promo_code_redeemed`
+
+Plus a companion `promo_code_failed` trend broken down by failure reason —
+a spike in failures on a specific code means it expired or was fat-fingered
+in a campaign asset.
+
+### D3. Plus activation
+
+`Insights → New → Trends`
+
+Series:
+- `paywall_checkout_completed` + `promo_code_redeemed` = total grants
+- `welcome_to_plus_shown` → `welcome_to_plus_cta_tapped` mini-funnel — do
+  new Plus members actually engage the feature they unlocked, or churn silently?
+
+Watch `vikriti_plus_action_tapped` alongside the free vikriti action to see
+which surface converts free→plus intent (see §5.10 of the taxonomy for the
+free-vs-plus action split).
 
 ---
 
 ## Cross-cutting insights (no dedicated dashboard)
 
-### C1. CTR by surface
+### X1. CTR by surface
 
 `Insights → New → Trends → Formula`
 
 For each surface that has both an impression and a tap event:
 
 ```
-A = count(content_impression where surface = "home_suggested_asana")
-B = count(asana_card_tapped where surface = "home_suggested" || source = "home_suggested_asana")
+A = count(content_impression where surface = "<surface>")
+B = count(<the tap event for that surface>)
 formula: B / A
 ```
 
-Build one of these per surface:
-- `home_suggested_asana` (asana tap)
-- `discover_quick_routines` (routine tap)
-- `discover_explore_asanas` (asana tap)
+Build one per surface with a live impression:
+- `home_daily_session` → tap is `daily_session_cta_tapped`
+- `discover_quick_routines` → tap is `routine_card_tapped`
+- `discover_explore_asanas` → tap is `asana_card_tapped`
+- `discover_breathwork` → breathwork tap
+- `dosha_profile`, `dinacharya`, `vikriti_history` → their respective taps
 
 Compare CTRs side-by-side. The lowest one is your weakest surface — it
 either isn't visible enough or doesn't speak to user intent.
 
-### C2. CTA performance board
+> Note: the old `home_suggested_asana` surface was removed when the daily-
+> session hero replaced the single-asana suggestion card. Use
+> `home_daily_session` (above) — do not resurrect the old surface name.
+
+### X2. CTA performance board
 
 `Insights → New → Trends`
 
@@ -140,7 +310,7 @@ Total `cta_clicked` count, breakdown by `cta_id`. Sort descending.
 Surfaces which CTAs are loved vs. ignored. Useful for A/B label tests
 (swap copy on the lowest performer; compare next month).
 
-### C3. Retention
+### X3. Retention
 
 `Insights → New → Retention`
 
@@ -148,39 +318,45 @@ Surfaces which CTAs are loved vs. ignored. Useful for A/B label tests
 - **Returning event**: `practice_started`
 - **Period**: weekly
 - **Window**: 8 weeks
+- **Breakdown**: `app_language` — retention is the truest cross-market signal
 
 This is the long-term truth: do users actually come back to practice?
 If week-1 retention <40% the product isn't sticky enough yet — work on
 notifications, streak mechanics, or the morning ritual prompt before
 chasing more growth.
 
-Secondary retention chart with `Returning event = pose_completed` to
-exclude users who started but never actually moved. Tighter signal.
+Secondary retention chart with `Returning event = daily_session_completed`
+to measure the habit feature specifically — this is the DAU metric that
+justifies the composer + notifications investment.
 
-### C4. Engagement quality cohorts
+### X4. Engagement quality cohorts
 
 For any of the above, add **breakdown by `experience_level`** (1–7) as a
 super-property. Lets you compare beginner vs. seasoned-yogi behavior.
 
 Two findings to look for:
 - Do level-1 users skip more than level-3? → tutorial gap
-- Do level-7 users still tap the suggested asana? → personalization
+- Do level-7 users still tap the daily session? → personalization
   staleness; engine isn't adapting to advanced practitioners
 
 ---
 
 ## Setting up alerts
 
-PostHog → Insights → … → Subscribe.
+PostHog → Insights → … → Subscribe. Subscriptions and threshold alerts
+are configured in the UI per-insight; the provisioning script creates the
+insights but **cannot** create the subscriptions — do these by hand once.
 
 Recommended weekly digest (Mondays 09:00 CET):
 - Onboarding funnel (A1)
 - Practice completion funnel (B1)
-- Retention (C3)
+- Daily-session conversion (C1)
+- Retention (X3)
 
 Recommended threshold alerts:
 - **A2 login failure rate >5%** for 2h → Slack
 - **B1 practice completion drops >10pp WoW** → Slack
+- **C3 reminder tap→complete near zero** → Slack (a reminder type is buzzing for nothing)
 - **`error_caught` events spike >50/h** → Slack
 
 ---
@@ -203,6 +379,21 @@ WHERE event IN ('practice_started', 'practice_completed')
   AND timestamp >= now() - INTERVAL 30 DAY
 GROUP BY dosha
 ORDER BY sessions DESC
+```
+
+### Language cohort comparison (de/hi rollout)
+
+```sql
+SELECT
+  properties.app_language AS lang,
+  countIf(event = 'daily_session_started') AS started,
+  countIf(event = 'daily_session_completed') AS completed,
+  round(completed / started * 100, 1) AS complete_pct
+FROM events
+WHERE event IN ('daily_session_started', 'daily_session_completed')
+  AND timestamp >= now() - INTERVAL 30 DAY
+GROUP BY lang
+ORDER BY started DESC
 ```
 
 ### Top abandoned poses
@@ -244,7 +435,8 @@ ORDER BY visits DESC
 ## Maintaining the dashboards
 
 - **Add new insights to the doc, not just to PostHog.** Otherwise the
-  next person doesn't know what's been tried.
+  next person doesn't know what's been tried. The provisioning script is
+  the source of truth — edit it and re-run rather than clicking in the UI.
 - **Archive insights nobody opens** after 60 days idle. Dashboard rot is
   worse than missing data.
 - **Re-baseline** every release. A funnel that drops 5% might be a code
