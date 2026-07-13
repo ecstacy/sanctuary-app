@@ -34,17 +34,26 @@ const MANAGED_ID_BASE = 1100
 const MANAGED_ID_COUNT = 8
 const MANAGED_IDS = Array.from({ length: MANAGED_ID_COUNT }, (_, i) => MANAGED_ID_BASE + i)
 
+// A soothing singing-bowl chime (res/raw/singing_bowl.wav) instead of the OS
+// default. Android binds sound to the CHANNEL and a channel's sound is
+// immutable once created — so to change it we version the channel ids (…_v2)
+// and delete the old channels in ensureChannels(). Bump the suffix again if
+// the sound ever changes.
+const NOTIF_SOUND = 'singing_bowl.wav'
+
 // OS channels (Android) so a user can mute one kind in system settings.
 const CHANNELS = [
-  { id: 'reminders', name: 'Practice reminders', description: 'Your daily practice reminder', importance: 4 },
-  { id: 'streaks',   name: 'Streaks',            description: 'Nudges to keep your streak alive', importance: 4 },
-  { id: 'insights',  name: 'Insights',           description: 'Check-in and wind-down nudges',    importance: 3 },
+  { id: 'reminders_v2', name: 'Practice reminders', description: 'Your daily practice reminder', importance: 4, sound: NOTIF_SOUND },
+  { id: 'streaks_v2',   name: 'Streaks',            description: 'Nudges to keep your streak alive', importance: 4, sound: NOTIF_SOUND },
+  { id: 'insights_v2',  name: 'Insights',           description: 'Check-in and wind-down nudges',    importance: 3, sound: NOTIF_SOUND },
 ]
+// Legacy channel ids (default sound) — deleted on init so the new ones apply.
+const LEGACY_CHANNEL_IDS = ['reminders', 'streaks', 'insights']
 const KIND_CHANNEL = {
-  practice_reminder: 'reminders',
-  streak_save:       'streaks',
-  wind_down:         'insights',
-  vikriti_due:       'insights',
+  practice_reminder: 'reminders_v2',
+  streak_save:       'streaks_v2',
+  wind_down:         'insights_v2',
+  vikriti_due:       'insights_v2',
 }
 
 const DEFAULT_REMINDER_TIME = '07:00'
@@ -69,6 +78,10 @@ function notificationContent(kind, args = {}) {
 
 async function ensureChannels() {
   if (Capacitor.getPlatform() !== 'android') return
+  // Drop legacy channels (default sound) so the versioned ones take effect.
+  for (const id of LEGACY_CHANNEL_IDS) {
+    try { await LocalNotifications.deleteChannel({ id }) } catch { /* absent is fine */ }
+  }
   for (const ch of CHANNELS) {
     try { await LocalNotifications.createChannel(ch) }
     catch (err) { console.debug('[notifications] createChannel failed:', err?.message) }
@@ -179,6 +192,7 @@ export function useNotifications() {
       // the default exclamation icon. See res/drawable/ic_stat_lotus.xml.
       smallIcon: 'ic_stat_lotus',
       iconColor: '#3f7a52',
+      sound: NOTIF_SOUND,
       schedule: { at: d.at, allowWhileIdle: true },
       extra: { kind: d.kind },
     }))
