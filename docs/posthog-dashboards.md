@@ -343,21 +343,21 @@ Two findings to look for:
 
 ## Setting up alerts
 
-PostHog → Insights → … → Subscribe. Subscriptions and threshold alerts
-are configured in the UI per-insight; the provisioning script creates the
-insights but **cannot** create the subscriptions — do these by hand once.
+**Scripted** — `scripts/provision-posthog-alerts.mjs` (run *after* the
+dashboards script; it resolves insights by their `provisioned:*` tag). Dry-run
+by default; `--apply` to write. `npm run dashboards:alerts` /
+`dashboards:alerts:apply`. It creates:
 
-Recommended weekly digest (Mondays 09:00 CET):
-- Onboarding funnel (A1)
-- Practice completion funnel (B1)
-- Daily-session conversion (C1)
-- Retention (X3)
+- **Weekly email digests** (Mondays 09:00 CEST) → the account email (override
+  with `POSTHOG_DIGEST_EMAIL`): Onboarding funnel (A1), Practice completion
+  (B1), Daily-session conversion (C1), Retention (X3).
+- **Threshold alert**: A2 login-failure rate `> 5`, email-routed.
 
-Recommended threshold alerts:
-- **A2 login failure rate >5%** for 2h → Slack
-- **B1 practice completion drops >10pp WoW** → Slack
-- **C3 reminder tap→complete near zero** → Slack (a reminder type is buzzing for nothing)
-- **`error_caught` events spike >50/h** → Slack
+**Still UI-only** (a personal API key can't provision a Slack integration):
+- **Slack routing** for any of the above — add the Slack destination by hand.
+- Relative/percent-change alerts that PostHog only exposes in the UI, e.g.
+  **B1 practice completion drops >10pp WoW**, **C3 reminder tap→complete near
+  zero**, **`error_caught` spike >50/h**. Add these once when you want Slack.
 
 ---
 
