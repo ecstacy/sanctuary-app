@@ -174,6 +174,11 @@ export function useNotifications() {
       id: MANAGED_IDS[i] ?? (MANAGED_ID_BASE + i),
       ...notificationContent(d.kind, d.args),
       channelId: KIND_CHANNEL[d.kind],
+      // Status-bar silhouette (white alpha mask, tinted by iconColor). Set here
+      // as well as in capacitor.config so the schedule call never falls back to
+      // the default exclamation icon. See res/drawable/ic_stat_lotus.xml.
+      smallIcon: 'ic_stat_lotus',
+      iconColor: '#3f7a52',
       schedule: { at: d.at, allowWhileIdle: true },
       extra: { kind: d.kind },
     }))

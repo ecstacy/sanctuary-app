@@ -7,6 +7,10 @@
       "overlaysWebView": false,
       "style": "DARK",
       "backgroundColor": "#00000000"
+    },
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_lotus",
+      "iconColor": "#3f7a52"
     }
   }
 }
