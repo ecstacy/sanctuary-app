@@ -536,7 +536,10 @@ export default function DiscoverPage() {
         </div>
 
         {/* ── Ayurvedic tip ── */}
-        <div className="bg-primary-container/15 rounded-xl p-5 stagger-5">
+        {/* Hairline border + slightly stronger tint so the card stays distinct
+            from the page background on every dosha theme — the Pitta palette's
+            primary-container is a pale orange that otherwise melts into it. */}
+        <div className="bg-primary-container/25 border border-primary/10 rounded-xl p-5 stagger-5">
           <div className="flex items-start gap-3">
             <span className="material-symbols-outlined text-primary text-lg mt-0.5">local_florist</span>
             <div>
