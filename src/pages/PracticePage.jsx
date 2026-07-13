@@ -1231,14 +1231,24 @@ export default function PracticePage() {
             <div className="mb-4 w-full flex justify-center">
               <PoseFigure
                 poseKey={currentAsana.poseKey}
-                size={Math.min(360, typeof window !== 'undefined' ? window.innerWidth - 48 : 320)}
+                size={Math.min(
+                  430,
+                  typeof window !== 'undefined' ? window.innerWidth - 48 : 320,
+                  // Cap by viewport height too so the pose name, timer and the
+                  // instruction subtitle below always fit without the flex
+                  // column compressing (and clipping) the subtitle slot.
+                  typeof window !== 'undefined' ? window.innerHeight * 0.44 : 320,
+                )}
                 breathing={!isPaused}
                 variant="video"
+                // Portrait pose photos in a square box crop top+bottom; bias the
+                // visible window upward so the head keeps its headroom.
+                objectPosition="center 30%"
               />
             </div>
             <h2 className="font-headline text-2xl text-on-surface text-center mb-0.5">{currentAsana.sanskrit}</h2>
             <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">{currentAsana.english}</p>
-            <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={140} />
+            <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={92} />
 
             {/* ── Inline instruction subtitle ───────────────────────────────
                 FIXED-HEIGHT slot — not min-height. The parent flex column
@@ -1250,8 +1260,8 @@ export default function PracticePage() {
                 and the slot is invisible-but-present when narration is
                 done (instructionIndex === -1). */}
             <div
-              className="mt-5 w-full max-w-sm px-4 flex flex-col items-center justify-start overflow-hidden"
-              style={{ height: '7.5rem' }}
+              className="mt-4 w-full max-w-sm px-4 flex flex-col items-center justify-start overflow-hidden flex-shrink-0"
+              style={{ height: '8rem' }}
               aria-live="polite"
               aria-atomic="true"
             >
@@ -1260,7 +1270,7 @@ export default function PracticePage() {
                 && Array.isArray(currentAsana.instructions)
                 && currentAsana.instructions[instructionIndex] && (
                 <>
-                  <p className="font-body text-sm text-on-surface-variant text-center leading-relaxed line-clamp-3">
+                  <p className="font-body text-sm text-on-surface-variant text-center leading-relaxed line-clamp-4">
                     {currentAsana.instructions[instructionIndex]}
                   </p>
                   <button
