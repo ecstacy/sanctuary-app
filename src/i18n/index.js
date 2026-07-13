@@ -18,6 +18,8 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
+import { setSuperProps } from '../lib/track'
+
 import en from './locales/en.json'
 import hi from './locales/hi.json'
 import de from './locales/de.json'
@@ -49,16 +51,22 @@ i18n
     // detection (detect.js) so we can weight region signals our way.
   })
 
-// Persist every language change so next launch skips detection.
+// Persist every language change so next launch skips detection. Also keep
+// `app_language` on the analytics super-props so every event can be broken
+// down by UI language — the key dimension for the de/hi rollout ("do Hindi
+// users complete practices at the same rate?"). Super-props are inert until
+// an event fires and consent gating still applies, so this is safe pre-consent.
 i18n.on('languageChanged', (lng) => {
   writeStoredLanguage(lng)
+  setSuperProps({ app_language: lng })
   if (typeof document !== 'undefined') {
     document.documentElement.lang = lng
     document.documentElement.dir = i18n.dir(lng)
   }
 })
 
-// Set initial <html lang> and dir on first paint.
+// Seed the initial super-prop and <html lang>/dir on first paint.
+setSuperProps({ app_language: initialLanguage })
 if (typeof document !== 'undefined') {
   document.documentElement.lang = initialLanguage
   document.documentElement.dir = i18n.dir(initialLanguage)

@@ -16,7 +16,11 @@
     "preview": "vite preview",
     "postinstall": "patch-package",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "dashboards": "node scripts/provision-posthog-dashboards.mjs",
+    "dashboards:apply": "node scripts/provision-posthog-dashboards.mjs --apply",
+    "dashboards:alerts": "node scripts/provision-posthog-alerts.mjs",
+    "dashboards:alerts:apply": "node scripts/provision-posthog-alerts.mjs --apply"
   },
   "dependencies": {
     "@aparajita/capacitor-biometric-auth": "^10.0.0",

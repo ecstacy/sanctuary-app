@@ -54,6 +54,7 @@ Set once on `identify()` and on app start. Never duplicated per-event.
 |---|---|---|---|
 | `platform` | `'web' \| 'android' \| 'ios'` | Capacitor.getPlatform() | |
 | `app_version` | string | `import.meta.env.VITE_APP_VERSION` | |
+| `app_language` | `'en' \| 'de' \| 'hi'` | `i18n.language` (registered in `src/i18n/index.js`, re-set on `languageChanged`) | breakdown dimension for the de/hi rollout |
 | `dosha_primary` | `'vata' \| 'pitta' \| 'kapha' \| null` | `profile.dosha_details.primary` | |
 | `dosha_secondary` | same | profile | |
 | `vikriti_primary` | same | latest vikriti row | |
