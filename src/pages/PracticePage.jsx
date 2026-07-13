@@ -844,6 +844,36 @@ export default function PracticePage() {
             </p>
           </div>
 
+          {/* ── Practice plan — the sequence of poses in this session, so the
+               user knows what they're starting before they commit. Display-only
+               list: thumbnail, name, per-pose duration. ── */}
+          <section aria-label={t('practice.planAria')} className="pb-5 stagger-4">
+            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">
+              {t('practice.planHeader', { count: routine.asanas.length })}
+            </p>
+            <div className="flex flex-col gap-2">
+              {routine.asanas.map((a, i) => (
+                <div
+                  key={`${a.poseKey}-${i}`}
+                  className="flex items-center gap-3 bg-surface-container rounded-lg p-2.5"
+                >
+                  <div className="w-12 h-12 rounded-md overflow-hidden flex-shrink-0 bg-surface-container-high">
+                    <PoseFigure poseKey={a.poseKey} size={48} breathing={false} variant="image" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-body font-semibold text-sm text-on-surface truncate">{a.sanskrit}</p>
+                    <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider truncate">{a.english}</p>
+                  </div>
+                  <span className="font-label text-[10px] text-primary font-semibold flex-shrink-0">
+                    {a.durationSeconds >= 60
+                      ? t('practice.planMinutes', { min: Math.round(a.durationSeconds / 60) })
+                      : t('practice.planSeconds', { sec: a.durationSeconds })}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* ── Inline check-in — always visible to maximize the chance the
                user actually answers (collapsed accordions are mostly ignored
                and starve the analytics that personalize the experience).

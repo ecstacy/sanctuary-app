@@ -109,6 +109,21 @@ export default function RecommendationsPage() {
     }
   }
 
+  // ── Practice with a real asana → open its detail page (explore) ──
+  function handlePracticeExplore(recId, practiceIndex, practice) {
+    if (user?.id) {
+      analytics.logContentEvent({
+        userId: user.id,
+        eventType: analytics.EVENT_TYPES.CLICKED,
+        contentType: analytics.CONTENT_TYPES.ASANA,
+        contentId: practice.poseId,
+        surface: analytics.SURFACES.SEARCH_RESULT,
+        context: { query, from: 'recommendation_practice', practice_title: practice.title },
+      })
+    }
+    navigate(`/asana/${practice.poseId}`)
+  }
+
   // ── "Also Related" card click — log `clicked`, then pivot the search ──
   function handleRelatedClick(rec) {
     if (user?.id) {
@@ -269,11 +284,17 @@ export default function RecommendationsPage() {
               <div className="flex flex-col gap-3">
                 {topResult.practices.map((practice, i) => {
                   const isExpanded = expandedPractice === `${topResult.id}-${i}`
+                  // Rows backed by a real asana open its detail page (explore);
+                  // the rest keep the tap-to-expand description (no asana to open).
+                  const canExplore = !!practice.poseId
                   return (
                     <button
                       key={i}
-                      onClick={() => handlePracticeToggle(topResult.id, i, practice.title)}
+                      onClick={() => canExplore
+                        ? handlePracticeExplore(topResult.id, i, practice)
+                        : handlePracticeToggle(topResult.id, i, practice.title)}
                       className="bg-surface-container rounded-lg p-4 text-left transition-all active:scale-[0.98] w-full"
+                      aria-label={canExplore ? t('recommendations.explorePose', { pose: practice.title }) : undefined}
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
@@ -289,12 +310,12 @@ export default function RecommendationsPage() {
                           <span className="font-label text-[10px] text-primary font-semibold">{practice.duration}</span>
                           <span className="font-label text-[9px] text-on-surface-variant/50 uppercase">{practice.level}</span>
                         </div>
-                        <span className={`material-symbols-outlined text-on-surface-variant/30 text-sm transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
-                          expand_more
+                        <span className={`material-symbols-outlined text-on-surface-variant/30 text-sm transition-transform duration-200 ${!canExplore && isExpanded ? 'rotate-180' : ''}`}>
+                          {canExplore ? 'chevron_right' : 'expand_more'}
                         </span>
                       </div>
-                      {/* Expanded description */}
-                      <div className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-24 mt-3 opacity-100' : 'max-h-0 opacity-0'}`}>
+                      {/* Expanded description — only for rows with no asana to open */}
+                      <div className={`overflow-hidden transition-all duration-300 ${!canExplore && isExpanded ? 'max-h-24 mt-3 opacity-100' : 'max-h-0 opacity-0'}`}>
                         <p className="font-body text-xs text-on-surface-variant leading-relaxed pl-14">
                           {practice.description}
                         </p>
