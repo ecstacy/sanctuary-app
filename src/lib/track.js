@@ -213,6 +213,10 @@ export const EVENTS = Object.freeze({
   DAILY_SESSION_CTA_TAPPED: 'daily_session_cta_tapped',
   DAILY_SESSION_STARTED:    'daily_session_started',
   DAILY_SESSION_COMPLETED:  'daily_session_completed',
+
+  // Acquisition — fired once per install when the Play Install Referrer
+  // carries utm_* params (see lib/installReferrer.js + growth-plan §4).
+  INSTALL_ATTRIBUTED:       'install_attributed',
 })
 
 // ─── Internal state ──────────────────────────────────────────────────────
