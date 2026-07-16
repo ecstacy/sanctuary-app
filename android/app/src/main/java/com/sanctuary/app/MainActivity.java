@@ -12,8 +12,9 @@ public class MainActivity extends BridgeActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // Register the ExternalBrowser plugin
+        // Register local plugins
         registerPlugin(ExternalBrowserPlugin.class);
+        registerPlugin(InstallReferrerPlugin.class);
 
         super.onCreate(savedInstanceState);
         Uri data = getIntent().getData();

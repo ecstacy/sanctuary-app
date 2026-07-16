@@ -9,6 +9,7 @@ import BottomNav from './components/BottomNav'
 import DoshaThemeProvider from './components/DoshaThemeProvider'
 import { supabase } from './lib/supabase'
 import { init as initAnalytics, track, EVENTS } from './lib/track'
+import { readInstallReferrerOnce } from './lib/installReferrer'
 import { init as initCrash, recordError as crashRecordError } from './lib/crash'
 import { routeNameFor } from './lib/routeName'
 import { useNotifications } from './hooks/useNotifications'
@@ -466,6 +467,9 @@ export default function App() {
     initAnalytics()
     initCrash()
     track(EVENTS.APP_OPENED, { cold_start: true })
+    // First-launch install attribution (Android only; internally guarded to
+    // run once per install — see lib/installReferrer.js).
+    readInstallReferrerOnce()
 
     // ── Global JS error handlers ─────────────────────────────────────
     // Catches uncaught exceptions and unhandled promise rejections,

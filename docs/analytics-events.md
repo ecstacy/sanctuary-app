@@ -478,6 +478,22 @@ client-side by `src/lib/dailySession.js` from signals we already collect
 > events (shown/cta) in chunk 3; started/completed in chunk 2 alongside the
 > `/practice/daily` route.
 
+### 5.14 Acquisition — install attribution
+
+- **`install_attributed`** — fired at most once per install, on first launch,
+  when the Play Install Referrer carries a `utm_source` (the website's store
+  badge re-encodes campaign UTMs into the store URL's `referrer=` param — see
+  `website/assets/site.js`, `src/lib/installReferrer.js`,
+  [growth-plan §4](./growth-plan.md)).
+- **Props**: `{utm_source*, utm_medium, utm_campaign, utm_content}`. Play's
+  organic default (`utm_source=google-play, utm_medium=organic`) also fires —
+  the breakdown separates campaigns from organic.
+- **Super-props**: `acquisition_source` + `acquisition_campaign` are pinned so
+  every subsequent event of the user is cohortable by acquisition channel
+  (e.g. Dashboard C funnels split by campaign).
+- Sideloads/emulators have no referrer → no event; a transient referrer-service
+  error retries next launch.
+
 ## 6. What we already track in Supabase (preserved as-is)
 
 These continue firing into the personalization layer. Where a parallel
