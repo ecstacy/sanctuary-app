@@ -72,14 +72,25 @@ logged-in session. → *Fix:* set `android:allowBackup="false"` and
 `android:fullBackupContent="false"` (a wellness app has nothing that benefits
 from backup, and the tokens are the crown jewels).
 
-**5. 🔴 SELF-GRANT PREMIUM — CONFIRMED VULNERABLE (2026-07-16), FIX WRITTEN
-(migration 014, pending deploy).** The live policy was checked and is:
+**5. ✅ SELF-GRANT PREMIUM — was CONFIRMED VULNERABLE, now FIXED AND VERIFIED
+IN PRODUCTION (2026-07-16).** The live policy was
 `"Users can update own profile" UPDATE USING (auth.uid() = id) WITH CHECK NULL`
-— with no column restriction and no trigger. Any signed-in user could grant
-themselves free lifetime Plus with the public anon key. **Migration 014 adds a
-`BEFORE UPDATE` trigger that blocks entitlement-column writes from client
-roles; it must be applied to production before launch.** The original text of
-this finding follows for the record.
+— no column restriction, no trigger — so any signed-in user could grant
+themselves free lifetime Plus with the public anon key. Migration 014 (applied)
+adds a `BEFORE UPDATE` trigger; verified as `current_user=authenticated` with
+`auth.uid()` resolving → blocked with `42501`. Blast radius was nil: the app
+had no users beyond the founder's own accounts.
+
+> **Testing lesson worth keeping.** The obvious check
+> (`update profiles set is_premium = true where id = auth.uid();` in the
+> Supabase SQL Editor) is *worthless* and initially gave us both a false
+> negative and a false positive: the editor has no JWT (so `auth.uid()` is
+> NULL and the WHERE matches nothing), an `UPDATE` without `RETURNING` prints
+> "Success" regardless, and the editor runs as a privileged role that the
+> trigger allows by design. Even `set local role authenticated` fails, because
+> the editor may run each statement in its own transaction. Use the
+> single-statement `do $$ … $$` block documented in migration 014.
+> The original text of this finding follows for the record.
 `is_premium`, `premium_source`, `premium_expires_at` live on the `profiles`
 table, which the client writes to constantly (language, notification prefs,
 health consent all `update profiles`). The migration 007 comment claims *"RLS

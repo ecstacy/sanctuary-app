@@ -76,18 +76,54 @@ create trigger trg_profiles_guard_entitlement
   execute function guard_profile_entitlement_columns();
 
 
--- ── Verification (run manually as a normal signed-in user) ────────────────
---  Before this migration the following SUCCEEDED. It must now fail with
---  42501:
+-- ── Verification ─────────────────────────────────────────────────────────
+--  VERIFIED AGAINST PRODUCTION 2026-07-16: blocked with 42501 as
+--  current_user=authenticated with auth.uid() resolving. The guard works.
 --
---      update profiles set is_premium = true where id = auth.uid();
+--  ⚠️ DO NOT verify with a bare statement in the Supabase SQL Editor:
 --
---  And these must still succeed (ordinary profile edits):
+--      update profiles set is_premium = true where id = auth.uid();   -- USELESS
+--
+--  It reports "Success" while proving nothing, for two reasons:
+--    1. The editor has no JWT, so auth.uid() is NULL → the WHERE matches zero
+--       rows, and an UPDATE without RETURNING prints "Success. No rows
+--       returned" either way.
+--    2. The editor connects as a privileged role, which this trigger allows
+--       BY DESIGN (that's how the Stripe webhook and redeem_promo_code work).
+--       `set local role authenticated` does not reliably help — the editor may
+--       run each statement in its own transaction, so the role reverts before
+--       the UPDATE and it silently executes as postgres.
+--
+--  Use this instead: ONE statement (cannot be split), self-rolling-back, and
+--  it surfaces the verdict as the error text.
+--
+--      do $$
+--      declare v_uid uuid; v_verdict text;
+--      begin
+--        select id into v_uid from profiles limit 1;
+--        perform set_config('role', 'authenticated', true);
+--        perform set_config('request.jwt.claims',
+--                json_build_object('sub', v_uid, 'role','authenticated')::text, true);
+--        begin
+--          update profiles set is_premium = true where id = v_uid;
+--          v_verdict := 'VULNERABLE — update succeeded';
+--        exception
+--          when insufficient_privilege then v_verdict := 'SAFE — blocked with 42501';
+--          when others then v_verdict := 'OTHER ' || sqlstate || ' ' || sqlerrm;
+--        end;
+--        raise exception 'VERDICT: % | current_user=% | auth.uid()=%',
+--              v_verdict, current_user, coalesce(auth.uid()::text,'NULL');
+--      end $$;
+--
+--  Expect: "VERDICT: SAFE — blocked with 42501 | current_user=authenticated".
+--  If current_user comes back as postgres, the impersonation didn't take and
+--  the run proves nothing — retry rather than concluding.
+--
+--  These must still succeed (ordinary profile edits), and
+--  redeem_promo_code('SANCTUARY-TEAM') must still grant premium:
 --
 --      update profiles set language = 'de' where id = auth.uid();
 --      update profiles set notification_prefs = '{}'::jsonb where id = auth.uid();
---
---  redeem_promo_code('SANCTUARY-TEAM') must still grant premium.
 --
 --  FOLLOW-UP: any account that self-granted before this landed will still
 --  read is_premium=true. Audit with:
