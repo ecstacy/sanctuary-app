@@ -264,8 +264,15 @@ from data that already exists.
   2. Add StoreKit via a Capacitor IAP plugin + server-side receipt
      validation alongside Stripe (the real fix; ~a chunk of work)
   3. US external-purchase-link entitlement (US-only, messy UX)
-  - **Recommendation:** option 1 to enter the store in M3–M4, option 2 as a
-    scheduled M5–M6 workstream.
+  - **DECIDED (2026-07-16): option 1** — iOS launches free-tier only; StoreKit
+    (option 2) is a later workstream. Implemented in `src/lib/monetization.js`:
+    `getPurchaseBlockReason()` returns `'ios'` on iOS, so `PaywallSheet` shows
+    a factual "not available in this app" notice with **no purchase path and no
+    external link** (steering is the same 3.1.1 violation as selling), and
+    `handlePlan` hard-returns. Entitlement is untouched — `useIsPremium()` still
+    honours Plus bought on Android/web, which Apple permits. Promo redemption
+    stays available (a free grant is not a sale). Covered by
+    `src/lib/monetization.test.js`.
 - Listing mirrors Play ASO; App Store screenshots need device-frame exports
   (6.7" + 5.5"). TestFlight the same builds the Pixel gets.
 
