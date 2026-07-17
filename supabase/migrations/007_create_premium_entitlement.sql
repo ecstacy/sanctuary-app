@@ -148,7 +148,13 @@ create policy "promo_redemptions_select_own"
 -- The only path by which a code can move a profile to is_premium=true via
 -- the 'promo' source. Runs as security definer (elevated) so it can:
 --   • read promo_codes (RLS-locked for clients)
---   • update profiles (RLS limits clients to non-entitlement columns)
+--   • update profiles
+--       ⚠️ CORRECTION (see 014): this line used to claim "RLS limits clients
+--       to non-entitlement columns". That is FALSE — Postgres RLS gates rows,
+--       never columns, so the permissive `auth.uid() = id` UPDATE policy let
+--       any client write is_premium directly. Migration 014 adds the BEFORE
+--       UPDATE trigger that actually enforces it. Do not reintroduce this
+--       assumption.
 --   • insert into promo_redemptions
 --
 -- Returns a JSON object: { ok, error?, granted_until?, code? }.
