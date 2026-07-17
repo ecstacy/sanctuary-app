@@ -23,8 +23,25 @@ dist-ssr
 *.sln
 *.sw?
 .claude/
-.env.local
 supabase/.temp/
+
+# ── Secrets ──────────────────────────────────────────────────────────────
+# Broad env coverage, not just .env.local — one mis-named file is a public
+# leak (this repo is public; see docs/security-audit.md).
+.env
+.env.*
+!.env.example
+
+# Release signing material. Committing a keystore hands over the ability to
+# ship a malicious update as us — it can never be rotated for installed users.
+*.jks
+*.keystore
+keystore.properties
+key.properties
+google-services.json.bak
+*.p12
+*.pem
+*.mobileprovision
 
 # Pose videos — hosted in Supabase Storage, not bundled (see docs/pose-videos.md)
 media/pose-videos/

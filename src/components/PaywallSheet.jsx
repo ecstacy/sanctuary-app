@@ -30,7 +30,8 @@ import { useTranslation } from 'react-i18next'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
 import { track, EVENTS } from '../lib/track'
-import { isPlusPurchaseRestricted, getCoarseRegion } from '../lib/region'
+import { getCoarseRegion } from '../lib/region'
+import { getPurchaseBlockReason } from '../lib/monetization'
 
 const ExternalBrowser = registerPlugin('ExternalBrowser', {
   web: { async open({ url }) { window.open(url, '_blank') } }
@@ -80,11 +81,13 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
 
   const shownRef = useRef(false)
 
-  // Region gate — don't offer paid plans where we can't yet sell (India /
-  // OIDAR for v1). Promo redemption stays available everywhere, so a gated
-  // user can still be granted Plus via a code. Computed once per render;
-  // cheap (a single Intl lookup).
-  const purchaseRestricted = isPlusPurchaseRestricted()
+  // Purchase gate — don't offer paid plans where we may not sell: on iOS
+  // (Apple requires IAP; Plus is Stripe — see lib/monetization.js) or in a
+  // region we're not registered for yet (India / OIDAR for v1). Promo
+  // redemption stays available in both cases, so a gated user can still be
+  // granted Plus via a code. Cheap; computed once per render.
+  const blockReason = getPurchaseBlockReason()   // 'ios' | 'region' | null
+  const purchaseRestricted = blockReason !== null
 
   // Fire PAYWALL_SHOWN once per open. Reset on close so the next open
   // counts as a new impression.
@@ -96,6 +99,9 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
         anonymous: !user,
         region: getCoarseRegion(),
         purchase_restricted: purchaseRestricted,
+        // 'ios' | 'region' | null — separates the Apple-policy gate from the
+        // jurisdictional one in Dashboard D.
+        block_reason: blockReason,
       })
     }
     if (!open) {
@@ -106,7 +112,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
       setPromoError(null)
       setPromoSuccess(null)
     }
-  }, [open, surface, user, purchaseRestricted])
+  }, [open, surface, user, blockReason, purchaseRestricted])
 
   if (!open) return null
 
@@ -117,6 +123,11 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
   }
 
   async function handlePlan(plan) {
+    // Defence in depth: the plan buttons don't render when a gate is active,
+    // so this is unreachable — but opening Stripe on iOS would be an Apple
+    // 3.1.1 violation, and that's not a thing to leave to render logic alone.
+    if (purchaseRestricted) return
+
     track(EVENTS.PAYWALL_PLAN_SELECTED, { surface, plan: plan.id })
 
     const baseUrl = import.meta.env[plan.envKey]
@@ -293,17 +304,22 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               ))}
             </ul>
 
-            {/* Plans — OR a region-not-supported notice. In gated regions
-                (India / OIDAR for v1) we don't surface paid plans at all;
-                the user can still redeem a code below. */}
+            {/* Plans — OR a not-available notice. We don't surface paid plans
+                on iOS (Apple requires IAP; Plus is Stripe) or in gated regions
+                (India / OIDAR for v1). Either way the copy stays factual and
+                links nowhere — steering to an external purchase is the same
+                Apple violation as selling. The user can still redeem a code
+                below in both cases. */}
             {purchaseRestricted ? (
               <div className="bg-surface-container rounded-2xl p-5 mb-5 text-center">
-                <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-2xl mb-2">public</span>
+                <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-2xl mb-2">
+                  {blockReason === 'ios' ? 'lock' : 'public'}
+                </span>
                 <p className="font-body font-semibold text-sm text-on-surface mb-1">
-                  {t('paywall.regionTitle')}
+                  {blockReason === 'ios' ? t('paywall.iosTitle') : t('paywall.regionTitle')}
                 </p>
                 <p className="font-body text-xs text-on-surface-variant/70 leading-relaxed">
-                  {t('paywall.regionBody')}
+                  {blockReason === 'ios' ? t('paywall.iosBody') : t('paywall.regionBody')}
                 </p>
               </div>
             ) : (
@@ -488,6 +504,10 @@ const ERROR_KEYS = {
   exhausted:          'paywall.promo.errExhausted',
   already_redeemed:   'paywall.promo.errAlreadyRedeemed',
   kind_not_supported: 'paywall.promo.errKindUnsupported',
+  // Brute-force guard tripped (migration 013): too many failed attempts in the
+  // rolling window. Message stays vague on purpose — telling an attacker the
+  // exact budget and window is free intel.
+  rate_limited:       'paywall.promo.errRateLimited',
 }
 
 // Append query params to a URL, preserving any existing query string the

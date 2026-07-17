@@ -1404,6 +1404,8 @@
     "haveCode": "Hast du einen Code?",
     "comingSoon": "Sanctuary Plus startet bald. Wir senden dir eine Einladung — interne Codes funktionieren bereits über „Hast du einen Code?“.",
     "signInToSubscribe": "Bitte melde dich an oder erstelle ein Konto, um zu abonnieren.",
+    "iosTitle": "Plus ist in dieser App nicht verfügbar",
+    "iosBody": "Sanctuary Plus kann in der iOS-App nicht gekauft werden. Alles im kostenlosen Tarif gehört dir vollständig — und wenn du Plus bereits hast oder einen Einladungscode besitzt, kannst du ihn unten einlösen.",
     "regionTitle": "Plus ist in deiner Region noch nicht verfügbar",
     "regionBody": "Wir arbeiten daran, kostenpflichtige Pläne in dein Land zu bringen. In der Zwischenzeit gehört dir alles im kostenlosen Tarif vollständig — und wenn du einen Einladungscode hast, kannst du ihn unten einlösen.",
     "promo": {
@@ -1427,6 +1429,7 @@
       "errNotYetValid": "Dieser Code ist noch nicht aktiv — versuche es später erneut.",
       "errExhausted": "Dieser Code hat sein Einlöselimit erreicht.",
       "errAlreadyRedeemed": "Du hast diesen Code bereits eingelöst.",
+      "errRateLimited": "Zu viele Versuche. Bitte warte einen Moment und versuche es erneut.",
       "errKindUnsupported": "Dieser Code kann hier noch nicht eingelöst werden.",
       "errDefault": "Dieser Code konnte nicht eingelöst werden."
     }

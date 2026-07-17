@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android 12+ (API 31) backup/transfer opt-out. Pairs with
+  android:allowBackup="false" + fullBackupContent="false" in the manifest,
+  which cover older API levels.
+
+  Rationale: the app's private storage contains the Supabase session (access +
+  refresh tokens) and the OAuth PKCE verifier. Allowing cloud backup or
+  device-to-device transfer would move a live authenticated session off the
+  device. There is nothing worth backing up — all practice data is in Supabase
+  and re-syncs on sign-in.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="root" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+        <exclude domain="file" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="root" />
+        <exclude domain="database" />
+        <exclude domain="sharedpref" />
+        <exclude domain="external" />
+        <exclude domain="file" />
+    </device-transfer>
+</data-extraction-rules>

@@ -1404,6 +1404,8 @@
     "haveCode": "Have a code?",
     "comingSoon": "Sanctuary Plus is launching soon. We'll send you an invite — meanwhile, internal codes work via \"Have a code?\".",
     "signInToSubscribe": "Please sign in or create an account to subscribe.",
+    "iosTitle": "Plus isn't available in this app",
+    "iosBody": "Sanctuary Plus can't be purchased in the iOS app. Everything in the free tier is fully yours — and if you already have Plus, or have an invite code, you can redeem it below.",
     "regionTitle": "Plus isn't available in your region yet",
     "regionBody": "We're working on bringing paid plans to your country. In the meantime, everything in the free tier is fully yours — and if you have an invite code, you can redeem it below.",
     "promo": {
@@ -1427,6 +1429,7 @@
       "errNotYetValid": "That code isn't active yet — try again later.",
       "errExhausted": "That code has reached its redemption limit.",
       "errAlreadyRedeemed": "You've already redeemed this code.",
+      "errRateLimited": "Too many attempts. Please wait a little while and try again.",
       "errKindUnsupported": "That code can't be redeemed here yet.",
       "errDefault": "That code couldn't be redeemed."
     }
