@@ -1429,6 +1429,7 @@
       "errNotYetValid": "Dieser Code ist noch nicht aktiv — versuche es später erneut.",
       "errExhausted": "Dieser Code hat sein Einlöselimit erreicht.",
       "errAlreadyRedeemed": "Du hast diesen Code bereits eingelöst.",
+      "errRateLimited": "Zu viele Versuche. Bitte warte einen Moment und versuche es erneut.",
       "errKindUnsupported": "Dieser Code kann hier noch nicht eingelöst werden.",
       "errDefault": "Dieser Code konnte nicht eingelöst werden."
     }

@@ -504,6 +504,10 @@ const ERROR_KEYS = {
   exhausted:          'paywall.promo.errExhausted',
   already_redeemed:   'paywall.promo.errAlreadyRedeemed',
   kind_not_supported: 'paywall.promo.errKindUnsupported',
+  // Brute-force guard tripped (migration 013): too many failed attempts in the
+  // rolling window. Message stays vague on purpose — telling an attacker the
+  // exact budget and window is free intel.
+  rate_limited:       'paywall.promo.errRateLimited',
 }
 
 // Append query params to a URL, preserving any existing query string the

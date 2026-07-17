@@ -1429,6 +1429,7 @@
       "errNotYetValid": "That code isn't active yet — try again later.",
       "errExhausted": "That code has reached its redemption limit.",
       "errAlreadyRedeemed": "You've already redeemed this code.",
+      "errRateLimited": "Too many attempts. Please wait a little while and try again.",
       "errKindUnsupported": "That code can't be redeemed here yet.",
       "errDefault": "That code couldn't be redeemed."
     }
