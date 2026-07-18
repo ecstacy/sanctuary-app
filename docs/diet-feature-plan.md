@@ -196,18 +196,27 @@ settling Vata"). Turns a correctness nuance into a trust-building moment.
 | **5 — Integration & polish** | Entry points (Discover, Dosha profile, Home?), Plus funnel wiring, a11y pass, analytics verification, on-device check | |
 | **6 — (Later, optional) Constrained LLM** | NL ingredient parsing ("what can I make with rice + spinach") + prose rephrasing that ONLY restates retrieved curated facts. Needs guardrails + an eval set + explicit "adds nothing new" contract | Only after the deterministic core proves out; keeps the hallucination bar |
 
-## 10. Open questions / risks
+## 10. Decided (2026-07-16)
+
+- **Regional emphasis (Chunk 1):** **Indian staples + the most common Western
+  foods eaten in Germany.** Indian foods map cleanly to classical citations
+  (`high` confidence); the German-Western set (bread, oats, potato, dairy,
+  common veg/fruit, coffee) will lean on property-derived classification
+  (`medium` + "derived" note) — acceptable and honestly labelled.
+- **Placement:** a **dedicated Diet section on Discover**, **inside Discover
+  search**, and a **Home "meal of the day" nudge widget**. (So Feature 2's
+  composer also powers a Home widget, like Today's Practice.)
+- **Longer game:** this dataset becomes a **source of truth to enrich the rest
+  of the app** (dinacharya, recommendations, seasonal content) once built.
+
+## 11. Open questions / risks
 
 - **Coverage of non-classical foods.** The classical corpus has no "avocado" or
-  "quinoa." Plan: classify by derivable properties (rasa/virya/vipaka), mark
-  `confidence: medium` + "derived" note. Acceptable, but set expectations —
-  a Western-food-heavy user will hit more `medium` entries.
+  "quinoa." Classify by derivable properties (rasa/virya/vipaka), mark
+  `confidence: medium` + "derived" note. The German-Western set will produce
+  more `medium` entries — expected, and labelled.
 - **Review throughput.** Dataset correctness is the entire value; the
   `reviewed` gate means the feature is only as big as Akash's fact-checking
   bandwidth. Ship incrementally (60 → 200) rather than blocking on a full corpus.
-- **Regional cuisine breadth** (Indian vs Western vs East-Asian staples) —
-  decide the v1 emphasis when curating Chunk 1.
-- **Where it lives in the app** — extend `DietaryGuidancePage`, or a new Diet
-  tab / Discover section? Decide at Chunk 5.
 - **LLM layer economics** (Chunk 6) — model choice, cost, offline story — defer
   until the core exists.
