@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What's your dosha? — A 1-minute Ayurvedic quiz | The Sanctuary</title>
+  <meta name="description" content="Find your Ayurvedic constitution in five questions. Vata, pitta, or kapha — and what it means for how you should practise.">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <meta property="og:title" content="What's your dosha? — a 1-minute Ayurvedic quiz">
+  <meta property="og:description" content="Five questions to find your constitution — vata, pitta, or kapha.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.thesanctuaryteam.com/quiz">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <img src="/assets/logo.png" alt="">
+      <span>The Sanctuary</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/#how">How it works</a>
+      <a href="/support">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap quiz-wrap">
+
+    <!-- Intro -->
+    <section id="quiz-intro">
+      <p class="kicker">Ayurvedic constitution</p>
+      <h1>What&rsquo;s your dosha?</h1>
+      <p class="sub">
+        In Ayurveda, your constitution &mdash; <em>prakriti</em> &mdash; shapes
+        how you should eat, rest, and practise. Five questions, about a minute.
+      </p>
+      <button class="btn-primary" id="quiz-start" type="button">Start the quiz</button>
+      <p class="cta-note">No sign-up. Nothing stored on our servers.</p>
+    </section>
+
+    <!-- Question + result stage (JS-driven) -->
+    <section id="quiz-stage" hidden aria-live="polite"></section>
+
+    <!-- No-JS fallback: the quiz is interactive, so give a real alternative -->
+    <noscript>
+      <p class="sub">
+        This quiz needs JavaScript. You can take the full assessment inside the
+        app instead &mdash;
+        <a href="https://play.google.com/store/apps/details?id=com.sanctuary.app">get The Sanctuary on Google Play</a>.
+      </p>
+    </noscript>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <a class="brand" href="/">
+        <img src="/assets/logo.png" alt="">
+        <span>The Sanctuary</span>
+      </a>
+      <nav class="footer-links">
+        <a href="/support">Support</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+    </div>
+    <p class="copyright">© 2026 The Sanctuary. Yoga is a practice, not a prescription —
+       see a professional for medical concerns.</p>
+  </div>
+</footer>
+
+<script src="/assets/site.js"></script>
+<script src="/assets/quiz.js"></script>
+</body>
+</html>

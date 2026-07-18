@@ -6,21 +6,65 @@
 // 2. PostHog (EU, cookieless): memory persistence — no cookies, no banner.
 
 (function () {
-  // ── UTM passthrough onto every Play badge ──
+  // ── Campaign attribution, persisted for the visit ──
+  // The landing page carries the utm_* params, but the highest-intent path is
+  // landing → /quiz → store badge, and that internal hop drops the query
+  // string. Persisting to sessionStorage keeps the campaign attached for the
+  // whole visit, so the badge on the quiz RESULT still carries the referrer.
+  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  var STORE_KEY = 'sanctuary.utms';
   var params = new URLSearchParams(window.location.search);
+
   var utms = [];
-  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+  KEYS.forEach(function (k) {
     var v = params.get(k);
     if (v) utms.push(k + '=' + encodeURIComponent(v));
   });
-  if (utms.length) {
-    var referrer = encodeURIComponent(utms.join('&'));
-    document.querySelectorAll('a[data-play-link]').forEach(function (a) {
-      var url = new URL(a.href);
-      url.searchParams.set('referrer', decodeURIComponent(referrer));
-      a.href = url.toString();
+
+  try {
+    if (utms.length) {
+      // First touch of this visit wins — don't let a later param-less page
+      // overwrite the campaign that actually brought the user in.
+      sessionStorage.setItem(STORE_KEY, utms.join('&'));
+    } else {
+      var saved = sessionStorage.getItem(STORE_KEY);
+      if (saved) utms = saved.split('&');
+    }
+  } catch (e) { /* private mode / storage blocked — degrade to URL-only */ }
+
+  // Read a single param, falling back to the persisted set.
+  function utmValue(key) {
+    var direct = params.get(key);
+    if (direct) return direct;
+    var hit = utms.filter(function (p) { return p.indexOf(key + '=') === 0; })[0];
+    return hit ? decodeURIComponent(hit.slice(key.length + 1)) : null;
+  }
+
+  // Exposed so pages that render badges AFTER load (e.g. the quiz result card)
+  // can re-apply attribution — otherwise a dynamically inserted badge would
+  // silently drop the campaign and break the install-attribution chain.
+  function applyAttribution(root) {
+    (root || document).querySelectorAll('a[data-play-link]').forEach(function (a) {
+      if (utms.length) {
+        var url = new URL(a.href);
+        url.searchParams.set('referrer', utms.join('&'));
+        a.href = url.toString();
+      }
+      if (a.dataset.attributionBound) return;
+      a.dataset.attributionBound = '1';
+      a.addEventListener('click', function () {
+        if (!window.posthog) return;
+        window.posthog.capture('store_badge_clicked', {
+          store: 'google_play',
+          placement: a.dataset.placement || 'unknown',
+          utm_source: utmValue('utm_source'),
+          utm_campaign: utmValue('utm_campaign'),
+        });
+      });
     });
   }
+  window.sanctuaryApplyAttribution = applyAttribution;
+  applyAttribution(document);
 
   // ── PostHog web analytics (same project as the app; platform=web) ──
   var POSTHOG_KEY = 'phc_sabRLt3PV658fMuK7w345tQZWJHeAkBwjdXqPmJ2gxym';
@@ -36,16 +80,8 @@
       autocapture: false,             // only pageviews + explicit events
       register: { platform: 'web' },
     });
-    // Store-badge clicks are the website's conversion event.
-    document.querySelectorAll('a[data-play-link]').forEach(function (a) {
-      a.addEventListener('click', function () {
-        window.posthog.capture('store_badge_clicked', {
-          store: 'google_play',
-          utm_source: params.get('utm_source') || null,
-          utm_campaign: params.get('utm_campaign') || null,
-        });
-      });
-    });
+    // Badge click listeners are bound by applyAttribution() above (which also
+    // covers badges rendered later), so nothing to wire here.
   };
   document.head.appendChild(s);
 })();

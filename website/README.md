@@ -33,9 +33,46 @@ Netlify works identically (publish directory `website`, no build command).
 - [ ] Verify the Play badge carries `referrer=` UTMs end-to-end
       (visit `/?utm_source=test`, click badge, check the URL)
 
+## Pages
+
+| Path | Purpose |
+|---|---|
+| `/` | Landing. Hero → Play badge + **"Find your dosha →"** (the primary funnel CTA) |
+| `/quiz` | **The funnel workhorse** (growth-plan §2.2). 5-question dosha teaser → result → store badge |
+| `/support`, `/privacy`, `/terms` | Store-required pages |
+
+### About the quiz
+
+`assets/quiz.js` mirrors the app's real instrument (`src/data/doshaQuiz.js`):
+the same five trait dimensions and the same weights (3 × body @ 1.5, mind and
+lifestyle @ 1.0). The app asks them as 15 agree/somewhat/disagree statements
+plus tiebreakers; the web version compresses each dimension to one
+forced-choice question. It is deliberately less precise, the result says so,
+and that honesty gap *is* the reason to install.
+
+Result copy (taglines) is lifted verbatim from
+`src/data/ayurveda/dosha-prakriti.js` so web and app never contradict each
+other. **If you change the quiz or the taglines in the app, update this too.**
+
+Events: `quiz_started`, `quiz_question_answered`, `quiz_completed`
+(with `primary`/`is_dual`/percentages), `quiz_restarted`, `store_badge_clicked`
+(with `placement`).
+
 ## Attribution notes
 
-`assets/site.js` re-encodes any `utm_*` params on the page URL into the Play
-link's `referrer=` param (Install Referrer spine — growth-plan §4), fires
-`store_badge_clicked` into PostHog (EU, cookieless `memory` persistence — no
-banner needed), and captures pageviews with `platform: web`.
+`assets/site.js` re-encodes any `utm_*` params into the Play link's `referrer=`
+param (Install Referrer spine — growth-plan §4), fires `store_badge_clicked`
+into PostHog (EU, cookieless `memory` persistence — no banner needed), and
+captures pageviews with `platform: web`.
+
+Two things it handles that are easy to break:
+
+1. **Campaign persists across internal navigation.** The highest-intent path is
+   `/?utm_source=…` → `/quiz` → badge, and that internal hop drops the query
+   string. UTMs are saved to `sessionStorage` on first touch (first touch wins)
+   so the badge on the quiz *result* still carries the referrer. Without this,
+   attribution silently dies on the best-converting path.
+2. **Badges rendered after load get bound too.** The quiz result badge doesn't
+   exist at load, so `window.sanctuaryApplyAttribution(root)` is exposed and
+   called after rendering. A new dynamic badge must call it or it will drop
+   both the referrer and the click event.
