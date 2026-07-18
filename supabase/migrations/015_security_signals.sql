@@ -110,11 +110,19 @@ grant  select on security_promo_codes_probed to service_role;
 
 
 -- ── Verification ─────────────────────────────────────────────────────────
+--  ✅ VERIFIED IN PRODUCTION 2026-07-23, AFTER this migration replaced the
+--     014 trigger function: an entitlement write as `authenticated` is still
+--     blocked with 42501. Re-checking mattered — `create or replace function`
+--     on a security-critical guard is exactly the kind of change that can
+--     silently weaken a control while every other test still passes.
+--
 --  (a) As a client role, attempt an entitlement write and confirm BOTH that
 --      it still fails 42501 AND that a SECURITY_SIGNAL line appears in
 --      Supabase → Logs → Postgres. Use the single-statement do-block from
 --      migration 014 (the SQL editor runs as a privileged role otherwise —
 --      see that file for why the obvious test is worthless).
+--      NOTE: that block ALWAYS ends in an error — the error text carries the
+--      verdict. "an error appeared" is not a result; read the VERDICT string.
 --  (b) select * from security_promo_abuse;  -- empty until someone abuses it
 --
 --  Alerting + the weekly review routine: docs/security-monitoring.md
