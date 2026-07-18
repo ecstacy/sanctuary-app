@@ -1,6 +1,6 @@
 # The Sanctuary — open to-dos
 
-> Last updated: 2026-07-16. This is the durable copy of the working task list —
+> Last updated: 2026-07-23. This is the durable copy of the working task list —
 > readable any time, no session needed. Keep it current when things land.
 >
 > **A** = needs Akash (accounts, devices, decisions) · **C** = Claude can do it
@@ -23,25 +23,29 @@
 ## 🔒 Security
 
 Full findings + prioritised plan: [security-audit.md](./security-audit.md).
-Landed in PR #16: self-grant fix (014, **verified in prod**), promo brute-force
-(013), CVEs → 0 vulns, `allowBackup=false`, LICENSE, PII regression test.
+Landed: self-grant fix (014, **verified in prod**), promo brute-force (013),
+CVEs → 0 vulns, `allowBackup=false`, LICENSE, PII regression test (PR #16);
+reflected-XSS fix in the password-reset bridge + network timeouts (PR #20,
+**deployed & verified against prod**); detection signals (015) + inexact alarms
+(PR #21). Monitoring runbook: [security-monitoring.md](./security-monitoring.md).
 
 | # | Task | Who | Notes |
 |---|------|-----|-------|
 | 24 | **Confirm founder account isn't left `is_premium=true`** | A | A test during the 014 verification ran as `postgres` and may have stuck (its `rollback` had nothing to roll back if the editor split statements). Check `select id, is_premium, premium_source from profiles where is_premium = true;` → if the founder account appears with a null `premium_source`, reset it. Low stakes, but it would skew the Plus funnel in Dashboard D |
 | 22 | **Public-vs-private repo decision** | A | Repo is **PUBLIC**. Legitimate for this stack — committed keys (Supabase anon, PostHog ingest, `google-services.json`) are client-public *by design*, and no real secret was ever committed. But every migration, RLS policy and Edge Function is readable, so RLS must be perfect — cf. the self-grant bug that *was* there. Private is the safer default pre-launch. audit §2 |
-| 23a | **Network timeouts** | C | No `AbortController` deadline on Supabase/fetch calls — a hung network leaves spinners forever and can wedge auth/checkout. Reliability + DoS-resilience |
-| 23b | **Edge-function auth audit** | C | Confirm `create-customer-portal-session`, `posthog-delete-person`, `oauth-redirect`, `reset-password-redirect` each require a valid JWT or an equivalent guard. **`posthog-delete-person` is the one to scrutinise** — a GDPR delete path that must not be invokable for an arbitrary `distinct_id`. (`stripe-webhook` is already correct: `--no-verify-jwt` + signature check) |
-| 23c | **Stripe allowed-countries, server-side** | A | `region.js` hides paid plans in gated regions (India/OIDAR), but that's the *front door*. Configure allowed countries on the Payment Link/Checkout so a crafted request can't complete a sale we're not registered for. audit §7 |
-| 23d | **Secret scanning / push protection** | A | gitleaks in CI, or GitHub secret scanning + push protection (free on public repos). The gitignore is now broad, but it's one typo from a leak |
-| 23e | **`SCHEDULE_EXACT_ALARM` declaration** | A | May draw extra Play scrutiny (Android 13+). Justified (reminders) — be ready to explain it, or switch to `USE_EXACT_ALARM` (allowed for alarm/reminder apps, no special-access prompt) |
+| 23a | ~~Network timeouts~~ | ✅ | **DONE** — `lib/fetchWithTimeout.js` wired into the Supabase client's `global.fetch`, so every query/auth/RPC/edge call has a 15s deadline. Voice manifest bounded at 8s with TTS fallback. |
+| 23b | ~~Edge-function auth audit~~ | ✅ | **DONE — and it found a live reflected XSS** in `reset-password-redirect` (raw query params in a JS string *and* an href). Fixed with validation + per-context encoding + CSP, **deployed and verified against production**. Also corrected config drift (`verify_jwt` said true; prod served 200 unauthenticated — left as-is it would have broken every password reset). `posthog-delete-person` was already safe: it derives its target from the caller's own token. |
+| 23c | **Stripe allowed-countries, server-side** | A | ⏸ **BLOCKED — no Stripe account exists yet.** Do this as part of *creating* the account, not after. `region.js` only hides paid plans in gated regions (India/OIDAR); it's the friendly front door. The actual lock is allowed-countries on the Payment Link/Checkout so a crafted request can't complete a sale we're not registered for. Until an account exists, Plus can't be purchased at all — so there's no live exposure. audit §7 |
+| 23d | ~~Secret scanning / push protection~~ | ✅ | **DONE** — enabled in GitHub Settings → Code security. Worth one sanity check: push a fake key to a throwaway branch and confirm it's blocked. An untested control isn't a control. |
+| 23e | ~~Drop `SCHEDULE_EXACT_ALARM`~~ (⏳ on-device check pending) | ✅ | **DONE** — permission removed (verified absent from the *merged* manifest) and alarms are now inexact. Still unconfirmed on hardware that reminders fire; APK is built. | **Recommendation changed after checking the code.** targetSdk is **36**, so this permission is *denied by default* on Android 14+ and the user must manually enable "Alarms & reminders" — a silent-failure path for reminders. A yoga reminder does **not** need second-precision (07:00 firing at 07:05 is fine). Switching `allowWhileIdle: true` → inexact removes the permission, the Play declaration burden, **and** the permission-dependency failure mode. `USE_EXACT_ALARM` is the wrong swap — it's reserved for alarm-clock/calendar apps and invites rejection. |
+| 28 | **Security monitoring — one alert still dead** | A | Signals shipped (015): entitlement-write attempts log `SECURITY_SIGNAL` to Postgres logs; `security_promo_abuse` / `security_promo_codes_probed` views over promo attempts. Alerts **verified armed via API**: A2 login-failure ✓, X5 error-spike ✓ — but **`Completion WoW drop` is enabled yet has EMPTY bounds, so it can never fire**, and it's a *relative* change wrongly configured as absolute. Decide: disable until launch (recommended — no meaningful threshold at ~1 user) or rebuild as percent-change later. Runbook: [security-monitoring.md](./security-monitoring.md) |
 
 ## 🚀 Growth / build
 
 | # | Task | Who | Notes |
 |---|------|-----|-------|
-| 17 | **Website M2: `/quiz` mini dosha funnel** | C | **Highest-leverage remaining build.** 3–5 question teaser → result card ("You lean Pitta") → store badge with UTMs intact. Every content CTA points here, not at the cold listing — the quiz-result moment converts far better and keeps analytics on the path. Targets: ≥40% completion, ≥25% quiz→badge CTR. Reuse `src/data/doshaQuiz.js`. growth-plan §2.2 |
-| 18 | **Website M3–M4: `/poses` SEO library** | C | The compounding asset: 76 `/poses/[slug]` pages generated from `src/data/asanas.js` — video/still, benefits, precautions, instructions + the **dosha-affinity table** (the moat no generic yoga site has). Schema.org `HowTo`, internal-link poses ↔ problems, submit sitemap. This is where Astro earns its place (site is deliberately zero-build today). The esbuild-bundle trick already solves Node-importing `asanas.js` |
+| 17 | ~~Website M2: `/quiz` funnel~~ | ✅ | **DONE & merged.** Mirrors the app's real instrument (same 5 dimensions/weights, taglines verbatim) so web and app can't contradict each other. Also fixed two attribution bugs that would have silently killed install tracking on the best-converting path. |
+| 18 | ~~Website M3–M4: `/poses` SEO library~~ | ✅ | **DONE & merged.** 76 pages generated by `scripts/build-pose-pages.mjs` (`npm run poses:pages`) — a generator, NOT Astro, to keep the site zero-build. Verification caught an inverted dosha sign that would have reversed the advice on every page; now fixed at the source via `lib/doshaSemantics.js`. |
 | 19 | **Verify `install_attributed` end-to-end** | A+C | ⚠️ **Never proven.** The spine is merged and compiles and the no-referrer path is graceful — but **adb sideloads return no referrer by design**, so attribution has never actually been observed working. Needs an internal-testing track (#11/#12). Test: visit `?utm_source=test&utm_campaign=x` → Play badge → install from Play → confirm `install_attributed` + `acquisition_source`/`acquisition_campaign` land in PostHog |
 
 ## 📱 iOS (decided: free-tier first)

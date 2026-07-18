@@ -193,7 +193,15 @@ export function useNotifications() {
       smallIcon: 'ic_stat_lotus',
       iconColor: '#3f7a52',
       sound: NOTIF_SOUND,
-      schedule: { at: d.at, allowWhileIdle: true },
+      // INEXACT on purpose. `allowWhileIdle: true` asks for an exact alarm,
+      // which needs SCHEDULE_EXACT_ALARM — denied by default since Android 14
+      // for our targetSdk (36) unless the user hunts down the "Alarms &
+      // reminders" toggle. That made reminders silently never fire for anyone
+      // who didn't. A practice nudge doesn't need second-precision (07:00
+      // arriving at 07:05 is fine), so we let the system batch it: no special
+      // permission, no Play declaration, and no silent-failure path.
+      // Don't "fix" this back to true — see docs/TODO.md #23e.
+      schedule: { at: d.at },
       extra: { kind: d.kind },
     }))
     try { await LocalNotifications.schedule({ notifications }) }

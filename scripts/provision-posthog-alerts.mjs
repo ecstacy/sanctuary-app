@@ -106,6 +106,17 @@ const ALERTS = [
     seriesIndex: 0,
     upper: 5,
   },
+  {
+    // Error spikes are both a reliability and a SECURITY signal — fuzzing an
+    // app tends to generate errors long before it finds anything. The runbook
+    // specifies ">50/h"; PostHog's cheapest calculation_interval here is
+    // daily, so this is a deliberately coarse daily proxy rather than a
+    // pretend-precise hourly rule. Tune once real traffic sets a baseline.
+    slug: 'X5',
+    name: 'X5 · Error spike (error_caught)',
+    seriesIndex: 0,
+    upper: 100,
+  },
 ]
 
 async function upsertDigest(d, ctx) {
