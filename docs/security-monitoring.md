@@ -62,10 +62,28 @@ In PostHog, from [posthog-dashboards.md](./posthog-dashboards.md):
   provider.
 - **`error_caught` spike > 50/h** → often the first sign of someone fuzzing.
 
-⚠️ These were *specified* in the runbook but **the threshold alerts are UI-only**
-(a personal API key can't provision Slack routing) — so **verify they're
-actually armed**, don't assume. An alert you believe in but never configured is
-worse than none.
+**Armed and verified** (2026-07-23, checked via the API rather than assumed):
+
+| Alert | State |
+|---|---|
+| `A2 · Login failure rate > 5%` | ✅ armed, `upper: 5` |
+| `X5 · Error spike (error_caught)` | ✅ armed, `upper: 100`/day |
+| `Completion WoW drop` | 🔴 **enabled but CANNOT FIRE — empty bounds** |
+
+⚠️ **`Completion WoW drop` is a live example of the failure mode this doc warns
+about.** It's enabled and PostHog checks it daily, so it *looks* healthy — but
+its threshold has no bounds, so nothing can ever cross it. It's also
+conceptually wrong: a week-over-week drop is a **relative** change configured
+as `absolute_value`.
+
+**Decide one of:** (a) disable it until launch — recommended, since no
+meaningful threshold exists at ~1 user and a dead alert breeds false
+confidence; or (b) rebuild it as a relative/percent-change alert once real
+traffic sets a baseline. Left untouched for now rather than guessed at.
+
+Slack routing for any of these remains **UI-only** (a personal API key can't
+provision a Slack integration). The rule that produced this table: **verify
+alerts are armed, never assume.**
 
 ---
 
