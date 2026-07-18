@@ -193,15 +193,21 @@ export function useNotifications() {
       smallIcon: 'ic_stat_lotus',
       iconColor: '#3f7a52',
       sound: NOTIF_SOUND,
-      // INEXACT on purpose. `allowWhileIdle: true` asks for an exact alarm,
-      // which needs SCHEDULE_EXACT_ALARM — denied by default since Android 14
-      // for our targetSdk (36) unless the user hunts down the "Alarms &
-      // reminders" toggle. That made reminders silently never fire for anyone
-      // who didn't. A practice nudge doesn't need second-precision (07:00
-      // arriving at 07:05 is fine), so we let the system batch it: no special
-      // permission, no Play declaration, and no silent-failure path.
-      // Don't "fix" this back to true — see docs/TODO.md #23e.
-      schedule: { at: d.at },
+      // `allowWhileIdle: true` WITHOUT declaring SCHEDULE_EXACT_ALARM. That
+      // combination is deliberate — read the plugin before changing it
+      // (LocalNotificationManager.setExactIfPossible):
+      //
+      //   canScheduleExactAlarms() == false (we don't request the permission)
+      //     allowWhileIdle true  -> setAndAllowWhileIdle(RTC_WAKEUP)  ✅
+      //     allowWhileIdle false -> set(RTC)                          ❌
+      //
+      // `set(RTC)` does NOT wake the device and Doze defers it indefinitely,
+      // so on a locked phone the reminder never arrives — we shipped that
+      // briefly and reminders silently stopped firing.
+      // `setAndAllowWhileIdle` is inexact (needs no permission) but uses
+      // RTC_WAKEUP and survives Doze, which is exactly right for a daily
+      // reminder: a few minutes of drift, but it actually arrives.
+      schedule: { at: d.at, allowWhileIdle: true },
       extra: { kind: d.kind },
     }))
     try { await LocalNotifications.schedule({ notifications }) }

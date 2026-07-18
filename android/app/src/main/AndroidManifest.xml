@@ -18,9 +18,15 @@
          USE_EXACT_ALARM is not an alternative: it's reserved for apps whose
          core function is alarms/calendars, and claiming it for a wellness app
          invites a Play rejection.
-         A practice reminder tolerates a few minutes of drift, so we schedule
-         inexact alarms (see useNotifications.js) and need neither permission
-         nor a Play declaration. Don't re-add this. -->
+
+         This works because useNotifications.js still passes
+         `allowWhileIdle: true`. With no exact-alarm permission the plugin
+         falls back to setAndAllowWhileIdle(RTC_WAKEUP) — inexact (no
+         permission needed) but it WAKES the device and survives Doze, so a
+         daily reminder drifts a few minutes yet actually arrives.
+         ⚠ Removing `allowWhileIdle` as well drops it to set(RTC), which
+         neither wakes the device nor survives Doze: reminders stop firing.
+         Don't re-add this permission, and don't drop allowWhileIdle. -->
 
     <!-- allowBackup=false: the WebView's storage holds the Supabase session
          (access + refresh tokens) and the PKCE verifier. With backup enabled,
