@@ -269,6 +269,14 @@ const DASHBOARDS = [
         slug: 'X3b', name: 'X3b · Retention (signup → daily session)',
         query: retention({ target: 'signup_completed', returning: 'daily_session_completed', period: 'Week' }),
       },
+      {
+        // Doubles as a security signal: a sudden error spike is often the
+        // first visible sign of someone fuzzing the app. Meaningful even at
+        // low traffic — 100 errors/day with a handful of users is wrong by
+        // definition. See docs/security-monitoring.md.
+        slug: 'X5', name: 'X5 · Error rate (error_caught)',
+        query: trends({ series: ['error_caught'], breakdown: 'kind' }),
+      },
     ],
   },
 ]
@@ -279,9 +287,18 @@ const MARKER = 'provisioned'
 // ── Upsert helpers (idempotent by provisioning tag) ──────────────────────────
 async function findByTag(kind, tag, projectId) {
   // kind: 'dashboards' | 'insights'
+  //
+  // ⚠ PostHog LOWERCASES tags on write. Comparing case-sensitively meant
+  // `provisioned:dash-X` never matched the stored `provisioned:dash-x`, so
+  // "idempotent" re-runs silently created DUPLICATE dashboards and insights
+  // instead of updating them. (It did exactly that once — a second
+  // "Cross-cutting" board.) Compare lowercase on both sides.
+  const want = tag.toLowerCase()
   const r = await api(`/api/projects/${projectId}/${kind}/?limit=200`)
-  const items = r?.results || []
-  return items.find(i => Array.isArray(i.tags) && i.tags.includes(tag)) || null
+  const items = (r?.results || []).filter(i => !i.deleted)
+  return items.find(i =>
+    Array.isArray(i.tags) && i.tags.some(t => String(t).toLowerCase() === want)
+  ) || null
 }
 
 async function upsertInsight(insight, projectId) {
