@@ -298,6 +298,64 @@ generic failure.
 Users. (`.invalid` is a reserved TLD, so no real mailbox exists.)
 
 
+**21. 🔴 Password-reset token is interceptable via custom-scheme hijacking.**
+The deep-link intent filter registers a **custom scheme with no host and no
+`autoVerify`**:
+
+```xml
+<data android:scheme="com.sanctuary.app" />
+```
+
+On Android **any app may register the same custom scheme**. Two flows arrive
+through it, and they are not equally protected:
+
+| Flow | Handler | Exposure |
+|---|---|---|
+| OAuth callback | `exchangeCodeForSession(code)` | ✅ **Safe — PKCE.** An interceptor gets the `code` but not the `code_verifier` (held in this app's localStorage), so the exchange fails. |
+| Password reset | `verifyOtp({token_hash, type:'recovery'})` | 🔴 **No equivalent protection.** |
+
+The recovery flow has no PKCE-style binding. A malicious app that registers
+`com.sanctuary.app://` and receives the reset deep link obtains `token_hash`,
+and can call `verifyOtp` itself using the **public** anon key — yielding a
+valid session for the victim. That is **full account takeover** from a single
+intercepted reset link.
+
+Realism: it needs a hostile app already installed that registered the scheme,
+and Android shows a disambiguation dialog when two apps claim it — so this is
+social-engineering-assisted, not silent. It is nevertheless the known weakness
+of custom-scheme deep links, and the reason the platform provides App Links.
+
+→ *Fix: **Android App Links*** — an `https://www.thesanctuaryteam.com/...`
+intent filter with `android:autoVerify="true"`, plus
+`/.well-known/assetlinks.json` on the domain carrying the app's signing
+certificate SHA-256. Android then verifies domain ownership and routes the
+link **only** to the verified app: no chooser, no hijacking.
+
+**Sequencing — this cannot be done yet, and doing it early makes things
+worse.** `assetlinks.json` needs the release signing certificate fingerprint,
+which doesn't exist until #12 (and with Play App Signing it comes *from* Play
+Console after upload). Adding an `https` intent filter *before* the file is
+live leaves it unverified, which puts the app into the browser disambiguation
+dialog — worse UX, no security gain. Correct order:
+1. #12 — release signing → obtain the SHA-256 from Play Console.
+2. #13 — deploy `website/.well-known/assetlinks.json` (served at
+   `https://www.thesanctuaryteam.com/.well-known/assetlinks.json`).
+3. Add the verified `https` intent filter, keeping the custom scheme as a
+   fallback for already-installed builds.
+4. Point Supabase's reset-email redirect at the `https` URL.
+5. Verify: `adb shell pm get-app-links com.sanctuary.app` → `verified`.
+
+**Also checked and clean (Capacitor defaults, no overrides in
+`capacitor.config.json`):** `webContentsDebuggingEnabled` defaults to `isDebug`
+→ **off in release** (this is the classic hole: a debuggable WebView in
+production lets anyone with USB access read localStorage and lift the Supabase
+session). `loggingEnabled` likewise defaults to `isDebug` → no plugin payloads
+in logcat in release. `allowMixedContent` false; no `allowNavigation`
+widening; no `addJavascriptInterface`; https `androidScheme`.
+⚠️ Both defaults key off the build being **non-debuggable** — confirm the
+release AAB in #12 is not debuggable, or both protections silently vanish.
+
+
 ---
 
 ## Prioritised remediation plan
