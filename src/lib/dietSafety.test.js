@@ -1,0 +1,186 @@
+// Guardrail tests for the diet feature.
+//
+// These are not incidental coverage — they encode the three promises the
+// feature is built on (docs/diet-feature-plan.md §2, §6):
+//   1. unreviewed facts never reach a user,
+//   2. an allergen is never surfaced, whatever its dosha score,
+//   3. we stop advising and point to a professional when we should.
+// If one of these fails, the feature is not safe to ship.
+
+import { describe, it, expect, afterEach } from 'vitest'
+import {
+  ALLERGENS, DIET_PATTERNS,
+  detectSeekHelp, needsSofterHandling, messageForTriggers,
+  exclusionFor, filterSafe,
+  DISORDERED_EATING_MESSAGE, SEEK_HELP_MESSAGE,
+} from './dietSafety'
+import { INGREDIENTS, ALL_INGREDIENTS } from '../data/ayurveda/ingredients'
+import { getIngredient, searchIngredients, coverageStats, suitabilityFor } from './ingredients'
+import { SUITABILITY } from './doshaSemantics'
+
+describe('the review gate — unreviewed facts must not reach users', () => {
+  it('every seeded entry is still draft (nobody has flipped a flag unverified)', () => {
+    const shipped = ALL_INGREDIENTS.filter((i) => i.reviewStatus === 'reviewed')
+    expect(
+      shipped.map((i) => i.id),
+      'entries marked reviewed must have been fact-checked against Charaka by a human',
+    ).toEqual([])
+  })
+
+  it('getIngredient hides draft rows entirely', () => {
+    expect(INGREDIENTS.ghee).toBeTruthy()          // exists in the dataset
+    expect(getIngredient('ghee')).toBeNull()       // but is invisible to the app
+  })
+
+  it('an unknown id and an unreviewed id are indistinguishable to callers', () => {
+    // Deliberate: a draft must behave exactly as if it does not exist, so no
+    // caller can special-case its way around the gate.
+    expect(getIngredient('ghee')).toBe(getIngredient('nonexistentFood'))
+  })
+
+  it('search returns nothing while the dataset is unreviewed', () => {
+    expect(searchIngredients('ghee').results).toEqual([])
+    expect(searchIngredients('ghee').coverageMiss).toBe(true)
+  })
+
+  it('coverage stats report the gate honestly', () => {
+    const s = coverageStats()
+    expect(s.total).toBeGreaterThan(0)
+    expect(s.reviewed).toBe(0)
+    expect(s.draft).toBe(s.total)
+  })
+})
+
+describe('the gate opens correctly once a row is reviewed', () => {
+  afterEach(() => { INGREDIENTS.ghee.reviewStatus = 'draft' })
+
+  it('a reviewed row becomes visible to lookup and search', () => {
+    INGREDIENTS.ghee.reviewStatus = 'reviewed'
+    // Note: the module caches its reviewed list at import, so this exercises
+    // getIngredient's per-call check rather than the cached search list.
+    expect(getIngredient('ghee')).toBeTruthy()
+    expect(getIngredient('ghee').name).toBe('Ghee')
+  })
+})
+
+describe('allergens are an absolute filter, not a ranking penalty', () => {
+  const ghee = INGREDIENTS.ghee
+  const rice = INGREDIENTS.basmatiRice
+
+  it('excludes an allergen even when it is ideal for the dosha', () => {
+    // Ghee pacifies both Vata and Pitta — the strongest possible "favor" —
+    // and must still be removed for a dairy allergy.
+    expect(suitabilityFor(ghee, 'vata')).toBe(SUITABILITY.BALANCING)
+    const { excluded, reason, key } = exclusionFor(ghee, { allergens: [ALLERGENS.DAIRY] })
+    expect(excluded).toBe(true)
+    expect(reason).toBe('allergen')
+    expect(key).toBe('dairy')
+  })
+
+  it('reports allergens distinctly from dietary patterns', () => {
+    // The UI must not describe an allergen as merely "doesn't suit your diet".
+    expect(exclusionFor(ghee, { allergens: ['dairy'] }).reason).toBe('allergen')
+    expect(exclusionFor(ghee, { patterns: [DIET_PATTERNS.VEGAN] }).reason).toBe('pattern')
+  })
+
+  it('filterSafe REMOVES rather than down-ranks', () => {
+    const out = filterSafe([ghee, rice], { allergens: ['dairy'] })
+    expect(out.map((i) => i.id)).toEqual(['basmatiRice'])
+  })
+
+  it('leaves unaffected foods alone', () => {
+    expect(exclusionFor(rice, { allergens: ['dairy', 'nuts'] }).excluded).toBe(false)
+  })
+
+  it('handles an empty or missing profile without excluding everything', () => {
+    expect(filterSafe([ghee, rice], {})).toHaveLength(2)
+    expect(filterSafe([ghee, rice], undefined)).toHaveLength(2)
+  })
+
+  it('vegan excludes dairy; vegetarian does not', () => {
+    expect(exclusionFor(ghee, { patterns: ['vegan'] }).excluded).toBe(true)
+    expect(exclusionFor(ghee, { patterns: ['vegetarian'] }).excluded).toBe(false)
+  })
+})
+
+describe('seek-help triggers', () => {
+  it('detects pregnancy, conditions and medication', () => {
+    expect(detectSeekHelp('is ginger safe while pregnant').categories).toContain('pregnancy')
+    expect(detectSeekHelp('what should I eat with diabetes').categories).toContain('medical')
+    expect(detectSeekHelp('does this interact with my medication').categories).toContain('medication')
+  })
+
+  it('is case-insensitive and matches inside sentences', () => {
+    expect(detectSeekHelp('I am in my second TRIMESTER').triggered).toBe(true)
+  })
+
+  it('does not fire on ordinary food questions', () => {
+    expect(detectSeekHelp('is rice good for vata').triggered).toBe(false)
+    expect(detectSeekHelp('ghee').triggered).toBe(false)
+    expect(detectSeekHelp('').triggered).toBe(false)
+  })
+
+  it('routes disordered-eating signals to the supportive message, not diet advice', () => {
+    const { categories, triggered } = detectSeekHelp('how do I stop eating to lose weight fast')
+    expect(triggered).toBe(true)
+    expect(needsSofterHandling(categories)).toBe(true)
+    expect(messageForTriggers(categories)).toBe(DISORDERED_EATING_MESSAGE)
+  })
+
+  it('uses the standard referral message for other triggers', () => {
+    const { categories } = detectSeekHelp('I have kidney problems')
+    expect(needsSofterHandling(categories)).toBe(false)
+    expect(messageForTriggers(categories)).toBe(SEEK_HELP_MESSAGE)
+  })
+})
+
+describe('dosha interpretation uses the FOOD convention', () => {
+  it('-1 reads as balancing, +1 as caution', () => {
+    // Ghee: vata -1 (pacifies), kapha +1 (aggravates). Reading these raw, or
+    // with the asana convention, would invert the advice — that shipped once.
+    expect(suitabilityFor(INGREDIENTS.ghee, 'vata')).toBe(SUITABILITY.BALANCING)
+    expect(suitabilityFor(INGREDIENTS.ghee, 'kapha')).toBe(SUITABILITY.CAUTION)
+    expect(suitabilityFor(INGREDIENTS.basmatiRice, 'kapha')).toBe(SUITABILITY.NEUTRAL)
+  })
+
+  it('degrades to neutral rather than guessing', () => {
+    expect(suitabilityFor(null, 'vata')).toBe(SUITABILITY.NEUTRAL)
+    expect(suitabilityFor(INGREDIENTS.ghee, null)).toBe(SUITABILITY.NEUTRAL)
+  })
+})
+
+describe('dataset integrity', () => {
+  it('every entry carries a source and a confidence level', () => {
+    for (const i of ALL_INGREDIENTS) {
+      expect(i.source, `${i.id} needs a source`).toBeTruthy()
+      expect(['high', 'medium']).toContain(i.confidence)
+      expect(['draft', 'reviewed']).toContain(i.reviewStatus)
+    }
+  })
+
+  it('property-derived entries are marked medium and explain themselves', () => {
+    // A food absent from the classical corpus must not masquerade as attested.
+    for (const i of ALL_INGREDIENTS.filter((x) => x.source.text === 'modern')) {
+      expect(i.confidence, `${i.id} is non-classical, so cannot be 'high'`).toBe('medium')
+      expect(i.source.note, `${i.id} must say how it was derived`).toBeTruthy()
+    }
+  })
+
+  it('classically-cited entries carry a verse reference', () => {
+    for (const i of ALL_INGREDIENTS.filter((x) => x.source.text === 'CS')) {
+      expect(i.source.verse, `${i.id} cites Charaka, so needs a verse`).toBeTruthy()
+    }
+  })
+
+  it('dosha effects are only -1, 0 or 1', () => {
+    for (const i of ALL_INGREDIENTS) {
+      for (const d of ['vata', 'pitta', 'kapha']) {
+        expect([-1, 0, 1], `${i.id}.${d}`).toContain(i.doshaEffect[d])
+      }
+    }
+  })
+
+  it('ids are unique and match their keys', () => {
+    for (const [key, i] of Object.entries(INGREDIENTS)) expect(i.id).toBe(key)
+  })
+})
