@@ -241,6 +241,39 @@ browser: PostHog, Google Fonts, the Play badge and the full quiz→result→badg
 attribution path all work, with zero violations.
 
 
+**19. ⚠️ Email confirmation is DISABLED (`mailer_autoconfirm: true`) — and it
+undercuts the promo brute-force guard.** Read from the public
+`/auth/v1/settings` endpoint. Anyone can register with **any** email address
+and the account is active immediately, with no proof of ownership.
+
+Consequences, in order of how much they matter here:
+1. **It weakens migration 013.** The promo rate-limit is keyed on `user_id`,
+   and 013's own note says "an attacker must burn an account per bucket…a
+   determined attacker can create accounts". With autoconfirm on, creating
+   accounts is instant, free and unlimited — so the per-user budget is a speed
+   bump, not a wall. **Code entropy is doing nearly all the work.**
+2. **Account squatting** — someone can register a victim's address before they
+   do. (Password reset returns control to the real owner, so this is nuisance
+   rather than takeover.)
+3. **Fake accounts pollute analytics** and inflate any user-count metric.
+
+Note the app **never checks `email_confirmed_at`** anywhere, so even enabling
+confirmation wouldn't gate access on its own.
+→ *Decide before launch:* enable email confirmation (Supabase → Auth →
+Providers → Email → "Confirm email"), accepting the signup friction; or keep
+autoconfirm and compensate — high-entropy promo codes (already required),
+plus tightening `max_redemptions`. Pre-launch this is low risk; at launch it's
+the difference between "promo codes are rate-limited" and "promo codes are
+rate-limited per throwaway account".
+
+**Password policy:** the client enforces `minLength={8}` in SignupPage, but
+that's client-side only — a direct API call bypasses it. Supabase's server-side
+minimum defaults to **6** and there's no public endpoint to read it, so the
+effective policy is unconfirmed. Worth checking Auth → Policies in the
+dashboard, and enabling **leaked-password protection** (Supabase's
+HaveIBeenPwned check) which is off by default.
+
+
 ---
 
 ## Prioritised remediation plan
