@@ -197,6 +197,48 @@ keystore, kept **out** of git (add `*.jks`/`*.keystore` to `.gitignore`
 pre-emptively). HTTPS everywhere is fine (no `usesCleartextTraffic`, so
 cleartext is disabled by default on API 28+).
 
+**16. ⚠️ `avatars` Storage bucket is publicly LISTABLE — enumerates user IDs.**
+Anyone holding the public anon key can list the bucket, and the folder names
+are raw user UUIDs (upload path is `${user.id}/avatar.ext`). Today that
+exposes exactly one folder (the founder's) so blast radius is nil — **but at
+launch it makes every user's ID publicly enumerable**, along with a live user
+count.
+Calibration: user IDs alone aren't exploitable (RLS still demands a valid JWT),
+so this is **information disclosure, not a breach** — P2, fix before launch.
+It does hand an attacker a target list for any future bug that takes a
+`user_id`, and leaks growth numbers.
+→ *Fix:* the bucket is public so objects are still served via
+`/object/public/...` **without** a SELECT policy — listing is what needs
+removing. Inspect first (policy names are unknown; they were created in the
+dashboard, same blind spot as finding #5):
+```sql
+select policyname, cmd, roles, qual
+from pg_policies where schemaname = 'storage' and tablename = 'objects';
+```
+Then drop/scope the permissive SELECT policy covering `bucket_id = 'avatars'`
+so `anon` cannot list, and re-verify avatar upload + display still work.
+Not done blind: guessing at storage policy names risks breaking avatars.
+
+**17. ✅ Black-box RLS probe — clean (2026-07-23).** Every table was probed with
+the public anon key for both read and write: `profiles`, `content_events`,
+`dosha_assessments`, `pose_interactions`, `practice_sessions`, `promo_attempts`,
+`promo_codes`, `promo_redemptions`, `protocol_day_completions`,
+`recommendations_log`, `searches`, `subscription_events`, `user_state_checkins`.
+**No anonymous reads returned data and every insert was rejected** (RLS
+violation or no grant). Notably `promo_codes` inserts are blocked — anon cannot
+mint themselves a grant code. This tests the same bug class as finding #5
+(policies defined in the dashboard, invisible to git) from the outside, which
+is the only way to catch it without DB access.
+
+**18. ✅ Website security headers added.** `website/_headers` (Cloudflare Pages
+reads it at deploy, no build step): CSP, HSTS, `X-Frame-Options: DENY`,
+`nosniff`, `Referrer-Policy`, `Permissions-Policy`. HSTS deliberately **without
+`preload`** — preload is effectively irreversible and shouldn't be committed to
+before the subdomain plan is settled. Verified by enforcing the CSP in a real
+browser: PostHog, Google Fonts, the Play badge and the full quiz→result→badge
+attribution path all work, with zero violations.
+
+
 ---
 
 ## Prioritised remediation plan

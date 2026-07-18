@@ -1,0 +1,42 @@
+# Cloudflare Pages security headers.
+#
+# Cloudflare Pages (and Netlify) read this file at deploy time and apply the
+# rules to matching paths. No build step, no config UI — it ships with the
+# site. Without it the site serves with no security headers at all, which is
+# the default and is worth fixing before the domain is public.
+#
+# Verify after deploying:
+#   curl -sI https://www.thesanctuaryteam.com/ | grep -iE 'content-security|x-frame|strict-transport'
+# and check https://securityheaders.com for a second opinion.
+
+/*
+  # Clickjacking: nothing here should ever be framed. frame-ancestors in the
+  # CSP is the modern control; X-Frame-Options covers older browsers.
+  X-Frame-Options: DENY
+  # Stop MIME sniffing turning a stray upload into executable content.
+  X-Content-Type-Options: nosniff
+  # Don't leak the full URL (which carries utm_* campaign params) to third
+  # parties; send only the origin cross-site.
+  Referrer-Policy: strict-origin-when-cross-origin
+  # HSTS: 1 year, subdomains. Deliberately NO `preload` — preload is
+  # effectively irreversible and shouldn't be committed to before the domain's
+  # subdomain plan is settled. Add it later, on purpose.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  # The site needs no camera/mic/geolocation/payment. Deny them so an injected
+  # script can't prompt for them either.
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  # CSP — tight, because this is a static marketing site with known sources:
+  #   script-src  'self' + PostHog (analytics) + 'unsafe-inline' for the small
+  #               inline snippets in site.js/quiz.js bootstrapping.
+  #   style-src   'unsafe-inline' is required by the inline <style> blocks and
+  #               Google Fonts' stylesheet.
+  #   img-src     data: for inline icons, plus the Google Play badge host.
+  #   connect-src PostHog EU ingest only.
+  #   frame-src / object-src none — nothing is embedded.
+  # form-action 'none' matters here: there are no forms, so this blocks a
+  # would-be phishing form injected into a page.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://eu-assets.i.posthog.com https://eu.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://play.google.com; connect-src 'self' https://eu.i.posthog.com https://eu-assets.i.posthog.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+
+# Generated pose pages and assets are immutable between deploys — cache hard.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
