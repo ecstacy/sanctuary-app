@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 import { Capacitor } from '@capacitor/core'
 import { TextToSpeech } from '@capacitor-community/text-to-speech'
 import i18n from '../i18n'
+import { fetchWithTimeout } from '../lib/fetchWithTimeout'
 
 // ─── Voice Guidance ─────────────────────────────────────────────────────────
 //
@@ -47,7 +48,11 @@ const manifestCache = {} // lang -> Promise<manifest>
 function loadManifest(lang) {
   const l = LANG_TTS[lang] ? lang : 'en'
   if (manifestCache[l]) return manifestCache[l]
-  manifestCache[l] = fetch(audioPathsFor(l).manifest)
+  // Bounded: the manifest gates pre-recorded audio during a practice, and a
+  // hung request would stall voice guidance for the whole session. On timeout
+  // (or any failure) we resolve to {} and fall back to live TTS — degraded,
+  // never stuck. Shorter than the default since this is a small static file.
+  manifestCache[l] = fetchWithTimeout(audioPathsFor(l).manifest, { timeoutMs: 8000 })
     .then(r => (r.ok ? r.json() : {}))
     .catch(() => ({}))
   return manifestCache[l]

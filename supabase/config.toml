@@ -1,7 +1,12 @@
 
+# Password-reset bridge page. verify_jwt MUST be false: the link is opened
+# from an email in a plain browser with no Supabase JWT, so verification would
+# 401 the user out of their own password reset. This previously said `true`
+# while production served 200 unauthenticated — config drift that would have
+# broken resets on the next deploy from this file.
 [functions.reset-password-redirect]
 enabled = true
-verify_jwt = true
+verify_jwt = false
 import_map = "./functions/reset-password-redirect/deno.json"
 # Uncomment to specify a custom file path to the entrypoint.
 # Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx

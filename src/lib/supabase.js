@@ -1,9 +1,15 @@
 import { createClient } from '@supabase/supabase-js'
+import { fetchWithTimeout } from './fetchWithTimeout'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  // Every Supabase call (queries, auth, RPCs, edge functions) goes through
+  // this fetch, so one wrapper puts a deadline on all of them. Without it a
+  // hung socket leaves an `await` pending forever — a spinner the user can
+  // neither escape nor retry. See lib/fetchWithTimeout.js.
+  global: { fetch: fetchWithTimeout },
   auth: {
     persistSession: true,
     storage: window.localStorage,

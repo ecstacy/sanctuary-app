@@ -118,7 +118,36 @@ UPDATE grant on (only `service_role` + the definer RPC write it), **or** add a
 unchanged or the caller is `service_role`. Commit whichever fix as a tracked
 migration so this is never again invisible to the repo.
 
-**6. No request timeouts on Supabase / fetch calls.** The client awaits
+**14. 🔴 REFLECTED XSS in `reset-password-redirect` — FOUND AND FIXED (2026-07-23).**
+The edge function interpolated raw `token_hash` / `type` query params into
+**two** sinks: a JS string (`window.location.href = "${appDeepLink}"`) and an
+`href` attribute. Confirmed live against production — an injected marker came
+back unescaped twice, on an unauthenticated `HTTP 200`. Payloads like
+`?token_hash=x";alert(1);//` broke out of the script string.
+Because the page renders mid-password-reset on a legitimate-looking URL, the
+realistic exploit is convincing **phishing** (replace the page with a "set your
+new password" form), not session theft — this origin holds no app session.
+→ *Fixed* with two independent layers: strict **validation** (allowlisted
+`type`, `[A-Za-z0-9._~-]{1,512}` token charset — failures render a static error
+and never echo input) and per-context **encoding** (`JSON.stringify` for the JS
+string, HTML-escape for the attribute, `encodeURIComponent` for the params),
+plus a restrictive CSP and `nosniff`/`no-referrer`/`no-store` headers. Both
+layers verified independently: validation blocks all 6 payloads, and encoding
+alone neutralises them with validation bypassed.
+→ Also corrected **config drift**: `config.toml` claimed `verify_jwt = true`
+for this function while production served 200 unauthenticated. It must be
+`false` (an email link carries no JWT) — left as `true`, the next deploy from
+this file would have broken every password reset.
+
+**15. ✅ Edge-function auth audit — otherwise clean.** `posthog-delete-person`
+derives the target from `getUser()` on the **caller's own token**
+(`distinct_ids: [user.id]`), so the GDPR delete path cannot be pointed at
+another user — the concern raised in finding #8 does not apply.
+`create-customer-portal-session` has `verify_jwt = true` plus an internal
+`getUser(jwt)` check. `oauth-redirect` takes no parameters (static page).
+`stripe-webhook` correctly runs `--no-verify-jwt` with signature verification.
+
+**6. ✅ Request timeouts — FIXED (2026-07-23).** The client awaits
 Supabase and Edge Function calls without an `AbortController` deadline; a hung
 network leaves spinners forever and can wedge flows (auth, checkout).
 → *Fix:* wrap network calls in a timeout helper (e.g. 10–15s abort) and
