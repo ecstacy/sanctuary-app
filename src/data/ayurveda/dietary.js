@@ -27,6 +27,15 @@
 // ─── Six tastes (Rasa) — the foundation ────────────────────────────────
 // Charaka and Sushruta both organize food by six tastes. Each taste
 // has a known effect on each dosha. This is the pragmatic skeleton.
+//
+// ⚠ SIGN CONVENTION — READ BEFORE CONSUMING `effect`.
+// Here -1 = PACIFIES (reduces the dosha) and +1 = AGGRAVATES. That is the
+// OPPOSITE of `doshaAffinity` on asanas/pranayamas, where +1 means balancing.
+// The same number means opposite things in the two datasets. Do NOT compare
+// them directly, and do NOT read these numbers raw — convert via
+// `foodSuitability()` / `foodEffectDirection()` in src/lib/doshaSemantics.js,
+// which returns the same vocabulary as practices so the two can be reasoned
+// about together safely. This bit us once already (see that module's header).
 
 export const RASAS = {
   sweet: {

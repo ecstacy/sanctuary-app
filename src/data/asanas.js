@@ -18,6 +18,7 @@
 // English IDs (`cobra`, `bridge`, …) to new ones for backward compatibility.
 
 import { localizeAsana, localizeRoutineMeta, localizeDoshaTagLabel } from '../i18n/contentI18n'
+import { SUITABILITY, practiceSuitability } from '../lib/doshaSemantics'
 
 export const ASANAS = {
   // ── Standing Poses ──────────────────────────────────────────────────────
@@ -4604,18 +4605,23 @@ export function getRoutineKeys() {
   return Object.keys(ROUTINE_TEMPLATES)
 }
 
+const DOSHA_TAG_STYLE = {
+  [SUITABILITY.BALANCING]: { label: 'Balancing', color: 'bg-green-100 text-green-700' },
+  [SUITABILITY.CAUTION]:   { label: 'Caution',   color: 'bg-red-100 text-red-700' },
+  [SUITABILITY.NEUTRAL]:   { label: 'Neutral',   color: 'bg-gray-100 text-gray-500' },
+}
+
+/**
+ * Presentation wrapper for a practice's `doshaAffinity` value.
+ *
+ * The sign→meaning decision lives in lib/doshaSemantics.js, NOT here — foods
+ * use the opposite sign convention, and keeping one interpreter stops the two
+ * being conflated. See that module's header for the incident this prevents.
+ * Handles both the numeric schema and the legacy strings.
+ */
 export function getDoshaTag(affinity) {
-  // Bridge between the new schema (numeric +1/0/-1 in `doshaAffinity`)
-  // and the legacy schema ('balancing' | 'neutral' | 'aggravating'
-  // strings). New entries pass numbers; UI helpers normalize here.
-  if (typeof affinity === 'number') {
-    if (affinity > 0)  return { label: localizeDoshaTagLabel('Balancing'), color: 'bg-green-100 text-green-700' }
-    if (affinity < 0)  return { label: localizeDoshaTagLabel('Caution'),   color: 'bg-red-100 text-red-700' }
-    return { label: localizeDoshaTagLabel('Neutral'), color: 'bg-gray-100 text-gray-500' }
-  }
-  if (affinity === 'balancing')   return { label: localizeDoshaTagLabel('Balancing'), color: 'bg-green-100 text-green-700' }
-  if (affinity === 'aggravating') return { label: localizeDoshaTagLabel('Caution'),   color: 'bg-red-100 text-red-700' }
-  return { label: localizeDoshaTagLabel('Neutral'), color: 'bg-gray-100 text-gray-500' }
+  const style = DOSHA_TAG_STYLE[practiceSuitability(affinity)]
+  return { label: localizeDoshaTagLabel(style.label), color: style.color }
 }
 
 // ─── Backward-compat alias map ──────────────────────────────────────────

@@ -209,6 +209,40 @@ settling Vata"). Turns a correctness nuance into a trust-building moment.
 - **Longer game:** this dataset becomes a **source of truth to enrich the rest
   of the app** (dinacharya, recommendations, seasonal content) once built.
 
+## 10b. ⚠ The sign-convention trap (read before writing any food→dosha logic)
+
+The two datasets encode dosha numbers with **opposite signs**, because they
+measure different things:
+
+| Data | Field | `+1` means | `-1` means |
+|---|---|---|---|
+| `asanas.js`, `pranayamas.js` | `doshaAffinity` | **balancing** (good fit) | caution |
+| `dietary.js` | `RASAS[t].effect` | **aggravates** | pacifies (good) |
+
+Both are individually correct — a food's effect is classically described as
+raising or lowering a dosha, a practice by its suitability — but the same
+number means the opposite thing in each, and nothing in the raw data says so.
+
+**This already caused a real bug.** Generating the public `/poses` pages, the
+food convention was applied to asana data: all 76 pages rendered
+"Increases vata" where the truth was "Balancing", inverting the advice while
+looking entirely plausible.
+
+**Rule for this feature: never read these numbers raw.** Convert through
+`src/lib/doshaSemantics.js`, which normalizes both domains to one vocabulary
+(`balancing` / `neutral` / `caution`):
+
+```js
+import { practiceSuitability, foodSuitability } from '../lib/doshaSemantics'
+practiceSuitability(asana.doshaAffinity.vata)   // +1 → 'balancing'
+foodSuitability(RASAS.sweet.effect.vata)        // -1 → 'balancing'
+```
+
+The inversion lives in that one module, under test
+(`doshaSemantics.test.js` asserts `practiceSuitability(n) === foodSuitability(-n)`).
+New food entries should keep the `dietary.js` convention for consistency with
+the classical sources — just never compare them to practice numbers directly.
+
 ## 11. Open questions / risks
 
 - **Coverage of non-classical foods.** The classical corpus has no "avocado" or
