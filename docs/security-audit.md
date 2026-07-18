@@ -197,7 +197,7 @@ keystore, kept **out** of git (add `*.jks`/`*.keystore` to `.gitignore`
 pre-emptively). HTTPS everywhere is fine (no `usesCleartextTraffic`, so
 cleartext is disabled by default on API 28+).
 
-**16. ⚠️ `avatars` Storage bucket is publicly LISTABLE — enumerates user IDs.**
+**16. ✅ `avatars` bucket was publicly LISTABLE — FIXED & VERIFIED (migration 016).**
 Anyone holding the public anon key can list the bucket, and the folder names
 are raw user UUIDs (upload path is `${user.id}/avatar.ext`). Today that
 exposes exactly one folder (the founder's) so blast radius is nil — **but at
@@ -207,17 +207,19 @@ Calibration: user IDs alone aren't exploitable (RLS still demands a valid JWT),
 so this is **information disclosure, not a breach** — P2, fix before launch.
 It does hand an attacker a target list for any future bug that takes a
 `user_id`, and leaks growth numbers.
-→ *Fix:* the bucket is public so objects are still served via
-`/object/public/...` **without** a SELECT policy — listing is what needs
-removing. Inspect first (policy names are unknown; they were created in the
-dashboard, same blind spot as finding #5):
-```sql
-select policyname, cmd, roles, qual
-from pg_policies where schemaname = 'storage' and tablename = 'objects';
-```
-Then drop/scope the permissive SELECT policy covering `bucket_id = 'avatars'`
-so `anon` cannot list, and re-verify avatar upload + display still work.
-Not done blind: guessing at storage policy names risks breaking avatars.
+**Cause:** a dashboard-created policy, invisible to this repo until probed
+from outside — `"Avatars are publicly accessible" SELECT to public USING
+(bucket_id = 'avatars')`. SELECT on `storage.objects` is exactly what LIST reads.
+**Fix (016):** dropped it; replaced with an owner-scoped SELECT. Proven safe
+*before* changing anything by fetching an avatar with **no apikey at all** →
+HTTP 200, confirming the bucket is genuinely public and display bypasses RLS.
+Also hardened the INSERT policy (its `WITH CHECK` was never inspected — if
+unscoped, any authenticated user could overwrite another user's avatar) and
+gave UPDATE a matching `WITH CHECK` so an object can't be moved into someone
+else's folder.
+**Verified after applying:** anon listing returns `[]` (was a list of user
+UUIDs); the public avatar URL still returns 200.
+⏳ Still to confirm on-device: Profile → change photo (upload path).
 
 **17. ✅ Black-box RLS probe — clean (2026-07-23).** Every table was probed with
 the public anon key for both read and write: `profiles`, `content_events`,
