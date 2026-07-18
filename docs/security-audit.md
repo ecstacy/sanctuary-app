@@ -266,12 +266,36 @@ plus tightening `max_redemptions`. Pre-launch this is low risk; at launch it's
 the difference between "promo codes are rate-limited" and "promo codes are
 rate-limited per throwaway account".
 
-**Password policy:** the client enforces `minLength={8}` in SignupPage, but
-that's client-side only — a direct API call bypasses it. Supabase's server-side
-minimum defaults to **6** and there's no public endpoint to read it, so the
-effective policy is unconfirmed. Worth checking Auth → Policies in the
-dashboard, and enabling **leaked-password protection** (Supabase's
-HaveIBeenPwned check) which is off by default.
+**20. 🔴 Password minimum is 6 characters — CONFIRMED BY TEST (2026-07-18).**
+The client enforces `minLength={8}` in SignupPage, but that is cosmetic: a
+direct `POST /auth/v1/signup` bypasses it entirely. Probed against production:
+
+| password | result |
+|---|---|
+| `abcde` (5) | rejected — *"Password should be at least 6 characters."* |
+| `abcdef` (6) | **ACCEPTED — account created** |
+
+So the real policy is Supabase's default of 6, with no character-class
+requirement — `abcdef` and `123456` are valid passwords for this app. Combined
+with §19 (no email confirmation), that's a weak position against credential
+stuffing at launch.
+
+→ *Fix (dashboard, free tier):* **Authentication → Sign In / Providers →
+Email** — raise **minimum password length to 8+** (the docs explicitly advise
+against under 8) and enable **required character classes**.
+→ **Leaked-password protection** (HaveIBeenPwned) lives on the same page but
+**requires the Pro plan** — that's why it isn't visible on Free. Not a
+misconfiguration; a plan limit.
+→ ⚠️ *Correction to an earlier note in this doc:* these settings are **not**
+under "Auth → Policies" (that page is for RLS). They're on the Email provider
+page.
+→ Raising the server minimum will start rejecting signups the client thinks are
+valid, so check `SignupPage` surfaces the server error text rather than a
+generic failure.
+
+*Test artifact:* one account was created during this probe —
+`pwtest-657000@sanctuary-pwtest.invalid` — delete it under Authentication →
+Users. (`.invalid` is a reserved TLD, so no real mailbox exists.)
 
 
 ---
