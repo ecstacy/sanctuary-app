@@ -39,7 +39,40 @@ Netlify works identically (publish directory `website`, no build command).
 |---|---|
 | `/` | Landing. Hero → Play badge + **"Find your dosha →"** (the primary funnel CTA) |
 | `/quiz` | **The funnel workhorse** (growth-plan §2.2). 5-question dosha teaser → result → store badge |
+| `/poses/` + 76 × `/poses/<slug>` | **Generated** SEO library — see below |
 | `/support`, `/privacy`, `/terms` | Store-required pages |
+
+### The pose library is generated — don't hand-edit it
+
+`website/poses/*.html`, `website/assets/poses/*`, and `sitemap.xml` are
+**generated** by `scripts/build-pose-pages.mjs` from `src/data/asanas.js` (the
+same canonical data the app renders, so the site and product can't drift).
+
+```bash
+npm run poses:pages     # rebuild manifest + regenerate pages + sitemap
+```
+
+Re-run after editing `asanas.js`. Output is committed so Cloudflare Pages stays
+zero-build. (A generator was chosen over Astro deliberately: the site has no
+build step, this repo already has the `scripts/*.mjs` pattern and already
+commits generated artifacts like `poseManifest.js`, and the output stays
+reviewable in diffs.)
+
+⚠️ **Two traps encoded in that script — read before changing it:**
+
+1. **Dosha sign convention is inverted between asanas and foods.**
+   `asanas.js doshaAffinity`: **+1 = Balancing, −1 = Caution**
+   (authoritative: `getDoshaTag()` in `src/data/asanas.js`).
+   `dietary.js RASAS.effect`: **−1 = pacifying, +1 = aggravating** — the
+   opposite. Getting this backwards inverts the advice on all 76 pages while
+   looking perfectly plausible. The generator therefore calls the app's own
+   `getDoshaTag()` rather than mapping numbers itself — which also handles the
+   few legacy entries using the string schema (`'balancing'`).
+2. **`POSE_ALIASES`** — a few poses' data keys differ from their image
+   filenames (`legsUpWall` → `legUpWall.webp`, `forwardBend` →
+   `paschimottanasana.webp`). The map is mirrored from
+   `src/components/PoseFigure.jsx`; keep them in sync or those pages lose their
+   images.
 
 ### About the quiz
 

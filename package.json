@@ -9,6 +9,7 @@
     "poses:webp": "node scripts/convert-poses-webp.mjs",
     "poses:upload": "node scripts/upload-pose-videos.mjs",
     "poses:sync": "node scripts/upload-pose-videos.mjs && node scripts/build-pose-manifest.mjs",
+    "poses:pages": "node scripts/build-pose-manifest.mjs && node scripts/build-pose-pages.mjs",
     "predev": "node scripts/build-pose-manifest.mjs",
     "prebuild": "node scripts/build-pose-manifest.mjs",
     "dev": "vite",
