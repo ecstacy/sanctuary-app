@@ -1,5 +1,21 @@
 apply plugin: 'com.android.application'
 
+// ── Release signing ──────────────────────────────────────────────────────
+// Credentials come from android/keystore.properties, which is GITIGNORED and
+// never committed — a committed keystore hands over the ability to ship a
+// malicious update as us, and it can never be rotated for already-installed
+// users. See docs/release-signing.md for how to generate it.
+//
+// The file is intentionally optional: without it, debug builds and a fresh
+// clone still work, and `assembleRelease` simply produces an unsigned
+// artifact rather than failing the whole build.
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+def hasReleaseKeystore = keystorePropertiesFile.exists()
+if (hasReleaseKeystore) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace = "com.sanctuary.app"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -16,10 +32,49 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        if (hasReleaseKeystore) {
+            release {
+                storeFile     rootProject.file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias      keystoreProperties['keyAlias']
+                keyPassword   keystoreProperties['keyPassword']
+                // Both signature schemes: v1 for older devices, v2+ for modern
+                // verification. Play re-signs for delivery (Play App Signing),
+                // but the uploaded artifact must still verify on its own.
+                v1SigningEnabled true
+                v2SigningEnabled true
+            }
+        }
+    }
     buildTypes {
         release {
+            // ⚠️ debuggable MUST stay false. Capacitor derives both
+            // webContentsDebuggingEnabled and loggingEnabled from the build's
+            // debuggable flag — flip this and a production build gets an
+            // inspectable WebView (localStorage holds the Supabase session)
+            // plus plugin payloads in logcat. See docs/security-audit.md §21.
+            debuggable false
+            // Left off for now: R8 needs keep rules for Capacitor's
+            // reflection-based plugin registration, and enabling it blind
+            // risks runtime failures that only appear in release. Revisit
+            // deliberately, with an on-device pass. See docs/release-signing.md.
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (hasReleaseKeystore) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+}
+
+// Fail loudly at assemble/bundle time rather than silently shipping an
+// unsigned artifact that Play will reject with an unhelpful error.
+tasks.whenTaskAdded { task ->
+    if (!hasReleaseKeystore && (task.name == 'bundleRelease' || task.name == 'assembleRelease')) {
+        task.doFirst {
+            logger.warn("⚠️  android/keystore.properties not found — this release artifact will be UNSIGNED " +
+                        "and Play will reject it. See docs/release-signing.md.")
         }
     }
 }
