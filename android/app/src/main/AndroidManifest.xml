@@ -11,10 +11,16 @@
          device reboots. Without this, the user's morning reminder
          disappears every time they restart their phone. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <!-- Schedule exact alarms (Android 12+). Local notifications use this
-         to fire at the user's chosen time accurately rather than being
-         batched by the system into a "sometime that hour" window. -->
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <!-- NO exact-alarm permission, deliberately.
+         SCHEDULE_EXACT_ALARM is denied by default from Android 14 for our
+         targetSdk (36) — the user has to find the "Alarms & reminders" toggle
+         in system settings, and reminders silently never fire until they do.
+         USE_EXACT_ALARM is not an alternative: it's reserved for apps whose
+         core function is alarms/calendars, and claiming it for a wellness app
+         invites a Play rejection.
+         A practice reminder tolerates a few minutes of drift, so we schedule
+         inexact alarms (see useNotifications.js) and need neither permission
+         nor a Play declaration. Don't re-add this. -->
 
     <!-- allowBackup=false: the WebView's storage holds the Supabase session
          (access + refresh tokens) and the PKCE verifier. With backup enabled,
