@@ -18,7 +18,7 @@
 //  plausible; it already shipped once on the /poses pages.
 //
 //  ── THE REVIEW GATE ────────────────────────────────────────────────────────
-//  `reviewStatus: 'draft'` entries are INVISIBLE to the app. Only 'reviewed'
+//  `reviewStatus: 'reviewed'` entries are INVISIBLE to the app. Only 'reviewed'
 //  rows are returned by the accessors in lib/ingredients.js. A new entry is
 //  drafted from the classical framework and has NOT been fact-checked against
 //  Charaka by a human — that check is the gate, and it is the difference
@@ -378,7 +378,7 @@ export const INGREDIENTS = {
       'Freshly made flatbread is lighter than yeasted bread; both are heavier cold than warm.',
     allergens: ['gluten'],
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -403,9 +403,9 @@ export const INGREDIENTS = {
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
-      note: 'Barley is unambiguously classical and its light, dry, Kapha-reducing character is consensus. The PUNGENT vipaka is the part to check — authorities differ, and sweet is also attested.',
+      note: 'Review batch 2: pungent (katu) vipaka confirmed as the preferable reading for a Charaka-based dataset, though authorities differ and sweet is also attested.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -426,9 +426,10 @@ export const INGREDIENTS = {
     whyFavor:
       'The heaviest and most building of the pulses — genuinely nourishing and strengthening where mung is light and recovering.',
     whyAvoid: 'Heating and heavy: it adds to both Pitta and Kapha, and is slow to digest in quantity.',
-    preparation: 'Long-cooked with asafoetida and ginger to make the heaviness manageable.',
+    preparation:
+      'Long-cooked with ginger, cumin, black pepper or asafoetida to make the heaviness manageable. That changes how the food is experienced, not its intrinsic properties — the ratings above already describe the dal itself.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -446,11 +447,12 @@ export const INGREDIENTS = {
     doshaEffect: { vata: 1, pitta: -1, kapha: -1 },
     bestTime: ['midday'],
     whyFavor: 'Dry and astringent — settles Pitta and reduces Kapha without heaviness.',
-    whyAvoid: 'Notably gas-forming; the dryness and roughness aggravate Vata.',
+    whyAvoid:
+      'Although classically light (laghu), its pronounced dry (ruksha) and rough (khara) qualities make it Vata-provoking and commonly associated with flatulence — the dryness is the reason, not heaviness.',
     preparation:
-      'Soaking well, cooking thoroughly and adding asafoetida, cumin and ginger is the standard way to make it tolerable for Vata.',
+      'Soaking well, cooking thoroughly and adding enough unctuousness plus digestive spices (asafoetida, cumin, ginger) is the standard way to make it tolerable for Vata.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -473,7 +475,12 @@ export const INGREDIENTS = {
     whyAvoid: 'Heavy and oily, so it reliably increases Kapha and congestion.',
     preparation:
       'Traditionally taken warm and spiced (cardamom, ginger, turmeric) rather than cold — warming it is held to make it markedly easier to digest.',
-    combosToAvoid: ['fish', 'sour fruit', 'salt', 'yoghurt'],
+    combosToAvoid: [
+      'fish',
+      'sour substances, including sour fruit',
+      'salt',
+      'yoghurt (later tradition — not one of Charaka’s canonical incompatible pairs)',
+    ],
     cautions: ['lactose_intolerance'],
     cautionNote:
       'Lactose intolerance is a modern physiological caution, not a classical one — but it overrides everything above for someone who has it.',
@@ -481,9 +488,9 @@ export const INGREDIENTS = {
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
-      note: 'Milk and its qualities are core classical material. The incompatible combinations are from the viruddha ahara material (Sutrasthana 26); check whether all four listed belong there rather than to later tradition.',
+      note: 'Review batch 2: fish, sour substances and salt are the canonical viruddha pairs (Sutrasthana 26). Milk with yoghurt is widely taught but is NOT one of Charaka’s canonical examples, and is labelled as later tradition in the list above.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -509,9 +516,9 @@ export const INGREDIENTS = {
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
-      note: 'Takra is strongly attested, especially for digestive complaints. The Pitta-neutral rating is the soft spot: sour and heating properties argue for +1, while the classical use in Pitta conditions argues against. Drafted as neutral deliberately.',
+      note: 'Review batch 2: Pitta-neutral accepted. The SOUR VIPAKA is the least certain field here — sources are less uniform on takra than on milk or yoghurt, so it is defensible but not settled. Note also that classical takra is a CLASS of preparations varying by how much butter was removed, how much water was added and how long it was churned; this entry models the general case, not commercial cultured buttermilk specifically.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -532,9 +539,9 @@ export const INGREDIENTS = {
     allergens: ['dairy'],
     source: {
       text: 'modern',
-      note: 'Classical navanita is FRESH, unsalted, unfermented butter churned from curd — not the same as salted supermarket butter, which carries added salt and is usually cultured. Rated on the classical properties of fresh butter; confidence held at medium because the everyday Western product differs.',
+      note: 'Classical navanita is FRESH butter churned from curd, minimally processed, usually unsalted and eaten fresh. Supermarket butter is pasteurised, stored for weeks, often salted and industrially processed. Ayurveda weighs freshness and processing heavily, so this is not a trivial difference. Rated on the classical properties of fresh butter, with confidence held at medium because the everyday Western product differs.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -561,9 +568,9 @@ export const INGREDIENTS = {
     allergens: ['dairy'],
     source: {
       text: 'modern',
-      note: 'Aged hard cheese has no classical counterpart — the corpus knows fresh curd, buttermilk and ghee, not months-matured rennet cheese. Derived from properties: sour rasa from ageing, dense and oily guna.',
+      note: 'Derived from fermented-dairy principles; no direct analogue exists in the classical texts, which know fresh curd, buttermilk and ghee but not months-matured rennet cheese. Sour rasa from ageing, dense and oily guna.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -586,7 +593,7 @@ export const INGREDIENTS = {
       'The one sweet food that reduces Kapha rather than building it — light, dry and scraping, which is why it is the classical sweetener where sweetness would otherwise be a problem.',
     whyAvoid: 'The dryness can aggravate Vata in quantity.',
     preparation:
-      'Never heated or cooked. Charaka is unusually emphatic that heated honey becomes harmful, and this is the one preparation rule in this dataset stated as a prohibition rather than a preference.',
+      'Never heated or cooked. Charaka is unusually emphatic here — among the strongest and most consistently transmitted food-processing prohibitions in the canon — and it is the one rule in this dataset stated as a prohibition rather than a preference. Two caveats: the reasoning is Ayurvedic (changed qualities, difficult digestion, production of ama), NOT a modern toxicological claim; and the texts give no precise temperature threshold, so familiar rules like “never above 40°C” are later interpretation rather than anything Charaka states.',
     combosToAvoid: ['equal parts ghee by weight', 'hot water', 'cooking or baking'],
     cautions: ['infant_under_1'],
     cautionNote:
@@ -594,9 +601,9 @@ export const INGREDIENTS = {
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
-      note: 'Honey’s properties and the prohibition on heating it are both classical. Check the equal-parts-ghee incompatibility specifically: it is widely repeated, and worth confirming it is Charaka rather than later commentary.',
+      note: 'Review batch 2: the prohibition on heating honey is confirmed classical and emphatic. Virya is traditionally debated — heating is the common modern reading rather than a settled classical one. ⚠ The equal-parts-ghee incompatibility below is still UNVERIFIED; it was asked in review and not answered, so treat it as later tradition until confirmed.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -615,8 +622,10 @@ export const INGREDIENTS = {
     bestSeason: ['winter'],
     whyFavor: 'Warming and building — settles Vata in a way refined sugar does not.',
     whyAvoid: 'Heavy and heating: it adds to both Pitta and Kapha.',
+    preparation:
+      'Classical note: aged jaggery (purana guda) is considered lighter and more digestible than freshly made jaggery (nava guda), which is heavier and more Kapha-promoting. The ratings above describe jaggery in general.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -631,15 +640,17 @@ export const INGREDIENTS = {
     rasa: ['sweet', 'bitter', 'astringent'],
     virya: 'heating',
     vipaka: 'sweet',
-    guna: ['heavy', 'oily', 'penetrating'],
-    doshaEffect: { vata: -1, pitta: 1, kapha: 0 },
+    // Review batch 2: Kapha corrected 0 → +1. Reasoning that the penetrating
+    // quality offsets the heaviness was too clever — it is still an oil.
+    guna: ['heavy', 'oily', 'subtle_penetrating'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: 1 },
     bestSeason: ['autumn', 'winter'],
     whyFavor:
-      'Charaka treats sesame as the foremost of the oils — warming, penetrating and the standard oil for settling Vata, internally and for massage.',
+      'Charaka treats sesame as the foremost of the oils — warming, subtle and penetrating (suksma, the quality that lets it carry effects into the deeper tissues), and the standard oil for settling Vata, internally and for massage.',
     whyAvoid: 'Heating, so it adds to Pitta in summer or in an already-hot state.',
     allergens: ['sesame'],
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -657,9 +668,9 @@ export const INGREDIENTS = {
     whyAvoid: 'Oily and heavy, so it adds to Kapha.',
     source: {
       text: 'modern',
-      note: 'Absent from the classical corpus. Derived from properties: sweet and mildly astringent rasa, unctuous guna, neither notably heating nor cooling. Uses the neutral virya added in batch 1.',
+      note: 'No classical Ayurvedic attribution exists for olive oil. Derived from properties: sweet and mildly astringent rasa, unctuous guna, neither notably heating nor cooling. Uses the neutral virya added in batch 1.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -681,7 +692,7 @@ export const INGREDIENTS = {
     cautions: ['acid_reflux'],
     cautionNote: 'Practical and symptom-based, not a classical contraindication.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -705,9 +716,9 @@ export const INGREDIENTS = {
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
-      note: 'Haridra is classical and its bitter/drying, Kapha-reducing character is consensus. The Vata +1 rating is my inference from the dryness rather than an explicit statement — worth checking.',
+      note: 'Haridra’s rasa, virya and vipaka are classically described. The DOSHA SCORES — Vata +1 especially — are synthesised from those qualities and are NOT dosha assignments quoted from Charaka. Read the properties as classical and the weighting as derived.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -718,20 +729,22 @@ export const INGREDIENTS = {
     devanagari: 'जीरक',
     aliases: ['jeera', 'zeera', 'kreuzkümmel', 'kreuzkuemmel'],
     category: 'spice',
-    rasa: ['pungent'],
+    // Review batch 2: rasa gains bitter (katu + tikta), and Vata corrected
+    // −1 → 0. A pungent, heating, drying spice does not pacify Vata; the
+    // classical use for bloating justifies "not aggravating", not "settling".
+    rasa: ['pungent', 'bitter'],
     virya: 'heating',
     vipaka: 'pungent',
     guna: ['light', 'dry'],
-    doshaEffect: { vata: -1, pitta: 1, kapha: -1 },
+    doshaEffect: { vata: 0, pitta: 1, kapha: -1 },
     whyFavor:
-      'Kindles digestion and relieves bloating — one of the few pungent spices gentle enough to settle Vata rather than stir it.',
+      'Kindles digestion and relieves bloating — gentle enough among the pungent spices not to unsettle Vata the way pepper does.',
     whyAvoid: 'Heating, so it adds to Pitta.',
     source: {
-      text: 'CS',
-      verse: 'Sutrasthana 27',
-      note: 'The digestive action is classical consensus. Vata −1 alongside a pungent, heating, drying profile is the tension in this entry — pungency usually raises Vata. Drafted −1 on the strength of the classical use for bloating.',
+      text: 'modern',
+      note: 'Jiraka is a classical substance, but its complete energetic profile is synthesised from the broader Ayurvedic tradition rather than enumerated in Sutrasthana 27 — so no verse is cited for it here.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -742,19 +755,22 @@ export const INGREDIENTS = {
     devanagari: 'धान्यक',
     aliases: ['dhania', 'koriander', 'cilantro seed', 'ground coriander'],
     category: 'spice',
-    rasa: ['sweet', 'bitter', 'astringent'],
+    // Review batch 2: was drafted sweet/bitter/astringent, light/oily and
+    // tridoshic (−1/−1/−1). Corrected to kashaya + tikta, laghu + ruksha, and
+    // Vata 0 — the tridoshic claim was the strongest this schema can make and
+    // it did not survive review. Dry spices do not pacify Vata.
+    rasa: ['astringent', 'bitter'],
     virya: 'cooling',
     vipaka: 'sweet',
-    guna: ['light', 'oily'],
-    doshaEffect: { vata: -1, pitta: -1, kapha: -1 },
+    guna: ['light', 'dry'],
+    doshaEffect: { vata: 0, pitta: -1, kapha: -1 },
     whyFavor:
       'Unusual among digestive spices in being cooling — it supports digestion without adding heat, which is why it suits Pitta where cumin and pepper do not.',
     source: {
-      text: 'CS',
-      verse: 'Sutrasthana 27',
-      note: 'Cooling potency and Pitta-suitability are well attested. A tridoshic −1/−1/−1 is the strongest possible claim in this schema — flagged for scrutiny, since "good for everything" is exactly the kind of statement that should be hard to earn.',
+      text: 'modern',
+      note: 'Dhanyaka is a classical substance, but its complete energetic profile is synthesised from the broader Ayurvedic tradition rather than enumerated in Sutrasthana 27 — so no verse is cited for it here.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -777,7 +793,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Fennel appears in Ayurvedic tradition but is less prominent in the Charaka corpus than cumin or coriander. Rated on properties and consistent traditional use rather than a specific citation.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -798,7 +814,7 @@ export const INGREDIENTS = {
     whyAvoid: 'Sharp and heating: it adds to Pitta.',
     preparation: 'Always cooked briefly in fat first; raw, it is harsh.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -819,40 +835,68 @@ export const INGREDIENTS = {
     whyFavor: 'Strongly warming and penetrating — settles Vata and cuts Kapha.',
     whyAvoid: 'Markedly heating; it aggravates Pitta more than most spices.',
     cautionNote:
-      'Excluded by several dietary patterns this app supports (Jain, no-onion-garlic, and much yogic/sattvic practice, which treats it as agitating for the mind rather than harmful to the body). That is a pattern exclusion, not a health caution.',
+      'Excluded by several dietary patterns this app supports (Jain, no-onion-garlic, and much yogic/sattvic practice, which treats it as agitating for the mind rather than harmful to the body). That is a pattern exclusion, not a health caution — and the common claim that “Ayurveda discourages garlic” is historically inaccurate. The avoidance comes from yogic and spiritual discipline, not from Charaka, who treats it as a valuable food.',
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
       note: 'Lashuna is classical and its heating, Vata-pacifying, Kapha-reducing character is consensus. The sattvic/yogic objection is a separate tradition from Charaka and is recorded as a pattern exclusion, not a classical property.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
-  onion: {
-    id: 'onion',
-    dietTags: ['allium', 'root'],
-    name: 'Onion',
+  // Review batch 2: split from a single `onion` entry. Cooking changes onion's
+  // qualities more than it does most foods — the raw pungency gives way to
+  // sweetness and heaviness — and a single row could only average the two,
+  // which described neither. Same reasoning as the gingerFresh/gingerDry split.
+  onionRaw: {
+    id: 'onionRaw',
+    name: 'Onion (raw)',
     sanskrit: 'Palandu',
     devanagari: 'पलाण्डु',
-    aliases: ['pyaz', 'zwiebel', 'red onion', 'white onion'],
+    aliases: ['pyaz', 'zwiebel', 'raw onion', 'salad onion', 'red onion'],
     category: 'vegetable',
-    rasa: ['pungent', 'sweet'],
+    dietTags: ['allium', 'root'],
+    rasa: ['sweet', 'pungent'],
     virya: 'heating',
     vipaka: 'pungent',
-    guna: ['heavy', 'oily'],
-    doshaEffect: { vata: -1, pitta: 1, kapha: 1 },
-    whyFavor: 'Cooked, the sweetness dominates and it becomes grounding for Vata.',
+    guna: ['heavy', 'slightly_unctuous', 'sharp'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: 0 },
     whyAvoid:
-      'Raw, the pungency dominates and it is sharply heating for Pitta. Cooked, its heaviness feeds Kapha.',
-    preparation:
-      'Raw and cooked onion behave differently enough that the ratings above are a compromise between them — a rare case where preparation changes the answer, not just the degree.',
+      'Raw, the pungency dominates and it is sharply heating — the form most likely to aggravate Pitta.',
     cautionNote: 'Excluded by Jain and no-onion-garlic patterns, as for garlic.',
     source: {
       text: 'modern',
-      note: 'Palandu is named classically but with less consistent characterisation than lashuna, and the raw-versus-cooked split is my inference. Held at medium.',
+      note: 'Palandu is named classically but characterised less consistently than lashuna, and the raw/cooked distinction is derived rather than stated in the corpus.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
+    confidence: 'medium',
+  },
+
+  onionCooked: {
+    id: 'onionCooked',
+    name: 'Onion (cooked)',
+    sanskrit: 'Palandu',
+    devanagari: 'पलाण्डु',
+    aliases: ['fried onion', 'sautéed onion', 'gebratene zwiebel', 'onion masala', 'pyaz'],
+    category: 'vegetable',
+    dietTags: ['allium', 'root'],
+    rasa: ['sweet', 'pungent'],
+    virya: 'heating',
+    vipaka: 'pungent',
+    guna: ['heavy', 'oily', 'soft'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: 1 },
+    whyFavor: 'Cooked, the sweetness dominates and it becomes grounding for Vata.',
+    whyAvoid:
+      'Still heating for Pitta, though milder than raw, and its softened heaviness feeds Kapha.',
+    preparation:
+      'Slow-cooking is what softens the pungency into sweetness. The longer it cooks, the further it moves from the raw profile.',
+    cautionNote: 'Excluded by Jain and no-onion-garlic patterns, as for garlic.',
+    source: {
+      text: 'modern',
+      note: 'Palandu is named classically but characterised less consistently than lashuna, and the raw/cooked distinction is derived rather than stated in the corpus.',
+    },
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -875,12 +919,12 @@ export const INGREDIENTS = {
     whyAvoid:
       'Dry and gas-forming for Vata, heavy for Kapha. Its cooling sweetness does suit Pitta.',
     preparation:
-      'Cooked with ghee and warming spices, or mashed rather than baked dry, blunts the Vata aggravation.',
+      'Preparation shifts this noticeably: boiled or steamed sits closest to the profile above; roasted or baked is drier and so more Vata-provoking; mashed with butter or ghee is the least Vata-provoking, as the fat offsets the dryness. Deep-fried is a different food again and is not covered by this entry.',
     source: {
       text: 'modern',
       note: 'A New World crop, so necessarily absent from the classical corpus. Derived from properties: sweet and astringent rasa, dry and heavy guna, cooling.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -904,14 +948,18 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Leafy greens as a class are described classically as astringent, light and drying, but the specific identification of palakya with modern spinach is not secure. Rated on the class properties.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
+  // Review batch 2: split. Stewing does not merely soften apple's effect on
+  // Vata, it REVERSES it — and a `preparation` note on one row cannot carry a
+  // sign flip, because the dosha chips at the top of the screen would still
+  // say "increases Vata" while the note underneath said the opposite.
   apple: {
     id: 'apple',
-    name: 'Apple',
-    aliases: ['apfel', 'seb', 'apples', 'stewed apple'],
+    name: 'Apple (raw)',
+    aliases: ['apfel', 'seb', 'apples', 'raw apple'],
     category: 'fruit',
     rasa: ['sweet', 'astringent'],
     virya: 'cooling',
@@ -922,13 +970,35 @@ export const INGREDIENTS = {
     bestSeason: ['autumn'],
     whyFavor: 'Light, cooling and astringent — settles Pitta and does not add to Kapha.',
     whyAvoid: 'Raw, the roughness and astringency aggravate Vata.',
-    preparation:
-      'Stewed warm with cinnamon or cardamom reverses the Vata effect — a clear case of preparation flipping the answer rather than softening it.',
+    preparation: 'See “Apple (stewed)” — cooking reverses the Vata effect rather than softening it.',
     source: {
       text: 'modern',
       note: 'Not identifiable in the classical corpus. Derived from properties: sweet and astringent rasa, light and rough guna, cooling.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
+    confidence: 'medium',
+  },
+
+  appleStewed: {
+    id: 'appleStewed',
+    name: 'Apple (stewed)',
+    aliases: ['stewed apple', 'apple compote', 'apfelmus', 'baked apple', 'cooked apple'],
+    category: 'fruit',
+    rasa: ['sweet', 'astringent'],
+    virya: 'neutral',
+    vipaka: 'sweet',
+    guna: ['soft', 'moist'],
+    doshaEffect: { vata: -1, pitta: -1, kapha: 0 },
+    bestTime: ['morning'],
+    bestSeason: ['autumn', 'winter'],
+    whyFavor:
+      'Warm, soft and moist — stewing substantially changes the energetics, making apple mildly Vata-pacifying rather than Vata-aggravating.',
+    preparation: 'Stewed warm with cinnamon or cardamom; the spices add to the warming effect.',
+    source: {
+      text: 'modern',
+      note: 'Not in the classical corpus. Derived from the raw apple profile plus the standard effect of cooking with moisture and warming spice: dryness and roughness give way to softness.',
+    },
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -955,7 +1025,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Almonds appear in later Ayurvedic and regional tradition more than in the Charaka corpus. Rated on properties and consistent traditional use; the soaking practice is well attested but not cited here.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 }

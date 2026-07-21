@@ -18,20 +18,23 @@ import { INGREDIENTS, ALL_INGREDIENTS } from '../data/ayurveda/ingredients'
 import { getIngredient, searchIngredients, coverageStats, suitabilityFor } from './ingredients'
 import { SUITABILITY } from './doshaSemantics'
 
-// The set a human actually fact-checked against Charaka — batch 1, signed off
-// in docs/diet-review-batch-1.md. This list is the gate's memory: a new entry
-// appearing here without a corresponding review is a failing test, not a
-// silent ship. When batch 2 is reviewed, add its ids here and nowhere else.
-const REVIEWED_BATCH_1 = [
-  'basmatiRice',
-  'oats',
-  'ghee',
-  'yoghurt',
-  'gingerFresh',
-  'gingerDry',
-  'mungDal',
-  'ryeBread',
-  'coffee',
+// The set a human actually fact-checked against Charaka. This list is the
+// gate's memory: an entry marked reviewed but missing here is a failing test,
+// not a silent ship. When a batch is signed off, add its ids here — and only
+// here.
+const REVIEWED_SIGNED_OFF = [
+  // Batch 1 — signed off 2026-07-21 (docs/diet-review-batch-1.md)
+  'basmatiRice', 'oats', 'ghee', 'yoghurt', 'gingerFresh', 'gingerDry',
+  'mungDal', 'ryeBread', 'coffee',
+  // Batch 2 — signed off 2026-07-21 (docs/diet-review-batch-2.md).
+  // 24 entries reviewed, 26 rows out: `onion` split into onionRaw/onionCooked
+  // and `apple` into apple/appleStewed, both at the reviewer's direction.
+  'wheat', 'barley', 'uradDal', 'chickpea',
+  'milk', 'buttermilk', 'butter', 'hardCheese',
+  'honey', 'jaggery', 'sesameOil', 'oliveOil',
+  'blackPepper', 'turmeric', 'cumin', 'corianderSeed', 'fennel', 'asafoetida',
+  'garlic', 'onionRaw', 'onionCooked',
+  'potato', 'spinach', 'apple', 'appleStewed', 'almond',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {
@@ -39,8 +42,8 @@ describe('the review gate — unreviewed facts must not reach users', () => {
     const shipped = ALL_INGREDIENTS.filter((i) => i.reviewStatus === 'reviewed')
     expect(
       shipped.map((i) => i.id).sort(),
-      'an entry marked reviewed but absent from batch 1 was never fact-checked against Charaka',
-    ).toEqual([...REVIEWED_BATCH_1].sort())
+      'an entry marked reviewed but absent from this list was never fact-checked against Charaka',
+    ).toEqual([...REVIEWED_SIGNED_OFF].sort())
   })
 
   it('getIngredient hides draft rows entirely', () => {
@@ -61,7 +64,7 @@ describe('the review gate — unreviewed facts must not reach users', () => {
   it('coverage stats report the gate honestly', () => {
     const s = coverageStats()
     expect(s.total).toBeGreaterThan(0)
-    expect(s.reviewed).toBe(REVIEWED_BATCH_1.length)
+    expect(s.reviewed).toBe(REVIEWED_SIGNED_OFF.length)
     expect(s.reviewed + s.draft).toBe(s.total)
   })
 
@@ -209,7 +212,10 @@ describe('pattern exclusions rely on dietTags, which entries must actually set',
   it('excludes alliums for Jain and no-onion-garlic', () => {
     for (const p of ['jain', 'no_onion_garlic']) {
       expect(exclusionFor(INGREDIENTS.garlic, { patterns: [p] }).excluded, `garlic/${p}`).toBe(true)
-      expect(exclusionFor(INGREDIENTS.onion, { patterns: [p] }).excluded, `onion/${p}`).toBe(true)
+      // Both halves of the onion split must stay tagged — a split is an easy
+      // place to drop a safety tag on one row and not notice.
+      expect(exclusionFor(INGREDIENTS.onionRaw, { patterns: [p] }).excluded, `onionRaw/${p}`).toBe(true)
+      expect(exclusionFor(INGREDIENTS.onionCooked, { patterns: [p] }).excluded, `onionCooked/${p}`).toBe(true)
     }
   })
 

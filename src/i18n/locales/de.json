@@ -1570,7 +1570,9 @@
       "soft": "Weich",
       "soft_when_cooked": "Weich gekocht",
       "stable": "Stabil",
-      "unctuous": "Ölig"
+      "unctuous": "Ölig",
+      "subtle_penetrating": "Fein durchdringend",
+      "moist": "Feucht"
     }
   }
 }

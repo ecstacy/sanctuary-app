@@ -1570,7 +1570,9 @@
       "soft": "Soft",
       "soft_when_cooked": "Soft when cooked",
       "stable": "Stable",
-      "unctuous": "Unctuous"
+      "unctuous": "Unctuous",
+      "subtle_penetrating": "Subtle, penetrating",
+      "moist": "Moist"
     }
   }
 }
