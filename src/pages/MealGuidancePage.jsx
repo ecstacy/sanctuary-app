@@ -178,7 +178,15 @@ export default function MealGuidancePage() {
                 }}
                 className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.99] transition-all"
               >
-                <p className="font-body text-base font-semibold text-on-surface">{idea.name}</p>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <p className="font-body text-base font-semibold text-on-surface">{idea.name}</p>
+                  {/* A component, not a full meal — said rather than implied. */}
+                  {idea.kind === 'preparation' && (
+                    <span className="px-2 py-0.5 rounded-full bg-surface-container-high font-label text-[8px] uppercase tracking-wide text-on-surface-variant">
+                      {t('meals.kind.preparation')}
+                    </span>
+                  )}
+                </div>
 
                 {/* Verdict shown WITH its inputs — a derived conclusion that
                     hides its derivation looks exactly like an asserted one. */}
@@ -204,6 +212,15 @@ export default function MealGuidancePage() {
 
                 {idea.prep && (
                   <p className="font-body text-xs text-on-surface-variant/70 mt-2 leading-relaxed">{idea.prep}</p>
+                )}
+
+                {/* Traditional companions. Never presented as required — the
+                    rule that every spice stays optional is the whole reason
+                    this field exists rather than a core-ingredient exception. */}
+                {idea.balancedBy.length > 0 && (
+                  <p className="font-body text-xs text-on-surface-variant/70 mt-2 leading-relaxed">
+                    {t('meals.balancedBy', { list: idea.balancedBy.map((b) => b.name).join(', ') })}
+                  </p>
                 )}
 
                 <div className="flex flex-wrap items-center gap-1.5 mt-2.5">

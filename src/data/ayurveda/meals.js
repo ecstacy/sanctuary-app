@@ -55,6 +55,14 @@
  * @property {string}   name          Culinary name. Not a claim.
  * @property {string[]} coreIds       Ingredient ids that DEFINE the dish
  * @property {string[]} [optionalIds] Additions, filtered individually
+ * @property {'meal'|'preparation'|'practice'} [kind]
+ *   Defaults to 'meal'. Added at review batch 3, because two rows were not
+ *   meals and saying so is more useful than forcing them into the shape:
+ *     • 'preparation' — a component rather than a full meal (mashed potato).
+ *       Still shown on /meals, labelled, because you do eat it.
+ *     • 'practice'    — a dinacharya observance, not food (honey in lukewarm
+ *       water). NOT shown on /meals at all; it belongs on the daily-routine
+ *       surface, which is not wired up yet.
  * @property {('morning'|'midday'|'evening')[]} slots
  * @property {('spring'|'summer'|'autumn'|'winter')[]} [seasons]
  * @property {string}   [prep]        ONE-LINE hint. Never a method.
@@ -81,9 +89,12 @@ export const MEAL_TEMPLATES = {
 
   stewedAppleBreakfast: {
     id: 'stewedAppleBreakfast',
-    name: 'Stewed apple with cardamom',
+    name: 'Stewed apple',
     coreIds: ['appleStewed'],
-    optionalIds: ['ghee', 'jaggery'],
+    // Cardamom added to the dataset at batch 3 but still DRAFT, so
+    // getIngredient hides it and the composer simply won't list it yet. The
+    // name no longer promises it either way — same naming rule as the fats.
+    optionalIds: ['cardamom', 'ghee', 'jaggery'],
     slots: ['morning'],
     prep: 'Stewed until soft and eaten warm.',
     reviewStatus: 'draft',
@@ -102,6 +113,9 @@ export const MEAL_TEMPLATES = {
   honeyWarmWater: {
     id: 'honeyWarmWater',
     name: 'Honey with lukewarm water',
+    // Not a meal — a daily-routine observance. Excluded from /meals entirely
+    // rather than listed among breakfast ideas.
+    kind: 'practice',
     coreIds: ['honey'],
     slots: ['morning'],
     seasons: ['spring'],
@@ -121,20 +135,6 @@ export const MEAL_TEMPLATES = {
     reviewStatus: 'draft',
   },
 
-  // ⚠ Applying the core/optional rule collapsed this into `kitchari`: same
-  // core, same slot, a subset of the same optional list. Kept as a draft (so
-  // invisible) rather than deleted, because dropping a template is the
-  // reviewer's call — but it should almost certainly go, and the composer
-  // would otherwise offer two suggestions that differ only in name. Raised in
-  // docs/diet-review-batch-3-meals.md.
-  riceDalGhee: {
-    id: 'riceDalGhee',
-    name: 'Rice and dal',
-    coreIds: ['basmatiRice', 'mungDal'],
-    optionalIds: ['ghee', 'cumin', 'turmeric', 'asafoetida'],
-    slots: ['midday'],
-    reviewStatus: 'draft',
-  },
 
   chickpeaCurry: {
     id: 'chickpeaCurry',
@@ -180,6 +180,8 @@ export const MEAL_TEMPLATES = {
   potatoWithGhee: {
     id: 'potatoWithGhee',
     name: 'Mashed potato',
+    // A component, not a full meal. Shown, but labelled as such.
+    kind: 'preparation',
     coreIds: ['potato'],
     optionalIds: ['ghee', 'cumin', 'blackPepper', 'asafoetida'],
     slots: ['midday'],

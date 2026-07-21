@@ -1577,7 +1577,9 @@
     "badge": {
       "allergen": "Contains {{key}}",
       "pattern": "Not {{key}}"
-    }
+    },
+    "balancedBy": "Traditionally balanced with",
+    "balancedByHelp": "Traditionally used to make this food easier to digest. Suggestions, never requirements — nothing here is filtered out if you skip them."
   },
   "dietPrefs": {
     "title": "Food to keep off your plate",
@@ -1626,6 +1628,10 @@
         "body": "Our meal ideas are still being checked by a person before they go live. That's our work to finish — the food search below is already reviewed and available."
       }
     },
-    "entryHelp": "Meal ideas for your imbalance · Plus"
+    "entryHelp": "Meal ideas for your imbalance · Plus",
+    "balancedBy": "Traditionally balanced with {{list}}.",
+    "kind": {
+      "preparation": "Component"
+    }
   }
 }

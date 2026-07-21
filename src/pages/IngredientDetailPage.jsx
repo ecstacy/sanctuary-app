@@ -263,6 +263,34 @@ export default function IngredientDetailPage() {
           </Section>
         )}
 
+        {/* ── Traditionally balanced with ──────────────────────────────────
+            The counterpart to combosToAvoid: what makes this food easier,
+            rather than what makes it worse. Informational only — these are
+            never required and never filter anything. */}
+        {ingredient.balancedBy?.length > 0 && (
+          <Section title={t('diet.balancedBy')}>
+            <div className="bg-surface-container-low rounded-2xl p-4">
+              <div className="flex flex-wrap gap-2">
+                {ingredient.balancedBy
+                  .map((id) => getIngredient(id))
+                  .filter(Boolean)
+                  .map((b) => (
+                    <button
+                      key={b.id}
+                      onClick={() => navigate(`/ingredient/${b.id}`)}
+                      className="px-3 py-1.5 rounded-full bg-surface-container-high font-body text-xs text-on-surface active:scale-95 transition-all"
+                    >
+                      {b.name}
+                    </button>
+                  ))}
+              </div>
+              <p className="font-body text-xs text-on-surface-variant/70 leading-relaxed mt-2.5">
+                {t('diet.balancedByHelp')}
+              </p>
+            </div>
+          </Section>
+        )}
+
         {/* ── Combinations to avoid ────────────────────────────────────────*/}
         {ingredient.combosToAvoid?.length > 0 && (
           <Section title={t('diet.combosToAvoid')}>

@@ -74,6 +74,20 @@
  *   contraindication* from a *practical, symptom-based* caution, and conflating
  *   them overstates the tradition — flagging ginger for pregnancy as though
  *   Charaka forbade it would be wrong. Use this to say which kind it is.
+ * @property {string[]} [balancedBy]
+ *   Ingredient ids traditionally used to make THIS food digestible — the
+ *   asafoetida-and-ginger that make heavy legumes tolerable.
+ *
+ *   Added at review batch 3 to solve a specific problem without bending the
+ *   rules engine. Chickpea and urad dal genuinely need digestive spices, but
+ *   making those spices `core` in every dish containing them would delete the
+ *   dish for anyone who can't eat one of them, and hard-coding a "needs
+ *   spices" exception into the composer would put a food fact inside the
+ *   engine. This keeps the principle in the DATA, where it belongs, and leaves
+ *   every spice optional.
+ *
+ *   It is INFORMATIONAL: it never filters, never scores, never blocks. It is
+ *   shown to the user as "traditionally balanced with…" and nothing else.
  * @property {string[]} [dietTags]
  *   Pattern-exclusion tags consumed by `exclusionFor()`. Use ONLY the keys in
  *   `DIET_TAGS` (lib/dietSafety.js) — a typo matches no rule and so silently
@@ -434,7 +448,8 @@ export const INGREDIENTS = {
       'The heaviest and most building of the pulses — genuinely nourishing and strengthening where mung is light and recovering.',
     whyAvoid: 'Heating and heavy: it adds to both Pitta and Kapha, and is slow to digest in quantity.',
     preparation:
-      'Long-cooked with ginger, cumin, black pepper or asafoetida to make the heaviness manageable. That changes how the food is experienced, not its intrinsic properties — the ratings above already describe the dal itself.',
+      'Long-cooked to make the heaviness manageable. That changes how the food is experienced, not its intrinsic properties — the ratings above already describe the dal itself.',
+    balancedBy: ['asafoetida', 'gingerFresh', 'cumin', 'blackPepper'],
     source: { text: 'CS', verse: 'Sutrasthana 27' },
     reviewStatus: 'reviewed',
     confidence: 'high',
@@ -457,7 +472,8 @@ export const INGREDIENTS = {
     whyAvoid:
       'Although classically light (laghu), its pronounced dry (ruksha) and rough (khara) qualities make it Vata-provoking and commonly associated with flatulence — the dryness is the reason, not heaviness.',
     preparation:
-      'Soaking well, cooking thoroughly and adding enough unctuousness plus digestive spices (asafoetida, cumin, ginger) is the standard way to make it tolerable for Vata.',
+      'Soaking well, cooking thoroughly and adding enough unctuousness plus digestive spices is the standard way to make it tolerable for Vata.',
+    balancedBy: ['asafoetida', 'cumin', 'gingerFresh', 'ghee'],
     source: { text: 'CS', verse: 'Sutrasthana 27' },
     reviewStatus: 'reviewed',
     confidence: 'high',
@@ -805,6 +821,32 @@ export const INGREDIENTS = {
       note: 'Fennel appears in Ayurvedic tradition but is less prominent in the Charaka corpus than cumin or coriander. Rated on properties and consistent traditional use rather than a specific citation.',
     },
     reviewStatus: 'reviewed',
+    confidence: 'medium',
+  },
+
+  cardamom: {
+    id: 'cardamom',
+    name: 'Cardamom',
+    sanskrit: 'Ela',
+    devanagari: 'एला',
+    aliases: ['elaichi', 'ilaichi', 'kardamom', 'green cardamom'],
+    category: 'spice',
+    rasa: ['pungent', 'sweet'],
+    // ⚠ The field to check. Ela is classically described as SHEETA (cooling),
+    // which is unusual for an aromatic pungent spice and is the opposite of
+    // what property-derivation alone would suggest. Drafted as cooling on the
+    // strength of the classical description rather than the derivation.
+    virya: 'cooling',
+    vipaka: 'pungent',
+    guna: ['light', 'dry'],
+    doshaEffect: { vata: -1, pitta: -1, kapha: -1 },
+    whyFavor:
+      'Aromatic and digestive without being heating — which is why it is the spice added to milk and to sweet dishes rather than to a hot curry.',
+    source: {
+      text: 'modern',
+      note: 'Ela is a classical substance, but as with cumin and coriander the complete energetic profile is synthesised from the broader tradition rather than enumerated in Sutrasthana 27. ⚠ The tridoshic -1/-1/-1 is the strongest claim this schema makes, and batch 2 rejected exactly that claim for coriander — it needs the same scrutiny here.',
+    },
+    reviewStatus: 'draft',
     confidence: 'medium',
   },
 

@@ -1577,7 +1577,9 @@
     "badge": {
       "allergen": "Enthält {{key}}",
       "pattern": "Nicht {{key}}"
-    }
+    },
+    "balancedBy": "Traditionell ausgeglichen mit",
+    "balancedByHelp": "Traditionell verwendet, um dieses Lebensmittel bekömmlicher zu machen. Vorschläge, keine Vorschriften — nichts wird ausgefiltert, wenn du sie weglässt."
   },
   "dietPrefs": {
     "title": "Was nicht auf deinen Teller soll",
@@ -1626,6 +1628,10 @@
         "body": "Unsere Mahlzeiten-Ideen werden noch von einem Menschen geprüft, bevor sie live gehen. Das liegt an uns — die Lebensmittelsuche ist bereits geprüft und verfügbar."
       }
     },
-    "entryHelp": "Mahlzeiten-Ideen für dein Ungleichgewicht · Plus"
+    "entryHelp": "Mahlzeiten-Ideen für dein Ungleichgewicht · Plus",
+    "balancedBy": "Traditionell ausgeglichen mit {{list}}.",
+    "kind": {
+      "preparation": "Beilage"
+    }
   }
 }

@@ -162,22 +162,61 @@ those and `barleySoup`. Untouched: `stewedAppleBreakfast`, `honeyWarmWater`,
 `chickpeaCurry`, `chapatiSabzi`, `buttermilkRice`, `uradDalStew`, `spicedMilk`
 — their cores were already bulk-and-identity.
 
-## Still needing your call
+## ✅ All five resolved 2026-07-21
 
-1. 🔴 **`riceDalGhee` is now identical to `kitchari`.** Delete it?
-2. **`stewedAppleBreakfast` names cardamom, which isn't in the dataset.**
-   Rename, or add cardamom in a later ingredient batch?
-3. **`honeyWarmWater` — is it a meal?** It reads more like a practice; it may
-   belong in dinacharya instead.
-4. **#7 `chickpeaCurry` and #12 `uradDalStew`:** both have prep lines saying
-   they *need* digestive spices, but under the rule every spice is optional, so
-   the app can suggest bare chickpeas or bare urad dal. The rule is right and I
-   don't want to special-case it — but is the `prep` line enough of a carrier
-   for that, or should heavy legumes get something stronger?
-5. **`potatoWithGhee`** — meal or side?
+| Item | Decision | What changed |
+|---|---|---|
+| `riceDalGhee` duplicate | **Delete** | Removed. 14 → 13 templates. |
+| Cardamom | **Add it** | `cardamom` (Ela) added to the ingredient dataset as **`draft`** — it's new content, so it goes through the same gate as everything else. `stewedAppleBreakfast` renamed to **"Stewed apple"** and lists cardamom as optional; it stays invisible until reviewed, so the name can't promise it. |
+| `honeyWarmWater` | **A practice, not a meal** | New `kind` field. It's `'practice'` and is **excluded from `/meals` entirely** — not ranked low, since low-ranked still means "we're offering you this to eat". Wiring it into the dinacharya surface is a chunk-5 job. |
+| `potatoWithGhee` | **A preparation, not a meal** | `kind: 'preparation'`. Still shown (you do eat it) but labelled **"Component"** and ranked below full meals. |
+| Chickpea / urad spices | **New field, don't touch the engine** | New `balancedBy` on the ingredient. |
 
-## Coverage note
+### The `balancedBy` field
 
-14 templates across 3 slots is thin — a Kapha user in summer will see the same
-few ideas repeatedly. Deliberate for a first pass. Worth expanding once the
-shape is right; no point generating 40 against a rule that might still move.
+Your call here was the right one and better than either option I was weighing.
+Making the spices `core` would have deleted the dish for anyone who can't eat
+one of them; special-casing "heavy legumes need spices" in the composer would
+have put a food fact inside the rules engine, where nobody would look for it.
+
+`balancedBy` keeps the principle **in the data**:
+
+```js
+chickpea: { …, balancedBy: ['asafoetida', 'cumin', 'gingerFresh', 'ghee'] }
+uradDal:  { …, balancedBy: ['asafoetida', 'gingerFresh', 'cumin', 'blackPepper'] }
+```
+
+It is **purely informational** — it never filters, never scores, never blocks.
+It renders as *"Traditionally balanced with asafoetida, cumin, ginger"* on both
+the ingredient page and the meal card, and every spice stays optional. It also
+respects the safety filter: a dairy-allergic user sees the chickpea advice
+**without ghee**, verified.
+
+⚠️ **These are new claims on two rows you already approved**, so `balancedBy` on
+`chickpea` and `uradDal` needs your sign-off with the rest of this batch. Other
+foods could carry it later; I've only added it where you raised the issue.
+
+### Verified
+
+```
+templates=13  riceDalGheeGone=true  cardamom=draft
+IDEA Spiced chickpeas with rice   balancedBy=Asafoetida/Cumin/Ginger (fresh)/Ghee
+IDEA Slow-cooked urad dal         balancedBy=Asafoetida/Ginger (fresh)/Cumin/Black pepper
+IDEA Mashed potato [COMPONENT]
+honeyShown=false  notAMeal=1
+appleName="Stewed apple"  appleOptional=Ghee/Jaggery
+chickpeaBalancedBy_dairyAllergy=Asafoetida/Cumin/Ginger (fresh)   <- ghee correctly dropped
+```
+
+## What's left to review
+
+**13 meal templates** (as listed above, already re-sorted), plus two things that
+rode in on this batch:
+
+1. **`cardamom`** — a new ingredient, so a batch-1/2-style classical check.
+   ⚠️ I've drafted it **tridoshic (−1/−1/−1)**, which is exactly the claim you
+   rejected for coriander in batch 2. It deserves the same scrutiny. Its
+   cooling virya is also unusual for an aromatic pungent spice — that's the
+   classical description rather than what derivation would suggest.
+2. **`balancedBy` on `chickpea` and `uradDal`** — new claims on approved rows.
+

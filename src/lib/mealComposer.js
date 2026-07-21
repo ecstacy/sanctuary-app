@@ -66,6 +66,9 @@ function mulberry32(seed) {
 
 const DEFAULT_COUNT = 3
 
+/** Which `kind`s belong on the "what should I eat" surface. */
+const KINDS_ON_MEAL_SURFACE = new Set(['meal', 'preparation'])
+
 /** Hour → meal slot. Coarse on purpose; nobody eats on a schedule. */
 export function mealSlotFor(hour) {
   if (hour < 11) return 'morning'
@@ -132,11 +135,18 @@ export function composeMeals(ctx = {}) {
 
   let gatedOut = 0      // templates dropped for unreviewed content
   let filteredOut = 0   // templates dropped for the user's own safety filter
+  let notAMeal = 0      // practices — correct to omit, not a coverage problem
 
   const candidates = []
 
   for (const tpl of ALL_MEAL_TEMPLATES) {
     if (tpl.reviewStatus !== 'reviewed') { gatedOut++; continue }
+
+    // A 'practice' is a dinacharya observance, not food — honey in lukewarm
+    // water is not a breakfast idea. Excluded here rather than ranked low,
+    // because low-ranked still means "we are offering you this to eat".
+    const kind = tpl.kind || 'meal'
+    if (!KINDS_ON_MEAL_SURFACE.has(kind)) { notAMeal++; continue }
 
     // 1. GATE — every core ingredient must itself be reviewed. getIngredient
     //    returns null for drafts, so this is the same gate, reused rather than
@@ -153,7 +163,7 @@ export function composeMeals(ctx = {}) {
       .map(getIngredient)
       .filter((i) => i && !exclusionFor(i, dietPrefs).excluded)
 
-    candidates.push({ tpl, core, optional })
+    candidates.push({ tpl, core, optional, kind })
   }
 
   // 4. RANK
@@ -163,6 +173,10 @@ export function composeMeals(ctx = {}) {
 
     if (c.tpl.slots?.includes(slot)) { score += 4; reasons.push({ code: `slot:${slot}` }) }
     else score -= 2   // a nudge, not a ban — porridge at night is odd, not wrong
+
+    // A full meal outranks a component. Mashed potato is a real answer to
+    // "what should I eat", just a less complete one than kitchari.
+    if (c.kind === 'preparation') score -= 1.5
 
     if (targetDosha) {
       // Core carries the dish; optional extras count for less because the user
@@ -205,7 +219,19 @@ export function composeMeals(ctx = {}) {
       slots:      c.tpl.slots,
       core:       c.core.map((i) => ({ id: i.id, name: i.name })),
       optional:   c.optional.map((i) => ({ id: i.id, name: i.name })),
+      kind:       c.kind,
       suitability: net.suitability,
+      /**
+       * Traditional companions for whatever in this dish needs them — the
+       * asafoetida-and-ginger that make heavy legumes digestible. Purely
+       * informational: it never filters and never scores. It exists so the
+       * principle survives the rule that every spice stays optional.
+       * Only ingredients that are themselves reviewed and not excluded appear.
+       */
+      balancedBy: [...new Set(c.core.flatMap((i) => i.balancedBy || []))]
+        .map(getIngredient)
+        .filter((i) => i && !exclusionFor(i, dietPrefs).excluded)
+        .map((i) => ({ id: i.id, name: i.name })),
       /** Per-ingredient, so the verdict can be shown WITH its inputs. */
       contributions: explainIdea(c.core, targetDosha),
       reasons:    c.reasons,
@@ -236,6 +262,7 @@ export function composeMeals(ctx = {}) {
       totalTemplates: ALL_MEAL_TEMPLATES.length,
       gatedOut,
       filteredOut,
+      notAMeal,
       shown: ideas.length,
       emptyBecauseFiltered: ideas.length === 0 && filteredOut > 0,
       emptyBecauseUnreviewed: ideas.length === 0 && filteredOut === 0 && gatedOut > 0,

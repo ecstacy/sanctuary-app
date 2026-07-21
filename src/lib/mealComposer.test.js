@@ -40,7 +40,6 @@ describe('the review gate reaches the composer', () => {
         const out = composeMeals({ now: at(13), count: 99 })
         const ids = out.ideas.map((i) => i.id)
         expect(ids).not.toContain('kitchari')     // core includes mungDal
-        expect(ids).not.toContain('riceDalGhee')
       } finally {
         INGREDIENTS.mungDal.reviewStatus = original
       }
@@ -79,6 +78,54 @@ describe('safety filtering happens BEFORE ranking', () => {
       expect(dish, 'kitchari must survive a dairy allergy').toBeTruthy()
       expect(dish.optional.map((o) => o.id)).not.toContain('ghee')
       expect(dish.core.map((c) => c.id)).toEqual(['mungDal', 'basmatiRice'])
+    })
+  })
+
+  it('excludes practices from the meal surface entirely', () => {
+    // Honey in lukewarm water is a dinacharya observance, not a breakfast.
+    // Excluded rather than ranked low: low-ranked still means "we are
+    // offering you this to eat".
+    withReviewedTemplates(() => {
+      const out = composeMeals({ now: at(8), season: 'spring', count: 99 })
+      expect(out.ideas.map((i) => i.id)).not.toContain('honeyWarmWater')
+      expect(out.coverage.notAMeal).toBeGreaterThan(0)
+    })
+  })
+
+  it('ranks a full meal above a mere preparation', () => {
+    withReviewedTemplates(() => {
+      const out = composeMeals({ now: at(13), count: 99 })
+      const ids = out.ideas.map((i) => i.id)
+      const potato = ids.indexOf('potatoWithGhee')
+      const kitchari = ids.indexOf('kitchari')
+      expect(potato).toBeGreaterThan(-1)
+      expect(kitchari, 'a complete meal should outrank a component').toBeLessThan(potato)
+      expect(out.ideas.find((i) => i.id === 'potatoWithGhee').kind).toBe('preparation')
+    })
+  })
+
+  it('surfaces traditional balancing ingredients without making them required', () => {
+    // The batch-3 answer to "chickpeas need digestive spices": keep the
+    // principle in the data and every spice optional, rather than bending the
+    // engine. It informs; it must never filter or score.
+    withReviewedTemplates(() => {
+      const out = composeMeals({ now: at(13), count: 99 })
+      const dish = out.ideas.find((i) => i.id === 'chickpeaCurry')
+      expect(dish.balancedBy.map((b) => b.id)).toContain('asafoetida')
+      // Still optional — the dish survives with none of them present.
+      expect(dish.core.map((c) => c.id)).toEqual(['chickpea', 'basmatiRice'])
+    })
+  })
+
+  it('does not suggest a balancing ingredient the user cannot eat', () => {
+    withReviewedTemplates(() => {
+      const out = composeMeals({
+        now: at(13), count: 99, dietPrefs: { allergens: ['dairy'] },
+      })
+      const dish = out.ideas.find((i) => i.id === 'chickpeaCurry')
+      // chickpea.balancedBy includes ghee; a dairy allergy must remove it
+      // from the advice, not just from the ingredient list.
+      expect(dish.balancedBy.map((b) => b.id)).not.toContain('ghee')
     })
   })
 
