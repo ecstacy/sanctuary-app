@@ -123,6 +123,39 @@ describe('allergens are an absolute filter, not a ranking penalty', () => {
   })
 })
 
+describe('pattern exclusions rely on dietTags, which entries must actually set', () => {
+  // `exclusionFor` has always honoured 'allium'/'root', but for a while no
+  // entry set them — so the rule was live and doing nothing. These tests bind
+  // the rule to real rows so a future entry can't quietly go untagged.
+  // (Reads INGREDIENTS directly: most of these are batch-2 drafts.)
+  it('excludes alliums for Jain and no-onion-garlic', () => {
+    for (const p of ['jain', 'no_onion_garlic']) {
+      expect(exclusionFor(INGREDIENTS.garlic, { patterns: [p] }).excluded, `garlic/${p}`).toBe(true)
+      expect(exclusionFor(INGREDIENTS.onion, { patterns: [p] }).excluded, `onion/${p}`).toBe(true)
+    }
+  })
+
+  it('excludes roots for Jain only, not for no-onion-garlic', () => {
+    expect(exclusionFor(INGREDIENTS.potato, { patterns: ['jain'] }).excluded).toBe(true)
+    expect(exclusionFor(INGREDIENTS.potato, { patterns: ['no_onion_garlic'] }).excluded).toBe(false)
+  })
+
+  it('excludes fresh ginger for Jain but not dry ginger', () => {
+    // Jain practice excludes the fresh underground root and permits the dried
+    // spice. Tagging both, or neither, would be wrong in opposite directions.
+    expect(exclusionFor(INGREDIENTS.gingerFresh, { patterns: ['jain'] }).excluded).toBe(true)
+    expect(exclusionFor(INGREDIENTS.gingerDry, { patterns: ['jain'] }).excluded).toBe(false)
+  })
+
+  it('excludes honey for vegan but not vegetarian', () => {
+    // Honey is a 'sweetener', so no category rule catches it — without the
+    // animal_derived tag a vegan would be told it suits them.
+    expect(exclusionFor(INGREDIENTS.honey, { patterns: ['vegan'] }).excluded).toBe(true)
+    expect(exclusionFor(INGREDIENTS.honey, { patterns: ['vegan'] }).reason).toBe('pattern')
+    expect(exclusionFor(INGREDIENTS.honey, { patterns: ['vegetarian'] }).excluded).toBe(false)
+  })
+})
+
 describe('seek-help triggers', () => {
   it('detects pregnancy, conditions and medication', () => {
     expect(detectSeekHelp('is ginger safe while pregnant').categories).toContain('pregnancy')

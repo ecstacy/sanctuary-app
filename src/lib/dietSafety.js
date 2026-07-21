@@ -169,6 +169,13 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
     return { excluded: true, reason: 'pattern', key: 'vegan' }
   }
   const tags = new Set(ingredient?.dietTags || [])
+  // Animal-derived but not meat and not dairy — honey is the case that matters
+  // here, and category alone can't catch it (it's a 'sweetener'). Vegans
+  // exclude it; vegetarians do not. Without this an honest-looking "suits you"
+  // would be returned for a food the user has explicitly excluded.
+  if (tags.has('animal_derived') && patterns.has(DIET_PATTERNS.VEGAN)) {
+    return { excluded: true, reason: 'pattern', key: 'vegan' }
+  }
   if (tags.has('allium') && (patterns.has(DIET_PATTERNS.NO_ONION_GARLIC) || patterns.has(DIET_PATTERNS.JAIN))) {
     return { excluded: true, reason: 'pattern', key: patterns.has(DIET_PATTERNS.JAIN) ? 'jain' : 'no_onion_garlic' }
   }

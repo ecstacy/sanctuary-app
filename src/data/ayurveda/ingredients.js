@@ -74,6 +74,10 @@
  *   contraindication* from a *practical, symptom-based* caution, and conflating
  *   them overstates the tradition — flagging ginger for pregnancy as though
  *   Charaka forbade it would be wrong. Use this to say which kind it is.
+ * @property {string[]} [dietTags]
+ *   Pattern-exclusion tags consumed by `exclusionFor()`: 'allium' (Jain /
+ *   no-onion-garlic), 'root' (Jain), 'animal_derived' (vegan — honey, which
+ *   no category alone catches). Absent means "excluded by nothing".
  * @property {string[]} [allergens]   Canonical allergen keys — see lib/dietSafety.js
  * @property {{text:'CS'|'HYP'|'modern', verse?:string, note?:string}} source
  * @property {'draft'|'reviewed'} reviewStatus  Only 'reviewed' is ever shown
@@ -208,6 +212,10 @@ export const INGREDIENTS = {
   // and the therapeutic use — NOT because vipaka differs (both are madhura).
   gingerFresh: {
     id: 'gingerFresh',
+    // Jain practice excludes fresh ginger as an underground part but permits
+    // DRY ginger, so the tag sits here and deliberately not on gingerDry.
+    // Raised for sign-off in docs/diet-review-batch-2.md as a batch-1 amendment.
+    dietTags: ['root'],
     name: 'Ginger (fresh)',
     sanskrit: 'Ardraka',
     devanagari: 'आर्द्रक',
@@ -329,6 +337,611 @@ export const INGREDIENTS = {
       note: 'Not in the classical corpus. Derived from properties: bitter/astringent rasa, sharp and drying guna, heating potency.',
     },
     reviewStatus: 'reviewed',
+    confidence: 'medium',
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  //  BATCH 2 — drafted 2026-07-21, awaiting fact-check. See
+  //  docs/diet-review-batch-2.md. Every row below is `draft` and therefore
+  //  INVISIBLE to the app until reviewed.
+  //
+  //  Drafting rule carried over from batch 1's standing correction: the bias to
+  //  guard against is OVER-ATTRIBUTION. A Charaka citation is claimed only
+  //  where the food is named in the corpus AND the specific property is what
+  //  the text says. Where a property is contested between authorities, or is my
+  //  inference, the entry is 'medium' and says so in `source.note` — even when
+  //  the food itself is unambiguously classical.
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // ── Grains ────────────────────────────────────────────────────────────────
+  wheat: {
+    id: 'wheat',
+    name: 'Wheat',
+    sanskrit: 'Godhuma',
+    devanagari: 'गोधूम',
+    aliases: ['atta', 'chapati', 'roti', 'weizen', 'wheat flour', 'wholemeal'],
+    category: 'grain',
+    rasa: ['sweet'],
+    virya: 'cooling',
+    vipaka: 'sweet',
+    guna: ['heavy', 'oily', 'stable'],
+    doshaEffect: { vata: -1, pitta: -1, kapha: 1 },
+    bestTime: ['midday'],
+    whyFavor:
+      'Sweet, cooling and substantial — one of the two grains Charaka treats as building tissue, and steadying for both Vata and Pitta.',
+    whyAvoid: 'Heavy and stable, so it adds to Kapha sluggishness when eaten often or late.',
+    preparation:
+      'Freshly made flatbread is lighter than yeasted bread; both are heavier cold than warm.',
+    allergens: ['gluten'],
+    source: { text: 'CS', verse: 'Sutrasthana 27' },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  barley: {
+    id: 'barley',
+    name: 'Barley',
+    sanskrit: 'Yava',
+    devanagari: 'यव',
+    aliases: ['jau', 'gerste', 'pearl barley', 'barley water'],
+    category: 'grain',
+    rasa: ['sweet', 'astringent'],
+    virya: 'cooling',
+    vipaka: 'pungent',
+    guna: ['light', 'dry', 'rough'],
+    doshaEffect: { vata: 1, pitta: -1, kapha: -1 },
+    bestTime: ['midday'],
+    bestSeason: ['spring'],
+    whyFavor:
+      'Light, dry and scraping — the classical grain for reducing Kapha and heaviness, where most cereals do the opposite.',
+    whyAvoid: 'The dryness and roughness can unsettle Vata, especially uncooked or cold.',
+    allergens: ['gluten'],
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 27',
+      note: 'Barley is unambiguously classical and its light, dry, Kapha-reducing character is consensus. The PUNGENT vipaka is the part to check — authorities differ, and sweet is also attested.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  // ── Legumes ───────────────────────────────────────────────────────────────
+  uradDal: {
+    id: 'uradDal',
+    name: 'Urad dal',
+    sanskrit: 'Masha',
+    devanagari: 'माष',
+    aliases: ['black gram', 'black lentil', 'urad', 'dal makhani'],
+    category: 'legume',
+    rasa: ['sweet'],
+    virya: 'heating',
+    vipaka: 'sweet',
+    guna: ['heavy', 'oily', 'unctuous'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: 1 },
+    bestTime: ['midday'],
+    whyFavor:
+      'The heaviest and most building of the pulses — genuinely nourishing and strengthening where mung is light and recovering.',
+    whyAvoid: 'Heating and heavy: it adds to both Pitta and Kapha, and is slow to digest in quantity.',
+    preparation: 'Long-cooked with asafoetida and ginger to make the heaviness manageable.',
+    source: { text: 'CS', verse: 'Sutrasthana 27' },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  chickpea: {
+    id: 'chickpea',
+    name: 'Chickpea',
+    sanskrit: 'Chanaka',
+    devanagari: 'चणक',
+    aliases: ['chana', 'garbanzo', 'kichererbse', 'besan', 'gram flour', 'hummus'],
+    category: 'legume',
+    rasa: ['sweet', 'astringent'],
+    virya: 'cooling',
+    vipaka: 'pungent',
+    guna: ['light', 'dry', 'rough'],
+    doshaEffect: { vata: 1, pitta: -1, kapha: -1 },
+    bestTime: ['midday'],
+    whyFavor: 'Dry and astringent — settles Pitta and reduces Kapha without heaviness.',
+    whyAvoid: 'Notably gas-forming; the dryness and roughness aggravate Vata.',
+    preparation:
+      'Soaking well, cooking thoroughly and adding asafoetida, cumin and ginger is the standard way to make it tolerable for Vata.',
+    source: { text: 'CS', verse: 'Sutrasthana 27' },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  // ── Dairy ─────────────────────────────────────────────────────────────────
+  milk: {
+    id: 'milk',
+    name: 'Cow’s milk',
+    sanskrit: 'Kshira',
+    devanagari: 'क्षीर',
+    aliases: ['milch', 'dairy milk', 'whole milk', 'doodh'],
+    category: 'dairy',
+    rasa: ['sweet'],
+    virya: 'cooling',
+    vipaka: 'sweet',
+    guna: ['heavy', 'oily', 'soft'],
+    doshaEffect: { vata: -1, pitta: -1, kapha: 1 },
+    bestTime: ['evening'],
+    whyFavor:
+      'Sweet, cooling and nourishing — Charaka treats milk as one of the most building of foods, and it settles both Vata and Pitta.',
+    whyAvoid: 'Heavy and oily, so it reliably increases Kapha and congestion.',
+    preparation:
+      'Traditionally taken warm and spiced (cardamom, ginger, turmeric) rather than cold — warming it is held to make it markedly easier to digest.',
+    combosToAvoid: ['fish', 'sour fruit', 'salt', 'yoghurt'],
+    cautions: ['lactose_intolerance'],
+    cautionNote:
+      'Lactose intolerance is a modern physiological caution, not a classical one — but it overrides everything above for someone who has it.',
+    allergens: ['dairy'],
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 27',
+      note: 'Milk and its qualities are core classical material. The incompatible combinations are from the viruddha ahara material (Sutrasthana 26); check whether all four listed belong there rather than to later tradition.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  buttermilk: {
+    id: 'buttermilk',
+    name: 'Buttermilk',
+    sanskrit: 'Takra',
+    devanagari: 'तक्र',
+    aliases: ['chaas', 'chhaas', 'lassi', 'buttermilch', 'thin yoghurt drink'],
+    category: 'dairy',
+    rasa: ['sour', 'astringent'],
+    virya: 'heating',
+    vipaka: 'sour',
+    guna: ['light', 'dry'],
+    doshaEffect: { vata: -1, pitta: 0, kapha: -1 },
+    bestTime: ['midday'],
+    whyFavor:
+      'Light and astringent where yoghurt is heavy — classically the remedy for weak digestion, and one of the few dairy foods that reduces rather than builds Kapha.',
+    preparation:
+      'Churned and diluted with water, the butter removed. That dilution is what separates takra from yoghurt; undiluted yoghurt does not behave this way.',
+    cautions: ['lactose_intolerance'],
+    allergens: ['dairy'],
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 27',
+      note: 'Takra is strongly attested, especially for digestive complaints. The Pitta-neutral rating is the soft spot: sour and heating properties argue for +1, while the classical use in Pitta conditions argues against. Drafted as neutral deliberately.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  butter: {
+    id: 'butter',
+    name: 'Butter',
+    sanskrit: 'Navanita',
+    devanagari: 'नवनीत',
+    aliases: ['butter', 'makhan', 'unsalted butter'],
+    category: 'dairy',
+    rasa: ['sweet'],
+    virya: 'cooling',
+    vipaka: 'sweet',
+    guna: ['heavy', 'oily', 'soft'],
+    doshaEffect: { vata: -1, pitta: -1, kapha: 1 },
+    whyFavor: 'Cooling and nourishing, gentler than ghee on Pitta and softening for Vata.',
+    whyAvoid: 'Heavy and oily — increases Kapha, more so than ghee.',
+    allergens: ['dairy'],
+    source: {
+      text: 'modern',
+      note: 'Classical navanita is FRESH, unsalted, unfermented butter churned from curd — not the same as salted supermarket butter, which carries added salt and is usually cultured. Rated on the classical properties of fresh butter; confidence held at medium because the everyday Western product differs.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  hardCheese: {
+    id: 'hardCheese',
+    name: 'Hard cheese',
+    aliases: ['cheese', 'käse', 'kaese', 'gouda', 'cheddar', 'emmental', 'parmesan'],
+    category: 'dairy',
+    rasa: ['sweet', 'sour'],
+    virya: 'heating',
+    vipaka: 'sour',
+    guna: ['heavy', 'oily', 'dense'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: 1 },
+    bestTime: ['midday'],
+    whyAvoid:
+      'Dense, oily and fermented — among the heaviest foods for Kapha, and the sourness of ageing adds heat to Pitta.',
+    cautions: ['lactose_intolerance'],
+    allergens: ['dairy'],
+    source: {
+      text: 'modern',
+      note: 'Aged hard cheese has no classical counterpart — the corpus knows fresh curd, buttermilk and ghee, not months-matured rennet cheese. Derived from properties: sour rasa from ageing, dense and oily guna.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  // ── Sweeteners ────────────────────────────────────────────────────────────
+  honey: {
+    id: 'honey',
+    dietTags: ['animal_derived'],
+    name: 'Honey',
+    sanskrit: 'Madhu',
+    devanagari: 'मधु',
+    aliases: ['honig', 'shahad', 'raw honey'],
+    category: 'sweetener',
+    rasa: ['sweet', 'astringent'],
+    virya: 'heating',
+    vipaka: 'sweet',
+    guna: ['light', 'dry', 'scraping'],
+    doshaEffect: { vata: 1, pitta: 0, kapha: -1 },
+    bestTime: ['morning'],
+    whyFavor:
+      'The one sweet food that reduces Kapha rather than building it — light, dry and scraping, which is why it is the classical sweetener where sweetness would otherwise be a problem.',
+    whyAvoid: 'The dryness can aggravate Vata in quantity.',
+    preparation:
+      'Never heated or cooked. Charaka is unusually emphatic that heated honey becomes harmful, and this is the one preparation rule in this dataset stated as a prohibition rather than a preference.',
+    combosToAvoid: ['equal parts ghee by weight', 'hot water', 'cooking or baking'],
+    cautions: ['infant_under_1'],
+    cautionNote:
+      'The infant caution is modern (botulism risk), not classical, and is absolute — it is a safety flag, not an Ayurvedic one.',
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 27',
+      note: 'Honey’s properties and the prohibition on heating it are both classical. Check the equal-parts-ghee incompatibility specifically: it is widely repeated, and worth confirming it is Charaka rather than later commentary.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  jaggery: {
+    id: 'jaggery',
+    name: 'Jaggery',
+    sanskrit: 'Guda',
+    devanagari: 'गुड',
+    aliases: ['gur', 'gud', 'palm sugar', 'unrefined cane sugar', 'rohrzucker'],
+    category: 'sweetener',
+    rasa: ['sweet'],
+    virya: 'heating',
+    vipaka: 'sweet',
+    guna: ['heavy', 'oily'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: 1 },
+    bestSeason: ['winter'],
+    whyFavor: 'Warming and building — settles Vata in a way refined sugar does not.',
+    whyAvoid: 'Heavy and heating: it adds to both Pitta and Kapha.',
+    source: { text: 'CS', verse: 'Sutrasthana 27' },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  // ── Oils ──────────────────────────────────────────────────────────────────
+  sesameOil: {
+    id: 'sesameOil',
+    name: 'Sesame oil',
+    sanskrit: 'Tila taila',
+    devanagari: 'तिल तैल',
+    aliases: ['til oil', 'gingelly oil', 'sesamöl', 'sesamoel'],
+    category: 'oil',
+    rasa: ['sweet', 'bitter', 'astringent'],
+    virya: 'heating',
+    vipaka: 'sweet',
+    guna: ['heavy', 'oily', 'penetrating'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: 0 },
+    bestSeason: ['autumn', 'winter'],
+    whyFavor:
+      'Charaka treats sesame as the foremost of the oils — warming, penetrating and the standard oil for settling Vata, internally and for massage.',
+    whyAvoid: 'Heating, so it adds to Pitta in summer or in an already-hot state.',
+    allergens: ['sesame'],
+    source: { text: 'CS', verse: 'Sutrasthana 27' },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  oliveOil: {
+    id: 'oliveOil',
+    name: 'Olive oil',
+    aliases: ['olivenöl', 'olivenoel', 'extra virgin olive oil'],
+    category: 'oil',
+    rasa: ['sweet', 'astringent'],
+    virya: 'neutral',
+    vipaka: 'sweet',
+    guna: ['oily', 'heavy'],
+    doshaEffect: { vata: -1, pitta: 0, kapha: 1 },
+    whyFavor: 'Oily and smooth, so it softens Vata dryness without the heat of sesame.',
+    whyAvoid: 'Oily and heavy, so it adds to Kapha.',
+    source: {
+      text: 'modern',
+      note: 'Absent from the classical corpus. Derived from properties: sweet and mildly astringent rasa, unctuous guna, neither notably heating nor cooling. Uses the neutral virya added in batch 1.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  // ── Spices ────────────────────────────────────────────────────────────────
+  blackPepper: {
+    id: 'blackPepper',
+    name: 'Black pepper',
+    sanskrit: 'Maricha',
+    devanagari: 'मरिच',
+    aliases: ['kali mirch', 'pfeffer', 'peppercorn'],
+    category: 'spice',
+    rasa: ['pungent'],
+    virya: 'heating',
+    vipaka: 'pungent',
+    guna: ['light', 'dry', 'sharp'],
+    doshaEffect: { vata: 1, pitta: 1, kapha: -1 },
+    whyFavor: 'Sharp and penetrating — kindles digestion and cuts Kapha and congestion.',
+    whyAvoid: 'Distinctly heating and drying: it adds to Pitta and, in quantity, to Vata.',
+    cautions: ['acid_reflux'],
+    cautionNote: 'Practical and symptom-based, not a classical contraindication.',
+    source: { text: 'CS', verse: 'Sutrasthana 27' },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  turmeric: {
+    id: 'turmeric',
+    name: 'Turmeric',
+    sanskrit: 'Haridra',
+    devanagari: 'हरिद्रा',
+    aliases: ['haldi', 'kurkuma', 'curcuma'],
+    category: 'spice',
+    rasa: ['bitter', 'astringent', 'pungent'],
+    virya: 'heating',
+    vipaka: 'pungent',
+    guna: ['light', 'dry'],
+    doshaEffect: { vata: 1, pitta: 1, kapha: -1 },
+    whyFavor: 'Bitter and drying — classically used to clear Kapha and to purify.',
+    whyAvoid: 'Drying and heating in quantity, so it can aggravate Vata and Pitta.',
+    preparation: 'Culinary amounts cooked into fat behave far more gently than large doses.',
+    cautionNote:
+      'We describe traditional use only. Turmeric is heavily marketed with modern therapeutic claims — this dataset makes none of them.',
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 27',
+      note: 'Haridra is classical and its bitter/drying, Kapha-reducing character is consensus. The Vata +1 rating is my inference from the dryness rather than an explicit statement — worth checking.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  cumin: {
+    id: 'cumin',
+    name: 'Cumin',
+    sanskrit: 'Jiraka',
+    devanagari: 'जीरक',
+    aliases: ['jeera', 'zeera', 'kreuzkümmel', 'kreuzkuemmel'],
+    category: 'spice',
+    rasa: ['pungent'],
+    virya: 'heating',
+    vipaka: 'pungent',
+    guna: ['light', 'dry'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: -1 },
+    whyFavor:
+      'Kindles digestion and relieves bloating — one of the few pungent spices gentle enough to settle Vata rather than stir it.',
+    whyAvoid: 'Heating, so it adds to Pitta.',
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 27',
+      note: 'The digestive action is classical consensus. Vata −1 alongside a pungent, heating, drying profile is the tension in this entry — pungency usually raises Vata. Drafted −1 on the strength of the classical use for bloating.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  corianderSeed: {
+    id: 'corianderSeed',
+    name: 'Coriander seed',
+    sanskrit: 'Dhanyaka',
+    devanagari: 'धान्यक',
+    aliases: ['dhania', 'koriander', 'cilantro seed', 'ground coriander'],
+    category: 'spice',
+    rasa: ['sweet', 'bitter', 'astringent'],
+    virya: 'cooling',
+    vipaka: 'sweet',
+    guna: ['light', 'oily'],
+    doshaEffect: { vata: -1, pitta: -1, kapha: -1 },
+    whyFavor:
+      'Unusual among digestive spices in being cooling — it supports digestion without adding heat, which is why it suits Pitta where cumin and pepper do not.',
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 27',
+      note: 'Cooling potency and Pitta-suitability are well attested. A tridoshic −1/−1/−1 is the strongest possible claim in this schema — flagged for scrutiny, since "good for everything" is exactly the kind of statement that should be hard to earn.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  fennel: {
+    id: 'fennel',
+    name: 'Fennel seed',
+    sanskrit: 'Mishreya',
+    devanagari: 'मिश्रेया',
+    aliases: ['saunf', 'fenchel', 'fennel tea'],
+    category: 'spice',
+    rasa: ['sweet', 'pungent', 'bitter'],
+    virya: 'cooling',
+    vipaka: 'sweet',
+    guna: ['light', 'oily'],
+    doshaEffect: { vata: -1, pitta: -1, kapha: 0 },
+    bestTime: ['midday', 'evening'],
+    whyFavor:
+      'Settles digestion and wind while staying cooling — the reason it is chewed after meals and given as a mild after-dinner tea.',
+    source: {
+      text: 'modern',
+      note: 'Fennel appears in Ayurvedic tradition but is less prominent in the Charaka corpus than cumin or coriander. Rated on properties and consistent traditional use rather than a specific citation.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  asafoetida: {
+    id: 'asafoetida',
+    name: 'Asafoetida',
+    sanskrit: 'Hingu',
+    devanagari: 'हिङ्गु',
+    aliases: ['hing', 'heeng', 'asant'],
+    category: 'spice',
+    rasa: ['pungent'],
+    virya: 'heating',
+    vipaka: 'pungent',
+    guna: ['light', 'oily', 'sharp'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: -1 },
+    whyFavor:
+      'The classical answer to gas and bloating — a pinch in cooking is what makes heavy legumes digestible, which is why it appears wherever dal does.',
+    whyAvoid: 'Sharp and heating: it adds to Pitta.',
+    preparation: 'Always cooked briefly in fat first; raw, it is harsh.',
+    source: { text: 'CS', verse: 'Sutrasthana 27' },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  garlic: {
+    id: 'garlic',
+    dietTags: ['allium', 'root'],
+    name: 'Garlic',
+    sanskrit: 'Lashuna',
+    devanagari: 'लशुन',
+    aliases: ['lehsun', 'knoblauch', 'raw garlic'],
+    category: 'spice',
+    rasa: ['pungent'],
+    virya: 'heating',
+    vipaka: 'pungent',
+    guna: ['heavy', 'oily', 'sharp', 'penetrating'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: -1 },
+    bestSeason: ['winter'],
+    whyFavor: 'Strongly warming and penetrating — settles Vata and cuts Kapha.',
+    whyAvoid: 'Markedly heating; it aggravates Pitta more than most spices.',
+    cautionNote:
+      'Excluded by several dietary patterns this app supports (Jain, no-onion-garlic, and much yogic/sattvic practice, which treats it as agitating for the mind rather than harmful to the body). That is a pattern exclusion, not a health caution.',
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 27',
+      note: 'Lashuna is classical and its heating, Vata-pacifying, Kapha-reducing character is consensus. The sattvic/yogic objection is a separate tradition from Charaka and is recorded as a pattern exclusion, not a classical property.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'high',
+  },
+
+  onion: {
+    id: 'onion',
+    dietTags: ['allium', 'root'],
+    name: 'Onion',
+    sanskrit: 'Palandu',
+    devanagari: 'पलाण्डु',
+    aliases: ['pyaz', 'zwiebel', 'red onion', 'white onion'],
+    category: 'vegetable',
+    rasa: ['pungent', 'sweet'],
+    virya: 'heating',
+    vipaka: 'pungent',
+    guna: ['heavy', 'oily'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: 1 },
+    whyFavor: 'Cooked, the sweetness dominates and it becomes grounding for Vata.',
+    whyAvoid:
+      'Raw, the pungency dominates and it is sharply heating for Pitta. Cooked, its heaviness feeds Kapha.',
+    preparation:
+      'Raw and cooked onion behave differently enough that the ratings above are a compromise between them — a rare case where preparation changes the answer, not just the degree.',
+    cautionNote: 'Excluded by Jain and no-onion-garlic patterns, as for garlic.',
+    source: {
+      text: 'modern',
+      note: 'Palandu is named classically but with less consistent characterisation than lashuna, and the raw-versus-cooked split is my inference. Held at medium.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  // ── Vegetables & fruit ────────────────────────────────────────────────────
+  potato: {
+    id: 'potato',
+    dietTags: ['root'],
+    name: 'Potato',
+    aliases: ['aloo', 'kartoffel', 'potatoes', 'mashed potato'],
+    category: 'vegetable',
+    rasa: ['sweet', 'astringent'],
+    virya: 'cooling',
+    vipaka: 'sweet',
+    guna: ['heavy', 'dry'],
+    doshaEffect: { vata: 1, pitta: -1, kapha: 1 },
+    whyAvoid:
+      'Dry and gas-forming for Vata, heavy for Kapha. Its cooling sweetness does suit Pitta.',
+    preparation:
+      'Cooked with ghee and warming spices, or mashed rather than baked dry, blunts the Vata aggravation.',
+    source: {
+      text: 'modern',
+      note: 'A New World crop, so necessarily absent from the classical corpus. Derived from properties: sweet and astringent rasa, dry and heavy guna, cooling.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  spinach: {
+    id: 'spinach',
+    name: 'Spinach',
+    sanskrit: 'Palakya',
+    devanagari: 'पालक्य',
+    aliases: ['palak', 'spinat', 'saag'],
+    category: 'vegetable',
+    rasa: ['astringent', 'sweet'],
+    virya: 'cooling',
+    vipaka: 'pungent',
+    guna: ['light', 'dry', 'rough'],
+    doshaEffect: { vata: 1, pitta: -1, kapha: -1 },
+    whyFavor: 'Light, cooling and astringent — suits Pitta heat and Kapha heaviness.',
+    whyAvoid: 'Rough and drying, so it unsettles Vata, particularly raw.',
+    preparation:
+      'Cooked with ghee and spices rather than eaten raw makes it far friendlier to Vata.',
+    source: {
+      text: 'modern',
+      note: 'Leafy greens as a class are described classically as astringent, light and drying, but the specific identification of palakya with modern spinach is not secure. Rated on the class properties.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  apple: {
+    id: 'apple',
+    name: 'Apple',
+    aliases: ['apfel', 'seb', 'apples', 'stewed apple'],
+    category: 'fruit',
+    rasa: ['sweet', 'astringent'],
+    virya: 'cooling',
+    vipaka: 'sweet',
+    guna: ['light', 'dry', 'rough'],
+    doshaEffect: { vata: 1, pitta: -1, kapha: -1 },
+    bestTime: ['morning'],
+    bestSeason: ['autumn'],
+    whyFavor: 'Light, cooling and astringent — settles Pitta and does not add to Kapha.',
+    whyAvoid: 'Raw, the roughness and astringency aggravate Vata.',
+    preparation:
+      'Stewed warm with cinnamon or cardamom reverses the Vata effect — a clear case of preparation flipping the answer rather than softening it.',
+    source: {
+      text: 'modern',
+      note: 'Not identifiable in the classical corpus. Derived from properties: sweet and astringent rasa, light and rough guna, cooling.',
+    },
+    reviewStatus: 'draft',
+    confidence: 'medium',
+  },
+
+  // ── Nuts ──────────────────────────────────────────────────────────────────
+  almond: {
+    id: 'almond',
+    name: 'Almond',
+    sanskrit: 'Badama',
+    devanagari: 'बादाम',
+    aliases: ['badam', 'mandel', 'almonds', 'almond milk'],
+    category: 'nut_seed',
+    rasa: ['sweet'],
+    virya: 'heating',
+    vipaka: 'sweet',
+    guna: ['heavy', 'oily'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: 1 },
+    bestTime: ['morning'],
+    whyFavor: 'Oily, sweet and building — one of the standard foods for settling and nourishing Vata.',
+    whyAvoid: 'Heating and heavy, so it adds to Pitta and Kapha.',
+    preparation:
+      'Traditionally soaked overnight and peeled. The skin is held to be the irritating and hard-to-digest part, and soaking is treated as a requirement rather than a refinement.',
+    allergens: ['nuts'],
+    source: {
+      text: 'modern',
+      note: 'Almonds appear in later Ayurvedic and regional tradition more than in the Charaka corpus. Rated on properties and consistent traditional use; the soaking practice is well attested but not cited here.',
+    },
+    reviewStatus: 'draft',
     confidence: 'medium',
   },
 }
