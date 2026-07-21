@@ -79,6 +79,12 @@
  *   `DIET_TAGS` (lib/dietSafety.js) — a typo matches no rule and so silently
  *   filters nothing, which is why the vocabulary is asserted in tests.
  *   Absent means "excluded by nothing", so omitting a tag is a claim too.
+ *
+ *   ⚠ `'root'` follows the PLANT PART, not the processing. A rhizome is still
+ *   a rhizome dried, ground or powdered — ginger fresh and dry both carry it,
+ *   as does turmeric (review batch 2). The one deliberate exception is
+ *   asafoetida: what is eaten is the dried RESIN, not the root, which is why
+ *   it is Jain-permitted and the classic allium substitute in Jain cooking.
  * @property {string[]} [allergens]
  *   Canonical allergen keys — see `ALLERGENS` in lib/dietSafety.js. Dairy is
  *   implied by the category and need not be repeated; everything else must be
@@ -216,9 +222,6 @@ export const INGREDIENTS = {
   // and the therapeutic use — NOT because vipaka differs (both are madhura).
   gingerFresh: {
     id: 'gingerFresh',
-    // Jain practice excludes fresh ginger as an underground part but permits
-    // DRY ginger, so the tag sits here and deliberately not on gingerDry.
-    // Raised for sign-off in docs/diet-review-batch-2.md as a batch-1 amendment.
     dietTags: ['root'],
     name: 'Ginger (fresh)',
     sanskrit: 'Ardraka',
@@ -249,6 +252,10 @@ export const INGREDIENTS = {
 
   gingerDry: {
     id: 'gingerDry',
+    // Review batch 2: tagged to MATCH gingerFresh. The earlier fresh/dried
+    // asymmetry was wrong — Jain exclusion follows the PLANT PART, not the
+    // processing. A rhizome stays a rhizome dried and powdered.
+    dietTags: ['root'],
     name: 'Ginger (dry)',
     sanskrit: 'Shunthi',
     devanagari: 'शुण्ठी',
@@ -594,14 +601,18 @@ export const INGREDIENTS = {
     whyAvoid: 'The dryness can aggravate Vata in quantity.',
     preparation:
       'Never heated or cooked. Charaka is unusually emphatic here — among the strongest and most consistently transmitted food-processing prohibitions in the canon — and it is the one rule in this dataset stated as a prohibition rather than a preference. Two caveats: the reasoning is Ayurvedic (changed qualities, difficult digestion, production of ama), NOT a modern toxicological claim; and the texts give no precise temperature threshold, so familiar rules like “never above 40°C” are later interpretation rather than anything Charaka states.',
-    combosToAvoid: ['equal parts ghee by weight', 'hot water', 'cooking or baking'],
+    combosToAvoid: [
+      'equal parts ghee by weight (viruddha ahara, Sutrasthana 26)',
+      'hot water',
+      'cooking or baking',
+    ],
     cautions: ['infant_under_1'],
     cautionNote:
       'The infant caution is modern (botulism risk), not classical, and is absolute — it is a safety flag, not an Ayurvedic one.',
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
-      note: 'Review batch 2: the prohibition on heating honey is confirmed classical and emphatic. Virya is traditionally debated — heating is the common modern reading rather than a settled classical one. ⚠ The equal-parts-ghee incompatibility below is still UNVERIFIED; it was asked in review and not answered, so treat it as later tradition until confirmed.',
+      note: 'Review batch 2: the prohibition on heating honey is confirmed classical and emphatic, and the equal-parts-ghee incompatibility is confirmed as genuine viruddha ahara (Sutrasthana 26) — unlike ghee\u2019s yogavahi attribution, which review rejected. Virya is traditionally debated; heating is the common modern reading rather than a settled classical one.',
     },
     reviewStatus: 'reviewed',
     confidence: 'high',
@@ -698,6 +709,9 @@ export const INGREDIENTS = {
 
   turmeric: {
     id: 'turmeric',
+    // Rhizome, so it follows the same plant-part rule as ginger. Signed off in
+    // review batch 2 for consistency with that precedent.
+    dietTags: ['root'],
     name: 'Turmeric',
     sanskrit: 'Haridra',
     devanagari: 'हरिद्रा',

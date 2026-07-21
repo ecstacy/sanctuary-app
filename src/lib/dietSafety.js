@@ -62,6 +62,10 @@ export const DIET_PATTERNS = {
  */
 export const DIET_TAGS = {
   ALLIUM:         'allium',          // onion/garlic family — Jain, no-onion-garlic
+  // Follows the PLANT PART, not the processing: a rhizome stays a rhizome
+  // dried and powdered (ginger fresh AND dry, turmeric). The exception is
+  // asafoetida, where what is eaten is the dried resin rather than the root —
+  // which is why Jain cooking permits it as the standard allium substitute.
   ROOT:           'root',            // underground part — Jain
   ANIMAL_DERIVED: 'animal_derived',  // from an animal but not meat/dairy (honey)
   ANIMAL_RENNET:  'animal_rennet',   // slaughter-derived enzyme — not vegetarian

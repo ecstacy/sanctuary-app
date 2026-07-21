@@ -546,24 +546,30 @@ not pacify Vāta.** "Doesn't aggravate" is a 0, and that is usually the honest
 answer. Reserve −1 for genuinely unctuous, grounding, or explicitly attested
 cases.
 
-### ⚠️ Three things still open
+### ✅ The three open items — resolved 2026-07-21
 
-These were asked and not answered — I have **not** assumed consent:
+| Item | Decision |
+|---|---|
+| `honey` + equal parts ghee | **Keep as a classical citation** — genuine viruddha āhāra, CS Sutrasthana 26. Unlike the *yogavāhī* attribution, this one holds. |
+| `gingerDry` root tag | **Add**, matching `gingerFresh`. |
+| `turmeric` root tag | **Add**, for consistency with the ginger precedent. |
 
-1. **`honey` + equal parts ghee.** I asked whether this is Charaka or later
-   commentary (the same question that caught ghee's *yogavahi*). It's still in
-   `combosToAvoid`, now with a note marking it **unverified**. It's the last
-   unaudited citation-style claim in the dataset.
-2. **`gingerFresh` tagged `root` / `gingerDry` not** — the Jain asymmetry on
-   two batch-1 rows. Still needs an explicit yes.
-3. **`turmeric` and Jain.** Turmeric is a rhizome like ginger. By the
-   `gingerFresh` logic it'd be excluded fresh; by the `gingerDry` logic the
-   dried powder we actually describe would not. Left untagged rather than
-   guessed at.
+**The rule this establishes, now recorded in the schema and under test:**
+Jain exclusion follows the **plant part**, not the processing. A rhizome stays
+a rhizome dried, ground or powdered. My earlier fresh-vs-dried asymmetry was
+wrong and has been reversed.
 
-Marking `potato` and `hardCheese` reviewed I've taken as approving the
-`nightshade` allergen and the `animal_rennet` tag on them, since both were
-described in this doc when you signed them off. Say if that's wrong.
+**One deliberate exception**, which the rule would otherwise catch:
+**asafoetida**. Hing is the dried *resin*, not the root itself — which is why
+Jain cooking permits it, and uses it as the standard allium substitute.
+Excluding it would break the very diet the pattern exists to serve. Left
+untagged on purpose, and there is now a test saying so, so nobody "fixes" it
+later.
+
+This also cleanly separates the two layers the reviewer asked for:
+**evidence** (is the claim classical?) and **pattern** (does an observance
+exclude it?). Honey+ghee is an evidence-layer decision; the rhizome tags are
+pattern-layer, and neither should borrow reasoning from the other.
 
 ### Note to self on the format
 

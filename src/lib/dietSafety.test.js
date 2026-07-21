@@ -224,11 +224,20 @@ describe('pattern exclusions rely on dietTags, which entries must actually set',
     expect(exclusionFor(INGREDIENTS.potato, { patterns: ['no_onion_garlic'] }).excluded).toBe(false)
   })
 
-  it('excludes fresh ginger for Jain but not dry ginger', () => {
-    // Jain practice excludes the fresh underground root and permits the dried
-    // spice. Tagging both, or neither, would be wrong in opposite directions.
-    expect(exclusionFor(INGREDIENTS.gingerFresh, { patterns: ['jain'] }).excluded).toBe(true)
-    expect(exclusionFor(INGREDIENTS.gingerDry, { patterns: ['jain'] }).excluded).toBe(false)
+  it('excludes rhizomes for Jain however they are processed', () => {
+    // Review batch 2 overturned an earlier fresh-vs-dried asymmetry: the rule
+    // follows the PLANT PART, not the processing. Drying and powdering a
+    // rhizome does not make it something else.
+    for (const id of ['gingerFresh', 'gingerDry', 'turmeric']) {
+      expect(exclusionFor(INGREDIENTS[id], { patterns: ['jain'] }).excluded, id).toBe(true)
+    }
+  })
+
+  it('permits asafoetida for Jain — the resin, not the root, is eaten', () => {
+    // The deliberate exception to the plant-part rule, and not an oversight:
+    // hing is the standard allium substitute in Jain cooking, so excluding it
+    // would break the very diet the pattern exists to serve.
+    expect(exclusionFor(INGREDIENTS.asafoetida, { patterns: ['jain'] }).excluded).toBe(false)
   })
 
   it('excludes honey for vegan but not vegetarian', () => {
