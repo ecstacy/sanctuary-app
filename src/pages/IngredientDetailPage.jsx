@@ -278,7 +278,7 @@ export default function IngredientDetailPage() {
                     <button
                       key={b.id}
                       onClick={() => navigate(`/ingredient/${b.id}`)}
-                      className="px-3 py-1.5 rounded-full bg-surface-container-high font-body text-xs text-on-surface active:scale-95 transition-all"
+                      className="min-h-11 px-4 inline-flex items-center rounded-full bg-surface-container-high font-body text-xs text-on-surface active:scale-95 transition-all"
                     >
                       {b.name}
                     </button>
@@ -339,7 +339,7 @@ export default function IngredientDetailPage() {
             <div className="flex items-center gap-2 flex-wrap">
               <span
                 className={`px-2.5 py-1 rounded-full font-label text-[10px] uppercase tracking-wide ${
-                  view.isDerived ? 'bg-surface-container-high text-on-surface-variant' : 'bg-primary-fixed text-primary'
+                  view.isDerived ? 'bg-surface-container-high text-on-surface-variant' : 'bg-primary-container text-on-primary-container'
                 }`}
               >
                 {view.isDerived ? t('diet.confidence.medium') : t('diet.confidence.high')}

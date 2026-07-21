@@ -16,6 +16,7 @@ import PaywallSheet from '../components/PaywallSheet'
 import WelcomeToPlusCard from '../components/WelcomeToPlusCard'
 import * as analytics from '../lib/analytics'
 import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
+import MealOfTheDayCard from '../components/MealOfTheDayCard'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
 
 // Mirror of YOGI_LEVELS in JourneyPage; kept tiny here to avoid a cross-page
@@ -607,6 +608,11 @@ export default function HomePage() {
 
         {/* One-time nudge to enable the daily reminder (after 2 daily sessions). */}
         <ReminderPrompt />
+
+        {/* ── Meal of the day ──────────────────────────────────────────────
+            Renders nothing at all when the composer has no idea to offer, so
+            Home never carries an empty apology card. See the component. */}
+        <MealOfTheDayCard />
 
         {/* ── Daily Ritual — Breathing (redesigned with staggered breath rings) ── */}
         <button

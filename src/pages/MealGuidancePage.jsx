@@ -230,7 +230,7 @@ export default function MealGuidancePage() {
                     </span>
                   )}
                   {idea.citations.map((v) => (
-                    <span key={v} className="px-2 py-0.5 rounded-full bg-primary-fixed font-label text-[8px] uppercase tracking-wide text-primary">
+                    <span key={v} className="px-2 py-0.5 rounded-full bg-primary-container font-label text-[8px] uppercase tracking-wide text-on-primary-container">
                       {v}
                     </span>
                   ))}

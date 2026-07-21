@@ -5,7 +5,7 @@
 // into something a user acts on. These tests encode that it can't.
 
 import { describe, it, expect } from 'vitest'
-import { composeMeals, mealSlotFor, netDoshaEffect, explainIdea } from './mealComposer'
+import { composeMeals, dailyPractices, mealSlotFor, netDoshaEffect, explainIdea } from './mealComposer'
 import { MEAL_TEMPLATES, ALL_MEAL_TEMPLATES } from '../data/ayurveda/meals'
 import { INGREDIENTS } from '../data/ayurveda/ingredients'
 import { SUITABILITY } from './doshaSemantics'
@@ -245,6 +245,44 @@ describe('ideas assert nothing their ingredients do not', () => {
       expect(out.ideas.length).toBeGreaterThan(0)
       expect(out.ideas[0].suitability).toBe(SUITABILITY.NEUTRAL)
       expect(out.ideas[0].contributions).toEqual([])
+    })
+  })
+})
+
+describe('dailyPractices — the dinacharya surface', () => {
+  it('is empty while the templates are unreviewed', () => {
+    expect(dailyPractices()).toEqual([])
+  })
+
+  it('returns practices, and ONLY practices', () => {
+    // The complement of the meal surface: what composeMeals excludes is
+    // exactly what this returns, so nothing falls between the two.
+    withReviewedTemplates(() => {
+      const ids = dailyPractices().map((p) => p.id)
+      expect(ids).toContain('honeyWarmWater')
+      const mealIds = composeMeals({ now: at(8), count: 99 }).ideas.map((i) => i.id)
+      for (const id of ids) expect(mealIds, `${id} appears on both surfaces`).not.toContain(id)
+    })
+  })
+
+  it('applies the same safety filter as meals', () => {
+    // A traditional practice is not offered to someone who has excluded its
+    // ingredient, however classical it is.
+    withReviewedTemplates(() => {
+      const out = dailyPractices({ dietPrefs: { patterns: ['vegan'] } })  // honey
+      expect(out.map((p) => p.id)).not.toContain('honeyWarmWater')
+    })
+  })
+
+  it('hides a practice whose ingredient is unreviewed', () => {
+    withReviewedTemplates(() => {
+      const original = INGREDIENTS.honey.reviewStatus
+      INGREDIENTS.honey.reviewStatus = 'draft'
+      try {
+        expect(dailyPractices().map((p) => p.id)).not.toContain('honeyWarmWater')
+      } finally {
+        INGREDIENTS.honey.reviewStatus = original
+      }
     })
   })
 })

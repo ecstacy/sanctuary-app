@@ -908,7 +908,8 @@
     "safetyAria": "Sicherheitshinweise",
     "doshaClock": "Die Dosha-Uhr",
     "sourceLabel": "Quelle:",
-    "clockSource": "Quelle: Charaka Samhita Sutrasthana 5 (primär) + Sutrasthana 7 (natürliche Bedürfnisse) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel)."
+    "clockSource": "Quelle: Charaka Samhita Sutrasthana 5 (primär) + Sutrasthana 7 (natürliche Bedürfnisse) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel).",
+    "foodPractices": "Ernährungspraktiken"
   },
   "dietary": {
     "goBack": "Zurück",
@@ -924,7 +925,8 @@
     "seasonalNote": "Saisonaler Hinweis",
     "sixTastes": "Die sechs Geschmäcker (Charaka-Referenz)",
     "unknownDosha": "Unbekanntes Dosha: {{dosha}}",
-    "sourceLabel": "Quelle:"
+    "sourceLabel": "Quelle:",
+    "lookUpFood": "Jedes Lebensmittel nachschlagen, mit Quelle"
   },
   "recommendations": {
     "goBack": "Zurück",
@@ -1632,6 +1634,10 @@
     "balancedBy": "Traditionell ausgeglichen mit {{list}}.",
     "kind": {
       "preparation": "Beilage"
+    },
+    "card": {
+      "seeMore": "Weitere Ideen für heute",
+      "seeMorePlus": "Mehr sehen mit Plus"
     }
   }
 }

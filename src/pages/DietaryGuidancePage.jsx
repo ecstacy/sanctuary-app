@@ -89,6 +89,41 @@ export default function DietaryGuidancePage() {
         <p className="font-body text-sm opacity-95 leading-relaxed">{guide.principle}</p>
       </div>
 
+      {/* ── Bridge to the reviewed dataset ────────────────────────────────
+          This page is the older, general per-dosha guidance. The diet feature
+          is the specific, cited, human-reviewed version of the same question,
+          so the two need to be connected rather than sit as rival answers. */}
+      <div className="px-5 mt-4 flex flex-col gap-2 stagger-2">
+        <button
+          onClick={() => {
+            track(EVENTS.CTA_CLICKED, { cta_id: 'dietary_to_food_search', route_name: 'dietary_guidance' })
+            navigate('/discover')
+          }}
+          className="flex items-center gap-3 bg-surface-container-low rounded-2xl p-3.5 text-left active:scale-[0.99] transition-all"
+        >
+          <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">search</span>
+          <span className="flex-1 min-w-0">
+            <span className="block font-body text-sm font-semibold text-on-surface">{t('diet.sectionTitle')}</span>
+            <span className="block font-body text-xs text-on-surface-variant/70">{t('dietary.lookUpFood')}</span>
+          </span>
+          <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+        </button>
+        <button
+          onClick={() => {
+            track(EVENTS.CTA_CLICKED, { cta_id: 'dietary_to_meals', route_name: 'dietary_guidance' })
+            navigate('/meals')
+          }}
+          className="flex items-center gap-3 bg-surface-container-low rounded-2xl p-3.5 text-left active:scale-[0.99] transition-all"
+        >
+          <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">restaurant_menu</span>
+          <span className="flex-1 min-w-0">
+            <span className="block font-body text-sm font-semibold text-on-surface">{t('meals.title')}</span>
+            <span className="block font-body text-xs text-on-surface-variant/70">{t('meals.entryHelp')}</span>
+          </span>
+          <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+        </button>
+      </div>
+
       {/* Dosha tabs */}
       <div className="px-5 mt-4 flex gap-2 stagger-2">
         {['vata', 'pitta', 'kapha'].map(d => (

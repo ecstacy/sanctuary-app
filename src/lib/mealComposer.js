@@ -111,6 +111,34 @@ export function explainIdea(ingredients, dosha) {
 }
 
 /**
+ * Templates that are `kind: 'practice'` — dinacharya observances rather than
+ * food, so they are excluded from `composeMeals` entirely and surfaced here
+ * instead.
+ *
+ * Same gate and same safety filter as meals: unreviewed rows are invisible,
+ * and a practice whose core ingredient the user excludes is not shown. Honey
+ * in lukewarm water is not offered to someone who has excluded honey, however
+ * traditional the practice is.
+ *
+ * @param {{dietPrefs?: object}} [ctx]
+ */
+export function dailyPractices(ctx = {}) {
+  const dietPrefs = ctx.dietPrefs || {}
+  return ALL_MEAL_TEMPLATES
+    .filter((tpl) => tpl.reviewStatus === 'reviewed' && tpl.kind === 'practice')
+    .map((tpl) => ({ tpl, core: tpl.coreIds.map(getIngredient) }))
+    .filter(({ core }) => core.every(Boolean))
+    .filter(({ core }) => !core.some((i) => exclusionFor(i, dietPrefs).excluded))
+    .map(({ tpl, core }) => ({
+      id:    tpl.id,
+      name:  tpl.name,
+      prep:  tpl.prep || null,
+      slots: tpl.slots,
+      core:  core.map((i) => ({ id: i.id, name: i.name })),
+    }))
+}
+
+/**
  * @param {object}   ctx
  * @param {string}   [ctx.userId]
  * @param {Date}     [ctx.now]

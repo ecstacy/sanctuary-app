@@ -32,11 +32,11 @@ import MedicalDisclaimer from '../components/MedicalDisclaimer'
 import useScrollDepth from '../hooks/useScrollDepth'
 
 function Chip({ selected, label, onClick, tone = 'neutral' }) {
-  const base = 'px-3.5 py-2 rounded-full font-body text-sm transition-all active:scale-95 border'
+  const base = 'min-h-11 px-4 inline-flex items-center rounded-full font-body text-sm transition-all active:scale-95 border'
   const styles = selected
     ? tone === 'alert'
       ? 'bg-error-container/70 text-on-error-container border-transparent'
-      : 'bg-primary-fixed text-primary border-transparent'
+      : 'bg-primary-container text-on-primary-container border-transparent'
     : 'bg-surface-container-low text-on-surface-variant border-outline-variant/30'
   return (
     <button

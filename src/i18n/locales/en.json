@@ -908,7 +908,8 @@
     "safetyAria": "Safety considerations",
     "doshaClock": "The Dosha Clock",
     "sourceLabel": "Source:",
-    "clockSource": "Source: Charaka Samhita Sutrasthana 5 (primary) + Sutrasthana 7 (natural urges) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel)."
+    "clockSource": "Source: Charaka Samhita Sutrasthana 5 (primary) + Sutrasthana 7 (natural urges) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel).",
+    "foodPractices": "Food practices"
   },
   "dietary": {
     "goBack": "Go back",
@@ -924,7 +925,8 @@
     "seasonalNote": "Seasonal Note",
     "sixTastes": "The Six Tastes (Charaka Reference)",
     "unknownDosha": "Unknown dosha: {{dosha}}",
-    "sourceLabel": "Source:"
+    "sourceLabel": "Source:",
+    "lookUpFood": "Look up any food, with its source"
   },
   "recommendations": {
     "goBack": "Go back",
@@ -1632,6 +1634,10 @@
     "balancedBy": "Traditionally balanced with {{list}}.",
     "kind": {
       "preparation": "Component"
+    },
+    "card": {
+      "seeMore": "See today's other ideas",
+      "seeMorePlus": "See more with Plus"
     }
   }
 }
