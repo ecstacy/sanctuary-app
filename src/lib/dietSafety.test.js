@@ -18,16 +18,35 @@ import { INGREDIENTS, ALL_INGREDIENTS } from '../data/ayurveda/ingredients'
 import { getIngredient, searchIngredients, coverageStats, suitabilityFor } from './ingredients'
 import { SUITABILITY } from './doshaSemantics'
 
+// The set a human actually fact-checked against Charaka — batch 1, signed off
+// in docs/diet-review-batch-1.md. This list is the gate's memory: a new entry
+// appearing here without a corresponding review is a failing test, not a
+// silent ship. When batch 2 is reviewed, add its ids here and nowhere else.
+const REVIEWED_BATCH_1 = [
+  'basmatiRice',
+  'oats',
+  'ghee',
+  'yoghurt',
+  'gingerFresh',
+  'gingerDry',
+  'mungDal',
+  'ryeBread',
+  'coffee',
+]
+
 describe('the review gate — unreviewed facts must not reach users', () => {
-  it('every seeded entry is still draft (nobody has flipped a flag unverified)', () => {
+  it('only entries a human signed off are marked reviewed', () => {
     const shipped = ALL_INGREDIENTS.filter((i) => i.reviewStatus === 'reviewed')
     expect(
-      shipped.map((i) => i.id),
-      'entries marked reviewed must have been fact-checked against Charaka by a human',
-    ).toEqual([])
+      shipped.map((i) => i.id).sort(),
+      'an entry marked reviewed but absent from batch 1 was never fact-checked against Charaka',
+    ).toEqual([...REVIEWED_BATCH_1].sort())
   })
 
   it('getIngredient hides draft rows entirely', () => {
+    // Simulate an unreviewed row rather than depending on one existing: once
+    // every seeded entry is reviewed, the gate still has to work for batch 2.
+    INGREDIENTS.ghee.reviewStatus = 'draft'
     expect(INGREDIENTS.ghee).toBeTruthy()          // exists in the dataset
     expect(getIngredient('ghee')).toBeNull()       // but is invisible to the app
   })
@@ -35,31 +54,32 @@ describe('the review gate — unreviewed facts must not reach users', () => {
   it('an unknown id and an unreviewed id are indistinguishable to callers', () => {
     // Deliberate: a draft must behave exactly as if it does not exist, so no
     // caller can special-case its way around the gate.
+    INGREDIENTS.ghee.reviewStatus = 'draft'
     expect(getIngredient('ghee')).toBe(getIngredient('nonexistentFood'))
-  })
-
-  it('search returns nothing while the dataset is unreviewed', () => {
-    expect(searchIngredients('ghee').results).toEqual([])
-    expect(searchIngredients('ghee').coverageMiss).toBe(true)
   })
 
   it('coverage stats report the gate honestly', () => {
     const s = coverageStats()
     expect(s.total).toBeGreaterThan(0)
-    expect(s.reviewed).toBe(0)
-    expect(s.draft).toBe(s.total)
+    expect(s.reviewed).toBe(REVIEWED_BATCH_1.length)
+    expect(s.reviewed + s.draft).toBe(s.total)
   })
+
+  afterEach(() => { INGREDIENTS.ghee.reviewStatus = 'reviewed' })
 })
 
 describe('the gate opens correctly once a row is reviewed', () => {
-  afterEach(() => { INGREDIENTS.ghee.reviewStatus = 'draft' })
-
-  it('a reviewed row becomes visible to lookup and search', () => {
-    INGREDIENTS.ghee.reviewStatus = 'reviewed'
-    // Note: the module caches its reviewed list at import, so this exercises
-    // getIngredient's per-call check rather than the cached search list.
+  it('a reviewed row is visible to lookup and to search', () => {
     expect(getIngredient('ghee')).toBeTruthy()
     expect(getIngredient('ghee').name).toBe('Ghee')
+    expect(searchIngredients('ghee').results.map((i) => i.id)).toContain('ghee')
+    expect(searchIngredients('ghee').coverageMiss).toBe(false)
+  })
+
+  it('a food outside the reference reports a coverage miss, never a guess', () => {
+    const { results, coverageMiss } = searchIngredients('bratwurst')
+    expect(results).toEqual([])
+    expect(coverageMiss).toBe(true)
   })
 })
 

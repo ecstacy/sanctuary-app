@@ -19,11 +19,15 @@
 //
 //  ── THE REVIEW GATE ────────────────────────────────────────────────────────
 //  `reviewStatus: 'draft'` entries are INVISIBLE to the app. Only 'reviewed'
-//  rows are returned by the accessors in lib/ingredients.js. Everything here
-//  starts as draft: these were drafted from the classical framework and have
-//  NOT yet been fact-checked against Charaka by a human. That check is the
-//  gate, and it is the difference between a reference and a plausible-sounding
-//  guess. Do not flip a flag you have not verified.
+//  rows are returned by the accessors in lib/ingredients.js. A new entry is
+//  drafted from the classical framework and has NOT been fact-checked against
+//  Charaka by a human — that check is the gate, and it is the difference
+//  between a reference and a plausible-sounding guess. Do not flip a flag you
+//  have not verified.
+//
+//  Batch 1 (the 9 rows below) was reviewed and signed off on 2026-07-21; see
+//  docs/diet-review-batch-1.md. dietSafety.test.js pins that approved id set,
+//  so a future entry cannot reach users by quietly being born 'reviewed'.
 //
 //  ── SOURCE POLICY ──────────────────────────────────────────────────────────
 //  Same as dietary.js: paraphrase the Sanskrit verses and pre-1923 English
@@ -50,7 +54,11 @@
  * @property {string[]} aliases       Search synonyms incl. common regional names
  * @property {FoodCategory} category
  * @property {Taste[]}  rasa          Primary tastes
- * @property {'heating'|'cooling'} virya   Potency (uṣṇa / śīta)
+ * @property {'heating'|'cooling'|'neutral'} virya
+ *   Potency (uṣṇa / śīta). `'neutral'` was added after review batch 1: the
+ *   classical pair is heating/cooling, but property-derived non-classical
+ *   foods genuinely sit between (cooked oats), and forcing them to one pole
+ *   overstates what we know.
  * @property {'sweet'|'sour'|'pungent'} vipaka  Post-digestive effect
  * @property {string[]} guna          Qualities: 'light','heavy','oily','dry','sharp'…
  * @property {{vata:-1|0|1, pitta:-1|0|1, kapha:-1|0|1}} doshaEffect  −1 pacifies / +1 aggravates
@@ -61,6 +69,11 @@
  * @property {string}   [whyAvoid]
  * @property {string[]} [combosToAvoid]  viruddha āhāra — incompatible combinations
  * @property {string[]} [cautions]    FLAGS, not diagnoses: 'pregnancy','acid_reflux'…
+ * @property {string}   [cautionNote]
+ *   Added after review batch 1. A bare flag can't distinguish a *classical
+ *   contraindication* from a *practical, symptom-based* caution, and conflating
+ *   them overstates the tradition — flagging ginger for pregnancy as though
+ *   Charaka forbade it would be wrong. Use this to say which kind it is.
  * @property {string[]} [allergens]   Canonical allergen keys — see lib/dietSafety.js
  * @property {{text:'CS'|'HYP'|'modern', verse?:string, note?:string}} source
  * @property {'draft'|'reviewed'} reviewStatus  Only 'reviewed' is ever shown
@@ -88,7 +101,7 @@ export const INGREDIENTS = {
     preparation:
       'Well-cooked and moist suits Vata best; drier preparations suit Kapha.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -98,21 +111,24 @@ export const INGREDIENTS = {
     aliases: ['oatmeal', 'porridge', 'haferflocken'],
     category: 'grain',
     rasa: ['sweet'],
-    virya: 'heating',
+    // Review batch 1: was 'heating' — corrected to neutral. Cooked oats are at
+    // most mildly warming, and claiming a heating potency overstated the
+    // derivation. This correction is what added 'neutral' to the schema.
+    virya: 'neutral',
     vipaka: 'sweet',
-    guna: ['heavy', 'oily'],
+    guna: ['heavy', 'soft_when_cooked', 'nourishing'],
     doshaEffect: { vata: -1, pitta: 0, kapha: 1 },
     bestTime: ['morning'],
     bestSeason: ['autumn', 'winter'],
     whyFavor:
-      'Warm, moist and grounding — a good winter breakfast for Vata. Cooked oats are far easier to digest than raw muesli.',
-    whyAvoid: 'Heavy and moist, so it can add to Kapha sluggishness in spring.',
+      'Warm, soft and grounding — a good winter breakfast for Vata. Cooked oats are far easier to digest than raw muesli.',
+    whyAvoid: 'Heavy and nourishing, so it can add to Kapha sluggishness in spring.',
     allergens: ['gluten'],
     source: {
       text: 'modern',
-      note: 'Not in the classical corpus. Classified from properties: sweet rasa, heavy and oily guna, warming when cooked.',
+      note: 'Not in the classical corpus. Derived from properties: sweet rasa, heavy and nourishing guna, neutral to mildly warming when cooked.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -131,11 +147,19 @@ export const INGREDIENTS = {
     doshaEffect: { vata: -1, pitta: -1, kapha: 1 },
     bestTime: ['midday'],
     whyFavor:
-      'Charaka treats ghee as the foremost of the fats — it carries the qualities of whatever it is cooked with inward, kindles digestion without overheating, and settles both Vata and Pitta.',
+      'Charaka treats ghee as the foremost of the fats — it kindles digestion without overheating, and settles both Vata and Pitta.',
     whyAvoid: 'Heavy and oily, so excess adds to Kapha.',
     allergens: ['dairy'],
-    source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 27',
+      // Review batch 1: the *yogavahi* framing (that ghee carries the
+      // qualities of whatever it is cooked with) was removed — it is a later
+      // classical/commentarial concept, not something Sutrasthana 27 states.
+      // The properties and dosha effects below are the classical description.
+      note: 'Properties and dosha effects per Sutrasthana 27. The yogavahi (carrier) attribute is later commentary and is deliberately not claimed here.',
+    },
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -157,38 +181,85 @@ export const INGREDIENTS = {
     preparation:
       'Traditionally taken thinned and spiced (as buttermilk/lassi) rather than plain and cold.',
     combosToAvoid: [
-      'Fruit — a classical incompatible combination (viruddha)',
+      'Fruit — widely taught as an incompatible pairing (viruddha)',
       'Fish',
-      'Hot/cooked meals at night',
+      'Eating it at night',
     ],
     allergens: ['dairy'],
     cautions: ['acid_reflux'],
-    source: { text: 'CS', verse: 'Sutrasthana 7' },
-    reviewStatus: 'draft',
-    confidence: 'high',
+    cautionNote: 'Practical, symptom-based — not a classical contraindication.',
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 7',
+      // Review batch 1: downgraded to confidence 'medium'. Charaka does treat
+      // dadhi and viruddha āhāra, but this SPECIFIC list of incompatible
+      // pairings reflects later Ayurvedic interpretation as much as
+      // Sutrasthana 7. Rather than assert it as classical, we present it as
+      // commonly taught and drop the confidence.
+      note: 'Properties follow the classical description of dadhi. The specific incompatibility list reflects later interpretation as much as Sutrasthana 7 — hence medium confidence.',
+    },
+    reviewStatus: 'reviewed',
+    confidence: 'medium',
   },
 
   // ── Spices ───────────────────────────────────────────────────────────────
-  ginger: {
-    id: 'ginger',
+  // Review batch 1 split `ginger` into fresh and dry. The tradition treats
+  // them as distinct dravyas because drying materially changes the qualities
+  // and the therapeutic use — NOT because vipaka differs (both are madhura).
+  gingerFresh: {
+    id: 'gingerFresh',
     name: 'Ginger (fresh)',
     sanskrit: 'Ardraka',
     devanagari: 'आर्द्रक',
-    aliases: ['adrak', 'fresh ginger', 'ingwer'],
+    aliases: ['ginger', 'adrak', 'fresh ginger', 'ingwer'],
     category: 'spice',
     rasa: ['pungent'],
     virya: 'heating',
     vipaka: 'sweet',
-    guna: ['light', 'oily', 'sharp'],
+    guna: ['light', 'slightly_unctuous', 'sharp'],
     doshaEffect: { vata: -1, pitta: 1, kapha: -1 },
     bestTime: ['morning', 'midday'],
     bestSeason: ['autumn', 'winter'],
     whyFavor:
       'The classical digestive kindler — pungent and warming, it lifts a dull appetite and clears Kapha heaviness.',
     whyAvoid: 'Heating and sharp, so it can inflame an already-hot Pitta.',
-    cautions: ['acid_reflux', 'pregnancy'],
+    // Review batch 1: pregnancy caution REMOVED. It is not an explicit Charaka
+    // caution for ardraka, and modern evidence supports culinary amounts and
+    // modest medicinal doses for pregnancy-related nausea. Flagging it would
+    // have discouraged something commonly recommended.
+    cautions: ['acid_reflux'],
+    cautionNote:
+      'Practical and symptom-based, not a classical contraindication — sharp, heating foods can aggravate reflux.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
+    confidence: 'high',
+  },
+
+  gingerDry: {
+    id: 'gingerDry',
+    name: 'Ginger (dry)',
+    sanskrit: 'Shunthi',
+    devanagari: 'शुण्ठी',
+    aliases: ['dry ginger', 'dried ginger', 'sonth', 'ground ginger', 'ginger powder'],
+    category: 'spice',
+    rasa: ['pungent'],
+    virya: 'heating',
+    vipaka: 'sweet',            // same as fresh — drying changes guna, not vipaka
+    guna: ['light', 'dry', 'sharp'],
+    doshaEffect: { vata: -1, pitta: 1, kapha: -1 },
+    bestTime: ['morning', 'midday'],
+    bestSeason: ['autumn', 'winter'],
+    whyFavor:
+      'Drying makes it sharper and more penetrating than fresh — the stronger choice for clearing Kapha heaviness and a sluggish appetite.',
+    whyAvoid:
+      'More intensely heating and drying than fresh ginger, so it presses harder on Pitta.',
+    preparation:
+      'Distinct from fresh ginger: drier and more concentrated, so less goes further.',
+    cautions: ['acid_reflux'],
+    cautionNote:
+      'Practical and symptom-based, not a classical contraindication.',
+    source: { text: 'CS', verse: 'Sutrasthana 27' },
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -211,7 +282,7 @@ export const INGREDIENTS = {
     preparation:
       'Split and well-cooked with warming spices keeps it from unsettling Vata.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -228,13 +299,14 @@ export const INGREDIENTS = {
     doshaEffect: { vata: 1, pitta: 0, kapha: 1 },
     whyAvoid:
       'Dry and heavy — the combination tends to unsettle Vata digestion and sit heavily for Kapha, especially cold.',
-    preparation: 'Toasted and buttered offsets the dryness for Vata.',
+    preparation:
+      'Toasted and buttered offsets the dryness for Vata. Sourdough fermentation adds a mild sour note and improves digestibility, easing the Vata aggravation slightly — but not enough to reclassify the potency as heating.',
     allergens: ['gluten'],
     source: {
       text: 'modern',
       note: 'Not in the classical corpus. Derived from properties: dry and heavy guna, cooling, with the astringency of rye and the sourness of the leaven.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -256,7 +328,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Not in the classical corpus. Derived from properties: bitter/astringent rasa, sharp and drying guna, heating potency.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 }
