@@ -36,6 +36,7 @@ const STATIC = {
   '/routine':          'routine',
   '/dietary':          'dietary_guidance',
   '/dinacharya':       'dinacharya',
+  '/diet-preferences': 'diet_prefs',
 }
 
 // Patterns for parameterized routes. First match wins. Each tester returns

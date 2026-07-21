@@ -13,6 +13,8 @@ import { useIsPremium } from '../hooks/useIsPremium'
 import { isAsanaFree, isPranayamaFree } from '../lib/premiumTiers'
 import PaywallSheet from '../components/PaywallSheet'
 import { searchIngredients, coverageStats, REVIEWED_INGREDIENTS } from '../lib/ingredients'
+import { exclusionFor } from '../lib/dietSafety'
+import { useDietPrefs } from '../hooks/useDietPrefs'
 
 
 const ALL_ASANAS = Object.values(ASANAS)
@@ -30,7 +32,8 @@ const FOOD_ICONS = {
 // One reviewed ingredient in the Discover search results. Shows the
 // confidence badge inline: whether a claim is classically cited or derived
 // from properties is part of the result, not a detail-page footnote.
-function FoodResultRow({ ingredient, onTap, t }) {
+function FoodResultRow({ ingredient, onTap, t, exclusion }) {
+  const excluded = exclusion?.excluded
   return (
     <button
       onClick={onTap}
@@ -46,9 +49,26 @@ function FoodResultRow({ ingredient, onTap, t }) {
         {ingredient.sanskrit && (
           <p className="font-body text-xs text-on-surface-variant/60">{ingredient.sanskrit}</p>
         )}
-        <span className="inline-block mt-1 px-2 py-0.5 rounded-full bg-surface-container-high font-label text-[8px] uppercase tracking-wide text-on-surface-variant">
-          {t(`diet.confidence.${ingredient.confidence}`)}
-        </span>
+        <div className="flex flex-wrap items-center gap-1.5 mt-1">
+          <span className="px-2 py-0.5 rounded-full bg-surface-container-high font-label text-[8px] uppercase tracking-wide text-on-surface-variant">
+            {t(`diet.confidence.${ingredient.confidence}`)}
+          </span>
+          {/* An excluded food still appears in SEARCH — hiding it would look
+              like a coverage gap and leave the user wondering. It is labelled
+              instead, and the allergen wording stays distinct from the
+              preference wording, as everywhere else. */}
+          {excluded && (
+            <span className={`px-2 py-0.5 rounded-full font-label text-[8px] uppercase tracking-wide ${
+              exclusion.reason === 'allergen'
+                ? 'bg-error-container/70 text-on-error-container'
+                : 'bg-surface-container-high text-on-surface-variant'
+            }`}>
+              {exclusion.reason === 'allergen'
+                ? t('diet.badge.allergen', { key: t(`diet.allergens.${exclusion.key}`, exclusion.key) })
+                : t('diet.badge.pattern',  { key: t(`diet.patterns.${exclusion.key}`,  exclusion.key) })}
+            </span>
+          )}
+        </div>
       </div>
       <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
     </button>
@@ -346,6 +366,10 @@ export default function DiscoverPage() {
 
   const coverage = useMemo(() => coverageStats(), [])
 
+  // The user's safety filter, applied to what search shows. Read through the
+  // hook so this surface can never drift from the stored shape.
+  const { prefs: dietPrefs } = useDietPrefs()
+
   function handleSearch(q) {
     const query = q || searchQuery
     if (query.trim().length < 2) return
@@ -474,6 +498,7 @@ export default function DiscoverPage() {
                   key={ing.id}
                   ingredient={ing}
                   t={t}
+                  exclusion={exclusionFor(ing, dietPrefs)}
                   onTap={() => navigate(`/ingredient/${ing.id}`)}
                 />
               ))}

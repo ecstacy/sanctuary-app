@@ -1097,7 +1097,7 @@
     "introBody": "Im Ayurveda ist dein Dosha deine einzigartige Blaupause — die elementaren Kräfte, die deinen Körper, Geist und deine Seele formen.",
     "honestyPrimer": "Antworte danach, wie du den Großteil deines Lebens warst — nicht danach, wie du dich diese Woche fühlst.",
     "introMeta": "15 Fragen · etwa 90 Sekunden",
-    "consentText": "Ich stimme zu, dass The Sanctuary meine Dosha-Ergebnisse und Wohlbefindens-Angaben (Stimmung, Energie, Schlaf) verarbeitet, um meine Praxis zu personalisieren, wie in der Datenschutzerklärung beschrieben. Dies sind gesundheitsbezogene Daten; ich kann meine Einwilligung jederzeit in den Einstellungen widerrufen.",
+    "consentText": "Ich willige ein, dass The Sanctuary meine Dosha-Ergebnisse, Wohlbefinden-Angaben (Stimmung, Energie, Schlaf) sowie von mir gespeicherte Ernährungseinschränkungen oder Allergien verarbeitet, um Praxis und Ernährungsempfehlungen zu personalisieren – wie in der Datenschutzerklärung beschrieben. Es handelt sich um gesundheitsbezogene Daten; ich kann meine Einwilligung jederzeit in den Einstellungen widerrufen.",
     "startCta": "Mein Dosha entdecken",
     "keepCurrent": "Aktuelles Ergebnis behalten: {{dosha}}",
     "calc": {
@@ -1573,6 +1573,28 @@
       "unctuous": "Ölig",
       "subtle_penetrating": "Fein durchdringend",
       "moist": "Feucht"
+    },
+    "badge": {
+      "allergen": "Enthält {{key}}",
+      "pattern": "Nicht {{key}}"
     }
+  },
+  "dietPrefs": {
+    "title": "Was nicht auf deinen Teller soll",
+    "intro": "Alles, was du hier einträgst, wird aus jedem Ernährungsvorschlag entfernt — nicht nur niedriger gewichtet, sondern entfernt. Du kannst es jederzeit ändern.",
+    "consentTitle": "Bevor wir das speichern",
+    "consentCta": "Ich stimme zu — Einstellungen speichern",
+    "allergensTitle": "Allergien & Unverträglichkeiten",
+    "allergensHelp": "Gilt als absoluter Filter. Ein ayurvedisches „empfehlenswert“ setzt sich nie über eine Allergie hinweg.",
+    "patternsTitle": "Wie du isst",
+    "patternsHelp": "Vorlieben und Ernährungsformen. Werden genauso gefiltert, aber als Entscheidung beschrieben, nicht als Sicherheitsgrenze.",
+    "saving": "Wird gespeichert…",
+    "savedSummary": "Gespeichert — {{allergens}} Allergien, {{patterns}} Vorlieben.",
+    "notSetYet": "Noch nichts eingetragen. Eine leere Liste heißt, dass du uns nichts gesagt hast — nicht, dass nichts zutrifft.",
+    "syncFailed": "Wir konnten das nicht mit deinem Konto synchronisieren, es ist nur auf diesem Gerät gespeichert. Dein Filter funktioniert hier weiterhin. Wir versuchen es beim nächsten Öffnen erneut.",
+    "notExhaustive": "Diese Liste deckt die häufigsten Einschränkungen ab, nicht jede mögliche. Fehlt etwas, das du brauchst, prüfe die Zutaten bitte selbst — das sagen wir lieber deutlich, als den Eindruck zu erwecken, die Liste sei vollständig.",
+    "entry": "Ernährungseinstellungen",
+    "entryHelp": "Allergien und Ernährungsweise",
+    "consentNeededHint": "Stimme oben zu, dann speichern wir das — bis dahin verlässt nichts über deine Gesundheit diesen Bildschirm."
   }
 }

@@ -1097,7 +1097,7 @@
     "introBody": "In Ayurveda, your Dosha is your unique blueprint — the elemental forces that shape your body, mind, and spirit.",
     "honestyPrimer": "Answer based on how you've been most of your life — not how you feel this week.",
     "introMeta": "15 questions · about 90 seconds",
-    "consentText": "I consent to The Sanctuary processing my dosha results and wellness inputs (mood, energy, sleep) to personalize my practice, as described in the Privacy Policy. This is health-related data; I can withdraw consent anytime in Settings.",
+    "consentText": "I consent to The Sanctuary processing my dosha results, wellness inputs (mood, energy, sleep) and any dietary restrictions or allergies I choose to save, to personalize my practice and food guidance, as described in the Privacy Policy. This is health-related data; I can withdraw consent anytime in Settings.",
     "startCta": "Discover My Dosha",
     "keepCurrent": "Keep current result: {{dosha}}",
     "calc": {
@@ -1573,6 +1573,28 @@
       "unctuous": "Unctuous",
       "subtle_penetrating": "Subtle, penetrating",
       "moist": "Moist"
+    },
+    "badge": {
+      "allergen": "Contains {{key}}",
+      "pattern": "Not {{key}}"
     }
+  },
+  "dietPrefs": {
+    "title": "Food to keep off your plate",
+    "intro": "Anything you record here is removed from every food suggestion we make — not ranked lower, removed. You can change it any time.",
+    "consentTitle": "Before we save this",
+    "consentCta": "I agree — save my preferences",
+    "allergensTitle": "Allergies & intolerances",
+    "allergensHelp": "Treated as an absolute filter. An Ayurvedic “favour this” never overrides an allergy.",
+    "patternsTitle": "How you eat",
+    "patternsHelp": "Preferences and observances. Filtered the same way, but described as a choice rather than a safety limit.",
+    "saving": "Saving…",
+    "savedSummary": "Saved — {{allergens}} allergies, {{patterns}} preferences.",
+    "notSetYet": "Nothing recorded yet. An empty list means you haven't told us — not that nothing applies.",
+    "syncFailed": "We couldn't sync this to your account, so it's saved on this device only. Your filter still works here. We'll retry next time you open the app.",
+    "notExhaustive": "This list covers the most common restrictions, not every possible one. If something you need isn't here, please check ingredients yourself — we'd rather say that plainly than let the list imply it's complete.",
+    "entry": "Diet preferences",
+    "entryHelp": "Allergies and how you eat",
+    "consentNeededHint": "Agree above and we'll save that — until then nothing about your health leaves this screen."
   }
 }

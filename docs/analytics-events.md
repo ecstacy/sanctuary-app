@@ -513,8 +513,11 @@ Spec'd with the feature (docs/diet-feature-plan.md §8); wired per chunk.
   property-derived (`medium`) rather than classically cited (`high`).
   `excluded_reason` (`allergen` | `pattern` | null) shows how often safety
   filtering changes what someone sees.
-- **`diet_prefs_set`** — `{allergen_count*, pattern_count*}`. Counts only —
-  **never the specific allergens**, which are health data.
+- **`diet_prefs_set`** — `{allergen_count*, pattern_count*, surface*}`. Counts
+  only — **never the specific allergens**, which are GDPR Art. 9 health data.
+  Enforced in `useDietPrefs.save()`, which is the only write path, so no
+  surface can send the keys by accident. `surface` is where the edit happened
+  (`diet_prefs`), not what was edited.
 - **`diet_safety_triggered`** — `{categories*, surface*}`. Records that a
   seek-help path fired, by **category only** (`pregnancy`/`medical`/
   `medication`/`disorderedEating`) — never the text that triggered it.

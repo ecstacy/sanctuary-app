@@ -34,6 +34,7 @@ const RecommendationsPage = lazy(() => import('./pages/RecommendationsPage'))
 const DoshaProfilePage = lazy(() => import('./pages/DoshaProfilePage'))
 const DietaryGuidancePage = lazy(() => import('./pages/DietaryGuidancePage'))
 const IngredientDetailPage = lazy(() => import('./pages/IngredientDetailPage'))
+const DietPrefsPage = lazy(() => import('./pages/DietPrefsPage'))
 const DinacharyaPage = lazy(() => import('./pages/DinacharyaPage'))
 const RoutinePage = lazy(() => import('./pages/RoutinePage'))
 const PracticePage = lazy(() => import('./pages/PracticePage'))
@@ -337,6 +338,7 @@ function AppRoutes() {
               the page shows the food's properties WITHOUT a personal verdict,
               and invites the dosha quiz. */}
           <Route path="/ingredient/:id" element={<IngredientDetailPage />} />
+          <Route path="/diet-preferences" element={<PrivateRoute><DietPrefsPage /></PrivateRoute>} />
           <Route path="/dinacharya" element={<PrivateRoute><DinacharyaPage /></PrivateRoute>} />
           <Route path="/routine" element={<PrivateRoute><RoutinePage /></PrivateRoute>} />
           <Route path="/asana/:id" element={<PrivateRoute><AsanaDetailPage /></PrivateRoute>} />
