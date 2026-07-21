@@ -51,17 +51,53 @@ describe('the review gate reaches the composer', () => {
 describe('safety filtering happens BEFORE ranking', () => {
   it('drops a dish whose core contains an allergen, however well it scores', () => {
     withReviewedTemplates(() => {
-      // Kitchari is core rice + mung + ghee and is the best-scoring midday
-      // idea for Vata. A dairy allergy must remove it outright.
-      const open = composeMeals({ now: at(13), targetDosha: 'vata', count: 99 })
-      expect(open.ideas.map((i) => i.id)).toContain('kitchari')
+      // buttermilkRice is core rice + buttermilk. A dairy allergy must remove
+      // it outright, no matter how well it otherwise scores.
+      const open = composeMeals({ now: at(13), season: 'summer', count: 99 })
+      expect(open.ideas.map((i) => i.id)).toContain('buttermilkRice')
 
       const filtered = composeMeals({
+        now: at(13), season: 'summer', count: 99,
+        dietPrefs: { allergens: ['dairy'] },
+      })
+      expect(filtered.ideas.map((i) => i.id)).not.toContain('buttermilkRice')
+    })
+  })
+
+  it('does NOT drop a dish when the allergen is only a garnish', () => {
+    // The core/optional rule, agreed at review 2026-07-21: core is bulk and
+    // identity; fats and spices are optional unless the dish is nothing
+    // without them. Kitchari is rice + dal, so a dairy-allergic user gets
+    // kitchari WITHOUT the ghee rather than losing the dish. Before the rule,
+    // ghee sat in core (because it was in the dish's name) and they lost it.
+    withReviewedTemplates(() => {
+      const out = composeMeals({
         now: at(13), targetDosha: 'vata', count: 99,
         dietPrefs: { allergens: ['dairy'] },
       })
-      expect(filtered.ideas.map((i) => i.id)).not.toContain('kitchari')
+      const dish = out.ideas.find((i) => i.id === 'kitchari')
+      expect(dish, 'kitchari must survive a dairy allergy').toBeTruthy()
+      expect(dish.optional.map((o) => o.id)).not.toContain('ghee')
+      expect(dish.core.map((c) => c.id)).toEqual(['mungDal', 'basmatiRice'])
     })
+  })
+
+  it('no template name promises an ingredient that can be filtered away', () => {
+    // Corollary of the rule: if a name mentions an optional ingredient, a
+    // restricted user is shown a dish whose name references something we just
+    // removed. Checked mechanically for the fats and spices most likely to be
+    // filtered — a cheap guard against the next name drifting back.
+    const RISKY = { ghee: 'ghee', milk: 'milk', butter: 'butter', sesameOil: 'sesame' }
+    for (const t of ALL_MEAL_TEMPLATES) {
+      for (const [id, word] of Object.entries(RISKY)) {
+        if ((t.optionalIds || []).includes(id)) {
+          expect(
+            t.name.toLowerCase(),
+            `${t.id} names "${word}" but treats it as optional`,
+          ).not.toContain(word)
+        }
+      }
+    }
   })
 
   it('keeps a dish when only an OPTIONAL ingredient is excluded, minus that item', () => {

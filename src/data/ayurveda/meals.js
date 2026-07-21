@@ -31,10 +31,22 @@
 //  method.
 //
 //  ── CORE VS OPTIONAL ───────────────────────────────────────────────────────
-//  `coreIds` define the dish: remove one and it is a different meal, so if any
-//  core ingredient is filtered out (allergen, pattern) the WHOLE idea is
-//  dropped rather than silently served without it. `optionalIds` are additions
-//  that get individually filtered — a dish is not ruined by dropping them.
+//  If a CORE ingredient is filtered out (allergen, pattern) the WHOLE idea is
+//  dropped. If an OPTIONAL one is, the dish survives without it. So this split
+//  is a filtering decision, and it decides what a restricted user gets to see.
+//
+//  ⚠ THE RULE (agreed at review, 2026-07-21):
+//      core = the ingredients that carry the meal's BULK AND IDENTITY.
+//      Fats and spices are OPTIONAL unless the dish is nothing without them.
+//
+//  The first draft got this wrong in a specific and instructive way: things
+//  went in `core` because they appeared in the dish's NAME. "Porridge with
+//  ghee" had core ghee, so a dairy-allergic user lost the porridge entirely
+//  instead of being offered it without ghee. Six of fourteen were affected.
+//
+//  Corollary: a NAME must not promise an optional ingredient either, or the
+//  same user is shown a dish whose name references something we just removed.
+//  Several names were shortened for exactly this reason.
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
@@ -58,9 +70,9 @@ export const MEAL_TEMPLATES = {
   // ── Morning ───────────────────────────────────────────────────────────────
   spicedOatPorridge: {
     id: 'spicedOatPorridge',
-    name: 'Warm spiced oat porridge with ghee',
-    coreIds: ['oats', 'ghee'],
-    optionalIds: ['gingerDry', 'jaggery', 'almond'],
+    name: 'Warm spiced oat porridge',
+    coreIds: ['oats'],
+    optionalIds: ['ghee', 'gingerDry', 'jaggery', 'almond'],
     slots: ['morning'],
     seasons: ['autumn', 'winter'],
     prep: 'Cooked soft with plenty of liquid rather than eaten as raw muesli.',
@@ -79,9 +91,9 @@ export const MEAL_TEMPLATES = {
 
   ricePorridge: {
     id: 'ricePorridge',
-    name: 'Soft rice porridge with ghee',
-    coreIds: ['basmatiRice', 'ghee'],
-    optionalIds: ['gingerFresh', 'cumin'],
+    name: 'Soft rice porridge',
+    coreIds: ['basmatiRice'],
+    optionalIds: ['ghee', 'gingerFresh', 'cumin'],
     slots: ['morning', 'evening'],
     prep: 'Cooked well past the point of firmness, loose rather than fluffy.',
     reviewStatus: 'draft',
@@ -102,18 +114,24 @@ export const MEAL_TEMPLATES = {
   kitchari: {
     id: 'kitchari',
     name: 'Mung dal kitchari',
-    coreIds: ['mungDal', 'basmatiRice', 'ghee'],
-    optionalIds: ['gingerFresh', 'cumin', 'turmeric', 'asafoetida', 'corianderSeed'],
+    coreIds: ['mungDal', 'basmatiRice'],
+    optionalIds: ['ghee', 'gingerFresh', 'cumin', 'turmeric', 'asafoetida', 'corianderSeed'],
     slots: ['midday', 'evening'],
     prep: 'Cooked together until soft enough to need no chewing.',
     reviewStatus: 'draft',
   },
 
+  // ⚠ Applying the core/optional rule collapsed this into `kitchari`: same
+  // core, same slot, a subset of the same optional list. Kept as a draft (so
+  // invisible) rather than deleted, because dropping a template is the
+  // reviewer's call — but it should almost certainly go, and the composer
+  // would otherwise offer two suggestions that differ only in name. Raised in
+  // docs/diet-review-batch-3-meals.md.
   riceDalGhee: {
     id: 'riceDalGhee',
-    name: 'Rice and dal with ghee',
-    coreIds: ['basmatiRice', 'mungDal', 'ghee'],
-    optionalIds: ['cumin', 'turmeric', 'asafoetida'],
+    name: 'Rice and dal',
+    coreIds: ['basmatiRice', 'mungDal'],
+    optionalIds: ['ghee', 'cumin', 'turmeric', 'asafoetida'],
     slots: ['midday'],
     reviewStatus: 'draft',
   },
@@ -140,7 +158,7 @@ export const MEAL_TEMPLATES = {
 
   barleySoup: {
     id: 'barleySoup',
-    name: 'Barley and vegetable soup',
+    name: 'Barley soup',
     coreIds: ['barley'],
     optionalIds: ['blackPepper', 'gingerDry', 'spinach', 'onionCooked', 'turmeric'],
     slots: ['midday'],
@@ -161,11 +179,15 @@ export const MEAL_TEMPLATES = {
 
   potatoWithGhee: {
     id: 'potatoWithGhee',
-    name: 'Mashed potato with ghee and cumin',
-    coreIds: ['potato', 'ghee'],
-    optionalIds: ['cumin', 'blackPepper', 'asafoetida'],
+    name: 'Mashed potato',
+    coreIds: ['potato'],
+    optionalIds: ['ghee', 'cumin', 'blackPepper', 'asafoetida'],
     slots: ['midday'],
-    prep: 'Mashed with fat rather than baked dry.',
+    // Worth noting what the rule buys here: with ghee optional, the derived
+    // verdict for the core alone is "increases Vata" — which is TRUE of dry
+    // mashed potato. The old core-ghee version derived a gentler verdict that
+    // only held if you added the fat.
+    prep: 'Mashed with ghee or butter rather than baked dry — the fat is what offsets the dryness.',
     reviewStatus: 'draft',
   },
 
@@ -193,9 +215,9 @@ export const MEAL_TEMPLATES = {
 
   vegetableSoupSesame: {
     id: 'vegetableSoupSesame',
-    name: 'Warm vegetable soup with sesame oil',
-    coreIds: ['sesameOil', 'spinach'],
-    optionalIds: ['gingerFresh', 'cumin', 'blackPepper', 'onionCooked'],
+    name: 'Warm greens soup',
+    coreIds: ['spinach'],
+    optionalIds: ['sesameOil', 'gingerFresh', 'cumin', 'blackPepper', 'onionCooked'],
     slots: ['evening'],
     seasons: ['autumn', 'winter'],
     reviewStatus: 'draft',

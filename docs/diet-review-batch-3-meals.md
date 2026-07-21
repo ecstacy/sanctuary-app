@@ -6,6 +6,8 @@
 > a culinary question, not a classical one.
 >
 > All 14 are `draft`, so `/meals` currently shows nothing.
+> **Already re-sorted** against the core/optional rule you approved — the
+> entries below show their current state, not the first draft.
 > File: `src/data/ayurveda/meals.js`.
 
 ## Why there's so little to check
@@ -15,7 +17,7 @@ A template **asserts no Ayurvedic facts**. There is no `doshaEffect`, no
 enforces that. Everything the app says about a dish is **derived at runtime**
 from its ingredients, which you have already reviewed:
 
-> *Mung dal kitchari* → **Settles Vata** — mung dal, rice, ghee
+> *Mung dal kitchari* → **Settles Vata** — mung dal, rice
 
 That sentence is assembled from three reviewed rows. If a template could carry
 its own dosha rating, that rating could drift from the ingredient data
@@ -25,11 +27,10 @@ here are the ones a template is actually allowed to claim:
 1. **Is this a real dish** people actually eat?
 2. **Are the `coreIds` right** — is anything missing that would make it a
    different meal, or present that doesn't belong?
-3. **Is `core` vs `optional` correct?** This one has teeth: if a **core**
-   ingredient is filtered out by an allergy, the whole idea is dropped. If an
-   **optional** one is, the dish survives without it. Putting ghee in `core`
-   when it's really optional silently removes a dish from every dairy-allergic
-   user.
+3. **Is `core` vs `optional` correct?** Already re-sorted against the rule we
+   agreed (see the bottom of this doc) — this is a spot-check, not a full pass.
+   It has teeth: a filtered **core** ingredient drops the whole idea, a
+   filtered **optional** one just goes missing from it.
 4. **Is the slot right** (morning / midday / evening)?
 5. **Is the `prep` line true?** One line, a hint not a method — we deliberately
    ship no quantities or steps.
@@ -42,13 +43,11 @@ Anything you'd reject, just say why — as before, the *why* improves the next s
 
 ### Morning
 
-**1. `spicedOatPorridge` — Warm spiced oat porridge with ghee**
-core: oats, ghee · optional: dry ginger, jaggery, almond · autumn/winter
+**1. `spicedOatPorridge` — Warm spiced oat porridge**
+core: **oats** · optional: ghee, dry ginger, jaggery, almond · autumn/winter
 prep: *"Cooked soft with plenty of liquid rather than eaten as raw muesli."*
-→ **My doubt:** is **ghee core or optional?** I made it core because the dish is
-named for it, but that means anyone with a dairy allergy loses the porridge
-entirely rather than getting it without ghee. I think that's wrong and it
-should be optional. Your call.
+→ ✅ **Re-sorted.** Ghee moved to optional and dropped from the name, so a
+dairy-allergic user now gets the porridge without it.
 
 **2. `stewedAppleBreakfast` — Stewed apple with cardamom**
 core: appleStewed · optional: ghee, jaggery
@@ -56,9 +55,9 @@ core: appleStewed · optional: ghee, jaggery
 dataset** — it wasn't in batch 2. So the name promises an ingredient the app
 can't show or filter. Rename, or add cardamom in a later batch?
 
-**3. `ricePorridge` — Soft rice porridge with ghee**
-core: basmati rice, ghee · optional: fresh ginger, cumin · morning + evening
-→ Same core-ghee question as #1.
+**3. `ricePorridge` — Soft rice porridge**
+core: **basmati rice** · optional: ghee, fresh ginger, cumin · morning + evening
+→ ✅ **Re-sorted.** Ghee optional, dropped from the name.
 
 **4. `honeyWarmWater` — Honey with lukewarm water**
 core: honey · spring
@@ -70,16 +69,19 @@ it's the dataset's one outright prohibition.
 ### Midday
 
 **5. `kitchari` — Mung dal kitchari**
-core: mung dal, basmati rice, ghee · optional: fresh ginger, cumin, turmeric,
-asafoetida, coriander seed
-→ The reference dish. Core-ghee question applies again, though here it's more
-defensible.
+core: **mung dal, basmati rice** · optional: ghee, fresh ginger, cumin,
+turmeric, asafoetida, coriander seed
+→ ✅ **Re-sorted** to core rice + dal. This is the case that shows what the rule
+buys: a dairy-allergic user now gets kitchari without the ghee instead of
+losing the dish. There's a test for exactly this.
 
-**6. `riceDalGhee` — Rice and dal with ghee**
-core: basmati rice, mung dal, ghee · optional: cumin, turmeric, asafoetida
-→ **My doubt: is this just kitchari again?** Same three core ingredients. If
-they're not meaningfully different dishes, one should go — two near-identical
-suggestions makes the list look padded.
+**6. `riceDalGhee` — Rice and dal**
+core: **basmati rice, mung dal** · optional: ghee, cumin, turmeric, asafoetida
+→ 🔴 **The rule made this worse, and it now needs a decision.** After
+re-sorting, this is *identical* to `kitchari` — same core, same slot, a subset
+of the same optional list. The composer would offer two suggestions differing
+only in name. I've left it as a draft rather than deleting it, because dropping
+a template is your call, but I'd remove it.
 
 **7. `chickpeaCurry` — Spiced chickpeas with rice**
 core: chickpea, basmati rice · optional: asafoetida, cumin, fresh ginger,
@@ -95,11 +97,11 @@ core: wheat, spinach · optional: ghee, cumin, garlic, cooked onion
 → Note "sabzi" generally means any cooked vegetable; I've tied it to spinach
 because that's what the dataset has.
 
-**9. `barleySoup` — Barley and vegetable soup**
-core: barley · optional: black pepper, dry ginger, spinach, cooked onion,
+**9. `barleySoup` — Barley soup**
+core: **barley** · optional: black pepper, dry ginger, spinach, cooked onion,
 turmeric · spring
-→ **My doubt:** core is barley alone, so "vegetable soup" is a name whose
-vegetables are all optional. Honest, or misleading?
+→ ✅ **Renamed to "Barley soup."** The vegetables are all optional, so the old
+name promised something a filter could remove.
 
 **10. `buttermilkRice` — Rice with buttermilk**
 core: basmati rice, buttermilk · optional: cumin, coriander seed · summer
@@ -107,10 +109,15 @@ prep: *"Buttermilk thinned with water, not thick yoghurt."*
 → Meant as curd rice / dahi bhaat. Is the takra-not-yoghurt distinction worth
 making here, given your batch-2 note that classical takra is a whole class?
 
-**11. `potatoWithGhee` — Mashed potato with ghee and cumin**
-core: potato, ghee · optional: cumin, black pepper, asafoetida
-→ Built directly on your batch-2 preparation note (mashed with fat is the
-least Vata-provoking form). Does it read as a real meal or a side?
+**11. `potatoWithGhee` — Mashed potato**
+core: **potato** · optional: ghee, cumin, black pepper, asafoetida
+prep: *"Mashed with ghee or butter rather than baked dry — the fat is what
+offsets the dryness."*
+→ ✅ **Re-sorted and renamed to "Mashed potato."** Worth noting what the rule
+buys here: with ghee optional, the derived verdict for the core alone is
+**"increases Vata"** — which is *true* of dry mashed potato. The old core-ghee
+version derived a gentler verdict that only held if you actually added the fat.
+→ Still open: does this read as a meal or a side?
 
 ### Evening
 
@@ -127,29 +134,50 @@ prep: *"Warmed and spiced rather than drunk cold. Not taken with a salty or
 sour meal."*
 → The second clause encodes milk's viruddha combinations. Right place for it?
 
-**14. `vegetableSoupSesame` — Warm vegetable soup with sesame oil**
-core: sesame oil, spinach · optional: fresh ginger, cumin, black pepper,
+**14. `vegetableSoupSesame` — Warm greens soup**
+core: **spinach** · optional: sesame oil, fresh ginger, cumin, black pepper,
 cooked onion · autumn/winter
-→ **My doubt:** sesame oil as a *core* ingredient makes the dish sound like it's
-mostly oil. Probably should be optional with a vegetable as core.
+→ ✅ **Re-sorted** to core spinach, sesame oil optional; renamed to "Warm greens
+soup".
 
 ---
 
-## The pattern in my own doubts
+## ✅ The core/optional rule — agreed and applied 2026-07-21
 
-Six of the fourteen are the same question: **I've been putting things in `core`
-because they're in the dish's name, when `core` actually means "remove this and
-the whole suggestion disappears for anyone who can't eat it."** That's a
-filtering decision dressed up as a naming decision.
+> **core = the ingredients that carry the meal's bulk and identity.
+> Fats and spices are optional unless the dish is nothing without them.**
 
-If you agree, the rule is probably: **`core` = the ingredients that carry the
-meal's bulk and identity; fats and spices go in `optional` unless the dish is
-literally nothing without them.** Tell me and I'll re-sort all fourteen against
-that rule rather than case by case.
+All fourteen were re-sorted against it before you review them, rather than
+case by case. It's recorded at the top of `meals.js` and enforced by tests.
+
+**The corollary I hadn't seen when I proposed the rule:** a name mustn't
+promise an optional ingredient either. "Warm spiced oat porridge **with ghee**"
+shown to a dairy-allergic user, minus the ghee, is a dish whose name references
+something we just removed. Five names were shortened, and there's now a test
+that fails if a template names a fat it treats as optional.
+
+**What changed:** `spicedOatPorridge`, `ricePorridge`, `kitchari`,
+`riceDalGhee`, `potatoWithGhee`, `vegetableSoupSesame` (core), plus renames on
+those and `barleySoup`. Untouched: `stewedAppleBreakfast`, `honeyWarmWater`,
+`chickpeaCurry`, `chapatiSabzi`, `buttermilkRice`, `uradDalStew`, `spicedMilk`
+— their cores were already bulk-and-identity.
+
+## Still needing your call
+
+1. 🔴 **`riceDalGhee` is now identical to `kitchari`.** Delete it?
+2. **`stewedAppleBreakfast` names cardamom, which isn't in the dataset.**
+   Rename, or add cardamom in a later ingredient batch?
+3. **`honeyWarmWater` — is it a meal?** It reads more like a practice; it may
+   belong in dinacharya instead.
+4. **#7 `chickpeaCurry` and #12 `uradDalStew`:** both have prep lines saying
+   they *need* digestive spices, but under the rule every spice is optional, so
+   the app can suggest bare chickpeas or bare urad dal. The rule is right and I
+   don't want to special-case it — but is the `prep` line enough of a carrier
+   for that, or should heavy legumes get something stronger?
+5. **`potatoWithGhee`** — meal or side?
 
 ## Coverage note
 
 14 templates across 3 slots is thin — a Kapha user in summer will see the same
-few ideas repeatedly. That's deliberate for a first pass, and worth expanding
-once the *shape* is right. No point generating 40 with a core/optional rule
-that turns out to be wrong.
+few ideas repeatedly. Deliberate for a first pass. Worth expanding once the
+shape is right; no point generating 40 against a rule that might still move.
