@@ -33,6 +33,7 @@ const VikritiQuizPage = lazy(() => import('./pages/VikritiQuizPage'))
 const RecommendationsPage = lazy(() => import('./pages/RecommendationsPage'))
 const DoshaProfilePage = lazy(() => import('./pages/DoshaProfilePage'))
 const DietaryGuidancePage = lazy(() => import('./pages/DietaryGuidancePage'))
+const IngredientDetailPage = lazy(() => import('./pages/IngredientDetailPage'))
 const DinacharyaPage = lazy(() => import('./pages/DinacharyaPage'))
 const RoutinePage = lazy(() => import('./pages/RoutinePage'))
 const PracticePage = lazy(() => import('./pages/PracticePage'))
@@ -329,6 +330,13 @@ function AppRoutes() {
           <Route path="/vikriti" element={<PrivateRoute><VikritiQuizPage /></PrivateRoute>} />
           <Route path="/dosha" element={<PrivateRoute><DoshaProfilePage /></PrivateRoute>} />
           <Route path="/dietary" element={<PrivateRoute><DietaryGuidancePage /></PrivateRoute>} />
+          {/* Public, like /discover. Ingredient lookup is the FREE tier
+              (diet-feature-plan.md §4) and the Discover food strip is
+              reachable anonymously — gating the detail page would make every
+              one of those cards a dead end into onboarding. With no profile
+              the page shows the food's properties WITHOUT a personal verdict,
+              and invites the dosha quiz. */}
+          <Route path="/ingredient/:id" element={<IngredientDetailPage />} />
           <Route path="/dinacharya" element={<PrivateRoute><DinacharyaPage /></PrivateRoute>} />
           <Route path="/routine" element={<PrivateRoute><RoutinePage /></PrivateRoute>} />
           <Route path="/asana/:id" element={<PrivateRoute><AsanaDetailPage /></PrivateRoute>} />

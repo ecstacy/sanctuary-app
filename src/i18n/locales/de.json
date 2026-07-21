@@ -1453,5 +1453,123 @@
     "body": "Du hast zweimal geübt — schön. Möchtest du eine sanfte tägliche Erinnerung, damit es zur Gewohnheit wird?",
     "enable": "Erinnerungen aktivieren",
     "notNow": "Nicht jetzt"
+  },
+  "diet": {
+    "sectionTitle": "Ernährung & Ayurveda",
+    "sectionSubtitle": "Wie ein Lebensmittel auf deine Doshas wirkt — aus den klassischen Texten, von Menschen geprüft.",
+    "searchPlaceholder": "Lebensmittel suchen — Reis, Ghee, Kaffee…",
+    "searchAria": "Lebensmittel suchen",
+    "resultsMatching": "Lebensmittel zu „{{query}}“",
+    "browseAll": "Lebensmittel entdecken",
+    "coverageLine": "{{reviewed}} Lebensmittel bisher geprüft",
+    "miss": {
+      "title": "Noch nicht in unserer Referenz",
+      "body": "Zu diesem Lebensmittel haben wir noch keine verlässliche ayurvedische Einordnung — und wir raten lieber nicht. Jeder Eintrag wird von einem Menschen anhand der klassischen Texte geprüft, bevor er erscheint."
+    },
+    "doshaEffect": "Wirkung auf die Doshas",
+    "why": "Warum",
+    "properties": "Klassische Eigenschaften",
+    "preparation": "Zubereitung",
+    "bestEnjoyed": "Am besten",
+    "combosToAvoid": "Besser nicht kombinieren mit",
+    "cautions": "Hinweise",
+    "source": "Woher das stammt",
+    "rasa": "Geschmack",
+    "virya": "Wirkkraft",
+    "vipaka": "Nach der Verdauung",
+    "guna": "Eigenschaften",
+    "citedAs": "Charaka Samhita, {{verse}}",
+    "derived": "Aus den Eigenschaften abgeleitet — nicht klassisch belegt",
+    "noTarget": "Mach das Dosha-Quiz, dann sagen wir dir, was das konkret für dich bedeutet.",
+    "targetSimple": "Bezogen auf deine {{dosha}}-Konstitution.",
+    "targetExplained": "Deine Konstitution ist {{prakriti}}, aber zuletzt war {{vikriti}} erhöht — deshalb beziehen wir das hier auf {{vikriti}}.",
+    "excluded": {
+      "allergen": "Enthält {{key}}. Du hast uns gesagt, dass das für dich ein Allergen ist — dieses Lebensmittel bleibt aus allen Empfehlungen ausgeschlossen.",
+      "pattern": "Ausgeschlossen durch deine Einstellung „{{key}}“."
+    },
+    "suitability": {
+      "balancing": "Beruhigt",
+      "neutral": "Neutral",
+      "caution": "Erhöht"
+    },
+    "confidence": {
+      "high": "Klassisch belegt",
+      "medium": "Abgeleitet"
+    },
+    "dosha": {
+      "vata": "Vata",
+      "pitta": "Pitta",
+      "kapha": "Kapha"
+    },
+    "tastes": {
+      "sweet": "Süß",
+      "sour": "Sauer",
+      "salty": "Salzig",
+      "pungent": "Scharf",
+      "bitter": "Bitter",
+      "astringent": "Herb"
+    },
+    "viryas": {
+      "heating": "Wärmend",
+      "cooling": "Kühlend",
+      "neutral": "Neutral"
+    },
+    "times": {
+      "morning": "Morgens",
+      "midday": "Mittags",
+      "evening": "Abends"
+    },
+    "seasons": {
+      "spring": "Frühling",
+      "summer": "Sommer",
+      "autumn": "Herbst",
+      "winter": "Winter"
+    },
+    "allergens": {
+      "dairy": "Milchprodukte",
+      "gluten": "Gluten",
+      "nuts": "Nüsse",
+      "peanuts": "Erdnüsse",
+      "soy": "Soja",
+      "egg": "Ei",
+      "fish": "Fisch",
+      "shellfish": "Schalentiere",
+      "sesame": "Sesam",
+      "mustard": "Senf",
+      "nightshade": "Nachtschattengewächse"
+    },
+    "patterns": {
+      "vegetarian": "vegetarisch",
+      "vegan": "vegan",
+      "jain": "Jain",
+      "no_onion_garlic": "ohne Zwiebel und Knoblauch",
+      "halal": "halal",
+      "kosher": "koscher"
+    },
+    "cautionFlags": {
+      "pregnancy": "Schwangerschaft",
+      "acid_reflux": "Sodbrennen",
+      "anxiety": "Unruhe",
+      "insomnia": "Schlaf",
+      "lactose_intolerance": "Laktose",
+      "infant_under_1": "Säuglinge unter 1 Jahr"
+    },
+    "gunas": {
+      "dense": "Dicht",
+      "dry": "Trocken",
+      "heavy": "Schwer",
+      "light": "Leicht",
+      "nourishing": "Nährend",
+      "oily": "Ölig",
+      "penetrating": "Durchdringend",
+      "rough": "Rau",
+      "scraping": "Schabend",
+      "sharp": "Scharf",
+      "slightly_unctuous": "Leicht ölig",
+      "soft": "Weich",
+      "soft_when_cooked": "Weich gekocht",
+      "stable": "Stabil",
+      "unctuous": "Ölig"
+    }
   }
 }

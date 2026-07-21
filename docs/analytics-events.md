@@ -498,12 +498,17 @@ client-side by `src/lib/dailySession.js` from signals we already collect
 
 Spec'd with the feature (docs/diet-feature-plan.md §8); wired per chunk.
 
-- **`diet_search`** — `{query_len*, coverage_hit*, result_count*, target_dosha}`.
+- **`diet_search`** — `{query_len*, coverage_hit*, result_count*, source*, target_dosha}`.
+  Fires debounced (~900ms) from the Discover search box, so a typed word logs
+  once rather than once per keystroke. `source` is the surface (`discover`).
   ⚠️ Log `query_len`, **never the query text** — a diet query can carry health
   details ("food for my diabetes"). `coverage_hit` is the point of this event:
   the miss rate tells us what to add to the dataset next, and is only knowable
   if misses are logged as deliberately as hits.
-- **`ingredient_viewed`** — `{ingredient_id*, confidence*, suitability, target_dosha, excluded_reason}`.
+- **`ingredient_viewed`** — `{ingredient_id*, confidence*, category, suitability, target_dosha, dosha_source, excluded_reason}`.
+  `dosha_source` (`vikriti` | `prakriti` | `none`) shows how often we are
+  reading against a real current imbalance rather than the birth constitution —
+  the personalization that actually differentiates us.
   `confidence` lets us see how much of what users actually read is
   property-derived (`medium`) rather than classically cited (`high`).
   `excluded_reason` (`allergen` | `pattern` | null) shows how often safety

@@ -190,7 +190,7 @@ settling Vata"). Turns a correctness nuance into a trust-building moment.
 |---|---|---|
 | **0 — Foundations** | Ingredient schema in `ingredients.js`; safety/disclaimer + seek-help framework; copyright policy; analytics events; i18n scaffolding | No user-facing feature yet; sets the guardrails first |
 | **1 — Dataset v1** | ~60 highest-frequency foods fully classified + **Akash-reviewed** (grains, dals, common veg/fruit, dairy, core spices, oils, sweeteners, common beverages). Expandable to ~200 | The real content lift. Claude drafts from the Charaka framework; Akash fact-checks against his copies. `reviewStatus` gates shipping |
-| **2 — Search (free)** | Ingredient/dish search + result view with why/timing/cautions/citation/confidence; coverage-honest misses | Reuses Discover search; free tier |
+| **2 — Search (free)** | ✅ **Shipped 2026-07-21.** Food search inside the Discover box + a Food & Ayurveda section + `/ingredient/:id` detail view (dosha effect, why, classical properties, preparation, combos, cautions, citation + confidence); coverage-honest misses. Target dosha resolved by `lib/dietTarget.js` (vikriti → prakriti → none). Route is PUBLIC — the free-tier hook, and the Discover strip is reachable anonymously | Reuses Discover search; free tier |
 | **3 — Diet profile** | Allergy/restriction opt-in + `profiles.diet_prefs` storage + hard-filter plumbing | Safety foundation for the planner |
 | **4 — Meal composer (Plus)** | `mealComposer.js` + meal-idea templates + the planner UI; vikriti/prakriti/season/allergies/available-ingredients | Mirrors dailySession.js; Plus-gated |
 | **5 — Integration & polish** | Entry points (Discover, Dosha profile, Home?), Plus funnel wiring, a11y pass, analytics verification, on-device check | |

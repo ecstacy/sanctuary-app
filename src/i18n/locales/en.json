@@ -1453,5 +1453,123 @@
     "body": "You’ve practiced twice — nice. Want a gentle daily reminder so it becomes a habit?",
     "enable": "Enable reminders",
     "notNow": "Not now"
+  },
+  "diet": {
+    "sectionTitle": "Food & Ayurveda",
+    "sectionSubtitle": "How a food acts on your doshas — from the classical texts, checked by a human.",
+    "searchPlaceholder": "Search a food — rice, ghee, coffee…",
+    "searchAria": "Search foods",
+    "resultsMatching": "Foods matching “{{query}}”",
+    "browseAll": "Browse foods",
+    "coverageLine": "{{reviewed}} foods reviewed so far",
+    "miss": {
+      "title": "Not in our reference yet",
+      "body": "We don't have reliable Ayurvedic guidance on this food yet, and we'd rather say so than guess. Every entry here is checked against the classical texts by a person before it appears."
+    },
+    "doshaEffect": "Effect on the doshas",
+    "why": "Why",
+    "properties": "Classical properties",
+    "preparation": "Preparation",
+    "bestEnjoyed": "Best enjoyed",
+    "combosToAvoid": "Best not combined with",
+    "cautions": "Cautions",
+    "source": "Where this comes from",
+    "rasa": "Taste",
+    "virya": "Potency",
+    "vipaka": "After digestion",
+    "guna": "Qualities",
+    "citedAs": "Charaka Samhita, {{verse}}",
+    "derived": "Derived from its properties — not classically cited",
+    "noTarget": "Take the dosha quiz and we'll tell you what this means for you specifically.",
+    "targetSimple": "Read against your {{dosha}} constitution.",
+    "targetExplained": "Your constitution is {{prakriti}}, but lately you've been running {{vikriti}}-high — so we're reading this against {{vikriti}}.",
+    "excluded": {
+      "allergen": "Contains {{key}}. You've told us this is an allergen for you, so this food is excluded from anything we suggest.",
+      "pattern": "Excluded by your {{key}} preference."
+    },
+    "suitability": {
+      "balancing": "Settles",
+      "neutral": "Neutral",
+      "caution": "Increases"
+    },
+    "confidence": {
+      "high": "Classically cited",
+      "medium": "Derived"
+    },
+    "dosha": {
+      "vata": "Vata",
+      "pitta": "Pitta",
+      "kapha": "Kapha"
+    },
+    "tastes": {
+      "sweet": "Sweet",
+      "sour": "Sour",
+      "salty": "Salty",
+      "pungent": "Pungent",
+      "bitter": "Bitter",
+      "astringent": "Astringent"
+    },
+    "viryas": {
+      "heating": "Heating",
+      "cooling": "Cooling",
+      "neutral": "Neutral"
+    },
+    "times": {
+      "morning": "Morning",
+      "midday": "Midday",
+      "evening": "Evening"
+    },
+    "seasons": {
+      "spring": "Spring",
+      "summer": "Summer",
+      "autumn": "Autumn",
+      "winter": "Winter"
+    },
+    "allergens": {
+      "dairy": "dairy",
+      "gluten": "gluten",
+      "nuts": "nuts",
+      "peanuts": "peanuts",
+      "soy": "soy",
+      "egg": "egg",
+      "fish": "fish",
+      "shellfish": "shellfish",
+      "sesame": "sesame",
+      "mustard": "mustard",
+      "nightshade": "nightshade"
+    },
+    "patterns": {
+      "vegetarian": "vegetarian",
+      "vegan": "vegan",
+      "jain": "Jain",
+      "no_onion_garlic": "no onion or garlic",
+      "halal": "halal",
+      "kosher": "kosher"
+    },
+    "cautionFlags": {
+      "pregnancy": "Pregnancy",
+      "acid_reflux": "Acid reflux",
+      "anxiety": "Anxiety",
+      "insomnia": "Sleep",
+      "lactose_intolerance": "Lactose",
+      "infant_under_1": "Infants under 1"
+    },
+    "gunas": {
+      "dense": "Dense",
+      "dry": "Dry",
+      "heavy": "Heavy",
+      "light": "Light",
+      "nourishing": "Nourishing",
+      "oily": "Oily",
+      "penetrating": "Penetrating",
+      "rough": "Rough",
+      "scraping": "Scraping",
+      "sharp": "Sharp",
+      "slightly_unctuous": "Slightly unctuous",
+      "soft": "Soft",
+      "soft_when_cooked": "Soft when cooked",
+      "stable": "Stable",
+      "unctuous": "Unctuous"
+    }
   }
 }

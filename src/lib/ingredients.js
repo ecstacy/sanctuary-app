@@ -26,6 +26,13 @@ import { exclusionFor } from './dietSafety'
 /** Rows cleared for display. Computed once — the dataset is static. */
 const REVIEWED = ALL_INGREDIENTS.filter((i) => i.reviewStatus === 'reviewed')
 
+/**
+ * The reviewed rows, for browse surfaces that list foods rather than search
+ * them. Exported so no UI is ever tempted to import INGREDIENTS directly and
+ * filter for itself — that is how a draft reaches a user.
+ */
+export const REVIEWED_INGREDIENTS = REVIEWED
+
 /** How much of the dataset is actually live. Used for coverage messaging. */
 export function coverageStats() {
   return {

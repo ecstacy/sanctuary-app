@@ -1453,5 +1453,123 @@
     "body": "आपने दो बार अभ्यास किया — बढ़िया। क्या आप एक कोमल दैनिक याद चाहते हैं ताकि यह आदत बन जाए?",
     "enable": "याद सक्रिय करें",
     "notNow": "अभी नहीं"
+  },
+  "diet": {
+    "sectionTitle": "आहार और आयुर्वेद",
+    "sectionSubtitle": "कोई आहार आपके दोषों पर कैसे असर करता है — शास्त्रों से, मनुष्य द्वारा जाँचा हुआ।",
+    "searchPlaceholder": "आहार खोजें — चावल, घी, कॉफ़ी…",
+    "searchAria": "आहार खोजें",
+    "resultsMatching": "“{{query}}” से मिलते आहार",
+    "browseAll": "आहार देखें",
+    "coverageLine": "अब तक {{reviewed}} आहार जाँचे गए",
+    "miss": {
+      "title": "अभी हमारे संदर्भ में नहीं",
+      "body": "इस आहार पर हमारे पास अभी विश्वसनीय आयुर्वेदिक जानकारी नहीं है, और अनुमान लगाने से बेहतर है यह कह देना। यहाँ हर प्रविष्टि दिखने से पहले शास्त्रों के अनुसार किसी व्यक्ति द्वारा जाँची जाती है।"
+    },
+    "doshaEffect": "दोषों पर प्रभाव",
+    "why": "क्यों",
+    "properties": "शास्त्रीय गुण",
+    "preparation": "तैयारी",
+    "bestEnjoyed": "सर्वोत्तम समय",
+    "combosToAvoid": "इनके साथ न लें",
+    "cautions": "सावधानियाँ",
+    "source": "यह कहाँ से है",
+    "rasa": "रस",
+    "virya": "वीर्य",
+    "vipaka": "विपाक",
+    "guna": "गुण",
+    "citedAs": "चरक संहिता, {{verse}}",
+    "derived": "गुणों से अनुमानित — शास्त्रीय उद्धरण नहीं",
+    "noTarget": "दोष क्विज़ पूरा करें, फिर हम बताएँगे कि आपके लिए इसका क्या अर्थ है।",
+    "targetSimple": "आपकी {{dosha}} प्रकृति के अनुसार।",
+    "targetExplained": "आपकी प्रकृति {{prakriti}} है, पर हाल में {{vikriti}} बढ़ा हुआ रहा — इसलिए हम इसे {{vikriti}} के हिसाब से देख रहे हैं।",
+    "excluded": {
+      "allergen": "इसमें {{key}} है। आपने बताया है कि यह आपके लिए एलर्जन है, इसलिए यह हर सुझाव से बाहर रहेगा।",
+      "pattern": "आपकी “{{key}}” पसंद के कारण बाहर।"
+    },
+    "suitability": {
+      "balancing": "शांत करता है",
+      "neutral": "तटस्थ",
+      "caution": "बढ़ाता है"
+    },
+    "confidence": {
+      "high": "शास्त्रोक्त",
+      "medium": "अनुमानित"
+    },
+    "dosha": {
+      "vata": "वात",
+      "pitta": "पित्त",
+      "kapha": "कफ"
+    },
+    "tastes": {
+      "sweet": "मधुर",
+      "sour": "अम्ल",
+      "salty": "लवण",
+      "pungent": "कटु",
+      "bitter": "तिक्त",
+      "astringent": "कषाय"
+    },
+    "viryas": {
+      "heating": "उष्ण",
+      "cooling": "शीत",
+      "neutral": "सम"
+    },
+    "times": {
+      "morning": "प्रातः",
+      "midday": "मध्याह्न",
+      "evening": "सायं"
+    },
+    "seasons": {
+      "spring": "वसंत",
+      "summer": "ग्रीष्म",
+      "autumn": "शरद",
+      "winter": "शिशिर"
+    },
+    "allergens": {
+      "dairy": "दुग्ध",
+      "gluten": "ग्लूटेन",
+      "nuts": "मेवे",
+      "peanuts": "मूँगफली",
+      "soy": "सोया",
+      "egg": "अंडा",
+      "fish": "मछली",
+      "shellfish": "शेलफ़िश",
+      "sesame": "तिल",
+      "mustard": "सरसों",
+      "nightshade": "नाइटशेड"
+    },
+    "patterns": {
+      "vegetarian": "शाकाहारी",
+      "vegan": "वीगन",
+      "jain": "जैन",
+      "no_onion_garlic": "बिना प्याज़-लहसुन",
+      "halal": "हलाल",
+      "kosher": "कोशर"
+    },
+    "cautionFlags": {
+      "pregnancy": "गर्भावस्था",
+      "acid_reflux": "अम्लता",
+      "anxiety": "बेचैनी",
+      "insomnia": "नींद",
+      "lactose_intolerance": "लैक्टोज़",
+      "infant_under_1": "1 वर्ष से छोटे शिशु"
+    },
+    "gunas": {
+      "dense": "सघन",
+      "dry": "रूक्ष",
+      "heavy": "गुरु",
+      "light": "लघु",
+      "nourishing": "पौष्टिक",
+      "oily": "स्निग्ध",
+      "penetrating": "तीक्ष्ण भेदी",
+      "rough": "खर",
+      "scraping": "लेखन",
+      "sharp": "तीक्ष्ण",
+      "slightly_unctuous": "किंचित् स्निग्ध",
+      "soft": "मृदु",
+      "soft_when_cooked": "पकने पर मृदु",
+      "stable": "स्थिर",
+      "unctuous": "स्निग्ध"
+    }
   }
 }

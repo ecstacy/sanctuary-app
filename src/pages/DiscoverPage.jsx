@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { POPULAR_SEARCHES } from '../data/recommendations'
@@ -12,9 +12,48 @@ import useImpression from '../hooks/useImpression'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { isAsanaFree, isPranayamaFree } from '../lib/premiumTiers'
 import PaywallSheet from '../components/PaywallSheet'
+import { searchIngredients, coverageStats, REVIEWED_INGREDIENTS } from '../lib/ingredients'
 
 
 const ALL_ASANAS = Object.values(ASANAS)
+
+// Icon per food category. Purely decorative — every card also carries the
+// food's name as text, so nothing depends on recognising the glyph.
+const FOOD_ICONS = {
+  grain: 'grain', legume: 'nutrition', vegetable: 'eco', fruit: 'nutrition',
+  dairy: 'water_full', spice: 'local_fire_department', oil: 'water_drop',
+  nut_seed: 'spa', sweetener: 'icecream', beverage: 'local_cafe',
+  animal: 'set_meal', other: 'restaurant',
+}
+
+// ─── FoodResultRow ────────────────────────────────────────────────────────
+// One reviewed ingredient in the Discover search results. Shows the
+// confidence badge inline: whether a claim is classically cited or derived
+// from properties is part of the result, not a detail-page footnote.
+function FoodResultRow({ ingredient, onTap, t }) {
+  return (
+    <button
+      onClick={onTap}
+      className="flex items-center gap-3.5 bg-surface-container-low rounded-xl p-3 text-left active:scale-[0.98] transition-all"
+    >
+      <div className="w-11 h-11 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0">
+        <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">
+          {FOOD_ICONS[ingredient.category] || FOOD_ICONS.other}
+        </span>
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="font-body text-sm font-semibold text-on-surface">{ingredient.name}</p>
+        {ingredient.sanskrit && (
+          <p className="font-body text-xs text-on-surface-variant/60">{ingredient.sanskrit}</p>
+        )}
+        <span className="inline-block mt-1 px-2 py-0.5 rounded-full bg-surface-container-high font-label text-[8px] uppercase tracking-wide text-on-surface-variant">
+          {t(`diet.confidence.${ingredient.confidence}`)}
+        </span>
+      </div>
+      <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+    </button>
+  )
+}
 
 // ─── ExploreAsanaCard ────────────────────────────────────────────────────
 // One card per asana in the horizontal Explore strip. Extracted so each
@@ -280,6 +319,33 @@ export default function DiscoverPage() {
 
   const showAsanaResults = searchQuery.trim().length >= 2 && matchedAsanas.length > 0
 
+  // ── Food results ──────────────────────────────────────────────────────
+  // Searching foods and searching poses share one box on purpose: people
+  // don't think in terms of which dataset holds the answer. The lookup goes
+  // through lib/ingredients so only reviewed rows can ever appear.
+  const foodSearch = useMemo(() => searchIngredients(searchQuery), [searchQuery])
+  const searching = searchQuery.trim().length >= 2
+
+  // The miss rate is the single most useful signal for what to add to the
+  // dataset next, and it's only knowable if misses are logged as deliberately
+  // as hits. Debounced so a typed word logs once, not once per keystroke.
+  useEffect(() => {
+    if (!searching) return
+    const id = setTimeout(() => {
+      // `query_len`, never the query text — a food query can carry health
+      // details ("food for my diabetes"). See analytics-events.md §5.14.
+      track(EVENTS.DIET_SEARCH, {
+        query_len:    foodSearch.query.length,
+        result_count: foodSearch.results.length,
+        coverage_hit: !foodSearch.coverageMiss,
+        source:       'discover',
+      })
+    }, 900)
+    return () => clearTimeout(id)
+  }, [searching, foodSearch])
+
+  const coverage = useMemo(() => coverageStats(), [])
+
   function handleSearch(q) {
     const query = q || searchQuery
     if (query.trim().length < 2) return
@@ -389,6 +455,71 @@ export default function DiscoverPage() {
                 )
               })}
             </div>
+          </div>
+        )}
+
+        {/* ── Food search results ──────────────────────────────────────────
+            A miss renders an explicit "not in our reference yet" rather than
+            an empty space or a guess — coverage honesty is a feature here,
+            not a failure state (diet-feature-plan.md §2). It only shows when
+            no pose matched either, so a pose search isn't nagged at. */}
+        {searching && foodSearch.results.length > 0 && (
+          <div className="stagger-2">
+            <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2.5">
+              {t('diet.resultsMatching', { query: searchQuery.trim() })}
+            </p>
+            <div className="flex flex-col gap-2">
+              {foodSearch.results.map(ing => (
+                <FoodResultRow
+                  key={ing.id}
+                  ingredient={ing}
+                  t={t}
+                  onTap={() => navigate(`/ingredient/${ing.id}`)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {searching && foodSearch.coverageMiss && !showAsanaResults && (
+          <div className="stagger-2 bg-surface-container-low rounded-2xl p-4" role="status">
+            <p className="font-body text-sm font-semibold text-on-surface">{t('diet.miss.title')}</p>
+            <p className="font-body text-xs text-on-surface-variant mt-1 leading-relaxed">
+              {t('diet.miss.body')}
+            </p>
+          </div>
+        )}
+
+        {/* ── Food & Ayurveda ──────────────────────────────────────────────
+            The dedicated Diet section. Deliberately states how many foods are
+            reviewed: a small, honest number beats an implied completeness the
+            dataset doesn't have. */}
+        {!searching && REVIEWED_INGREDIENTS.length > 0 && (
+          <div className="stagger-3">
+            <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-1">
+              {t('diet.sectionTitle')}
+            </p>
+            <p className="font-body text-xs text-on-surface-variant/70 mb-3 leading-relaxed">
+              {t('diet.sectionSubtitle')}
+            </p>
+            <div className="flex gap-2.5 overflow-x-auto snap-x pb-1 -mx-6 px-6">
+              {REVIEWED_INGREDIENTS.map(ing => (
+                <button
+                  key={ing.id}
+                  onClick={() => navigate(`/ingredient/${ing.id}`)}
+                  className="flex-shrink-0 w-28 snap-start bg-surface-container-low rounded-2xl p-3 text-left active:scale-[0.97] transition-all"
+                  aria-label={ing.name}
+                >
+                  <span aria-hidden="true" className="material-symbols-outlined text-primary text-2xl">
+                    {FOOD_ICONS[ing.category] || FOOD_ICONS.other}
+                  </span>
+                  <p className="font-body text-xs text-on-surface mt-1.5 leading-tight line-clamp-2">{ing.name}</p>
+                </button>
+              ))}
+            </div>
+            <p className="font-label text-[9px] text-on-surface-variant/40 uppercase tracking-widest mt-2">
+              {t('diet.coverageLine', { reviewed: coverage.reviewed })}
+            </p>
           </div>
         )}
 
