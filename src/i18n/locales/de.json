@@ -1536,8 +1536,7 @@
       "fish": "Fisch",
       "shellfish": "Schalentiere",
       "sesame": "Sesam",
-      "mustard": "Senf",
-      "nightshade": "Nachtschattengewächse"
+      "mustard": "Senf"
     },
     "patterns": {
       "vegetarian": "vegetarisch",
@@ -1545,7 +1544,8 @@
       "jain": "Jain",
       "no_onion_garlic": "ohne Zwiebel und Knoblauch",
       "halal": "halal",
-      "kosher": "koscher"
+      "kosher": "koscher",
+      "no_nightshade": "ohne Nachtschattengewächse"
     },
     "cautionFlags": {
       "pregnancy": "Schwangerschaft",

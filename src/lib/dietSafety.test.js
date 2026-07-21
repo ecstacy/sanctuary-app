@@ -9,7 +9,7 @@
 
 import { describe, it, expect, afterEach } from 'vitest'
 import {
-  ALLERGENS, DIET_PATTERNS, PATTERN_KEYS, PATTERNS_WITH_RULES,
+  ALLERGENS, DIET_PATTERNS, PATTERN_KEYS, PATTERNS_WITH_RULES, ALLERGEN_KEYS,
   detectSeekHelp, needsSofterHandling, messageForTriggers,
   exclusionFor, filterSafe, allergensOf, unknownSafetyKeys,
   DISORDERED_EATING_MESSAGE, SEEK_HELP_MESSAGE,
@@ -183,16 +183,35 @@ describe('the exclusion path fails CLOSED, not open', () => {
   })
 
   it('treats animal rennet as not vegetarian, despite the dairy category', () => {
-    // Rennet is slaughter-derived. The dairy category alone would let a hard
-    // cheese through a vegetarian filter.
-    expect(exclusionFor(INGREDIENTS.hardCheese, { patterns: ['vegetarian'] }).excluded).toBe(true)
-    expect(exclusionFor(INGREDIENTS.hardCheese, { patterns: ['vegan'] }).excluded).toBe(true)
+    // Rennet is slaughter-derived, so the dairy category alone would let a
+    // traditionally-set cheese through a vegetarian filter. Uses a fixture
+    // rather than hardCheese, which is generic — see the granularity test below.
+    const traditional = { id: 'parmigiano', category: 'dairy', dietTags: ['animal_rennet'] }
+    expect(exclusionFor(traditional, { patterns: ['vegetarian'] }).excluded).toBe(true)
+    expect(exclusionFor(traditional, { patterns: ['vegan'] }).excluded).toBe(true)
   })
 
-  it('excludes potato for a nightshade allergy', () => {
-    // 'nightshade' was a canonical allergen key from the start, and potato was
-    // the first food in the dataset that is one — untagged, it matched nothing.
-    expect(exclusionFor(INGREDIENTS.potato, { allergens: ['nightshade'] }).excluded).toBe(true)
+  it('treats nightshade as a preference, never an allergy', () => {
+    // Solanaceae is a plant family, not an allergen category. Reporting it as
+    // an allergy would tell the user the app believes they have a medical
+    // condition — an overstatement in the one direction the exclusion copy is
+    // most careful about elsewhere.
+    const out = exclusionFor(INGREDIENTS.potato, { patterns: ['no_nightshade'] })
+    expect(out.excluded).toBe(true)
+    expect(out.reason).toBe('pattern')
+    expect(ALLERGEN_KEYS).not.toContain('nightshade')
+  })
+
+  it('does not exclude hard cheese wholesale for vegetarians', () => {
+    // Rennet varies: traditional parmesan is animal-set, most modern hard
+    // cheese is microbial. A generic entry that excluded them all would be
+    // wrong for the majority case, so this one carries a cautionNote instead.
+    // The animal_rennet RULE stays live for a future specific entry.
+    expect(exclusionFor(INGREDIENTS.hardCheese, { patterns: ['vegetarian'] }).excluded).toBe(false)
+    expect(INGREDIENTS.hardCheese.cautionNote).toMatch(/rennet/i)
+
+    const traditional = { id: 'parmigiano', category: 'dairy', dietTags: ['animal_rennet'] }
+    expect(exclusionFor(traditional, { patterns: ['vegetarian'] }).excluded).toBe(true)
   })
 
   it('survives malformed prefs instead of failing open on a crash', () => {

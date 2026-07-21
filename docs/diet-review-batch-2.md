@@ -571,6 +571,34 @@ This also cleanly separates the two layers the reviewer asked for:
 exclude it?). Honey+ghee is an evidence-layer decision; the rhizome tags are
 pattern-layer, and neither should borrow reasoning from the other.
 
+### ✅ The two safety-layer questions — resolved 2026-07-21
+
+**`potato` → nightshade: changed to a preference, not an allergen.**
+Calling solanaceae an allergen was a category mismatch — a botanical family is
+not a medical allergen category, and putting it in `ALLERGENS` made the UI tell
+the user *"you've told us this is an allergen for you"* about what is really an
+avoidance choice. `'nightshade'` is now a `dietTags` value with a matching
+`DIET_PATTERNS.NO_NIGHTSHADE`, exactly parallel to `allium` / `no_onion_garlic`.
+It reports as `reason: 'pattern'`, so the copy says preference rather than
+allergy. A test asserts it never returns to the allergen vocabulary.
+
+**`hardCheese` → animal rennet: exclusion removed, note added.**
+The entry is generic — its aliases cover gouda, cheddar, emmental and parmesan
+— and most modern hard cheese uses microbial or vegetable rennet, so excluding
+it wholesale would be wrong for the majority case. It now carries a
+`cautionNote` naming which styles are traditionally animal-set and suggesting a
+label check.
+
+This reverses my earlier "over-restriction is the safe failure" reasoning, and
+it's worth being explicit about why: that rule holds for **allergens**, where
+the two error directions are wildly asymmetric. For a **preference**, both
+errors cost something — telling a vegetarian that all hard cheese is off-limits
+is a real wrong answer, not a safe one. Safety-vs-preference is what decides
+which way to lean, and it is the same distinction the potato fix turns on.
+
+The `animal_rennet` tag, rule and test all stay live, exercised by a fixture,
+so a specific `parmigianoReggiano` entry can use them the day we add one.
+
 ### Note to self on the format
 
 The doubt table didn't render for you in Cursor, which made the five entries

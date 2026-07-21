@@ -1536,8 +1536,7 @@
       "fish": "मछली",
       "shellfish": "शेलफ़िश",
       "sesame": "तिल",
-      "mustard": "सरसों",
-      "nightshade": "नाइटशेड"
+      "mustard": "सरसों"
     },
     "patterns": {
       "vegetarian": "शाकाहारी",
@@ -1545,7 +1544,8 @@
       "jain": "जैन",
       "no_onion_garlic": "बिना प्याज़-लहसुन",
       "halal": "हलाल",
-      "kosher": "कोशर"
+      "kosher": "कोशर",
+      "no_nightshade": "बिना नाइटशेड"
     },
     "cautionFlags": {
       "pregnancy": "गर्भावस्था",

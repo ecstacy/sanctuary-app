@@ -146,6 +146,17 @@ medication, and disordered eating. Design requirements:
   normalisation on both sides; a canonical tag vocabulary (a typo matches no
   rule); a test asserting every declared pattern has a rule; and for
   halal/kosher, **exclude rather than imply an approval we cannot certify**.
+- **Allergen vs preference is a real distinction, not a wording choice.** An
+  allergen is a safety constraint whose two failure directions are wildly
+  asymmetric, so we over-restrict without hesitation. A preference (vegan,
+  Jain, no-nightshade) is a choice where BOTH errors cost something — telling a
+  vegetarian all hard cheese is off-limits is a wrong answer, not a safe one.
+  Keep the vocabularies separate: `nightshade` was briefly an allergen and had
+  to be moved, because a botanical family is not a medical category and the UI
+  was calling an avoidance choice an allergy.
+  ⚠ **Chunk 3 note:** `diet_prefs` storage does not exist yet, so no stored
+  user data carries the old key. When it lands, `nightshade` belongs under
+  patterns (`no_nightshade`) and must not appear in the allergen picker.
 - **Allergy/restriction profile** — a small opt-in step (allergens +
   veg/vegan/jain/no-onion-garlic/etc.), stored on `profiles.diet_prefs` (jsonb;
   same client-writable pattern as `notification_prefs`, **not** an entitlement

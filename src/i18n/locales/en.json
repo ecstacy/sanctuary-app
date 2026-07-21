@@ -1536,8 +1536,7 @@
       "fish": "fish",
       "shellfish": "shellfish",
       "sesame": "sesame",
-      "mustard": "mustard",
-      "nightshade": "nightshade"
+      "mustard": "mustard"
     },
     "patterns": {
       "vegetarian": "vegetarian",
@@ -1545,7 +1544,8 @@
       "jain": "Jain",
       "no_onion_garlic": "no onion or garlic",
       "halal": "halal",
-      "kosher": "kosher"
+      "kosher": "kosher",
+      "no_nightshade": "no nightshades"
     },
     "cautionFlags": {
       "pregnancy": "Pregnancy",

@@ -554,12 +554,7 @@ export const INGREDIENTS = {
 
   hardCheese: {
     id: 'hardCheese',
-    // Traditional hard cheeses (parmesan, many gouda and cheddar styles) are
-    // set with animal rennet, which is slaughter-derived — so a vegetarian
-    // excludes them even though the category is dairy. Tagging conservatively:
-    // microbial-rennet versions exist, but assuming the vegetarian-friendly
-    // case would fail in the harmful direction.
-    dietTags: ['animal_rennet'],
+
     name: 'Hard cheese',
     aliases: ['cheese', 'käse', 'kaese', 'gouda', 'cheddar', 'emmental', 'parmesan'],
     category: 'dairy',
@@ -572,6 +567,8 @@ export const INGREDIENTS = {
     whyAvoid:
       'Dense, oily and fermented — among the heaviest foods for Kapha, and the sourness of ageing adds heat to Pitta.',
     cautions: ['lactose_intolerance'],
+    cautionNote:
+      'Rennet varies and this generic entry cannot tell you which you have. Traditional Parmigiano Reggiano, and many cheddar and gouda styles, are set with animal (slaughter-derived) rennet and are therefore not vegetarian; a great many modern hard cheeses use microbial or vegetable rennet and are. Worth checking the label if that matters to you — we deliberately do not exclude hard cheese wholesale for vegetarians, because most of it now qualifies.',
     allergens: ['dairy'],
     source: {
       text: 'modern',
@@ -917,11 +914,11 @@ export const INGREDIENTS = {
   // ── Vegetables & fruit ────────────────────────────────────────────────────
   potato: {
     id: 'potato',
-    dietTags: ['root'],
-    // Nightshade. 'nightshade' has been a canonical allergen key since chunk 0
-    // and potato was the first food in the dataset that actually is one —
-    // untagged, the filter existed and matched nothing.
-    allergens: ['nightshade'],
+    // Nightshade — recorded as an avoidance PREFERENCE, not an allergen.
+    // It was briefly an allergen, which was a category error: solanaceae is a
+    // plant family, and labelling it an allergy overstates a preference as a
+    // medical constraint in the UI.
+    dietTags: ['root', 'nightshade'],
     name: 'Potato',
     aliases: ['aloo', 'kartoffel', 'potatoes', 'mashed potato'],
     category: 'vegetable',

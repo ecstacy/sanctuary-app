@@ -36,7 +36,11 @@ export const ALLERGENS = {
   SHELLFISH: 'shellfish',
   SESAME:    'sesame',
   MUSTARD:   'mustard',
-  NIGHTSHADE:'nightshade',
+  // NOTE: 'nightshade' was here and was a CATEGORY ERROR — a botanical family
+  // is not an allergen. It moved to DIET_PATTERNS.NO_NIGHTSHADE +
+  // DIET_TAGS.NIGHTSHADE, which is where an avoidance preference belongs.
+  // Keeping it here made the UI call it an allergy, overstating a preference
+  // as a medical constraint. A test asserts it does not come back.
 }
 
 /**
@@ -51,6 +55,11 @@ export const DIET_PATTERNS = {
   NO_ONION_GARLIC: 'no_onion_garlic', // sattvic / observance
   HALAL:           'halal',
   KOSHER:          'kosher',
+  // An avoidance preference, not an allergy — potato, tomato, aubergine and
+  // peppers are a plant family, and people avoid them for comfort or belief
+  // rather than anaphylaxis. Sits here so the UI says "your preference",
+  // never "you are allergic". Parallels NO_ONION_GARLIC exactly.
+  NO_NIGHTSHADE:   'no_nightshade',
 }
 
 /**
@@ -72,6 +81,7 @@ export const DIET_TAGS = {
   PORK:           'pork',            // halal, kosher
   ALCOHOL:        'alcohol',         // halal
   SHELLFISH:      'shellfish',       // kosher
+  NIGHTSHADE:     'nightshade',      // solanaceae — no_nightshade
 }
 
 /**
@@ -299,6 +309,7 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
   if (tags.has(DIET_TAGS.ANIMAL_RENNET) && (veg || vegan)) add(vegan ? 'vegan' : 'vegetarian')
   if (tags.has(DIET_TAGS.ALLIUM) && (jain || noOG)) add(jain ? 'jain' : 'no_onion_garlic')
   if (tags.has(DIET_TAGS.ROOT) && jain) add('jain')
+  if (tags.has(DIET_TAGS.NIGHTSHADE) && patterns.has(DIET_PATTERNS.NO_NIGHTSHADE)) add('no_nightshade')
 
   // Halal / kosher. We cannot certify anything, so these rules are
   // deliberately conservative: they exclude what is definitely out and, for
@@ -323,6 +334,7 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
 export const PATTERNS_WITH_RULES = Object.freeze([
   DIET_PATTERNS.VEGETARIAN, DIET_PATTERNS.VEGAN, DIET_PATTERNS.JAIN,
   DIET_PATTERNS.NO_ONION_GARLIC, DIET_PATTERNS.HALAL, DIET_PATTERNS.KOSHER,
+  DIET_PATTERNS.NO_NIGHTSHADE,
 ])
 
 /** Exported for the same reason as PATTERNS_WITH_RULES. */
