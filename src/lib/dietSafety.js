@@ -54,6 +54,97 @@ export const DIET_PATTERNS = {
 }
 
 /**
+ * Pattern-exclusion tags an ingredient row can carry. Canonical, because a
+ * TYPO IN A TAG IS A SILENT SAFETY FAILURE: `'alium'` matches no rule, so the
+ * food quietly stops being filtered and the user is told it suits them. The
+ * vocabulary is validated in dev (see `assertKnownTags`) and asserted in tests
+ * rather than trusted.
+ */
+export const DIET_TAGS = {
+  ALLIUM:         'allium',          // onion/garlic family — Jain, no-onion-garlic
+  ROOT:           'root',            // underground part — Jain
+  ANIMAL_DERIVED: 'animal_derived',  // from an animal but not meat/dairy (honey)
+  ANIMAL_RENNET:  'animal_rennet',   // slaughter-derived enzyme — not vegetarian
+  PORK:           'pork',            // halal, kosher
+  ALCOHOL:        'alcohol',         // halal
+  SHELLFISH:      'shellfish',       // kosher
+}
+
+/**
+ * Allergens that follow inescapably from the category, applied whether or not
+ * the row remembered to declare them.
+ *
+ * Only total mappings belong here. `dairy` is one: there is no dairy-category
+ * food that is not a dairy allergen. `nut_seed` is NOT — sesame and sunflower
+ * are seeds, not nuts, and mapping the category to 'nuts' would both
+ * over-exclude and mislabel. Where the mapping isn't total, the row declares
+ * its own allergens and `dataset integrity` tests enforce that it did.
+ */
+const IMPLIED_ALLERGENS_BY_CATEGORY = {
+  dairy: [ALLERGENS.DAIRY],
+}
+
+const ALLERGEN_VALUES = new Set(Object.values(ALLERGENS))
+const PATTERN_VALUES  = new Set(Object.values(DIET_PATTERNS))
+const TAG_VALUES      = new Set(Object.values(DIET_TAGS))
+
+/**
+ * Normalise a user- or data-supplied key list to canonical form.
+ *
+ * `diet_prefs` is client-written jsonb, so 'Dairy', ' dairy ' and 'DAIRY' all
+ * reach us in practice. An exact Set comparison against 'dairy' fails on every
+ * one of them — and fails OPEN, silently telling an allergic user their
+ * allergen is fine. Normalising both sides is the difference between a filter
+ * and the appearance of one.
+ */
+function normaliseKeys(list) {
+  if (!Array.isArray(list)) return []
+  return list
+    .filter((k) => typeof k === 'string')
+    .map((k) => k.trim().toLowerCase().replace(/[\s-]+/g, '_'))
+    .filter(Boolean)
+}
+
+/**
+ * Every allergen this ingredient carries: declared plus category-implied,
+ * normalised. Exported because the UI must be able to show exactly what the
+ * filter sees, not its own re-derivation.
+ * @param {object} ingredient
+ * @returns {string[]}
+ */
+export function allergensOf(ingredient) {
+  const declared = normaliseKeys(ingredient?.allergens)
+  const implied  = IMPLIED_ALLERGENS_BY_CATEGORY[ingredient?.category] || []
+  return [...new Set([...declared, ...implied])]
+}
+
+/** Normalised pattern tags for an ingredient. */
+export function tagsOf(ingredient) {
+  return normaliseKeys(ingredient?.dietTags)
+}
+
+/**
+ * Dev-only guard against unknown keys in the dataset. An unrecognised allergen
+ * or tag can never match a rule, so it fails open — exactly the failure this
+ * module exists to prevent. Loud in dev, silent in production (a warning must
+ * never be the thing that breaks a user's app).
+ * @returns {string[]} the unknown keys found, for tests to assert on
+ */
+export function unknownSafetyKeys(ingredient) {
+  const bad = [
+    ...allergensOf(ingredient).filter((a) => !ALLERGEN_VALUES.has(a)),
+    ...tagsOf(ingredient).filter((t) => !TAG_VALUES.has(t)),
+  ]
+  if (bad.length && import.meta.env?.DEV) {
+    console.warn(
+      `[dietSafety] ${ingredient?.id}: unknown safety keys ${bad.join(', ')} — ` +
+      'these match no rule and so filter nothing.',
+    )
+  }
+  return bad
+}
+
+/**
  * Why an ingredient was excluded. The UI must distinguish these — telling
  * someone their allergen was "not ideal for your dosha" would be dangerous
  * understatement.
@@ -156,35 +247,83 @@ export function messageForTriggers(categories) {
  * @returns {{excluded: boolean, reason: ExclusionReason, key: string|null}}
  */
 export function exclusionFor(ingredient, dietPrefs = {}) {
-  const userAllergens = new Set(dietPrefs.allergens || [])
-  const hit = (ingredient?.allergens || []).find((a) => userAllergens.has(a))
-  if (hit) return { excluded: true, reason: 'allergen', key: hit }
+  const userAllergens = new Set(normaliseKeys(dietPrefs?.allergens))
+  const patterns      = new Set(normaliseKeys(dietPrefs?.patterns))
+  const tags          = new Set(tagsOf(ingredient))
+  const cat           = ingredient?.category
 
-  const patterns = new Set(dietPrefs.patterns || [])
-  const cat = ingredient?.category
-  if (cat === 'animal' && (patterns.has(DIET_PATTERNS.VEGETARIAN) || patterns.has(DIET_PATTERNS.VEGAN))) {
-    return { excluded: true, reason: 'pattern', key: patterns.has(DIET_PATTERNS.VEGAN) ? 'vegan' : 'vegetarian' }
-  }
-  if (cat === 'dairy' && patterns.has(DIET_PATTERNS.VEGAN)) {
-    return { excluded: true, reason: 'pattern', key: 'vegan' }
-  }
-  const tags = new Set(ingredient?.dietTags || [])
-  // Animal-derived but not meat and not dairy — honey is the case that matters
-  // here, and category alone can't catch it (it's a 'sweetener'). Vegans
-  // exclude it; vegetarians do not. Without this an honest-looking "suits you"
-  // would be returned for a food the user has explicitly excluded.
-  if (tags.has('animal_derived') && patterns.has(DIET_PATTERNS.VEGAN)) {
-    return { excluded: true, reason: 'pattern', key: 'vegan' }
-  }
-  if (tags.has('allium') && (patterns.has(DIET_PATTERNS.NO_ONION_GARLIC) || patterns.has(DIET_PATTERNS.JAIN))) {
-    return { excluded: true, reason: 'pattern', key: patterns.has(DIET_PATTERNS.JAIN) ? 'jain' : 'no_onion_garlic' }
-  }
-  if (tags.has('root') && patterns.has(DIET_PATTERNS.JAIN)) {
-    return { excluded: true, reason: 'pattern', key: 'jain' }
+  unknownSafetyKeys(ingredient)   // dev-only warning; no effect on the result
+
+  // ── Allergens first, and ALL of them ──────────────────────────────────
+  // Reported before any pattern rule: conflating "you are allergic to this"
+  // with "this doesn't fit your diet" would be a dangerous understatement.
+  // Sorted so the reported key is deterministic rather than dependent on the
+  // order the row happened to list its allergens in.
+  const allergenHits = allergensOf(ingredient).filter((a) => userAllergens.has(a)).sort()
+  if (allergenHits.length > 0) {
+    return {
+      excluded: true,
+      reason:   'allergen',
+      key:      allergenHits[0],
+      all:      allergenHits.map((k) => ({ reason: 'allergen', key: k })),
+    }
   }
 
-  return { excluded: false, reason: null, key: null }
+  // ── Pattern rules ─────────────────────────────────────────────────────
+  // Each is (does this pattern apply) → (does this food violate it). Every
+  // pattern in DIET_PATTERNS must appear here: a declared pattern with no
+  // rule is a filter the user believes is on while it does nothing, which is
+  // how `allium`/`root` sat dead for a release.
+  const hits = []
+  const veg    = patterns.has(DIET_PATTERNS.VEGETARIAN)
+  const vegan  = patterns.has(DIET_PATTERNS.VEGAN)
+  const jain   = patterns.has(DIET_PATTERNS.JAIN)
+  const noOG   = patterns.has(DIET_PATTERNS.NO_ONION_GARLIC)
+  const halal  = patterns.has(DIET_PATTERNS.HALAL)
+  const kosher = patterns.has(DIET_PATTERNS.KOSHER)
+
+  const add = (key) => hits.push({ reason: 'pattern', key })
+
+  if (cat === 'animal' && (veg || vegan)) add(vegan ? 'vegan' : 'vegetarian')
+  if (cat === 'dairy' && vegan) add('vegan')
+  // Animal-derived but neither meat nor dairy — honey, which no category rule
+  // catches (it is a 'sweetener'). Vegans exclude it; vegetarians do not.
+  if (tags.has(DIET_TAGS.ANIMAL_DERIVED) && vegan) add('vegan')
+  // Rennet is slaughter-derived, so a cheese made with it is not vegetarian
+  // even though its category is dairy. Vegetarians are the group this
+  // protects; vegans are already excluded by the dairy rule above.
+  if (tags.has(DIET_TAGS.ANIMAL_RENNET) && (veg || vegan)) add(vegan ? 'vegan' : 'vegetarian')
+  if (tags.has(DIET_TAGS.ALLIUM) && (jain || noOG)) add(jain ? 'jain' : 'no_onion_garlic')
+  if (tags.has(DIET_TAGS.ROOT) && jain) add('jain')
+
+  // Halal / kosher. We cannot certify anything, so these rules are
+  // deliberately conservative: they exclude what is definitely out and, for
+  // meat, exclude rather than imply approval — silence would read as "this is
+  // fine for you", and under-restriction is the harmful direction. The UI
+  // wording must stay "we can't confirm", never "this is halal".
+  if (halal && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.ALCOHOL) || cat === 'animal')) add('halal')
+  if (kosher && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.SHELLFISH) || cat === 'animal')) add('kosher')
+
+  if (hits.length > 0) {
+    return { excluded: true, reason: 'pattern', key: hits[0].key, all: hits }
+  }
+
+  return { excluded: false, reason: null, key: null, all: [] }
 }
+
+/**
+ * Every declared pattern must have a rule in `exclusionFor`. Exported so a
+ * test can assert it, because the failure mode is invisible: a pattern with no
+ * rule looks exactly like a pattern nothing happens to violate.
+ */
+export const PATTERNS_WITH_RULES = Object.freeze([
+  DIET_PATTERNS.VEGETARIAN, DIET_PATTERNS.VEGAN, DIET_PATTERNS.JAIN,
+  DIET_PATTERNS.NO_ONION_GARLIC, DIET_PATTERNS.HALAL, DIET_PATTERNS.KOSHER,
+])
+
+/** Exported for the same reason as PATTERNS_WITH_RULES. */
+export const ALLERGEN_KEYS = Object.freeze([...ALLERGEN_VALUES])
+export const PATTERN_KEYS  = Object.freeze([...PATTERN_VALUES])
 
 /**
  * Hard filter. Anything excluded is REMOVED, never merely down-ranked — the

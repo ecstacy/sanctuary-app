@@ -9,9 +9,9 @@
 
 import { describe, it, expect, afterEach } from 'vitest'
 import {
-  ALLERGENS, DIET_PATTERNS,
+  ALLERGENS, DIET_PATTERNS, PATTERN_KEYS, PATTERNS_WITH_RULES,
   detectSeekHelp, needsSofterHandling, messageForTriggers,
-  exclusionFor, filterSafe,
+  exclusionFor, filterSafe, allergensOf, unknownSafetyKeys,
   DISORDERED_EATING_MESSAGE, SEEK_HELP_MESSAGE,
 } from './dietSafety'
 import { INGREDIENTS, ALL_INGREDIENTS } from '../data/ayurveda/ingredients'
@@ -120,6 +120,84 @@ describe('allergens are an absolute filter, not a ranking penalty', () => {
   it('vegan excludes dairy; vegetarian does not', () => {
     expect(exclusionFor(ghee, { patterns: ['vegan'] }).excluded).toBe(true)
     expect(exclusionFor(ghee, { patterns: ['vegetarian'] }).excluded).toBe(false)
+  })
+})
+
+describe('the exclusion path fails CLOSED, not open', () => {
+  // Every bug this block guards has the same shape: the filter looks present
+  // and does nothing, so the user is told an excluded food suits them. That
+  // is the harmful direction, and none of it is visible from the UI.
+
+  it('matches allergens regardless of casing or spacing in stored prefs', () => {
+    // diet_prefs is client-written jsonb: 'Dairy', ' dairy ' and 'DAIRY' all
+    // occur. An exact Set comparison fails on every one of them — and fails
+    // open, telling an allergic user their allergen is fine.
+    for (const variant of ['dairy', 'Dairy', 'DAIRY', ' dairy ', 'Dairy ']) {
+      const out = exclusionFor(INGREDIENTS.ghee, { allergens: [variant] })
+      expect(out.excluded, `variant ${JSON.stringify(variant)}`).toBe(true)
+      expect(out.reason).toBe('allergen')
+    }
+  })
+
+  it('normalises pattern keys the same way', () => {
+    expect(exclusionFor(INGREDIENTS.garlic, { patterns: ['No-Onion-Garlic'] }).excluded).toBe(true)
+    expect(exclusionFor(INGREDIENTS.garlic, { patterns: ['JAIN'] }).excluded).toBe(true)
+  })
+
+  it('implies the dairy allergen from the category even if the row omits it', () => {
+    // A row that forgets `allergens: ['dairy']` must not thereby become safe.
+    const forgetful = { id: 'x', category: 'dairy', allergens: [] }
+    expect(allergensOf(forgetful)).toContain('dairy')
+    expect(exclusionFor(forgetful, { allergens: ['dairy'] }).excluded).toBe(true)
+  })
+
+  it('reports every matching allergen, not just the first', () => {
+    const both = { id: 'y', category: 'other', allergens: ['gluten', 'sesame'] }
+    const out = exclusionFor(both, { allergens: ['sesame', 'gluten'] })
+    expect(out.all.map((h) => h.key)).toEqual(['gluten', 'sesame'])  // sorted, deterministic
+  })
+
+  it('every declared dietary pattern actually has a rule', () => {
+    // A pattern in DIET_PATTERNS with no rule in exclusionFor is a filter the
+    // user believes is on while it does nothing — exactly how 'allium' and
+    // 'root' sat dead for a release.
+    expect([...PATTERNS_WITH_RULES].sort()).toEqual(PATTERN_KEYS.slice().sort())
+  })
+
+  it('no entry carries an unknown allergen or tag key', () => {
+    // A typo like 'diary' or 'alium' matches no rule and so filters nothing.
+    for (const i of ALL_INGREDIENTS) {
+      expect(unknownSafetyKeys(i), `${i.id} has unrecognised safety keys`).toEqual([])
+    }
+  })
+
+  it('halal and kosher exclude meat rather than implying approval', () => {
+    // We cannot certify anything. Staying silent on an animal food would read
+    // as "this is fine for you", so we exclude and the UI says we can't confirm.
+    const meat = { id: 'z', category: 'animal' }
+    expect(exclusionFor(meat, { patterns: ['halal'] }).excluded).toBe(true)
+    expect(exclusionFor(meat, { patterns: ['kosher'] }).excluded).toBe(true)
+  })
+
+  it('treats animal rennet as not vegetarian, despite the dairy category', () => {
+    // Rennet is slaughter-derived. The dairy category alone would let a hard
+    // cheese through a vegetarian filter.
+    expect(exclusionFor(INGREDIENTS.hardCheese, { patterns: ['vegetarian'] }).excluded).toBe(true)
+    expect(exclusionFor(INGREDIENTS.hardCheese, { patterns: ['vegan'] }).excluded).toBe(true)
+  })
+
+  it('excludes potato for a nightshade allergy', () => {
+    // 'nightshade' was a canonical allergen key from the start, and potato was
+    // the first food in the dataset that is one — untagged, it matched nothing.
+    expect(exclusionFor(INGREDIENTS.potato, { allergens: ['nightshade'] }).excluded).toBe(true)
+  })
+
+  it('survives malformed prefs instead of failing open on a crash', () => {
+    for (const prefs of [null, undefined, {}, { allergens: null }, { patterns: 'vegan' }, { allergens: [1, null] }]) {
+      expect(() => exclusionFor(INGREDIENTS.ghee, prefs)).not.toThrow()
+    }
+    // A string where an array belongs must not be treated as a set of chars.
+    expect(exclusionFor(INGREDIENTS.ghee, { patterns: 'vegan' }).excluded).toBe(false)
   })
 })
 

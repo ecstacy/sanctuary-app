@@ -159,7 +159,12 @@ export default function IngredientDetailPage() {
             <p className="font-body text-sm leading-relaxed">
               {view.exclusion.reason === 'allergen'
                 ? t('diet.excluded.allergen', { key: t(`diet.allergens.${view.exclusion.key}`, view.exclusion.key) })
-                : t('diet.excluded.pattern',  { key: t(`diet.patterns.${view.exclusion.key}`,  view.exclusion.key) })}
+                /* halal/kosher get their own wording: we cannot certify
+                   anything, so the message must say we can't confirm it —
+                   never imply we checked and approved. */
+                : ['halal', 'kosher'].includes(view.exclusion.key)
+                  ? t('diet.excluded.uncertified', { key: t(`diet.patterns.${view.exclusion.key}`, view.exclusion.key) })
+                  : t('diet.excluded.pattern',     { key: t(`diet.patterns.${view.exclusion.key}`, view.exclusion.key) })}
             </p>
           </div>
         )}

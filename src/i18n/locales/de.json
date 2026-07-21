@@ -1485,7 +1485,8 @@
     "targetExplained": "Deine Konstitution ist {{prakriti}}, aber zuletzt war {{vikriti}} erhöht — deshalb beziehen wir das hier auf {{vikriti}}.",
     "excluded": {
       "allergen": "Enthält {{key}}. Du hast uns gesagt, dass das für dich ein Allergen ist — dieses Lebensmittel bleibt aus allen Empfehlungen ausgeschlossen.",
-      "pattern": "Ausgeschlossen durch deine Einstellung „{{key}}“."
+      "pattern": "Ausgeschlossen durch deine Einstellung „{{key}}“.",
+      "uncertified": "Wir können nicht bestätigen, ob dies {{key}} ist — deshalb lassen wir es weg, statt eine Prüfung zu suggerieren."
     },
     "suitability": {
       "balancing": "Beruhigt",

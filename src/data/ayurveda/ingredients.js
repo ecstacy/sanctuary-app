@@ -75,10 +75,14 @@
  *   them overstates the tradition — flagging ginger for pregnancy as though
  *   Charaka forbade it would be wrong. Use this to say which kind it is.
  * @property {string[]} [dietTags]
- *   Pattern-exclusion tags consumed by `exclusionFor()`: 'allium' (Jain /
- *   no-onion-garlic), 'root' (Jain), 'animal_derived' (vegan — honey, which
- *   no category alone catches). Absent means "excluded by nothing".
- * @property {string[]} [allergens]   Canonical allergen keys — see lib/dietSafety.js
+ *   Pattern-exclusion tags consumed by `exclusionFor()`. Use ONLY the keys in
+ *   `DIET_TAGS` (lib/dietSafety.js) — a typo matches no rule and so silently
+ *   filters nothing, which is why the vocabulary is asserted in tests.
+ *   Absent means "excluded by nothing", so omitting a tag is a claim too.
+ * @property {string[]} [allergens]
+ *   Canonical allergen keys — see `ALLERGENS` in lib/dietSafety.js. Dairy is
+ *   implied by the category and need not be repeated; everything else must be
+ *   declared, and `dataset integrity` tests check the ones we can verify.
  * @property {{text:'CS'|'HYP'|'modern', verse?:string, note?:string}} source
  * @property {'draft'|'reviewed'} reviewStatus  Only 'reviewed' is ever shown
  * @property {'high'|'medium'} confidence
@@ -536,6 +540,12 @@ export const INGREDIENTS = {
 
   hardCheese: {
     id: 'hardCheese',
+    // Traditional hard cheeses (parmesan, many gouda and cheddar styles) are
+    // set with animal rennet, which is slaughter-derived — so a vegetarian
+    // excludes them even though the category is dairy. Tagging conservatively:
+    // microbial-rennet versions exist, but assuming the vegetarian-friendly
+    // case would fail in the harmful direction.
+    dietTags: ['animal_rennet'],
     name: 'Hard cheese',
     aliases: ['cheese', 'käse', 'kaese', 'gouda', 'cheddar', 'emmental', 'parmesan'],
     category: 'dairy',
@@ -850,6 +860,10 @@ export const INGREDIENTS = {
   potato: {
     id: 'potato',
     dietTags: ['root'],
+    // Nightshade. 'nightshade' has been a canonical allergen key since chunk 0
+    // and potato was the first food in the dataset that actually is one —
+    // untagged, the filter existed and matched nothing.
+    allergens: ['nightshade'],
     name: 'Potato',
     aliases: ['aloo', 'kartoffel', 'potatoes', 'mashed potato'],
     category: 'vegetable',

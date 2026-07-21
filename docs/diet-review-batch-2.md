@@ -174,10 +174,29 @@ you already approved:
 - **`gingerDry` → deliberately NOT tagged** (permitted in Jain practice)
 
 That asymmetry is a factual claim about Jain observance on rows you've already
-signed off, so it needs your yes. Also added: `honey → animal_derived`, because
-it's a `'sweetener'` and no category rule caught it — **a vegan asking about
-honey was previously told it suited them.** `garlic`/`onion` → `allium`+`root`,
-`potato` → `root`.
+signed off, so it needs your yes.
+
+A second pass hardened the whole exclusion path (see the commit). Two of those
+fixes are **content claims in batch 2 that need your verdict alongside the rest**:
+
+- **`potato` → `allergens: ['nightshade']`.** `'nightshade'` has been a
+  canonical allergen key since chunk 0, and potato is the first food in the
+  dataset that actually is one — so the filter existed and matched nothing.
+- **`hardCheese` → `dietTags: ['animal_rennet']`**, which now excludes it for
+  **vegetarians**, not just vegans. Traditional parmesan, and many gouda and
+  cheddar styles, are set with slaughter-derived rennet. Microbial-rennet
+  versions exist, so this over-excludes some cheeses — deliberately, because
+  the other error tells a vegetarian that slaughter-derived rennet suits them.
+  If you'd rather split into rennet/microbial entries, say so.
+
+Also: `honey → animal_derived` (a `'sweetener'`, so no category rule caught it
+— **a vegan asking about honey was previously told it suited them**),
+`garlic`/`onion` → `allium`+`root`, `potato` → `root`.
+
+**One I did NOT tag, and want your call on:** turmeric is a rhizome like
+ginger. By the same logic as `gingerFresh` it would be Jain-excluded fresh —
+but our entry is generic and mostly describes dried powder, which follows the
+`gingerDry` precedent. Left untagged rather than guessed at.
 
 ## After reviewing
 

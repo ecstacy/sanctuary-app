@@ -136,6 +136,16 @@ Gated behind Plus via the existing `PaywallSheet` (`surface: 'diet_planner'`).
 An Ayurvedic diet tool intersects allergies, medical conditions, pregnancy,
 medication, and disordered eating. Design requirements:
 
+- **The exclusion path fails CLOSED.** Every bug found here so far had one
+  shape: the filter looks present and does nothing, so the user is told an
+  excluded food suits them — invisible from the UI, and always the harmful
+  direction. Four such bugs were live at once (dead `dietTags`, honey passing a
+  vegan filter, `halal`/`kosher` declared with no rule, and case-sensitive
+  matching against client-written jsonb). The standing rules, all tested:
+  category-implied allergens so a forgotten tag can't unfilter a food; input
+  normalisation on both sides; a canonical tag vocabulary (a typo matches no
+  rule); a test asserting every declared pattern has a rule; and for
+  halal/kosher, **exclude rather than imply an approval we cannot certify**.
 - **Allergy/restriction profile** — a small opt-in step (allergens +
   veg/vegan/jain/no-onion-garlic/etc.), stored on `profiles.diet_prefs` (jsonb;
   same client-writable pattern as `notification_prefs`, **not** an entitlement

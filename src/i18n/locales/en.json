@@ -1485,7 +1485,8 @@
     "targetExplained": "Your constitution is {{prakriti}}, but lately you've been running {{vikriti}}-high — so we're reading this against {{vikriti}}.",
     "excluded": {
       "allergen": "Contains {{key}}. You've told us this is an allergen for you, so this food is excluded from anything we suggest.",
-      "pattern": "Excluded by your {{key}} preference."
+      "pattern": "Excluded by your {{key}} preference.",
+      "uncertified": "We can't confirm whether this is {{key}}, so we've left it out rather than imply it's been checked."
     },
     "suitability": {
       "balancing": "Settles",
