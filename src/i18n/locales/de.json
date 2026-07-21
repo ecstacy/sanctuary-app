@@ -1596,5 +1596,36 @@
     "entry": "Ernährungseinstellungen",
     "entryHelp": "Allergien und Ernährungsweise",
     "consentNeededHint": "Stimme oben zu, dann speichern wir das — bis dahin verlässt nichts über deine Gesundheit diesen Bildschirm."
+  },
+  "meals": {
+    "title": "Ernährungsempfehlungen",
+    "plusPitch": "Mahlzeiten-Ideen, abgestimmt auf dein aktuelles Ungleichgewicht, die Jahreszeit und das, was du nicht essen kannst — zusammengestellt aus denselben geprüften Quellen wie alles hier.",
+    "paywallHeadline": "Iss so, wie es dir heute entspricht",
+    "paywallSubhead": "Mahlzeiten-Ideen, die deinem Ungleichgewicht und deinen Einschränkungen folgen, nicht einem Standardplan.",
+    "heading": {
+      "morning": "Frühstücks-Ideen",
+      "midday": "Mittags-Ideen",
+      "evening": "Abend-Ideen"
+    },
+    "forDosha": "Ausgewählt, um dein {{dosha}} zu beruhigen.",
+    "noTarget": "Mach das Dosha-Quiz, dann wird das konkret für dich. Bis dahin sind das einfach gute saisonale Mahlzeiten.",
+    "verdict": {
+      "balancing": "Beruhigt {{dosha}}",
+      "neutral": "Neutral für {{dosha}}",
+      "caution": "Erhöht {{dosha}}"
+    },
+    "notRecipes": "Das sind Mahlzeiten-Ideen, keine Rezepte — keine Mengen, keine Zubereitungsschritte. Koch sie so, wie du ohnehin kochst.",
+    "empty": {
+      "filtered": {
+        "title": "Nichts, das wir sicher empfehlen können",
+        "body": "Wir hätten Ideen für jetzt, aber jede einzelne enthält etwas, das du ausgeschlossen hast. Lieber zeigen wir nichts, als eine deiner Einschränkungen zu übergehen, nur um die Seite zu füllen.",
+        "cta": "Ernährungseinstellungen prüfen"
+      },
+      "unreviewed": {
+        "title": "Noch nicht so weit",
+        "body": "Unsere Mahlzeiten-Ideen werden noch von einem Menschen geprüft, bevor sie live gehen. Das liegt an uns — die Lebensmittelsuche ist bereits geprüft und verfügbar."
+      }
+    },
+    "entryHelp": "Mahlzeiten-Ideen für dein Ungleichgewicht · Plus"
   }
 }

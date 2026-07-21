@@ -545,6 +545,21 @@ export default function DiscoverPage() {
             <p className="font-label text-[9px] text-on-surface-variant/40 uppercase tracking-widest mt-2">
               {t('diet.coverageLine', { reviewed: coverage.reviewed })}
             </p>
+
+            {/* Entry to the Plus meal planner. Not shown as a locked card:
+                the paywall lives on the destination, so a curious tap lands on
+                a page that explains the feature rather than on a wall. */}
+            <button
+              onClick={() => navigate('/meals')}
+              className="w-full mt-3 flex items-center gap-3 bg-surface-container-low rounded-2xl p-3.5 text-left active:scale-[0.99] transition-all"
+            >
+              <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">restaurant_menu</span>
+              <span className="flex-1 min-w-0">
+                <span className="block font-body text-sm font-semibold text-on-surface">{t('meals.title')}</span>
+                <span className="block font-body text-xs text-on-surface-variant/70">{t('meals.entryHelp')}</span>
+              </span>
+              <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+            </button>
           </div>
         )}
 

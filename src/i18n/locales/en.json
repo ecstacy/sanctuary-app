@@ -1596,5 +1596,36 @@
     "entry": "Diet preferences",
     "entryHelp": "Allergies and how you eat",
     "consentNeededHint": "Agree above and we'll save that — until then nothing about your health leaves this screen."
+  },
+  "meals": {
+    "title": "Meal guidance",
+    "plusPitch": "Meal ideas tuned to your current imbalance, the season, and what you can't eat — composed from the same reviewed sources as everything else here.",
+    "paywallHeadline": "Eat for how you are today",
+    "paywallSubhead": "Meal ideas that follow your imbalance and your restrictions, not a generic plan.",
+    "heading": {
+      "morning": "Breakfast ideas",
+      "midday": "Lunch ideas",
+      "evening": "Evening ideas"
+    },
+    "forDosha": "Chosen to settle your {{dosha}}.",
+    "noTarget": "Take the dosha quiz and these become specific to you. For now, these are simply well-made seasonal meals.",
+    "verdict": {
+      "balancing": "Settles {{dosha}}",
+      "neutral": "Neutral for {{dosha}}",
+      "caution": "Increases {{dosha}}"
+    },
+    "notRecipes": "These are meal ideas, not recipes — no quantities and no method. Cook them the way you already cook.",
+    "empty": {
+      "filtered": {
+        "title": "Nothing we can safely suggest",
+        "body": "We had ideas for right now, but every one of them contains something you've asked us to exclude. We'd rather show you nothing than drop one of your restrictions to fill the page.",
+        "cta": "Review my diet preferences"
+      },
+      "unreviewed": {
+        "title": "Not ready yet",
+        "body": "Our meal ideas are still being checked by a person before they go live. That's our work to finish — the food search below is already reviewed and available."
+      }
+    },
+    "entryHelp": "Meal ideas for your imbalance · Plus"
   }
 }
