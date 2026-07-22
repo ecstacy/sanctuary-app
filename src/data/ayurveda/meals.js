@@ -24,6 +24,10 @@
 //  dish, and are these the right ingredients for it?" is a culinary question,
 //  not a Charaka one. It should be much faster than an ingredient batch.
 //
+//  All 12 below were reviewed and signed off on 2026-07-22; see
+//  docs/diet-review-batch-3-meals.md. mealComposer.test.js pins that approved
+//  id set, so a future template cannot reach users by being born 'reviewed'.
+//
 //  ── NO RECIPES ─────────────────────────────────────────────────────────────
 //  No quantities, no steps, no times. Meal IDEAS only (diet-feature-plan §5).
 //  That keeps us out of cooking-instruction liability and away from implying a
@@ -84,7 +88,7 @@ export const MEAL_TEMPLATES = {
     slots: ['morning'],
     seasons: ['autumn', 'winter'],
     prep: 'Cooked soft with plenty of liquid rather than eaten as raw muesli.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   stewedAppleBreakfast: {
@@ -97,7 +101,7 @@ export const MEAL_TEMPLATES = {
     optionalIds: ['cardamom', 'ghee', 'jaggery'],
     slots: ['morning'],
     prep: 'Stewed until soft and eaten warm.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   ricePorridge: {
@@ -107,7 +111,7 @@ export const MEAL_TEMPLATES = {
     optionalIds: ['ghee', 'gingerFresh', 'cumin'],
     slots: ['morning', 'evening'],
     prep: 'Cooked well past the point of firmness, loose rather than fluffy.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   honeyWarmWater: {
@@ -121,7 +125,7 @@ export const MEAL_TEMPLATES = {
     seasons: ['spring'],
     // The one preparation rule in this dataset stated as a prohibition.
     prep: 'Lukewarm, never hot — heating honey is classically held to spoil it.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   // ── Midday ────────────────────────────────────────────────────────────────
@@ -132,7 +136,7 @@ export const MEAL_TEMPLATES = {
     optionalIds: ['ghee', 'gingerFresh', 'cumin', 'turmeric', 'asafoetida', 'corianderSeed'],
     slots: ['midday', 'evening'],
     prep: 'Cooked together until soft enough to need no chewing.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
 
@@ -143,7 +147,7 @@ export const MEAL_TEMPLATES = {
     optionalIds: ['asafoetida', 'cumin', 'gingerFresh', 'turmeric', 'onionCooked'],
     slots: ['midday'],
     prep: 'Soaked well and cooked thoroughly with digestive spices.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   chapatiSabzi: {
@@ -158,7 +162,7 @@ export const MEAL_TEMPLATES = {
     optionalIds: ['spinach', 'ghee', 'cumin', 'garlic', 'onionCooked'],
     slots: ['midday'],
     prep: 'Vegetables cooked in fat rather than eaten raw.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   barleySoup: {
@@ -168,7 +172,7 @@ export const MEAL_TEMPLATES = {
     optionalIds: ['blackPepper', 'gingerDry', 'spinach', 'onionCooked', 'turmeric'],
     slots: ['midday'],
     seasons: ['spring'],
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   buttermilkRice: {
@@ -179,7 +183,7 @@ export const MEAL_TEMPLATES = {
     slots: ['midday'],
     seasons: ['summer'],
     prep: 'Use diluted takra — cultured yoghurt churned with water — rather than plain thick yoghurt. Takra is itself a spectrum of preparations, so this points at the method, not at one exact product.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   potatoWithGhee: {
@@ -195,7 +199,7 @@ export const MEAL_TEMPLATES = {
     // mashed potato. The old core-ghee version derived a gentler verdict that
     // only held if you added the fat.
     prep: 'Mashed with ghee or butter rather than baked dry — the fat is what offsets the dryness.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   // ── Evening ───────────────────────────────────────────────────────────────
@@ -207,7 +211,7 @@ export const MEAL_TEMPLATES = {
     slots: ['evening'],
     seasons: ['autumn', 'winter'],
     prep: 'Long-cooked with digestive spices — it is heavy without them.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   spicedMilk: {
@@ -217,7 +221,7 @@ export const MEAL_TEMPLATES = {
     optionalIds: ['gingerDry', 'turmeric', 'jaggery'],
     slots: ['evening'],
     prep: 'Warmed and spiced rather than drunk cold. Not taken with a salty or sour meal.',
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
   },
 
   // Review batch 3: `vegetableSoupSesame` REMOVED. It was a mixed-vegetable

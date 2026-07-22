@@ -256,12 +256,21 @@ same spice. The meal card now **omits anything the dish already lists**, so
 urad dal shows *"+ Ghee, Asafoetida, Ginger, Garlic"* and *"traditionally
 balanced with Cumin, Black pepper"* — the companions it doesn't already have.
 
-### ⚠️ Nothing was marked reviewed
+### ✅ Signed off 2026-07-22 — all 12 reviewed
 
-You gave corrections but no approvals, so all 12 templates are still `draft`
-and **`/meals` and the Home widget both show nothing** in the build now on your
-phone. That's the gate working as designed, not a bug. Say the word and I'll
-flip the ones you're happy with.
+`/meals`, the Home meal card and the Dinacharya food practices are now **live**.
+`mealComposer.test.js` pins the approved id set, so a future template can't
+reach users by being born `reviewed`.
+
+**Still `draft`, deliberately:** `cardamom` — queued for the next ingredient
+batch as you asked, so "Stewed apple" won't list it yet.
+
+⚠️ **Coverage is visibly thin.** With 12 templates, a Vata and a Pitta user get
+the *identical* top three at midday (rice-with-buttermilk, kitchari, chapati),
+because rice and dal are balancing for both and there is nothing else to
+choose from. It isn't wrong, but it will read as generic. The next batch should
+be breadth — more vegetables above all, which also unblocks the mixed-vegetable
+soup that was removed and gives `chapatiSabzi` real alternatives.
 
 ## What's left to review
 

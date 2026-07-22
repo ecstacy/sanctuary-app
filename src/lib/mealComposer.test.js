@@ -12,7 +12,20 @@ import { SUITABILITY } from './doshaSemantics'
 
 const at = (h) => new Date(`2026-07-21T${String(h).padStart(2, '0')}:00:00`)
 
-/** Run the composer with every template temporarily reviewed. */
+// The templates a human actually signed off (docs/diet-review-batch-3-meals.md,
+// 2026-07-22). Same gate memory as the ingredient set: a template marked
+// reviewed but missing here is a failing test, not a silent ship.
+const REVIEWED_TEMPLATES = [
+  'spicedOatPorridge', 'stewedAppleBreakfast', 'ricePorridge', 'honeyWarmWater',
+  'kitchari', 'chickpeaCurry', 'chapatiSabzi', 'barleySoup', 'buttermilkRice',
+  'potatoWithGhee', 'uradDalStew', 'spicedMilk',
+]
+
+/**
+ * Kept from when every template was draft. Now a no-op in the common case, but
+ * still the honest way to express "with the content available" — and it keeps
+ * working if a future batch lands as draft.
+ */
 function withReviewedTemplates(fn) {
   const before = ALL_MEAL_TEMPLATES.map((t) => t.reviewStatus)
   ALL_MEAL_TEMPLATES.forEach((t) => { t.reviewStatus = 'reviewed' })
@@ -21,13 +34,29 @@ function withReviewedTemplates(fn) {
   }
 }
 
+/** Run `fn` with one template forced to draft, then restore it. */
+function withDraft(id, fn) {
+  const tpl = MEAL_TEMPLATES[id]
+  const before = tpl.reviewStatus
+  tpl.reviewStatus = 'draft'
+  try { return fn() } finally { tpl.reviewStatus = before }
+}
+
 describe('the review gate reaches the composer', () => {
-  it('suggests nothing while templates are unreviewed', () => {
-    // Chunk 4 ships dark on purpose: the templates are drafts until a human
-    // signs them off, exactly as the ingredients were.
-    const out = composeMeals({ now: at(8) })
-    expect(out.ideas).toEqual([])
-    expect(out.coverage.emptyBecauseUnreviewed).toBe(true)
+  it('only templates a human signed off are marked reviewed', () => {
+    const shipped = ALL_MEAL_TEMPLATES.filter((t) => t.reviewStatus === 'reviewed')
+    expect(
+      shipped.map((t) => t.id).sort(),
+      'a template marked reviewed but absent from this list was never checked',
+    ).toEqual([...REVIEWED_TEMPLATES].sort())
+  })
+
+  it('hides a draft template entirely', () => {
+    // The gate still has to work for the next batch, now that none are draft.
+    withDraft('kitchari', () => {
+      const ids = composeMeals({ now: at(13), count: 99 }).ideas.map((i) => i.id)
+      expect(ids).not.toContain('kitchari')
+    })
   })
 
   it('never composes from a draft INGREDIENT even if the template is reviewed', () => {
@@ -266,8 +295,10 @@ describe('ideas assert nothing their ingredients do not', () => {
 })
 
 describe('dailyPractices — the dinacharya surface', () => {
-  it('is empty while the templates are unreviewed', () => {
-    expect(dailyPractices()).toEqual([])
+  it('hides a draft practice', () => {
+    withDraft('honeyWarmWater', () => {
+      expect(dailyPractices().map((p) => p.id)).not.toContain('honeyWarmWater')
+    })
   })
 
   it('returns practices, and ONLY practices', () => {
@@ -348,7 +379,14 @@ describe('determinism and slotting', () => {
   })
 
   it('survives a missing context entirely', () => {
+    // No user, no clock, no dosha, no prefs. Must still return a well-formed
+    // result rather than throwing — the Home widget calls this on first paint,
+    // before the profile has loaded.
     expect(() => composeMeals()).not.toThrow()
-    expect(composeMeals().ideas).toEqual([])
+    const out = composeMeals()
+    expect(Array.isArray(out.ideas)).toBe(true)
+    expect(out.meta.targetDosha).toBeNull()
+    // With no target it still suggests, but offers no personal verdict.
+    for (const idea of out.ideas) expect(idea.contributions).toEqual([])
   })
 })
