@@ -1581,7 +1581,15 @@
       "pattern": "Not {{key}}"
     },
     "balancedBy": "Traditionally balanced with",
-    "balancedByHelp": "Traditionally used to make this food easier to digest. Suggestions, never requirements — nothing here is filtered out if you skip them."
+    "balancedByHelp": "Traditionally used to make this food easier to digest. Suggestions, never requirements — nothing here is filtered out if you skip them.",
+    "verdict": {
+      "balancing": "Good for your {{dosha}} right now",
+      "neutral": "Neutral for your {{dosha}}",
+      "caution": "Go easy on this right now"
+    },
+    "inPractice": "In practice",
+    "reference": "Reference",
+    "takeQuiz": "Take the dosha quiz"
   },
   "dietPrefs": {
     "title": "Food to keep off your plate",

@@ -15,18 +15,10 @@ import PaywallSheet from '../components/PaywallSheet'
 import { searchIngredients, coverageStats, REVIEWED_INGREDIENTS } from '../lib/ingredients'
 import { exclusionFor } from '../lib/dietSafety'
 import { useDietPrefs } from '../hooks/useDietPrefs'
+import FoodIcon from '../components/FoodIcon'
 
 
 const ALL_ASANAS = Object.values(ASANAS)
-
-// Icon per food category. Purely decorative — every card also carries the
-// food's name as text, so nothing depends on recognising the glyph.
-const FOOD_ICONS = {
-  grain: 'grain', legume: 'nutrition', vegetable: 'eco', fruit: 'nutrition',
-  dairy: 'water_full', spice: 'local_fire_department', oil: 'water_drop',
-  nut_seed: 'spa', sweetener: 'icecream', beverage: 'local_cafe',
-  animal: 'set_meal', other: 'restaurant',
-}
 
 // ─── FoodResultRow ────────────────────────────────────────────────────────
 // One reviewed ingredient in the Discover search results. Shows the
@@ -39,10 +31,8 @@ function FoodResultRow({ ingredient, onTap, t, exclusion }) {
       onClick={onTap}
       className="flex items-center gap-3.5 bg-surface-container-low rounded-xl p-3 text-left active:scale-[0.98] transition-all"
     >
-      <div className="w-11 h-11 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0">
-        <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">
-          {FOOD_ICONS[ingredient.category] || FOOD_ICONS.other}
-        </span>
+      <div className="w-11 h-11 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0 text-primary">
+        <FoodIcon ingredient={ingredient} size={24} />
       </div>
       <div className="flex-1 min-w-0">
         <p className="font-body text-sm font-semibold text-on-surface">{ingredient.name}</p>
@@ -527,7 +517,7 @@ export default function DiscoverPage() {
             <p className="font-body text-xs text-on-surface-variant/70 mb-3 leading-relaxed">
               {t('diet.sectionSubtitle')}
             </p>
-            <div className="flex gap-2.5 overflow-x-auto snap-x pb-1 -mx-6 px-6">
+            <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
               {REVIEWED_INGREDIENTS.map(ing => (
                 <button
                   key={ing.id}
@@ -535,9 +525,7 @@ export default function DiscoverPage() {
                   className="flex-shrink-0 w-28 snap-start bg-surface-container-low rounded-2xl p-3 text-left active:scale-[0.97] transition-all"
                   aria-label={ing.name}
                 >
-                  <span aria-hidden="true" className="material-symbols-outlined text-primary text-2xl">
-                    {FOOD_ICONS[ing.category] || FOOD_ICONS.other}
-                  </span>
+                  <span className="text-primary block"><FoodIcon ingredient={ing} size={28} /></span>
                   <p className="font-body text-xs text-on-surface mt-1.5 leading-tight line-clamp-2">{ing.name}</p>
                 </button>
               ))}

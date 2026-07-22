@@ -1581,7 +1581,15 @@
       "pattern": "Nicht {{key}}"
     },
     "balancedBy": "Traditionell ausgeglichen mit",
-    "balancedByHelp": "Traditionell verwendet, um dieses Lebensmittel bekömmlicher zu machen. Vorschläge, keine Vorschriften — nichts wird ausgefiltert, wenn du sie weglässt."
+    "balancedByHelp": "Traditionell verwendet, um dieses Lebensmittel bekömmlicher zu machen. Vorschläge, keine Vorschriften — nichts wird ausgefiltert, wenn du sie weglässt.",
+    "verdict": {
+      "balancing": "Gut für dein {{dosha}} gerade jetzt",
+      "neutral": "Neutral für dein {{dosha}}",
+      "caution": "Zurzeit lieber sparsam damit"
+    },
+    "inPractice": "In der Praxis",
+    "reference": "Nachschlagen",
+    "takeQuiz": "Dosha-Quiz starten"
   },
   "dietPrefs": {
     "title": "Was nicht auf deinen Teller soll",
