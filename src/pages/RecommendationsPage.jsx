@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
@@ -6,6 +6,11 @@ import { searchRecommendations, POPULAR_SEARCHES } from '../data/recommendations
 import { localizeRecommendation } from '../i18n/contentI18n'
 import * as analytics from '../lib/analytics'
 import useScrollDepth from '../hooks/useScrollDepth'
+import { searchIngredients } from '../lib/ingredients'
+import { exclusionFor } from '../lib/dietSafety'
+import { useDietPrefs } from '../hooks/useDietPrefs'
+import FoodIcon from '../components/FoodIcon'
+import { track, EVENTS } from '../lib/track'
 
 export default function RecommendationsPage() {
   const navigate = useNavigate()
@@ -26,6 +31,7 @@ export default function RecommendationsPage() {
   // searches-table log picks the right `source` value. Updated on every
   // handleSearch call and on mount when we auto-run the initial query.
   const [lastSearchSource, setLastSearchSource] = useState(null)
+  const { prefs: dietPrefs } = useDietPrefs()
   // Refs guard against double-logging (StrictMode, re-renders).
   const lastLoggedShownKeyRef = useRef(null)
   const lastLoggedSearchKeyRef = useRef(null)
@@ -147,6 +153,14 @@ export default function RecommendationsPage() {
     }
   }
 
+  // ── Foods ─────────────────────────────────────────────────────────────
+  // Discover shows food matches inline, but pressing Enter navigated HERE,
+  // which only ever searched practices — so submitting a search silently
+  // dropped every food result. Searching "rice" showed basmati rice until you
+  // pressed the button that means "search". This page now answers the same
+  // question the box does.
+  const foodSearch = useMemo(() => searchIngredients(query), [query])
+
   const topResult = localizeRecommendation(results[0])
   const otherResults = results.slice(1)
 
@@ -221,8 +235,58 @@ export default function RecommendationsPage() {
           </div>
         )}
 
-        {/* ── No results ── */}
-        {hasSearched && results.length === 0 && (
+        {/* ── Food matches ──────────────────────────────────────────────
+            Rendered before the practice results and independently of them: a
+            food query can match here while matching no asana at all, which is
+            exactly the case that used to show "no matches". */}
+        {foodSearch.results.length > 0 && (
+          <div className="mb-8 stagger-2">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2.5">
+              {t('diet.resultsMatching', { query: query.trim() })}
+            </p>
+            <div className="flex flex-col gap-2">
+              {foodSearch.results.map((ing) => {
+                const ex = exclusionFor(ing, dietPrefs)
+                return (
+                  <button
+                    key={ing.id}
+                    onClick={() => {
+                      track(EVENTS.CTA_CLICKED, { cta_id: 'recommendations_food_result', ingredient_id: ing.id })
+                      navigate(`/ingredient/${ing.id}`)
+                    }}
+                    className="flex items-center gap-3.5 bg-surface-container-low rounded-xl p-3 text-left active:scale-[0.98] transition-all"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-primary-container/20 flex items-center justify-center flex-shrink-0 text-primary">
+                      <FoodIcon ingredient={ing} size={24} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-body text-sm font-semibold text-on-surface">{ing.name}</p>
+                      {ing.sanskrit && (
+                        <p className="font-body text-xs text-on-surface-variant/60">{ing.sanskrit}</p>
+                      )}
+                      {ex.excluded && (
+                        <span className={`inline-block mt-1 px-2 py-0.5 rounded-full font-label text-[8px] uppercase tracking-wide ${
+                          ex.reason === 'allergen'
+                            ? 'bg-error-container/70 text-on-error-container'
+                            : 'bg-surface-container-high text-on-surface-variant'
+                        }`}>
+                          {ex.reason === 'allergen'
+                            ? t('diet.badge.allergen', { key: t(`diet.allergens.${ex.key}`, ex.key) })
+                            : t('diet.badge.pattern',  { key: t(`diet.patterns.${ex.key}`,  ex.key) })}
+                        </span>
+                      )}
+                    </div>
+                    <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── No results ──
+            Only a real dead end when NEITHER practices nor foods matched. */}
+        {hasSearched && results.length === 0 && foodSearch.results.length === 0 && (
           <div className="flex flex-col items-center text-center py-12 stagger-2">
             <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-5">
               <span className="material-symbols-outlined text-on-surface-variant/40 text-2xl">search_off</span>
