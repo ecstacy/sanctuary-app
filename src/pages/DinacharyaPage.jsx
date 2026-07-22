@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { DINACHARYA_PRACTICES, DOSHA_TIMES } from '../data/ayurveda/dinacharya'
 import { localizeDinacharyaPractice, localizeDoshaTimeNote } from '../i18n/contentI18n'
 import { track, screen, EVENTS } from '../lib/track'
 import useScrollDepth from '../hooks/useScrollDepth'
+import { useDietPrefs } from '../hooks/useDietPrefs'
+import { dailyPractices } from '../lib/mealComposer'
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  DinacharyaPage — `/dinacharya`
@@ -152,6 +154,10 @@ export default function DinacharyaPage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const [openId, setOpenId] = useState(null)
+  const { prefs: dietPrefs } = useDietPrefs()
+  // Safety filter applies here too: a traditional practice is not offered to
+  // someone who has excluded its ingredient, however classical it is.
+  const foodPractices = useMemo(() => dailyPractices({ dietPrefs }), [dietPrefs])
   useScrollDepth('dinacharya')
 
   const period = currentDoshaPeriod()
@@ -213,6 +219,37 @@ export default function DinacharyaPage() {
           </button>
         </div>
       </div>
+
+      {/* ── Food practices ───────────────────────────────────────────────
+          Templates marked `kind: 'practice'` in the diet dataset — dinacharya
+          observances rather than meals, which is exactly why they are excluded
+          from /meals and surfaced here instead. Renders nothing when there are
+          none (they are all draft today), so this page is unchanged until the
+          content is reviewed. */}
+      {foodPractices.length > 0 && (
+        <div className="px-5 mt-6">
+          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">
+            {t('dinacharya.foodPractices')}
+          </p>
+          <div className="flex flex-col gap-2.5">
+            {foodPractices.map((fp) => (
+              <button
+                key={fp.id}
+                onClick={() => {
+                  track(EVENTS.CTA_CLICKED, { cta_id: 'dinacharya_food_practice', route_name: 'dinacharya', meal_id: fp.id })
+                  navigate(`/ingredient/${fp.core[0].id}`)
+                }}
+                className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.99] transition-all"
+              >
+                <p className="font-body text-sm font-semibold text-on-surface">{fp.name}</p>
+                {fp.prep && (
+                  <p className="font-body text-xs text-on-surface-variant/70 mt-1.5 leading-relaxed">{fp.prep}</p>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Section label */}
       <div className="px-5 mt-6 mb-3 flex items-baseline justify-between">

@@ -6,9 +6,15 @@
 //    • consent.js   → aggregate product analytics (Art. 6 legitimate-interest-
 //                     adjacent; opt-in for cross-user analytics)
 //    • this module  → dosha results, mood/energy/stress check-ins, sleep
-//                     self-reports, vikriti tracking. These are SPECIAL
-//                     CATEGORY data under Art. 9; processing them needs
-//                     EXPLICIT consent (Art. 9(2)(a)).
+//                     self-reports, vikriti tracking, and (v2) ALLERGIES and
+//                     DIETARY RESTRICTIONS. These are SPECIAL CATEGORY data
+//                     under Art. 9; processing them needs EXPLICIT consent
+//                     (Art. 9(2)(a)).
+//
+//  ⚠ The consent TEXT defines the scope, not this comment. If you add a new
+//  category of health data, widen doshaQuiz.consentText AND bump
+//  CONSENT_VERSION — otherwise the app is processing data the user never
+//  agreed to, and the stored consent record cannot demonstrate otherwise.
 //
 //  Keeping them separate means a user can't accidentally grant one by
 //  toggling the other, and the audit trail for each is clean.
@@ -39,7 +45,15 @@
 const STORAGE_KEY = 'sanctuary.healthConsent.v1'
 
 // Bump this when the consent wording materially changes → forces re-prompt.
-export const CONSENT_VERSION = 1
+//
+// v2 (2026-07-21) — diet feature. v1 said "dosha results and wellness inputs
+// (mood, energy, sleep)", which does NOT cover an allergy or a medical dietary
+// restriction. Storing those under v1 would have been processing special-
+// category data outside the scope the user agreed to, so the text was widened
+// and the version bumped to re-prompt. Done pre-launch, when the re-prompt
+// costs essentially nothing; the same change after launch would be far more
+// expensive, which is the argument for getting consent scope right early.
+export const CONSENT_VERSION = 2
 
 const DEFAULT_STATE = Object.freeze({
   granted: false,

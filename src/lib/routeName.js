@@ -36,12 +36,15 @@ const STATIC = {
   '/routine':          'routine',
   '/dietary':          'dietary_guidance',
   '/dinacharya':       'dinacharya',
+  '/diet-preferences': 'diet_prefs',
+  '/meals':            'meal_guidance',
 }
 
 // Patterns for parameterized routes. First match wins. Each tester returns
 // the canonical route_name string (or null).
 const PATTERNS = [
   [/^\/asana\/[^/]+$/,            'asana_detail'],
+  [/^\/ingredient\/[^/]+$/,       'ingredient_detail'],
   [/^\/pranayama\/[^/]+$/,        'pranayama_detail'],
   [/^\/practice\/asana\/[^/]+$/,  'practice_single'],
   [/^\/practice\/[^/]+$/,         'practice'],

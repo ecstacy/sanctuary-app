@@ -792,6 +792,21 @@ export default function ProfilePage() {
             drift, streak save) land in a later iteration. The pref
             schema in notification_prefs is future-proofed for both. */}
         <div className="bg-surface-container rounded-lg overflow-hidden stagger-3 mb-5">
+          {/* Diet preferences — allergens + patterns. Lives above the
+              notification block because it is a safety setting, not a comfort
+              one: what is recorded there hard-filters every food suggestion. */}
+          <button
+            onClick={() => navigate('/diet-preferences')}
+            className="w-full px-5 py-4 border-b border-surface-container-high flex items-center gap-4 text-left active:bg-surface-container-high/40 transition-colors"
+          >
+            <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">restaurant</span>
+            <div className="flex-1 min-w-0">
+              <p className="font-body text-sm font-semibold text-on-surface">{t('dietPrefs.entry')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant/70 mt-0.5">{t('dietPrefs.entryHelp')}</p>
+            </div>
+            <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
+          </button>
+
           <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
             {t('profile.notif.section')}
           </p>

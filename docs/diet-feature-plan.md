@@ -136,6 +136,27 @@ Gated behind Plus via the existing `PaywallSheet` (`surface: 'diet_planner'`).
 An Ayurvedic diet tool intersects allergies, medical conditions, pregnancy,
 medication, and disordered eating. Design requirements:
 
+- **The exclusion path fails CLOSED.** Every bug found here so far had one
+  shape: the filter looks present and does nothing, so the user is told an
+  excluded food suits them — invisible from the UI, and always the harmful
+  direction. Four such bugs were live at once (dead `dietTags`, honey passing a
+  vegan filter, `halal`/`kosher` declared with no rule, and case-sensitive
+  matching against client-written jsonb). The standing rules, all tested:
+  category-implied allergens so a forgotten tag can't unfilter a food; input
+  normalisation on both sides; a canonical tag vocabulary (a typo matches no
+  rule); a test asserting every declared pattern has a rule; and for
+  halal/kosher, **exclude rather than imply an approval we cannot certify**.
+- **Allergen vs preference is a real distinction, not a wording choice.** An
+  allergen is a safety constraint whose two failure directions are wildly
+  asymmetric, so we over-restrict without hesitation. A preference (vegan,
+  Jain, no-nightshade) is a choice where BOTH errors cost something — telling a
+  vegetarian all hard cheese is off-limits is a wrong answer, not a safe one.
+  Keep the vocabularies separate: `nightshade` was briefly an allergen and had
+  to be moved, because a botanical family is not a medical category and the UI
+  was calling an avoidance choice an allergy.
+  ⚠ **Chunk 3 note:** `diet_prefs` storage does not exist yet, so no stored
+  user data carries the old key. When it lands, `nightshade` belongs under
+  patterns (`no_nightshade`) and must not appear in the allergen picker.
 - **Allergy/restriction profile** — a small opt-in step (allergens +
   veg/vegan/jain/no-onion-garlic/etc.), stored on `profiles.diet_prefs` (jsonb;
   same client-writable pattern as `notification_prefs`, **not** an entitlement
@@ -190,10 +211,10 @@ settling Vata"). Turns a correctness nuance into a trust-building moment.
 |---|---|---|
 | **0 — Foundations** | Ingredient schema in `ingredients.js`; safety/disclaimer + seek-help framework; copyright policy; analytics events; i18n scaffolding | No user-facing feature yet; sets the guardrails first |
 | **1 — Dataset v1** | ~60 highest-frequency foods fully classified + **Akash-reviewed** (grains, dals, common veg/fruit, dairy, core spices, oils, sweeteners, common beverages). Expandable to ~200 | The real content lift. Claude drafts from the Charaka framework; Akash fact-checks against his copies. `reviewStatus` gates shipping |
-| **2 — Search (free)** | Ingredient/dish search + result view with why/timing/cautions/citation/confidence; coverage-honest misses | Reuses Discover search; free tier |
-| **3 — Diet profile** | Allergy/restriction opt-in + `profiles.diet_prefs` storage + hard-filter plumbing | Safety foundation for the planner |
-| **4 — Meal composer (Plus)** | `mealComposer.js` + meal-idea templates + the planner UI; vikriti/prakriti/season/allergies/available-ingredients | Mirrors dailySession.js; Plus-gated |
-| **5 — Integration & polish** | Entry points (Discover, Dosha profile, Home?), Plus funnel wiring, a11y pass, analytics verification, on-device check | |
+| **2 — Search (free)** | ✅ **Shipped 2026-07-21.** Food search inside the Discover box + a Food & Ayurveda section + `/ingredient/:id` detail view (dosha effect, why, classical properties, preparation, combos, cautions, citation + confidence); coverage-honest misses. Target dosha resolved by `lib/dietTarget.js` (vikriti → prakriti → none). Route is PUBLIC — the free-tier hook, and the Discover strip is reachable anonymously | Reuses Discover search; free tier |
+| **3 — Diet profile** | ✅ **Shipped 2026-07-21.** `/diet-preferences` picker (allergens vs patterns, visually separate), `profiles.diet_prefs` jsonb (migration 017), `useDietPrefs` as the single read/write path, exclusion badges in Discover food search, entry point in Profile. **Health consent bumped to v2** — v1's text covered "dosha results and wellness inputs" and did NOT cover an allergy, so storing one under it would have been processing outside consent | Safety foundation for the planner |
+| **4 — Meal composer (Plus)** | ✅ **Built 2026-07-21, ships dark.** `lib/mealComposer.js` (pure, seeded, mirrors dailySession) + 14 templates in `data/ayurveda/meals.js` + `/meals` Plus-gated UI. **Templates assert NO Ayurvedic facts** — no doshaEffect, no authored why, no citation; everything is derived at runtime from reviewed ingredient rows and shown with its inputs. A test enforces that. Templates are `draft` pending a CULINARY review (docs/diet-review-batch-3-meals.md) | Mirrors dailySession.js; Plus-gated |
+| **5 — Integration & polish** | ✅ **Built 2026-07-21.** Home "meal of the day" widget (renders NOTHING rather than an empty card), entry points from Discover and Dietary Guidance, `kind: 'practice'` templates surfaced on Dinacharya via `dailyPractices()`, a11y pass (contrast + touch targets), analytics documented. Remaining: on-device check (task #32) | |
 | **6 — (Later, optional) Constrained LLM** | NL ingredient parsing ("what can I make with rice + spinach") + prose rephrasing that ONLY restates retrieved curated facts. Needs guardrails + an eval set + explicit "adds nothing new" contract | Only after the deterministic core proves out; keeps the hallucination bar |
 
 ## 10. Decided (2026-07-16)

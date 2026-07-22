@@ -217,6 +217,21 @@ export const EVENTS = Object.freeze({
   // Acquisition — fired once per install when the Play Install Referrer
   // carries utm_* params (see lib/installReferrer.js + growth-plan §4).
   INSTALL_ATTRIBUTED:       'install_attributed',
+
+  // ── Diet & nutrition (docs/diet-feature-plan.md §8) ──────────────────────
+  // DIET_SEARCH always carries `coverage_hit` — the miss rate is the single
+  // most useful signal for what to add to the dataset next, and it's only
+  // knowable if we log misses as deliberately as hits.
+  // INGREDIENT_VIEWED carries `confidence` so we can see how much of what
+  // users actually read is property-derived rather than classically cited.
+  // DIET_SAFETY_TRIGGERED records that a seek-help path fired, by CATEGORY
+  // only — never the query text, which could carry health details.
+  DIET_SEARCH:              'diet_search',
+  INGREDIENT_VIEWED:        'ingredient_viewed',
+  DIET_PREFS_SET:           'diet_prefs_set',
+  DIET_SAFETY_TRIGGERED:    'diet_safety_triggered',
+  MEAL_COMPOSED:            'meal_composed',
+  MEAL_IDEA_TAPPED:         'meal_idea_tapped',
 })
 
 // ─── Internal state ──────────────────────────────────────────────────────

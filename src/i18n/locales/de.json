@@ -908,7 +908,8 @@
     "safetyAria": "Sicherheitshinweise",
     "doshaClock": "Die Dosha-Uhr",
     "sourceLabel": "Quelle:",
-    "clockSource": "Quelle: Charaka Samhita Sutrasthana 5 (primär) + Sutrasthana 7 (natürliche Bedürfnisse) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel)."
+    "clockSource": "Quelle: Charaka Samhita Sutrasthana 5 (primär) + Sutrasthana 7 (natürliche Bedürfnisse) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel).",
+    "foodPractices": "Ernährungspraktiken"
   },
   "dietary": {
     "goBack": "Zurück",
@@ -924,7 +925,8 @@
     "seasonalNote": "Saisonaler Hinweis",
     "sixTastes": "Die sechs Geschmäcker (Charaka-Referenz)",
     "unknownDosha": "Unbekanntes Dosha: {{dosha}}",
-    "sourceLabel": "Quelle:"
+    "sourceLabel": "Quelle:",
+    "lookUpFood": "Jedes Lebensmittel nachschlagen, mit Quelle"
   },
   "recommendations": {
     "goBack": "Zurück",
@@ -1097,7 +1099,7 @@
     "introBody": "Im Ayurveda ist dein Dosha deine einzigartige Blaupause — die elementaren Kräfte, die deinen Körper, Geist und deine Seele formen.",
     "honestyPrimer": "Antworte danach, wie du den Großteil deines Lebens warst — nicht danach, wie du dich diese Woche fühlst.",
     "introMeta": "15 Fragen · etwa 90 Sekunden",
-    "consentText": "Ich stimme zu, dass The Sanctuary meine Dosha-Ergebnisse und Wohlbefindens-Angaben (Stimmung, Energie, Schlaf) verarbeitet, um meine Praxis zu personalisieren, wie in der Datenschutzerklärung beschrieben. Dies sind gesundheitsbezogene Daten; ich kann meine Einwilligung jederzeit in den Einstellungen widerrufen.",
+    "consentText": "Ich willige ein, dass The Sanctuary meine Dosha-Ergebnisse, Wohlbefinden-Angaben (Stimmung, Energie, Schlaf) sowie von mir gespeicherte Ernährungseinschränkungen oder Allergien verarbeitet, um Praxis und Ernährungsempfehlungen zu personalisieren – wie in der Datenschutzerklärung beschrieben. Es handelt sich um gesundheitsbezogene Daten; ich kann meine Einwilligung jederzeit in den Einstellungen widerrufen.",
     "startCta": "Mein Dosha entdecken",
     "keepCurrent": "Aktuelles Ergebnis behalten: {{dosha}}",
     "calc": {
@@ -1453,5 +1455,189 @@
     "body": "Du hast zweimal geübt — schön. Möchtest du eine sanfte tägliche Erinnerung, damit es zur Gewohnheit wird?",
     "enable": "Erinnerungen aktivieren",
     "notNow": "Nicht jetzt"
+  },
+  "diet": {
+    "sectionTitle": "Ernährung & Ayurveda",
+    "sectionSubtitle": "Wie ein Lebensmittel auf deine Doshas wirkt — aus den klassischen Texten, von Menschen geprüft.",
+    "searchPlaceholder": "Lebensmittel suchen — Reis, Ghee, Kaffee…",
+    "searchAria": "Lebensmittel suchen",
+    "resultsMatching": "Lebensmittel zu „{{query}}“",
+    "browseAll": "Lebensmittel entdecken",
+    "coverageLine": "{{reviewed}} Lebensmittel bisher geprüft",
+    "miss": {
+      "title": "Noch nicht in unserer Referenz",
+      "body": "Zu diesem Lebensmittel haben wir noch keine verlässliche ayurvedische Einordnung — und wir raten lieber nicht. Jeder Eintrag wird von einem Menschen anhand der klassischen Texte geprüft, bevor er erscheint."
+    },
+    "doshaEffect": "Wirkung auf die Doshas",
+    "why": "Warum",
+    "properties": "Klassische Eigenschaften",
+    "preparation": "Zubereitung",
+    "bestEnjoyed": "Am besten",
+    "combosToAvoid": "Besser nicht kombinieren mit",
+    "cautions": "Hinweise",
+    "source": "Woher das stammt",
+    "rasa": "Geschmack",
+    "virya": "Wirkkraft",
+    "vipaka": "Nach der Verdauung",
+    "guna": "Eigenschaften",
+    "citedAs": "Charaka Samhita, {{verse}}",
+    "derived": "Aus den Eigenschaften abgeleitet — nicht klassisch belegt",
+    "noTarget": "Mach das Dosha-Quiz, dann sagen wir dir, was das konkret für dich bedeutet.",
+    "targetSimple": "Bezogen auf deine {{dosha}}-Konstitution.",
+    "targetExplained": "Deine Konstitution ist {{prakriti}}, aber zuletzt war {{vikriti}} erhöht — deshalb beziehen wir das hier auf {{vikriti}}.",
+    "excluded": {
+      "allergen": "Enthält {{key}}. Du hast uns gesagt, dass das für dich ein Allergen ist — dieses Lebensmittel bleibt aus allen Empfehlungen ausgeschlossen.",
+      "pattern": "Ausgeschlossen durch deine Einstellung „{{key}}“.",
+      "uncertified": "Wir können nicht bestätigen, ob dies {{key}} ist — deshalb lassen wir es weg, statt eine Prüfung zu suggerieren."
+    },
+    "suitability": {
+      "balancing": "Beruhigt",
+      "neutral": "Neutral",
+      "caution": "Erhöht"
+    },
+    "confidence": {
+      "high": "Klassisch belegt",
+      "medium": "Abgeleitet"
+    },
+    "dosha": {
+      "vata": "Vata",
+      "pitta": "Pitta",
+      "kapha": "Kapha"
+    },
+    "tastes": {
+      "sweet": "Süß",
+      "sour": "Sauer",
+      "salty": "Salzig",
+      "pungent": "Scharf",
+      "bitter": "Bitter",
+      "astringent": "Herb"
+    },
+    "viryas": {
+      "heating": "Wärmend",
+      "cooling": "Kühlend",
+      "neutral": "Neutral"
+    },
+    "times": {
+      "morning": "Morgens",
+      "midday": "Mittags",
+      "evening": "Abends"
+    },
+    "seasons": {
+      "spring": "Frühling",
+      "summer": "Sommer",
+      "autumn": "Herbst",
+      "winter": "Winter"
+    },
+    "allergens": {
+      "dairy": "Milchprodukte",
+      "gluten": "Gluten",
+      "nuts": "Nüsse",
+      "peanuts": "Erdnüsse",
+      "soy": "Soja",
+      "egg": "Ei",
+      "fish": "Fisch",
+      "shellfish": "Schalentiere",
+      "sesame": "Sesam",
+      "mustard": "Senf"
+    },
+    "patterns": {
+      "vegetarian": "vegetarisch",
+      "vegan": "vegan",
+      "jain": "Jain",
+      "no_onion_garlic": "ohne Zwiebel und Knoblauch",
+      "halal": "halal",
+      "kosher": "koscher",
+      "no_nightshade": "ohne Nachtschattengewächse"
+    },
+    "cautionFlags": {
+      "pregnancy": "Schwangerschaft",
+      "acid_reflux": "Sodbrennen",
+      "anxiety": "Unruhe",
+      "insomnia": "Schlaf",
+      "lactose_intolerance": "Laktose",
+      "infant_under_1": "Säuglinge unter 1 Jahr"
+    },
+    "gunas": {
+      "dense": "Dicht",
+      "dry": "Trocken",
+      "heavy": "Schwer",
+      "light": "Leicht",
+      "nourishing": "Nährend",
+      "oily": "Ölig",
+      "penetrating": "Durchdringend",
+      "rough": "Rau",
+      "scraping": "Schabend",
+      "sharp": "Scharf",
+      "slightly_unctuous": "Leicht ölig",
+      "soft": "Weich",
+      "soft_when_cooked": "Weich gekocht",
+      "stable": "Stabil",
+      "unctuous": "Ölig",
+      "subtle_penetrating": "Fein durchdringend",
+      "moist": "Feucht"
+    },
+    "badge": {
+      "allergen": "Enthält {{key}}",
+      "pattern": "Nicht {{key}}"
+    },
+    "balancedBy": "Traditionell ausgeglichen mit",
+    "balancedByHelp": "Traditionell verwendet, um dieses Lebensmittel bekömmlicher zu machen. Vorschläge, keine Vorschriften — nichts wird ausgefiltert, wenn du sie weglässt."
+  },
+  "dietPrefs": {
+    "title": "Was nicht auf deinen Teller soll",
+    "intro": "Alles, was du hier einträgst, wird aus jedem Ernährungsvorschlag entfernt — nicht nur niedriger gewichtet, sondern entfernt. Du kannst es jederzeit ändern.",
+    "consentTitle": "Bevor wir das speichern",
+    "consentCta": "Ich stimme zu — Einstellungen speichern",
+    "allergensTitle": "Allergien & Unverträglichkeiten",
+    "allergensHelp": "Gilt als absoluter Filter. Ein ayurvedisches „empfehlenswert“ setzt sich nie über eine Allergie hinweg.",
+    "patternsTitle": "Wie du isst",
+    "patternsHelp": "Vorlieben und Ernährungsformen. Werden genauso gefiltert, aber als Entscheidung beschrieben, nicht als Sicherheitsgrenze.",
+    "saving": "Wird gespeichert…",
+    "savedSummary": "Gespeichert — {{allergens}} Allergien, {{patterns}} Vorlieben.",
+    "notSetYet": "Noch nichts eingetragen. Eine leere Liste heißt, dass du uns nichts gesagt hast — nicht, dass nichts zutrifft.",
+    "syncFailed": "Wir konnten das nicht mit deinem Konto synchronisieren, es ist nur auf diesem Gerät gespeichert. Dein Filter funktioniert hier weiterhin. Wir versuchen es beim nächsten Öffnen erneut.",
+    "notExhaustive": "Diese Liste deckt die häufigsten Einschränkungen ab, nicht jede mögliche. Fehlt etwas, das du brauchst, prüfe die Zutaten bitte selbst — das sagen wir lieber deutlich, als den Eindruck zu erwecken, die Liste sei vollständig.",
+    "entry": "Ernährungseinstellungen",
+    "entryHelp": "Allergien und Ernährungsweise",
+    "consentNeededHint": "Stimme oben zu, dann speichern wir das — bis dahin verlässt nichts über deine Gesundheit diesen Bildschirm."
+  },
+  "meals": {
+    "title": "Ernährungsempfehlungen",
+    "plusPitch": "Mahlzeiten-Ideen, abgestimmt auf dein aktuelles Ungleichgewicht, die Jahreszeit und das, was du nicht essen kannst — zusammengestellt aus denselben geprüften Quellen wie alles hier.",
+    "paywallHeadline": "Iss so, wie es dir heute entspricht",
+    "paywallSubhead": "Mahlzeiten-Ideen, die deinem Ungleichgewicht und deinen Einschränkungen folgen, nicht einem Standardplan.",
+    "heading": {
+      "morning": "Frühstücks-Ideen",
+      "midday": "Mittags-Ideen",
+      "evening": "Abend-Ideen"
+    },
+    "forDosha": "Ausgewählt, um dein {{dosha}} zu beruhigen.",
+    "noTarget": "Mach das Dosha-Quiz, dann wird das konkret für dich. Bis dahin sind das einfach gute saisonale Mahlzeiten.",
+    "verdict": {
+      "balancing": "Beruhigt {{dosha}}",
+      "neutral": "Neutral für {{dosha}}",
+      "caution": "Erhöht {{dosha}}"
+    },
+    "notRecipes": "Das sind Mahlzeiten-Ideen, keine Rezepte — keine Mengen, keine Zubereitungsschritte. Koch sie so, wie du ohnehin kochst.",
+    "empty": {
+      "filtered": {
+        "title": "Nichts, das wir sicher empfehlen können",
+        "body": "Wir hätten Ideen für jetzt, aber jede einzelne enthält etwas, das du ausgeschlossen hast. Lieber zeigen wir nichts, als eine deiner Einschränkungen zu übergehen, nur um die Seite zu füllen.",
+        "cta": "Ernährungseinstellungen prüfen"
+      },
+      "unreviewed": {
+        "title": "Noch nicht so weit",
+        "body": "Unsere Mahlzeiten-Ideen werden noch von einem Menschen geprüft, bevor sie live gehen. Das liegt an uns — die Lebensmittelsuche ist bereits geprüft und verfügbar."
+      }
+    },
+    "entryHelp": "Mahlzeiten-Ideen für dein Ungleichgewicht · Plus",
+    "balancedBy": "Traditionell ausgeglichen mit {{list}}.",
+    "kind": {
+      "preparation": "Beilage"
+    },
+    "card": {
+      "seeMore": "Weitere Ideen für heute",
+      "seeMorePlus": "Mehr sehen mit Plus"
+    }
   }
 }

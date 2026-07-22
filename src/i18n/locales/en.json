@@ -908,7 +908,8 @@
     "safetyAria": "Safety considerations",
     "doshaClock": "The Dosha Clock",
     "sourceLabel": "Source:",
-    "clockSource": "Source: Charaka Samhita Sutrasthana 5 (primary) + Sutrasthana 7 (natural urges) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel)."
+    "clockSource": "Source: Charaka Samhita Sutrasthana 5 (primary) + Sutrasthana 7 (natural urges) + Vagbhata Ashtanga Hridayam Sutrasthana 2 (parallel).",
+    "foodPractices": "Food practices"
   },
   "dietary": {
     "goBack": "Go back",
@@ -924,7 +925,8 @@
     "seasonalNote": "Seasonal Note",
     "sixTastes": "The Six Tastes (Charaka Reference)",
     "unknownDosha": "Unknown dosha: {{dosha}}",
-    "sourceLabel": "Source:"
+    "sourceLabel": "Source:",
+    "lookUpFood": "Look up any food, with its source"
   },
   "recommendations": {
     "goBack": "Go back",
@@ -1097,7 +1099,7 @@
     "introBody": "In Ayurveda, your Dosha is your unique blueprint — the elemental forces that shape your body, mind, and spirit.",
     "honestyPrimer": "Answer based on how you've been most of your life — not how you feel this week.",
     "introMeta": "15 questions · about 90 seconds",
-    "consentText": "I consent to The Sanctuary processing my dosha results and wellness inputs (mood, energy, sleep) to personalize my practice, as described in the Privacy Policy. This is health-related data; I can withdraw consent anytime in Settings.",
+    "consentText": "I consent to The Sanctuary processing my dosha results, wellness inputs (mood, energy, sleep) and any dietary restrictions or allergies I choose to save, to personalize my practice and food guidance, as described in the Privacy Policy. This is health-related data; I can withdraw consent anytime in Settings.",
     "startCta": "Discover My Dosha",
     "keepCurrent": "Keep current result: {{dosha}}",
     "calc": {
@@ -1453,5 +1455,189 @@
     "body": "You’ve practiced twice — nice. Want a gentle daily reminder so it becomes a habit?",
     "enable": "Enable reminders",
     "notNow": "Not now"
+  },
+  "diet": {
+    "sectionTitle": "Food & Ayurveda",
+    "sectionSubtitle": "How a food acts on your doshas — from the classical texts, checked by a human.",
+    "searchPlaceholder": "Search a food — rice, ghee, coffee…",
+    "searchAria": "Search foods",
+    "resultsMatching": "Foods matching “{{query}}”",
+    "browseAll": "Browse foods",
+    "coverageLine": "{{reviewed}} foods reviewed so far",
+    "miss": {
+      "title": "Not in our reference yet",
+      "body": "We don't have reliable Ayurvedic guidance on this food yet, and we'd rather say so than guess. Every entry here is checked against the classical texts by a person before it appears."
+    },
+    "doshaEffect": "Effect on the doshas",
+    "why": "Why",
+    "properties": "Classical properties",
+    "preparation": "Preparation",
+    "bestEnjoyed": "Best enjoyed",
+    "combosToAvoid": "Best not combined with",
+    "cautions": "Cautions",
+    "source": "Where this comes from",
+    "rasa": "Taste",
+    "virya": "Potency",
+    "vipaka": "After digestion",
+    "guna": "Qualities",
+    "citedAs": "Charaka Samhita, {{verse}}",
+    "derived": "Derived from its properties — not classically cited",
+    "noTarget": "Take the dosha quiz and we'll tell you what this means for you specifically.",
+    "targetSimple": "Read against your {{dosha}} constitution.",
+    "targetExplained": "Your constitution is {{prakriti}}, but lately you've been running {{vikriti}}-high — so we're reading this against {{vikriti}}.",
+    "excluded": {
+      "allergen": "Contains {{key}}. You've told us this is an allergen for you, so this food is excluded from anything we suggest.",
+      "pattern": "Excluded by your {{key}} preference.",
+      "uncertified": "We can't confirm whether this is {{key}}, so we've left it out rather than imply it's been checked."
+    },
+    "suitability": {
+      "balancing": "Settles",
+      "neutral": "Neutral",
+      "caution": "Increases"
+    },
+    "confidence": {
+      "high": "Classically cited",
+      "medium": "Derived"
+    },
+    "dosha": {
+      "vata": "Vata",
+      "pitta": "Pitta",
+      "kapha": "Kapha"
+    },
+    "tastes": {
+      "sweet": "Sweet",
+      "sour": "Sour",
+      "salty": "Salty",
+      "pungent": "Pungent",
+      "bitter": "Bitter",
+      "astringent": "Astringent"
+    },
+    "viryas": {
+      "heating": "Heating",
+      "cooling": "Cooling",
+      "neutral": "Neutral"
+    },
+    "times": {
+      "morning": "Morning",
+      "midday": "Midday",
+      "evening": "Evening"
+    },
+    "seasons": {
+      "spring": "Spring",
+      "summer": "Summer",
+      "autumn": "Autumn",
+      "winter": "Winter"
+    },
+    "allergens": {
+      "dairy": "dairy",
+      "gluten": "gluten",
+      "nuts": "nuts",
+      "peanuts": "peanuts",
+      "soy": "soy",
+      "egg": "egg",
+      "fish": "fish",
+      "shellfish": "shellfish",
+      "sesame": "sesame",
+      "mustard": "mustard"
+    },
+    "patterns": {
+      "vegetarian": "vegetarian",
+      "vegan": "vegan",
+      "jain": "Jain",
+      "no_onion_garlic": "no onion or garlic",
+      "halal": "halal",
+      "kosher": "kosher",
+      "no_nightshade": "no nightshades"
+    },
+    "cautionFlags": {
+      "pregnancy": "Pregnancy",
+      "acid_reflux": "Acid reflux",
+      "anxiety": "Anxiety",
+      "insomnia": "Sleep",
+      "lactose_intolerance": "Lactose",
+      "infant_under_1": "Infants under 1"
+    },
+    "gunas": {
+      "dense": "Dense",
+      "dry": "Dry",
+      "heavy": "Heavy",
+      "light": "Light",
+      "nourishing": "Nourishing",
+      "oily": "Oily",
+      "penetrating": "Penetrating",
+      "rough": "Rough",
+      "scraping": "Scraping",
+      "sharp": "Sharp",
+      "slightly_unctuous": "Slightly unctuous",
+      "soft": "Soft",
+      "soft_when_cooked": "Soft when cooked",
+      "stable": "Stable",
+      "unctuous": "Unctuous",
+      "subtle_penetrating": "Subtle, penetrating",
+      "moist": "Moist"
+    },
+    "badge": {
+      "allergen": "Contains {{key}}",
+      "pattern": "Not {{key}}"
+    },
+    "balancedBy": "Traditionally balanced with",
+    "balancedByHelp": "Traditionally used to make this food easier to digest. Suggestions, never requirements — nothing here is filtered out if you skip them."
+  },
+  "dietPrefs": {
+    "title": "Food to keep off your plate",
+    "intro": "Anything you record here is removed from every food suggestion we make — not ranked lower, removed. You can change it any time.",
+    "consentTitle": "Before we save this",
+    "consentCta": "I agree — save my preferences",
+    "allergensTitle": "Allergies & intolerances",
+    "allergensHelp": "Treated as an absolute filter. An Ayurvedic “favour this” never overrides an allergy.",
+    "patternsTitle": "How you eat",
+    "patternsHelp": "Preferences and observances. Filtered the same way, but described as a choice rather than a safety limit.",
+    "saving": "Saving…",
+    "savedSummary": "Saved — {{allergens}} allergies, {{patterns}} preferences.",
+    "notSetYet": "Nothing recorded yet. An empty list means you haven't told us — not that nothing applies.",
+    "syncFailed": "We couldn't sync this to your account, so it's saved on this device only. Your filter still works here. We'll retry next time you open the app.",
+    "notExhaustive": "This list covers the most common restrictions, not every possible one. If something you need isn't here, please check ingredients yourself — we'd rather say that plainly than let the list imply it's complete.",
+    "entry": "Diet preferences",
+    "entryHelp": "Allergies and how you eat",
+    "consentNeededHint": "Agree above and we'll save that — until then nothing about your health leaves this screen."
+  },
+  "meals": {
+    "title": "Meal guidance",
+    "plusPitch": "Meal ideas tuned to your current imbalance, the season, and what you can't eat — composed from the same reviewed sources as everything else here.",
+    "paywallHeadline": "Eat for how you are today",
+    "paywallSubhead": "Meal ideas that follow your imbalance and your restrictions, not a generic plan.",
+    "heading": {
+      "morning": "Breakfast ideas",
+      "midday": "Lunch ideas",
+      "evening": "Evening ideas"
+    },
+    "forDosha": "Chosen to settle your {{dosha}}.",
+    "noTarget": "Take the dosha quiz and these become specific to you. For now, these are simply well-made seasonal meals.",
+    "verdict": {
+      "balancing": "Settles {{dosha}}",
+      "neutral": "Neutral for {{dosha}}",
+      "caution": "Increases {{dosha}}"
+    },
+    "notRecipes": "These are meal ideas, not recipes — no quantities and no method. Cook them the way you already cook.",
+    "empty": {
+      "filtered": {
+        "title": "Nothing we can safely suggest",
+        "body": "We had ideas for right now, but every one of them contains something you've asked us to exclude. We'd rather show you nothing than drop one of your restrictions to fill the page.",
+        "cta": "Review my diet preferences"
+      },
+      "unreviewed": {
+        "title": "Not ready yet",
+        "body": "Our meal ideas are still being checked by a person before they go live. That's our work to finish — the food search below is already reviewed and available."
+      }
+    },
+    "entryHelp": "Meal ideas for your imbalance · Plus",
+    "balancedBy": "Traditionally balanced with {{list}}.",
+    "kind": {
+      "preparation": "Side"
+    },
+    "card": {
+      "seeMore": "See today's other ideas",
+      "seeMorePlus": "See more with Plus"
+    }
   }
 }

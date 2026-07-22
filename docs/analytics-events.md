@@ -494,6 +494,50 @@ client-side by `src/lib/dailySession.js` from signals we already collect
 - Sideloads/emulators have no referrer → no event; a transient referrer-service
   error retries next launch.
 
+### 5.15 Diet & nutrition
+
+Spec'd with the feature (docs/diet-feature-plan.md §8); wired per chunk.
+
+- **`diet_search`** — `{query_len*, coverage_hit*, result_count*, source*, target_dosha}`.
+  Fires debounced (~900ms) from the Discover search box, so a typed word logs
+  once rather than once per keystroke. `source` is the surface (`discover`).
+  ⚠️ Log `query_len`, **never the query text** — a diet query can carry health
+  details ("food for my diabetes"). `coverage_hit` is the point of this event:
+  the miss rate tells us what to add to the dataset next, and is only knowable
+  if misses are logged as deliberately as hits.
+- **`ingredient_viewed`** — `{ingredient_id*, confidence*, category, suitability, target_dosha, dosha_source, excluded_reason}`.
+  `dosha_source` (`vikriti` | `prakriti` | `none`) shows how often we are
+  reading against a real current imbalance rather than the birth constitution —
+  the personalization that actually differentiates us.
+  `confidence` lets us see how much of what users actually read is
+  property-derived (`medium`) rather than classically cited (`high`).
+  `excluded_reason` (`allergen` | `pattern` | null) shows how often safety
+  filtering changes what someone sees.
+- **`diet_prefs_set`** — `{allergen_count*, pattern_count*, surface*}`. Counts
+  only — **never the specific allergens**, which are GDPR Art. 9 health data.
+  Enforced in `useDietPrefs.save()`, which is the only write path, so no
+  surface can send the keys by accident. `surface` is where the edit happened
+  (`diet_prefs`), not what was edited.
+- **`diet_safety_triggered`** — `{categories*, surface*}`. Records that a
+  seek-help path fired, by **category only** (`pregnancy`/`medical`/
+  `medication`/`disorderedEating`) — never the text that triggered it.
+- **`meal_composed`** — `{slot*, idea_count*, target_dosha, dosha_source, filtered_out*, gated_out*}`.
+  `filtered_out` and `gated_out` are COUNTS, never which allergens — the keys
+  are Art. 9 health data. `gated_out` is the honest measure of how much of the
+  dataset is still awaiting review; `filtered_out` shows how often a user's own
+  restrictions empty the result, which is the signal that the template set is
+  too narrow.
+- **`meal_idea_tapped`** — `{meal_id*, target_dosha, source, is_premium}`.
+  `source` distinguishes the Home widget (`home_meal_of_day`) from the planner.
+- **(superseded) `meal_composed`** — `{slot*, target_dosha*, dosha_source*, idea_count*, used_available_ingredients*, excluded_count}`.
+- **`meal_idea_tapped`** — `{idea_id*, slot*, position*}`.
+
+> These carry more PII risk than any other events in the app, so the rule is
+> tighter than the default: **counts and categories, never free text and never
+> specific health attributes.** `track.js`'s scrubber drops PII-shaped keys,
+> but that is a backstop, not permission to send health data.
+
+
 ## 6. What we already track in Supabase (preserved as-is)
 
 These continue firing into the personalization layer. Where a parallel
