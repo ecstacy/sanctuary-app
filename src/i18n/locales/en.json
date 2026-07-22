@@ -1633,7 +1633,7 @@
     "entryHelp": "Meal ideas for your imbalance · Plus",
     "balancedBy": "Traditionally balanced with {{list}}.",
     "kind": {
-      "preparation": "Component"
+      "preparation": "Side"
     },
     "card": {
       "seeMore": "See today's other ideas",

@@ -148,11 +148,16 @@ export const MEAL_TEMPLATES = {
 
   chapatiSabzi: {
     id: 'chapatiSabzi',
-    name: 'Chapati with cooked greens',
-    coreIds: ['wheat', 'spinach'],
-    optionalIds: ['ghee', 'cumin', 'garlic', 'onionCooked'],
+    // Review batch 3: kept GENERIC. Spinach was in core, which quietly turned
+    // "sabzi" — any cooked vegetable — into "spinach", far narrower than the
+    // dish actually is. Wheat is the only true core; the vegetable is now
+    // whatever the user has. More vegetables are queued for the next
+    // ingredient batch, at which point this gains real alternatives.
+    name: 'Chapati with cooked vegetables',
+    coreIds: ['wheat'],
+    optionalIds: ['spinach', 'ghee', 'cumin', 'garlic', 'onionCooked'],
     slots: ['midday'],
-    prep: 'Greens cooked in fat rather than eaten raw.',
+    prep: 'Vegetables cooked in fat rather than eaten raw.',
     reviewStatus: 'draft',
   },
 
@@ -173,7 +178,7 @@ export const MEAL_TEMPLATES = {
     optionalIds: ['cumin', 'corianderSeed'],
     slots: ['midday'],
     seasons: ['summer'],
-    prep: 'Buttermilk thinned with water, not thick yoghurt.',
+    prep: 'Use diluted takra — cultured yoghurt churned with water — rather than plain thick yoghurt. Takra is itself a spectrum of preparations, so this points at the method, not at one exact product.',
     reviewStatus: 'draft',
   },
 
@@ -215,15 +220,12 @@ export const MEAL_TEMPLATES = {
     reviewStatus: 'draft',
   },
 
-  vegetableSoupSesame: {
-    id: 'vegetableSoupSesame',
-    name: 'Warm greens soup',
-    coreIds: ['spinach'],
-    optionalIds: ['sesameOil', 'gingerFresh', 'cumin', 'blackPepper', 'onionCooked'],
-    slots: ['evening'],
-    seasons: ['autumn', 'winter'],
-    reviewStatus: 'draft',
-  },
+  // Review batch 3: `vegetableSoupSesame` REMOVED. It was a mixed-vegetable
+  // soup in name and a spinach soup in fact, because spinach is the only green
+  // in the dataset. Falling back to one arbitrary vegetable misrepresents the
+  // dish, and there is no honest version of it until the vegetable set exists.
+  // Re-add with the next ingredient batch.
+
 }
 
 /** Stable list form. Includes drafts — filter before display. */

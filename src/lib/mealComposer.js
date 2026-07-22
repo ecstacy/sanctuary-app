@@ -256,10 +256,17 @@ export function composeMeals(ctx = {}) {
        * principle survives the rule that every spice stays optional.
        * Only ingredients that are themselves reviewed and not excluded appear.
        */
-      balancedBy: [...new Set(c.core.flatMap((i) => i.balancedBy || []))]
-        .map(getIngredient)
-        .filter((i) => i && !exclusionFor(i, dietPrefs).excluded)
-        .map((i) => ({ id: i.id, name: i.name })),
+      balancedBy: (() => {
+        // Anything already listed as core or optional is part of the
+        // suggestion, so repeating it under "traditionally balanced with"
+        // reads as two different recommendations for the same spice.
+        const already = new Set([...c.core, ...c.optional].map((i) => i.id))
+        return [...new Set(c.core.flatMap((i) => i.balancedBy || []))]
+          .filter((id) => !already.has(id))
+          .map(getIngredient)
+          .filter((i) => i && !exclusionFor(i, dietPrefs).excluded)
+          .map((i) => ({ id: i.id, name: i.name }))
+      })(),
       /** Per-ingredient, so the verdict can be shown WITH its inputs. */
       contributions: explainIdea(c.core, targetDosha),
       reasons:    c.reasons,

@@ -110,10 +110,26 @@ describe('safety filtering happens BEFORE ranking', () => {
     // engine. It informs; it must never filter or score.
     withReviewedTemplates(() => {
       const out = composeMeals({ now: at(13), count: 99 })
-      const dish = out.ideas.find((i) => i.id === 'chickpeaCurry')
-      expect(dish.balancedBy.map((b) => b.id)).toContain('asafoetida')
+      const dish = out.ideas.find((i) => i.id === 'uradDalStew')
+      expect(dish.balancedBy.map((b) => b.id).length).toBeGreaterThan(0)
       // Still optional — the dish survives with none of them present.
-      expect(dish.core.map((c) => c.id)).toEqual(['chickpea', 'basmatiRice'])
+      expect(dish.core.map((c) => c.id)).toEqual(['uradDal'])
+    })
+  })
+
+  it('does not repeat an ingredient the dish already lists', () => {
+    // Asafoetida is optional ON chickpeaCurry and also in chickpea.balancedBy.
+    // Showing it in both places reads as two separate recommendations for the
+    // same spice.
+    withReviewedTemplates(() => {
+      const out = composeMeals({ now: at(13), count: 99 })
+      const dish = out.ideas.find((i) => i.id === 'chickpeaCurry')
+      const listed = new Set([...dish.core, ...dish.optional].map((i) => i.id))
+      for (const b of dish.balancedBy) {
+        expect(listed.has(b.id), `${b.id} shown twice`).toBe(false)
+      }
+      expect(dish.optional.map((o) => o.id)).toContain('asafoetida')
+      expect(dish.balancedBy.map((b) => b.id)).not.toContain('asafoetida')
     })
   })
 
