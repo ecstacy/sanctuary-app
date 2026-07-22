@@ -1271,6 +1271,36 @@
       "tightHips": "Tight hips",
       "lowEnergy": "Low energy",
       "bloating": "Bloating"
+    },
+    "browse": "Browse",
+    "quickRoutinesSub": "One session, right now.",
+    "programsSub": "A sequence to follow over several days.",
+    "hub": {
+      "practices": {
+        "title": "Practices",
+        "sub": "{{poses}} poses by name or by what aches",
+        "pageSub": "{{poses}} poses. Start from what hurts, or find one by name."
+      },
+      "breathwork": {
+        "title": "Breathwork",
+        "sub": "Pranayama, guided",
+        "pageSub": "{{count}} guided breathing practices."
+      },
+      "foods": {
+        "title": "Food & Ayurveda",
+        "sub": "{{foods}} foods, checked by a human",
+        "pageSub": "How a food acts on your doshas — from the classical texts, each entry checked by a person before it appears.",
+        "coverage": "{{reviewed}} foods so far. The list is deliberately small and growing: an entry only appears once a person has checked it against the classical sources, and we'd rather tell you a food is missing than guess at it."
+      },
+      "programs": {
+        "title": "Routines & programs",
+        "sub": "Ready-made sessions and series",
+        "pageSub": "Ready-made sessions for a particular need, and longer series to follow over days."
+      },
+      "dinacharya": {
+        "title": "Daily routine",
+        "sub": "Dinacharya — the rhythm of the day"
+      }
     }
   },
   "protocol": {
@@ -1590,7 +1620,21 @@
     },
     "inPractice": "In practice",
     "reference": "Reference",
-    "takeQuiz": "Take the dosha quiz"
+    "takeQuiz": "Take the dosha quiz",
+    "categories": {
+      "grain": "Grains",
+      "legume": "Legumes",
+      "vegetable": "Vegetables",
+      "fruit": "Fruit",
+      "dairy": "Dairy",
+      "nut_seed": "Nuts & seeds",
+      "oil": "Oils",
+      "sweetener": "Sweeteners",
+      "spice": "Spices",
+      "beverage": "Drinks",
+      "animal": "Animal foods",
+      "other": "Other"
+    }
   },
   "dietPrefs": {
     "title": "Food to keep off your plate",

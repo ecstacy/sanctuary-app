@@ -1271,6 +1271,36 @@
       "tightHips": "Enge Hüften",
       "lowEnergy": "Wenig Energie",
       "bloating": "Blähungen"
+    },
+    "browse": "Entdecken",
+    "quickRoutinesSub": "Eine Einheit, jetzt gleich.",
+    "programsSub": "Eine Abfolge über mehrere Tage.",
+    "hub": {
+      "practices": {
+        "title": "Übungen",
+        "sub": "{{poses}} Haltungen nach Name oder Beschwerde",
+        "pageSub": "{{poses}} Haltungen. Beginne bei dem, was schmerzt — oder suche nach Namen."
+      },
+      "breathwork": {
+        "title": "Atemübungen",
+        "sub": "Pranayama, angeleitet",
+        "pageSub": "{{count}} angeleitete Atemübungen."
+      },
+      "foods": {
+        "title": "Ernährung & Ayurveda",
+        "sub": "{{foods}} Lebensmittel, von Menschen geprüft",
+        "pageSub": "Wie ein Lebensmittel auf deine Doshas wirkt — aus den klassischen Texten, jeder Eintrag vor der Veröffentlichung von einer Person geprüft.",
+        "coverage": "Bisher {{reviewed}} Lebensmittel. Die Liste ist bewusst klein und wächst: ein Eintrag erscheint erst, wenn ihn jemand anhand der klassischen Quellen geprüft hat — lieber sagen wir dir, dass etwas fehlt, als zu raten."
+      },
+      "programs": {
+        "title": "Routinen & Programme",
+        "sub": "Fertige Einheiten und Serien",
+        "pageSub": "Fertige Einheiten für einen bestimmten Bedarf und längere Serien über mehrere Tage."
+      },
+      "dinacharya": {
+        "title": "Tagesroutine",
+        "sub": "Dinacharya — der Rhythmus des Tages"
+      }
     }
   },
   "protocol": {
@@ -1590,7 +1620,21 @@
     },
     "inPractice": "In der Praxis",
     "reference": "Nachschlagen",
-    "takeQuiz": "Dosha-Quiz starten"
+    "takeQuiz": "Dosha-Quiz starten",
+    "categories": {
+      "grain": "Getreide",
+      "legume": "Hülsenfrüchte",
+      "vegetable": "Gemüse",
+      "fruit": "Obst",
+      "dairy": "Milchprodukte",
+      "nut_seed": "Nüsse & Samen",
+      "oil": "Öle",
+      "sweetener": "Süßungsmittel",
+      "spice": "Gewürze",
+      "beverage": "Getränke",
+      "animal": "Tierische Lebensmittel",
+      "other": "Sonstiges"
+    }
   },
   "dietPrefs": {
     "title": "Was nicht auf deinen Teller soll",

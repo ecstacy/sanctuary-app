@@ -22,6 +22,10 @@ const WelcomePage = lazy(() => import('./pages/WelcomePage'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
 const SignupPage = lazy(() => import('./pages/SignupPage'))
 const DiscoverPage = lazy(() => import('./pages/DiscoverPage'))
+const DiscoverPracticesPage = lazy(() => import('./pages/DiscoverPracticesPage'))
+const DiscoverBreathworkPage = lazy(() => import('./pages/DiscoverBreathworkPage'))
+const DiscoverFoodsPage = lazy(() => import('./pages/DiscoverFoodsPage'))
+const DiscoverProgramsPage = lazy(() => import('./pages/DiscoverProgramsPage'))
 const PreviewPage = lazy(() => import('./pages/PreviewPage'))
 const HomePage = lazy(() => import('./pages/HomePage'))
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'))
@@ -317,6 +321,12 @@ function AppRoutes() {
         <Routes>
           <Route path="/" element={user ? <Navigate to="/home" replace /> : <WelcomePage />} />
           <Route path="/discover" element={<DiscoverPage />} />
+          {/* Public, like /discover itself — browsing is open and locked items
+              keep their existing Plus treatment rather than a sign-in wall. */}
+          <Route path="/discover/practices" element={<DiscoverPracticesPage />} />
+          <Route path="/discover/breathwork" element={<DiscoverBreathworkPage />} />
+          <Route path="/discover/foods" element={<DiscoverFoodsPage />} />
+          <Route path="/discover/programs" element={<DiscoverProgramsPage />} />
           <Route path="/preview" element={<PreviewPage />} />
           <Route path="/login" element={user ? <Navigate to="/home" replace /> : <LoginPage />} />
           <Route path="/signup" element={user ? <Navigate to="/home" replace /> : <SignupPage />} />
