@@ -1574,7 +1574,8 @@
       "stable": "Stabil",
       "unctuous": "Ölig",
       "subtle_penetrating": "Fein durchdringend",
-      "moist": "Feucht"
+      "moist": "Feucht",
+      "slimy": "Schleimig"
     },
     "badge": {
       "allergen": "Enthält {{key}}",

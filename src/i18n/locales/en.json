@@ -1574,7 +1574,8 @@
       "stable": "Stable",
       "unctuous": "Unctuous",
       "subtle_penetrating": "Subtle, penetrating",
-      "moist": "Moist"
+      "moist": "Moist",
+      "slimy": "Mucilaginous"
     },
     "badge": {
       "allergen": "Contains {{key}}",

@@ -210,6 +210,86 @@ const SHAPES = {
     </>
   ),
 
+  // A tapered root with fronds — carrot.
+  carrot: (
+    <>
+      <path d="M8.5 9.5 12 21l6.5-9.5c.6-.9.3-2.1-.7-2.6l-3-1.6c-1-.5-2.2-.2-2.8.7Z" />
+      <path d="M13 7 12 3M13.5 7.3 17 4.6M11.5 7.6 8 5.6" strokeLinecap="round" />
+    </>
+  ),
+  // A round gourd with ribs — pumpkin, squash, bottle gourd.
+  gourd: (
+    <>
+      <path d="M12 7c4 0 7 2.8 7 6.5S16 20 12 20s-7-2.8-7-6.5S8 7 12 7Z" />
+      <path d="M9.3 8c-1 3.4-1 7.1 0 10.8M14.7 8c1 3.4 1 7.1 0 10.8" />
+      <path d="M12 7V4.5M12 4.5c1.4-.6 2.5-.3 3.3 1" strokeLinecap="round" />
+    </>
+  ),
+  // A dense round head with a stem — cabbage, cauliflower.
+  brassica: (
+    <>
+      <circle cx="12" cy="13" r="7" />
+      <path d="M12 6V3.5" strokeLinecap="round" />
+      <path d="M7.2 10c2.5 1.3 4.1 3.7 4.8 7M16.8 10c-2.5 1.3-4.1 3.7-4.8 7" />
+    </>
+  ),
+  // A round fruit with a leafy stem — tomato.
+  tomato: (
+    <>
+      <circle cx="12" cy="13.5" r="6.8" />
+      <path d="M12 6.7V4.5" strokeLinecap="round" />
+      <path d="M12 6.7c-1.6-1.4-3-1.5-4.2-.4 1.2 1.5 2.6 1.9 4.2 1.3ZM12 6.7c1.6-1.4 3-1.5 4.2-.4-1.2 1.5-2.6 1.9-4.2 1.3Z" />
+    </>
+  ),
+  // A long ridged fruit — cucumber, courgette.
+  cucumber: (
+    <>
+      <path d="M17.8 6.2c2 2 1 6.2-2.2 9.4s-7.4 4.2-9.4 2.2-1-6.2 2.2-9.4 7.4-4.2 9.4-2.2Z" />
+      <path d="M10.5 9.5c1 .3 1.6 1 1.8 2M13.5 12.5c1 .3 1.6 1 1.8 2" strokeLinecap="round" />
+    </>
+  ),
+  // A curved fruit — banana.
+  banana: (
+    <>
+      <path d="M4.5 8c0 6.5 4.5 11 11 11 2.2 0 3.6-.7 4-2-3.5 0-6.4-1-8.6-3.2C8.7 11.6 7.7 8.7 7.7 5.2c-1.3.4-2 1.3-3.2 2.8Z" />
+      <path d="M7.7 5.2 7 3.5" strokeLinecap="round" />
+    </>
+  ),
+  // A segmented citrus half — lemon, lime.
+  citrus: (
+    <>
+      <circle cx="12" cy="12" r="8" />
+      <circle cx="12" cy="12" r="5.2" />
+      <path d="M12 6.8v10.4M7.4 9.4l9.2 5.2M7.4 14.6l9.2-5.2" />
+    </>
+  ),
+  // A bunch of small round fruit — grapes, raisins.
+  grapes: (
+    <>
+      <circle cx="9" cy="11" r="2.1" />
+      <circle cx="15" cy="11" r="2.1" />
+      <circle cx="12" cy="14.8" r="2.1" />
+      <circle cx="12" cy="7.6" r="2.1" />
+      <circle cx="9.6" cy="18.2" r="1.8" />
+      <path d="M12 5.5V3M12 3c1.5-.4 2.6 0 3.3 1.3" strokeLinecap="round" />
+    </>
+  ),
+  // A rounded fruit with a crown — pomegranate.
+  crownedFruit: (
+    <>
+      <circle cx="12" cy="13.5" r="6.8" />
+      <path d="M12 6.7V4M10.3 4.6 12 2.8l1.7 1.8" strokeLinecap="round" />
+      <path d="M9.5 12.5h.01M14.5 12.5h.01M12 16h.01" strokeLinecap="round" strokeWidth="2" />
+    </>
+  ),
+  // An oval stone fruit with a leaf — mango.
+  mango: (
+    <>
+      <path d="M15.5 6.5c3 1.6 4 5.4 2.2 8.7s-5.6 4.7-8.6 3.1-4-5.4-2.2-8.7c1.5-2.7 5-4.9 8.6-3.1Z" />
+      <path d="M14.8 6.8c.6-1.9 2-2.9 4-3-.1 1.9-1.1 3-3 3.4" />
+    </>
+  ),
+
   // ── Beverages ───────────────────────────────────────────────────────────
   // A cup with steam and a handle.
   hotCup: (
@@ -266,6 +346,27 @@ const BY_ID = {
   appleStewed: 'apple',
   almond: 'nut',
   coffee: 'hotCup',
+
+  // Batch 4 — vegetables and fruit
+  carrot: 'carrot',
+  beetroot: 'tuber',
+  radish: 'carrot',
+  pumpkin: 'gourd',
+  bottleGourd: 'gourd',
+  okra: 'pod',
+  cabbage: 'brassica',
+  cauliflower: 'brassica',
+  greenBeans: 'pod',
+  peas: 'pod',
+  tomatoRaw: 'tomato',
+  tomatoCooked: 'tomato',
+  aubergine: 'gourd',
+  cucumber: 'cucumber',
+  banana: 'banana',
+  pomegranate: 'crownedFruit',
+  grapes: 'grapes',
+  mangoRipe: 'mango',
+  lemon: 'citrus',
 }
 
 // Fallback when an id has no glyph yet — still better than one flame for every
