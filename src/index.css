@@ -7,53 +7,105 @@
    The default (no dosha) uses the app's original sage green.
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   DAYLIGHT — the design identity (2026-07). Warm modern minimalism: an oat
+   ground, warm-charcoal ink, and three earth accents that carry meaning
+   (pine settles, ochre signs the source, clay warns). Every surface and text
+   colour is a token here so the "Dusk" dark theme is a drop-in later —
+   redefine these under :root[data-theme="dark"] and nothing else changes.
+   Tailwind reads these via var() with the same values as fallback.
+   ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  --color-primary: #3f7a52;
-  --color-primary-dim: #326340;
-  --color-primary-container: #c8ecd0;
-  --color-primary-fixed: #d0f0d6;
-  --color-primary-fixed-dim: #a8d4b3;
-  --color-on-primary: #f0fff2;
-  --color-on-primary-container: #2b5638;
+  /* Surfaces — oat ground, warm-white cards, stepped warm neutrals */
+  --color-background: #f3f0e7;
+  --color-surface: #f3f0e7;
+  --color-surface-container-low: #fbfaf3;
+  --color-surface-container: #ece9dd;
+  --color-surface-container-high: #e4e1d2;
+  --color-surface-container-highest: #ddd8c7;
+  /* Ink — warm charcoal, never pure black */
+  --color-on-surface: #2b2b26;
+  --color-on-surface-variant: #57564c;
+  --color-outline-variant: #ccc8b8;
+
+  /* Earth accents — semantic, distinct from the dosha-adaptive primary */
+  /* Accents used as TEXT are deepened to clear WCAG AA (4.5:1) on the oat
+     ground — gold and rust can't be both vivid and legible on a light ground,
+     so text takes the deeper cut. The lighter `-mark` variants are for fills,
+     icons, and rules, which only need 3:1. */
+  --color-pine: #3a6b53;          /* balancing · settles — 5.4:1, AA ok */
+  --color-pine-container: #e2ebe2;
+  --color-ochre: #8a6520;         /* the source mark, as text — 4.6:1 */
+  --color-ochre-mark: #b98a37;    /* ochre for fills/rules/icons — 3:1+ */
+  --color-ochre-container: #f1e6cd;
+  --color-clay: #a24a2b;          /* caution · aggravates, as text — 4.9:1 */
+  --color-clay-mark: #b25a37;     /* clay for fills/icons */
+  --color-clay-container: #f0ddd2;
+
+  /* Dosha-adaptive primary — default is pine, deepened from the old mint */
+  --color-primary: #3a6b53;
+  --color-primary-dim: #2f5a45;
+  --color-primary-container: #cfe4d3;
+  --color-primary-fixed: #dcecdd;
+  --color-primary-fixed-dim: #aecdb6;
+  --color-on-primary: #f4faf3;
+  --color-on-primary-container: #26503a;
 }
 
-/* Vata — cool slate blue (Air + Ether) */
+/* Vata — cool slate blue (Air + Ether), deepened for the oat ground */
 :root[data-dosha="vata"] {
-  --color-primary: #3f85a8;
-  --color-primary-dim: #326f8e;
-  --color-primary-container: #c2e0f1;
-  --color-primary-fixed: #d1eaf6;
-  --color-primary-fixed-dim: #a2c9dd;
-  --color-on-primary: #ecf7ff;
-  --color-on-primary-container: #2a607d;
+  --color-primary: #3a7b9c;
+  --color-primary-dim: #2f6683;
+  --color-primary-container: #c8e2f0;
+  --color-primary-fixed: #d6ecf6;
+  --color-primary-fixed-dim: #a4cbdd;
+  --color-on-primary: #eef8ff;
+  --color-on-primary-container: #245a76;
 }
 
-/* Pitta — warm amber/terracotta (Fire + Water) */
+/* Pitta — warm ochre (Fire + Water), aligned to the earth-accent family */
 :root[data-dosha="pitta"] {
-  --color-primary: #c27a39;
-  --color-primary-dim: #a66429;
-  --color-primary-container: #fadcb8;
-  --color-primary-fixed: #fbe5cc;
-  --color-primary-fixed-dim: #e9c79a;
-  --color-on-primary: #fff7ec;
-  --color-on-primary-container: #7d4a1c;
+  --color-primary: #bc7f33;
+  --color-primary-dim: #a06a26;
+  --color-primary-container: #f5dcb2;
+  --color-primary-fixed: #fbe7c9;
+  --color-primary-fixed-dim: #e5c393;
+  --color-on-primary: #fff8ee;
+  --color-on-primary-container: #78491a;
 }
 
-/* Kapha — lush earth green (Earth + Water) */
+/* Kapha — grounded earth green (Earth + Water) */
 :root[data-dosha="kapha"] {
-  --color-primary: #5e8d52;
-  --color-primary-dim: #4e7944;
-  --color-primary-container: #c6e5be;
-  --color-primary-fixed: #d4eccc;
-  --color-primary-fixed-dim: #a6ca9c;
-  --color-on-primary: #eeffea;
-  --color-on-primary-container: #365d2d;
+  --color-primary: #4f8146;
+  --color-primary-dim: #416d3a;
+  --color-primary-container: #cae4c1;
+  --color-primary-fixed: #d8ecd0;
+  --color-primary-fixed-dim: #a8ca9d;
+  --color-on-primary: #f1fbec;
+  --color-on-primary-container: #345626;
 }
 
 body {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   -webkit-tap-highlight-color: transparent;
+  background: var(--color-background);
+  color: var(--color-on-surface);
+}
+
+/* Fraunces carries real optical sizing — let the browser pick the display cut
+   at large sizes and the text cut at small. A touch of negative tracking on
+   headings tightens the display face without crowding it. Hanken Grotesk gets
+   the default optical treatment; nothing needed. */
+.font-headline, .font-serif {
+  font-optical-sizing: auto;
+  letter-spacing: -0.011em;
+}
+/* Fraunces default weight reads a little light for a display serif on this
+   warm ground — nudge unstyled headings to 500 while leaving explicit weights
+   (font-semibold etc.) untouched. */
+h1.font-headline, h2.font-headline, h3.font-headline {
+  font-weight: 500;
 }
 
 /* Remove focus outlines on non-keyboard interaction (Android WebView) */
