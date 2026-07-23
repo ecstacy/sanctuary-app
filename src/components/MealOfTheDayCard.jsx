@@ -32,9 +32,9 @@ import useImpression from '../hooks/useImpression'
 import { track, EVENTS } from '../lib/track'
 
 const STYLE = {
-  [SUITABILITY.BALANCING]: { icon: 'trending_down', tint: 'text-[#4e6b45]' },
+  [SUITABILITY.BALANCING]: { icon: 'trending_down', tint: 'text-pine' },
   [SUITABILITY.NEUTRAL]:   { icon: 'remove',        tint: 'text-on-surface-variant' },
-  [SUITABILITY.CAUTION]:   { icon: 'trending_up',   tint: 'text-[#96551f]' },
+  [SUITABILITY.CAUTION]:   { icon: 'trending_up',   tint: 'text-clay' },
 }
 
 export default function MealOfTheDayCard() {

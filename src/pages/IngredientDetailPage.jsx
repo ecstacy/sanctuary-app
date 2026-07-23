@@ -57,8 +57,8 @@ const DOSHA_ICON = { vata: 'air', pitta: 'local_fire_department', kapha: 'water_
 const VERDICT = {
   [SUITABILITY.BALANCING]: {
     icon: 'check_circle',
-    card: 'bg-[#6b8f5e]/12 border-[#6b8f5e]/25',
-    text: 'text-[#3f5a37]',
+    card: 'bg-pine/[0.10] border-pine/25',
+    text: 'text-pine',
   },
   [SUITABILITY.NEUTRAL]: {
     icon: 'remove_circle_outline',
@@ -67,8 +67,8 @@ const VERDICT = {
   },
   [SUITABILITY.CAUTION]: {
     icon: 'error_outline',
-    card: 'bg-[#c47a3a]/12 border-[#c47a3a]/25',
-    text: 'text-[#7d4718]',
+    card: 'bg-clay/[0.10] border-clay/25',
+    text: 'text-clay',
   },
 }
 
