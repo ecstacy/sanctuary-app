@@ -62,10 +62,14 @@ export default {
         sans: ['Hanken Grotesk', 'Noto Sans Devanagari', 'system-ui', 'sans-serif'],
         serif: ['Fraunces', 'Noto Serif Devanagari', 'Georgia', 'serif'],
       },
+      // Daylight tightens the oversized steps: `lg` was 32px and `xl` a bubbly
+      // 48px (larger than 2xl's 16px — the scale had inverted through trial-
+      // and-error use). Pulled to a more architectural rhythm that still reads
+      // clearly rounded, without a class rename across the app.
       borderRadius: {
         DEFAULT: '1rem',
-        lg: '2rem',
-        xl: '3rem',
+        lg: '1.375rem',   /* 22px  (was 32px) */
+        xl: '1.5rem',     /* 24px  (was 48px) */
         full: '9999px',
       },
       spacing: {
