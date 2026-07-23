@@ -42,6 +42,14 @@
   --color-clay-mark: #b25a37;     /* clay for fills/icons */
   --color-clay-container: #f0ddd2;
 
+  /* Dosha IDENTITY colours — the fixed hue for each dosha wherever it is named
+     (chips, bars, quiz). Distinct from the dosha-adaptive PRIMARY above, which
+     shifts the whole UI to the user's own dosha. Tuned to clear AA (4.5:1) on
+     the oat ground; the old slate/terracotta/sage were ~2.8–3.4 and ghosted. */
+  --color-vata: #35708f;
+  --color-pitta: #9e5720;
+  --color-kapha: #467539;
+
   /* Dosha-adaptive primary — default is pine, deepened from the old mint */
   --color-primary: #3a6b53;
   --color-primary-dim: #2f5a45;

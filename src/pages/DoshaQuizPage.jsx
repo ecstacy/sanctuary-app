@@ -448,13 +448,13 @@ export default function DoshaQuizPage() {
             </span>
           </div>
           <div className="absolute inset-0 animate-spin-slow">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#7b93a8]" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-vata" />
           </div>
           <div className="absolute inset-0 animate-spin-slow-reverse">
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#c47a3a]" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-pitta" />
           </div>
           <div className="absolute inset-0 animate-spin-slow" style={{ animationDelay: '1s' }}>
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#6b8f5e]" />
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-kapha" />
           </div>
         </div>
 

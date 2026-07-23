@@ -20,9 +20,9 @@ import useScrollDepth from '../hooks/useScrollDepth'
 // ─────────────────────────────────────────────────────────────────────────────
 
 const DOSHA_COLORS = {
-  vata:  { gradient: 'from-[#7b93a8] to-[#b8d4e8]', accent: 'text-[#3d5a73]', bg: 'bg-[#e6eef5]' },
-  pitta: { gradient: 'from-[#c47a3a] to-[#f0c987]', accent: 'text-[#8b5a2b]', bg: 'bg-[#fef3e2]' },
-  kapha: { gradient: 'from-[#6b8f5e] to-[#b8d4a8]', accent: 'text-[#3d5e34]', bg: 'bg-[#edf5e8]' },
+  vata:  { gradient: 'from-[#7b93a8] to-[#b8d4e8]', accent: 'text-vata', bg: 'bg-[#e6eef5]' },
+  pitta: { gradient: 'from-[#c47a3a] to-[#f0c987]', accent: 'text-pitta', bg: 'bg-[#fef3e2]' },
+  kapha: { gradient: 'from-[#6b8f5e] to-[#b8d4a8]', accent: 'text-kapha', bg: 'bg-[#edf5e8]' },
 }
 
 const DOSHA_LABELS = { vata: 'Vata', pitta: 'Pitta', kapha: 'Kapha' }

@@ -52,7 +52,7 @@ const DOSHA_THEME = {
     emoji:     'wind_power',
     gradient:  'from-[#7b93a8] to-[#b8d4e8]',
     bgColor:   'bg-[#e8f0f6]',
-    textColor: 'text-[#3d5a73]',
+    textColor: 'text-vata',
     accentHex: '#3d5a73',
   },
   pitta: {
@@ -60,7 +60,7 @@ const DOSHA_THEME = {
     emoji:     'local_fire_department',
     gradient:  'from-[#c47a3a] to-[#f0c987]',
     bgColor:   'bg-[#fef3e2]',
-    textColor: 'text-[#8b5a2b]',
+    textColor: 'text-pitta',
     accentHex: '#8b5a2b',
   },
   kapha: {
@@ -68,7 +68,7 @@ const DOSHA_THEME = {
     emoji:     'landscape',
     gradient:  'from-[#6b8f5e] to-[#b8d4a8]',
     bgColor:   'bg-[#edf5e8]',
-    textColor: 'text-[#3d5e34]',
+    textColor: 'text-kapha',
     accentHex: '#3d5e34',
   },
 }

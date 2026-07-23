@@ -22,9 +22,9 @@ import { dailyPractices } from '../lib/mealComposer'
 
 const DOSHA_ICON = { vata: 'air', pitta: 'local_fire_department', kapha: 'landscape' }
 const DOSHA_COLORS = {
-  vata:  'bg-[#e6eef5] text-[#3d5a73]',
-  pitta: 'bg-[#fef3e2] text-[#8b5a2b]',
-  kapha: 'bg-[#edf5e8] text-[#3d5e34]',
+  vata:  'bg-[#e6eef5] text-vata',
+  pitta: 'bg-[#fef3e2] text-pitta',
+  kapha: 'bg-[#edf5e8] text-kapha',
 }
 
 // Map the current hour to the governing dosha, mirroring DOSHA_TIMES in

@@ -28,9 +28,9 @@ import PaywallSheet from '../components/PaywallSheet'
 // ─────────────────────────────────────────────────────────────────────────────
 
 const DOSHA_INFO = {
-  vata:  { label: 'Vata',  icon: 'air',                     color: 'text-[#7b93a8]', bg: 'bg-[#7b93a8]/10' },
-  pitta: { label: 'Pitta', icon: 'local_fire_department',   color: 'text-[#c47a3a]', bg: 'bg-[#c47a3a]/10' },
-  kapha: { label: 'Kapha', icon: 'water_drop',              color: 'text-[#6b8f5e]', bg: 'bg-[#6b8f5e]/10' },
+  vata:  { label: 'Vata',  icon: 'air',                     color: 'text-vata', bg: 'bg-vata/10' },
+  pitta: { label: 'Pitta', icon: 'local_fire_department',   color: 'text-pitta', bg: 'bg-pitta/10' },
+  kapha: { label: 'Kapha', icon: 'water_drop',              color: 'text-kapha', bg: 'bg-kapha/10' },
 }
 
 // Pranayama-specific level visuals (same idea as asana levels).

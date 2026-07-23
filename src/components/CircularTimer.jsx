@@ -44,7 +44,7 @@ export default function CircularTimer({ duration, remaining, isPaused, size = 16
 
       {/* Centre content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className={`font-headline text-3xl ${isWarning ? 'text-[#c47a3a]' : 'text-on-surface'}`}>
+        <span className={`font-headline text-3xl ${isWarning ? 'text-pitta' : 'text-on-surface'}`}>
           {display}
         </span>
         {isPaused && (

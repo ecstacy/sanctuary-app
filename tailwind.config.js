@@ -17,6 +17,9 @@ export default {
         // Earth accents — semantic, themeable via vars (see index.css).
         // `secondary`/`tertiary` are kept as aliases so existing usages don't
         // break, but they now point at the Daylight ochre/clay family.
+        vata: 'var(--color-vata, #35708f)',
+        pitta: 'var(--color-pitta, #9e5720)',
+        kapha: 'var(--color-kapha, #467539)',
         pine: 'var(--color-pine, #3a6b53)',
         'pine-container': 'var(--color-pine-container, #e2ebe2)',
         ochre: 'var(--color-ochre, #8a6520)',
