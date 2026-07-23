@@ -192,14 +192,19 @@ select:focus-visible,
   opacity: 0;
   animation: stagger-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.stagger-1 { animation-delay: 0.05s; }
-.stagger-2 { animation-delay: 0.1s; }
-.stagger-3 { animation-delay: 0.15s; }
-.stagger-4 { animation-delay: 0.2s; }
-.stagger-5 { animation-delay: 0.25s; }
-.stagger-6 { animation-delay: 0.3s; }
-.stagger-7 { animation-delay: 0.35s; }
-.stagger-8 { animation-delay: 0.4s; }
+/* Daylight compresses the cascade. The old 0.05s-per-level ramp meant the
+   eighth element landed 0.4s in — a long, visibly sequential waterfall that
+   read as busy (and faintly "generated") on every navigation. A gentle settle
+   at the top of the page is enough: the first few steps stagger, the rest
+   arrive together by ~0.18s. Same classes, calmer motion. */
+.stagger-1 { animation-delay: 0.04s; }
+.stagger-2 { animation-delay: 0.08s; }
+.stagger-3 { animation-delay: 0.12s; }
+.stagger-4 { animation-delay: 0.15s; }
+.stagger-5 { animation-delay: 0.17s; }
+.stagger-6 { animation-delay: 0.18s; }
+.stagger-7 { animation-delay: 0.18s; }
+.stagger-8 { animation-delay: 0.18s; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    LOADING SCREEN
