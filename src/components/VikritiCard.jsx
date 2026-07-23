@@ -142,7 +142,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
           {r.emoji}
         </span>
         <p
-          className="font-label text-[10px] font-semibold uppercase tracking-[0.22em]"
+          className="font-label text-[11px] font-semibold uppercase tracking-[0.22em]"
           style={{ color: r.accentHex }}
         >
           {t('vikritiCard.todaysReading')}
@@ -190,7 +190,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
               it reads as a header rather than an ornament on a tile. */}
           {isReturning && (
             <p
-              className="font-label text-[10px] font-semibold uppercase tracking-[0.18em] mb-2"
+              className="font-label text-[11px] font-semibold uppercase tracking-[0.18em] mb-2"
               style={{ color: r.accentHex }}
             >
               {t('vikritiCard.returningKicker', { n: nextAttemptNumber })}
@@ -269,7 +269,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
                 lock
               </span>
               <span
-                className={`font-label text-[9px] font-semibold uppercase tracking-wide ${r.textColor}`}
+                className={`font-label text-[11px] font-semibold uppercase tracking-wide ${r.textColor}`}
               >
                 {t('vikritiCard.plusBadge')}
               </span>

@@ -86,7 +86,7 @@ export default function MealOfTheDayCard() {
     >
       <div className="flex items-center gap-2">
         <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">restaurant_menu</span>
-        <span className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">
+        <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
           {t(`meals.heading.${result.slot}`)}
         </span>
       </div>

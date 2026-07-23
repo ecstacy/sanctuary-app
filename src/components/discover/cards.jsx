@@ -97,7 +97,7 @@ export function ExploreAsanaCard({ asana, position, locked, onTap, surface = 'di
         </div>
         {asana.level && asana.level !== 'Beginner' && !locked && (
           <div className="absolute top-2 left-2">
-            <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-primary uppercase tracking-wide">
+            <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[11px] text-primary uppercase tracking-wide">
               {asana.level}
             </span>
           </div>
@@ -116,7 +116,7 @@ export function ExploreAsanaCard({ asana, position, locked, onTap, surface = 'di
             <div className="absolute inset-x-2 bottom-2 flex items-center justify-between gap-1 px-2.5 py-1 rounded-full bg-surface/95 backdrop-blur-sm shadow-sm">
               <div className="flex items-center gap-1 min-w-0">
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">lock</span>
-                <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider truncate">
+                <span className="font-label text-[11px] font-semibold text-primary uppercase tracking-wider truncate">
                   {t('discover.unlockWithPlus')}
                 </span>
               </div>
@@ -163,7 +163,7 @@ export function PranayamaCard({ pranayama, position, locked, onTap, surface = 'd
         </div>
         {pranayama.level && pranayama.level !== 'beginner' && !locked && (
           <div className="absolute top-2 left-2">
-            <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-primary uppercase tracking-wide">
+            <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[11px] text-primary uppercase tracking-wide">
               {pranayama.level}
             </span>
           </div>
@@ -174,7 +174,7 @@ export function PranayamaCard({ pranayama, position, locked, onTap, surface = 'd
             without competing with the call to action. */}
         {!locked && (
           <div className="absolute bottom-2 right-2">
-            <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[9px] text-on-surface-variant uppercase tracking-wide">
+            <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[11px] text-on-surface-variant uppercase tracking-wide">
               {minutes} {t('discover.minSuffix')}
             </span>
           </div>
@@ -183,7 +183,7 @@ export function PranayamaCard({ pranayama, position, locked, onTap, surface = 'd
           <>
             <div
               aria-hidden="true"
-              className="absolute top-2 right-2 px-2 py-0.5 bg-surface/80 backdrop-blur-sm rounded-full font-label text-[9px] text-on-surface-variant uppercase tracking-wide"
+              className="absolute top-2 right-2 px-2 py-0.5 bg-surface/80 backdrop-blur-sm rounded-full font-label text-[11px] text-on-surface-variant uppercase tracking-wide"
             >
               {minutes} {t('discover.minSuffix')}
             </div>
@@ -194,7 +194,7 @@ export function PranayamaCard({ pranayama, position, locked, onTap, surface = 'd
             <div className="absolute inset-x-2 bottom-2 flex items-center justify-between gap-1 px-2.5 py-1 rounded-full bg-surface/95 backdrop-blur-sm shadow-sm">
               <div className="flex items-center gap-1 min-w-0">
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">lock</span>
-                <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider truncate">
+                <span className="font-label text-[11px] font-semibold text-primary uppercase tracking-wider truncate">
                   {t('discover.unlockWithPlus')}
                 </span>
               </div>
@@ -234,7 +234,7 @@ export function QuickRoutineCard({ routine, position, onTap, surface = 'discover
         <p className="font-body text-xs text-on-surface-variant/60 mt-0.5">{routine.desc}</p>
       </div>
       <div className="flex items-center gap-1 flex-shrink-0">
-        <span className="font-label text-[10px] text-on-surface-variant/40 uppercase">{routine.time}</span>
+        <span className="font-label text-[11px] text-on-surface-variant uppercase">{routine.time}</span>
         <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
       </div>
     </button>

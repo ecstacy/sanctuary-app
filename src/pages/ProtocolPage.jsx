@@ -197,7 +197,7 @@ export default function ProtocolPage() {
             <span aria-hidden="true" className="material-symbols-outlined text-white text-lg">arrow_back</span>
           </button>
           <div className="relative z-10 text-center mt-4">
-            <p className="font-label text-[10px] text-white/60 uppercase tracking-widest mb-2">
+            <p className="font-label text-[11px] text-white/60 uppercase tracking-widest mb-2">
               {t('protocol.plusKicker')}
             </p>
             <h1 className="font-headline text-4xl text-white leading-tight mb-2">
@@ -265,7 +265,7 @@ export default function ProtocolPage() {
         </button>
 
         <div className="relative z-10 text-center mt-4">
-          <p className="font-label text-[10px] text-white/60 uppercase tracking-widest mb-2">
+          <p className="font-label text-[11px] text-white/60 uppercase tracking-widest mb-2">
             {t('protocol.threeDayKicker')}
           </p>
           <h1 className="font-headline text-4xl text-white leading-tight mb-2">
@@ -333,7 +333,7 @@ export default function ProtocolPage() {
         {/* Active day header */}
         <div className="mb-5 px-1">
           <p
-            className="font-label text-[10px] font-semibold uppercase tracking-[0.22em] mb-2"
+            className="font-label text-[11px] font-semibold uppercase tracking-[0.22em] mb-2"
             style={{ color: theme.accentHex }}
           >
             {t('protocol.dayHeader', { n: day.day, title: day.title })}
@@ -430,10 +430,10 @@ export default function ProtocolPage() {
         {history.length > 0 && (
           <div className="bg-surface-container rounded-2xl p-5 mt-6 mb-4">
             <div className="flex items-baseline justify-between mb-4">
-              <p className="font-label text-[10px] font-semibold uppercase tracking-[0.22em] text-on-surface-variant">
+              <p className="font-label text-[11px] font-semibold uppercase tracking-[0.22em] text-on-surface-variant">
                 {t('protocol.yourHistory')}
               </p>
-              <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-wider tabular-nums">
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider tabular-nums">
                 {t('protocol.previousAttempts', { count: history.length })}
               </p>
             </div>

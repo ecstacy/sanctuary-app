@@ -207,7 +207,7 @@ export default function RecommendationsPage() {
         {/* ── No search yet: show popular searches ── */}
         {!hasSearched && (
           <div className="stagger-2">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">
               {t('recommendations.popularSearches')}
             </p>
             <div className="flex flex-wrap gap-2 mb-8">
@@ -297,7 +297,7 @@ export default function RecommendationsPage() {
             <p className="font-body text-xs text-on-surface-variant leading-relaxed max-w-xs mb-6">
               {t('recommendations.tryDifferent')}
             </p>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">
               {t('recommendations.tryInstead')}
             </p>
             <div className="flex flex-wrap justify-center gap-2">
@@ -327,7 +327,7 @@ export default function RecommendationsPage() {
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="material-symbols-outlined text-white/80 text-lg">{topResult.icon}</span>
-                  <p className="font-label text-[10px] text-white/70 uppercase tracking-widest">
+                  <p className="font-label text-[11px] text-white/70 uppercase tracking-widest">
                     {t('recommendations.recommendedForYou')}
                   </p>
                 </div>
@@ -342,7 +342,7 @@ export default function RecommendationsPage() {
 
             {/* Practice cards */}
             <div className="mb-5 stagger-3">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">
                 {t('recommendations.recommendedPractices', { count: topResult.practices.length })}
               </p>
               <div className="flex flex-col gap-3">
@@ -366,13 +366,13 @@ export default function RecommendationsPage() {
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-body font-semibold text-sm text-on-surface">{practice.title}</p>
-                          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">
+                          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-0.5">
                             {practice.subtitle}
                           </p>
                         </div>
                         <div className="flex flex-col items-end gap-1 flex-shrink-0">
                           <span className="font-label text-[10px] text-primary font-semibold">{practice.duration}</span>
-                          <span className="font-label text-[9px] text-on-surface-variant/50 uppercase">{practice.level}</span>
+                          <span className="font-label text-[11px] text-on-surface-variant uppercase">{practice.level}</span>
                         </div>
                         <span className={`material-symbols-outlined text-on-surface-variant/30 text-sm transition-transform duration-200 ${!canExplore && isExpanded ? 'rotate-180' : ''}`}>
                           {canExplore ? 'chevron_right' : 'expand_more'}
@@ -398,7 +398,7 @@ export default function RecommendationsPage() {
                 </div>
                 <div>
                   <p className="font-body font-semibold text-sm text-on-surface">{topResult.breathwork.title}</p>
-                  <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{topResult.breathwork.subtitle}</p>
+                  <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{topResult.breathwork.subtitle}</p>
                 </div>
               </div>
               <p className="font-body text-xs text-on-surface-variant leading-relaxed">
@@ -411,7 +411,7 @@ export default function RecommendationsPage() {
               <div className="flex items-start gap-3">
                 <span className="material-symbols-outlined text-primary text-base mt-0.5">spa</span>
                 <div>
-                  <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-2">
+                  <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-2">
                     {t('recommendations.ayurvedicInsight')}
                   </p>
                   <p className="font-body text-xs text-on-surface leading-relaxed italic">
@@ -424,7 +424,7 @@ export default function RecommendationsPage() {
             {/* Other matches */}
             {otherResults.length > 0 && (
               <div className="mb-6 stagger-6">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">
                   {t('recommendations.alsoRelated')}
                 </p>
                 <div className="flex flex-col gap-3">

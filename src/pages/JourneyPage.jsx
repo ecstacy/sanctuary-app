@@ -215,7 +215,7 @@ export default function JourneyPage() {
             <div className="absolute -right-4 -bottom-4 opacity-10">
               <span className="material-symbols-outlined text-6xl">local_fire_department</span>
             </div>
-            <p className="font-label text-[9px] uppercase tracking-widest text-on-primary/60 mb-1">{t('journey.dayStreak')}</p>
+            <p className="font-label text-[11px] uppercase tracking-widest text-on-primary/60 mb-1">{t('journey.dayStreak')}</p>
             <p className="font-headline text-4xl leading-none">{stats.streak}</p>
             <p className="font-body text-xs text-on-primary/60 mt-1">
               {stats.streak === 0 ? t('journey.streakStart') : stats.streak === 1 ? t('journey.streakDay') : t('journey.streakDays')}
@@ -225,7 +225,7 @@ export default function JourneyPage() {
             <div className="absolute -right-4 -bottom-4 opacity-10">
               <span className="material-symbols-outlined text-6xl">schedule</span>
             </div>
-            <p className="font-label text-[9px] uppercase tracking-widest text-on-surface-variant/60 mb-1">{t('journey.thisWeek')}</p>
+            <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant mb-1">{t('journey.thisWeek')}</p>
             <p className="font-headline text-4xl text-on-surface leading-none">{stats.weekMinutes}</p>
             <p className="font-body text-xs text-on-surface-variant/60 mt-1">{t('journey.minutes')}</p>
           </div>
@@ -238,7 +238,7 @@ export default function JourneyPage() {
               <span className="material-symbols-outlined text-primary text-2xl">{currentLevel.icon}</span>
             </div>
             <div className="flex-1">
-              <p className="font-label text-[9px] text-primary uppercase tracking-widest">{t('journey.level', { n: currentLevel.level })}</p>
+              <p className="font-label text-[11px] text-primary uppercase tracking-widest">{t('journey.level', { n: currentLevel.level })}</p>
               <h3 className="font-headline text-xl text-on-surface">{levelTitle(currentLevel)}</h3>
               <p className="font-body text-xs text-on-surface-variant">{levelSubtitle(currentLevel)}</p>
             </div>
@@ -247,10 +247,10 @@ export default function JourneyPage() {
           {nextLevel ? (
             <>
               <div className="flex justify-between mb-1.5">
-                <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-widest">
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
                   {t('journey.progressTo', { title: levelTitle(nextLevel) })}
                 </p>
-                <p className="font-label text-[9px] text-primary uppercase tracking-widest">
+                <p className="font-label text-[11px] text-primary uppercase tracking-widest">
                   {t('journey.minProgress', { current: stats.totalMinutes, total: nextLevel.minMinutes })}
                 </p>
               </div>
@@ -270,7 +270,7 @@ export default function JourneyPage() {
           {/* Future levels preview */}
           {nextLevel && (
             <div className="mt-4 pt-3 border-t border-surface-container-high/50">
-              <p className="font-label text-[9px] text-on-surface-variant/40 uppercase tracking-widest mb-2.5">{t('journey.comingUp')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2.5">{t('journey.comingUp')}</p>
               <div className="flex gap-3 overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
                 {YOGI_LEVELS.filter(l => l.level > currentLevel.level).slice(0, 3).map(lvl => (
                   <div
@@ -309,7 +309,7 @@ export default function JourneyPage() {
               <button
                 key={key}
                 onClick={() => setPeriod(key)}
-                className={`px-3.5 py-1.5 rounded-full font-label text-[10px] uppercase tracking-widest transition-all ${
+                className={`px-3.5 py-1.5 rounded-full font-label text-[11px] uppercase tracking-widest transition-all ${
                   period === key
                     ? 'bg-primary text-on-primary font-semibold'
                     : 'bg-surface-container-high text-on-surface-variant'
@@ -376,22 +376,22 @@ export default function JourneyPage() {
             <div className="bg-surface-container rounded-lg p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">schedule</span>
               <p className="font-headline text-2xl text-on-surface">{stats.totalMinutes}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.totalMinutes')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('journey.totalMinutes')}</p>
             </div>
             <div className="bg-surface-container rounded-lg p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">self_improvement</span>
               <p className="font-headline text-2xl text-on-surface">{stats.totalSessions}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.totalSessions')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('journey.totalSessions')}</p>
             </div>
             <div className="bg-surface-container rounded-lg p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">local_fire_department</span>
               <p className="font-headline text-2xl text-on-surface">{stats.longestStreak}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.bestStreak')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('journey.bestStreak')}</p>
             </div>
             <div className="bg-surface-container rounded-lg p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">today</span>
               <p className="font-headline text-2xl text-on-surface">{stats.todayMinutes}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">{t('journey.today')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('journey.today')}</p>
             </div>
           </div>
         </div>
@@ -412,7 +412,7 @@ export default function JourneyPage() {
                       <p className="font-body text-sm text-on-surface font-medium truncate">
                         {session.routineLabel || session.routineKey}
                       </p>
-                      <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">
+                      <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
                         {d.toLocaleDateString(i18n.language, { weekday: 'short', day: 'numeric', month: 'short' })} · {d.toLocaleTimeString(i18n.language, { hour: '2-digit', minute: '2-digit' })}
                       </p>
                     </div>

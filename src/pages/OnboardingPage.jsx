@@ -136,7 +136,7 @@ export default function OnboardingPage() {
           <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${slide.accent} opacity-20 animate-ritual-glow`} />
         </div>
 
-        <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-2 stagger-2">
+        <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-2 stagger-2">
           {slideText.eyebrow}
         </p>
         <h1 className="font-headline text-3xl text-on-surface text-center leading-tight mb-4 px-2 stagger-3 max-w-sm">

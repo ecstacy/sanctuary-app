@@ -288,14 +288,14 @@ export default function IngredientDetailPage() {
 
               {ingredient.preparation && (
                 <Card>
-                  <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1.5">{t('diet.preparation')}</p>
+                  <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-1.5">{t('diet.preparation')}</p>
                   <p className="font-body text-[15px] text-on-surface leading-relaxed">{ingredient.preparation}</p>
                 </Card>
               )}
 
               {ingredient.balancedBy?.length > 0 && (
                 <Card>
-                  <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">{t('diet.balancedBy')}</p>
+                  <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-2">{t('diet.balancedBy')}</p>
                   <div className="flex flex-wrap gap-2">
                     {ingredient.balancedBy.map((bid) => getIngredient(bid)).filter(Boolean).map((b) => (
                       <button
@@ -316,7 +316,7 @@ export default function IngredientDetailPage() {
 
               {ingredient.combosToAvoid?.length > 0 && (
                 <Card>
-                  <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">{t('diet.combosToAvoid')}</p>
+                  <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-2">{t('diet.combosToAvoid')}</p>
                   <ul className="flex flex-col gap-2">
                     {ingredient.combosToAvoid.map((c) => (
                       <li key={c} className="font-body text-[15px] text-on-surface flex gap-2 leading-relaxed">
@@ -332,7 +332,7 @@ export default function IngredientDetailPage() {
                   classical contraindication or a practical caution. */}
               {(ingredient.cautions?.length > 0 || ingredient.cautionNote) && (
                 <Card>
-                  <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2">{t('diet.cautions')}</p>
+                  <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-2">{t('diet.cautions')}</p>
                   {ingredient.cautions?.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {ingredient.cautions.map((c) => (
@@ -357,7 +357,7 @@ export default function IngredientDetailPage() {
         <div className="mt-10 pt-2 border-t border-outline-variant/20">
           <Section title={t('diet.reference')} className="mt-5">
             <Card>
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2.5">{t('diet.doshaEffect')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-2.5">{t('diet.doshaEffect')}</p>
               <div className="flex flex-col gap-2">
                 {DOSHAS.map((d) => {
                   const s = suitabilityFor(ingredient, d)
@@ -383,7 +383,7 @@ export default function IngredientDetailPage() {
             </Card>
 
             <Card className="mt-3">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-2.5">{t('diet.properties')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-2.5">{t('diet.properties')}</p>
               <dl className="flex flex-col gap-3">
                 {[
                   [t('diet.rasa'),   ingredient.rasa.map((r) => t(`diet.tastes.${r}`)).join(' · ')],
@@ -404,7 +404,7 @@ export default function IngredientDetailPage() {
             <Card className="mt-3">
               <div className="flex items-center gap-2 flex-wrap">
                 <span
-                  className={`px-3 py-1 rounded-full font-label text-[10px] uppercase tracking-wide ${
+                  className={`px-3 py-1 rounded-full font-label text-[11px] uppercase tracking-wide ${
                     view.isDerived
                       ? 'bg-surface-container-high text-on-surface-variant'
                       : 'bg-primary-container text-on-primary-container'

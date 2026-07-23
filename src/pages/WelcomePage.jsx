@@ -91,7 +91,7 @@ export default function WelcomePage() {
 
         {/* Personalized Ayurveda */}
         <div className="bg-surface-container rounded-lg p-8 relative overflow-hidden group stagger-4">
-          <span className="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-[10px] font-label uppercase tracking-widest mb-5 inline-block">
+          <span className="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-[11px] font-label uppercase tracking-widest mb-5 inline-block">
             {t('welcome.dailyRituals')}
           </span>
           <h3 className="font-headline text-2xl text-on-surface mb-3">{t('welcome.ayurvedaTitle')}</h3>

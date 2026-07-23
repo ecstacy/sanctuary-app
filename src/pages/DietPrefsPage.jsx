@@ -116,7 +116,7 @@ export default function DietPrefsPage() {
 
         {/* ── Allergens ───────────────────────────────────────────────────*/}
         <section className="mt-7">
-          <h2 className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-1">
+          <h2 className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-1">
             {t('dietPrefs.allergensTitle')}
           </h2>
           <p className="font-body text-xs text-on-surface-variant/70 mb-3 leading-relaxed">
@@ -137,7 +137,7 @@ export default function DietPrefsPage() {
 
         {/* ── Patterns ────────────────────────────────────────────────────*/}
         <section className="mt-7">
-          <h2 className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-1">
+          <h2 className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-1">
             {t('dietPrefs.patternsTitle')}
           </h2>
           <p className="font-body text-xs text-on-surface-variant/70 mb-3 leading-relaxed">

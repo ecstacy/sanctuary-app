@@ -269,10 +269,10 @@ export default function AsanaDetailPage() {
             <span className="material-symbols-outlined text-on-surface text-lg">arrow_back</span>
           </button>
           <div className="flex gap-2">
-            <span className="px-3 py-1 bg-surface-container-high rounded-full font-label text-[10px] text-on-surface-variant uppercase tracking-widest shadow-sm border border-outline-variant/20">
+            <span className="px-3 py-1 bg-surface-container-high rounded-full font-label text-[11px] text-on-surface-variant uppercase tracking-widest shadow-sm border border-outline-variant/20">
               {categoryLabel}
             </span>
-            <span className="px-3 py-1 bg-primary text-on-primary rounded-full font-label text-[10px] uppercase tracking-widest shadow-sm">
+            <span className="px-3 py-1 bg-primary text-on-primary rounded-full font-label text-[11px] uppercase tracking-widest shadow-sm">
               {levelLabel(asana.level)}
             </span>
           </div>
@@ -285,14 +285,14 @@ export default function AsanaDetailPage() {
 
         {/* Name */}
         <div className="px-6 text-center">
-          <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{categoryLabel}</p>
+          <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-1">{categoryLabel}</p>
           {/* Plus badge when this asana is gated for the viewing user.
               Visible above the title so it's the first thing read —
               sets expectation before they read the content + tap CTA. */}
           {isLocked && (
             <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary-container/60 rounded-full mb-2">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px]">lock</span>
-              <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider">
+              <span className="font-label text-[11px] font-semibold text-primary uppercase tracking-wider">
                 {t('asanaDetail.plusBadge')}
               </span>
             </div>
@@ -322,7 +322,7 @@ export default function AsanaDetailPage() {
           >
             <span className="material-symbols-outlined text-primary text-lg mb-1 block">timer</span>
             <p className="font-headline text-lg text-on-surface">{asana.durationSeconds >= 60 ? `${Math.ceil(asana.durationSeconds / 60)}m` : `${asana.durationSeconds}s`}</p>
-            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('asanaDetail.hold')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('asanaDetail.hold')}</p>
           </button>
           <button
             onClick={() => setSheet('level')}
@@ -330,7 +330,7 @@ export default function AsanaDetailPage() {
           >
             <span className="material-symbols-outlined text-primary text-lg mb-1 block">fitness_center</span>
             <p className="font-headline text-lg text-on-surface">{levelLabel(asana.level)}</p>
-            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('asanaDetail.level')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('asanaDetail.level')}</p>
           </button>
           <button
             onClick={() => setSheet('areas')}
@@ -338,7 +338,7 @@ export default function AsanaDetailPage() {
           >
             <span className="material-symbols-outlined text-primary text-lg mb-1 block">body_system</span>
             <p className="font-headline text-lg text-on-surface">{asana.bodyParts.length}</p>
-            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('asanaDetail.areas')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('asanaDetail.areas')}</p>
           </button>
         </div>
 
@@ -367,7 +367,7 @@ export default function AsanaDetailPage() {
                   {i < steps.length - 1 && <div className="w-px flex-1 bg-primary/10 mt-1" />}
                 </div>
                 <div className="pb-4 flex-1">
-                  <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{phaseLabel(step.phase)}</p>
+                  <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-1">{phaseLabel(step.phase)}</p>
                   <p className="font-body text-sm text-on-surface-variant leading-relaxed">{step.text}</p>
                 </div>
               </div>
@@ -547,7 +547,7 @@ export default function AsanaDetailPage() {
           <div className="h-2 rounded-full bg-gradient-to-r from-primary-container via-primary/50 to-primary" />
         </div>
 
-        <div className="flex justify-between font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-5">
+        <div className="flex justify-between font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-5">
           <span>{t('asanaDetail.scaleBeginner')}</span>
           <span>{t('asanaDetail.scaleIntermediate')}</span>
           <span>{t('asanaDetail.scaleExpert')}</span>

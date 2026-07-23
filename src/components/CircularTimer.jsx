@@ -48,7 +48,7 @@ export default function CircularTimer({ duration, remaining, isPaused, size = 16
           {display}
         </span>
         {isPaused && (
-          <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">
+          <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mt-1">
             Paused
           </span>
         )}

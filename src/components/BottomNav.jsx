@@ -96,7 +96,7 @@ export default function BottomNav() {
             >
               {tab.icon}
             </span>
-            <span className={`font-label text-[10px] uppercase tracking-widest transition-colors duration-200 ${
+            <span className={`font-label text-[11px] uppercase tracking-widest transition-colors duration-200 ${
               active ? 'text-primary font-medium' : 'text-on-surface-variant/50'
             }`}>
               {label}

@@ -32,7 +32,7 @@ function CategoryList({ items, accent }) {
     <div className="space-y-2">
       {Object.entries(items).map(([category, text]) => (
         <div key={category} className="flex gap-3">
-          <p className={`font-label text-[10px] uppercase tracking-wider min-w-[78px] flex-shrink-0 mt-0.5 ${accent}`}>
+          <p className={`font-label text-[11px] uppercase tracking-wider min-w-[78px] flex-shrink-0 mt-0.5 ${accent}`}>
             {localizeDietCategory(category)}
           </p>
           <p className="font-body text-sm text-on-surface-variant leading-relaxed flex-1">{text}</p>
@@ -84,7 +84,7 @@ export default function DietaryGuidancePage() {
 
       {/* Hero */}
       <div className={`mx-5 mt-2 rounded-2xl bg-gradient-to-br ${colors.gradient} px-5 py-6 text-white stagger-1`}>
-        <p className="font-label text-[10px] uppercase tracking-widest opacity-80 mb-1">{t('dietary.forConstitution', { dosha: DOSHA_LABELS[activeDosha] })}</p>
+        <p className="font-label text-[11px] uppercase tracking-widest opacity-80 mb-1">{t('dietary.forConstitution', { dosha: DOSHA_LABELS[activeDosha] })}</p>
         <h1 className="font-headline text-2xl leading-tight mb-2">{t('dietary.eatToBalance')}</h1>
         <p className="font-body text-sm opacity-95 leading-relaxed">{guide.principle}</p>
       </div>
@@ -151,10 +151,10 @@ export default function DietaryGuidancePage() {
 
       {/* Tastes */}
       <div className="px-5 mt-6 stagger-3">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.tastesRasa')}</p>
+        <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.tastesRasa')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5">
           <div className="mb-4">
-            <p className={`font-label text-[10px] uppercase tracking-wider mb-2 ${colors.accent}`}>{t('dietary.favor')}</p>
+            <p className={`font-label text-[11px] uppercase tracking-wider mb-2 ${colors.accent}`}>{t('dietary.favor')}</p>
             <div className="flex flex-wrap gap-2">
               {guide.tastes.favor.map(t => (
                 <span key={t} className={`px-3 py-1 rounded-full text-xs ${colors.bg} ${colors.accent} font-medium`}>
@@ -164,7 +164,7 @@ export default function DietaryGuidancePage() {
             </div>
           </div>
           <div>
-            <p className="font-label text-[10px] uppercase tracking-wider mb-2 text-on-surface-variant/60">{t('dietary.avoidExcess')}</p>
+            <p className="font-label text-[11px] uppercase tracking-wider mb-2 text-on-surface-variant">{t('dietary.avoidExcess')}</p>
             <div className="flex flex-wrap gap-2">
               {guide.tastes.avoid.map(t => (
                 <span key={t} className="px-3 py-1 rounded-full text-xs bg-surface-container text-on-surface-variant">
@@ -178,7 +178,7 @@ export default function DietaryGuidancePage() {
 
       {/* Foods to Favor */}
       <div className="px-5 mt-6 stagger-4">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.foodsToFavor')}</p>
+        <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.foodsToFavor')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5">
           <CategoryList items={guide.favor} accent={colors.accent} />
         </div>
@@ -186,7 +186,7 @@ export default function DietaryGuidancePage() {
 
       {/* Foods to Avoid */}
       <div className="px-5 mt-6 stagger-4">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.foodsToAvoid')}</p>
+        <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.foodsToAvoid')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5 space-y-3">
           <p className="font-body text-sm text-on-surface-variant leading-relaxed italic">{guide.avoid.generally}</p>
           <ul className="space-y-1.5">
@@ -202,7 +202,7 @@ export default function DietaryGuidancePage() {
 
       {/* Eating habits */}
       <div className="px-5 mt-6 stagger-5">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.howToEat')}</p>
+        <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.howToEat')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5">
           <ul className="space-y-2">
             {guide.eatingHabits.map((item, i) => (
@@ -218,14 +218,14 @@ export default function DietaryGuidancePage() {
       {/* Seasonal note */}
       <div className="px-5 mt-6 stagger-5">
         <div className={`rounded-2xl p-5 ${colors.bg}`}>
-          <p className={`font-label text-[10px] uppercase tracking-widest mb-2 ${colors.accent}`}>{t('dietary.seasonalNote')}</p>
+          <p className={`font-label text-[11px] uppercase tracking-widest mb-2 ${colors.accent}`}>{t('dietary.seasonalNote')}</p>
           <p className="font-body text-sm text-on-surface leading-relaxed">{guide.seasonal}</p>
         </div>
       </div>
 
       {/* Six tastes reference */}
       <div className="px-5 mt-6 stagger-5">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.sixTastes')}</p>
+        <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">{t('dietary.sixTastes')}</p>
         <div className="bg-surface-container-low rounded-2xl p-5 space-y-3">
           {Object.entries(RASAS).map(([key, r]) => {
             const lr = localizeRasa(key, r)
@@ -235,7 +235,7 @@ export default function DietaryGuidancePage() {
                 <p className="font-body font-semibold text-sm text-on-surface">
                   {r.sanskrit} <span className="text-on-surface-variant/70 font-normal italic">({r.iast})</span>
                 </p>
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider capitalize">{key}</p>
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider capitalize">{key}</p>
               </div>
               <p className="font-body text-xs text-on-surface-variant leading-relaxed">{lr.examples}</p>
             </div>

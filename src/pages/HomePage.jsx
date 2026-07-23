@@ -384,7 +384,7 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="material-symbols-outlined text-primary text-sm">local_fire_department</span>
-                <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('home.dayStreak')}</p>
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('home.dayStreak')}</p>
               </div>
               <p className="font-headline text-3xl text-primary leading-none">{stats.streak}</p>
               <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">
@@ -400,7 +400,7 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="material-symbols-outlined text-secondary text-sm">schedule</span>
-                <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('home.thisWeek')}</p>
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('home.thisWeek')}</p>
               </div>
               <p className="font-headline text-3xl text-secondary leading-none">{stats.weekMinutes}</p>
               <p className="font-body text-[10px] text-on-surface-variant/50 mt-1">{t('home.minutesPracticed')}</p>
@@ -445,7 +445,7 @@ export default function HomePage() {
                 <span className="material-symbols-outlined text-primary text-lg">waving_hand</span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-0.5">
+                <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-0.5">
                   {vikriti.vikritiCount === 0 ? t('home.checkinFirstKicker') : t('home.checkinWeeklyKicker')}
                 </p>
                 <p className="font-body font-semibold text-sm text-on-surface leading-tight">
@@ -568,7 +568,7 @@ export default function HomePage() {
             <div aria-hidden="true" className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-on-primary/5" />
             <div aria-hidden="true" className="absolute -bottom-10 -left-6 w-28 h-28 rounded-full bg-on-primary/5" />
             <div className="relative">
-              <p className="font-label text-[10px] uppercase tracking-widest text-on-primary/70 mb-1.5 font-semibold">
+              <p className="font-label text-[11px] uppercase tracking-widest text-on-primary/70 mb-1.5 font-semibold">
                 {t('home.daily.eyebrow')}
               </p>
               <h3 className="font-headline text-2xl text-on-primary leading-tight mb-1">
@@ -635,7 +635,7 @@ export default function HomePage() {
 
             {/* Text content */}
             <div className="flex-1 min-w-0">
-              <p className="font-label text-[9px] text-primary uppercase tracking-widest mb-1 font-semibold">{t('home.dailyRitual')}</p>
+              <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-1 font-semibold">{t('home.dailyRitual')}</p>
               <h3 className="font-headline text-xl text-on-surface leading-snug">{t('home.mindfulRespiration')}</h3>
               <p className="font-body text-xs text-on-surface-variant mt-1">{t('home.inhaleHoldExhale')}</p>
             </div>
@@ -653,7 +653,7 @@ export default function HomePage() {
           <div className="flex items-center gap-2.5 mb-4">
             <span className="material-symbols-outlined text-secondary text-lg">block</span>
             <h3 className="font-headline text-lg text-on-surface">{t('home.avoid.title')}</h3>
-            <span className="ml-auto font-label text-[10px] text-on-secondary-container uppercase tracking-widest font-semibold bg-secondary-container px-2.5 py-1 rounded-full">{t(`home.avoid.badge.${timeOfDay}`)}</span>
+            <span className="ml-auto font-label text-[11px] text-on-secondary-container uppercase tracking-widest font-semibold bg-secondary-container px-2.5 py-1 rounded-full">{t(`home.avoid.badge.${timeOfDay}`)}</span>
           </div>
           <div className="flex flex-col gap-3">
             {avoidTips.map((tip, i) => (
@@ -666,7 +666,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="mt-4 pt-3 border-t border-secondary-container/20">
-            <p className="font-label text-[9px] text-secondary/60 uppercase tracking-widest text-center italic">
+            <p className="font-label text-[11px] text-secondary/60 uppercase tracking-widest text-center italic">
               {t('home.avoid.reminder')}
             </p>
           </div>
@@ -740,7 +740,7 @@ export default function HomePage() {
                   <span className="material-symbols-outlined text-sm opacity-70">
                     {hasDosha ? theme.icon : 'spa'}
                   </span>
-                  <p className="font-label text-[10px] uppercase tracking-widest opacity-70">
+                  <p className="font-label text-[11px] uppercase tracking-widest opacity-70">
                     {hasDosha ? theme.element : t('home.dosha.type')}
                   </p>
                 </div>
@@ -796,7 +796,7 @@ export default function HomePage() {
           <p className="font-headline italic text-lg text-on-surface-variant leading-relaxed mb-3">
             "{t(`home.quotes.${quoteIndex}`, quote.text)}"
           </p>
-          <p className="font-label text-[10px] uppercase tracking-widest text-primary">
+          <p className="font-label text-[11px] uppercase tracking-widest text-primary">
             {quote.author}
           </p>
         </div>

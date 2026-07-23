@@ -92,22 +92,22 @@ function PatternCard({ pattern, breathPattern }) {
   if (breathPattern === 'rate') {
     return (
       <div className="bg-surface-container rounded-2xl p-5 border border-outline-variant/10">
-        <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-3">{t('pranayamaDetail.breathPattern')}</p>
+        <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-3">{t('pranayamaDetail.breathPattern')}</p>
         <div className="grid grid-cols-2 gap-x-4 gap-y-3">
           <div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.rate')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.rate')}</p>
             <p className="font-body text-sm font-semibold text-on-surface">{t('pranayamaDetail.breathsPerMin', { rate: pattern.rate })}</p>
           </div>
           <div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.roundDuration')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.roundDuration')}</p>
             <p className="font-body text-sm font-semibold text-on-surface">{pattern.roundSeconds}s</p>
           </div>
           <div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.rounds')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.rounds')}</p>
             <p className="font-body text-sm font-semibold text-on-surface">{pattern.rounds}</p>
           </div>
           <div>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.restBetween')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-0.5">{t('pranayamaDetail.restBetween')}</p>
             <p className="font-body text-sm font-semibold text-on-surface">{pattern.restBetweenRounds}s</p>
           </div>
         </div>
@@ -123,31 +123,31 @@ function PatternCard({ pattern, breathPattern }) {
   // Default: paced pattern
   return (
     <div className="bg-surface-container rounded-2xl p-5 border border-outline-variant/10">
-      <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-3">{t('pranayamaDetail.breathPattern')}</p>
+      <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-3">{t('pranayamaDetail.breathPattern')}</p>
       <div className="flex items-center justify-around mb-3">
         <div className="text-center">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.inhale')}</p>
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.inhale')}</p>
           <p className="font-headline text-3xl text-primary tabular-nums">{pattern.inhale ?? '—'}</p>
         </div>
         {pattern.holdAfterIn ? (
           <div className="text-center">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.hold')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.hold')}</p>
             <p className="font-headline text-3xl text-on-surface-variant tabular-nums">{pattern.holdAfterIn}</p>
           </div>
         ) : null}
         <div className="text-center">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.exhale')}</p>
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.exhale')}</p>
           <p className="font-headline text-3xl text-primary tabular-nums">{pattern.exhale ?? '—'}</p>
         </div>
         {pattern.holdAfterEx ? (
           <div className="text-center">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.hold')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-1">{t('pranayamaDetail.hold')}</p>
             <p className="font-headline text-3xl text-on-surface-variant tabular-nums">{pattern.holdAfterEx}</p>
           </div>
         ) : null}
       </div>
       {pattern.ratio && (
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest text-center mb-3">{t('pranayamaDetail.ratio', { ratio: pattern.ratio })}</p>
+        <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest text-center mb-3">{t('pranayamaDetail.ratio', { ratio: pattern.ratio })}</p>
       )}
       {pattern.notes && (
         <p className="font-body text-xs text-on-surface-variant leading-relaxed pt-3 border-t border-outline-variant/15">
@@ -253,7 +253,7 @@ export default function PranayamaDetailPage() {
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-xl">arrow_back</span>
           </button>
           <p className="font-headline text-base text-on-surface flex-1 truncate">{sanskritLabel(pranayama)}</p>
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.minLabel', { min: minutes })}</p>
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.minLabel', { min: minutes })}</p>
         </div>
       </div>
 
@@ -266,7 +266,7 @@ export default function PranayamaDetailPage() {
         >
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-xl">arrow_back</span>
         </button>
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.label')}</p>
+        <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.label')}</p>
         <div className="w-9" />
       </div>
 
@@ -285,14 +285,14 @@ export default function PranayamaDetailPage() {
         </div>
 
         <div className="text-center">
-          <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{t('pranayamaDetail.label')}</p>
+          <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-1">{t('pranayamaDetail.label')}</p>
           {/* Plus badge — only when this pranayama is Plus-gated for
               the viewing user. Sets expectation before they reach
               the practice CTA at the bottom. */}
           {isLocked && (
             <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary-container/60 rounded-full mb-2">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px]">lock</span>
-              <span className="font-label text-[9px] font-semibold text-primary uppercase tracking-wider">
+              <span className="font-label text-[11px] font-semibold text-primary uppercase tracking-wider">
                 {t('pranayamaDetail.plusBadge')}
               </span>
             </div>
@@ -319,7 +319,7 @@ export default function PranayamaDetailPage() {
           >
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">timer</span>
             <p className="font-headline text-base text-on-surface">{t('pranayamaDetail.minLabel', { min: minutes })}</p>
-            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.duration')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.duration')}</p>
           </button>
 
           {seatAsana ? (
@@ -330,20 +330,20 @@ export default function PranayamaDetailPage() {
             >
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">self_care</span>
               <p className="font-headline text-base text-on-surface line-clamp-1">{sanskritLabel(seatAsana)}</p>
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.seat')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.seat')}</p>
             </button>
           ) : (
             <div className="flex flex-col items-center gap-1 p-2">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">self_care</span>
               <p className="font-headline text-base text-on-surface">{t('pranayamaDetail.anySeat')}</p>
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.seat')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.seat')}</p>
             </div>
           )}
 
           <div className="flex flex-col items-center gap-1 p-2">
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">{levelInfo.icon}</span>
             <p className="font-headline text-base text-on-surface">{t(`asanaDetail.levels.${pranayama.level}`, levelInfo.label)}</p>
-            <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.level')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('pranayamaDetail.level')}</p>
           </div>
         </div>
       </div>
@@ -380,7 +380,7 @@ export default function PranayamaDetailPage() {
                 </div>
                 <div className="flex-1 pt-0.5 pb-3">
                   {step.phase && (
-                    <p className="font-label text-[10px] text-primary uppercase tracking-widest mb-1">{phaseLabel(step.phase)}</p>
+                    <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-1">{phaseLabel(step.phase)}</p>
                   )}
                   <p className="font-body text-sm text-on-surface leading-relaxed">{step.text}</p>
                 </div>
@@ -455,7 +455,7 @@ export default function PranayamaDetailPage() {
           <div className="flex items-start gap-2">
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-base flex-shrink-0 mt-0.5">menu_book</span>
             <p className="font-body text-xs text-on-surface-variant/70 leading-relaxed">
-              <span className="font-label uppercase tracking-widest text-[10px]">{t('pranayamaDetail.sourceLabel')}</span>
+              <span className="font-label uppercase tracking-widest text-[11px]">{t('pranayamaDetail.sourceLabel')}</span>
               {pranayama.source.text === 'HYP'    ? t('pranayamaDetail.sourceHYP')
                : pranayama.source.text === 'CS'   ? t('pranayamaDetail.sourceCS')
                : pranayama.source.text === 'GS'   ? t('pranayamaDetail.sourceGS')

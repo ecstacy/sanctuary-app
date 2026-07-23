@@ -96,7 +96,7 @@ export default function PreviewPage() {
             </div>
             <div>
               <p className="font-body font-semibold text-on-surface text-sm">{preview.label} Sequence</p>
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
                 Personalized practice{struggles.length > 1 ? ` · +${struggles.length - 1} more` : ''}
               </p>
             </div>

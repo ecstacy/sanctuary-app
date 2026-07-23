@@ -100,27 +100,27 @@ export default function RoutinePage() {
         <div className="bg-surface rounded-2xl p-4 shadow-lg border border-outline-variant/20 stagger-2 mb-5">
           <div className="flex items-center gap-2 mb-3">
             <span className="material-symbols-outlined text-primary text-base">flag</span>
-            <p className="font-label text-[10px] text-primary uppercase tracking-widest font-semibold">{t('routinePage.todaysGoal')}</p>
+            <p className="font-label text-[11px] text-primary uppercase tracking-widest font-semibold">{t('routinePage.todaysGoal')}</p>
           </div>
           <div className="grid grid-cols-3 gap-2">
             <div className="text-center">
               <p className="font-headline text-2xl text-on-surface leading-none">{totalPoses}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1">{t('routinePage.poses')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-1">{t('routinePage.poses')}</p>
             </div>
             <div className="text-center border-x border-outline-variant/20">
               <p className="font-headline text-2xl text-on-surface leading-none">{Math.round(routine.totalDuration / 60)}</p>
-              <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1">{t('routinePage.minutes')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-1">{t('routinePage.minutes')}</p>
             </div>
             <div className="text-center">
               <p className="font-headline text-2xl text-on-surface leading-none">+1</p>
-              <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1">{t('routinePage.streakDay')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-1">{t('routinePage.streakDay')}</p>
             </div>
           </div>
         </div>
 
         {/* ── Up Next — the first asana, hero treatment so the user knows
              exactly what's coming and feels ready to begin. ── */}
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-2 px-1 stagger-2">
+        <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2 px-1 stagger-2">
           {t('routinePage.upNext')}
         </p>
         <button
@@ -148,7 +148,7 @@ export default function RoutinePage() {
             <PoseFigure poseKey={firstAsana.poseKey} size={80} breathing={false} objectPosition="top" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-label text-[9px] text-primary uppercase tracking-widest font-semibold mb-0.5">{t('routinePage.poseProgress', { n: 1, total: totalPoses })}</p>
+            <p className="font-label text-[11px] text-primary uppercase tracking-widest font-semibold mb-0.5">{t('routinePage.poseProgress', { n: 1, total: totalPoses })}</p>
             <p className="font-body font-semibold text-base text-on-surface leading-tight">{firstAsana.sanskrit}</p>
             <p className="font-body text-xs text-on-surface-variant mt-0.5">{firstAsana.english} · {formatDuration(firstAsana.durationSeconds, t)}</p>
           </div>
@@ -157,7 +157,7 @@ export default function RoutinePage() {
 
         {/* ── Path — gamified vertical timeline of poses ── */}
         <div className="flex items-center justify-between mb-3 px-1 stagger-3">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">{t('routinePage.yourPath')}</p>
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('routinePage.yourPath')}</p>
           <span className="font-label text-[10px] text-on-surface-variant/50 tracking-wider">{t('routinePage.tapPreview')}</span>
         </div>
 
@@ -197,7 +197,7 @@ export default function RoutinePage() {
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1 min-w-0">
                       <p className="font-body font-semibold text-sm text-on-surface leading-tight">{asana.sanskrit}</p>
-                      <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">
+                      <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-0.5">
                         {asana.english} · {formatDuration(asana.durationSeconds, t)}
                       </p>
                     </div>
@@ -224,7 +224,7 @@ export default function RoutinePage() {
                     </p>
 
                     <div className="mb-3">
-                      <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2">{t('routinePage.benefits')}</p>
+                      <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2">{t('routinePage.benefits')}</p>
                       <div className="flex flex-wrap gap-1.5">
                         {asana.benefits.map((b, j) => (
                           <span key={j} className="bg-primary-container text-on-primary-container font-label text-[10px] px-2.5 py-1 rounded-full">
@@ -235,7 +235,7 @@ export default function RoutinePage() {
                     </div>
 
                     <div className="mb-3">
-                      <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-2">{t('routinePage.bodyFocus')}</p>
+                      <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2">{t('routinePage.bodyFocus')}</p>
                       <div className="flex flex-wrap gap-1.5">
                         {asana.bodyParts.map((bp, j) => (
                           <span key={j} className="bg-surface-container-high text-on-surface-variant font-label text-[10px] px-2.5 py-1 rounded-full">
@@ -257,7 +257,7 @@ export default function RoutinePage() {
             </div>
             <div className="flex-1 bg-primary-container/30 rounded-xl p-3.5 border border-primary/15">
               <p className="font-body font-semibold text-sm text-primary leading-tight">{t('routinePage.finishLine')}</p>
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-0.5">
                 {t('routinePage.finishSub')}
               </p>
             </div>
@@ -268,7 +268,7 @@ export default function RoutinePage() {
         <div className="mt-7 stagger-4">
           <div className="flex items-center gap-2 mb-3 px-1">
             <span className="material-symbols-outlined text-primary text-base">favorite</span>
-            <p className="font-label text-[10px] text-primary uppercase tracking-widest font-semibold">{t('routinePage.whatYoullFeel')}</p>
+            <p className="font-label text-[11px] text-primary uppercase tracking-widest font-semibold">{t('routinePage.whatYoullFeel')}</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {outcomes.map((o, i) => (

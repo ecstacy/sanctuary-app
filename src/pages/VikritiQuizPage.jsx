@@ -298,7 +298,7 @@ export default function VikritiQuizPage() {
           <div className={`${currentMeta.bg} rounded-lg p-5 mb-5`}>
             <div className="flex items-center gap-2 mb-2">
               <span className={`material-symbols-outlined ${currentMeta.text} text-lg`}>{currentMeta.icon}</span>
-              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: currentMeta.hex }}>
+              <p className="font-label text-[11px] uppercase tracking-widest" style={{ color: currentMeta.hex }}>
                 {isAggravated
                   ? t('vikritiQuiz.aggravated', { dosha: currentMeta.name })
                   : t('vikritiQuiz.trending', { dosha: currentMeta.name })}
@@ -345,7 +345,7 @@ export default function VikritiQuizPage() {
         <button onClick={handleBack} className="text-on-surface-variant" aria-label={t('vikritiQuiz.prevQuestion')}>
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
-        <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+        <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
           {t('vikritiQuiz.weeklyCheckin')}
         </span>
         <span className="font-label text-xs text-on-surface-variant/50">{currentQ + 1}/{total}</span>
