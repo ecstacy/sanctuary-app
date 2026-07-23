@@ -23,18 +23,24 @@ import { SUITABILITY } from './doshaSemantics'
 // not a silent ship. When a batch is signed off, add its ids here — and only
 // here.
 const REVIEWED_SIGNED_OFF = [
-  // Batch 1 — signed off 2026-07-21 (docs/diet-review-batch-1.md)
+  // Batch 1 — 2026-07-21 (docs/diet-review-batch-1.md)
   'basmatiRice', 'oats', 'ghee', 'yoghurt', 'gingerFresh', 'gingerDry',
   'mungDal', 'ryeBread', 'coffee',
-  // Batch 2 — signed off 2026-07-21 (docs/diet-review-batch-2.md).
-  // 24 entries reviewed, 26 rows out: `onion` split into onionRaw/onionCooked
-  // and `apple` into apple/appleStewed, both at the reviewer's direction.
+  // Batch 2 — 2026-07-21 (docs/diet-review-batch-2.md)
   'wheat', 'barley', 'uradDal', 'chickpea',
   'milk', 'buttermilk', 'butter', 'hardCheese',
   'honey', 'jaggery', 'sesameOil', 'oliveOil',
   'blackPepper', 'turmeric', 'cumin', 'corianderSeed', 'fennel', 'asafoetida',
   'garlic', 'onionRaw', 'onionCooked',
   'potato', 'spinach', 'apple', 'appleStewed', 'almond',
+  // Batch 4 + cardamom — 2026-07-23 (docs/diet-review-batch-4.md).
+  // 19 reviewed, 20 rows: `radish` split into radishTender/radishMature,
+  // `pumpkin` renamed to `ashGourd` (Kushmanda = Benincasa, not Cucurbita).
+  'cardamom',
+  'carrot', 'beetroot', 'ashGourd', 'bottleGourd', 'okra', 'cabbage',
+  'cauliflower', 'greenBeans', 'peas', 'tomatoRaw', 'tomatoCooked', 'aubergine',
+  'cucumber', 'radishTender', 'radishMature',
+  'banana', 'pomegranate', 'grapes', 'mangoRipe', 'lemon',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {

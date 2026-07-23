@@ -350,8 +350,9 @@ const BY_ID = {
   // Batch 4 — vegetables and fruit
   carrot: 'carrot',
   beetroot: 'tuber',
-  radish: 'carrot',
-  pumpkin: 'gourd',
+  radishTender: 'carrot',
+  radishMature: 'carrot',
+  ashGourd: 'gourd',
   bottleGourd: 'gourd',
   okra: 'pod',
   cabbage: 'brassica',

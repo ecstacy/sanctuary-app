@@ -1605,7 +1605,9 @@
       "unctuous": "Ölig",
       "subtle_penetrating": "Fein durchdringend",
       "moist": "Feucht",
-      "slimy": "Schleimig"
+      "slimy": "Schleimig",
+      "picchila": "Schleimig",
+      "aromatic": "Aromatisch"
     },
     "badge": {
       "allergen": "Enthält {{key}}",

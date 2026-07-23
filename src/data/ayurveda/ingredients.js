@@ -832,21 +832,23 @@ export const INGREDIENTS = {
     aliases: ['elaichi', 'ilaichi', 'kardamom', 'green cardamom'],
     category: 'spice',
     rasa: ['pungent', 'sweet'],
-    // ⚠ The field to check. Ela is classically described as SHEETA (cooling),
-    // which is unusual for an aromatic pungent spice and is the opposite of
-    // what property-derivation alone would suggest. Drafted as cooling on the
-    // strength of the classical description rather than the derivation.
+    // Ela is classically SHEETA (cooling) despite being an aromatic pungent
+    // spice — kept on the strength of the classical description, not derivation.
     virya: 'cooling',
-    vipaka: 'pungent',
-    guna: ['light', 'dry'],
-    doshaEffect: { vata: -1, pitta: -1, kapha: -1 },
+    // Review batch 4: vipaka pungent → sweet; guna dry → aromatic; and the
+    // tridoshic -1/-1/-1 corrected to V0/P-1/K-1 — the same over-claim rejected
+    // for coriander. Cooling, digestive and Kapha-reducing without overstating
+    // its ability to pacify Vata.
+    vipaka: 'sweet',
+    guna: ['light', 'aromatic'],
+    doshaEffect: { vata: 0, pitta: -1, kapha: -1 },
     whyFavor:
       'Aromatic and digestive without being heating — which is why it is the spice added to milk and to sweet dishes rather than to a hot curry.',
     source: {
       text: 'modern',
       note: 'Ela is a classical substance, but as with cumin and coriander the complete energetic profile is synthesised from the broader tradition rather than enumerated in Sutrasthana 27. ⚠ The tridoshic -1/-1/-1 is the strongest claim this schema makes, and batch 2 rejected exactly that claim for coriander — it needs the same scrutiny here.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1124,7 +1126,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Not securely identifiable in the classical corpus. Derived from properties: sweet with an astringent edge, light, mildly warming.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1138,25 +1140,32 @@ export const INGREDIENTS = {
     virya: 'heating',
     vipaka: 'sweet',
     guna: ['heavy', 'oily'],
-    doshaEffect: { vata: -1, pitta: 1, kapha: 0 },
+    // Review batch 4: Kapha 0 → +1. Warmth doesn't offset the heaviness of a
+    // heavy sweet root — the same "too clever" move corrected on sesame oil.
+    doshaEffect: { vata: -1, pitta: 1, kapha: 1 },
     bestSeason: ['autumn', 'winter'],
     preparation: 'Cooked rather than raw — raw beetroot is markedly harder to digest.',
     whyFavor: 'Sweet, warming and grounding — settles Vata.',
-    whyAvoid: 'Distinctly heating; it adds to Pitta.',
+    whyAvoid: 'Distinctly heating and heavy; it adds to both Pitta and Kapha.',
     source: {
       text: 'modern',
       note: 'Absent from the classical corpus. Derived from properties: strongly sweet, heavy, warming.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
-  pumpkin: {
-    id: 'pumpkin',
-    name: 'Pumpkin',
+  // Review batch 4: renamed pumpkin → ash gourd. Classical Kushmanda is
+  // Benincasa hispida (ash gourd / winter melon), NOT the New World Cucurbita
+  // that "pumpkin" evokes — so the Charaka citation belongs to ash gourd, and
+  // the Cucurbita aliases were removed to stop the misread. A separate derived
+  // pumpkin entry can be added later if wanted.
+  ashGourd: {
+    id: 'ashGourd',
+    name: 'Ash gourd',
     sanskrit: 'Kushmanda',
     devanagari: 'कूष्माण्ड',
-    aliases: ['kaddu', 'kürbis', 'kuerbis', 'squash', 'butternut'],
+    aliases: ['winter melon', 'wax gourd', 'white pumpkin', 'petha', 'kushmanda'],
     category: 'vegetable',
     rasa: ['sweet'],
     virya: 'cooling',
@@ -1170,9 +1179,9 @@ export const INGREDIENTS = {
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
-      note: 'Kushmanda is classical, though the identification with modern squashes is approximate. Rated on the classical description of a sweet, cooling, heavy gourd.',
+      note: 'Kushmanda is classical and identified as ash gourd (Benincasa hispida), not modern pumpkin. Rated on the classical description of a sweet, cooling, heavy gourd.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1186,17 +1195,20 @@ export const INGREDIENTS = {
     rasa: ['sweet'],
     virya: 'cooling',
     vipaka: 'sweet',
-    guna: ['light', 'moist'],
+    // Review batch 4: guna corrected light/moist → heavy/dry, to match how
+    // Charaka actually characterises Alabu. The dosha neutrality now emerges
+    // from those opposing classical qualities rather than modern intuition.
+    guna: ['heavy', 'dry'],
     doshaEffect: { vata: 0, pitta: -1, kapha: 0 },
     bestSeason: ['summer'],
     whyFavor:
-      'Light, watery and cooling — the standard vegetable for convalescence and hot weather, easy to digest where most gourds are not.',
+      'Cooling and settling for Pitta — the standard vegetable for convalescence and hot weather.',
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
-      note: 'Alabu is classically named. The dosha weighting is synthesised from its light, cooling, watery character rather than quoted.',
+      note: 'Alabu is classically named as heavy and dry; the near-neutral dosha weighting follows from those opposing qualities rather than being quoted.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1208,7 +1220,9 @@ export const INGREDIENTS = {
     rasa: ['sweet', 'astringent'],
     virya: 'cooling',
     vipaka: 'sweet',
-    guna: ['light', 'slimy'],
+    // Review batch 4: 'slimy' → 'picchila', keeping the quality inside the
+    // classical guna vocabulary rather than a purely modern descriptor.
+    guna: ['light', 'picchila'],
     doshaEffect: { vata: -1, pitta: -1, kapha: 1 },
     preparation:
       'Cooked dry with spices; the characteristic sliminess is what makes it soothing for Vata and what makes it heavy for Kapha.',
@@ -1218,7 +1232,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Not clearly identifiable in the corpus. Derived from properties: sweet and astringent, cooling, notably mucilaginous.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1236,11 +1250,14 @@ export const INGREDIENTS = {
       'Cooked with oil and warming spices; raw or lightly cooked it is notably gas-forming.',
     whyFavor: 'Light, dry and astringent — reduces both Pitta heat and Kapha heaviness.',
     whyAvoid: 'Rough, drying and gas-forming: among the harder vegetables for Vata.',
+    // Review batch 4: made symmetric with cauliflower — the brassica family
+    // shares the same default balancing spices.
+    balancedBy: ['asafoetida', 'cumin', 'gingerFresh', 'ghee'],
     source: {
       text: 'modern',
       note: 'Absent from the classical corpus. Derived from the brassica pattern: astringent, light, dry, cooling, gas-forming.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1262,7 +1279,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Absent from the classical corpus. Derived from the brassica pattern, as cabbage.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1283,7 +1300,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Absent from the classical corpus. Derived from properties: sweet, mildly astringent, light and cooling. The near-neutral rating is deliberate — this is a mild food and claiming otherwise would overstate it.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1297,14 +1314,15 @@ export const INGREDIENTS = {
     vipaka: 'pungent',
     guna: ['light', 'dry'],
     doshaEffect: { vata: 1, pitta: -1, kapha: -1 },
-    preparation: 'Cooked with fat and spices offsets the dryness for Vata.',
+    preparation:
+      'This profile is for FRESH green peas and intentionally follows the legume/pulse pattern because of their drying, gas-forming tendency. Cooked with fat and spices offsets the dryness for Vata. Dried peas would warrant a separate, heavier profile.',
     whyFavor: 'Light and astringent, cooling for Pitta and drying for Kapha.',
     whyAvoid: 'Dry and gas-forming, as legumes tend to be — unsettling for Vata.',
     source: {
       text: 'modern',
       note: 'Derived from properties. Peas sit between vegetable and pulse; the dryness and gas-forming tendency follow the pulse pattern.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1321,16 +1339,19 @@ export const INGREDIENTS = {
     virya: 'heating',
     vipaka: 'sour',
     guna: ['light', 'moist'],
-    doshaEffect: { vata: 1, pitta: 1, kapha: 1 },
+    // Review batch 4: Kapha +1 → 0. Cooking's real transition is Vata; raw
+    // tomato is sour and heating (aggravating Vata and Pitta) but not a
+    // Kapha-building food.
+    doshaEffect: { vata: 1, pitta: 1, kapha: 0 },
     whyAvoid:
-      'Sour and heating — the rare food that aggravates all three doshas raw, which is why it is traditionally eaten cooked and spiced.',
+      'Sour and heating — it aggravates both Vata and Pitta raw, which is why it is traditionally eaten cooked and spiced.',
     cautions: ['acid_reflux'],
     cautionNote: 'Practical and symptom-based, not a classical contraindication.',
     source: {
       text: 'modern',
       note: 'A New World crop, necessarily absent from the classical corpus. Derived from properties: pronounced sourness, heating, light.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1354,7 +1375,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'A New World crop. Derived from the raw profile plus the standard effect of cooking with fat: the rawness and sharpness soften, the sourness does not.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1371,14 +1392,19 @@ export const INGREDIENTS = {
     vipaka: 'pungent',
     guna: ['light', 'dry'],
     doshaEffect: { vata: 0, pitta: 1, kapha: -1 },
-    preparation: 'Roasted or cooked with oil; it absorbs a great deal of fat, which changes how heavy the dish is.',
     whyFavor: 'Light and warming — reduces Kapha.',
     whyAvoid: 'Heating and pungent, so it adds to Pitta.',
+    // Review batch 4: this profile assumes COOKED aubergine — frying or cooking
+    // with oil/ghee substantially moderates the drying tendency, which is why
+    // it is not rated more Vata-provoking. It also absorbs a lot of fat, which
+    // changes how heavy the dish becomes.
+    preparation:
+      'Roasted or cooked with oil, which moderates its drying tendency; it absorbs a great deal of fat, so the dish can become heavy.',
     source: {
       text: 'modern',
       note: 'Vartaka is named in later Ayurvedic literature more than in the Charaka corpus, and the identification is not certain. Rated on properties.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1394,26 +1420,31 @@ export const INGREDIENTS = {
     virya: 'cooling',
     vipaka: 'sweet',
     guna: ['heavy', 'moist'],
-    doshaEffect: { vata: 1, pitta: -1, kapha: 1 },
+    // Review batch 4: Vata +1 → 0. The moist, sweet, heavy qualities offset
+    // the cooling, so cooling alone shouldn't drive it Vata-aggravating.
+    doshaEffect: { vata: 0, pitta: -1, kapha: 1 },
     bestSeason: ['summer'],
     bestTime: ['midday'],
     whyFavor: 'Markedly cooling and watery — one of the best foods for summer Pitta.',
-    whyAvoid: 'Cold and watery: it unsettles Vata and adds to Kapha, and is poor food in cold weather.',
+    whyAvoid: 'Cold, watery and heavy: it adds to Kapha, and is poor food in cold weather.',
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
       note: 'Trapusha is classically named and its cooling character is consensus. The Vata and Kapha weightings are synthesised from the cold, watery quality rather than quoted.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
-  radish: {
-    id: 'radish',
-    name: 'Radish',
+  // Review batch 4: split. Classical sources treat tender and mature radish
+  // very differently — the tender form is mild, the mature aggravates all three
+  // doshas — and a single row could only describe one.
+  radishTender: {
+    id: 'radishTender',
+    name: 'Radish (tender)',
     sanskrit: 'Mulaka',
     devanagari: 'मूलक',
-    aliases: ['mooli', 'daikon', 'rettich', 'radieschen', 'white radish'],
+    aliases: ['mooli', 'young radish', 'radieschen', 'red radish'],
     category: 'vegetable',
     dietTags: ['root'],
     rasa: ['pungent'],
@@ -1421,16 +1452,40 @@ export const INGREDIENTS = {
     vipaka: 'pungent',
     guna: ['light', 'dry', 'sharp'],
     doshaEffect: { vata: 0, pitta: 1, kapha: -1 },
-    preparation:
-      'Young and cooked is the gentler form. Classical sources treat tender radish very differently from large mature ones, which are held to be much harsher.',
+    preparation: 'Young and cooked is the gentle form Charaka treats favourably.',
     whyFavor: 'Sharp, light and penetrating — cuts Kapha and stimulates a dull appetite.',
     whyAvoid: 'Pungent and heating: it adds to Pitta.',
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
-      note: 'Mulaka is classical, and the tender-versus-mature distinction is explicitly made in the tradition. This entry describes the tender form; a single row cannot carry both.',
+      note: 'Mulaka is classical, and the tradition explicitly treats the tender form as the wholesome one. This entry is the tender radish.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
+    confidence: 'medium',
+  },
+
+  radishMature: {
+    id: 'radishMature',
+    name: 'Radish (mature)',
+    sanskrit: 'Mulaka',
+    devanagari: 'मूलक',
+    aliases: ['daikon', 'large radish', 'white radish', 'rettich', 'old radish'],
+    category: 'vegetable',
+    dietTags: ['root'],
+    rasa: ['pungent'],
+    virya: 'heating',
+    vipaka: 'pungent',
+    guna: ['heavy', 'dry', 'sharp'],
+    doshaEffect: { vata: 1, pitta: 1, kapha: 1 },
+    preparation: 'Cooking with fat modifies the effect, and drying changes it again.',
+    whyAvoid:
+      'The mature root is classically held to aggravate all three doshas — harsher than the tender form in every direction.',
+    source: {
+      text: 'CS',
+      verse: 'Sutrasthana 27',
+      note: 'Charaka states plainly that large, mature radish aggravates all three doshas; the tridoshic rating reflects the text rather than a derivation.',
+    },
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1452,19 +1507,18 @@ export const INGREDIENTS = {
     doshaEffect: { vata: -1, pitta: 0, kapha: 1 },
     whyFavor: 'Sweet, heavy and grounding — settling for Vata.',
     whyAvoid: 'Heavy and moist, so it adds to Kapha. Its sour post-digestive effect makes it less benign for Pitta than the sweet taste suggests.',
-    combosToAvoid: ['milk'],
+    combosToAvoid: ['milk (later Ayurvedic tradition — not verified in Charaka)'],
     source: {
-      text: 'CS',
-      verse: 'Sutrasthana 27',
-      note: 'Kadali is classical. The SOUR vipaka is the part to check — it is well attested but counter-intuitive, and the banana-with-milk incompatibility is widely taught but should be confirmed as Charaka rather than later tradition.',
+      text: 'modern',
+      note: 'Review batch 4: downgraded from a Charaka citation. Kadali\u2019s SOUR vipaka and the banana-with-milk incompatibility are both later-tradition (Sushruta / later compendia), not verified in Charaka. The sour vipaka is retained on that basis; the milk pairing is labelled as later tradition in the list above.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
   pomegranate: {
     id: 'pomegranate',
-    name: 'Pomegranate',
+    name: 'Pomegranate (sweet)',
     sanskrit: 'Dadima',
     devanagari: 'दाडिम',
     aliases: ['anar', 'granatapfel', 'pomegranate seeds'],
@@ -1481,7 +1535,7 @@ export const INGREDIENTS = {
       verse: 'Sutrasthana 27',
       note: 'Dadima is strongly attested and classically praised. Note the sweet variety is the one described; sour pomegranate is treated differently and is not covered by this entry.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -1500,8 +1554,9 @@ export const INGREDIENTS = {
     whyFavor:
       'Sweet, cooling and moistening — Charaka rates draksha among the best of the fruits, and it settles both Vata and Pitta.',
     whyAvoid: 'Heavy and sweet, so it adds to Kapha.',
+    preparation: 'Profile assumes ripe, sweet grapes; unripe or very sour grapes differ.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -1525,7 +1580,7 @@ export const INGREDIENTS = {
       verse: 'Sutrasthana 27',
       note: 'Ripe amra is classical. ⚠ The virya is the contested field: ripe mango is commonly described as heating, yet also as settling rather than aggravating Pitta, which sits awkwardly together. Drafted heating with Pitta neutral; worth a decision.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1549,7 +1604,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Citrus is named in later Ayurvedic literature more than in the Charaka corpus. Rated on properties and consistent traditional use.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 }

@@ -1605,7 +1605,9 @@
       "unctuous": "Unctuous",
       "subtle_penetrating": "Subtle, penetrating",
       "moist": "Moist",
-      "slimy": "Mucilaginous"
+      "slimy": "Mucilaginous",
+      "picchila": "Mucilaginous",
+      "aromatic": "Aromatic"
     },
     "badge": {
       "allergen": "Contains {{key}}",
