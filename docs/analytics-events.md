@@ -82,7 +82,10 @@ marked `*` is required; others are best-effort.
 
 #### `screen_viewed` *(autocapture)*
 - **Where**: single `useEffect` on `useLocation()` in `App.jsx`.
-- **Props**: `path*`, `route_name*` (e.g. `home`, `practice`, `asana_detail`),
+- **Props**: `path*`, `route_name*` (e.g. `home`, `practice`, `asana_detail`;
+  the Discover hub emits `discover`, `discover_practices`, `discover_breathwork`,
+  `discover_foods`, `discover_programs`, `ingredient_detail`, `meal_guidance`,
+  `diet_prefs`),
   `params?` (route params, no query string).
 - **Notes**: Replaces the need for individual per-page view events.
 
@@ -203,7 +206,7 @@ marked `*` is required; others are best-effort.
 
 #### `routine_card_tapped`
 - **Where**: HomePage Quick Routines + RoutinePage switcher.
-- **Props**: `routine_key*`, `surface*: 'home_quick' \| 'routine_switch'`.
+- **Props**: `routine_key*`, `surface*: 'home_quick' \| 'routine_switch' \| 'discover_programs_routines' \| 'discover_programs_series'`.
 
 #### `routine_switched`
 - **Where**: RoutinePage from the chip.
@@ -211,7 +214,7 @@ marked `*` is required; others are best-effort.
 
 #### `asana_card_tapped`
 - **Where**: any chip/card that opens `/asana/:id`.
-- **Props**: `asana_id*`, `surface*: 'discover_explore' \| 'discover_search_result' \| 'recommendations' \| 'home_suggested'`.
+- **Props**: `asana_id*`, `surface*: 'discover_explore' \| 'discover_search_results' \| 'discover_practices' \| 'recommendations' \| 'home_suggested'`.
 
 #### `search_submitted`
 - **Where**: HomePage + DiscoverPage + RecommendationsPage.
@@ -221,6 +224,21 @@ marked `*` is required; others are best-effort.
 #### `search_result_clicked`
 - **Where**: any tap on a recommendation card on RecommendationsPage.
 - **Props**: `query`, `position*`, `result_id*`, `result_type*`.
+
+#### Discover hub navigation *(via `cta_clicked`)*
+The 2026-07 hub split routes browse through `cta_clicked` rather than bespoke
+events, so the "CTA performance" board covers it for free. Stable `cta_id`s:
+- **Hub doors**: `discover_hub_practices` \| `discover_hub_breathwork` \|
+  `discover_hub_foods` \| `discover_hub_programs` \| `discover_hub_dinacharya`.
+- **Foods page**: `foods_to_meals`, `foods_to_prefs`, `food_library_item`
+  (carries `ingredient_id`).
+- **Practices page**: category taps fire `search_submitted` with
+  `source: 'discover_practices_category'`; the pose grid fires
+  `asana_card_tapped` with `surface: 'discover_practices'`.
+- **Recommendations food result**: `recommendations_food_result`
+  (`ingredient_id`).
+Screen depth per page comes free from `screen_viewed` / `screen_left`, so
+these pages need no per-view event of their own.
 
 ### 5.7 Profile & account
 
