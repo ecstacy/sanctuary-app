@@ -79,15 +79,36 @@ dropping per-element stagger past level 2–3.
 
 ---
 
-## Suggested sequence
+## Status (2026-07-23)
+
+Everything mechanical or global is done and verified in-browser:
 
 1. ✅ **Foundation** — tokens + type (`b79e1f4`).
-2. **Label + answer-first sweep** (P1) across Home, Dietary, Profile, Practice,
-   Dosha profile. Highest visible payoff.
-3. **Legacy-hex alignment** (P2) — one mechanical pass.
-4. **Home + Practice flatness** (P2) — the two most-seen screens.
-5. **Dusk dark theme** — the token drop-in + a toggle in Profile.
-6. Polish: radius, motion (P3).
+2. ✅ **Label legibility sweep** (P1) — 202 ghost labels → 11px full colour,
+   27 files (`9267d66`). Zero sub-11px uppercase labels remain.
+3. ✅ **Diet semantic colours** → pine/clay tokens (`7b493eb`).
+4. ✅ **Legacy dosha-identity hexes** → AA tokens, 34 uses (`d17af04`).
+5. ✅ **Radius** tightened (`a2f0151`) and **motion** compressed (`bfba9a2`).
 
-Each is its own reviewable chunk; none blocks the others. The foundation is
-mergeable on its own — it already lifts every screen.
+### Still open — needs on-device (or logged-in) eyes, not blind edits
+
+Two items are deliberately NOT done yet, because they are structural
+restructures of **auth-gated, data-dependent screens** (real dosha results,
+streaks, composed sessions). Reshaping Home or Dosha-profile without seeing
+them render with real content is the kind of blind change that breaks delicate
+conditional layout — it should wait for on-device verification.
+
+- **Answer-before-apparatus** on Dosha profile + Dietary guidance. Reorder each
+  to verdict → detail → reference, as the ingredient page already is.
+- **Cards-on-cards flatness** on Home + Practice — lead with type and
+  whitespace; a card only for a genuinely bounded object.
+
+Do these paired with a device build, screen by screen.
+
+### Also still ahead
+
+- **Dusk dark theme** — now a pure token drop-in: a `:root[data-theme="dark"]`
+  block (Temple-at-Dusk palette) + a toggle in Profile. No component changes.
+
+The foundation and all five completed passes are mergeable together — they lift
+every screen and break nothing.
