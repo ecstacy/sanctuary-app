@@ -347,6 +347,17 @@ const BY_ID = {
   almond: 'nut',
   coffee: 'hotCup',
 
+  // Batch 5
+  toorDal: 'pulses', masoorDal: 'pulses', chanaDal: 'pulses', rajma: 'pulses', peanut: 'nut',
+  paneer: 'cheeseWedge',
+  brownRice: 'riceBowl', flattenedRice: 'riceBowl', semolina: 'porridge', pearlMillet: 'grainEar',
+  sweetPotato: 'tuber', broccoli: 'brassica', zucchini: 'cucumber', bellPepper: 'tomato',
+  greenChili: 'pod', mushroom: 'gourd', corianderLeaf: 'leaf', curryLeaf: 'leaf',
+  orange: 'citrus', coconut: 'crownedFruit', papaya: 'mango', dates: 'grapes',
+  amla: 'crownedFruit', watermelon: 'gourd',
+  cinnamon: 'seeds', clove: 'seeds', mustardSeed: 'seeds', fenugreekSeed: 'seeds', tamarind: 'pod',
+  coconutOil: 'oilBottle', cashew: 'nut', walnut: 'nut',
+
   // Batch 4 — vegetables and fruit
   carrot: 'carrot',
   beetroot: 'tuber',
