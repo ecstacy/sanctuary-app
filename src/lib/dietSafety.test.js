@@ -41,6 +41,15 @@ const REVIEWED_SIGNED_OFF = [
   'cauliflower', 'greenBeans', 'peas', 'tomatoRaw', 'tomatoCooked', 'aubergine',
   'cucumber', 'radishTender', 'radishMature',
   'banana', 'pomegranate', 'grapes', 'mangoRipe', 'lemon',
+  // Batch 5 — 2026-07-24 (docs/diet-review-batch-5.md). 32 comprehensiveness
+  // entries: the everyday dals, paneer, common grains/veg/fruit/spices.
+  'toorDal', 'masoorDal', 'chanaDal', 'rajma', 'peanut', 'paneer',
+  'brownRice', 'semolina', 'flattenedRice', 'pearlMillet',
+  'sweetPotato', 'broccoli', 'zucchini', 'bellPepper', 'greenChili', 'mushroom',
+  'corianderLeaf', 'curryLeaf',
+  'orange', 'coconut', 'papaya', 'dates', 'amla', 'watermelon',
+  'cinnamon', 'clove', 'mustardSeed', 'fenugreekSeed', 'tamarind',
+  'coconutOil', 'cashew', 'walnut',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {

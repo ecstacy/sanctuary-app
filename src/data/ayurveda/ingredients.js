@@ -1644,7 +1644,7 @@ export const INGREDIENTS = {
     whyAvoid: 'Dry and gas-forming, as pulses are, so it unsettles Vata without help.',
     balancedBy: ['asafoetida', 'cumin', 'gingerFresh', 'ghee'],
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -1670,9 +1670,9 @@ export const INGREDIENTS = {
     source: {
       text: 'CS',
       verse: 'Sutrasthana 27',
-      note: 'Masura is classical; the heating virya is the contested field (see the dosha note).',
+      note: 'Masura is classical. Virya is described inconsistently in later Ayurvedic sources; this profile follows the heating interpretation.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1697,7 +1697,7 @@ export const INGREDIENTS = {
       verse: 'Sutrasthana 27',
       note: 'Same classical substance as whole chickpea (Chanaka); split and skinned it is a touch easier.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -1708,6 +1708,7 @@ export const INGREDIENTS = {
     category: 'legume',
     rasa: ['sweet', 'astringent'],
     virya: 'cooling',
+    // vipaka added at review — inferred (derived), following the pulse pattern.
     vipaka: 'pungent',
     guna: ['heavy', 'dry'],
     doshaEffect: { vata: 1, pitta: 0, kapha: 1 },
@@ -1719,7 +1720,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'A New World bean, absent from the classical corpus. Derived: heavy, dry, gas-forming — heavier than the classical pulses.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1740,7 +1741,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'A New World legume, not in the classical corpus. Derived from properties: sweet, oily, heavy, warming.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1764,7 +1765,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Fresh acid-set cheese; the classical corpus knows curd and buttermilk but not paneer specifically. Derived from fresh-dairy properties.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1786,7 +1787,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Classical shali is polished white rice. Brown rice is derived: the retained bran makes it heavier, drier and slower than the classical grain.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1806,7 +1807,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Derived from wheat (Godhuma): coarsely milled and de-branned, so lighter than the whole grain.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1827,7 +1828,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'A rice product rather than a classical grain in its own right. Derived: lighter and drier than cooked rice.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1848,9 +1849,9 @@ export const INGREDIENTS = {
     whyAvoid: 'Dry and heating, so it unsettles Vata and adds to Pitta; poor food in summer.',
     source: {
       text: 'modern',
-      note: 'Millets sit more in regional and later tradition than in the Charaka corpus. Derived from properties: light, dry, warming.',
+      note: 'Profile derived from later Ayurvedic and traditional usage rather than a direct classical food monograph — millets sit more in regional than Charaka tradition. Light, dry, warming.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1872,7 +1873,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'A New World tuber, absent from the corpus. Derived: sweet, heavy, mildly warming.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1894,7 +1895,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'A brassica absent from the classical corpus. Rated on the brassica pattern, as cabbage and cauliflower.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1914,7 +1915,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'A summer squash, not classically identified. Derived: sweet, light, cooling, watery — close to the gourd pattern.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1927,7 +1928,8 @@ export const INGREDIENTS = {
     rasa: ['pungent', 'sweet'],
     virya: 'heating',
     vipaka: 'pungent',
-    guna: ['light', 'dry'],
+    // Review: guna moist (watery), not dry.
+    guna: ['light', 'moist'],
     doshaEffect: { vata: 0, pitta: 1, kapha: -1 },
     whyFavor: 'Light and mildly pungent — reduces Kapha.',
     whyAvoid: 'A nightshade, warming and slightly drying, so it adds to Pitta.',
@@ -1935,7 +1937,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'A New World nightshade, absent from the corpus. Derived: mildly pungent, light, warming.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1958,7 +1960,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Chilli is a New World plant, absent from the classical corpus (classical heat came from pepper and ginger). Derived: sharply pungent and heating.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1978,7 +1980,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Classical texts treat fungi with caution and do not characterise culinary mushrooms clearly. Derived, and held at medium.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -1997,7 +1999,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'The fresh leaf of Dhanyaka. Milder and more cooling than the seed; rated on properties.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -2018,7 +2020,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Present in regional and later Ayurvedic use more than in the Charaka corpus. Rated on properties.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -2032,15 +2034,16 @@ export const INGREDIENTS = {
     virya: 'cooling',
     vipaka: 'sweet',
     guna: ['light', 'moist'],
-    doshaEffect: { vata: -1, pitta: 0, kapha: 1 },
+    // Review: rated fully neutral — sweet, sour and light balance out.
+    doshaEffect: { vata: 0, pitta: 0, kapha: 0 },
     bestTime: ['morning'],
-    whyFavor: 'Sweet-sour and juicy — refreshing, and its sourness settles Vata.',
-    whyAvoid: 'The sweetness adds to Kapha, and a sour one can tell on Pitta.',
+    whyFavor: 'Sweet-sour, juicy and refreshing — gentle and near-neutral across the doshas.',
+    whyAvoid: 'A very sour one can tell on Pitta.',
     source: {
       text: 'modern',
       note: 'Sweet citrus sits in later tradition more than the Charaka corpus. Derived from properties.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -2060,7 +2063,7 @@ export const INGREDIENTS = {
     whyFavor: 'Sweet, oily and cooling — Charaka regards Narikela as strengthening, and it settles both Vata and Pitta.',
     whyAvoid: 'Heavy and oily, so it adds to Kapha.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -2082,7 +2085,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'A New World fruit, absent from the corpus. Derived: sweet, warming, light, digestive.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -2102,7 +2105,7 @@ export const INGREDIENTS = {
     whyFavor: 'Sweet, heavy and building — Charaka ranks Kharjura among the restorative fruits, settling Vata and Pitta.',
     whyAvoid: 'Heavy and sweet, so it adds to Kapha.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -2128,7 +2131,7 @@ export const INGREDIENTS = {
       verse: 'Sutrasthana 27',
       note: 'Amalaki is strongly attested and genuinely tridoshic in the classical texts — the rare case where the three-dosha claim is the tradition\'s, not a derivation. The sour taste (not the dryness) carries the Vata pacification.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -2151,7 +2154,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Not securely classical. Derived: sweet, cooling, heavy, watery.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -2171,7 +2174,7 @@ export const INGREDIENTS = {
     whyFavor: 'Warming and sweet-pungent — settles Vata and cuts Kapha, a gentle everyday warming spice.',
     whyAvoid: 'Heating, so it adds to Pitta in quantity.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -2196,7 +2199,7 @@ export const INGREDIENTS = {
       verse: 'Sutrasthana 27',
       note: 'Lavanga is classical. The COOLING virya is the field to confirm — it is the classical description but contradicts the pungent taste.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -2216,7 +2219,7 @@ export const INGREDIENTS = {
     whyAvoid: 'Strongly heating: it aggravates Pitta.',
     allergens: ['mustard'],
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -2235,7 +2238,7 @@ export const INGREDIENTS = {
     whyFavor: 'Bitter and warming — kindles digestion and cuts Kapha; classically valued for the mother after childbirth.',
     whyAvoid: 'Heating and bitter, so it adds to Pitta and, in quantity, can be drying.',
     source: { text: 'CS', verse: 'Sutrasthana 27' },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -2259,7 +2262,7 @@ export const INGREDIENTS = {
       verse: 'Sutrasthana 27',
       note: 'Amlika is classical and its sour, heating character is consensus.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'high',
   },
 
@@ -2281,7 +2284,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'Derived from coconut (Narikela): sweet, cooling, unctuous — the cooling counterpart to warming sesame oil.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -2303,7 +2306,7 @@ export const INGREDIENTS = {
       text: 'modern',
       note: 'A New World nut, absent from the corpus. Derived: sweet, oily, heavy, warming.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 
@@ -2328,7 +2331,7 @@ export const INGREDIENTS = {
       verse: 'Sutrasthana 27',
       note: 'Akshota is named among the classical nuts; oily, warming, building character is consensus.',
     },
-    reviewStatus: 'draft',
+    reviewStatus: 'reviewed',
     confidence: 'medium',
   },
 }
