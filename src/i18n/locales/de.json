@@ -992,7 +992,31 @@
     "sixTastes": "Die sechs Geschmäcker (Charaka-Referenz)",
     "unknownDosha": "Unbekanntes Dosha: {{dosha}}",
     "sourceLabel": "Quelle:",
-    "lookUpFood": "Jedes Lebensmittel nachschlagen, mit Quelle"
+    "lookUpFood": "Jedes Lebensmittel nachschlagen, mit Quelle",
+    "answer": {
+      "vata": {
+        "headline": "Warm, feucht und erdend essen.",
+        "rule": "Iss zu regelmäßigen Zeiten in ruhiger Umgebung — Vata lebt von Rhythmus."
+      },
+      "pitta": {
+        "headline": "Kühl, mild und stetig essen.",
+        "rule": "Nie Mahlzeiten auslassen — besonders das Mittagessen, das Pitta am meisten braucht."
+      },
+      "kapha": {
+        "headline": "Leicht, warm und würzig essen.",
+        "rule": "Iss etwas weniger, als dir danach ist — halte das Frühstück leicht oder lass es aus."
+      }
+    },
+    "atAGlance": "Auf einen Blick",
+    "favourEaseOff": "Bevorzugen & zurücknehmen",
+    "favourShort": "Bevorzugen",
+    "easeOff": "Zurücknehmen",
+    "tastesPacify": "Geschmäcker, die {{dosha}} besänftigen",
+    "whatToEat": "Was essen",
+    "whatToEaseOff": "Was reduzieren",
+    "rightNow": "Gerade jetzt",
+    "referenceLabel": "Nachschlagen",
+    "sixTastesSub": "Jedes Nahrungsmittel trägt einen oder mehrere. Ayurveda gleicht alle sechs über den Tag aus."
   },
   "recommendations": {
     "goBack": "Zurück",

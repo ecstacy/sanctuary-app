@@ -992,7 +992,31 @@
     "sixTastes": "The Six Tastes (Charaka Reference)",
     "unknownDosha": "Unknown dosha: {{dosha}}",
     "sourceLabel": "Source:",
-    "lookUpFood": "Look up any food, with its source"
+    "lookUpFood": "Look up any food, with its source",
+    "answer": {
+      "vata": {
+        "headline": "Eat warm, moist and grounding.",
+        "rule": "Eat at regular times, in a calm setting — Vata thrives on rhythm."
+      },
+      "pitta": {
+        "headline": "Eat cool, mild and steady.",
+        "rule": "Never skip meals — especially lunch, the meal Pitta needs most."
+      },
+      "kapha": {
+        "headline": "Eat light, warm and spiced.",
+        "rule": "Eat a little less than you feel like — keep breakfast light or skip it."
+      }
+    },
+    "atAGlance": "At a glance",
+    "favourEaseOff": "Favour & ease off",
+    "favourShort": "Favour",
+    "easeOff": "Ease off",
+    "tastesPacify": "Tastes that pacify {{dosha}}",
+    "whatToEat": "What to eat",
+    "whatToEaseOff": "What to ease off",
+    "rightNow": "Right now",
+    "referenceLabel": "Reference",
+    "sixTastesSub": "Every food carries one or more. Ayurveda balances all six across a day."
   },
   "recommendations": {
     "goBack": "Go back",
