@@ -54,13 +54,22 @@ export default function DoshaProfilePage() {
       percentages={percentages}
       onBack={() => navigate(-1)}
       footerSlot={
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 flex flex-col items-center gap-3">
           <button
             onClick={() => navigate('/quiz')}
             className="inline-flex items-center gap-2 px-6 py-3 bg-surface-container rounded-full font-label text-xs text-on-surface-variant uppercase tracking-widest active:scale-95 transition-all"
           >
             <span className="material-symbols-outlined text-sm" aria-hidden="true">refresh</span>
             {t('doshaProfile.retakeQuiz')}
+          </button>
+          {/* TEMP (design review): direct /dietary entry while the page is
+              still Plus-gated. Remove once the dietary redesign is signed off
+              or a permanent free entry is decided. */}
+          <button
+            onClick={() => navigate('/dietary')}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-full font-label text-xs uppercase tracking-widest active:scale-95 transition-all"
+          >
+            TEMP → Dietary guidance
           </button>
         </div>
       }

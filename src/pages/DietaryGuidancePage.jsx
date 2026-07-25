@@ -34,7 +34,7 @@ const DOSHA_LABELS = { vata: 'Vata', pitta: 'Pitta', kapha: 'Kapha' }
 // sections instead of a nested card — the Daylight "answer, then detail" move.
 function SectionHead({ label, title, hairline = true }) {
   return (
-    <div className={`px-5 ${hairline ? 'mt-7 pt-6 border-t border-outline-variant/40' : 'mt-6'}`}>
+    <div className={`px-5 ${hairline ? 'mt-7 pt-6 border-t border-outline-variant/40' : 'mt-10'}`}>
       {label && <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{label}</p>}
       <h2 className={`font-headline text-xl text-on-surface leading-tight ${label ? 'mt-1' : ''}`}>{title}</h2>
     </div>
@@ -135,26 +135,23 @@ export default function DietaryGuidancePage() {
         <div className="w-9 h-9" />
       </div>
 
-      {/* ── Answer — the verdict, then the one rule that matters. Type-led,
-           not a big gradient card. ── */}
-      <div className="px-5 pt-3 stagger-1">
-        <p className="font-label text-[11px] uppercase tracking-widest mb-2" style={{ color: colors.ink }}>
+      {/* ── Answer — the verdict + one supporting line, given room to breathe.
+           The "never skip meals" rule lives in the How-to-eat accordion, so the
+           first viewport stays a clean statement, not a wall of text. ── */}
+      <div className="px-5 pt-6 pb-1 stagger-1">
+        <p className="font-label text-[11px] uppercase tracking-[0.18em] mb-4" style={{ color: colors.ink }}>
           {t('dietary.forConstitution', { dosha: DOSHA_LABELS[activeDosha] })}
         </p>
-        <h1 className="font-headline text-[2rem] leading-[1.05] tracking-tight text-on-surface">
+        <h1 className="font-headline text-[2.5rem] leading-[1.08] tracking-tight text-on-surface">
           {t(`dietary.answer.${activeDosha}.headline`)}
         </h1>
-        <p className="font-body text-[15px] text-on-surface-variant leading-relaxed mt-3">
+        <p className="font-body text-[15px] text-on-surface-variant leading-relaxed mt-5 max-w-[32ch]">
           {guide.principle}
         </p>
-        <div className="flex items-start gap-3 mt-4 rounded-2xl px-4 py-3" style={{ backgroundColor: colors.tint }}>
-          <span aria-hidden="true" className="material-symbols-outlined text-lg flex-shrink-0" style={{ color: colors.ink }}>{colors.ruleIcon}</span>
-          <p className="font-body text-sm leading-relaxed" style={{ color: colors.ink }}>{t(`dietary.answer.${activeDosha}.rule`)}</p>
-        </div>
       </div>
 
       {/* Dosha switch */}
-      <div className="px-5 mt-5 flex gap-2 stagger-2">
+      <div className="px-5 mt-8 flex gap-2 stagger-2">
         {['vata', 'pitta', 'kapha'].map(d => (
           <button
             key={d}
