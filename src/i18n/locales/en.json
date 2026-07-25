@@ -566,7 +566,12 @@
       "details": "Details",
       "legendSettled": "settled",
       "legendHigh": "high",
-      "legendSteady": "steady"
+      "legendSteady": "steady",
+      "base": {
+        "vata": "Your nature runs Vata — air and ether. Today’s practice keeps you grounded and steady.",
+        "pitta": "Your nature runs Pitta — fire and water. Today’s practice keeps you cool and unhurried.",
+        "kapha": "Your nature runs Kapha — earth and water. Today’s practice keeps you light and moving."
+      }
     },
     "day": {
       "title": "Your day",
@@ -612,6 +617,9 @@
       "streak": "day streak",
       "week": "min this week",
       "sessions": "sessions"
+    },
+    "focus": {
+      "another": "choose another practice"
     }
   },
   "profile": {

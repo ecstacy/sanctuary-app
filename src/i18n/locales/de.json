@@ -566,7 +566,12 @@
       "details": "Details",
       "legendSettled": "ruhig",
       "legendHigh": "hoch",
-      "legendSteady": "stabil"
+      "legendSteady": "stabil",
+      "base": {
+        "vata": "Deine Natur ist Vata — Luft und Äther. Die heutige Praxis hält dich geerdet und stabil.",
+        "pitta": "Deine Natur ist Pitta — Feuer und Wasser. Die heutige Praxis hält dich kühl und gelassen.",
+        "kapha": "Deine Natur ist Kapha — Erde und Wasser. Die heutige Praxis hält dich leicht und in Bewegung."
+      }
     },
     "day": {
       "title": "Dein Tag",
@@ -612,6 +617,9 @@
       "streak": "Tage in Folge",
       "week": "Min. diese Woche",
       "sessions": "Einheiten"
+    },
+    "focus": {
+      "another": "eine andere Praxis wählen"
     }
   },
   "profile": {
