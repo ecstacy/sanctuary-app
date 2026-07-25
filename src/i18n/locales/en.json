@@ -554,6 +554,64 @@
       "doneTitle": "{{title}} done",
       "doneEveningTeaser": "Come back this evening to wind down.",
       "doneAllBody": "That's your practice for today. See you tomorrow."
+    },
+    "state": {
+      "title": "Your state this week",
+      "pill": "High {{dosha}}",
+      "say": {
+        "vata": "Your balance leans toward Vata this week. A warm, grounding practice draws it back toward centre.",
+        "pitta": "Your balance leans toward Pitta this week. A cool, slow practice draws it back toward centre.",
+        "kapha": "Your balance leans toward Kapha this week. A warming, energising practice draws it back toward centre."
+      },
+      "details": "Details",
+      "legendSettled": "settled",
+      "legendHigh": "high",
+      "legendSteady": "steady"
+    },
+    "day": {
+      "title": "Your day",
+      "now": "Now",
+      "when": {
+        "morning": "Morning",
+        "afternoon": "Midday",
+        "evening": "Evening"
+      },
+      "breathWhen": "Breath"
+    },
+    "nourish": {
+      "title": "To nourish"
+    },
+    "favour": {
+      "title": "To favour",
+      "avoidTitle": "To ease off",
+      "vata": [
+        "Warm, cooked, well-oiled food",
+        "A steady, unhurried routine",
+        "Warmth, rest, and quiet"
+      ],
+      "pitta": [
+        "Cool, sweet, hydrating food",
+        "Shade, air, and open space",
+        "An unhurried, calming pace"
+      ],
+      "kapha": [
+        "Light, warm, well-spiced food",
+        "Brisk movement early in the day",
+        "Stimulation and variety"
+      ],
+      "balanced": [
+        "Fresh, seasonal, simple food",
+        "A steady daily rhythm",
+        "Movement that suits the season"
+      ]
+    },
+    "journey": {
+      "section": "Your practice",
+      "title": "Your journey",
+      "seeAll": "See all",
+      "streak": "day streak",
+      "week": "min this week",
+      "sessions": "sessions"
     }
   },
   "profile": {

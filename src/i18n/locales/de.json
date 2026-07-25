@@ -554,6 +554,64 @@
       "doneTitle": "{{title}} erledigt",
       "doneEveningTeaser": "Komm heute Abend zum Ausklingen wieder.",
       "doneAllBody": "Das war deine Praxis für heute. Bis morgen."
+    },
+    "state": {
+      "title": "Dein Zustand diese Woche",
+      "pill": "{{dosha}} erhöht",
+      "say": {
+        "vata": "Dein Gleichgewicht neigt diese Woche zu Vata. Eine warme, erdende Praxis führt es zur Mitte zurück.",
+        "pitta": "Dein Gleichgewicht neigt diese Woche zu Pitta. Eine kühle, langsame Praxis führt es zur Mitte zurück.",
+        "kapha": "Dein Gleichgewicht neigt diese Woche zu Kapha. Eine wärmende, belebende Praxis führt es zur Mitte zurück."
+      },
+      "details": "Details",
+      "legendSettled": "ruhig",
+      "legendHigh": "hoch",
+      "legendSteady": "stabil"
+    },
+    "day": {
+      "title": "Dein Tag",
+      "now": "Jetzt",
+      "when": {
+        "morning": "Morgen",
+        "afternoon": "Mittag",
+        "evening": "Abend"
+      },
+      "breathWhen": "Atem"
+    },
+    "nourish": {
+      "title": "Zur Nährung"
+    },
+    "favour": {
+      "title": "Zu bevorzugen",
+      "avoidTitle": "Zurückzunehmen",
+      "vata": [
+        "Warme, gekochte, gut geölte Speisen",
+        "Eine ruhige, gleichmäßige Routine",
+        "Wärme, Ruhe und Stille"
+      ],
+      "pitta": [
+        "Kühle, süße, feuchtigkeitsspendende Speisen",
+        "Schatten, Luft und offener Raum",
+        "Ein ruhiges, beruhigendes Tempo"
+      ],
+      "kapha": [
+        "Leichte, warme, gut gewürzte Speisen",
+        "Zügige Bewegung am frühen Tag",
+        "Anregung und Abwechslung"
+      ],
+      "balanced": [
+        "Frische, saisonale, einfache Speisen",
+        "Ein gleichmäßiger Tagesrhythmus",
+        "Bewegung, die zur Jahreszeit passt"
+      ]
+    },
+    "journey": {
+      "section": "Deine Praxis",
+      "title": "Deine Reise",
+      "seeAll": "Alle ansehen",
+      "streak": "Tage in Folge",
+      "week": "Min. diese Woche",
+      "sessions": "Einheiten"
     }
   },
   "profile": {
