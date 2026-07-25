@@ -148,7 +148,7 @@ export default function DietaryGuidancePage() {
               {guide.tastes.favor.map(taste => (
                 <li key={taste} className="flex items-start gap-2">
                   <span aria-hidden="true" className="material-symbols-outlined text-pine text-[15px] mt-0.5">check</span>
-                  <span className="font-body text-[13px] text-on-surface-variant leading-snug capitalize">{taste}</span>
+                  <span className="font-body text-[13px] text-on-surface-variant leading-snug first-letter:uppercase">{taste}</span>
                 </li>
               ))}
             </ul>
@@ -162,7 +162,7 @@ export default function DietaryGuidancePage() {
               {guide.tastes.avoid.map(taste => (
                 <li key={taste} className="flex items-start gap-2">
                   <span aria-hidden="true" className="material-symbols-outlined text-clay text-[15px] mt-0.5">close</span>
-                  <span className="font-body text-[13px] text-on-surface-variant leading-snug capitalize">{taste}</span>
+                  <span className="font-body text-[13px] text-on-surface-variant leading-snug first-letter:uppercase">{taste}</span>
                 </li>
               ))}
             </ul>
