@@ -407,7 +407,11 @@ export default function HomePage() {
         </button>
       </div>
 
-      <div className="px-6 flex flex-col gap-6">
+      {/* ── First viewport — the greeting sits at the top, the single focus is
+           centred in the space below it, and the whole thing fills the screen
+           so nothing else shows above the fold. Everything else is a scroll
+           away. ── */}
+      <div className="px-6 flex flex-col min-h-[calc(100dvh-8rem)]">
 
         {/* ── Greeting + current-state pill ── */}
         <div className="stagger-1">
@@ -439,9 +443,10 @@ export default function HomePage() {
 
         {/* ── The focus — today's composed session. Not a card: the practice
              fills the page's attention, with a single round Begin. This is the
-             one thing the home is for. ── */}
+             one thing the home is for. Centred in the viewport's spare space. ── */}
+        <div className="flex-1 flex flex-col justify-center py-6">
         {!dailyDone ? (
-          <div ref={dailyImpressionRef} className="stagger-2 flex flex-col items-center text-center pt-2 pb-3">
+          <div ref={dailyImpressionRef} className="stagger-2 flex flex-col items-center text-center">
             <p className="font-label text-[11px] uppercase tracking-[0.16em] text-on-surface-variant/70 font-semibold mb-2.5">
               {t('home.daily.eyebrow')}
             </p>
@@ -473,7 +478,7 @@ export default function HomePage() {
             </button>
           </div>
         ) : (
-          <div ref={dailyImpressionRef} className="stagger-2 flex flex-col items-center text-center py-4">
+          <div ref={dailyImpressionRef} className="stagger-2 flex flex-col items-center text-center">
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-4xl mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
             <h2 className="font-headline text-2xl text-on-surface leading-tight">
               {t('home.daily.doneTitle', { title: t(dailyTitleKey) })}
@@ -483,6 +488,11 @@ export default function HomePage() {
             </p>
           </div>
         )}
+        </div>
+      </div>
+
+      {/* ── Below the fold — the depth. ── */}
+      <div className="px-6 flex flex-col gap-6 pt-2">
 
         {/* ── Vikriti re-check prompt — only when due, after the schedule hook
              has resolved so it doesn't pop in late. ── */}
