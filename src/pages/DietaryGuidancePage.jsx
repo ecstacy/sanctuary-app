@@ -44,15 +44,44 @@ function SectionHead({ label, title, hairline = true }) {
 // Hairline rows, not a card-in-card: category label + text separated by a rule.
 function CategoryRows({ items, ink }) {
   return (
-    <div className="px-5 mt-2">
+    <div className="mt-1">
       {Object.entries(items).map(([category, text]) => (
-        <div key={category} className="flex gap-3.5 py-3 border-t border-outline-variant/30 first:border-t-0">
-          <p className="font-label text-[11px] uppercase tracking-wider w-[86px] flex-shrink-0 pt-0.5" style={{ color: ink }}>
+        <div key={category} className="flex gap-3.5 py-2.5 border-t border-outline-variant/30 first:border-t-0">
+          <p className="font-label text-[11px] uppercase tracking-wider w-[78px] flex-shrink-0 pt-0.5" style={{ color: ink }}>
             {localizeDietCategory(category)}
           </p>
-          <p className="font-body text-sm text-on-surface-variant leading-relaxed flex-1">{text}</p>
+          <p className="font-body text-[13.5px] text-on-surface-variant leading-relaxed flex-1">{text}</p>
         </div>
       ))}
+    </div>
+  )
+}
+
+// Collapsible section — the depth is one tap away, so the default page stays
+// scannable instead of a wall of prose. Header = icon + label + a one-line
+// summary; body reveals on tap. Same progressive-disclosure pattern as the
+// Dosha profile's deep dives.
+function Accordion({ icon, label, summary, ink, isOpen, onToggle, children }) {
+  return (
+    <div className="border-t border-outline-variant/40">
+      <button
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className="w-full flex items-center gap-3 py-4 text-left active:opacity-70 transition-opacity"
+      >
+        <span aria-hidden="true" className="material-symbols-outlined text-lg flex-shrink-0" style={{ color: ink }}>{icon}</span>
+        <span className="flex-1 min-w-0">
+          <span className="block font-body text-[15px] font-medium text-on-surface leading-tight">{label}</span>
+          {summary && <span className="block font-body text-xs text-on-surface-variant/70 mt-0.5 truncate">{summary}</span>}
+        </span>
+        <span
+          aria-hidden="true"
+          className={`material-symbols-outlined text-on-surface-variant/40 text-xl flex-shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+        >
+          expand_more
+        </span>
+      </button>
+      {isOpen && <div className="pb-5 pl-9 pr-1">{children}</div>}
     </div>
   )
 }
@@ -66,6 +95,15 @@ export default function DietaryGuidancePage() {
   const userDosha = profile?.dosha_details?.primary || profile?.dosha?.toLowerCase() || 'vata'
   const [activeDosha, setActiveDosha] = useState(userDosha)
   const guide = localizeDietaryGuidance(DIETARY_GUIDANCE[activeDosha])
+
+  // Which deep-dive sections are open. Reset when the dosha changes so a new
+  // tab starts clean (scannable) rather than inheriting the last one's state.
+  const [open, setOpen] = useState(() => new Set())
+  const toggle = id => setOpen(prev => {
+    const next = new Set(prev)
+    next.has(id) ? next.delete(id) : next.add(id)
+    return next
+  })
 
   useEffect(() => {
     screen('dietary_guidance', { dosha_primary: userDosha })
@@ -123,6 +161,7 @@ export default function DietaryGuidancePage() {
             onClick={() => {
               track(EVENTS.CTA_CLICKED, { cta_id: 'dietary_dosha_tab', route_name: 'dietary_guidance', target_dosha: d })
               setActiveDosha(d)
+              setOpen(new Set())
             }}
             className={`flex-1 py-2 rounded-full font-label text-[11px] uppercase tracking-wider transition-all ${
               activeDosha === d ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant'
@@ -173,47 +212,87 @@ export default function DietaryGuidancePage() {
         </p>
       </div>
 
-      {/* What to eat */}
-      <SectionHead label={t('dietary.whatToEat')} title={t('dietary.foodsToFavor')} />
-      <CategoryRows items={guide.favor} ink={colors.ink} />
-
-      {/* What to ease off */}
-      <SectionHead label={t('dietary.whatToEaseOff')} title={t('dietary.foodsToAvoid')} />
-      <div className="px-5 mt-2">
-        <p className="font-body text-sm text-on-surface-variant leading-relaxed italic mb-3">{guide.avoid.generally}</p>
-        <ul className="flex flex-col">
-          {guide.avoid.specific.map((item, i) => (
-            <li key={i} className="flex items-start gap-2.5 py-1.5">
-              <span aria-hidden="true" className="material-symbols-outlined text-clay text-[15px] mt-0.5">close</span>
-              <span className="font-body text-sm text-on-surface-variant leading-relaxed">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* How to eat */}
-      <SectionHead title={t('dietary.howToEat')} />
-      <div className="px-5 mt-2">
-        <ul className="flex flex-col">
-          {guide.eatingHabits.map((item, i) => (
-            <li key={i} className="flex items-start gap-2.5 py-1.5">
-              <span aria-hidden="true" className="material-symbols-outlined text-pine text-base mt-0.5">check_circle</span>
-              <span className="font-body text-sm text-on-surface-variant leading-relaxed">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Right now — seasonal */}
-      <div className="px-5 mt-7">
-        <div className="rounded-2xl p-5" style={{ backgroundColor: colors.tint }}>
-          <p className="font-label text-[11px] uppercase tracking-widest mb-2" style={{ color: colors.ink }}>{t('dietary.rightNow')}</p>
-          <p className="font-body text-sm text-on-surface leading-relaxed">{guide.seasonal}</p>
+      {/* Right now — seasonal. Short & timely, kept in the open. */}
+      <div className="px-5 mt-6">
+        <div className="rounded-2xl p-4 flex items-start gap-3" style={{ backgroundColor: colors.tint }}>
+          <span aria-hidden="true" className="material-symbols-outlined text-lg flex-shrink-0" style={{ color: colors.ink }}>wb_sunny</span>
+          <div>
+            <p className="font-label text-[11px] uppercase tracking-widest mb-1" style={{ color: colors.ink }}>{t('dietary.rightNow')}</p>
+            <p className="font-body text-[13.5px] text-on-surface leading-relaxed">{guide.seasonal}</p>
+          </div>
         </div>
       </div>
 
+      {/* ── The detail — collapsed by default so the page stays scannable
+           instead of a wall of prose. Tap a row to reveal it. ── */}
+      <div className="px-5 mt-7">
+        <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-1">{t('dietary.theDetail')}</p>
+
+        <Accordion
+          icon="eco" ink={colors.ink}
+          label={t('dietary.foodsToFavor')}
+          summary={Object.keys(guide.favor).map(localizeDietCategory).join(' · ')}
+          isOpen={open.has('favor')} onToggle={() => toggle('favor')}
+        >
+          <CategoryRows items={guide.favor} ink={colors.ink} />
+        </Accordion>
+
+        <Accordion
+          icon="block" ink={colors.ink}
+          label={t('dietary.foodsToAvoid')}
+          summary={t('dietary.foodsAvoidSummary')}
+          isOpen={open.has('avoid')} onToggle={() => toggle('avoid')}
+        >
+          <p className="font-body text-[13.5px] text-on-surface-variant leading-relaxed italic mb-2.5">{guide.avoid.generally}</p>
+          <ul className="flex flex-col">
+            {guide.avoid.specific.map((item, i) => (
+              <li key={i} className="flex items-start gap-2.5 py-1">
+                <span aria-hidden="true" className="material-symbols-outlined text-clay text-[15px] mt-0.5">close</span>
+                <span className="font-body text-[13.5px] text-on-surface-variant leading-relaxed">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Accordion>
+
+        <Accordion
+          icon="restaurant" ink={colors.ink}
+          label={t('dietary.howToEat')}
+          summary={t('dietary.habitsCount', { count: guide.eatingHabits.length })}
+          isOpen={open.has('how')} onToggle={() => toggle('how')}
+        >
+          <ul className="flex flex-col">
+            {guide.eatingHabits.map((item, i) => (
+              <li key={i} className="flex items-start gap-2.5 py-1">
+                <span aria-hidden="true" className="material-symbols-outlined text-pine text-base mt-0.5">check_circle</span>
+                <span className="font-body text-[13.5px] text-on-surface-variant leading-relaxed">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Accordion>
+
+        <Accordion
+          icon="menu_book" ink={colors.ink}
+          label={t('dietary.sixTastes')}
+          summary={t('dietary.referenceLabel')}
+          isOpen={open.has('rasas')} onToggle={() => toggle('rasas')}
+        >
+          <p className="font-body text-[13px] text-on-surface-variant/70 leading-relaxed mb-2">{t('dietary.sixTastesSub')}</p>
+          {Object.entries(RASAS).map(([key, r]) => {
+            const lr = localizeRasa(key, r)
+            return (
+              <div key={key} className="flex items-baseline justify-between gap-4 py-2 border-t border-outline-variant/30 first:border-t-0">
+                <p className="font-body text-[13px] text-on-surface flex-shrink-0">
+                  {r.sanskrit} <span className="text-on-surface-variant/60 italic capitalize">({key})</span>
+                </p>
+                <p className="font-body text-xs text-on-surface-variant/70 text-right leading-snug">{lr.examples}</p>
+              </div>
+            )
+          })}
+        </Accordion>
+      </div>
+
       {/* Bridges to the reviewed food database + meals */}
-      <div className="px-5 mt-4 flex flex-col gap-2">
+      <div className="px-5 mt-6 flex flex-col gap-2">
         <button
           onClick={() => {
             track(EVENTS.CTA_CLICKED, { cta_id: 'dietary_to_food_search', route_name: 'dietary_guidance' })
@@ -242,23 +321,6 @@ export default function DietaryGuidancePage() {
           </span>
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
         </button>
-      </div>
-
-      {/* ── Reference — the six tastes, demoted to a quiet block at the foot. ── */}
-      <SectionHead label={t('dietary.referenceLabel')} title={t('dietary.sixTastes')} />
-      <div className="px-5 mt-1">
-        <p className="font-body text-[13px] text-on-surface-variant/70 leading-relaxed mb-2">{t('dietary.sixTastesSub')}</p>
-        {Object.entries(RASAS).map(([key, r]) => {
-          const lr = localizeRasa(key, r)
-          return (
-            <div key={key} className="flex items-baseline justify-between gap-4 py-2.5 border-t border-outline-variant/30 first:border-t-0">
-              <p className="font-body text-[13px] text-on-surface flex-shrink-0">
-                {r.sanskrit} <span className="text-on-surface-variant/60 italic capitalize">({key})</span>
-              </p>
-              <p className="font-body text-xs text-on-surface-variant/70 text-right leading-snug">{lr.examples}</p>
-            </div>
-          )
-        })}
       </div>
 
       {/* Source citation */}

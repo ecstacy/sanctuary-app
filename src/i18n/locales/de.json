@@ -1016,7 +1016,10 @@
     "whatToEaseOff": "Was reduzieren",
     "rightNow": "Gerade jetzt",
     "referenceLabel": "Nachschlagen",
-    "sixTastesSub": "Jedes Nahrungsmittel trägt einen oder mehrere. Ayurveda gleicht alle sechs über den Tag aus."
+    "sixTastesSub": "Jedes Nahrungsmittel trägt einen oder mehrere. Ayurveda gleicht alle sechs über den Tag aus.",
+    "theDetail": "Im Detail",
+    "foodsAvoidSummary": "Was du vom Teller lässt",
+    "habitsCount": "{{count}} Essgewohnheiten"
   },
   "recommendations": {
     "goBack": "Zurück",

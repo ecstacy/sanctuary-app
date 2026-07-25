@@ -1016,7 +1016,10 @@
     "whatToEaseOff": "What to ease off",
     "rightNow": "Right now",
     "referenceLabel": "Reference",
-    "sixTastesSub": "Every food carries one or more. Ayurveda balances all six across a day."
+    "sixTastesSub": "Every food carries one or more. Ayurveda balances all six across a day.",
+    "theDetail": "The detail",
+    "foodsAvoidSummary": "What to keep off your plate",
+    "habitsCount": "{{count}} eating habits"
   },
   "recommendations": {
     "goBack": "Go back",

@@ -445,11 +445,12 @@ export default function HomePage() {
         </div>
 
         {/* ── The focus — today's composed session. Not a card: the practice
-             fills the page's attention, with a single round Begin. This is the
-             one thing the home is for. Centred in the viewport's spare space. ── */}
+             fills the page's attention, left-aligned with a single round Begin
+             (the v9 layout). The one thing the home is for, vertically centred
+             in the viewport's spare space. ── */}
         <div className="flex-1 flex flex-col justify-center py-6">
         {!dailyDone ? (
-          <div ref={dailyImpressionRef} className="stagger-2 flex flex-col items-center text-center">
+          <div ref={dailyImpressionRef} className="stagger-2 flex flex-col items-start text-left">
             <p className="font-label text-[11px] uppercase tracking-[0.16em] text-on-surface-variant/70 font-semibold mb-2.5">
               {t('home.daily.eyebrow')}
             </p>
@@ -481,7 +482,7 @@ export default function HomePage() {
             </button>
           </div>
         ) : (
-          <div ref={dailyImpressionRef} className="stagger-2 flex flex-col items-center text-center">
+          <div ref={dailyImpressionRef} className="stagger-2 flex flex-col items-start text-left">
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-4xl mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
             <h2 className="font-headline text-2xl text-on-surface leading-tight">
               {t('home.daily.doneTitle', { title: t(dailyTitleKey) })}
