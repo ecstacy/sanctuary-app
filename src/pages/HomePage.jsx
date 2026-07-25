@@ -126,11 +126,14 @@ function getTimeOfDay() {
 }
 
 // ── Dosha accent hexes ──
-// Kept literal (not tokens) because the balance triangle draws all THREE
-// doshas at once — the single dosha-adaptive --color-primary can't paint a
-// three-way shape. Matches the gradient stops used on the Dosha card below.
-const DOSHA_HEX  = { vata: '#5f83a3', pitta: '#c07f38', kapha: '#5b9061' }
-const DOSHA_INK  = { vata: '#456787', pitta: '#95632c', kapha: '#48764f' }
+// Mirror the canonical dosha tokens (--color-vata/pitta/kapha in index.css) so
+// the balance triangle + state pill match the dosha colour used everywhere
+// else (Dosha profile, vikriti chart, tags). Kept literal here because the
+// triangle draws all THREE at once — the single dosha-adaptive
+// --color-primary can't paint a three-way shape. INK is a darkened pair for
+// text/edges on the oat ground.
+const DOSHA_HEX  = { vata: '#35708f', pitta: '#9e5720', kapha: '#467539' }
+const DOSHA_INK  = { vata: '#2c5f79', pitta: '#83471a', kapha: '#3a6130' }
 
 // ── Balance shape geometry ──
 // The three dosha vertices of the ternary triangle (viewBox 300×168) and its
