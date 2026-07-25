@@ -4454,7 +4454,7 @@ const ROUTINE_TEMPLATES = {
     label: 'Stress Relief',
     description: 'A calming sequence to soothe your nervous system and release tension.',
     icon: 'psychiatry',
-    gradient: 'from-[#7b93a8] to-[#b8d4e8]',
+    gradient: 'from-[#35708f] to-[#6fa0b8]',
     asanas: [
       { id: 'sukhasana', time: '07:00', customDuration: 120 },
       { id: 'balasana', time: '07:03', customDuration: 120 },
@@ -4483,7 +4483,7 @@ const ROUTINE_TEMPLATES = {
     label: 'Energy Boost',
     description: 'An invigorating flow to awaken your body and sharpen your focus.',
     icon: 'bolt',
-    gradient: 'from-[#c47a3a] to-[#f0c987]',
+    gradient: 'from-[#9e5720] to-[#c98a4e]',
     asanas: [
       { id: 'tadasana', time: '06:30', customDuration: 60 },
       { id: 'suryaNamaskarA', time: '06:32', customDuration: 300 },
@@ -4499,7 +4499,7 @@ const ROUTINE_TEMPLATES = {
     label: 'Flexibility & Mobility',
     description: 'Targeted stretches to release tightness and restore your range of motion.',
     icon: 'self_care',
-    gradient: 'from-[#6b8f5e] to-[#b8d4a8]',
+    gradient: 'from-[#467539] to-[#7ba86b]',
     asanas: [
       { id: 'suryaNamaskarA', time: '07:00', customDuration: 300 },
       { id: 'adhoMukhaSvanasana', time: '07:06', customDuration: 60 },
@@ -4521,7 +4521,7 @@ const ROUTINE_TEMPLATES = {
     label: 'Morning Reset',
     description: 'A balanced 12-minute flow to wake the body, warm the spine, and start the day grounded.',
     icon: 'wb_twilight',
-    gradient: 'from-[#c47a3a] to-[#f0c987]',
+    gradient: 'from-[#9e5720] to-[#c98a4e]',
     asanas: [
       { id: 'cardiacWarmup',       time: '06:30', customDuration: 60  },
       { id: 'suryaNamaskarA',      time: '06:31', customDuration: 300 },
@@ -4543,7 +4543,7 @@ const ROUTINE_TEMPLATES = {
     label: 'Back Pain Relief',
     description: 'A gentle 12-minute sequence to decompress the spine, mobilize the back, and ease lower-back tension.',
     icon: 'healing',
-    gradient: 'from-[#6b8f5e] to-[#a8c8a0]',
+    gradient: 'from-[#467539] to-[#7ba86b]',
     asanas: [
       { id: 'apanasana',                time: '12:00', customDuration: 60  },
       { id: 'cardiacWarmup',            time: '12:01', customDuration: 90  },

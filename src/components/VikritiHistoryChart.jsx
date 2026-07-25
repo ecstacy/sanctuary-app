@@ -15,9 +15,9 @@
 import { useTranslation } from 'react-i18next'
 
 const COLOR = {
-  vata:     '#7b93a8',
-  pitta:    '#c47a3a',
-  kapha:    '#6b8f5e',
+  vata:     '#35708f',
+  pitta:    '#9e5720',
+  kapha:    '#467539',
   balanced: '#cbd2cc',
 }
 

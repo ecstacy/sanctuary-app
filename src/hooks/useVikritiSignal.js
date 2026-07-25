@@ -93,10 +93,10 @@ const NUDGE_BY_VIKRITI = {
   vata: {
     headline:   'Your Vata is running high.',
     summary:    'Anxiety, scattered focus, light sleep — your week reads as Vata aggravation. Grounding helps.',
-    accentHex:  '#3d5a73',
-    barColor:   'bg-[#7b93a8]',
-    bgColor:    'bg-[#e8f0f6]',
-    textColor:  'text-[#3d5a73]',
+    accentHex:  '#2c5f79',
+    barColor:   'bg-[#35708f]',
+    bgColor:    'bg-[#e7eff3]',
+    textColor:  'text-[#2c5f79]',
     emoji:      'wind_power',
     free: {
       label:    "Tonight: 5 minutes in Child's Pose",
@@ -111,10 +111,10 @@ const NUDGE_BY_VIKRITI = {
   pitta: {
     headline:   'Your Pitta is running high.',
     summary:    'Irritability, intensity, heat — your week reads as Pitta aggravation. Cool it down.',
-    accentHex:  '#8b5a2b',
-    barColor:   'bg-[#c47a3a]',
-    bgColor:    'bg-[#fef3e2]',
-    textColor:  'text-[#8b5a2b]',
+    accentHex:  '#83471a',
+    barColor:   'bg-[#9e5720]',
+    bgColor:    'bg-[#f4e9db]',
+    textColor:  'text-[#83471a]',
     emoji:      'local_fire_department',
     free: {
       // Nadi Shodhana is in the free pranayama tier — alternate-nostril
@@ -131,10 +131,10 @@ const NUDGE_BY_VIKRITI = {
   kapha: {
     headline:   'Your Kapha is running high.',
     summary:    'Heaviness, slow starts, withdrawal — your week reads as Kapha aggravation. Spark some heat.',
-    accentHex:  '#3d5e34',
-    barColor:   'bg-[#6b8f5e]',
-    bgColor:    'bg-[#edf5e8]',
-    textColor:  'text-[#3d5e34]',
+    accentHex:  '#3a6130',
+    barColor:   'bg-[#467539]',
+    bgColor:    'bg-[#e9f0e5]',
+    textColor:  'text-[#3a6130]',
     emoji:      'landscape',
     free: {
       // Tadasana is free; standing energizing pose is the right entry

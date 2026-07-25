@@ -12,7 +12,8 @@ export default function CircularTimer({ duration, remaining, isPaused, size = 16
   const display = `${mins}:${secs.toString().padStart(2, '0')}`
 
   const isWarning = remaining <= 10 && remaining > 0
-  const strokeColor = isWarning ? '#c47a3a' : 'var(--color-primary, #6b7f5e)'
+  // Warning is a caution signal, not a Pitta cue → clay token, not a dosha hex.
+  const strokeColor = isWarning ? 'var(--color-clay, #a24a2b)' : 'var(--color-primary, #6b7f5e)'
 
   return (
     <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>

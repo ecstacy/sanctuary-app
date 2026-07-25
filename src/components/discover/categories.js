@@ -10,7 +10,7 @@
 // `query` is the recommendation-engine key (stays English); `labelKey`
 // is the localized display label.
 export const CATEGORIES = [
-  { query: 'Lower back pain', labelKey: 'discover.categories.back', icon: 'accessibility_new', gradient: 'from-[#6b8f5e] to-[#b8d4a8]' },
+  { query: 'Lower back pain', labelKey: 'discover.categories.back', icon: 'accessibility_new', gradient: 'from-[#467539] to-[#7ba86b]' },
   { query: 'Neck pain', labelKey: 'discover.categories.neck', icon: 'self_care', gradient: 'from-[#a87b5e] to-[#e8c8a8]' },
   { query: 'Anxiety', labelKey: 'discover.categories.anxiety', icon: 'cloud', gradient: 'from-[#8b7ba8] to-[#c8b8e8]' },
   { query: 'Can\'t sleep', labelKey: 'discover.categories.sleep', icon: 'bedtime', gradient: 'from-[#5e6b8f] to-[#a8b8d4]' },

@@ -25,9 +25,9 @@ import MedicalDisclaimer from '../components/MedicalDisclaimer'
 // Visual config per slide; eyebrow/title/body come from the onboarding
 // namespace (onboarding.slides[i]) so they localize.
 const SLIDES = [
-  { icon: 'spa',              accent: 'from-[#6b8f5e] to-[#b8d4a8]' },
-  { icon: 'self_improvement', accent: 'from-[#7b93a8] to-[#b8d4e8]' },
-  { icon: 'restaurant',       accent: 'from-[#c47a3a] to-[#f0c987]' },
+  { icon: 'spa',              accent: 'from-[#467539] to-[#7ba86b]' },
+  { icon: 'self_improvement', accent: 'from-[#35708f] to-[#6fa0b8]' },
+  { icon: 'restaurant',       accent: 'from-[#9e5720] to-[#c98a4e]' },
   { icon: 'auto_awesome',     accent: 'from-[#5c4e8a] to-[#9b8fd4]', isFinal: true },
 ]
 

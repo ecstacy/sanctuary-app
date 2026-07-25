@@ -43,7 +43,7 @@ const ALL_ASANAS = Object.values(ASANAS)
 // The five doors. Ordered by how often someone opens them, not by how much
 // content sits behind them — practice first, because that is what the app is.
 const DESTINATIONS = [
-  { key: 'practices',  to: '/discover/practices',  icon: 'accessibility_new', gradient: 'from-[#6b8f5e] to-[#b8d4a8]' },
+  { key: 'practices',  to: '/discover/practices',  icon: 'accessibility_new', gradient: 'from-[#467539] to-[#7ba86b]' },
   { key: 'breathwork', to: '/discover/breathwork', icon: 'air',            gradient: 'from-[#5e7b8f] to-[#a8c8d4]' },
   { key: 'foods',      to: '/discover/foods',      icon: 'nutrition',      gradient: 'from-[#a87b5e] to-[#e8c8a8]' },
   { key: 'programs',   to: '/discover/programs',   icon: 'calendar_month', gradient: 'from-[#8b7ba8] to-[#c8b8e8]' },

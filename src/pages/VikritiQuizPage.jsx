@@ -37,9 +37,9 @@ const VIKRITI_QUESTIONS = [
 ]
 
 const DOSHA_META = {
-  vata:  { name: 'Vata',  hex: '#7b93a8', bg: 'bg-[#e8f0f6]', text: 'text-vata', icon: 'wind_power',         element: 'Air + Ether'  },
-  pitta: { name: 'Pitta', hex: '#c47a3a', bg: 'bg-[#fef3e2]', text: 'text-pitta', icon: 'local_fire_department', element: 'Fire + Water' },
-  kapha: { name: 'Kapha', hex: '#6b8f5e', bg: 'bg-[#edf5e8]', text: 'text-kapha', icon: 'landscape',          element: 'Earth + Water' },
+  vata:  { name: 'Vata',  hex: '#35708f', bg: 'bg-[#e7eff3]', text: 'text-vata', icon: 'wind_power',         element: 'Air + Ether'  },
+  pitta: { name: 'Pitta', hex: '#9e5720', bg: 'bg-[#f4e9db]', text: 'text-pitta', icon: 'local_fire_department', element: 'Fire + Water' },
+  kapha: { name: 'Kapha', hex: '#467539', bg: 'bg-[#e9f0e5]', text: 'text-kapha', icon: 'landscape',          element: 'Earth + Water' },
 }
 
 function calculateVikriti(answers) {
