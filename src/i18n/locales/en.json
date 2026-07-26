@@ -306,7 +306,8 @@
     "understandingTitle": "Understanding Prakriti",
     "understandingBody": "In Ayurveda, your Prakriti is your birth constitution — the unique ratio of Vata, Pitta, and Kapha you were born with. It remains stable throughout life. When doshas shift due to diet, stress, or seasons, that temporary state is called Vikriti. The goal of Ayurveda is to bring Vikriti back in alignment with Prakriti.",
     "paywallHeadline": "Live by your {{primary}} nature",
-    "paywallSubhead": "Unlock Chapter 3 and your full Ayurvedic lifestyle protocol."
+    "paywallSubhead": "Unlock Chapter 3 and your full Ayurvedic lifestyle protocol.",
+    "dietPreview": "Preview your dietary guide"
   },
   "onboarding": {
     "skip": "Skip",
@@ -1019,7 +1020,15 @@
     "sixTastesSub": "Every food carries one or more. Ayurveda balances all six across a day.",
     "theDetail": "The detail",
     "foodsAvoidSummary": "What to keep off your plate",
-    "habitsCount": "{{count}} eating habits"
+    "habitsCount": "{{count}} eating habits",
+    "plusKicker": "Sanctuary Plus",
+    "plusTitle": "Your full {{dosha}} diet guide",
+    "plusBody": "Every food to favour and avoid, how to eat for your body, and the six-taste reference — all cited to Charaka.",
+    "plusB1": "Foods to favour, by group",
+    "plusB2": "What to keep off your plate",
+    "plusB3": "How to eat & the six tastes",
+    "unlock": "Unlock with Plus",
+    "paywallSubhead": "Personalized dietary guidance for your constitution, cited to the classical texts."
   },
   "recommendations": {
     "goBack": "Go back",

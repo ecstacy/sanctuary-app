@@ -658,6 +658,22 @@ export default function DoshaProfileContent({
             </button>
           )}
 
+          {/* Value-first entry to the dietary teaser: free users get the verdict
+              + tastes for their dosha, then the paywall for the full guide. This
+              is the soft path into Chapter 3. */}
+          {!isPremium && (
+            <button
+              onClick={() => {
+                track(EVENTS.CTA_CLICKED, { cta_id: 'dosha_diet_preview', primary_dosha: primary })
+                navigate('/dietary')
+              }}
+              className="w-full flex items-center justify-center gap-1.5 mb-5 py-2 font-body text-[13px] font-medium text-primary active:opacity-70 transition-opacity"
+            >
+              {t('doshaProfile.dietPreview')}
+              <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+          )}
+
           {/* ── Below: the full chapter, only rendered for Plus members ── */}
           {isPremium && (
           <>

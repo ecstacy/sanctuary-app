@@ -6,6 +6,8 @@ import { DIETARY_GUIDANCE, RASAS } from '../data/ayurveda/dietary'
 import { localizeDietaryGuidance, localizeRasa, localizeDietCategory } from '../i18n/contentI18n'
 import { track, screen, EVENTS } from '../lib/track'
 import useScrollDepth from '../hooks/useScrollDepth'
+import { useIsPremium } from '../hooks/useIsPremium'
+import PaywallSheet from '../components/PaywallSheet'
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  DietaryGuidancePage — `/dietary`
@@ -92,12 +94,21 @@ export default function DietaryGuidancePage() {
   const { profile } = useAuth()
   useScrollDepth('dietary_guidance')
 
-  const userDosha = profile?.dosha_details?.primary || profile?.dosha?.toLowerCase() || 'vata'
-  const [activeDosha, setActiveDosha] = useState(userDosha)
+  // Locked to the user's own Prakriti — no dosha tabs. Showing other doshas'
+  // guidance here only adds decision fatigue; this page answers "what should
+  // *I* eat", not "what could anyone eat".
+  const activeDosha = ['vata', 'pitta', 'kapha'].includes(profile?.dosha_details?.primary)
+    ? profile.dosha_details.primary
+    : (['vata', 'pitta', 'kapha'].includes(profile?.dosha?.toLowerCase()) ? profile.dosha.toLowerCase() : 'vata')
+  const userDosha = activeDosha
   const guide = localizeDietaryGuidance(DIETARY_GUIDANCE[activeDosha])
 
-  // Which deep-dive sections are open. Reset when the dosha changes so a new
-  // tab starts clean (scannable) rather than inheriting the last one's state.
+  // Plus gate. Free users get the insight (verdict + tastes + season) to
+  // convert on; the full guide (foods, how-to-eat, six tastes) is Plus.
+  const { isPremium } = useIsPremium()
+  const [paywallOpen, setPaywallOpen] = useState(false)
+
+  // Which deep-dive sections are open (Plus only).
   const [open, setOpen] = useState(() => new Set())
   const toggle = id => setOpen(prev => {
     const next = new Set(prev)
@@ -150,26 +161,6 @@ export default function DietaryGuidancePage() {
         </p>
       </div>
 
-      {/* Dosha switch */}
-      <div className="px-5 mt-8 flex gap-2 stagger-2">
-        {['vata', 'pitta', 'kapha'].map(d => (
-          <button
-            key={d}
-            onClick={() => {
-              track(EVENTS.CTA_CLICKED, { cta_id: 'dietary_dosha_tab', route_name: 'dietary_guidance', target_dosha: d })
-              setActiveDosha(d)
-              setOpen(new Set())
-            }}
-            className={`flex-1 py-2 rounded-full font-label text-[11px] uppercase tracking-wider transition-all ${
-              activeDosha === d ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant'
-            }`}
-            aria-pressed={activeDosha === d}
-          >
-            {DOSHA_LABELS[d]}
-          </button>
-        ))}
-      </div>
-
       {/* ── At a glance — favour / ease off. One genuinely-bounded object,
            split pine (favour) / clay (ease off). ── */}
       <SectionHead label={t('dietary.atAGlance')} title={t('dietary.favourEaseOff')} hairline={false} />
@@ -219,6 +210,10 @@ export default function DietaryGuidancePage() {
           </div>
         </div>
       </div>
+
+      {/* ── Plus gate — the insight above (verdict + tastes + season) is free
+           to convert on; the full guide below is Plus. ── */}
+      {isPremium ? (<>
 
       {/* ── The detail — collapsed by default so the page stays scannable
            instead of a wall of prose. Tap a row to reveal it. ── */}
@@ -320,12 +315,55 @@ export default function DietaryGuidancePage() {
         </button>
       </div>
 
-      {/* Source citation */}
+      </>) : (
+        /* Free — the conversion teaser. Shows exactly what Plus unlocks. */
+        <div className="px-5 mt-8">
+          <button
+            onClick={() => {
+              track(EVENTS.CTA_CLICKED, { cta_id: 'dietary_unlock', route_name: 'dietary_guidance', primary_dosha: activeDosha })
+              setPaywallOpen(true)
+            }}
+            className="w-full text-left rounded-2xl p-6 active:scale-[0.99] transition-all"
+            style={{ backgroundColor: colors.tint }}
+            aria-label={t('dietary.unlock')}
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <span aria-hidden="true" className="material-symbols-outlined text-base" style={{ color: colors.ink }}>auto_awesome</span>
+              <span className="font-label text-[11px] font-semibold uppercase tracking-[0.2em]" style={{ color: colors.ink }}>{t('dietary.plusKicker')}</span>
+            </div>
+            <p className="font-headline text-xl text-on-surface leading-tight mb-2">{t('dietary.plusTitle', { dosha: DOSHA_LABELS[activeDosha] })}</p>
+            <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-4">{t('dietary.plusBody')}</p>
+            <ul className="flex flex-col gap-1.5 mb-5">
+              {[t('dietary.plusB1'), t('dietary.plusB2'), t('dietary.plusB3')].map(line => (
+                <li key={line} className="flex items-center gap-2">
+                  <span aria-hidden="true" className="material-symbols-outlined text-[15px]" style={{ color: colors.ink }}>check_circle</span>
+                  <span className="font-body text-[13px] text-on-surface">{line}</span>
+                </li>
+              ))}
+            </ul>
+            <span className="inline-flex items-center gap-1.5 font-label text-xs font-semibold uppercase tracking-wider" style={{ color: colors.ink }}>
+              {t('dietary.unlock')}
+              <span aria-hidden="true" className="material-symbols-outlined text-base">arrow_forward</span>
+            </span>
+          </button>
+        </div>
+      )}
+
+      {/* Source citation — always shown; the Charaka verse lends the teaser
+          its credibility. */}
       <div className="px-5 mt-6 mb-2">
         <p className="font-label text-[10px] text-on-surface-variant/60 leading-relaxed">
           {t('dietary.sourceLabel')} {guide.source.text} {guide.source.verse}. {guide.source.note}
         </p>
       </div>
+
+      <PaywallSheet
+        open={paywallOpen}
+        onClose={() => setPaywallOpen(false)}
+        surface="dietary_guide"
+        headline={t('dietary.plusTitle', { dosha: DOSHA_LABELS[activeDosha] })}
+        subhead={t('dietary.paywallSubhead')}
+      />
     </div>
   )
 }

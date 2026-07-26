@@ -306,7 +306,8 @@
     "understandingTitle": "Prakriti verstehen",
     "understandingBody": "Im Ayurveda ist deine Prakriti deine Geburtskonstitution — das einzigartige Verhältnis von Vata, Pitta und Kapha, mit dem du geboren wurdest. Sie bleibt das ganze Leben stabil. Wenn sich die Doshas durch Ernährung, Stress oder Jahreszeiten verschieben, wird dieser vorübergehende Zustand Vikriti genannt. Das Ziel des Ayurveda ist es, die Vikriti wieder mit der Prakriti in Einklang zu bringen.",
     "paywallHeadline": "Lebe nach deiner {{primary}}-Natur",
-    "paywallSubhead": "Schalte Kapitel 3 und dein vollständiges ayurvedisches Lifestyle-Protokoll frei."
+    "paywallSubhead": "Schalte Kapitel 3 und dein vollständiges ayurvedisches Lifestyle-Protokoll frei.",
+    "dietPreview": "Vorschau deines Ernährungsguides"
   },
   "onboarding": {
     "skip": "Überspringen",
@@ -1019,7 +1020,15 @@
     "sixTastesSub": "Jedes Nahrungsmittel trägt einen oder mehrere. Ayurveda gleicht alle sechs über den Tag aus.",
     "theDetail": "Im Detail",
     "foodsAvoidSummary": "Was du vom Teller lässt",
-    "habitsCount": "{{count}} Essgewohnheiten"
+    "habitsCount": "{{count}} Essgewohnheiten",
+    "plusKicker": "Sanctuary Plus",
+    "plusTitle": "Dein vollständiger {{dosha}}-Ernährungsguide",
+    "plusBody": "Jedes Nahrungsmittel zum Bevorzugen und Meiden, wie du für deinen Körper isst, und die Sechs-Geschmacks-Referenz — alles nach Charaka belegt.",
+    "plusB1": "Zu bevorzugende Speisen, nach Gruppe",
+    "plusB2": "Was du vom Teller lässt",
+    "plusB3": "Wie man isst & die sechs Geschmäcker",
+    "unlock": "Mit Plus freischalten",
+    "paywallSubhead": "Personalisierte Ernährungsberatung für deine Konstitution, belegt durch die klassischen Texte."
   },
   "recommendations": {
     "goBack": "Zurück",
