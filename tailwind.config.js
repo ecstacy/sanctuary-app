@@ -28,6 +28,9 @@ export default {
         clay: 'var(--color-clay, #a24a2b)',
         'clay-mark': 'var(--color-clay-mark, #b25a37)',
         'clay-container': 'var(--color-clay-container, #f0ddd2)',
+        // Sanctuary Plus — the one accent reserved for gated/premium surfaces.
+        plus: 'var(--color-plus, #6d4a86)',
+        'plus-container': 'var(--color-plus-container, #ece5f3)',
         secondary: 'var(--color-clay, #a24a2b)',
         'secondary-container': 'var(--color-clay-container, #f0ddd2)',
         'on-secondary-container': '#5c2a16',

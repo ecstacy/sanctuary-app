@@ -323,25 +323,24 @@ export default function DietaryGuidancePage() {
               track(EVENTS.CTA_CLICKED, { cta_id: 'dietary_unlock', route_name: 'dietary_guidance', primary_dosha: activeDosha })
               setPaywallOpen(true)
             }}
-            className="w-full text-left rounded-2xl p-6 active:scale-[0.99] transition-all"
-            style={{ backgroundColor: colors.tint }}
+            className="w-full text-left rounded-2xl p-6 bg-plus-container border border-plus/25 active:scale-[0.99] transition-all"
             aria-label={t('dietary.unlock')}
           >
             <div className="flex items-center gap-2 mb-3">
-              <span aria-hidden="true" className="material-symbols-outlined text-base" style={{ color: colors.ink }}>auto_awesome</span>
-              <span className="font-label text-[11px] font-semibold uppercase tracking-[0.2em]" style={{ color: colors.ink }}>{t('dietary.plusKicker')}</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-base text-plus">auto_awesome</span>
+              <span className="font-label text-[11px] font-semibold uppercase tracking-[0.2em] text-plus">{t('dietary.plusKicker')}</span>
             </div>
             <p className="font-headline text-xl text-on-surface leading-tight mb-2">{t('dietary.plusTitle', { dosha: DOSHA_LABELS[activeDosha] })}</p>
             <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-4">{t('dietary.plusBody')}</p>
             <ul className="flex flex-col gap-1.5 mb-5">
               {[t('dietary.plusB1'), t('dietary.plusB2'), t('dietary.plusB3')].map(line => (
                 <li key={line} className="flex items-center gap-2">
-                  <span aria-hidden="true" className="material-symbols-outlined text-[15px]" style={{ color: colors.ink }}>check_circle</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-[15px] text-plus">check_circle</span>
                   <span className="font-body text-[13px] text-on-surface">{line}</span>
                 </li>
               ))}
             </ul>
-            <span className="inline-flex items-center gap-1.5 font-label text-xs font-semibold uppercase tracking-wider" style={{ color: colors.ink }}>
+            <span className="inline-flex items-center gap-1.5 font-label text-xs font-semibold uppercase tracking-wider text-plus">
               {t('dietary.unlock')}
               <span aria-hidden="true" className="material-symbols-outlined text-base">arrow_forward</span>
             </span>

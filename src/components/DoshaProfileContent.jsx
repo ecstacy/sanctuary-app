@@ -626,12 +626,12 @@ export default function DoshaProfileContent({
                 })
                 openPaywall()
               }}
-              className={`block w-full text-left rounded-2xl p-6 mb-5 ${primaryData.bgColor} active:scale-[0.99] transition-all`}
+              className="block w-full text-left rounded-2xl p-6 mb-5 bg-plus-container border border-plus/25 active:scale-[0.99] transition-all"
               aria-label={t('doshaProfile.unlockChapter3Aria')}
             >
               <div className="flex items-center gap-2 mb-3">
-                <span aria-hidden="true" className={`material-symbols-outlined text-base ${primaryData.textColor}`}>auto_awesome</span>
-                <span className="font-label text-[11px] font-semibold uppercase tracking-[0.22em]" style={{ color: primaryData.accentHex }}>
+                <span aria-hidden="true" className="material-symbols-outlined text-base text-plus">auto_awesome</span>
+                <span className="font-label text-[11px] font-semibold uppercase tracking-[0.22em] text-plus">
                   {t('doshaProfile.plusBadge')}
                 </span>
               </div>
@@ -644,16 +644,16 @@ export default function DoshaProfileContent({
               <ul className="space-y-1.5 mb-5">
                 {[t('doshaProfile.teaserBullet1'), t('doshaProfile.teaserBullet2'), t('doshaProfile.teaserBullet3')].map((line) => (
                   <li key={line} className="flex items-center gap-2">
-                    <span aria-hidden="true" className={`material-symbols-outlined text-[14px] ${primaryData.textColor}`}>check_circle</span>
+                    <span aria-hidden="true" className="material-symbols-outlined text-[14px] text-plus">check_circle</span>
                     <span className="font-body text-xs text-on-surface">{line}</span>
                   </li>
                 ))}
               </ul>
               <div className="flex items-center justify-between">
-                <span className={`font-label text-xs font-semibold uppercase tracking-wider ${primaryData.textColor}`}>
+                <span className="font-label text-xs font-semibold uppercase tracking-wider text-plus">
                   {t('doshaProfile.unlockChapter3')}
                 </span>
-                <span aria-hidden="true" className={`material-symbols-outlined text-base ${primaryData.textColor}`}>arrow_forward</span>
+                <span aria-hidden="true" className="material-symbols-outlined text-base text-plus">arrow_forward</span>
               </div>
             </button>
           )}
@@ -667,7 +667,7 @@ export default function DoshaProfileContent({
                 track(EVENTS.CTA_CLICKED, { cta_id: 'dosha_diet_preview', primary_dosha: primary })
                 navigate('/dietary')
               }}
-              className="w-full flex items-center justify-center gap-1.5 mb-5 py-2 font-body text-[13px] font-medium text-primary active:opacity-70 transition-opacity"
+              className="w-full flex items-center justify-center gap-1.5 mb-5 py-2 font-body text-[13px] font-medium text-plus active:opacity-70 transition-opacity"
             >
               {t('doshaProfile.dietPreview')}
               <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>

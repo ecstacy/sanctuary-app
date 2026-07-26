@@ -106,7 +106,8 @@ export default function MealOfTheDayCard() {
         </p>
       )}
 
-      <p className="font-body text-xs text-on-surface-variant/70 mt-2.5 flex items-center gap-1">
+      <p className={`font-body text-xs mt-2.5 flex items-center gap-1 ${isPremium ? 'text-on-surface-variant/70' : 'text-plus font-medium'}`}>
+        {!isPremium && <span aria-hidden="true" className="material-symbols-outlined text-sm">auto_awesome</span>}
         {isPremium ? t('meals.card.seeMore') : t('meals.card.seeMorePlus')}
         <span aria-hidden="true" className="material-symbols-outlined text-sm">chevron_right</span>
       </p>

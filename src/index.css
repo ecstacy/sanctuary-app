@@ -42,6 +42,13 @@
   --color-clay-mark: #b25a37;     /* clay for fills/icons */
   --color-clay-container: #f0ddd2;
 
+  /* Sanctuary Plus IDENTITY — a muted amethyst reserved ONLY for gated /
+     premium surfaces. Deliberately unlike every dosha (blue/ochre/green) and
+     the pine/clay semantics, so "this is Plus" reads at a glance regardless of
+     the user's dosha theme. Text tone hits AA (5.4:1) on the oat ground. */
+  --color-plus: #6d4a86;          /* plum — Plus text/icon/label */
+  --color-plus-container: #ece5f3; /* pale amethyst — Plus card background */
+
   /* Dosha IDENTITY colours — the fixed hue for each dosha wherever it is named
      (chips, bars, quiz). Distinct from the dosha-adaptive PRIMARY above, which
      shifts the whole UI to the user's own dosha. Tuned to clear AA (4.5:1) on
