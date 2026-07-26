@@ -836,7 +836,10 @@ export default function PracticePage() {
           {/* Hero — tap to expand video */}
           <div className="flex flex-col items-center pt-2 pb-4">
             <div className="mb-4 stagger-1">
-              <PoseFigure poseKey={currentAsana.poseKey} size="lg" breathing variant="video" expandable />
+              {/* Still image on the plan preview (video plays during the actual
+                  practice; the expand overlay still offers "Play video"). Avoids
+                  the WebView media-focus outline the autoplay video drew here. */}
+              <PoseFigure poseKey={currentAsana.poseKey} size="lg" breathing={false} variant="image" expandable />
             </div>
             <h1 className="font-headline text-3xl text-on-surface text-center mb-1 stagger-2">{routine.label}</h1>
             <p className="font-body text-sm text-on-surface-variant text-center stagger-3">
@@ -845,32 +848,49 @@ export default function PracticePage() {
           </div>
 
           {/* ── Practice plan — the sequence of poses in this session, so the
-               user knows what they're starting before they commit. Display-only
-               list: thumbnail, name, per-pose duration. ── */}
+               user knows what they're starting before they commit. Drawn as one
+               connected, numbered flow (hairline rows + a light spine) rather
+               than a stack of filled cards — it reads as an ordered sequence
+               with a beginning and an end. ── */}
           <section aria-label={t('practice.planAria')} className="pb-5 stagger-4">
-            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2">
               {t('practice.planHeader', { count: routine.asanas.length })}
             </p>
-            <div className="flex flex-col gap-2">
-              {routine.asanas.map((a, i) => (
-                <div
-                  key={`${a.poseKey}-${i}`}
-                  className="flex items-center gap-3 bg-surface-container rounded-lg p-2.5"
-                >
-                  <div className="w-12 h-12 rounded-md overflow-hidden flex-shrink-0 bg-surface-container-high">
-                    <PoseFigure poseKey={a.poseKey} size={48} breathing={false} variant="image" />
+            <div className="flex flex-col">
+              {routine.asanas.map((a, i) => {
+                const isLastStep = i === routine.asanas.length - 1
+                return (
+                  <div
+                    key={`${a.poseKey}-${i}`}
+                    className="flex items-center gap-3.5 py-2.5 border-t border-outline-variant/40 first:border-t-0"
+                  >
+                    {/* Sequence number sitting on a connecting spine. */}
+                    <div className="relative w-7 flex-shrink-0 self-stretch flex items-center justify-center">
+                      <span
+                        aria-hidden="true"
+                        className={`absolute left-1/2 -translate-x-1/2 w-px bg-outline-variant/60 ${
+                          i === 0 ? 'top-1/2 bottom-0' : isLastStep ? 'top-0 bottom-1/2' : 'inset-y-0'
+                        }`}
+                      />
+                      <span className="relative font-headline text-[15px] text-on-surface-variant bg-background px-1 leading-none">
+                        {i + 1}
+                      </span>
+                    </div>
+                    <div className="w-11 h-11 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container-high">
+                      <PoseFigure poseKey={a.poseKey} size={44} breathing={false} variant="image" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-body text-[15px] font-medium text-on-surface truncate">{a.sanskrit}</p>
+                      <p className="font-label text-[11px] text-on-surface-variant/80 uppercase tracking-wider truncate">{a.english}</p>
+                    </div>
+                    <span className="font-body text-[13px] text-ochre font-semibold flex-shrink-0 tabular-nums">
+                      {a.durationSeconds >= 60
+                        ? t('practice.planMinutes', { min: Math.round(a.durationSeconds / 60) })
+                        : t('practice.planSeconds', { sec: a.durationSeconds })}
+                    </span>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-body font-semibold text-sm text-on-surface truncate">{a.sanskrit}</p>
-                    <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider truncate">{a.english}</p>
-                  </div>
-                  <span className="font-label text-[10px] text-primary font-semibold flex-shrink-0">
-                    {a.durationSeconds >= 60
-                      ? t('practice.planMinutes', { min: Math.round(a.durationSeconds / 60) })
-                      : t('practice.planSeconds', { sec: a.durationSeconds })}
-                  </span>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </section>
 
@@ -926,7 +946,8 @@ export default function PracticePage() {
           >
             <button
               onClick={handleStart}
-              className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg"
+              className="w-full py-4 text-white rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg"
+              style={{ background: 'radial-gradient(120% 120% at 50% 0%, #3f7659, var(--color-pine, #2b5a42) 74%)' }}
             >
               <span className="material-symbols-outlined text-lg">play_arrow</span>
               {single ? t('practice.startSingle', { label: routine.label }) : t('practice.startPractice')}
