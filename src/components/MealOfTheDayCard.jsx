@@ -32,9 +32,9 @@ import useImpression from '../hooks/useImpression'
 import { track, EVENTS } from '../lib/track'
 
 const STYLE = {
-  [SUITABILITY.BALANCING]: { icon: 'trending_down', tint: 'text-[#4e6b45]' },
+  [SUITABILITY.BALANCING]: { icon: 'trending_down', tint: 'text-pine' },
   [SUITABILITY.NEUTRAL]:   { icon: 'remove',        tint: 'text-on-surface-variant' },
-  [SUITABILITY.CAUTION]:   { icon: 'trending_up',   tint: 'text-[#96551f]' },
+  [SUITABILITY.CAUTION]:   { icon: 'trending_up',   tint: 'text-clay' },
 }
 
 export default function MealOfTheDayCard() {
@@ -86,7 +86,7 @@ export default function MealOfTheDayCard() {
     >
       <div className="flex items-center gap-2">
         <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">restaurant_menu</span>
-        <span className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest">
+        <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
           {t(`meals.heading.${result.slot}`)}
         </span>
       </div>
@@ -106,7 +106,8 @@ export default function MealOfTheDayCard() {
         </p>
       )}
 
-      <p className="font-body text-xs text-on-surface-variant/70 mt-2.5 flex items-center gap-1">
+      <p className={`font-body text-xs mt-2.5 flex items-center gap-1 ${isPremium ? 'text-on-surface-variant/70' : 'text-plus font-medium'}`}>
+        {!isPremium && <span aria-hidden="true" className="material-symbols-outlined text-sm">auto_awesome</span>}
         {isPremium ? t('meals.card.seeMore') : t('meals.card.seeMorePlus')}
         <span aria-hidden="true" className="material-symbols-outlined text-sm">chevron_right</span>
       </p>

@@ -827,7 +827,7 @@ export default function PracticePage() {
             }`}
           >
             <span className="material-symbols-outlined text-lg">{voice.enabled ? 'volume_up' : 'volume_off'}</span>
-            <span className="font-label text-[10px] uppercase tracking-wider">{t('practice.voiceLabel')}</span>
+            <span className="font-label text-[11px] uppercase tracking-wider">{t('practice.voiceLabel')}</span>
           </button>
         </div>
 
@@ -848,7 +848,7 @@ export default function PracticePage() {
                user knows what they're starting before they commit. Display-only
                list: thumbnail, name, per-pose duration. ── */}
           <section aria-label={t('practice.planAria')} className="pb-5 stagger-4">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">
               {t('practice.planHeader', { count: routine.asanas.length })}
             </p>
             <div className="flex flex-col gap-2">
@@ -862,7 +862,7 @@ export default function PracticePage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-body font-semibold text-sm text-on-surface truncate">{a.sanskrit}</p>
-                    <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider truncate">{a.english}</p>
+                    <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider truncate">{a.english}</p>
                   </div>
                   <span className="font-label text-[10px] text-primary font-semibold flex-shrink-0">
                     {a.durationSeconds >= 60
@@ -883,7 +883,7 @@ export default function PracticePage() {
             aria-label={t('practice.checkinAria')}
             className="pb-4 space-y-5 stagger-4"
           >
-            <p className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-[0.2em] text-center">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-[0.2em] text-center">
               {t('practice.howDoYouFeel')} <span className="text-on-surface-variant/40">· {t('practice.optional')}</span>
             </p>
             <CheckinScale
@@ -961,7 +961,7 @@ export default function PracticePage() {
             <div className="w-18 h-18 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-4 stagger-1" style={{ width: 72, height: 72 }}>
               <span className="material-symbols-outlined text-on-primary text-3xl">self_improvement</span>
             </div>
-            <p className="font-label text-[10px] text-on-primary/70 uppercase tracking-widest mb-1 stagger-2">{t('practice.practiceComplete')}</p>
+            <p className="font-label text-[11px] text-on-primary/70 uppercase tracking-widest mb-1 stagger-2">{t('practice.practiceComplete')}</p>
             <h1 className="font-headline text-3xl text-on-primary mb-2 stagger-2">{t('practice.namaste')}</h1>
             <p className="font-body text-sm text-on-primary/85 stagger-3">
               {t('practice.completedRoutine', { label: routine.label.toLowerCase() })}
@@ -973,19 +973,19 @@ export default function PracticePage() {
           <div className="grid grid-cols-3 gap-3 mb-5 stagger-4">
             <div className="bg-surface rounded-lg p-3 text-center shadow-sm">
               <p className="font-headline text-xl text-on-surface">{formatDuration(totalTime, t)}</p>
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest mt-0.5">{t('practice.duration')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mt-0.5">{t('practice.duration')}</p>
             </div>
             <div className="bg-surface rounded-lg p-3 text-center shadow-sm">
               <p className="font-headline text-xl text-on-surface">{completedCount}</p>
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest mt-0.5">{t('practice.completed')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mt-0.5">{t('practice.completed')}</p>
             </div>
             <div className="bg-surface rounded-lg p-3 text-center shadow-sm">
               <p className="font-headline text-xl text-on-surface">{skippedCount}</p>
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest mt-0.5">{t('practice.skipped')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mt-0.5">{t('practice.skipped')}</p>
             </div>
           </div>
 
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3 stagger-5">{t('practice.summary')}</p>
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3 stagger-5">{t('practice.summary')}</p>
           <div className="flex flex-col gap-1.5 mb-6 stagger-5">
             {completedAsanas.map((ca, i) => {
               const asana = routine.asanas[i]
@@ -997,7 +997,7 @@ export default function PracticePage() {
                   <div className="flex-1">
                     <p className={`font-body text-sm ${ca.skipped ? 'text-on-surface-variant/50' : 'text-on-surface'}`}>{asana?.sanskrit}</p>
                   </div>
-                  <p className="font-label text-[10px] text-on-surface-variant/50 uppercase">
+                  <p className="font-label text-[11px] text-on-surface-variant uppercase">
                     {ca.skipped ? t('practice.skippedTag') : formatDuration(ca.actualDuration, t)}
                   </p>
                 </div>
@@ -1014,7 +1014,7 @@ export default function PracticePage() {
             <div className="mb-4 stagger-6">
               {!postSubmitted ? (
                 <div className="bg-surface-container rounded-2xl p-4">
-                  <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-3 text-center">
+                  <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3 text-center">
                     {t('practice.howFeelNow')}
                   </p>
                   <div className="flex items-stretch justify-between gap-2">
@@ -1032,7 +1032,7 @@ export default function PracticePage() {
                         <span className="material-symbols-outlined text-2xl text-primary">
                           {opt.icon}
                         </span>
-                        <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">
+                        <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">
                           {opt.caption}
                         </span>
                       </button>
@@ -1149,19 +1149,19 @@ export default function PracticePage() {
   if (status === 'resting') {
     return (
       <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col items-center justify-center px-6">
-        <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">{t('practice.rest')}</p>
+        <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">{t('practice.rest')}</p>
         <div className="w-24 h-24 rounded-full bg-surface-container flex items-center justify-center mx-auto mb-6">
           <span className="font-headline text-3xl text-on-surface">{restTime}</span>
         </div>
 
         {nextAsana && (
           <div className="bg-surface-container rounded-lg p-4 max-w-xs w-full mx-auto mb-6">
-            <p className="font-label text-[9px] text-on-surface-variant/50 uppercase tracking-widest mb-3 text-center">{t('practice.nextUp')}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3 text-center">{t('practice.nextUp')}</p>
             <div className="flex justify-center mb-2">
               <PoseFigure poseKey={nextAsana.poseKey} size="sm" breathing={false} />
             </div>
             <p className="font-body font-semibold text-sm text-on-surface text-center">{nextAsana.sanskrit}</p>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5 text-center">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-0.5 text-center">
               {nextAsana.english} · {formatDuration(nextAsana.durationSeconds, t)}
             </p>
           </div>
@@ -1277,7 +1277,7 @@ export default function PracticePage() {
               />
             </div>
             <h2 className="font-headline text-2xl text-on-surface text-center mb-0.5">{currentAsana.sanskrit}</h2>
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">{currentAsana.english}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">{currentAsana.english}</p>
             <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={92} />
 
             {/* ── Inline instruction subtitle ───────────────────────────────
@@ -1308,7 +1308,7 @@ export default function PracticePage() {
                       voice.stop()
                       dispatch({ type: 'SKIP_NARRATION' })
                     }}
-                    className="mt-3 font-label text-[10px] text-on-surface-variant/70 uppercase tracking-widest"
+                    className="mt-3 font-label text-[11px] text-on-surface-variant/70 uppercase tracking-widest"
                     aria-label={t('practice.skipNarration')}
                   >
                     {t('practice.skipNarration')}
@@ -1322,14 +1322,14 @@ export default function PracticePage() {
             <div className="bg-surface-container rounded-lg p-4 mb-2">
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="material-symbols-outlined text-primary text-sm">auto_awesome</span>
-                <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest">{t('practice.whyThisPose')}</p>
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('practice.whyThisPose')}</p>
               </div>
               <p className="font-body text-xs text-on-surface leading-relaxed">{currentAsana.reasoning}</p>
             </div>
 
             {doshaTag && (
               <div className="bg-surface-container rounded-lg p-4 mb-2">
-                <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest mb-2">{t('practice.doshaCompat')}</p>
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2">{t('practice.doshaCompat')}</p>
                 <div className="flex gap-2">
                   {Object.entries(currentAsana.doshaAffinity).map(([d, a]) => {
                     const t = getDoshaTag(a)
@@ -1344,7 +1344,7 @@ export default function PracticePage() {
             )}
 
             <div className="bg-surface-container rounded-lg p-4 mb-2">
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest mb-2">{t('practice.benefits')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2">{t('practice.benefits')}</p>
               {currentAsana.benefits.map((b, i) => (
                 <div key={i} className="flex items-center gap-2 mb-1 last:mb-0">
                   <span className="material-symbols-outlined text-primary text-xs">check_circle</span>
@@ -1354,7 +1354,7 @@ export default function PracticePage() {
             </div>
 
             <div className="bg-surface-container rounded-lg p-4 mb-2">
-              <p className="font-label text-[9px] text-on-surface-variant uppercase tracking-widest mb-2">{t('practice.bodyFocus')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2">{t('practice.bodyFocus')}</p>
               <div className="flex flex-wrap gap-1.5">
                 {currentAsana.bodyParts.map((bp, i) => (
                   <span key={i} className="bg-primary-container text-on-primary-container font-label text-[10px] px-2 py-0.5 rounded-full">{bp}</span>
@@ -1403,7 +1403,7 @@ export default function PracticePage() {
             className="w-full flex items-center justify-center gap-1.5 py-1.5 mb-2"
           >
             <span className="material-symbols-outlined text-on-surface-variant text-sm">{showInfo ? 'visibility_off' : 'info'}</span>
-            <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+            <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
               {showInfo ? t('practice.showPose') : t('practice.whyThisPose')}
             </span>
           </button>

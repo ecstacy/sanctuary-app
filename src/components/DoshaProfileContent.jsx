@@ -29,11 +29,11 @@ export const DOSHA_DATA = {
     name: 'Vata',
     element: 'Air + Ether',
     emoji: 'wind_power',
-    gradient: 'from-[#7b93a8] to-[#b8d4e8]',
-    bgColor: 'bg-[#e8f0f6]',
-    textColor: 'text-[#3d5a73]',
-    barColor: 'bg-[#7b93a8]',
-    accentHex: '#3d5a73',
+    gradient: 'from-[#35708f] to-[#6fa0b8]',
+    bgColor: 'bg-[#e7eff3]',
+    textColor: 'text-vata',
+    barColor: 'bg-vata',
+    accentHex: '#2c5f79',
     tagline: 'The Creative Whirlwind',
     description: 'You are movement itself — quick-thinking, imaginative, and beautifully spontaneous. Like the wind, you bring change and inspiration wherever you go.',
     strengths: ['Creative & artistic', 'Quick learner', 'Adaptable & flexible', 'Enthusiastic spirit'],
@@ -49,11 +49,11 @@ export const DOSHA_DATA = {
     name: 'Pitta',
     element: 'Fire + Water',
     emoji: 'local_fire_department',
-    gradient: 'from-[#c47a3a] to-[#f0c987]',
-    bgColor: 'bg-[#fef3e2]',
-    textColor: 'text-[#8b5a2b]',
-    barColor: 'bg-[#c47a3a]',
-    accentHex: '#8b5a2b',
+    gradient: 'from-[#9e5720] to-[#c98a4e]',
+    bgColor: 'bg-[#f4e9db]',
+    textColor: 'text-pitta',
+    barColor: 'bg-pitta',
+    accentHex: '#83471a',
     tagline: 'The Fierce Transformer',
     description: 'You are fire incarnate — sharp, determined, and brilliantly focused. Your intensity transforms everything it touches.',
     strengths: ['Natural leader', 'Sharp intellect', 'Courageous & bold', 'Strong digestion'],
@@ -69,11 +69,11 @@ export const DOSHA_DATA = {
     name: 'Kapha',
     element: 'Earth + Water',
     emoji: 'landscape',
-    gradient: 'from-[#6b8f5e] to-[#b8d4a8]',
-    bgColor: 'bg-[#edf5e8]',
-    textColor: 'text-[#3d5e34]',
-    barColor: 'bg-[#6b8f5e]',
-    accentHex: '#3d5e34',
+    gradient: 'from-[#467539] to-[#7ba86b]',
+    bgColor: 'bg-[#e9f0e5]',
+    textColor: 'text-kapha',
+    barColor: 'bg-kapha',
+    accentHex: '#3a6130',
     tagline: 'The Steady Mountain',
     description: 'You are earth embodied — steady, nurturing, and deeply resilient. Your calm presence is a sanctuary for everyone around you.',
     strengths: ['Loyal & compassionate', 'Incredible endurance', 'Strong memory', 'Natural caretaker'],
@@ -98,7 +98,7 @@ function ThemeSection({ kicker, title, lede, children }) {
     <section className="mb-10">
       <div className="px-1 mb-5 mt-6">
         {kicker && (
-          <p className="font-label text-[10px] font-semibold uppercase tracking-[0.22em] text-primary mb-2">{kicker}</p>
+          <p className="font-label text-[11px] font-semibold uppercase tracking-[0.22em] text-primary mb-2">{kicker}</p>
         )}
         <h2 className="font-headline text-[28px] text-on-surface leading-tight mb-2">{title}</h2>
         {lede && (
@@ -147,7 +147,7 @@ function ExpandableSection({ id, icon, label, summary, accentClass = 'text-on-su
 function LabelValueRow({ label, value }) {
   return (
     <div className="py-3 border-b border-outline-variant/10 last:border-0 last:pb-0 first:pt-1">
-      <p className="font-label text-[10px] uppercase tracking-[0.15em] text-on-surface-variant/60 mb-1">{label}</p>
+      <p className="font-label text-[11px] uppercase tracking-[0.15em] text-on-surface-variant mb-1">{label}</p>
       <p className="font-body text-sm text-on-surface leading-relaxed">{value}</p>
     </div>
   )
@@ -242,7 +242,7 @@ export default function DoshaProfileContent({
         )}
 
         <div className="relative z-10 text-center mt-4">
-          <p className="font-label text-[10px] text-white/60 uppercase tracking-widest mb-2">
+          <p className="font-label text-[11px] text-white/60 uppercase tracking-widest mb-2">
             {t('doshaProfile.yourDoshaType')}
           </p>
           <h1 className="font-headline text-5xl text-white leading-none mb-2">
@@ -289,10 +289,10 @@ export default function DoshaProfileContent({
           {percentages && (
             <div className="bg-surface rounded-2xl p-6 shadow-md mb-5 stagger-2">
               <div className="flex items-baseline justify-between mb-6">
-                <p className="font-label text-[10px] font-semibold text-on-surface-variant uppercase tracking-[0.22em]">
+                <p className="font-label text-[11px] font-semibold text-on-surface-variant uppercase tracking-[0.22em]">
                   {t('doshaProfile.yourConstitution')}
                 </p>
-                <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-wider">
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">
                   {t('doshaProfile.vpkShort')}
                 </p>
               </div>
@@ -334,7 +334,7 @@ export default function DoshaProfileContent({
                         className={`w-2.5 h-2.5 rounded-full ${data.barColor} flex-shrink-0`}
                       />
                       <span className="font-body font-semibold text-sm text-on-surface">{data.name}</span>
-                      <span className="font-label text-[10px] text-on-surface-variant/60 uppercase tracking-wider truncate">
+                      <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider truncate">
                         {data.element}
                       </span>
                     </div>
@@ -370,7 +370,7 @@ export default function DoshaProfileContent({
           <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5 stagger-3`}>
             <div className="flex items-center gap-2 mb-3">
               <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>{primaryData.emoji}</span>
-              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
+              <p className="font-label text-[11px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
                 {isTridoshic ? t('doshaProfile.balancedNature') : t('doshaProfile.dominant', { name: primaryData.name })}
               </p>
             </div>
@@ -382,7 +382,7 @@ export default function DoshaProfileContent({
             <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-4">
               <div className="flex items-center gap-2 mb-3">
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">{secondaryData.emoji}</span>
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
                   {t('doshaProfile.secondary', { name: secondaryData.name })}
                 </p>
               </div>
@@ -392,7 +392,7 @@ export default function DoshaProfileContent({
 
           {/* Qualities (Gunas) */}
           <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-4">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">
               {t('doshaProfile.qualitiesGunas', { name: primaryData.name })}
             </p>
             {richDosha?.qualities ? (
@@ -466,11 +466,11 @@ export default function DoshaProfileContent({
               >
                 <div className="pt-3 space-y-4">
                   <div>
-                    <p className={`font-label text-[10px] uppercase tracking-wider mb-2 ${primaryData.textColor}`}>{t('doshaProfile.inBalance')}</p>
+                    <p className={`font-label text-[11px] uppercase tracking-wider mb-2 ${primaryData.textColor}`}>{t('doshaProfile.inBalance')}</p>
                     <BulletList items={richDosha.mind.balanced} iconName="check_circle" iconClass={primaryData.textColor} />
                   </div>
                   <div>
-                    <p className="font-label text-[10px] uppercase tracking-wider mb-2 text-on-surface-variant/60">{t('doshaProfile.outOfBalance')}</p>
+                    <p className="font-label text-[11px] uppercase tracking-wider mb-2 text-on-surface-variant">{t('doshaProfile.outOfBalance')}</p>
                     <BulletList items={richDosha.mind.imbalanced} iconName="error" iconClass="text-on-surface-variant/40" />
                   </div>
                 </div>
@@ -480,7 +480,7 @@ export default function DoshaProfileContent({
 
           {/* Natural Strengths */}
           <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-5">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">
               {t('doshaProfile.naturalStrengths')}
             </p>
             <div className="grid grid-cols-2 gap-3">
@@ -567,7 +567,7 @@ export default function DoshaProfileContent({
 
           {/* Stay In Balance tips */}
           <div className="bg-surface-container-low rounded-lg p-6 mb-5 stagger-5">
-            <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-4">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">
               {t('doshaProfile.stayInBalance')}
             </p>
             <div className="flex flex-col gap-3">
@@ -584,7 +584,7 @@ export default function DoshaProfileContent({
           <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5`}>
             <div className="flex items-center gap-2 mb-3">
               <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>self_care</span>
-              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
+              <p className="font-label text-[11px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
                 {t('doshaProfile.yogaMovement')}
               </p>
             </div>
@@ -595,7 +595,7 @@ export default function DoshaProfileContent({
           <div className="bg-surface-container rounded-lg p-6 mb-5">
             <div className="flex items-center gap-2 mb-3">
               <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">air</span>
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
                 {t('doshaProfile.meditationBreathwork')}
               </p>
             </div>
@@ -626,12 +626,12 @@ export default function DoshaProfileContent({
                 })
                 openPaywall()
               }}
-              className={`block w-full text-left rounded-2xl p-6 mb-5 ${primaryData.bgColor} active:scale-[0.99] transition-all`}
+              className="block w-full text-left rounded-2xl p-6 mb-5 bg-plus-container border border-plus/25 active:scale-[0.99] transition-all"
               aria-label={t('doshaProfile.unlockChapter3Aria')}
             >
               <div className="flex items-center gap-2 mb-3">
-                <span aria-hidden="true" className={`material-symbols-outlined text-base ${primaryData.textColor}`}>auto_awesome</span>
-                <span className="font-label text-[10px] font-semibold uppercase tracking-[0.22em]" style={{ color: primaryData.accentHex }}>
+                <span aria-hidden="true" className="material-symbols-outlined text-base text-plus">auto_awesome</span>
+                <span className="font-label text-[11px] font-semibold uppercase tracking-[0.22em] text-plus">
                   {t('doshaProfile.plusBadge')}
                 </span>
               </div>
@@ -644,17 +644,33 @@ export default function DoshaProfileContent({
               <ul className="space-y-1.5 mb-5">
                 {[t('doshaProfile.teaserBullet1'), t('doshaProfile.teaserBullet2'), t('doshaProfile.teaserBullet3')].map((line) => (
                   <li key={line} className="flex items-center gap-2">
-                    <span aria-hidden="true" className={`material-symbols-outlined text-[14px] ${primaryData.textColor}`}>check_circle</span>
+                    <span aria-hidden="true" className="material-symbols-outlined text-[14px] text-plus">check_circle</span>
                     <span className="font-body text-xs text-on-surface">{line}</span>
                   </li>
                 ))}
               </ul>
               <div className="flex items-center justify-between">
-                <span className={`font-label text-xs font-semibold uppercase tracking-wider ${primaryData.textColor}`}>
+                <span className="font-label text-xs font-semibold uppercase tracking-wider text-plus">
                   {t('doshaProfile.unlockChapter3')}
                 </span>
-                <span aria-hidden="true" className={`material-symbols-outlined text-base ${primaryData.textColor}`}>arrow_forward</span>
+                <span aria-hidden="true" className="material-symbols-outlined text-base text-plus">arrow_forward</span>
               </div>
+            </button>
+          )}
+
+          {/* Value-first entry to the dietary teaser: free users get the verdict
+              + tastes for their dosha, then the paywall for the full guide. This
+              is the soft path into Chapter 3. */}
+          {!isPremium && (
+            <button
+              onClick={() => {
+                track(EVENTS.CTA_CLICKED, { cta_id: 'dosha_diet_preview', primary_dosha: primary })
+                navigate('/dietary')
+              }}
+              className="w-full flex items-center justify-center gap-1.5 mb-5 py-2 font-body text-[13px] font-medium text-plus active:opacity-70 transition-opacity"
+            >
+              {t('doshaProfile.dietPreview')}
+              <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
           )}
 
@@ -724,7 +740,7 @@ export default function DoshaProfileContent({
                   {primaryData.emoji}
                 </span>
                 <p
-                  className="font-label text-[10px] font-semibold uppercase tracking-[0.22em]"
+                  className="font-label text-[11px] font-semibold uppercase tracking-[0.22em]"
                   style={{ color: primaryData.accentHex }}
                 >
                   {t('doshaProfile.protocolKicker', { name: primaryData.name })}

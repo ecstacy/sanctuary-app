@@ -34,9 +34,9 @@ import { useEffect, useState } from 'react'
 // celebration ties visually to the rest of the app. Plus the primary
 // brand teal as a neutral.
 const COLORS = [
-  '#7b93a8',  // Vata blue
-  '#c47a3a',  // Pitta amber
-  '#6b8f5e',  // Kapha sage
+  '#35708f',  // Vata blue
+  '#9e5720',  // Pitta amber
+  '#467539',  // Kapha sage
   '#cbb681',  // Primary warm
   '#e8d5b7',  // Primary light
 ]

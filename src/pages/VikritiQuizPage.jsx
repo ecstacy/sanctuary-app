@@ -37,9 +37,9 @@ const VIKRITI_QUESTIONS = [
 ]
 
 const DOSHA_META = {
-  vata:  { name: 'Vata',  hex: '#7b93a8', bg: 'bg-[#e8f0f6]', text: 'text-[#3d5a73]', icon: 'wind_power',         element: 'Air + Ether'  },
-  pitta: { name: 'Pitta', hex: '#c47a3a', bg: 'bg-[#fef3e2]', text: 'text-[#8b5a2b]', icon: 'local_fire_department', element: 'Fire + Water' },
-  kapha: { name: 'Kapha', hex: '#6b8f5e', bg: 'bg-[#edf5e8]', text: 'text-[#3d5e34]', icon: 'landscape',          element: 'Earth + Water' },
+  vata:  { name: 'Vata',  hex: '#35708f', bg: 'bg-[#e7eff3]', text: 'text-vata', icon: 'wind_power',         element: 'Air + Ether'  },
+  pitta: { name: 'Pitta', hex: '#9e5720', bg: 'bg-[#f4e9db]', text: 'text-pitta', icon: 'local_fire_department', element: 'Fire + Water' },
+  kapha: { name: 'Kapha', hex: '#467539', bg: 'bg-[#e9f0e5]', text: 'text-kapha', icon: 'landscape',          element: 'Earth + Water' },
 }
 
 function calculateVikriti(answers) {
@@ -298,7 +298,7 @@ export default function VikritiQuizPage() {
           <div className={`${currentMeta.bg} rounded-lg p-5 mb-5`}>
             <div className="flex items-center gap-2 mb-2">
               <span className={`material-symbols-outlined ${currentMeta.text} text-lg`}>{currentMeta.icon}</span>
-              <p className="font-label text-[10px] uppercase tracking-widest" style={{ color: currentMeta.hex }}>
+              <p className="font-label text-[11px] uppercase tracking-widest" style={{ color: currentMeta.hex }}>
                 {isAggravated
                   ? t('vikritiQuiz.aggravated', { dosha: currentMeta.name })
                   : t('vikritiQuiz.trending', { dosha: currentMeta.name })}
@@ -345,7 +345,7 @@ export default function VikritiQuizPage() {
         <button onClick={handleBack} className="text-on-surface-variant" aria-label={t('vikritiQuiz.prevQuestion')}>
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
-        <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+        <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
           {t('vikritiQuiz.weeklyCheckin')}
         </span>
         <span className="font-label text-xs text-on-surface-variant/50">{currentQ + 1}/{total}</span>

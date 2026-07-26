@@ -448,13 +448,13 @@ export default function DoshaQuizPage() {
             </span>
           </div>
           <div className="absolute inset-0 animate-spin-slow">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#7b93a8]" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-vata" />
           </div>
           <div className="absolute inset-0 animate-spin-slow-reverse">
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[#c47a3a]" />
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-pitta" />
           </div>
           <div className="absolute inset-0 animate-spin-slow" style={{ animationDelay: '1s' }}>
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#6b8f5e]" />
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-kapha" />
           </div>
         </div>
 
@@ -503,7 +503,7 @@ export default function DoshaQuizPage() {
         {/* Top bar */}
         <div className="flex items-center justify-between px-6 py-4 flex-shrink-0">
           <div className="w-6" />
-          <span className="font-label text-[10px] text-primary uppercase tracking-widest">
+          <span className="font-label text-[11px] text-primary uppercase tracking-widest">
             {t('doshaQuiz.quickCheck')}
           </span>
           <span className="font-label text-xs text-on-surface-variant/50 tabular-nums">
@@ -575,7 +575,7 @@ export default function DoshaQuizPage() {
       <div className="pb-2">
         {!user && (
           <div className="bg-primary-container/40 border border-primary/15 rounded-xl px-4 py-3 mb-3">
-            <p className="font-label text-[10px] uppercase tracking-wider text-primary mb-1">{t('doshaQuiz.saveResultKicker')}</p>
+            <p className="font-label text-[11px] uppercase tracking-wider text-primary mb-1">{t('doshaQuiz.saveResultKicker')}</p>
             <p className="font-body text-xs text-on-surface leading-relaxed">
               {t('doshaQuiz.saveResultBody')}
             </p>
@@ -628,7 +628,7 @@ export default function DoshaQuizPage() {
         <button onClick={handleBack} className="text-on-surface-variant" aria-label={t('doshaQuiz.prevQuestion')}>
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
-        <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+        <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
           {t('doshaQuiz.discovery')}
         </span>
         <span className="font-label text-xs text-on-surface-variant/50 tabular-nums" aria-live="polite">

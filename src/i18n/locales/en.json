@@ -306,7 +306,8 @@
     "understandingTitle": "Understanding Prakriti",
     "understandingBody": "In Ayurveda, your Prakriti is your birth constitution — the unique ratio of Vata, Pitta, and Kapha you were born with. It remains stable throughout life. When doshas shift due to diet, stress, or seasons, that temporary state is called Vikriti. The goal of Ayurveda is to bring Vikriti back in alignment with Prakriti.",
     "paywallHeadline": "Live by your {{primary}} nature",
-    "paywallSubhead": "Unlock Chapter 3 and your full Ayurvedic lifestyle protocol."
+    "paywallSubhead": "Unlock Chapter 3 and your full Ayurvedic lifestyle protocol.",
+    "dietPreview": "Preview your dietary guide"
   },
   "onboarding": {
     "skip": "Skip",
@@ -554,6 +555,72 @@
       "doneTitle": "{{title}} done",
       "doneEveningTeaser": "Come back this evening to wind down.",
       "doneAllBody": "That's your practice for today. See you tomorrow."
+    },
+    "state": {
+      "title": "Your state this week",
+      "pill": "High {{dosha}}",
+      "say": {
+        "vata": "Your balance leans toward Vata this week. A warm, grounding practice draws it back toward centre.",
+        "pitta": "Your balance leans toward Pitta this week. A cool, slow practice draws it back toward centre.",
+        "kapha": "Your balance leans toward Kapha this week. A warming, energising practice draws it back toward centre."
+      },
+      "details": "Details",
+      "legendSettled": "settled",
+      "legendHigh": "high",
+      "legendSteady": "steady",
+      "base": {
+        "vata": "Your nature runs Vata — air and ether. Today’s practice keeps you grounded and steady.",
+        "pitta": "Your nature runs Pitta — fire and water. Today’s practice keeps you cool and unhurried.",
+        "kapha": "Your nature runs Kapha — earth and water. Today’s practice keeps you light and moving."
+      }
+    },
+    "day": {
+      "title": "Your day",
+      "now": "Now",
+      "when": {
+        "morning": "Morning",
+        "afternoon": "Midday",
+        "evening": "Evening"
+      },
+      "breathWhen": "Breath"
+    },
+    "nourish": {
+      "title": "To nourish"
+    },
+    "favour": {
+      "title": "To favour",
+      "avoidTitle": "To ease off",
+      "vata": [
+        "Warm, cooked, well-oiled food",
+        "A steady, unhurried routine",
+        "Warmth, rest, and quiet"
+      ],
+      "pitta": [
+        "Cool, sweet, hydrating food",
+        "Shade, air, and open space",
+        "An unhurried, calming pace"
+      ],
+      "kapha": [
+        "Light, warm, well-spiced food",
+        "Brisk movement early in the day",
+        "Stimulation and variety"
+      ],
+      "balanced": [
+        "Fresh, seasonal, simple food",
+        "A steady daily rhythm",
+        "Movement that suits the season"
+      ]
+    },
+    "journey": {
+      "section": "Your practice",
+      "title": "Your journey",
+      "seeAll": "See all",
+      "streak": "day streak",
+      "week": "min this week",
+      "sessions": "sessions"
+    },
+    "focus": {
+      "another": "choose another practice"
     }
   },
   "profile": {
@@ -926,7 +993,42 @@
     "sixTastes": "The Six Tastes (Charaka Reference)",
     "unknownDosha": "Unknown dosha: {{dosha}}",
     "sourceLabel": "Source:",
-    "lookUpFood": "Look up any food, with its source"
+    "lookUpFood": "Look up any food, with its source",
+    "answer": {
+      "vata": {
+        "headline": "Eat warm, moist and grounding.",
+        "rule": "Eat at regular times, in a calm setting — Vata thrives on rhythm."
+      },
+      "pitta": {
+        "headline": "Eat cool, mild and steady.",
+        "rule": "Never skip meals — especially lunch, the meal Pitta needs most."
+      },
+      "kapha": {
+        "headline": "Eat light, warm and spiced.",
+        "rule": "Eat a little less than you feel like — keep breakfast light or skip it."
+      }
+    },
+    "atAGlance": "At a glance",
+    "favourEaseOff": "Favour & ease off",
+    "favourShort": "Favour",
+    "easeOff": "Ease off",
+    "tastesPacify": "Tastes that pacify {{dosha}}",
+    "whatToEat": "What to eat",
+    "whatToEaseOff": "What to ease off",
+    "rightNow": "Right now",
+    "referenceLabel": "Reference",
+    "sixTastesSub": "Every food carries one or more. Ayurveda balances all six across a day.",
+    "theDetail": "The detail",
+    "foodsAvoidSummary": "What to keep off your plate",
+    "habitsCount": "{{count}} eating habits",
+    "plusKicker": "Sanctuary Plus",
+    "plusTitle": "Your full {{dosha}} diet guide",
+    "plusBody": "Every food to favour and avoid, how to eat for your body, and the six-taste reference — all cited to Charaka.",
+    "plusB1": "Foods to favour, by group",
+    "plusB2": "What to keep off your plate",
+    "plusB3": "How to eat & the six tastes",
+    "unlock": "Unlock with Plus",
+    "paywallSubhead": "Personalized dietary guidance for your constitution, cited to the classical texts."
   },
   "recommendations": {
     "goBack": "Go back",
@@ -1271,6 +1373,36 @@
       "tightHips": "Tight hips",
       "lowEnergy": "Low energy",
       "bloating": "Bloating"
+    },
+    "browse": "Browse",
+    "quickRoutinesSub": "One session, right now.",
+    "programsSub": "A sequence to follow over several days.",
+    "hub": {
+      "practices": {
+        "title": "Practices",
+        "sub": "{{poses}} poses by name or by what aches",
+        "pageSub": "{{poses}} poses. Start from what hurts, or find one by name."
+      },
+      "breathwork": {
+        "title": "Breathwork",
+        "sub": "Pranayama, guided",
+        "pageSub": "{{count}} guided breathing practices."
+      },
+      "foods": {
+        "title": "Food & Ayurveda",
+        "sub": "{{foods}} foods, checked by a human",
+        "pageSub": "How a food acts on your doshas — from the classical texts, each entry checked by a person before it appears.",
+        "coverage": "{{reviewed}} foods so far. The list is deliberately small and growing: an entry only appears once a person has checked it against the classical sources, and we'd rather tell you a food is missing than guess at it."
+      },
+      "programs": {
+        "title": "Routines & programs",
+        "sub": "Ready-made sessions and series",
+        "pageSub": "Ready-made sessions for a particular need, and longer series to follow over days."
+      },
+      "dinacharya": {
+        "title": "Daily routine",
+        "sub": "Dinacharya — the rhythm of the day"
+      }
     }
   },
   "protocol": {
@@ -1574,14 +1706,39 @@
       "stable": "Stable",
       "unctuous": "Unctuous",
       "subtle_penetrating": "Subtle, penetrating",
-      "moist": "Moist"
+      "moist": "Moist",
+      "slimy": "Mucilaginous",
+      "picchila": "Mucilaginous",
+      "aromatic": "Aromatic"
     },
     "badge": {
       "allergen": "Contains {{key}}",
       "pattern": "Not {{key}}"
     },
     "balancedBy": "Traditionally balanced with",
-    "balancedByHelp": "Traditionally used to make this food easier to digest. Suggestions, never requirements — nothing here is filtered out if you skip them."
+    "balancedByHelp": "Traditionally used to make this food easier to digest. Suggestions, never requirements — nothing here is filtered out if you skip them.",
+    "verdict": {
+      "balancing": "Good for your {{dosha}} right now",
+      "neutral": "Neutral for your {{dosha}}",
+      "caution": "Go easy on this right now"
+    },
+    "inPractice": "In practice",
+    "reference": "Reference",
+    "takeQuiz": "Take the dosha quiz",
+    "categories": {
+      "grain": "Grains",
+      "legume": "Legumes",
+      "vegetable": "Vegetables",
+      "fruit": "Fruit",
+      "dairy": "Dairy",
+      "nut_seed": "Nuts & seeds",
+      "oil": "Oils",
+      "sweetener": "Sweeteners",
+      "spice": "Spices",
+      "beverage": "Drinks",
+      "animal": "Animal foods",
+      "other": "Other"
+    }
   },
   "dietPrefs": {
     "title": "Food to keep off your plate",

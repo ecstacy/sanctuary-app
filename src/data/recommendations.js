@@ -8,7 +8,7 @@ const RECOMMENDATIONS = [
     keywords: ['lower back', 'back pain', 'lumbar', 'backache', 'spine', 'spinal'],
     label: 'Lower Back Relief',
     icon: 'accessibility_new',
-    color: 'from-[#6b8f5e] to-[#b8d4a8]',
+    color: 'from-[#467539] to-[#7ba86b]',
     description: 'Gentle poses that decompress the spine, release tension in the lumbar region, and strengthen the core to prevent future discomfort.',
     practices: [
       { poseId: 'cardiacWarmup', title: 'Cat-Cow Stretch', subtitle: 'Marjaryasana-Bitilasana', duration: '3 min', level: 'Beginner', icon: 'self_care', description: 'Gentle spinal flexion and extension to warm up the lower back and release stiffness.' },
@@ -25,7 +25,7 @@ const RECOMMENDATIONS = [
     keywords: ['headache', 'head pain', 'migraine', 'head ache', 'temple', 'tension headache'],
     label: 'Headache Relief',
     icon: 'psychology',
-    color: 'from-[#7b93a8] to-[#b8d4e8]',
+    color: 'from-[#35708f] to-[#6fa0b8]',
     description: 'Calming practices that release tension from the neck, shoulders, and skull — the root cause of most headaches.',
     practices: [
       { title: 'Neck Rolls', subtitle: 'Greeva Sanchalana', duration: '2 min', level: 'Beginner', icon: 'rotate_right', description: 'Gentle circular neck movements to release tension in the cervical spine and jaw.' },
@@ -122,7 +122,7 @@ const RECOMMENDATIONS = [
     keywords: ['focus', 'concentration', 'brain fog', 'distracted', 'attention', 'clarity', 'mental', 'foggy', 'scattered', 'productivity'],
     label: 'Mental Clarity',
     icon: 'lightbulb',
-    color: 'from-[#c47a3a] to-[#f0c987]',
+    color: 'from-[#9e5720] to-[#c98a4e]',
     description: 'Practices that sharpen the mind, clear brain fog, and create laser focus. Your Pitta-powered concentration toolkit.',
     practices: [
       { poseId: 'suryaNamaskarA', title: 'Sun Salutation', subtitle: 'Surya Namaskar', duration: '10 min', level: 'Beginner', icon: 'wb_sunny', description: 'A rhythmic flow that wakes up the entire body and floods the brain with oxygen.' },

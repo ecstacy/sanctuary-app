@@ -280,7 +280,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
           >
             {/* Hero */}
             <div className="text-center mt-2 mb-8">
-              <p className="font-label text-[10px] font-semibold text-primary uppercase tracking-[0.22em] mb-3">
+              <p className="font-label text-[11px] font-semibold text-primary uppercase tracking-[0.22em] mb-3">
                 {t('paywall.kicker')}
               </p>
               <h2 id="paywall-title" className="font-headline text-3xl text-on-surface leading-tight mb-3">
@@ -337,7 +337,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                       aria-label={t(plan.labelKey)}
                     >
                       {plan.savingsKey && (
-                        <span className="absolute -top-2 right-4 bg-primary text-on-primary font-label text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">
+                        <span className="absolute -top-2 right-4 bg-primary text-on-primary font-label text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">
                           {t(plan.savingsKey)}
                         </span>
                       )}
@@ -397,7 +397,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               </div>
             </div>
 
-            <p className="font-label text-[10px] font-semibold text-primary uppercase tracking-[0.22em] mb-3">
+            <p className="font-label text-[11px] font-semibold text-primary uppercase tracking-[0.22em] mb-3">
               {t('paywall.promo.successKicker')}
             </p>
             <h2 className="font-headline text-3xl text-on-surface leading-tight mb-3">
@@ -408,7 +408,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                 ? t('paywall.promo.successUntil', { date: new Date(promoSuccess.grantedUntil).toLocaleDateString() })
                 : t('paywall.promo.successLifetime')}
             </p>
-            <p className="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-wider mb-8 tabular-nums">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-8 tabular-nums">
               {promoSuccess.code}
             </p>
 
@@ -435,7 +435,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               >
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">arrow_back</span>
               </button>
-              <p className="font-label text-[10px] font-semibold text-primary uppercase tracking-[0.22em]">
+              <p className="font-label text-[11px] font-semibold text-primary uppercase tracking-[0.22em]">
                 {t('paywall.promo.kicker')}
               </p>
             </div>

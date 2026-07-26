@@ -306,7 +306,8 @@
     "understandingTitle": "Prakriti verstehen",
     "understandingBody": "Im Ayurveda ist deine Prakriti deine Geburtskonstitution — das einzigartige Verhältnis von Vata, Pitta und Kapha, mit dem du geboren wurdest. Sie bleibt das ganze Leben stabil. Wenn sich die Doshas durch Ernährung, Stress oder Jahreszeiten verschieben, wird dieser vorübergehende Zustand Vikriti genannt. Das Ziel des Ayurveda ist es, die Vikriti wieder mit der Prakriti in Einklang zu bringen.",
     "paywallHeadline": "Lebe nach deiner {{primary}}-Natur",
-    "paywallSubhead": "Schalte Kapitel 3 und dein vollständiges ayurvedisches Lifestyle-Protokoll frei."
+    "paywallSubhead": "Schalte Kapitel 3 und dein vollständiges ayurvedisches Lifestyle-Protokoll frei.",
+    "dietPreview": "Vorschau deines Ernährungsguides"
   },
   "onboarding": {
     "skip": "Überspringen",
@@ -554,6 +555,72 @@
       "doneTitle": "{{title}} erledigt",
       "doneEveningTeaser": "Komm heute Abend zum Ausklingen wieder.",
       "doneAllBody": "Das war deine Praxis für heute. Bis morgen."
+    },
+    "state": {
+      "title": "Dein Zustand diese Woche",
+      "pill": "{{dosha}} erhöht",
+      "say": {
+        "vata": "Dein Gleichgewicht neigt diese Woche zu Vata. Eine warme, erdende Praxis führt es zur Mitte zurück.",
+        "pitta": "Dein Gleichgewicht neigt diese Woche zu Pitta. Eine kühle, langsame Praxis führt es zur Mitte zurück.",
+        "kapha": "Dein Gleichgewicht neigt diese Woche zu Kapha. Eine wärmende, belebende Praxis führt es zur Mitte zurück."
+      },
+      "details": "Details",
+      "legendSettled": "ruhig",
+      "legendHigh": "hoch",
+      "legendSteady": "stabil",
+      "base": {
+        "vata": "Deine Natur ist Vata — Luft und Äther. Die heutige Praxis hält dich geerdet und stabil.",
+        "pitta": "Deine Natur ist Pitta — Feuer und Wasser. Die heutige Praxis hält dich kühl und gelassen.",
+        "kapha": "Deine Natur ist Kapha — Erde und Wasser. Die heutige Praxis hält dich leicht und in Bewegung."
+      }
+    },
+    "day": {
+      "title": "Dein Tag",
+      "now": "Jetzt",
+      "when": {
+        "morning": "Morgen",
+        "afternoon": "Mittag",
+        "evening": "Abend"
+      },
+      "breathWhen": "Atem"
+    },
+    "nourish": {
+      "title": "Zur Nährung"
+    },
+    "favour": {
+      "title": "Zu bevorzugen",
+      "avoidTitle": "Zurückzunehmen",
+      "vata": [
+        "Warme, gekochte, gut geölte Speisen",
+        "Eine ruhige, gleichmäßige Routine",
+        "Wärme, Ruhe und Stille"
+      ],
+      "pitta": [
+        "Kühle, süße, feuchtigkeitsspendende Speisen",
+        "Schatten, Luft und offener Raum",
+        "Ein ruhiges, beruhigendes Tempo"
+      ],
+      "kapha": [
+        "Leichte, warme, gut gewürzte Speisen",
+        "Zügige Bewegung am frühen Tag",
+        "Anregung und Abwechslung"
+      ],
+      "balanced": [
+        "Frische, saisonale, einfache Speisen",
+        "Ein gleichmäßiger Tagesrhythmus",
+        "Bewegung, die zur Jahreszeit passt"
+      ]
+    },
+    "journey": {
+      "section": "Deine Praxis",
+      "title": "Deine Reise",
+      "seeAll": "Alle ansehen",
+      "streak": "Tage in Folge",
+      "week": "Min. diese Woche",
+      "sessions": "Einheiten"
+    },
+    "focus": {
+      "another": "eine andere Praxis wählen"
     }
   },
   "profile": {
@@ -926,7 +993,42 @@
     "sixTastes": "Die sechs Geschmäcker (Charaka-Referenz)",
     "unknownDosha": "Unbekanntes Dosha: {{dosha}}",
     "sourceLabel": "Quelle:",
-    "lookUpFood": "Jedes Lebensmittel nachschlagen, mit Quelle"
+    "lookUpFood": "Jedes Lebensmittel nachschlagen, mit Quelle",
+    "answer": {
+      "vata": {
+        "headline": "Warm, feucht und erdend essen.",
+        "rule": "Iss zu regelmäßigen Zeiten in ruhiger Umgebung — Vata lebt von Rhythmus."
+      },
+      "pitta": {
+        "headline": "Kühl, mild und stetig essen.",
+        "rule": "Nie Mahlzeiten auslassen — besonders das Mittagessen, das Pitta am meisten braucht."
+      },
+      "kapha": {
+        "headline": "Leicht, warm und würzig essen.",
+        "rule": "Iss etwas weniger, als dir danach ist — halte das Frühstück leicht oder lass es aus."
+      }
+    },
+    "atAGlance": "Auf einen Blick",
+    "favourEaseOff": "Bevorzugen & zurücknehmen",
+    "favourShort": "Bevorzugen",
+    "easeOff": "Zurücknehmen",
+    "tastesPacify": "Geschmäcker, die {{dosha}} besänftigen",
+    "whatToEat": "Was essen",
+    "whatToEaseOff": "Was reduzieren",
+    "rightNow": "Gerade jetzt",
+    "referenceLabel": "Nachschlagen",
+    "sixTastesSub": "Jedes Nahrungsmittel trägt einen oder mehrere. Ayurveda gleicht alle sechs über den Tag aus.",
+    "theDetail": "Im Detail",
+    "foodsAvoidSummary": "Was du vom Teller lässt",
+    "habitsCount": "{{count}} Essgewohnheiten",
+    "plusKicker": "Sanctuary Plus",
+    "plusTitle": "Dein vollständiger {{dosha}}-Ernährungsguide",
+    "plusBody": "Jedes Nahrungsmittel zum Bevorzugen und Meiden, wie du für deinen Körper isst, und die Sechs-Geschmacks-Referenz — alles nach Charaka belegt.",
+    "plusB1": "Zu bevorzugende Speisen, nach Gruppe",
+    "plusB2": "Was du vom Teller lässt",
+    "plusB3": "Wie man isst & die sechs Geschmäcker",
+    "unlock": "Mit Plus freischalten",
+    "paywallSubhead": "Personalisierte Ernährungsberatung für deine Konstitution, belegt durch die klassischen Texte."
   },
   "recommendations": {
     "goBack": "Zurück",
@@ -1271,6 +1373,36 @@
       "tightHips": "Enge Hüften",
       "lowEnergy": "Wenig Energie",
       "bloating": "Blähungen"
+    },
+    "browse": "Entdecken",
+    "quickRoutinesSub": "Eine Einheit, jetzt gleich.",
+    "programsSub": "Eine Abfolge über mehrere Tage.",
+    "hub": {
+      "practices": {
+        "title": "Übungen",
+        "sub": "{{poses}} Haltungen nach Name oder Beschwerde",
+        "pageSub": "{{poses}} Haltungen. Beginne bei dem, was schmerzt — oder suche nach Namen."
+      },
+      "breathwork": {
+        "title": "Atemübungen",
+        "sub": "Pranayama, angeleitet",
+        "pageSub": "{{count}} angeleitete Atemübungen."
+      },
+      "foods": {
+        "title": "Ernährung & Ayurveda",
+        "sub": "{{foods}} Lebensmittel, von Menschen geprüft",
+        "pageSub": "Wie ein Lebensmittel auf deine Doshas wirkt — aus den klassischen Texten, jeder Eintrag vor der Veröffentlichung von einer Person geprüft.",
+        "coverage": "Bisher {{reviewed}} Lebensmittel. Die Liste ist bewusst klein und wächst: ein Eintrag erscheint erst, wenn ihn jemand anhand der klassischen Quellen geprüft hat — lieber sagen wir dir, dass etwas fehlt, als zu raten."
+      },
+      "programs": {
+        "title": "Routinen & Programme",
+        "sub": "Fertige Einheiten und Serien",
+        "pageSub": "Fertige Einheiten für einen bestimmten Bedarf und längere Serien über mehrere Tage."
+      },
+      "dinacharya": {
+        "title": "Tagesroutine",
+        "sub": "Dinacharya — der Rhythmus des Tages"
+      }
     }
   },
   "protocol": {
@@ -1574,14 +1706,39 @@
       "stable": "Stabil",
       "unctuous": "Ölig",
       "subtle_penetrating": "Fein durchdringend",
-      "moist": "Feucht"
+      "moist": "Feucht",
+      "slimy": "Schleimig",
+      "picchila": "Schleimig",
+      "aromatic": "Aromatisch"
     },
     "badge": {
       "allergen": "Enthält {{key}}",
       "pattern": "Nicht {{key}}"
     },
     "balancedBy": "Traditionell ausgeglichen mit",
-    "balancedByHelp": "Traditionell verwendet, um dieses Lebensmittel bekömmlicher zu machen. Vorschläge, keine Vorschriften — nichts wird ausgefiltert, wenn du sie weglässt."
+    "balancedByHelp": "Traditionell verwendet, um dieses Lebensmittel bekömmlicher zu machen. Vorschläge, keine Vorschriften — nichts wird ausgefiltert, wenn du sie weglässt.",
+    "verdict": {
+      "balancing": "Gut für dein {{dosha}} gerade jetzt",
+      "neutral": "Neutral für dein {{dosha}}",
+      "caution": "Zurzeit lieber sparsam damit"
+    },
+    "inPractice": "In der Praxis",
+    "reference": "Nachschlagen",
+    "takeQuiz": "Dosha-Quiz starten",
+    "categories": {
+      "grain": "Getreide",
+      "legume": "Hülsenfrüchte",
+      "vegetable": "Gemüse",
+      "fruit": "Obst",
+      "dairy": "Milchprodukte",
+      "nut_seed": "Nüsse & Samen",
+      "oil": "Öle",
+      "sweetener": "Süßungsmittel",
+      "spice": "Gewürze",
+      "beverage": "Getränke",
+      "animal": "Tierische Lebensmittel",
+      "other": "Sonstiges"
+    }
   },
   "dietPrefs": {
     "title": "Was nicht auf deinen Teller soll",

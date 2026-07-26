@@ -336,7 +336,7 @@ export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
               </>
             ) : isRate ? (
               <>
-                <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-1">
+                <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant mb-1">
                   {rateRounds[roundIndex]?.kind === 'active' ? t('pranayamaPractice.roundOfTotal', { n: rateRounds[roundIndex].index, total: pranayama.pattern.rounds }) : t('pranayamaPractice.rest')}
                 </p>
                 <p className="font-headline text-5xl text-primary tabular-nums">{roundRemaining}s</p>
@@ -350,11 +350,11 @@ export default function PranayamaPracticeOverlay({ pranayama, onClose }) {
 
         {/* Total time remaining strip */}
         <div className="mt-8 flex items-baseline gap-2">
-          <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">{t('pranayamaPractice.total')}</p>
+          <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant">{t('pranayamaPractice.total')}</p>
           <p className="font-headline text-2xl text-on-surface tabular-nums">
             {mins}:{secs.toString().padStart(2, '0')}
           </p>
-          <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">{paused ? t('pranayamaPractice.paused') : t('pranayamaPractice.remaining')}</p>
+          <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant">{paused ? t('pranayamaPractice.paused') : t('pranayamaPractice.remaining')}</p>
         </div>
       </div>
 

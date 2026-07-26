@@ -205,7 +205,7 @@ export default function WelcomeToPlusCard() {
           </span>
         </div>
 
-        <p className="font-label text-[10px] font-semibold uppercase tracking-[0.22em] text-primary mb-2">
+        <p className="font-label text-[11px] font-semibold uppercase tracking-[0.22em] text-primary mb-2">
           {t('welcomePlus.kicker')}
         </p>
         <h2

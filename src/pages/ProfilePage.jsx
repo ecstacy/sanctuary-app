@@ -535,7 +535,7 @@ export default function ProfilePage() {
           {isGoogle && (
             <div className="flex items-center gap-1.5 mt-2 px-3 py-1 bg-surface-container rounded-full">
               <GoogleIcon className="w-3.5 h-3.5" />
-              <span className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.googleLabel')}</span>
+              <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.googleLabel')}</span>
             </div>
           )}
         </div>
@@ -545,7 +545,7 @@ export default function ProfilePage() {
           onClick={() => navigate(doshaLabel ? '/dosha' : '/quiz')}
           className="bg-primary-container rounded-lg p-5 text-left w-full active:scale-[0.98] transition-all stagger-2"
         >
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mb-2">
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2">
             {t('profile.doshaType')}
           </p>
           <div className="flex items-center justify-between">
@@ -569,7 +569,7 @@ export default function ProfilePage() {
           >
             <span className="material-symbols-outlined text-on-surface-variant text-lg">language</span>
             <div className="flex-1">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.language')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.language')}</p>
               <p className="font-body text-sm text-on-surface">
                 {t(`languages.${i18n.language}.label`, { defaultValue: i18n.language })}
               </p>
@@ -617,7 +617,7 @@ export default function ProfilePage() {
                 same paywall sheet, different starting pane)
               • premium     → status row showing source + expiry, no CTAs */}
         <div className="bg-surface-container rounded-lg overflow-hidden stagger-3 mb-5">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
             {t('profile.plus.section')}
           </p>
 
@@ -719,7 +719,7 @@ export default function ProfilePage() {
                     <p className="font-headline text-2xl text-on-surface tabular-nums leading-none">
                       {practiceStats.totalSessions}
                     </p>
-                    <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1.5">
+                    <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-1.5">
                       {practiceStats.totalSessions === 1 ? t('profile.plus.statPractice') : t('profile.plus.statPractices')}
                     </p>
                   </div>
@@ -727,7 +727,7 @@ export default function ProfilePage() {
                     <p className="font-headline text-2xl text-on-surface tabular-nums leading-none">
                       {practiceStats.totalMinutes}
                     </p>
-                    <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1.5">
+                    <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-1.5">
                       {t('profile.plus.statMinutes')}
                     </p>
                   </div>
@@ -735,7 +735,7 @@ export default function ProfilePage() {
                     <p className="font-headline text-2xl text-on-surface tabular-nums leading-none">
                       {protocolStats.protocolsFinished}
                     </p>
-                    <p className="font-label text-[9px] text-on-surface-variant/60 uppercase tracking-wider mt-1.5">
+                    <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-1.5">
                       {protocolStats.protocolsFinished === 1 ? t('profile.plus.statProtocol') : t('profile.plus.statProtocols')}
                     </p>
                   </div>
@@ -807,7 +807,7 @@ export default function ProfilePage() {
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
           </button>
 
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
             {t('profile.notif.section')}
           </p>
 
@@ -931,7 +931,7 @@ export default function ProfilePage() {
 
         {/* Account info */}
         <div className="bg-surface-container rounded-lg overflow-hidden stagger-3">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
             {t('profile.account.section')}
           </p>
 
@@ -941,7 +941,7 @@ export default function ProfilePage() {
           >
             <span className="material-symbols-outlined text-on-surface-variant text-lg">person</span>
             <div className="flex-1">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.name')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.name')}</p>
               <p className="font-body text-sm text-on-surface">{fullName}</p>
             </div>
             <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">edit</span>
@@ -950,7 +950,7 @@ export default function ProfilePage() {
           <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
             <span className="material-symbols-outlined text-on-surface-variant text-lg">mail</span>
             <div className="flex-1">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.email')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.email')}</p>
               <p className="font-body text-sm text-on-surface">{email}</p>
             </div>
           </div>
@@ -962,7 +962,7 @@ export default function ProfilePage() {
           >
             <span className="material-symbols-outlined text-on-surface-variant text-lg">photo_camera</span>
             <div className="flex-1">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.profilePhoto')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.profilePhoto')}</p>
               <p className="font-body text-sm text-on-surface">
                 {uploadingPhoto ? t('profile.account.uploading') : avatarUrl ? t('profile.account.changePhoto') : t('profile.account.uploadPhoto')}
               </p>
@@ -975,7 +975,7 @@ export default function ProfilePage() {
             <div className="flex items-center gap-4 mb-3">
               <span className="material-symbols-outlined text-on-surface-variant text-lg">wc</span>
               <div className="flex-1">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.gender')}</p>
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.gender')}</p>
                 <p className="font-body text-[10px] text-on-surface-variant/40 mt-0.5">{t('profile.account.genderOptional')}</p>
               </div>
               {savingGender && (
@@ -1009,14 +1009,14 @@ export default function ProfilePage() {
             <div className="flex items-center gap-4 px-5 py-4">
               <span className="material-symbols-outlined text-on-surface-variant text-lg">key</span>
               <div className="flex-1">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.signInMethod')}</p>
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.signInMethod')}</p>
                 <p className="font-body text-sm text-on-surface">{t('profile.googleLabel')}</p>
               </div>
             </div>
           ) : changingPassword ? (
             <div className="px-5 py-4">
               <div className="flex items-center justify-between mb-4">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.changePasswordTitle')}</p>
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.changePasswordTitle')}</p>
                 <button onClick={resetPasswordForm} className="text-on-surface-variant/40 active:scale-90 transition-all" aria-label={t('profile.account.closePwForm')}>
                   <span className="material-symbols-outlined text-sm">close</span>
                 </button>
@@ -1103,7 +1103,7 @@ export default function ProfilePage() {
             >
               <span className="material-symbols-outlined text-on-surface-variant text-lg">lock</span>
               <div className="flex-1">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.passwordLabel')}</p>
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.account.passwordLabel')}</p>
                 <p className="font-body text-sm text-on-surface">{t('profile.account.changePassword')}</p>
               </div>
               <span className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
@@ -1116,7 +1116,7 @@ export default function ProfilePage() {
           <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
             <span className="material-symbols-outlined text-on-surface-variant text-lg">shield</span>
             <div className="flex-1 min-w-0">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.privacy.aggregateTitle')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.privacy.aggregateTitle')}</p>
               <p className="font-body text-xs text-on-surface-variant/80 mt-0.5 leading-snug">
                 {consent.aggregate ? t('profile.privacy.aggregateOn') : t('profile.privacy.aggregateOff')}
               </p>
@@ -1147,7 +1147,7 @@ export default function ProfilePage() {
           <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">bug_report</span>
             <div className="flex-1 min-w-0">
-              <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.crash.title')}</p>
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.crash.title')}</p>
               <p className="font-body text-xs text-on-surface-variant/80 mt-0.5 leading-snug">
                 {consent.crash ? t('profile.crash.on') : t('profile.crash.off')}
               </p>
@@ -1179,7 +1179,7 @@ export default function ProfilePage() {
             <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
               <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">favorite</span>
               <div className="flex-1 min-w-0">
-                <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-wider">{t('profile.health.title')}</p>
+                <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider">{t('profile.health.title')}</p>
                 <p className="font-body text-xs text-on-surface-variant/80 mt-0.5 leading-snug">
                   {t('profile.health.on')}
                 </p>
@@ -1210,7 +1210,7 @@ export default function ProfilePage() {
                   crashRecordError(new Error('Non-fatal test from ProfilePage'), { where: 'profile_test_button' })
                   alert('Non-fatal sent. Should appear in Crashlytics within ~5 min.')
                 }}
-                className="px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label text-[10px] uppercase tracking-wide"
+                className="px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label text-[11px] uppercase tracking-wide"
               >
                 Send non-fatal
               </button>
@@ -1219,7 +1219,7 @@ export default function ProfilePage() {
                   try { _forceTestCrash() }
                   catch (err) { alert(err.message) }
                 }}
-                className="px-3 py-1.5 rounded-full bg-error/20 text-error font-label text-[10px] uppercase tracking-wide"
+                className="px-3 py-1.5 rounded-full bg-error/20 text-error font-label text-[11px] uppercase tracking-wide"
               >
                 Force native crash
               </button>
@@ -1252,7 +1252,7 @@ export default function ProfilePage() {
 
               {/* What we NEVER collect — as prominent as the above */}
               <div>
-                <p className="font-label text-[10px] text-on-surface-variant/70 uppercase tracking-wider mb-1.5">
+                <p className="font-label text-[11px] text-on-surface-variant/70 uppercase tracking-wider mb-1.5">
                   {t('profile.privacy.neverCollectHeading')}
                 </p>
                 <ul className="space-y-1.5">
@@ -1273,7 +1273,7 @@ export default function ProfilePage() {
                   processor, where the data lives, and links to their
                   privacy policy so the user can read the full DPA. */}
               <div className="pt-2 border-t border-outline-variant/15">
-                <p className="font-label text-[10px] text-on-surface-variant/70 uppercase tracking-wider mb-1.5">
+                <p className="font-label text-[11px] text-on-surface-variant/70 uppercase tracking-wider mb-1.5">
                   {t('profile.analyticsProvider')}
                 </p>
                 <p className="font-body text-[12px] text-on-surface-variant leading-relaxed">
@@ -1295,7 +1295,7 @@ export default function ProfilePage() {
 
         {/* Your data — GDPR export + account deletion */}
         <div className="bg-surface-container rounded-lg overflow-hidden stagger-4">
-          <p className="font-label text-[10px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
             {t('profile.yourData.section')}
           </p>
 
@@ -1355,7 +1355,7 @@ export default function ProfilePage() {
           <span className="font-label text-sm font-semibold text-error tracking-wide">{t('profile.signOut')}</span>
         </button>
 
-        <p className="text-center font-label text-[10px] text-on-surface-variant/40 uppercase tracking-widest pb-4">
+        <p className="text-center font-label text-[11px] text-on-surface-variant uppercase tracking-widest pb-4">
           The Sanctuary · v1.0
         </p>
 

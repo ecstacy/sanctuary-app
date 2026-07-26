@@ -142,7 +142,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
           {r.emoji}
         </span>
         <p
-          className="font-label text-[10px] font-semibold uppercase tracking-[0.22em]"
+          className="font-label text-[11px] font-semibold uppercase tracking-[0.22em]"
           style={{ color: r.accentHex }}
         >
           {t('vikritiCard.todaysReading')}
@@ -190,7 +190,7 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
               it reads as a header rather than an ornament on a tile. */}
           {isReturning && (
             <p
-              className="font-label text-[10px] font-semibold uppercase tracking-[0.18em] mb-2"
+              className="font-label text-[11px] font-semibold uppercase tracking-[0.18em] mb-2"
               style={{ color: r.accentHex }}
             >
               {t('vikritiCard.returningKicker', { n: nextAttemptNumber })}
@@ -261,15 +261,15 @@ export default function VikritiCard({ signal, isPremium, onOpenPaywall }) {
                 {sig('plusSub')}
               </p>
             </div>
-            <div className="flex items-center gap-1 px-2 py-0.5 bg-surface rounded-full ml-3 flex-shrink-0">
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-plus-container rounded-full ml-3 flex-shrink-0">
               <span
                 aria-hidden="true"
-                className={`material-symbols-outlined text-[11px] ${r.textColor}`}
+                className="material-symbols-outlined text-[11px] text-plus"
               >
                 lock
               </span>
               <span
-                className={`font-label text-[9px] font-semibold uppercase tracking-wide ${r.textColor}`}
+                className="font-label text-[11px] font-semibold uppercase tracking-wide text-plus"
               >
                 {t('vikritiCard.plusBadge')}
               </span>
