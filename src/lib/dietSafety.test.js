@@ -50,6 +50,20 @@ const REVIEWED_SIGNED_OFF = [
   'orange', 'coconut', 'papaya', 'dates', 'amla', 'watermelon',
   'cinnamon', 'clove', 'mustardSeed', 'fenugreekSeed', 'tamarind',
   'coconutOil', 'cashew', 'walnut',
+  // Batch 6 — 2026-07-28 (docs/diet-review-batch-6.md). 44 breadth entries incl.
+  // the first animal foods (egg, chicken). Reviewer decisions applied: saffron
+  // published tridoshic-as-attested (high), ragi virya = cooling, animal foods
+  // limited to egg/chicken/fish scope.
+  'tofu', 'besan', 'blackEyedPeas', 'wholeMung', 'brownLentil',
+  'fingerMillet', 'sorghum', 'quinoa', 'corn', 'pasta',
+  'kale', 'lettuce', 'leek', 'asparagus', 'bitterGourd', 'ridgeGourd',
+  'colocasia', 'fenugreekLeaf', 'mintLeaf', 'plantain',
+  'pear', 'peach', 'guava', 'pineapple', 'strawberry', 'fig', 'avocado',
+  'nutmeg', 'bayLeaf', 'ajwain', 'saffron', 'amchur',
+  'mustardOil', 'sunflowerOil', 'caneSugar',
+  'pistachio', 'flaxSeed', 'sunflowerSeed', 'sesameSeed',
+  'blackTea', 'greenTea', 'herbalTea',
+  'egg', 'chicken',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {
