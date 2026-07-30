@@ -64,6 +64,20 @@ const REVIEWED_SIGNED_OFF = [
   'pistachio', 'flaxSeed', 'sunflowerSeed', 'sesameSeed',
   'blackTea', 'greenTea', 'herbalTea',
   'egg', 'chicken',
+  // Batch 7 — 2026-07-28 (docs/diet-review-batch-7.md). 58 depth/long-tail
+  // entries (the classical Sutrasthana-27 foods + German/Western staples).
+  'amaranth', 'buckwheat', 'foxtailMillet', 'sago', 'whiteBread',
+  'soybean', 'horseGram', 'mothBean', 'blackBean',
+  'pumpkin', 'drumstick', 'pointedGourd', 'ivyGourd', 'elephantYam', 'turnip',
+  'fennelBulb', 'celery', 'brusselsSprouts', 'artichoke', 'mustardGreens',
+  'jamun', 'jackfruit', 'raisins', 'muskmelon', 'sweetLime', 'plum', 'apricot',
+  'cherry', 'kiwi', 'blueberry', 'custardApple',
+  'lotusSeed', 'pumpkinSeed', 'chiaSeed', 'hazelnut', 'chestnut',
+  'longPepper', 'holyBasil', 'rockSalt', 'dillSeed', 'starAnise', 'mace',
+  'nigella', 'rosemary', 'thyme', 'poppySeed',
+  'peanutOil', 'almondOil', 'rockCandy', 'mapleSyrup',
+  'coconutWater', 'sugarcaneJuice', 'cocoa', 'cream', 'khoa',
+  'fishFreshwater', 'goatMeat', 'prawn',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {
