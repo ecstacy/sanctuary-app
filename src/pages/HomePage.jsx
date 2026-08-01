@@ -16,6 +16,8 @@ import PaywallSheet from '../components/PaywallSheet'
 import WelcomeToPlusCard from '../components/WelcomeToPlusCard'
 import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
 import MealOfTheDayCard from '../components/MealOfTheDayCard'
+import DoshaGemImage from '../components/DoshaGemImage'
+import { GEM_HUE } from '../components/DoshaGem'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
 
 // Mirror of YOGI_LEVELS in JourneyPage; kept tiny here to avoid a cross-page
@@ -135,44 +137,14 @@ function getTimeOfDay() {
 const DOSHA_HEX  = { vata: '#35708f', pitta: '#9e5720', kapha: '#467539' }
 const DOSHA_INK  = { vata: '#2c5f79', pitta: '#83471a', kapha: '#3a6130' }
 
-// ── Balance shape geometry ──
-// The three dosha vertices of the ternary triangle (viewBox 300×168) and its
-// centroid. buildBalanceShape places one "level point" per dosha along the
-// line from centre → vertex: the dominant dosha stretches out toward its
-// corner, the others sit lower. We only know WHICH dosha is elevated (the
-// signal returns a single dosha, not per-dosha scores), so this is an honest
-// "shape of you" at a glance — not a measurement. No dominant ⇒ balanced.
-const TRI      = { vata: [150, 12], pitta: [288, 158], kapha: [12, 158] }
-const TRI_C    = [150, 109.33]
-function levelPoint(dosha, level) {
-  const [vx, vy] = TRI[dosha]
-  const [cx, cy] = TRI_C
-  return [cx + level * (vx - cx), cy + level * (vy - cy)]
-}
-function buildBalanceShape({ dominant, percentages, elevated } = {}) {
-  let levels
-  if (percentages && !elevated) {
-    // Real quiz numbers → an accurate shape. Scale % into a readable
-    // level (a 45% dosha stretches most of the way out; a 20% dosha sits
-    // close to centre), clamped so the polygon never collapses or clips.
-    const lv = p => Math.max(0.24, Math.min(0.88, (Number(p) || 0) / 100 * 1.55))
-    levels = { vata: lv(percentages.vata), pitta: lv(percentages.pitta), kapha: lv(percentages.kapha) }
-  } else if (dominant) {
-    // Acute vikriti signal (or no percentages) → skew hard toward the
-    // elevated dosha.
-    levels = { vata: 0.34, pitta: 0.34, kapha: 0.34 }
-    levels[dominant] = 0.82
-  } else {
-    levels = { vata: 0.5, pitta: 0.5, kapha: 0.5 }
-  }
-  const dots = {
-    vata:  levelPoint('vata',  levels.vata),
-    pitta: levelPoint('pitta', levels.pitta),
-    kapha: levelPoint('kapha', levels.kapha),
-  }
-  const fmt = p => `${p[0].toFixed(0)},${p[1].toFixed(0)}`
-  return { inner: [dots.vata, dots.pitta, dots.kapha].map(fmt).join(' '), dots, levels }
-}
+// Leader-line legend slots for the gem card: where each dosha's %/name label
+// sits, and the connector line [labelEnd, gemEdge] in the 300×180 viewBox.
+// Ordered by descending dosha share (biggest liquid zone first).
+const LEGEND_SLOTS = [
+  { label: { left: 0,  top: '30%',    width: 84, textAlign: 'right' }, line: [[86, 66], [120, 90]] },
+  { label: { right: 0, top: '2%',     width: 84, textAlign: 'left' },  line: [[214, 28], [192, 66]] },
+  { label: { right: 0, bottom: '2%',  width: 84, textAlign: 'left' },  line: [[214, 152], [196, 112]] },
+]
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -420,11 +392,6 @@ export default function HomePage() {
   // Favour list follows the current state (or constitution; balanced fallback).
   const favourDosha    = currentDosha
   const favourTips     = t(`home.favour.${favourDosha || 'balanced'}`, { returnObjects: true })
-  const balanceShape   = buildBalanceShape({
-    dominant:    currentDosha,
-    percentages: doshaPercentages,
-    elevated:    isElevated,
-  })
 
   return (
     <div className="min-h-screen bg-background text-on-surface font-body pb-20">
@@ -709,25 +676,34 @@ export default function HomePage() {
                 <span className="material-symbols-outlined text-sm">chevron_right</span>
               </span>
             </div>
-            <div className="flex justify-center my-1">
-              <svg viewBox="0 0 300 168" width="300" height="168" className="max-w-full" aria-hidden="true">
-                <polygon points="150,12 288,158 12,158" fill="none" stroke="var(--color-outline-variant)" strokeWidth="1.4" />
-                <line x1="150" y1="12" x2="150" y2="111" stroke="var(--color-outline-variant)" strokeOpacity="0.5" strokeWidth="1" />
-                <line x1="288" y1="158" x2="81" y2="85" stroke="var(--color-outline-variant)" strokeOpacity="0.5" strokeWidth="1" />
-                <line x1="12" y1="158" x2="219" y2="85" stroke="var(--color-outline-variant)" strokeOpacity="0.5" strokeWidth="1" />
-                <polygon
-                  points={balanceShape.inner}
-                  fill={DOSHA_HEX[currentDosha]} fillOpacity="0.18"
-                  stroke={DOSHA_HEX[currentDosha]} strokeWidth="1.6" strokeLinejoin="round"
-                />
-                <circle cx={balanceShape.dots.vata[0]}  cy={balanceShape.dots.vata[1]}  r="4" fill={DOSHA_HEX.vata} />
-                <circle cx={balanceShape.dots.pitta[0]} cy={balanceShape.dots.pitta[1]} r="4" fill={DOSHA_HEX.pitta} />
-                <circle cx={balanceShape.dots.kapha[0]} cy={balanceShape.dots.kapha[1]} r="4" fill={DOSHA_HEX.kapha} />
-                <text x="150" y="8"   textAnchor="middle" fontSize="11" fontWeight="700" fill={DOSHA_INK.vata}>{doshaDisplayName('vata').toUpperCase()}</text>
-                <text x="292" y="168" textAnchor="end"    fontSize="11" fontWeight="700" fill={DOSHA_INK.pitta}>{doshaDisplayName('pitta').toUpperCase()}</text>
-                <text x="8"   y="168"                      fontSize="11" fontWeight="700" fill={DOSHA_INK.kapha}>{doshaDisplayName('kapha').toUpperCase()}</text>
-              </svg>
-            </div>
+            {/* The constitution as a glass vessel with a leader-line legend:
+                the liquid stacks by the real percentages, the labels point to
+                each dosha's zone. */}
+            {(() => {
+              const order = doshaPercentages
+                ? ['vata', 'pitta', 'kapha'].filter(d => (doshaPercentages[d] || 0) > 0).sort((a, b) => doshaPercentages[b] - doshaPercentages[a])
+                : []
+              return (
+                <div className="relative mx-auto my-3" style={{ width: '100%', maxWidth: 300, height: 180 }}>
+                  <svg viewBox="0 0 300 180" className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+                    {order.map((d, i) => LEGEND_SLOTS[i] && (
+                      <line key={d} x1={LEGEND_SLOTS[i].line[0][0]} y1={LEGEND_SLOTS[i].line[0][1]}
+                        x2={LEGEND_SLOTS[i].line[1][0]} y2={LEGEND_SLOTS[i].line[1][1]}
+                        stroke="var(--color-outline-variant)" strokeWidth="1" />
+                    ))}
+                  </svg>
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <DoshaGemImage percentages={doshaPercentages} dominant={currentDosha} size={172} />
+                  </div>
+                  {order.map((d, i) => LEGEND_SLOTS[i] && (
+                    <div key={d} className="absolute" style={LEGEND_SLOTS[i].label}>
+                      <p className="font-headline text-xl text-on-surface leading-none tabular-nums">{Math.round(doshaPercentages[d])}%</p>
+                      <p className="font-label text-[11px] uppercase tracking-wide mt-0.5" style={{ color: GEM_HUE[d].base }}>{doshaDisplayName(d)}</p>
+                    </div>
+                  ))}
+                </div>
+              )
+            })()}
             <p className="font-body text-[13px] text-on-surface-variant leading-relaxed">
               {isElevated ? t(`home.state.say.${currentDosha}`) : t(`home.state.base.${currentDosha}`)}
             </p>
