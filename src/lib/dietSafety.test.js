@@ -225,6 +225,32 @@ describe('the exclusion path fails CLOSED, not open', () => {
     expect(exclusionFor(meat, { patterns: ['kosher'] }).excluded).toBe(true)
   })
 
+  it('eggetarian keeps eggs but excludes fish and meat', () => {
+    expect(exclusionFor(INGREDIENTS.egg, { patterns: ['eggetarian'] }).excluded).toBe(false)
+    expect(exclusionFor(INGREDIENTS.chicken, { patterns: ['eggetarian'] }).excluded).toBe(true)
+    expect(exclusionFor(INGREDIENTS.fishFreshwater, { patterns: ['eggetarian'] }).excluded).toBe(true)
+    // still lacto — dairy is fine
+    expect(exclusionFor(INGREDIENTS.milk, { patterns: ['eggetarian'] }).excluded).toBe(false)
+  })
+
+  it('pescatarian keeps fish and eggs but excludes meat & poultry', () => {
+    expect(exclusionFor(INGREDIENTS.fishFreshwater, { patterns: ['pescatarian'] }).excluded).toBe(false)
+    expect(exclusionFor(INGREDIENTS.prawn, { patterns: ['pescatarian'] }).excluded).toBe(false)
+    expect(exclusionFor(INGREDIENTS.egg, { patterns: ['pescatarian'] }).excluded).toBe(false)
+    expect(exclusionFor(INGREDIENTS.chicken, { patterns: ['pescatarian'] }).excluded).toBe(true)
+    expect(exclusionFor(INGREDIENTS.goatMeat, { patterns: ['pescatarian'] }).excluded).toBe(true)
+  })
+
+  it('no_pork / no_beef exclude only the tagged food (fail closed, match narrow)', () => {
+    const pork = { id: 'p', category: 'animal', dietTags: ['pork'] }
+    const beef = { id: 'b', category: 'animal', dietTags: ['beef'] }
+    expect(exclusionFor(pork, { patterns: ['no_pork'] }).excluded).toBe(true)
+    expect(exclusionFor(beef, { patterns: ['no_beef'] }).excluded).toBe(true)
+    // and they don't over-reach onto other animal foods
+    expect(exclusionFor(INGREDIENTS.chicken, { patterns: ['no_pork'] }).excluded).toBe(false)
+    expect(exclusionFor(INGREDIENTS.chicken, { patterns: ['no_beef'] }).excluded).toBe(false)
+  })
+
   it('treats animal rennet as not vegetarian, despite the dairy category', () => {
     // Rennet is slaughter-derived, so the dairy category alone would let a
     // traditionally-set cheese through a vegetarian filter. Uses a fixture
