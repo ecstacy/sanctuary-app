@@ -266,20 +266,51 @@ export default function HomePage() {
   // Which daily slots are already done today — inferred from today's saved
   // 'daily' sessions by their timestamp. Feeds slot resolution (morning done →
   // afternoon rolls to evening) and the card's completed state.
-  const doneSlotsToday = useMemo(() => {
+  // Today's completed 'daily' sessions, oldest-first — the source of both the
+  // done-slot set and the "Your day" timeline.
+  // ⚠ stats.sessions are NORMALISED to camelCase (routineKey, timestamp). This
+  // read used routine_key/created_at, which are always undefined on the
+  // normalised rows, so it matched nothing and the home never showed a
+  // completed state after a session. Use the normalised field names.
+  // One row per completed slot (a slot repeated in a day collapses to a single
+  // timeline entry, keeping the earliest completion time).
+  const todaysDaily = useMemo(() => {
     const d = new Date()
     const todayStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-    const done = new Set()
+    const bySlot = new Map()
     for (const s of stats.sessions || []) {
-      if (s?.date !== todayStr || s?.routine_key !== 'daily') continue
-      const hr = s.created_at ? new Date(s.created_at).getHours() : 12
-      done.add(hr >= 17 ? 'evening' : 'morning')
+      if (s?.date !== todayStr || s?.routineKey !== 'daily') continue
+      const at = s.timestamp ? new Date(s.timestamp) : null
+      const slot = (at ? at.getHours() : 12) >= 17 ? 'evening' : 'morning'
+      const existing = bySlot.get(slot)
+      if (!existing || (s.timestamp || 0) < (existing.timestamp || 0)) bySlot.set(slot, { ...s, at, slot })
     }
-    return Array.from(done)
+    return [...bySlot.values()].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0))
   }, [stats.sessions])
 
-  // Compose for right now. Deterministic per (user, date, slot) — stable all
-  // day and the exact arc the practice runs (we hand it over via router state).
+  const doneSlotsToday = useMemo(
+    () => todaysDaily.map((s) => s.slot),
+    [todaysDaily],
+  )
+
+  // Which slot is due RIGHT NOW. The composer will roll an afternoon to evening
+  // once morning is done, but prescribing "Evening Wind-Down" at midday reads as
+  // a bug — so the home only treats a slot as active when its time has actually
+  // come: morning (or an unfinished morning through the afternoon), and evening
+  // only from the evening. When nothing is due, the day reads as done-for-now.
+  const nowHour = new Date().getHours()
+  const activeSlot = nowHour >= 17
+    ? (doneSlotsToday.includes('evening') ? null : 'evening')
+    : (doneSlotsToday.includes('morning') ? null : 'morning')
+  const dailyDone = activeSlot === null
+  // Softly point to the evening session when the morning is done and it isn't
+  // evening yet — a teaser, never an active "now".
+  const dailyNextSlot = (dailyDone && nowHour < 17 && !doneSlotsToday.includes('evening')) ? 'evening' : null
+  const shownSlot = activeSlot || (nowHour >= 17 ? 'evening' : 'morning')
+  const dailyTitleKey = shownSlot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle'
+
+  // Compose the session for the slot that's actually due (forceSlot), so Begin
+  // starts the right arc. Deterministic per (user, date, slot).
   const dailySession = useMemo(() => {
     const history = [...(stats.sessions || [])].sort((a, b) =>
       String(b.created_at || b.date).localeCompare(String(a.created_at || a.date)))
@@ -291,14 +322,27 @@ export default function HomePage() {
       doneSlotsToday,
       userId: user?.id,
       now: new Date(),
+      forceSlot: shownSlot,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profile, vikritiSignal.hasSignal, vikritiSignal.vikriti, checkedIn, stats.sessions, doneSlotsToday, user?.id])
+  }, [profile, vikritiSignal.hasSignal, vikritiSignal.vikriti, checkedIn, stats.sessions, doneSlotsToday, user?.id, shownSlot])
 
   const dailyDurationMin = Math.max(1, Math.round(dailySession.totalSeconds / 60))
-  const dailyDone = doneSlotsToday.includes(dailySession.slot)
-  const dailyNextSlot = (dailyDone && dailySession.slot === 'morning' && !doneSlotsToday.includes('evening')) ? 'evening' : null
-  const dailyTitleKey = dailySession.slot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle'
+
+  // The next slot still ahead today, shown in Your day as a muted "Later" row
+  // (never an active "now"). Compose it so the row can show its length and start
+  // it early if the user wants.
+  const upcomingSlot = (!doneSlotsToday.includes('evening') && shownSlot !== 'evening') ? 'evening' : null
+  const upcomingSession = useMemo(() => {
+    if (!upcomingSlot) return null
+    const history = [...(stats.sessions || [])].sort((a, b) =>
+      String(b.created_at || b.date).localeCompare(String(a.created_at || a.date)))
+    return composeDailySession({
+      profile, vikriti: vikritiSignal, checkin: checkedIn, history,
+      doneSlotsToday, userId: user?.id, now: new Date(), forceSlot: upcomingSlot,
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [upcomingSlot, profile, vikritiSignal.hasSignal, vikritiSignal.vikriti, checkedIn, stats.sessions, doneSlotsToday, user?.id])
 
   // Localized reason chips (skip the slot reason — that's the headline).
   const dailyReasonChips = dailySession.reasons
@@ -346,6 +390,16 @@ export default function HomePage() {
       reason_codes: dailySession.reasons.map(r => r.code),
     })
     navigate('/practice/daily', { state: { session: dailySession } })
+  }
+
+  const handleStartUpcoming = () => {
+    if (!upcomingSession) return
+    track(EVENTS.DAILY_SESSION_CTA_TAPPED, {
+      slot: upcomingSession.slot, pose_count: upcomingSession.asanaIds.length,
+      duration_s: upcomingSession.totalSeconds, reason_codes: upcomingSession.reasons.map(r => r.code),
+      early: true,
+    })
+    navigate('/practice/daily', { state: { session: upcomingSession } })
   }
 
   // ── Current dosha state — drives the pill, the balance shape, and the
@@ -483,13 +537,31 @@ export default function HomePage() {
           </div>
         ) : (
           <div ref={dailyImpressionRef} className="stagger-2 flex flex-col items-start text-left">
-            <span aria-hidden="true" className="material-symbols-outlined text-primary text-4xl mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-            <h2 className="font-headline text-2xl text-on-surface leading-tight">
+            {/* A filled tick that echoes the round Begin — the "done" twin of
+                the start button, so the completed state has the same weight. */}
+            <span
+              aria-hidden="true"
+              className="w-[84px] h-[84px] rounded-full flex items-center justify-center shadow-lg mb-6"
+              style={{ background: 'radial-gradient(120% 120% at 50% 12%, #3f7659, var(--color-pine, #2b5a42) 74%)' }}
+            >
+              <span className="material-symbols-outlined text-white text-[46px]" style={{ fontVariationSettings: "'FILL' 1, 'wght' 600" }}>check</span>
+            </span>
+            <h2 className="font-headline text-[2.5rem] leading-[1.04] tracking-tight text-on-surface">
               {t('home.daily.doneTitle', { title: t(dailyTitleKey) })}
             </h2>
-            <p className="font-body text-sm text-on-surface-variant leading-relaxed mt-2 max-w-[28ch]">
+            <p className="font-body text-sm text-on-surface-variant leading-relaxed mt-3 max-w-[28ch]">
               {dailyNextSlot ? t('home.daily.doneEveningTeaser') : t('home.daily.doneAllBody')}
             </p>
+            <button
+              onClick={() => {
+                track(EVENTS.CTA_CLICKED, { cta_id: 'home_daily_done_explore', route_name: 'home' })
+                navigate('/discover/practices')
+              }}
+              className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-primary-container text-on-primary-container font-body text-sm font-medium px-5 py-2.5 active:scale-95 transition-all"
+            >
+              <span aria-hidden="true" className="material-symbols-outlined text-lg">explore</span>
+              {t('home.daily.exploreMore', 'Explore more practices')}
+            </button>
           </div>
         )}
         </div>
@@ -535,46 +607,84 @@ export default function HomePage() {
           </button>
         )}
 
-        {/* ── Your day — practices only. Honest rows: the composed session
-             (now) and the daily breath ritual. No meals, no "anytime". ── */}
+        {/* ── Your day — a timeline of the day's prescribed practice: what's
+             already done (with the time), then what's next. No breath ritual
+             (that lives in Discover), no meals, no "anytime". ── */}
         <div className="stagger-3">
           <p className="font-label text-xs text-on-surface-variant uppercase tracking-widest mb-2 px-1">
             {t('home.day.title')}
           </p>
           <div className="flex flex-col">
-            <button
-              onClick={handleStartDaily}
-              className="flex items-center gap-3.5 rounded-xl px-3 py-3.5 text-left bg-primary-container/30 active:scale-[0.99] transition-all"
-            >
-              <span className="font-headline italic text-[13px] text-primary w-16 flex-shrink-0">
-                {t(`home.day.when.${timeOfDay}`)}
-              </span>
-              <span className="flex-1 min-w-0">
-                <span className="block font-body text-[15px] font-medium text-on-surface leading-snug">{t(dailyTitleKey)}</span>
-                <span className="block font-body text-xs text-on-surface-variant mt-0.5">
-                  {t('home.daily.meta', { min: dailyDurationMin, count: dailySession.asanaIds.length })}
+            {/* Completed sessions today — so finishing one visibly changes the day. */}
+            {todaysDaily.map((s, i) => (
+              <div
+                key={s.id || i}
+                className={`flex items-center gap-3.5 rounded-xl px-3 py-3.5 text-left ${i > 0 ? 'border-t border-outline-variant/40' : ''}`}
+              >
+                <span className="font-headline italic text-[13px] text-on-surface-variant/60 w-16 flex-shrink-0 tabular-nums">
+                  {s.at ? s.at.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : ''}
                 </span>
-              </span>
-              <span className="flex-shrink-0 font-label text-[10px] font-semibold uppercase tracking-wide text-on-primary bg-primary rounded-full px-2.5 py-1">
-                {t('home.day.now')}
-              </span>
-            </button>
-            <button
-              onClick={() => {
-                track(EVENTS.CTA_CLICKED, { cta_id: 'home_day_breath', asana_id: 'mindfulRespiration' })
-                navigate('/practice/asana/mindfulRespiration')
-              }}
-              className="flex items-center gap-3.5 rounded-xl px-3 py-3.5 text-left border-t border-outline-variant/40 active:bg-surface-container-low transition-all"
-            >
-              <span className="font-headline italic text-[13px] text-on-surface-variant w-16 flex-shrink-0">
-                {t('home.day.breathWhen')}
-              </span>
-              <span className="flex-1 min-w-0">
-                <span className="block font-body text-[15px] font-medium text-on-surface leading-snug">{t('home.mindfulRespiration')}</span>
-                <span className="block font-body text-xs text-on-surface-variant mt-0.5">{t('home.inhaleHoldExhale')}</span>
-              </span>
-              <span className="material-symbols-outlined text-outline text-lg flex-shrink-0">chevron_right</span>
-            </button>
+                <span className="flex-1 min-w-0">
+                  <span className="block font-body text-[15px] text-on-surface-variant leading-snug">
+                    {t(s.slot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle')}
+                  </span>
+                </span>
+                <span className="flex-shrink-0 inline-flex items-center gap-1 font-label text-[10px] font-semibold uppercase tracking-wide text-primary">
+                  <span aria-hidden="true" className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                  {t('home.day.done', 'Done')}
+                </span>
+              </div>
+            ))}
+
+            {/* What's next — only when the current composed slot isn't done. */}
+            {!dailyDone && (
+              <button
+                onClick={handleStartDaily}
+                className={`flex items-center gap-3.5 rounded-xl px-3 py-3.5 text-left bg-primary-container/30 active:scale-[0.99] transition-all ${todaysDaily.length > 0 ? 'border-t border-outline-variant/40' : ''}`}
+              >
+                <span className="font-headline italic text-[13px] text-primary w-16 flex-shrink-0">
+                  {t(`home.day.when.${timeOfDay}`)}
+                </span>
+                <span className="flex-1 min-w-0">
+                  <span className="block font-body text-[15px] font-medium text-on-surface leading-snug">{t(dailyTitleKey)}</span>
+                  <span className="block font-body text-xs text-on-surface-variant mt-0.5">
+                    {t('home.daily.meta', { min: dailyDurationMin, count: dailySession.asanaIds.length })}
+                  </span>
+                </span>
+                <span className="flex-shrink-0 font-label text-[10px] font-semibold uppercase tracking-wide text-on-primary bg-primary rounded-full px-2.5 py-1">
+                  {t('home.day.now')}
+                </span>
+              </button>
+            )}
+
+            {/* Still ahead today — the evening session as a muted "Later" row
+                (not an active "now"). Tappable to start early if they want. */}
+            {upcomingSlot && upcomingSession && (
+              <button
+                onClick={handleStartUpcoming}
+                className={`flex items-center gap-3.5 rounded-xl px-3 py-3.5 text-left active:bg-surface-container-low transition-all ${(todaysDaily.length > 0 || !dailyDone) ? 'border-t border-outline-variant/40' : ''}`}
+              >
+                <span className="font-headline italic text-[13px] text-on-surface-variant/60 w-16 flex-shrink-0">
+                  {t('home.day.when.evening')}
+                </span>
+                <span className="flex-1 min-w-0">
+                  <span className="block font-body text-[15px] font-medium text-on-surface leading-snug">{t('practice.dailyEveningTitle')}</span>
+                  <span className="block font-body text-xs text-on-surface-variant mt-0.5">
+                    {t('home.daily.meta', { min: Math.max(1, Math.round(upcomingSession.totalSeconds / 60)), count: upcomingSession.asanaIds.length })}
+                  </span>
+                </span>
+                <span className="flex-shrink-0 font-label text-[10px] font-semibold uppercase tracking-wide text-on-surface-variant bg-surface-container-high rounded-full px-2.5 py-1">
+                  {t('home.day.later', 'Later')}
+                </span>
+              </button>
+            )}
+
+            {/* Everything for today is done and nothing left to tease. */}
+            {dailyDone && !upcomingSlot && (
+              <p className="font-body text-[13px] text-on-surface-variant/80 leading-relaxed px-3 py-3.5 border-t border-outline-variant/40">
+                {t('home.day.allDone', 'That’s your prescribed practice for today. Anything more is exploration — enjoy it.')}
+              </p>
+            )}
           </div>
         </div>
 
@@ -667,7 +777,7 @@ export default function HomePage() {
         {/* ── To favour / ease off — always on, keyed to current state (or
              constitution) for favour and to time-of-day for what to ease. ── */}
         <div className="grid grid-cols-1 gap-3 stagger-5">
-          <div className="bg-primary-container/20 rounded-xl p-5">
+          <div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant/40">
             <div className="flex items-center gap-2.5 mb-3">
               <span className="material-symbols-outlined text-primary text-lg">eco</span>
               <h3 className="font-headline text-lg text-on-surface">{t('home.favour.title')}</h3>
@@ -688,7 +798,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="bg-secondary-container/15 rounded-xl p-5">
+          <div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant/40">
             <div className="flex items-center gap-2.5 mb-3">
               <span className="material-symbols-outlined text-secondary text-lg">block</span>
               <h3 className="font-headline text-lg text-on-surface">{t('home.favour.avoidTitle')}</h3>

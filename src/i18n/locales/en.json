@@ -555,7 +555,8 @@
       "reasonCheckin": "You said: {{mood}}",
       "doneTitle": "{{title}} done",
       "doneEveningTeaser": "Come back this evening to wind down.",
-      "doneAllBody": "That's your practice for today. See you tomorrow."
+      "doneAllBody": "That's your practice for today. See you tomorrow.",
+      "exploreMore": "Explore more practices"
     },
     "state": {
       "title": "Your state this week",
@@ -583,7 +584,10 @@
         "afternoon": "Midday",
         "evening": "Evening"
       },
-      "breathWhen": "Breath"
+      "breathWhen": "Breath",
+      "done": "Done",
+      "allDone": "That’s your prescribed practice for today. Anything more is exploration — enjoy it.",
+      "later": "Later"
     },
     "nourish": {
       "title": "To nourish"

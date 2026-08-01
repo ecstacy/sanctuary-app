@@ -555,7 +555,8 @@
       "reasonCheckin": "Du sagtest: {{mood}}",
       "doneTitle": "{{title}} erledigt",
       "doneEveningTeaser": "Komm heute Abend zum Ausklingen wieder.",
-      "doneAllBody": "Das war deine Praxis für heute. Bis morgen."
+      "doneAllBody": "Das war deine Praxis für heute. Bis morgen.",
+      "exploreMore": "Mehr Übungen entdecken"
     },
     "state": {
       "title": "Dein Zustand diese Woche",
@@ -583,7 +584,10 @@
         "afternoon": "Mittag",
         "evening": "Abend"
       },
-      "breathWhen": "Atem"
+      "breathWhen": "Atem",
+      "done": "Erledigt",
+      "allDone": "Das war deine empfohlene Praxis für heute. Alles Weitere ist freie Entdeckung — genieße es.",
+      "later": "Später"
     },
     "nourish": {
       "title": "Zur Nährung"
