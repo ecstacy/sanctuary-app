@@ -27,7 +27,8 @@
     "cancel": "Abbrechen",
     "loading": "Wird geladen…",
     "or": "oder",
-    "retry": "Erneut versuchen"
+    "retry": "Erneut versuchen",
+    "clear": "Löschen"
   },
   "welcome": {
     "greeting": "Willkommen bei",
@@ -1403,6 +1404,14 @@
         "title": "Tagesroutine",
         "sub": "Dinacharya — der Rhythmus des Tages"
       }
+    },
+    "foods": {
+      "searchPlaceholder": "Lebensmittel suchen…",
+      "filterAll": "Alle",
+      "filterLabel": "Nach Kategorie filtern",
+      "resultCount": "{{count}} Lebensmittel",
+      "noResults": "Keine Treffer für „{{query}}“.",
+      "clearFilters": "Filter zurücksetzen"
     }
   },
   "protocol": {

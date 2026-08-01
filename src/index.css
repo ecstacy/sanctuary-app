@@ -100,6 +100,11 @@
   --color-on-primary-container: #345626;
 }
 
+/* Hide the scrollbar on horizontal pill/chip rows (visual only — still scrolls,
+   and keyboard focus still reaches every pill). */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
 body {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);

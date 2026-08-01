@@ -1,18 +1,15 @@
 // ─────────────────────────────────────────────────────────────────────────────
 //  DiscoverFoodsPage — the food library, behind the hub.
 //
-//  The flat Discover page showed foods as a horizontal strip of nine cards.
-//  That was the right shape for a teaser and the wrong one for a reference:
-//  it hid most of the set behind a swipe, and it gave no way to see WHICH
-//  foods we cover — which is the first question anyone has about a dataset
-//  that openly admits it is incomplete.
-//
-//  So: grouped by category, in full, with the coverage line stated plainly
-//  rather than buried. A reference that is honest about its size is more
-//  useful than one that looks endless.
+//  190 foods is too many to scroll. Like a food-delivery app, the page leads
+//  with a search box and a sticky row of category pills so a user narrows to a
+//  bucket (Vegetables, Spices, Fruit …) in one tap. "All" restores the full
+//  grouped-by-category reference; a search or a pill collapses it to a flat
+//  result grid with a count. A filtered-out food is labelled, never hidden —
+//  hiding it would read as a coverage gap rather than the user's own setting.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { REVIEWED_INGREDIENTS, coverageStats } from '../lib/ingredients'
@@ -30,23 +27,125 @@ const CATEGORY_ORDER = [
   'nut_seed', 'oil', 'sweetener', 'spice', 'beverage', 'animal', 'other',
 ]
 
+const ALL = '__all__'
+
+// Second-row attribute filters (multi-select). Tokens are `v:<virya>` or
+// `r:<rasa>`; a food must satisfy every active token (AND). Potency first
+// (the most-asked axis — "something cooling"), then the six tastes.
+const ATTR_FILTERS = [
+  { token: 'v:cooling', kind: 'virya', value: 'cooling', i18n: 'diet.viryas.cooling' },
+  { token: 'v:heating', kind: 'virya', value: 'heating', i18n: 'diet.viryas.heating' },
+  { token: 'r:sweet', kind: 'rasa', value: 'sweet', i18n: 'diet.tastes.sweet' },
+  { token: 'r:sour', kind: 'rasa', value: 'sour', i18n: 'diet.tastes.sour' },
+  { token: 'r:salty', kind: 'rasa', value: 'salty', i18n: 'diet.tastes.salty' },
+  { token: 'r:pungent', kind: 'rasa', value: 'pungent', i18n: 'diet.tastes.pungent' },
+  { token: 'r:bitter', kind: 'rasa', value: 'bitter', i18n: 'diet.tastes.bitter' },
+  { token: 'r:astringent', kind: 'rasa', value: 'astringent', i18n: 'diet.tastes.astringent' },
+]
+
+function matchesQuery(ing, q) {
+  if (!q) return true
+  const hay = [ing.name, ing.sanskrit, ...(ing.aliases || [])].join(' ').toLowerCase()
+  return hay.includes(q)
+}
+
+function matchesAttrs(ing, attrs) {
+  for (const token of attrs) {
+    const f = ATTR_FILTERS.find((a) => a.token === token)
+    if (!f) continue
+    if (f.kind === 'virya' && ing.virya !== f.value) return false
+    if (f.kind === 'rasa' && !(ing.rasa || []).includes(f.value)) return false
+  }
+  return true
+}
+
+function FoodCard({ ing, dietPrefs, t, navigate }) {
+  const ex = exclusionFor(ing, dietPrefs)
+  return (
+    <button
+      onClick={() => {
+        track(EVENTS.CTA_CLICKED, { cta_id: 'food_library_item', ingredient_id: ing.id })
+        navigate(`/ingredient/${ing.id}`)
+      }}
+      className="bg-surface-container-low rounded-2xl p-3.5 text-left active:scale-[0.97] transition-all"
+    >
+      <span className="text-primary block"><FoodIcon ingredient={ing} size={26} /></span>
+      <p className="font-body text-sm text-on-surface mt-2 leading-tight">{ing.name}</p>
+      {ing.sanskrit && (
+        <p className="font-body text-[11px] text-on-surface-variant/70 leading-tight mt-0.5">{ing.sanskrit}</p>
+      )}
+      {ex.excluded && (
+        <span className={`inline-block mt-1.5 px-2 py-0.5 rounded-full font-label text-[8px] uppercase tracking-wide ${
+          ex.reason === 'allergen'
+            ? 'bg-error-container/70 text-on-error-container'
+            : 'bg-surface-container-high text-on-surface-variant'
+        }`}>
+          {ex.reason === 'allergen'
+            ? t('diet.badge.allergen', { key: t(`diet.allergens.${ex.key}`, ex.key) })
+            : t('diet.badge.pattern', { key: t(`diet.patterns.${ex.key}`, ex.key) })}
+        </span>
+      )}
+    </button>
+  )
+}
+
 export default function DiscoverFoodsPage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { user } = useAuth()
   const { prefs: dietPrefs } = useDietPrefs()
 
+  const [query, setQuery] = useState('')
+  const [activeCat, setActiveCat] = useState(ALL)
+  const [activeAttrs, setActiveAttrs] = useState(() => new Set())
+  const q = query.trim().toLowerCase()
+
   const coverage = useMemo(() => coverageStats(), [])
+
+  // Categories that actually have foods, in display order, with counts — built
+  // from the data, so an empty bucket never shows a pill.
+  const categories = useMemo(() => {
+    const count = new Map()
+    for (const ing of REVIEWED_INGREDIENTS) count.set(ing.category, (count.get(ing.category) || 0) + 1)
+    return CATEGORY_ORDER.filter((c) => count.has(c)).map((c) => ({ id: c, count: count.get(c) }))
+  }, [])
+
+  // Grouped view (the "All", no-search reference).
   const grouped = useMemo(() => {
     const byCat = new Map()
     for (const ing of REVIEWED_INGREDIENTS) {
       if (!byCat.has(ing.category)) byCat.set(ing.category, [])
       byCat.get(ing.category).push(ing)
     }
-    return CATEGORY_ORDER
-      .filter((c) => byCat.has(c))
-      .map((c) => [c, byCat.get(c).sort((a, b) => a.name.localeCompare(b.name))])
-  }, [])
+    return categories.map(({ id }) => [id, byCat.get(id).sort((a, b) => a.name.localeCompare(b.name))])
+  }, [categories])
+
+  // Flat filtered results (a pill, an attribute, and/or a search is active).
+  const flat = useMemo(() => {
+    return REVIEWED_INGREDIENTS
+      .filter((i) => (activeCat === ALL || i.category === activeCat) && matchesQuery(i, q) && matchesAttrs(i, activeAttrs))
+      .sort((a, b) => a.name.localeCompare(b.name))
+  }, [activeCat, q, activeAttrs])
+
+  const isFiltered = activeCat !== ALL || q.length > 0 || activeAttrs.size > 0
+
+  const selectCat = (id) => {
+    setActiveCat(id)
+    track(EVENTS.CTA_CLICKED, {
+      cta_id: 'food_category_pill', route_name: 'discover_foods', category: id === ALL ? 'all' : id,
+    })
+  }
+
+  const toggleAttr = (token) => {
+    setActiveAttrs((prev) => {
+      const next = new Set(prev)
+      next.has(token) ? next.delete(token) : next.add(token)
+      return next
+    })
+    track(EVENTS.CTA_CLICKED, { cta_id: 'food_attribute_pill', route_name: 'discover_foods', attribute: token })
+  }
+
+  const clearAll = () => { setQuery(''); setActiveCat(ALL); setActiveAttrs(new Set()) }
 
   return (
     <SubPage
@@ -55,7 +154,7 @@ export default function DiscoverFoodsPage() {
       routeName="discover_foods"
     >
       {/* Entry points before the list: someone arriving here usually wants a
-          suggestion or their own settings, not to read 35 rows. */}
+          suggestion or their own settings, not to read every row. */}
       <div className="flex flex-col gap-2.5">
         <button
           onClick={() => {
@@ -72,8 +171,6 @@ export default function DiscoverFoodsPage() {
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
         </button>
 
-        {/* Only for signed-in users: the picker writes to their profile, so
-            offering it anonymously would lead to a dead end. */}
         {user && (
           <button
             onClick={() => {
@@ -96,54 +193,127 @@ export default function DiscoverFoodsPage() {
         )}
       </div>
 
-      {/* ── The library ── */}
-      {grouped.map(([category, items]) => (
-        <section key={category} className="mt-8">
-          <h2 className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">
-            {t(`diet.categories.${category}`, category.replace(/_/g, ' '))}
-          </h2>
-          <div className="grid grid-cols-2 gap-2.5">
-            {items.map((ing) => {
-              const ex = exclusionFor(ing, dietPrefs)
-              return (
-                <button
-                  key={ing.id}
-                  onClick={() => {
-                    track(EVENTS.CTA_CLICKED, { cta_id: 'food_library_item', ingredient_id: ing.id })
-                    navigate(`/ingredient/${ing.id}`)
-                  }}
-                  className="bg-surface-container-low rounded-2xl p-3.5 text-left active:scale-[0.97] transition-all"
-                >
-                  <span className="text-primary block"><FoodIcon ingredient={ing} size={26} /></span>
-                  <p className="font-body text-sm text-on-surface mt-2 leading-tight">{ing.name}</p>
-                  {ing.sanskrit && (
-                    <p className="font-body text-[11px] text-on-surface-variant/70 leading-tight mt-0.5">{ing.sanskrit}</p>
-                  )}
-                  {/* A filtered food is labelled, not hidden — hiding it would
-                      read as a coverage gap rather than as their own setting. */}
-                  {ex.excluded && (
-                    <span className={`inline-block mt-1.5 px-2 py-0.5 rounded-full font-label text-[8px] uppercase tracking-wide ${
-                      ex.reason === 'allergen'
-                        ? 'bg-error-container/70 text-on-error-container'
-                        : 'bg-surface-container-high text-on-surface-variant'
-                    }`}>
-                      {ex.reason === 'allergen'
-                        ? t('diet.badge.allergen', { key: t(`diet.allergens.${ex.key}`, ex.key) })
-                        : t('diet.badge.pattern',  { key: t(`diet.patterns.${ex.key}`,  ex.key) })}
-                    </span>
-                  )}
-                </button>
-              )
-            })}
-          </div>
-        </section>
-      ))}
+      {/* Search */}
+      <div className="mt-6 relative">
+        <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-xl absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none">search</span>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => { setQuery(e.target.value); if (e.target.value) setActiveCat(ALL) }}
+          placeholder={t('discover.foods.searchPlaceholder', 'Search foods…')}
+          aria-label={t('discover.foods.searchPlaceholder', 'Search foods')}
+          className="w-full bg-surface-container-low rounded-2xl pl-11 pr-11 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant/50 outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        />
+        {query && (
+          <button
+            onClick={() => setQuery('')}
+            aria-label={t('common.clear', 'Clear')}
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90 transition-transform"
+          >
+            <span aria-hidden="true" className="material-symbols-outlined text-lg">close</span>
+          </button>
+        )}
+      </div>
 
-      {/* Stated plainly rather than buried: the dataset is deliberately small
-          and growing, and saying so is the honest version of a reference. */}
+      {/* Sticky category pills */}
+      <div className="sticky top-0 z-20 -mx-6 px-6 pt-3 pb-2.5 mt-3 bg-background/95 backdrop-blur-sm">
+        <div
+          role="tablist"
+          aria-label={t('discover.foods.filterLabel', 'Filter by category')}
+          className="flex gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 pb-0.5"
+        >
+          <Pill active={activeCat === ALL} onClick={() => selectCat(ALL)}>
+            {t('discover.foods.filterAll', 'All')}
+          </Pill>
+          {categories.map(({ id, count }) => (
+            <Pill key={id} active={activeCat === id} onClick={() => selectCat(id)}>
+              {t(`diet.categories.${id}`, id.replace(/_/g, ' '))}
+              <span className={`ml-1.5 tabular-nums ${activeCat === id ? 'text-on-primary/70' : 'text-on-surface-variant/50'}`}>{count}</span>
+            </Pill>
+          ))}
+        </div>
+
+        {/* Row 2 — attribute refiners (potency + taste), multi-select. */}
+        <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 mt-2 pb-0.5">
+          {ATTR_FILTERS.map((f) => {
+            const on = activeAttrs.has(f.token)
+            return (
+              <button
+                key={f.token}
+                aria-pressed={on}
+                onClick={() => toggleAttr(f.token)}
+                className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 font-body text-xs font-medium border transition-colors ${
+                  on
+                    ? 'bg-primary-container border-primary-container text-on-primary-container'
+                    : 'bg-transparent border-outline-variant text-on-surface-variant active:bg-surface-container-low'
+                }`}
+              >
+                {t(f.i18n, f.value)}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Results */}
+      {isFiltered ? (
+        <div className="mt-4">
+          <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">
+            {t('discover.foods.resultCount', { count: flat.length, defaultValue: '{{count}} foods' })}
+          </p>
+          {flat.length > 0 ? (
+            <div className="grid grid-cols-2 gap-2.5">
+              {flat.map((ing) => <FoodCard key={ing.id} ing={ing} dietPrefs={dietPrefs} t={t} navigate={navigate} />)}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-4xl">search_off</span>
+              <p className="font-body text-sm text-on-surface-variant mt-3">
+                {t('discover.foods.noResults', { query, defaultValue: 'No foods match “{{query}}”.' })}
+              </p>
+              <button
+                onClick={clearAll}
+                className="mt-4 font-body text-sm text-primary font-semibold active:scale-95 transition-transform"
+              >
+                {t('discover.foods.clearFilters', 'Clear filters')}
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        grouped.map(([category, items]) => (
+          <section key={category} className="mt-8">
+            <h2 className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">
+              {t(`diet.categories.${category}`, category.replace(/_/g, ' '))}
+            </h2>
+            <div className="grid grid-cols-2 gap-2.5">
+              {items.map((ing) => <FoodCard key={ing.id} ing={ing} dietPrefs={dietPrefs} t={t} navigate={navigate} />)}
+            </div>
+          </section>
+        ))
+      )}
+
+      {/* Coverage, stated plainly. */}
       <p className="font-body text-[13px] text-on-surface-variant leading-relaxed mt-9">
         {t('discover.hub.foods.coverage', { reviewed: coverage.reviewed })}
       </p>
     </SubPage>
+  )
+}
+
+function Pill({ active, onClick, children }) {
+  return (
+    <button
+      role="tab"
+      aria-selected={active}
+      onClick={onClick}
+      className={`shrink-0 whitespace-nowrap rounded-full px-4 py-2 font-body text-[13px] font-medium transition-colors ${
+        active
+          ? 'bg-primary text-on-primary'
+          : 'bg-surface-container-low text-on-surface-variant active:bg-surface-container'
+      }`}
+    >
+      {children}
+    </button>
   )
 }
