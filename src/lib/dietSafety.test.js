@@ -50,6 +50,34 @@ const REVIEWED_SIGNED_OFF = [
   'orange', 'coconut', 'papaya', 'dates', 'amla', 'watermelon',
   'cinnamon', 'clove', 'mustardSeed', 'fenugreekSeed', 'tamarind',
   'coconutOil', 'cashew', 'walnut',
+  // Batch 6 — 2026-07-28 (docs/diet-review-batch-6.md). 44 breadth entries incl.
+  // the first animal foods (egg, chicken). Reviewer decisions applied: saffron
+  // published tridoshic-as-attested (high), ragi virya = cooling, animal foods
+  // limited to egg/chicken/fish scope.
+  'tofu', 'besan', 'blackEyedPeas', 'wholeMung', 'brownLentil',
+  'fingerMillet', 'sorghum', 'quinoa', 'corn', 'pasta',
+  'kale', 'lettuce', 'leek', 'asparagus', 'bitterGourd', 'ridgeGourd',
+  'colocasia', 'fenugreekLeaf', 'mintLeaf', 'plantain',
+  'pear', 'peach', 'guava', 'pineapple', 'strawberry', 'fig', 'avocado',
+  'nutmeg', 'bayLeaf', 'ajwain', 'saffron', 'amchur',
+  'mustardOil', 'sunflowerOil', 'caneSugar',
+  'pistachio', 'flaxSeed', 'sunflowerSeed', 'sesameSeed',
+  'blackTea', 'greenTea', 'herbalTea',
+  'egg', 'chicken',
+  // Batch 7 — 2026-07-28 (docs/diet-review-batch-7.md). 58 depth/long-tail
+  // entries (the classical Sutrasthana-27 foods + German/Western staples).
+  'amaranth', 'buckwheat', 'foxtailMillet', 'sago', 'whiteBread',
+  'soybean', 'horseGram', 'mothBean', 'blackBean',
+  'pumpkin', 'drumstick', 'pointedGourd', 'ivyGourd', 'elephantYam', 'turnip',
+  'fennelBulb', 'celery', 'brusselsSprouts', 'artichoke', 'mustardGreens',
+  'jamun', 'jackfruit', 'raisins', 'muskmelon', 'sweetLime', 'plum', 'apricot',
+  'cherry', 'kiwi', 'blueberry', 'custardApple',
+  'lotusSeed', 'pumpkinSeed', 'chiaSeed', 'hazelnut', 'chestnut',
+  'longPepper', 'holyBasil', 'rockSalt', 'dillSeed', 'starAnise', 'mace',
+  'nigella', 'rosemary', 'thyme', 'poppySeed',
+  'peanutOil', 'almondOil', 'rockCandy', 'mapleSyrup',
+  'coconutWater', 'sugarcaneJuice', 'cocoa', 'cream', 'khoa',
+  'fishFreshwater', 'goatMeat', 'prawn',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {
