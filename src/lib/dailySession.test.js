@@ -5,7 +5,12 @@ import { ASANAS } from '../data/asanas'
 // Helpers ---------------------------------------------------------------------
 const at = (hour) => new Date(`2026-07-10T${String(hour).padStart(2, '0')}:00:00`)
 const base = (over = {}) => ({ userId: 'u1', now: at(8), profile: {}, vikriti: { hasSignal: false }, checkin: null, history: [], ...over })
-const dur = (ids) => ids.reduce((s, id) => s + (ASANAS[id]?.durationSeconds || 0), 0)
+// Bilateral poses are practised on both sides, so the composer budgets (and
+// reports totalSeconds at) 2× their listed hold — mirror that here.
+const dur = (ids) => ids.reduce((s, id) => {
+  const a = ASANAS[id]
+  return s + (a?.durationSeconds || 0) * (a?.bilateral ? 2 : 1)
+}, 0)
 
 describe('slot resolution', () => {
   it('maps hours to raw slots', () => {

@@ -1125,7 +1125,9 @@
     "tilePickupSub": "Letztes Mal hat es geholfen — deine neueste Lesung legt eine weitere Runde nahe.",
     "tileContinueSub": "Tag {{day}} von {{total}} — bleib im Rhythmus.",
     "dailyMorningTitle": "Morgenpraxis",
-    "dailyEveningTitle": "Abendliches Ausklingen"
+    "dailyEveningTitle": "Abendliches Ausklingen",
+    "sideFirst": "Erste Seite · 1 von 2",
+    "sideSecond": "Andere Seite · 2 von 2"
   },
   "doshaQuizContent": {
     "questions": {

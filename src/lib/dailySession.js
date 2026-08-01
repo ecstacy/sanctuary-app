@@ -283,15 +283,20 @@ export function composeDailySession(ctx = {}) {
     let count = 0
     for (const { a } of scored) {
       if (count >= phase.max) break
+      // Bilateral poses (warrior, triangle, tree…) are practised on BOTH sides,
+      // so they cost twice their listed hold in the real session. Budget them
+      // at 2× so a session that includes them stays on target rather than
+      // silently running long.
+      const cost = a.bilateral ? a.durationSeconds * 2 : a.durationSeconds
       // For flexible phases, stop adding once we're within budget (leaving the
       // close reserve), but always honour the phase minimum.
       if (phase.flex && count >= phase.min) {
-        const projected = totalSeconds + a.durationSeconds + (isClose ? 0 : closeReserve)
+        const projected = totalSeconds + cost + (isClose ? 0 : closeReserve)
         if (projected > targetSeconds + DURATION_TOLERANCE_S) break
       }
       picked.push({ id: a.id, phase: phase.key })
       pickedIds.add(a.id)
-      totalSeconds += a.durationSeconds
+      totalSeconds += cost
       count++
     }
   }
