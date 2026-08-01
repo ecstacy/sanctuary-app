@@ -115,12 +115,12 @@ export function ExploreAsanaCard({ asana, position, locked, onTap, surface = 'di
             />
             <div className="absolute inset-x-2 bottom-2 flex items-center justify-between gap-1 px-2.5 py-1 rounded-full bg-surface/95 backdrop-blur-sm shadow-sm">
               <div className="flex items-center gap-1 min-w-0">
-                <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">lock</span>
-                <span className="font-label text-[11px] font-semibold text-primary uppercase tracking-wider truncate">
+                <span aria-hidden="true" className="material-symbols-outlined text-plus text-[11px] flex-shrink-0">lock</span>
+                <span className="font-label text-[11px] font-semibold text-plus uppercase tracking-wider truncate">
                   {t('discover.unlockWithPlus')}
                 </span>
               </div>
-              <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">arrow_forward</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-plus text-[11px] flex-shrink-0">arrow_forward</span>
             </div>
           </>
         )}
@@ -193,12 +193,12 @@ export function PranayamaCard({ pranayama, position, locked, onTap, surface = 'd
             />
             <div className="absolute inset-x-2 bottom-2 flex items-center justify-between gap-1 px-2.5 py-1 rounded-full bg-surface/95 backdrop-blur-sm shadow-sm">
               <div className="flex items-center gap-1 min-w-0">
-                <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">lock</span>
-                <span className="font-label text-[11px] font-semibold text-primary uppercase tracking-wider truncate">
+                <span aria-hidden="true" className="material-symbols-outlined text-plus text-[11px] flex-shrink-0">lock</span>
+                <span className="font-label text-[11px] font-semibold text-plus uppercase tracking-wider truncate">
                   {t('discover.unlockWithPlus')}
                 </span>
               </div>
-              <span aria-hidden="true" className="material-symbols-outlined text-primary text-[11px] flex-shrink-0">arrow_forward</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-plus text-[11px] flex-shrink-0">arrow_forward</span>
             </div>
           </>
         )}

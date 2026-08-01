@@ -361,9 +361,9 @@ export default function JourneyPage() {
               <p className="font-body text-sm text-on-surface-variant/85 leading-relaxed mb-3">
                 {t('journey.doshaTeaser')}
               </p>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-container/60">
-                <span aria-hidden="true" className="material-symbols-outlined text-primary text-[13px]">lock</span>
-                <span className="font-label text-[11px] font-semibold text-primary uppercase tracking-wide">{t('journey.unlockWithPlus')}</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-plus-container/60">
+                <span aria-hidden="true" className="material-symbols-outlined text-plus text-[13px]">lock</span>
+                <span className="font-label text-[11px] font-semibold text-plus uppercase tracking-wide">{t('journey.unlockWithPlus')}</span>
               </span>
             </button>
           )}

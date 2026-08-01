@@ -105,6 +105,18 @@
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 
+/* Sanctuary Plus filled CTA — a subtle vertical plum gradient (deeper at the
+   foot) plus a soft plum-tinted shadow and a hairline top highlight, so the
+   button reads premium and has depth instead of a flat, bright fill.
+   Pair with text-white. Deepens on press. */
+.btn-plus {
+  background-image: linear-gradient(180deg, #77518f 0%, #684781 52%, #573a6d 100%);
+  box-shadow: 0 8px 22px rgba(87, 58, 109, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+.btn-plus:active {
+  background-image: linear-gradient(180deg, #6d4a86 0%, #5f3f77 52%, #4e3363 100%);
+}
+
 body {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);

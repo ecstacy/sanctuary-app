@@ -24,6 +24,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Capacitor } from '@capacitor/core'
 import { registerPlugin } from '@capacitor/core'
 import { useTranslation } from 'react-i18next'
@@ -244,9 +245,14 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
   // over the modal's Apply/Continue CTAs on phones where the modal is
   // tall, since the nav is rendered later in the tree and the two share
   // a z-index. Bumping to 60 keeps the modal CTA always reachable.
-  return (
+  // Portaled to document.body so it escapes the page's PageTransition transform
+  // (a stacking context). Without this, a page-level sticky CTA that is ALSO
+  // portaled to body (e.g. RoutinePage's "Unlock with Plus" bar) would render
+  // ABOVE this sheet even at a higher z-index, because the sheet was trapped
+  // inside the transformed page context. z-[70] keeps it over that bar (z-50).
+  return createPortal((
     <div
-      className="fixed inset-0 z-[60] flex items-end justify-center bg-black/40 backdrop-blur-sm"
+      className="fixed inset-0 z-[70] flex items-end justify-center bg-black/40 backdrop-blur-sm"
       onClick={handleDismiss}
       role="dialog"
       aria-modal="true"
@@ -280,7 +286,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
           >
             {/* Hero */}
             <div className="text-center mt-2 mb-8">
-              <p className="font-label text-[11px] font-semibold text-primary uppercase tracking-[0.22em] mb-3">
+              <p className="font-label text-[11px] font-semibold text-plus uppercase tracking-[0.22em] mb-3">
                 {t('paywall.kicker')}
               </p>
               <h2 id="paywall-title" className="font-headline text-3xl text-on-surface leading-tight mb-3">
@@ -297,7 +303,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                 <li key={b.icon} className="flex items-start gap-3">
                   <span
                     aria-hidden="true"
-                    className="material-symbols-outlined text-primary text-base mt-0.5 flex-shrink-0"
+                    className="material-symbols-outlined text-plus text-base mt-0.5 flex-shrink-0"
                   >{b.icon}</span>
                   <span className="font-body text-sm text-on-surface leading-snug">{t(b.key)}</span>
                 </li>
@@ -331,13 +337,13 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                       onClick={() => handlePlan(plan)}
                       className={`w-full rounded-2xl p-4 text-left relative active:scale-[0.98] transition-all ${
                         plan.highlight
-                          ? 'bg-primary-container border-2 border-primary'
+                          ? 'bg-plus-container border-2 border-plus'
                           : 'bg-surface-container border-2 border-transparent'
                       }`}
                       aria-label={t(plan.labelKey)}
                     >
                       {plan.savingsKey && (
-                        <span className="absolute -top-2 right-4 bg-primary text-on-primary font-label text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">
+                        <span className="absolute -top-2 right-4 bg-plus text-white font-label text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full">
                           {t(plan.savingsKey)}
                         </span>
                       )}
@@ -382,14 +388,14 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
             style={{ paddingBottom: 'calc(2rem + env(safe-area-inset-bottom))' }}
           >
             <div className="mt-6 mb-6 inline-flex items-center justify-center">
-              <div className="relative w-24 h-24 rounded-full bg-primary-container flex items-center justify-center">
+              <div className="relative w-24 h-24 rounded-full bg-plus-container flex items-center justify-center">
                 {/* Subtle pulse ring for a celebratory feel without
                     becoming animated noise. The animation is keyframed
                     in the global stylesheet (animate-quiz-pulse). */}
-                <div className="absolute inset-0 rounded-full bg-primary/20 animate-quiz-pulse" />
+                <div className="absolute inset-0 rounded-full bg-plus/20 animate-quiz-pulse" />
                 <span
                   aria-hidden="true"
-                  className="material-symbols-outlined text-primary text-5xl relative z-10"
+                  className="material-symbols-outlined text-plus text-5xl relative z-10"
                   style={{ fontVariationSettings: "'FILL' 1" }}
                 >
                   workspace_premium
@@ -397,7 +403,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               </div>
             </div>
 
-            <p className="font-label text-[11px] font-semibold text-primary uppercase tracking-[0.22em] mb-3">
+            <p className="font-label text-[11px] font-semibold text-plus uppercase tracking-[0.22em] mb-3">
               {t('paywall.promo.successKicker')}
             </p>
             <h2 className="font-headline text-3xl text-on-surface leading-tight mb-3">
@@ -415,7 +421,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
             <button
               type="button"
               onClick={() => onClose?.()}
-              className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
+              className="w-full py-4 btn-plus text-white rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
               {t('paywall.promo.startExploring')}
             </button>
@@ -435,7 +441,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               >
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">arrow_back</span>
               </button>
-              <p className="font-label text-[11px] font-semibold text-primary uppercase tracking-[0.22em]">
+              <p className="font-label text-[11px] font-semibold text-plus uppercase tracking-[0.22em]">
                 {t('paywall.promo.kicker')}
               </p>
             </div>
@@ -466,7 +472,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
                 autoCorrect="off"
                 spellCheck="false"
                 disabled={promoBusy || !!promoSuccess}
-                className="w-full px-4 py-3 rounded-xl bg-surface-container font-body text-base text-on-surface placeholder:text-on-surface-variant/40 tracking-wider uppercase focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-4 py-3 rounded-xl bg-surface-container font-body text-base text-on-surface placeholder:text-on-surface-variant/40 tracking-wider uppercase focus:outline-none focus:ring-2 focus:ring-plus"
               />
 
               {promoError && (
@@ -482,7 +488,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               <button
                 type="submit"
                 disabled={promoBusy || !promoCode.trim()}
-                className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50"
+                className="w-full py-4 btn-plus text-white rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50"
               >
                 {promoBusy ? t('paywall.promo.checking') : t('paywall.promo.apply')}
               </button>
@@ -491,7 +497,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
         )}
       </div>
     </div>
-  )
+  ), document.body)
 }
 
 // Map server-side RPC error codes to i18n keys (resolved at render via t()).

@@ -495,7 +495,9 @@ export default function PranayamaDetailPage() {
               })
               setPracticing(true)
             }}
-            className="w-full py-4 bg-primary text-on-primary rounded-full font-label text-sm font-semibold tracking-wide active:scale-95 transition-all flex items-center justify-center gap-2 shadow-[0_8px_24px_rgba(78,99,85,0.15)]"
+            className={`w-full py-4 rounded-full font-label text-sm font-semibold tracking-wide active:scale-95 transition-all flex items-center justify-center gap-2 ${
+              isLocked ? 'btn-plus text-white' : 'bg-primary text-on-primary shadow-[0_8px_24px_rgba(78,99,85,0.15)]'
+            }`}
           >
             <span aria-hidden="true" className="material-symbols-outlined text-lg">
               {isLocked ? 'lock' : 'play_arrow'}
