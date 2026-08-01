@@ -586,7 +586,8 @@
       },
       "breathWhen": "Atem",
       "done": "Erledigt",
-      "allDone": "Das war deine empfohlene Praxis für heute. Alles Weitere ist freie Entdeckung — genieße es."
+      "allDone": "Das war deine empfohlene Praxis für heute. Alles Weitere ist freie Entdeckung — genieße es.",
+      "later": "Später"
     },
     "nourish": {
       "title": "Zur Nährung"

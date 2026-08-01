@@ -329,6 +329,21 @@ export default function HomePage() {
 
   const dailyDurationMin = Math.max(1, Math.round(dailySession.totalSeconds / 60))
 
+  // The next slot still ahead today, shown in Your day as a muted "Later" row
+  // (never an active "now"). Compose it so the row can show its length and start
+  // it early if the user wants.
+  const upcomingSlot = (!doneSlotsToday.includes('evening') && shownSlot !== 'evening') ? 'evening' : null
+  const upcomingSession = useMemo(() => {
+    if (!upcomingSlot) return null
+    const history = [...(stats.sessions || [])].sort((a, b) =>
+      String(b.created_at || b.date).localeCompare(String(a.created_at || a.date)))
+    return composeDailySession({
+      profile, vikriti: vikritiSignal, checkin: checkedIn, history,
+      doneSlotsToday, userId: user?.id, now: new Date(), forceSlot: upcomingSlot,
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [upcomingSlot, profile, vikritiSignal.hasSignal, vikritiSignal.vikriti, checkedIn, stats.sessions, doneSlotsToday, user?.id])
+
   // Localized reason chips (skip the slot reason — that's the headline).
   const dailyReasonChips = dailySession.reasons
     .filter(r => !r.code.startsWith('slot:'))
@@ -375,6 +390,16 @@ export default function HomePage() {
       reason_codes: dailySession.reasons.map(r => r.code),
     })
     navigate('/practice/daily', { state: { session: dailySession } })
+  }
+
+  const handleStartUpcoming = () => {
+    if (!upcomingSession) return
+    track(EVENTS.DAILY_SESSION_CTA_TAPPED, {
+      slot: upcomingSession.slot, pose_count: upcomingSession.asanaIds.length,
+      duration_s: upcomingSession.totalSeconds, reason_codes: upcomingSession.reasons.map(r => r.code),
+      early: true,
+    })
+    navigate('/practice/daily', { state: { session: upcomingSession } })
   }
 
   // ── Current dosha state — drives the pill, the balance shape, and the
@@ -596,9 +621,11 @@ export default function HomePage() {
                     {t(s.slot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle')}
                   </span>
                 </span>
-                <span className="flex-shrink-0 inline-flex items-center gap-1 font-label text-[10px] font-semibold uppercase tracking-wide text-primary">
-                  <span aria-hidden="true" className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                  {t('home.day.done', 'Done')}
+                <span className="flex-shrink-0 inline-flex items-center gap-1.5">
+                  <span className="font-label text-[10px] font-semibold uppercase tracking-wide text-primary/80">{t('home.day.done', 'Done')}</span>
+                  <span className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shadow-sm">
+                    <span aria-hidden="true" className="material-symbols-outlined text-on-primary text-base" style={{ fontVariationSettings: "'FILL' 1, 'wght' 600" }}>check</span>
+                  </span>
                 </span>
               </div>
             ))}
@@ -624,8 +651,30 @@ export default function HomePage() {
               </button>
             )}
 
-            {/* Everything for today is done, and no later slot to tease. */}
-            {dailyDone && !dailyNextSlot && (
+            {/* Still ahead today — the evening session as a muted "Later" row
+                (not an active "now"). Tappable to start early if they want. */}
+            {upcomingSlot && upcomingSession && (
+              <button
+                onClick={handleStartUpcoming}
+                className={`flex items-center gap-3.5 rounded-xl px-3 py-3.5 text-left active:bg-surface-container-low transition-all ${(todaysDaily.length > 0 || !dailyDone) ? 'border-t border-outline-variant/40' : ''}`}
+              >
+                <span className="font-headline italic text-[13px] text-on-surface-variant/60 w-16 flex-shrink-0">
+                  {t('home.day.when.evening')}
+                </span>
+                <span className="flex-1 min-w-0">
+                  <span className="block font-body text-[15px] font-medium text-on-surface leading-snug">{t('practice.dailyEveningTitle')}</span>
+                  <span className="block font-body text-xs text-on-surface-variant mt-0.5">
+                    {t('home.daily.meta', { min: Math.max(1, Math.round(upcomingSession.totalSeconds / 60)), count: upcomingSession.asanaIds.length })}
+                  </span>
+                </span>
+                <span className="flex-shrink-0 font-label text-[10px] font-semibold uppercase tracking-wide text-on-surface-variant bg-surface-container-high rounded-full px-2.5 py-1">
+                  {t('home.day.later', 'Later')}
+                </span>
+              </button>
+            )}
+
+            {/* Everything for today is done and nothing left to tease. */}
+            {dailyDone && !upcomingSlot && (
               <p className="font-body text-[13px] text-on-surface-variant/80 leading-relaxed px-3 py-3.5 border-t border-outline-variant/40">
                 {t('home.day.allDone', 'That’s your prescribed practice for today. Anything more is exploration — enjoy it.')}
               </p>

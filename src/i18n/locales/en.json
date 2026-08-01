@@ -586,7 +586,8 @@
       },
       "breathWhen": "Breath",
       "done": "Done",
-      "allDone": "That’s your prescribed practice for today. Anything more is exploration — enjoy it."
+      "allDone": "That’s your prescribed practice for today. Anything more is exploration — enjoy it.",
+      "later": "Later"
     },
     "nourish": {
       "title": "To nourish"
