@@ -3112,14 +3112,14 @@ export const INGREDIENTS = {
 
   // Nuts & seeds
   lotusSeed: {
-    id: 'lotusSeed', name: 'Lotus seed (makhana)', sanskrit: 'Padmabija', devanagari: 'पद्मबीज',
-    aliases: ['makhana', 'phool makhana', 'fox nut', 'lotussamen'], category: 'nut_seed',
+    id: 'lotusSeed', name: 'Lotus seed', sanskrit: 'Padmabija', devanagari: 'पद्मबीज',
+    aliases: ['lotus seed', 'kamal gatta', 'kamal beej', 'lotussamen'], category: 'nut_seed',
     rasa: ['sweet', 'astringent'], virya: 'cooling', vipaka: 'sweet', guna: ['light', 'dry'],
-    doshaEffect: { vata: 0, pitta: -1, kapha: -1 }, balancedBy: ['ghee'],
-    whyFavor: 'Sweet, light and cooling — a rare light seed that suits Pitta and Kapha; roasted, an easy snack.',
+    doshaEffect: { vata: 0, pitta: -1, kapha: -1 }, balancedBy: ['ghee', 'cardamom'],
+    whyFavor: 'Sweet, light and cooling — suits Pitta and Kapha.',
     whyAvoid: 'Light and dry, so pair with a little ghee for Vata.',
-    source: { text: 'modern', note: 'Lotus (Padma) is classical, its seed food-profile largely derived: sweet, light, cooling.' },
-    reviewStatus: 'reviewed', confidence: 'medium',
+    source: { text: 'CS', verse: 'Sutrasthana 27', note: 'True lotus seeds (Nelumbo nucifera, Padma). Distinct from makhana (Euryale ferox / fox nut), which — being slightly more nourishing (V−1) — should get its own entry.' },
+    reviewStatus: 'reviewed', confidence: 'high',
   },
   pumpkinSeed: {
     id: 'pumpkinSeed', name: 'Pumpkin seeds', aliases: ['kaddu ke beej', 'kürbiskerne', 'pepitas'],
