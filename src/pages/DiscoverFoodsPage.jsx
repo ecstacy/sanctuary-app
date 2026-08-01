@@ -29,10 +29,34 @@ const CATEGORY_ORDER = [
 
 const ALL = '__all__'
 
+// Second-row attribute filters (multi-select). Tokens are `v:<virya>` or
+// `r:<rasa>`; a food must satisfy every active token (AND). Potency first
+// (the most-asked axis — "something cooling"), then the six tastes.
+const ATTR_FILTERS = [
+  { token: 'v:cooling', kind: 'virya', value: 'cooling', i18n: 'diet.viryas.cooling' },
+  { token: 'v:heating', kind: 'virya', value: 'heating', i18n: 'diet.viryas.heating' },
+  { token: 'r:sweet', kind: 'rasa', value: 'sweet', i18n: 'diet.tastes.sweet' },
+  { token: 'r:sour', kind: 'rasa', value: 'sour', i18n: 'diet.tastes.sour' },
+  { token: 'r:salty', kind: 'rasa', value: 'salty', i18n: 'diet.tastes.salty' },
+  { token: 'r:pungent', kind: 'rasa', value: 'pungent', i18n: 'diet.tastes.pungent' },
+  { token: 'r:bitter', kind: 'rasa', value: 'bitter', i18n: 'diet.tastes.bitter' },
+  { token: 'r:astringent', kind: 'rasa', value: 'astringent', i18n: 'diet.tastes.astringent' },
+]
+
 function matchesQuery(ing, q) {
   if (!q) return true
   const hay = [ing.name, ing.sanskrit, ...(ing.aliases || [])].join(' ').toLowerCase()
   return hay.includes(q)
+}
+
+function matchesAttrs(ing, attrs) {
+  for (const token of attrs) {
+    const f = ATTR_FILTERS.find((a) => a.token === token)
+    if (!f) continue
+    if (f.kind === 'virya' && ing.virya !== f.value) return false
+    if (f.kind === 'rasa' && !(ing.rasa || []).includes(f.value)) return false
+  }
+  return true
 }
 
 function FoodCard({ ing, dietPrefs, t, navigate }) {
@@ -73,6 +97,7 @@ export default function DiscoverFoodsPage() {
 
   const [query, setQuery] = useState('')
   const [activeCat, setActiveCat] = useState(ALL)
+  const [activeAttrs, setActiveAttrs] = useState(() => new Set())
   const q = query.trim().toLowerCase()
 
   const coverage = useMemo(() => coverageStats(), [])
@@ -95,14 +120,14 @@ export default function DiscoverFoodsPage() {
     return categories.map(({ id }) => [id, byCat.get(id).sort((a, b) => a.name.localeCompare(b.name))])
   }, [categories])
 
-  // Flat filtered results (a pill and/or a search is active).
+  // Flat filtered results (a pill, an attribute, and/or a search is active).
   const flat = useMemo(() => {
     return REVIEWED_INGREDIENTS
-      .filter((i) => (activeCat === ALL || i.category === activeCat) && matchesQuery(i, q))
+      .filter((i) => (activeCat === ALL || i.category === activeCat) && matchesQuery(i, q) && matchesAttrs(i, activeAttrs))
       .sort((a, b) => a.name.localeCompare(b.name))
-  }, [activeCat, q])
+  }, [activeCat, q, activeAttrs])
 
-  const isFiltered = activeCat !== ALL || q.length > 0
+  const isFiltered = activeCat !== ALL || q.length > 0 || activeAttrs.size > 0
 
   const selectCat = (id) => {
     setActiveCat(id)
@@ -110,6 +135,17 @@ export default function DiscoverFoodsPage() {
       cta_id: 'food_category_pill', route_name: 'discover_foods', category: id === ALL ? 'all' : id,
     })
   }
+
+  const toggleAttr = (token) => {
+    setActiveAttrs((prev) => {
+      const next = new Set(prev)
+      next.has(token) ? next.delete(token) : next.add(token)
+      return next
+    })
+    track(EVENTS.CTA_CLICKED, { cta_id: 'food_attribute_pill', route_name: 'discover_foods', attribute: token })
+  }
+
+  const clearAll = () => { setQuery(''); setActiveCat(ALL); setActiveAttrs(new Set()) }
 
   return (
     <SubPage
@@ -196,6 +232,27 @@ export default function DiscoverFoodsPage() {
             </Pill>
           ))}
         </div>
+
+        {/* Row 2 — attribute refiners (potency + taste), multi-select. */}
+        <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 mt-2 pb-0.5">
+          {ATTR_FILTERS.map((f) => {
+            const on = activeAttrs.has(f.token)
+            return (
+              <button
+                key={f.token}
+                aria-pressed={on}
+                onClick={() => toggleAttr(f.token)}
+                className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 font-body text-xs font-medium border transition-colors ${
+                  on
+                    ? 'bg-primary-container border-primary-container text-on-primary-container'
+                    : 'bg-transparent border-outline-variant text-on-surface-variant active:bg-surface-container-low'
+                }`}
+              >
+                {t(f.i18n, f.value)}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* Results */}
@@ -215,7 +272,7 @@ export default function DiscoverFoodsPage() {
                 {t('discover.foods.noResults', { query, defaultValue: 'No foods match “{{query}}”.' })}
               </p>
               <button
-                onClick={() => { setQuery(''); setActiveCat(ALL) }}
+                onClick={clearAll}
                 className="mt-4 font-body text-sm text-primary font-semibold active:scale-95 transition-transform"
               >
                 {t('discover.foods.clearFilters', 'Clear filters')}
