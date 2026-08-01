@@ -316,8 +316,8 @@ export default function RoutinePage() {
               })
               navigate(`/practice/${routineKey}`)
             }}
-            className={`w-full py-4 rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all shadow-lg flex items-center justify-center gap-2 ${
-              isLocked ? 'bg-plus text-white' : 'bg-primary text-on-primary'
+            className={`w-full py-4 rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all flex items-center justify-center gap-2 ${
+              isLocked ? 'btn-plus text-white' : 'bg-primary text-on-primary shadow-lg'
             }`}
           >
             <span aria-hidden="true" className="material-symbols-outlined text-lg">

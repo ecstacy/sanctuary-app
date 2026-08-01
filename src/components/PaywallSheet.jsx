@@ -421,7 +421,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
             <button
               type="button"
               onClick={() => onClose?.()}
-              className="w-full py-4 bg-plus text-white rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
+              className="w-full py-4 btn-plus text-white rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
               {t('paywall.promo.startExploring')}
             </button>
@@ -488,7 +488,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
               <button
                 type="submit"
                 disabled={promoBusy || !promoCode.trim()}
-                className="w-full py-4 bg-plus text-white rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50"
+                className="w-full py-4 btn-plus text-white rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50"
               >
                 {promoBusy ? t('paywall.promo.checking') : t('paywall.promo.apply')}
               </button>
