@@ -272,25 +272,45 @@ export default function HomePage() {
   // read used routine_key/created_at, which are always undefined on the
   // normalised rows, so it matched nothing and the home never showed a
   // completed state after a session. Use the normalised field names.
+  // One row per completed slot (a slot repeated in a day collapses to a single
+  // timeline entry, keeping the earliest completion time).
   const todaysDaily = useMemo(() => {
     const d = new Date()
     const todayStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-    return (stats.sessions || [])
-      .filter((s) => s?.date === todayStr && s?.routineKey === 'daily')
-      .map((s) => {
-        const at = s.timestamp ? new Date(s.timestamp) : null
-        return { ...s, at, slot: (at ? at.getHours() : 12) >= 17 ? 'evening' : 'morning' }
-      })
-      .sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0))
+    const bySlot = new Map()
+    for (const s of stats.sessions || []) {
+      if (s?.date !== todayStr || s?.routineKey !== 'daily') continue
+      const at = s.timestamp ? new Date(s.timestamp) : null
+      const slot = (at ? at.getHours() : 12) >= 17 ? 'evening' : 'morning'
+      const existing = bySlot.get(slot)
+      if (!existing || (s.timestamp || 0) < (existing.timestamp || 0)) bySlot.set(slot, { ...s, at, slot })
+    }
+    return [...bySlot.values()].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0))
   }, [stats.sessions])
 
   const doneSlotsToday = useMemo(
-    () => Array.from(new Set(todaysDaily.map((s) => s.slot))),
+    () => todaysDaily.map((s) => s.slot),
     [todaysDaily],
   )
 
-  // Compose for right now. Deterministic per (user, date, slot) — stable all
-  // day and the exact arc the practice runs (we hand it over via router state).
+  // Which slot is due RIGHT NOW. The composer will roll an afternoon to evening
+  // once morning is done, but prescribing "Evening Wind-Down" at midday reads as
+  // a bug — so the home only treats a slot as active when its time has actually
+  // come: morning (or an unfinished morning through the afternoon), and evening
+  // only from the evening. When nothing is due, the day reads as done-for-now.
+  const nowHour = new Date().getHours()
+  const activeSlot = nowHour >= 17
+    ? (doneSlotsToday.includes('evening') ? null : 'evening')
+    : (doneSlotsToday.includes('morning') ? null : 'morning')
+  const dailyDone = activeSlot === null
+  // Softly point to the evening session when the morning is done and it isn't
+  // evening yet — a teaser, never an active "now".
+  const dailyNextSlot = (dailyDone && nowHour < 17 && !doneSlotsToday.includes('evening')) ? 'evening' : null
+  const shownSlot = activeSlot || (nowHour >= 17 ? 'evening' : 'morning')
+  const dailyTitleKey = shownSlot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle'
+
+  // Compose the session for the slot that's actually due (forceSlot), so Begin
+  // starts the right arc. Deterministic per (user, date, slot).
   const dailySession = useMemo(() => {
     const history = [...(stats.sessions || [])].sort((a, b) =>
       String(b.created_at || b.date).localeCompare(String(a.created_at || a.date)))
@@ -302,14 +322,12 @@ export default function HomePage() {
       doneSlotsToday,
       userId: user?.id,
       now: new Date(),
+      forceSlot: shownSlot,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profile, vikritiSignal.hasSignal, vikritiSignal.vikriti, checkedIn, stats.sessions, doneSlotsToday, user?.id])
+  }, [profile, vikritiSignal.hasSignal, vikritiSignal.vikriti, checkedIn, stats.sessions, doneSlotsToday, user?.id, shownSlot])
 
   const dailyDurationMin = Math.max(1, Math.round(dailySession.totalSeconds / 60))
-  const dailyDone = doneSlotsToday.includes(dailySession.slot)
-  const dailyNextSlot = (dailyDone && dailySession.slot === 'morning' && !doneSlotsToday.includes('evening')) ? 'evening' : null
-  const dailyTitleKey = dailySession.slot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle'
 
   // Localized reason chips (skip the slot reason — that's the headline).
   const dailyReasonChips = dailySession.reasons
@@ -570,11 +588,11 @@ export default function HomePage() {
                 key={s.id || i}
                 className={`flex items-center gap-3.5 rounded-xl px-3 py-3.5 text-left ${i > 0 ? 'border-t border-outline-variant/40' : ''}`}
               >
-                <span className="font-headline italic text-[13px] text-on-surface-variant/70 w-16 flex-shrink-0 tabular-nums">
+                <span className="font-headline italic text-[13px] text-on-surface-variant/60 w-16 flex-shrink-0 tabular-nums">
                   {s.at ? s.at.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) : ''}
                 </span>
                 <span className="flex-1 min-w-0">
-                  <span className="block font-body text-[15px] font-medium text-on-surface/70 leading-snug line-through decoration-on-surface-variant/40">
+                  <span className="block font-body text-[15px] text-on-surface-variant leading-snug">
                     {t(s.slot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle')}
                   </span>
                 </span>
