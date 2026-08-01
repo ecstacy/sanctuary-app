@@ -777,7 +777,7 @@ export default function HomePage() {
         {/* ── To favour / ease off — always on, keyed to current state (or
              constitution) for favour and to time-of-day for what to ease. ── */}
         <div className="grid grid-cols-1 gap-3 stagger-5">
-          <div className="bg-primary-container/20 rounded-xl p-5">
+          <div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant/40">
             <div className="flex items-center gap-2.5 mb-3">
               <span className="material-symbols-outlined text-primary text-lg">eco</span>
               <h3 className="font-headline text-lg text-on-surface">{t('home.favour.title')}</h3>
@@ -798,7 +798,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="bg-secondary-container/15 rounded-xl p-5">
+          <div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant/40">
             <div className="flex items-center gap-2.5 mb-3">
               <span className="material-symbols-outlined text-secondary text-lg">block</span>
               <h3 className="font-headline text-lg text-on-surface">{t('home.favour.avoidTitle')}</h3>
