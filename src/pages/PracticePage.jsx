@@ -385,17 +385,18 @@ export default function PracticePage() {
     return () => clearInterval(timerRef.current)
   }, [status])
 
-  // ── Audio ticks during active ───────────────────────────────────────────
+  // ── Audio during active ───────────────────────────────────────────────────
   useEffect(() => {
     if (status !== 'active' || isPaused) return
 
-    // Tick sound every second
-    if (timeRemaining > 0 && timeRemaining < currentAsana.durationSeconds) {
-      audio.tick()
-    }
+    // No per-second tick — a click every second is noise that pulls the user
+    // out of the pose. Time awareness comes from the voice coach instead, which
+    // speaks the halfway point and the 30s/15s milestones (see voiceCoach.js),
+    // so the user knows how far in and how long is left without a metronome.
 
-    // Countdown beeps for last 5 seconds
-    if (timeRemaining > 0 && timeRemaining <= 5) {
+    // A soft countdown only in the final 3 seconds — a brief "the pose is about
+    // to change" signal, not a running clock.
+    if (timeRemaining > 0 && timeRemaining <= 3) {
       audio.countdown()
     }
   }, [timeRemaining, status, isPaused])
