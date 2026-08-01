@@ -537,11 +537,19 @@ export default function HomePage() {
           </div>
         ) : (
           <div ref={dailyImpressionRef} className="stagger-2 flex flex-col items-start text-left">
-            <span aria-hidden="true" className="material-symbols-outlined text-primary text-4xl mb-2" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-            <h2 className="font-headline text-2xl text-on-surface leading-tight">
+            {/* A filled tick that echoes the round Begin — the "done" twin of
+                the start button, so the completed state has the same weight. */}
+            <span
+              aria-hidden="true"
+              className="w-[84px] h-[84px] rounded-full flex items-center justify-center shadow-lg mb-6"
+              style={{ background: 'radial-gradient(120% 120% at 50% 12%, #3f7659, var(--color-pine, #2b5a42) 74%)' }}
+            >
+              <span className="material-symbols-outlined text-white text-[46px]" style={{ fontVariationSettings: "'FILL' 1, 'wght' 600" }}>check</span>
+            </span>
+            <h2 className="font-headline text-[2.5rem] leading-[1.04] tracking-tight text-on-surface">
               {t('home.daily.doneTitle', { title: t(dailyTitleKey) })}
             </h2>
-            <p className="font-body text-sm text-on-surface-variant leading-relaxed mt-2 max-w-[28ch]">
+            <p className="font-body text-sm text-on-surface-variant leading-relaxed mt-3 max-w-[28ch]">
               {dailyNextSlot ? t('home.daily.doneEveningTeaser') : t('home.daily.doneAllBody')}
             </p>
             <button
@@ -621,11 +629,9 @@ export default function HomePage() {
                     {t(s.slot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle')}
                   </span>
                 </span>
-                <span className="flex-shrink-0 inline-flex items-center gap-1.5">
-                  <span className="font-label text-[10px] font-semibold uppercase tracking-wide text-primary/80">{t('home.day.done', 'Done')}</span>
-                  <span className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shadow-sm">
-                    <span aria-hidden="true" className="material-symbols-outlined text-on-primary text-base" style={{ fontVariationSettings: "'FILL' 1, 'wght' 600" }}>check</span>
-                  </span>
+                <span className="flex-shrink-0 inline-flex items-center gap-1 font-label text-[10px] font-semibold uppercase tracking-wide text-primary">
+                  <span aria-hidden="true" className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                  {t('home.day.done', 'Done')}
                 </span>
               </div>
             ))}

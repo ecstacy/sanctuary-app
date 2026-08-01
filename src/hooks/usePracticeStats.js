@@ -266,10 +266,19 @@ export default function usePracticeStats() {
       // disagreement to persist forever.
       const today = toDateStr(new Date())
       const local = readLocalCache(user.id)
-      const remoteKeys = new Set(normalized.map(r => `${r.date}|${r.routineKey}|${r.timestamp}`))
+      // A local row is "already synced" if a remote row for the same day and
+      // routine landed within a few minutes of it. Matching on the exact
+      // timestamp fails here: the local row is stamped with the client clock
+      // (Date.now at save) while the remote row carries the server's created_at,
+      // so the two never match and the SAME session shows (and counts) twice.
+      const SAME_SESSION_MS = 5 * 60 * 1000
       const localOnlyToday = local.filter(s =>
         s?.date === today &&
-        !remoteKeys.has(`${s.date}|${s.routineKey}|${s.timestamp}`)
+        !normalized.some(r =>
+          r.date === s.date &&
+          r.routineKey === s.routineKey &&
+          Math.abs((r.timestamp || 0) - (s.timestamp || 0)) < SAME_SESSION_MS
+        )
       )
       const merged = [...normalized, ...localOnlyToday]
       setSessions(merged)
