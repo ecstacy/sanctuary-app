@@ -27,42 +27,61 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useDietPrefs } from '../hooks/useDietPrefs'
 import { useHealthConsent } from '../hooks/useHealthConsent'
-import { ALLERGEN_KEYS, PATTERN_KEYS, DIET_DISCLAIMER } from '../lib/dietSafety'
+import { ALLERGEN_KEYS, PATTERN_KEYS, DIET_PATTERNS, DIET_DISCLAIMER } from '../lib/dietSafety'
 import MedicalDisclaimer from '../components/MedicalDisclaimer'
 import useScrollDepth from '../hooks/useScrollDepth'
 
-function Chip({ selected, label, onClick, tone = 'neutral' }) {
+function Chip({ selected, label, onClick, tone = 'neutral', radio = false }) {
   const base = 'min-h-11 px-4 inline-flex items-center rounded-full font-body text-sm transition-all active:scale-95 border'
   const styles = selected
     ? tone === 'alert'
       ? 'bg-error-container/70 text-on-error-container border-transparent'
       : 'bg-primary-container text-on-primary-container border-transparent'
     : 'bg-surface-container-low text-on-surface-variant border-outline-variant/30'
+  // Icon carries state too, never colour alone (WCAG 1.4.1). Radios (eating
+  // style) use a filled dot; switches (allergens, observances) use a check.
+  const icon = radio
+    ? (selected ? 'radio_button_checked' : 'radio_button_unchecked')
+    : (selected ? 'check_circle' : 'add_circle')
   return (
     <button
       type="button"
-      role="switch"
+      role={radio ? 'radio' : 'switch'}
       aria-checked={selected}
       onClick={onClick}
       className={`${base} ${styles}`}
     >
-      {/* Icon + state, never colour alone (WCAG 1.4.1). */}
       <span className="inline-flex items-center gap-1.5">
-        <span aria-hidden="true" className="material-symbols-outlined text-sm">
-          {selected ? 'check_circle' : 'add_circle'}
-        </span>
+        <span aria-hidden="true" className="material-symbols-outlined text-sm">{icon}</span>
         {label}
       </span>
     </button>
   )
 }
 
+// Eating styles are mutually exclusive (you are one of these); observances
+// stack on top (you can be Jain AND no-onion-garlic). Order within each follows
+// DIET_PATTERNS. "Non-vegetarian" is the absence of an eating-style pattern.
+const EATING_STYLES = [
+  DIET_PATTERNS.VEGETARIAN, DIET_PATTERNS.VEGAN,
+  DIET_PATTERNS.EGGETARIAN, DIET_PATTERNS.PESCATARIAN,
+]
+
 export default function DietPrefsPage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { prefs, toggle, saving, error, needsConsent, hasAnswered } = useDietPrefs()
+  const { prefs, toggle, save, saving, error, needsConsent, hasAnswered } = useDietPrefs()
   const { grant } = useHealthConsent()
   useScrollDepth('diet_prefs')
+
+  const observances = PATTERN_KEYS.filter((k) => !EATING_STYLES.includes(k))
+  const activeStyle = EATING_STYLES.find((k) => prefs.patterns.includes(k)) || null
+
+  // Single-select: replace whichever eating style was set, keep observances.
+  const selectStyle = (key) => {
+    const rest = prefs.patterns.filter((k) => !EATING_STYLES.includes(k))
+    save({ ...prefs, patterns: key ? [...rest, key] : rest })
+  }
 
   const syncFailed     = error && error !== 'health_consent_required'
   // The consent gate correctly refuses the write, but a tap that silently
@@ -135,16 +154,43 @@ export default function DietPrefsPage() {
           </div>
         </section>
 
-        {/* ── Patterns ────────────────────────────────────────────────────*/}
+        {/* ── Eating style (single-select) ────────────────────────────────*/}
         <section className="mt-7">
           <h2 className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-1">
-            {t('dietPrefs.patternsTitle')}
+            {t('dietPrefs.eatingStyleTitle', 'Eating style')}
           </h2>
           <p className="font-body text-xs text-on-surface-variant/70 mb-3 leading-relaxed">
-            {t('dietPrefs.patternsHelp')}
+            {t('dietPrefs.eatingStyleHelp', 'Pick the one that fits. It sets what animal foods you’re shown.')}
+          </p>
+          <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={t('dietPrefs.eatingStyleTitle', 'Eating style')}>
+            {EATING_STYLES.map((key) => (
+              <Chip
+                key={key}
+                radio
+                selected={activeStyle === key}
+                label={t(`diet.patterns.${key}`, key)}
+                onClick={() => selectStyle(activeStyle === key ? null : key)}
+              />
+            ))}
+            <Chip
+              radio
+              selected={activeStyle === null}
+              label={t('diet.patterns.non_vegetarian', 'Non-vegetarian')}
+              onClick={() => selectStyle(null)}
+            />
+          </div>
+        </section>
+
+        {/* ── Observances (multi-select) ──────────────────────────────────*/}
+        <section className="mt-7">
+          <h2 className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-1">
+            {t('dietPrefs.observancesTitle', 'Observances')}
+          </h2>
+          <p className="font-body text-xs text-on-surface-variant/70 mb-3 leading-relaxed">
+            {t('dietPrefs.observancesHelp', 'Any that apply — these stack on top of your eating style.')}
           </p>
           <div className="flex flex-wrap gap-2">
-            {PATTERN_KEYS.map((key) => (
+            {observances.map((key) => (
               <Chip
                 key={key}
                 selected={prefs.patterns.includes(key)}

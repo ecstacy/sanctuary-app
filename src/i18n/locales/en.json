@@ -1688,7 +1688,12 @@
       "no_onion_garlic": "no onion or garlic",
       "halal": "halal",
       "kosher": "kosher",
-      "no_nightshade": "no nightshades"
+      "no_nightshade": "no nightshades",
+      "eggetarian": "Eggetarian",
+      "pescatarian": "Pescatarian",
+      "no_beef": "No beef",
+      "no_pork": "No pork",
+      "non_vegetarian": "Non-vegetarian"
     },
     "cautionFlags": {
       "pregnancy": "Pregnancy",
@@ -1765,7 +1770,11 @@
     "notExhaustive": "This list covers the most common restrictions, not every possible one. If something you need isn't here, please check ingredients yourself — we'd rather say that plainly than let the list imply it's complete.",
     "entry": "Diet preferences",
     "entryHelp": "Allergies and how you eat",
-    "consentNeededHint": "Agree above and we'll save that — until then nothing about your health leaves this screen."
+    "consentNeededHint": "Agree above and we'll save that — until then nothing about your health leaves this screen.",
+    "eatingStyleTitle": "Eating style",
+    "eatingStyleHelp": "Pick the one that fits — it sets which animal foods you’re shown.",
+    "observancesTitle": "Observances",
+    "observancesHelp": "Any that apply — these stack on top of your eating style."
   },
   "meals": {
     "title": "Meal guidance",

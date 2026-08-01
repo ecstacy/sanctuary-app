@@ -51,10 +51,14 @@ export const ALLERGENS = {
 export const DIET_PATTERNS = {
   VEGETARIAN:      'vegetarian',
   VEGAN:           'vegan',
+  EGGETARIAN:      'eggetarian',      // lacto-ovo: eggs allowed, no meat/fish
+  PESCATARIAN:     'pescatarian',     // veg + fish/seafood (and eggs), no meat/poultry
   JAIN:            'jain',            // no roots/alliums
   NO_ONION_GARLIC: 'no_onion_garlic', // sattvic / observance
   HALAL:           'halal',
   KOSHER:          'kosher',
+  NO_BEEF:         'no_beef',         // e.g. Hindu observance
+  NO_PORK:         'no_pork',         // common observance; halal already implies it
   // An avoidance preference, not an allergy — potato, tomato, aubergine and
   // peppers are a plant family, and people avoid them for comfort or belief
   // rather than anaphylaxis. Sits here so the UI says "your preference",
@@ -78,7 +82,8 @@ export const DIET_TAGS = {
   ROOT:           'root',            // underground part — Jain
   ANIMAL_DERIVED: 'animal_derived',  // from an animal but not meat/dairy (honey)
   ANIMAL_RENNET:  'animal_rennet',   // slaughter-derived enzyme — not vegetarian
-  PORK:           'pork',            // halal, kosher
+  PORK:           'pork',            // halal, kosher, no_pork
+  BEEF:           'beef',            // no_beef (Hindu observance)
   ALCOHOL:        'alcohol',         // halal
   SHELLFISH:      'shellfish',       // kosher
   NIGHTSHADE:     'nightshade',      // solanaceae — no_nightshade
@@ -135,6 +140,21 @@ export function allergensOf(ingredient) {
 /** Normalised pattern tags for an ingredient. */
 export function tagsOf(ingredient) {
   return normaliseKeys(ingredient?.dietTags)
+}
+
+/**
+ * Which kind of animal food this is, for the eating-style patterns
+ * (eggetarian, pescatarian). Derived from the allergen it carries so the data
+ * needs no extra field: egg → 'egg'; fish/shellfish → 'seafood'; anything else
+ * in the animal category → 'meat' (meat & poultry). null for non-animal foods.
+ * If a future beef/pork food needs finer handling, it also carries a dietTag.
+ */
+export function animalKind(ingredient) {
+  if (ingredient?.category !== 'animal') return null
+  const alg = allergensOf(ingredient)
+  if (alg.includes('egg')) return 'egg'
+  if (alg.includes('fish') || alg.includes('shellfish')) return 'seafood'
+  return 'meat'
 }
 
 /**
@@ -291,14 +311,23 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
   const hits = []
   const veg    = patterns.has(DIET_PATTERNS.VEGETARIAN)
   const vegan  = patterns.has(DIET_PATTERNS.VEGAN)
+  const egget  = patterns.has(DIET_PATTERNS.EGGETARIAN)
+  const pesc   = patterns.has(DIET_PATTERNS.PESCATARIAN)
   const jain   = patterns.has(DIET_PATTERNS.JAIN)
   const noOG   = patterns.has(DIET_PATTERNS.NO_ONION_GARLIC)
   const halal  = patterns.has(DIET_PATTERNS.HALAL)
   const kosher = patterns.has(DIET_PATTERNS.KOSHER)
+  const kind   = animalKind(ingredient)   // 'egg' | 'seafood' | 'meat' | null
 
   const add = (key) => hits.push({ reason: 'pattern', key })
 
   if (cat === 'animal' && (veg || vegan)) add(vegan ? 'vegan' : 'vegetarian')
+  // Eating styles that admit SOME animal foods. Eggetarian (lacto-ovo) keeps
+  // eggs and excludes the rest; pescatarian keeps fish/seafood (and eggs) and
+  // excludes meat & poultry. Both are looser than vegetarian, so they only
+  // matter when vegetarian/vegan is NOT also set.
+  if (egget && cat === 'animal' && kind !== 'egg') add('eggetarian')
+  if (pesc && kind === 'meat') add('pescatarian')
   if (cat === 'dairy' && vegan) add('vegan')
   // Animal-derived but neither meat nor dairy — honey, which no category rule
   // catches (it is a 'sweetener'). Vegans exclude it; vegetarians do not.
@@ -319,6 +348,12 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
   if (halal && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.ALCOHOL) || cat === 'animal')) add('halal')
   if (kosher && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.SHELLFISH) || cat === 'animal')) add('kosher')
 
+  // Single-food observances, keyed on an explicit tag so they exclude exactly
+  // the one food and nothing else. (No beef/pork foods exist in the dataset
+  // yet, so these currently match nothing — they are correct for when they do.)
+  if (patterns.has(DIET_PATTERNS.NO_BEEF) && tags.has(DIET_TAGS.BEEF)) add('no_beef')
+  if (patterns.has(DIET_PATTERNS.NO_PORK) && tags.has(DIET_TAGS.PORK)) add('no_pork')
+
   if (hits.length > 0) {
     return { excluded: true, reason: 'pattern', key: hits[0].key, all: hits }
   }
@@ -332,9 +367,10 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
  * rule looks exactly like a pattern nothing happens to violate.
  */
 export const PATTERNS_WITH_RULES = Object.freeze([
-  DIET_PATTERNS.VEGETARIAN, DIET_PATTERNS.VEGAN, DIET_PATTERNS.JAIN,
-  DIET_PATTERNS.NO_ONION_GARLIC, DIET_PATTERNS.HALAL, DIET_PATTERNS.KOSHER,
-  DIET_PATTERNS.NO_NIGHTSHADE,
+  DIET_PATTERNS.VEGETARIAN, DIET_PATTERNS.VEGAN, DIET_PATTERNS.EGGETARIAN,
+  DIET_PATTERNS.PESCATARIAN, DIET_PATTERNS.JAIN, DIET_PATTERNS.NO_ONION_GARLIC,
+  DIET_PATTERNS.HALAL, DIET_PATTERNS.KOSHER, DIET_PATTERNS.NO_BEEF,
+  DIET_PATTERNS.NO_PORK, DIET_PATTERNS.NO_NIGHTSHADE,
 ])
 
 /** Exported for the same reason as PATTERNS_WITH_RULES. */

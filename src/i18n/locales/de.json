@@ -1688,7 +1688,12 @@
       "no_onion_garlic": "ohne Zwiebel und Knoblauch",
       "halal": "halal",
       "kosher": "koscher",
-      "no_nightshade": "ohne Nachtschattengewächse"
+      "no_nightshade": "ohne Nachtschattengewächse",
+      "eggetarian": "Ovo-vegetarisch",
+      "pescatarian": "Pescetarisch",
+      "no_beef": "Kein Rindfleisch",
+      "no_pork": "Kein Schweinefleisch",
+      "non_vegetarian": "Nicht vegetarisch"
     },
     "cautionFlags": {
       "pregnancy": "Schwangerschaft",
@@ -1765,7 +1770,11 @@
     "notExhaustive": "Diese Liste deckt die häufigsten Einschränkungen ab, nicht jede mögliche. Fehlt etwas, das du brauchst, prüfe die Zutaten bitte selbst — das sagen wir lieber deutlich, als den Eindruck zu erwecken, die Liste sei vollständig.",
     "entry": "Ernährungseinstellungen",
     "entryHelp": "Allergien und Ernährungsweise",
-    "consentNeededHint": "Stimme oben zu, dann speichern wir das — bis dahin verlässt nichts über deine Gesundheit diesen Bildschirm."
+    "consentNeededHint": "Stimme oben zu, dann speichern wir das — bis dahin verlässt nichts über deine Gesundheit diesen Bildschirm.",
+    "eatingStyleTitle": "Ernährungsweise",
+    "eatingStyleHelp": "Wähle die passende — sie bestimmt, welche tierischen Lebensmittel dir angezeigt werden.",
+    "observancesTitle": "Weitere Regeln",
+    "observancesHelp": "Alles Zutreffende — ergänzt deine Ernährungsweise."
   },
   "meals": {
     "title": "Ernährungsempfehlungen",
