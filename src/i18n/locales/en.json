@@ -27,7 +27,8 @@
     "cancel": "Cancel",
     "loading": "Loading…",
     "or": "or",
-    "retry": "Try again"
+    "retry": "Try again",
+    "clear": "Clear"
   },
   "welcome": {
     "greeting": "Welcome to",
@@ -1403,6 +1404,14 @@
         "title": "Daily routine",
         "sub": "Dinacharya — the rhythm of the day"
       }
+    },
+    "foods": {
+      "searchPlaceholder": "Search foods…",
+      "filterAll": "All",
+      "filterLabel": "Filter by category",
+      "resultCount": "{{count}} foods",
+      "noResults": "No foods match “{{query}}”.",
+      "clearFilters": "Clear filters"
     }
   },
   "protocol": {
