@@ -110,7 +110,7 @@ export default function OnboardingPage() {
           onClick={prev}
           disabled={idx === 0}
           aria-label={t('onboarding.prevSlide')}
-          className={`w-9 h-9 rounded-full flex items-center justify-center active:scale-90 ${
+          className={`w-11 h-11 rounded-full flex items-center justify-center active:scale-90 ${
             idx === 0 ? 'opacity-0 pointer-events-none' : 'text-on-surface-variant'
           }`}
         >

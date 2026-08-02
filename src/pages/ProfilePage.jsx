@@ -437,7 +437,7 @@ export default function ProfilePage() {
         </div>
         <button
           onClick={() => navigate('/home')}
-          className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center"
+          className="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center"
           aria-label={t('profile.closeProfile')}
         >
           <span className="material-symbols-outlined text-on-surface-variant text-lg">close</span>

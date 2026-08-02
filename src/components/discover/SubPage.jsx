@@ -20,7 +20,7 @@ export default function SubPage({ title, subtitle, routeName, children }) {
       <div className="px-6 pt-4">
         <button
           onClick={() => navigate(-1)}
-          className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center"
+          className="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center"
           aria-label={t('common.back')}
         >
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">arrow_back</span>

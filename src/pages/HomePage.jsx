@@ -409,7 +409,7 @@ export default function HomePage() {
             single word. That's the identity-as-asset retention play. */}
         <button
           onClick={() => navigate('/profile')}
-          className={`relative w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center ${
+          className={`relative w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center ${
             isPremium ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''
           }`}
           aria-label={isPremium ? t('home.profileAriaPlus') : t('home.profileAria')}
