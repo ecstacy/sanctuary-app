@@ -117,7 +117,7 @@ export default function DiscoverPage() {
         </div>
         <button
           onClick={() => navigate('/profile')}
-          className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center"
+          className="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center"
           aria-label={t('discover.profileAria')}
         >
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">person</span>

@@ -248,7 +248,7 @@ export default function PranayamaDetailPage() {
           <button
             onClick={() => navigate(-1)}
             aria-label={t('pranayamaDetail.goBack')}
-            className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center"
+            className="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center"
           >
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-xl">arrow_back</span>
           </button>
@@ -262,7 +262,7 @@ export default function PranayamaDetailPage() {
         <button
           onClick={() => navigate(-1)}
           aria-label={t('pranayamaDetail.goBack')}
-          className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center"
+          className="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center"
         >
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-xl">arrow_back</span>
         </button>

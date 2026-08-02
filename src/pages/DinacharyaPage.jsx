@@ -186,7 +186,7 @@ export default function DinacharyaPage() {
         <button
           onClick={() => navigate(-1)}
           aria-label={t('dinacharya.goBack')}
-          className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90"
+          className="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant active:scale-90"
         >
           <span aria-hidden="true" className="material-symbols-outlined">arrow_back</span>
         </button>

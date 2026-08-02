@@ -62,9 +62,19 @@ public class MainActivity extends BridgeActivity {
             final String jsEvent = "{ detail: { \"url\": \"" + encodedUrl + "\" } }";
             getBridge().getActivity().runOnUiThread(() -> {
                 new android.os.Handler().postDelayed(() -> {
-                    android.util.Log.d("DeepLink", "Firing event now: " + jsEvent);
-                    getBridge().triggerWindowJSEvent("appUrlOpen", jsEvent);
-                    android.util.Log.d("DeepLink", "Event fired: " + jsEvent);
+                    if (getBridge() == null || getBridge().getWebView() == null) return;
+                    // Dispatch a plain window CustomEvent (App.jsx listens for
+                    // 'appUrlOpen'), GUARDED so it no-ops if the WebView JS isn't
+                    // ready yet. The old triggerWindowJSEvent ran
+                    // `window.Capacitor.triggerEvent(...)`, which at a slow cold
+                    // start executed before window.Capacitor existed and threw
+                    // "undefined.triggerEvent". Cold-start deep links are still
+                    // delivered via Capacitor's getLaunchUrl() on the JS side.
+                    final String js =
+                        "if (window.Capacitor) { window.dispatchEvent(new CustomEvent('appUrlOpen', "
+                        + jsEvent + ")); }";
+                    getBridge().getWebView().evaluateJavascript(js, null);
+                    android.util.Log.d("DeepLink", "Event dispatched (guarded): " + jsEvent);
                 }, 1500);
             });
         }
