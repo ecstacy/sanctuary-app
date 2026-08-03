@@ -490,14 +490,14 @@ export default function PracticePage() {
     audio.bell()
     voice.speak(`${currentAsana.english}.`, null, { fileKey: `${currentAsana.id}__name` })
 
-    // Second side of a bilateral pose: the timer already ran a full side, and
-    // the exit cue announced the switch. Re-guide the entry only (pre-recorded),
-    // not the whole step-by-step walk-in — otherwise it feels like starting the
-    // pose over from scratch.
+    // Second side of a bilateral pose: announce the pose name only. We do NOT
+    // replay the pose's enter/instruction cues here — those name a fixed side
+    // ("step the RIGHT foot forward…") because the audio is pre-recorded, so on
+    // the second side they'd tell the user the wrong side. The switch is already
+    // conveyed by the first side's "…repeat on the other side" exit cue, the
+    // transition bell, and the on-screen "Other side" badge; the user mirrors
+    // the shape they just held.
     if (currentAsana.isSecondSide) {
-      if (currentAsana.voiceCues?.enter) {
-        voice.speak(currentAsana.voiceCues.enter, null, { fileKey: `${currentAsana.id}__enter` })
-      }
       return () => { cancelled = true }
     }
 
