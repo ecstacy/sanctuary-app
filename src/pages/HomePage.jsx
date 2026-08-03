@@ -684,8 +684,8 @@ export default function HomePage() {
                 ? ['vata', 'pitta', 'kapha'].filter(d => (doshaPercentages[d] || 0) > 0).sort((a, b) => doshaPercentages[b] - doshaPercentages[a])
                 : []
               return (
-                <div className="relative mx-auto my-3" style={{ width: '100%', maxWidth: 300, height: 180 }}>
-                  <svg viewBox="0 0 300 180" className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+                <div className="relative mx-auto my-3" style={{ width: '100%', maxWidth: 320, height: 208 }}>
+                  <svg viewBox="0 0 300 180" preserveAspectRatio="none" className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
                     {order.map((d, i) => LEGEND_SLOTS[i] && (
                       <line key={d} x1={LEGEND_SLOTS[i].line[0][0]} y1={LEGEND_SLOTS[i].line[0][1]}
                         x2={LEGEND_SLOTS[i].line[1][0]} y2={LEGEND_SLOTS[i].line[1][1]}
@@ -693,7 +693,7 @@ export default function HomePage() {
                     ))}
                   </svg>
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <DoshaGemImage percentages={doshaPercentages} dominant={currentDosha} size={172} />
+                    <DoshaGemImage percentages={doshaPercentages} dominant={currentDosha} size={200} />
                   </div>
                   {order.map((d, i) => LEGEND_SLOTS[i] && (
                     <div key={d} className="absolute" style={LEGEND_SLOTS[i].label}>
