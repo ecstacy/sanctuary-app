@@ -22,7 +22,8 @@
     "dashboards": "node scripts/provision-posthog-dashboards.mjs",
     "dashboards:apply": "node scripts/provision-posthog-dashboards.mjs --apply",
     "dashboards:alerts": "node scripts/provision-posthog-alerts.mjs",
-    "dashboards:alerts:apply": "node scripts/provision-posthog-alerts.mjs --apply"
+    "dashboards:alerts:apply": "node scripts/provision-posthog-alerts.mjs --apply",
+    "og:image": "node scripts/build-og-image.mjs"
   },
   "dependencies": {
     "@aparajita/capacitor-biometric-auth": "^10.0.0",
