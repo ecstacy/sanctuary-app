@@ -6,6 +6,16 @@
 // 2. PostHog (EU, cookieless): memory persistence — no cookies, no banner.
 
 (function () {
+  // ── Launch state ──
+  // The app is not published on Google Play yet (waiting on the org account /
+  // D-U-N-S). Until it is, we must NOT show the official "Get it on Google
+  // Play" badge pointing at a dead listing — it 404s and breaks Play's brand
+  // rules. So every badge renders a "Coming soon" pill that keeps the funnel
+  // moving to /quiz. Flip this to true the day the app publishes — one line,
+  // and every badge across the site (landing, quiz result, 76 pose pages)
+  // becomes the real, attribution-carrying Play link.
+  var APP_LIVE = false;
+
   // ── Campaign attribution, persisted for the visit ──
   // The landing page carries the utm_* params, but the highest-intent path is
   // landing → /quiz → store badge, and that internal hop drops the query
@@ -45,23 +55,56 @@
   // silently drop the campaign and break the install-attribution chain.
   function applyAttribution(root) {
     (root || document).querySelectorAll('a[data-play-link]').forEach(function (a) {
+      if (!APP_LIVE) {
+        // ── Coming-soon state ──
+        if (!a.dataset.soon) {
+          a.dataset.soon = '1';
+          a.classList.add('play-badge--soon');
+          a.setAttribute('href', '/quiz');
+          a.setAttribute('aria-label', 'Coming soon on Google Play — take the free dosha quiz');
+          a.innerHTML =
+            '<span class="soon-pill"><span class="soon-dot"></span>Coming soon on Google Play</span>';
+          a.addEventListener('click', function () {
+            if (!window.posthog) return;
+            window.posthog.capture('coming_soon_badge_clicked', {
+              placement: a.dataset.placement || 'unknown',
+              utm_source: utmValue('utm_source'),
+              utm_campaign: utmValue('utm_campaign'),
+            });
+          });
+        }
+        a.style.visibility = 'visible';
+        return;
+      }
+
+      // ── Live state — real Play badge + install attribution ──
       if (utms.length) {
         var url = new URL(a.href);
         url.searchParams.set('referrer', utms.join('&'));
         a.href = url.toString();
       }
-      if (a.dataset.attributionBound) return;
-      a.dataset.attributionBound = '1';
-      a.addEventListener('click', function () {
-        if (!window.posthog) return;
-        window.posthog.capture('store_badge_clicked', {
-          store: 'google_play',
-          placement: a.dataset.placement || 'unknown',
-          utm_source: utmValue('utm_source'),
-          utm_campaign: utmValue('utm_campaign'),
+      if (!a.dataset.attributionBound) {
+        a.dataset.attributionBound = '1';
+        a.addEventListener('click', function () {
+          if (!window.posthog) return;
+          window.posthog.capture('store_badge_clicked', {
+            store: 'google_play',
+            placement: a.dataset.placement || 'unknown',
+            utm_source: utmValue('utm_source'),
+            utm_campaign: utmValue('utm_campaign'),
+          });
         });
-      });
+      }
+      a.style.visibility = 'visible';
     });
+
+    // Non-badge prose links to Play (e.g. the quiz page sentence) — while
+    // coming-soon, redirect them to /quiz so they aren't dead ends.
+    if (!APP_LIVE) {
+      (root || document).querySelectorAll('a[href*="play.google.com/store"]:not([data-play-link])').forEach(function (a) {
+        a.setAttribute('href', '/quiz');
+      });
+    }
   }
   window.sanctuaryApplyAttribution = applyAttribution;
   applyAttribution(document);

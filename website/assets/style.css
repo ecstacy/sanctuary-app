@@ -97,6 +97,31 @@ h1 {
 .cta-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 .play-badge img { height: 56px; display: block; }
 .cta-note { font-size: 0.8rem; color: var(--on-surface-variant); }
+
+/* Badges are hidden until site.js resolves the launch state (real Play badge
+   vs coming-soon pill) so neither flashes the wrong thing on first paint. If
+   JS is blocked they stay hidden and the "Find your dosha" CTA carries the
+   funnel. */
+a[data-play-link] { visibility: hidden; }
+.play-badge--soon { text-decoration: none; }
+.soon-pill {
+  display: inline-flex; align-items: center; gap: 9px;
+  height: 56px; padding: 0 22px; box-sizing: border-box;
+  border-radius: 999px;
+  background: var(--primary-container); color: var(--on-primary-container);
+  font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
+  border: 1px solid rgba(43, 86, 56, 0.12);
+}
+.soon-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--secondary);
+  animation: soon-pulse 2.4s ease-in-out infinite;
+}
+@keyframes soon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(194, 109, 74, 0.45); }
+  50%      { box-shadow: 0 0 0 6px rgba(194, 109, 74, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .soon-dot { animation: none; } }
 .btn-secondary {
   display: inline-block;
   padding: 13px 26px;
