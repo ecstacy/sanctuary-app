@@ -1127,7 +1127,8 @@
     "dailyMorningTitle": "Morgenpraxis",
     "dailyEveningTitle": "Abendliches Ausklingen",
     "sideFirst": "Erste Seite · 1 von 2",
-    "sideSecond": "Andere Seite · 2 von 2"
+    "sideSecond": "Andere Seite · 2 von 2",
+    "otherSideCue": "Jetzt die andere Seite."
   },
   "doshaQuizContent": {
     "questions": {
