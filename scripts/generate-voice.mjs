@@ -166,6 +166,11 @@ function buildJobs() {
   // fallback — we'd rather have silence than robot voice for these
   // pivotal moments.
   push('session__complete', 'Practice complete. Namaste. Your body and mind thank you.')
+  // Spoken at the start of the second side of a bilateral pose. Side-neutral on
+  // purpose — the pre-recorded pose cues name a fixed side, so we never re-read
+  // them on the other side. Until this clip is generated the practice page
+  // TTS-falls-back (it is NOT requireFile), so the cue is always heard.
+  push('session__other_side', 'Now, the other side.')
 
   const everything = [
     ...Object.values(ASANAS).map(a => ({ ...a, kind: 'asana' })),

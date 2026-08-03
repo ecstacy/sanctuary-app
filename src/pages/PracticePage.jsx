@@ -488,18 +488,22 @@ export default function PracticePage() {
     // fileKey routes to the pre-recorded Azure HD voice clip when
     // generation has been run; falls back to TTS otherwise.
     audio.bell()
-    voice.speak(`${currentAsana.english}.`, null, { fileKey: `${currentAsana.id}__name` })
 
-    // Second side of a bilateral pose: announce the pose name only. We do NOT
-    // replay the pose's enter/instruction cues here — those name a fixed side
-    // ("step the RIGHT foot forward…") because the audio is pre-recorded, so on
-    // the second side they'd tell the user the wrong side. The switch is already
-    // conveyed by the first side's "…repeat on the other side" exit cue, the
-    // transition bell, and the on-screen "Other side" badge; the user mirrors
-    // the shape they just held.
+    // Second side of a bilateral pose: say "now, the other side" (side-neutral,
+    // so it's never wrong), then the pose name — filling what was an odd silent
+    // start. We deliberately do NOT replay the pose's enter/instruction cues:
+    // those name a fixed side ("step the RIGHT foot forward…") because the audio
+    // is pre-recorded, so on the second side they'd announce the wrong side. The
+    // switch is also shown by the "Other side" badge; the user mirrors the shape
+    // they just held. `session__other_side` uses the pre-recorded HD clip when
+    // present and TTS otherwise.
     if (currentAsana.isSecondSide) {
+      voice.speak(t('practice.otherSideCue', 'Now, the other side.'), null, { fileKey: 'session__other_side' })
+      voice.speak(`${currentAsana.english}.`, null, { fileKey: `${currentAsana.id}__name` })
       return () => { cancelled = true }
     }
+
+    voice.speak(`${currentAsana.english}.`, null, { fileKey: `${currentAsana.id}__name` })
 
     if (instructions.length === 0) {
       // Pose has no granular instructions — just announce and let the

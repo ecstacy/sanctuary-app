@@ -1127,7 +1127,8 @@
     "dailyMorningTitle": "प्रातः अभ्यास",
     "dailyEveningTitle": "सांध्य विश्राम",
     "sideFirst": "पहली ओर · 1/2",
-    "sideSecond": "दूसरी ओर · 2/2"
+    "sideSecond": "दूसरी ओर · 2/2",
+    "otherSideCue": "अब, दूसरी ओर।"
   },
   "doshaQuizContent": {
     "questions": {
