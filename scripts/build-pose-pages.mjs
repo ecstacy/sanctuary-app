@@ -135,8 +135,11 @@ const head = ({ title, description, canonical, image, jsonld }) => `<!doctype ht
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="${esc(canonical)}">${image ? `
-  <meta property="og:image" content="${esc(image)}">` : ''}
+  <meta property="og:url" content="${esc(canonical)}">
+  <meta property="og:image" content="${esc(image || `${SITE}/assets/og.png`)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${esc(title)}">
+  <meta name="twitter:image" content="${esc(image || `${SITE}/assets/og.png`)}">
 ${jsonld ? `  <script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ''}
 </head>
 <body>
