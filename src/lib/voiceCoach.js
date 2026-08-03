@@ -195,8 +195,12 @@ export function buildSchedule({ asana, poseIndex, userDosha }) {
   }
   // ── Exit prep ──
   // Pose-authored exit cue arrives ~8s out so the user has time to begin
-  // releasing as the bell sounds.
-  cue(8, 'exit', asana.voiceCues.exit, `${asana.id}__exit`)
+  // releasing as the bell sounds. On the SECOND side of a bilateral pose we
+  // skip it — that cue says "…repeat on the other side", which is wrong once
+  // both sides are done. The generic transition bell closes the pose instead.
+  if (!asana.isSecondSide && asana.voiceCues?.exit) {
+    cue(8, 'exit', asana.voiceCues.exit, `${asana.id}__exit`)
+  }
 
   // Sort latest-first (entry → exit by timeline) so the dedupe pass below
   // walks the practice in order.

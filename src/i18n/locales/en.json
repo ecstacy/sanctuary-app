@@ -1125,7 +1125,9 @@
     "tilePickupSub": "Last time helped — your latest reading suggests another round.",
     "tileContinueSub": "Day {{day}} of {{total}} — keep the rhythm.",
     "dailyMorningTitle": "Morning Practice",
-    "dailyEveningTitle": "Evening Wind-Down"
+    "dailyEveningTitle": "Evening Wind-Down",
+    "sideFirst": "First side · 1 of 2",
+    "sideSecond": "Other side · 2 of 2"
   },
   "doshaQuizContent": {
     "questions": {

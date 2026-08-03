@@ -104,6 +104,44 @@ function formatDuration(seconds, t) {
     : t('practice.durationHm', { h: Math.floor(m / 60), m: m % 60 })
 }
 
+// Anti-rush guardrail: the least a pose's hold can be without the narration
+// feeling hurried — a base plus a few seconds per instruction line (spoken +
+// a breath to follow it). Only ever RAISES a hold, never shortens it.
+function minDurationForPose(a) {
+  const lines = Array.isArray(a.instructions) ? a.instructions.length : 0
+  return 20 + lines * 6
+}
+
+// Prepare the pose list for playback:
+//   1. apply the guardrail so no pose is shorter than its narration needs;
+//   2. expand each bilateral pose (warrior, triangle, tree…) into TWO
+//      full-duration segments — side 1 → side 2 — so both sides get a proper
+//      hold instead of the user only ever practising one. The second segment is
+//      tagged isSecondSide: the engine re-guides the other side (pose name +
+//      entry cue) without re-reading the full step walkthrough, and voiceCoach
+//      skips the "repeat on the other side" exit cue on it.
+function preparePractice(asanas) {
+  const out = []
+  for (const a of asanas || []) {
+    const durationSeconds = Math.max(a.durationSeconds, minDurationForPose(a))
+    const base = { ...a, durationSeconds }
+    if (a.bilateral) {
+      out.push({ ...base, side: 1, sideCount: 2 })
+      out.push({ ...base, side: 2, sideCount: 2, isSecondSide: true })
+    } else {
+      out.push(base)
+    }
+  }
+  return out
+}
+
+// Wrap a routine so its poses are playback-ready (guardrail + bilateral sides)
+// and its total time reflects the real, expanded arc.
+function withPractice(r) {
+  const asanas = preparePractice(r.asanas)
+  return { ...r, asanas, totalDuration: asanas.reduce((s, a) => s + a.durationSeconds, 0) }
+}
+
 // ─── PostPracticeProtocolTile ─────────────────────────────────────────────
 // Plus-member contextual continuation tile shown on the practice-complete
 // screen when there's an active vikriti signal. Three states based on
@@ -222,14 +260,14 @@ export default function PracticePage() {
   const routine = useMemo(() => {
     if (single) {
       const a = getAsana(asanaId)
-      if (!a) return getRoutine('stress') // graceful fallback
-      return {
+      if (!a) return withPractice(getRoutine('stress')) // graceful fallback
+      return withPractice({
         key: `asana-${a.id}`,
         label: a.sanskrit,
         gradient: 'from-primary-container to-surface-container-low',
         totalDuration: a.durationSeconds,
         asanas: [a],
-      }
+      })
     }
 
     // ── Today's Practice — the composed daily session ──
@@ -250,22 +288,22 @@ export default function PracticePage() {
       // Defensive: a malformed/empty session should never yield a blank
       // practice. Fall back to a real routine matched to the time of day.
       if (asanas.length === 0) {
-        return getRoutine(session.slot === 'evening' ? 'sleep' : 'energy')
+        return withPractice(getRoutine(session.slot === 'evening' ? 'sleep' : 'energy'))
       }
       const title = t(
         session.slot === 'evening' ? 'practice.dailyEveningTitle' : 'practice.dailyMorningTitle',
       )
-      return {
+      return withPractice({
         key: 'daily',
         label: title,
         gradient: 'from-primary-container to-surface-container-low',
         totalDuration: asanas.reduce((s, a) => s + a.durationSeconds, 0),
         asanas,
         dailySession: session, // { slot, reasons, ... } — for the daily_session_* events
-      }
+      })
     }
 
-    return getRoutine(routineKey || 'stress')
+    return withPractice(getRoutine(routineKey || 'stress'))
     // vikritiSignal intentionally omitted: compose once at mount so the session
     // is stable for the whole practice (it loads async and would otherwise
     // recompose the arc mid-view).
@@ -385,17 +423,18 @@ export default function PracticePage() {
     return () => clearInterval(timerRef.current)
   }, [status])
 
-  // ── Audio ticks during active ───────────────────────────────────────────
+  // ── Audio during active ───────────────────────────────────────────────────
   useEffect(() => {
     if (status !== 'active' || isPaused) return
 
-    // Tick sound every second
-    if (timeRemaining > 0 && timeRemaining < currentAsana.durationSeconds) {
-      audio.tick()
-    }
+    // No per-second tick — a click every second is noise that pulls the user
+    // out of the pose. Time awareness comes from the voice coach instead, which
+    // speaks the halfway point and the 30s/15s milestones (see voiceCoach.js),
+    // so the user knows how far in and how long is left without a metronome.
 
-    // Countdown beeps for last 5 seconds
-    if (timeRemaining > 0 && timeRemaining <= 5) {
+    // A soft countdown only in the final 3 seconds — a brief "the pose is about
+    // to change" signal, not a running clock.
+    if (timeRemaining > 0 && timeRemaining <= 3) {
       audio.countdown()
     }
   }, [timeRemaining, status, isPaused])
@@ -450,6 +489,17 @@ export default function PracticePage() {
     // generation has been run; falls back to TTS otherwise.
     audio.bell()
     voice.speak(`${currentAsana.english}.`, null, { fileKey: `${currentAsana.id}__name` })
+
+    // Second side of a bilateral pose: announce the pose name only. We do NOT
+    // replay the pose's enter/instruction cues here — those name a fixed side
+    // ("step the RIGHT foot forward…") because the audio is pre-recorded, so on
+    // the second side they'd tell the user the wrong side. The switch is already
+    // conveyed by the first side's "…repeat on the other side" exit cue, the
+    // transition bell, and the on-screen "Other side" badge; the user mirrors
+    // the shape they just held.
+    if (currentAsana.isSecondSide) {
+      return () => { cancelled = true }
+    }
 
     if (instructions.length === 0) {
       // Pose has no granular instructions — just announce and let the
@@ -1298,7 +1348,15 @@ export default function PracticePage() {
               />
             </div>
             <h2 className="font-headline text-2xl text-on-surface text-center mb-0.5">{currentAsana.sanskrit}</h2>
-            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">{currentAsana.english}</p>
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2">{currentAsana.english}</p>
+            {currentAsana.sideCount === 2 && (
+              <p className="inline-flex items-center gap-1 mb-3 px-2.5 py-0.5 rounded-full bg-primary-container/50 font-label text-[10px] font-semibold text-primary uppercase tracking-wider">
+                <span aria-hidden="true" className="material-symbols-outlined text-[12px]">
+                  {currentAsana.isSecondSide ? 'swap_horiz' : 'looks_one'}
+                </span>
+                {currentAsana.isSecondSide ? t('practice.sideSecond', 'Other side · 2 of 2') : t('practice.sideFirst', 'First side · 1 of 2')}
+              </p>
+            )}
             <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={92} />
 
             {/* ── Inline instruction subtitle ───────────────────────────────
