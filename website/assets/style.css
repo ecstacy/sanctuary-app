@@ -65,6 +65,24 @@ header {
 }
 .nav-links a:hover { color: var(--primary); }
 
+/* Language switcher — EN / DE / HI pills in the header nav. */
+.lang-switch { display: inline-flex; align-items: center; gap: 2px; }
+.lang-switch a {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  padding: 3px 7px;
+  border-radius: 999px;
+  line-height: 1;
+}
+.lang-switch a:hover { color: var(--primary); }
+.lang-switch a[aria-current="page"] {
+  color: var(--on-primary-container);
+  background: var(--primary-container);
+}
+
 /* ── Hero ── */
 .hero { padding: 72px 0 56px; }
 .hero-grid {

@@ -425,6 +425,8 @@ await writeFile(join(OUT_DIR, 'index.html'), indexPage(byCategory), 'utf8')
 // ── Sitemap (regenerated wholesale so it can't drift) ───────────────────────
 const staticUrls = [
   { loc: `${SITE}/`, priority: '1.0' },
+  { loc: `${SITE}/de/`, priority: '0.9' },
+  { loc: `${SITE}/hi/`, priority: '0.9' },
   { loc: `${SITE}/quiz`, priority: '0.9' },
   { loc: `${SITE}/poses/`, priority: '0.8' },
   { loc: `${SITE}/support`, priority: '0.6' },

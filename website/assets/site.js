@@ -16,6 +16,15 @@
   // becomes the real, attribution-carrying Play link.
   var APP_LIVE = false;
 
+  // Localised copy for the coming-soon badge, keyed off the page's <html lang>.
+  var LANG = (document.documentElement.lang || 'en').slice(0, 2);
+  var I18N = {
+    en: { soon: 'Coming soon on Google Play', aria: 'Coming soon on Google Play — take the free dosha quiz' },
+    de: { soon: 'Bald bei Google Play',       aria: 'Bald bei Google Play — mach das kostenlose Dosha-Quiz' },
+    hi: { soon: 'जल्द ही Google Play पर',       aria: 'जल्द ही Google Play पर — मुफ़्त दोष क्विज़ लें' },
+  };
+  var TXT = I18N[LANG] || I18N.en;
+
   // ── Campaign attribution, persisted for the visit ──
   // The landing page carries the utm_* params, but the highest-intent path is
   // landing → /quiz → store badge, and that internal hop drops the query
@@ -61,9 +70,9 @@
           a.dataset.soon = '1';
           a.classList.add('play-badge--soon');
           a.setAttribute('href', '/quiz');
-          a.setAttribute('aria-label', 'Coming soon on Google Play — take the free dosha quiz');
+          a.setAttribute('aria-label', TXT.aria);
           a.innerHTML =
-            '<span class="soon-pill"><span class="soon-dot"></span>Coming soon on Google Play</span>';
+            '<span class="soon-pill"><span class="soon-dot"></span>' + TXT.soon + '</span>';
           a.addEventListener('click', function () {
             if (!window.posthog) return;
             window.posthog.capture('coming_soon_badge_clicked', {
