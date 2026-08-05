@@ -16,8 +16,7 @@ import PaywallSheet from '../components/PaywallSheet'
 import WelcomeToPlusCard from '../components/WelcomeToPlusCard'
 import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
 import MealOfTheDayCard from '../components/MealOfTheDayCard'
-import DoshaGemImage from '../components/DoshaGemImage'
-import { GEM_HUE } from '../components/DoshaGem'
+import DoshaGem, { GEM_HUE } from '../components/DoshaGem'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
 
 // Mirror of YOGI_LEVELS in JourneyPage; kept tiny here to avoid a cross-page
@@ -677,8 +676,10 @@ export default function HomePage() {
               </span>
             </div>
             {/* The constitution as a glass vessel with a leader-line legend:
-                the liquid stacks by the real percentages, the labels point to
-                each dosha's zone. */}
+                the WebGL gem's colour zones are sized to the real percentages
+                (proportional — all three doshas show), and the labels point to
+                each dosha's zone. A pre-rendered exact-match gem set is backlogged
+                (see docs/TODO.md — categorical PNGs omitted the third dosha). */}
             {(() => {
               const order = doshaPercentages
                 ? ['vata', 'pitta', 'kapha'].filter(d => (doshaPercentages[d] || 0) > 0).sort((a, b) => doshaPercentages[b] - doshaPercentages[a])
@@ -693,7 +694,7 @@ export default function HomePage() {
                     ))}
                   </svg>
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <DoshaGemImage percentages={doshaPercentages} dominant={currentDosha} size={200} />
+                    <DoshaGem percentages={doshaPercentages} dominant={currentDosha} size={200} />
                   </div>
                   {order.map((d, i) => LEGEND_SLOTS[i] && (
                     <div key={d} className="absolute" style={LEGEND_SLOTS[i].label}>
