@@ -16,7 +16,7 @@ import PaywallSheet from '../components/PaywallSheet'
 import WelcomeToPlusCard from '../components/WelcomeToPlusCard'
 import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
 import MealOfTheDayCard from '../components/MealOfTheDayCard'
-import DoshaGem, { GEM_HUE } from '../components/DoshaGem'
+import DoshaGem, { GEM_HUE, gemRadiusAtU } from '../components/DoshaGem'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
 
 // Mirror of YOGI_LEVELS in JourneyPage; kept tiny here to avoid a cross-page
@@ -145,7 +145,12 @@ const DOSHA_INK  = { vata: '#2c5f79', pitta: '#83471a', kapha: '#3a6130' }
 // none), so y maps 1:1 to the container height.
 const GEM_TOP_VY = 22    // viewBox-y of the liquid's visible top (the tip)
 const GEM_BOT_VY = 164   // viewBox-y of the liquid's visible bottom
+const GEM_CX = 150       // gem centre-x in the 300-wide viewBox
+const GEM_EDGE_VX = 80   // half-width (viewBox units) of the gem at its widest
 // Build the per-dosha legend rows from an already-sorted (descending) order.
+// Each row carries the leader line's endpoints: the outer end sits by the
+// label, the inner end lands exactly on the gem's edge at that band's height
+// (narrow near the tip, wide low), so no line floats short of the teardrop.
 function gemLegendRows(order, pct) {
   const total = order.reduce((s, d) => s + (pct[d] || 0), 0) || 1
   let acc = 0
@@ -157,7 +162,10 @@ function gemLegendRows(order, pct) {
     // Middle band sits on the left; top & bottom bands on the right. Keeps the
     // three rows from colliding and mirrors the original around-the-gem look.
     const side = i === 1 ? 'left' : 'right'
-    return { dosha: d, vy, side }
+    const edge = gemRadiusAtU(uCentre) * GEM_EDGE_VX
+    const x1 = side === 'right' ? 236 : 64                       // by the label
+    const x2 = side === 'right' ? GEM_CX + edge : GEM_CX - edge  // on the gem edge
+    return { dosha: d, vy, side, x1, x2 }
   })
 }
 
@@ -705,10 +713,9 @@ export default function HomePage() {
               return (
                 <div className="relative mx-auto my-3" style={{ width: '100%', maxWidth: 320, height: 208 }}>
                   <svg viewBox="0 0 300 180" preserveAspectRatio="none" className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
-                    {rows.map(({ dosha, vy, side }) => (
+                    {rows.map(({ dosha, vy, x1, x2 }) => (
                       <line key={dosha}
-                        x1={side === 'right' ? 232 : 68} y1={vy}
-                        x2={side === 'right' ? 196 : 104} y2={vy}
+                        x1={x1} y1={vy} x2={x2} y2={vy}
                         stroke="var(--color-outline-variant)" strokeWidth="1" />
                     ))}
                   </svg>
