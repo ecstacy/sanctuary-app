@@ -20,14 +20,40 @@ export const GEM_HUE = {
   pitta: { deep: '#a86a24', base: '#dda85a', light: '#f8dc9f' }, // honey-gold
   kapha: { deep: '#2e6f57', base: '#3fa07a', light: '#8fd4b3' }, // teal-green
 }
+// Liquid hues for the gem itself — more saturated/luminous than the label
+// swatches above, so the glass reads as vivid jewel-toned liquid (the label
+// text keeps the softer GEM_HUE so it stays legible on the card).
+const GEM_LIQUID = {
+  vata:  '#8a3fd4', // amethyst violet
+  pitta: '#edb412', // rich honey-gold
+  kapha: '#0fa457', // deep emerald
+}
 const DOSHAS = ['vata', 'pitta', 'kapha']
 
-// Egg profile (radius, height) revolved into the vessel — rounder + wider than a
-// teardrop, so it sits well in the card.
+// Teardrop profile (radius, height) revolved into the gem — a sharp tip up top
+// widening to a full, round bottom, matching the liquid-glass gem art. Height
+// kept ~±1.35 so it fills the card the same as the old egg.
 const PROFILE = [
-  [0.001, 1.28], [0.22, 1.2], [0.47, 1.03], [0.69, 0.77], [0.87, 0.42],
-  [0.98, 0.0], [1.0, -0.42], [0.92, -0.8], [0.71, -1.08], [0.4, -1.28], [0.001, -1.34],
+  [0.001, 1.38], [0.17, 1.06], [0.34, 0.76], [0.52, 0.44], [0.68, 0.10],
+  [0.82, -0.28], [0.92, -0.64], [0.965, -0.96], [0.86, -1.18], [0.52, -1.34], [0.001, -1.4],
 ]
+const GEM_MAX_R = Math.max(...PROFILE.map(p => p[0]))
+// Silhouette half-width (as a fraction of the widest point, 0..1) at a stacked
+// band position u — u = 0 at the gem's bottom, 1 at the top, matching the
+// shader's `u = y*0.42 + 0.5` fill axis. The legend uses this so each leader
+// line ends exactly on the gem's edge at that band's height (the teardrop is
+// narrow up top, wide low), instead of stopping at a fixed margin.
+export function gemRadiusAtU(u) {
+  const y = (Math.min(1, Math.max(0, u)) - 0.5) / 0.42
+  for (let i = 0; i < PROFILE.length - 1; i++) {
+    const [r0, y0] = PROFILE[i], [r1, y1] = PROFILE[i + 1]
+    if (y <= y0 && y >= y1) {
+      const t = (y0 - y) / ((y0 - y1) || 1)
+      return (r0 + (r1 - r0) * t) / GEM_MAX_R
+    }
+  }
+  return (y > PROFILE[0][1] ? PROFILE[0][0] : PROFILE[PROFILE.length - 1][0]) / GEM_MAX_R
+}
 
 const NOISE_GLSL = /* glsl */`
 vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
@@ -96,29 +122,30 @@ void main(){
   col = mix(col, uCol1, smoothstep(uT0 - e, uT0 + e, u));
   col = mix(col, uCol2, smoothstep(uT1 - e, uT1 + e, u));
 
-  // liquid depth — rich and dark deep in the body, luminous toward the top
+  // liquid depth — rich and dark deep in the body, luminous toward the top.
+  // wide range → strong volume: deep jewel shadows low, glowing highlights high.
   float depth = smoothstep(-1.2, 1.2, vPos.y + 0.5*(w1 - 0.5));
-  col *= mix(0.98, 1.6, depth);           // more contrast → the liquid gains volume, rich low → bright high
+  col *= mix(0.76, 1.78, depth);          // more contrast → the liquid gains volume, rich low → bright high
   // animated internal swirl ribbons
   float swirl = fbm(pw*2.2 + vec3(warp*1.6, t*0.22));
-  col = mix(col, col*1.28, smoothstep(0.45, 0.78, swirl));
+  col = mix(col, col*1.42, smoothstep(0.42, 0.80, swirl));
   // tiny drifting glints, like light catching the liquid
   float spk = fbm(pw*9.0 + vec3(t*0.5, -t*0.45, t*0.35));
-  col += smoothstep(0.82, 0.95, spk) * 0.65;
+  col += smoothstep(0.82, 0.95, spk) * 0.4;
 
   // glassy highlights: fresnel rim + a tight specular hotspot for a wet, liquid sheen
   vec3 viewDir = normalize(cameraPosition - vWorld);
   vec3 N = normalize(vNormalW);
   float fres = pow(1.0 - max(dot(N, viewDir), 0.0), 2.5);
-  col += fres * 0.30;
+  col += fres * 0.20;
   vec3 L = normalize(vec3(-0.5, 0.95, 0.6));
-  float spec = pow(max(dot(reflect(-L, N), viewDir), 0.0), 22.0);
-  col += spec * 0.9;                       // bright wet hotspot (top-left)
+  float spec = pow(max(dot(reflect(-L, N), viewDir), 0.0), 26.0);
+  col += spec * 0.5;                        // bright wet hotspot (top-left)
   float hl = smoothstep(0.6, 1.0, dot(N, L));
   col += hl * 0.16;                         // soft broad sheen
 
-  // light translucent lift — keep it glassy
-  col = mix(col, vec3(1.0, 0.985, 0.95), 0.12);
+  // light translucent lift — keep it glassy (subtle, so hues stay saturated)
+  col = mix(col, vec3(1.0, 0.985, 0.95), 0.05);
   // encode linear→sRGB for output (a raw ShaderMaterial doesn't get three's
   // automatic colorspace pass, so without this the true colour renders muddy).
   col = pow(clamp(col, 0.0, 1.0), vec3(0.4545));
@@ -169,12 +196,17 @@ export default function DoshaGem({ percentages = null, dominant = null, size = 1
       camera = new THREE.PerspectiveCamera(30, w / h, 0.1, 100)
       camera.position.set(0, 0, 5.6)
 
-      glassGeo = new THREE.LatheGeometry(PROFILE.map(([x, y]) => new THREE.Vector2(x, y)), 96)
+      // Smooth the silhouette: fit a Catmull-Rom spline through the control
+      // points and sample it densely, so the teardrop reads as one flowing
+      // curve rather than faceted straight segments.
+      const spline = new THREE.SplineCurve(PROFILE.map(([x, y]) => new THREE.Vector2(x, y)))
+      const profilePts = spline.getPoints(90).map(p => new THREE.Vector2(Math.max(0.001, p.x), p.y))
+      glassGeo = new THREE.LatheGeometry(profilePts, 128)
       glassGeo.center()
 
       glassMat = new THREE.MeshPhysicalMaterial({
-        color: 0xfffdf8, metalness: 0, roughness: 0.12, transmission: 0.96, thickness: 0.35,
-        ior: 1.5, clearcoat: 1.0, clearcoatRoughness: 0.08, envMapIntensity: 3.0, transparent: true,
+        color: 0xfbfcff, metalness: 0, roughness: 0.045, transmission: 0.98, thickness: 0.18,
+        ior: 1.5, clearcoat: 1.0, clearcoatRoughness: 0.04, envMapIntensity: 1.7, transparent: true,
       })
       const glass = new THREE.Mesh(glassGeo, glassMat)
 
@@ -188,9 +220,9 @@ export default function DoshaGem({ percentages = null, dominant = null, size = 1
           uTime: { value: 0 },
           // true saturated hues — now that output is sRGB-encoded these render
           // as luminous liquid (gold/violet/teal) rather than muddy earth tones.
-          uCol0: { value: linearRGB(GEM_HUE[ord[0]].base) },
-          uCol1: { value: linearRGB(GEM_HUE[ord[1]].base) },
-          uCol2: { value: linearRGB(GEM_HUE[ord[2]].base) },
+          uCol0: { value: linearRGB(GEM_LIQUID[ord[0]]) },
+          uCol1: { value: linearRGB(GEM_LIQUID[ord[1]]) },
+          uCol2: { value: linearRGB(GEM_LIQUID[ord[2]]) },
           // Push a threshold out of range when its zone is empty, so a 0% dosha
           // never bleeds a sliver at the edge.
           uT0: { value: frac[1] > 0.004 ? frac[0] : 2.0 },
@@ -199,7 +231,7 @@ export default function DoshaGem({ percentages = null, dominant = null, size = 1
       })
       liquidGeo = glassGeo.clone()
       const liquid = new THREE.Mesh(liquidGeo, liquidMat)
-      liquid.scale.setScalar(0.82)
+      liquid.scale.setScalar(0.93)
 
       const group = new THREE.Group()
       group.add(liquid, glass)
