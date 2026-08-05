@@ -136,14 +136,30 @@ function getTimeOfDay() {
 const DOSHA_HEX  = { vata: '#35708f', pitta: '#9e5720', kapha: '#467539' }
 const DOSHA_INK  = { vata: '#2c5f79', pitta: '#83471a', kapha: '#3a6130' }
 
-// Leader-line legend slots for the gem card: where each dosha's %/name label
-// sits, and the connector line [labelEnd, gemEdge] in the 300×180 viewBox.
-// Ordered by descending dosha share (biggest liquid zone first).
-const LEGEND_SLOTS = [
-  { label: { left: 0,  top: '30%',    width: 84, textAlign: 'right' }, line: [[86, 66], [120, 90]] },
-  { label: { right: 0, top: '2%',     width: 84, textAlign: 'left' },  line: [[214, 28], [192, 66]] },
-  { label: { right: 0, bottom: '2%',  width: 84, textAlign: 'left' },  line: [[214, 152], [196, 112]] },
-]
+// Gem legend geometry. The WebGL gem (DoshaGem) stacks its colour bands
+// BOTTOM→TOP in descending-% order (largest dosha at the bottom), with the
+// band boundaries at the cumulative fractions. So each dosha's label + leader
+// line is positioned dynamically at the vertical CENTRE of its own band —
+// the line always lands on the matching colour, for any split. Coords are in
+// the overlay's 300×180 viewBox (stretched to the card, preserveAspectRatio
+// none), so y maps 1:1 to the container height.
+const GEM_TOP_VY = 22    // viewBox-y of the liquid's visible top (the tip)
+const GEM_BOT_VY = 164   // viewBox-y of the liquid's visible bottom
+// Build the per-dosha legend rows from an already-sorted (descending) order.
+function gemLegendRows(order, pct) {
+  const total = order.reduce((s, d) => s + (pct[d] || 0), 0) || 1
+  let acc = 0
+  return order.map((d, i) => {
+    const f = (pct[d] || 0) / total
+    const uCentre = acc + f / 2   // 0 = gem bottom, 1 = gem top
+    acc += f
+    const vy = GEM_BOT_VY - uCentre * (GEM_BOT_VY - GEM_TOP_VY)
+    // Middle band sits on the left; top & bottom bands on the right. Keeps the
+    // three rows from colliding and mirrors the original around-the-gem look.
+    const side = i === 1 ? 'left' : 'right'
+    return { dosha: d, vy, side }
+  })
+}
 
 export default function HomePage() {
   const navigate = useNavigate()
@@ -684,22 +700,31 @@ export default function HomePage() {
               const order = doshaPercentages
                 ? ['vata', 'pitta', 'kapha'].filter(d => (doshaPercentages[d] || 0) > 0).sort((a, b) => doshaPercentages[b] - doshaPercentages[a])
                 : []
+              if (!order.length) return null
+              const rows = gemLegendRows(order, doshaPercentages)
               return (
                 <div className="relative mx-auto my-3" style={{ width: '100%', maxWidth: 320, height: 208 }}>
                   <svg viewBox="0 0 300 180" preserveAspectRatio="none" className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
-                    {order.map((d, i) => LEGEND_SLOTS[i] && (
-                      <line key={d} x1={LEGEND_SLOTS[i].line[0][0]} y1={LEGEND_SLOTS[i].line[0][1]}
-                        x2={LEGEND_SLOTS[i].line[1][0]} y2={LEGEND_SLOTS[i].line[1][1]}
+                    {rows.map(({ dosha, vy, side }) => (
+                      <line key={dosha}
+                        x1={side === 'right' ? 232 : 68} y1={vy}
+                        x2={side === 'right' ? 196 : 104} y2={vy}
                         stroke="var(--color-outline-variant)" strokeWidth="1" />
                     ))}
                   </svg>
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                     <DoshaGem percentages={doshaPercentages} dominant={currentDosha} size={200} />
                   </div>
-                  {order.map((d, i) => LEGEND_SLOTS[i] && (
-                    <div key={d} className="absolute" style={LEGEND_SLOTS[i].label}>
-                      <p className="font-headline text-xl text-on-surface leading-none tabular-nums">{Math.round(doshaPercentages[d])}%</p>
-                      <p className="font-label text-[11px] uppercase tracking-wide mt-0.5" style={{ color: GEM_HUE[d].base }}>{doshaDisplayName(d)}</p>
+                  {rows.map(({ dosha, vy, side }) => (
+                    <div key={dosha} className="absolute" style={{
+                      [side]: 0,
+                      top: `${(vy / 180) * 100}%`,
+                      transform: 'translateY(-50%)',
+                      width: 84,
+                      textAlign: side === 'right' ? 'left' : 'right',
+                    }}>
+                      <p className="font-headline text-xl text-on-surface leading-none tabular-nums">{Math.round(doshaPercentages[dosha])}%</p>
+                      <p className="font-label text-[11px] uppercase tracking-wide mt-0.5" style={{ color: GEM_HUE[dosha].base }}>{doshaDisplayName(dosha)}</p>
                     </div>
                   ))}
                 </div>
