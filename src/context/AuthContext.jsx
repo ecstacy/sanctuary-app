@@ -133,7 +133,11 @@ export function AuthProvider({ children }) {
       .eq('id', userId)
       .single()
     if (error) console.error('Failed to fetch profile:', error.message)
-    setProfile(data)
+    // Only replace the profile when the fetch actually returned one. A
+    // transient error (offline, token refresh in flight) returns null — and
+    // blanking a good cached profile would flash the home screen empty. Keep
+    // the last-known-good snapshot until a real profile arrives.
+    if (data) setProfile(data)
     // Cache the fresh profile so the next app open hydrates instantly
     // — no theme flash, no missing-name flash. Cleared on signOut.
     if (data) writeProfileCache(userId, data)

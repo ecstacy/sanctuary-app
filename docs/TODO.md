@@ -68,6 +68,7 @@ so Plus bought on Android/web still works.
 |---|------|-----|-------|
 | 9 | **Merge PR #16** | A | Security batch (audit + P0/P1 fixes) **+ the iOS free-tier gate**, which is logically separate — say the word and I'll split it out. ⚠️ Migration 014 is **already applied and verified in prod**; merging is just the code catching up |
 | 10 | **Install latest build on Pixel + verify** | A+C | APK builds from main; the Pixel keeps dropping off USB/wireless adb. Three changes merged in PR #13 have **never been eyeballed on-device**: pre-practice plan list, recommendation poses → asana detail, Ayurvedic tip contrast on the Pitta theme |
+| 38 | **Exact-match pre-rendered dosha gem** | A+C | The home state card now uses the **proportional WebGL gem** (`DoshaGem`) — accurate for all splits but more muted than the pre-rendered liquid-glass teardrop. The pre-rendered set (`DoshaGemImage` + `lib/doshaOutcome.js` + `public/dosha-gems/*.png`) was **categorical** (10 buckets); single-dominant emblems omitted the 3rd dosha, so a Kapha label pointed at no teal. **The quiz can produce 4,131 exact triples** (per `scoreQuiz`), so one-PNG-per-triple is infeasible — options are: bin to nearest 10% (66 imgs) or 5% (231 imgs), each emblem carrying a proportional 3rd ribbon; then swap `DoshaGemImage` back in with an exact-bin resolver. Enumerator logic captured in this session. Also reconcile `LEGEND_SLOTS` leader-lines to the actual zones. |
 
 ---
 
