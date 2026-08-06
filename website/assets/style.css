@@ -176,7 +176,7 @@ a[data-play-link] { visibility: hidden; }
   border: 1px solid rgba(37, 39, 31, 0.06);
   box-shadow: 0 30px 70px rgba(37, 39, 31, 0.16);
 }
-.hero-gem img { width: 100%; display: block; }
+.hero-gem img { width: 100%; height: auto; display: block; }
 
 /* Secondary showcase — the home screen in a phone frame + a line of copy. */
 .peek-grid {
@@ -563,9 +563,11 @@ footer {
   .peek-grid .phone { order: 0; }
   .steps, .features { grid-template-columns: 1fr; }
   .hero { padding: 40px 0 32px; }
-  /* Header: drop the in-page anchors so the brand never wraps, but KEEP the
-     real destinations — the quiz is the funnel entry and must stay reachable. */
-  .nav-links { gap: 16px; }
-  .nav-links a[href^="#"] { display: none; }
+  /* Header on mobile: drop the text nav links (they live in the footer, and the
+     hero's "Find your dosha" CTA carries the funnel) so the brand + language
+     switcher never overflow. The switcher is a <span>, so it stays. */
+  .nav-links { gap: 14px; }
+  .nav-links > a { display: none; }
   .brand span { font-size: 1.1rem; }
+  .lang-switch { margin-left: auto; }
 }
