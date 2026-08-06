@@ -428,6 +428,8 @@ const staticUrls = [
   { loc: `${SITE}/de/`, priority: '0.9' },
   { loc: `${SITE}/hi/`, priority: '0.9' },
   { loc: `${SITE}/quiz`, priority: '0.9' },
+  { loc: `${SITE}/de/quiz`, priority: '0.8' },
+  { loc: `${SITE}/hi/quiz`, priority: '0.8' },
   { loc: `${SITE}/poses/`, priority: '0.8' },
   { loc: `${SITE}/support`, priority: '0.6' },
   { loc: `${SITE}/privacy`, priority: '0.3' },

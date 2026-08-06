@@ -24,6 +24,8 @@
     hi: { soon: 'जल्द ही Google Play पर',       aria: 'जल्द ही Google Play पर — मुफ़्त दोष क्विज़ लें' },
   };
   var TXT = I18N[LANG] || I18N.en;
+  // Localised quiz path — the funnel destination for coming-soon badges.
+  var QUIZ = (LANG === 'de' || LANG === 'hi') ? '/' + LANG + '/quiz' : '/quiz';
 
   // ── Campaign attribution, persisted for the visit ──
   // The landing page carries the utm_* params, but the highest-intent path is
@@ -69,7 +71,7 @@
         if (!a.dataset.soon) {
           a.dataset.soon = '1';
           a.classList.add('play-badge--soon');
-          a.setAttribute('href', '/quiz');
+          a.setAttribute('href', QUIZ);
           a.setAttribute('aria-label', TXT.aria);
           a.innerHTML =
             '<span class="soon-pill"><span class="soon-dot"></span>' + TXT.soon + '</span>';
@@ -111,7 +113,7 @@
     // coming-soon, redirect them to /quiz so they aren't dead ends.
     if (!APP_LIVE) {
       (root || document).querySelectorAll('a[href*="play.google.com/store"]:not([data-play-link])').forEach(function (a) {
-        a.setAttribute('href', '/quiz');
+        a.setAttribute('href', QUIZ);
       });
     }
   }
