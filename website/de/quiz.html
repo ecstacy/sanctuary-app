@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>What's your dosha? — A 1-minute Ayurvedic quiz | The Sanctuary</title>
-  <meta name="description" content="Find your Ayurvedic constitution in five questions. Vata, pitta, or kapha — and what it means for how you should practise.">
+  <title>Was ist dein Dosha? — Ein 1-Minuten-Ayurveda-Quiz | The Sanctuary</title>
+  <meta name="description" content="Finde deine ayurvedische Konstitution in fünf Fragen. Vata, Pitta oder Kapha — und was das für deine Praxis bedeutet.">
   <link rel="icon" type="image/png" href="/assets/favicon.png">
-  <link rel="canonical" href="https://www.thesanctuaryteam.com/quiz">
+  <link rel="canonical" href="https://www.thesanctuaryteam.com/de/quiz">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -15,32 +15,32 @@
   <link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/quiz">
   <link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/quiz">
   <link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/quiz">
-  <meta property="og:title" content="What's your dosha? — a 1-minute Ayurvedic quiz">
-  <meta property="og:description" content="Five questions to find your constitution — vata, pitta, or kapha.">
+  <meta property="og:title" content="Was ist dein Dosha? — ein 1-Minuten-Ayurveda-Quiz">
+  <meta property="og:description" content="Fünf Fragen, um deine Konstitution zu finden — Vata, Pitta oder Kapha.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.thesanctuaryteam.com/quiz">
+  <meta property="og:url" content="https://www.thesanctuaryteam.com/de/quiz">
   <meta property="og:image" content="https://www.thesanctuaryteam.com/assets/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Find your dosha — The Sanctuary">
-  <meta name="twitter:description" content="A 5-question dosha quiz. Discover your Ayurvedic body type in a minute.">
+  <meta name="twitter:title" content="Finde dein Dosha — The Sanctuary">
+  <meta name="twitter:description" content="Ein 5-Fragen-Dosha-Quiz. Finde deinen ayurvedischen Körpertyp in einer Minute.">
   <meta name="twitter:image" content="https://www.thesanctuaryteam.com/assets/og.png">
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="/">
+    <a class="brand" href="/de/">
       <img src="/assets/logo.png" alt="">
       <span>The Sanctuary</span>
     </a>
     <nav class="nav-links">
-      <a href="/#how">How it works</a>
+      <a href="/de/#how">So funktioniert's</a>
       <a href="/support">Support</a>
-      <span class="lang-switch" aria-label="Language">
-        <a href="/quiz" aria-current="page">EN</a>
-        <a href="/de/quiz">DE</a>
+      <span class="lang-switch" aria-label="Sprache">
+        <a href="/quiz">EN</a>
+        <a href="/de/quiz" aria-current="page">DE</a>
         <a href="/hi/quiz">HI</a>
       </span>
     </nav>
@@ -50,27 +50,24 @@
 <main>
   <div class="wrap quiz-wrap">
 
-    <!-- Intro -->
     <section id="quiz-intro">
-      <p class="kicker">Ayurvedic constitution</p>
-      <h1>What&rsquo;s your dosha?</h1>
+      <p class="kicker">Ayurvedische Konstitution</p>
+      <h1>Was ist dein Dosha?</h1>
       <p class="sub">
-        In Ayurveda, your constitution &mdash; <em>prakriti</em> &mdash; shapes
-        how you should eat, rest, and practise. Five questions, about a minute.
+        Im Ayurveda prägt deine Konstitution &mdash; <em>Prakriti</em> &mdash; wie
+        du essen, ruhen und üben solltest. Fünf Fragen, etwa eine Minute.
       </p>
-      <button class="btn-primary" id="quiz-start" type="button">Start the quiz</button>
-      <p class="cta-note">No sign-up. Nothing stored on our servers.</p>
+      <button class="btn-primary" id="quiz-start" type="button">Quiz starten</button>
+      <p class="cta-note">Keine Anmeldung. Nichts auf unseren Servern gespeichert.</p>
     </section>
 
-    <!-- Question + result stage (JS-driven) -->
     <section id="quiz-stage" hidden aria-live="polite"></section>
 
-    <!-- No-JS fallback: the quiz is interactive, so give a real alternative -->
     <noscript>
       <p class="sub">
-        This quiz needs JavaScript. You can take the full assessment inside the
-        app instead &mdash;
-        <a href="https://play.google.com/store/apps/details?id=com.sanctuary.app">get The Sanctuary on Google Play</a>.
+        Dieses Quiz benötigt JavaScript. Du kannst die vollständige Bewertung
+        stattdessen in der App machen &mdash;
+        <a href="https://play.google.com/store/apps/details?id=com.sanctuary.app">hol dir The Sanctuary bei Google Play</a>.
       </p>
     </noscript>
 
@@ -80,18 +77,18 @@
 <footer>
   <div class="wrap">
     <div class="footer-grid">
-      <a class="brand" href="/">
+      <a class="brand" href="/de/">
         <img src="/assets/logo.png" alt="">
         <span>The Sanctuary</span>
       </a>
       <nav class="footer-links">
         <a href="/support">Support</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
+        <a href="/privacy">Datenschutz</a>
+        <a href="/terms">AGB</a>
       </nav>
     </div>
-    <p class="copyright">© 2026 The Sanctuary. Yoga is a practice, not a prescription —
-       see a professional for medical concerns.</p>
+    <p class="copyright">© 2026 The Sanctuary. Yoga ist eine Praxis, keine Verordnung —
+       wende dich bei gesundheitlichen Anliegen an Fachleute.</p>
   </div>
 </footer>
 
