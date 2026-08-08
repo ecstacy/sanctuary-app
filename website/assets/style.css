@@ -121,7 +121,9 @@ h1 {
    JS is blocked they stay hidden and the "Find your dosha" CTA carries the
    funnel. */
 a[data-play-link] { visibility: hidden; }
-.play-badge--soon { text-decoration: none; }
+/* Coming-soon pill is a status indicator, not a link (until the app is live) —
+   ignore all pointer interaction so it can't be clicked or hovered as a button. */
+.play-badge--soon { text-decoration: none; pointer-events: none; cursor: default; }
 .soon-pill {
   display: inline-flex; align-items: center; gap: 9px;
   height: 56px; padding: 0 22px; box-sizing: border-box;
