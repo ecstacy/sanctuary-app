@@ -93,7 +93,7 @@ const head = ({ title, description, canonical, jsonld }) => `<!doctype html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/assets/style.css?v=2">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:type" content="article">
@@ -140,7 +140,7 @@ const footer = () => `
   </div>
 </footer>
 
-<script src="/assets/site.js"></script>
+<script src="/assets/site.js?v=2"></script>
 </body>
 </html>
 `

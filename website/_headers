@@ -37,6 +37,12 @@
   # would-be phishing form injected into a page.
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://eu-assets.i.posthog.com https://eu.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://play.google.com; connect-src 'self' https://eu.i.posthog.com https://eu-assets.i.posthog.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
 
-# Generated pose pages and assets are immutable between deploys — cache hard.
+# Assets are NOT content-hashed (style.css, site.js, hero-*.png keep the same
+# name across deploys), so they must NOT be `immutable` — that told browsers to
+# cache them for a year and never revalidate, which pinned old CSS/images on
+# returning visitors no matter how many times they reloaded. Revalidate instead:
+# the browser keeps the bytes but checks ETag each load (a cheap 304 when
+# unchanged, fresh bytes the moment we redeploy). Pair with a ?v= on the asset
+# URLs when a change must reach already-cached browsers immediately.
 /assets/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=0, must-revalidate
