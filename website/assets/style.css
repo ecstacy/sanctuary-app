@@ -407,7 +407,11 @@ footer {
   background: var(--outline);
   border-radius: 999px;
 }
-.r-row.is-top .r-fill { background: var(--primary); }
+/* Colour each bar by its dosha, matched to the app's palette (vata violet,
+   pitta gold, kapha teal) — not a single green bar with the rest greyed out. */
+.r-fill--vata  { background: #6b62c4; }
+.r-fill--pitta { background: #d99a3c; }
+.r-fill--kapha { background: #3fa07a; }
 .r-pct {
   width: 42px;
   text-align: right;

@@ -229,7 +229,7 @@
   function bar(dosha, pct, isTop) {
     return '<div class="r-row' + (isTop ? ' is-top' : '') + '">' +
       '<span class="r-name">' + DOSHAS[dosha].label + '</span>' +
-      '<span class="r-track"><span class="r-fill" style="width:' + pct + '%"></span></span>' +
+      '<span class="r-track"><span class="r-fill r-fill--' + dosha + '" style="width:' + pct + '%"></span></span>' +
       '<span class="r-pct">' + pct + '%</span></div>';
   }
 
