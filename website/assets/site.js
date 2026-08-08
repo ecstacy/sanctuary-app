@@ -19,9 +19,9 @@
   // Localised copy for the coming-soon badge, keyed off the page's <html lang>.
   var LANG = (document.documentElement.lang || 'en').slice(0, 2);
   var I18N = {
-    en: { soon: 'Coming soon on Google Play', aria: 'Coming soon on Google Play — take the free dosha quiz' },
-    de: { soon: 'Bald bei Google Play',       aria: 'Bald bei Google Play — mach das kostenlose Dosha-Quiz' },
-    hi: { soon: 'जल्द ही Google Play पर',       aria: 'जल्द ही Google Play पर — मुफ़्त दोष क्विज़ लें' },
+    en: { soon: 'Coming soon on Google Play', aria: 'Coming soon on Google Play' },
+    de: { soon: 'Bald bei Google Play',       aria: 'Bald bei Google Play' },
+    hi: { soon: 'जल्द ही Google Play पर',       aria: 'जल्द ही Google Play पर' },
   };
   var TXT = I18N[LANG] || I18N.en;
   // Localised quiz path — the funnel destination for coming-soon badges.
@@ -68,21 +68,18 @@
     (root || document).querySelectorAll('a[data-play-link]').forEach(function (a) {
       if (!APP_LIVE) {
         // ── Coming-soon state ──
+        // The app isn't on Play yet, so this is a NON-interactive status pill —
+        // no href (linking it to /quiz was confusing), not focusable, and
+        // pointer-events:none in CSS. When APP_LIVE flips, the live branch
+        // below turns the same element into the real, deep-linked Play badge.
         if (!a.dataset.soon) {
           a.dataset.soon = '1';
           a.classList.add('play-badge--soon');
-          a.setAttribute('href', QUIZ);
+          a.removeAttribute('href');
+          a.setAttribute('role', 'img');
           a.setAttribute('aria-label', TXT.aria);
           a.innerHTML =
             '<span class="soon-pill"><span class="soon-dot"></span>' + TXT.soon + '</span>';
-          a.addEventListener('click', function () {
-            if (!window.posthog) return;
-            window.posthog.capture('coming_soon_badge_clicked', {
-              placement: a.dataset.placement || 'unknown',
-              utm_source: utmValue('utm_source'),
-              utm_campaign: utmValue('utm_campaign'),
-            });
-          });
         }
         a.style.visibility = 'visible';
         return;
