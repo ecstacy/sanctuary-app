@@ -267,7 +267,12 @@ footer {
 .copyright { font-size: 0.78rem; color: var(--outline); margin-top: 14px; }
 
 /* ── Legal / support pages ── */
-.page { padding: 56px 0 72px; max-width: 720px; }
+/* Doc pages (privacy, terms, support, faq): the container fills the standard
+   .wrap (1040, centred) so its left edge lines up with the header logo, and the
+   reading measure is capped on the content itself — left-aligned to that edge,
+   not a narrow column centred adrift with a big right-hand gap. */
+.page { padding: 56px 0 72px; }
+.page > * { max-width: 680px; }
 .page h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
 .page .updated { font-size: 0.8rem; color: var(--outline); margin-bottom: 36px; }
 .page h2 { font-size: 1.25rem; margin: 36px 0 12px; }
