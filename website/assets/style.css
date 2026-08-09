@@ -271,7 +271,7 @@ footer {
    .wrap (1040, centred) so its left edge lines up with the header logo, and the
    reading measure is capped on the content itself — left-aligned to that edge,
    not a narrow column centred adrift with a big right-hand gap. */
-.page { padding: 56px 0 72px; }
+.page { padding-top: 56px; padding-bottom: 72px; }
 .page > * { max-width: 680px; }
 .page h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
 .page .updated { font-size: 0.8rem; color: var(--outline); margin-bottom: 36px; }
