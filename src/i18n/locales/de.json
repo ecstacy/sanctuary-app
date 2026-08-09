@@ -1821,5 +1821,33 @@
       "seeMore": "Weitere Ideen für heute",
       "seeMorePlus": "Mehr sehen mit Plus"
     }
+  },
+  "mealCheck": {
+    "title": "Mahlzeit-Check",
+    "inputHelp": "Sag mir, was du gegessen hast — ich zeige, wie es deine Doshas bewegt.",
+    "inputPlaceholder": "z. B. Eier mit Toast und Avocado",
+    "checkCta": "Mahlzeit prüfen",
+    "confirmTitle": "Hast du das gegessen?",
+    "confirmHelp": "Tippe auf ein Lebensmittel, um es zu entfernen, oder füge Fehlendes hinzu.",
+    "noItemsYet": "Noch keine Lebensmittel — füge unten eins hinzu.",
+    "whichDidYouMean": "Welches „{{token}}\" meinst du?",
+    "dontHave": "„{{token}}\" haben wir noch nicht — wähle das Nächste oder überspringe es.",
+    "skip": "Überspringen",
+    "seeResultCta": "Wie es mich beeinflusst",
+    "resultKicker": "Deine Mahlzeit",
+    "verdictBalanced": "Diese Mahlzeit ist für dich weitgehend ausgeglichen.",
+    "verdictRaises": "Diese Mahlzeit erhöht dein {{dosha}}.",
+    "verdictMind": "Diese Mahlzeit erhöht {{dosha}} — dein dominantes Dosha, also lieber etwas zurücknehmen.",
+    "verdictWatch": "Diese Mahlzeit erhöht {{dosha}} — achte darauf, wenn du dazu neigst.",
+    "combosLabel": "Besser nicht kombinieren",
+    "rebalanceTitle": "Zum Ausgleichen",
+    "rebalanceHelp": "Das zusätzliche {{dosha}} beruhigen mit:",
+    "foodsLabel": "Lebensmittel",
+    "breathLabel": "Atem",
+    "checkAnother": "Weitere Mahlzeit prüfen",
+    "disclaimer": "Ein Wellness-Leitfaden, keine medizinische Beratung.",
+    "trialNote": "Kostenlose Testphase · noch {{count}} Tage",
+    "lockedBody": "Sieh, wie jede Mahlzeit deine Doshas bewegt — und wie du ausgleichst. Teil von Plus.",
+    "unlockCta": "Mit Plus freischalten"
   }
 }

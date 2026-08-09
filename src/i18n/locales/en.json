@@ -1821,5 +1821,33 @@
       "seeMore": "See today's other ideas",
       "seeMorePlus": "See more with Plus"
     }
+  },
+  "mealCheck": {
+    "title": "Meal Check",
+    "inputHelp": "Tell me what you ate — I'll show how it moves your doshas.",
+    "inputPlaceholder": "e.g. eggs with toast and avocado",
+    "checkCta": "Check my meal",
+    "confirmTitle": "Is this what you ate?",
+    "confirmHelp": "Tap a food to remove it, or add anything we missed.",
+    "noItemsYet": "No foods yet — add one below.",
+    "whichDidYouMean": "Which \"{{token}}\" did you mean?",
+    "dontHave": "We don't have \"{{token}}\" yet — pick the closest, or skip it.",
+    "skip": "Skip",
+    "seeResultCta": "See how it affects me",
+    "resultKicker": "Your meal",
+    "verdictBalanced": "This meal is broadly balanced for you.",
+    "verdictRaises": "This meal raises your {{dosha}}.",
+    "verdictMind": "This meal raises {{dosha}} — your dominant dosha, so worth easing off.",
+    "verdictWatch": "This meal raises {{dosha}} — keep an eye if you run high there.",
+    "combosLabel": "Worth not combining",
+    "rebalanceTitle": "To rebalance",
+    "rebalanceHelp": "Settle the extra {{dosha}} with:",
+    "foodsLabel": "Foods",
+    "breathLabel": "Breath",
+    "checkAnother": "Check another meal",
+    "disclaimer": "A wellness guide, not medical advice.",
+    "trialNote": "Free trial · {{count}} days left",
+    "lockedBody": "See how any meal moves your doshas — and how to rebalance. Part of Plus.",
+    "unlockCta": "Unlock with Plus"
   }
 }
