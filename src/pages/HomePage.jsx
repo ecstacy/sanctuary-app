@@ -781,6 +781,17 @@ export default function HomePage() {
             {t('home.nourish.title')}
           </p>
           <MealOfTheDayCard />
+          <button
+            onClick={() => navigate('/meal-check')}
+            className="w-full mt-3 bg-surface-container-low rounded-2xl p-4 border border-outline-variant/40 flex items-center gap-3 text-left"
+          >
+            <span className="material-symbols-outlined text-primary">restaurant_menu</span>
+            <span className="flex-1 min-w-0">
+              <span className="block font-headline text-base text-on-surface">{t('mealCheck.title')}</span>
+              <span className="block text-sm text-on-surface-variant truncate">{t('mealCheck.inputHelp')}</span>
+            </span>
+            <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+          </button>
         </div>
 
         {/* ── To favour / ease off — always on, keyed to current state (or
