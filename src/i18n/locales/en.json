@@ -1850,6 +1850,12 @@
     "lockedBody": "See how any meal moves your doshas — and how to rebalance. Part of Plus.",
     "unlockCta": "Unlock with Plus",
     "recentTitle": "Recent checks",
-    "balancedShort": "Balanced"
+    "balancedShort": "Balanced",
+    "homeBadge": "Free · {{count}}d",
+    "dirRaises": "raises",
+    "dirSettles": "settles",
+    "dirSteady": "steady",
+    "deleteAria": "Delete this check",
+    "swipeHint": "Swipe a check left to delete it."
   }
 }

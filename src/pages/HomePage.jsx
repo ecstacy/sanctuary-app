@@ -10,6 +10,7 @@ import useImpression from '../hooks/useImpression'
 import useVikritiSchedule from '../hooks/useVikritiSchedule'
 import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { useIsPremium } from '../hooks/useIsPremium'
+import { useMealCheckAccess } from '../hooks/useMealCheckAccess'
 import VikritiCard from '../components/VikritiCard'
 import ReminderPrompt from '../components/ReminderPrompt'
 import PaywallSheet from '../components/PaywallSheet'
@@ -174,6 +175,7 @@ export default function HomePage() {
   const location = useLocation()
   const { t } = useTranslation()
   const { profile, user } = useAuth()
+  const mealAccess = useMealCheckAccess()
   // checkin is still fed to the composer (null = no explicit mood); the home
   // no longer exposes a mood picker, so there's no setter.
   const [checkedIn] = useState(null)
@@ -785,9 +787,16 @@ export default function HomePage() {
             onClick={() => navigate('/meal-check')}
             className="w-full mt-3 bg-surface-container-low rounded-2xl p-4 border border-outline-variant/40 flex items-center gap-3 text-left"
           >
-            <span className="material-symbols-outlined text-primary">restaurant_menu</span>
+            <span className="material-symbols-outlined text-primary">query_stats</span>
             <span className="flex-1 min-w-0">
-              <span className="block font-headline text-base text-on-surface">{t('mealCheck.title')}</span>
+              <span className="flex items-center gap-2">
+                <span className="font-headline text-base text-on-surface">{t('mealCheck.title')}</span>
+                {(mealAccess.state === 'trial' || mealAccess.state === 'trial_fresh') && (
+                  <span className="shrink-0 font-label text-[10px] uppercase tracking-wide text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded-full">
+                    {t('mealCheck.homeBadge', { count: mealAccess.trialDaysLeft })}
+                  </span>
+                )}
+              </span>
               <span className="block text-sm text-on-surface-variant truncate">{t('mealCheck.inputHelp')}</span>
             </span>
             <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>

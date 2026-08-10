@@ -8,13 +8,13 @@
 //  Every completed check is logged to Supabase (cross-device history).
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { useMealCheckAccess } from '../hooks/useMealCheckAccess'
 import { parseMeal, assessMeal, remediesFor } from '../lib/mealCheck'
-import { saveMealLog, startMealTrialIfNeeded, listMealLogs } from '../lib/mealLog'
+import { saveMealLog, startMealTrialIfNeeded, listMealLogs, deleteMealLog } from '../lib/mealLog'
 import { getIngredient } from '../lib/ingredients'
 import { PRANAYAMAS } from '../data/pranayamas'
 import { doshaDisplayName } from '../i18n/contentI18n'
@@ -24,14 +24,16 @@ import { track } from '../lib/track'
 
 const DOSHAS = ['vata', 'pitta', 'kapha']
 
-function DoshaBars({ perDosha, headline }) {
+function DoshaBars({ t, perDosha, headline }) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3.5">
       {DOSHAS.map((d) => {
         const v = perDosha?.[d] || 0
         const pct = Math.min(100, Math.round(Math.abs(v) * 100))
-        const arrow = v > 0.15 ? 'arrow_upward' : v < -0.15 ? 'arrow_downward' : 'remove'
+        const dir = v > 0.15 ? 'up' : v < -0.15 ? 'down' : 'steady'
+        const label = dir === 'up' ? t('mealCheck.dirRaises') : dir === 'down' ? t('mealCheck.dirSettles') : t('mealCheck.dirSteady')
         const isHead = headline === d
+        const muted = dir === 'steady'
         return (
           <div key={d} className="flex items-center gap-3">
             <span
@@ -41,14 +43,16 @@ function DoshaBars({ perDosha, headline }) {
               {doshaDisplayName(d)}
             </span>
             <div className="flex-1 h-2.5 rounded-full bg-surface-container overflow-hidden">
-              <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: GEM_HUE[d].base }} />
+              <div
+                className="h-full rounded-full transition-all"
+                style={{ width: `${Math.max(pct, muted ? 4 : pct)}%`, background: muted ? 'var(--color-outline)' : GEM_HUE[d].base }}
+              />
             </div>
             <span
-              className="material-symbols-outlined text-base w-6 text-right"
-              style={{ color: v === 0 ? 'var(--color-outline)' : GEM_HUE[d].base }}
-              aria-hidden="true"
+              className="w-16 shrink-0 text-right text-[11px] font-label"
+              style={{ color: muted ? 'var(--color-on-surface-variant)' : GEM_HUE[d].base }}
             >
-              {arrow}
+              {label}
             </span>
           </div>
         )
@@ -74,6 +78,28 @@ export default function MealCheckPage() {
 
   const dietPrefs = profile?.diet_prefs || {}
 
+  // Restore the result when returning from a remedy detail page. Tapping a
+  // remedy leaves this route (so the page remounts on back); we stash the result
+  // and bring the user straight back to it instead of a blank input screen.
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem('mealCheck.resume')
+      if (raw) {
+        sessionStorage.removeItem('mealCheck.resume')
+        const saved = JSON.parse(raw)
+        if (saved?.result && Date.now() - (saved.ts || 0) < 60_000) {
+          setResult(saved.result); setText(saved.text || ''); setPhase('result')
+        }
+      }
+    } catch { /* sessionStorage unavailable — ignore */ }
+  }, [])
+
+  // Open a remedy detail, preserving the current result so back returns to it.
+  function openDetail(path) {
+    try { sessionStorage.setItem('mealCheck.resume', JSON.stringify({ result, text, ts: Date.now() })) } catch { /* ignore */ }
+    navigate(path)
+  }
+
   // Load recent checks whenever the user lands back on the input screen
   // (cross-device history; fails soft to [] until migration 018 is deployed).
   useEffect(() => {
@@ -89,7 +115,7 @@ export default function MealCheckPage() {
   if (!access.allowed) {
     return (
       <div className="min-h-screen bg-background text-on-surface font-body px-6 pb-24">
-        <TopBar t={t} navigate={navigate} />
+        <TopBar t={t} onBack={() => navigate(-1)} />
         <div className="max-w-md mx-auto mt-10 text-center">
           <span className="material-symbols-outlined text-4xl text-primary">restaurant_menu</span>
           <h1 className="font-headline text-2xl mt-3 mb-2">{t('mealCheck.title')}</h1>
@@ -121,7 +147,10 @@ export default function MealCheckPage() {
     setItems(parsed.matched.map((m) => ({ id: m.id, name: m.name })))
     setAmbiguous(parsed.ambiguous)
     setUnknown(parsed.unknown)
-    parsed.unknown.forEach((u) => track('meal_check_coverage_miss', { token: u.token }))
+    // Counts only — food text is special-category diet data and must not reach
+    // analytics (see migration 017 / analytics-events §5.14). The actual
+    // unmatched terms are captured server-side for dataset review (task #44).
+    if (parsed.unknown.length) track('meal_check_coverage_miss', { count: parsed.unknown.length })
     // Skip the confirm step only when the parse was completely clean.
     if (parsed.matched.length && !parsed.ambiguous.length && !parsed.unknown.length) {
       computeResult(parsed.matched.map((m) => ({ id: m.id, name: m.name })))
@@ -178,6 +207,18 @@ export default function MealCheckPage() {
     setPhase('input'); setText(''); setItems([]); setAmbiguous([]); setUnknown([]); setResult(null)
   }
 
+  // In-flow back: step back through the phases before leaving the feature, so a
+  // single back never skips from a result straight past the input.
+  function onBack() {
+    if (phase === 'result' || phase === 'confirm') { setPhase('input'); setResult(null) }
+    else navigate(-1)
+  }
+
+  async function removeHistory(id) {
+    setHistory((prev) => prev.filter((l) => l.id !== id))   // optimistic
+    if (user?.id) { await deleteMealLog(user.id, id); track('meal_check_history_deleted', {}) }
+  }
+
   // Re-open a past check from its stored snapshot (no re-computation, so history
   // reads back exactly as it did the day it was logged).
   function viewHistory(log) {
@@ -199,7 +240,7 @@ export default function MealCheckPage() {
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-background text-on-surface font-body px-6 pb-28">
-      <TopBar t={t} navigate={navigate} />
+      <TopBar t={t} onBack={onBack} />
 
       {access.state !== 'premium' && (
         <p className="max-w-md mx-auto -mt-2 mb-4 text-center text-xs text-on-surface-variant">
@@ -234,34 +275,11 @@ export default function MealCheckPage() {
                 <p className="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-3">
                   {t('mealCheck.recentTitle')}
                 </p>
+                <p className="text-[11px] text-on-surface-variant/70 mb-2">{t('mealCheck.swipeHint')}</p>
                 <div className="space-y-2">
-                  {history.map((log) => {
-                    const h = log.assessment?.headline
-                    return (
-                      <button
-                        key={log.id}
-                        onClick={() => viewHistory(log)}
-                        className="w-full flex items-center gap-3 bg-surface-container-low rounded-xl p-3.5 border border-outline-variant/40 text-left"
-                      >
-                        <span className="flex-1 min-w-0">
-                          <span className="block text-sm text-on-surface truncate">{log.input_text || '—'}</span>
-                          <span className="block text-xs text-on-surface-variant">
-                            {new Date(log.eaten_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
-                          </span>
-                        </span>
-                        {h ? (
-                          <span
-                            className="shrink-0 text-[11px] font-label uppercase tracking-wide px-2.5 py-1 rounded-full"
-                            style={{ background: `${GEM_HUE[h].base}22`, color: GEM_HUE[h].base }}
-                          >
-                            {doshaDisplayName(h)}
-                          </span>
-                        ) : (
-                          <span className="shrink-0 text-[11px] text-on-surface-variant">{t('mealCheck.balancedShort')}</span>
-                        )}
-                      </button>
-                    )
-                  })}
+                  {history.map((log) => (
+                    <HistoryRow key={log.id} t={t} log={log} onOpen={viewHistory} onDelete={removeHistory} />
+                  ))}
                 </div>
               </div>
             )}
@@ -344,18 +362,74 @@ export default function MealCheckPage() {
         )}
 
         {phase === 'result' && result && (
-          <ResultView t={t} result={result} navigate={navigate} onReset={reset} />
+          <ResultView t={t} result={result} onOpenDetail={openDetail} onReset={reset} />
         )}
       </div>
     </div>
   )
 }
 
-function TopBar({ t, navigate }) {
+// A recent-check row that reveals a delete action on left-swipe.
+function HistoryRow({ t, log, onOpen, onDelete }) {
+  const [dx, setDx] = useState(0)
+  const [dragging, setDragging] = useState(false)
+  const startX = useRef(0)
+  const base = useRef(0)
+  const moved = useRef(false)
+  const h = log.assessment?.headline
+
+  const onStart = (x) => { startX.current = x; base.current = dx; moved.current = false; setDragging(true) }
+  const onMove = (x) => {
+    const d = base.current + (x - startX.current)
+    if (Math.abs(x - startX.current) > 4) moved.current = true
+    setDx(Math.max(-84, Math.min(0, d)))
+  }
+  const onEnd = () => { setDragging(false); setDx(dx < -42 ? -76 : 0) }
+
+  return (
+    <div className="relative overflow-hidden rounded-xl">
+      <button
+        onClick={() => onDelete(log.id)}
+        aria-label={t('mealCheck.deleteAria')}
+        className="absolute inset-y-0 right-0 w-[76px] flex items-center justify-center"
+        style={{ background: '#b3261e', color: 'white' }}
+      >
+        <span className="material-symbols-outlined">delete</span>
+      </button>
+      <button
+        onClick={() => { if (dx < -10) { setDx(0); return } if (!moved.current) onOpen(log) }}
+        onTouchStart={(e) => onStart(e.touches[0].clientX)}
+        onTouchMove={(e) => onMove(e.touches[0].clientX)}
+        onTouchEnd={onEnd}
+        className="relative w-full flex items-center gap-3 bg-surface-container-low p-3.5 border border-outline-variant/40 text-left rounded-xl"
+        style={{ transform: `translateX(${dx}px)`, transition: dragging ? 'none' : 'transform 0.18s ease' }}
+      >
+        <span className="flex-1 min-w-0">
+          <span className="block text-sm text-on-surface truncate">{log.input_text || '—'}</span>
+          <span className="block text-xs text-on-surface-variant">
+            {new Date(log.eaten_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+          </span>
+        </span>
+        {h ? (
+          <span
+            className="shrink-0 text-[11px] font-label uppercase tracking-wide px-2.5 py-1 rounded-full"
+            style={{ background: `${GEM_HUE[h].base}22`, color: GEM_HUE[h].base }}
+          >
+            {doshaDisplayName(h)}
+          </span>
+        ) : (
+          <span className="shrink-0 text-[11px] text-on-surface-variant">{t('mealCheck.balancedShort')}</span>
+        )}
+      </button>
+    </div>
+  )
+}
+
+function TopBar({ t, onBack }) {
   return (
     <header className="flex items-center py-4">
       <button
-        onClick={() => navigate(-1)}
+        onClick={onBack}
         className="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center"
         aria-label={t('common.back', 'Back')}
       >
@@ -365,7 +439,7 @@ function TopBar({ t, navigate }) {
   )
 }
 
-function ResultView({ t, result, navigate, onReset }) {
+function ResultView({ t, result, onOpenDetail, onReset }) {
   const { assessment: a, remedies: r } = result
   const head = a.headline
   const dLabel = head ? doshaDisplayName(head) : null
@@ -384,7 +458,7 @@ function ResultView({ t, result, navigate, onReset }) {
       <h2 className="font-headline text-2xl leading-snug mb-4">{verdict}</h2>
 
       <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-5 mb-6">
-        <DoshaBars perDosha={a.perDosha} headline={head} />
+        <DoshaBars t={t} perDosha={a.perDosha} headline={head} />
       </div>
 
       {r.combos?.length > 0 && (
@@ -408,7 +482,7 @@ function ResultView({ t, result, navigate, onReset }) {
                 {r.foods.map((f) => (
                   <button
                     key={f.id}
-                    onClick={() => navigate(`/ingredient/${f.id}`)}
+                    onClick={() => onOpenDetail(`/ingredient/${f.id}`)}
                     className="inline-flex items-center gap-1.5 bg-surface-container border border-outline-variant rounded-full px-3.5 py-2 text-sm"
                   >
                     <span className="material-symbols-outlined text-base text-primary">nutrition</span>
@@ -426,7 +500,7 @@ function ResultView({ t, result, navigate, onReset }) {
                 {r.practices.map((p) => (
                   <button
                     key={p.id}
-                    onClick={() => navigate(`/pranayama/${p.id}`)}
+                    onClick={() => onOpenDetail(`/pranayama/${p.id}`)}
                     className="inline-flex items-center gap-1.5 bg-surface-container border border-outline-variant rounded-full px-3.5 py-2 text-sm"
                   >
                     <span className="material-symbols-outlined text-base text-primary">air</span>
