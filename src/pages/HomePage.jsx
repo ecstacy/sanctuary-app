@@ -413,7 +413,15 @@ export default function HomePage() {
   const isElevated     = !!signalDosha
   const currentDosha   = signalDosha || (prakritiValid ? prakriti : null)
   const currentDoshaName = currentDosha ? doshaDisplayName(currentDosha) : null
-  const doshaPercentages = profile?.dosha_details?.percentages || null
+  // The gem shows the CURRENT constitution split. A fresh vikriti check-in
+  // (within the 14-day window) reflects how the user is right now, so it takes
+  // precedence over the birth prakriti; otherwise fall back to the prakriti
+  // quiz percentages. Without this, re-taking the vikriti quiz never moves the
+  // Home gem (it stayed pinned to the original prakriti). See task #46.
+  const doshaPercentages =
+    (vikritiFresh && vikriti.lastVikritiPercentages) ||
+    profile?.dosha_details?.percentages ||
+    null
   // Favour list follows the current state (or constitution; balanced fallback).
   const favourDosha    = currentDosha
   const favourTips     = t(`home.favour.${favourDosha || 'balanced'}`, { returnObjects: true })

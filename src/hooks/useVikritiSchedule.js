@@ -20,6 +20,9 @@ import { useAuth } from '../context/AuthContext'
  *    lastVikritiAt         — ISO string or null
  *    lastVikritiPrimary    — 'vata' | 'pitta' | 'kapha' | null
  *    lastVikritiSecondary  — 'vata' | 'pitta' | 'kapha' | null
+ *    lastVikritiPercentages— { vata, pitta, kapha } | null  (the latest check-in's
+ *                            constitution split, so Home's gem can reflect the
+ *                            current state, not just the birth prakriti)
  *    daysSinceLast         — integer (Infinity if no vikriti yet)
  *    vikritiCount          — how many vikriti assessments the user has taken
  *    nextDueAt             — ISO string of when the next one should happen
@@ -57,6 +60,26 @@ function writeCache(userId, state) {
   } catch { /* quota — ignore */ }
 }
 
+// The latest vikriti row's constitution split, so Home can show the current
+// state rather than the birth prakriti. Prefer the stored percentages
+// (raw_details.percentages, written by the quiz); fall back to normalising the
+// raw score columns. Returns null when nothing usable is present.
+function derivePercentages(row) {
+  if (!row) return null
+  const stored = row.raw_details?.percentages
+  if (stored && ['vata', 'pitta', 'kapha'].every(d => typeof stored[d] === 'number')) {
+    return { vata: stored.vata, pitta: stored.pitta, kapha: stored.kapha }
+  }
+  const v = row.vata_score, p = row.pitta_score, k = row.kapha_score
+  const total = (v || 0) + (p || 0) + (k || 0)
+  if (!total) return null
+  return {
+    vata:  Math.round((v / total) * 100),
+    pitta: Math.round((p / total) * 100),
+    kapha: Math.round((k / total) * 100),
+  }
+}
+
 // Recompute time-derived fields from a cached snapshot so `daysSinceLast`
 // and `isDue` stay correct even if the cache is hours/days old.
 function refreshDerived(cached) {
@@ -90,6 +113,7 @@ export default function useVikritiSchedule() {
       lastVikritiAt:        null,
       lastVikritiPrimary:   null,
       lastVikritiSecondary: null,
+      lastVikritiPercentages: null,
       daysSinceLast:        Infinity,
       vikritiCount:         0,
       nextDueAt:            null,
@@ -115,7 +139,7 @@ export default function useVikritiSchedule() {
       // queries; cheaper than pulling history we don't need.
       const { data: latest, error: latestErr } = await supabase
         .from('dosha_assessments')
-        .select('created_at, primary_dosha, secondary_dosha')
+        .select('created_at, primary_dosha, secondary_dosha, vata_score, pitta_score, kapha_score, raw_details')
         .eq('user_id', user.id)
         .eq('assessment_type', 'vikriti')
         .order('created_at', { ascending: false })
@@ -138,6 +162,7 @@ export default function useVikritiSchedule() {
       const lastVikritiAt       = latest?.created_at ?? null
       const lastVikritiPrimary  = latest?.primary_dosha ?? null
       const lastVikritiSecondary = latest?.secondary_dosha ?? null
+      const lastVikritiPercentages = derivePercentages(latest)
 
       // Pick the cadence based on how many checks the user has done.
       const intervalDays = vikritiCount < INITIAL_PHASE_COUNT
@@ -160,6 +185,7 @@ export default function useVikritiSchedule() {
         lastVikritiAt,
         lastVikritiPrimary,
         lastVikritiSecondary,
+        lastVikritiPercentages,
         daysSinceLast,
         vikritiCount,
         nextDueAt,
