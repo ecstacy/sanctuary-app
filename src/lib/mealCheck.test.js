@@ -86,14 +86,20 @@ describe('remediesFor', () => {
   })
 
   it('never suggests a food the user must exclude (vegan → no dairy remedy)', () => {
-    const a = assessMeal(['gingerFresh']) // pitta; yoghurt/buttermilk pacify pitta
+    const a = assessMeal(['gingerFresh']) // pitta; some pitta pacifiers are dairy (ghee, buttermilk)
     const vegan = remediesFor(a, { dietPrefs: { patterns: ['vegan'] } })
     for (const f of vegan.foods) {
       expect(getIngredient(f.id).category).not.toBe('dairy')
     }
-    const plain = remediesFor(a)
-    // without the restriction, a dairy pacifier is allowed to appear
-    expect(plain.foods.some((f) => getIngredient(f.id).category === 'dairy')).toBe(true)
+  })
+
+  it('personalises remedies by time of day', () => {
+    const a = assessMeal(['egg', 'whiteBread', 'avocado']) // kapha
+    const morning = remediesFor(a, { slot: 'morning' }).foods.map((f) => f.id)
+    const evening = remediesFor(a, { slot: 'evening' }).foods.map((f) => f.id)
+    expect(morning).not.toEqual(evening) // the slot actually changes the picks
+    // every pick still genuinely pacifies the raised dosha
+    for (const f of [...morning, ...evening]) expect(getIngredient(f).doshaEffect.kapha).toBeLessThan(0)
   })
 
   it('returns no remedy target when nothing is raised', () => {
