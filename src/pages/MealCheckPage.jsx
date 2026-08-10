@@ -16,6 +16,8 @@ import { useMealCheckAccess } from '../hooks/useMealCheckAccess'
 import { parseMeal, assessMeal, remediesFor } from '../lib/mealCheck'
 import { saveMealLog, startMealTrialIfNeeded, listMealLogs, deleteMealLog, logMealSearchTerms } from '../lib/mealLog'
 import { getIngredient } from '../lib/ingredients'
+import { exclusionFor } from '../lib/dietSafety'
+import { formFor, curatedFor } from '../lib/consumableForms'
 import { PRANAYAMAS } from '../data/pranayamas'
 import { doshaDisplayName } from '../i18n/contentI18n'
 import { GEM_HUE } from '../components/DoshaGem'
@@ -24,41 +26,91 @@ import { track } from '../lib/track'
 
 const DOSHAS = ['vata', 'pitta', 'kapha']
 
-function DoshaBars({ t, perDosha, headline }) {
+// Dosha display metadata for the result graphic. Colours follow the Dosha page
+// tokens (--color-vata/pitta/kapha), NOT the gem palette — the two differ and
+// are being unified app-wide (task #48). Elements match DoshaProfileContent.
+const DOSHA_META = {
+  vata:  { hex: 'var(--color-vata)',  bar: 'bg-vata',  element: 'Air + Ether' },
+  pitta: { hex: 'var(--color-pitta)', bar: 'bg-pitta', element: 'Fire + Water' },
+  kapha: { hex: 'var(--color-kapha)', bar: 'bg-kapha', element: 'Earth + Water' },
+}
+
+// Direction of the meal's push on a dosha, from the net per-dosha shift. Derived
+// here (not read from assessment.dir) so it works for both a live check and a
+// re-opened history snapshot, which only stores perDosha.
+function pushDir(v) {
+  return v > 0.15 ? 'raises' : v < -0.15 ? 'eases' : 'steady'
+}
+
+// The constitution graphic — the Dosha page's stacked bar + legend, now with
+// each dosha's push from THIS meal beside it. When the user has no stored
+// percentages we drop the bar and show an effect-only list.
+function ConstitutionEffect({ t, percentages, perDosha, headline }) {
+  const hasPct = percentages && DOSHAS.some((d) => (percentages[d] || 0) > 0)
+  // Row order: dominance when we have a constitution, else by push magnitude.
+  const order = [...DOSHAS].sort((a, b) =>
+    hasPct ? (percentages[b] || 0) - (percentages[a] || 0)
+           : Math.abs(perDosha?.[b] || 0) - Math.abs(perDosha?.[a] || 0))
+
   return (
-    <div className="space-y-3.5">
-      {DOSHAS.map((d) => {
-        const v = perDosha?.[d] || 0
-        const pct = Math.min(100, Math.round(Math.abs(v) * 100))
-        const dir = v > 0.15 ? 'up' : v < -0.15 ? 'down' : 'steady'
-        const label = dir === 'up' ? t('mealCheck.dirRaises') : dir === 'down' ? t('mealCheck.dirSettles') : t('mealCheck.dirSteady')
-        const isHead = headline === d
-        const muted = dir === 'steady'
-        return (
-          <div key={d} className="flex items-center gap-3">
-            <span
-              className="w-14 shrink-0 text-xs font-label uppercase tracking-wider"
-              style={{ color: GEM_HUE[d].base, opacity: isHead ? 1 : 0.85 }}
-            >
-              {doshaDisplayName(d)}
-            </span>
-            <div className="flex-1 h-2.5 rounded-full bg-surface-container overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all"
-                style={{ width: `${Math.max(pct, muted ? 4 : pct)}%`, background: muted ? 'var(--color-outline)' : GEM_HUE[d].base }}
-              />
+    <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-5 mb-4">
+      <p className="font-label text-[11px] uppercase tracking-[0.15em] text-on-surface-variant mb-4">
+        {hasPct ? t('mealCheck.constitutionLabel') : t('mealCheck.effectOnlyLabel')}
+      </p>
+
+      {hasPct && (
+        <div className="h-3 rounded-full overflow-hidden flex gap-px mb-5 bg-surface-container-high">
+          {order.filter((d) => (percentages[d] || 0) > 0).map((d) => (
+            <div
+              key={d}
+              className={`h-full ${DOSHA_META[d].bar}`}
+              style={{ width: `${percentages[d]}%` }}
+              role="img"
+              aria-label={`${doshaDisplayName(d)} ${percentages[d]}%`}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className="flex flex-col">
+        {order.map((d) => {
+          const dir = pushDir(perDosha?.[d] || 0)
+          const isHead = headline === d
+          return (
+            <div key={d} className="flex items-center gap-3 py-2.5 border-t border-outline-variant/25 first:border-t-0">
+              <span className={`w-2.5 h-2.5 rounded-full ${DOSHA_META[d].bar} shrink-0`} aria-hidden="true" />
+              <span className="min-w-0">
+                <span className="font-body font-semibold text-sm" style={{ color: isHead ? DOSHA_META[d].hex : 'var(--color-on-surface)' }}>
+                  {doshaDisplayName(d)}
+                </span>
+                <span className="block font-label text-[11px] text-on-surface-variant uppercase tracking-wide">
+                  {DOSHA_META[d].element}
+                </span>
+              </span>
+              {hasPct && (
+                <span className="ml-auto font-headline text-lg text-on-surface tabular-nums leading-none">
+                  {Math.round(percentages[d])}%
+                </span>
+              )}
+              <PushBadge t={t} dosha={d} dir={dir} className={hasPct ? '' : 'ml-auto'} />
             </div>
-            <span
-              className="w-16 shrink-0 text-right text-[11px] font-label"
-              style={{ color: muted ? 'var(--color-on-surface-variant)' : GEM_HUE[d].base }}
-            >
-              {label}
-            </span>
-          </div>
-        )
-      })}
+          )
+        })}
+      </div>
     </div>
   )
+}
+
+function PushBadge({ t, dosha, dir, className = '' }) {
+  const hex = DOSHA_META[dosha].hex
+  const base = 'shrink-0 text-[10px] font-label font-bold uppercase tracking-wide rounded-md px-2 py-1 min-w-[72px] text-center'
+  if (dir === 'raises') {
+    return <span className={`${base} ${className}`} style={{ background: hex, color: '#fff' }}>↑ {t('mealCheck.pushRaises')}</span>
+  }
+  if (dir === 'eases') {
+    return <span className={`${base} ${className}`} style={{ background: `color-mix(in srgb, ${hex} 15%, transparent)`, color: hex }}>↓ {t('mealCheck.pushEases')}</span>
+  }
+  return <span className={`${base} ${className} bg-surface-container text-on-surface-variant`}>– {t('mealCheck.pushSteady')}</span>
 }
 
 export default function MealCheckPage() {
@@ -172,8 +224,9 @@ export default function MealCheckPage() {
   }
   function dismissUnknown(token) { setUnknown((prev) => prev.filter((u) => u.token !== token)) }
 
-  function computeResult(list) {
+  function computeResult(list, opts = {}) {
     const finalItems = list || items
+    setItems(finalItems)   // keep the editable chip list in sync with the result
     const ids = finalItems.map((i) => i.id)
     const assessment = assessMeal(ids, profile)
     const hr = new Date().getHours()
@@ -181,20 +234,37 @@ export default function MealCheckPage() {
     const remedies = remediesFor(assessment, { dietPrefs, slot })
     setResult({ assessment, remedies })
     setPhase('result')
-    track('meal_check_completed', {
+    track(opts.event || 'meal_check_completed', {
       item_count: ids.length,
       headline: assessment.headline,
       concern: assessment.concern,
     })
     // Persist + start the trial clock (fire-and-forget; never blocks the UI).
-    persist(finalItems, assessment, remedies)
+    persist(finalItems, assessment, remedies, opts.inputText)
   }
 
-  async function persist(finalItems, assessment, remedies) {
+  // Editing the meal from the result screen recomputes + re-logs as an edited
+  // check (its own event, so edits don't inflate the "completed" funnel).
+  function editItems(nextItems) {
+    const label = nextItems.map((i) => i.name).join(', ')
+    computeResult(nextItems, { event: 'meal_check_edited', inputText: label })
+  }
+  function resultRemoveItem(id) { editItems(items.filter((i) => i.id !== id)) }
+  function resultAddFood(query) {
+    const parsed = parseMeal(query)
+    const found = parsed.matched
+      .filter((m) => !items.some((i) => i.id === m.id))
+      .map((m) => ({ id: m.id, name: m.name }))
+    if (!found.length) return false
+    editItems([...items, ...found])
+    return true
+  }
+
+  async function persist(finalItems, assessment, remedies, inputTextOverride) {
     if (!user?.id) return
     const started = await startMealTrialIfNeeded(user.id, profile?.meal_check_trial_started_at)
     await saveMealLog(user.id, {
-      inputText: text.trim(),
+      inputText: (inputTextOverride ?? text).trim() || null,
       itemIds: finalItems.map((i) => i.id),
       assessment: {
         perDosha: assessment.perDosha,
@@ -234,8 +304,16 @@ export default function MealCheckPage() {
     const practices = (snap.remedies?.practices || [])
       .map((id) => { const p = PRANAYAMAS[id]; return p ? { id, sanskrit: p.sanskrit, english: p.english } : null })
       .filter(Boolean)
+    const restoredItems = (log.item_ids || [])
+      .map((id) => { const f = getIngredient(id); return f ? { id, name: f.name } : null })
+      .filter(Boolean)
+    setItems(restoredItems)
     setResult({
-      assessment: { perDosha: snap.perDosha || {}, headline: snap.headline || null, concern: snap.concern, lens: snap.lens },
+      assessment: {
+        items: restoredItems.map((i) => i.id),
+        perDosha: snap.perDosha || {}, headline: snap.headline || null,
+        concern: snap.concern, lens: snap.lens, prakriti: snap.lens,
+      },
       remedies: { target: snap.headline || null, foods, practices, combos: [] },
     })
     setText(log.input_text || '')
@@ -367,7 +445,17 @@ export default function MealCheckPage() {
         )}
 
         {phase === 'result' && result && (
-          <ResultView t={t} result={result} onOpenDetail={openDetail} onReset={reset} />
+          <ResultView
+            t={t}
+            result={result}
+            items={items}
+            profile={profile}
+            dietPrefs={dietPrefs}
+            onRemoveItem={resultRemoveItem}
+            onAddFood={resultAddFood}
+            onOpenDetail={openDetail}
+            onReset={reset}
+          />
         )}
       </div>
     </div>
@@ -444,7 +532,44 @@ function TopBar({ t, onBack }) {
   )
 }
 
-function ResultView({ t, result, onOpenDetail, onReset }) {
+// Personalized "what this means" — framed to the concern and the user's own
+// constitution, not a generic blurb. Falls through to a balanced read.
+function meansText(t, a) {
+  const head = a.headline
+  const lensLabel = a.lens ? doshaDisplayName(a.lens) : null
+  const surfaceKey = { pitta: 'surfacePitta', vata: 'surfaceVata', kapha: 'surfaceKapha' }
+  if (head && a.concern === 'mind') {
+    return t('mealCheck.meansMind', {
+      dosha: doshaDisplayName(head),
+      element: DOSHA_META[head].element,
+      surface: t(`mealCheck.${surfaceKey[head]}`),
+    })
+  }
+  if (head && a.concern === 'watch') return t('mealCheck.meansWatch', { dosha: doshaDisplayName(head) })
+  if (a.concern === 'good' && lensLabel) return t('mealCheck.meansGood', { dosha: lensLabel })
+  return t('mealCheck.meansBalanced')
+}
+
+// Compose the actionable rebalance list: marquee curated combos first (each
+// safety-gated), then a per-ingredient consumable form for whatever the engine
+// surfaced. Deduped by id, capped so the section stays scannable.
+function buildRebalance(target, foods, dietPrefs) {
+  if (!target) return []
+  const isSafe = (id) => { const ing = getIngredient(id); return ing ? !exclusionFor(ing, dietPrefs)?.excluded : false }
+  const curated = curatedFor(target, isSafe)
+  const perFood = (foods || []).map((f) => ({ id: f.id, ...formFor(getIngredient(f.id), f.name) }))
+  const seen = new Set()
+  const out = []
+  for (const item of [...curated, ...perFood]) {
+    if (!item.id || seen.has(item.id)) continue
+    seen.add(item.id)
+    out.push(item)
+    if (out.length >= 4) break
+  }
+  return out
+}
+
+function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddFood, onOpenDetail, onReset }) {
   const { assessment: a, remedies: r } = result
   const head = a.headline
   const dLabel = head ? doshaDisplayName(head) : null
@@ -457,17 +582,35 @@ function ResultView({ t, result, onOpenDetail, onReset }) {
         ? t('mealCheck.verdictWatch', { dosha: dLabel })
         : t('mealCheck.verdictRaises', { dosha: dLabel })
 
+  const percentages = profile?.dosha_details?.percentages || null
+  const rebalance = buildRebalance(head, r.foods, dietPrefs)
+  const eatDrinkTitle = head
+    ? t(`mealCheck.eatDrink${head.charAt(0).toUpperCase() + head.slice(1)}`)
+    : null
+
   return (
     <section>
-      <p className="font-label text-xs uppercase tracking-widest text-primary mb-2">{t('mealCheck.resultKicker')}</p>
+      <p className="font-label text-xs uppercase tracking-widest text-primary mb-2">{t('mealCheck.yourMealLabel')}</p>
+
+      {/* Editable meal — remove a chip or add a food you forgot; recomputes. */}
+      <MealChips t={t} items={items} onRemoveItem={onRemoveItem} onAddFood={onAddFood} />
+
       <h2 className="font-headline text-2xl leading-snug mb-4">{verdict}</h2>
 
-      <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-5 mb-6">
-        <DoshaBars t={t} perDosha={a.perDosha} headline={head} />
+      {/* The constitution graphic + this meal's push per dosha. */}
+      <ConstitutionEffect t={t} percentages={percentages} perDosha={a.perDosha} headline={head} />
+
+      {/* What this means — crisp, personalized to the user's constitution. */}
+      <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-5 mb-4">
+        <p className="font-label text-[11px] uppercase tracking-[0.15em] text-on-surface-variant mb-2">{t('mealCheck.meansTitle')}</p>
+        <p className="font-body text-sm text-on-surface leading-relaxed">{meansText(t, a)}</p>
       </div>
 
+      {/* Where it comes from — the per-food breakdown, tucked in an accordion. */}
+      {items.length > 0 && <Breakdown t={t} items={items} />}
+
       {r.combos?.length > 0 && (
-        <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-4 mb-6">
+        <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-4 mb-4">
           <p className="font-label text-xs uppercase tracking-wide text-secondary mb-1">{t('mealCheck.combosLabel')}</p>
           {r.combos.map((c, i) => (
             <p key={i} className="text-sm text-on-surface-variant">{c.note}</p>
@@ -475,53 +618,153 @@ function ResultView({ t, result, onOpenDetail, onReset }) {
         </div>
       )}
 
-      {head && (r.foods.length > 0 || r.practices.length > 0) && (
-        <div className="mb-6">
-          <h3 className="font-headline text-lg mb-1">{t('mealCheck.rebalanceTitle')}</h3>
-          <p className="text-on-surface-variant text-sm mb-4">{t('mealCheck.rebalanceHelp', { dosha: dLabel })}</p>
-
-          {r.foods.length > 0 && (
-            <div className="mb-4">
-              <p className="font-label text-xs uppercase tracking-wide text-on-surface-variant mb-2">{t('mealCheck.foodsLabel')}</p>
-              <div className="flex flex-wrap gap-2">
-                {r.foods.map((f) => (
-                  <button
-                    key={f.id}
-                    onClick={() => onOpenDetail(`/ingredient/${f.id}`)}
-                    className="inline-flex items-center gap-1.5 bg-surface-container border border-outline-variant rounded-full px-3.5 py-2 text-sm"
-                  >
-                    <span className="material-symbols-outlined text-base text-primary">nutrition</span>
-                    {f.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {r.practices.length > 0 && (
-            <div>
-              <p className="font-label text-xs uppercase tracking-wide text-on-surface-variant mb-2">{t('mealCheck.breathLabel')}</p>
-              <div className="flex flex-wrap gap-2">
-                {r.practices.map((p) => (
-                  <button
-                    key={p.id}
-                    onClick={() => onOpenDetail(`/pranayama/${p.id}`)}
-                    className="inline-flex items-center gap-1.5 bg-surface-container border border-outline-variant rounded-full px-3.5 py-2 text-sm"
-                  >
-                    <span className="material-symbols-outlined text-base text-primary">air</span>
-                    {p.sanskrit}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
+      {/* Rebalance — actionable eat/drink (with how-to), then breath, separated. */}
+      {rebalance.length > 0 && (
+        <div className="mt-6">
+          <p className="font-label text-xs uppercase tracking-[0.14em] text-on-surface-variant mb-3">{eatDrinkTitle}</p>
+          {rebalance.map((item) => (
+            <RemedyCard
+              key={item.id}
+              emoji={item.emoji}
+              title={item.title}
+              howTo={item.howTo}
+              onClick={() => onOpenDetail(`/ingredient/${item.id}`)}
+            />
+          ))}
         </div>
       )}
 
-      <button onClick={onReset} className="w-full bg-surface-container-high text-on-surface font-label py-3 rounded-full">
+      {head && r.practices.length > 0 && (
+        <div className="mt-6">
+          <p className="font-label text-xs uppercase tracking-[0.14em] text-on-surface-variant mb-3">{t('mealCheck.breatheTitle')}</p>
+          {r.practices.map((p) => (
+            <RemedyCard
+              key={p.id}
+              emoji="🫁"
+              breath
+              title={p.sanskrit}
+              tag={t('mealCheck.breathTag')}
+              howTo={p.english}
+              onClick={() => onOpenDetail(`/pranayama/${p.id}`)}
+            />
+          ))}
+        </div>
+      )}
+
+      <button onClick={onReset} className="w-full mt-8 bg-surface-container-high text-on-surface font-label py-3 rounded-full">
         {t('mealCheck.checkAnother')}
       </button>
       <p className="text-xs text-on-surface-variant text-center mt-4">{t('mealCheck.disclaimer')}</p>
     </section>
+  )
+}
+
+// Editable meal chips — × removes, ＋ reveals an inline add field.
+function MealChips({ t, items, onRemoveItem, onAddFood }) {
+  const [adding, setAdding] = useState(false)
+  const [val, setVal] = useState('')
+  const [miss, setMiss] = useState(false)
+
+  function submit() {
+    const q = val.trim()
+    if (!q) return
+    const ok = onAddFood(q)
+    if (ok) { setVal(''); setAdding(false); setMiss(false) }
+    else setMiss(true)
+  }
+
+  return (
+    <div className="mb-5">
+      <div className="flex flex-wrap gap-2">
+        {items.map((it) => (
+          <span key={it.id} className="inline-flex items-center gap-1.5 bg-surface-container text-on-surface rounded-full pl-3.5 pr-2 py-1.5 text-sm">
+            {it.name}
+            <button onClick={() => onRemoveItem(it.id)} aria-label={t('mealCheck.deleteAria')} className="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center">
+              <span className="material-symbols-outlined text-[15px] text-on-surface-variant">close</span>
+            </button>
+          </span>
+        ))}
+        {!adding && (
+          <button onClick={() => setAdding(true)} className="inline-flex items-center gap-1 rounded-full border border-dashed border-outline px-3.5 py-1.5 text-sm text-on-surface-variant">
+            <span className="material-symbols-outlined text-[16px]">add</span>
+            {t('mealCheck.addItem')}
+          </button>
+        )}
+      </div>
+      {adding && (
+        <div className="mt-2.5">
+          <div className="flex gap-2">
+            <input
+              autoFocus
+              value={val}
+              onChange={(e) => { setVal(e.target.value); setMiss(false) }}
+              onKeyDown={(e) => { if (e.key === 'Enter') submit() }}
+              placeholder={t('mealCheck.addPlaceholder')}
+              className="flex-1 rounded-full bg-surface-container-low border border-outline-variant px-4 py-2 text-sm focus:outline-none focus:border-primary"
+            />
+            <button onClick={submit} className="shrink-0 bg-primary text-on-primary font-label px-4 rounded-full text-sm">{t('mealCheck.addBtn')}</button>
+          </div>
+          {miss && <p className="text-[11px] text-on-surface-variant mt-1.5 px-1">{t('mealCheck.addNotFound')}</p>}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Per-food dosha breakdown — a collapsed accordion (lower priority than the
+// verdict). Each food shows the doshas it raises (↑) or eases (↓).
+function Breakdown({ t, items }) {
+  const [open, setOpen] = useState(false)
+  const rows = items
+    .map((it) => ({ it, ing: getIngredient(it.id) }))
+    .filter(({ ing }) => ing)
+  return (
+    <div className="bg-surface-container-low border border-outline-variant rounded-2xl mb-4 overflow-hidden">
+      <button onClick={() => setOpen((o) => !o)} className="w-full flex items-center gap-2 px-4 py-3 text-left" aria-expanded={open}>
+        <span className="font-body font-semibold text-sm text-on-surface">{t('mealCheck.breakdownTitle')}</span>
+        <span className={`material-symbols-outlined text-on-surface-variant/50 text-lg ml-auto transition-transform ${open ? 'rotate-180' : ''}`}>expand_more</span>
+      </button>
+      {open && (
+        <div className="px-4 pb-3">
+          {rows.map(({ it, ing }) => (
+            <div key={it.id} className="flex items-center gap-2 py-2 border-t border-outline-variant/25">
+              <span className="flex-1 font-body font-semibold text-sm text-on-surface">{it.name}</span>
+              {DOSHAS.filter((d) => (ing.doshaEffect?.[d] || 0) !== 0).map((d) => {
+                const up = (ing.doshaEffect[d] || 0) > 0
+                const hex = DOSHA_META[d].hex
+                return (
+                  <span key={d} className="text-[10px] font-label font-bold rounded px-1.5 py-0.5"
+                    style={{ background: `color-mix(in srgb, ${hex} 15%, transparent)`, color: hex }}>
+                    {up ? '↑' : '↓'} {doshaDisplayName(d)}
+                  </span>
+                )
+              })}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// A rebalance card — icon, name (+ optional tag), and a concrete how-to line.
+function RemedyCard({ emoji, title, tag, howTo, breath, onClick }) {
+  return (
+    <button onClick={onClick} className="w-full flex items-start gap-3 bg-surface-container-low border border-outline-variant rounded-2xl p-3 mb-2.5 text-left active:scale-[0.99] transition-transform">
+      <span
+        className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center text-lg"
+        style={{ background: `color-mix(in srgb, var(--color-${breath ? 'vata' : 'kapha'}) 12%, transparent)` }}
+        aria-hidden="true"
+      >
+        {emoji}
+      </span>
+      <span className="min-w-0">
+        <span className="font-body font-semibold text-sm text-on-surface flex items-center gap-2 flex-wrap">
+          {title}
+          {tag && <span className="text-[9px] font-label font-bold uppercase tracking-wide text-primary border border-primary/35 rounded px-1.5 py-0.5">{tag}</span>}
+        </span>
+        <span className="block font-body text-[13px] text-on-surface-variant leading-relaxed mt-0.5">{howTo}</span>
+      </span>
+    </button>
   )
 }
