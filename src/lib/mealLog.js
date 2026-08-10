@@ -32,6 +32,13 @@ export async function saveMealLog(userId, { inputText, itemIds, assessment, cont
   return { data, error }
 }
 
+export async function deleteMealLog(userId, id) {
+  if (!userId || !id) return { error: 'bad-args' }
+  const { error } = await supabase.from('meal_logs').delete().eq('id', id).eq('user_id', userId)
+  if (error) console.error('meal_logs delete failed:', error.message)
+  return { error }
+}
+
 // Anchor the 7-day trial on first use. Conditional (only writes when still
 // null) so it can't be pushed forward by later checks. Returns the ISO value
 // it set, or null if it was already set / nothing to do.

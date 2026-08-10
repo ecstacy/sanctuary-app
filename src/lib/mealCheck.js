@@ -49,31 +49,40 @@ const STOPWORDS = new Set([
   'bit', 'little', 'few', 'cup', 'glass', 'bowl', 'piece', 'slice', 'served',
 ])
 
-// Look a token up, tolerating plurals and multi-word phrases ("scrambled eggs").
+const isExact = (r, q) => r.name.toLowerCase() === q || (r.aliases || []).some((a) => a.toLowerCase() === q)
+
+// Look a token up, tolerating plurals and finding the food ANYWHERE in a
+// multi-word phrase: "scrambled eggs" → egg, "black coffee dripped" → coffee,
+// "green tea" → green tea. Builds candidate queries most-specific first and
+// returns on the first EXACT name/alias hit; otherwise the best partial set
+// (which the UI then offers as a disambiguation).
 function lookup(token) {
-  const tries = new Set()
   const t = token.trim().toLowerCase()
   if (!t) return []
-  tries.add(t)
-  if (t.endsWith('es')) tries.add(t.slice(0, -2))
-  if (t.endsWith('s')) tries.add(t.slice(0, -1))
   const words = t.split(/\s+/)
-  if (words.length > 1) {
-    const last = words[words.length - 1]
-    tries.add(last)
-    if (last.endsWith('s')) tries.add(last.slice(0, -1))
+
+  const cands = [t]
+  if (t.endsWith('es')) cands.push(t.slice(0, -2))
+  if (t.endsWith('s')) cands.push(t.slice(0, -1))
+  // contiguous word-pairs ("green tea", "bottle gourd")
+  for (let i = 0; i < words.length - 1; i++) cands.push(`${words[i]} ${words[i + 1]}`)
+  // individual words, longest first (the longer word is likelier the food, not
+  // a modifier like "black"/"fresh"); include singulars.
+  for (const w of [...new Set(words)].filter((w) => w.length >= 3).sort((a, b) => b.length - a.length)) {
+    cands.push(w)
+    if (w.endsWith('es')) cands.push(w.slice(0, -2))
+    else if (w.endsWith('s')) cands.push(w.slice(0, -1))
   }
-  for (const q of tries) {
+
+  let partial = null
+  for (const q of [...new Set(cands)]) {
     const { results } = searchIngredients(q)
-    if (results.length) {
-      // Prefer an exact name/alias hit when the query is ambiguous.
-      const exact = results.find(
-        (r) => r.name.toLowerCase() === q || (r.aliases || []).some((a) => a.toLowerCase() === q),
-      )
-      return exact ? [exact] : results
-    }
+    if (!results.length) continue
+    const exact = results.find((r) => isExact(r, q))
+    if (exact) return [exact]           // an exact hit wins outright
+    if (!partial) partial = results     // remember the first partial as fallback
   }
-  return []
+  return partial || []
 }
 
 const brief = (r) => ({ id: r.id, name: r.name })

@@ -14,6 +14,11 @@ describe('parseMeal', () => {
     expect(ids).toContain('avocado')
   })
 
+  it('finds the food inside a multi-word phrase (modifiers ignored)', () => {
+    expect(parseMeal('black coffee dripped').matched.map((m) => m.id)).toContain('coffee')
+    expect(parseMeal('scrambled eggs').matched.map((m) => m.id)).toContain('egg')
+  })
+
   it('surfaces unknown foods instead of guessing them', () => {
     const { matched, unknown } = parseMeal('quinoa and a unicornberry')
     expect(matched.map((m) => m.id)).toContain('quinoa')

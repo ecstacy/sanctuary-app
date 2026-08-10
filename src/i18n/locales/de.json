@@ -1850,6 +1850,12 @@
     "lockedBody": "Sieh, wie jede Mahlzeit deine Doshas bewegt — und wie du ausgleichst. Teil von Plus.",
     "unlockCta": "Mit Plus freischalten",
     "recentTitle": "Letzte Prüfungen",
-    "balancedShort": "Ausgeglichen"
+    "balancedShort": "Ausgeglichen",
+    "homeBadge": "Frei · {{count}}T",
+    "dirRaises": "erhöht",
+    "dirSettles": "senkt",
+    "dirSteady": "stabil",
+    "deleteAria": "Diese Prüfung löschen",
+    "swipeHint": "Wische eine Prüfung nach links zum Löschen."
   }
 }

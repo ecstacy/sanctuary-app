@@ -1850,6 +1850,12 @@
     "lockedBody": "देखें कि कोई भी भोजन आपके दोषों को कैसे प्रभावित करता है — और कैसे संतुलित करें। Plus का हिस्सा।",
     "unlockCta": "Plus के साथ अनलॉक करें",
     "recentTitle": "हाल की जाँच",
-    "balancedShort": "संतुलित"
+    "balancedShort": "संतुलित",
+    "homeBadge": "मुफ़्त · {{count}}द",
+    "dirRaises": "बढ़ाता",
+    "dirSettles": "घटाता",
+    "dirSteady": "स्थिर",
+    "deleteAria": "यह जाँच हटाएँ",
+    "swipeHint": "हटाने के लिए जाँच को बाएँ स्वाइप करें।"
   }
 }
