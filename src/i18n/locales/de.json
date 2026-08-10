@@ -1848,6 +1848,8 @@
     "disclaimer": "Ein Wellness-Leitfaden, keine medizinische Beratung.",
     "trialNote": "Kostenlose Testphase · noch {{count}} Tage",
     "lockedBody": "Sieh, wie jede Mahlzeit deine Doshas bewegt — und wie du ausgleichst. Teil von Plus.",
-    "unlockCta": "Mit Plus freischalten"
+    "unlockCta": "Mit Plus freischalten",
+    "recentTitle": "Letzte Prüfungen",
+    "balancedShort": "Ausgeglichen"
   }
 }
