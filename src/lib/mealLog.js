@@ -4,6 +4,27 @@
 // never block the user from seeing their verdict.
 
 import { supabase } from './supabase'
+import { logSearch } from './analytics'
+
+// Capture every parsed meal-check term into the `searches` table (source
+// 'meal_check') so we can review, in our own DB (not third-party analytics),
+// the most-typed foods and — via result_count = 0 — the coverage gaps to add to
+// the dataset. One row per token: matched → result_count 1 + the resolved id;
+// unmatched → result_count 0 (surfaced by searches' no-results partial index).
+// Fire-and-forget; never blocks the verdict.
+export function logMealSearchTerms(userId, parsed) {
+  if (!userId || !parsed) return
+  const fire = (query, resultCount, topResultId) =>
+    logSearch({
+      userId, query, resultCount,
+      topResultId: topResultId ?? null,
+      topResultType: topResultId ? 'ingredient' : null,
+      source: 'meal_check',
+    })
+  ;(parsed.matched || []).forEach((m) => fire(m.token, 1, m.id))
+  ;(parsed.ambiguous || []).forEach((a) => fire(a.token, a.options?.length || 0, a.options?.[0]?.id || null))
+  ;(parsed.unknown || []).forEach((u) => fire(u.token, 0, null))
+}
 
 export async function listMealLogs(userId, limit = 30) {
   if (!userId) return []

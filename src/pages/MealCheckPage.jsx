@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { useMealCheckAccess } from '../hooks/useMealCheckAccess'
 import { parseMeal, assessMeal, remediesFor } from '../lib/mealCheck'
-import { saveMealLog, startMealTrialIfNeeded, listMealLogs, deleteMealLog } from '../lib/mealLog'
+import { saveMealLog, startMealTrialIfNeeded, listMealLogs, deleteMealLog, logMealSearchTerms } from '../lib/mealLog'
 import { getIngredient } from '../lib/ingredients'
 import { PRANAYAMAS } from '../data/pranayamas'
 import { doshaDisplayName } from '../i18n/contentI18n'
@@ -151,6 +151,9 @@ export default function MealCheckPage() {
     // analytics (see migration 017 / analytics-events §5.14). The actual
     // unmatched terms are captured server-side for dataset review (task #44).
     if (parsed.unknown.length) track('meal_check_coverage_miss', { count: parsed.unknown.length })
+    // Persist the actual terms server-side (our DB, not analytics) for keyword +
+    // coverage-gap review to grow the dataset.
+    if (user?.id) logMealSearchTerms(user.id, parsed)
     // Skip the confirm step only when the parse was completely clean.
     if (parsed.matched.length && !parsed.ambiguous.length && !parsed.unknown.length) {
       computeResult(parsed.matched.map((m) => ({ id: m.id, name: m.name })))
