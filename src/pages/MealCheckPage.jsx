@@ -176,7 +176,9 @@ export default function MealCheckPage() {
     const finalItems = list || items
     const ids = finalItems.map((i) => i.id)
     const assessment = assessMeal(ids, profile)
-    const remedies = remediesFor(assessment, { dietPrefs })
+    const hr = new Date().getHours()
+    const slot = hr < 11 ? 'morning' : hr < 17 ? 'midday' : 'evening'
+    const remedies = remediesFor(assessment, { dietPrefs, slot })
     setResult({ assessment, remedies })
     setPhase('result')
     track('meal_check_completed', {

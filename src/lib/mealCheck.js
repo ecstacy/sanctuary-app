@@ -181,43 +181,61 @@ export function assessMeal(ids, profile = {}) {
 }
 
 // ── Rebalancing remedies for the raised dosha ───────────────────────────────
-function rankPacifier(f, dosha) {
-  let s = -(f.doshaEffect?.[dosha] || 0)          // 1 for a −1 (pacifying) food
-  if (f.confidence === 'high') s += 0.5           // classical > property-derived
+// Classical tastes that pacify each dosha, and the potency that counters it
+// (Vata & Kapha are cold → warming; Pitta is hot → cooling). Used to prefer
+// remedies that genuinely oppose the excess, not just any food that nets down.
+const RASA_FOR = {
+  vata: ['sweet', 'sour', 'salty'],
+  pitta: ['sweet', 'bitter', 'astringent'],
+  kapha: ['pungent', 'bitter', 'astringent'],
+}
+const VIRYA_FOR = { vata: 'heating', pitta: 'cooling', kapha: 'heating' }
+
+function remedyScore(f, target, slot, balancedByIds) {
+  let s = 1
+  if (f.confidence === 'high') s += 0.6                        // classical > derived
+  if (balancedByIds.has(f.id)) s += 0.5                        // named antidote of what they ate
+  // Time-of-day fit: a remedy for right now should suit the slot.
+  if (slot && f.bestTime?.length) s += f.bestTime.includes(slot) ? 1.0 : -0.4
+  // Corrective forms — a spice or tea is the natural "have a little to settle
+  // it" remedy; a heavy staple is not.
+  if (f.category === 'spice') s += 0.7
+  else if (f.category === 'beverage') s += 0.4
+  // Properties that actively counter the excess.
+  if (f.virya === VIRYA_FOR[target]) s += 0.4
+  if ((f.rasa || []).some((r) => (RASA_FOR[target] || []).includes(r))) s += 0.3
   return s
 }
 
-export function remediesFor(assessment, { dietPrefs = {} } = {}) {
+export function remediesFor(assessment, { dietPrefs = {}, slot = null } = {}) {
   const target = assessment?.headline
   const combos = mealCombos(assessment?.items || [])
   if (!target) return { target: null, foods: [], practices: [], combos }
 
   const eaten = new Set(assessment.items)
 
-  // Reviewed foods that PACIFY the raised dosha (doshaEffect[target] < 0), are
-  // safe for this user, and weren't just eaten. Classical antidotes named in the
-  // offending foods' `balancedBy` are folded in — but only if they too pacify
-  // the target (balancedBy is about digestibility, not always dosha direction).
+  // Classical antidotes named in the offending foods' `balancedBy` get a boost
+  // (but only when they too pacify the target — balancedBy is about
+  // digestibility, not always dosha direction).
   const balancedByIds = new Set(
     assessment.items
       .map(getIngredient)
-      .filter((f) => f && (f.doshaEffect?.[target] || 0) > 0)   // the offenders
+      .filter((f) => f && (f.doshaEffect?.[target] || 0) > 0)
       .flatMap((f) => f.balancedBy || []),
   )
 
+  // Reviewed foods that PACIFY the raised dosha, are safe, and weren't just
+  // eaten — ranked so only the most RELEVANT (classical, time-appropriate,
+  // corrective, actively-opposing) surface; the tail of technically-pacifying-
+  // but-odd suggestions is dropped by taking only the top few.
   const foods = REVIEWED_INGREDIENTS
-    .filter((f) => (f.doshaEffect?.[target] || 0) < 0)          // pacifies target
+    .filter((f) => (f.doshaEffect?.[target] || 0) < 0)
     .filter((f) => !eaten.has(f.id))
-    .filter((f) => notExcluded(f, dietPrefs))                   // allergen/diet safe
-    .sort((a, b) => {
-      // classical antidotes for these exact foods bubble up first
-      const ba = balancedByIds.has(a.id) ? 1 : 0
-      const bb = balancedByIds.has(b.id) ? 1 : 0
-      if (ba !== bb) return bb - ba
-      return rankPacifier(b, target) - rankPacifier(a, target)
-    })
-    .slice(0, 4)
-    .map((f) => ({ id: f.id, name: f.name, isDerived: f.confidence !== 'high' }))
+    .filter((f) => notExcluded(f, dietPrefs))
+    .map((f) => ({ f, score: remedyScore(f, target, slot, balancedByIds) }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map(({ f }) => ({ id: f.id, name: f.name, isDerived: f.confidence !== 'high' }))
 
   // Pranayama that BALANCES the raised dosha (doshaAffinity[target] > 0).
   // Breath is the post-meal-safe choice (no inversions on a full stomach). Rank
