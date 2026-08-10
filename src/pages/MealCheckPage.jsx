@@ -14,14 +14,15 @@ import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { useMealCheckAccess } from '../hooks/useMealCheckAccess'
 import { parseMeal, assessMeal, remediesFor } from '../lib/mealCheck'
-import { saveMealLog, startMealTrialIfNeeded } from '../lib/mealLog'
+import { saveMealLog, startMealTrialIfNeeded, listMealLogs } from '../lib/mealLog'
+import { getIngredient } from '../lib/ingredients'
+import { PRANAYAMAS } from '../data/pranayamas'
+import { doshaDisplayName } from '../i18n/contentI18n'
 import { GEM_HUE } from '../components/DoshaGem'
 import PaywallSheet from '../components/PaywallSheet'
 import { track } from '../lib/track'
 
 const DOSHAS = ['vata', 'pitta', 'kapha']
-const DOSHA_LABEL = { vata: 'Vata', pitta: 'Pitta', kapha: 'Kapha' }
-const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s)
 
 function DoshaBars({ perDosha, headline }) {
   return (
@@ -37,7 +38,7 @@ function DoshaBars({ perDosha, headline }) {
               className="w-14 shrink-0 text-xs font-label uppercase tracking-wider"
               style={{ color: GEM_HUE[d].base, opacity: isHead ? 1 : 0.85 }}
             >
-              {DOSHA_LABEL[d]}
+              {doshaDisplayName(d)}
             </span>
             <div className="flex-1 h-2.5 rounded-full bg-surface-container overflow-hidden">
               <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: GEM_HUE[d].base }} />
@@ -69,8 +70,17 @@ export default function MealCheckPage() {
   const [unknown, setUnknown] = useState([])   // [{ token, suggestions:[{id,name}] }]
   const [result, setResult] = useState(null)   // { assessment, remedies }
   const [paywallOpen, setPaywallOpen] = useState(false)
+  const [history, setHistory] = useState([])
 
   const dietPrefs = profile?.diet_prefs || {}
+
+  // Load recent checks whenever the user lands back on the input screen
+  // (cross-device history; fails soft to [] until migration 018 is deployed).
+  useEffect(() => {
+    if (access.allowed && user?.id && phase === 'input') {
+      listMealLogs(user.id, 10).then(setHistory)
+    }
+  }, [access.allowed, user?.id, phase])
 
   // ── Locked (trial expired, not Plus) ──────────────────────────────────────
   if (access.state === 'loading') {
@@ -168,6 +178,24 @@ export default function MealCheckPage() {
     setPhase('input'); setText(''); setItems([]); setAmbiguous([]); setUnknown([]); setResult(null)
   }
 
+  // Re-open a past check from its stored snapshot (no re-computation, so history
+  // reads back exactly as it did the day it was logged).
+  function viewHistory(log) {
+    const snap = log.assessment || {}
+    const foods = (snap.remedies?.foods || [])
+      .map((id) => { const f = getIngredient(id); return f ? { id, name: f.name } : null })
+      .filter(Boolean)
+    const practices = (snap.remedies?.practices || [])
+      .map((id) => { const p = PRANAYAMAS[id]; return p ? { id, sanskrit: p.sanskrit, english: p.english } : null })
+      .filter(Boolean)
+    setResult({
+      assessment: { perDosha: snap.perDosha || {}, headline: snap.headline || null, concern: snap.concern, lens: snap.lens },
+      remedies: { target: snap.headline || null, foods, practices, combos: [] },
+    })
+    setText(log.input_text || '')
+    setPhase('result')
+  }
+
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-background text-on-surface font-body px-6 pb-28">
@@ -200,6 +228,43 @@ export default function MealCheckPage() {
             >
               {t('mealCheck.checkCta')}
             </button>
+
+            {history.length > 0 && (
+              <div className="mt-9">
+                <p className="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-3">
+                  {t('mealCheck.recentTitle')}
+                </p>
+                <div className="space-y-2">
+                  {history.map((log) => {
+                    const h = log.assessment?.headline
+                    return (
+                      <button
+                        key={log.id}
+                        onClick={() => viewHistory(log)}
+                        className="w-full flex items-center gap-3 bg-surface-container-low rounded-xl p-3.5 border border-outline-variant/40 text-left"
+                      >
+                        <span className="flex-1 min-w-0">
+                          <span className="block text-sm text-on-surface truncate">{log.input_text || '—'}</span>
+                          <span className="block text-xs text-on-surface-variant">
+                            {new Date(log.eaten_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                          </span>
+                        </span>
+                        {h ? (
+                          <span
+                            className="shrink-0 text-[11px] font-label uppercase tracking-wide px-2.5 py-1 rounded-full"
+                            style={{ background: `${GEM_HUE[h].base}22`, color: GEM_HUE[h].base }}
+                          >
+                            {doshaDisplayName(h)}
+                          </span>
+                        ) : (
+                          <span className="shrink-0 text-[11px] text-on-surface-variant">{t('mealCheck.balancedShort')}</span>
+                        )}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
           </section>
         )}
 
@@ -303,7 +368,7 @@ function TopBar({ t, navigate }) {
 function ResultView({ t, result, navigate, onReset }) {
   const { assessment: a, remedies: r } = result
   const head = a.headline
-  const dLabel = head ? DOSHA_LABEL[head] : null
+  const dLabel = head ? doshaDisplayName(head) : null
 
   const verdict = !head
     ? t('mealCheck.verdictBalanced')

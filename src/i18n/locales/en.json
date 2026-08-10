@@ -1848,6 +1848,8 @@
     "disclaimer": "A wellness guide, not medical advice.",
     "trialNote": "Free trial · {{count}} days left",
     "lockedBody": "See how any meal moves your doshas — and how to rebalance. Part of Plus.",
-    "unlockCta": "Unlock with Plus"
+    "unlockCta": "Unlock with Plus",
+    "recentTitle": "Recent checks",
+    "balancedShort": "Balanced"
   }
 }
