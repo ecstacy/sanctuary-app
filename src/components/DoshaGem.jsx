@@ -4,8 +4,9 @@
 //  A frosted glass egg holding the three dosha "liquids", stacked as translucent
 //  colour zones sized to each dosha's percentage (dominant fills most, the
 //  others band toward the edge) with soft, slowly-flowing boundaries — so an
-//  80% Pitta / 20% Kapha reading shows a large honey zone and a clear teal one.
-//  Gold = Pitta, indigo-violet = Vata, teal-green = Kapha. Frozen under
+//  80% Pitta / 20% Kapha reading shows a large terracotta zone and a clear green one.
+//  Terracotta = Pitta, ocean-blue = Vata, sage-green = Kapha (the brand tokens,
+//  luminous). Frozen under
 //  prefers-reduced-motion, paused off-screen, WebGL-failure fallback.
 //
 //  Props: percentages {vata,pitta,kapha}|null, dominant string|null, size px.
@@ -15,18 +16,24 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 
+// Dosha colours are ONE palette app-wide: the brand tokens
+// (--color-vata/pitta/kapha, mirrored in DoshaProfileContent's DOSHA_DATA).
+// The gem used to run its own violet/gold/teal set, which made the same dosha
+// a different colour on Home than on the Dosha page — now unified (task #48).
+// `base` matches the token exactly; deep/light are the dosha-page shades.
 export const GEM_HUE = {
-  vata:  { deep: '#3a3f8f', base: '#6b62c4', light: '#b3a6ee' }, // indigo-violet
-  pitta: { deep: '#a86a24', base: '#dda85a', light: '#f8dc9f' }, // honey-gold
-  kapha: { deep: '#2e6f57', base: '#3fa07a', light: '#8fd4b3' }, // teal-green
+  vata:  { deep: '#2c5f79', base: '#35708f', light: '#6fa0b8' }, // ocean blue
+  pitta: { deep: '#83471a', base: '#9e5720', light: '#c98a4e' }, // terracotta
+  kapha: { deep: '#3a6130', base: '#467539', light: '#7ba86b' }, // sage green
 }
-// Liquid hues for the gem itself — more saturated/luminous than the label
-// swatches above, so the glass reads as vivid jewel-toned liquid (the label
-// text keeps the softer GEM_HUE so it stays legible on the card).
+// Liquid hues for the WebGL gem itself — the SAME blue/terracotta/green identity
+// as the tokens, but brightened/saturated so the glass reads as luminous liquid
+// rather than a muddy flat fill (the label swatches above stay at token value so
+// legend text remains legible on the card).
 const GEM_LIQUID = {
-  vata:  '#8a3fd4', // amethyst violet
-  pitta: '#edb412', // rich honey-gold
-  kapha: '#0fa457', // deep emerald
+  vata:  '#2e93c4', // luminous ocean blue
+  pitta: '#d97a2b', // glowing terracotta
+  kapha: '#3fa85a', // vivid sage-emerald
 }
 const DOSHAS = ['vata', 'pitta', 'kapha']
 
@@ -218,8 +225,8 @@ export default function DoshaGem({ percentages = null, dominant = null, size = 1
         vertexShader: VERT, fragmentShader: FRAG,
         uniforms: {
           uTime: { value: 0 },
-          // true saturated hues — now that output is sRGB-encoded these render
-          // as luminous liquid (gold/violet/teal) rather than muddy earth tones.
+          // Brightened token hues (blue/terracotta/green) — sRGB-encoded output
+          // renders them as luminous liquid rather than a muddy flat fill.
           uCol0: { value: linearRGB(GEM_LIQUID[ord[0]]) },
           uCol1: { value: linearRGB(GEM_LIQUID[ord[1]]) },
           uCol2: { value: linearRGB(GEM_LIQUID[ord[2]]) },
