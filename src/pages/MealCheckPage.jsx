@@ -556,8 +556,12 @@ function meansText(t, a) {
 function buildRebalance(target, foods, dietPrefs) {
   if (!target) return []
   const isSafe = (id) => { const ing = getIngredient(id); return ing ? !exclusionFor(ing, dietPrefs)?.excluded : false }
-  const curated = curatedFor(target, isSafe)
-  const perFood = (foods || []).map((f) => ({ id: f.id, ...formFor(getIngredient(f.id), f.name) }))
+  // Confidence read straight from the dataset (robust for live + history):
+  // 'high' = classically attested, anything else = property-derived.
+  const confOf = (id) => (getIngredient(id)?.confidence === 'high' ? 'classical' : 'derived')
+  // Curated combos are traditional preparations — classically grounded.
+  const curated = curatedFor(target, isSafe).map((c) => ({ ...c, confidence: 'classical' }))
+  const perFood = (foods || []).map((f) => ({ id: f.id, confidence: confOf(f.id), ...formFor(getIngredient(f.id), f.name) }))
   const seen = new Set()
   const out = []
   for (const item of [...curated, ...perFood]) {
@@ -644,6 +648,7 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
               emoji={item.emoji}
               title={item.title}
               howTo={item.howTo}
+              confidence={item.confidence}
               onClick={() => onOpenDetail(`/ingredient/${item.id}`)}
             />
           ))}
@@ -763,8 +768,12 @@ function Breakdown({ t, items }) {
   )
 }
 
-// A rebalance card — icon, name (+ optional tag), and a concrete how-to line.
-function RemedyCard({ emoji, title, tag, howTo, breath, onClick }) {
+// A rebalance card — icon, name (+ optional tag), a concrete how-to line, and
+// an honest provenance label (classically cited vs property-derived). The
+// honesty is the point: naming the confident ones "classically cited" makes
+// them more believable, and flagging the derived ones keeps trust.
+function RemedyCard({ emoji, title, tag, howTo, breath, confidence, onClick }) {
+  const { t } = useTranslation()
   return (
     <button onClick={onClick} className="w-full flex items-start gap-3 bg-surface-container-low border border-outline-variant rounded-2xl p-3 mb-2.5 text-left active:scale-[0.99] transition-transform">
       <span
@@ -780,6 +789,16 @@ function RemedyCard({ emoji, title, tag, howTo, breath, onClick }) {
           {tag && <span className="text-[9px] font-label font-bold uppercase tracking-wide text-primary border border-primary/35 rounded px-1.5 py-0.5">{tag}</span>}
         </span>
         <span className="block font-body text-[13px] text-on-surface-variant leading-relaxed mt-0.5">{howTo}</span>
+        {confidence && (
+          <span className="flex items-center gap-1 mt-1.5">
+            <span aria-hidden="true" className={`material-symbols-outlined text-[13px] ${confidence === 'classical' ? 'text-primary' : 'text-on-surface-variant/60'}`}>
+              {confidence === 'classical' ? 'verified' : 'science'}
+            </span>
+            <span className={`font-label text-[10px] uppercase tracking-wide ${confidence === 'classical' ? 'text-primary' : 'text-on-surface-variant/70'}`}>
+              {confidence === 'classical' ? t('mealCheck.confClassical') : t('mealCheck.confDerived')}
+            </span>
+          </span>
+        )}
       </span>
     </button>
   )
