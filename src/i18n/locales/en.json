@@ -1944,6 +1944,20 @@
     "rebalanceWhyWatch": "This nudged {{dosha}} up. These settle it — gently, since it isn’t your dominant dosha.",
     "rebalanceWhyGeneric": "Chosen to ease the extra {{dosha}} this meal added.",
     "confClassical": "Classically cited",
-    "confDerived": "Derived, not classically cited"
+    "confDerived": "Derived, not classically cited",
+    "patternsTitle": "Your patterns lately",
+    "patternDosha": "Your recent meals lean {{dosha}}-aggravating.",
+    "patternBalanced": "Your recent meals sit fairly balanced.",
+    "patternOften": "often {{tastes}}",
+    "patternRarely": "rarely {{tastes}}",
+    "tasteJoin": " & ",
+    "taste": {
+      "sweet": "sweet",
+      "sour": "sour",
+      "salty": "salty",
+      "pungent": "pungent",
+      "bitter": "bitter",
+      "astringent": "astringent"
+    }
   }
 }
