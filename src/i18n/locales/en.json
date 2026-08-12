@@ -1887,6 +1887,8 @@
     "rebalanceChosenFor": "Chosen for you",
     "rebalanceWhyMind": "Because you run {{dosha}} and this meal pushed it up further — these bring it back toward balance.",
     "rebalanceWhyWatch": "This nudged {{dosha}} up. These settle it — gently, since it isn’t your dominant dosha.",
-    "rebalanceWhyGeneric": "Chosen to ease the extra {{dosha}} this meal added."
+    "rebalanceWhyGeneric": "Chosen to ease the extra {{dosha}} this meal added.",
+    "confClassical": "Classically cited",
+    "confDerived": "Derived, not classically cited"
   }
 }
