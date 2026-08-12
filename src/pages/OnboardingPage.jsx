@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { track, EVENTS } from '../lib/track'
+import { INTENTS, setIntent } from '../lib/intent'
 import MedicalDisclaimer from '../components/MedicalDisclaimer'
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -38,6 +39,7 @@ export default function OnboardingPage() {
   const { t } = useTranslation()
   const { user } = useAuth()
   const [idx, setIdx] = useState(0)
+  const [phase, setPhase] = useState('slides') // slides | intent
   const startRef = useRef(false)
   const touchStartX = useRef(null)
 
@@ -66,6 +68,19 @@ export default function OnboardingPage() {
   function complete() {
     markSeen()
     track(EVENTS.ONBOARDING_COMPLETED, {})
+    // One high-signal question before the quiz — bends the reading to their
+    // goal so they feel heard at minute one (#53).
+    setPhase('intent')
+  }
+
+  function chooseIntent(id) {
+    setIntent(id)
+    track('onboarding_intent_selected', { intent: id })
+    navigate('/quiz')
+  }
+
+  function skipIntent() {
+    track('onboarding_intent_skipped', {})
     navigate('/quiz')
   }
 
@@ -93,6 +108,52 @@ export default function OnboardingPage() {
     if (dx < 0) next()
     else prev()
     touchStartX.current = null
+  }
+
+  // ── Intent step — "what brought you here?" (one tap, skippable) ──
+  if (phase === 'intent') {
+    return (
+      <div className="h-[100dvh] bg-background text-on-surface font-body flex flex-col overflow-hidden">
+        <div className="flex items-center justify-between px-5 pt-3 pb-1 flex-shrink-0">
+          <div className="w-11" />
+          <span className="font-headline italic text-primary text-base">The Sanctuary</span>
+          <button
+            onClick={skipIntent}
+            className="font-label text-[11px] uppercase tracking-wider text-on-surface-variant px-3 py-1"
+          >
+            {t('onboarding.skip')}
+          </button>
+        </div>
+
+        <div className="flex-1 flex flex-col justify-center px-6 min-h-0 overflow-y-auto py-6">
+          <p className="font-label text-[11px] text-primary uppercase tracking-widest mb-2 text-center">
+            {t('onboarding.intent.eyebrow')}
+          </p>
+          <h1 className="font-headline text-3xl text-on-surface text-center leading-tight mb-3 max-w-sm mx-auto">
+            {t('onboarding.intent.title')}
+          </h1>
+          <p className="font-body text-sm text-on-surface-variant text-center leading-relaxed max-w-xs mx-auto mb-8">
+            {t('onboarding.intent.subtitle')}
+          </p>
+
+          <div className="flex flex-col gap-2.5 w-full max-w-sm mx-auto">
+            {INTENTS.map((opt) => (
+              <button
+                key={opt.id}
+                onClick={() => chooseIntent(opt.id)}
+                className="flex items-center gap-3.5 w-full rounded-2xl bg-surface-container-low border border-outline-variant p-4 text-left active:scale-[0.99] transition-transform"
+              >
+                <span className="w-10 h-10 shrink-0 rounded-full bg-primary-container/50 flex items-center justify-center">
+                  <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">{opt.icon}</span>
+                </span>
+                <span className="font-body text-[15px] text-on-surface">{t(`onboarding.intent.options.${opt.id}`)}</span>
+                <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-lg ml-auto">chevron_right</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
   }
 
   const slide = SLIDES[idx]
