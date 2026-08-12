@@ -614,7 +614,10 @@
         "Fresh, seasonal, simple food",
         "A steady daily rhythm",
         "Movement that suits the season"
-      ]
+      ],
+      "whyElevated": "Your {{dosha}} is running high this week — these help settle it.",
+      "whyBase": "Your constitution leans {{dosha}} — these keep it steady.",
+      "whyBalanced": "A balanced constitution — these keep you even."
     },
     "journey": {
       "section": "Your practice",
@@ -1880,6 +1883,10 @@
     "eatDrinkKapha": "Eat or drink to lighten it",
     "eatDrinkVata": "Eat or drink to ground it",
     "breatheTitle": "Or take a few minutes to breathe",
-    "breathTag": "Breathing"
+    "breathTag": "Breathing",
+    "rebalanceChosenFor": "Chosen for you",
+    "rebalanceWhyMind": "Because you run {{dosha}} and this meal pushed it up further — these bring it back toward balance.",
+    "rebalanceWhyWatch": "This nudged {{dosha}} up. These settle it — gently, since it isn’t your dominant dosha.",
+    "rebalanceWhyGeneric": "Chosen to ease the extra {{dosha}} this meal added."
   }
 }

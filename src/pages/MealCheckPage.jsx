@@ -618,9 +618,25 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
         </div>
       )}
 
+      {/* Why these suggestions, in the user's own terms — the rebalance set is
+          chosen for their constitution and what this meal did to it, so it
+          doesn't read as a generic list. */}
+      {rebalance.length > 0 && (a.lens || head) && (
+        <div className="mt-6 mb-1">
+          <p className="font-label text-[10px] uppercase tracking-[0.16em] text-primary mb-1.5">{t('mealCheck.rebalanceChosenFor')}</p>
+          <p className="font-body text-[13px] text-on-surface-variant leading-relaxed">
+            {a.concern === 'mind'
+              ? t('mealCheck.rebalanceWhyMind', { dosha: doshaDisplayName(a.lens || head) })
+              : a.concern === 'watch'
+                ? t('mealCheck.rebalanceWhyWatch', { dosha: doshaDisplayName(head) })
+                : t('mealCheck.rebalanceWhyGeneric', { dosha: doshaDisplayName(head) })}
+          </p>
+        </div>
+      )}
+
       {/* Rebalance — actionable eat/drink (with how-to), then breath, separated. */}
       {rebalance.length > 0 && (
-        <div className="mt-6">
+        <div className="mt-4">
           <p className="font-label text-xs uppercase tracking-[0.14em] text-on-surface-variant mb-3">{eatDrinkTitle}</p>
           {rebalance.map((item) => (
             <RemedyCard
