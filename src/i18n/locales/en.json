@@ -629,6 +629,15 @@
     },
     "focus": {
       "another": "choose another practice"
+    },
+    "fit": {
+      "prompt": "Does this sound like you?",
+      "yes": "Yes",
+      "notQuite": "Not quite",
+      "pickPrompt": "Which feels more like you?",
+      "confirmedAck": "Thanks — noted.",
+      "adjustedAck": "Updated — we’ll lean on {{dosha}}.",
+      "change": "Change"
     }
   },
   "profile": {

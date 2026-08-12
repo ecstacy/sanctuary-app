@@ -70,6 +70,16 @@ describe('assessMeal — the worked example (eggs + toast + avocado)', () => {
     expect(assessMeal(meal, kaphaUser).concern).toBe('mind')
     expect(assessMeal(meal, pittaUser).concern).toBe('watch') // raises kapha, not their pitta
   })
+
+  it('honours a self-reported dosha over the quiz primary (#52)', () => {
+    // A Pitta-by-quiz user who told us they feel more like Kapha: the meal that
+    // raises Kapha is now framed as raising THEIR own dosha.
+    const feelsKapha = { dosha_details: { primary: 'pitta', selfReport: { fit: 'adjusted', primary: 'kapha' } } }
+    expect(assessMeal(meal, feelsKapha).concern).toBe('mind')
+    // A mere 'confirmed' report leaves the quiz primary in place.
+    const confirmedPitta = { dosha_details: { primary: 'pitta', selfReport: { fit: 'confirmed' } } }
+    expect(assessMeal(meal, confirmedPitta).concern).toBe('watch')
+  })
 })
 
 describe('remediesFor', () => {
