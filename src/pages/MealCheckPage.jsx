@@ -8,7 +8,7 @@
 //  Every completed check is logged to Supabase (cross-device history).
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
@@ -18,6 +18,7 @@ import { saveMealLog, startMealTrialIfNeeded, listMealLogs, deleteMealLog, logMe
 import { getIngredient } from '../lib/ingredients'
 import { exclusionFor } from '../lib/dietSafety'
 import { formFor, curatedFor } from '../lib/consumableForms'
+import { computeDietProfile, hasDietPattern } from '../lib/dietProfile'
 import { PRANAYAMAS } from '../data/pranayamas'
 import { doshaDisplayName } from '../i18n/contentI18n'
 import { GEM_HUE } from '../components/DoshaGem'
@@ -129,6 +130,9 @@ export default function MealCheckPage() {
   const [history, setHistory] = useState([])
 
   const dietPrefs = profile?.diet_prefs || {}
+  // Derived read of how the user tends to eat — from the logs already loaded for
+  // history, so no extra fetch. The substrate for pattern-aware guidance (#45).
+  const dietProfile = useMemo(() => computeDietProfile(history), [history])
 
   // Restore the result when returning from a remedy detail page. Tapping a
   // remedy leaves this route (so the page remounts on back); we stash the result
@@ -353,6 +357,8 @@ export default function MealCheckPage() {
               {t('mealCheck.checkCta')}
             </button>
 
+            {hasDietPattern(dietProfile) && <PatternsCard t={t} profile={dietProfile} />}
+
             {history.length > 0 && (
               <div className="mt-9">
                 <p className="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-3">
@@ -514,6 +520,37 @@ function HistoryRow({ t, log, onOpen, onDelete }) {
           <span className="shrink-0 text-[11px] text-on-surface-variant">{t('mealCheck.balancedShort')}</span>
         )}
       </button>
+    </div>
+  )
+}
+
+// "Your patterns lately" — a compact read of the diet profile (#45): the dosha
+// the user's meals tend to push, plus the tastes they over- and under-eat.
+// Priority order for naming a missing taste (bitter & astringent are the most
+// commonly absent in a modern diet, so they're the most useful to surface).
+const MISSING_TASTE_PRIORITY = ['bitter', 'astringent', 'sweet', 'salty', 'sour', 'pungent']
+function PatternsCard({ t, profile }) {
+  const tasteList = (keys) => keys.map((k) => t(`mealCheck.taste.${k}`)).join(t('mealCheck.tasteJoin'))
+  const often = profile.surplusTastes.slice(0, 2)
+  const rarely = MISSING_TASTE_PRIORITY.filter((r) => profile.missingTastes.includes(r)).slice(0, 2)
+  return (
+    <div className="mt-9 rounded-2xl bg-surface-container-low border border-outline-variant p-4">
+      <div className="flex items-center gap-2 mb-2">
+        <span aria-hidden="true" className="material-symbols-outlined text-primary text-base">insights</span>
+        <p className="font-label text-[11px] uppercase tracking-wider text-primary">{t('mealCheck.patternsTitle')}</p>
+      </div>
+      <p className="font-body text-[13px] text-on-surface leading-relaxed">
+        {profile.dominant
+          ? t('mealCheck.patternDosha', { dosha: doshaDisplayName(profile.dominant) })
+          : t('mealCheck.patternBalanced')}
+      </p>
+      {(often.length > 0 || rarely.length > 0) && (
+        <p className="font-body text-[12px] text-on-surface-variant leading-relaxed mt-1">
+          {often.length > 0 && t('mealCheck.patternOften', { tastes: tasteList(often) })}
+          {often.length > 0 && rarely.length > 0 && ' · '}
+          {rarely.length > 0 && t('mealCheck.patternRarely', { tastes: tasteList(rarely) })}
+        </p>
+      )}
     </div>
   )
 }
