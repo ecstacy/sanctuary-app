@@ -26,6 +26,7 @@ import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
 import { track, EVENTS } from '../lib/track'
 import DoshaProfileContent from '../components/DoshaProfileContent'
+import SharpenReadingCard from '../components/SharpenReadingCard'
 import { useHealthConsent } from '../hooks/useHealthConsent'
 import {
   TRAIT_QUESTIONS,
@@ -573,6 +574,8 @@ export default function DoshaQuizPage() {
 
     const resultFooter = (
       <div className="pb-2">
+        {/* Optional depth: sharpen the reading with a few day-to-day taps (#54). */}
+        <SharpenReadingCard primary={doshaResult.primary} />
         {!user && (
           <div className="bg-primary-container/40 border border-primary/15 rounded-xl px-4 py-3 mb-3">
             <p className="font-label text-[11px] uppercase tracking-wider text-primary mb-1">{t('doshaQuiz.saveResultKicker')}</p>
