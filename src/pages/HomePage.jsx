@@ -825,6 +825,15 @@ export default function HomePage() {
                 </span>
               )}
             </div>
+            {/* Why these, in the user's own terms — a current flare vs their
+                baseline constitution. Turns a generic list into an earned one. */}
+            <p className="font-body text-[13px] text-on-surface-variant/80 leading-relaxed mb-3">
+              {favourDosha
+                ? (isElevated
+                    ? t('home.favour.whyElevated', { dosha: doshaDisplayName(favourDosha) })
+                    : t('home.favour.whyBase', { dosha: doshaDisplayName(favourDosha) }))
+                : t('home.favour.whyBalanced')}
+            </p>
             <div className="flex flex-col gap-2.5">
               {(Array.isArray(favourTips) ? favourTips : []).map((tip, i) => (
                 <div key={i} className="flex items-start gap-3">
