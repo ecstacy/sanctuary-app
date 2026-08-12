@@ -108,6 +108,8 @@
  * @property {'high'|'medium'} confidence
  */
 
+import { MODERN_DRAFT_INGREDIENTS } from './ingredients-modern-draft'
+
 /** @type {Record<string, Ingredient>} */
 export const INGREDIENTS = {
   // ── Grains ───────────────────────────────────────────────────────────────
@@ -3382,6 +3384,13 @@ export const INGREDIENTS = {
     reviewStatus: 'reviewed', confidence: 'medium',
   },
 }
+
+// ── Modern-diet review batch ──────────────────────────────────────────────
+// A separate module of Western/global/processed foods, all `reviewStatus:
+// 'draft'` so they stay INVISIBLE to the app until a human fact-checks each and
+// flips the flag. Merged here (not shipped separately) so getIngredient() and
+// the integrity tests see them as real draft rows of the one dataset.
+Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS)
 
 /** Stable list form, for iteration. Includes drafts — filter before display. */
 export const ALL_INGREDIENTS = Object.values(INGREDIENTS)
