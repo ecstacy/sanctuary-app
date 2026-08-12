@@ -19,6 +19,7 @@ import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
 import MealOfTheDayCard from '../components/MealOfTheDayCard'
 import DoshaGem, { GEM_HUE, gemRadiusAtU } from '../components/DoshaGem'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
+import { saveDoshaSelfReport, effectivePrimary, doshaSelfReport } from '../lib/doshaSelfReport'
 
 // Mirror of YOGI_LEVELS in JourneyPage; kept tiny here to avoid a cross-page
 // import for a 7-row lookup. If this list ever changes there, update both.
@@ -174,7 +175,7 @@ export default function HomePage() {
   const navigate = useNavigate()
   const location = useLocation()
   const { t } = useTranslation()
-  const { profile, user } = useAuth()
+  const { profile, user, refreshProfile } = useAuth()
   const mealAccess = useMealCheckAccess()
   // checkin is still fed to the composer (null = no explicit mood); the home
   // no longer exposes a mood picker, so there's no setter.
@@ -408,7 +409,8 @@ export default function HomePage() {
   const signalDosha    = vikritiSignal.hasSignal
     ? vikritiSignal.vikriti
     : (vikritiFresh ? vikriti.lastVikritiPrimary : null)
-  const prakriti       = (profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
+  // Honours the user's own "not quite → I feel more like X" correction (#52).
+  const prakriti       = effectivePrimary(profile) || (profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
   const prakritiValid  = ['vata', 'pitta', 'kapha'].includes(prakriti)
   const isElevated     = !!signalDosha
   const currentDosha   = signalDosha || (prakritiValid ? prakriti : null)
@@ -774,6 +776,25 @@ export default function HomePage() {
           </button>
         )}
 
+        {/* ── "Does this sound like you?" — a one-tap confirm/correct on the
+             reading. Co-creation builds trust when a short quiz didn't quite
+             land, and the correction (an explicit self-report) overrides the
+             quiz-derived primary app-wide. Shown only for the baseline read,
+             not a transient vikriti flare. (#52) ── */}
+        {currentDosha && !isElevated && (
+          <DoshaFitCheck
+            t={t}
+            dosha={currentDosha}
+            report={doshaSelfReport(profile)}
+            onSave={async (fit, primary) => {
+              if (!user?.id) return
+              track('dosha_fit_feedback', { fit, primary: primary || null, shown_dosha: currentDosha })
+              await saveDoshaSelfReport(user.id, profile?.dosha_details, primary ? { fit, primary } : { fit })
+              refreshProfile?.()
+            }}
+          />
+        )}
+
         {/* ── Vikriti drift reading — the actionable nudge + Plus teaser. Only
               fires on a clear 14-day signal (same gate as the state card). ── */}
         {vikritiSignal.hasSignal && (
@@ -940,6 +961,68 @@ export default function HomePage() {
         subhead={t('home.paywallSubhead')}
       />
 
+    </div>
+  )
+}
+
+// "Does this sound like you?" — confirm / correct the dosha reading in one tap.
+// Three states: ask → (confirmed | adjusting → picker) → acknowledged. A prior
+// answer (from `report`) shows the acknowledged state with a way back in.
+const FIT_DOSHAS = ['vata', 'pitta', 'kapha']
+function DoshaFitCheck({ t, dosha, report, onSave }) {
+  const [mode, setMode] = useState('ask')       // ask | picking
+  // Seed from any durable answer on the profile; updated optimistically on tap.
+  const [saved, setSaved] = useState(report)    // {fit, primary} once answered
+
+  async function confirm() { setSaved({ fit: 'confirmed' }); await onSave('confirmed') }
+  async function adjust(primary) { setMode('ask'); setSaved({ fit: 'adjusted', primary }); await onSave('adjusted', primary) }
+
+  if (saved) {
+    const ack = saved.fit === 'adjusted'
+      ? t('home.fit.adjustedAck', { dosha: doshaDisplayName(saved.primary || dosha) })
+      : t('home.fit.confirmedAck')
+    return (
+      <div className="flex items-center gap-2 px-1 mt-2.5 mb-1">
+        <span aria-hidden="true" className="material-symbols-outlined text-primary text-base">check_circle</span>
+        <p className="font-body text-[13px] text-on-surface-variant">{ack}</p>
+        <button onClick={() => { setSaved(null); setMode('picking') }} className="ml-auto font-label text-[11px] uppercase tracking-wide text-primary">
+          {t('home.fit.change')}
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="rounded-2xl bg-surface-container-low border border-outline-variant/40 p-4 mt-2.5 mb-1">
+      {mode === 'ask' ? (
+        <div className="flex items-center gap-3 flex-wrap">
+          <p className="font-body text-sm text-on-surface">{t('home.fit.prompt')}</p>
+          <div className="flex items-center gap-2 ml-auto">
+            <button onClick={confirm} className="font-label text-xs px-3.5 py-1.5 rounded-full bg-primary text-on-primary">
+              {t('home.fit.yes')}
+            </button>
+            <button onClick={() => setMode('picking')} className="font-label text-xs px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface">
+              {t('home.fit.notQuite')}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <p className="font-body text-sm text-on-surface mb-3">{t('home.fit.pickPrompt')}</p>
+          <div className="flex gap-2">
+            {FIT_DOSHAS.map((d) => (
+              <button
+                key={d}
+                onClick={() => adjust(d)}
+                className="flex-1 font-label text-xs py-2 rounded-full border"
+                style={{ borderColor: `${DOSHA_HEX[d]}55`, color: DOSHA_INK[d], background: `${DOSHA_HEX[d]}12` }}
+              >
+                {doshaDisplayName(d)}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
