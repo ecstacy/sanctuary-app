@@ -21,6 +21,8 @@ import DoshaGem, { GEM_HUE, gemRadiusAtU } from '../components/DoshaGem'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
 import { saveDoshaSelfReport, effectivePrimary, doshaSelfReport } from '../lib/doshaSelfReport'
 import { getIntent } from '../lib/intent'
+import { getRefine } from '../lib/refine'
+import { computeFamiliarity } from '../lib/familiarity'
 
 // Mirror of YOGI_LEVELS in JourneyPage; kept tiny here to avoid a cross-page
 // import for a 7-row lookup. If this list ever changes there, update both.
@@ -427,6 +429,15 @@ export default function HomePage() {
     null
   // Favour list follows the current state (or constitution; balanced fallback).
   const intent         = getIntent()
+  // The qualitative "getting to know you" progression (#55) — folds the
+  // self-knowledge signals we've gathered into a warm stage phrase.
+  const familiarity    = computeFamiliarity({
+    hasPrakriti:  prakritiValid,
+    intent:       !!intent,
+    refine:       !!getRefine(),
+    selfReport:   !!doshaSelfReport(profile),
+    vikritiCount: vikriti.vikritiCount,
+  })
   const favourDosha    = currentDosha
   const favourTips     = t(`home.favour.${favourDosha || 'balanced'}`, { returnObjects: true })
 
@@ -795,6 +806,18 @@ export default function HomePage() {
               refreshProfile?.()
             }}
           />
+        )}
+
+        {/* "Getting to know you" — a qualitative read that deepens with
+            engagement (never a numeric % that would read as "barely knows me").
+            (#55) */}
+        {familiarity && (
+          <div className="flex items-center gap-2 px-1 mt-2">
+            <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/50 text-[15px]">psychology</span>
+            <p className="font-body text-[12px] text-on-surface-variant/80 leading-snug">
+              {t(`home.familiarity.${familiarity.key}`)}
+            </p>
+          </div>
         )}
 
         {/* ── Vikriti drift reading — the actionable nudge + Plus teaser. Only
