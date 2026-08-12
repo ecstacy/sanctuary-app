@@ -1255,7 +1255,40 @@
     "discovery": "Discovery",
     "progressAria": "Quiz progress",
     "primerShort": "Lifelong tendency, not this week.",
-    "saveFailed": "Failed to save: {{error}}"
+    "saveFailed": "Failed to save: {{error}}",
+    "refine": {
+      "kicker": "Sharpen your reading",
+      "prompt": "Three quick taps on how you actually run, and we’ll tune your reading to you.",
+      "ackTitle": "Reading sharpened",
+      "ackAligned": "Your daily patterns line up with your {{dosha}} — a confident read.",
+      "ackDiverge": "Your daily patterns lean {{dosha}}. We’ll factor that in as we learn you.",
+      "q": {
+        "digestion": {
+          "title": "How’s your digestion, usually?",
+          "options": [
+            "Irregular — sometimes hungry, sometimes not",
+            "Strong & sharp — I get hungry fast, can feel acidic",
+            "Slow & heavy — I stay full a long time"
+          ]
+        },
+        "sleep": {
+          "title": "And your sleep?",
+          "options": [
+            "Light — I wake easily",
+            "Fine, but I run hot or wake early",
+            "Deep — hard to get going in the morning"
+          ]
+        },
+        "mind": {
+          "title": "Your mind, on a typical day?",
+          "options": [
+            "Quick and restless — lots of ideas",
+            "Focused and driven — can get intense",
+            "Steady and calm — slow to start"
+          ]
+        }
+      }
+    }
   },
   "journey": {
     "title": "Your Journey",
