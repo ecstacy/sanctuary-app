@@ -339,7 +339,19 @@
         "title": "Let's find your dosha",
         "body": "A short 15-question quiz reveals your Ayurvedic constitution — the foundation everything else builds on. Takes about 90 seconds."
       }
-    ]
+    ],
+    "intent": {
+      "eyebrow": "One quick thing",
+      "title": "What brought you here?",
+      "subtitle": "We’ll tune your guidance to this — you can change it anytime.",
+      "options": {
+        "calm": "Calm a busy mind",
+        "energy": "More steady energy",
+        "digestion": "Better digestion",
+        "sleep": "Deeper sleep",
+        "curious": "Just exploring"
+      }
+    }
   },
   "auth": {
     "forgot": {
@@ -617,7 +629,8 @@
       ],
       "whyElevated": "Your {{dosha}} is running high this week — these help settle it.",
       "whyBase": "Your constitution leans {{dosha}} — these keep it steady.",
-      "whyBalanced": "A balanced constitution — these keep you even."
+      "whyBalanced": "A balanced constitution — these keep you even.",
+      "goalNote": "Part of what you came here for: {{goal}}."
     },
     "journey": {
       "section": "Your practice",

@@ -20,6 +20,7 @@ import MealOfTheDayCard from '../components/MealOfTheDayCard'
 import DoshaGem, { GEM_HUE, gemRadiusAtU } from '../components/DoshaGem'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
 import { saveDoshaSelfReport, effectivePrimary, doshaSelfReport } from '../lib/doshaSelfReport'
+import { getIntent } from '../lib/intent'
 
 // Mirror of YOGI_LEVELS in JourneyPage; kept tiny here to avoid a cross-page
 // import for a 7-row lookup. If this list ever changes there, update both.
@@ -425,6 +426,7 @@ export default function HomePage() {
     profile?.dosha_details?.percentages ||
     null
   // Favour list follows the current state (or constitution; balanced fallback).
+  const intent         = getIntent()
   const favourDosha    = currentDosha
   const favourTips     = t(`home.favour.${favourDosha || 'balanced'}`, { returnObjects: true })
 
@@ -855,6 +857,14 @@ export default function HomePage() {
                     : t('home.favour.whyBase', { dosha: doshaDisplayName(favourDosha) }))
                 : t('home.favour.whyBalanced')}
             </p>
+            {/* Second personal anchor: the goal the user told us at onboarding
+                (#53). Makes the list feel aimed at what they came for. */}
+            {intent && (
+              <p className="flex items-center gap-1.5 font-body text-[12px] text-primary/85 -mt-1.5 mb-3">
+                <span aria-hidden="true" className="material-symbols-outlined text-[14px]">flag</span>
+                {t('home.favour.goalNote', { goal: t(`onboarding.intent.options.${intent}`) })}
+              </p>
+            )}
             <div className="flex flex-col gap-2.5">
               {(Array.isArray(favourTips) ? favourTips : []).map((tip, i) => (
                 <div key={i} className="flex items-start gap-3">
