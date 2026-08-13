@@ -21,6 +21,7 @@
 
 import { REVIEWED_INGREDIENTS, getIngredient, searchIngredients } from './ingredients'
 import { exclusionFor } from './dietSafety'
+import { prepDeltaFor, impliedAdditionsFor } from './mealModifiers'
 import { PRANAYAMAS } from '../data/pranayamas'
 
 export const DOSHAS = ['vata', 'pitta', 'kapha']
@@ -231,6 +232,32 @@ export function parseMeal(text) {
       ambiguous.push({ token: baseText, options: results.slice(0, 4).map(brief) })
     }
   }
+
+  // Modifier effects (#57): attach each item's prep dosha delta, and inject any
+  // companion foods a descriptor implies ("milky coffee" → a milk item), marked
+  // `inferred` so the UI can show them as removable "added" chips.
+  const injected = []
+  for (const m of matched) {
+    m.doshaDelta = prepDeltaFor(m.modifiers)
+    for (const add of impliedAdditionsFor(m.modifiers)) {
+      if (seen.has(add.id)) continue
+      const f = getIngredient(add.id)
+      if (!f) continue
+      seen.add(add.id)
+      injected.push({
+        token: f.name.toLowerCase(),
+        id: add.id,
+        name: f.name,
+        qty: { count: 1, size: null, unit: null },
+        modifiers: [],
+        portionWeight: add.portion || 0.6,
+        doshaDelta: null,
+        inferred: true,
+      })
+    }
+  }
+  matched.push(...injected)
+
   return { matched, ambiguous, unknown }
 }
 
@@ -240,16 +267,19 @@ export function parseMeal(text) {
 // existing callers passing an id array still work.
 export function assessMeal(items, profile = {}) {
   const resolved = (items || [])
-    .map((it) => (typeof it === 'string' ? { id: it, portionWeight: 1 } : { id: it?.id, portionWeight: it?.portionWeight || 1 }))
-    .map(({ id, portionWeight }) => ({ f: getIngredient(id), portionWeight }))
+    .map((it) => (typeof it === 'string'
+      ? { id: it, portionWeight: 1, doshaDelta: null }
+      : { id: it?.id, portionWeight: it?.portionWeight || 1, doshaDelta: it?.doshaDelta || null }))
+    .map(({ id, portionWeight, doshaDelta }) => ({ f: getIngredient(id), portionWeight, doshaDelta }))
     .filter((x) => x.f)
 
   const raw = { vata: 0, pitta: 0, kapha: 0 }
   let totalW = 0
-  for (const { f, portionWeight } of resolved) {
+  for (const { f, portionWeight, doshaDelta } of resolved) {
     const w = weightOf(f) * portionWeight
     totalW += w
-    for (const d of DOSHAS) raw[d] += w * (f.doshaEffect?.[d] || 0)
+    // Food's own effect, nudged by any preparation delta (iced/fried/…).
+    for (const d of DOSHAS) raw[d] += w * ((f.doshaEffect?.[d] || 0) + (doshaDelta?.[d] || 0))
   }
 
   const perDosha = { vata: 0, pitta: 0, kapha: 0 }
