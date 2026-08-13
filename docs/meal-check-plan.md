@@ -114,6 +114,20 @@ practice helps. Example target output:
 - A day-level rollup ("today's meals net-raised Pitta") can later feed the
   vikriti reconciler — out of scope for v1, note only.
 
+**Coverage review buckets (in our `searches` table, not analytics).** The
+structured parser (#56) can match a base food and drop the rest, which would
+otherwise hide a gap behind a "hit". Three things to review when growing the
+dataset:
+- `source='meal_check' AND result_count=0` — genuinely unknown foods (the
+  primary gap list; add these to the dataset).
+- `source='meal_check_modifier' AND result_count=0` — descriptors we kept but
+  couldn't act on ("cappuccino", "latte", "oat", "smoothie"); frequency here
+  reveals missing variants/foods hiding behind a partial base match. Benign
+  words ("black", "hot") also land here — rank by frequency and eyeball.
+- `source='meal_check' AND result_count=1 AND context->>'partial'='true'` —
+  matches that were only partial; `context->'residual'` lists the unexplained
+  words for that specific input.
+
 ## Free vs Plus (decision)
 Recommended per the premium-teaser principle: **free = the verdict** (real
 insight, real value), **Plus = the remedies** ("To rebalance" section behind

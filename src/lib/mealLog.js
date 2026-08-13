@@ -11,19 +11,34 @@ import { logSearch } from './analytics'
 // the most-typed foods and — via result_count = 0 — the coverage gaps to add to
 // the dataset. One row per token: matched → result_count 1 + the resolved id;
 // unmatched → result_count 0 (surfaced by searches' no-results partial index).
-// Fire-and-forget; never blocks the verdict.
+//
+// ⚠ PARTIAL-MATCH SIGNAL. The structured parser (#56) can match a BASE food and
+// silently drop the rest ("oat milk cappuccino" → matches "milk"). Logged naïvely
+// that reads as a clean hit, hiding the gap ("cappuccino"). So we (a) tag a match
+// that had leftover descriptors as `context.partial` with the residual words, and
+// (b) log each residual descriptor on its own under source 'meal_check_modifier'
+// (result_count 0) — reviewable for frequent unrecognised words WITHOUT polluting
+// the real "unknown food" coverage list. Fire-and-forget; never blocks the verdict.
 export function logMealSearchTerms(userId, parsed) {
   if (!userId || !parsed) return
-  const fire = (query, resultCount, topResultId) =>
+  const fire = (query, resultCount, opts = {}) =>
     logSearch({
       userId, query, resultCount,
-      topResultId: topResultId ?? null,
-      topResultType: topResultId ? 'ingredient' : null,
-      source: 'meal_check',
+      topResultId: opts.topResultId ?? null,
+      topResultType: opts.topResultId ? 'ingredient' : null,
+      source: opts.source || 'meal_check',
+      context: opts.context || {},
     })
-  ;(parsed.matched || []).forEach((m) => fire(m.token, 1, m.id))
-  ;(parsed.ambiguous || []).forEach((a) => fire(a.token, a.options?.length || 0, a.options?.[0]?.id || null))
-  ;(parsed.unknown || []).forEach((u) => fire(u.token, 0, null))
+  ;(parsed.matched || []).forEach((m) => {
+    const residual = m.modifiers || []
+    fire(m.token, 1, {
+      topResultId: m.id,
+      context: residual.length ? { partial: true, residual } : {},
+    })
+    residual.forEach((mod) => fire(mod, 0, { source: 'meal_check_modifier' }))
+  })
+  ;(parsed.ambiguous || []).forEach((a) => fire(a.token, a.options?.length || 0, { topResultId: a.options?.[0]?.id || null }))
+  ;(parsed.unknown || []).forEach((u) => fire(u.token, 0))
 }
 
 export async function listMealLogs(userId, limit = 30) {
