@@ -60,6 +60,42 @@ describe('parseMeal', () => {
     expect(parseMeal('tomato').ambiguous.length).toBeGreaterThan(0)
     expect(parseMeal('cooked tomato').matched.map((m) => m.id)).toContain('tomatoCooked')
   })
+
+  it('attaches a prep dosha delta from a preparation modifier (#57)', () => {
+    const iced = parseMeal('iced coffee').matched.find((m) => m.id === 'coffee')
+    expect(iced.doshaDelta).toBeTruthy()
+    expect(iced.doshaDelta.pitta).toBeLessThan(0) // iced cools
+  })
+
+  it('infers an implied companion food and marks it added (#57)', () => {
+    const ids = parseMeal('milky coffee').matched.map((m) => m.id)
+    expect(ids).toContain('coffee')
+    expect(ids).toContain('milk')
+    const milk = parseMeal('milky coffee').matched.find((m) => m.id === 'milk')
+    expect(milk.inferred).toBe(true)
+  })
+
+  it('does not double-add a companion already named', () => {
+    // "coffee with milk" already splits milk out; "milky" must not add a 2nd.
+    const milks = parseMeal('milky coffee with milk').matched.filter((m) => m.id === 'milk')
+    expect(milks.length).toBe(1)
+  })
+})
+
+describe('modifier prep deltas — bounded and correct sign', () => {
+  it('reads an iced drink as cooler than a hot one', () => {
+    const iced = assessMeal([{ id: 'coffee', portionWeight: 1, doshaDelta: parseMeal('iced coffee').matched.find((m) => m.id === 'coffee').doshaDelta }])
+    const hot = assessMeal(['coffee'])
+    expect(iced.perDosha.pitta).toBeLessThan(hot.perDosha.pitta)
+  })
+
+  it('reads a fried food as heavier (more Kapha) than plain', () => {
+    // potato is reviewed; frying should push Kapha up vs the bare food.
+    const friedDelta = { kapha: 0.4, pitta: 0.3 }
+    const fried = assessMeal([{ id: 'potato', portionWeight: 1, doshaDelta: friedDelta }])
+    const plain = assessMeal(['potato'])
+    expect(fried.perDosha.kapha).toBeGreaterThan(plain.perDosha.kapha)
+  })
 })
 
 describe('portionWeightOf — bounded magnitude', () => {

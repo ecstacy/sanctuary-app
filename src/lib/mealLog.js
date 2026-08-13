@@ -29,7 +29,9 @@ export function logMealSearchTerms(userId, parsed) {
       source: opts.source || 'meal_check',
       context: opts.context || {},
     })
-  ;(parsed.matched || []).forEach((m) => {
+  // Skip inferred companions (#57) — they weren't typed, so they aren't a search
+  // signal; logging them would pollute the typed-food frequency.
+  ;(parsed.matched || []).filter((m) => !m.inferred).forEach((m) => {
     const residual = m.modifiers || []
     fire(m.token, 1, {
       topResultId: m.id,

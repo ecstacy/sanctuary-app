@@ -1968,6 +1968,7 @@
     "qty": {
       "large": "Large",
       "small": "Small"
-    }
+    },
+    "addedTag": "added"
   }
 }

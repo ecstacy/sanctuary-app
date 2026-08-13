@@ -30,7 +30,10 @@ const DOSHAS = ['vata', 'pitta', 'kapha']
 // A parsed match → the editable item shape the page carries. Keeps the quantity
 // (qty + portionWeight) so it flows into the reading and onto the chips.
 function toItem(m) {
-  return { id: m.id, name: m.name, qty: m.qty, modifiers: m.modifiers, portionWeight: m.portionWeight }
+  return {
+    id: m.id, name: m.name, qty: m.qty, modifiers: m.modifiers,
+    portionWeight: m.portionWeight, doshaDelta: m.doshaDelta, inferred: m.inferred,
+  }
 }
 
 // A short, localized quantity prefix for a chip ("Large ", "2× "), or '' when
@@ -406,6 +409,7 @@ export default function MealCheckPage() {
                   className="inline-flex items-center gap-1.5 bg-primary-container text-on-primary-container rounded-full pl-3.5 pr-2 py-1.5 text-sm"
                 >
                   {qtyPrefix(t, it.qty)}{it.name}
+                  {it.inferred && <span className="text-[10px] font-label uppercase tracking-wide opacity-60">{t('mealCheck.addedTag')}</span>}
                   <span className="material-symbols-outlined text-base opacity-70">close</span>
                 </button>
               ))}
@@ -755,6 +759,7 @@ function MealChips({ t, items, onRemoveItem, onAddFood }) {
         {items.map((it) => (
           <span key={it.id} className="inline-flex items-center gap-1.5 bg-surface-container text-on-surface rounded-full pl-3.5 pr-2 py-1.5 text-sm">
             {qtyPrefix(t, it.qty)}{it.name}
+            {it.inferred && <span className="text-[10px] font-label uppercase tracking-wide text-on-surface-variant/60">{t('mealCheck.addedTag')}</span>}
             <button onClick={() => onRemoveItem(it.id)} aria-label={t('mealCheck.deleteAria')} className="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center">
               <span className="material-symbols-outlined text-[15px] text-on-surface-variant">close</span>
             </button>
