@@ -46,7 +46,21 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/faq"/>
     <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/faq"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/faq"/><priority>0.5</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/</loc><priority>0.8</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/"/><priority>0.8</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/"/><priority>0.7</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/support</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/support"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/support"/>
@@ -283,80 +297,1144 @@
   <url><loc>https://www.thesanctuaryteam.com/foods/whole-mung-bean</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/yoghurt</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/zucchini</loc><priority>0.6</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/accomplished-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/auspicious-seat</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/belly-twist</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/bharadvajas-twist</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/bound-angle-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/bow-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/bridge-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/cat-cow-flow</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/chair-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/childs-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/cobra-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/cock-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/corpse-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/cow-face-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/crane-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/crocodile-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/crow-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/dancers-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/downward-facing-dog</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/eagle-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/easy-seated-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/eight-angle-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/four-limbed-staff-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/frog-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/garland-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/gracious-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/half-locust-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/half-lord-of-the-fishes-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/half-lotus-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/half-pigeon-forward-fold</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/hand-to-big-toe-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/handstand</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/head-to-knee-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/headstand</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/hero-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/king-pigeon-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/knees-to-chest-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/legs-up-the-wall</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/lion-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/locust-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/lotus-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/low-lunge</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/marichis-pose-a</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/marichis-pose-c</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/mindful-respiration</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/moon-salutation</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/mountain-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/noose-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/peacock-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/pigeon-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/plow-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/pyramid-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/rabbit-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/reclined-bound-angle-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/reclined-easy-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/reclined-hand-to-big-toe-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/reclined-hero-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/revolved-triangle</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/seated-forward-bend</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/shoulder-stand</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/side-angle-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/side-plank</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/standing-forward-fold</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/stretched-tortoise-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/sun-salutation-a</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/sun-salutation-b</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/supine-spinal-twist</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/thunderbolt-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/tortoise-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/tree-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/triangle-pose</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/warrior-i</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/warrior-ii</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/warrior-iii</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/wide-angle-seated-forward-bend</loc><priority>0.7</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/poses/wide-legged-forward-fold</loc><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/accomplished-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/accomplished-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/accomplished-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/accomplished-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/accomplished-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/auspicious-seat</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/auspicious-seat"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/auspicious-seat"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/auspicious-seat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/auspicious-seat"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/belly-twist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/belly-twist"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/belly-twist"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/belly-twist"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/belly-twist"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/bharadvajas-twist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bharadvajas-twist"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bharadvajas-twist"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bharadvajas-twist"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bharadvajas-twist"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/bound-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bound-angle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/bow-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bow-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bow-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bow-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bow-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/bridge-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bridge-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bridge-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bridge-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bridge-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/cat-cow-flow</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cat-cow-flow"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cat-cow-flow"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cat-cow-flow"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cat-cow-flow"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/chair-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/chair-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/chair-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/chair-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/chair-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/childs-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/childs-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/childs-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/childs-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/childs-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/cobra-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cobra-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cobra-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cobra-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cobra-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/cock-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cock-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cock-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cock-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cock-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/corpse-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/corpse-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/corpse-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/corpse-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/corpse-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/cow-face-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cow-face-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cow-face-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cow-face-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cow-face-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/crane-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/crane-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/crane-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/crane-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/crane-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/crocodile-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/crocodile-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/crocodile-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/crocodile-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/crocodile-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/crow-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/crow-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/crow-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/crow-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/crow-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/dancers-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/dancers-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/dancers-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/dancers-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/dancers-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/downward-facing-dog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/downward-facing-dog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/downward-facing-dog"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/downward-facing-dog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/downward-facing-dog"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/eagle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/eagle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/eagle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/eagle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/eagle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/easy-seated-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/easy-seated-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/easy-seated-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/easy-seated-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/easy-seated-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/eight-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/eight-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/eight-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/eight-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/eight-angle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/four-limbed-staff-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/four-limbed-staff-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/four-limbed-staff-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/four-limbed-staff-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/four-limbed-staff-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/frog-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/frog-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/frog-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/frog-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/frog-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/garland-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/garland-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/garland-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/garland-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/garland-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/gracious-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/gracious-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/gracious-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/gracious-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/gracious-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/half-locust-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-locust-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/half-lord-of-the-fishes-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-lord-of-the-fishes-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-lord-of-the-fishes-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-lord-of-the-fishes-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-lord-of-the-fishes-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/half-lotus-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-lotus-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/half-pigeon-forward-fold</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-pigeon-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-pigeon-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-pigeon-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-pigeon-forward-fold"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/hand-to-big-toe-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/hand-to-big-toe-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/handstand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/handstand"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/handstand"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/handstand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/handstand"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/head-to-knee-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/head-to-knee-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/head-to-knee-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/head-to-knee-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/head-to-knee-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/headstand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/headstand"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/headstand"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/headstand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/headstand"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/hero-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/hero-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/king-pigeon-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/king-pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/king-pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/king-pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/king-pigeon-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/knees-to-chest-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/knees-to-chest-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/knees-to-chest-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/knees-to-chest-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/knees-to-chest-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/legs-up-the-wall</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/legs-up-the-wall"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/legs-up-the-wall"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/legs-up-the-wall"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/legs-up-the-wall"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/lion-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/lion-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/lion-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/lion-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/lion-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/locust-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/locust-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/lotus-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/lotus-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/low-lunge</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/low-lunge"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/low-lunge"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/low-lunge"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/low-lunge"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/marichis-pose-a</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/marichis-pose-a"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/marichis-pose-a"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/marichis-pose-a"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/marichis-pose-a"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/marichis-pose-c</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/marichis-pose-c"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/marichis-pose-c"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/marichis-pose-c"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/marichis-pose-c"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/mindful-respiration</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/mindful-respiration"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/mindful-respiration"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/mindful-respiration"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/mindful-respiration"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/moon-salutation</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/moon-salutation"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/moon-salutation"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/moon-salutation"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/moon-salutation"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/mountain-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/mountain-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/mountain-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/mountain-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/mountain-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/noose-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/noose-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/noose-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/noose-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/noose-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/peacock-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/peacock-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/peacock-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/peacock-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/peacock-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/pigeon-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/pigeon-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/plow-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/plow-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/plow-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/plow-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/plow-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/pyramid-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/pyramid-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/pyramid-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/pyramid-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/pyramid-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/rabbit-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/rabbit-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/rabbit-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/rabbit-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/rabbit-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/reclined-bound-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-bound-angle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/reclined-easy-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-easy-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-easy-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-easy-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-easy-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/reclined-hand-to-big-toe-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-hand-to-big-toe-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/reclined-hero-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-hero-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/revolved-triangle</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/revolved-triangle"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/revolved-triangle"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/revolved-triangle"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/revolved-triangle"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/seated-forward-bend</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/seated-forward-bend"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/shoulder-stand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/shoulder-stand"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/shoulder-stand"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/shoulder-stand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/shoulder-stand"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/side-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/side-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/side-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/side-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/side-angle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/side-plank</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/side-plank"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/side-plank"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/side-plank"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/side-plank"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/standing-forward-fold</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/standing-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/standing-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/standing-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/standing-forward-fold"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/stretched-tortoise-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/stretched-tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/stretched-tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/stretched-tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/stretched-tortoise-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/sun-salutation-a</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/sun-salutation-a"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/sun-salutation-a"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/sun-salutation-a"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/sun-salutation-a"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/sun-salutation-b</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/sun-salutation-b"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/sun-salutation-b"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/sun-salutation-b"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/sun-salutation-b"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/supine-spinal-twist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/supine-spinal-twist"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/supine-spinal-twist"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/supine-spinal-twist"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/supine-spinal-twist"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/thunderbolt-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/thunderbolt-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/thunderbolt-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/thunderbolt-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/thunderbolt-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/tortoise-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/tortoise-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/tree-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/tree-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/tree-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/tree-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/tree-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/triangle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/triangle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/triangle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/triangle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/triangle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/warrior-i</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/warrior-i"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/warrior-i"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/warrior-i"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/warrior-i"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/warrior-ii</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/warrior-ii"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/warrior-ii"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/warrior-ii"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/warrior-ii"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/warrior-iii</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/warrior-iii"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/warrior-iii"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/warrior-iii"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/warrior-iii"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/wide-angle-seated-forward-bend</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/wide-angle-seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/wide-angle-seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/wide-angle-seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/wide-angle-seated-forward-bend"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/poses/wide-legged-forward-fold</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/wide-legged-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/wide-legged-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/wide-legged-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/wide-legged-forward-fold"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/accomplished-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/accomplished-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/accomplished-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/accomplished-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/accomplished-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/auspicious-seat</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/auspicious-seat"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/auspicious-seat"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/auspicious-seat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/auspicious-seat"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/belly-twist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/belly-twist"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/belly-twist"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/belly-twist"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/belly-twist"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/bharadvajas-twist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bharadvajas-twist"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bharadvajas-twist"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bharadvajas-twist"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bharadvajas-twist"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/bound-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bound-angle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/bow-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bow-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bow-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bow-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bow-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/bridge-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bridge-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bridge-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bridge-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bridge-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/cat-cow-flow</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cat-cow-flow"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cat-cow-flow"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cat-cow-flow"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cat-cow-flow"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/chair-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/chair-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/chair-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/chair-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/chair-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/childs-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/childs-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/childs-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/childs-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/childs-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/cobra-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cobra-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cobra-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cobra-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cobra-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/cock-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cock-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cock-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cock-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cock-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/corpse-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/corpse-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/corpse-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/corpse-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/corpse-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/cow-face-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cow-face-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cow-face-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cow-face-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cow-face-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/crane-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/crane-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/crane-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/crane-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/crane-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/crocodile-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/crocodile-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/crocodile-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/crocodile-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/crocodile-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/crow-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/crow-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/crow-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/crow-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/crow-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/dancers-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/dancers-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/dancers-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/dancers-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/dancers-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/downward-facing-dog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/downward-facing-dog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/downward-facing-dog"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/downward-facing-dog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/downward-facing-dog"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/eagle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/eagle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/eagle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/eagle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/eagle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/easy-seated-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/easy-seated-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/easy-seated-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/easy-seated-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/easy-seated-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/eight-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/eight-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/eight-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/eight-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/eight-angle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/four-limbed-staff-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/four-limbed-staff-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/four-limbed-staff-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/four-limbed-staff-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/four-limbed-staff-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/frog-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/frog-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/frog-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/frog-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/frog-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/garland-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/garland-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/garland-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/garland-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/garland-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/gracious-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/gracious-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/gracious-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/gracious-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/gracious-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/half-locust-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-locust-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/half-lord-of-the-fishes-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-lord-of-the-fishes-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-lord-of-the-fishes-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-lord-of-the-fishes-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-lord-of-the-fishes-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/half-lotus-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-lotus-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/half-pigeon-forward-fold</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-pigeon-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-pigeon-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-pigeon-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-pigeon-forward-fold"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/hand-to-big-toe-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/hand-to-big-toe-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/handstand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/handstand"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/handstand"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/handstand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/handstand"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/head-to-knee-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/head-to-knee-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/head-to-knee-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/head-to-knee-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/head-to-knee-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/headstand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/headstand"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/headstand"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/headstand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/headstand"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/hero-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/hero-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/king-pigeon-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/king-pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/king-pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/king-pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/king-pigeon-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/knees-to-chest-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/knees-to-chest-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/knees-to-chest-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/knees-to-chest-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/knees-to-chest-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/legs-up-the-wall</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/legs-up-the-wall"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/legs-up-the-wall"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/legs-up-the-wall"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/legs-up-the-wall"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/lion-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/lion-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/lion-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/lion-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/lion-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/locust-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/locust-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/lotus-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/lotus-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/low-lunge</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/low-lunge"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/low-lunge"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/low-lunge"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/low-lunge"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/marichis-pose-a</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/marichis-pose-a"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/marichis-pose-a"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/marichis-pose-a"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/marichis-pose-a"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/marichis-pose-c</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/marichis-pose-c"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/marichis-pose-c"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/marichis-pose-c"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/marichis-pose-c"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/mindful-respiration</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/mindful-respiration"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/mindful-respiration"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/mindful-respiration"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/mindful-respiration"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/moon-salutation</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/moon-salutation"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/moon-salutation"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/moon-salutation"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/moon-salutation"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/mountain-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/mountain-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/mountain-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/mountain-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/mountain-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/noose-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/noose-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/noose-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/noose-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/noose-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/peacock-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/peacock-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/peacock-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/peacock-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/peacock-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/pigeon-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/pigeon-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/plow-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/plow-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/plow-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/plow-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/plow-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/pyramid-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/pyramid-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/pyramid-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/pyramid-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/pyramid-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/rabbit-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/rabbit-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/rabbit-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/rabbit-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/rabbit-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/reclined-bound-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-bound-angle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/reclined-easy-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-easy-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-easy-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-easy-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-easy-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/reclined-hand-to-big-toe-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-hand-to-big-toe-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/reclined-hero-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-hero-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/revolved-triangle</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/revolved-triangle"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/revolved-triangle"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/revolved-triangle"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/revolved-triangle"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/seated-forward-bend</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/seated-forward-bend"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/shoulder-stand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/shoulder-stand"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/shoulder-stand"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/shoulder-stand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/shoulder-stand"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/side-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/side-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/side-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/side-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/side-angle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/side-plank</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/side-plank"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/side-plank"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/side-plank"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/side-plank"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/standing-forward-fold</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/standing-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/standing-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/standing-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/standing-forward-fold"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/stretched-tortoise-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/stretched-tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/stretched-tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/stretched-tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/stretched-tortoise-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/sun-salutation-a</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/sun-salutation-a"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/sun-salutation-a"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/sun-salutation-a"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/sun-salutation-a"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/sun-salutation-b</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/sun-salutation-b"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/sun-salutation-b"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/sun-salutation-b"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/sun-salutation-b"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/supine-spinal-twist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/supine-spinal-twist"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/supine-spinal-twist"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/supine-spinal-twist"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/supine-spinal-twist"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/thunderbolt-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/thunderbolt-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/thunderbolt-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/thunderbolt-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/thunderbolt-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/tortoise-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/tortoise-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/tree-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/tree-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/tree-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/tree-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/tree-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/triangle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/triangle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/triangle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/triangle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/triangle-pose"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/warrior-i</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/warrior-i"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/warrior-i"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/warrior-i"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/warrior-i"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/warrior-ii</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/warrior-ii"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/warrior-ii"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/warrior-ii"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/warrior-ii"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/warrior-iii</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/warrior-iii"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/warrior-iii"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/warrior-iii"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/warrior-iii"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/wide-angle-seated-forward-bend</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/wide-angle-seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/wide-angle-seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/wide-angle-seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/wide-angle-seated-forward-bend"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/poses/wide-legged-forward-fold</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/wide-legged-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/wide-legged-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/wide-legged-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/wide-legged-forward-fold"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/accomplished-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/accomplished-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/accomplished-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/accomplished-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/accomplished-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/auspicious-seat</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/auspicious-seat"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/auspicious-seat"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/auspicious-seat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/auspicious-seat"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/belly-twist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/belly-twist"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/belly-twist"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/belly-twist"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/belly-twist"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/bharadvajas-twist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bharadvajas-twist"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bharadvajas-twist"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bharadvajas-twist"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bharadvajas-twist"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/bound-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bound-angle-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/bow-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bow-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bow-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bow-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bow-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/bridge-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/bridge-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/bridge-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/bridge-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/bridge-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/cat-cow-flow</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cat-cow-flow"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cat-cow-flow"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cat-cow-flow"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cat-cow-flow"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/chair-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/chair-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/chair-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/chair-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/chair-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/childs-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/childs-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/childs-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/childs-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/childs-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/cobra-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cobra-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cobra-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cobra-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cobra-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/cock-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cock-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cock-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cock-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cock-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/corpse-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/corpse-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/corpse-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/corpse-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/corpse-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/cow-face-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/cow-face-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/cow-face-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/cow-face-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/cow-face-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/crane-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/crane-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/crane-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/crane-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/crane-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/crocodile-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/crocodile-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/crocodile-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/crocodile-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/crocodile-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/crow-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/crow-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/crow-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/crow-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/crow-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/dancers-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/dancers-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/dancers-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/dancers-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/dancers-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/downward-facing-dog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/downward-facing-dog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/downward-facing-dog"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/downward-facing-dog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/downward-facing-dog"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/eagle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/eagle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/eagle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/eagle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/eagle-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/easy-seated-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/easy-seated-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/easy-seated-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/easy-seated-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/easy-seated-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/eight-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/eight-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/eight-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/eight-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/eight-angle-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/four-limbed-staff-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/four-limbed-staff-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/four-limbed-staff-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/four-limbed-staff-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/four-limbed-staff-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/frog-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/frog-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/frog-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/frog-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/frog-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/garland-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/garland-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/garland-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/garland-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/garland-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/gracious-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/gracious-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/gracious-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/gracious-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/gracious-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/half-locust-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-locust-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/half-lord-of-the-fishes-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-lord-of-the-fishes-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-lord-of-the-fishes-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-lord-of-the-fishes-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-lord-of-the-fishes-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/half-lotus-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-lotus-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/half-pigeon-forward-fold</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/half-pigeon-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/half-pigeon-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/half-pigeon-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/half-pigeon-forward-fold"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/hand-to-big-toe-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/hand-to-big-toe-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/handstand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/handstand"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/handstand"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/handstand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/handstand"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/head-to-knee-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/head-to-knee-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/head-to-knee-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/head-to-knee-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/head-to-knee-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/headstand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/headstand"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/headstand"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/headstand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/headstand"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/hero-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/hero-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/king-pigeon-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/king-pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/king-pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/king-pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/king-pigeon-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/knees-to-chest-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/knees-to-chest-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/knees-to-chest-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/knees-to-chest-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/knees-to-chest-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/legs-up-the-wall</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/legs-up-the-wall"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/legs-up-the-wall"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/legs-up-the-wall"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/legs-up-the-wall"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/lion-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/lion-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/lion-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/lion-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/lion-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/locust-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/locust-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/locust-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/lotus-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/lotus-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/lotus-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/low-lunge</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/low-lunge"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/low-lunge"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/low-lunge"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/low-lunge"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/marichis-pose-a</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/marichis-pose-a"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/marichis-pose-a"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/marichis-pose-a"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/marichis-pose-a"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/marichis-pose-c</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/marichis-pose-c"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/marichis-pose-c"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/marichis-pose-c"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/marichis-pose-c"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/mindful-respiration</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/mindful-respiration"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/mindful-respiration"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/mindful-respiration"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/mindful-respiration"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/moon-salutation</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/moon-salutation"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/moon-salutation"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/moon-salutation"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/moon-salutation"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/mountain-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/mountain-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/mountain-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/mountain-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/mountain-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/noose-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/noose-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/noose-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/noose-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/noose-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/peacock-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/peacock-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/peacock-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/peacock-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/peacock-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/pigeon-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/pigeon-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/pigeon-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/plow-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/plow-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/plow-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/plow-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/plow-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/pyramid-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/pyramid-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/pyramid-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/pyramid-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/pyramid-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/rabbit-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/rabbit-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/rabbit-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/rabbit-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/rabbit-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/reclined-bound-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-bound-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-bound-angle-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/reclined-easy-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-easy-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-easy-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-easy-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-easy-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/reclined-hand-to-big-toe-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-hand-to-big-toe-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-hand-to-big-toe-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/reclined-hero-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/reclined-hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/reclined-hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/reclined-hero-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/reclined-hero-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/revolved-triangle</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/revolved-triangle"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/revolved-triangle"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/revolved-triangle"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/revolved-triangle"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/seated-forward-bend</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/seated-forward-bend"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/shoulder-stand</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/shoulder-stand"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/shoulder-stand"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/shoulder-stand"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/shoulder-stand"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/side-angle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/side-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/side-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/side-angle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/side-angle-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/side-plank</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/side-plank"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/side-plank"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/side-plank"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/side-plank"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/standing-forward-fold</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/standing-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/standing-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/standing-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/standing-forward-fold"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/stretched-tortoise-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/stretched-tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/stretched-tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/stretched-tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/stretched-tortoise-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/sun-salutation-a</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/sun-salutation-a"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/sun-salutation-a"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/sun-salutation-a"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/sun-salutation-a"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/sun-salutation-b</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/sun-salutation-b"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/sun-salutation-b"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/sun-salutation-b"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/sun-salutation-b"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/supine-spinal-twist</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/supine-spinal-twist"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/supine-spinal-twist"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/supine-spinal-twist"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/supine-spinal-twist"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/thunderbolt-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/thunderbolt-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/thunderbolt-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/thunderbolt-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/thunderbolt-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/tortoise-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/tortoise-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/tortoise-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/tree-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/tree-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/tree-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/tree-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/tree-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/triangle-pose</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/triangle-pose"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/triangle-pose"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/triangle-pose"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/triangle-pose"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/warrior-i</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/warrior-i"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/warrior-i"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/warrior-i"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/warrior-i"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/warrior-ii</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/warrior-ii"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/warrior-ii"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/warrior-ii"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/warrior-ii"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/warrior-iii</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/warrior-iii"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/warrior-iii"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/warrior-iii"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/warrior-iii"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/wide-angle-seated-forward-bend</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/wide-angle-seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/wide-angle-seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/wide-angle-seated-forward-bend"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/wide-angle-seated-forward-bend"/><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/poses/wide-legged-forward-fold</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/wide-legged-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/wide-legged-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/poses/wide-legged-forward-fold"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/poses/wide-legged-forward-fold"/><priority>0.7</priority></url>
 </urlset>
