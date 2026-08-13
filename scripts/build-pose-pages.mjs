@@ -445,6 +445,7 @@ const altsFor = (path) => [
 const supportAlts = altsFor('/support')
 const privacyAlts = altsFor('/privacy')
 const termsAlts = altsFor('/terms')
+const faqAlts = altsFor('/faq')
 const staticUrls = [
   { loc: `${SITE}/`, priority: '1.0', alts: landingAlts },
   { loc: `${SITE}/de/`, priority: '0.9', alts: landingAlts },
@@ -452,7 +453,9 @@ const staticUrls = [
   { loc: `${SITE}/quiz`, priority: '0.9', alts: quizAlts },
   { loc: `${SITE}/de/quiz`, priority: '0.8', alts: quizAlts },
   { loc: `${SITE}/hi/quiz`, priority: '0.8', alts: quizAlts },
-  { loc: `${SITE}/faq`, priority: '0.6' },
+  { loc: `${SITE}/faq`, priority: '0.6', alts: faqAlts },
+  { loc: `${SITE}/de/faq`, priority: '0.5', alts: faqAlts },
+  { loc: `${SITE}/hi/faq`, priority: '0.5', alts: faqAlts },
   { loc: `${SITE}/poses/`, priority: '0.8' },
   { loc: `${SITE}/support`, priority: '0.6', alts: supportAlts },
   { loc: `${SITE}/de/support`, priority: '0.5', alts: supportAlts },
