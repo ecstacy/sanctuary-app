@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseMeal, assessMeal, remediesFor, mealCombos } from './mealCheck'
+import { parseMeal, assessMeal, remediesFor, mealCombos, portionWeightOf } from './mealCheck'
 import { getIngredient } from './ingredients'
 
 const pittaUser = { dosha_details: { primary: 'pitta' } }
@@ -28,6 +28,56 @@ describe('parseMeal', () => {
   it('does not double-count a repeated food', () => {
     const { matched } = parseMeal('rice, rice and more rice')
     expect(matched.filter((m) => m.id === 'basmatiRice' || m.id === 'brownRice').length).toBeLessThanOrEqual(1)
+  })
+
+  it('captures quantity (size + count) without losing the food', () => {
+    const large = parseMeal('large black coffee').matched[0]
+    expect(large.id).toBe('coffee')
+    expect(large.qty.size).toBe('large')
+    expect(large.portionWeight).toBeGreaterThan(1)
+
+    const two = parseMeal('two eggs').matched[0]
+    expect(two.id).toBe('egg')
+    expect(two.qty.count).toBe(2)
+    expect(two.portionWeight).toBeGreaterThan(1)
+  })
+
+  it('reads a portion word as an implied size (a bowl is large)', () => {
+    const bowl = parseMeal('a bowl of rice').matched[0]
+    expect(['basmatiRice', 'brownRice']).toContain(bowl.id)
+    expect(bowl.qty.unit).toBe('bowl')
+    expect(bowl.qty.size).toBe('large')
+  })
+
+  it('keeps leftover descriptors as modifiers', () => {
+    const m = parseMeal('black coffee').matched[0]
+    expect(m.id).toBe('coffee')
+    expect(m.modifiers).toContain('black')
+  })
+
+  it('uses a modifier to resolve a raw/cooked variant automatically', () => {
+    // "tomato" alone is ambiguous; "cooked tomato" should pick the cooked one.
+    expect(parseMeal('tomato').ambiguous.length).toBeGreaterThan(0)
+    expect(parseMeal('cooked tomato').matched.map((m) => m.id)).toContain('tomatoCooked')
+  })
+})
+
+describe('portionWeightOf — bounded magnitude', () => {
+  it('scales up for large / more and down for small, within bounds', () => {
+    expect(portionWeightOf({ size: 'large' })).toBeGreaterThan(1)
+    expect(portionWeightOf({ size: 'small' })).toBeLessThan(1)
+    expect(portionWeightOf({ count: 3 })).toBeGreaterThan(portionWeightOf({ count: 1 }))
+    // never runaway
+    expect(portionWeightOf({ count: 99, size: 'large' })).toBeLessThanOrEqual(1.8)
+    expect(portionWeightOf({ size: 'small' })).toBeGreaterThanOrEqual(0.5)
+  })
+
+  it('lets a larger portion pull the meal harder between items', () => {
+    // ginger (raises pitta) + basmati (settles pitta). A large ginger should
+    // tilt the net more toward pitta than a small one.
+    const bigGinger = assessMeal([{ id: 'gingerFresh', portionWeight: 1.6 }, { id: 'basmatiRice', portionWeight: 1 }])
+    const smallGinger = assessMeal([{ id: 'gingerFresh', portionWeight: 0.6 }, { id: 'basmatiRice', portionWeight: 1 }])
+    expect(bigGinger.perDosha.pitta).toBeGreaterThan(smallGinger.perDosha.pitta)
   })
 })
 

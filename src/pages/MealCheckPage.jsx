@@ -27,6 +27,23 @@ import { track } from '../lib/track'
 
 const DOSHAS = ['vata', 'pitta', 'kapha']
 
+// A parsed match → the editable item shape the page carries. Keeps the quantity
+// (qty + portionWeight) so it flows into the reading and onto the chips.
+function toItem(m) {
+  return { id: m.id, name: m.name, qty: m.qty, modifiers: m.modifiers, portionWeight: m.portionWeight }
+}
+
+// A short, localized quantity prefix for a chip ("Large ", "2× "), or '' when
+// there's nothing remarkable to show.
+function qtyPrefix(t, qty) {
+  if (!qty) return ''
+  const bits = []
+  if ((qty.count || 1) > 1) bits.push(`${qty.count}×`)
+  if (qty.size === 'large') bits.push(t('mealCheck.qty.large'))
+  else if (qty.size === 'small') bits.push(t('mealCheck.qty.small'))
+  return bits.length ? `${bits.join(' ')} ` : ''
+}
+
 // Dosha display metadata for the result graphic. Colours follow the Dosha page
 // tokens (--color-vata/pitta/kapha), NOT the gem palette — the two differ and
 // are being unified app-wide (task #48). Elements match DoshaProfileContent.
@@ -200,7 +217,7 @@ export default function MealCheckPage() {
     if (!trimmed) return
     track('meal_check_started', { chars: trimmed.length })
     const parsed = parseMeal(trimmed)
-    setItems(parsed.matched.map((m) => ({ id: m.id, name: m.name })))
+    setItems(parsed.matched.map(toItem))
     setAmbiguous(parsed.ambiguous)
     setUnknown(parsed.unknown)
     // Counts only — food text is special-category diet data and must not reach
@@ -212,7 +229,7 @@ export default function MealCheckPage() {
     if (user?.id) logMealSearchTerms(user.id, parsed)
     // Skip the confirm step only when the parse was completely clean.
     if (parsed.matched.length && !parsed.ambiguous.length && !parsed.unknown.length) {
-      computeResult(parsed.matched.map((m) => ({ id: m.id, name: m.name })))
+      computeResult(parsed.matched.map(toItem))
     } else {
       setPhase('confirm')
     }
@@ -232,7 +249,8 @@ export default function MealCheckPage() {
     const finalItems = list || items
     setItems(finalItems)   // keep the editable chip list in sync with the result
     const ids = finalItems.map((i) => i.id)
-    const assessment = assessMeal(ids, profile)
+    // Pass the full items (with portionWeight) so quantity scales the reading.
+    const assessment = assessMeal(finalItems, profile)
     const hr = new Date().getHours()
     const slot = hr < 11 ? 'morning' : hr < 17 ? 'midday' : 'evening'
     const remedies = remediesFor(assessment, { dietPrefs, slot })
@@ -387,7 +405,7 @@ export default function MealCheckPage() {
                   onClick={() => removeItem(it.id)}
                   className="inline-flex items-center gap-1.5 bg-primary-container text-on-primary-container rounded-full pl-3.5 pr-2 py-1.5 text-sm"
                 >
-                  {it.name}
+                  {qtyPrefix(t, it.qty)}{it.name}
                   <span className="material-symbols-outlined text-base opacity-70">close</span>
                 </button>
               ))}
@@ -736,7 +754,7 @@ function MealChips({ t, items, onRemoveItem, onAddFood }) {
       <div className="flex flex-wrap gap-2">
         {items.map((it) => (
           <span key={it.id} className="inline-flex items-center gap-1.5 bg-surface-container text-on-surface rounded-full pl-3.5 pr-2 py-1.5 text-sm">
-            {it.name}
+            {qtyPrefix(t, it.qty)}{it.name}
             <button onClick={() => onRemoveItem(it.id)} aria-label={t('mealCheck.deleteAria')} className="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center">
               <span className="material-symbols-outlined text-[15px] text-on-surface-variant">close</span>
             </button>

@@ -43,11 +43,82 @@ const notExcluded = (f, dietPrefs) => {
   return !(ex && ex.excluded)
 }
 
-// ── Parse free text → resolved / ambiguous / unknown tokens ─────────────────
+// ── Structured input parsing ────────────────────────────────────────────────
+//
+// A modality-agnostic pipeline: normalize → segment → extract → resolve. Each
+// item phrase yields a structured ParsedItem carrying not just the food id but
+// the QUANTITY (count + size), portion words, and leftover modifiers. This is
+// the foundation the speech feature (#47) plugs into — a transcript enters at
+// the same normalize step, so language/accent handling never touches the engine.
+//
+// Quantity is captured and turned into a BOUNDED portion weight (a directional
+// nudge, never a calorie count — see portionWeightOf). Composition (undeclared
+// milk/sugar) is intentionally left to the user's editable meal chips.
+
+// Filler that carries no food, quantity or modifier meaning. Portion words
+// (cup/bowl/slice…) and sizes (little/large…) are NOT here — they're parsed.
 const STOPWORDS = new Set([
-  'a', 'an', 'the', 'some', 'of', 'my', 'for', 'plus', 'had', 'ate', 'i',
-  'bit', 'little', 'few', 'cup', 'glass', 'bowl', 'piece', 'slice', 'served',
+  'a', 'an', 'the', 'some', 'of', 'my', 'for', 'plus', 'had', 'ate', 'i', 'served', 'few',
 ])
+
+// Number words → a count. 'a'/'an' stay stopwords (an implicit 1).
+const NUMBER_WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, couple: 2, dozen: 12 }
+
+// Size adjectives → a coarse bucket.
+const SIZE_WORDS = {
+  small: 'small', little: 'small', mini: 'small', tiny: 'small', short: 'small', single: 'small',
+  large: 'large', big: 'large', huge: 'large', double: 'large', tall: 'large', grande: 'large',
+  venti: 'large', jumbo: 'large', heaped: 'large', generous: 'large', extra: 'large',
+  medium: 'regular', regular: 'regular', normal: 'regular',
+}
+
+// Portion nouns (kept as `unit`), and the size some of them imply when no
+// explicit size is given (a shot is small; a bowl is large).
+const UNIT_WORDS = new Set([
+  'cup', 'glass', 'mug', 'bowl', 'plate', 'slice', 'piece', 'bottle', 'can', 'jug',
+  'handful', 'spoon', 'spoonful', 'tsp', 'tbsp', 'teaspoon', 'tablespoon', 'shot',
+  'scoop', 'pinch', 'serving', 'bit', 'bite', 'katori',
+])
+const UNIT_IMPLIED_SIZE = {
+  shot: 'small', spoon: 'small', spoonful: 'small', tsp: 'small', tbsp: 'small',
+  teaspoon: 'small', tablespoon: 'small', pinch: 'small', bit: 'small', bite: 'small',
+  bowl: 'large', plate: 'large', mug: 'large', bottle: 'large', jug: 'large',
+}
+
+const singular = (w) => (w.endsWith('es') ? w.slice(0, -2) : w.endsWith('s') ? w.slice(0, -1) : w)
+
+// Pull quantity / size / unit out of one item phrase; the rest is the food +
+// its modifiers. Deterministic and locale-light so a speech transcript can feed
+// the same function.
+function extractPhrase(phrase) {
+  let count = null
+  let size = null
+  let unit = null
+  const rest = []
+  for (const raw of phrase.split(/\s+/).filter(Boolean)) {
+    const w = raw.toLowerCase()
+    const s = singular(w)
+    if (STOPWORDS.has(w)) continue
+    if (/^\d+$/.test(w)) { count = parseInt(w, 10); continue }
+    if (w in NUMBER_WORDS) { count = NUMBER_WORDS[w]; continue }
+    if (w in SIZE_WORDS) { size = SIZE_WORDS[w]; continue }
+    if (UNIT_WORDS.has(s)) { unit = s; if (!size && UNIT_IMPLIED_SIZE[s]) size = UNIT_IMPLIED_SIZE[s]; continue }
+    rest.push(w)
+  }
+  return { count: count || 1, size, unit, baseText: rest.join(' ') }
+}
+
+// Quantity → a BOUNDED magnitude multiplier on a food's contribution. Large/more
+// pulls the meal harder; small pulls less — but clamped, because the verdict is
+// directional, not a nutrient calculation. A single item's size can't flip its
+// own direction (a large coffee still raises Pitta); it changes how much it
+// outweighs the OTHER foods on the plate.
+export function portionWeightOf({ count = 1, size = null } = {}) {
+  const sizeFactor = size === 'large' ? 1.4 : size === 'small' ? 0.65 : 1
+  const c = Math.min(Math.max(count || 1, 1), 3)
+  const countFactor = c <= 1 ? 1 : c === 2 ? 1.25 : 1.45
+  return Math.max(0.5, Math.min(1.8, sizeFactor * countFactor))
+}
 
 const isExact = (r, q) => r.name.toLowerCase() === q || (r.aliases || []).some((a) => a.toLowerCase() === q)
 
@@ -97,43 +168,86 @@ function nearest(token) {
     .map(brief)
 }
 
+// The words of the phrase that aren't part of the resolved food's name/aliases —
+// i.e. the leftover descriptors ("black", "iced", "scrambled"). Kept on the item
+// for display and future use; they don't (yet) alter the dosha math.
+function modifiersOf(baseText, ingredient) {
+  const nameWords = new Set(
+    [ingredient.name, ...(ingredient.aliases || [])]
+      .join(' ').toLowerCase().split(/\s+/).map(singular),
+  )
+  return baseText.split(/\s+/).filter(Boolean)
+    .filter((w) => w.length >= 3 && !nameWords.has(singular(w)))
+}
+
+// When a base term is ambiguous (e.g. "tomato" → raw / cooked), try to resolve
+// it with the phrase's own descriptors. Score each candidate by how many of the
+// phrase's words its name/aliases contain, and pick the winner only if it's a
+// UNIQUE best — so "cooked tomato" resolves to Tomato (cooked) while a bare
+// "tomato" (both score 1) stays ambiguous for the user to disambiguate.
+function narrowByModifiers(results, baseText) {
+  const words = [...new Set(baseText.split(/\s+/).map(singular).filter((w) => w.length >= 3))]
+  const scored = results.map((r) => {
+    const hay = [r.name, ...(r.aliases || [])].join(' ').toLowerCase()
+    return { r, score: words.filter((w) => hay.includes(w)).length }
+  })
+  const max = Math.max(...scored.map((s) => s.score))
+  const top = scored.filter((s) => s.score === max)
+  return max > 0 && top.length === 1 ? [top[0].r] : results
+}
+
 export function parseMeal(text) {
-  const tokens = String(text || '')
+  const phrases = String(text || '')
     .split(/[,+\n/]|\band\b|\bwith\b|\bplus\b/i)
-    // drop filler words from inside each phrase too ("a unicornberry" → the food,
-    // "bit of yoghurt" → "yoghurt") so the token we match/report is the food.
-    .map((t) => t.trim().toLowerCase().split(/\s+/).filter((w) => w && !STOPWORDS.has(w)).join(' '))
-    .filter(Boolean)
+    .map((p) => extractPhrase(p))
+    .filter((p) => p.baseText)
 
   const matched = []
   const ambiguous = []
   const unknown = []
   const seen = new Set()
 
-  for (const token of tokens) {
-    const results = lookup(token)
+  for (const { baseText, count, size, unit } of phrases) {
+    let results = lookup(baseText)
+    if (results.length > 1) results = narrowByModifiers(results, baseText)
+
     if (results.length === 0) {
-      unknown.push({ token, suggestions: nearest(token) })
+      unknown.push({ token: baseText, suggestions: nearest(baseText) })
     } else if (results.length === 1) {
-      if (!seen.has(results[0].id)) {
-        seen.add(results[0].id)
-        matched.push({ token, id: results[0].id, name: results[0].name })
+      const r = results[0]
+      if (!seen.has(r.id)) {
+        seen.add(r.id)
+        const qty = { count, size, unit }
+        matched.push({
+          token: baseText,
+          id: r.id,
+          name: r.name,
+          qty,
+          modifiers: modifiersOf(baseText, r),
+          portionWeight: portionWeightOf(qty),
+        })
       }
     } else {
-      ambiguous.push({ token, options: results.slice(0, 4).map(brief) })
+      ambiguous.push({ token: baseText, options: results.slice(0, 4).map(brief) })
     }
   }
   return { matched, ambiguous, unknown }
 }
 
 // ── Assess a resolved meal against the user's constitution ──────────────────
-export function assessMeal(ids, profile = {}) {
-  const items = (ids || []).map(getIngredient).filter(Boolean)
+// Accepts either bare ingredient ids (portion 1) or { id, portionWeight } items,
+// so quantity from the parser scales a food's contribution. Backward-compatible:
+// existing callers passing an id array still work.
+export function assessMeal(items, profile = {}) {
+  const resolved = (items || [])
+    .map((it) => (typeof it === 'string' ? { id: it, portionWeight: 1 } : { id: it?.id, portionWeight: it?.portionWeight || 1 }))
+    .map(({ id, portionWeight }) => ({ f: getIngredient(id), portionWeight }))
+    .filter((x) => x.f)
 
   const raw = { vata: 0, pitta: 0, kapha: 0 }
   let totalW = 0
-  for (const f of items) {
-    const w = weightOf(f)
+  for (const { f, portionWeight } of resolved) {
+    const w = weightOf(f) * portionWeight
     totalW += w
     for (const d of DOSHAS) raw[d] += w * (f.doshaEffect?.[d] || 0)
   }
@@ -176,7 +290,7 @@ export function assessMeal(ids, profile = {}) {
   else if (lens && dir[lens] === 'settles') concern = 'good'
 
   return {
-    items: items.map((f) => f.id),
+    items: resolved.map((x) => x.f.id),
     perDosha,
     dir,
     headline,
