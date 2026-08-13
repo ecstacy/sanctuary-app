@@ -437,6 +437,14 @@ const quizAlts = [
   { h: 'en', href: `${SITE}/quiz` }, { h: 'de', href: `${SITE}/de/quiz` },
   { h: 'hi', href: `${SITE}/hi/quiz` }, { h: 'x-default', href: `${SITE}/quiz` },
 ]
+// Deeper pages now localized in en/de/hi (support + legal).
+const altsFor = (path) => [
+  { h: 'en', href: `${SITE}${path}` }, { h: 'de', href: `${SITE}/de${path}` },
+  { h: 'hi', href: `${SITE}/hi${path}` }, { h: 'x-default', href: `${SITE}${path}` },
+]
+const supportAlts = altsFor('/support')
+const privacyAlts = altsFor('/privacy')
+const termsAlts = altsFor('/terms')
 const staticUrls = [
   { loc: `${SITE}/`, priority: '1.0', alts: landingAlts },
   { loc: `${SITE}/de/`, priority: '0.9', alts: landingAlts },
@@ -446,9 +454,15 @@ const staticUrls = [
   { loc: `${SITE}/hi/quiz`, priority: '0.8', alts: quizAlts },
   { loc: `${SITE}/faq`, priority: '0.6' },
   { loc: `${SITE}/poses/`, priority: '0.8' },
-  { loc: `${SITE}/support`, priority: '0.6' },
-  { loc: `${SITE}/privacy`, priority: '0.3' },
-  { loc: `${SITE}/terms`, priority: '0.3' },
+  { loc: `${SITE}/support`, priority: '0.6', alts: supportAlts },
+  { loc: `${SITE}/de/support`, priority: '0.5', alts: supportAlts },
+  { loc: `${SITE}/hi/support`, priority: '0.5', alts: supportAlts },
+  { loc: `${SITE}/privacy`, priority: '0.3', alts: privacyAlts },
+  { loc: `${SITE}/de/privacy`, priority: '0.3', alts: privacyAlts },
+  { loc: `${SITE}/hi/privacy`, priority: '0.3', alts: privacyAlts },
+  { loc: `${SITE}/terms`, priority: '0.3', alts: termsAlts },
+  { loc: `${SITE}/de/terms`, priority: '0.3', alts: termsAlts },
+  { loc: `${SITE}/hi/terms`, priority: '0.3', alts: termsAlts },
 ]
 const poseUrls = asanas
   .map((a) => ({ loc: `${SITE}/poses/${slugOf(a)}`, priority: '0.7' }))

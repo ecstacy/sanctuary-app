@@ -33,9 +33,51 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/quiz"/><priority>0.8</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/faq</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/poses/</loc><priority>0.8</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/support</loc><priority>0.6</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/privacy</loc><priority>0.3</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/terms</loc><priority>0.3</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/support</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/support"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/support"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/support"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/support"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/support</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/support"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/support"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/support"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/support"/><priority>0.5</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/support</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/support"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/support"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/support"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/support"/><priority>0.5</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/privacy"/><priority>0.3</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/privacy"/><priority>0.3</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/privacy"/><priority>0.3</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/terms"/><priority>0.3</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/terms"/><priority>0.3</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/terms"/><priority>0.3</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/</loc><priority>0.8</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/almond</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/almond-oil</loc><priority>0.6</priority></url>
