@@ -31,7 +31,21 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/quiz"/>
     <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/quiz"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/quiz"/><priority>0.8</priority></url>
-  <url><loc>https://www.thesanctuaryteam.com/faq</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/faq"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/faq"/><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/de/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/faq"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/faq"/><priority>0.5</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/hi/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/faq"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/faq"/><priority>0.5</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/poses/</loc><priority>0.8</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/support</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/support"/>
