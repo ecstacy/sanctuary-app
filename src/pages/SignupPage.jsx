@@ -123,7 +123,7 @@ export default function SignupPage() {
         <button
           onClick={() => step > 1 ? setStep(step - 1) : navigate('/preview', { state: { struggles, notes } })}
           className="text-on-surface-variant"
-          aria-label="Go back"
+          aria-label={t('common.back')}
         >
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>
@@ -247,7 +247,7 @@ export default function SignupPage() {
                   onChange={e => setFullName(e.target.value)}
                   placeholder={t('signup.step2.fullNamePlaceholder')}
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
-                  aria-label="Full name"
+                  aria-label={t('signup.step2.fullName')}
                 />
               </div>
 
@@ -262,7 +262,7 @@ export default function SignupPage() {
                   onChange={e => setEmail(e.target.value)}
                   placeholder={t('signup.step2.emailPlaceholder')}
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
-                  aria-label="Email address"
+                  aria-label={t('signup.step2.email')}
                 />
               </div>
 
@@ -278,7 +278,7 @@ export default function SignupPage() {
                   placeholder={t('signup.step2.passwordPlaceholder')}
                   minLength={8}
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
-                  aria-label="Password"
+                  aria-label={t('signup.step2.password')}
                   aria-describedby="password-hint"
                 />
                 <p id="password-hint" className="text-[11px] text-on-surface-variant/70 px-1">

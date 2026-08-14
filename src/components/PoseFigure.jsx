@@ -4,6 +4,7 @@
 // figure opens a fullscreen overlay with a "Play video" toggle.
 
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { VIDEO_FILES, IMAGE_FILES } from '../data/poseManifest'
 
@@ -163,6 +164,7 @@ function PoseMedia({ poseKey, width, height, variant, breathing, rounded = true,
 // Portaled to document.body so `position: fixed` is viewport-relative even
 // when an ancestor (e.g. PageTransition) creates a transform containing block.
 function PoseExpandedOverlay({ poseKey, onClose }) {
+  const { t } = useTranslation()
   const [playing, setPlaying] = useState(false)
   const [videoBroken, setVideoBroken] = useState(false)
   const videoSrc = resolveVideo(poseKey)
@@ -198,7 +200,7 @@ function PoseExpandedOverlay({ poseKey, onClose }) {
       {/* Close */}
       <button
         onClick={(e) => { e.stopPropagation(); onClose() }}
-        aria-label="Close"
+        aria-label={t('common.close')}
         style={{
           position: 'absolute',
           top: 'max(1rem, env(safe-area-inset-top))',

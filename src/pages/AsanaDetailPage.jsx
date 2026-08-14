@@ -252,7 +252,7 @@ export default function AsanaDetailPage() {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex-shrink-0 active:scale-90 transition-all rounded-xl overflow-hidden"
-            aria-label="Scroll to top"
+            aria-label={t('a11y.scrollTop')}
           >
             <PoseFigure poseKey={asana.poseKey} size={44} breathing={false} objectPosition="top" />
           </button>
@@ -263,7 +263,7 @@ export default function AsanaDetailPage() {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0"
-            aria-label="Scroll to top"
+            aria-label={t('a11y.scrollTop')}
           >
             <span className="material-symbols-outlined text-on-surface-variant text-sm">expand_less</span>
           </button>
