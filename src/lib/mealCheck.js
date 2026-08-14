@@ -21,6 +21,7 @@
 
 import { REVIEWED_INGREDIENTS, getIngredient, searchIngredients } from './ingredients'
 import { exclusionFor } from './dietSafety'
+import { effectivePrimary, afterBaseline } from './doshaState'
 import { prepDeltaFor, impliedAdditionsFor } from './mealModifiers'
 import { PRANAYAMAS } from '../data/pranayamas'
 
@@ -291,17 +292,14 @@ export function assessMeal(items, profile = {}) {
   }
 
   // Constitution lens: this week's state (vikriti) first, birth type (prakriti)
-  // as fallback. The prakriti honours the user's own self-correction if they
-  // gave one (see doshaSelfReport). Raising the dosha the user already runs high
-  // in is the concern.
-  const vikriti = (profile?.vikriti_details?.primary || '').toLowerCase()
-  // The prakriti honours the user's own self-correction if they gave one (a
-  // 'adjusted' selfReport in dosha_details; kept inline so this stays a pure
-  // module with no supabase import).
-  const selfReport = profile?.dosha_details?.selfReport
-  const selfPrimary = (selfReport?.fit === 'adjusted' && DOSHAS.includes(selfReport.primary)) ? selfReport.primary : null
-  const prakriti = selfPrimary || (profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
-  const lens = DOSHAS.includes(vikriti) ? vikriti : (DOSHAS.includes(prakriti) ? prakriti : null)
+  // as fallback — the same shared rules Home/food/practice use (#65). The
+  // vikriti quiz reading (vikriti_details) counts only when it's newer than the
+  // constitution baseline; prakriti honours the user's own self-correction.
+  const vd = profile?.vikriti_details
+  const vikriti = (vd?.primary || '').toLowerCase()
+  const vikritiRelevant = DOSHAS.includes(vikriti) && afterBaseline(profile, vd?.assessedAt)
+  const prakriti = effectivePrimary(profile) || (profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
+  const lens = vikritiRelevant ? vikriti : (DOSHAS.includes(prakriti) ? prakriti : null)
 
   // Headline = the dosha the meal raises most (if any).
   let headline = null
@@ -326,7 +324,7 @@ export function assessMeal(items, profile = {}) {
     headline,
     lens,
     prakriti: DOSHAS.includes(prakriti) ? prakriti : null,
-    vikriti: DOSHAS.includes(vikriti) ? vikriti : null,
+    vikriti: vikritiRelevant ? vikriti : null,
     concern,
   }
 }

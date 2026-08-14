@@ -35,6 +35,27 @@ describe('resolveDietTarget', () => {
     expect(resolveDietTarget({ profile: { dosha: 'KAPHA' } }).dosha).toBe('kapha')
   })
 
+  it('ignores a vikriti signal that predates a re-taken constitution (#65)', () => {
+    // Re-quizzed to Kapha today; the Pitta flare is from stale earlier check-ins.
+    const profile = { dosha_details: { primary: 'kapha', assessedAt: '2026-07-10T00:00:00Z' } }
+    const stale = resolveDietTarget({
+      vikriti: { hasSignal: true, vikriti: 'pitta', lastCheckinAt: '2026-07-01T00:00:00Z' },
+      profile, now: jul,
+    })
+    expect(stale).toMatchObject({ dosha: 'kapha', source: 'prakriti' })
+    // A check-in AFTER the re-quiz is a genuine new flare and is honoured.
+    const fresh = resolveDietTarget({
+      vikriti: { hasSignal: true, vikriti: 'pitta', lastCheckinAt: '2026-07-15T00:00:00Z' },
+      profile, now: jul,
+    })
+    expect(fresh).toMatchObject({ dosha: 'pitta', source: 'vikriti' })
+  })
+
+  it('honours the user self-correction for the prakriti target (#52)', () => {
+    const t = resolveDietTarget({ profile: { dosha_details: { primary: 'pitta', selfReport: { fit: 'adjusted', primary: 'vata' } } }, now: jul })
+    expect(t).toMatchObject({ dosha: 'vata', source: 'prakriti' })
+  })
+
   it('always carries the season, whatever the target', () => {
     expect(resolveDietTarget({ now: jan }).season).toBe('winter')
     expect(resolveDietTarget({ now: jul }).season).toBe('summer')
