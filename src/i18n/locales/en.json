@@ -29,7 +29,9 @@
     "or": "or",
     "retry": "Try again",
     "clear": "Clear",
-    "close": "Close"
+    "close": "Close",
+    "noMedia": "No media",
+    "swipeToClose": "Swipe again to close"
   },
   "welcome": {
     "greeting": "Welcome to",
@@ -1981,5 +1983,70 @@
   "a11y": {
     "scrollTop": "Scroll to top",
     "primaryNav": "Primary"
+  },
+  "preview": {
+    "eyebrow": "Your Personalized Preview",
+    "title": "Your path to {{label}}.",
+    "subtitle": "Based on what you shared, here is a glimpse of your Sanctuary practice.",
+    "sequenceLabel": "{{label}} Sequence",
+    "personalized": "Personalized practice",
+    "plusMore": " · +{{count}} more",
+    "lockedTitle": "Your Dosha profile + 12 more sequences",
+    "lockedSub": "Create a free account to unlock everything",
+    "whyTitle": "Why create an account",
+    "cta": "Create My Free Account",
+    "haveAccount": "Already have an account? Sign in",
+    "struggles": {
+      "stress": {
+        "label": "Stress Relief",
+        "tip": "Warm sesame oil massage before bed calms Vata.",
+        "sequence": [
+          "Nadi Shodhana · 5 min",
+          "Balasana · 2 min",
+          "Viparita Karani · 5 min"
+        ]
+      },
+      "sleep": {
+        "label": "Deep Sleep",
+        "tip": "Ashwagandha in warm milk 30 min before bed.",
+        "sequence": [
+          "Bhramari · 5 min",
+          "Supta Baddha Konasana · 3 min",
+          "Yoga Nidra · 10 min"
+        ]
+      },
+      "energy": {
+        "label": "Energy Boost",
+        "tip": "Ginger tea with honey activates Agni at dawn.",
+        "sequence": [
+          "Kapalabhati · 3 min",
+          "Surya Namaskar · 10 min",
+          "Ujjayi · 3 min"
+        ]
+      },
+      "flexibility": {
+        "label": "Flexibility Flow",
+        "tip": "Warm sesame oil on joints before practice.",
+        "sequence": [
+          "Uttanasana · 2 min",
+          "Pigeon Pose · 3 min",
+          "Supta Matsyendrasana · 2 min"
+        ]
+      }
+    },
+    "why": [
+      {
+        "title": "Your practice, remembered",
+        "description": "We save your sequences, streaks, and progress so you never lose your journey."
+      },
+      {
+        "title": "Personalized to your constitution",
+        "description": "Your Dosha profile and daily recommendations evolve as we learn what works for you."
+      },
+      {
+        "title": "Private by design",
+        "description": "Your health data is encrypted, never sold, and deletable at any time. You own it."
+      }
+    ]
   }
 }

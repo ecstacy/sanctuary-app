@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useRef, useState, lazy, Suspense } from 'react'
 import { App as CapacitorApp } from '@capacitor/app'
+import { useTranslation } from 'react-i18next'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import ScrollToTop from './components/ScrollToTop'
 import LoadingScreen from './components/LoadingScreen'
@@ -161,6 +162,7 @@ function DeepLinkHandler() {
 }
 
 function BackButtonHandler() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [toastVisible, setToastVisible] = useState(false)
   const exitPending = useRef(false)
@@ -198,7 +200,7 @@ function BackButtonHandler() {
 
   return (
     <div className="fixed bottom-32 left-1/2 -translate-x-1/2 z-50 bg-[#31332e] text-[#eaffe1] text-xs font-label px-5 py-3 rounded-full shadow-lg whitespace-nowrap animate-fade-in-up">
-      Swipe again to close
+      {t('common.swipeToClose')}
     </div>
   )
 }

@@ -29,7 +29,9 @@
     "or": "oder",
     "retry": "Erneut versuchen",
     "clear": "Löschen",
-    "close": "Schließen"
+    "close": "Schließen",
+    "noMedia": "Kein Medium",
+    "swipeToClose": "Zum Schließen erneut wischen"
   },
   "welcome": {
     "greeting": "Willkommen bei",
@@ -1981,5 +1983,70 @@
   "a11y": {
     "scrollTop": "Nach oben scrollen",
     "primaryNav": "Hauptnavigation"
+  },
+  "preview": {
+    "eyebrow": "Deine persönliche Vorschau",
+    "title": "Dein Weg zu {{label}}.",
+    "subtitle": "Basierend auf deinen Angaben — ein kleiner Einblick in deine Sanctuary-Praxis.",
+    "sequenceLabel": "{{label}}-Abfolge",
+    "personalized": "Persönliche Praxis",
+    "plusMore": " · +{{count}} weitere",
+    "lockedTitle": "Dein Dosha-Profil + 12 weitere Abfolgen",
+    "lockedSub": "Erstelle ein kostenloses Konto, um alles freizuschalten",
+    "whyTitle": "Warum ein Konto erstellen",
+    "cta": "Kostenloses Konto erstellen",
+    "haveAccount": "Schon ein Konto? Anmelden",
+    "struggles": {
+      "stress": {
+        "label": "Stressabbau",
+        "tip": "Eine warme Sesamöl-Massage vor dem Schlafen beruhigt Vata.",
+        "sequence": [
+          "Nadi Shodhana · 5 Min.",
+          "Balasana · 2 Min.",
+          "Viparita Karani · 5 Min."
+        ]
+      },
+      "sleep": {
+        "label": "Tiefer Schlaf",
+        "tip": "Ashwagandha in warmer Milch 30 Min. vor dem Schlafen.",
+        "sequence": [
+          "Bhramari · 5 Min.",
+          "Supta Baddha Konasana · 3 Min.",
+          "Yoga Nidra · 10 Min."
+        ]
+      },
+      "energy": {
+        "label": "Energieschub",
+        "tip": "Ingwertee mit Honig aktiviert Agni im Morgengrauen.",
+        "sequence": [
+          "Kapalabhati · 3 Min.",
+          "Surya Namaskar · 10 Min.",
+          "Ujjayi · 3 Min."
+        ]
+      },
+      "flexibility": {
+        "label": "Beweglichkeits-Flow",
+        "tip": "Warmes Sesamöl auf die Gelenke vor der Praxis.",
+        "sequence": [
+          "Uttanasana · 2 Min.",
+          "Taubenhaltung · 3 Min.",
+          "Supta Matsyendrasana · 2 Min."
+        ]
+      }
+    },
+    "why": [
+      {
+        "title": "Deine Praxis, gespeichert",
+        "description": "Wir speichern deine Abfolgen, Streaks und Fortschritte, damit du deinen Weg nie verlierst."
+      },
+      {
+        "title": "Auf deine Konstitution abgestimmt",
+        "description": "Dein Dosha-Profil und die täglichen Empfehlungen entwickeln sich weiter, während wir lernen, was für dich funktioniert."
+      },
+      {
+        "title": "Privat von Grund auf",
+        "description": "Deine Gesundheitsdaten sind verschlüsselt, werden nie verkauft und sind jederzeit löschbar. Sie gehören dir."
+      }
+    ]
   }
 }
