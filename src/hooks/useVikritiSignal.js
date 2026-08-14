@@ -190,7 +190,7 @@ export function useVikritiSignal() {
 
       const signal = detectVikriti(data || [])
       if (!signal) {
-        setState({ isLoading: false, hasSignal: false, vikriti: null, evidence: null, recommendations: null })
+        setState({ isLoading: false, hasSignal: false, vikriti: null, evidence: null, recommendations: null, lastCheckinAt: null })
         return
       }
 
@@ -200,6 +200,9 @@ export function useVikritiSignal() {
         vikriti:         signal.vikriti,
         evidence:        signal.evidence,
         recommendations: NUDGE_BY_VIKRITI[signal.vikriti],
+        // Newest check-in behind this signal — lets a caller decide whether the
+        // signal predates a freshly re-taken constitution baseline (stale).
+        lastCheckinAt:   signal.lastCheckinAt,
       })
     }
 
@@ -240,9 +243,11 @@ export function detectVikriti(checkins) {
   // Used in the card copy ("4 of the last 7 days") so the user sees the
   // pattern, not just our verdict.
   const matchingDays = countMatchingDays(valid, vikriti)
+  const lastCheckinAt = valid.reduce((max, c) => (c.created_at > max ? c.created_at : max), '')
 
   return {
     vikriti,
+    lastCheckinAt: lastCheckinAt || null,
     evidence: {
       matchingDays,
       totalDays:  distinctDays.size,

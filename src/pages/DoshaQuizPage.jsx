@@ -272,6 +272,10 @@ export default function DoshaQuizPage() {
           primary:     doshaResult.primary,
           secondary:   doshaResult.secondary,
           tertiary:    doshaResult.tertiary,
+          // When this baseline was (re)established. Vikriti readings older than
+          // this are stale — a new constitution invalidates old deviations from
+          // the previous one (see HomePage current-state derivation).
+          assessedAt:  new Date().toISOString(),
         },
       })
       .eq('id', user.id)

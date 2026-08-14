@@ -192,6 +192,7 @@ export function AuthProvider({ children }) {
                   primary:     pending.primary,
                   secondary:   pending.secondary,
                   tertiary:    pending.tertiary,
+                  assessedAt:  new Date().toISOString(),
                 },
               })
               .eq('id', userId)
@@ -206,6 +207,7 @@ export function AuthProvider({ children }) {
                 primary:     pending.primary,
                 secondary:   pending.secondary,
                 tertiary:    pending.tertiary,
+                assessedAt:  new Date().toISOString(),
               }
             }
 
