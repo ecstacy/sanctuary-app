@@ -255,7 +255,7 @@ function PoseExpandedOverlay({ poseKey, onClose }) {
             style={{ width: '100%', height: '100%', objectFit: 'contain', background: '#111' }}
           />
         ) : (
-          <span style={{ color: 'white', fontFamily: 'sans-serif', fontSize: 14 }}>No media</span>
+          <span style={{ color: 'white', fontFamily: 'sans-serif', fontSize: 14 }}>{t('common.noMedia')}</span>
         )}
       </div>
 
