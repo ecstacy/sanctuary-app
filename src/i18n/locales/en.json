@@ -996,7 +996,9 @@
       "beginner": "Beginner",
       "intermediate": "Intermediate",
       "advanced": "Advanced"
-    }
+    },
+    "markDone": "Mark done today",
+    "doneToday": "Done today"
   },
   "dinacharya": {
     "goBack": "Go back",
