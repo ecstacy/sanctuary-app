@@ -592,8 +592,10 @@
       "base": {
         "vata": "Deine Natur ist Vata — Luft und Äther. Die heutige Praxis hält dich geerdet und stabil.",
         "pitta": "Deine Natur ist Pitta — Feuer und Wasser. Die heutige Praxis hält dich kühl und gelassen.",
-        "kapha": "Deine Natur ist Kapha — Erde und Wasser. Die heutige Praxis hält dich leicht und in Bewegung."
-      }
+        "kapha": "Deine Natur ist Kapha — Erde und Wasser. Die heutige Praxis hält dich leicht und in Bewegung.",
+        "balanced": "Deine Konstitution ist über alle drei Doshas ausgeglichen — ein seltenes Gleichgewicht. Halte es stabil."
+      },
+      "balancedName": "Ausgeglichen"
     },
     "day": {
       "title": "Dein Tag",

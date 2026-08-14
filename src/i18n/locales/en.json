@@ -592,8 +592,10 @@
       "base": {
         "vata": "Your nature runs Vata — air and ether. Today’s practice keeps you grounded and steady.",
         "pitta": "Your nature runs Pitta — fire and water. Today’s practice keeps you cool and unhurried.",
-        "kapha": "Your nature runs Kapha — earth and water. Today’s practice keeps you light and moving."
-      }
+        "kapha": "Your nature runs Kapha — earth and water. Today’s practice keeps you light and moving.",
+        "balanced": "Your constitution is balanced across all three doshas — a rare equilibrium. Keep it steady."
+      },
+      "balancedName": "Balanced"
     },
     "day": {
       "title": "Your day",

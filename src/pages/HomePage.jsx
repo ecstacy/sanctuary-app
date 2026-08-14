@@ -403,31 +403,45 @@ export default function HomePage() {
     navigate('/practice/daily', { state: { session: upcomingSession } })
   }
 
-  // ── Current dosha state — drives the pill, the balance shape, and the
-  // favour list. We ALWAYS have a state when the user has taken the quiz:
-  //   acute vikriti signal  →  "High Pitta"  (elevated, a temporary flare)
-  //   otherwise constitution →  "Pitta"       (their baseline from the quiz)
-  // Only a user with no dosha at all falls through to the quiz CTA. ───────────
-  const vikritiFresh   = vikriti.lastVikritiAt && vikriti.daysSinceLast <= 14
-  const signalDosha    = vikritiSignal.hasSignal
+  // ── Current dosha state — ONE derivation drives the pill, the gem, and the
+  // favour list, so they can never disagree (a class of bug #65 fixed).
+  //
+  // A vikriti reading (an acute check-in signal, or the vikriti quiz) reflects
+  // the CURRENT state — but only relative to the CURRENT constitution. Anything
+  // recorded BEFORE the latest prakriti assessment is stale: a new constitution
+  // invalidates old deviations from the previous one. So re-taking the quiz
+  // cleanly resets the reading instead of leaving a phantom "High Pitta". Only
+  // vikriti that is both fresh (≤14 days) AND newer than the baseline counts;
+  // otherwise the constitution IS the reading.
+  const baselineAt     = profile?.dosha_details?.assessedAt || null
+  const afterBaseline  = (ts) => !baselineAt || (!!ts && ts > baselineAt)
+  const signalRelevant = vikritiSignal.hasSignal && afterBaseline(vikritiSignal.lastCheckinAt)
+  const vikritiFresh   = !!vikriti.lastVikritiAt && vikriti.daysSinceLast <= 14 && afterBaseline(vikriti.lastVikritiAt)
+  const signalDosha    = signalRelevant
     ? vikritiSignal.vikriti
     : (vikritiFresh ? vikriti.lastVikritiPrimary : null)
   // Honours the user's own "not quite → I feel more like X" correction (#52).
   const prakriti       = effectivePrimary(profile) || (profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
   const prakritiValid  = ['vata', 'pitta', 'kapha'].includes(prakriti)
+  const pcts           = profile?.dosha_details?.percentages || null
+  // A balanced constitution has no single dominant: the stored label says so,
+  // or all three sit within a few points (guards against a bare-primary read).
+  const isTridoshic    = (profile?.dosha || '').toLowerCase() === 'tridoshic' ||
+    (!!pcts && (Math.max(pcts.vata, pcts.pitta, pcts.kapha) - Math.min(pcts.vata, pcts.pitta, pcts.kapha) <= 3))
   const isElevated     = !!signalDosha
+  // The reading's dosha, for gem emphasis + accent + copy. When a balanced
+  // constitution isn't elevated, there's no dominant → favour "balanced".
+  const balanced       = isTridoshic && !isElevated
   const currentDosha   = signalDosha || (prakritiValid ? prakriti : null)
   const currentDoshaName = currentDosha ? doshaDisplayName(currentDosha) : null
-  // The gem shows the CURRENT constitution split. A fresh vikriti check-in
-  // (within the 14-day window) reflects how the user is right now, so it takes
-  // precedence over the birth prakriti; otherwise fall back to the prakriti
-  // quiz percentages. Without this, re-taking the vikriti quiz never moves the
-  // Home gem (it stayed pinned to the original prakriti). See task #46.
+  // The gem shows the split for whichever source is the reading: fresh, relevant
+  // vikriti percentages, otherwise the constitution's. Same source decision as
+  // the dosha above, so the number and the label can't come from different reads.
   const doshaPercentages =
     (vikritiFresh && vikriti.lastVikritiPercentages) ||
-    profile?.dosha_details?.percentages ||
+    pcts ||
     null
-  // Favour list follows the current state (or constitution; balanced fallback).
+  // Favour list follows the current state (or constitution; balanced when tridoshic).
   const intent         = getIntent()
   // The qualitative "getting to know you" progression (#55) — folds the
   // self-knowledge signals we've gathered into a warm stage phrase.
@@ -438,7 +452,9 @@ export default function HomePage() {
     selfReport:   !!doshaSelfReport(profile),
     vikritiCount: vikriti.vikritiCount,
   })
-  const favourDosha    = currentDosha
+  // A balanced (tridoshic, un-elevated) reading favours the balanced tips, not
+  // the arbitrary sort-order primary.
+  const favourDosha    = balanced ? null : currentDosha
   const favourTips     = t(`home.favour.${favourDosha || 'balanced'}`, { returnObjects: true })
 
   return (
@@ -501,10 +517,12 @@ export default function HomePage() {
             {currentDosha && (
               <span
                 className="flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-body text-xs font-semibold mt-1"
-                style={{ backgroundColor: `${DOSHA_HEX[currentDosha]}1f`, color: DOSHA_INK[currentDosha] }}
+                style={balanced
+                  ? { backgroundColor: 'var(--color-surface-container-high)', color: 'var(--color-on-surface-variant)' }
+                  : { backgroundColor: `${DOSHA_HEX[currentDosha]}1f`, color: DOSHA_INK[currentDosha] }}
               >
-                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: DOSHA_HEX[currentDosha] }} />
-                {isElevated ? t('home.state.pill', { dosha: currentDoshaName }) : currentDoshaName}
+                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: balanced ? 'var(--color-on-surface-variant)' : DOSHA_HEX[currentDosha] }} />
+                {isElevated ? t('home.state.pill', { dosha: currentDoshaName }) : (balanced ? t('home.state.balancedName') : currentDoshaName)}
               </span>
             )}
           </div>
@@ -763,7 +781,9 @@ export default function HomePage() {
               )
             })()}
             <p className="font-body text-[13px] text-on-surface-variant leading-relaxed">
-              {isElevated ? t(`home.state.say.${currentDosha}`) : t(`home.state.base.${currentDosha}`)}
+              {isElevated
+                ? t(`home.state.say.${currentDosha}`)
+                : (balanced ? t('home.state.base.balanced') : t(`home.state.base.${currentDosha}`))}
             </p>
           </button>
         ) : (

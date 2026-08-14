@@ -232,13 +232,16 @@ export function scoreQuiz(answers, tiebreakerAnswers = {}) {
     kapha: Math.round((scores.kapha / total) * 100),
   } : { vata: 33, pitta: 33, kapha: 34 }
 
-  // Snap to 100 by adjusting the largest bucket.
+  // Snap to 100 by adjusting the largest bucket — but ONLY when there is a
+  // unique largest. On a tie (a Tridoshic 33/33/33, or two doshas level) adding
+  // the leftover point to one of them would fake an imbalance the scores don't
+  // show — a Tridoshic must read as balanced, not 34/33/33. We accept the 1pt
+  // under-sum instead; it's imperceptible in the bar and honest.
   const sum = percentages.vata + percentages.pitta + percentages.kapha
   if (sum !== 100) {
-    const maxKey = ['vata', 'pitta', 'kapha'].reduce(
-      (a, b) => percentages[a] >= percentages[b] ? a : b
-    )
-    percentages[maxKey] += (100 - sum)
+    const maxVal = Math.max(percentages.vata, percentages.pitta, percentages.kapha)
+    const leaders = ['vata', 'pitta', 'kapha'].filter((k) => percentages[k] === maxVal)
+    if (leaders.length === 1) percentages[leaders[0]] += (100 - sum)
   }
 
   const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1])
