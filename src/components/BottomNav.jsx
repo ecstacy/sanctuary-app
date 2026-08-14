@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import useKeyboardOpen from '../hooks/useKeyboardOpen'
+import Icon from './Icon'
 
 const TABS = [
   { path: '/home', navKey: 'nav.home', icon: 'home_max' },
@@ -87,15 +88,13 @@ export default function BottomNav() {
               active ? 'bg-primary-fixed rounded-full' : ''
             }`}
           >
-            <span
-              aria-hidden="true"
-              className={`material-symbols-outlined transition-colors duration-200 ${
+            <Icon
+              name={tab.icon}
+              filled={active && tab.filled}
+              className={`transition-colors duration-200 ${
                 active ? 'text-primary' : 'text-on-surface-variant/50'
               }`}
-              style={active && tab.filled ? { fontVariationSettings: "'FILL' 1" } : {}}
-            >
-              {tab.icon}
-            </span>
+            />
             <span className={`font-label text-[11px] uppercase tracking-widest transition-colors duration-200 ${
               active ? 'text-primary font-medium' : 'text-on-surface-variant/50'
             }`}>

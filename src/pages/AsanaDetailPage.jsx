@@ -9,6 +9,7 @@ import PoseFigure from '../components/PoseFigure'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
 import { isDoneToday, toggleDoneToday } from '../lib/asanaDone'
+import Icon from '../components/Icon'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { isAsanaFree } from '../lib/premiumTiers'
 import PaywallSheet from '../components/PaywallSheet'
@@ -330,9 +331,7 @@ export default function AsanaDetailPage() {
                 : 'bg-surface-container-high text-on-surface-variant border border-outline-variant'
             }`}
           >
-            <span aria-hidden="true" className="material-symbols-outlined text-base">
-              {doneToday ? 'check_circle' : 'radio_button_unchecked'}
-            </span>
+            <Icon name={doneToday ? 'check_circle' : 'radio_button_unchecked'} className="text-base" />
             {doneToday ? t('asanaDetail.doneToday') : t('asanaDetail.markDone')}
           </button>
         </div>
