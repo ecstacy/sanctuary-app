@@ -78,7 +78,11 @@
       "googleCta": "Mit Google registrieren",
       "haveAccount": "Schon ein Konto?",
       "signIn": "Anmelden",
-      "validationError": "Bitte fülle alle Felder aus. Passwort muss mindestens 8 Zeichen lang sein."
+      "validationError": "Bitte fülle alle Felder aus. Passwort muss mindestens 8 Zeichen lang sein.",
+      "passwordHint": "Mindestens 8 Zeichen, mit einem Großbuchstaben und einer Zahl.",
+      "weakPassword": "Bitte wähle ein stärkeres Passwort — mindestens 8 Zeichen, mit einem Großbuchstaben und einer Zahl.",
+      "emailTaken": "Mit dieser E-Mail existiert bereits ein Konto. Versuche dich stattdessen anzumelden.",
+      "genericError": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
     }
   },
   "login": {
@@ -339,7 +343,19 @@
         "title": "Finden wir dein Dosha",
         "body": "Ein kurzes Quiz mit 15 Fragen zeigt deine ayurvedische Konstitution — das Fundament, auf dem alles andere aufbaut. Dauert etwa 90 Sekunden."
       }
-    ]
+    ],
+    "intent": {
+      "eyebrow": "Eine kurze Frage",
+      "title": "Was bringt dich her?",
+      "subtitle": "Wir stimmen deine Empfehlungen darauf ab — jederzeit änderbar.",
+      "options": {
+        "calm": "Einen unruhigen Geist beruhigen",
+        "energy": "Mehr gleichmäßige Energie",
+        "digestion": "Bessere Verdauung",
+        "sleep": "Tieferer Schlaf",
+        "curious": "Nur schauen"
+      }
+    }
   },
   "auth": {
     "forgot": {
@@ -614,7 +630,11 @@
         "Frische, saisonale, einfache Speisen",
         "Ein gleichmäßiger Tagesrhythmus",
         "Bewegung, die zur Jahreszeit passt"
-      ]
+      ],
+      "whyElevated": "Dein {{dosha}} ist diese Woche erhöht — das hilft, es zu beruhigen.",
+      "whyBase": "Deine Konstitution neigt zu {{dosha}} — das hält sie stabil.",
+      "whyBalanced": "Eine ausgeglichene Konstitution — das hält dich im Gleichgewicht.",
+      "goalNote": "Teil dessen, wofür du hier bist: {{goal}}."
     },
     "journey": {
       "section": "Deine Praxis",
@@ -626,6 +646,21 @@
     },
     "focus": {
       "another": "eine andere Praxis wählen"
+    },
+    "fit": {
+      "prompt": "Klingt das nach dir?",
+      "yes": "Ja",
+      "notQuite": "Nicht ganz",
+      "pickPrompt": "Was fühlt sich eher nach dir an?",
+      "confirmedAck": "Danke — notiert.",
+      "adjustedAck": "Aktualisiert — wir richten uns nach {{dosha}}.",
+      "change": "Ändern"
+    },
+    "familiarity": {
+      "stage0": "Wir lernen dich noch kennen — je öfter du eincheckst, desto genauer wird deine Lesung.",
+      "stage1": "Deine Lesung nimmt Gestalt an.",
+      "stage2": "Deine Lesung festigt sich.",
+      "stage3": "Deine Lesung ist gut auf dich abgestimmt."
     }
   },
   "profile": {
@@ -961,7 +996,9 @@
       "beginner": "Anfänger",
       "intermediate": "Mittel",
       "advanced": "Fortgeschritten"
-    }
+    },
+    "markDone": "Heute als erledigt markieren",
+    "doneToday": "Heute erledigt"
   },
   "dinacharya": {
     "goBack": "Zurück",
@@ -1230,7 +1267,40 @@
     "discovery": "Entdeckung",
     "progressAria": "Quiz-Fortschritt",
     "primerShort": "Lebenslange Tendenz, nicht diese Woche.",
-    "saveFailed": "Speichern fehlgeschlagen: {{error}}"
+    "saveFailed": "Speichern fehlgeschlagen: {{error}}",
+    "refine": {
+      "kicker": "Schärfe deine Lesung",
+      "prompt": "Drei schnelle Tipps dazu, wie du wirklich tickst, und wir stimmen deine Lesung auf dich ab.",
+      "ackTitle": "Lesung geschärft",
+      "ackAligned": "Deine Alltagsmuster passen zu deinem {{dosha}} — eine sichere Lesung.",
+      "ackDiverge": "Deine Alltagsmuster neigen zu {{dosha}}. Das beziehen wir mit ein, während wir dich kennenlernen.",
+      "q": {
+        "digestion": {
+          "title": "Wie ist deine Verdauung meistens?",
+          "options": [
+            "Unregelmäßig — mal hungrig, mal nicht",
+            "Stark & scharf — schnell hungrig, manchmal säuerlich",
+            "Langsam & schwer — lange satt"
+          ]
+        },
+        "sleep": {
+          "title": "Und dein Schlaf?",
+          "options": [
+            "Leicht — ich wache leicht auf",
+            "Okay, aber mir ist heiß oder ich wache früh auf",
+            "Tief — schwer, morgens in Gang zu kommen"
+          ]
+        },
+        "mind": {
+          "title": "Dein Geist an einem typischen Tag?",
+          "options": [
+            "Schnell und ruhelos — viele Ideen",
+            "Fokussiert und getrieben — kann intensiv werden",
+            "Ruhig und gelassen — kommt langsam in Gang"
+          ]
+        }
+      }
+    }
   },
   "journey": {
     "title": "Deine Reise",
@@ -1856,6 +1926,55 @@
     "dirSettles": "senkt",
     "dirSteady": "stabil",
     "deleteAria": "Diese Prüfung löschen",
-    "swipeHint": "Wische eine Prüfung nach links zum Löschen."
+    "swipeHint": "Wische eine Prüfung nach links zum Löschen.",
+    "yourMealLabel": "Deine Mahlzeit",
+    "addItem": "Hinzufügen",
+    "addPlaceholder": "Ein Lebensmittel hinzufügen…",
+    "addBtn": "Hinzufügen",
+    "addNotFound": "Noch nicht in unseren Lebensmitteln — versuch ein anderes Wort.",
+    "constitutionLabel": "Deine Konstitution · Wirkung dieser Mahlzeit",
+    "effectOnlyLabel": "Wirkung dieser Mahlzeit auf deine Doshas",
+    "pushRaises": "erhöht",
+    "pushEases": "senkt",
+    "pushSteady": "stabil",
+    "meansTitle": "Was das für dich bedeutet",
+    "meansMind": "Du bist von Natur aus {{dosha}}. Diese Mahlzeit verstärkt es, und unbeachtet kann sich das später als {{surface}} zeigen.",
+    "meansWatch": "Das treibt dein {{dosha}} etwas hoch. Es ist nicht dein dominantes Dosha, also meist mild — mildere es, wenn du es spürst.",
+    "meansGood": "Das beruhigt {{dosha}} — unterstützend für deinen aktuellen Zustand.",
+    "meansBalanced": "Nichts hier bringt dich aus dem Gleichgewicht — ein ausgewogener Teller für deine Konstitution.",
+    "surfacePitta": "Hitze, Schärfe oder Säure",
+    "surfaceVata": "Unruhe, Trockenheit oder zerstreute Aufmerksamkeit",
+    "surfaceKapha": "Schwere, Trägheit oder Verschleimung",
+    "breakdownTitle": "Woher es kommt",
+    "eatDrinkPitta": "Iss oder trink, um es zu kühlen",
+    "eatDrinkKapha": "Iss oder trink, um es leichter zu machen",
+    "eatDrinkVata": "Iss oder trink, um zu erden",
+    "breatheTitle": "Oder nimm dir ein paar Minuten zum Atmen",
+    "breathTag": "Atmung",
+    "rebalanceChosenFor": "Für dich ausgewählt",
+    "rebalanceWhyMind": "Weil du {{dosha}} bist und diese Mahlzeit es weiter erhöht hat — das bringt es zurück ins Gleichgewicht.",
+    "rebalanceWhyWatch": "Das hat {{dosha}} etwas erhöht. Das beruhigt es — sanft, da es nicht dein dominantes Dosha ist.",
+    "rebalanceWhyGeneric": "Ausgewählt, um das zusätzliche {{dosha}} dieser Mahlzeit zu mildern.",
+    "confClassical": "Klassisch belegt",
+    "confDerived": "Abgeleitet, nicht klassisch belegt",
+    "patternsTitle": "Deine Muster in letzter Zeit",
+    "patternDosha": "Deine letzten Mahlzeiten neigen dazu, {{dosha}} zu verstärken.",
+    "patternBalanced": "Deine letzten Mahlzeiten sind recht ausgewogen.",
+    "patternOften": "oft {{tastes}}",
+    "patternRarely": "selten {{tastes}}",
+    "tasteJoin": " & ",
+    "taste": {
+      "sweet": "süß",
+      "sour": "sauer",
+      "salty": "salzig",
+      "pungent": "scharf",
+      "bitter": "bitter",
+      "astringent": "herb"
+    },
+    "qty": {
+      "large": "Groß",
+      "small": "Klein"
+    },
+    "addedTag": "hinzugefügt"
   }
 }
