@@ -18,6 +18,7 @@ import { localizeAsana, localizePranayama, sanskritLabel } from '../../i18n/cont
 import PoseFigure, { hasPoseImage } from '../PoseFigure'
 import FoodIcon from '../FoodIcon'
 import useImpression from '../../hooks/useImpression'
+import { isDoneToday } from '../../lib/asanaDone'
 
 // ─── FoodResultRow ────────────────────────────────────────────────────────
 // One reviewed ingredient in the Discover search results. Shows the
@@ -72,6 +73,7 @@ export function FoodResultRow({ ingredient, onTap, t, exclusion }) {
 export function ExploreAsanaCard({ asana, position, locked, onTap, surface = 'discover_explore_asanas' }) {
   const { t } = useTranslation()
   const la = localizeAsana(asana)
+  const done = isDoneToday(asana.id)
   const ref = useImpression({
     surface,
     contentType: 'asana',
@@ -100,6 +102,12 @@ export function ExploreAsanaCard({ asana, position, locked, onTap, surface = 'di
             <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[11px] text-primary uppercase tracking-wide">
               {asana.level}
             </span>
+          </div>
+        )}
+        {/* Done-for-the-day check (#61) */}
+        {done && !locked && (
+          <div className="absolute top-2 right-2" title={t('asanaDetail.doneToday')}>
+            <span aria-hidden="true" className="material-symbols-outlined text-primary bg-surface/90 backdrop-blur-sm rounded-full text-[18px] leading-none p-0.5">check_circle</span>
           </div>
         )}
         {/* Locked-card treatment — a darker gradient fade at the bottom +

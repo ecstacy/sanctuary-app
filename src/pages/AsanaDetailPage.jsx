@@ -8,6 +8,7 @@ import { localizePrecautions, sanskritLabel } from '../i18n/contentI18n'
 import PoseFigure from '../components/PoseFigure'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
+import { isDoneToday, toggleDoneToday } from '../lib/asanaDone'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { isAsanaFree } from '../lib/premiumTiers'
 import PaywallSheet from '../components/PaywallSheet'
@@ -206,6 +207,15 @@ export default function AsanaDetailPage() {
   const [sheet, setSheet] = useState(null) // 'hold' | 'level' | 'areas' | null
   const heroRef = useRef(null)
 
+  // "Done for the day" — a lightweight personal tick, resets at local midnight.
+  const [doneToday, setDoneToday] = useState(false)
+  useEffect(() => { setDoneToday(isDoneToday(id)) }, [id])
+  function handleToggleDone() {
+    const now = toggleDoneToday(id)
+    setDoneToday(now)
+    track('asana_done_toggled', { asana_id: id, done: now })
+  }
+
   // Track when hero scrolls out of view to show sticky mini player
   useEffect(() => {
     const el = heroRef.current
@@ -309,6 +319,22 @@ export default function AsanaDetailPage() {
             </p>
           )}
           <p className="font-body text-sm text-on-surface-variant">{asana.english}</p>
+
+          {/* "Done for the day" — tick this pose off, resets at midnight. */}
+          <button
+            onClick={handleToggleDone}
+            aria-pressed={doneToday}
+            className={`inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full font-label text-xs tracking-wide transition-all active:scale-95 ${
+              doneToday
+                ? 'bg-primary text-on-primary'
+                : 'bg-surface-container-high text-on-surface-variant border border-outline-variant'
+            }`}
+          >
+            <span aria-hidden="true" className="material-symbols-outlined text-base">
+              {doneToday ? 'check_circle' : 'radio_button_unchecked'}
+            </span>
+            {doneToday ? t('asanaDetail.doneToday') : t('asanaDetail.markDone')}
+          </button>
         </div>
       </div>
 
