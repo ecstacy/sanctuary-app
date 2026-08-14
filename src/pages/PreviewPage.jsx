@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const STRUGGLE_PREVIEWS = {
   stress: {
@@ -46,6 +47,7 @@ const WHY_ACCOUNT = [
 ]
 
 export default function PreviewPage() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
   const { struggles = [], notes = '' } = location.state || {}
@@ -62,7 +64,7 @@ export default function PreviewPage() {
         <button
           onClick={() => navigate('/discover')}
           className="text-on-surface-variant"
-          aria-label="Go back"
+          aria-label={t('common.back')}
         >
           <span className="material-symbols-outlined text-xl">arrow_back</span>
         </button>

@@ -59,7 +59,7 @@ export default function BottomNav() {
 
   return (
     <nav
-      aria-label="Primary"
+      aria-label={t('a11y.primaryNav')}
       className={`fixed bottom-0 left-0 w-full bg-background/60 backdrop-blur-2xl border-t border-outline-variant/10 px-4 pt-3 flex justify-around items-center transition-transform duration-300 ease-out ${
         visible && !keyboardOpen ? 'translate-y-0' : 'translate-y-full'
       }`}

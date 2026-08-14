@@ -28,7 +28,8 @@
     "loading": "Wird geladen…",
     "or": "oder",
     "retry": "Erneut versuchen",
-    "clear": "Löschen"
+    "clear": "Löschen",
+    "close": "Schließen"
   },
   "welcome": {
     "greeting": "Willkommen bei",
@@ -1976,5 +1977,9 @@
       "small": "Klein"
     },
     "addedTag": "hinzugefügt"
+  },
+  "a11y": {
+    "scrollTop": "Nach oben scrollen",
+    "primaryNav": "Hauptnavigation"
   }
 }
