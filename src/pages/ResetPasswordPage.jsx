@@ -43,7 +43,9 @@ export default function ResetPasswordPage() {
       setError(t('auth.reset.passwordsMismatch'))
       return
     }
-    if (password.length < 8) {
+    // Enforce the same policy the requirement checklist advertises, and that the
+    // hardened server now applies (#59): 8+ chars, an uppercase letter, a number.
+    if (password.length < 8 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
       setError(t('auth.reset.passwordTooShort'))
       return
     }
@@ -52,7 +54,9 @@ export default function ResetPasswordPage() {
     const { error } = await supabase.auth.updateUser({ password })
 
     if (error) {
-      setError(error.message)
+      // Surface the weak-password rejection clearly rather than the raw server
+      // string; fall back to the server message for anything else.
+      setError(/password/i.test(error.message) ? t('auth.reset.passwordTooShort') : error.message)
       setLoading(false)
       return
     }

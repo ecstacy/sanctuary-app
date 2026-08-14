@@ -13,6 +13,18 @@ import GoogleIcon from '../components/GoogleIcon'
 import ErrorAlert from '../components/ErrorAlert'
 import { track, identify, EVENTS } from '../lib/track'
 
+// Map the common Supabase auth errors to clear, localized copy instead of the
+// raw English server string — notably the weak-password rejection that the
+// hardened server policy now returns (#59), and the already-registered case.
+// Falls back to the server's own message so nothing is ever swallowed.
+function friendlyAuthError(err, t) {
+  const msg = err?.message || ''
+  const code = err?.code || ''
+  if (code === 'weak_password' || /password/i.test(msg)) return t('signup.step2.weakPassword')
+  if (code === 'user_already_exists' || /already (registered|been registered|exists)/i.test(msg)) return t('signup.step2.emailTaken')
+  return msg || t('signup.step2.genericError')
+}
+
 export default function SignupPage() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -67,7 +79,7 @@ export default function SignupPage() {
     })
 
     if (signUpError) {
-      setError(signUpError.message)
+      setError(friendlyAuthError(signUpError, t))
       setLoading(false)
       return
     }
@@ -267,7 +279,11 @@ export default function SignupPage() {
                   minLength={8}
                   className="bg-surface-container-low rounded-lg px-4 py-4 text-on-surface font-body text-sm outline-none focus:bg-surface-container transition-colors placeholder:text-on-surface-variant/40"
                   aria-label="Password"
+                  aria-describedby="password-hint"
                 />
+                <p id="password-hint" className="text-[11px] text-on-surface-variant/70 px-1">
+                  {t('signup.step2.passwordHint')}
+                </p>
               </div>
 
               {/* Privacy note */}
@@ -285,8 +301,15 @@ export default function SignupPage() {
 
           <button
             onClick={() => {
-              if (!fullName || !email || password.length < 8) {
+              if (!fullName || !email) {
                 setError(t('signup.step2.validationError'))
+                return
+              }
+              // Match the hardened server policy (#59) client-side for instant
+              // feedback: 8+ chars, an uppercase letter and a number (same rule
+              // the reset-password screen advertises).
+              if (password.length < 8 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
+                setError(t('signup.step2.weakPassword'))
                 return
               }
               setError('')

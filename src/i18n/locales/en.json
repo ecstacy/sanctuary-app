@@ -78,7 +78,11 @@
       "googleCta": "Sign up with Google",
       "haveAccount": "Already have an account?",
       "signIn": "Sign in",
-      "validationError": "Please fill in all fields. Password must be at least 8 characters."
+      "validationError": "Please fill in all fields. Password must be at least 8 characters.",
+      "passwordHint": "At least 8 characters, including an uppercase letter and a number.",
+      "weakPassword": "Please choose a stronger password — at least 8 characters, including an uppercase letter and a number.",
+      "emailTaken": "An account with this email already exists. Try signing in instead.",
+      "genericError": "Something went wrong. Please try again."
     }
   },
   "login": {
@@ -393,7 +397,7 @@
       "reqUpper": "One uppercase letter",
       "reqNumber": "One number",
       "passwordsMismatch": "Passwords do not match.",
-      "passwordTooShort": "Password must be at least 8 characters.",
+      "passwordTooShort": "Password must be at least 8 characters, with an uppercase letter and a number.",
       "updating": "Updating...",
       "setNewPassword": "Set New Password",
       "updatedTitle": "Password updated.",
