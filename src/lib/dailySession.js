@@ -34,6 +34,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { ASANAS } from '../data/asanas'
+import { effectivePrimary, afterBaseline } from './doshaState'
 
 // ── Seeded PRNG ──────────────────────────────────────────────────────────────
 // mulberry32: tiny, fast, good enough for shuffling a pose pool. Deterministic
@@ -107,10 +108,13 @@ export function resolveSlot(hour, doneSlotsToday = []) {
 // Pacify the current imbalance if we have a vikriti reading; otherwise support
 // the birth constitution. Returns a dosha key or null (→ neutral composition).
 function resolveTargetDosha(ctx) {
-  if (ctx.vikriti?.hasSignal && ctx.vikriti.vikriti) {
+  // A vikriti signal counts only if it's newer than the constitution baseline
+  // (a re-quiz supersedes a stale flare); prakriti honours the self-correction.
+  // Shared rules with Home + food so all three agree (#65).
+  if (ctx.vikriti?.hasSignal && ctx.vikriti.vikriti && afterBaseline(ctx.profile, ctx.vikriti.lastCheckinAt)) {
     return { dosha: ctx.vikriti.vikriti, source: 'vikriti' }
   }
-  const p = ctx.profile?.dosha_details?.primary || ctx.profile?.dosha
+  const p = effectivePrimary(ctx.profile) || ctx.profile?.dosha_details?.primary || ctx.profile?.dosha
   if (p) return { dosha: String(p).toLowerCase(), source: 'prakriti' }
   return { dosha: null, source: 'none' }
 }

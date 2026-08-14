@@ -67,7 +67,7 @@ function calculateVikriti(answers) {
 export default function VikritiQuizPage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { user, profile } = useAuth()
+  const { user, profile, refreshProfile } = useAuth()
 
   const [phase, setPhase] = useState('intro') // intro | quiz | result
   const [currentQ, setCurrentQ] = useState(0)
@@ -168,6 +168,22 @@ export default function VikritiQuizPage() {
       setSaving(false)
       return
     }
+
+    // Denormalized current-state cache on the profile, so the pure engine libs
+    // (meal check, analytics) have a live vikriti source with a timestamp to
+    // compare against the constitution baseline (#65). assessedAt lets a later
+    // prakriti re-quiz supersede this reading.
+    const { error: cacheErr } = await supabase
+      .from('profiles')
+      .update({ vikriti_details: {
+        primary:     result.primary,
+        secondary:   result.secondary,
+        percentages: result.percentages,
+        assessedAt:  new Date().toISOString(),
+      } })
+      .eq('id', user.id)
+    if (cacheErr) console.error('vikriti_details cache failed:', cacheErr.message)
+    else refreshProfile?.()
     // Signal HomePage to refetch the vikriti schedule. Without this, its
     // mounted `useVikritiSchedule` cache still shows the pre-save state
     // (daysSinceLast=Infinity / isDue=true) so the prompt card sticks

@@ -32,6 +32,8 @@
 // user in Sydney — but the alternative (asking, or reading location) costs more
 // than the nudge is worth, and season is only ever an overlay here. Revisit if
 // the app gets a real southern-hemisphere audience.
+import { effectivePrimary, afterBaseline } from './doshaState'
+
 const SEASON_BY_MONTH = [
   'winter', 'winter', // Jan, Feb
   'spring', 'spring', 'spring', // Mar–May
@@ -60,11 +62,14 @@ export function seasonFor(now = new Date()) {
 export function resolveDietTarget({ vikriti, profile, now = new Date() } = {}) {
   const season = seasonFor(now)
 
-  if (vikriti?.hasSignal && vikriti.vikriti) {
+  // A vikriti signal counts only if it's newer than the constitution baseline
+  // (a re-quiz supersedes a stale flare) — same rule as Home (#65).
+  if (vikriti?.hasSignal && vikriti.vikriti && afterBaseline(profile, vikriti.lastCheckinAt)) {
     return { dosha: String(vikriti.vikriti).toLowerCase(), source: 'vikriti', season }
   }
 
-  const p = profile?.dosha_details?.primary || profile?.dosha
+  // Prakriti honours the user's own self-correction (#52).
+  const p = effectivePrimary(profile) || profile?.dosha_details?.primary || profile?.dosha
   if (p) return { dosha: String(p).toLowerCase(), source: 'prakriti', season }
 
   return { dosha: null, source: 'none', season }

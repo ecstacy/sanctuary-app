@@ -15,7 +15,9 @@
 
 import { supabase } from './supabase'
 
-const DOSHAS = ['vata', 'pitta', 'kapha']
+// effectivePrimary lives in the pure doshaState module (shared by the engine
+// libs); re-exported here so existing importers keep working.
+export { effectivePrimary } from './doshaState'
 
 // Merge a self-report into dosha_details without clobbering the quiz fields.
 export async function saveDoshaSelfReport(userId, currentDoshaDetails, report) {
@@ -27,16 +29,6 @@ export async function saveDoshaSelfReport(userId, currentDoshaDetails, report) {
   const { error } = await supabase.from('profiles').update({ dosha_details: next }).eq('id', userId)
   if (error) console.error('dosha self-report save failed:', error.message)
   return { error, selfReport: next.selfReport }
-}
-
-// The primary dosha the app should treat as the user's baseline: their own
-// correction wins, then the quiz result, then the legacy `dosha` label.
-export function effectivePrimary(profile) {
-  const d = profile?.dosha_details || {}
-  const sr = d.selfReport
-  if (sr?.fit === 'adjusted' && DOSHAS.includes(sr.primary)) return sr.primary
-  const quiz = (d.primary || profile?.dosha || '').toLowerCase()
-  return DOSHAS.includes(quiz) ? quiz : null
 }
 
 // Whether the user has already answered "does this fit?" for the current read.
