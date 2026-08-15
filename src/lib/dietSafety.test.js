@@ -78,6 +78,21 @@ const REVIEWED_SIGNED_OFF = [
   'peanutOil', 'almondOil', 'rockCandy', 'mapleSyrup',
   'coconutWater', 'sugarcaneJuice', 'cocoa', 'cream', 'khoa',
   'fishFreshwater', 'goatMeat', 'prawn',
+  // Modern batch — 2026-08-15 (docs/diet-review-modern-batch.md). 55 modern /
+  // Western / urban-diet entries, human-reviewed and corrected. Property-derived
+  // (source.text 'modern'); a handful the reviewer marked well-established are
+  // confidence 'high' (beef, pork, coconutMilk, greekYoghurt, mozzarella, beer,
+  // wine). See ingredients-modern-draft.js for the applied corrections.
+  'sourdoughBread', 'wholeWheatBread', 'bagel', 'croissant', 'tortillaWrap',
+  'couscous', 'granola', 'muesli', 'cornflakes', 'riceNoodles', 'instantNoodles',
+  'salmon', 'tuna', 'beef', 'pork', 'bacon', 'turkey',
+  'tempeh', 'seitan', 'edamame', 'lentilPasta', 'wheyProtein',
+  'almondMilk', 'soyMilk', 'oatMilk', 'coconutMilk',
+  'greekYoghurt', 'mozzarella', 'cottageCheese', 'creamCheese', 'feta', 'iceCream', 'kefir',
+  'cola', 'energyDrink', 'beer', 'wine', 'matcha', 'kombucha', 'orangeJuice', 'hotChocolate',
+  'darkChocolate', 'milkChocolate', 'potatoChips', 'frenchFries', 'popcorn',
+  'peanutButter', 'hummus', 'hazelnutSpread', 'ketchup', 'mayonnaise', 'soySauce',
+  'olives', 'avocadoOil', 'stevia',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {
