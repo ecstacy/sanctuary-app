@@ -224,11 +224,133 @@ export const MEAL_TEMPLATES = {
     reviewStatus: 'reviewed',
   },
 
-  // Review batch 3: `vegetableSoupSesame` REMOVED. It was a mixed-vegetable
-  // soup in name and a spinach soup in fact, because spinach is the only green
-  // in the dataset. Falling back to one arbitrary vegetable misrepresents the
-  // dish, and there is no honest version of it until the vegetable set exists.
-  // Re-add with the next ingredient batch.
+  // ── Fuller everyday meals (batch 4 — 2026-08-15) ───────────────────────────
+  // Founder feedback: the original set read too spare — single-ingredient,
+  // convalescent dishes ("rice with buttermilk" alone) rather than meals anyone
+  // plans a day around. With the modern-foods batch reviewed, these are proper
+  // plates: a grain + a protein + a vegetable, spanning vegan / vegetarian /
+  // meat and all three slots. Same rules as above — core = bulk-and-identity,
+  // fats & spices & acids stay optional, and the NAME never promises an optional
+  // ingredient. The mixed-vegetable soup that batch 3 pulled (only spinach then)
+  // returns here honestly, now that the vegetable set exists.
+  //
+  // Culinary review 2026-08-15: real dishes, sensible ingredient sets; each
+  // makes NO Ayurvedic claim — the verdict is derived from its ingredients.
+
+  // ── Morning ──
+  avocadoToast: {
+    id: 'avocadoToast',
+    name: 'Avocado toast',
+    coreIds: ['wholeWheatBread', 'avocado'],
+    optionalIds: ['oliveOil', 'lemon', 'blackPepper', 'tomatoRaw', 'greenChili'],
+    slots: ['morning'],
+    prep: 'Ripe avocado mashed onto warm toast, with a squeeze of lemon and cracked pepper.',
+    reviewStatus: 'reviewed',
+  },
+
+  eggsOnToast: {
+    id: 'eggsOnToast',
+    name: 'Scrambled eggs on toast',
+    coreIds: ['egg', 'wholeWheatBread'],
+    optionalIds: ['ghee', 'butter', 'blackPepper', 'spinach', 'tomatoCooked'],
+    slots: ['morning'],
+    prep: 'Eggs soft-scrambled in a little ghee or butter, served on warm toast.',
+    reviewStatus: 'reviewed',
+  },
+
+  // ── Midday / evening ──
+  salmonRiceGreens: {
+    id: 'salmonRiceGreens',
+    name: 'Salmon with rice and greens',
+    coreIds: ['salmon', 'basmatiRice', 'broccoli'],
+    optionalIds: ['ghee', 'lemon', 'gingerFresh', 'blackPepper', 'dillSeed'],
+    slots: ['midday', 'evening'],
+    seasons: ['autumn', 'winter'],
+    prep: 'Salmon baked or pan-seared, served over rice with steamed greens.',
+    reviewStatus: 'reviewed',
+  },
+
+  chickenRiceVeg: {
+    id: 'chickenRiceVeg',
+    name: 'Chicken with rice and vegetables',
+    coreIds: ['chicken', 'basmatiRice', 'peas'],
+    optionalIds: ['turmeric', 'cumin', 'gingerFresh', 'ghee', 'carrot', 'onionCooked'],
+    slots: ['midday', 'evening'],
+    prep: 'Chicken simmered with warming spices, served with rice and vegetables.',
+    reviewStatus: 'reviewed',
+  },
+
+  grainBowlHummus: {
+    id: 'grainBowlHummus',
+    name: 'Grain bowl with roasted vegetables and hummus',
+    coreIds: ['quinoa', 'sweetPotato', 'hummus'],
+    optionalIds: ['oliveOil', 'cumin', 'lemon', 'spinach', 'bellPepper'],
+    slots: ['midday'],
+    prep: 'Warm roasted vegetables over quinoa, with a generous spoon of hummus.',
+    reviewStatus: 'reviewed',
+  },
+
+  tofuStirFryRice: {
+    id: 'tofuStirFryRice',
+    name: 'Tofu stir-fry with rice',
+    coreIds: ['tofu', 'basmatiRice', 'bellPepper'],
+    optionalIds: ['gingerFresh', 'soySauce', 'sesameOil', 'broccoli', 'garlic'],
+    slots: ['midday', 'evening'],
+    prep: 'Tofu and vegetables stir-fried, tossed with a little soy sauce, over rice.',
+    reviewStatus: 'reviewed',
+  },
+
+  lentilPastaVeg: {
+    id: 'lentilPastaVeg',
+    name: 'Lentil pasta with vegetables',
+    coreIds: ['lentilPasta', 'tomatoCooked'],
+    optionalIds: ['oliveOil', 'garlic', 'blackPepper', 'spinach', 'onionCooked'],
+    slots: ['midday'],
+    prep: 'Lentil pasta tossed with a simple cooked-tomato sauce and greens.',
+    reviewStatus: 'reviewed',
+  },
+
+  greekSalad: {
+    id: 'greekSalad',
+    name: 'Greek-style salad',
+    coreIds: ['cucumber', 'tomatoRaw', 'feta', 'olives'],
+    optionalIds: ['oliveOil', 'lemon', 'mintLeaf', 'onionRaw'],
+    slots: ['midday'],
+    seasons: ['summer'],
+    prep: 'Chopped cucumber and tomato with feta and olives, dressed in olive oil.',
+    reviewStatus: 'reviewed',
+  },
+
+  paneerPeasChapati: {
+    id: 'paneerPeasChapati',
+    name: 'Paneer and peas with chapati',
+    coreIds: ['paneer', 'peas', 'wheat'],
+    optionalIds: ['turmeric', 'cumin', 'gingerFresh', 'tomatoCooked', 'ghee'],
+    slots: ['midday', 'evening'],
+    prep: 'Paneer and peas in a light spiced tomato base, with chapati.',
+    reviewStatus: 'reviewed',
+  },
+
+  dalRiceGreens: {
+    id: 'dalRiceGreens',
+    name: 'Rice and dal with sautéed greens',
+    coreIds: ['mungDal', 'basmatiRice', 'spinach'],
+    optionalIds: ['ghee', 'cumin', 'turmeric', 'gingerFresh'],
+    slots: ['midday', 'evening'],
+    prep: 'Soft dal and rice with a side of greens sautéed in a little ghee.',
+    reviewStatus: 'reviewed',
+  },
+
+  mixedVegSoup: {
+    id: 'mixedVegSoup',
+    name: 'Mixed vegetable soup',
+    coreIds: ['carrot', 'greenBeans', 'spinach'],
+    optionalIds: ['barley', 'onionCooked', 'gingerDry', 'blackPepper', 'turmeric', 'oliveOil'],
+    slots: ['midday', 'evening'],
+    seasons: ['autumn', 'winter'],
+    prep: 'Mixed vegetables simmered soft into a warming soup — a barley handful makes it a fuller meal.',
+    reviewStatus: 'reviewed',
+  },
 
 }
 
