@@ -23,6 +23,11 @@ const REVIEWED_TEMPLATES = [
   'avocadoToast', 'eggsOnToast', 'salmonRiceGreens', 'chickenRiceVeg',
   'grainBowlHummus', 'tofuStirFryRice', 'lentilPastaVeg', 'greekSalad',
   'paneerPeasChapati', 'dalRiceGreens', 'mixedVegSoup',
+  // Batch 5 — 2026-08-15 (breadth across cuisines/slots, reviewed ingredients).
+  'muesliYoghurtFruit', 'bananaBerrySmoothie', 'pohaPeas', 'semolinaUpma',
+  'peanutButterBananaToast', 'vegetableOmelette', 'rajmaChawal', 'dalTadkaRice',
+  'vegetablePulao', 'fishCurryRice', 'tunaSandwich', 'chickpeaSaladBowl',
+  'quinoaSalad', 'lentilSoup', 'tomatoSoup',
 ]
 
 /**
