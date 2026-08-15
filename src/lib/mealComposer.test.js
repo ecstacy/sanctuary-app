@@ -19,6 +19,10 @@ const REVIEWED_TEMPLATES = [
   'spicedOatPorridge', 'stewedAppleBreakfast', 'ricePorridge', 'honeyWarmWater',
   'kitchari', 'chickpeaCurry', 'chapatiSabzi', 'barleySoup', 'buttermilkRice',
   'potatoWithGhee', 'uradDalStew', 'spicedMilk',
+  // Batch 4 — 2026-08-15 (fuller everyday meals, using the modern-foods batch).
+  'avocadoToast', 'eggsOnToast', 'salmonRiceGreens', 'chickenRiceVeg',
+  'grainBowlHummus', 'tofuStirFryRice', 'lentilPastaVeg', 'greekSalad',
+  'paneerPeasChapati', 'dalRiceGreens', 'mixedVegSoup',
 ]
 
 /**
