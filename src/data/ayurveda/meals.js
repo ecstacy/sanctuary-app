@@ -352,6 +352,167 @@ export const MEAL_TEMPLATES = {
     reviewStatus: 'reviewed',
   },
 
+  // ── More everyday meals (batch 5 — 2026-08-15) ─────────────────────────────
+  // Breadth across cuisines and slots — Indian staples, Western breakfasts and
+  // sandwiches, salads and soups — all built from already-reviewed ingredients.
+  // Same rules: core = bulk-and-identity, fats/spices/acids optional, the name
+  // never promises an optional. Culinary review 2026-08-15.
+
+  // ── Morning ──
+  muesliYoghurtFruit: {
+    id: 'muesliYoghurtFruit',
+    name: 'Muesli with yoghurt and fruit',
+    coreIds: ['muesli', 'yoghurt', 'banana'],
+    optionalIds: ['honey', 'almond', 'apple'],
+    slots: ['morning'],
+    prep: 'Muesli soaked a little to soften, with yoghurt and fresh fruit.',
+    reviewStatus: 'reviewed',
+  },
+
+  bananaBerrySmoothie: {
+    id: 'bananaBerrySmoothie',
+    name: 'Banana and berry smoothie',
+    coreIds: ['banana', 'strawberry', 'milk'],
+    optionalIds: ['yoghurt', 'honey', 'oats', 'almond'],
+    slots: ['morning'],
+    prep: 'Blended smooth; at room temperature rather than ice-cold is gentler on digestion.',
+    reviewStatus: 'reviewed',
+  },
+
+  pohaPeas: {
+    id: 'pohaPeas',
+    name: 'Flattened rice with peas',
+    coreIds: ['flattenedRice', 'peas'],
+    optionalIds: ['onionCooked', 'mustardSeed', 'curryLeaf', 'turmeric', 'peanut', 'lemon'],
+    slots: ['morning'],
+    prep: 'Poha rinsed and steamed soft with a light tempering of spices.',
+    reviewStatus: 'reviewed',
+  },
+
+  semolinaUpma: {
+    id: 'semolinaUpma',
+    name: 'Semolina upma',
+    coreIds: ['semolina'],
+    optionalIds: ['mustardSeed', 'curryLeaf', 'onionCooked', 'peas', 'gingerFresh', 'ghee'],
+    slots: ['morning'],
+    prep: 'Semolina dry-roasted, then cooked soft with a spiced tempering.',
+    reviewStatus: 'reviewed',
+  },
+
+  peanutButterBananaToast: {
+    id: 'peanutButterBananaToast',
+    name: 'Peanut butter and banana toast',
+    coreIds: ['wholeWheatBread', 'peanutButter', 'banana'],
+    optionalIds: ['honey', 'cinnamon'],
+    slots: ['morning'],
+    prep: 'Peanut butter and sliced banana on warm toast.',
+    reviewStatus: 'reviewed',
+  },
+
+  vegetableOmelette: {
+    id: 'vegetableOmelette',
+    name: 'Vegetable omelette',
+    coreIds: ['egg', 'tomatoCooked'],
+    optionalIds: ['onionCooked', 'bellPepper', 'spinach', 'blackPepper', 'ghee'],
+    slots: ['morning', 'midday'],
+    prep: 'Eggs cooked soft with vegetables folded through.',
+    reviewStatus: 'reviewed',
+  },
+
+  // ── Midday / evening ──
+  rajmaChawal: {
+    id: 'rajmaChawal',
+    name: 'Rajma with rice',
+    coreIds: ['rajma', 'basmatiRice'],
+    optionalIds: ['onionCooked', 'tomatoCooked', 'cumin', 'gingerFresh', 'turmeric', 'garlic'],
+    slots: ['midday', 'evening'],
+    prep: 'Kidney beans soaked well and simmered soft in a spiced tomato-onion base, with rice.',
+    reviewStatus: 'reviewed',
+  },
+
+  dalTadkaRice: {
+    id: 'dalTadkaRice',
+    name: 'Dal tadka with rice',
+    coreIds: ['toorDal', 'basmatiRice'],
+    optionalIds: ['ghee', 'cumin', 'garlic', 'tomatoCooked', 'turmeric', 'onionCooked'],
+    slots: ['midday', 'evening'],
+    prep: 'Toor dal cooked soft and finished with a ghee tempering, with rice.',
+    reviewStatus: 'reviewed',
+  },
+
+  vegetablePulao: {
+    id: 'vegetablePulao',
+    name: 'Vegetable pulao',
+    coreIds: ['basmatiRice', 'carrot', 'peas'],
+    optionalIds: ['greenBeans', 'cashew', 'cardamom', 'clove', 'cinnamon', 'ghee', 'onionCooked'],
+    slots: ['midday', 'evening'],
+    prep: 'Rice cooked with vegetables and whole spices, loose rather than sticky.',
+    reviewStatus: 'reviewed',
+  },
+
+  fishCurryRice: {
+    id: 'fishCurryRice',
+    name: 'Fish curry with rice',
+    coreIds: ['fishFreshwater', 'basmatiRice'],
+    optionalIds: ['coconutMilk', 'turmeric', 'curryLeaf', 'tamarind', 'gingerFresh', 'onionCooked'],
+    slots: ['midday', 'evening'],
+    prep: 'Fish simmered gently in a spiced gravy, served with rice.',
+    reviewStatus: 'reviewed',
+  },
+
+  tunaSandwich: {
+    id: 'tunaSandwich',
+    name: 'Tuna sandwich',
+    coreIds: ['tuna', 'wholeWheatBread'],
+    optionalIds: ['mayonnaise', 'lettuce', 'cucumber', 'blackPepper', 'lemon'],
+    slots: ['midday'],
+    prep: 'Flaked tuna between slices of wholegrain bread with crisp salad.',
+    reviewStatus: 'reviewed',
+  },
+
+  chickpeaSaladBowl: {
+    id: 'chickpeaSaladBowl',
+    name: 'Chickpea salad bowl',
+    coreIds: ['chickpea', 'cucumber', 'tomatoRaw'],
+    optionalIds: ['oliveOil', 'lemon', 'onionRaw', 'mintLeaf'],
+    slots: ['midday'],
+    seasons: ['summer'],
+    prep: 'Cooked chickpeas tossed with chopped salad and a lemon-oil dressing.',
+    reviewStatus: 'reviewed',
+  },
+
+  quinoaSalad: {
+    id: 'quinoaSalad',
+    name: 'Quinoa salad',
+    coreIds: ['quinoa', 'cucumber', 'tomatoRaw'],
+    optionalIds: ['oliveOil', 'lemon', 'mintLeaf', 'chickpea', 'onionRaw'],
+    slots: ['midday'],
+    seasons: ['summer'],
+    prep: 'Cooled quinoa tossed with chopped salad and herbs.',
+    reviewStatus: 'reviewed',
+  },
+
+  lentilSoup: {
+    id: 'lentilSoup',
+    name: 'Lentil soup',
+    coreIds: ['masoorDal'],
+    optionalIds: ['carrot', 'onionCooked', 'cumin', 'garlic', 'tomatoCooked', 'oliveOil'],
+    slots: ['midday', 'evening'],
+    seasons: ['autumn', 'winter'],
+    prep: 'Red lentils simmered soft with vegetables into a hearty soup.',
+    reviewStatus: 'reviewed',
+  },
+
+  tomatoSoup: {
+    id: 'tomatoSoup',
+    name: 'Tomato soup',
+    coreIds: ['tomatoCooked'],
+    optionalIds: ['blackPepper', 'cream', 'garlic', 'oliveOil', 'onionCooked'],
+    slots: ['midday', 'evening'],
+    prep: 'Tomatoes simmered and blended smooth, finished with a little cream.',
+    reviewStatus: 'reviewed',
+  },
+
 }
 
 /** Stable list form. Includes drafts — filter before display. */
