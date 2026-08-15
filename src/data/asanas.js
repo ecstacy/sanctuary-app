@@ -1088,7 +1088,7 @@ export const ASANAS = {
       'Place a folded blanket between your calves and thighs if knees feel pinched.',
       'Rest your hands on your thighs, palms down.',
       'Lengthen the spine. Soften the shoulders.',
-      'This seat is safe to practice for 5 minutes after a meal — it supports digestion.',
+      'This seat is safe to practice soon after a meal — it supports digestion.',
     ],
     voiceCues: {
       enter: 'Kneel on the floor with the knees together and the tops of the feet flat. Sit back on the heels. Big toes touching, heels apart enough to cradle the sit bones.',
@@ -1669,7 +1669,7 @@ export const ASANAS = {
       'Inhale and lengthen the spine.',
       'Wrap the right arm around the right shin (and around the back of the body) to clasp the left hand behind your back. Or hold a strap between the hands.',
       'Exhale and fold forward over the extended left leg.',
-      'Hold for 30-60 seconds. Switch sides.',
+      'Hold, steady in the twist. Switch sides.',
     ],
     voiceCues: {
       enter: 'Sit with the legs extended. Bend the right knee, foot flat on the floor close to the right sit bone. Wrap the right arm around the right shin and clasp the left hand behind your back, or hold a strap.',
@@ -2059,7 +2059,7 @@ export const ASANAS = {
       'Close the eyes or soften the gaze toward the ceiling.',
       'Optional: place a folded blanket under the head or knees for support.',
       'Optional: cover the eyes with a soft cloth.',
-      'Release all effort. Let the floor hold you completely. Stay 5-15 minutes.',
+      'Release all effort. Let the floor hold you completely. Rest here until the practice gently calls you back.',
     ],
     voiceCues: {
       enter: 'Lie flat on the back. Let the feet fall open naturally. Arms rest by the sides, palms facing up. Allow the eyes to close.',
@@ -2119,7 +2119,7 @@ export const ASANAS = {
       'Move the feet closer to the body or further away to find what feels best.',
       'Rest one hand on your belly, one on your heart. Or rest both arms by your sides, palms up.',
       'Cover your eyes with a soft cloth or eye pillow if you have one.',
-      'Soften the jaw, soften the eyes. Stay 5-10 minutes.',
+      'Soften the jaw, soften the eyes. Rest here and let the hips open.',
     ],
     voiceCues: {
       enter: 'Lie on the back. Bring the soles of the feet together and let the knees fall apart to the sides. Place a cushion or block under each knee for support.',
@@ -2341,7 +2341,7 @@ export const ASANAS = {
       'Let the body soften completely into the floor.',
       'Soften the jaw and the eyes.',
       'Breathe naturally into the belly. Each inhale presses the belly gently against the mat.',
-      'Stay 3-5 minutes. Use this between deeper backbends or as a recovery pose.',
+      'Rest here as a recovery pose, between deeper backbends.',
     ],
     voiceCues: {
       enter: 'Lie face down. Stack the forearms in front of you and rest the forehead on the forearms. Spread the legs slightly wider than hip-width apart.',
@@ -2395,7 +2395,7 @@ export const ASANAS = {
       "Pause here. If the knees, hips, or quads complain, stay on the elbows or come back up.",
       'If accessible, lower all the way down onto the back. Place a bolster lengthwise behind the spine for support.',
       'Arms can rest by the sides, palms up, or extend overhead on the bolster.',
-      "Hold for 1-3 minutes. The release is in the duration — don't rush.",
+      "Stay and soften. The release comes with time — don't rush.",
       'To exit: press up onto the elbows first, then to the hands, then sit up.',
     ],
     voiceCues: {
@@ -2451,7 +2451,7 @@ export const ASANAS = {
       'If accessible, lower all the way down onto the back. The crossed legs stay folded.',
       'Place a bolster or pillow under the head and shoulders for a slight chest-lift.',
       'Arms rest out to the sides at any comfortable angle, palms up.',
-      'Hold for 1-3 minutes per side, then switch which leg is in front and repeat.',
+      'Stay and breathe, then switch which leg is in front and repeat.',
       'To exit: press up onto the elbows, then to the hands, then sit up.',
     ],
     voiceCues: {
@@ -2937,7 +2937,7 @@ export const ASANAS = {
       'Flex the feet so the inner edges press into the mat.',
       'Inner ankles, inner knees, and the front of the hips should form a square shape.',
       "Press the hips back slightly toward the heels. Hips don't need to lower — gentle pressure is enough.",
-      'Hold for 60-90 seconds. Slowly draw the knees back together to exit.',
+      'Hold, breathing into the hips. Slowly draw the knees back together to exit.',
     ],
     voiceCues: {
       enter: 'Come to all fours on padded knees. Lower the forearms to the floor.',
@@ -2985,19 +2985,19 @@ export const ASANAS = {
     icon: 'spa',
     durationSeconds: 120,
     breathPattern: 'natural',
-    breathCues: { notes: 'Slow deep breath. Long holds in this pose are where deep fascial release happens — stay 2-5 minutes per side.' },
+    breathCues: { notes: 'Slow deep breath. Long holds in this pose are where deep fascial release happens — give it time on each side.' },
     instructions: [
       'Start in Pigeon Pose with the right knee forward.',
       'Square the hips. Place a folded blanket under the right hip if it lifts.',
       'Walk the hands forward, lowering the torso over the front leg.',
       'Rest the forehead on stacked fists, on a block, or on the floor.',
       'Arms can extend forward or fold back alongside the body.',
-      'Hold for 2-5 minutes. The release happens with time, not effort.',
+      'Stay and soften. The release happens with time, not effort.',
       'To exit: walk the hands back, press to all fours, switch sides.',
     ],
     voiceCues: {
       enter: 'From Pigeon Pose with the right leg forward, walk the hands forward and lower the torso over the front leg. Rest the forehead on stacked fists, a block, or the floor.',
-      hold: 'Stay 2-5 minutes. The deep release happens with time, not effort. Soften everything that can soften.',
+      hold: 'Let the fold deepen slowly. The deep release happens with time, not effort. Soften everything that can soften.',
       breathe: 'Each long exhale lets you sink a touch deeper. The body unwinds in its own time.',
       exit: 'Walk the hands back slowly. Press to all fours. Pause for a breath. Switch sides.',
     },
@@ -3350,7 +3350,7 @@ export const ASANAS = {
       'Optional: place a folded blanket under your hips for a slight pelvic tilt.',
       'Rest your arms by your sides, palms up. Or one hand on the belly, one on the heart.',
       'Cover your eyes with a soft cloth or eye pillow if you have one.',
-      'Soften everything. Stay 5-15 minutes.',
+      'Soften everything. Rest here and let gravity do the work.',
     ],
     voiceCues: {
       enter: 'Sit with the right hip against the wall. Swing the legs up the wall as you lie down on the back. Scoot the hips as close to the wall as comfortable — they don\'t have to touch.',
@@ -3526,13 +3526,13 @@ export const ASANAS = {
       'Lift the hips up like Down Dog. Walk the feet in toward the elbows.',
       'Bend the knees in toward the chest, then slowly extend the legs straight up toward the ceiling.',
       'Most of the weight should be in the forearms, NOT the head — only 10-20% on the crown.',
-      'Hold for 30-60 seconds at most for new practitioners. Come down slowly with the same control.',
+      'New practitioners: keep the hold short and come down well before fatigue. Come down slowly with the same control.',
     ],
     voiceCues: {
       enter: 'From kneeling near a wall, interlace the fingers and place the forearms down. Crown of the head on the mat, head cradled in the hands. Lift the hips like Down Dog and walk the feet in.',
       hold: 'Bring the knees toward the chest, then extend the legs up. Most of the weight in the forearms, not the head. Soft, even breath.',
       breathe: 'Slow nasal breath. If the breath gets ragged, come down. The pose is the breath check.',
-      exit: 'Slowly bend the knees and lower the feet to the floor with control. Rest in Child\'s Pose for at least 60 seconds before lifting the head.',
+      exit: 'Slowly bend the knees and lower the feet to the floor with control. Rest in Child\'s Pose, head down, before lifting it.',
     },
     bodyParts: ['shoulders', 'core', 'spine', 'neck', 'forearms'],
     doshaAffinity: { vata: -1, pitta: 1, kapha: 1 },
@@ -3585,7 +3585,7 @@ export const ASANAS = {
       'Inhale and lift the hips up, rolling the body forward onto the crown.',
       'Most of the weight stays in the legs and hands — only 10-20% on the crown.',
       'The forehead approaches the knees as the spine rounds in deep flexion.',
-      'Hold for 20-30 seconds. To exit, lower the hips back to the heels and rest.',
+      'Hold, breathing steadily. To exit, lower the hips back to the heels and rest.',
     ],
     voiceCues: {
       enter: 'Sit on your heels. Reach back and grasp the heels with both hands. Tuck the chin and place the crown of the head on the mat in front of the knees.',
@@ -3995,7 +3995,7 @@ export const ASANAS = {
       'The knees release toward the floor, supported by cushions if they hover.',
       'Lengthen the spine — crown reaches up, sit bones root down.',
       'Hold gaze either straight ahead or eyes softly closed.',
-      'Stay for 3-5 minutes for meditation.',
+      'Stay as long as is comfortable for meditation.',
     ],
     voiceCues: {
       enter: 'Sit tall. Bring the soles of the feet together close to the body. Grasp the feet with both hands.',
@@ -4105,7 +4105,7 @@ export const ASANAS = {
       'Press the knees against the back of the upper arms, just above the elbows.',
       'Shift the weight forward over the hands. Lift the heels and curl the toes off the floor.',
       'Gaze forward — NOT down. The gaze direction is the balance.',
-      'Hold for 5-15 seconds. To exit: lower the feet, lift the head, stand up.',
+      'Hold as long as is steady. To exit: lower the feet, lift the head, stand up.',
     ],
     voiceCues: {
       enter: 'Squat low. Place the palms flat on the floor in front. Bend the elbows slightly.',

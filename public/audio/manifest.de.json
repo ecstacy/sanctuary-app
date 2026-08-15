@@ -5023,5 +5023,10 @@
     "hash": "6da07da29dfb",
     "text": "Fünfzehn Sekunden. Noch drei Atemzüge.",
     "bytes": 18576
+  },
+  "session__other_side": {
+    "hash": "7197db2afc81",
+    "text": "Now, the other side.",
+    "bytes": 9216
   }
 }

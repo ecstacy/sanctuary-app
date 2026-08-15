@@ -99,13 +99,13 @@ if (!KEY && !DRY) {
 // modules in-memory with esbuild (which resolves like Vite) and eval the CJS to
 // pull the data objects out. Enumerating jobs from the canonical data keeps the
 // key set identical across languages; translation happens after (see translator).
-const { ASANAS, PRANAYAMAS, COACH_PHRASES } = await (async () => {
+const { ASANAS, PRANAYAMAS, COACH_PHRASES, spokenInstructions } = await (async () => {
   const bundled = await esbuild.build({
     stdin: {
       contents:
         `export { ASANAS } from './src/data/asanas.js'\n` +
         `export { PRANAYAMAS } from './src/data/pranayamas.js'\n` +
-        `export { COACH_PHRASES } from './src/lib/voiceCoach.js'\n`,
+        `export { COACH_PHRASES, spokenInstructions } from './src/lib/voiceCoach.js'\n`,
       resolveDir: REPO_ROOT,
       loader: 'js',
     },
@@ -195,9 +195,12 @@ function buildJobs() {
     if (entry.voiceCues?.breathe) push(`${entry.id}__breathe`, entry.voiceCues.breathe)
     if (entry.voiceCues?.exit)    push(`${entry.id}__exit`,    entry.voiceCues.exit)
 
-    // 4. Granular instructions[] — main narration during the hold.
+    // 4. Granular instructions[] — main narration during the hold. Use the
+    //    same bilateral-aware transform the practice page plays, so the trailing
+    //    "switch sides" clip is never generated (and never requested). Indices
+    //    0..N-1 stay stable; only the redundant tail is dropped/shortened.
     if (Array.isArray(entry.instructions)) {
-      entry.instructions.forEach((step, i) => push(`${entry.id}__i${i}`, step))
+      spokenInstructions(entry).forEach((step, i) => push(`${entry.id}__i${i}`, step))
     }
   }
 
