@@ -1170,6 +1170,10 @@
     "dailyEveningTitle": "सांध्य विश्राम",
     "sideFirst": "पहली ओर · 1/2",
     "sideSecond": "दूसरी ओर · 2/2",
+    "sideRight": "दाईं",
+    "sideLeft": "बाईं",
+    "sideRightFull": "दाईं ओर · 1/2",
+    "sideLeftFull": "बाईं ओर · 2/2",
     "otherSideCue": "अब, दूसरी ओर।"
   },
   "doshaQuizContent": {

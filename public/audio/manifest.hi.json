@@ -65,9 +65,9 @@
     "bytes": 49104
   },
   "virabhadrasanaI__name": {
-    "hash": "d4d703f5962b",
-    "text": "वीरभद्रासन I (योद्धा I).",
-    "bytes": 23760
+    "hash": "79e1afd49c00",
+    "text": "योद्धा I.",
+    "bytes": 13392
   },
   "virabhadrasanaI__enter": {
     "hash": "320495731a58",
@@ -185,9 +185,9 @@
     "bytes": 60912
   },
   "vrksasana__name": {
-    "hash": "99e7c0c8a525",
-    "text": "वृक्षासन (वृक्ष मुद्रा).",
-    "bytes": 20592
+    "hash": "8422cbba2a7f",
+    "text": "वृक्ष मुद्रा.",
+    "bytes": 12960
   },
   "vrksasana__enter": {
     "hash": "f4233eb5bbcd",
@@ -245,9 +245,9 @@
     "bytes": 42912
   },
   "trikonasana__name": {
-    "hash": "1130434d5a09",
-    "text": "त्रिकोणासन (त्रिभुज मुद्रा).",
-    "bytes": 22464
+    "hash": "85a305cf9141",
+    "text": "त्रिभुज मुद्रा.",
+    "bytes": 13680
   },
   "trikonasana__enter": {
     "hash": "67090170d515",
@@ -305,9 +305,9 @@
     "bytes": 48096
   },
   "utkatasana__name": {
-    "hash": "db87de8a123c",
-    "text": "उत्कटासन (कुर्सी मुद्रा).",
-    "bytes": 21744
+    "hash": "8427a70d663c",
+    "text": "कुर्सी मुद्रा.",
+    "bytes": 13536
   },
   "utkatasana__enter": {
     "hash": "7785d29b4e99",
@@ -365,9 +365,9 @@
     "bytes": 49824
   },
   "virabhadrasanaIII__name": {
-    "hash": "5ef69bad946e",
-    "text": "वीरभद्रासन III (योद्धा III).",
-    "bytes": 24048
+    "hash": "1741e5671b27",
+    "text": "योद्धा III.",
+    "bytes": 13680
   },
   "virabhadrasanaIII__enter": {
     "hash": "9d8eb9882df6",
@@ -425,9 +425,9 @@
     "bytes": 50688
   },
   "parsvakonasana__name": {
-    "hash": "e502736cd99d",
-    "text": "पार्श्वकोणासन (पार्श्व कोण मुद्रा).",
-    "bytes": 25488
+    "hash": "228e7161d0d9",
+    "text": "पार्श्व कोण मुद्रा.",
+    "bytes": 15552
   },
   "parsvakonasana__enter": {
     "hash": "4b7ec180e62b",
@@ -485,9 +485,9 @@
     "bytes": 48096
   },
   "parsvottanasana__name": {
-    "hash": "478777d580f8",
-    "text": "पार्श्वोत्तानासन (पिरामिड मुद्रा).",
-    "bytes": 24624
+    "hash": "0367f199f6c3",
+    "text": "पिरामिड मुद्रा.",
+    "bytes": 14400
   },
   "parsvottanasana__enter": {
     "hash": "ac976110c9c5",
@@ -545,9 +545,9 @@
     "bytes": 89424
   },
   "prasaritaPadottanasana__name": {
-    "hash": "72a0e1c37df3",
-    "text": "प्रसारित पादोत्तानासन (चौड़े पैर आगे झुकान).",
-    "bytes": 32832
+    "hash": "41691454b22f",
+    "text": "चौड़े पैर आगे झुकान.",
+    "bytes": 18864
   },
   "prasaritaPadottanasana__enter": {
     "hash": "50a2b9fb8934",
@@ -785,9 +785,9 @@
     "bytes": 57168
   },
   "natarajasana__name": {
-    "hash": "c49893d326a8",
-    "text": "नटराजासन (नर्तक मुद्रा).",
-    "bytes": 22320
+    "hash": "4c3d1c3bb94d",
+    "text": "नर्तक मुद्रा.",
+    "bytes": 13968
   },
   "natarajasana__enter": {
     "hash": "0d3a9551242d",
@@ -930,9 +930,9 @@
     "bytes": 42048
   },
   "padmasana__name": {
-    "hash": "b2a9bc9aa941",
-    "text": "पद्मासन (कमल मुद्रा).",
-    "bytes": 20304
+    "hash": "de19ec712aad",
+    "text": "कमल मुद्रा.",
+    "bytes": 12960
   },
   "padmasana__enter": {
     "hash": "274fd4a25e3c",
@@ -990,9 +990,9 @@
     "bytes": 48672
   },
   "siddhasana__name": {
-    "hash": "8ef25b176ac5",
-    "text": "सिद्धासन (सिद्ध मुद्रा).",
-    "bytes": 21168
+    "hash": "45492d833d57",
+    "text": "सिद्ध मुद्रा.",
+    "bytes": 13680
   },
   "siddhasana__enter": {
     "hash": "251ef7682595",
@@ -1050,9 +1050,9 @@
     "bytes": 35136
   },
   "vajrasana__name": {
-    "hash": "1e665f271200",
-    "text": "वज्रासन (वज्र मुद्रा).",
-    "bytes": 20304
+    "hash": "11fa57f5f428",
+    "text": "वज्र मुद्रा.",
+    "bytes": 12960
   },
   "vajrasana__enter": {
     "hash": "3096bf2d5541",
@@ -1110,9 +1110,9 @@
     "bytes": 52560
   },
   "ardhaPadmasana__name": {
-    "hash": "a296e2f3d834",
-    "text": "अर्ध पद्मासन (आधा कमल).",
-    "bytes": 22752
+    "hash": "1a2237754ec4",
+    "text": "आधा कमल.",
+    "bytes": 12960
   },
   "ardhaPadmasana__enter": {
     "hash": "8374529ef8cd",
@@ -1170,9 +1170,9 @@
     "bytes": 44208
   },
   "baddhaKonasana__name": {
-    "hash": "b2f3de82d80f",
-    "text": "बद्धकोणासन (बँधा कोण मुद्रा).",
-    "bytes": 24624
+    "hash": "d41bf1b358b7",
+    "text": "बँधा कोण मुद्रा.",
+    "bytes": 15552
   },
   "baddhaKonasana__enter": {
     "hash": "16de2103fc26",
@@ -1350,9 +1350,9 @@
     "bytes": 35136
   },
   "gomukhasana__name": {
-    "hash": "b13618c64753",
-    "text": "गोमुखासन (गाय-मुख मुद्रा).",
-    "bytes": 23184
+    "hash": "119876b5fe43",
+    "text": "गाय-मुख मुद्रा.",
+    "bytes": 14400
   },
   "gomukhasana__enter": {
     "hash": "484b55829ff7",
@@ -1410,9 +1410,9 @@
     "bytes": 66816
   },
   "marichyasanaC__name": {
-    "hash": "6c4e84769f46",
-    "text": "मरीच्यासन C (मरीचि मुद्रा C).",
-    "bytes": 24768
+    "hash": "bbe755b103aa",
+    "text": "मरीचि मुद्रा C.",
+    "bytes": 16128
   },
   "marichyasanaC__enter": {
     "hash": "5aa46ee96ec6",
@@ -1470,9 +1470,9 @@
     "bytes": 44784
   },
   "virasana__name": {
-    "hash": "0b2ca32c603c",
-    "text": "वीरासन (वीर मुद्रा).",
-    "bytes": 20304
+    "hash": "35bc2af43375",
+    "text": "वीर मुद्रा.",
+    "bytes": 13104
   },
   "virasana__enter": {
     "hash": "f98587df785b",
@@ -1530,9 +1530,9 @@
     "bytes": 27504
   },
   "ardhaMatsyendrasana__name": {
-    "hash": "5db8f63667dd",
-    "text": "अर्ध मत्स्येन्द्रासन (आधा मत्स्येन्द्र आसन).",
-    "bytes": 30096
+    "hash": "60c3347af211",
+    "text": "आधा मत्स्येन्द्र आसन.",
+    "bytes": 18432
   },
   "ardhaMatsyendrasana__enter": {
     "hash": "330ea3b05c46",
@@ -1590,9 +1590,9 @@
     "bytes": 53424
   },
   "bharadvajasana__name": {
-    "hash": "b3a07c389e04",
-    "text": "भरद्वाजासन (भरद्वाज की मरोड़).",
-    "bytes": 25776
+    "hash": "d9c6abb1c58e",
+    "text": "भरद्वाज की मरोड़.",
+    "bytes": 16272
   },
   "bharadvajasana__enter": {
     "hash": "67b33448e458",
@@ -1650,9 +1650,9 @@
     "bytes": 39024
   },
   "marichyasanaA__name": {
-    "hash": "0fef07874146",
-    "text": "मरीच्यासन A (मरीचि मुद्रा A).",
-    "bytes": 23616
+    "hash": "323188ba0da9",
+    "text": "मरीचि मुद्रा A.",
+    "bytes": 15408
   },
   "marichyasanaA__enter": {
     "hash": "feb98bf5637f",
@@ -1710,9 +1710,9 @@
     "bytes": 32400
   },
   "parivrttaTrikonasana__name": {
-    "hash": "8f6c47ba5cf8",
-    "text": "परिवृत्त त्रिकोणासन (घुमावदार त्रिभुज).",
-    "bytes": 28656
+    "hash": "834e8d8d5f08",
+    "text": "घुमावदार त्रिभुज.",
+    "bytes": 16272
   },
   "parivrttaTrikonasana__enter": {
     "hash": "a5ac21837aab",
@@ -1770,9 +1770,9 @@
     "bytes": 47520
   },
   "uttanasana__name": {
-    "hash": "0c5a5d2d3b22",
-    "text": "उत्तानासन (खड़ी आगे झुकान).",
-    "bytes": 24480
+    "hash": "c43b2c201bed",
+    "text": "खड़ी आगे झुकान.",
+    "bytes": 16416
   },
   "uttanasana__enter": {
     "hash": "a1fab60d051a",
@@ -1830,9 +1830,9 @@
     "bytes": 37728
   },
   "paschimottanasana__name": {
-    "hash": "b4fd411431ac",
-    "text": "पश्चिमोत्तानासन (बैठी आगे झुकान).",
-    "bytes": 28224
+    "hash": "df1a10bf1f44",
+    "text": "बैठी आगे झुकान.",
+    "bytes": 17712
   },
   "paschimottanasana__enter": {
     "hash": "94a8a5bdcf31",
@@ -2070,9 +2070,9 @@
     "bytes": 58032
   },
   "suptaBaddhaKonasana__name": {
-    "hash": "f8b5dc48fd0e",
-    "text": "सुप्त बद्धकोणासन (लेटी बँधा कोण मुद्रा).",
-    "bytes": 29952
+    "hash": "97ea1969e805",
+    "text": "लेटी बँधा कोण मुद्रा.",
+    "bytes": 18432
   },
   "suptaBaddhaKonasana__enter": {
     "hash": "a5593d4f867c",
@@ -2190,9 +2190,9 @@
     "bytes": 34272
   },
   "apanasana__name": {
-    "hash": "e80755108386",
-    "text": "अपानासन (घुटने-से-छाती मुद्रा).",
-    "bytes": 24624
+    "hash": "9c284c793c98",
+    "text": "घुटने-से-छाती मुद्रा.",
+    "bytes": 17568
   },
   "apanasana__enter": {
     "hash": "b99b2ae280d4",
@@ -2250,9 +2250,9 @@
     "bytes": 48528
   },
   "jatharaParivartanasana__name": {
-    "hash": "2aabdf9405a4",
-    "text": "जठर परिवर्तनासन (पेट मरोड़).",
-    "bytes": 25056
+    "hash": "f0bded8db244",
+    "text": "पेट मरोड़.",
+    "bytes": 12672
   },
   "jatharaParivartanasana__enter": {
     "hash": "d8f91a1912bc",
@@ -2310,9 +2310,9 @@
     "bytes": 51696
   },
   "makarasana__name": {
-    "hash": "965602fc8463",
-    "text": "मकरासन (मगरमच्छ मुद्रा).",
-    "bytes": 22752
+    "hash": "9226bfc50f8e",
+    "text": "मगरमच्छ मुद्रा.",
+    "bytes": 15552
   },
   "makarasana__enter": {
     "hash": "5d41bb9f7023",
@@ -2370,9 +2370,9 @@
     "bytes": 60912
   },
   "suptaVirasana__name": {
-    "hash": "c22183cddb3d",
-    "text": "सुप्त वीरासन (लेटी वीर मुद्रा).",
-    "bytes": 25200
+    "hash": "0cf96c650b89",
+    "text": "लेटी वीर मुद्रा.",
+    "bytes": 15696
   },
   "suptaVirasana__enter": {
     "hash": "a59b7df5f26d",
@@ -2430,9 +2430,9 @@
     "bytes": 47088
   },
   "suptaSukhasana__name": {
-    "hash": "7f297fc2412b",
-    "text": "सुप्त सुखासन (लेटी सुखासन).",
-    "bytes": 25200
+    "hash": "ffb2563d7b8f",
+    "text": "लेटी सुखासन.",
+    "bytes": 15264
   },
   "suptaSukhasana__enter": {
     "hash": "5b336a95131f",
@@ -2610,9 +2610,9 @@
     "bytes": 75312
   },
   "dhanurasana__name": {
-    "hash": "86ebd6243f02",
-    "text": "धनुरासन (धनुष मुद्रा).",
-    "bytes": 21024
+    "hash": "e0c0facfc3b6",
+    "text": "धनुष मुद्रा.",
+    "bytes": 13392
   },
   "dhanurasana__enter": {
     "hash": "cf599e3c1e53",
@@ -2670,9 +2670,9 @@
     "bytes": 67248
   },
   "salabhasana__name": {
-    "hash": "eb6908b2c9c7",
-    "text": "शलभासन (टिड्डी मुद्रा).",
-    "bytes": 21024
+    "hash": "417985575ff1",
+    "text": "टिड्डी मुद्रा.",
+    "bytes": 13248
   },
   "salabhasana__enter": {
     "hash": "e7619cc9e81c",
@@ -2730,9 +2730,9 @@
     "bytes": 55440
   },
   "ardhaSalabhasana__name": {
-    "hash": "88251ce9fb3a",
-    "text": "अर्ध शलभासन (आधी टिड्डी मुद्रा).",
-    "bytes": 25488
+    "hash": "0d856c06b96d",
+    "text": "आधी टिड्डी मुद्रा.",
+    "bytes": 15552
   },
   "ardhaSalabhasana__enter": {
     "hash": "185bc0231580",
@@ -2790,9 +2790,9 @@
     "bytes": 32832
   },
   "ekaPadaRajakapotasana__name": {
-    "hash": "18d254215558",
-    "text": "एक पाद राजकपोतासन (कबूतर मुद्रा).",
-    "bytes": 27648
+    "hash": "04ee9337e097",
+    "text": "कबूतर मुद्रा.",
+    "bytes": 14256
   },
   "ekaPadaRajakapotasana__enter": {
     "hash": "64357b5eb5f6",
@@ -2850,9 +2850,9 @@
     "bytes": 45504
   },
   "malasana__name": {
-    "hash": "d1eb2bb82ff0",
-    "text": "मालासन (माला मुद्रा).",
-    "bytes": 20448
+    "hash": "c30d4e960c03",
+    "text": "माला मुद्रा.",
+    "bytes": 13392
   },
   "malasana__enter": {
     "hash": "a846dfcf61d5",
@@ -3285,9 +3285,9 @@
     "bytes": 57888
   },
   "adhoMukhaSvanasana__name": {
-    "hash": "aed051188908",
-    "text": "अधो मुख श्वानासन (अधोमुखी कुत्ता).",
-    "bytes": 26352
+    "hash": "bfa6ce666c8b",
+    "text": "अधोमुखी कुत्ता.",
+    "bytes": 14688
   },
   "adhoMukhaSvanasana__enter": {
     "hash": "6089ff866741",
@@ -3345,9 +3345,9 @@
     "bytes": 55584
   },
   "legsUpTheWall__name": {
-    "hash": "e74bfca8f52e",
-    "text": "विपरीत करणी (दीवार पर पैर).",
-    "bytes": 22320
+    "hash": "ae407e46def0",
+    "text": "दीवार पर पैर.",
+    "bytes": 14544
   },
   "legsUpTheWall__enter": {
     "hash": "5ec82d19ba78",
@@ -3405,9 +3405,9 @@
     "bytes": 35136
   },
   "halasana__name": {
-    "hash": "b90ce559822e",
-    "text": "हलासन (हल मुद्रा).",
-    "bytes": 19152
+    "hash": "4c28acf5d73f",
+    "text": "हल मुद्रा.",
+    "bytes": 12096
   },
   "halasana__enter": {
     "hash": "d9349c221a99",
@@ -3525,9 +3525,9 @@
     "bytes": 69552
   },
   "sirsasana__name": {
-    "hash": "ec00a53a9a24",
-    "text": "शीर्षासन (सिर के बल खड़ा होना).",
-    "bytes": 25488
+    "hash": "32cace66d0cd",
+    "text": "सिर के बल खड़ा होना.",
+    "bytes": 17280
   },
   "sirsasana__enter": {
     "hash": "1b0931f77f5c",
@@ -3645,9 +3645,9 @@
     "bytes": 60624
   },
   "swastikasana__name": {
-    "hash": "afa5bf5dc383",
-    "text": "स्वस्तिकासन (शुभ आसन).",
-    "bytes": 21456
+    "hash": "2b54e9a168bf",
+    "text": "शुभ आसन.",
+    "bytes": 12816
   },
   "swastikasana__enter": {
     "hash": "f58901b3e94b",
@@ -3705,9 +3705,9 @@
     "bytes": 27792
   },
   "kurmasana__name": {
-    "hash": "e7c7a0065805",
-    "text": "कूर्मासन (कछुआ मुद्रा).",
-    "bytes": 21024
+    "hash": "c8f732e5e1d7",
+    "text": "कछुआ मुद्रा.",
+    "bytes": 13536
   },
   "kurmasana__enter": {
     "hash": "f55f67e48fb5",
@@ -3765,9 +3765,9 @@
     "bytes": 56736
   },
   "kukkutasana__name": {
-    "hash": "f8c745724a9d",
-    "text": "कुक्कुटासन (मुर्गा मुद्रा).",
-    "bytes": 21744
+    "hash": "bdc1a8193332",
+    "text": "मुर्गा मुद्रा.",
+    "bytes": 13536
   },
   "kukkutasana__enter": {
     "hash": "1ccea1dbb48a",
@@ -3825,9 +3825,9 @@
     "bytes": 38448
   },
   "uttanaKurmasana__name": {
-    "hash": "f3214b3c92f2",
-    "text": "उत्तान कूर्मासन (खिंचा कछुआ मुद्रा).",
-    "bytes": 27072
+    "hash": "d6edba54aa9b",
+    "text": "खिंचा कछुआ मुद्रा.",
+    "bytes": 16560
   },
   "uttanaKurmasana__enter": {
     "hash": "4cd52b717e56",
@@ -3880,9 +3880,9 @@
     "bytes": 52848
   },
   "mayurasana__name": {
-    "hash": "d6bae23f2b6b",
-    "text": "मयूरासन (मोर मुद्रा).",
-    "bytes": 21312
+    "hash": "f77e673959a7",
+    "text": "मोर मुद्रा.",
+    "bytes": 12672
   },
   "mayurasana__enter": {
     "hash": "ca34e70c7ab6",
@@ -3940,9 +3940,9 @@
     "bytes": 57456
   },
   "simhasana__name": {
-    "hash": "a94762f760ee",
-    "text": "सिंहासन (शेर मुद्रा).",
-    "bytes": 21024
+    "hash": "9eed61c0a220",
+    "text": "शेर मुद्रा.",
+    "bytes": 12816
   },
   "simhasana__enter": {
     "hash": "3650ecc12a1c",
@@ -4000,9 +4000,9 @@
     "bytes": 51408
   },
   "bhadrasana__name": {
-    "hash": "9b3aede3fdb2",
-    "text": "भद्रासन (शुभ आसन).",
-    "bytes": 20448
+    "hash": "2b54e9a168bf",
+    "text": "शुभ आसन.",
+    "bytes": 12816
   },
   "bhadrasana__enter": {
     "hash": "20bd4473c680",
@@ -4060,9 +4060,9 @@
     "bytes": 25200
   },
   "kapotasana__name": {
-    "hash": "912e96ec64b1",
-    "text": "कपोतासन (राज-कबूतर मुद्रा).",
-    "bytes": 23904
+    "hash": "f040dc520290",
+    "text": "राज-कबूतर मुद्रा.",
+    "bytes": 16128
   },
   "kapotasana__enter": {
     "hash": "4ec7eadd47d0",
@@ -4120,9 +4120,9 @@
     "bytes": 50832
   },
   "bakasana__name": {
-    "hash": "022a7fd3a43e",
-    "text": "बकासन (बगुला मुद्रा).",
-    "bytes": 21024
+    "hash": "a2a5f7d1fbdb",
+    "text": "बगुला मुद्रा.",
+    "bytes": 13824
   },
   "bakasana__enter": {
     "hash": "41af17217da9",
@@ -4180,9 +4180,9 @@
     "bytes": 61200
   },
   "kakasana__name": {
-    "hash": "53453ee1a28d",
-    "text": "काकासन (सारस मुद्रा).",
-    "bytes": 21312
+    "hash": "280e20ce7217",
+    "text": "सारस मुद्रा.",
+    "bytes": 14256
   },
   "kakasana__enter": {
     "hash": "5e8b3dc8425b",
@@ -4300,9 +4300,9 @@
     "bytes": 51120
   },
   "vasishthasana__name": {
-    "hash": "dd8d61135c4d",
-    "text": "वसिष्ठासन (पार्श्व तख़्ती).",
-    "bytes": 22752
+    "hash": "d6ed199f8db5",
+    "text": "पार्श्व तख़्ती.",
+    "bytes": 13824
   },
   "vasishthasana__enter": {
     "hash": "00e97ef6d3bc",
@@ -4360,9 +4360,9 @@
     "bytes": 44064
   },
   "astavakrasana__name": {
-    "hash": "953f0519b232",
-    "text": "अष्टावक्रासन (आठ-कोण मुद्रा).",
-    "bytes": 23904
+    "hash": "bda6cab34590",
+    "text": "आठ-कोण मुद्रा.",
+    "bytes": 14112
   },
   "astavakrasana__enter": {
     "hash": "2dd0fb214109",
@@ -4420,9 +4420,9 @@
     "bytes": 61056
   },
   "pasasana__name": {
-    "hash": "d3b14ace7634",
-    "text": "पाशासन (फंदा मुद्रा).",
-    "bytes": 20880
+    "hash": "82725558f6d0",
+    "text": "फंदा मुद्रा.",
+    "bytes": 13536
   },
   "pasasana__enter": {
     "hash": "c3b6335c1fc4",
@@ -4475,9 +4475,9 @@
     "bytes": 55296
   },
   "adhoMukhaVrksasana__name": {
-    "hash": "7678ed8737b8",
-    "text": "अधो मुख वृक्षासन (हस्तस्तंभ).",
-    "bytes": 24912
+    "hash": "a4d16d99fdbd",
+    "text": "हस्तस्तंभ.",
+    "bytes": 12960
   },
   "adhoMukhaVrksasana__enter": {
     "hash": "22cb3f5fdc51",
@@ -5023,5 +5023,10 @@
     "hash": "5a068a242935",
     "text": "पंद्रह सेकंड। तीन और साँसें।",
     "bytes": 28080
+  },
+  "session__other_side": {
+    "hash": "4e312f872d8c",
+    "text": "Now, the other side.",
+    "bytes": 17424
   }
 }

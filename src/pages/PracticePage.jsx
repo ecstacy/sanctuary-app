@@ -8,7 +8,7 @@ import { localizeAsana } from '../i18n/contentI18n'
 import { composeDailySession } from '../lib/dailySession'
 import { useVoiceGuidance } from '../hooks/useVoiceGuidance'
 import { useAudio } from '../hooks/useAudio'
-import { buildSchedule, restNarration } from '../lib/voiceCoach'
+import { buildSchedule, restNarration, spokenInstructions } from '../lib/voiceCoach'
 import { useWakeLock } from '../hooks/useWakeLock'
 import { savePracticeSession } from '../hooks/usePracticeStats'
 import PoseFigure from '../components/PoseFigure'
@@ -108,7 +108,7 @@ function formatDuration(seconds, t) {
 // feeling hurried — a base plus a few seconds per instruction line (spoken +
 // a breath to follow it). Only ever RAISES a hold, never shortens it.
 function minDurationForPose(a) {
-  const lines = Array.isArray(a.instructions) ? a.instructions.length : 0
+  const lines = spokenInstructions(a).length
   return 20 + lines * 6
 }
 
@@ -481,7 +481,9 @@ export default function PracticePage() {
   useEffect(() => {
     if (status !== 'active' || !currentAsana) return
     if (!voice.enabled) return
-    const instructions = Array.isArray(currentAsana.instructions) ? currentAsana.instructions : []
+    // Bilateral-aware: drops the redundant trailing "switch sides" line, since
+    // the app plays each side as its own segment with a spoken "other side" cue.
+    const instructions = spokenInstructions(currentAsana)
 
     let cancelled = false
     // Soft entry chime + pose name so the user knows what just started.
@@ -934,7 +936,14 @@ export default function PracticePage() {
                       <PoseFigure poseKey={a.poseKey} size={44} breathing={false} variant="image" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-body text-[15px] font-medium text-on-surface truncate">{a.sanskrit}</p>
+                      <p className="font-body text-[15px] font-medium text-on-surface truncate">
+                        {a.sanskrit}
+                        {a.sideCount === 2 && (
+                          <span className="ml-2 font-label text-[11px] text-primary/80 uppercase tracking-wide">
+                            {a.side === 1 ? t('practice.sideRight') : t('practice.sideLeft')}
+                          </span>
+                        )}
+                      </p>
                       <p className="font-label text-[11px] text-on-surface-variant/80 uppercase tracking-wider truncate">{a.english}</p>
                     </div>
                     <span className="font-body text-[13px] text-ochre font-semibold flex-shrink-0 tabular-nums">
@@ -1358,7 +1367,9 @@ export default function PracticePage() {
                 <span aria-hidden="true" className="material-symbols-outlined text-[12px]">
                   {currentAsana.isSecondSide ? 'swap_horiz' : 'looks_one'}
                 </span>
-                {currentAsana.isSecondSide ? t('practice.sideSecond', 'Other side · 2 of 2') : t('practice.sideFirst', 'First side · 1 of 2')}
+                {currentAsana.isSecondSide
+                  ? t('practice.sideLeftFull', 'Left side · 2 of 2')
+                  : t('practice.sideRightFull', 'Right side · 1 of 2')}
               </p>
             )}
             <CircularTimer duration={currentAsana.durationSeconds} remaining={timeRemaining} isPaused={isPaused} size={92} />
@@ -1380,11 +1391,10 @@ export default function PracticePage() {
             >
               {voice.enabled
                 && instructionIndex >= 0
-                && Array.isArray(currentAsana.instructions)
-                && currentAsana.instructions[instructionIndex] && (
+                && spokenInstructions(currentAsana)[instructionIndex] && (
                 <>
                   <p className="font-body text-sm text-on-surface-variant text-center leading-relaxed line-clamp-4">
-                    {currentAsana.instructions[instructionIndex]}
+                    {spokenInstructions(currentAsana)[instructionIndex]}
                   </p>
                   <button
                     onClick={() => {

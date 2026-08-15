@@ -98,6 +98,32 @@ export const COACH_PHRASES = (() => {
   return items
 })()
 
+// ── Spoken walkthrough (bilateral-aware) ────────────────────────────────────
+// A trailing "switch sides" directive belongs in the STATIC pose description
+// (the detail page shows the whole pose, both sides, un-guided). But in guided
+// practice each side plays as its own Right/Left segment with a spoken "Now,
+// the other side", so repeating "switch sides" inside the first-side walkthrough
+// is redundant and confusing (user feedback: the pose "already talks about
+// using both sides and yet it is duplicated twice"). We strip only that trailing
+// sentence, and only for bilateral poses — the canonical data is untouched, so
+// the detail page still reads correctly. The generator must call this too so the
+// pre-recorded per-instruction clips match what playback requests.
+// Matches a TRAILING switch-side directive in en / de / hi. Only the trailing
+// case is stripped — where the localized text puts the switch mid-line (before
+// exit steps) the structure diverges per language and is left to the human
+// localization review (#20) rather than guessed at here.
+const SWITCH_SENTENCE_RE = /[\s,]*(then switch which leg is in front and repeat|switch which leg is in front and repeat|switch sides|and repeat|wechsle die seite|seiten? wechseln|पक्ष बदलें|बगल बदलें)[.।]?\s*$/i
+
+export function spokenInstructions(asana) {
+  const list = Array.isArray(asana?.instructions) ? asana.instructions : []
+  if (!asana?.bilateral || !list.length) return list
+  const out = list.slice()
+  const stripped = out[out.length - 1].replace(SWITCH_SENTENCE_RE, '').trim()
+  if (!stripped) out.pop()
+  else out[out.length - 1] = stripped
+  return out
+}
+
 // ── Schedule ────────────────────────────────────────────────────────────────
 // For a given pose duration D, return an array of milestones the coach
 // should hit. Each milestone is `{ atRemaining, key, text }`. We compute
@@ -115,7 +141,11 @@ const PRIORITY = {
   'breath-univ': 40, align: 40, presence: 30,
 }
 
-const MIN_GAP_SECONDS = 6
+// Calmer pacing (#practice-voice): a real studio teacher leaves long silences
+// so the student can actually follow the breath. We widened the minimum gap
+// between spoken cues and raised the per-layer duration thresholds below so
+// shorter holds stay quiet and only genuinely long holds get the full rotation.
+const MIN_GAP_SECONDS = 12
 
 export function buildSchedule({ asana, poseIndex, userDosha }) {
   const D = asana.durationSeconds
@@ -151,12 +181,12 @@ export function buildSchedule({ asana, poseIndex, userDosha }) {
   }
 
   // ── Pose-specific breath instruction at ~35% ──
-  if (D >= 30) {
+  if (D >= 40) {
     cue(D - Math.floor(D * 0.35), 'breathe-pose', asana.voiceCues.breathe, `${asana.id}__breathe`)
   }
 
   // ── Universal alignment refinement at ~45% (long poses only) ──
-  if (D >= 45) {
+  if (D >= 60) {
     const i = pickIndex(ALIGNMENT_CUES, poseIndex)
     cue(D - Math.floor(D * 0.45), 'align', ALIGNMENT_CUES[i], `coach__align_${i}`)
   }
@@ -172,14 +202,14 @@ export function buildSchedule({ asana, poseIndex, userDosha }) {
   }
 
   // ── Universal breath cue at ~72% ──
-  if (D >= 45) {
+  if (D >= 75) {
     const i = pickIndex(BREATH_CUES, poseIndex + 1)
     cue(D - Math.floor(D * 0.72), 'breath-univ', BREATH_CUES[i], `coach__breath_${i}`)
   }
 
   // ── Presence / encouragement — only when there is enough room before
   //     the 15s and 8s exit cues, otherwise it just doubles up.
-  if (D >= 75) {
+  if (D >= 105) {
     const i = pickIndex(PRESENCE_CUES, poseIndex + 2)
     cue(D - Math.floor(D * 0.82), 'presence', PRESENCE_CUES[i], `coach__presence_${i}`)
   }

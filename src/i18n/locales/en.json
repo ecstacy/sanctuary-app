@@ -1170,6 +1170,10 @@
     "dailyEveningTitle": "Evening Wind-Down",
     "sideFirst": "First side · 1 of 2",
     "sideSecond": "Other side · 2 of 2",
+    "sideRight": "Right",
+    "sideLeft": "Left",
+    "sideRightFull": "Right side · 1 of 2",
+    "sideLeftFull": "Left side · 2 of 2",
     "otherSideCue": "Now, the other side."
   },
   "doshaQuizContent": {

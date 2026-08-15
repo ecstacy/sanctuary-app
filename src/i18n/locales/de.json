@@ -1170,6 +1170,10 @@
     "dailyEveningTitle": "Abendliches Ausklingen",
     "sideFirst": "Erste Seite · 1 von 2",
     "sideSecond": "Andere Seite · 2 von 2",
+    "sideRight": "Rechts",
+    "sideLeft": "Links",
+    "sideRightFull": "Rechte Seite · 1 von 2",
+    "sideLeftFull": "Linke Seite · 2 von 2",
     "otherSideCue": "Jetzt die andere Seite."
   },
   "doshaQuizContent": {
