@@ -11,6 +11,10 @@
          device reboots. Without this, the user's morning reminder
          disappears every time they restart their phone. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Speech-to-text for the Meal Check voice input
+         (@capacitor-community/speech-recognition). RECORD_AUDIO is requested at
+         runtime the first time the user taps the mic. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- NO exact-alarm permission, deliberately.
          SCHEDULE_EXACT_ALARM is denied by default from Android 14 for our
          targetSdk (36) — the user has to find the "Alarms & reminders" toggle
@@ -78,5 +82,13 @@
                 android:resource="@xml/file_paths" />
         </provider>
     </application>
+
+    <!-- Android 11+ (API 30) package visibility: without this the app can't see
+         the on-device speech recognition service and STT silently no-ops. -->
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
 
 </manifest>

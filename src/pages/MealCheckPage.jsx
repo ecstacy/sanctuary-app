@@ -25,6 +25,7 @@ import { GEM_HUE } from '../components/DoshaGem'
 import PaywallSheet from '../components/PaywallSheet'
 import { track } from '../lib/track'
 import { pushBackInterceptor } from '../lib/backInterceptor'
+import { useSpeechInput, speechLangFor } from '../hooks/useSpeechInput'
 import PoseFigure, { hasPoseImage } from '../components/PoseFigure'
 import DoshaEffectRows from '../components/DoshaEffectRows'
 import { SUITABILITY } from '../lib/doshaSemantics'
@@ -116,7 +117,7 @@ function ConstitutionEffect({ t, percentages, perDosha, lens }) {
 }
 
 export default function MealCheckPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const { user, profile, refreshProfile } = useAuth()
   const access = useMealCheckAccess()
@@ -134,6 +135,16 @@ export default function MealCheckPage() {
   // Derived read of how the user tends to eat — from the logs already loaded for
   // history, so no extra fetch. The substrate for pattern-aware guidance (#45).
   const dietProfile = useMemo(() => computeDietProfile(history), [history])
+
+  // Voice capture — a transcript flows straight into the same text field the
+  // user would type into, so parseMeal handles it unchanged. Only rendered when
+  // a recogniser exists (see useSpeechInput).
+  const speech = useSpeechInput({
+    lang: speechLangFor(i18n.language),
+    onPartial: (transcript) => setText(transcript),
+  })
+  // Release the mic whenever we leave the input screen.
+  useEffect(() => { if (phase !== 'input') speech.stop() }, [phase, speech.stop])
 
   // Restore the result when returning from a remedy detail page. Tapping a
   // remedy leaves this route (so the page remounts on back); we stash the result
@@ -371,13 +382,39 @@ export default function MealCheckPage() {
           <section>
             <h1 className="font-headline text-2xl mb-1">{t('mealCheck.title')}</h1>
             <p className="text-on-surface-variant text-sm mb-5">{t('mealCheck.inputHelp')}</p>
-            <textarea
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              rows={3}
-              placeholder={t('mealCheck.inputPlaceholder')}
-              className="w-full rounded-2xl bg-surface-container-low border border-outline-variant p-4 text-on-surface resize-none focus:outline-none focus:border-primary"
-            />
+            <div className="relative">
+              <textarea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                rows={3}
+                placeholder={t('mealCheck.inputPlaceholder')}
+                className={`w-full rounded-2xl bg-surface-container-low border border-outline-variant p-4 ${speech.supported ? 'pr-14' : ''} text-on-surface resize-none focus:outline-none focus:border-primary`}
+              />
+              {speech.supported && (
+                <button
+                  type="button"
+                  onClick={speech.toggle}
+                  aria-pressed={speech.listening}
+                  aria-label={t(speech.listening ? 'mealCheck.voiceStop' : 'mealCheck.voiceStart', speech.listening ? 'Stop' : 'Speak your meal')}
+                  className={`absolute bottom-3 right-3 w-11 h-11 rounded-full flex items-center justify-center transition-colors ${
+                    speech.listening ? 'bg-primary text-on-primary' : 'bg-surface-container-high text-on-surface-variant active:scale-95'
+                  }`}
+                >
+                  <span aria-hidden="true" className={`material-symbols-outlined text-xl ${speech.listening ? 'animate-pulse' : ''}`}>
+                    {speech.listening ? 'stop' : 'mic'}
+                  </span>
+                </button>
+              )}
+            </div>
+            {speech.listening && (
+              <p className="mt-2 flex items-center gap-1.5 font-body text-[12px] text-primary">
+                <span aria-hidden="true" className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                {t('mealCheck.voiceListening', 'Listening… say what you ate')}
+              </p>
+            )}
+            {speech.error === 'permission' && (
+              <p className="mt-2 font-body text-[12px] text-clay">{t('mealCheck.voicePermission', 'Microphone access is needed for voice input.')}</p>
+            )}
             <button
               onClick={onCheck}
               disabled={!text.trim()}
