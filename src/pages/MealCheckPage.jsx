@@ -185,6 +185,12 @@ export default function MealCheckPage() {
     }
   }, [access.allowed, user?.id, phase])
 
+  // Each phase is a fresh screen, so start it at the top. Phase changes are
+  // NOT route changes, so the app-wide ScrollToTop (keyed on pathname) doesn't
+  // fire — the result would otherwise open pre-scrolled to wherever the input
+  // screen was.
+  useEffect(() => { window.scrollTo(0, 0) }, [phase])
+
   // Route the Android hardware / edge-swipe back through the in-flow steps: from
   // a result (or the confirm screen) it returns to the input, NOT out to Home.
   // The result is page STATE, not its own route. We register with the single
