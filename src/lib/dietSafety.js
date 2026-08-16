@@ -82,6 +82,7 @@ export const DIET_TAGS = {
   ROOT:           'root',            // underground part — Jain
   ANIMAL_DERIVED: 'animal_derived',  // from an animal but not meat/dairy (honey)
   ANIMAL_RENNET:  'animal_rennet',   // slaughter-derived enzyme — not vegetarian
+  GELATIN:        'gelatin',         // slaughter-derived (bones/skin) — not vegetarian
   PORK:           'pork',            // halal, kosher, no_pork
   BEEF:           'beef',            // no_beef (Hindu observance)
   ALCOHOL:        'alcohol',         // halal
@@ -336,6 +337,9 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
   // even though its category is dairy. Vegetarians are the group this
   // protects; vegans are already excluded by the dairy rule above.
   if (tags.has(DIET_TAGS.ANIMAL_RENNET) && (veg || vegan)) add(vegan ? 'vegan' : 'vegetarian')
+  // Gelatin is boiled from animal bones/skin — slaughter-derived, so like rennet
+  // it is excluded for vegetarians as well as vegans.
+  if (tags.has(DIET_TAGS.GELATIN) && (veg || vegan)) add(vegan ? 'vegan' : 'vegetarian')
   if (tags.has(DIET_TAGS.ALLIUM) && (jain || noOG)) add(jain ? 'jain' : 'no_onion_garlic')
   if (tags.has(DIET_TAGS.ROOT) && jain) add('jain')
   if (tags.has(DIET_TAGS.NIGHTSHADE) && patterns.has(DIET_PATTERNS.NO_NIGHTSHADE)) add('no_nightshade')
