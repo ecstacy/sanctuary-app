@@ -272,7 +272,7 @@ export default function RecommendationsPage() {
                         }`}>
                           {ex.reason === 'allergen'
                             ? t('diet.badge.allergen', { key: t(`diet.allergens.${ex.key}`, ex.key) })
-                            : t('diet.badge.pattern',  { key: t(`diet.patterns.${ex.key}`,  ex.key) })}
+                            : t(`diet.excludedBy.${ex.key}`, t(`diet.patterns.${ex.key}`, ex.key))}
                         </span>
                       )}
                     </div>

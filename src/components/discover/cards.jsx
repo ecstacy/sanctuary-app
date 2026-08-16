@@ -55,7 +55,7 @@ export function FoodResultRow({ ingredient, onTap, t, exclusion }) {
             }`}>
               {exclusion.reason === 'allergen'
                 ? t('diet.badge.allergen', { key: t(`diet.allergens.${exclusion.key}`, exclusion.key) })
-                : t('diet.badge.pattern',  { key: t(`diet.patterns.${exclusion.key}`,  exclusion.key) })}
+                : t(`diet.excludedBy.${exclusion.key}`, t(`diet.patterns.${exclusion.key}`, exclusion.key))}
             </span>
           )}
         </div>

@@ -299,6 +299,51 @@ const SHAPES = {
       <path d="M8.5 6.8c.7-.9.7-1.8 0-2.7M12 6.8c.7-.9.7-1.8 0-2.7" strokeLinecap="round" />
     </>
   ),
+  // A tumbler with a liquid line and a straw — cold drinks & juices.
+  glass: (
+    <>
+      <path d="M6.5 4.5h11l-1.2 14.2a1.6 1.6 0 0 1-1.6 1.5H9.3a1.6 1.6 0 0 1-1.6-1.5Z" />
+      <path d="M7.2 9h9.6" />
+      <path d="M14.5 4.5 16 1.6" strokeLinecap="round" />
+    </>
+  ),
+
+  // ── Animal foods ──────────────────────────────────────────────────────────
+  // A fish with a tail fin and an eye.
+  fish: (
+    <>
+      <path d="M3.5 12c2.6-3.3 6-4.9 9.1-4.9 2.5 0 4.6 1 6 3l2.9-2.4v8.6l-2.9-2.4c-1.4 2-3.5 3-6 3-3.1 0-6.5-1.6-9.1-4.9Z" />
+      <circle cx="8" cy="10.8" r="0.7" />
+      <path d="M12.6 10c1 .6 1.5 1.2 1.5 2s-.5 1.4-1.5 2" />
+    </>
+  ),
+  // A whole egg.
+  egg: (
+    <path d="M12 3.2c3.2 0 5.3 5.1 5.3 9.3 0 3.8-2.4 6.8-5.3 6.8s-5.3-3-5.3-6.8C6.7 8.3 8.8 3.2 12 3.2Z" />
+  ),
+  // A drumstick — meat on the bone (poultry).
+  drumstick: (
+    <>
+      <path d="M14.8 4.6c2.4 0 4.3 1.9 4.3 4.3 0 2.2-1.6 4-3.8 4.3-.8.1-1.2.3-1.7.8l-5 5a2.1 2.1 0 1 1-3-3l5-5c.5-.5.7-.9.8-1.7.3-2.2 2-3.9 4.1-3.9Z" />
+      <path d="M6.6 16.3 4.7 18.2M8.1 17.8 6.2 19.7" strokeLinecap="round" />
+    </>
+  ),
+  // A cut of red meat with a bone.
+  meatCut: (
+    <>
+      <path d="M4.6 10.8c-.5-2.9 2.3-5.6 6.2-6 3.9-.4 7.7 1.1 8.6 4 .9 2.9-1.4 5.7-5.1 6.7-1 .3-1.7.9-2.5 1.7-1.2 1.1-3.1 1-4.1-.3-.5-.7-1-1.1-1.8-1.5-2.1-1-3.1-2.4-1.4-4.3Z" />
+      <circle cx="8.8" cy="10.6" r="1.6" />
+    </>
+  ),
+  // A curled shrimp / prawn with antennae.
+  shrimp: (
+    <>
+      <path d="M18 6.5c-4.5-.6-9.5 1-9.5 6 0 3.6 3 6 6.5 6 1.3 0 2.4-.4 3.2-1" />
+      <path d="M8.5 12.5c-2.2 0-3.8-1.1-3.8-3" strokeLinecap="round" />
+      <path d="M18 6.5c1.4-1 2.6-1.1 3.6-.3M18 6.5c1-1.5.9-2.7 0-3.6" strokeLinecap="round" />
+      <circle cx="16.8" cy="8" r="0.6" />
+    </>
+  ),
 }
 
 // Per-ingredient mapping. Explicit rather than derived from `category`, which
@@ -379,6 +424,71 @@ const BY_ID = {
   grapes: 'grapes',
   mangoRipe: 'mango',
   lemon: 'citrus',
+
+  // ── Animal foods (batch 6 + earlier) ──────────────────────────────────────
+  egg: 'egg',
+  chicken: 'drumstick', turkey: 'drumstick', duck: 'drumstick',
+  beef: 'meatCut', pork: 'meatCut', lamb: 'meatCut', goatMeat: 'meatCut',
+  bacon: 'meatCut', sausage: 'meatCut', beefJerky: 'meatCut',
+  fishFreshwater: 'fish', salmon: 'fish', tuna: 'fish', cod: 'fish', sardine: 'fish',
+  prawn: 'shrimp',
+
+  // ── Modern breads → a loaf, not an ear of wheat ───────────────────────────
+  whiteBread: 'loaf', wholeWheatBread: 'loaf', sourdoughBread: 'loaf', bagel: 'loaf',
+  pita: 'loaf', naan: 'loaf', tortillaWrap: 'loaf', croissant: 'loaf',
+  crackers: 'loaf', pretzel: 'loaf',
+
+  // ── Cheeses → a wedge ─────────────────────────────────────────────────────
+  mozzarella: 'cheeseWedge', cheddar: 'cheeseWedge', parmesan: 'cheeseWedge',
+  feta: 'cheeseWedge', ricotta: 'cheeseWedge', cottageCheese: 'cheeseWedge',
+  creamCheese: 'cheeseWedge', khoa: 'block',
+
+  // ── Cold drinks & juices → a tumbler; hot ones keep the cup ───────────────
+  cola: 'glass', energyDrink: 'glass', beer: 'glass', wine: 'glass', lemonade: 'glass',
+  orangeJuice: 'glass', appleJuice: 'glass', kombucha: 'glass', lassi: 'glass',
+  sugarcaneJuice: 'glass', coconutWater: 'glass', drinkableYoghurt: 'glass',
+  blackTea: 'hotCup', greenTea: 'hotCup', herbalTea: 'hotCup', matcha: 'hotCup',
+  masalaChai: 'hotCup', hotChocolate: 'hotCup',
+  // Plant & dairy milks → a bottle.
+  almondMilk: 'milkBottle', soyMilk: 'milkBottle', oatMilk: 'milkBottle',
+  riceMilk: 'milkBottle', coconutMilk: 'milkBottle', wheyProtein: 'milkBottle',
+  cream: 'milkBottle', kefir: 'milkBottle', greekYoghurt: 'curdCup', sourCream: 'curdCup',
+
+  // ── Spreads & syrups → a jar ──────────────────────────────────────────────
+  peanutButter: 'jar', hazelnutSpread: 'jar', tahini: 'jar', hummus: 'jar',
+  mayonnaise: 'jar', ketchup: 'jar', jam: 'jar', mustard: 'jar', pesto: 'jar',
+  guacamole: 'jar', salsa: 'jar', avocadoOil: 'oilBottle', rapeseedOil: 'oilBottle',
+  mustardOil: 'oilBottle', sunflowerOil: 'oilBottle', peanutOil: 'oilBottle', almondOil: 'oilBottle',
+
+  // ── Sweets & chocolate → a block ──────────────────────────────────────────
+  darkChocolate: 'block', milkChocolate: 'block', candyBar: 'block', marshmallow: 'block',
+  brownSugar: 'block', caneSugar: 'block', rockCandy: 'block', stevia: 'block',
+  mapleSyrup: 'honeyDipper', gummyCandy: 'block', iceCream: 'curdCup', iceCreamBar: 'block',
+
+  // ── More nuts & seeds → nut / seeds ───────────────────────────────────────
+  pecan: 'nut', macadamia: 'nut', hazelnut: 'nut', pistachio: 'nut', chestnut: 'nut',
+  flaxSeed: 'seeds', sunflowerSeed: 'seeds', sesameSeed: 'seeds', chiaSeed: 'seeds',
+  pumpkinSeed: 'seeds', poppySeed: 'seeds', lotusSeed: 'seeds',
+
+  // ── More fruit → berries/citrus/apple/mango ───────────────────────────────
+  raspberry: 'grapes', blackberry: 'grapes', cranberry: 'grapes', blueberry: 'grapes',
+  strawberry: 'grapes', raisins: 'grapes', jamun: 'grapes',
+  grapefruit: 'citrus', lime: 'citrus', sweetLime: 'citrus',
+  pear: 'apple', peach: 'apple', plum: 'apple', apricot: 'apple', kiwi: 'apple',
+  guava: 'apple', custardApple: 'apple', jackfruit: 'mango', lychee: 'mango',
+  muskmelon: 'gourd', pineapple: 'crownedFruit',
+
+  // ── More herbs & spices → seeds/leaf/rhizome ──────────────────────────────
+  basil: 'leaf', oregano: 'leaf', parsley: 'leaf', mintLeaf: 'leaf', holyBasil: 'leaf',
+  rosemary: 'leaf', thyme: 'leaf', bayLeaf: 'leaf', fenugreekLeaf: 'leaf', lemongrass: 'leaf',
+  paprika: 'seeds', nutmeg: 'seeds', ajwain: 'seeds', nigella: 'seeds', starAnise: 'seeds',
+  longPepper: 'seeds', dillSeed: 'seeds', mace: 'seeds', saffron: 'seeds', vanilla: 'pod',
+
+  // ── More vegetables ───────────────────────────────────────────────────────
+  arugula: 'leaf', bokChoy: 'leaf', kale: 'leaf', lettuce: 'leaf', mustardGreens: 'leaf',
+  springOnion: 'onion', shallot: 'onion', leek: 'onion',
+  snowPeas: 'pod', edamame: 'pod',
+  parsnip: 'carrot', turnip: 'tuber', olives: 'nut',
 }
 
 // Fallback when an id has no glyph yet — still better than one flame for every
@@ -387,7 +497,7 @@ const BY_ID = {
 const BY_CATEGORY = {
   grain: 'grainEar', legume: 'pulses', vegetable: 'leaf', fruit: 'apple',
   dairy: 'milkBottle', spice: 'seeds', oil: 'oilBottle', nut_seed: 'nut',
-  sweetener: 'block', beverage: 'hotCup', animal: 'pulses', other: 'riceBowl',
+  sweetener: 'block', beverage: 'glass', animal: 'meatCut', other: 'riceBowl',
 }
 
 function foodShapeFor(ingredient) {

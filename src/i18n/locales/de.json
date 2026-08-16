@@ -1817,6 +1817,19 @@
       "allergen": "Enthält {{key}}",
       "pattern": "Nicht {{key}}"
     },
+    "excludedBy": {
+      "vegetarian": "Nicht vegetarisch",
+      "vegan": "Nicht vegan",
+      "eggetarian": "Nicht Eggetarisch",
+      "pescatarian": "Nicht pescetarisch",
+      "jain": "Nicht Jain",
+      "no_onion_garlic": "Zwiebel / Knoblauch",
+      "halal": "Nicht halal",
+      "kosher": "Nicht koscher",
+      "no_beef": "Rind",
+      "no_pork": "Schwein",
+      "no_nightshade": "Nachtschatten"
+    },
     "balancedBy": "Traditionell ausgeglichen mit",
     "balancedByHelp": "Traditionell verwendet, um dieses Lebensmittel bekömmlicher zu machen. Vorschläge, keine Vorschriften — nichts wird ausgefiltert, wenn du sie weglässt.",
     "verdict": {

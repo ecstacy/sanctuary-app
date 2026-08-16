@@ -1817,6 +1817,19 @@
       "allergen": "Contains {{key}}",
       "pattern": "Not {{key}}"
     },
+    "excludedBy": {
+      "vegetarian": "Not vegetarian",
+      "vegan": "Not vegan",
+      "eggetarian": "Not eggetarian",
+      "pescatarian": "Not pescatarian",
+      "jain": "Not Jain",
+      "no_onion_garlic": "Onion / garlic",
+      "halal": "Not halal",
+      "kosher": "Not kosher",
+      "no_beef": "Beef",
+      "no_pork": "Pork",
+      "no_nightshade": "Nightshade"
+    },
     "balancedBy": "Traditionally balanced with",
     "balancedByHelp": "Traditionally used to make this food easier to digest. Suggestions, never requirements — nothing here is filtered out if you skip them.",
     "verdict": {
