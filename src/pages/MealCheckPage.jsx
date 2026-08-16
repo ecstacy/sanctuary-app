@@ -25,6 +25,7 @@ import { GEM_HUE } from '../components/DoshaGem'
 import PaywallSheet from '../components/PaywallSheet'
 import { track } from '../lib/track'
 import { pushBackInterceptor } from '../lib/backInterceptor'
+import PoseFigure, { hasPoseImage } from '../components/PoseFigure'
 
 const DOSHAS = ['vata', 'pitta', 'kapha']
 
@@ -752,6 +753,7 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
             <RemedyCard
               key={p.id}
               emoji="🫁"
+              poseKey={PRANAYAMAS[p.id]?.poseKey}
               breath
               title={p.sanskrit}
               tag={t('mealCheck.breathTag')}
@@ -880,17 +882,24 @@ function Breakdown({ t, items }) {
 // an honest provenance label (classically cited vs property-derived). The
 // honesty is the point: naming the confident ones "classically cited" makes
 // them more believable, and flagging the derived ones keeps trust.
-function RemedyCard({ emoji, title, tag, howTo, breath, confidence, onClick }) {
+function RemedyCard({ emoji, poseKey, title, tag, howTo, breath, confidence, onClick }) {
   const { t } = useTranslation()
+  const showPose = poseKey && hasPoseImage(poseKey)
   return (
     <button onClick={onClick} className="w-full flex items-start gap-3 bg-surface-container-low border border-outline-variant rounded-2xl p-3 mb-2.5 text-left active:scale-[0.99] transition-transform">
-      <span
-        className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center text-lg"
-        style={{ background: `color-mix(in srgb, var(--color-${breath ? 'vata' : 'kapha'}) 12%, transparent)` }}
-        aria-hidden="true"
-      >
-        {emoji}
-      </span>
+      {showPose ? (
+        <span className="w-10 h-10 shrink-0" aria-hidden="true">
+          <PoseFigure poseKey={poseKey} size={40} breathing={false} />
+        </span>
+      ) : (
+        <span
+          className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center text-lg"
+          style={{ background: `color-mix(in srgb, var(--color-${breath ? 'vata' : 'kapha'}) 12%, transparent)` }}
+          aria-hidden="true"
+        >
+          {emoji}
+        </span>
+      )}
       <span className="min-w-0">
         <span className="font-body font-semibold text-sm text-on-surface flex items-center gap-2 flex-wrap">
           {title}
