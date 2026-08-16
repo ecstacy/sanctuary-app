@@ -288,6 +288,14 @@ describe('the exclusion path fails CLOSED, not open', () => {
     expect(exclusionFor(traditional, { patterns: ['vegan'] }).excluded).toBe(true)
   })
 
+  it('treats gelatin as not vegetarian (slaughter-derived), like rennet', () => {
+    // Gelatin is boiled from animal bones/skin, so a gummy sweet is neither
+    // vegetarian nor vegan despite being a 'sweetener'.
+    const gummy = { id: 'gummyCandy', category: 'sweetener', dietTags: ['gelatin'] }
+    expect(exclusionFor(gummy, { patterns: ['vegetarian'] }).excluded).toBe(true)
+    expect(exclusionFor(gummy, { patterns: ['vegan'] }).excluded).toBe(true)
+  })
+
   it('treats nightshade as a preference, never an allergy', () => {
     // Solanaceae is a plant family, not an allergen category. Reporting it as
     // an allergy would tell the user the app believes they have a medical

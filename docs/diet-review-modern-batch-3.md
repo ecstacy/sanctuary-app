@@ -1,4 +1,4 @@
-# Modern-diet review batch 3 (50 entries) — eating out & store snacks
+# Modern-diet review batch 3 (53 entries) — eating out & store snacks
 
 _All rows are `reviewStatus: 'draft'` — invisible to the app until fact-checked and flipped to `reviewed` (add the id to `REVIEWED_SIGNED_OFF` in `dietSafety.test.js`). Source: property-derived (`modern`, `confidence: medium`). Sign convention: doshaEffect −1 pacifies / +1 aggravates._
 
@@ -6,7 +6,7 @@ _All rows are `reviewStatus: 'draft'` — invisible to the app until fact-checke
 
 **How to review:** tick ✅ if it looks right, or note a correction under the row (freeform, same as batches 1–2 — I'll apply your edits and flip the flags). Composite dishes are judged as the WHOLE plate, so a rich sauce or deep-fry usually dominates a lighter base.
 
-## Eating out — restaurant & takeaway (30)
+## Eating out — restaurant & takeaway (33)
 
 | ✔ | Dish | rasa | vīrya | doshaEffect | flags |
 |---|------|------|-------|-------------|-------|
@@ -17,9 +17,12 @@ _All rows are `reviewStatus: 'draft'` — invisible to the app until fact-checke
 | ☐ | **Pad thai** | sweet, sour, salty | heating | V −1 · P +1 · K +1 | allergen:peanuts, fish, egg |
 | ☐ | **Fried rice** | salty, sweet | heating | V 0 · P +1 · K +1 | allergen:soy, egg |
 | ☐ | **Spring roll** (fried) | salty, sweet | heating | V 0 · P +1 · K +1 | allergen:gluten |
+| ☐ | **Fresh summer roll** | sweet, astringent | cooling | V 0 · P −1 · K 0 | — |
 | ☐ | **Dumplings** (steamed) | sweet, salty | heating | V −1 · P 0 · K +1 | allergen:gluten, soy |
+| ☐ | **Fried dumplings** (gyoza) | sweet, salty | heating | V 0 · P +1 · K +1 | allergen:gluten, soy |
 | ☐ | **Tacos** | salty, pungent, sweet | heating | V 0 · P +1 · K +1 | tag:nightshade |
-| ☐ | **Burrito** | sweet, salty | heating | V −1 · P +1 · K +1 | allergen:gluten, dairy |
+| ☐ | **Burrito** (meat) | sweet, salty | heating | V −1 · P +1 · K +1 | allergen:gluten, dairy |
+| ☐ | **Veggie burrito** (bean) | sweet, astringent | neutral | V 0 · P 0 · K +1 | allergen:gluten, dairy |
 | ☐ | **Quesadilla** | sweet, salty | heating | V −1 · P +1 · K +1 | allergen:gluten, dairy |
 | ☐ | **Nachos** | salty | heating | V +1 · P +1 · K +1 | allergen:dairy · tag:nightshade · caution:high_sodium |
 | ☐ | **Falafel** | astringent, pungent | heating | V 0 · P +1 · K +1 | — |
@@ -48,7 +51,7 @@ _All rows are `reviewStatus: 'draft'` — invisible to the app until fact-checke
 | ☐ | **Protein bar** | sweet | neutral | V 0 · P 0 · K +1 | caution:processed |
 | ☐ | **Granola bar** | sweet | neutral | V +1 · P 0 · K +1 | allergen:gluten, nuts · caution:high_sugar |
 | ☐ | **Chocolate bar** (filled) | sweet | heating | V −1 · P +1 · K +1 | allergen:dairy, nuts · caution:high_sugar |
-| ☐ | **Gummy candy** | sweet, sour | heating | V −1 · P +1 · K +1 | caution:high_sugar (gelatin — non-veg) |
+| ☐ | **Gummy candy** | sweet, sour | heating | V −1 · P +1 · K +1 | tag:gelatin · caution:high_sugar |
 | ☐ | **Pretzels** | salty, sweet | neutral | V +1 · P 0 · K +1 | allergen:gluten · caution:high_sodium |
 | ☐ | **Tortilla chips** | salty | heating | V +1 · P +1 · K +1 | caution:high_sodium |
 | ☐ | **Cheese puffs** | salty, sweet | heating | V +1 · P +1 · K +1 | allergen:dairy · caution:processed, high_sodium |
@@ -62,17 +65,17 @@ _All rows are `reviewStatus: 'draft'` — invisible to the app until fact-checke
 | ☐ | **Muffin** | sweet | heating | V −1 · P 0 · K +1 | allergen:gluten, dairy, egg · caution:high_sugar |
 | ☐ | **Ice cream bar** | sweet | cooling | V −1 · P −1 · K +1 | allergen:dairy, nuts, soy |
 | ☐ | **Drinkable yoghurt** | sweet, sour | cooling | V −1 · P 0 · K +1 | allergen:dairy · caution:high_sugar |
-| ☐ | **Marshmallow** | sweet | cooling | V 0 · P 0 · K +1 | caution:high_sugar (gelatin — non-veg) |
+| ☐ | **Marshmallow** | sweet | cooling | V 0 · P 0 · K +1 | tag:gelatin · caution:high_sugar |
 | ☐ | **Beef jerky** | salty, sweet | heating | V 0 · P +1 · K 0 | tag:beef · caution:high_sodium, processed |
 | ☐ | **Mixed nuts** (salted) | sweet, astringent, salty | heating | V −1 · P +1 · K +1 | allergen:nuts · caution:high_sodium |
 
 ---
 
-## Open questions for review
+## Decisions (resolved 2026-08-16)
 
-- **Meal-vs-snack line.** A few restaurant rows (biryani, burrito) are basically full meals — fine as ingredients (a user logs "I had biryani"), but flag if you'd rather they be meal *templates* instead.
-- **Gelatin.** Gummy candy and marshmallow usually contain gelatin (non-vegetarian). There's no `gelatin` dietTag yet — noted in prose only. Want a real tag so veg diets exclude them?
-- **Variability.** These are "standard" versions. Where a dish swings hard by preparation (steamed vs fried dumplings, veg vs meat burrito), say if you'd like it split into two rows.
+- **Meal-vs-snack line.** ✅ Keep these as INGREDIENTS (composite dishes a user logs), separate from meal templates. No conversion.
+- **Gelatin.** ✅ Added a real `gelatin` dietTag (lib/dietSafety.js) that excludes vegetarian AND vegan (it's slaughter-derived, like animal rennet). Applied to **gummy candy** and **marshmallow**. Also confirmed: the app never *suggests* junk — the meal composer draws only from curated meal templates; these composites appear only in the searchable reference and when a user logs one for assessment.
+- **Prep variability.** ✅ Split the clear energetic swings into their own rows: **fried dumplings** (gyoza) vs steamed dumplings, **fresh summer roll** vs fried spring roll, **veggie burrito** vs meat burrito. (Batch is now 53 rows.)
 
 ## Notes / corrections
 
