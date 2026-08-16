@@ -13,6 +13,7 @@ import { init as initAnalytics, track, EVENTS } from './lib/track'
 import { readInstallReferrerOnce } from './lib/installReferrer'
 import { init as initCrash, recordError as crashRecordError } from './lib/crash'
 import { routeNameFor } from './lib/routeName'
+import { runBackInterceptors } from './lib/backInterceptor'
 import { useNotifications } from './hooks/useNotifications'
 import usePracticeStats from './hooks/usePracticeStats'
 import useVikritiSchedule from './hooks/useVikritiSchedule'
@@ -170,6 +171,11 @@ function BackButtonHandler() {
 
   useEffect(() => {
     const handleBack = () => {
+      // Give the current page first refusal — e.g. Meal Check unwinds its
+      // result view (page state, not a route) back to the input screen instead
+      // of the back press leaving the feature to Home.
+      if (runBackInterceptors()) return
+
       if (window.history.length > 1) {
         window.history.back()
         return
