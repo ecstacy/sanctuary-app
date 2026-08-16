@@ -25,6 +25,9 @@ import { GEM_HUE } from '../components/DoshaGem'
 import PaywallSheet from '../components/PaywallSheet'
 import { track } from '../lib/track'
 import { pushBackInterceptor } from '../lib/backInterceptor'
+import PoseFigure, { hasPoseImage } from '../components/PoseFigure'
+import DoshaEffectRows from '../components/DoshaEffectRows'
+import { SUITABILITY } from '../lib/doshaSemantics'
 
 const DOSHAS = ['vata', 'pitta', 'kapha']
 
@@ -67,21 +70,34 @@ function pushDir(v) {
 // The constitution graphic — the Dosha page's stacked bar + legend, now with
 // each dosha's push from THIS meal beside it. When the user has no stored
 // percentages we drop the bar and show an effect-only list.
-function ConstitutionEffect({ t, percentages, perDosha, headline }) {
+// The meal's effect per dosha, in the shared "effect on the doshas" graphic —
+// with a slim constitution bar and the user's CURRENT dosha state named, and
+// its row highlighted (or "Balanced" when tridoshic). `lens` is the current
+// state (vikriti flare or constitution), null for a balanced/no-signal user.
+function ConstitutionEffect({ t, percentages, perDosha, lens }) {
   const hasPct = percentages && DOSHAS.some((d) => (percentages[d] || 0) > 0)
-  // Row order: dominance when we have a constitution, else by push magnitude.
-  const order = [...DOSHAS].sort((a, b) =>
-    hasPct ? (percentages[b] || 0) - (percentages[a] || 0)
-           : Math.abs(perDosha?.[b] || 0) - Math.abs(perDosha?.[a] || 0))
+  const order = [...DOSHAS].sort((a, b) => (percentages?.[b] || 0) - (percentages?.[a] || 0))
+  const stateLabel = lens ? doshaDisplayName(lens) : t('mealCheck.stateBalanced', 'Balanced')
+
+  // Map the meal's directional push onto the shared suitability vocabulary.
+  const effectFor = (d) => {
+    const dir = pushDir(perDosha?.[d] || 0)
+    return dir === 'raises' ? SUITABILITY.CAUTION : dir === 'eases' ? SUITABILITY.BALANCING : SUITABILITY.NEUTRAL
+  }
 
   return (
     <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-5 mb-4">
-      <p className="font-label text-[11px] uppercase tracking-[0.15em] text-on-surface-variant mb-4">
-        {hasPct ? t('mealCheck.constitutionLabel') : t('mealCheck.effectOnlyLabel')}
-      </p>
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <p className="font-label text-[11px] uppercase tracking-[0.15em] text-on-surface-variant">
+          {t('mealCheck.effectOnYours', 'Effect on your doshas')}
+        </p>
+        <span className="shrink-0 font-label text-[10px] uppercase tracking-wide text-on-surface-variant/90 bg-surface-container-high rounded-full px-2.5 py-1">
+          {t('mealCheck.yourState', { state: stateLabel, defaultValue: 'You: {{state}}' })}
+        </span>
+      </div>
 
       {hasPct && (
-        <div className="h-3 rounded-full overflow-hidden flex gap-px mb-5 bg-surface-container-high">
+        <div className="h-2.5 rounded-full overflow-hidden flex gap-px mb-4 bg-surface-container-high">
           {order.filter((d) => (percentages[d] || 0) > 0).map((d) => (
             <div
               key={d}
@@ -94,45 +110,9 @@ function ConstitutionEffect({ t, percentages, perDosha, headline }) {
         </div>
       )}
 
-      <div className="flex flex-col">
-        {order.map((d) => {
-          const dir = pushDir(perDosha?.[d] || 0)
-          const isHead = headline === d
-          return (
-            <div key={d} className="flex items-center gap-3 py-2.5 border-t border-outline-variant/25 first:border-t-0">
-              <span className={`w-2.5 h-2.5 rounded-full ${DOSHA_META[d].bar} shrink-0`} aria-hidden="true" />
-              <span className="min-w-0">
-                <span className="font-body font-semibold text-sm" style={{ color: isHead ? DOSHA_META[d].hex : 'var(--color-on-surface)' }}>
-                  {doshaDisplayName(d)}
-                </span>
-                <span className="block font-label text-[11px] text-on-surface-variant uppercase tracking-wide">
-                  {DOSHA_META[d].element}
-                </span>
-              </span>
-              {hasPct && (
-                <span className="ml-auto font-headline text-lg text-on-surface tabular-nums leading-none">
-                  {Math.round(percentages[d])}%
-                </span>
-              )}
-              <PushBadge t={t} dosha={d} dir={dir} className={hasPct ? '' : 'ml-auto'} />
-            </div>
-          )
-        })}
-      </div>
+      <DoshaEffectRows effectFor={effectFor} highlight={lens} />
     </div>
   )
-}
-
-function PushBadge({ t, dosha, dir, className = '' }) {
-  const hex = DOSHA_META[dosha].hex
-  const base = 'shrink-0 text-[10px] font-label font-bold uppercase tracking-wide rounded-md px-2 py-1 min-w-[72px] text-center'
-  if (dir === 'raises') {
-    return <span className={`${base} ${className}`} style={{ background: hex, color: '#fff' }}>↑ {t('mealCheck.pushRaises')}</span>
-  }
-  if (dir === 'eases') {
-    return <span className={`${base} ${className}`} style={{ background: `color-mix(in srgb, ${hex} 15%, transparent)`, color: hex }}>↓ {t('mealCheck.pushEases')}</span>
-  }
-  return <span className={`${base} ${className} bg-surface-container text-on-surface-variant`}>– {t('mealCheck.pushSteady')}</span>
 }
 
 export default function MealCheckPage() {
@@ -691,7 +671,7 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
       <h2 className="font-headline text-2xl leading-snug mb-4">{verdict}</h2>
 
       {/* The constitution graphic + this meal's push per dosha. */}
-      <ConstitutionEffect t={t} percentages={percentages} perDosha={a.perDosha} headline={head} />
+      <ConstitutionEffect t={t} percentages={percentages} perDosha={a.perDosha} lens={a.lens} />
 
       {/* What this means — crisp, personalized to the user's constitution. */}
       <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-5 mb-4">
@@ -752,6 +732,7 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
             <RemedyCard
               key={p.id}
               emoji="🫁"
+              poseKey={PRANAYAMAS[p.id]?.poseKey}
               breath
               title={p.sanskrit}
               tag={t('mealCheck.breathTag')}
@@ -880,17 +861,24 @@ function Breakdown({ t, items }) {
 // an honest provenance label (classically cited vs property-derived). The
 // honesty is the point: naming the confident ones "classically cited" makes
 // them more believable, and flagging the derived ones keeps trust.
-function RemedyCard({ emoji, title, tag, howTo, breath, confidence, onClick }) {
+function RemedyCard({ emoji, poseKey, title, tag, howTo, breath, confidence, onClick }) {
   const { t } = useTranslation()
+  const showPose = poseKey && hasPoseImage(poseKey)
   return (
     <button onClick={onClick} className="w-full flex items-start gap-3 bg-surface-container-low border border-outline-variant rounded-2xl p-3 mb-2.5 text-left active:scale-[0.99] transition-transform">
-      <span
-        className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center text-lg"
-        style={{ background: `color-mix(in srgb, var(--color-${breath ? 'vata' : 'kapha'}) 12%, transparent)` }}
-        aria-hidden="true"
-      >
-        {emoji}
-      </span>
+      {showPose ? (
+        <span className="w-10 h-10 shrink-0" aria-hidden="true">
+          <PoseFigure poseKey={poseKey} size={40} breathing={false} />
+        </span>
+      ) : (
+        <span
+          className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center text-lg"
+          style={{ background: `color-mix(in srgb, var(--color-${breath ? 'vata' : 'kapha'}) 12%, transparent)` }}
+          aria-hidden="true"
+        >
+          {emoji}
+        </span>
+      )}
       <span className="min-w-0">
         <span className="font-body font-semibold text-sm text-on-surface flex items-center gap-2 flex-wrap">
           {title}

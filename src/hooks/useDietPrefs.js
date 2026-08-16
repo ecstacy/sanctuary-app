@@ -32,7 +32,7 @@ import { normalizeDietPrefs } from '../lib/dietPrefs'
 import { track, EVENTS } from '../lib/track'
 
 export function useDietPrefs() {
-  const { user, profile } = useAuth()
+  const { user, profile, refreshProfile } = useAuth()
   const { hasConsent } = useHealthConsent()
 
   const serverPrefs = useMemo(
@@ -90,8 +90,13 @@ export function useDietPrefs() {
       setError(err.message)
       return { ok: false, reason: 'network', message: err.message }
     }
+    // Refresh the shared profile so AuthContext.diet_prefs matches what we just
+    // wrote. Without this the write lands in the DB but the in-memory profile
+    // stays stale, and the next time this page mounts it re-seeds local state
+    // from the stale value — silently dropping the just-saved preference.
+    await refreshProfile?.()
     return { ok: true, persisted: true }
-  }, [user, hasConsent])
+  }, [user, hasConsent, refreshProfile])
 
   const toggle = useCallback((kind, key) => {
     const list = prefs[kind] || []

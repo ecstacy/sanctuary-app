@@ -43,6 +43,24 @@ const ATTR_FILTERS = [
   { token: 'r:astringent', kind: 'rasa', value: 'astringent', i18n: 'diet.tastes.astringent' },
 ]
 
+// App destinations the food search can also jump to — so typing "meal check"
+// lands the user in the feature instead of an empty food result. Matched on the
+// (translated) title or a keyword; shown above the food results when searching.
+const DESTINATIONS = [
+  { id: 'meal_check', route: '/meal-check', icon: 'fact_check', titleKey: 'mealCheck.title',
+    keywords: ['meal check', 'check meal', 'checkmeal', 'what did i eat', 'log meal', 'log food', 'assess meal'] },
+  { id: 'meals', route: '/meals', icon: 'restaurant_menu', titleKey: 'meals.title',
+    keywords: ['meal guidance', 'meal idea', 'meal ideas', 'recipe', 'recipes', 'what to eat'] },
+  { id: 'diet_prefs', route: '/diet-preferences', icon: 'tune', titleKey: 'dietPrefs.entry',
+    keywords: ['diet preference', 'diet preferences', 'allergy', 'allergies', 'allergen', 'intolerance', 'vegetarian', 'vegan', 'restriction', 'no beef', 'halal', 'kosher', 'keep off'] },
+]
+
+function matchesDestination(dest, q, title) {
+  if (!q || q.length < 2) return false
+  if ((title || '').toLowerCase().includes(q)) return true
+  return dest.keywords.some((k) => k.includes(q) || q.includes(k))
+}
+
 function matchesQuery(ing, q) {
   if (!q) return true
   const hay = [ing.name, ing.sanskrit, ...(ing.aliases || [])].join(' ').toLowerCase()
@@ -82,7 +100,7 @@ function FoodCard({ ing, dietPrefs, t, navigate }) {
         }`}>
           {ex.reason === 'allergen'
             ? t('diet.badge.allergen', { key: t(`diet.allergens.${ex.key}`, ex.key) })
-            : t('diet.badge.pattern', { key: t(`diet.patterns.${ex.key}`, ex.key) })}
+            : t(`diet.excludedBy.${ex.key}`, t(`diet.patterns.${ex.key}`, ex.key))}
         </span>
       )}
     </button>
@@ -127,6 +145,12 @@ export default function DiscoverFoodsPage() {
       .sort((a, b) => a.name.localeCompare(b.name))
   }, [activeCat, q, activeAttrs])
 
+  // App destinations matching the search (so "meal check" jumps to the feature).
+  const destinations = useMemo(
+    () => (q ? DESTINATIONS.filter((d) => matchesDestination(d, q, t(d.titleKey))) : []),
+    [q, t],
+  )
+
   const isFiltered = activeCat !== ALL || q.length > 0 || activeAttrs.size > 0
 
   const selectCat = (id) => {
@@ -156,6 +180,21 @@ export default function DiscoverFoodsPage() {
       {/* Entry points before the list: someone arriving here usually wants a
           suggestion or their own settings, not to read every row. */}
       <div className="flex flex-col gap-2.5">
+        <button
+          onClick={() => {
+            track(EVENTS.CTA_CLICKED, { cta_id: 'foods_to_meal_check', route_name: 'discover_foods' })
+            navigate('/meal-check')
+          }}
+          className="flex items-center gap-3 bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.99] transition-all"
+        >
+          <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">fact_check</span>
+          <span className="flex-1 min-w-0">
+            <span className="block font-body text-sm font-semibold text-on-surface">{t('mealCheck.title')}</span>
+            <span className="block font-body text-xs text-on-surface-variant">{t('discover.foods.mealCheckEntry', 'See what a meal does to your doshas')}</span>
+          </span>
+          <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
+        </button>
+
         <button
           onClick={() => {
             track(EVENTS.CTA_CLICKED, { cta_id: 'foods_to_meals', route_name: 'discover_foods' })
@@ -258,6 +297,30 @@ export default function DiscoverFoodsPage() {
       {/* Results */}
       {isFiltered ? (
         <div className="mt-4">
+          {/* Jump-to: a search that names a feature ("meal check") lands there. */}
+          {destinations.length > 0 && (
+            <div className="mb-5">
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2">
+                {t('discover.foods.jumpTo', 'Open in the app')}
+              </p>
+              <div className="flex flex-col gap-2">
+                {destinations.map((d) => (
+                  <button
+                    key={d.id}
+                    onClick={() => {
+                      track(EVENTS.CTA_CLICKED, { cta_id: 'food_search_destination', route_name: 'discover_foods', destination: d.id })
+                      navigate(d.route)
+                    }}
+                    className="flex items-center gap-3 bg-primary-container/40 rounded-2xl p-3.5 text-left active:scale-[0.99] transition-all"
+                  >
+                    <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">{d.icon}</span>
+                    <span className="flex-1 min-w-0 font-body text-sm font-semibold text-on-surface">{t(d.titleKey)}</span>
+                    <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-sm">chevron_right</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3">
             {t('discover.foods.resultCount', { count: flat.length, defaultValue: '{{count}} foods' })}
           </p>
@@ -265,7 +328,7 @@ export default function DiscoverFoodsPage() {
             <div className="grid grid-cols-2 gap-2.5">
               {flat.map((ing) => <FoodCard key={ing.id} ing={ing} dietPrefs={dietPrefs} t={t} navigate={navigate} />)}
             </div>
-          ) : (
+          ) : destinations.length > 0 ? null : (
             <div className="text-center py-12">
               <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-4xl">search_off</span>
               <p className="font-body text-sm text-on-surface-variant mt-3">

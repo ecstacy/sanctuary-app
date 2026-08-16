@@ -1497,7 +1497,9 @@
       "filterLabel": "Filter by category",
       "resultCount": "{{count}} foods",
       "noResults": "No foods match “{{query}}”.",
-      "clearFilters": "Clear filters"
+      "clearFilters": "Clear filters",
+      "mealCheckEntry": "See what a meal does to your doshas",
+      "jumpTo": "Open in the app"
     }
   },
   "protocol": {
@@ -1815,6 +1817,19 @@
       "allergen": "Contains {{key}}",
       "pattern": "Not {{key}}"
     },
+    "excludedBy": {
+      "vegetarian": "Not vegetarian",
+      "vegan": "Not vegan",
+      "eggetarian": "Not eggetarian",
+      "pescatarian": "Not pescatarian",
+      "jain": "Not Jain",
+      "no_onion_garlic": "Onion / garlic",
+      "halal": "Not halal",
+      "kosher": "Not kosher",
+      "no_beef": "Beef",
+      "no_pork": "Pork",
+      "no_nightshade": "Nightshade"
+    },
     "balancedBy": "Traditionally balanced with",
     "balancedByHelp": "Traditionally used to make this food easier to digest. Suggestions, never requirements — nothing here is filtered out if you skip them.",
     "verdict": {
@@ -1931,6 +1946,9 @@
     "recentTitle": "Recent checks",
     "balancedShort": "Balanced",
     "raisesAria": "Raises {{dosha}}",
+    "effectOnYours": "Effect on your doshas",
+    "yourState": "You: {{state}}",
+    "stateBalanced": "Balanced",
     "homeBadge": "Free · {{count}}d",
     "dirRaises": "raises",
     "dirSettles": "settles",

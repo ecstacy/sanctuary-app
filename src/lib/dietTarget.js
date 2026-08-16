@@ -32,7 +32,7 @@
 // user in Sydney — but the alternative (asking, or reading location) costs more
 // than the nudge is worth, and season is only ever an overlay here. Revisit if
 // the app gets a real southern-hemisphere audience.
-import { effectivePrimary, afterBaseline } from './doshaState'
+import { effectivePrimary, afterBaseline, isBalancedConstitution } from './doshaState'
 
 const SEASON_BY_MONTH = [
   'winter', 'winter', // Jan, Feb
@@ -67,6 +67,13 @@ export function resolveDietTarget({ vikriti, profile, now = new Date() } = {}) {
   if (vikriti?.hasSignal && vikriti.vikriti && afterBaseline(profile, vikriti.lastCheckinAt)) {
     return { dosha: String(vikriti.vikriti).toLowerCase(), source: 'vikriti', season }
   }
+
+  // A tridoshic/balanced constitution has no dominant to read a food against, so
+  // we don't lens to its numeric top dosha — that made a balanced user's food
+  // page say "read against your Pitta constitution" (same bug class as #65/#66
+  // and meal check). With no live vikriti flare above, a balanced user gets the
+  // neutral reference, not a single-dosha verdict.
+  if (isBalancedConstitution(profile)) return { dosha: null, source: 'none', season }
 
   // Prakriti honours the user's own self-correction (#52).
   const p = effectivePrimary(profile) || profile?.dosha_details?.primary || profile?.dosha

@@ -1497,7 +1497,9 @@
       "filterLabel": "श्रेणी से छाँटें",
       "resultCount": "{{count}} खाद्य पदार्थ",
       "noResults": "“{{query}}” से मेल नहीं मिला।",
-      "clearFilters": "फ़िल्टर हटाएँ"
+      "clearFilters": "फ़िल्टर हटाएँ",
+      "mealCheckEntry": "देखें कि कोई भोजन आपके दोषों पर क्या असर करता है",
+      "jumpTo": "ऐप में खोलें"
     }
   },
   "protocol": {
@@ -1815,6 +1817,19 @@
       "allergen": "{{key}} युक्त",
       "pattern": "{{key}} नहीं"
     },
+    "excludedBy": {
+      "vegetarian": "शाकाहारी नहीं",
+      "vegan": "वीगन नहीं",
+      "eggetarian": "एगेटेरियन नहीं",
+      "pescatarian": "पेस्केटेरियन नहीं",
+      "jain": "जैन नहीं",
+      "no_onion_garlic": "प्याज़ / लहसुन",
+      "halal": "हलाल नहीं",
+      "kosher": "कोषर नहीं",
+      "no_beef": "गोमांस",
+      "no_pork": "सूअर",
+      "no_nightshade": "नाइटशेड"
+    },
     "balancedBy": "परंपरागत रूप से इनके साथ संतुलित",
     "balancedByHelp": "परंपरागत रूप से इस आहार को सुपाच्य बनाने के लिए प्रयुक्त। ये सुझाव हैं, अनिवार्यता नहीं — इन्हें छोड़ने पर कुछ भी हटाया नहीं जाता।",
     "verdict": {
@@ -1931,6 +1946,9 @@
     "recentTitle": "हाल की जाँच",
     "balancedShort": "संतुलित",
     "raisesAria": "{{dosha}} बढ़ाता है",
+    "effectOnYours": "आपके दोषों पर असर",
+    "yourState": "आप: {{state}}",
+    "stateBalanced": "संतुलित",
     "homeBadge": "मुफ़्त · {{count}}द",
     "dirRaises": "बढ़ाता",
     "dirSettles": "घटाता",

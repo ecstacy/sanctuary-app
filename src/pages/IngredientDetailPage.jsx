@@ -41,6 +41,7 @@ import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { getIngredient, describeForUser, suitabilityFor } from '../lib/ingredients'
 import { SUITABILITY } from '../lib/doshaSemantics'
+import DoshaEffectRows from '../components/DoshaEffectRows'
 import { resolveDietTarget, shouldExplainTarget } from '../lib/dietTarget'
 import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { DIET_DISCLAIMER } from '../lib/dietSafety'
@@ -49,8 +50,6 @@ import FoodIcon from '../components/FoodIcon'
 import { track, EVENTS } from '../lib/track'
 import useScrollDepth from '../hooks/useScrollDepth'
 
-const DOSHAS = ['vata', 'pitta', 'kapha']
-const DOSHA_ICON = { vata: 'air', pitta: 'local_fire_department', kapha: 'water_drop' }
 
 // Suitability → visual treatment. Never colour alone (WCAG 1.4.1): each
 // carries an icon and a word as well as a tint.
@@ -358,28 +357,7 @@ export default function IngredientDetailPage() {
           <Section title={t('diet.reference')} className="mt-5">
             <Card>
               <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-2.5">{t('diet.doshaEffect')}</p>
-              <div className="flex flex-col gap-2">
-                {DOSHAS.map((d) => {
-                  const s = suitabilityFor(ingredient, d)
-                  const v = VERDICT[s]
-                  const isTarget = target.dosha === d
-                  return (
-                    <div
-                      key={d}
-                      className={`flex items-center gap-2.5 rounded-xl px-3 py-2.5 ${isTarget ? 'bg-surface-container-high' : ''}`}
-                    >
-                      <span aria-hidden="true" className="material-symbols-outlined text-base text-on-surface-variant">{DOSHA_ICON[d]}</span>
-                      <span className={`font-body text-[15px] flex-1 ${isTarget ? 'font-semibold text-on-surface' : 'text-on-surface-variant'}`}>
-                        {t(`diet.dosha.${d}`)}
-                      </span>
-                      <span className={`inline-flex items-center gap-1.5 ${v.text}`}>
-                        <span aria-hidden="true" className="material-symbols-outlined text-base">{v.icon}</span>
-                        <span className="font-body text-sm">{t(`diet.suitability.${s}`)}</span>
-                      </span>
-                    </div>
-                  )
-                })}
-              </div>
+              <DoshaEffectRows effectFor={(d) => suitabilityFor(ingredient, d)} highlight={target.dosha} />
             </Card>
 
             <Card className="mt-3">

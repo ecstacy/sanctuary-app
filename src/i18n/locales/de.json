@@ -1497,7 +1497,9 @@
       "filterLabel": "Nach Kategorie filtern",
       "resultCount": "{{count}} Lebensmittel",
       "noResults": "Keine Treffer für „{{query}}“.",
-      "clearFilters": "Filter zurücksetzen"
+      "clearFilters": "Filter zurücksetzen",
+      "mealCheckEntry": "Sieh, was eine Mahlzeit mit deinen Doshas macht",
+      "jumpTo": "In der App öffnen"
     }
   },
   "protocol": {
@@ -1815,6 +1817,19 @@
       "allergen": "Enthält {{key}}",
       "pattern": "Nicht {{key}}"
     },
+    "excludedBy": {
+      "vegetarian": "Nicht vegetarisch",
+      "vegan": "Nicht vegan",
+      "eggetarian": "Nicht Eggetarisch",
+      "pescatarian": "Nicht pescetarisch",
+      "jain": "Nicht Jain",
+      "no_onion_garlic": "Zwiebel / Knoblauch",
+      "halal": "Nicht halal",
+      "kosher": "Nicht koscher",
+      "no_beef": "Rind",
+      "no_pork": "Schwein",
+      "no_nightshade": "Nachtschatten"
+    },
     "balancedBy": "Traditionell ausgeglichen mit",
     "balancedByHelp": "Traditionell verwendet, um dieses Lebensmittel bekömmlicher zu machen. Vorschläge, keine Vorschriften — nichts wird ausgefiltert, wenn du sie weglässt.",
     "verdict": {
@@ -1931,6 +1946,9 @@
     "recentTitle": "Letzte Prüfungen",
     "balancedShort": "Ausgeglichen",
     "raisesAria": "Erhöht {{dosha}}",
+    "effectOnYours": "Wirkung auf deine Doshas",
+    "yourState": "Du: {{state}}",
+    "stateBalanced": "Ausgeglichen",
     "homeBadge": "Frei · {{count}}T",
     "dirRaises": "erhöht",
     "dirSettles": "senkt",
