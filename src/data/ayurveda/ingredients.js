@@ -110,6 +110,7 @@
 
 import { MODERN_DRAFT_INGREDIENTS } from './ingredients-modern-draft'
 import { MODERN_DRAFT_INGREDIENTS_2 } from './ingredients-modern-draft-2'
+import { MODERN_DRAFT_INGREDIENTS_3 } from './ingredients-modern-draft-3'
 
 /** @type {Record<string, Ingredient>} */
 export const INGREDIENTS = {
@@ -3393,6 +3394,7 @@ export const INGREDIENTS = {
 // the integrity tests see them as real draft rows of the one dataset.
 Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS)
 Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_2)
+Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_3)
 
 /** Stable list form, for iteration. Includes drafts — filter before display. */
 export const ALL_INGREDIENTS = Object.values(INGREDIENTS)
