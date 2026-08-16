@@ -39,6 +39,24 @@ export function baselineAt(profile) {
 }
 
 /**
+ * Is the user's constitution tridoshic / balanced — no clear dominant dosha?
+ * True when the quiz percentages sit within a narrow band of each other (a
+ * ~33/33/34 reading). Surfaces that personalize to a single dominant dosha must
+ * NOT do so for a balanced person: `effectivePrimary` still returns the numeric
+ * top dosha, but that top is not meaningfully dominant, so lensing a meal (or a
+ * suggestion) to it is the class of bug #65/#66 — it makes a balanced user look
+ * Pitta. Callers use this to drop the single-dosha lens and fall back to
+ * "assess the meal on its own" instead.
+ */
+export function isBalancedConstitution(profile) {
+  const p = profile?.dosha_details?.percentages
+  if (!p) return false
+  const vals = DOSHAS.map((d) => Number(p[d]) || 0)
+  if (vals.every((v) => v === 0)) return false
+  return Math.max(...vals) - Math.min(...vals) <= 10
+}
+
+/**
  * Is a vikriti timestamp newer than the constitution baseline (i.e. not stale)?
  * True when there is no baseline yet, so behaviour is unchanged for profiles
  * assessed before assessedAt existed — until their next quiz.

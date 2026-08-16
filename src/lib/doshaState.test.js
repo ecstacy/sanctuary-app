@@ -1,5 +1,18 @@
 import { describe, it, expect } from 'vitest'
-import { effectivePrimary, afterBaseline, baselineAt } from './doshaState'
+import { effectivePrimary, afterBaseline, baselineAt, isBalancedConstitution } from './doshaState'
+
+describe('isBalancedConstitution — tridoshic detection', () => {
+  it('is true when the three percentages sit within a narrow band', () => {
+    expect(isBalancedConstitution({ dosha_details: { percentages: { vata: 34, pitta: 33, kapha: 33 } } })).toBe(true)
+  })
+  it('is false when one dosha clearly dominates', () => {
+    expect(isBalancedConstitution({ dosha_details: { percentages: { vata: 25, pitta: 60, kapha: 15 } } })).toBe(false)
+  })
+  it('is false without percentages (older profiles)', () => {
+    expect(isBalancedConstitution({ dosha_details: { primary: 'pitta' } })).toBe(false)
+    expect(isBalancedConstitution(null)).toBe(false)
+  })
+})
 
 describe('effectivePrimary', () => {
   it('prefers an adjusted self-report over the quiz primary', () => {

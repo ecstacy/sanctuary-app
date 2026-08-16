@@ -21,7 +21,7 @@
 
 import { REVIEWED_INGREDIENTS, getIngredient, searchIngredients } from './ingredients'
 import { exclusionFor } from './dietSafety'
-import { effectivePrimary, afterBaseline } from './doshaState'
+import { effectivePrimary, afterBaseline, isBalancedConstitution } from './doshaState'
 import { prepDeltaFor, impliedAdditionsFor } from './mealModifiers'
 import { PRANAYAMAS } from '../data/pranayamas'
 
@@ -299,7 +299,13 @@ export function assessMeal(items, profile = {}) {
   const vikriti = (vd?.primary || '').toLowerCase()
   const vikritiRelevant = DOSHAS.includes(vikriti) && afterBaseline(profile, vd?.assessedAt)
   const prakriti = effectivePrimary(profile) || (profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
-  const lens = vikritiRelevant ? vikriti : (DOSHAS.includes(prakriti) ? prakriti : null)
+  // A tridoshic/balanced constitution has no meaningful dominant, so we must NOT
+  // lens the meal to its numeric top dosha (that made a balanced user read as
+  // "your Pitta" — bug). With no vikriti signal, a balanced user gets no lens:
+  // the meal is assessed on its own (concern 'watch'), not against a phantom
+  // dominant. A live vikriti flare still lenses, because that IS a current excess.
+  const prakritiLens = isBalancedConstitution(profile) ? null : (DOSHAS.includes(prakriti) ? prakriti : null)
+  const lens = vikritiRelevant ? vikriti : prakritiLens
 
   // Headline = the dosha the meal raises most (if any).
   let headline = null
@@ -339,6 +345,11 @@ const RASA_FOR = {
   kapha: ['pungent', 'bitter', 'astringent'],
 }
 const VIRYA_FOR = { vata: 'heating', pitta: 'cooling', kapha: 'heating' }
+
+// A post-meal remedy is a light corrective (spice/tea/buttermilk/fruit), never a
+// second meal. These categories are meal STAPLES or full composite dishes, so
+// they are never offered as "have a little of this to settle it".
+const REMEDY_EXCLUDE_CATEGORIES = new Set(['grain', 'legume', 'animal', 'other'])
 
 function remedyScore(f, target, slot, balancedByIds) {
   let s = 1
@@ -380,6 +391,12 @@ export function remediesFor(assessment, { dietPrefs = {}, slot = null } = {}) {
   const foods = REVIEWED_INGREDIENTS
     .filter((f) => (f.doshaEffect?.[target] || 0) < 0)
     .filter((f) => !eaten.has(f.id))
+    // This is an AFTER-a-meal "have a little to settle it" list, so it must be
+    // light correctives — a spice, a tea, buttermilk, a cool fruit — never a
+    // second plate. Heavy meal staples (grains, dals/legumes, meat) are dropped:
+    // no one wants to be told to eat mung dal after dosa and sambar. Composite
+    // restaurant/snack dishes ('other') are excluded for the same reason.
+    .filter((f) => !REMEDY_EXCLUDE_CATEGORIES.has(f.category))
     .filter((f) => notExcluded(f, dietPrefs))
     .map((f) => ({ f, score: remedyScore(f, target, slot, balancedByIds) }))
     .sort((a, b) => b.score - a.score)

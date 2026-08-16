@@ -55,9 +55,13 @@ describe('parseMeal', () => {
     expect(m.modifiers).toContain('black')
   })
 
-  it('uses a modifier to resolve a raw/cooked variant automatically', () => {
-    // "tomato" alone is ambiguous; "cooked tomato" should pick the cooked one.
-    expect(parseMeal('tomato').ambiguous.length).toBeGreaterThan(0)
+  it('defaults a bare raw/cooked variant to cooked, but honours a modifier', () => {
+    // Bare "tomato"/"onion" now resolve to the COOKED variant — in a prepared
+    // meal that is almost always right, and it removes a friction prompt (the
+    // old behaviour asked every time). Raw stays reachable via an explicit word.
+    expect(parseMeal('tomato').matched.map((m) => m.id)).toContain('tomatoCooked')
+    expect(parseMeal('onion').matched.map((m) => m.id)).toContain('onionCooked')
+    expect(parseMeal('raw tomato').matched.map((m) => m.id)).toContain('tomatoRaw')
     expect(parseMeal('cooked tomato').matched.map((m) => m.id)).toContain('tomatoCooked')
   })
 
@@ -165,6 +169,30 @@ describe('assessMeal — the worked example (eggs + toast + avocado)', () => {
     // A mere 'confirmed' report leaves the quiz primary in place.
     const confirmedPitta = { dosha_details: { primary: 'pitta', selfReport: { fit: 'confirmed' } } }
     expect(assessMeal(meal, confirmedPitta).concern).toBe('watch')
+  })
+})
+
+describe('assessMeal — a balanced/tridoshic constitution has no single lens', () => {
+  // A ~33/33/34 user re-quizzed as tridoshic must NOT be lensed to their numeric
+  // top dosha (that made a balanced user read as "your Pitta"). A Pitta-raising
+  // meal is 'watch' (assessed on its own), never 'mind'.
+  const tridoshic = { dosha_details: { primary: 'vata', percentages: { vata: 34, pitta: 33, kapha: 33 } } }
+  it('does not treat the numeric top dosha as a dominant to mind', () => {
+    const a = assessMeal(['gingerFresh'], tridoshic) // raises pitta
+    expect(a.headline).toBe('pitta')
+    expect(a.lens).toBeNull()
+    expect(a.concern).toBe('watch')
+  })
+})
+
+describe('remediesFor — post-meal remedies are light correctives, not a second plate', () => {
+  it('never suggests a heavy staple (grain / legume / animal / composite) to eat now', () => {
+    const a = assessMeal(['gingerFresh']) // raises pitta
+    const { foods } = remediesFor(a)
+    const heavy = new Set(['grain', 'legume', 'animal', 'other'])
+    for (const f of foods) expect(heavy.has(getIngredient(f.id).category)).toBe(false)
+    // mung dal pacifies pitta but must never be offered after a meal.
+    expect(foods.map((f) => f.id)).not.toContain('mungDal')
   })
 })
 
