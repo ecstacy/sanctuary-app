@@ -24,6 +24,7 @@ import { doshaDisplayName } from '../i18n/contentI18n'
 import { GEM_HUE } from '../components/DoshaGem'
 import PaywallSheet from '../components/PaywallSheet'
 import { track } from '../lib/track'
+import { pushBackInterceptor } from '../lib/backInterceptor'
 
 const DOSHAS = ['vata', 'pitta', 'kapha']
 
@@ -186,22 +187,16 @@ export default function MealCheckPage() {
 
   // Route the Android hardware / edge-swipe back through the in-flow steps: from
   // a result (or the confirm screen) it returns to the input, NOT out to Home.
-  // The result is page STATE, not its own route, so the platform's default
-  // history-back skipped straight past it to whatever preceded /meal-check.
+  // The result is page STATE, not its own route. We register with the single
+  // global back handler (App.jsx) rather than adding our own backButton
+  // listener, which would race the global one (and lose — it calls
+  // window.history.back and pops the route to Home). Returning true consumes it.
   useEffect(() => {
-    let handle
-    let active = true
-    import('@capacitor/app')
-      .then(({ App }) => {
-        if (!active) return
-        App.addListener('backButton', () => {
-          if (phase === 'result' || phase === 'confirm') { setPhase('input'); setResult(null) }
-          else navigate(-1)
-        }).then((h) => { handle = h; if (!active) h.remove() })
-      })
-      .catch(() => { /* web / plugin absent — the browser's own back applies */ })
-    return () => { active = false; if (handle) handle.remove() }
-  }, [phase, navigate])
+    return pushBackInterceptor(() => {
+      if (phase === 'result' || phase === 'confirm') { setPhase('input'); setResult(null); return true }
+      return false
+    })
+  }, [phase])
 
   // ── Locked (trial expired, not Plus) ──────────────────────────────────────
   if (access.state === 'loading') {
