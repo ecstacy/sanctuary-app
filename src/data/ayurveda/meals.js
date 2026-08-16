@@ -513,6 +513,128 @@ export const MEAL_TEMPLATES = {
     reviewStatus: 'reviewed',
   },
 
+  // ── Meals using modern batch 2 ingredients (batch 6 — 2026-08-16) ──────────
+  // Now that batch-2 foods are reviewed (cheddar, pesto, cod, lamb, pita,
+  // bulgur, beans, basil, ricotta, sardines...), these plates put them to work.
+  // Same rules; culinary review 2026-08-16.
+
+  // ── Morning ──
+  ricottaToast: {
+    id: 'ricottaToast',
+    name: 'Ricotta toast with fruit',
+    coreIds: ['wholeWheatBread', 'ricotta'],
+    optionalIds: ['honey', 'banana', 'strawberry', 'cinnamon'],
+    slots: ['morning'],
+    prep: 'Fresh ricotta spread on warm toast, topped with fruit and a drizzle of honey.',
+    reviewStatus: 'reviewed',
+  },
+
+  // ── Midday / evening ──
+  grilledCheeseSandwich: {
+    id: 'grilledCheeseSandwich',
+    name: 'Grilled cheese sandwich',
+    coreIds: ['wholeWheatBread', 'cheddar'],
+    optionalIds: ['butter', 'tomatoCooked', 'blackPepper'],
+    slots: ['midday'],
+    prep: 'Cheese melted between buttered bread, toasted until golden.',
+    reviewStatus: 'reviewed',
+  },
+
+  pastaPesto: {
+    id: 'pastaPesto',
+    name: 'Pasta with pesto',
+    coreIds: ['pasta', 'pesto'],
+    optionalIds: ['parmesan', 'oliveOil', 'blackPepper', 'spinach', 'tomatoRaw'],
+    slots: ['midday', 'evening'],
+    prep: 'Pasta tossed with pesto, finished with a little grated cheese.',
+    reviewStatus: 'reviewed',
+  },
+
+  hummusPitaPlate: {
+    id: 'hummusPitaPlate',
+    name: 'Hummus and pita plate',
+    coreIds: ['pita', 'hummus'],
+    optionalIds: ['oliveOil', 'cucumber', 'tomatoRaw', 'olives', 'paprika'],
+    slots: ['midday'],
+    prep: 'Warm pita torn into soft hummus, with crisp salad and olives.',
+    reviewStatus: 'reviewed',
+  },
+
+  bulgurSalad: {
+    id: 'bulgurSalad',
+    name: 'Bulgur salad',
+    coreIds: ['bulgur', 'cucumber', 'tomatoRaw'],
+    optionalIds: ['oliveOil', 'lemon', 'mintLeaf', 'parsley', 'onionRaw'],
+    slots: ['midday'],
+    seasons: ['summer'],
+    prep: 'Cooked bulgur tossed with chopped salad and plenty of fresh herbs.',
+    reviewStatus: 'reviewed',
+  },
+
+  capreseSalad: {
+    id: 'capreseSalad',
+    name: 'Tomato, mozzarella and basil salad',
+    coreIds: ['tomatoRaw', 'mozzarella', 'basil'],
+    optionalIds: ['oliveOil', 'blackPepper'],
+    slots: ['midday'],
+    seasons: ['summer'],
+    prep: 'Sliced tomato and fresh mozzarella with basil and a drizzle of olive oil.',
+    reviewStatus: 'reviewed',
+  },
+
+  codRiceVeg: {
+    id: 'codRiceVeg',
+    name: 'Baked cod with rice and vegetables',
+    coreIds: ['cod', 'basmatiRice', 'broccoli'],
+    optionalIds: ['lemon', 'gingerFresh', 'oliveOil', 'blackPepper', 'dillSeed'],
+    slots: ['midday', 'evening'],
+    prep: 'Cod baked gently, served over rice with steamed greens.',
+    reviewStatus: 'reviewed',
+  },
+
+  sardineToast: {
+    id: 'sardineToast',
+    name: 'Sardines on toast',
+    coreIds: ['sardine', 'wholeWheatBread'],
+    optionalIds: ['lemon', 'blackPepper', 'tomatoRaw', 'oliveOil'],
+    slots: ['midday'],
+    prep: 'Sardines mashed onto warm toast with a squeeze of lemon.',
+    reviewStatus: 'reviewed',
+  },
+
+  lambCurryRice: {
+    id: 'lambCurryRice',
+    name: 'Lamb curry with rice',
+    coreIds: ['lamb', 'basmatiRice'],
+    optionalIds: ['onionCooked', 'tomatoCooked', 'gingerFresh', 'garlic', 'turmeric', 'cumin'],
+    slots: ['midday', 'evening'],
+    seasons: ['autumn', 'winter'],
+    prep: 'Lamb slow-cooked with warming spices, served with rice.',
+    reviewStatus: 'reviewed',
+  },
+
+  whiteBeanStew: {
+    id: 'whiteBeanStew',
+    name: 'White bean stew',
+    coreIds: ['cannelliniBeans', 'tomatoCooked', 'carrot'],
+    optionalIds: ['oliveOil', 'garlic', 'onionCooked', 'rosemary', 'blackPepper'],
+    slots: ['midday', 'evening'],
+    seasons: ['autumn', 'winter'],
+    prep: 'White beans simmered soft with vegetables into a hearty stew.',
+    reviewStatus: 'reviewed',
+  },
+
+  splitPeaSoup: {
+    id: 'splitPeaSoup',
+    name: 'Split pea soup',
+    coreIds: ['splitPeas'],
+    optionalIds: ['carrot', 'onionCooked', 'cumin', 'ghee', 'gingerFresh', 'turmeric'],
+    slots: ['midday', 'evening'],
+    seasons: ['autumn', 'winter'],
+    prep: 'Split peas simmered soft with vegetables and a ghee tempering.',
+    reviewStatus: 'reviewed',
+  },
+
 }
 
 /** Stable list form. Includes drafts — filter before display. */
