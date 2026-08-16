@@ -1,6 +1,18 @@
 import { describe, it, expect } from 'vitest'
 import { parseMeal, assessMeal, remediesFor, mealCombos, portionWeightOf } from './mealCheck'
-import { getIngredient } from './ingredients'
+import { getIngredient, variantsOf } from './ingredients'
+
+describe('variantsOf — prep-variant sibling grouping', () => {
+  it('groups a food with its raw/cooked sibling (for the chip switch)', () => {
+    const ids = variantsOf('onionCooked').map((v) => v.id).sort()
+    expect(ids).toEqual(['onionCooked', 'onionRaw'])
+    expect(variantsOf('onionRaw').find((v) => v.id === 'onionCooked').label).toBe('cooked')
+  })
+  it('returns nothing for a food with no variant', () => {
+    expect(variantsOf('basmatiRice')).toEqual([])
+    expect(variantsOf('sambar')).toEqual([])
+  })
+})
 
 const pittaUser = { dosha_details: { primary: 'pitta' } }
 const kaphaUser = { dosha_details: { primary: 'kapha' } }
