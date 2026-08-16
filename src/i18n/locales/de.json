@@ -1497,7 +1497,9 @@
       "filterLabel": "Nach Kategorie filtern",
       "resultCount": "{{count}} Lebensmittel",
       "noResults": "Keine Treffer für „{{query}}“.",
-      "clearFilters": "Filter zurücksetzen"
+      "clearFilters": "Filter zurücksetzen",
+      "mealCheckEntry": "Sieh, was eine Mahlzeit mit deinen Doshas macht",
+      "jumpTo": "In der App öffnen"
     }
   },
   "protocol": {

@@ -1497,7 +1497,9 @@
       "filterLabel": "Filter by category",
       "resultCount": "{{count}} foods",
       "noResults": "No foods match “{{query}}”.",
-      "clearFilters": "Clear filters"
+      "clearFilters": "Clear filters",
+      "mealCheckEntry": "See what a meal does to your doshas",
+      "jumpTo": "Open in the app"
     }
   },
   "protocol": {
