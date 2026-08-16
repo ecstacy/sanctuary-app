@@ -93,6 +93,19 @@ const REVIEWED_SIGNED_OFF = [
   'darkChocolate', 'milkChocolate', 'potatoChips', 'frenchFries', 'popcorn',
   'peanutButter', 'hummus', 'hazelnutSpread', 'ketchup', 'mayonnaise', 'soySauce',
   'olives', 'avocadoOil', 'stevia',
+  // Modern batch 2 — 2026-08-16 (docs/diet-review-modern-batch-2.md). 50 more
+  // modern/global foods, human-reviewed and corrected. Property-derived
+  // (source.text 'modern'), all confidence 'medium'.
+  'basil', 'oregano', 'parsley', 'paprika', 'vanilla', 'lemongrass',
+  'arugula', 'springOnion', 'shallot', 'snowPeas', 'parsnip', 'bokChoy',
+  'raspberry', 'blackberry', 'cranberry', 'grapefruit', 'lime', 'lychee',
+  'pita', 'naan', 'bulgur', 'riceCake', 'crackers',
+  'pintoBeans', 'cannelliniBeans', 'splitPeas',
+  'lamb', 'duck', 'cod', 'sardine', 'sausage',
+  'cheddar', 'parmesan', 'sourCream', 'ricotta',
+  'riceMilk', 'masalaChai', 'lassi', 'appleJuice', 'lemonade',
+  'mustard', 'pesto', 'salsa', 'guacamole', 'jam', 'tahini',
+  'pecan', 'macadamia', 'rapeseedOil', 'brownSugar',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {
@@ -138,7 +151,7 @@ describe('the gate opens correctly once a row is reviewed', () => {
   })
 
   it('a food outside the reference reports a coverage miss, never a guess', () => {
-    const { results, coverageMiss } = searchIngredients('bratwurst')
+    const { results, coverageMiss } = searchIngredients('churros')
     expect(results).toEqual([])
     expect(coverageMiss).toBe(true)
   })

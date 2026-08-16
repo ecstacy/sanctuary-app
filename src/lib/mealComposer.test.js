@@ -28,6 +28,10 @@ const REVIEWED_TEMPLATES = [
   'peanutButterBananaToast', 'vegetableOmelette', 'rajmaChawal', 'dalTadkaRice',
   'vegetablePulao', 'fishCurryRice', 'tunaSandwich', 'chickpeaSaladBowl',
   'quinoaSalad', 'lentilSoup', 'tomatoSoup',
+  // Batch 6 — 2026-08-16 (meals using modern batch-2 ingredients).
+  'ricottaToast', 'grilledCheeseSandwich', 'pastaPesto', 'hummusPitaPlate',
+  'bulgurSalad', 'capreseSalad', 'codRiceVeg', 'sardineToast', 'lambCurryRice',
+  'whiteBeanStew', 'splitPeaSoup',
 ]
 
 /**
