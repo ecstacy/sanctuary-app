@@ -111,6 +111,7 @@
 import { MODERN_DRAFT_INGREDIENTS } from './ingredients-modern-draft'
 import { MODERN_DRAFT_INGREDIENTS_2 } from './ingredients-modern-draft-2'
 import { MODERN_DRAFT_INGREDIENTS_3 } from './ingredients-modern-draft-3'
+import { DISH_INGREDIENTS } from './ingredients-dishes'
 
 /** @type {Record<string, Ingredient>} */
 export const INGREDIENTS = {
@@ -937,7 +938,7 @@ export const INGREDIENTS = {
     name: 'Onion (cooked)',
     sanskrit: 'Palandu',
     devanagari: 'पलाण्डु',
-    aliases: ['fried onion', 'sautéed onion', 'gebratene zwiebel', 'onion masala', 'pyaz'],
+    aliases: ['onion', 'onions', 'fried onion', 'sautéed onion', 'gebratene zwiebel', 'onion masala', 'pyaz'],
     category: 'vegetable',
     dietTags: ['allium', 'root'],
     rasa: ['sweet', 'pungent'],
@@ -1362,7 +1363,7 @@ export const INGREDIENTS = {
   tomatoCooked: {
     id: 'tomatoCooked',
     name: 'Tomato (cooked)',
-    aliases: ['tomato curry', 'passata', 'tomatensoße', 'tomato sauce', 'cooked tomato'],
+    aliases: ['tomato', 'tomatoes', 'tomato curry', 'passata', 'tomatensoße', 'tomato sauce', 'cooked tomato'],
     category: 'vegetable',
     dietTags: ['nightshade'],
     rasa: ['sour', 'sweet'],
@@ -3395,6 +3396,7 @@ export const INGREDIENTS = {
 Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS)
 Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_2)
 Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_3)
+Object.assign(INGREDIENTS, DISH_INGREDIENTS)
 
 /** Stable list form, for iteration. Includes drafts — filter before display. */
 export const ALL_INGREDIENTS = Object.values(INGREDIENTS)

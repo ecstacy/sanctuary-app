@@ -106,6 +106,12 @@ const REVIEWED_SIGNED_OFF = [
   'riceMilk', 'masalaChai', 'lassi', 'appleJuice', 'lemonade',
   'mustard', 'pesto', 'salsa', 'guacamole', 'jam', 'tahini',
   'pecan', 'macadamia', 'rapeseedOil', 'brownSugar',
+  // Dishes & staples — 2026-08-16 (ingredients-dishes.js). Plain salt (was
+  // missing) + common named Indian dishes people log, modelled as composites so
+  // "dosa"/"sambar" resolve instead of reading as gibberish.
+  'salt',
+  'dosa', 'idli', 'sambar', 'meduVada', 'uttapam', 'rasam', 'poha', 'dhokla',
+  'chole', 'palakPaneer', 'dalMakhani', 'alooGobi', 'upmaDish',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {

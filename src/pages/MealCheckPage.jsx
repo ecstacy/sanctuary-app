@@ -184,6 +184,25 @@ export default function MealCheckPage() {
     }
   }, [access.allowed, user?.id, phase])
 
+  // Route the Android hardware / edge-swipe back through the in-flow steps: from
+  // a result (or the confirm screen) it returns to the input, NOT out to Home.
+  // The result is page STATE, not its own route, so the platform's default
+  // history-back skipped straight past it to whatever preceded /meal-check.
+  useEffect(() => {
+    let handle
+    let active = true
+    import('@capacitor/app')
+      .then(({ App }) => {
+        if (!active) return
+        App.addListener('backButton', () => {
+          if (phase === 'result' || phase === 'confirm') { setPhase('input'); setResult(null) }
+          else navigate(-1)
+        }).then((h) => { handle = h; if (!active) h.remove() })
+      })
+      .catch(() => { /* web / plugin absent — the browser's own back applies */ })
+    return () => { active = false; if (handle) handle.remove() }
+  }, [phase, navigate])
+
   // ── Locked (trial expired, not Plus) ──────────────────────────────────────
   if (access.state === 'loading') {
     return <div className="min-h-screen bg-background" />
@@ -535,8 +554,9 @@ function HistoryRow({ t, log, onOpen, onDelete }) {
           <span
             className="shrink-0 text-[11px] font-label uppercase tracking-wide px-2.5 py-1 rounded-full"
             style={{ background: `${GEM_HUE[h].base}22`, color: GEM_HUE[h].base }}
+            aria-label={t('mealCheck.raisesAria', { dosha: doshaDisplayName(h) })}
           >
-            {doshaDisplayName(h)}
+            ↑ {doshaDisplayName(h)}
           </span>
         ) : (
           <span className="shrink-0 text-[11px] text-on-surface-variant">{t('mealCheck.balancedShort')}</span>
@@ -716,7 +736,8 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
 
       {head && r.practices.length > 0 && (
         <div className="mt-6">
-          <p className="font-label text-xs uppercase tracking-[0.14em] text-on-surface-variant mb-3">{t('mealCheck.breatheTitle')}</p>
+          <p className="font-label text-xs uppercase tracking-[0.14em] text-on-surface-variant mb-1">{t('mealCheck.breatheTitle', { dosha: dLabel })}</p>
+          <p className="font-body text-[12px] text-on-surface-variant/80 mb-3">{t('mealCheck.breatheHint')}</p>
           {r.practices.map((p) => (
             <RemedyCard
               key={p.id}
