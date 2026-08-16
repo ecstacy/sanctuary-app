@@ -53,6 +53,25 @@ export function getIngredient(id) {
   return hit && hit.reviewStatus === 'reviewed' ? hit : null
 }
 
+// A food whose name carries a parenthetical qualifier — "Onion (raw)",
+// "Ginger (fresh)", "Tomato (cooked)", "Radish (tender)" — is one PREP VARIANT
+// of a shared base. This groups them by that base name so a chip can offer "you
+// meant cooked, not raw?". Returns [] for foods with no variant (the common
+// case), or the full sibling set (including the food itself) with its label.
+const VARIANT_RE = /^(.*?)\s*\(([^)]+)\)\s*$/
+export function variantsOf(id) {
+  const ing = getIngredient(id)
+  if (!ing) return []
+  const m = ing.name.match(VARIANT_RE)
+  if (!m) return []
+  const base = m[1].trim().toLowerCase()
+  const sibs = REVIEWED
+    .map((f) => ({ f, m: f.name.match(VARIANT_RE) }))
+    .filter((x) => x.m && x.m[1].trim().toLowerCase() === base)
+    .map((x) => ({ id: x.f.id, name: x.f.name, label: x.m[2].trim() }))
+  return sibs.length > 1 ? sibs : []
+}
+
 /**
  * Search reviewed ingredients.
  *

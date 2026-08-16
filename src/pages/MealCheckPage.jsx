@@ -15,7 +15,7 @@ import { useAuth } from '../context/AuthContext'
 import { useMealCheckAccess } from '../hooks/useMealCheckAccess'
 import { parseMeal, assessMeal, remediesFor } from '../lib/mealCheck'
 import { saveMealLog, startMealTrialIfNeeded, listMealLogs, deleteMealLog, logMealSearchTerms } from '../lib/mealLog'
-import { getIngredient } from '../lib/ingredients'
+import { getIngredient, variantsOf } from '../lib/ingredients'
 import { exclusionFor } from '../lib/dietSafety'
 import { formFor, curatedFor } from '../lib/consumableForms'
 import { computeDietProfile, hasDietPattern } from '../lib/dietProfile'
@@ -294,6 +294,14 @@ export default function MealCheckPage() {
     computeResult(nextItems, { event: 'meal_check_edited', inputText: label })
   }
   function resultRemoveItem(id) { editItems(items.filter((i) => i.id !== id)) }
+  // Swap one chip to a sibling prep variant (raw ⇄ cooked, fresh ⇄ dry) and
+  // recompute. No-op if the new variant is already on the plate.
+  function resultChangeVariant(oldId, newId) {
+    if (oldId === newId) return
+    const f = getIngredient(newId)
+    if (!f || items.some((i) => i.id === newId)) return
+    editItems(items.map((i) => (i.id === oldId ? { id: newId, name: f.name } : i)))
+  }
   function resultAddFood(query) {
     const parsed = parseMeal(query)
     const found = parsed.matched
@@ -500,6 +508,7 @@ export default function MealCheckPage() {
             dietPrefs={dietPrefs}
             onRemoveItem={resultRemoveItem}
             onAddFood={resultAddFood}
+            onChangeVariant={resultChangeVariant}
             onOpenDetail={openDetail}
             onReset={reset}
           />
@@ -652,7 +661,7 @@ function buildRebalance(target, foods, dietPrefs) {
   return out
 }
 
-function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddFood, onOpenDetail, onReset }) {
+function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddFood, onChangeVariant, onOpenDetail, onReset }) {
   const { assessment: a, remedies: r } = result
   const head = a.headline
   const dLabel = head ? doshaDisplayName(head) : null
@@ -676,7 +685,7 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
       <p className="font-label text-xs uppercase tracking-widest text-primary mb-2">{t('mealCheck.yourMealLabel')}</p>
 
       {/* Editable meal — remove a chip or add a food you forgot; recomputes. */}
-      <MealChips t={t} items={items} onRemoveItem={onRemoveItem} onAddFood={onAddFood} />
+      <MealChips t={t} items={items} onRemoveItem={onRemoveItem} onAddFood={onAddFood} onChangeVariant={onChangeVariant} />
 
       <h2 className="font-headline text-2xl leading-snug mb-4">{verdict}</h2>
 
@@ -760,8 +769,9 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
   )
 }
 
-// Editable meal chips — × removes, ＋ reveals an inline add field.
-function MealChips({ t, items, onRemoveItem, onAddFood }) {
+// Editable meal chips — × removes, ＋ reveals an inline add field, and a food
+// with prep variants (raw ⇄ cooked, fresh ⇄ dry) carries a small switch.
+function MealChips({ t, items, onRemoveItem, onAddFood, onChangeVariant }) {
   const [adding, setAdding] = useState(false)
   const [val, setVal] = useState('')
   const [miss, setMiss] = useState(false)
@@ -777,15 +787,31 @@ function MealChips({ t, items, onRemoveItem, onAddFood }) {
   return (
     <div className="mb-5">
       <div className="flex flex-wrap gap-2">
-        {items.map((it) => (
-          <span key={it.id} className="inline-flex items-center gap-1.5 bg-surface-container text-on-surface rounded-full pl-3.5 pr-2 py-1.5 text-sm">
-            {qtyPrefix(t, it.qty)}{it.name}
-            {it.inferred && <span className="text-[10px] font-label uppercase tracking-wide text-on-surface-variant/60">{t('mealCheck.addedTag')}</span>}
-            <button onClick={() => onRemoveItem(it.id)} aria-label={t('mealCheck.deleteAria')} className="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center">
-              <span className="material-symbols-outlined text-[15px] text-on-surface-variant">close</span>
-            </button>
-          </span>
-        ))}
+        {items.map((it) => {
+          const variants = onChangeVariant ? variantsOf(it.id) : []
+          const nextVariant = variants.length > 1
+            ? variants[(variants.findIndex((v) => v.id === it.id) + 1) % variants.length]
+            : null
+          return (
+            <span key={it.id} className="inline-flex items-center gap-1.5 bg-surface-container text-on-surface rounded-full pl-3.5 pr-2 py-1.5 text-sm">
+              {qtyPrefix(t, it.qty)}{it.name}
+              {it.inferred && <span className="text-[10px] font-label uppercase tracking-wide text-on-surface-variant/60">{t('mealCheck.addedTag')}</span>}
+              {nextVariant && (
+                <button
+                  onClick={() => onChangeVariant(it.id, nextVariant.id)}
+                  aria-label={t('mealCheck.switchVariantAria', { variant: nextVariant.label })}
+                  className="inline-flex items-center gap-0.5 rounded-full bg-surface-container-high pl-1.5 pr-2 py-0.5 text-[10px] font-label lowercase tracking-wide text-on-surface-variant"
+                >
+                  <span aria-hidden="true" className="material-symbols-outlined text-[13px]">swap_horiz</span>
+                  {nextVariant.label}
+                </button>
+              )}
+              <button onClick={() => onRemoveItem(it.id)} aria-label={t('mealCheck.deleteAria')} className="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center">
+                <span className="material-symbols-outlined text-[15px] text-on-surface-variant">close</span>
+              </button>
+            </span>
+          )
+        })}
         {!adding && (
           <button onClick={() => setAdding(true)} className="inline-flex items-center gap-1 rounded-full border border-dashed border-outline px-3.5 py-1.5 text-sm text-on-surface-variant">
             <span className="material-symbols-outlined text-[16px]">add</span>

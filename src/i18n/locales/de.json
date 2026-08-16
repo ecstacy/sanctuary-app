@@ -1936,6 +1936,7 @@
     "dirSettles": "senkt",
     "dirSteady": "stabil",
     "deleteAria": "Diese Prüfung löschen",
+    "switchVariantAria": "Zu {{variant}} wechseln",
     "swipeHint": "Wische eine Prüfung nach links zum Löschen.",
     "yourMealLabel": "Deine Mahlzeit",
     "addItem": "Hinzufügen",
