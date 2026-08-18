@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { useMealCheckAccess } from '../hooks/useMealCheckAccess'
 import { parseMeal, assessMeal, remediesFor } from '../lib/mealCheck'
-import { saveMealLog, startMealTrialIfNeeded, listMealLogs, deleteMealLog, logMealSearchTerms } from '../lib/mealLog'
+import { saveMealLog, updateMealLog, startMealTrialIfNeeded, listMealLogs, deleteMealLog, logMealSearchTerms } from '../lib/mealLog'
 import { getIngredient, variantsOf } from '../lib/ingredients'
 import { exclusionFor } from '../lib/dietSafety'
 import { formFor, curatedFor } from '../lib/consumableForms'
@@ -136,6 +136,13 @@ export default function MealCheckPage() {
   // history, so no extra fetch. The substrate for pattern-aware guidance (#45).
   const dietProfile = useMemo(() => computeDietProfile(history), [history])
 
+  // The meal_logs row for the check currently on screen. A fresh check inserts
+  // (and captures the id here); editing that result UPDATES the same row instead
+  // of inserting a duplicate. `savingRef` serialises so a quick edit that lands
+  // before the initial insert resolves still updates rather than double-inserts.
+  const logIdRef = useRef(null)
+  const savingRef = useRef(null)
+
   // Voice capture — a transcript flows straight into the same text field the
   // user would type into, so parseMeal handles it unchanged. Only rendered when
   // a recogniser exists (see useSpeechInput).
@@ -205,21 +212,21 @@ export default function MealCheckPage() {
         <TopBar t={t} onBack={() => navigate(-1)} />
         <div className="max-w-md mx-auto mt-10 text-center">
           <span className="material-symbols-outlined text-4xl text-primary">restaurant_menu</span>
-          <h1 className="font-headline text-2xl mt-3 mb-2">{t('mealCheck.title')}</h1>
-          <p className="text-on-surface-variant mb-6">{t('mealCheck.lockedBody')}</p>
+          <h1 className="font-headline text-2xl mt-3 mb-2">{t('mealCheck.trialEndedTitle', 'Your free week has ended')}</h1>
+          <p className="text-on-surface-variant mb-6">{t('mealCheck.trialEndedBody')}</p>
           <button
             onClick={() => { setPaywallOpen(true); track('meal_check_paywall_shown', {}) }}
             className="btn-plus text-white font-label px-6 py-3 rounded-full"
           >
-            {t('mealCheck.unlockCta')}
+            {t('mealCheck.trialEndedCta', 'Continue with Plus')}
           </button>
         </div>
         <PaywallSheet
           open={paywallOpen}
           onClose={() => setPaywallOpen(false)}
           surface="meal_check_locked"
-          headline={t('mealCheck.title')}
-          subhead={t('mealCheck.lockedBody')}
+          headline={t('mealCheck.trialEndedTitle', 'Your free week has ended')}
+          subhead={t('mealCheck.trialEndedBody')}
         />
       </div>
     )
@@ -275,6 +282,8 @@ export default function MealCheckPage() {
       headline: assessment.headline,
       concern: assessment.concern,
     })
+    // A fresh check is a new row; an edit updates the row we're already on.
+    if (opts.event !== 'meal_check_edited') logIdRef.current = null
     // Persist + start the trial clock (fire-and-forget; never blocks the UI).
     persist(finalItems, assessment, remedies, opts.inputText)
   }
@@ -307,7 +316,7 @@ export default function MealCheckPage() {
   async function persist(finalItems, assessment, remedies, inputTextOverride) {
     if (!user?.id) return
     const started = await startMealTrialIfNeeded(user.id, profile?.meal_check_trial_started_at)
-    await saveMealLog(user.id, {
+    const payload = {
       inputText: (inputTextOverride ?? text).trim() || null,
       itemIds: finalItems.map((i) => i.id),
       assessment: {
@@ -318,11 +327,23 @@ export default function MealCheckPage() {
         remedies: { foods: remedies.foods.map((f) => f.id), practices: remedies.practices.map((p) => p.id) },
       },
       context: { entry: 'meal_check_page' },
-    })
+    }
+    // Wait out an in-flight insert so a fast edit updates its row, not a new one.
+    if (savingRef.current) { try { await savingRef.current } catch { /* insert failed; fall through to a new insert */ } }
+    if (logIdRef.current) {
+      await updateMealLog(user.id, logIdRef.current, payload)
+    } else {
+      const p = saveMealLog(user.id, payload)
+      savingRef.current = p
+      const { data } = await p
+      logIdRef.current = data?.id || null
+      savingRef.current = null
+    }
     if (started) refreshProfile?.()
   }
 
   function reset() {
+    logIdRef.current = null   // next check starts a new history row
     setPhase('input'); setText(''); setItems([]); setAmbiguous([]); setUnknown([]); setResult(null)
   }
 
@@ -351,6 +372,7 @@ export default function MealCheckPage() {
     const restoredItems = (log.item_ids || [])
       .map((id) => { const f = getIngredient(id); return f ? { id, name: f.name } : null })
       .filter(Boolean)
+    logIdRef.current = log.id   // edits to a past check update THAT row, not a new one
     setItems(restoredItems)
     setResult({
       assessment: {
