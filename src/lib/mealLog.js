@@ -70,6 +70,26 @@ export async function saveMealLog(userId, { inputText, itemIds, assessment, cont
   return { data, error }
 }
 
+// Update the meal the user is currently editing IN PLACE, rather than inserting
+// a new row. Editing a result (removing a chip, adding a food, swapping a prep
+// variant) recomputes and re-saves; without this each edit created a duplicate
+// history row (the same meal appearing many times).
+export async function updateMealLog(userId, id, { inputText, itemIds, assessment, context } = {}) {
+  if (!userId || !id) return { error: 'bad-args' }
+  const { error } = await supabase
+    .from('meal_logs')
+    .update({
+      input_text: inputText || null,
+      item_ids:   itemIds || [],
+      assessment: assessment || {},
+      context:    context || {},
+    })
+    .eq('id', id)
+    .eq('user_id', userId)
+  if (error) console.error('meal_logs update failed:', error.message)
+  return { error }
+}
+
 export async function deleteMealLog(userId, id) {
   if (!userId || !id) return { error: 'bad-args' }
   const { error } = await supabase.from('meal_logs').delete().eq('id', id).eq('user_id', userId)

@@ -120,6 +120,8 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
   // ── Handlers ────────────────────────────────────────────────────────────
   function handleDismiss() {
     track(EVENTS.PAYWALL_DISMISSED, { surface, pane })
+    // Dismissing after a successful redemption must still apply the unlock.
+    if (promoSuccess) { handleSuccessContinue(); return }
     onClose?.()
   }
 
@@ -218,9 +220,12 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
         track(EVENTS.PROMO_CODE_FAILED, { surface, reason: data?.error || 'unknown' })
         return
       }
-      // Success — show confirmation, then refresh the profile in-place
-      // so is_premium flips for every consumer of useAuth() / useIsPremium()
-      // without a jarring full-page reload.
+      // Success — show the celebration pane. We deliberately do NOT refresh the
+      // profile here: flipping is_premium unmounts the very screen that hosts
+      // this sheet (e.g. the Meal Check locked view), which would tear the
+      // celebration away before it's seen. The refresh happens when the user
+      // taps "Continue" on the success pane (handleSuccessContinue), so the
+      // moment of unlock is theirs to dismiss.
       setPromoSuccess({
         grantedUntil: data.granted_until,
         code:         data.code,
@@ -230,14 +235,18 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
         code:          data.code,
         granted_until: data.granted_until,
       })
-      // refreshProfile() updates AuthContext state synchronously after
-      // the supabase fetch resolves. All downstream useIsPremium()
-      // consumers re-render with isPremium=true. No window.reload(),
-      // no flash of unlocked content — the locks just disappear.
-      await refreshProfile()
     } finally {
       setPromoBusy(false)
     }
+  }
+
+  // Tapping "Continue" on the celebration is when we actually flip is_premium:
+  // refreshProfile() re-renders every useIsPremium() consumer, so the locks
+  // disappear as the sheet closes — the unlock happens on the user's tap, not
+  // silently behind the celebration.
+  async function handleSuccessContinue() {
+    try { await refreshProfile() } catch { /* the entitlement is already set server-side */ }
+    onClose?.()
   }
 
   // ── Render ──────────────────────────────────────────────────────────────
@@ -420,7 +429,7 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
 
             <button
               type="button"
-              onClick={() => onClose?.()}
+              onClick={handleSuccessContinue}
               className="w-full py-4 btn-plus text-white rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all"
             >
               {t('paywall.promo.startExploring')}
