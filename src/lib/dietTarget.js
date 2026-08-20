@@ -73,7 +73,10 @@ export function resolveDietTarget({ vikriti, profile, now = new Date() } = {}) {
   // page say "read against your Pitta constitution" (same bug class as #65/#66
   // and meal check). With no live vikriti flare above, a balanced user gets the
   // neutral reference, not a single-dosha verdict.
-  if (isBalancedConstitution(profile)) return { dosha: null, source: 'none', season }
+  // A balanced/tridoshic constitution has a real profile but no single dominant
+  // to lens to. Distinct from 'none' (never quizzed) so surfaces can say "you're
+  // balanced" instead of wrongly prompting the quiz.
+  if (isBalancedConstitution(profile)) return { dosha: null, source: 'balanced', season }
 
   // Prakriti honours the user's own self-correction (#52).
   const p = effectivePrimary(profile) || profile?.dosha_details?.primary || profile?.dosha

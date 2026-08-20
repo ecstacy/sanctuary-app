@@ -1889,6 +1889,7 @@
     },
     "forDosha": "Chosen to settle your {{dosha}}.",
     "noTarget": "Take the dosha quiz and these become specific to you. For now, these are simply well-made seasonal meals.",
+    "balancedTarget": "Your constitution is balanced — no single dosha to favour, so these are well-rounded seasonal meals suited to you.",
     "verdict": {
       "balancing": "Settles {{dosha}}",
       "neutral": "Neutral for {{dosha}}",

@@ -1889,6 +1889,7 @@
     },
     "forDosha": "Ausgewählt, um dein {{dosha}} zu beruhigen.",
     "noTarget": "Mach das Dosha-Quiz, dann wird das konkret für dich. Bis dahin sind das einfach gute saisonale Mahlzeiten.",
+    "balancedTarget": "Deine Konstitution ist ausgeglichen — kein einzelnes Dosha zu bevorzugen, daher sind das rundum passende saisonale Mahlzeiten für dich.",
     "verdict": {
       "balancing": "Beruhigt {{dosha}}",
       "neutral": "Neutral für {{dosha}}",
