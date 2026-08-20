@@ -496,7 +496,6 @@ export default function MealCheckPage() {
                 <p className="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-3">
                   {t('mealCheck.recentTitle')}
                 </p>
-                <p className="text-[11px] text-on-surface-variant/70 mb-2">{t('mealCheck.swipeHint')}</p>
                 <div className="space-y-2">
                   {history.map((log) => (
                     <HistoryRow key={log.id} t={t} log={log} onOpen={viewHistory} onDelete={removeHistory} />
@@ -684,7 +683,9 @@ function HistoryRow({ t, log, onOpen, onDelete }) {
             ↑ {doshaDisplayName(h)}
           </span>
         ) : (
-          <span className="shrink-0 text-[11px] text-on-surface-variant">{t('mealCheck.balancedShort')}</span>
+          <span className="shrink-0 text-[11px] font-label uppercase tracking-wide px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant">
+            {t('mealCheck.balancedShort')}
+          </span>
         )}
       </button>
     </div>
