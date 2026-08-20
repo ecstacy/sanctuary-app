@@ -133,6 +133,19 @@ const REVIEWED_SIGNED_OFF = [
   'cheesePuffs', 'trailMix', 'driedApricot', 'fruitLeather', 'flapjack',
   'digestiveBiscuit', 'chocolateChipCookie', 'donut', 'muffin', 'iceCreamBar',
   'drinkableYoghurt', 'marshmallow', 'beefJerky', 'mixedNuts',
+  // Modern batch 4 — 2026-08-20 (docs/diet-review-modern-batch-4.md). 50 sweets,
+  // more world dishes, drinks, condiments & pantry gaps — human-reviewed & corrected.
+  'gulabJamun', 'jalebi', 'kheer', 'halwa', 'laddu', 'barfi', 'cake', 'brownie',
+  'cheesecake', 'custard',
+  'omelette', 'hotDog', 'chickenNuggets', 'meatballs', 'gnocchi', 'garlicBread',
+  'onionRings', 'misoSoup', 'paella',
+  'milkshake', 'smoothie', 'latte', 'icedCoffee', 'sparklingWater', 'whiskey',
+  'bubbleTea', 'tomatoJuice',
+  'garamMasala', 'chiliPowder', 'curryPowder', 'appleCiderVinegar', 'balsamicVinegar',
+  'sriracha', 'fishSauce', 'bbqSauce', 'mangoPickle',
+  'beanSprouts', 'seaweed', 'broadBeans', 'butterBeans', 'brie', 'halloumi',
+  'condensedMilk', 'pineNut', 'brazilNut', 'molasses', 'passionFruit', 'mandarin',
+  'spelt', 'polenta',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {
