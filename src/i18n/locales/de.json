@@ -315,7 +315,11 @@
     "understandingBody": "Im Ayurveda ist deine Prakriti deine Geburtskonstitution — das einzigartige Verhältnis von Vata, Pitta und Kapha, mit dem du geboren wurdest. Sie bleibt das ganze Leben stabil. Wenn sich die Doshas durch Ernährung, Stress oder Jahreszeiten verschieben, wird dieser vorübergehende Zustand Vikriti genannt. Das Ziel des Ayurveda ist es, die Vikriti wieder mit der Prakriti in Einklang zu bringen.",
     "paywallHeadline": "Lebe nach deiner {{primary}}-Natur",
     "paywallSubhead": "Schalte Kapitel 3 und dein vollständiges ayurvedisches Lifestyle-Protokoll frei.",
-    "dietPreview": "Vorschau deines Ernährungsguides"
+    "dietPreview": "Vorschau deines Ernährungsguides",
+    "thisWeekTitle": "Diese Woche — dein aktueller Zustand",
+    "thisWeekLean": "Du hast gerade erhöhtes {{dosha}}.",
+    "thisWeekTrend": "Aktueller Verlauf",
+    "thisWeekBridge": "Deine Konstitution unten ist deine Basis. So tendierst du heute, gemessen daran."
   },
   "onboarding": {
     "skip": "Überspringen",

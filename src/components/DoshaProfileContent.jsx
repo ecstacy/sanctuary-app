@@ -176,6 +176,7 @@ export default function DoshaProfileContent({
   percentages,
   onBack,
   footerSlot,
+  leadSlot,
 }) {
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
@@ -224,6 +225,11 @@ export default function DoshaProfileContent({
 
   return (
     <div className="min-h-screen bg-background text-on-surface font-body pb-20">
+
+      {/* Optional lead — e.g. the "this week / current state" section, shown
+          above the constitution so the page continues the story the Home card
+          started (current state first, then the stable baseline below). */}
+      {leadSlot}
 
       {/* ── Gradient Hero ── */}
       <div className={`relative bg-gradient-to-b ${primaryData.gradient} px-6 pt-12 pb-16 overflow-hidden`}>
