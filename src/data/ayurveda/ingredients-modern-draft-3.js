@@ -411,7 +411,7 @@ export const MODERN_DRAFT_INGREDIENTS_3 = {
   },
   pretzel: {
     id: 'pretzel', name: 'Pretzels',
-    aliases: ['pretzel', 'salted pretzels', 'brezel'],
+    aliases: ['pretzel', 'pretzel bread', 'soft pretzel', 'salted pretzels', 'brezel'],
     category: 'grain', rasa: ['salty', 'sweet'], virya: 'neutral', vipaka: 'sweet',
     guna: ['light', 'dry'], doshaEffect: { vata: 1, pitta: 0, kapha: 1 },
     allergens: ['gluten'],

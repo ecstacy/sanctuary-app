@@ -329,7 +329,7 @@ export const INGREDIENTS = {
   ryeBread: {
     id: 'ryeBread',
     name: 'Rye bread',
-    aliases: ['roggenbrot', 'sourdough rye', 'brot', 'bread'],
+    aliases: ['rye bread', 'roggenbrot', 'sourdough rye'],
     category: 'grain',
     rasa: ['sweet', 'astringent'],
     virya: 'cooling',
@@ -2860,7 +2860,7 @@ export const INGREDIENTS = {
     reviewStatus: 'reviewed', confidence: 'medium',
   },
   whiteBread: {
-    id: 'whiteBread', name: 'White bread', aliases: ['maida bread', 'weißbrot', 'refined bread', 'toast'],
+    id: 'whiteBread', name: 'White bread', aliases: ['bread', 'sliced bread', 'sandwich bread', 'maida bread', 'weißbrot', 'refined bread', 'toast', 'white toast'],
     category: 'grain', rasa: ['sweet'], virya: 'neutral', vipaka: 'sweet', guna: ['heavy', 'dry'],
     doshaEffect: { vata: 1, pitta: 0, kapha: 1 }, balancedBy: ['ghee', 'butter', 'oliveOil'],
     whyAvoid: 'Refined and heavy with little to it — drying for Vata and sluggish for Kapha.',

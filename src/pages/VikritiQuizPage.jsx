@@ -183,7 +183,11 @@ export default function VikritiQuizPage() {
       } })
       .eq('id', user.id)
     if (cacheErr) console.error('vikriti_details cache failed:', cacheErr.message)
-    else refreshProfile?.()
+    // AWAIT the refresh so the shared AuthContext profile carries the new
+    // vikriti_details BEFORE we navigate — otherwise the next surface the user
+    // opens (e.g. Meal Check) reads the stale, pre-quiz dosha state and the
+    // update looks like it "didn't sync". Fire-and-forget raced the navigation.
+    else await refreshProfile?.()
     // Signal HomePage to refetch the vikriti schedule. Without this, its
     // mounted `useVikritiSchedule` cache still shows the pre-save state
     // (daysSinceLast=Infinity / isDue=true) so the prompt card sticks
