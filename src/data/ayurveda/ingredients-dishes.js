@@ -166,4 +166,38 @@ export const DISH_INGREDIENTS = {
     source: { ...M, note: 'Composite dish (roasted semolina cooked soft with a spiced tempering). Derived: soft, heavy, sweet (Vata↓, Kapha↑).' },
     reviewStatus: 'reviewed', confidence: 'medium',
   },
+
+  // ── Breads & sandwiches — depth so common terms resolve right ──────────────
+  // A generic sandwich (bread + filling); "sandwich"/"cheese sandwich"/"sub"
+  // used to mis-match the bare cheese or a tortilla wrap.
+  sandwich: {
+    id: 'sandwich', name: 'Sandwich',
+    aliases: ['sandwich', 'sandwiches', 'cheese sandwich', 'ham sandwich', 'veg sandwich', 'sub', 'submarine', 'panini', 'toastie', 'grilled sandwich'],
+    category: 'other', rasa: ['sweet', 'salty'], virya: 'neutral', vipaka: 'sweet',
+    guna: ['heavy'], doshaEffect: { vata: 0, pitta: 0, kapha: 1 },
+    allergens: ['gluten'],
+    whyAvoid: 'Refined bread with a filling — heavy for Kapha; the reading shifts with what is inside.',
+    source: { ...M, note: 'Composite dish (bread + filling). Derived: heavy, sweet-salty (Kapha↑), broadly neutral for Pitta/Vata. A rich/meat/cheese filling raises Pitta and Kapha; add those items to refine the reading.' },
+    reviewStatus: 'reviewed', confidence: 'medium',
+  },
+  baguette: {
+    id: 'baguette', name: 'Baguette',
+    aliases: ['baguette', 'french bread', 'french stick'],
+    category: 'grain', rasa: ['sweet'], virya: 'neutral', vipaka: 'sweet',
+    guna: ['light', 'dry'], doshaEffect: { vata: 1, pitta: 0, kapha: 1 },
+    allergens: ['gluten'],
+    whyAvoid: 'A crusty refined-wheat loaf — dry for Vata and refined-flour-sweet for Kapha.',
+    source: { ...M, note: 'Non-classical. Derived: crusty refined-wheat bread, light and dry (Vata↑, Kapha↑). Gluten.' },
+    reviewStatus: 'reviewed', confidence: 'medium',
+  },
+  breadRoll: {
+    id: 'breadRoll', name: 'Bread roll',
+    aliases: ['bread roll', 'dinner roll', 'bun', 'burger bun', 'soft roll'],
+    category: 'grain', rasa: ['sweet'], virya: 'neutral', vipaka: 'sweet',
+    guna: ['light', 'soft'], doshaEffect: { vata: 0, pitta: 0, kapha: 1 },
+    allergens: ['gluten'],
+    whyAvoid: 'A soft refined-wheat roll — leans to Kapha.',
+    source: { ...M, note: 'Non-classical. Derived: soft refined-wheat roll, light and soft (Kapha↑). Gluten.' },
+    reviewStatus: 'reviewed', confidence: 'medium',
+  },
 }

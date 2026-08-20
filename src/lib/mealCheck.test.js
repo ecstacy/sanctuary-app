@@ -67,6 +67,19 @@ describe('parseMeal', () => {
     expect(m.modifiers).toContain('black')
   })
 
+  it('resolves generic bread & sandwich terms to sensible items (not Rye)', () => {
+    // Regression: "bread" was aliased to ryeBread; "sandwich" mis-matched a wrap
+    // / bare cheese; "pretzel bread" / "multigrain bread" fell through to Rye.
+    const id = (q) => parseMeal(q).matched.map((m) => m.id)
+    expect(id('bread')).toContain('whiteBread')
+    expect(id('toast')).toContain('whiteBread')
+    expect(id('sandwich')).toContain('sandwich')
+    expect(id('cheese sandwich')).toContain('sandwich')
+    expect(id('pretzel bread')).toContain('pretzel')
+    expect(id('multigrain bread')).toContain('wholeWheatBread')
+    expect(id('rye bread')).toContain('ryeBread')
+  })
+
   it('defaults a bare raw/cooked variant to cooked, but honours a modifier', () => {
     // Bare "tomato"/"onion" now resolve to the COOKED variant — in a prepared
     // meal that is almost always right, and it removes a friction prompt (the

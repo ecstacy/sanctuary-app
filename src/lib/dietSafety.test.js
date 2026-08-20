@@ -112,6 +112,7 @@ const REVIEWED_SIGNED_OFF = [
   'salt',
   'dosa', 'idli', 'sambar', 'meduVada', 'uttapam', 'rasam', 'poha', 'dhokla',
   'chole', 'palakPaneer', 'dalMakhani', 'alooGobi', 'upmaDish',
+  'sandwich', 'baguette', 'breadRoll',
   // Modern batch 3 — 2026-08-18 (docs/diet-review-modern-batch-3.md). 53 eating-
   // out & store-snack composites, human-reviewed and corrected.
   'pizza', 'cheeseburger', 'sushi', 'ramenBowl', 'padThai', 'friedRice',

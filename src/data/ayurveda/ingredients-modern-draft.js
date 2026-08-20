@@ -48,7 +48,7 @@ export const MODERN_DRAFT_INGREDIENTS = {
   },
   wholeWheatBread: {
     id: 'wholeWheatBread', name: 'Whole-wheat bread',
-    aliases: ['brown bread', 'wholemeal bread', 'vollkornbrot'],
+    aliases: ['brown bread', 'wholemeal bread', 'multigrain bread', 'granary bread', 'wheat bread', 'brown toast', 'vollkornbrot'],
     category: 'grain', rasa: ['sweet', 'astringent'], virya: 'neutral', vipaka: 'sweet',
     guna: ['heavy', 'dry', 'rough'], doshaEffect: { vata: 1, pitta: 0, kapha: 1 },
     bestTime: ['midday'],
