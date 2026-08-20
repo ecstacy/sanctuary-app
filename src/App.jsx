@@ -43,6 +43,7 @@ const IngredientDetailPage = lazy(() => import('./pages/IngredientDetailPage'))
 const DietPrefsPage = lazy(() => import('./pages/DietPrefsPage'))
 const MealGuidancePage = lazy(() => import('./pages/MealGuidancePage'))
 const MealCheckPage = lazy(() => import('./pages/MealCheckPage'))
+const MealTrendsPage = lazy(() => import('./pages/MealTrendsPage'))
 const DinacharyaPage = lazy(() => import('./pages/DinacharyaPage'))
 const RoutinePage = lazy(() => import('./pages/RoutinePage'))
 const PracticePage = lazy(() => import('./pages/PracticePage'))
@@ -361,6 +362,7 @@ function AppRoutes() {
           <Route path="/diet-preferences" element={<PrivateRoute><DietPrefsPage /></PrivateRoute>} />
           <Route path="/meals" element={<PrivateRoute><MealGuidancePage /></PrivateRoute>} />
           <Route path="/meal-check" element={<PrivateRoute><MealCheckPage /></PrivateRoute>} />
+          <Route path="/meal-trends" element={<PrivateRoute><MealTrendsPage /></PrivateRoute>} />
           <Route path="/dinacharya" element={<PrivateRoute><DinacharyaPage /></PrivateRoute>} />
           <Route path="/routine" element={<PrivateRoute><RoutinePage /></PrivateRoute>} />
           <Route path="/asana/:id" element={<PrivateRoute><AsanaDetailPage /></PrivateRoute>} />

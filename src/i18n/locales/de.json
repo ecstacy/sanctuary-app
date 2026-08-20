@@ -2017,7 +2017,8 @@
       "large": "Groß",
       "small": "Klein"
     },
-    "addedTag": "hinzugefügt"
+    "addedTag": "hinzugefügt",
+    "patternsSeeWeekly": "Wöchentliche Trends ansehen →"
   },
   "a11y": {
     "scrollTop": "Nach oben scrollen",
@@ -2087,5 +2088,18 @@
         "description": "Deine Gesundheitsdaten sind verschlüsselt, werden nie verkauft und sind jederzeit löschbar. Sie gehören dir."
       }
     ]
+  },
+  "mealTrends": {
+    "title": "Deine Ess-Trends",
+    "subtitle": "Wie deine Mahlzeiten Woche für Woche tendierten.",
+    "latelyLabel": "In letzter Zeit",
+    "latelyLean": "Deine letzten Mahlzeiten wirken {{dosha}}-steigernd.",
+    "latelyBalanced": "Deine letzten Mahlzeiten waren recht ausgeglichen.",
+    "byWeek": "Nach Woche",
+    "balanced": "Ausgeglichen",
+    "checkCount": "{{count}} Checks",
+    "checkCount_one": "{{count}} Check",
+    "empty": "Prüfe ein paar Mahlzeiten, dann erscheinen hier deine wöchentlichen Trends.",
+    "footnote": "Basierend auf deinen geprüften Mahlzeiten. Je mehr du erfasst, desto klarer das Bild."
   }
 }
