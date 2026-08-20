@@ -112,6 +112,18 @@ const REVIEWED_SIGNED_OFF = [
   'salt',
   'dosa', 'idli', 'sambar', 'meduVada', 'uttapam', 'rasam', 'poha', 'dhokla',
   'chole', 'palakPaneer', 'dalMakhani', 'alooGobi', 'upmaDish',
+  // Modern batch 3 — 2026-08-18 (docs/diet-review-modern-batch-3.md). 53 eating-
+  // out & store-snack composites, human-reviewed and corrected.
+  'pizza', 'cheeseburger', 'sushi', 'ramenBowl', 'padThai', 'friedRice',
+  'springRoll', 'summerRoll', 'dumplings', 'friedDumplings', 'tacos', 'burrito',
+  'veggieBurrito', 'quesadilla', 'nachos', 'falafel', 'shawarma', 'butterChicken',
+  'tikkaMasala', 'biryani', 'samosa', 'pakora', 'pho', 'fishAndChips',
+  'friedChicken', 'chickenWings', 'caesarSalad', 'clubSandwich', 'lasagna',
+  'macAndCheese', 'risotto', 'pancakes', 'waffles',
+  'proteinBar', 'granolaBar', 'candyBar', 'gummyCandy', 'pretzel', 'tortillaChips',
+  'cheesePuffs', 'trailMix', 'driedApricot', 'fruitLeather', 'flapjack',
+  'digestiveBiscuit', 'chocolateChipCookie', 'donut', 'muffin', 'iceCreamBar',
+  'drinkableYoghurt', 'marshmallow', 'beefJerky', 'mixedNuts',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {
