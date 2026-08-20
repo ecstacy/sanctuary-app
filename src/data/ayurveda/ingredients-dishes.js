@@ -172,7 +172,7 @@ export const DISH_INGREDIENTS = {
   // used to mis-match the bare cheese or a tortilla wrap.
   sandwich: {
     id: 'sandwich', name: 'Sandwich',
-    aliases: ['sandwich', 'sandwiches', 'cheese sandwich', 'ham sandwich', 'veg sandwich', 'sub', 'submarine', 'panini', 'toastie', 'grilled sandwich'],
+    aliases: ['sandwich', 'sandwiches', 'cheese sandwich', 'ham sandwich', 'veg sandwich', 'sub', 'submarine', 'panini', 'toastie'],
     category: 'other', rasa: ['sweet', 'salty'], virya: 'neutral', vipaka: 'sweet',
     guna: ['heavy'], doshaEffect: { vata: 0, pitta: 0, kapha: 1 },
     allergens: ['gluten'],

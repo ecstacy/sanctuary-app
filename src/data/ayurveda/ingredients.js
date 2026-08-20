@@ -113,6 +113,7 @@ import { MODERN_DRAFT_INGREDIENTS_2 } from './ingredients-modern-draft-2'
 import { MODERN_DRAFT_INGREDIENTS_3 } from './ingredients-modern-draft-3'
 import { DISH_INGREDIENTS } from './ingredients-dishes'
 import { MODERN_DRAFT_INGREDIENTS_4 } from './ingredients-modern-draft-4'
+import { COMMON_INGREDIENTS } from './ingredients-common'
 
 /** @type {Record<string, Ingredient>} */
 export const INGREDIENTS = {
@@ -202,7 +203,7 @@ export const INGREDIENTS = {
     name: 'Yoghurt',
     sanskrit: 'Dadhi',
     devanagari: 'दधि',
-    aliases: ['curd', 'dahi', 'joghurt'],
+    aliases: ['yogurt', 'yoghurt', 'curd', 'dahi', 'joghurt'],
     category: 'dairy',
     rasa: ['sour', 'sweet'],
     virya: 'heating',
@@ -710,7 +711,7 @@ export const INGREDIENTS = {
     name: 'Black pepper',
     sanskrit: 'Maricha',
     devanagari: 'मरिच',
-    aliases: ['kali mirch', 'pfeffer', 'peppercorn'],
+    aliases: ['pepper', 'black pepper', 'kali mirch', 'pfeffer', 'peppercorn'],
     category: 'spice',
     rasa: ['pungent'],
     virya: 'heating',
@@ -1450,7 +1451,7 @@ export const INGREDIENTS = {
     name: 'Radish (tender)',
     sanskrit: 'Mulaka',
     devanagari: 'मूलक',
-    aliases: ['mooli', 'young radish', 'radieschen', 'red radish'],
+    aliases: ['radish', 'mooli', 'young radish', 'radieschen', 'red radish'],
     category: 'vegetable',
     dietTags: ['root'],
     rasa: ['pungent'],
@@ -3039,7 +3040,7 @@ export const INGREDIENTS = {
   },
   raisins: {
     id: 'raisins', name: 'Raisins', sanskrit: 'Draksha', devanagari: 'द्राक्षा',
-    aliases: ['kishmish', 'munakka', 'rosinen', 'dried grapes', 'sultanas'], category: 'fruit',
+    aliases: ['currants', 'kishmish', 'munakka', 'rosinen', 'dried grapes', 'sultanas'], category: 'fruit',
     rasa: ['sweet'], virya: 'cooling', vipaka: 'sweet', guna: ['heavy', 'moist'],
     doshaEffect: { vata: -1, pitta: -1, kapha: 1 }, balancedBy: ['fennel', 'cardamom'],
     whyFavor: 'Sweet, soft and cooling — Charaka ranks Draksha first among fruits, restorative and settling for Vata and Pitta.',
@@ -3399,6 +3400,7 @@ Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_2)
 Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_3)
 Object.assign(INGREDIENTS, DISH_INGREDIENTS)
 Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_4)
+Object.assign(INGREDIENTS, COMMON_INGREDIENTS)
 
 /** Stable list form, for iteration. Includes drafts — filter before display. */
 export const ALL_INGREDIENTS = Object.values(INGREDIENTS)
