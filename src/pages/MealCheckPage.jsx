@@ -489,7 +489,13 @@ export default function MealCheckPage() {
               {t('mealCheck.checkCta')}
             </button>
 
-            {hasDietPattern(dietProfile) && <PatternsCard t={t} profile={dietProfile} />}
+            {hasDietPattern(dietProfile) && (
+              <PatternsCard
+                t={t}
+                profile={dietProfile}
+                onOpen={() => { track('meal_trends_opened', { source: 'patterns_card' }); navigate('/meal-trends') }}
+              />
+            )}
 
             {history.length > 0 && (
               <div className="mt-9">
@@ -697,19 +703,31 @@ function HistoryRow({ t, log, onOpen, onDelete }) {
 // Priority order for naming a missing taste (bitter & astringent are the most
 // commonly absent in a modern diet, so they're the most useful to surface).
 const MISSING_TASTE_PRIORITY = ['bitter', 'astringent', 'sweet', 'salty', 'sour', 'pungent']
-function PatternsCard({ t, profile }) {
+function PatternsCard({ t, profile, onOpen }) {
   const tasteList = (keys) => keys.map((k) => t(`mealCheck.taste.${k}`)).join(t('mealCheck.tasteJoin'))
   const often = profile.surplusTastes.slice(0, 2)
   const rarely = MISSING_TASTE_PRIORITY.filter((r) => profile.missingTastes.includes(r)).slice(0, 2)
+  const dom = profile.dominant
+  const hue = dom ? GEM_HUE[dom].base : null
   return (
-    <div className="mt-9 rounded-2xl bg-surface-container-low border border-outline-variant p-4">
+    <button
+      onClick={onOpen}
+      className="mt-9 w-full text-left rounded-2xl bg-surface-container-low border border-outline-variant p-4 active:scale-[0.99] transition-transform"
+    >
       <div className="flex items-center gap-2 mb-2">
         <span aria-hidden="true" className="material-symbols-outlined text-primary text-base">insights</span>
         <p className="font-label text-[11px] uppercase tracking-wider text-primary">{t('mealCheck.patternsTitle')}</p>
+        {/* A dosha-coloured dot / "balanced" dot mirrors the trend colour. */}
+        <span
+          className="ml-1 w-2 h-2 rounded-full"
+          style={{ background: hue || 'var(--color-outline)' }}
+          aria-hidden="true"
+        />
+        <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/50 text-lg ml-auto">chevron_right</span>
       </div>
       <p className="font-body text-[13px] text-on-surface leading-relaxed">
-        {profile.dominant
-          ? t('mealCheck.patternDosha', { dosha: doshaDisplayName(profile.dominant) })
+        {dom
+          ? t('mealCheck.patternDosha', { dosha: doshaDisplayName(dom) })
           : t('mealCheck.patternBalanced')}
       </p>
       {(often.length > 0 || rarely.length > 0) && (
@@ -719,7 +737,8 @@ function PatternsCard({ t, profile }) {
           {rarely.length > 0 && t('mealCheck.patternRarely', { tastes: tasteList(rarely) })}
         </p>
       )}
-    </div>
+      <p className="font-label text-[11px] text-primary mt-3">{t('mealCheck.patternsSeeWeekly', 'See weekly trends →')}</p>
+    </button>
   )
 }
 

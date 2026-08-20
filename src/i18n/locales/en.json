@@ -2017,7 +2017,8 @@
       "large": "Large",
       "small": "Small"
     },
-    "addedTag": "added"
+    "addedTag": "added",
+    "patternsSeeWeekly": "See weekly trends →"
   },
   "a11y": {
     "scrollTop": "Scroll to top",
@@ -2087,5 +2088,18 @@
         "description": "Your health data is encrypted, never sold, and deletable at any time. You own it."
       }
     ]
+  },
+  "mealTrends": {
+    "title": "Your eating trends",
+    "subtitle": "How your meals have leaned, week by week.",
+    "latelyLabel": "Lately",
+    "latelyLean": "Your recent meals lean {{dosha}}-aggravating.",
+    "latelyBalanced": "Your recent meals have been fairly balanced.",
+    "byWeek": "By week",
+    "balanced": "Balanced",
+    "checkCount": "{{count}} checks",
+    "checkCount_one": "{{count}} check",
+    "empty": "Check a few meals and your weekly trends will appear here.",
+    "footnote": "Based on the meals you’ve checked. The more you log, the clearer the picture."
   }
 }
