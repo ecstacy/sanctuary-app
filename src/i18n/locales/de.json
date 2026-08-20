@@ -1933,6 +1933,7 @@
     "whichDidYouMean": "Welches „{{token}}\" meinst du?",
     "specifyTitle": "Was ist in deinem {{name}}?",
     "specifySkip": "Überspringen – grobe Schätzung nutzen",
+    "specifyAddOwn": "Eigenes hinzufügen",
     "specifyHelp": "Füge hinzu, was du hineingemixt hast, für eine Auswertung deines tatsächlichen Smoothies – oder überspringe für eine grobe Schätzung.",
     "dontHave": "„{{token}}\" haben wir noch nicht — wähle das Nächste oder überspringe es.",
     "skip": "Überspringen",
