@@ -91,7 +91,9 @@ describe('parseMeal', () => {
   })
 
   it('attaches a prep dosha delta from a preparation modifier (#57)', () => {
-    const iced = parseMeal('iced coffee').matched.find((m) => m.id === 'coffee')
+    // NB: "iced coffee" now resolves to the reviewed `icedCoffee` composite, so
+    // exercise the bare `iced` modifier on a base it doesn't shadow.
+    const iced = parseMeal('iced black coffee').matched.find((m) => m.id === 'coffee')
     expect(iced.doshaDelta).toBeTruthy()
     expect(iced.doshaDelta.pitta).toBeLessThan(0) // iced cools
   })
@@ -113,7 +115,7 @@ describe('parseMeal', () => {
 
 describe('modifier prep deltas — bounded and correct sign', () => {
   it('reads an iced drink as cooler than a hot one', () => {
-    const iced = assessMeal([{ id: 'coffee', portionWeight: 1, doshaDelta: parseMeal('iced coffee').matched.find((m) => m.id === 'coffee').doshaDelta }])
+    const iced = assessMeal([{ id: 'coffee', portionWeight: 1, doshaDelta: parseMeal('iced black coffee').matched.find((m) => m.id === 'coffee').doshaDelta }])
     const hot = assessMeal(['coffee'])
     expect(iced.perDosha.pitta).toBeLessThan(hot.perDosha.pitta)
   })
