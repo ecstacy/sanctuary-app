@@ -38,6 +38,8 @@ function toItem(m) {
   return {
     id: m.id, name: m.name, qty: m.qty, modifiers: m.modifiers,
     portionWeight: m.portionWeight, doshaDelta: m.doshaDelta, inferred: m.inferred,
+    // Open-composite metadata (smoothie etc.) — drives the "what's in it?" prompt.
+    open: m.open, componentSuggestions: m.componentSuggestions,
   }
 }
 
@@ -248,8 +250,11 @@ export default function MealCheckPage() {
     // Persist the actual terms server-side (our DB, not analytics) for keyword +
     // coverage-gap review to grow the dataset.
     if (user?.id) logMealSearchTerms(user.id, parsed)
-    // Skip the confirm step only when the parse was completely clean.
-    if (parsed.matched.length && !parsed.ambiguous.length && !parsed.unknown.length) {
+    // Skip the confirm step only when the parse was completely clean — and no
+    // matched item is an OPEN composite (smoothie etc.), where we want to give
+    // the user the chance to say what went in before trusting a generic verdict.
+    const hasOpen = parsed.matched.some((m) => m.open)
+    if (parsed.matched.length && !parsed.ambiguous.length && !parsed.unknown.length && !hasOpen) {
       computeResult(parsed.matched.map(toItem))
     } else {
       setPhase('confirm')
@@ -260,6 +265,21 @@ export default function MealCheckPage() {
     setItems((prev) => (prev.some((i) => i.id === opt.id) ? prev : [...prev, opt]))
   }
   function removeItem(id) { setItems((prev) => prev.filter((i) => i.id !== id)) }
+  // Specifying a component of an OPEN composite (e.g. adding "banana" to a
+  // smoothie) replaces the generic composite with its real parts: add the part
+  // and drop the composite, so the reading is composed from what was actually in
+  // it instead of a one-size default. Later parts just add (composite already gone).
+  function addComponent(openId, opt) {
+    setItems((prev) => {
+      const withoutComposite = prev.filter((i) => i.id !== openId)
+      return withoutComposite.some((i) => i.id === opt.id) ? withoutComposite : [...withoutComposite, opt]
+    })
+  }
+  // "That's everything" — the user is done specifying; keep the composite as-is
+  // (its fallback verdict) by just clearing the open flag so the prompt closes.
+  function keepComposite(openId) {
+    setItems((prev) => prev.map((i) => (i.id === openId ? { ...i, open: false } : i)))
+  }
   function resolveAmbiguous(token, opt) {
     addItem(opt)
     setAmbiguous((prev) => prev.filter((a) => a.token !== token))
@@ -484,6 +504,37 @@ export default function MealCheckPage() {
                 <span className="text-sm text-on-surface-variant">{t('mealCheck.noItemsYet')}</span>
               )}
             </div>
+
+            {items.filter((it) => it.open && it.componentSuggestions?.length).map((it) => (
+              <div key={`open-${it.id}`} className="mb-5 rounded-2xl bg-surface-container-low border border-outline-variant p-4">
+                <p className="font-body text-sm font-semibold text-on-surface mb-1">
+                  {t('mealCheck.specifyTitle', { name: it.name.toLowerCase() })}
+                </p>
+                <p className="text-[12px] text-on-surface-variant mb-3 leading-relaxed">
+                  {t('mealCheck.specifyHelp')}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {it.componentSuggestions
+                    .filter((c) => !items.some((i) => i.id === c.id))
+                    .map((c) => (
+                      <button
+                        key={c.id}
+                        onClick={() => addComponent(it.id, c)}
+                        className="inline-flex items-center gap-1 bg-surface-container border border-outline-variant rounded-full pl-3 pr-3.5 py-1.5 text-sm active:scale-95 transition-transform"
+                      >
+                        <span className="material-symbols-outlined text-[15px] text-on-surface-variant">add</span>
+                        {c.name}
+                      </button>
+                    ))}
+                  <button
+                    onClick={() => keepComposite(it.id)}
+                    className="text-sm text-on-surface-variant underline px-2 py-1.5"
+                  >
+                    {t('mealCheck.specifySkip')}
+                  </button>
+                </div>
+              </div>
+            ))}
 
             {ambiguous.map((a) => (
               <div key={a.token} className="mb-4">

@@ -241,6 +241,12 @@ export const MODERN_DRAFT_INGREDIENTS_4 = {
     aliases: ['fruit smoothie', 'smoothie'],
     category: 'beverage', rasa: ['sweet', 'sour'], virya: 'cooling', vipaka: 'sweet',
     guna: ['heavy', 'moist'], doshaEffect: { vata: 0, pitta: 0, kapha: 1 },
+    // OPEN composite: "smoothie" names a format, not a recipe — the verdict is
+    // dominated by what was blended in. The doshaEffect above is only a robust
+    // fallback; Meal Check offers these common add-ins so the user can specify
+    // and get a reading composed from the actual parts. See mealCheck.parseMeal.
+    composite: 'open',
+    components: ['banana', 'strawberry', 'blueberry', 'spinach', 'kale', 'yoghurt', 'milk', 'almondMilk', 'oats', 'peanutButter', 'honey', 'dates'],
     whyFavor: 'Blended fruit (and often yoghurt) — nourishing and cooling.',
     whyAvoid: 'Cold and sweet-dense, so a large one adds to Kapha; fruit-with-milk is a heavy pairing.',
     source: { ...M, note: 'Composite drink — an OPEN category: contents vary widely (fruit + yoghurt/milk/plant milk, greens, protein). Robust default is a soft Kapha↑ only (Vata 0, Pitta 0); banana-yoghurt, berry, and green smoothies each warrant their own profile. Declare dairy/soy/nuts per recipe.' },
