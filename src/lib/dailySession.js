@@ -34,7 +34,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { ASANAS } from '../data/asanas'
-import { effectivePrimary, afterBaseline } from './doshaState'
+import { effectivePrimary, afterBaseline, isBalancedConstitution } from './doshaState'
 
 // ── Seeded PRNG ──────────────────────────────────────────────────────────────
 // mulberry32: tiny, fast, good enough for shuffling a pose pool. Deterministic
@@ -114,6 +114,10 @@ function resolveTargetDosha(ctx) {
   if (ctx.vikriti?.hasSignal && ctx.vikriti.vikriti && afterBaseline(ctx.profile, ctx.vikriti.lastCheckinAt)) {
     return { dosha: ctx.vikriti.vikriti, source: 'vikriti' }
   }
+  // A balanced/tridoshic constitution has no dominant to lens the day's practice
+  // to (same class as the meal/food fix): compose a well-rounded session, don't
+  // favour its numeric-top dosha.
+  if (isBalancedConstitution(ctx.profile)) return { dosha: null, source: 'balanced' }
   const p = effectivePrimary(ctx.profile) || ctx.profile?.dosha_details?.primary || ctx.profile?.dosha
   if (p) return { dosha: String(p).toLowerCase(), source: 'prakriti' }
   return { dosha: null, source: 'none' }

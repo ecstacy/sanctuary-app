@@ -143,6 +143,8 @@ export default function MealGuidancePage() {
                 })
               : t('meals.forDosha', { dosha: t(`diet.dosha.${target.dosha}`) })}
           </p>
+        ) : target.source === 'balanced' ? (
+          <p className="font-body text-sm text-on-surface-variant mt-2 leading-relaxed">{t('meals.balancedTarget')}</p>
         ) : (
           <p className="font-body text-sm text-on-surface-variant mt-2 leading-relaxed">{t('meals.noTarget')}</p>
         )}

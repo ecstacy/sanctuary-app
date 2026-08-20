@@ -57,9 +57,13 @@ describe('resolveDietTarget', () => {
   })
 
   it('gives a tridoshic/balanced constitution NO single-dosha target', () => {
-    // A ~33/33/34 user must not have their food page read against "your Pitta".
+    // A ~33/33/34 user must not have their food page read against "your Pitta" —
+    // and the source is 'balanced' (has a profile), distinct from 'none' (never
+    // quizzed), so surfaces don't wrongly prompt the quiz.
     const balanced = { dosha_details: { primary: 'pitta', percentages: { vata: 34, pitta: 33, kapha: 33 } } }
-    expect(resolveDietTarget({ profile: balanced, now: jul })).toMatchObject({ dosha: null, source: 'none' })
+    expect(resolveDietTarget({ profile: balanced, now: jul })).toMatchObject({ dosha: null, source: 'balanced' })
+    // A user who never quizzed (no percentages) still reads as 'none'.
+    expect(resolveDietTarget({ profile: {}, now: jul })).toMatchObject({ dosha: null, source: 'none' })
     // …but a genuine current vikriti flare still lenses, balanced or not.
     const flare = resolveDietTarget({ vikriti: { hasSignal: true, vikriti: 'pitta' }, profile: balanced, now: jul })
     expect(flare).toMatchObject({ dosha: 'pitta', source: 'vikriti' })
