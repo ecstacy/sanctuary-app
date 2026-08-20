@@ -1712,6 +1712,7 @@
     "citedAs": "Charaka Samhita, {{verse}}",
     "derived": "Aus den Eigenschaften abgeleitet — nicht klassisch belegt",
     "noTarget": "Mach das Dosha-Quiz, dann sagen wir dir, was das konkret für dich bedeutet.",
+    "balancedTarget": "Deine Konstitution ist ausgeglichen — kein einzelnes Dosha, an dem sich das messen ließe. Die Referenz unten zeigt die Wirkung auf jedes.",
     "targetSimple": "Bezogen auf deine {{dosha}}-Konstitution.",
     "targetExplained": "Deine Konstitution ist {{prakriti}}, aber zuletzt war {{vikriti}} erhöht — deshalb beziehen wir das hier auf {{vikriti}}.",
     "excluded": {

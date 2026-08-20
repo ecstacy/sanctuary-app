@@ -1712,6 +1712,7 @@
     "citedAs": "Charaka Samhita, {{verse}}",
     "derived": "Derived from its properties — not classically cited",
     "noTarget": "Take the dosha quiz and we'll tell you what this means for you specifically.",
+    "balancedTarget": "Your constitution is balanced — no single dosha to read this against. The reference below shows how it acts on each.",
     "targetSimple": "Read against your {{dosha}} constitution.",
     "targetExplained": "Your constitution is {{prakriti}}, but lately you've been running {{vikriti}}-high — so we're reading this against {{vikriti}}.",
     "excluded": {

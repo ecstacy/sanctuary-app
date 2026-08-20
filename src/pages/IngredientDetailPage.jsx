@@ -251,6 +251,10 @@ export default function IngredientDetailPage() {
                 : t('diet.targetSimple', { dosha: doshaName })}
             </p>
           </div>
+        ) : target.source === 'balanced' ? (
+          <div className="mt-5 rounded-2xl border border-outline-variant/25 bg-surface-container-low p-5">
+            <p className="font-body text-[15px] text-on-surface leading-relaxed">{t('diet.balancedTarget')}</p>
+          </div>
         ) : (
           <div className="mt-5 rounded-2xl border border-outline-variant/25 bg-surface-container-low p-5">
             <p className="font-body text-[15px] text-on-surface leading-relaxed">{t('diet.noTarget')}</p>
