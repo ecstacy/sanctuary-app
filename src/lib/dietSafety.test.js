@@ -113,6 +113,14 @@ const REVIEWED_SIGNED_OFF = [
   'dosa', 'idli', 'sambar', 'meduVada', 'uttapam', 'rasam', 'poha', 'dhokla',
   'chole', 'palakPaneer', 'dalMakhani', 'alooGobi', 'upmaDish',
   'sandwich', 'baguette', 'breadRoll',
+  // Everyday-coverage depth — 2026-08-18 (ingredients-common.js). Common staples
+  // a gap-probe surfaced as missing, added reviewed so meal logging doesn't hit
+  // trust-breaking holes.
+  'water', 'crab', 'lobster', 'mussels', 'squid', 'scallops', 'mince',
+  'celeriac', 'swede', 'kohlrabi', 'watercress', 'endive', 'bakedBeans', 'greenSalad',
+  'nectarine', 'persimmon', 'prunes',
+  'paratha', 'kulcha', 'papadum', 'khichdi', 'pulao', 'kadhi', 'raita', 'chutney',
+  'gravy', 'stock', 'stew', 'coleslaw',
   // Modern batch 3 — 2026-08-18 (docs/diet-review-modern-batch-3.md). 53 eating-
   // out & store-snack composites, human-reviewed and corrected.
   'pizza', 'cheeseburger', 'sushi', 'ramenBowl', 'padThai', 'friedRice',

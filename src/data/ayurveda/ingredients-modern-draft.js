@@ -334,7 +334,7 @@ export const MODERN_DRAFT_INGREDIENTS = {
   },
   greekYoghurt: {
     id: 'greekYoghurt', name: 'Greek yoghurt',
-    aliases: ['strained yoghurt', 'griechischer joghurt'],
+    aliases: ['greek yogurt', 'greek yoghurt', 'strained yoghurt', 'griechischer joghurt'],
     category: 'dairy', rasa: ['sour', 'sweet'], virya: 'heating', vipaka: 'sour',
     guna: ['heavy', 'moist'], doshaEffect: { vata: -1, pitta: 1, kapha: 1 },
     whyFavor: 'Thick and grounding, with more protein than ordinary yoghurt — settling for Vata.',
