@@ -1934,6 +1934,7 @@
     "specifyTitle": "What's in your {{name}}?",
     "specifyHelp": "Add what you blended in for a reading based on your actual smoothie — or skip for a general estimate.",
     "specifySkip": "Skip — use a general estimate",
+    "specifyAddOwn": "Add your own",
     "dontHave": "We don't have \"{{token}}\" yet — pick the closest, or skip it.",
     "skip": "Skip",
     "seeResultCta": "See how it affects me",

@@ -271,6 +271,22 @@ export default function MealCheckPage() {
   // real parts at finalize time (resolveOpenComposites), so we never double-count
   // and the panel doesn't collapse after the first chip.
   function addComponent(_openId, opt) { addItem(opt) }
+  // Free-text add for a component that isn't in the pre-populated chips ("chia",
+  // "mango juice"…). Parses like any meal entry and adds whatever reviewed foods
+  // it resolves to, leaving the composite open so the panel stays. Returns false
+  // when nothing matched so the field can show a "not found" hint.
+  function addCustomComponent(query) {
+    const parsed = parseMeal(query)
+    const found = parsed.matched
+      .filter((m) => !items.some((i) => i.id === m.id))
+      .map((m) => ({ id: m.id, name: m.name }))
+    if (!found.length) return false
+    setItems((prev) => {
+      const add = found.filter((f) => !prev.some((i) => i.id === f.id))
+      return add.length ? [...prev, ...add] : prev
+    })
+    return true
+  }
   // "Skip" — the user doesn't want to itemise; keep the composite's fallback
   // verdict by clearing its open flag so the prompt closes.
   function keepComposite(openId) {
@@ -541,6 +557,7 @@ export default function MealCheckPage() {
                     {t('mealCheck.specifySkip')}
                   </button>
                 </div>
+                <ComponentAdder t={t} onAdd={addCustomComponent} />
               </div>
             ))}
 
@@ -866,6 +883,50 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
       </button>
       <p className="text-xs text-on-surface-variant text-center mt-4">{t('mealCheck.disclaimer')}</p>
     </section>
+  )
+}
+
+// Free-text "add your own" for the open-composite specify panel — a dashed
+// "＋ Add your own" that reveals a small input. Mirrors the MealChips adder so
+// the two feel the same; kept separate so the panel stays self-contained.
+function ComponentAdder({ t, onAdd }) {
+  const [adding, setAdding] = useState(false)
+  const [val, setVal] = useState('')
+  const [miss, setMiss] = useState(false)
+
+  function submit() {
+    const q = val.trim()
+    if (!q) return
+    if (onAdd(q)) { setVal(''); setAdding(false); setMiss(false) }
+    else setMiss(true)
+  }
+
+  if (!adding) {
+    return (
+      <button
+        onClick={() => setAdding(true)}
+        className="mt-3 inline-flex items-center gap-1 rounded-full border border-dashed border-outline px-3.5 py-1.5 text-sm text-on-surface-variant"
+      >
+        <span className="material-symbols-outlined text-[16px]">add</span>
+        {t('mealCheck.specifyAddOwn', 'Add your own')}
+      </button>
+    )
+  }
+  return (
+    <div className="mt-3">
+      <div className="flex gap-2">
+        <input
+          autoFocus
+          value={val}
+          onChange={(e) => { setVal(e.target.value); setMiss(false) }}
+          onKeyDown={(e) => { if (e.key === 'Enter') submit() }}
+          placeholder={t('mealCheck.addPlaceholder')}
+          className="flex-1 rounded-full bg-surface-container border border-outline-variant px-4 py-2 text-sm focus:outline-none focus:border-primary"
+        />
+        <button onClick={submit} className="shrink-0 bg-primary text-on-primary font-label px-4 rounded-full text-sm">{t('mealCheck.addBtn')}</button>
+      </div>
+      {miss && <p className="text-[11px] text-on-surface-variant mt-1.5 px-1">{t('mealCheck.addNotFound')}</p>}
+    </div>
   )
 }
 
