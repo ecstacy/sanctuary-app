@@ -17,6 +17,24 @@ describe('variantsOf — prep-variant sibling grouping', () => {
 const pittaUser = { dosha_details: { primary: 'pitta' } }
 const kaphaUser = { dosha_details: { primary: 'kapha' } }
 
+describe('open composites — ask what went in rather than trust a generic verdict', () => {
+  it('flags a smoothie as open and offers reviewed add-in components', () => {
+    const m = parseMeal('smoothie').matched.find((x) => x.id === 'smoothie')
+    expect(m.open).toBe(true)
+    const ids = m.componentSuggestions.map((c) => c.id)
+    expect(ids).toContain('banana')
+    expect(ids.length).toBeGreaterThan(3)
+    // Every suggestion must be a real, reviewed row (getIngredient hides drafts).
+    expect(m.componentSuggestions.every((c) => getIngredient(c.id))).toBe(true)
+  })
+
+  it('leaves a determinate composite unflagged (pizza keeps its single verdict)', () => {
+    const m = parseMeal('pizza').matched.find((x) => x.id === 'pizza')
+    expect(m.open).toBeFalsy()
+    expect(m.componentSuggestions).toBeUndefined()
+  })
+})
+
 describe('parseMeal', () => {
   it('resolves the example meal despite plurals, aliases and connectives', () => {
     const { matched } = parseMeal('eggs with toast and avocado')

@@ -160,6 +160,20 @@ function lookup(token) {
 
 const brief = (r) => ({ id: r.id, name: r.name })
 
+// For an OPEN composite ingredient (`composite: 'open'`), return the metadata the
+// parser attaches to its matched item: `open: true` plus its suggested add-in
+// components resolved to {id,name} (reviewed rows only). A non-open ingredient
+// returns nothing, so the spread is a no-op. Kept here (not in the ingredient
+// data) so the UI gets ready-to-render options and the gate stays data-driven.
+function openCompositeMeta(r) {
+  if (r?.composite !== 'open') return {}
+  const componentSuggestions = (r.components || [])
+    .map((id) => getIngredient(id))   // getIngredient hides draft rows
+    .filter(Boolean)
+    .map(brief)
+  return { open: true, componentSuggestions }
+}
+
 // Nearest known foods for an unknown token — best-effort suggestions for the UI.
 function nearest(token) {
   const first = token.trim().toLowerCase().split(/\s+/)[0]
@@ -227,6 +241,11 @@ export function parseMeal(text) {
           qty,
           modifiers: modifiersOf(baseText, r),
           portionWeight: portionWeightOf(qty),
+          // An OPEN composite (smoothie, salad…) names a format, not a recipe, so
+          // its baked-in verdict is only a fallback. Flag it and resolve its
+          // common add-ins so the UI can invite the user to specify what went in
+          // rather than trust a generic outcome. See ingredients `composite:'open'`.
+          ...openCompositeMeta(r),
         })
       }
     } else {
