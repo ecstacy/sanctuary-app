@@ -19,7 +19,8 @@ import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
 import MealOfTheDayCard from '../components/MealOfTheDayCard'
 import DoshaGem, { GEM_HUE, gemRadiusAtU } from '../components/DoshaGem'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
-import { saveDoshaSelfReport, effectivePrimary, doshaSelfReport } from '../lib/doshaSelfReport'
+import { saveDoshaSelfReport, doshaSelfReport } from '../lib/doshaSelfReport'
+import { deriveCurrentDoshaState } from '../lib/currentDoshaState'
 import { getIntent } from '../lib/intent'
 import { getRefine } from '../lib/refine'
 import { computeFamiliarity } from '../lib/familiarity'
@@ -413,34 +414,15 @@ export default function HomePage() {
   // cleanly resets the reading instead of leaving a phantom "High Pitta". Only
   // vikriti that is both fresh (≤14 days) AND newer than the baseline counts;
   // otherwise the constitution IS the reading.
-  const baselineAt     = profile?.dosha_details?.assessedAt || null
-  const afterBaseline  = (ts) => !baselineAt || (!!ts && ts > baselineAt)
-  const signalRelevant = vikritiSignal.hasSignal && afterBaseline(vikritiSignal.lastCheckinAt)
-  const vikritiFresh   = !!vikriti.lastVikritiAt && vikriti.daysSinceLast <= 14 && afterBaseline(vikriti.lastVikritiAt)
-  const signalDosha    = signalRelevant
-    ? vikritiSignal.vikriti
-    : (vikritiFresh ? vikriti.lastVikritiPrimary : null)
-  // Honours the user's own "not quite → I feel more like X" correction (#52).
-  const prakriti       = effectivePrimary(profile) || (profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
-  const prakritiValid  = ['vata', 'pitta', 'kapha'].includes(prakriti)
-  const pcts           = profile?.dosha_details?.percentages || null
-  // A balanced constitution has no single dominant: the stored label says so,
-  // or all three sit within a few points (guards against a bare-primary read).
-  const isTridoshic    = (profile?.dosha || '').toLowerCase() === 'tridoshic' ||
-    (!!pcts && (Math.max(pcts.vata, pcts.pitta, pcts.kapha) - Math.min(pcts.vata, pcts.pitta, pcts.kapha) <= 3))
-  const isElevated     = !!signalDosha
-  // The reading's dosha, for gem emphasis + accent + copy. When a balanced
-  // constitution isn't elevated, there's no dominant → favour "balanced".
-  const balanced       = isTridoshic && !isElevated
-  const currentDosha   = signalDosha || (prakritiValid ? prakriti : null)
+  // ONE derivation, shared with the Dosha profile page (lib/currentDoshaState.js)
+  // so the "state this week" card here and the page it links to can never show
+  // different readings. Home already holds the two vikriti reads + profile, so we
+  // pass them straight in (no extra fetch).
+  const {
+    currentDosha, isElevated, balanced, prakritiValid,
+    currentPercentages: doshaPercentages,
+  } = deriveCurrentDoshaState({ profile, signal: vikritiSignal, schedule: vikriti })
   const currentDoshaName = currentDosha ? doshaDisplayName(currentDosha) : null
-  // The gem shows the split for whichever source is the reading: fresh, relevant
-  // vikriti percentages, otherwise the constitution's. Same source decision as
-  // the dosha above, so the number and the label can't come from different reads.
-  const doshaPercentages =
-    (vikritiFresh && vikriti.lastVikritiPercentages) ||
-    pcts ||
-    null
   // Favour list follows the current state (or constitution; balanced when tridoshic).
   const intent         = getIntent()
   // The qualitative "getting to know you" progression (#55) — folds the

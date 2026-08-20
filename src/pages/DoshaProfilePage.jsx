@@ -2,11 +2,73 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import DoshaProfileContent from '../components/DoshaProfileContent'
+import DoshaGem from '../components/DoshaGem'
+import VikritiHistoryChart from '../components/VikritiHistoryChart'
+import { useCurrentDoshaState } from '../hooks/useCurrentDoshaState'
+import { useVikritiHistory } from '../hooks/useVikritiHistory'
+import { doshaDisplayName } from '../i18n/contentI18n'
+
+// The "this week / current state" lead — the SAME reading the Home state card
+// shows, so tapping the card continues the story instead of contradicting it.
+// Shown only when today's reading is a live imbalance that differs from the
+// baseline; otherwise the constitution stands on its own below.
+function ThisWeekLead({ t, onBack, state, history }) {
+  const name = doshaDisplayName(state.currentDosha)
+  return (
+    <div className="px-6 pt-3">
+      <header className="flex items-center py-2 -ml-1">
+        <button
+          onClick={onBack}
+          className="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center"
+          aria-label={t('common.back', 'Back')}
+        >
+          <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">arrow_back</span>
+        </button>
+      </header>
+
+      <div className="bg-surface-container-low border border-outline-variant rounded-2xl p-5 mt-1">
+        <p className="font-label text-xs uppercase tracking-widest text-primary mb-1">
+          {t('doshaProfile.thisWeekTitle', 'This week — your current state')}
+        </p>
+        <h1 className="font-headline text-2xl leading-snug mb-3">
+          {t('doshaProfile.thisWeekLean', { dosha: name, defaultValue: 'You’re running {{dosha}}-high right now.' })}
+        </h1>
+
+        {state.currentPercentages && (
+          <div className="flex justify-center my-2">
+            <DoshaGem percentages={state.currentPercentages} dominant={state.currentDosha} size={148} />
+          </div>
+        )}
+
+        {history?.daysTracked > 0 && (
+          <div className="mt-3">
+            <p className="font-label text-[11px] uppercase tracking-wide text-on-surface-variant mb-2">
+              {t('doshaProfile.thisWeekTrend', 'Recent trend')}
+            </p>
+            <VikritiHistoryChart history={history} />
+          </div>
+        )}
+
+        {/* The bridge: name the relationship so the two numbers stop reading as
+            a contradiction. */}
+        <p className="font-body text-[13px] text-on-surface-variant leading-relaxed mt-4">
+          {t('doshaProfile.thisWeekBridge', 'Your constitution below is your baseline. This is how you’re leaning today, read against it.')}
+        </p>
+      </div>
+
+      <p className="font-label text-xs uppercase tracking-widest text-on-surface-variant mt-7 mb-1 px-1">
+        {t('doshaProfile.yourConstitution', 'Your constitution')}
+      </p>
+    </div>
+  )
+}
 
 export default function DoshaProfilePage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { profile } = useAuth()
+  const state = useCurrentDoshaState()
+  const history = useVikritiHistory(30)
 
   const doshaLabel = profile?.dosha || null
   const details    = profile?.dosha_details || null
@@ -45,6 +107,11 @@ export default function DoshaProfilePage() {
     )
   }
 
+  // Lead with the current-state section only when today's reading is a live
+  // imbalance that differs from the baseline. When it matches the constitution
+  // (or there's no signal), the constitution stands alone — no duplicate.
+  const showThisWeek = state.isElevated && !state.matchesPrakriti
+
   return (
     <DoshaProfileContent
       doshaLabel={doshaLabel}
@@ -52,7 +119,11 @@ export default function DoshaProfilePage() {
       secondary={secondary}
       tertiary={tertiary}
       percentages={percentages}
-      onBack={() => navigate(-1)}
+      // When the lead is shown it owns the back button; otherwise the hero does.
+      onBack={showThisWeek ? null : () => navigate(-1)}
+      leadSlot={showThisWeek
+        ? <ThisWeekLead t={t} onBack={() => navigate(-1)} state={state} history={history} />
+        : null}
       footerSlot={
         <div className="text-center mb-8">
           <button

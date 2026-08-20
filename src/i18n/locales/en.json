@@ -245,7 +245,7 @@
     "ch1Kicker": "Chapter 1",
     "ch1Title": "Who you are",
     "ch1Lede": "The elements, qualities, and patterns that shape your constitution.",
-    "yourConstitution": "Your Constitution",
+    "yourConstitution": "Your constitution",
     "vpkShort": "V · P · K",
     "pctAria": "{{name}} {{pct}} percent",
     "footnoteTridoshic": "A rare and balanced constitution. All three doshas are equally expressed in your nature.",
@@ -315,7 +315,11 @@
     "understandingBody": "In Ayurveda, your Prakriti is your birth constitution — the unique ratio of Vata, Pitta, and Kapha you were born with. It remains stable throughout life. When doshas shift due to diet, stress, or seasons, that temporary state is called Vikriti. The goal of Ayurveda is to bring Vikriti back in alignment with Prakriti.",
     "paywallHeadline": "Live by your {{primary}} nature",
     "paywallSubhead": "Unlock Chapter 3 and your full Ayurvedic lifestyle protocol.",
-    "dietPreview": "Preview your dietary guide"
+    "dietPreview": "Preview your dietary guide",
+    "thisWeekTitle": "This week — your current state",
+    "thisWeekLean": "You’re running {{dosha}}-high right now.",
+    "thisWeekTrend": "Recent trend",
+    "thisWeekBridge": "Your constitution below is your baseline. This is how you’re leaning today, read against it."
   },
   "onboarding": {
     "skip": "Skip",
