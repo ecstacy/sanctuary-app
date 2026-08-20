@@ -265,20 +265,28 @@ export default function MealCheckPage() {
     setItems((prev) => (prev.some((i) => i.id === opt.id) ? prev : [...prev, opt]))
   }
   function removeItem(id) { setItems((prev) => prev.filter((i) => i.id !== id)) }
-  // Specifying a component of an OPEN composite (e.g. adding "banana" to a
-  // smoothie) replaces the generic composite with its real parts: add the part
-  // and drop the composite, so the reading is composed from what was actually in
-  // it instead of a one-size default. Later parts just add (composite already gone).
-  function addComponent(openId, opt) {
-    setItems((prev) => {
-      const withoutComposite = prev.filter((i) => i.id !== openId)
-      return withoutComposite.some((i) => i.id === opt.id) ? withoutComposite : [...withoutComposite, opt]
-    })
-  }
-  // "That's everything" — the user is done specifying; keep the composite as-is
-  // (its fallback verdict) by just clearing the open flag so the prompt closes.
+  // Specifying components of an OPEN composite (e.g. a smoothie): each tap just
+  // ADDS the part and leaves the composite in place so the panel stays open and
+  // the user can keep adding. The generic composite is only swapped out for its
+  // real parts at finalize time (resolveOpenComposites), so we never double-count
+  // and the panel doesn't collapse after the first chip.
+  function addComponent(_openId, opt) { addItem(opt) }
+  // "Skip" — the user doesn't want to itemise; keep the composite's fallback
+  // verdict by clearing its open flag so the prompt closes.
   function keepComposite(openId) {
     setItems((prev) => prev.map((i) => (i.id === openId ? { ...i, open: false } : i)))
+  }
+  // At finalize, drop any open composite the user actually itemised (≥1 of its
+  // components is now on the plate) — the parts replace the generic verdict. An
+  // untouched composite is kept as its fallback. Clears the open flag either way.
+  function resolveOpenComposites(list) {
+    return list
+      .filter((it) => {
+        if (!it.open) return true
+        const specified = (it.componentSuggestions || []).some((c) => list.some((i) => i.id === c.id))
+        return !specified
+      })
+      .map((it) => (it.open ? { ...it, open: false } : it))
   }
   function resolveAmbiguous(token, opt) {
     addItem(opt)
@@ -581,7 +589,7 @@ export default function MealCheckPage() {
             ))}
 
             <button
-              onClick={() => computeResult()}
+              onClick={() => computeResult(resolveOpenComposites(items))}
               disabled={items.length === 0}
               className="w-full mt-3 bg-primary text-on-primary font-label py-3.5 rounded-full disabled:opacity-40"
             >
