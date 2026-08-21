@@ -85,7 +85,7 @@ Dietary bridges, Dinacharya legibility.
 | VC1 | **Dosha profile — Chapter 3 info rows** | C | Season / hours / tastes cards use a `rounded-full` badge + `primaryData.bgColor`; retint to the NavRow squircle badge (color-mix accent) so Ch3 matches the entry rows above. Info rows (no chevron). |
 | VC2 | **Home — entry & state cards** | C | ✅ Meal Check entry → NavRow (badge slot added for the trial pill; badge tints to the dosha via theme-mapped `--color-primary`). The state gem card, quiz CTA, vikriti card, and journey stats card are intentionally distinct rich cards and already share the `surface-container-low rounded-2xl border` container language — left as-is. |
 | VC3 | **Discover hub tiles** | C | ✅ Browse grid kept (right affordance for a category gallery) but harmonized: squircle badges + ≥14px type on DiscoverPage + DiscoverPractices. DiscoverFoods' three entry rows → shared NavRow. Breathwork uses a different layout — left as-is. Verified in-browser (Kapha). |
-| VC4 | **Journey page cards** | C | Timeline nodes + stat cards — align radii, badges, and body-copy size. |
+| VC4 | **Journey page cards** | C | ✅ It's a stats dashboard (not nav rows), so aligned the card language instead: `rounded-xl`/`rounded-lg` → `rounded-2xl` (outer) + `rounded-xl` (inner), matching the Home journey card + the rest of the app. Verified in-browser (renders with zeros for a fresh user). |
 | VC5 | **Recommendations page cards** | C | Pose/recommendation cards → shared card language + ≥14px body. |
 | VC6 | **Meal Check result cards** | C | RemedyCard / rebalance / breakdown rows predate NavRow; align badge + type scale (keep their richer content). |
 | VC7 | **Profile / Settings list rows** | C | Settings + profile menu rows → one list-row style. |
