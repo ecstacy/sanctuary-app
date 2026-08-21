@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { DEV_MOCK } from '../lib/devMockAuth'
 import { Capacitor } from '@capacitor/core'
 import { registerPlugin } from '@capacitor/core'
 import { syncLanguageFromProfile } from '../i18n'
@@ -53,12 +54,15 @@ function clearProfileCache() {
 }
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [profile, setProfile] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(DEV_MOCK?.user ?? null)
+  const [profile, setProfile] = useState(DEV_MOCK?.profile ?? null)
+  const [loading, setLoading] = useState(!DEV_MOCK)
   const [authTransitioning, setAuthTransitioning] = useState(false)
 
   useEffect(() => {
+    // DEV-only mock session (inert in production) — skip all real Supabase auth.
+    if (DEV_MOCK) return
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       const sessionUser = session?.user ?? null
@@ -323,6 +327,7 @@ export function AuthProvider({ children }) {
   }
 
   async function refreshProfile() {
+    if (DEV_MOCK) return   // mock session: nothing to refetch
     // Fetch userId dynamically to avoid stale closure issues
     const { data: { session } } = await supabase.auth.getSession()
     if (session?.user?.id) await fetchProfile(session.user.id)
