@@ -657,7 +657,7 @@ function HistoryRow({ t, log, onOpen, onDelete }) {
   const onEnd = () => { setDragging(false); setDx(dx < -42 ? -76 : 0) }
 
   return (
-    <div className="relative overflow-hidden rounded-xl">
+    <div className="relative overflow-hidden rounded-2xl">
       <button
         onClick={() => onDelete(log.id)}
         aria-label={t('mealCheck.deleteAria')}
@@ -671,7 +671,7 @@ function HistoryRow({ t, log, onOpen, onDelete }) {
         onTouchStart={(e) => onStart(e.touches[0].clientX)}
         onTouchMove={(e) => onMove(e.touches[0].clientX)}
         onTouchEnd={onEnd}
-        className="relative w-full flex items-center gap-3 bg-surface-container-low p-3.5 border border-outline-variant/40 text-left rounded-xl"
+        className="relative w-full flex items-center gap-3 bg-surface-container-low p-3.5 border border-outline-variant/40 text-left rounded-2xl"
         style={{ transform: `translateX(${dx}px)`, transition: dragging ? 'none' : 'transform 0.18s ease' }}
       >
         <span className="flex-1 min-w-0">
@@ -1071,8 +1071,8 @@ function RemedyCard({ emoji, poseKey, title, tag, howTo, breath, confidence, onC
         </span>
       ) : (
         <span
-          className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center text-lg"
-          style={{ background: `color-mix(in srgb, var(--color-${breath ? 'vata' : 'kapha'}) 12%, transparent)` }}
+          className="w-11 h-11 shrink-0 rounded-2xl flex items-center justify-center text-lg"
+          style={{ background: `color-mix(in srgb, var(--color-${breath ? 'vata' : 'kapha'}) 14%, transparent)` }}
           aria-hidden="true"
         >
           {emoji}
