@@ -17,6 +17,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const now = () => new Date().toISOString()
+// A syntactically-valid UUID for a user that doesn't exist — Supabase queries
+// return empty instead of 400ing on a non-UUID id, keeping the console clean.
+const DEV_UUID = '00000000-0000-4000-8000-0000000d0511'
 
 const PROFILES = {
   vata: {
@@ -66,9 +69,9 @@ function getDevMock() {
   let premium = true
   try { premium = localStorage.getItem('devPremium') !== '0' } catch { /* ignore */ }
 
-  const user = { id: 'dev-user', email: 'dev@sanctuary.test', app_metadata: { provider: 'dev' }, user_metadata: {} }
+  const user = { id: DEV_UUID, email: 'dev@sanctuary.test', app_metadata: { provider: 'dev' }, user_metadata: {} }
   const profile = {
-    id: 'dev-user',
+    id: DEV_UUID,
     email: 'dev@sanctuary.test',
     is_premium: premium,
     diet_prefs: {},

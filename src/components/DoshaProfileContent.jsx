@@ -46,21 +46,28 @@ function ThemeSection({ kicker, title, lede, children }) {
 }
 
 
-// A preview tile — icon, title, one-line summary, chevron — that opens a
-// deep-dive on its own page. Same shape as the diet/routine entry tiles below,
-// so the whole profile reads as one consistent "tap to go deeper" system.
-function DetailTile({ icon, title, summary, onClick }) {
+// A full-width navigation row — a generous dosha-tinted icon badge, a bold
+// title, a real one/two-line description, and a chevron. Replaces the cramped
+// 2-up boxes so the depth behind each entry point actually reads. `accentHex`
+// tints the badge to the user's dosha, so the whole page feels of a piece.
+function NavRow({ icon, title, summary, onClick, accentHex = 'var(--color-primary)', ariaLabel }) {
   return (
     <button
       onClick={onClick}
-      className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2 relative"
+      aria-label={ariaLabel}
+      className="w-full flex items-center gap-4 bg-surface-container-low border border-outline-variant/50 rounded-2xl p-4 text-left active:scale-[0.99] transition-all"
     >
-      <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base absolute top-3 right-3">chevron_right</span>
-      <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
-        <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">{icon}</span>
+      <div
+        className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+        style={{ background: `color-mix(in srgb, ${accentHex} 14%, transparent)` }}
+      >
+        <span aria-hidden="true" className="material-symbols-outlined text-[22px]" style={{ color: accentHex }}>{icon}</span>
       </div>
-      <p className="font-body font-semibold text-sm text-on-surface leading-tight">{title}</p>
-      <p className="font-body text-[13px] text-on-surface-variant/70 leading-snug">{summary}</p>
+      <div className="flex-1 min-w-0">
+        <p className="font-body font-semibold text-[15px] text-on-surface leading-tight">{title}</p>
+        <p className="font-body text-[13px] text-on-surface-variant leading-snug mt-1">{summary}</p>
+      </div>
+      <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-xl flex-shrink-0">chevron_right</span>
     </button>
   )
 }
@@ -361,28 +368,31 @@ export default function DoshaProfileContent({
               <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-1 px-1">
                 {t('doshaProfile.exploreTitle', 'Explore your dosha')}
               </p>
-              <p className="font-body text-[13px] text-on-surface-variant/80 leading-relaxed mb-3 px-1">
+              <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-3 px-1">
                 {t('doshaProfile.exploreSubtitle', 'The full detail on each area — tap to open.')}
               </p>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col gap-2.5">
               {hasRichDetail(primary, isTridoshic) && (
-                <DetailTile
+                <NavRow
                   icon="self_improvement"
+                  accentHex={primaryData.accentHex}
                   title={t('doshaProfile.tileNature')}
                   summary={t('doshaProfile.tileNatureSummary', { name: primaryData.name })}
                   onClick={() => openSection('nature')}
                 />
               )}
               {hasRichDetail(primary, isTridoshic) && (
-                <DetailTile
+                <NavRow
                   icon="healing"
+                  accentHex={primaryData.accentHex}
                   title={t('doshaProfile.tileImbalance')}
                   summary={t('doshaProfile.tileImbalanceSummary')}
                   onClick={() => openSection('imbalance')}
                 />
               )}
-              <DetailTile
+              <NavRow
                 icon="spa"
+                accentHex={primaryData.accentHex}
                 title={t('doshaProfile.tileLifestyle')}
                 summary={t('doshaProfile.tileLifestyleSummary')}
                 onClick={() => openSection('lifestyle')}
@@ -564,31 +574,23 @@ export default function DoshaProfileContent({
           )}
 
           {/* Diet + Daily Routine deep-dive CTAs */}
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            <button
+          <div className="flex flex-col gap-2.5 mb-6">
+            <NavRow
+              icon="restaurant"
+              accentHex={primaryData.accentHex}
+              title={t('doshaProfile.dietTitle')}
+              summary={t('doshaProfile.dietSummary')}
+              ariaLabel={t('doshaProfile.dietAria')}
               onClick={() => navigate('/dietary')}
-              aria-label={t('doshaProfile.dietAria')}
-              className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2 relative"
-            >
-              <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base absolute top-3 right-3">chevron_right</span>
-              <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
-                <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">restaurant</span>
-              </div>
-              <p className="font-body font-semibold text-sm text-on-surface leading-tight">{t('doshaProfile.dietTitle')}</p>
-              <p className="font-body text-[13px] text-on-surface-variant/70 leading-snug">{t('doshaProfile.dietSummary')}</p>
-            </button>
-            <button
+            />
+            <NavRow
+              icon="schedule"
+              accentHex={primaryData.accentHex}
+              title={t('doshaProfile.routineTitle')}
+              summary={t('doshaProfile.routineSummary')}
+              ariaLabel={t('doshaProfile.routineAria')}
               onClick={() => navigate('/dinacharya')}
-              aria-label={t('doshaProfile.routineAria')}
-              className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2 relative"
-            >
-              <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base absolute top-3 right-3">chevron_right</span>
-              <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
-                <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">schedule</span>
-              </div>
-              <p className="font-body font-semibold text-sm text-on-surface leading-tight">{t('doshaProfile.routineTitle')}</p>
-              <p className="font-body text-[13px] text-on-surface-variant/70 leading-snug">{t('doshaProfile.routineSummary')}</p>
-            </button>
+            />
           </div>
           </>
           )}
