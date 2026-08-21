@@ -114,6 +114,7 @@ import { MODERN_DRAFT_INGREDIENTS_3 } from './ingredients-modern-draft-3'
 import { DISH_INGREDIENTS } from './ingredients-dishes'
 import { MODERN_DRAFT_INGREDIENTS_4 } from './ingredients-modern-draft-4'
 import { COMMON_INGREDIENTS } from './ingredients-common'
+import { MODERN_DRAFT_INGREDIENTS_5 } from './ingredients-modern-draft-5'
 
 /** @type {Record<string, Ingredient>} */
 export const INGREDIENTS = {
@@ -3401,6 +3402,7 @@ Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_3)
 Object.assign(INGREDIENTS, DISH_INGREDIENTS)
 Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_4)
 Object.assign(INGREDIENTS, COMMON_INGREDIENTS)
+Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_5)
 
 /** Stable list form, for iteration. Includes drafts — filter before display. */
 export const ALL_INGREDIENTS = Object.values(INGREDIENTS)
