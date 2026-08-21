@@ -251,7 +251,7 @@ export default function DoshaProfileContent({
           {/* Primary Dosha */}
           <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5 stagger-3`}>
             <div className="flex items-center gap-2 mb-3">
-              <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>{primaryData.emoji}</span>
+              <span aria-hidden="true" className="material-symbols-outlined text-lg" style={{ color: primaryData.accentHex }}>{primaryData.emoji}</span>
               <p className="font-label text-[11px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
                 {isTridoshic ? t('doshaProfile.balancedNature') : t('doshaProfile.dominant', { name: primaryData.name })}
               </p>
@@ -466,8 +466,8 @@ export default function DoshaProfileContent({
           {/* Ayurvedic Lifestyle — Season, Time, Taste */}
           <div className="bg-surface-container rounded-lg overflow-hidden mb-5">
             <div className="flex items-start gap-4 px-6 py-4">
-              <div className={`w-10 h-10 rounded-full ${primaryData.bgColor} flex items-center justify-center flex-shrink-0`}>
-                <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>calendar_month</span>
+              <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: `color-mix(in srgb, ${primaryData.accentHex} 14%, transparent)` }}>
+                <span aria-hidden="true" className="material-symbols-outlined text-xl" style={{ color: primaryData.accentHex }}>calendar_month</span>
               </div>
               <div>
                 <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.peakSeason')}</p>
@@ -478,8 +478,8 @@ export default function DoshaProfileContent({
             </div>
 
             <div className="flex items-start gap-4 px-6 py-4 border-t border-surface-container-high">
-              <div className={`w-10 h-10 rounded-full ${primaryData.bgColor} flex items-center justify-center flex-shrink-0`}>
-                <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>schedule</span>
+              <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: `color-mix(in srgb, ${primaryData.accentHex} 14%, transparent)` }}>
+                <span aria-hidden="true" className="material-symbols-outlined text-xl" style={{ color: primaryData.accentHex }}>schedule</span>
               </div>
               <div>
                 <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.doshaHours', { name: primaryData.name })}</p>
@@ -490,8 +490,8 @@ export default function DoshaProfileContent({
             </div>
 
             <div className="flex items-start gap-4 px-6 py-4 border-t border-surface-container-high">
-              <div className={`w-10 h-10 rounded-full ${primaryData.bgColor} flex items-center justify-center flex-shrink-0`}>
-                <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>restaurant</span>
+              <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: `color-mix(in srgb, ${primaryData.accentHex} 14%, transparent)` }}>
+                <span aria-hidden="true" className="material-symbols-outlined text-xl" style={{ color: primaryData.accentHex }}>restaurant</span>
               </div>
               <div>
                 <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.balancingTastes')}</p>
