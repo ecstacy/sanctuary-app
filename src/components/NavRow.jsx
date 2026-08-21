@@ -9,12 +9,12 @@
 //  dosha accent on dosha-themed surfaces so the row feels of a piece.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function NavRow({ icon, title, summary, onClick, accentHex = 'var(--color-primary)', ariaLabel }) {
+export default function NavRow({ icon, title, summary, onClick, accentHex = 'var(--color-primary)', ariaLabel, badge, className = '' }) {
   return (
     <button
       onClick={onClick}
       aria-label={ariaLabel}
-      className="w-full flex items-center gap-4 bg-surface-container-low border border-outline-variant/50 rounded-2xl p-4 text-left active:scale-[0.99] transition-all"
+      className={`w-full flex items-center gap-4 bg-surface-container-low border border-outline-variant/50 rounded-2xl p-4 text-left active:scale-[0.99] transition-all ${className}`}
     >
       <div
         className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
@@ -23,7 +23,10 @@ export default function NavRow({ icon, title, summary, onClick, accentHex = 'var
         <span aria-hidden="true" className="material-symbols-outlined text-[22px]" style={{ color: accentHex }}>{icon}</span>
       </div>
       <div className="flex-1 min-w-0">
-        <p className="font-body font-semibold text-[15px] text-on-surface leading-tight">{title}</p>
+        <div className="flex items-center gap-2 flex-wrap">
+          <p className="font-body font-semibold text-[15px] text-on-surface leading-tight">{title}</p>
+          {badge}
+        </div>
         {summary && <p className="font-body text-[13px] text-on-surface-variant leading-snug mt-1">{summary}</p>}
       </div>
       <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-xl flex-shrink-0">chevron_right</span>

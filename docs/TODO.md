@@ -83,7 +83,7 @@ Dietary bridges, Dinacharya legibility.
 | # | Chunk | Who | Notes |
 |---|-------|-----|-------|
 | VC1 | **Dosha profile — Chapter 3 info rows** | C | Season / hours / tastes cards use a `rounded-full` badge + `primaryData.bgColor`; retint to the NavRow squircle badge (color-mix accent) so Ch3 matches the entry rows above. Info rows (no chevron). |
-| VC2 | **Home — entry & state cards** | C | The state-this-week card, the quiz card, practice/upcoming cards, and the vikriti card each have bespoke styling. Unify: nav-type cards → NavRow; keep the gem state card distinct but align its radii/badges/type scale. |
+| VC2 | **Home — entry & state cards** | C | ✅ Meal Check entry → NavRow (badge slot added for the trial pill; badge tints to the dosha via theme-mapped `--color-primary`). The state gem card, quiz CTA, vikriti card, and journey stats card are intentionally distinct rich cards and already share the `surface-container-low rounded-2xl border` container language — left as-is. |
 | VC3 | **Discover hub tiles** | C | DiscoverPage + Discover{Practices,Breathwork,Foods,Programs} use 2-col tile grids with their own shapes. Move to the shared row/tile language. |
 | VC4 | **Journey page cards** | C | Timeline nodes + stat cards — align radii, badges, and body-copy size. |
 | VC5 | **Recommendations page cards** | C | Pose/recommendation cards → shared card language + ≥14px body. |

@@ -12,6 +12,7 @@ import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { useIsPremium } from '../hooks/useIsPremium'
 import { useMealCheckAccess } from '../hooks/useMealCheckAccess'
 import VikritiCard from '../components/VikritiCard'
+import NavRow from '../components/NavRow'
 import ReminderPrompt from '../components/ReminderPrompt'
 import PaywallSheet from '../components/PaywallSheet'
 import WelcomeToPlusCard from '../components/WelcomeToPlusCard'
@@ -839,24 +840,19 @@ export default function HomePage() {
             {t('home.nourish.title')}
           </p>
           <MealOfTheDayCard />
-          <button
+          <NavRow
+            className="mt-3"
+            icon="query_stats"
+            title={t('mealCheck.title')}
+            summary={t('mealCheck.inputHelp')}
+            ariaLabel={t('mealCheck.title')}
             onClick={() => navigate('/meal-check')}
-            className="w-full mt-3 bg-surface-container-low rounded-2xl p-4 border border-outline-variant/40 flex items-center gap-3 text-left"
-          >
-            <span className="material-symbols-outlined text-primary">query_stats</span>
-            <span className="flex-1 min-w-0">
-              <span className="flex items-center gap-2">
-                <span className="font-headline text-base text-on-surface">{t('mealCheck.title')}</span>
-                {(mealAccess.state === 'trial' || mealAccess.state === 'trial_fresh') && (
-                  <span className="shrink-0 font-label text-[10px] uppercase tracking-wide text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded-full">
-                    {t('mealCheck.homeBadge', { count: mealAccess.trialDaysLeft })}
-                  </span>
-                )}
+            badge={(mealAccess.state === 'trial' || mealAccess.state === 'trial_fresh') && (
+              <span className="shrink-0 font-label text-[10px] uppercase tracking-wide text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded-full">
+                {t('mealCheck.homeBadge', { count: mealAccess.trialDaysLeft })}
               </span>
-              <span className="block text-sm text-on-surface-variant truncate">{t('mealCheck.inputHelp')}</span>
-            </span>
-            <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-          </button>
+            )}
+          />
         </div>
 
         {/* ── To favour / ease off — always on, keyed to current state (or
