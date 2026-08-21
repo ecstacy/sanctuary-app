@@ -22,74 +22,9 @@ import { track, EVENTS } from '../lib/track'
 import { useIsPremium } from '../hooks/useIsPremium'
 import PaywallSheet from './PaywallSheet'
 import MedicalDisclaimer from './MedicalDisclaimer'
+import { NatureSections, ImbalanceSections, LifestyleSections, hasRichDetail } from './doshaDetailSections'
+import { DOSHA_DATA, capitalize } from './doshaProfilePrimitives'
 
-// ── Shared dosha display data ────────────────────────────────────────────────
-export const DOSHA_DATA = {
-  vata: {
-    name: 'Vata',
-    element: 'Air + Ether',
-    emoji: 'wind_power',
-    gradient: 'from-[#35708f] to-[#6fa0b8]',
-    bgColor: 'bg-[#e7eff3]',
-    textColor: 'text-vata',
-    barColor: 'bg-vata',
-    accentHex: '#2c5f79',
-    tagline: 'The Creative Whirlwind',
-    description: 'You are movement itself — quick-thinking, imaginative, and beautifully spontaneous. Like the wind, you bring change and inspiration wherever you go.',
-    strengths: ['Creative & artistic', 'Quick learner', 'Adaptable & flexible', 'Enthusiastic spirit'],
-    balanceTips: ['Ground yourself with warm, cooked foods', 'Establish a calming daily routine', 'Prioritize warmth and rest', 'Practice slow, grounding yoga'],
-    qualities: ['Light', 'Dry', 'Cold', 'Mobile', 'Subtle'],
-    season: 'Autumn & Early Winter',
-    timeOfDay: '2 AM – 6 AM & 2 PM – 6 PM',
-    taste: 'Sweet, Sour & Salty foods pacify Vata',
-    yoga: "Slow, grounding flows — Tadasana, Warrior I & II, Child's Pose, Savasana",
-    meditation: 'Body scan & grounding visualizations to anchor the restless mind',
-  },
-  pitta: {
-    name: 'Pitta',
-    element: 'Fire + Water',
-    emoji: 'local_fire_department',
-    gradient: 'from-[#9e5720] to-[#c98a4e]',
-    bgColor: 'bg-[#f4e9db]',
-    textColor: 'text-pitta',
-    barColor: 'bg-pitta',
-    accentHex: '#83471a',
-    tagline: 'The Fierce Transformer',
-    description: 'You are fire incarnate — sharp, determined, and brilliantly focused. Your intensity transforms everything it touches.',
-    strengths: ['Natural leader', 'Sharp intellect', 'Courageous & bold', 'Strong digestion'],
-    balanceTips: ['Cool down with fresh, sweet foods', 'Avoid overworking — rest is not weakness', 'Spend time near water', 'Practice cooling breathwork'],
-    qualities: ['Hot', 'Sharp', 'Light', 'Oily', 'Liquid'],
-    season: 'Summer & Late Spring',
-    timeOfDay: '10 AM – 2 PM & 10 PM – 2 AM',
-    taste: 'Sweet, Bitter & Astringent foods pacify Pitta',
-    yoga: 'Cooling, non-competitive flows — Moon Salutation, Forward Folds, Twists, Pigeon Pose',
-    meditation: 'Loving-kindness & cooling breath (Sheetali) to calm the inner fire',
-  },
-  kapha: {
-    name: 'Kapha',
-    element: 'Earth + Water',
-    emoji: 'landscape',
-    gradient: 'from-[#467539] to-[#7ba86b]',
-    bgColor: 'bg-[#e9f0e5]',
-    textColor: 'text-kapha',
-    barColor: 'bg-kapha',
-    accentHex: '#3a6130',
-    tagline: 'The Steady Mountain',
-    description: 'You are earth embodied — steady, nurturing, and deeply resilient. Your calm presence is a sanctuary for everyone around you.',
-    strengths: ['Loyal & compassionate', 'Incredible endurance', 'Strong memory', 'Natural caretaker'],
-    balanceTips: ['Embrace variety and stimulation', 'Move daily — even gentle walks count', 'Favor warm, spiced foods', 'Wake early and resist oversleeping'],
-    qualities: ['Heavy', 'Slow', 'Cool', 'Oily', 'Smooth'],
-    season: 'Late Winter & Spring',
-    timeOfDay: '6 AM – 10 AM & 6 PM – 10 PM',
-    taste: 'Pungent, Bitter & Astringent foods pacify Kapha',
-    yoga: 'Vigorous, energizing flows — Sun Salutation, Backbends, Warrior III, Camel Pose',
-    meditation: 'Energizing breathwork (Kapalabhati) & walking meditation to spark vitality',
-  },
-}
-
-function capitalize(s) {
-  return s.charAt(0).toUpperCase() + s.slice(1)
-}
 
 // ── Sub-components ───────────────────────────────────────────────────────────
 
@@ -110,59 +45,23 @@ function ThemeSection({ kicker, title, lede, children }) {
   )
 }
 
-function ExpandableSection({ id, icon, label, summary, accentClass = 'text-on-surface-variant', isOpen, onToggle, children }) {
-  return (
-    <div className="bg-surface-container-low rounded-lg overflow-hidden mb-3">
-      <button
-        onClick={onToggle}
-        className="w-full px-5 py-4 flex items-center gap-3 text-left active:bg-surface-container/50"
-        aria-expanded={isOpen}
-        aria-controls={`exp-${id}`}
-      >
-        <div className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0">
-          <span aria-hidden="true" className={`material-symbols-outlined text-base ${accentClass}`}>{icon}</span>
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="font-body font-semibold text-sm text-on-surface leading-tight">{label}</p>
-          {summary && (
-            <p className="font-body text-xs text-on-surface-variant/70 mt-0.5 leading-snug">{summary}</p>
-          )}
-        </div>
-        <span
-          aria-hidden="true"
-          className={`material-symbols-outlined text-on-surface-variant/40 text-sm transition-transform ${isOpen ? 'rotate-180' : ''}`}
-        >
-          expand_more
-        </span>
-      </button>
-      {isOpen && (
-        <div id={`exp-${id}`} className="px-5 pb-5 pt-1 border-t border-outline-variant/10">
-          {children}
-        </div>
-      )}
-    </div>
-  )
-}
 
-function LabelValueRow({ label, value }) {
+// A preview tile — icon, title, one-line summary, chevron — that opens a
+// deep-dive on its own page. Same shape as the diet/routine entry tiles below,
+// so the whole profile reads as one consistent "tap to go deeper" system.
+function DetailTile({ icon, title, summary, onClick }) {
   return (
-    <div className="py-3 border-b border-outline-variant/10 last:border-0 last:pb-0 first:pt-1">
-      <p className="font-label text-[11px] uppercase tracking-[0.15em] text-on-surface-variant mb-1">{label}</p>
-      <p className="font-body text-sm text-on-surface leading-relaxed">{value}</p>
-    </div>
-  )
-}
-
-function BulletList({ items, iconName = 'check_circle', iconClass = 'text-primary' }) {
-  return (
-    <ul className="space-y-2">
-      {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-2">
-          <span aria-hidden="true" className={`material-symbols-outlined text-[14px] mt-0.5 ${iconClass}`}>{iconName}</span>
-          <span className="font-body text-sm text-on-surface leading-relaxed">{item}</span>
-        </li>
-      ))}
-    </ul>
+    <button
+      onClick={onClick}
+      className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.98] transition-all flex flex-col gap-2 relative"
+    >
+      <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-base absolute top-3 right-3">chevron_right</span>
+      <div className="w-10 h-10 rounded-full bg-primary-container/50 flex items-center justify-center">
+        <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">{icon}</span>
+      </div>
+      <p className="font-body font-semibold text-sm text-on-surface leading-tight">{title}</p>
+      <p className="font-body text-xs text-on-surface-variant/70 leading-snug">{summary}</p>
+    </button>
   )
 }
 
@@ -177,7 +76,12 @@ export default function DoshaProfileContent({
   onBack,
   footerSlot,
   leadSlot,
+  // 'all'      — everything inline (anonymous quiz result; unchanged).
+  // 'overview' — slimmed: constitution + strengths + preview tiles + Ch3, with
+  //              the deep dives moved behind their own pages (logged-in profile).
+  sections = 'all',
 }) {
+  const overview = sections === 'overview'
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
   // Re-localize on language change: i18n.language in the dep keeps these
@@ -191,34 +95,15 @@ export default function DoshaProfileContent({
 
   const richDosha = localizeDosha(DOSHAS[primary] || null)
 
-  const [expanded, setExpanded] = useState(new Set())
-
   // ── Paywall: Chapter 3 ("Live by your dosha") is Plus-gated. Free users
   // see the kicker + lede as a teaser, then a single CTA tile that opens
   // the paywall sheet. The Charaka deep dives (body/mind/signs/triggers/
-  // pacify in Chapter 2) and the headline composition stay free — Plus
-  // unlocks the daily lifestyle integration layer.
+  // pacify) and the headline composition stay free — Plus unlocks the daily
+  // lifestyle integration layer.
   const { isPremium } = useIsPremium()
   const [paywallOpen, setPaywallOpen] = useState(false)
   function openPaywall() {
     setPaywallOpen(true)
-  }
-
-  function toggle(id) {
-    setExpanded(prev => {
-      const next = new Set(prev)
-      if (next.has(id)) next.delete(id)
-      else {
-        next.add(id)
-        track(EVENTS.CONTENT_IMPRESSION, {
-          surface:      'dosha_profile',
-          content_type: 'deep_dive',
-          content_id:   id,
-          primary_dosha: primary,
-        })
-      }
-      return next
-    })
   }
 
   if (!primaryData) return null
@@ -434,53 +319,11 @@ export default function DoshaProfileContent({
             )}
           </div>
 
-          {/* Body + Mind expandables */}
-          {richDosha && !isTridoshic && (
-            <div className="mb-5 stagger-5">
-              <ExpandableSection
-                id="body"
-                icon="accessibility_new"
-                label={t('doshaProfile.yourBody', { name: primaryData.name })}
-                summary={t('doshaProfile.bodySummary')}
-                accentClass={primaryData.textColor}
-                isOpen={expanded.has('body')}
-                onToggle={() => toggle('body')}
-              >
-                <div className="pt-3">
-                  {richDosha.body && (
-                    <>
-                      {richDosha.body.build     && <LabelValueRow label={t('doshaProfile.labelBuild')}     value={richDosha.body.build} />}
-                      {richDosha.body.skin       && <LabelValueRow label={t('doshaProfile.labelSkin')}      value={richDosha.body.skin} />}
-                      {richDosha.body.hair       && <LabelValueRow label={t('doshaProfile.labelHair')}      value={richDosha.body.hair} />}
-                      {richDosha.body.face       && <LabelValueRow label={t('doshaProfile.labelFace')}      value={richDosha.body.face} />}
-                      {richDosha.body.digestion  && <LabelValueRow label={t('doshaProfile.labelDigestion')} value={richDosha.body.digestion} />}
-                      {richDosha.body.sleep      && <LabelValueRow label={t('doshaProfile.labelSleep')}     value={richDosha.body.sleep} />}
-                      {richDosha.body.energy     && <LabelValueRow label={t('doshaProfile.labelEnergy')}    value={richDosha.body.energy} />}
-                    </>
-                  )}
-                </div>
-              </ExpandableSection>
-
-              <ExpandableSection
-                id="mind"
-                icon="psychology"
-                label={t('doshaProfile.yourMind', { name: primaryData.name })}
-                summary={t('doshaProfile.mindSummary')}
-                accentClass={primaryData.textColor}
-                isOpen={expanded.has('mind')}
-                onToggle={() => toggle('mind')}
-              >
-                <div className="pt-3 space-y-4">
-                  <div>
-                    <p className={`font-label text-[11px] uppercase tracking-wider mb-2 ${primaryData.textColor}`}>{t('doshaProfile.inBalance')}</p>
-                    <BulletList items={richDosha.mind.balanced} iconName="check_circle" iconClass={primaryData.textColor} />
-                  </div>
-                  <div>
-                    <p className="font-label text-[11px] uppercase tracking-wider mb-2 text-on-surface-variant">{t('doshaProfile.outOfBalance')}</p>
-                    <BulletList items={richDosha.mind.imbalanced} iconName="error" iconClass="text-on-surface-variant/40" />
-                  </div>
-                </div>
-              </ExpandableSection>
+          {/* Body + Mind — inline on the anonymous quiz result; on the logged-in
+              profile it lives behind the "Body & Mind" tile below. */}
+          {sections === 'all' && (
+            <div className="mb-5">
+              <NatureSections primary={primary} isTridoshic={isTridoshic} />
             </div>
           )}
 
@@ -502,113 +345,56 @@ export default function DoshaProfileContent({
             </div>
           </div>
 
+          {/* Deep-dive entry points — keeps the profile scannable; each topic
+              opens as its own page. Overview only; the anonymous quiz result
+              ('all') shows the sections inline in Chapter 2 below instead. */}
+          {overview && (
+            <div className="grid grid-cols-2 gap-3 mt-1">
+              {hasRichDetail(primary, isTridoshic) && (
+                <DetailTile
+                  icon="self_improvement"
+                  title={t('doshaProfile.tileNature')}
+                  summary={t('doshaProfile.tileNatureSummary', { name: primaryData.name })}
+                  onClick={() => navigate('/dosha/nature')}
+                />
+              )}
+              {hasRichDetail(primary, isTridoshic) && (
+                <DetailTile
+                  icon="healing"
+                  title={t('doshaProfile.tileImbalance')}
+                  summary={t('doshaProfile.tileImbalanceSummary')}
+                  onClick={() => navigate('/dosha/imbalance')}
+                />
+              )}
+              <DetailTile
+                icon="spa"
+                title={t('doshaProfile.tileLifestyle')}
+                summary={t('doshaProfile.tileLifestyleSummary')}
+                onClick={() => navigate('/dosha/lifestyle')}
+              />
+            </div>
+          )}
+
         </ThemeSection>
 
         {/* ═══════════════════════════════════════════════════════════
-            CHAPTER 2 — STAYING IN BALANCE
+            CHAPTER 2 — STAYING IN BALANCE  (inline only on the quiz result;
+            behind the tiles above on the logged-in profile)
             ═══════════════════════════════════════════════════════════ */}
+        {sections === 'all' && (
         <ThemeSection
           kicker={t('doshaProfile.ch2Kicker')}
           title={t('doshaProfile.ch2Title')}
           lede={t('doshaProfile.ch2Lede')}
         >
 
-          {richDosha && !isTridoshic && (
-            <div className="mb-5">
-              <ExpandableSection
-                id="signs"
-                icon="health_and_safety"
-                label={t('doshaProfile.signsLabel')}
-                summary={t('doshaProfile.signsSummary', { name: primaryData.name })}
-                accentClass={primaryData.textColor}
-                isOpen={expanded.has('signs')}
-                onToggle={() => toggle('signs')}
-              >
-                <div className="pt-3">
-                  <p className="font-body text-xs text-on-surface-variant leading-relaxed mb-3">
-                    {t('doshaProfile.signsIntro')}
-                  </p>
-                  <BulletList items={richDosha.imbalanceSigns} iconName="circle" iconClass="text-on-surface-variant/40" />
-                </div>
-              </ExpandableSection>
-
-              <ExpandableSection
-                id="triggers"
-                icon="warning"
-                label={t('doshaProfile.triggersLabel')}
-                summary={t('doshaProfile.triggersSummary')}
-                accentClass={primaryData.textColor}
-                isOpen={expanded.has('triggers')}
-                onToggle={() => toggle('triggers')}
-              >
-                <div className="pt-3">
-                  <BulletList items={richDosha.triggers} iconName="trending_up" iconClass="text-on-surface-variant/50" />
-                </div>
-              </ExpandableSection>
-
-              <ExpandableSection
-                id="pacify"
-                icon="spa"
-                label={t('doshaProfile.pacifyLabel')}
-                summary={richDosha.pacification?.principle ? richDosha.pacification.principle.split('.')[0] + '.' : t('doshaProfile.pacifySummaryFallback')}
-                accentClass={primaryData.textColor}
-                isOpen={expanded.has('pacify')}
-                onToggle={() => toggle('pacify')}
-              >
-                <div className="pt-3 space-y-3">
-                  {richDosha.pacification?.principle && (
-                    <div className={`rounded-xl px-4 py-3 ${primaryData.bgColor}`}>
-                      <p className={`font-body text-sm leading-relaxed ${primaryData.textColor}`}>
-                        {richDosha.pacification.principle}
-                      </p>
-                    </div>
-                  )}
-                  {richDosha.pacification?.lifestyle && (
-                    <BulletList items={richDosha.pacification.lifestyle} iconName="check_circle" iconClass={primaryData.textColor} />
-                  )}
-                </div>
-              </ExpandableSection>
-            </div>
-          )}
-
-          {/* Stay In Balance tips */}
-          <div className="bg-surface-container-low rounded-lg p-6 mb-5 stagger-5">
-            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">
-              {t('doshaProfile.stayInBalance')}
-            </p>
-            <div className="flex flex-col gap-3">
-              {primaryData.balanceTips.map((tip, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <span aria-hidden="true" className={`material-symbols-outlined text-base mt-0.5 ${primaryData.textColor}`}>spa</span>
-                  <p className="font-body text-xs text-on-surface leading-relaxed">{tip}</p>
-                </div>
-              ))}
-            </div>
+          <div className="mb-5">
+            <ImbalanceSections primary={primary} isTridoshic={isTridoshic} />
           </div>
-
-          {/* Yoga & Movement */}
-          <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5`}>
-            <div className="flex items-center gap-2 mb-3">
-              <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>self_care</span>
-              <p className="font-label text-[11px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
-                {t('doshaProfile.yogaMovement')}
-              </p>
-            </div>
-            <p className="font-body text-sm text-on-surface leading-relaxed">{primaryData.yoga}</p>
-          </div>
-
-          {/* Meditation & Breathwork */}
-          <div className="bg-surface-container rounded-lg p-6 mb-5">
-            <div className="flex items-center gap-2 mb-3">
-              <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">air</span>
-              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
-                {t('doshaProfile.meditationBreathwork')}
-              </p>
-            </div>
-            <p className="font-body text-sm text-on-surface leading-relaxed">{primaryData.meditation}</p>
-          </div>
+          <LifestyleSections primary={primary} />
 
         </ThemeSection>
+        )}
 
         {/* ═══════════════════════════════════════════════════════════
             CHAPTER 3 — LIVE BY YOUR DOSHA  (Plus-gated)

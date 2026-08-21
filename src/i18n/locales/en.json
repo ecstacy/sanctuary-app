@@ -319,7 +319,14 @@
     "thisWeekTitle": "This week — your current state",
     "thisWeekLean": "You’re running {{dosha}}-high right now.",
     "thisWeekTrend": "Recent trend",
-    "thisWeekBridge": "Your constitution below is your baseline. This is how you’re leaning today, read against it."
+    "thisWeekBridge": "Your constitution below is your baseline. This is how you’re leaning today, read against it.",
+    "tileNature": "Body & Mind",
+    "tileNatureSummary": "How {{name}} shows up — build, digestion, sleep, mind",
+    "tileImbalance": "When out of balance",
+    "tileImbalanceSummary": "Signs, triggers & how to rebalance",
+    "tileLifestyle": "Living in balance",
+    "tileLifestyleSummary": "Daily habits, movement & breath",
+    "tridoshicNoDeepDive": "A balanced constitution has no single dominant dosha, so this deep dive doesn’t apply. See your constitution and daily balance instead."
   },
   "onboarding": {
     "skip": "Skip",

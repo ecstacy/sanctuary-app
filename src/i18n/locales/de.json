@@ -319,7 +319,14 @@
     "thisWeekTitle": "Diese Woche — dein aktueller Zustand",
     "thisWeekLean": "Du hast gerade erhöhtes {{dosha}}.",
     "thisWeekTrend": "Aktueller Verlauf",
-    "thisWeekBridge": "Deine Konstitution unten ist deine Basis. So tendierst du heute, gemessen daran."
+    "thisWeekBridge": "Deine Konstitution unten ist deine Basis. So tendierst du heute, gemessen daran.",
+    "tileNature": "Körper & Geist",
+    "tileNatureSummary": "Wie sich {{name}} zeigt — Statur, Verdauung, Schlaf, Geist",
+    "tileImbalance": "Bei Ungleichgewicht",
+    "tileImbalanceSummary": "Anzeichen, Auslöser & wie du ausgleichst",
+    "tileLifestyle": "Im Gleichgewicht leben",
+    "tileLifestyleSummary": "Alltag, Bewegung & Atem",
+    "tridoshicNoDeepDive": "Eine ausgeglichene Konstitution hat kein einzelnes dominantes Dosha, daher gilt dieser Bereich nicht. Sieh dir stattdessen deine Konstitution und deinen Alltag an."
   },
   "onboarding": {
     "skip": "Überspringen",

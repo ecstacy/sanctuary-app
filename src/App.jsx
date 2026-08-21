@@ -38,6 +38,7 @@ const OnboardingPage = lazy(() => import('./pages/OnboardingPage'))
 const VikritiQuizPage = lazy(() => import('./pages/VikritiQuizPage'))
 const RecommendationsPage = lazy(() => import('./pages/RecommendationsPage'))
 const DoshaProfilePage = lazy(() => import('./pages/DoshaProfilePage'))
+const DoshaSectionPage = lazy(() => import('./pages/DoshaSectionPage'))
 const DietaryGuidancePage = lazy(() => import('./pages/DietaryGuidancePage'))
 const IngredientDetailPage = lazy(() => import('./pages/IngredientDetailPage'))
 const DietPrefsPage = lazy(() => import('./pages/DietPrefsPage'))
@@ -351,6 +352,9 @@ function AppRoutes() {
           <Route path="/quiz" element={<DoshaQuizPage />} />
           <Route path="/vikriti" element={<PrivateRoute><VikritiQuizPage /></PrivateRoute>} />
           <Route path="/dosha" element={<PrivateRoute><DoshaProfilePage /></PrivateRoute>} />
+          <Route path="/dosha/nature" element={<PrivateRoute><DoshaSectionPage section="nature" /></PrivateRoute>} />
+          <Route path="/dosha/imbalance" element={<PrivateRoute><DoshaSectionPage section="imbalance" /></PrivateRoute>} />
+          <Route path="/dosha/lifestyle" element={<PrivateRoute><DoshaSectionPage section="lifestyle" /></PrivateRoute>} />
           <Route path="/dietary" element={<PrivateRoute><DietaryGuidancePage /></PrivateRoute>} />
           {/* Public, like /discover. Ingredient lookup is the FREE tier
               (diet-feature-plan.md §4) and the Discover food strip is
