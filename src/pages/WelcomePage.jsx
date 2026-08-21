@@ -112,7 +112,7 @@ export default function WelcomePage() {
 
         {/* Two small cards */}
         <div className="stagger-5">
-          <div className="bg-tertiary-container rounded-lg p-6 flex flex-col items-center text-center">
+          <div className="bg-tertiary-container rounded-2xl p-6 flex flex-col items-center text-center">
             <div className="w-14 h-14 bg-tertiary-fixed-dim rounded-full flex items-center justify-center mb-4">
               <span className="material-symbols-outlined text-on-tertiary-container">self_care</span>
             </div>

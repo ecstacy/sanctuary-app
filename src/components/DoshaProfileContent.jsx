@@ -25,6 +25,7 @@ import MedicalDisclaimer from './MedicalDisclaimer'
 import { NatureSections, ImbalanceSections, LifestyleSections, hasRichDetail } from './doshaDetailSections'
 import { DOSHA_DATA, capitalize } from './doshaProfilePrimitives'
 import NavRow from './NavRow'
+import InfoRow from './InfoRow'
 
 
 // ── Sub-components ───────────────────────────────────────────────────────────
@@ -249,7 +250,7 @@ export default function DoshaProfileContent({
           )}
 
           {/* Primary Dosha */}
-          <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5 stagger-3`}>
+          <div className={`${primaryData.bgColor} rounded-2xl p-6 mb-5 stagger-3`}>
             <div className="flex items-center gap-2 mb-3">
               <span aria-hidden="true" className="material-symbols-outlined text-lg" style={{ color: primaryData.accentHex }}>{primaryData.emoji}</span>
               <p className="font-label text-[11px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>
@@ -261,7 +262,7 @@ export default function DoshaProfileContent({
 
           {/* Secondary Dosha */}
           {secondaryData && !isTridoshic && (
-            <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-4">
+            <div className="bg-surface-container rounded-2xl p-6 mb-5 stagger-4">
               <div className="flex items-center gap-2 mb-3">
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">{secondaryData.emoji}</span>
                 <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
@@ -273,7 +274,7 @@ export default function DoshaProfileContent({
           )}
 
           {/* Qualities (Gunas) */}
-          <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-4">
+          <div className="bg-surface-container rounded-2xl p-6 mb-5 stagger-4">
             <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">
               {t('doshaProfile.qualitiesGunas', { name: primaryData.name })}
             </p>
@@ -319,7 +320,7 @@ export default function DoshaProfileContent({
           )}
 
           {/* Natural Strengths */}
-          <div className="bg-surface-container rounded-lg p-6 mb-5 stagger-5">
+          <div className="bg-surface-container rounded-2xl p-6 mb-5 stagger-5">
             <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">
               {t('doshaProfile.naturalStrengths')}
             </p>
@@ -463,41 +464,17 @@ export default function DoshaProfileContent({
           {/* ── Below: the full chapter, only rendered for Plus members ── */}
           {isPremium && (
           <>
-          {/* Ayurvedic Lifestyle — Season, Time, Taste */}
-          <div className="bg-surface-container rounded-lg overflow-hidden mb-5">
-            <div className="flex items-start gap-4 px-6 py-4">
-              <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: `color-mix(in srgb, ${primaryData.accentHex} 14%, transparent)` }}>
-                <span aria-hidden="true" className="material-symbols-outlined text-xl" style={{ color: primaryData.accentHex }}>calendar_month</span>
-              </div>
-              <div>
-                <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.peakSeason')}</p>
-                <p className="font-body text-sm text-on-surface-variant leading-relaxed">
-                  {t('doshaProfile.peakSeasonBody', { season: primaryData.season, name: primaryData.name })}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 px-6 py-4 border-t border-surface-container-high">
-              <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: `color-mix(in srgb, ${primaryData.accentHex} 14%, transparent)` }}>
-                <span aria-hidden="true" className="material-symbols-outlined text-xl" style={{ color: primaryData.accentHex }}>schedule</span>
-              </div>
-              <div>
-                <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.doshaHours', { name: primaryData.name })}</p>
-                <p className="font-body text-sm text-on-surface-variant leading-relaxed">
-                  {t('doshaProfile.doshaHoursBody', { timeOfDay: primaryData.timeOfDay, name: primaryData.name })}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 px-6 py-4 border-t border-surface-container-high">
-              <div className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ background: `color-mix(in srgb, ${primaryData.accentHex} 14%, transparent)` }}>
-                <span aria-hidden="true" className="material-symbols-outlined text-xl" style={{ color: primaryData.accentHex }}>restaurant</span>
-              </div>
-              <div>
-                <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.balancingTastes')}</p>
-                <p className="font-body text-sm text-on-surface-variant leading-relaxed">{primaryData.taste}</p>
-              </div>
-            </div>
+          {/* Ayurvedic Lifestyle — Season, Time, Taste (shared InfoRow) */}
+          <div className="bg-surface-container rounded-2xl overflow-hidden mb-5">
+            <InfoRow icon="calendar_month" accentHex={primaryData.accentHex} title={t('doshaProfile.peakSeason')} className="px-6 py-4">
+              {t('doshaProfile.peakSeasonBody', { season: primaryData.season, name: primaryData.name })}
+            </InfoRow>
+            <InfoRow icon="schedule" accentHex={primaryData.accentHex} title={t('doshaProfile.doshaHours', { name: primaryData.name })} className="px-6 py-4 border-t border-surface-container-high">
+              {t('doshaProfile.doshaHoursBody', { timeOfDay: primaryData.timeOfDay, name: primaryData.name })}
+            </InfoRow>
+            <InfoRow icon="restaurant" accentHex={primaryData.accentHex} title={t('doshaProfile.balancingTastes')} className="px-6 py-4 border-t border-surface-container-high">
+              {primaryData.taste}
+            </InfoRow>
           </div>
 
           {/* Pacifying protocol — surfaced for non-Tridoshic Plus users.
@@ -566,7 +543,7 @@ export default function DoshaProfileContent({
         </ThemeSection>
 
         {/* Understanding Prakriti */}
-        <div className="bg-surface-container-low rounded-lg p-5 mb-5 flex items-start gap-3">
+        <div className="bg-surface-container-low rounded-2xl p-5 mb-5 flex items-start gap-3">
           <span aria-hidden="true" className="material-symbols-outlined text-primary text-base mt-0.5">auto_awesome</span>
           <div>
             <p className="font-body font-semibold text-sm text-on-surface mb-1">{t('doshaProfile.understandingTitle')}</p>

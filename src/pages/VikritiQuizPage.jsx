@@ -290,7 +290,7 @@ export default function VikritiQuizPage() {
 
           {/* Composition bars — ordered descending so the dominant dosha is
               always on top, regardless of the classical V/P/K sequence. */}
-          <div className="bg-surface-container rounded-lg p-5 mb-5">
+          <div className="bg-surface-container rounded-2xl p-5 mb-5">
             {orderedDoshas.map(key => {
               const m = DOSHA_META[key]
               const pct = result.percentages[key]
@@ -315,7 +315,7 @@ export default function VikritiQuizPage() {
               1. shifted  : different dosha elevated vs baseline
               2. same-but-aggravated : matches baseline but running high
               3. in-rhythm : matches baseline and within normal range    */}
-          <div className={`${currentMeta.bg} rounded-lg p-5 mb-5`}>
+          <div className={`${currentMeta.bg} rounded-2xl p-5 mb-5`}>
             <div className="flex items-center gap-2 mb-2">
               <span className={`material-symbols-outlined ${currentMeta.text} text-lg`}>{currentMeta.icon}</span>
               <p className="font-label text-[11px] uppercase tracking-widest" style={{ color: currentMeta.hex }}>

@@ -51,7 +51,7 @@ export default function PreviewPage() {
         </div>
 
         {/* Prescription preview card */}
-        <div className="bg-surface-container rounded-lg p-6 mb-5 relative overflow-hidden">
+        <div className="bg-surface-container rounded-2xl p-6 mb-5 relative overflow-hidden">
           <div className="flex items-center gap-3 mb-5">
             <div className="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center">
               <span className="material-symbols-outlined text-primary text-lg">{STRUGGLE_ICONS[primaryStruggle]}</span>
@@ -89,7 +89,7 @@ export default function PreviewPage() {
         </div>
 
         {/* Locked content teaser */}
-        <div className="bg-surface-container-low rounded-lg p-5 mb-8 flex items-center gap-4 relative overflow-hidden">
+        <div className="bg-surface-container-low rounded-2xl p-5 mb-8 flex items-center gap-4 relative overflow-hidden">
           <div className="absolute inset-0 backdrop-blur-[2px] bg-background/40" />
           <div className="relative z-10 w-10 h-10 bg-surface-container-high rounded-full flex items-center justify-center flex-shrink-0">
             <span className="material-symbols-outlined text-on-surface-variant">lock</span>
