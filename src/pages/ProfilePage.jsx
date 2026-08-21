@@ -543,7 +543,7 @@ export default function ProfilePage() {
         {/* Dosha card */}
         <button
           onClick={() => navigate(doshaLabel ? '/dosha' : '/quiz')}
-          className="bg-primary-container rounded-lg p-5 text-left w-full active:scale-[0.98] transition-all stagger-2"
+          className="bg-primary-container rounded-2xl p-5 text-left w-full active:scale-[0.98] transition-all stagger-2"
         >
           <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2">
             {t('profile.doshaType')}
@@ -562,7 +562,7 @@ export default function ProfilePage() {
         </button>
 
         {/* Language */}
-        <div className="bg-surface-container rounded-lg overflow-hidden stagger-3">
+        <div className="bg-surface-container rounded-2xl overflow-hidden stagger-3">
           <button
             onClick={() => setLanguagePickerOpen(!languagePickerOpen)}
             className="flex items-center gap-4 px-5 py-4 w-full text-left active:bg-surface-container-high/50 transition-colors"
@@ -616,7 +616,7 @@ export default function ProfilePage() {
               • non-premium → Upgrade row + Have a code row (both open the
                 same paywall sheet, different starting pane)
               • premium     → status row showing source + expiry, no CTAs */}
-        <div className="bg-surface-container rounded-lg overflow-hidden stagger-3 mb-5">
+        <div className="bg-surface-container rounded-2xl overflow-hidden stagger-3 mb-5">
           <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
             {t('profile.plus.section')}
           </p>
@@ -791,7 +791,7 @@ export default function ProfilePage() {
             notifications for server-driven contextual nudges (vikriti
             drift, streak save) land in a later iteration. The pref
             schema in notification_prefs is future-proofed for both. */}
-        <div className="bg-surface-container rounded-lg overflow-hidden stagger-3 mb-5">
+        <div className="bg-surface-container rounded-2xl overflow-hidden stagger-3 mb-5">
           {/* Diet preferences — allergens + patterns. Lives above the
               notification block because it is a safety setting, not a comfort
               one: what is recorded there hard-filters every food suggestion. */}
@@ -930,7 +930,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Account info */}
-        <div className="bg-surface-container rounded-lg overflow-hidden stagger-3">
+        <div className="bg-surface-container rounded-2xl overflow-hidden stagger-3">
           <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
             {t('profile.account.section')}
           </p>
@@ -1112,7 +1112,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Privacy */}
-        <div className="bg-surface-container rounded-lg overflow-hidden stagger-3">
+        <div className="bg-surface-container rounded-2xl overflow-hidden stagger-3">
           <div className="flex items-center gap-4 px-5 py-4 border-b border-surface-container-high">
             <span className="material-symbols-outlined text-on-surface-variant text-lg">shield</span>
             <div className="flex-1 min-w-0">
@@ -1294,7 +1294,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Your data — GDPR export + account deletion */}
-        <div className="bg-surface-container rounded-lg overflow-hidden stagger-4">
+        <div className="bg-surface-container rounded-2xl overflow-hidden stagger-4">
           <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest px-5 pt-5 pb-3">
             {t('profile.yourData.section')}
           </p>
@@ -1349,7 +1349,7 @@ export default function ProfilePage() {
         {/* Sign out */}
         <button
           onClick={handleSignOut}
-          className="w-full py-4 bg-surface-container rounded-lg flex items-center justify-center gap-2 active:scale-[0.98] transition-all stagger-4"
+          className="w-full py-4 bg-surface-container rounded-2xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all stagger-4"
         >
           <span className="material-symbols-outlined text-error text-lg">logout</span>
           <span className="font-label text-sm font-semibold text-error tracking-wide">{t('profile.signOut')}</span>
