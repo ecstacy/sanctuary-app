@@ -88,7 +88,7 @@ Dietary bridges, Dinacharya legibility.
 | VC4 | **Journey page cards** | C | ✅ It's a stats dashboard (not nav rows), so aligned the card language instead: `rounded-xl`/`rounded-lg` → `rounded-2xl` (outer) + `rounded-xl` (inner), matching the Home journey card + the rest of the app. Verified in-browser (renders with zeros for a fresh user). |
 | VC5 | **Recommendations page cards** | C | ✅ Result/practice/also-related cards → `rounded-2xl`; the two circular icon badges → squircle (w-11 rounded-2xl). Verified in-browser via a real "back pain" search (Vata). |
 | VC6 | **Meal Check result cards** | C | ✅ Most cards were already rounded-2xl. RemedyCard emoji badge → squircle (w-11 rounded-2xl, color-mix accent); history swipe rows rounded-xl → rounded-2xl. Verified in-browser via a real "fried chicken and coffee" check (Pitta). |
-| VC7 | **Profile / Settings list rows** | C | Settings + profile menu rows → one list-row style. |
+| VC7 | **Profile / Settings list rows** | C | ✅ The grouped iOS-style settings lists are the right pattern (kept the rows), but their containers used `rounded-lg`; bumped the 6 settings groups + dosha card + sign-out button to `rounded-2xl`, matching the app card language. Verified in-browser (Kapha, free). |
 | VC8 | **Extract a shared InfoRow/Card + audit** | C | Once patterns repeat, promote a second shared primitive (non-tappable InfoRow) and sweep any remaining ad-hoc `rounded-lg p-6` / `text-xs` body copy. |
 
 ---
