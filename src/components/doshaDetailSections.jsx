@@ -163,7 +163,7 @@ export function LifestyleSections({ primary }) {
   if (!primaryData) return null
   return (
     <>
-      <div className="bg-surface-container-low rounded-lg p-6 mb-5">
+      <div className="bg-surface-container-low rounded-2xl p-6 mb-5">
         <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-4">{t('doshaProfile.stayInBalance')}</p>
         <div className="flex flex-col gap-3">
           {primaryData.balanceTips.map((tip, i) => (
@@ -175,7 +175,7 @@ export function LifestyleSections({ primary }) {
         </div>
       </div>
 
-      <div className={`${primaryData.bgColor} rounded-lg p-6 mb-5`}>
+      <div className={`${primaryData.bgColor} rounded-2xl p-6 mb-5`}>
         <div className="flex items-center gap-2 mb-3">
           <span aria-hidden="true" className={`material-symbols-outlined text-lg ${primaryData.textColor}`}>self_care</span>
           <p className="font-label text-[11px] uppercase tracking-widest" style={{ color: primaryData.accentHex }}>{t('doshaProfile.yogaMovement')}</p>
@@ -183,7 +183,7 @@ export function LifestyleSections({ primary }) {
         <p className="font-body text-sm text-on-surface leading-relaxed">{primaryData.yoga}</p>
       </div>
 
-      <div className="bg-surface-container rounded-lg p-6 mb-5">
+      <div className="bg-surface-container rounded-2xl p-6 mb-5">
         <div className="flex items-center gap-2 mb-3">
           <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">air</span>
           <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('doshaProfile.meditationBreathwork')}</p>

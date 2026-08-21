@@ -89,7 +89,7 @@ Dietary bridges, Dinacharya legibility.
 | VC5 | **Recommendations page cards** | C | ✅ Result/practice/also-related cards → `rounded-2xl`; the two circular icon badges → squircle (w-11 rounded-2xl). Verified in-browser via a real "back pain" search (Vata). |
 | VC6 | **Meal Check result cards** | C | ✅ Most cards were already rounded-2xl. RemedyCard emoji badge → squircle (w-11 rounded-2xl, color-mix accent); history swipe rows rounded-xl → rounded-2xl. Verified in-browser via a real "fried chicken and coffee" check (Pitta). |
 | VC7 | **Profile / Settings list rows** | C | ✅ The grouped iOS-style settings lists are the right pattern (kept the rows), but their containers used `rounded-lg`; bumped the 6 settings groups + dosha card + sign-out button to `rounded-2xl`, matching the app card language. Verified in-browser (Kapha, free). |
-| VC8 | **Extract a shared InfoRow/Card + audit** | C | Once patterns repeat, promote a second shared primitive (non-tappable InfoRow) and sweep any remaining ad-hoc `rounded-lg p-6` / `text-xs` body copy. |
+| VC8 | **Extract a shared InfoRow/Card + audit** | C | ✅ Added `components/InfoRow.jsx` (non-tappable NavRow sibling — squircle badge + title + body, no chevron); the dosha Ch3 season/hours/tastes rows use it (deduped 3 blocks). Swept every remaining `rounded-lg p-5/p-6` card → `rounded-2xl` across dosha surfaces + Welcome/Preview/VikritiQuiz (0 left). **VC pass complete.** Shared primitives: `NavRow` (tappable), `InfoRow` (info), squircle accent badges, ≥14px body — reach for these on every new surface. |
 
 ---
 
