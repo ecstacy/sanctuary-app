@@ -247,11 +247,11 @@ export default function DiscoverPage() {
                 >
                   <div aria-hidden="true" className={`absolute inset-0 bg-gradient-to-br ${d.gradient} opacity-15`} />
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="w-10 h-10 rounded-full bg-surface/80 flex items-center justify-center mb-2.5">
-                      <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">{d.icon}</span>
+                    <div className="w-11 h-11 rounded-2xl bg-surface/80 flex items-center justify-center mb-2.5">
+                      <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">{d.icon}</span>
                     </div>
-                    <p className="font-body text-sm font-semibold text-on-surface">{t(`discover.hub.${d.key}.title`)}</p>
-                    <p className="font-body text-xs text-on-surface-variant mt-0.5 leading-snug">
+                    <p className="font-body text-[15px] font-semibold text-on-surface leading-tight">{t(`discover.hub.${d.key}.title`)}</p>
+                    <p className="font-body text-[13px] text-on-surface-variant mt-1 leading-snug">
                       {t(`discover.hub.${d.key}.sub`, { poses: ALL_ASANAS.length, foods: coverage.reviewed })}
                     </p>
                   </div>

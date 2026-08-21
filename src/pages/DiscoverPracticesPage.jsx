@@ -54,10 +54,10 @@ export default function DiscoverPracticesPage() {
           >
             <div aria-hidden="true" className={`absolute inset-0 bg-gradient-to-br ${cat.gradient} opacity-15`} />
             <div className="relative z-10">
-              <div className="w-10 h-10 rounded-full bg-surface/80 flex items-center justify-center mb-3">
-                <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">{cat.icon}</span>
+              <div className="w-11 h-11 rounded-2xl bg-surface/80 flex items-center justify-center mb-3">
+                <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">{cat.icon}</span>
               </div>
-              <p className="font-body text-sm font-semibold text-on-surface">{t(cat.labelKey)}</p>
+              <p className="font-body text-[15px] font-semibold text-on-surface leading-tight">{t(cat.labelKey)}</p>
             </div>
           </button>
         ))}
