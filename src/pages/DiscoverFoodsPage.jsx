@@ -17,6 +17,7 @@ import { exclusionFor } from '../lib/dietSafety'
 import { useDietPrefs } from '../hooks/useDietPrefs'
 import { useAuth } from '../context/AuthContext'
 import SubPage from '../components/discover/SubPage'
+import NavRow from '../components/NavRow'
 import FoodIcon from '../components/FoodIcon'
 import { track, EVENTS } from '../lib/track'
 
@@ -180,55 +181,41 @@ export default function DiscoverFoodsPage() {
       {/* Entry points before the list: someone arriving here usually wants a
           suggestion or their own settings, not to read every row. */}
       <div className="flex flex-col gap-2.5">
-        <button
+        <NavRow
+          icon="fact_check"
+          title={t('mealCheck.title')}
+          summary={t('discover.foods.mealCheckEntry', 'See what a meal does to your doshas')}
+          ariaLabel={t('mealCheck.title')}
           onClick={() => {
             track(EVENTS.CTA_CLICKED, { cta_id: 'foods_to_meal_check', route_name: 'discover_foods' })
             navigate('/meal-check')
           }}
-          className="flex items-center gap-3 bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.99] transition-all"
-        >
-          <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">fact_check</span>
-          <span className="flex-1 min-w-0">
-            <span className="block font-body text-sm font-semibold text-on-surface">{t('mealCheck.title')}</span>
-            <span className="block font-body text-xs text-on-surface-variant">{t('discover.foods.mealCheckEntry', 'See what a meal does to your doshas')}</span>
-          </span>
-          <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
-        </button>
+        />
 
-        <button
+        <NavRow
+          icon="restaurant_menu"
+          title={t('meals.title')}
+          summary={t('meals.entryHelp')}
+          ariaLabel={t('meals.title')}
           onClick={() => {
             track(EVENTS.CTA_CLICKED, { cta_id: 'foods_to_meals', route_name: 'discover_foods' })
             navigate('/meals')
           }}
-          className="flex items-center gap-3 bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.99] transition-all"
-        >
-          <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">restaurant_menu</span>
-          <span className="flex-1 min-w-0">
-            <span className="block font-body text-sm font-semibold text-on-surface">{t('meals.title')}</span>
-            <span className="block font-body text-xs text-on-surface-variant">{t('meals.entryHelp')}</span>
-          </span>
-          <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
-        </button>
+        />
 
         {user && (
-          <button
+          <NavRow
+            icon="tune"
+            title={t('dietPrefs.entry')}
+            summary={dietPrefs.allergens.length + dietPrefs.patterns.length > 0
+              ? t('dietPrefs.savedSummary', { allergens: dietPrefs.allergens.length, patterns: dietPrefs.patterns.length })
+              : t('dietPrefs.entryHelp')}
+            ariaLabel={t('dietPrefs.entry')}
             onClick={() => {
               track(EVENTS.CTA_CLICKED, { cta_id: 'foods_to_prefs', route_name: 'discover_foods' })
               navigate('/diet-preferences')
             }}
-            className="flex items-center gap-3 bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.99] transition-all"
-          >
-            <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">tune</span>
-            <span className="flex-1 min-w-0">
-              <span className="block font-body text-sm font-semibold text-on-surface">{t('dietPrefs.entry')}</span>
-              <span className="block font-body text-xs text-on-surface-variant">
-                {dietPrefs.allergens.length + dietPrefs.patterns.length > 0
-                  ? t('dietPrefs.savedSummary', { allergens: dietPrefs.allergens.length, patterns: dietPrefs.patterns.length })
-                  : t('dietPrefs.entryHelp')}
-              </span>
-            </span>
-            <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
-          </button>
+          />
         )}
       </div>
 
