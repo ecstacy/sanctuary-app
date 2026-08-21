@@ -70,6 +70,27 @@ so Plus bought on Android/web still works.
 | 10 | **Install latest build on Pixel + verify** | A+C | APK builds from main; the Pixel keeps dropping off USB/wireless adb. Three changes merged in PR #13 have **never been eyeballed on-device**: pre-practice plan list, recommendation poses → asana detail, Ayurvedic tip contrast on the Pitta theme |
 | 38 | **Exact-match pre-rendered dosha gem** | A+C | The home state card now uses the **proportional WebGL gem** (`DoshaGem`) — accurate for all splits but more muted than the pre-rendered liquid-glass teardrop. The pre-rendered set (`DoshaGemImage` + `lib/doshaOutcome.js` + `public/dosha-gems/*.png`) was **categorical** (10 buckets); single-dominant emblems omitted the 3rd dosha, so a Kapha label pointed at no teal. **The quiz can produce 4,131 exact triples** (per `scoreQuiz`), so one-PNG-per-triple is infeasible — options are: bin to nearest 10% (66 imgs) or 5% (231 imgs), each emblem carrying a proportional 3rd ribbon; then swap `DoshaGemImage` back in with an exact-bin resolver. Enumerator logic captured in this session. Also reconcile `LEGEND_SLOTS` leader-lines to the actual zones. |
 
+## 🎨 Visual consistency pass
+
+Standing principle (see memory `standards`): **every surface uses one visual
+language** — tappable entry points are `components/NavRow.jsx` (accent-tinted
+squircle icon badge + bold title + one/two-line summary + chevron); info rows
+share the same badge without a chevron; body copy is ≥14px. Do these **one
+chunk at a time**, each its own commit, **verified in-browser via the dev mock**
+(`?devAuth=<dosha>`), then on the Pixel. Landed so far: dosha profile entry rows,
+Dietary bridges, Dinacharya legibility.
+
+| # | Chunk | Who | Notes |
+|---|-------|-----|-------|
+| VC1 | **Dosha profile — Chapter 3 info rows** | C | Season / hours / tastes cards use a `rounded-full` badge + `primaryData.bgColor`; retint to the NavRow squircle badge (color-mix accent) so Ch3 matches the entry rows above. Info rows (no chevron). |
+| VC2 | **Home — entry & state cards** | C | The state-this-week card, the quiz card, practice/upcoming cards, and the vikriti card each have bespoke styling. Unify: nav-type cards → NavRow; keep the gem state card distinct but align its radii/badges/type scale. |
+| VC3 | **Discover hub tiles** | C | DiscoverPage + Discover{Practices,Breathwork,Foods,Programs} use 2-col tile grids with their own shapes. Move to the shared row/tile language. |
+| VC4 | **Journey page cards** | C | Timeline nodes + stat cards — align radii, badges, and body-copy size. |
+| VC5 | **Recommendations page cards** | C | Pose/recommendation cards → shared card language + ≥14px body. |
+| VC6 | **Meal Check result cards** | C | RemedyCard / rebalance / breakdown rows predate NavRow; align badge + type scale (keep their richer content). |
+| VC7 | **Profile / Settings list rows** | C | Settings + profile menu rows → one list-row style. |
+| VC8 | **Extract a shared InfoRow/Card + audit** | C | Once patterns repeat, promote a second shared primitive (non-tappable InfoRow) and sweep any remaining ad-hoc `rounded-lg p-6` / `text-xs` body copy. |
+
 ---
 
 ## Known unverified (be honest about these)
