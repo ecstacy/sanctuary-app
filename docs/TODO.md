@@ -91,6 +91,26 @@ Dietary bridges, Dinacharya legibility.
 | VC7 | **Profile / Settings list rows** | C | ✅ The grouped iOS-style settings lists are the right pattern (kept the rows), but their containers used `rounded-lg`; bumped the 6 settings groups + dosha card + sign-out button to `rounded-2xl`, matching the app card language. Verified in-browser (Kapha, free). |
 | VC8 | **Extract a shared InfoRow/Card + audit** | C | ✅ Added `components/InfoRow.jsx` (non-tappable NavRow sibling — squircle badge + title + body, no chevron); the dosha Ch3 season/hours/tastes rows use it (deduped 3 blocks). Swept every remaining `rounded-lg p-5/p-6` card → `rounded-2xl` across dosha surfaces + Welcome/Preview/VikritiQuiz (0 left). **VC pass complete.** Shared primitives: `NavRow` (tappable), `InfoRow` (info), squircle accent badges, ≥14px body — reach for these on every new surface. |
 
+## 🍽️ Meal Check UX/UI audit (2026-08-21)
+
+Walked the whole flow in-browser via the dev mock (`/meal-check?devAuth=pitta`,
+mobile 375×812) with a deliberately messy input ("tomato, smoothie, zorblax and
+rice"). Findings below, worst-first. Same rules as the VC pass: **one chunk per
+commit, verified in-browser, then the Pixel.**
+
+| # | Chunk | Sev | Notes |
+|---|-------|-----|-------|
+| MC1 | **Confirm screen promises "add anything we missed" but has no add control** | 🔴 | Copy `mealCheck.confirmHelp` says "Tap a food to remove it, or add anything we missed" — but the confirm phase renders only remove-chips, the open-composite adder, and unknown-suggestions. A food the parser missed entirely can't be added until the *result* screen (which does have "+ Add item"). Fix: reuse the result screen's add affordance on confirm (or fix the copy — but the affordance is the right call). |
+| MC2 | **Touch targets under 44×44 (own a11y standard)** | 🔴 | Measured live: chip remove `×` = **20×20**, variant switch = 47×**24**, "+ Add item" = 106×**34**. Standard is ≥44×44. Enlarge hit areas (padding/`::before` hit-slop) without growing the visual chip. |
+| MC3 | **No `aria-live` anywhere in the flow** | 🔴 | Measured: **0** live regions. Phase changes (input→confirm→result) and the async verdict are silent to screen readers. Add `aria-live="polite"` to the result headline + a status announcement on phase change. |
+| MC4 | **No `h1`; heading order starts at `h2`** | 🟠 | Measured: h1=0, h2=1. Each phase should own a proper `h1` ("Meal Check" / "Is this what you ate?" / the verdict). |
+| MC5 | **Silent variant assumption on confirm** | 🟠 | "tomato" resolved to **Tomato (cooked)** with no signal that a guess was made; the raw⇄cooked switch only exists on the *result* screen. Surface the variant switch (or an "assumed cooked" hint) on confirm, where the user is being asked to confirm. |
+| MC6 | **Confirm CTA buried below a long panel** | 🟠 | With an open composite the "See how it affects me" button sits below a ~12-chip smoothie panel — off-screen on a 812px viewport. Make the primary CTA sticky at the bottom of the confirm phase. |
+| MC7 | **Unknown-token notice is last, below everything** | 🟡 | The "We don't have 'zorblax' yet" prompt renders *after* the smoothie panel, so the thing needing a decision is the easiest to miss. Order the confirm sections by "needs your input first": unknown → ambiguous → open-composite. |
+| MC8 | **Empty input screen is mostly dead space** | 🟡 | A user with no history sees title + textarea + CTA and ~50% empty screen. Add quick-start chips (recent/common meals, or time-of-day suggestions like "breakfast I usually have") to make the first check one tap. |
+| MC9 | **Trial banner repeats on every phase** | 🟡 | "Free trial · 7 days left" sits above the content on input, confirm *and* result, pushing the actual content down on a small screen. Show once per session (or only on the input phase). |
+| MC10 | **Unlabelled constitution bar in the result** | 🟡 | The segmented bar in "Effect on your doshas" has no legend/label — it's the constitution split, but nothing says so. Add a caption or `aria-label`/legend. |
+
 ---
 
 ## Known unverified (be honest about these)
