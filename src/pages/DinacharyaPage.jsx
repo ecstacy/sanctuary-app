@@ -241,9 +241,9 @@ export default function DinacharyaPage() {
                 }}
                 className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.99] transition-all"
               >
-                <p className="font-body text-sm font-semibold text-on-surface">{fp.name}</p>
+                <p className="font-body text-[15px] font-semibold text-on-surface">{fp.name}</p>
                 {fp.prep && (
-                  <p className="font-body text-xs text-on-surface-variant/70 mt-1.5 leading-relaxed">{fp.prep}</p>
+                  <p className="font-body text-sm text-on-surface-variant/80 mt-1.5 leading-relaxed">{fp.prep}</p>
                 )}
               </button>
             ))}
