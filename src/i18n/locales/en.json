@@ -326,7 +326,9 @@
     "tileImbalanceSummary": "Signs, triggers & how to rebalance",
     "tileLifestyle": "Living in balance",
     "tileLifestyleSummary": "Daily habits, movement & breath",
-    "tridoshicNoDeepDive": "A balanced constitution has no single dominant dosha, so this deep dive doesn’t apply. See your constitution and daily balance instead."
+    "tridoshicNoDeepDive": "A balanced constitution has no single dominant dosha, so this deep dive doesn’t apply. See your constitution and daily balance instead.",
+    "exploreTitle": "Explore your dosha",
+    "exploreSubtitle": "The full detail on each area — tap to open."
   },
   "onboarding": {
     "skip": "Skip",
