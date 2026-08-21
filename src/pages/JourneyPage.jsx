@@ -211,7 +211,7 @@ export default function JourneyPage() {
 
         {/* ── Streak & Stats Hero ── */}
         <div className="grid grid-cols-2 gap-3 stagger-1">
-          <div className="bg-primary rounded-xl p-5 text-on-primary relative overflow-hidden">
+          <div className="bg-primary rounded-2xl p-5 text-on-primary relative overflow-hidden">
             <div className="absolute -right-4 -bottom-4 opacity-10">
               <span className="material-symbols-outlined text-6xl">local_fire_department</span>
             </div>
@@ -221,7 +221,7 @@ export default function JourneyPage() {
               {stats.streak === 0 ? t('journey.streakStart') : stats.streak === 1 ? t('journey.streakDay') : t('journey.streakDays')}
             </p>
           </div>
-          <div className="bg-secondary-container/30 rounded-xl p-5 relative overflow-hidden">
+          <div className="bg-secondary-container/30 rounded-2xl p-5 relative overflow-hidden">
             <div className="absolute -right-4 -bottom-4 opacity-10">
               <span className="material-symbols-outlined text-6xl">schedule</span>
             </div>
@@ -232,7 +232,7 @@ export default function JourneyPage() {
         </div>
 
         {/* ── Yogi Level ── */}
-        <div className="bg-surface-container-low rounded-xl p-5 stagger-2">
+        <div className="bg-surface-container-low rounded-2xl p-5 stagger-2">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-14 h-14 rounded-full bg-primary-fixed flex items-center justify-center">
               <span className="material-symbols-outlined text-primary text-2xl">{currentLevel.icon}</span>
@@ -298,7 +298,7 @@ export default function JourneyPage() {
         </div>
 
         {/* ── Activity Chart ── */}
-        <div className="bg-surface-container-low rounded-xl p-5 stagger-3">
+        <div className="bg-surface-container-low rounded-2xl p-5 stagger-3">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-headline text-lg text-on-surface">{t('journey.activity')}</h3>
           </div>
@@ -341,7 +341,7 @@ export default function JourneyPage() {
         </div>
 
         {/* ── Vikriti pattern over time (Plus insight) ── */}
-        <div className="bg-surface-container rounded-xl p-5 stagger-4">
+        <div className="bg-surface-container rounded-2xl p-5 stagger-4">
           <div className="flex items-center gap-2 mb-4">
             <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">insights</span>
             <h3 className="font-headline text-base text-on-surface leading-tight">{t('journey.doshaOverTime')}</h3>
@@ -370,25 +370,25 @@ export default function JourneyPage() {
         </div>
 
         {/* ── Lifetime Stats ── */}
-        <div className="bg-surface-container-low rounded-xl p-5 stagger-4">
+        <div className="bg-surface-container-low rounded-2xl p-5 stagger-4">
           <h3 className="font-headline text-lg text-on-surface mb-4">{t('journey.lifetime')}</h3>
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-surface-container rounded-lg p-4">
+            <div className="bg-surface-container rounded-xl p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">schedule</span>
               <p className="font-headline text-2xl text-on-surface">{stats.totalMinutes}</p>
               <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('journey.totalMinutes')}</p>
             </div>
-            <div className="bg-surface-container rounded-lg p-4">
+            <div className="bg-surface-container rounded-xl p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">self_improvement</span>
               <p className="font-headline text-2xl text-on-surface">{stats.totalSessions}</p>
               <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('journey.totalSessions')}</p>
             </div>
-            <div className="bg-surface-container rounded-lg p-4">
+            <div className="bg-surface-container rounded-xl p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">local_fire_department</span>
               <p className="font-headline text-2xl text-on-surface">{stats.longestStreak}</p>
               <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('journey.bestStreak')}</p>
             </div>
-            <div className="bg-surface-container rounded-lg p-4">
+            <div className="bg-surface-container rounded-xl p-4">
               <span className="material-symbols-outlined text-primary text-lg mb-2 block">today</span>
               <p className="font-headline text-2xl text-on-surface">{stats.todayMinutes}</p>
               <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">{t('journey.today')}</p>
@@ -398,13 +398,13 @@ export default function JourneyPage() {
 
         {/* ── Recent Sessions ── */}
         {stats.sessions.length > 0 && (
-          <div className="bg-surface-container-low rounded-xl p-5 stagger-5">
+          <div className="bg-surface-container-low rounded-2xl p-5 stagger-5">
             <h3 className="font-headline text-lg text-on-surface mb-4">{t('journey.recentSessions')}</h3>
             <div className="flex flex-col gap-2">
               {[...stats.sessions].reverse().slice(0, 10).map(session => {
                 const d = new Date(session.timestamp)
                 return (
-                  <div key={session.id} className="flex items-center gap-3 bg-surface-container rounded-lg px-4 py-3">
+                  <div key={session.id} className="flex items-center gap-3 bg-surface-container rounded-xl px-4 py-3">
                     <div className="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center flex-shrink-0">
                       <span className="material-symbols-outlined text-primary text-sm">self_care</span>
                     </div>
@@ -433,7 +433,7 @@ export default function JourneyPage() {
 
         {/* ── Start practicing CTA ── */}
         {stats.totalSessions === 0 && (
-          <div className="bg-primary-container/20 rounded-xl p-6 text-center stagger-3">
+          <div className="bg-primary-container/20 rounded-2xl p-6 text-center stagger-3">
             <span className="material-symbols-outlined text-primary text-4xl mb-3 block">self_improvement</span>
             <h3 className="font-headline text-xl text-on-surface mb-2">{t('journey.beginTitle')}</h3>
             <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-4">
