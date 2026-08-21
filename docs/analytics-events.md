@@ -294,13 +294,20 @@ every component.
   for the home suggested asana" = `count(asana_card_tapped where
   surface=home_suggested) / count(content_impression where
   surface=home_suggested)`. Fires once per card per screen visit.
+- **Dosha deep dives**: the profile's deep-dive topics now live on their own
+  pages (`/dosha/{nature|imbalance|lifestyle}`) instead of inline accordions.
+  Each fires `content_impression` on view with `surface=dosha_profile`,
+  `content_type=deep_dive`, `content_id ∈ {nature, imbalance, lifestyle}`,
+  `primary_dosha` — preserving the pre-split per-topic engagement signal. Pairs
+  with the `dosha_tile_*` CTA below for tile→view CTR.
 
 #### `cta_clicked`
 - **Where**: every primary/secondary CTA button (Start Practice, Begin
   Practice, See All, Switch Routine, Take Vikriti, etc.).
 - **Props**: `cta_id*` (stable string like `routine_start`,
-  `home_vikriti_take`, `discover_see_all`), `route_name*`, `label*` (the
-  visible text — useful for A/B label tests).
+  `home_vikriti_take`, `discover_see_all`, `dosha_tile_{nature|imbalance|
+  lifestyle}`), `route_name*`, `label*` (the visible text — useful for A/B
+  label tests).
 - **Notes**: Calling this out separately from `*_tapped` events lets us
   build a "CTA performance" board that's vendor-agnostic of the action
   the CTA leads to.

@@ -106,6 +106,14 @@ export default function DoshaProfileContent({
     setPaywallOpen(true)
   }
 
+  // Deep-dive tile → its page, with the entry-point click tracked (pairs with
+  // the CONTENT_IMPRESSION the destination page fires) so tile→view CTR is
+  // measurable. See analytics-events.md.
+  function openSection(sectionId) {
+    track(EVENTS.CTA_CLICKED, { cta_id: `dosha_tile_${sectionId}`, primary_dosha: primary })
+    navigate(`/dosha/${sectionId}`)
+  }
+
   if (!primaryData) return null
 
   return (
@@ -355,7 +363,7 @@ export default function DoshaProfileContent({
                   icon="self_improvement"
                   title={t('doshaProfile.tileNature')}
                   summary={t('doshaProfile.tileNatureSummary', { name: primaryData.name })}
-                  onClick={() => navigate('/dosha/nature')}
+                  onClick={() => openSection('nature')}
                 />
               )}
               {hasRichDetail(primary, isTridoshic) && (
@@ -363,14 +371,14 @@ export default function DoshaProfileContent({
                   icon="healing"
                   title={t('doshaProfile.tileImbalance')}
                   summary={t('doshaProfile.tileImbalanceSummary')}
-                  onClick={() => navigate('/dosha/imbalance')}
+                  onClick={() => openSection('imbalance')}
                 />
               )}
               <DetailTile
                 icon="spa"
                 title={t('doshaProfile.tileLifestyle')}
                 summary={t('doshaProfile.tileLifestyleSummary')}
-                onClick={() => navigate('/dosha/lifestyle')}
+                onClick={() => openSection('lifestyle')}
               />
             </div>
           )}
