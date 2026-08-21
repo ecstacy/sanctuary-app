@@ -223,7 +223,7 @@ export default function RecommendationsPage() {
               ))}
             </div>
 
-            <div className="bg-surface-container-low rounded-lg p-6 text-center">
+            <div className="bg-surface-container-low rounded-2xl p-6 text-center">
               <span className="material-symbols-outlined text-primary/30 text-4xl mb-3 block">self_care</span>
               <p className="font-headline italic text-lg text-on-surface-variant/60 mb-2">
                 {t('recommendations.tellUsHurts')}
@@ -320,7 +320,7 @@ export default function RecommendationsPage() {
           <div>
 
             {/* Primary result hero */}
-            <div className={`bg-gradient-to-br ${topResult.color} rounded-lg p-6 mb-5 relative overflow-hidden stagger-2`}>
+            <div className={`bg-gradient-to-br ${topResult.color} rounded-2xl p-6 mb-5 relative overflow-hidden stagger-2`}>
               <div className="absolute -right-6 -bottom-6 opacity-10">
                 <span className="material-symbols-outlined text-[7rem]">{topResult.icon}</span>
               </div>
@@ -357,11 +357,11 @@ export default function RecommendationsPage() {
                       onClick={() => canExplore
                         ? handlePracticeExplore(topResult.id, i, practice)
                         : handlePracticeToggle(topResult.id, i, practice.title)}
-                      className="bg-surface-container rounded-lg p-4 text-left transition-all active:scale-[0.98] w-full"
+                      className="bg-surface-container rounded-2xl p-4 text-left transition-all active:scale-[0.98] w-full"
                       aria-label={canExplore ? t('recommendations.explorePose', { pose: practice.title }) : undefined}
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center flex-shrink-0">
+                        <div className="w-11 h-11 rounded-2xl bg-primary-container flex items-center justify-center flex-shrink-0">
                           <span className="material-symbols-outlined text-primary text-lg">{practice.icon}</span>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -391,7 +391,7 @@ export default function RecommendationsPage() {
             </div>
 
             {/* Breathwork */}
-            <div className="bg-primary-container rounded-lg p-5 mb-5 stagger-4">
+            <div className="bg-primary-container rounded-2xl p-5 mb-5 stagger-4">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-9 h-9 rounded-full bg-primary/15 flex items-center justify-center">
                   <span className="material-symbols-outlined text-primary text-lg">air</span>
@@ -407,7 +407,7 @@ export default function RecommendationsPage() {
             </div>
 
             {/* Ayurvedic tip */}
-            <div className="bg-surface-container-low rounded-lg p-5 mb-5 stagger-5">
+            <div className="bg-surface-container-low rounded-2xl p-5 mb-5 stagger-5">
               <div className="flex items-start gap-3">
                 <span className="material-symbols-outlined text-primary text-base mt-0.5">spa</span>
                 <div>
@@ -432,9 +432,9 @@ export default function RecommendationsPage() {
                     <button
                       key={i}
                       onClick={() => handleRelatedClick(rec)}
-                      className="flex items-center gap-4 bg-surface-container rounded-lg p-4 text-left active:scale-[0.98] transition-all"
+                      className="flex items-center gap-4 bg-surface-container rounded-2xl p-4 text-left active:scale-[0.98] transition-all"
                     >
-                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${rec.color} flex items-center justify-center flex-shrink-0`}>
+                      <div className={`w-11 h-11 rounded-2xl bg-gradient-to-br ${rec.color} flex items-center justify-center flex-shrink-0`}>
                         <span className="material-symbols-outlined text-white text-lg">{rec.icon}</span>
                       </div>
                       <div className="flex-1">
