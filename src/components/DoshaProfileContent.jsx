@@ -360,27 +360,33 @@ export default function DoshaProfileContent({
             </div>
           </div>
 
-          {/* Deep-dive entry points — keeps the profile scannable; each topic
-              opens as its own page. Overview only; the anonymous quiz result
-              ('all') shows the sections inline in Chapter 2 below instead. */}
-          {overview && (
-            <div className="mt-2">
-              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-1 px-1">
-                {t('doshaProfile.exploreTitle', 'Explore your dosha')}
-              </p>
-              <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-3 px-1">
-                {t('doshaProfile.exploreSubtitle', 'The full detail on each area — tap to open.')}
-              </p>
+          {/* Go deeper into "who you are" — the full body & mind reading on its
+              own page. Overview only; the quiz result ('all') shows it inline
+              above. Belongs to Chapter 1: it's about your nature, not balance. */}
+          {overview && hasRichDetail(primary, isTridoshic) && (
+            <NavRow
+              icon="self_improvement"
+              accentHex={primaryData.accentHex}
+              title={t('doshaProfile.tileNature')}
+              summary={t('doshaProfile.tileNatureSummary', { name: primaryData.name })}
+              onClick={() => openSection('nature')}
+            />
+          )}
+
+        </ThemeSection>
+
+        {/* ═══════════════════════════════════════════════════════════
+            CHAPTER 2 — STAYING IN BALANCE. Always a real chapter (so the
+            numbering never skips): on the profile it's two entry rows; on the
+            quiz result it's the sections inline.
+            ═══════════════════════════════════════════════════════════ */}
+        <ThemeSection
+          kicker={t('doshaProfile.ch2Kicker')}
+          title={t('doshaProfile.ch2Title')}
+          lede={t('doshaProfile.ch2Lede')}
+        >
+          {overview ? (
             <div className="flex flex-col gap-2.5">
-              {hasRichDetail(primary, isTridoshic) && (
-                <NavRow
-                  icon="self_improvement"
-                  accentHex={primaryData.accentHex}
-                  title={t('doshaProfile.tileNature')}
-                  summary={t('doshaProfile.tileNatureSummary', { name: primaryData.name })}
-                  onClick={() => openSection('nature')}
-                />
-              )}
               {hasRichDetail(primary, isTridoshic) && (
                 <NavRow
                   icon="healing"
@@ -398,29 +404,15 @@ export default function DoshaProfileContent({
                 onClick={() => openSection('lifestyle')}
               />
             </div>
-            </div>
+          ) : (
+            <>
+              <div className="mb-5">
+                <ImbalanceSections primary={primary} isTridoshic={isTridoshic} />
+              </div>
+              <LifestyleSections primary={primary} />
+            </>
           )}
-
         </ThemeSection>
-
-        {/* ═══════════════════════════════════════════════════════════
-            CHAPTER 2 — STAYING IN BALANCE  (inline only on the quiz result;
-            behind the tiles above on the logged-in profile)
-            ═══════════════════════════════════════════════════════════ */}
-        {sections === 'all' && (
-        <ThemeSection
-          kicker={t('doshaProfile.ch2Kicker')}
-          title={t('doshaProfile.ch2Title')}
-          lede={t('doshaProfile.ch2Lede')}
-        >
-
-          <div className="mb-5">
-            <ImbalanceSections primary={primary} isTridoshic={isTridoshic} />
-          </div>
-          <LifestyleSections primary={primary} />
-
-        </ThemeSection>
-        )}
 
         {/* ═══════════════════════════════════════════════════════════
             CHAPTER 3 — LIVE BY YOUR DOSHA  (Plus-gated)
