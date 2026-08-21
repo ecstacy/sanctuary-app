@@ -60,7 +60,7 @@ function DetailTile({ icon, title, summary, onClick }) {
         <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">{icon}</span>
       </div>
       <p className="font-body font-semibold text-sm text-on-surface leading-tight">{title}</p>
-      <p className="font-body text-xs text-on-surface-variant/70 leading-snug">{summary}</p>
+      <p className="font-body text-[13px] text-on-surface-variant/70 leading-snug">{summary}</p>
     </button>
   )
 }
@@ -285,7 +285,7 @@ export default function DoshaProfileContent({
                   {t('doshaProfile.secondary', { name: secondaryData.name })}
                 </p>
               </div>
-              <p className="font-body text-xs text-on-surface-variant leading-relaxed">{secondaryData.description}</p>
+              <p className="font-body text-sm text-on-surface-variant leading-relaxed">{secondaryData.description}</p>
             </div>
           )}
 
@@ -306,7 +306,7 @@ export default function DoshaProfileContent({
                       <p className="font-body text-xs italic text-on-surface-variant/70">{q.sanskrit}</p>
                     </div>
                     {q.note && (
-                      <p className="font-body text-xs text-on-surface-variant leading-relaxed">{q.note}</p>
+                      <p className="font-body text-sm text-on-surface-variant leading-relaxed">{q.note}</p>
                     )}
                   </div>
                 ))}
@@ -347,7 +347,7 @@ export default function DoshaProfileContent({
               ].map((strength, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <span aria-hidden="true" className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                  <span className="font-body text-xs text-on-surface">{strength}</span>
+                  <span className="font-body text-sm text-on-surface">{strength}</span>
                 </div>
               ))}
             </div>
@@ -357,7 +357,14 @@ export default function DoshaProfileContent({
               opens as its own page. Overview only; the anonymous quiz result
               ('all') shows the sections inline in Chapter 2 below instead. */}
           {overview && (
-            <div className="grid grid-cols-2 gap-3 mt-1">
+            <div className="mt-2">
+              <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-1 px-1">
+                {t('doshaProfile.exploreTitle', 'Explore your dosha')}
+              </p>
+              <p className="font-body text-[13px] text-on-surface-variant/80 leading-relaxed mb-3 px-1">
+                {t('doshaProfile.exploreSubtitle', 'The full detail on each area — tap to open.')}
+              </p>
+            <div className="grid grid-cols-2 gap-3">
               {hasRichDetail(primary, isTridoshic) && (
                 <DetailTile
                   icon="self_improvement"
@@ -380,6 +387,7 @@ export default function DoshaProfileContent({
                 summary={t('doshaProfile.tileLifestyleSummary')}
                 onClick={() => openSection('lifestyle')}
               />
+            </div>
             </div>
           )}
 
@@ -445,7 +453,7 @@ export default function DoshaProfileContent({
                 {[t('doshaProfile.teaserBullet1'), t('doshaProfile.teaserBullet2'), t('doshaProfile.teaserBullet3')].map((line) => (
                   <li key={line} className="flex items-center gap-2">
                     <span aria-hidden="true" className="material-symbols-outlined text-[14px] text-plus">check_circle</span>
-                    <span className="font-body text-xs text-on-surface">{line}</span>
+                    <span className="font-body text-sm text-on-surface">{line}</span>
                   </li>
                 ))}
               </ul>
@@ -485,7 +493,7 @@ export default function DoshaProfileContent({
               </div>
               <div>
                 <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.peakSeason')}</p>
-                <p className="font-body text-xs text-on-surface-variant leading-relaxed">
+                <p className="font-body text-sm text-on-surface-variant leading-relaxed">
                   {t('doshaProfile.peakSeasonBody', { season: primaryData.season, name: primaryData.name })}
                 </p>
               </div>
@@ -497,7 +505,7 @@ export default function DoshaProfileContent({
               </div>
               <div>
                 <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.doshaHours', { name: primaryData.name })}</p>
-                <p className="font-body text-xs text-on-surface-variant leading-relaxed">
+                <p className="font-body text-sm text-on-surface-variant leading-relaxed">
                   {t('doshaProfile.doshaHoursBody', { timeOfDay: primaryData.timeOfDay, name: primaryData.name })}
                 </p>
               </div>
@@ -509,7 +517,7 @@ export default function DoshaProfileContent({
               </div>
               <div>
                 <p className="font-body font-semibold text-sm text-on-surface mb-0.5">{t('doshaProfile.balancingTastes')}</p>
-                <p className="font-body text-xs text-on-surface-variant leading-relaxed">{primaryData.taste}</p>
+                <p className="font-body text-sm text-on-surface-variant leading-relaxed">{primaryData.taste}</p>
               </div>
             </div>
           </div>
@@ -567,7 +575,7 @@ export default function DoshaProfileContent({
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">restaurant</span>
               </div>
               <p className="font-body font-semibold text-sm text-on-surface leading-tight">{t('doshaProfile.dietTitle')}</p>
-              <p className="font-body text-xs text-on-surface-variant/70 leading-snug">{t('doshaProfile.dietSummary')}</p>
+              <p className="font-body text-[13px] text-on-surface-variant/70 leading-snug">{t('doshaProfile.dietSummary')}</p>
             </button>
             <button
               onClick={() => navigate('/dinacharya')}
@@ -579,7 +587,7 @@ export default function DoshaProfileContent({
                 <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">schedule</span>
               </div>
               <p className="font-body font-semibold text-sm text-on-surface leading-tight">{t('doshaProfile.routineTitle')}</p>
-              <p className="font-body text-xs text-on-surface-variant/70 leading-snug">{t('doshaProfile.routineSummary')}</p>
+              <p className="font-body text-[13px] text-on-surface-variant/70 leading-snug">{t('doshaProfile.routineSummary')}</p>
             </button>
           </div>
           </>
@@ -592,7 +600,7 @@ export default function DoshaProfileContent({
           <span aria-hidden="true" className="material-symbols-outlined text-primary text-base mt-0.5">auto_awesome</span>
           <div>
             <p className="font-body font-semibold text-sm text-on-surface mb-1">{t('doshaProfile.understandingTitle')}</p>
-            <p className="font-body text-xs text-on-surface-variant leading-relaxed">
+            <p className="font-body text-sm text-on-surface-variant leading-relaxed">
               {t('doshaProfile.understandingBody')}
             </p>
           </div>

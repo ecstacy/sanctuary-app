@@ -326,7 +326,9 @@
     "tileImbalanceSummary": "Anzeichen, Auslöser & wie du ausgleichst",
     "tileLifestyle": "Im Gleichgewicht leben",
     "tileLifestyleSummary": "Alltag, Bewegung & Atem",
-    "tridoshicNoDeepDive": "Eine ausgeglichene Konstitution hat kein einzelnes dominantes Dosha, daher gilt dieser Bereich nicht. Sieh dir stattdessen deine Konstitution und deinen Alltag an."
+    "tridoshicNoDeepDive": "Eine ausgeglichene Konstitution hat kein einzelnes dominantes Dosha, daher gilt dieser Bereich nicht. Sieh dir stattdessen deine Konstitution und deinen Alltag an.",
+    "exploreTitle": "Dein Dosha erkunden",
+    "exploreSubtitle": "Alle Details zu jedem Bereich — zum Öffnen tippen."
   },
   "onboarding": {
     "skip": "Überspringen",
