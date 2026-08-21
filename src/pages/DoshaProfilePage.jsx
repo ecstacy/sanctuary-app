@@ -114,6 +114,7 @@ export default function DoshaProfilePage() {
 
   return (
     <DoshaProfileContent
+      sections="overview"
       doshaLabel={doshaLabel}
       primary={primary}
       secondary={secondary}
