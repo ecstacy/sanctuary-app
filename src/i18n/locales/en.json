@@ -1313,7 +1313,11 @@
           ]
         }
       }
-    }
+    },
+    "savedToProfile": "Saved to your profile",
+    "done": "Done",
+    "removeResult": "Remove this result",
+    "removing": "Removing…"
   },
   "journey": {
     "title": "Your Journey",

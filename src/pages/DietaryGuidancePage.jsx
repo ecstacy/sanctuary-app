@@ -43,16 +43,18 @@ function SectionHead({ label, title, hairline = true }) {
   )
 }
 
-// Hairline rows, not a card-in-card: category label + text separated by a rule.
+// Hairline rows: the category label as a small colored eyebrow, its text below.
+// Stacked (not a fixed-width label column) so long German/Hindi category names
+// like "MILCHPRODUKTE" can't overflow into and overlap the text beside them.
 function CategoryRows({ items, ink }) {
   return (
     <div className="mt-1">
       {Object.entries(items).map(([category, text]) => (
-        <div key={category} className="flex gap-3.5 py-2.5 border-t border-outline-variant/30 first:border-t-0">
-          <p className="font-label text-[11px] uppercase tracking-wider w-[78px] flex-shrink-0 pt-0.5" style={{ color: ink }}>
+        <div key={category} className="py-3 border-t border-outline-variant/30 first:border-t-0">
+          <p className="font-label text-[11px] uppercase tracking-wider mb-1 break-words" style={{ color: ink }}>
             {localizeDietCategory(category)}
           </p>
-          <p className="font-body text-[13.5px] text-on-surface-variant leading-relaxed flex-1">{text}</p>
+          <p className="font-body text-sm text-on-surface-variant leading-relaxed">{text}</p>
         </div>
       ))}
     </div>

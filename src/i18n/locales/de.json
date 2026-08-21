@@ -1313,7 +1313,11 @@
           ]
         }
       }
-    }
+    },
+    "savedToProfile": "In deinem Profil gespeichert",
+    "done": "Fertig",
+    "removeResult": "Dieses Ergebnis entfernen",
+    "removing": "Wird entfernt…"
   },
   "journey": {
     "title": "Deine Reise",

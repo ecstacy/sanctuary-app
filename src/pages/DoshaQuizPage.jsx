@@ -65,6 +65,14 @@ export default function DoshaQuizPage() {
   const [doshaResult, setDoshaResult] = useState(null)
   const [saving, setSaving]           = useState(false)
   const [calcStep, setCalcStep]       = useState(0)
+  // Auto-save: a logged-in user's result is persisted the moment the result
+  // screen appears, so swiping back never loses it (the CTA-at-the-bottom trap).
+  // We keep the constitution they had BEFORE this quiz so "Remove this result"
+  // can cleanly undo the overwrite.
+  const [saved, setSaved]             = useState(false)
+  const [removing, setRemoving]       = useState(false)
+  const autoSavedRef                  = useRef(false)
+  const prevProfileRef                = useRef(null)
 
   // ── Health-data consent (GDPR Art. 9) ──────────────────────────────────
   // The quiz is the first health-adjacent data we collect, so we gate its
@@ -100,6 +108,17 @@ export default function DoshaQuizPage() {
         secondary_dosha: doshaResult.secondary,
       })
     }
+  }, [phase, user, doshaResult])
+
+  // Auto-save a logged-in user's result as soon as the result screen renders —
+  // once. We snapshot the prior constitution first so "Remove this result" can
+  // revert. Anonymous users can't persist, so they keep the sign-up-to-save path.
+  useEffect(() => {
+    if (phase !== 'result' || !user || !doshaResult || autoSavedRef.current) return
+    autoSavedRef.current = true
+    prevProfileRef.current = { dosha: profile?.dosha ?? null, dosha_details: profile?.dosha_details ?? null }
+    saveDosha({ silent: true })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, user, doshaResult])
 
   useEffect(() => {
@@ -233,7 +252,9 @@ export default function DoshaQuizPage() {
   }, [phase, tiebreakers.length])
 
   // ── Save flow ──────────────────────────────────────────────────────────
-  async function saveDosha() {
+  // silent: persist without navigating away — used by the auto-save on the
+  // result screen. The manual (non-silent) path still routes to /dosha.
+  async function saveDosha({ silent = false } = {}) {
     if (!doshaResult) return
 
     const label = labelFor(doshaResult)
@@ -312,8 +333,35 @@ export default function DoshaQuizPage() {
     if (assessErr) console.error('Failed to log dosha assessment:', assessErr.message)
 
     await refreshProfile()
-    navigate('/dosha', { replace: true })
     setSaving(false)
+    if (silent) { setSaved(true); return }   // auto-save: stay on the result
+    navigate('/dosha', { replace: true })
+  }
+
+  // ── Remove this result (undo) ──────────────────────────────────────────
+  // Restores the constitution the user had before this quiz — or clears it if
+  // this was their first. The immutable dosha_assessments log row is left as-is
+  // (it's an audit trail); only the live profile is reverted.
+  async function removeResult() {
+    if (!user) return
+    setRemoving(true)
+    const prev = prevProfileRef.current || { dosha: null, dosha_details: null }
+    const { error } = await supabase
+      .from('profiles')
+      .update({ dosha: prev.dosha, dosha_details: prev.dosha_details })
+      .eq('id', user.id)
+    if (error) {
+      console.error('Failed to remove dosha result:', error.message)
+      alert(t('doshaQuiz.saveFailed', { error: error.message }))
+      setRemoving(false)
+      return
+    }
+    track(EVENTS.CTA_CLICKED, { cta_id: 'dosha_remove_result', primary_dosha: doshaResult?.primary })
+    await refreshProfile()
+    setRemoving(false)
+    // Back to where the constitution lives — the profile page (which shows the
+    // take-the-quiz prompt again if we cleared a first-time result).
+    navigate(prev.dosha ? '/dosha' : '/home', { replace: true })
   }
 
   // ── Reset helper (Retake) ──────────────────────────────────────────────
@@ -580,34 +628,62 @@ export default function DoshaQuizPage() {
       <div className="pb-2">
         {/* Optional depth: sharpen the reading with a few day-to-day taps (#54). */}
         <SharpenReadingCard primary={doshaResult.primary} />
-        {!user && (
-          <div className="bg-primary-container/40 border border-primary/15 rounded-xl px-4 py-3 mb-3">
-            <p className="font-label text-[11px] uppercase tracking-wider text-primary mb-1">{t('doshaQuiz.saveResultKicker')}</p>
-            <p className="font-body text-xs text-on-surface leading-relaxed">
-              {t('doshaQuiz.saveResultBody')}
-            </p>
-          </div>
+
+        {user ? (
+          // Logged-in: the result is already saved (auto-save on render), so the
+          // bottom is about what to do next, not a save the user could miss.
+          <>
+            <div className="flex items-center justify-center gap-1.5 mb-4">
+              <span aria-hidden="true" className="material-symbols-outlined text-[18px] text-pine">check_circle</span>
+              <p className="font-body text-[13px] text-on-surface-variant">{t('doshaQuiz.savedToProfile', 'Saved to your profile')}</p>
+            </div>
+            <button
+              onClick={() => navigate('/dosha', { replace: true })}
+              className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all mb-3"
+            >
+              {t('doshaQuiz.done', 'Done')}
+            </button>
+            <button
+              onClick={resetQuiz}
+              className="w-full py-3 text-center text-xs text-on-surface-variant/60 font-label uppercase tracking-widest"
+            >
+              {t('doshaQuiz.retake')}
+            </button>
+            <button
+              onClick={removeResult}
+              disabled={removing}
+              className="w-full py-3 text-center text-xs text-clay/80 font-label uppercase tracking-widest mb-8 disabled:opacity-50"
+            >
+              {removing ? t('doshaQuiz.removing', 'Removing…') : t('doshaQuiz.removeResult', 'Remove this result')}
+            </button>
+          </>
+        ) : (
+          // Anonymous: can't persist to a profile — keep the sign-up-to-save path.
+          <>
+            <div className="bg-primary-container/40 border border-primary/15 rounded-xl px-4 py-3 mb-3">
+              <p className="font-label text-[11px] uppercase tracking-wider text-primary mb-1">{t('doshaQuiz.saveResultKicker')}</p>
+              <p className="font-body text-xs text-on-surface leading-relaxed">
+                {t('doshaQuiz.saveResultBody')}
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                track(EVENTS.CTA_CLICKED, { cta_id: 'dosha_signup_to_save', primary_dosha: doshaResult?.primary, anonymous: true })
+                saveDosha()
+              }}
+              disabled={saving}
+              className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mb-3"
+            >
+              {saving ? t('doshaQuiz.saving') : t('doshaQuiz.createAccountCta')}
+            </button>
+            <button
+              onClick={resetQuiz}
+              className="w-full py-3 text-center text-xs text-on-surface-variant/50 font-label uppercase tracking-widest mb-8"
+            >
+              {t('doshaQuiz.retake')}
+            </button>
+          </>
         )}
-        <button
-          onClick={() => {
-            track(EVENTS.CTA_CLICKED, {
-              cta_id:        user ? 'dosha_save' : 'dosha_signup_to_save',
-              primary_dosha: doshaResult?.primary,
-              anonymous:     !user,
-            })
-            saveDosha()
-          }}
-          disabled={saving}
-          className="w-full py-4 bg-primary text-on-primary rounded-full font-label font-semibold tracking-wide text-sm active:scale-95 transition-all disabled:opacity-50 mb-3"
-        >
-          {saving ? t('doshaQuiz.saving') : (user ? t('doshaQuiz.saveCta') : t('doshaQuiz.createAccountCta'))}
-        </button>
-        <button
-          onClick={resetQuiz}
-          className="w-full py-3 text-center text-xs text-on-surface-variant/50 font-label uppercase tracking-widest mb-8"
-        >
-          {t('doshaQuiz.retake')}
-        </button>
       </div>
     )
 
