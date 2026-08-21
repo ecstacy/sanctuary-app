@@ -8,6 +8,7 @@ import { track, screen, EVENTS } from '../lib/track'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { useIsPremium } from '../hooks/useIsPremium'
 import PaywallSheet from '../components/PaywallSheet'
+import NavRow from '../components/NavRow'
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  DietaryGuidancePage — `/dietary`
@@ -286,35 +287,27 @@ export default function DietaryGuidancePage() {
       </div>
 
       {/* Bridges to the reviewed food database + meals */}
-      <div className="px-5 mt-6 flex flex-col gap-2">
-        <button
+      <div className="px-5 mt-6 flex flex-col gap-2.5">
+        <NavRow
+          icon="search"
+          accentHex={colors.ink}
+          title={t('diet.sectionTitle')}
+          summary={t('dietary.lookUpFood')}
           onClick={() => {
             track(EVENTS.CTA_CLICKED, { cta_id: 'dietary_to_food_search', route_name: 'dietary_guidance' })
             navigate('/discover')
           }}
-          className="flex items-center gap-3 bg-surface-container-low rounded-2xl p-3.5 text-left active:scale-[0.99] transition-all border border-outline-variant/30"
-        >
-          <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">search</span>
-          <span className="flex-1 min-w-0">
-            <span className="block font-body text-sm font-semibold text-on-surface">{t('diet.sectionTitle')}</span>
-            <span className="block font-body text-xs text-on-surface-variant/70">{t('dietary.lookUpFood')}</span>
-          </span>
-          <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
-        </button>
-        <button
+        />
+        <NavRow
+          icon="restaurant_menu"
+          accentHex={colors.ink}
+          title={t('meals.title')}
+          summary={t('meals.entryHelp')}
           onClick={() => {
             track(EVENTS.CTA_CLICKED, { cta_id: 'dietary_to_meals', route_name: 'dietary_guidance' })
             navigate('/meals')
           }}
-          className="flex items-center gap-3 bg-surface-container-low rounded-2xl p-3.5 text-left active:scale-[0.99] transition-all border border-outline-variant/30"
-        >
-          <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">restaurant_menu</span>
-          <span className="flex-1 min-w-0">
-            <span className="block font-body text-sm font-semibold text-on-surface">{t('meals.title')}</span>
-            <span className="block font-body text-xs text-on-surface-variant/70">{t('meals.entryHelp')}</span>
-          </span>
-          <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/30 text-sm">chevron_right</span>
-        </button>
+        />
       </div>
 
       </>) : (
