@@ -5,11 +5,13 @@
 //  comfortable reading size, expanded by default.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
 import { NatureSections, ImbalanceSections, LifestyleSections } from '../components/doshaDetailSections'
 import MedicalDisclaimer from '../components/MedicalDisclaimer'
+import { track, EVENTS } from '../lib/track'
 
 const SECTIONS = {
   nature:    { titleKey: 'doshaProfile.tileNature',    Comp: NatureSections },
@@ -25,6 +27,19 @@ export default function DoshaSectionPage({ section }) {
   const meta = SECTIONS[section]
   const primary = profile?.dosha_details?.primary || profile?.dosha?.toLowerCase() || null
   const isTridoshic = profile?.dosha === 'Tridoshic'
+
+  // Deep-dive impression — preserves the per-topic engagement signal the inline
+  // accordions used to fire (surface/content_type kept identical), so the split
+  // into pages doesn't create an analytics blind spot. Fires once per view.
+  useEffect(() => {
+    if (!meta || !primary) return
+    track(EVENTS.CONTENT_IMPRESSION, {
+      surface:       'dosha_profile',
+      content_type:  'deep_dive',
+      content_id:    section,
+      primary_dosha: primary,
+    })
+  }, [meta, primary, section])
 
   // No constitution yet, or an unknown section — send them to the profile.
   if (!meta || !primary) {
