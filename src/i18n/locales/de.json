@@ -2035,7 +2035,11 @@
       "small": "Klein"
     },
     "addedTag": "hinzugefügt",
-    "patternsSeeWeekly": "Wöchentliche Trends ansehen →"
+    "patternsSeeWeekly": "Wöchentliche Trends ansehen →",
+    "removeAria": "{{name}} entfernen",
+    "addMissed": "Fehlendes Lebensmittel hinzufügen",
+    "announceRaises": "Ergebnis fertig. Diese Mahlzeit tendiert zu {{dosha}}.",
+    "announceBalanced": "Ergebnis fertig. Diese Mahlzeit ist ausgeglichen."
   },
   "a11y": {
     "scrollTop": "Nach oben scrollen",

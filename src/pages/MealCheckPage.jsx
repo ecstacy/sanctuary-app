@@ -431,9 +431,20 @@ export default function MealCheckPage() {
   }
 
   // ── Render ────────────────────────────────────────────────────────────────
+  // A persistent live region announces phase changes + the verdict to screen
+  // readers — the async result was previously silent (a11y standard).
+  const liveMessage = phase === 'result' && result
+    ? (result.assessment?.headline
+        ? t('mealCheck.announceRaises', { dosha: doshaDisplayName(result.assessment.headline), defaultValue: 'Result ready. This meal leans {{dosha}}.' })
+        : t('mealCheck.announceBalanced', 'Result ready. This meal is balanced.'))
+    : phase === 'confirm'
+      ? t('mealCheck.confirmTitle')
+      : ''
+
   return (
     <div className="min-h-screen bg-background text-on-surface font-body px-6 pb-28">
       <TopBar t={t} onBack={onBack} />
+      <p className="sr-only" role="status" aria-live="polite">{liveMessage}</p>
 
       {access.state !== 'premium' && (
         <p className="max-w-md mx-auto -mt-2 mb-4 text-center text-xs text-on-surface-variant">
@@ -517,21 +528,28 @@ export default function MealCheckPage() {
             <h2 className="font-headline text-xl mb-1">{t('mealCheck.confirmTitle')}</h2>
             <p className="text-on-surface-variant text-sm mb-4">{t('mealCheck.confirmHelp')}</p>
 
-            <div className="flex flex-wrap gap-2 mb-5">
+            <div className="flex flex-wrap gap-2 mb-3">
               {items.map((it) => (
                 <button
                   key={it.id}
                   onClick={() => removeItem(it.id)}
-                  className="inline-flex items-center gap-1.5 bg-primary-container text-on-primary-container rounded-full pl-3.5 pr-2 py-1.5 text-sm"
+                  aria-label={t('mealCheck.removeAria', { name: it.name, defaultValue: 'Remove {{name}}' })}
+                  className="inline-flex items-center gap-1.5 bg-primary-container text-on-primary-container rounded-full pl-3.5 pr-2 min-h-[44px] text-sm"
                 >
                   {qtyPrefix(t, it.qty)}{it.name}
                   {it.inferred && <span className="text-[10px] font-label uppercase tracking-wide opacity-60">{t('mealCheck.addedTag')}</span>}
-                  <span className="material-symbols-outlined text-base opacity-70">close</span>
+                  <span aria-hidden="true" className="material-symbols-outlined text-base opacity-70">close</span>
                 </button>
               ))}
               {items.length === 0 && (
-                <span className="text-sm text-on-surface-variant">{t('mealCheck.noItemsYet')}</span>
+                <span className="text-sm text-on-surface-variant self-center">{t('mealCheck.noItemsYet')}</span>
               )}
+            </div>
+
+            {/* Add a food the parser missed entirely — the confirm copy promises
+                "add anything we missed", so the affordance has to be here. */}
+            <div className="mb-5">
+              <ComponentAdder t={t} onAdd={addCustomComponent} label={t('mealCheck.addMissed', 'Add a food we missed')} />
             </div>
 
             {items.filter((it) => it.open && it.componentSuggestions?.length).map((it) => (
@@ -549,7 +567,7 @@ export default function MealCheckPage() {
                       <button
                         key={c.id}
                         onClick={() => addComponent(it.id, c)}
-                        className="inline-flex items-center gap-1 bg-surface-container border border-outline-variant rounded-full pl-3 pr-3.5 py-1.5 text-sm active:scale-95 transition-transform"
+                        className="inline-flex items-center gap-1 bg-surface-container border border-outline-variant rounded-full pl-3 pr-3.5 min-h-[44px] text-sm active:scale-95 transition-transform"
                       >
                         <span className="material-symbols-outlined text-[15px] text-on-surface-variant">add</span>
                         {c.name}
@@ -557,7 +575,7 @@ export default function MealCheckPage() {
                     ))}
                   <button
                     onClick={() => keepComposite(it.id)}
-                    className="text-sm text-on-surface-variant underline px-2 py-1.5"
+                    className="text-sm text-on-surface-variant underline px-2 min-h-[44px] inline-flex items-center"
                   >
                     {t('mealCheck.specifySkip')}
                   </button>
@@ -576,7 +594,7 @@ export default function MealCheckPage() {
                     <button
                       key={o.id}
                       onClick={() => resolveAmbiguous(a.token, o)}
-                      className="bg-surface-container border border-outline-variant rounded-full px-3.5 py-1.5 text-sm"
+                      className="bg-surface-container border border-outline-variant rounded-full px-3.5 min-h-[44px] inline-flex items-center text-sm"
                     >
                       {o.name}
                     </button>
@@ -595,14 +613,14 @@ export default function MealCheckPage() {
                     <button
                       key={o.id}
                       onClick={() => { addItem(o); dismissUnknown(u.token) }}
-                      className="bg-surface-container border border-outline-variant rounded-full px-3.5 py-1.5 text-sm"
+                      className="bg-surface-container border border-outline-variant rounded-full px-3.5 min-h-[44px] inline-flex items-center text-sm"
                     >
                       {o.name}
                     </button>
                   ))}
                   <button
                     onClick={() => dismissUnknown(u.token)}
-                    className="text-sm text-on-surface-variant underline px-2 py-1.5"
+                    className="text-sm text-on-surface-variant underline px-2 min-h-[44px] inline-flex items-center"
                   >
                     {t('mealCheck.skip')}
                   </button>
@@ -909,7 +927,7 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
 // Free-text "add your own" for the open-composite specify panel — a dashed
 // "＋ Add your own" that reveals a small input. Mirrors the MealChips adder so
 // the two feel the same; kept separate so the panel stays self-contained.
-function ComponentAdder({ t, onAdd }) {
+function ComponentAdder({ t, onAdd, label }) {
   const [adding, setAdding] = useState(false)
   const [val, setVal] = useState('')
   const [miss, setMiss] = useState(false)
@@ -925,10 +943,10 @@ function ComponentAdder({ t, onAdd }) {
     return (
       <button
         onClick={() => setAdding(true)}
-        className="mt-3 inline-flex items-center gap-1 rounded-full border border-dashed border-outline px-3.5 py-1.5 text-sm text-on-surface-variant"
+        className="mt-3 inline-flex items-center gap-1 rounded-full border border-dashed border-outline px-4 min-h-[44px] text-sm text-on-surface-variant"
       >
         <span className="material-symbols-outlined text-[16px]">add</span>
-        {t('mealCheck.specifyAddOwn', 'Add your own')}
+        {label || t('mealCheck.specifyAddOwn', 'Add your own')}
       </button>
     )
   }
@@ -941,9 +959,9 @@ function ComponentAdder({ t, onAdd }) {
           onChange={(e) => { setVal(e.target.value); setMiss(false) }}
           onKeyDown={(e) => { if (e.key === 'Enter') submit() }}
           placeholder={t('mealCheck.addPlaceholder')}
-          className="flex-1 rounded-full bg-surface-container border border-outline-variant px-4 py-2 text-sm focus:outline-none focus:border-primary"
+          className="flex-1 rounded-full bg-surface-container border border-outline-variant px-4 min-h-[44px] text-sm focus:outline-none focus:border-primary"
         />
-        <button onClick={submit} className="shrink-0 bg-primary text-on-primary font-label px-4 rounded-full text-sm">{t('mealCheck.addBtn')}</button>
+        <button onClick={submit} className="shrink-0 bg-primary text-on-primary font-label px-4 min-h-[44px] rounded-full text-sm">{t('mealCheck.addBtn')}</button>
       </div>
       {miss && <p className="text-[11px] text-on-surface-variant mt-1.5 px-1">{t('mealCheck.addNotFound')}</p>}
     </div>
