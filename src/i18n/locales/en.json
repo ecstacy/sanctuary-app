@@ -2035,7 +2035,11 @@
       "small": "Small"
     },
     "addedTag": "added",
-    "patternsSeeWeekly": "See weekly trends →"
+    "patternsSeeWeekly": "See weekly trends →",
+    "removeAria": "Remove {{name}}",
+    "addMissed": "Add a food we missed",
+    "announceRaises": "Result ready. This meal leans {{dosha}}.",
+    "announceBalanced": "Result ready. This meal is balanced."
   },
   "a11y": {
     "scrollTop": "Scroll to top",
