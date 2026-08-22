@@ -347,6 +347,15 @@ export default function MealCheckPage() {
     if (!f || items.some((i) => i.id === newId)) return
     editItems(items.map((i) => (i.id === oldId ? { id: newId, name: f.name } : i)))
   }
+  // Confirm-phase variant swap: just update the item (no result to recompute
+  // yet), preserving quantity. Lets the user fix a raw⇄cooked guess before
+  // seeing the verdict (MC5).
+  function confirmChangeVariant(oldId, newId) {
+    if (oldId === newId) return
+    const f = getIngredient(newId)
+    if (!f || items.some((i) => i.id === newId)) return
+    setItems((prev) => prev.map((i) => (i.id === oldId ? { ...i, id: newId, name: f.name } : i)))
+  }
   function resultAddFood(query) {
     const parsed = parseMeal(query)
     const found = parsed.matched
@@ -525,32 +534,20 @@ export default function MealCheckPage() {
 
         {phase === 'confirm' && (
           <section>
-            <h2 className="font-headline text-xl mb-1">{t('mealCheck.confirmTitle')}</h2>
+            <h1 className="font-headline text-xl mb-1">{t('mealCheck.confirmTitle')}</h1>
             <p className="text-on-surface-variant text-sm mb-4">{t('mealCheck.confirmHelp')}</p>
 
-            <div className="flex flex-wrap gap-2 mb-3">
-              {items.map((it) => (
-                <button
-                  key={it.id}
-                  onClick={() => removeItem(it.id)}
-                  aria-label={t('mealCheck.removeAria', { name: it.name, defaultValue: 'Remove {{name}}' })}
-                  className="inline-flex items-center gap-1.5 bg-primary-container text-on-primary-container rounded-full pl-3.5 pr-2 min-h-[44px] text-sm"
-                >
-                  {qtyPrefix(t, it.qty)}{it.name}
-                  {it.inferred && <span className="text-[10px] font-label uppercase tracking-wide opacity-60">{t('mealCheck.addedTag')}</span>}
-                  <span aria-hidden="true" className="material-symbols-outlined text-base opacity-70">close</span>
-                </button>
-              ))}
-              {items.length === 0 && (
-                <span className="text-sm text-on-surface-variant self-center">{t('mealCheck.noItemsYet')}</span>
-              )}
-            </div>
-
-            {/* Add a food the parser missed entirely — the confirm copy promises
-                "add anything we missed", so the affordance has to be here. */}
-            <div className="mb-5">
-              <ComponentAdder t={t} onAdd={addCustomComponent} label={t('mealCheck.addMissed', 'Add a food we missed')} />
-            </div>
+            {/* Same MealChips as the result screen: remove ×, the raw⇄cooked
+                variant switch (MC5), and a labelled "add a food we missed" field
+                (MC1). One component, so both screens behave identically. */}
+            <MealChips
+              t={t}
+              items={items}
+              onRemoveItem={removeItem}
+              onAddFood={addCustomComponent}
+              onChangeVariant={confirmChangeVariant}
+              addLabel={t('mealCheck.addMissed', 'Add a food we missed')}
+            />
 
             {items.filter((it) => it.open && it.componentSuggestions?.length).map((it) => (
               <div key={`open-${it.id}`} className="mb-5 rounded-2xl bg-surface-container-low border border-outline-variant p-4">
@@ -765,7 +762,7 @@ function TopBar({ t, onBack }) {
     <header className="flex items-center py-4">
       <button
         onClick={onBack}
-        className="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center"
+        className="shrink-0 w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center"
         aria-label={t('common.back', 'Back')}
       >
         <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant text-lg">arrow_back</span>
@@ -841,7 +838,7 @@ function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddF
       {/* Editable meal — remove a chip or add a food you forgot; recomputes. */}
       <MealChips t={t} items={items} onRemoveItem={onRemoveItem} onAddFood={onAddFood} onChangeVariant={onChangeVariant} />
 
-      <h2 className="font-headline text-2xl leading-snug mb-4">{verdict}</h2>
+      <h1 className="font-headline text-2xl leading-snug mb-4">{verdict}</h1>
 
       {/* The constitution graphic + this meal's push per dosha. */}
       <ConstitutionEffect t={t} percentages={percentages} perDosha={a.perDosha} lens={a.lens} />
@@ -970,7 +967,7 @@ function ComponentAdder({ t, onAdd, label }) {
 
 // Editable meal chips — × removes, ＋ reveals an inline add field, and a food
 // with prep variants (raw ⇄ cooked, fresh ⇄ dry) carries a small switch.
-function MealChips({ t, items, onRemoveItem, onAddFood, onChangeVariant }) {
+function MealChips({ t, items, onRemoveItem, onAddFood, onChangeVariant, addLabel }) {
   const [adding, setAdding] = useState(false)
   const [val, setVal] = useState('')
   const [miss, setMiss] = useState(false)
@@ -992,29 +989,32 @@ function MealChips({ t, items, onRemoveItem, onAddFood, onChangeVariant }) {
             ? variants[(variants.findIndex((v) => v.id === it.id) + 1) % variants.length]
             : null
           return (
-            <span key={it.id} className="inline-flex items-center gap-1.5 bg-surface-container text-on-surface rounded-full pl-3.5 pr-2 py-1.5 text-sm">
+            <span key={it.id} className="inline-flex items-center gap-1 bg-surface-container text-on-surface rounded-full pl-3.5 pr-0.5 min-h-[44px] text-sm">
               {qtyPrefix(t, it.qty)}{it.name}
               {it.inferred && <span className="text-[10px] font-label uppercase tracking-wide text-on-surface-variant/60">{t('mealCheck.addedTag')}</span>}
               {nextVariant && (
                 <button
                   onClick={() => onChangeVariant(it.id, nextVariant.id)}
                   aria-label={t('mealCheck.switchVariantAria', { variant: nextVariant.label })}
-                  className="inline-flex items-center gap-0.5 rounded-full bg-surface-container-high pl-1.5 pr-2 py-0.5 text-[10px] font-label lowercase tracking-wide text-on-surface-variant"
+                  className="shrink-0 inline-flex items-center gap-0.5 rounded-full bg-surface-container-high pl-2 pr-2.5 min-h-[44px] text-[10px] font-label lowercase tracking-wide text-on-surface-variant"
                 >
                   <span aria-hidden="true" className="material-symbols-outlined text-[13px]">swap_horiz</span>
                   {nextVariant.label}
                 </button>
               )}
-              <button onClick={() => onRemoveItem(it.id)} aria-label={t('mealCheck.deleteAria')} className="w-5 h-5 rounded-full bg-surface-container-high flex items-center justify-center">
-                <span className="material-symbols-outlined text-[15px] text-on-surface-variant">close</span>
+              {/* 44×44 tap target (a11y standard); the visible ring stays small. */}
+              <button onClick={() => onRemoveItem(it.id)} aria-label={t('mealCheck.removeAria', { name: it.name, defaultValue: 'Remove {{name}}' })} className="shrink-0 w-11 h-11 flex items-center justify-center">
+                <span aria-hidden="true" className="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center">
+                  <span aria-hidden="true" className="material-symbols-outlined text-[15px] text-on-surface-variant">close</span>
+                </span>
               </button>
             </span>
           )
         })}
         {!adding && (
-          <button onClick={() => setAdding(true)} className="inline-flex items-center gap-1 rounded-full border border-dashed border-outline px-3.5 py-1.5 text-sm text-on-surface-variant">
+          <button onClick={() => setAdding(true)} className="inline-flex items-center gap-1 rounded-full border border-dashed border-outline px-3.5 min-h-[44px] text-sm text-on-surface-variant">
             <span className="material-symbols-outlined text-[16px]">add</span>
-            {t('mealCheck.addItem')}
+            {addLabel || t('mealCheck.addItem')}
           </button>
         )}
       </div>
@@ -1027,9 +1027,9 @@ function MealChips({ t, items, onRemoveItem, onAddFood, onChangeVariant }) {
               onChange={(e) => { setVal(e.target.value); setMiss(false) }}
               onKeyDown={(e) => { if (e.key === 'Enter') submit() }}
               placeholder={t('mealCheck.addPlaceholder')}
-              className="flex-1 rounded-full bg-surface-container-low border border-outline-variant px-4 py-2 text-sm focus:outline-none focus:border-primary"
+              className="flex-1 rounded-full bg-surface-container-low border border-outline-variant px-4 min-h-[44px] text-sm focus:outline-none focus:border-primary"
             />
-            <button onClick={submit} className="shrink-0 bg-primary text-on-primary font-label px-4 rounded-full text-sm">{t('mealCheck.addBtn')}</button>
+            <button onClick={submit} className="shrink-0 bg-primary text-on-primary font-label px-4 min-h-[44px] rounded-full text-sm">{t('mealCheck.addBtn')}</button>
           </div>
           {miss && <p className="text-[11px] text-on-surface-variant mt-1.5 px-1">{t('mealCheck.addNotFound')}</p>}
         </div>
