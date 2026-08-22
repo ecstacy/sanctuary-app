@@ -1025,7 +1025,7 @@ function MealChips({ t, items, onRemoveItem, onAddFood, onChangeVariant, addLabe
                 <button
                   onClick={() => onChangeVariant(it.id, nextVariant.id)}
                   aria-label={t('mealCheck.switchVariantAria', { variant: nextVariant.label })}
-                  className="shrink-0 inline-flex items-center gap-0.5 rounded-full bg-surface-container-high pl-2 pr-2.5 min-h-[44px] text-[10px] font-label lowercase tracking-wide text-on-surface-variant"
+                  className="shrink-0 inline-flex items-center gap-0.5 rounded-full bg-primary-container pl-2 pr-2.5 min-h-[44px] text-[11px] font-label font-semibold lowercase tracking-wide text-on-primary-container"
                 >
                   <span aria-hidden="true" className="material-symbols-outlined text-[13px]">swap_horiz</span>
                   {nextVariant.label}

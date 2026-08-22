@@ -44,6 +44,18 @@ describe('parseMeal', () => {
     expect(ids).toContain('avocado')
   })
 
+  it('offers only real "milk" foods for a disambiguation — not notes matches', () => {
+    // "milk" used to surface Cardamom / the Almond nut (their NOTES mention
+    // milk); disambiguation options must be things the word actually names.
+    const opts = parseMeal('milk').ambiguous[0]?.options.map((o) => o.id) || []
+    expect(opts).toContain('milk')
+    expect(opts).not.toContain('cardamom')
+    expect(opts).not.toContain('almond')
+    expect(opts.every((id) => /milk|khoa|buttermilk/i.test(id))).toBe(true)
+    // …and "almond milk" resolves to the drink, not the raw nut.
+    expect(parseMeal('almond milk').matched.map((m) => m.id)).toEqual(['almondMilk'])
+  })
+
   it('finds the food inside a multi-word phrase (modifiers ignored)', () => {
     expect(parseMeal('black coffee dripped').matched.map((m) => m.id)).toContain('coffee')
     expect(parseMeal('scrambled eggs').matched.map((m) => m.id)).toContain('egg')
