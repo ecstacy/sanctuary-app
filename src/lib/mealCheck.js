@@ -124,6 +124,13 @@ export function portionWeightOf({ count = 1, size = null } = {}) {
 
 const isExact = (r, q) => r.name.toLowerCase() === q || (r.aliases || []).some((a) => a.toLowerCase() === q)
 
+// Does the query actually appear in the food's NAME or an ALIAS (not just its
+// notes/why text)? searchIngredients also scores description/notes, which pulls
+// in irrelevant options — e.g. "milk" surfacing Cardamom/Almond because their
+// notes mention milk. Disambiguation options must be things the word names.
+const nameOrAliasHas = (r, q) =>
+  r.name.toLowerCase().includes(q) || (r.aliases || []).some((a) => a.toLowerCase().includes(q))
+
 // Look a token up, tolerating plurals and finding the food ANYWHERE in a
 // multi-word phrase: "scrambled eggs" → egg, "black coffee dripped" → coffee,
 // "green tea" → green tea. Builds candidate queries most-specific first and
@@ -148,14 +155,19 @@ function lookup(token) {
   }
 
   let partial = null
+  let noteFallback = null
   for (const q of [...new Set(cands)]) {
     const { results } = searchIngredients(q)
     if (!results.length) continue
     const exact = results.find((r) => isExact(r, q))
     if (exact) return [exact]           // an exact hit wins outright
-    if (!partial) partial = results     // remember the first partial as fallback
+    // Prefer options the word actually NAMES; keep the broad (notes-scored) set
+    // only as a last resort so recall doesn't regress for odd tokens.
+    const named = results.filter((r) => nameOrAliasHas(r, q))
+    if (named.length && !partial) partial = named
+    if (!noteFallback) noteFallback = results
   }
-  return partial || []
+  return partial || noteFallback || []
 }
 
 const brief = (r) => ({ id: r.id, name: r.name })

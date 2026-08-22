@@ -1071,7 +1071,7 @@ export const INGREDIENTS = {
     name: 'Almond',
     sanskrit: 'Badama',
     devanagari: 'बादाम',
-    aliases: ['badam', 'mandel', 'almonds', 'almond milk'],
+    aliases: ['badam', 'mandel', 'almonds'],
     category: 'nut_seed',
     rasa: ['sweet'],
     virya: 'heating',
