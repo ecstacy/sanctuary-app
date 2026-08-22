@@ -26,14 +26,16 @@ export const GEM_HUE = {
   pitta: { deep: '#83471a', base: '#9e5720', light: '#c98a4e' }, // terracotta
   kapha: { deep: '#3a6130', base: '#467539', light: '#7ba86b' }, // sage green
 }
-// Liquid hues for the WebGL gem itself — the SAME blue/terracotta/green identity
-// as the tokens, but brightened/saturated so the glass reads as luminous liquid
-// rather than a muddy flat fill (the label swatches above stay at token value so
-// legend text remains legible on the card).
+// Liquid hues for the WebGL gem — the SAME blue/terracotta/green identity as the
+// tokens, but used as ABSORPTION colours, not as flat fills. The shader runs
+// Beer-Lambert absorption over the view-ray thickness, so these read deep and
+// jewel-like through the body and glow bright where the glass thins at the rim.
+// (Bright, pre-lit hues here were what made the old gem look like poster paint:
+// with nothing to deepen them, every zone rendered as one flat colour.)
 const GEM_LIQUID = {
-  vata:  '#2e93c4', // luminous ocean blue
-  pitta: '#d97a2b', // glowing terracotta
-  kapha: '#3fa85a', // vivid sage-emerald
+  vata:  '#2b86c5', // ocean sapphire
+  pitta: '#d9702a', // amber terracotta
+  kapha: '#31a05c', // emerald sage
 }
 const DOSHAS = ['vata', 'pitta', 'kapha']
 
@@ -100,9 +102,21 @@ void main(){
 }
 `
 
-// Stacked translucent zones: colours ordered by descending share are laid along
-// a gently flowing left→right axis, partitioned at cumulative thresholds, with
-// soft wavy boundaries so it reads as calm layered liquid, not marble.
+// Stacked liquid zones rendered as ABSORBING GLASS rather than painted bands.
+//
+//  The old version picked a flat zone colour, multiplied it by a depth ramp, then
+//  ADDED specular/fresnel/sparkle on top and clamped — so every highlight clipped
+//  to pure white and the body posterized into flat poster-paint regions.
+//
+//  This version is physically motivated, which is what actually reads as
+//  "expensive glass":
+//    • view-ray thickness through the body drives Beer-Lambert absorption, so the
+//      colour DEEPENS with depth and thins to a luminous glow at the rim;
+//    • light entering the far side is attenuated by that same absorption
+//      (back-lit jewel core);
+//    • highlights are energy-weighted by Fresnel and left in HDR — the renderer's
+//      ACES filmic pass rolls them off instead of clipping to a white smudge;
+//    • an ordered dither breaks up gradient banding on smooth glass.
 const FRAG = /* glsl */`
 precision highp float;
 varying vec3 vPos; varying vec3 vWorld; varying vec3 vNormalW;
@@ -113,50 +127,89 @@ ${NOISE_GLSL}
 void main(){
   float t = uTime;
   vec3 pw = vPos * 1.1;
-  // two low-freq fields drive a domain-warped swirl → visibly flowing liquid
+  // two low-freq fields drive a domain-warped swirl → slow, liquid motion
   float w1 = fbm(pw + vec3(0.0, -t*0.16, t*0.11));
   float w2 = fbm(pw*1.7 + vec3(t*0.14, t*0.09, 0.0));
   vec2 warp = vec2(w1, w2) - 0.5;
 
-  // stack BOTTOM→TOP with a wavy, animated meniscus so the boundaries ripple
-  // like a liquid surface rather than sitting as flat bands.
-  // gentle sloshing — small amplitude so a thin band stays near its % position
-  // and its fixed leader line keeps pointing at it.
-  float surf = 0.04*sin(vPos.x*2.4 + t*0.55) + 0.055*(w1 - 0.5);
+  // stack BOTTOM→TOP with a gently rippling meniscus. Small amplitude so a thin
+  // band stays near its % position and its fixed leader line keeps pointing at it.
+  float surf = 0.035*sin(vPos.x*2.4 + t*0.55) + 0.05*(w1 - 0.5);
   float u = clamp(vPos.y * 0.42 + 0.5 + surf, 0.0, 1.0);
-  float e = 0.05;
-  vec3 col = uCol0;
-  col = mix(col, uCol1, smoothstep(uT0 - e, uT0 + e, u));
-  col = mix(col, uCol2, smoothstep(uT1 - e, uT1 + e, u));
+  float e = 0.055;
+  vec3 tint = uCol0;
+  tint = mix(tint, uCol1, smoothstep(uT0 - e, uT0 + e, u));
+  tint = mix(tint, uCol2, smoothstep(uT1 - e, uT1 + e, u));
 
-  // liquid depth — rich and dark deep in the body, luminous toward the top.
-  // wide range → strong volume: deep jewel shadows low, glowing highlights high.
-  float depth = smoothstep(-1.2, 1.2, vPos.y + 0.5*(w1 - 0.5));
-  col *= mix(0.76, 1.78, depth);          // more contrast → the liquid gains volume, rich low → bright high
-  // animated internal swirl ribbons
-  float swirl = fbm(pw*2.2 + vec3(warp*1.6, t*0.22));
-  col = mix(col, col*1.42, smoothstep(0.42, 0.80, swirl));
-  // tiny drifting glints, like light catching the liquid
-  float spk = fbm(pw*9.0 + vec3(t*0.5, -t*0.45, t*0.35));
-  col += smoothstep(0.82, 0.95, spk) * 0.4;
-
-  // glassy highlights: fresnel rim + a tight specular hotspot for a wet, liquid sheen
-  vec3 viewDir = normalize(cameraPosition - vWorld);
+  vec3 V = normalize(cameraPosition - vWorld);
   vec3 N = normalize(vNormalW);
-  float fres = pow(1.0 - max(dot(N, viewDir), 0.0), 2.5);
-  col += fres * 0.20;
-  vec3 L = normalize(vec3(-0.5, 0.95, 0.6));
-  float spec = pow(max(dot(reflect(-L, N), viewDir), 0.0), 26.0);
-  col += spec * 0.5;                        // bright wet hotspot (top-left)
-  float hl = smoothstep(0.6, 1.0, dot(N, L));
-  col += hl * 0.16;                         // soft broad sheen
+  float ndv = clamp(dot(N, V), 0.0, 1.0);
 
-  // light translucent lift — keep it glassy (subtle, so hues stay saturated)
-  col = mix(col, vec3(1.0, 0.985, 0.95), 0.05);
-  // encode linear→sRGB for output (a raw ShaderMaterial doesn't get three's
-  // automatic colorspace pass, so without this the true colour renders muddy).
-  col = pow(clamp(col, 0.0, 1.0), vec3(0.4545));
-  gl_FragColor = vec4(col, 1.0);
+  // ── Volume: how much liquid the eye looks through ─────────────────────────
+  // Facing the body → a long path (deep, saturated); grazing the silhouette →
+  // a short path (thin, luminous). Slight swirl variation keeps it organic.
+  float thickness = pow(ndv, 0.72) * (0.92 + 0.16*(w2 - 0.5));
+
+  // Art-directed depth ramp instead of raw Beer-Lambert (which drove the core
+  // either to black, or — over-scattered — to milky pastel). We build two hues
+  // from the zone tint: a RICH jewel version for the thick body, and a bright
+  // GLOW version for the thin rim, then blend by thickness. This keeps the hue
+  // saturated at every depth, which is what reads as "quality glass".
+  float lum = dot(tint, vec3(0.299, 0.587, 0.114));
+  // deep: darker AND pushed toward its own hue axis (tint/lum) → a rich, jewel
+  // saturation for the body. glow: lifted but NOT toward white (that was the
+  // pastel wash) — toward a bright version of the same hue, so the rim stays
+  // coloured. Body leans mostly deep; only the thin edge picks up glow.
+  vec3 hue = tint / max(lum, 0.001);
+  vec3 deep = tint * mix(vec3(0.54), hue, 0.48);          // rich jewel, not neon
+  vec3 glow = mix(tint, hue, 0.28) * 1.16;                // luminous, still coloured
+  vec3 col = mix(glow, deep, smoothstep(0.15, 0.85, thickness));
+
+  // Top-lit gradient: liquid catches light from above, so each zone is a touch
+  // brighter at its crown and settles richer at its base — dimensional depth
+  // rather than one flat fill.
+  col *= mix(0.86, 1.12, smoothstep(-1.25, 1.15, vPos.y + 0.35*(w1 - 0.5)));
+
+  // Internal swirl: subtle density variation so the body has slow-moving depth
+  // without turning into marble.
+  float swirl = fbm(pw*2.2 + vec3(warp*1.6, t*0.22));
+  col *= mix(0.90, 1.12, smoothstep(0.35, 0.85, swirl));
+
+  // A soft caustic pool low in the gem, where light focuses through the belly.
+  float caustic = smoothstep(0.55, 0.0, u) * smoothstep(0.35, 0.95, ndv);
+  col += glow * caustic * 0.22;
+
+  // ── Surface: Fresnel-weighted reflection + specular, energy-weighted ───────
+  float F = 0.04 + 0.96 * pow(1.0 - ndv, 5.0);   // Schlick, glass F0 ≈ 0.04
+  // Interior light is what survives; reflection takes the rest.
+  col *= (1.0 - F * 0.55);
+
+  vec3 L  = normalize(vec3(-0.55, 0.92, 0.62));  // key, upper-left
+  vec3 L2 = normalize(vec3(0.75, 0.25, 0.45));   // warm fill, right
+  vec3 H  = normalize(L + V);
+  vec3 H2 = normalize(L2 + V);
+  // Tight primary hotspot + a broader softer one → wet, polished sheen.
+  float spec  = pow(max(dot(N, H), 0.0), 220.0) * 2.6;
+  float spec2 = pow(max(dot(N, H2), 0.0), 42.0) * 0.32;
+  col += (spec + spec2) * F * 3.4;
+
+  // Rim light: a cool sheen along the silhouette, tinted by the liquid behind it
+  // rather than flat white (flat white is what made the old edge look chalky).
+  float rim = pow(1.0 - ndv, 3.2);
+  col += mix(vec3(0.62, 0.74, 0.86), tint, 0.45) * rim * 0.55;
+
+  // Faint interior bounce so the shadowed underside never reads as dead grey.
+  col += tint * (1.0 - ndv) * 0.10;
+
+  // Ordered dither — smooth glass gradients band badly in 8-bit without it.
+  float dither = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
+  col += (dither - 0.5) * 0.0035;
+
+  gl_FragColor = vec4(max(col, 0.0), 1.0);
+  // Filmic tone map + linear→sRGB via three's own chunks: highlights roll off
+  // instead of clipping, which is the difference between "glass" and "plastic".
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
 }
 `
 
@@ -190,7 +243,11 @@ export default function DoshaGem({ percentages = null, dominant = null, size = 1
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' })
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
       renderer.setSize(w, h, false)
-      renderer.toneMapping = THREE.NoToneMapping
+      // Filmic response curve. With NoToneMapping every bright value clipped at
+      // 1.0, which flattened the specular into a white smudge and posterized the
+      // body; ACES rolls the highlights off so the glass keeps its gradient.
+      renderer.toneMapping = THREE.ACESFilmicToneMapping
+      renderer.toneMappingExposure = 0.94
       renderer.domElement.style.width = `${w}px`
       renderer.domElement.style.height = `${h}px`
       mount.appendChild(renderer.domElement)
@@ -211,15 +268,21 @@ export default function DoshaGem({ percentages = null, dominant = null, size = 1
       glassGeo = new THREE.LatheGeometry(profilePts, 128)
       glassGeo.center()
 
+      // The outer shell is a thin polished coat, not a frosted white sheath. The
+      // old settings (near-white tint at envMapIntensity 1.7) built up a chalky
+      // grey ring around the silhouette that read like a sticker outline; a
+      // neutral tint, lower env gain and a slightly softer coat let the liquid's
+      // own rim colour come through instead.
       glassMat = new THREE.MeshPhysicalMaterial({
-        color: 0xfbfcff, metalness: 0, roughness: 0.045, transmission: 0.98, thickness: 0.18,
-        ior: 1.5, clearcoat: 1.0, clearcoatRoughness: 0.04, envMapIntensity: 1.7, transparent: true,
+        color: 0xffffff, metalness: 0, roughness: 0.06, transmission: 1.0, thickness: 0.32,
+        ior: 1.46, clearcoat: 1.0, clearcoatRoughness: 0.06, envMapIntensity: 0.85,
+        transparent: true, depthWrite: false,
       })
       const glass = new THREE.Mesh(glassGeo, glassMat)
 
-      const key = new THREE.DirectionalLight(0xffffff, 2.6); key.position.set(-2.4, 3.2, 3.6)
-      const rim = new THREE.DirectionalLight(0xfff2df, 0.9); rim.position.set(3, 0.5, 2)
-      scene.add(key, rim, new THREE.AmbientLight(0xffffff, 0.55))
+      const key = new THREE.DirectionalLight(0xffffff, 2.1); key.position.set(-2.4, 3.2, 3.6)
+      const rim = new THREE.DirectionalLight(0xfff2df, 0.7); rim.position.set(3, 0.5, 2)
+      scene.add(key, rim, new THREE.AmbientLight(0xffffff, 0.4))
 
       liquidMat = new THREE.ShaderMaterial({
         vertexShader: VERT, fragmentShader: FRAG,
@@ -238,7 +301,9 @@ export default function DoshaGem({ percentages = null, dominant = null, size = 1
       })
       liquidGeo = glassGeo.clone()
       const liquid = new THREE.Mesh(liquidGeo, liquidMat)
-      liquid.scale.setScalar(0.93)
+      // Close to the shell: a wide gap renders as a pale ring of empty glass
+      // around the liquid, which read as a grey sticker outline.
+      liquid.scale.setScalar(0.972)
 
       const group = new THREE.Group()
       group.add(liquid, glass)
@@ -275,13 +340,18 @@ export default function DoshaGem({ percentages = null, dominant = null, size = 1
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size, wPitta, wVata, wKapha])
 
+  // Halo tinted to the leading dosha and kept faint — the old fixed amber glow
+  // sat under every gem, warming the blue and green ones toward mud.
+  const lead = [...DOSHAS].sort((a, b) => (pct[b] || 0) - (pct[a] || 0))[0]
+  const halo = { vata: '53,112,143', pitta: '158,87,32', kapha: '70,117,57' }[lead] || '158,87,32'
+
   return (
     <div
       ref={mountRef}
       aria-hidden="true"
       style={{
         width: size * 0.86, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: 'radial-gradient(60% 55% at 50% 42%, rgba(248,220,159,0.22), transparent 70%)',
+        background: `radial-gradient(58% 52% at 50% 46%, rgba(${halo},0.13), transparent 72%)`,
       }}
     />
   )
