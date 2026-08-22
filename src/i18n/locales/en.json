@@ -2039,7 +2039,17 @@
     "removeAria": "Remove {{name}}",
     "addMissed": "Add a food we missed",
     "announceRaises": "Result ready. This meal leans {{dosha}}.",
-    "announceBalanced": "Result ready. This meal is balanced."
+    "announceBalanced": "Result ready. This meal is balanced.",
+    "tryLabel": "Try one of these",
+    "quickMeals": [
+      "Coffee",
+      "Rice and dal",
+      "Eggs and toast",
+      "Banana",
+      "Chicken salad"
+    ],
+    "constitutionCaption": "Your constitution",
+    "constitutionBarAria": "Your constitution"
   },
   "a11y": {
     "scrollTop": "Scroll to top",

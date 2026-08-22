@@ -100,16 +100,20 @@ function ConstitutionEffect({ t, percentages, perDosha, lens }) {
       </div>
 
       {hasPct && (
-        <div className="h-2.5 rounded-full overflow-hidden flex gap-px mb-4 bg-surface-container-high">
-          {order.filter((d) => (percentages[d] || 0) > 0).map((d) => (
-            <div
-              key={d}
-              className={`h-full ${DOSHA_META[d].bar}`}
-              style={{ width: `${percentages[d]}%` }}
-              role="img"
-              aria-label={`${doshaDisplayName(d)} ${percentages[d]}%`}
-            />
-          ))}
+        <div className="mb-4">
+          <div className="h-2.5 rounded-full overflow-hidden flex gap-px bg-surface-container-high" role="img" aria-label={t('mealCheck.constitutionBarAria', 'Your constitution')}>
+            {order.filter((d) => (percentages[d] || 0) > 0).map((d) => (
+              <div
+                key={d}
+                className={`h-full ${DOSHA_META[d].bar}`}
+                style={{ width: `${percentages[d]}%` }}
+                aria-label={`${doshaDisplayName(d)} ${percentages[d]}%`}
+              />
+            ))}
+          </div>
+          <p className="font-label text-[10px] uppercase tracking-wide text-on-surface-variant/70 mt-1.5">
+            {t('mealCheck.constitutionCaption', 'Your constitution')}
+          </p>
         </div>
       )}
 
@@ -455,11 +459,9 @@ export default function MealCheckPage() {
       <TopBar t={t} onBack={onBack} />
       <p className="sr-only" role="status" aria-live="polite">{liveMessage}</p>
 
-      {access.state !== 'premium' && (
+      {access.state !== 'premium' && access.state !== 'locked' && phase === 'input' && (
         <p className="max-w-md mx-auto -mt-2 mb-4 text-center text-xs text-on-surface-variant">
-          {access.state === 'locked'
-            ? null
-            : t('mealCheck.trialNote', { count: access.trialDaysLeft })}
+          {t('mealCheck.trialNote', { count: access.trialDaysLeft })}
         </p>
       )}
 
@@ -509,6 +511,27 @@ export default function MealCheckPage() {
               {t('mealCheck.checkCta')}
             </button>
 
+            {/* Quick-start examples so the first check is one tap, not a blank
+                page (MC8). Tapping fills the field; the user hits Check. */}
+            {!text.trim() && (
+              <div className="mt-6">
+                <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant mb-2.5">
+                  {t('mealCheck.tryLabel', 'Try one of these')}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {t('mealCheck.quickMeals', { returnObjects: true, defaultValue: ['Coffee', 'Rice and dal', 'Eggs and toast', 'Banana', 'Chicken salad'] }).map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => setText(q)}
+                      className="bg-surface-container border border-outline-variant rounded-full px-3.5 min-h-[44px] inline-flex items-center text-sm text-on-surface active:scale-95 transition-transform"
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {hasDietPattern(dietProfile) && (
               <PatternsCard
                 t={t}
@@ -549,6 +572,53 @@ export default function MealCheckPage() {
               addLabel={t('mealCheck.addMissed', 'Add a food we missed')}
             />
 
+            {/* Decisions first (MC7): the things that need your input — an
+                unrecognised word, then a "which did you mean" — sit above the
+                optional "what's in your smoothie" refinement. */}
+            {unknown.map((u) => (
+              <div key={u.token} className="mb-4">
+                <p className="text-sm text-on-surface-variant mb-2">
+                  {t('mealCheck.dontHave', { token: u.token })}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {u.suggestions.map((o) => (
+                    <button
+                      key={o.id}
+                      onClick={() => { addItem(o); dismissUnknown(u.token) }}
+                      className="bg-surface-container border border-outline-variant rounded-full px-3.5 min-h-[44px] inline-flex items-center text-sm"
+                    >
+                      {o.name}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() => dismissUnknown(u.token)}
+                    className="text-sm text-on-surface-variant underline px-2 min-h-[44px] inline-flex items-center"
+                  >
+                    {t('mealCheck.skip')}
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            {ambiguous.map((a) => (
+              <div key={a.token} className="mb-4">
+                <p className="text-sm text-on-surface-variant mb-2">
+                  {t('mealCheck.whichDidYouMean', { token: a.token })}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {a.options.map((o) => (
+                    <button
+                      key={o.id}
+                      onClick={() => resolveAmbiguous(a.token, o)}
+                      className="bg-surface-container border border-outline-variant rounded-full px-3.5 min-h-[44px] inline-flex items-center text-sm"
+                    >
+                      {o.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+
             {items.filter((it) => it.open && it.componentSuggestions?.length).map((it) => (
               <div key={`open-${it.id}`} className="mb-5 rounded-2xl bg-surface-container-low border border-outline-variant p-4">
                 <p className="font-body text-sm font-semibold text-on-surface mb-1">
@@ -581,57 +651,16 @@ export default function MealCheckPage() {
               </div>
             ))}
 
-            {ambiguous.map((a) => (
-              <div key={a.token} className="mb-4">
-                <p className="text-sm text-on-surface-variant mb-2">
-                  {t('mealCheck.whichDidYouMean', { token: a.token })}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {a.options.map((o) => (
-                    <button
-                      key={o.id}
-                      onClick={() => resolveAmbiguous(a.token, o)}
-                      className="bg-surface-container border border-outline-variant rounded-full px-3.5 min-h-[44px] inline-flex items-center text-sm"
-                    >
-                      {o.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
-
-            {unknown.map((u) => (
-              <div key={u.token} className="mb-4">
-                <p className="text-sm text-on-surface-variant mb-2">
-                  {t('mealCheck.dontHave', { token: u.token })}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {u.suggestions.map((o) => (
-                    <button
-                      key={o.id}
-                      onClick={() => { addItem(o); dismissUnknown(u.token) }}
-                      className="bg-surface-container border border-outline-variant rounded-full px-3.5 min-h-[44px] inline-flex items-center text-sm"
-                    >
-                      {o.name}
-                    </button>
-                  ))}
-                  <button
-                    onClick={() => dismissUnknown(u.token)}
-                    className="text-sm text-on-surface-variant underline px-2 min-h-[44px] inline-flex items-center"
-                  >
-                    {t('mealCheck.skip')}
-                  </button>
-                </div>
-              </div>
-            ))}
-
-            <button
-              onClick={() => computeResult(resolveOpenComposites(items))}
-              disabled={items.length === 0}
-              className="w-full mt-3 bg-primary text-on-primary font-label py-3.5 rounded-full disabled:opacity-40"
-            >
-              {t('mealCheck.seeResultCta')}
-            </button>
+            {/* Sticky so it stays reachable under a long "what's in it" panel (MC6). */}
+            <div className="sticky bottom-3 pt-3 -mx-6 px-6 bg-gradient-to-t from-background via-background to-transparent">
+              <button
+                onClick={() => computeResult(resolveOpenComposites(items))}
+                disabled={items.length === 0}
+                className="w-full bg-primary text-on-primary font-label py-3.5 rounded-full disabled:opacity-40"
+              >
+                {t('mealCheck.seeResultCta')}
+              </button>
+            </div>
           </section>
         )}
 

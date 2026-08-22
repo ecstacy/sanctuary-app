@@ -2039,7 +2039,17 @@
     "removeAria": "{{name}} हटाएँ",
     "addMissed": "छूटा हुआ भोजन जोड़ें",
     "announceRaises": "परिणाम तैयार। यह भोजन {{dosha}} की ओर झुकता है।",
-    "announceBalanced": "परिणाम तैयार। यह भोजन संतुलित है।"
+    "announceBalanced": "परिणाम तैयार। यह भोजन संतुलित है।",
+    "tryLabel": "इनमें से कोई आज़माएँ",
+    "quickMeals": [
+      "कॉफ़ी",
+      "चावल और दाल",
+      "अंडे और टोस्ट",
+      "केला",
+      "चिकन सलाद"
+    ],
+    "constitutionCaption": "आपकी प्रकृति",
+    "constitutionBarAria": "आपकी प्रकृति"
   },
   "a11y": {
     "scrollTop": "ऊपर स्क्रॉल करें",
