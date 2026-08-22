@@ -105,11 +105,11 @@ commit, verified in-browser, then the Pixel.**
 | MC3 | ✅ **aria-live added** | 🔴 | Measured: **0** live regions. Phase changes (input→confirm→result) and the async verdict are silent to screen readers. Add `aria-live="polite"` to the result headline + a status announcement on phase change. |
 | MC4 | ✅ **h1 per phase** | 🟠 | Measured: h1=0, h2=1. Each phase should own a proper `h1` ("Meal Check" / "Is this what you ate?" / the verdict). |
 | MC5 | ✅ **Variant switch on confirm** | 🟠 | "tomato" resolved to **Tomato (cooked)** with no signal that a guess was made; the raw⇄cooked switch only exists on the *result* screen. Surface the variant switch (or an "assumed cooked" hint) on confirm, where the user is being asked to confirm. |
-| MC6 | **Confirm CTA buried below a long panel** | 🟠 | With an open composite the "See how it affects me" button sits below a ~12-chip smoothie panel — off-screen on a 812px viewport. Make the primary CTA sticky at the bottom of the confirm phase. |
-| MC7 | **Unknown-token notice is last, below everything** | 🟡 | The "We don't have 'zorblax' yet" prompt renders *after* the smoothie panel, so the thing needing a decision is the easiest to miss. Order the confirm sections by "needs your input first": unknown → ambiguous → open-composite. |
-| MC8 | **Empty input screen is mostly dead space** | 🟡 | A user with no history sees title + textarea + CTA and ~50% empty screen. Add quick-start chips (recent/common meals, or time-of-day suggestions like "breakfast I usually have") to make the first check one tap. |
-| MC9 | **Trial banner repeats on every phase** | 🟡 | "Free trial · 7 days left" sits above the content on input, confirm *and* result, pushing the actual content down on a small screen. Show once per session (or only on the input phase). |
-| MC10 | **Unlabelled constitution bar in the result** | 🟡 | The segmented bar in "Effect on your doshas" has no legend/label — it's the constitution split, but nothing says so. Add a caption or `aria-label`/legend. |
+| MC6 | ✅ **Sticky confirm CTA** | 🟠 | With an open composite the "See how it affects me" button sits below a ~12-chip smoothie panel — off-screen on a 812px viewport. Make the primary CTA sticky at the bottom of the confirm phase. |
+| MC7 | ✅ **Confirm sections reordered (decisions first)** | 🟡 | The "We don't have 'zorblax' yet" prompt renders *after* the smoothie panel, so the thing needing a decision is the easiest to miss. Order the confirm sections by "needs your input first": unknown → ambiguous → open-composite. |
+| MC8 | ✅ **Input quick-start chips** | 🟡 | A user with no history sees title + textarea + CTA and ~50% empty screen. Add quick-start chips (recent/common meals, or time-of-day suggestions like "breakfast I usually have") to make the first check one tap. |
+| MC9 | ✅ **Trial banner input-phase only** | 🟡 | "Free trial · 7 days left" sits above the content on input, confirm *and* result, pushing the actual content down on a small screen. Show once per session (or only on the input phase). |
+| MC10 | ✅ **Constitution bar caption + aria** | 🟡 | The segmented bar in "Effect on your doshas" has no legend/label — it's the constitution split, but nothing says so. Add a caption or `aria-label`/legend. |
 
 ---
 

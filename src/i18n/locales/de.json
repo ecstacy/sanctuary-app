@@ -2039,7 +2039,17 @@
     "removeAria": "{{name}} entfernen",
     "addMissed": "Fehlendes Lebensmittel hinzufügen",
     "announceRaises": "Ergebnis fertig. Diese Mahlzeit tendiert zu {{dosha}}.",
-    "announceBalanced": "Ergebnis fertig. Diese Mahlzeit ist ausgeglichen."
+    "announceBalanced": "Ergebnis fertig. Diese Mahlzeit ist ausgeglichen.",
+    "tryLabel": "Probier eines davon",
+    "quickMeals": [
+      "Kaffee",
+      "Reis und Dal",
+      "Eier mit Toast",
+      "Banane",
+      "Hähnchensalat"
+    ],
+    "constitutionCaption": "Deine Konstitution",
+    "constitutionBarAria": "Deine Konstitution"
   },
   "a11y": {
     "scrollTop": "Nach oben scrollen",
