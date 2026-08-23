@@ -2049,7 +2049,9 @@
       "Hähnchensalat"
     ],
     "constitutionCaption": "Deine Konstitution",
-    "constitutionBarAria": "Deine Konstitution"
+    "constitutionBarAria": "Deine Konstitution",
+    "suggestionsLabel": "Vorschläge",
+    "yourUsual": "Deine üblichen"
   },
   "a11y": {
     "scrollTop": "Nach oben scrollen",

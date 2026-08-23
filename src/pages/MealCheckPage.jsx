@@ -15,7 +15,7 @@ import { useAuth } from '../context/AuthContext'
 import { useMealCheckAccess } from '../hooks/useMealCheckAccess'
 import { parseMeal, assessMeal, remediesFor } from '../lib/mealCheck'
 import { saveMealLog, updateMealLog, startMealTrialIfNeeded, listMealLogs, deleteMealLog, logMealSearchTerms } from '../lib/mealLog'
-import { getIngredient, variantsOf } from '../lib/ingredients'
+import { getIngredient, variantsOf, searchIngredients } from '../lib/ingredients'
 import { exclusionFor } from '../lib/dietSafety'
 import { formFor, curatedFor } from '../lib/consumableForms'
 import { computeDietProfile, hasDietPattern } from '../lib/dietProfile'
@@ -52,6 +52,59 @@ function qtyPrefix(t, qty) {
   if (qty.size === 'large') bits.push(t('mealCheck.qty.large'))
   else if (qty.size === 'small') bits.push(t('mealCheck.qty.small'))
   return bits.length ? `${bits.join(' ')} ` : ''
+}
+
+// ── Typeahead helpers ────────────────────────────────────────────────────────
+// The meal box is freeform ("coffee, eggs and toast"). To suggest as the user
+// types we operate on the LAST fragment — what they're currently writing —
+// splitting on the same connectives parseMeal uses.
+const TOKEN_BOUNDARY = /([,+/\n]|\band\b|\bwith\b|\bplus\b)/gi
+function boundaryIndex(text) {
+  let last = 0, m
+  TOKEN_BOUNDARY.lastIndex = 0
+  while ((m = TOKEN_BOUNDARY.exec(text)) !== null) last = m.index + m[0].length
+  return last
+}
+const currentToken = (text) => text.slice(boundaryIndex(text)).trim()
+// Replace the trailing fragment with a chosen food, ready for the next one.
+function replaceLastToken(text, name) {
+  const prefix = text.slice(0, boundaryIndex(text))
+  const sep = prefix && !/\s$/.test(prefix) ? ' ' : ''
+  return `${prefix}${sep}${name}, `
+}
+const nameOrAliasHas = (r, q) =>
+  r.name.toLowerCase().includes(q) || (r.aliases || []).some((a) => a.toLowerCase().includes(q))
+
+// Suggestions for the current token: live ingredient matches (name/alias),
+// with the user's own frequent foods ("favourites") floated to the top. When
+// the token is empty (fresh box, or just after a comma) we surface favourites
+// directly, so a returning user can re-add a usual meal in one tap.
+function mealSuggestions(text, favIds, topFoods) {
+  const tok = currentToken(text).toLowerCase()
+  if (!tok) {
+    return (topFoods || []).slice(0, 6).map((f) => ({ id: f.id, name: f.name, fav: true }))
+  }
+  if (tok.length < 2) return []
+  // searchIngredients returns name/alias/prose matches in DATASET order, not by
+  // relevance — so rank them: favourites first, then name-prefix ("ch"→Chicken)
+  // over name-contains over alias-only, so the intuitive foods surface.
+  const score = (r) => {
+    const n = r.name.toLowerCase()
+    let s = 0
+    if (n.startsWith(tok)) s += 50
+    else if (n.includes(tok)) s += 25
+    else if ((r.aliases || []).some((a) => a.toLowerCase().startsWith(tok))) s += 12
+    else s += 4 // alias-contains
+    // Favourite boost — strong when the name itself matches (a usual food the
+    // user is clearly reaching for), mild when it's only an alias match so it
+    // doesn't jump ahead of the obvious name-prefix hits.
+    if (favIds.has(r.id)) s += n.includes(tok) ? 100 : 18
+    return s
+  }
+  const named = searchIngredients(tok).results
+    .filter((r) => nameOrAliasHas(r, tok))
+    .sort((a, b) => score(b) - score(a))
+  return named.slice(0, 6).map((r) => ({ id: r.id, name: r.name, fav: favIds.has(r.id) }))
 }
 
 // Dosha display metadata for the result graphic. Colours follow the Dosha page
@@ -141,6 +194,18 @@ export default function MealCheckPage() {
   // Derived read of how the user tends to eat — from the logs already loaded for
   // history, so no extra fetch. The substrate for pattern-aware guidance (#45).
   const dietProfile = useMemo(() => computeDietProfile(history), [history])
+
+  // Personalised typeahead: the user's frequent foods ("favourites") float to
+  // the top of live ingredient matches as they type, and fill the box's resting
+  // state so a returning user re-adds a usual meal in one tap.
+  const textareaRef = useRef(null)
+  const favIds = useMemo(() => new Set((dietProfile.topFoods || []).map((f) => f.id)), [dietProfile])
+  const suggestions = useMemo(() => mealSuggestions(text, favIds, dietProfile.topFoods), [text, favIds, dietProfile])
+  const isTyping = currentToken(text).length >= 2
+  function addSuggestion(name) {
+    setText((prev) => replaceLastToken(prev, name))
+    requestAnimationFrame(() => textareaRef.current?.focus())
+  }
 
   // The meal_logs row for the check currently on screen. A fresh check inserts
   // (and captures the id here); editing that result UPDATES the same row instead
@@ -479,6 +544,7 @@ export default function MealCheckPage() {
             <p className="text-on-surface-variant text-sm mb-5">{t('mealCheck.inputHelp')}</p>
             <div className="relative">
               <textarea
+                ref={textareaRef}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 rows={3}
@@ -510,6 +576,31 @@ export default function MealCheckPage() {
             {speech.error === 'permission' && (
               <p className="mt-2 font-body text-[12px] text-clay">{t('mealCheck.voicePermission', 'Microphone access is needed for voice input.')}</p>
             )}
+
+            {/* Personalised typeahead: live ingredient matches while typing, or
+                the user's usual foods at rest — favourites first, one tap to add. */}
+            {suggestions.length > 0 && (
+              <div className="mt-3">
+                <p className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant/80 mb-2">
+                  {isTyping ? t('mealCheck.suggestionsLabel', 'Suggestions') : t('mealCheck.yourUsual', 'Your usual')}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {suggestions.map((s) => (
+                    <button
+                      key={s.id}
+                      onClick={() => addSuggestion(s.name)}
+                      className="inline-flex items-center gap-1 bg-surface-container border border-outline-variant rounded-full pl-2.5 pr-3.5 min-h-[44px] text-sm text-on-surface active:scale-95 transition-transform"
+                    >
+                      <span aria-hidden="true" className={`material-symbols-outlined text-[15px] ${s.fav ? 'text-primary' : 'text-on-surface-variant/50'}`}>
+                        {s.fav ? 'star' : 'add'}
+                      </span>
+                      {s.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <button
               onClick={onCheck}
               disabled={!text.trim()}
@@ -518,9 +609,10 @@ export default function MealCheckPage() {
               {t('mealCheck.checkCta')}
             </button>
 
-            {/* Quick-start examples so the first check is one tap, not a blank
-                page (MC8). Tapping fills the field; the user hits Check. */}
-            {!text.trim() && (
+            {/* No history yet → generic starter examples so the first check is
+                one tap, not a blank page (MC8). Personalised "usual" replaces
+                this once the user has a few checks. */}
+            {!text.trim() && suggestions.length === 0 && (
               <div className="mt-6">
                 <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant mb-2.5">
                   {t('mealCheck.tryLabel', 'Try one of these')}

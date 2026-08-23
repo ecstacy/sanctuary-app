@@ -2049,7 +2049,9 @@
       "Chicken salad"
     ],
     "constitutionCaption": "Your constitution",
-    "constitutionBarAria": "Your constitution"
+    "constitutionBarAria": "Your constitution",
+    "suggestionsLabel": "Suggestions",
+    "yourUsual": "Your usual"
   },
   "a11y": {
     "scrollTop": "Scroll to top",
