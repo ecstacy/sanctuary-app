@@ -2049,7 +2049,9 @@
       "चिकन सलाद"
     ],
     "constitutionCaption": "आपकी प्रकृति",
-    "constitutionBarAria": "आपकी प्रकृति"
+    "constitutionBarAria": "आपकी प्रकृति",
+    "suggestionsLabel": "सुझाव",
+    "yourUsual": "आपके सामान्य"
   },
   "a11y": {
     "scrollTop": "ऊपर स्क्रॉल करें",
