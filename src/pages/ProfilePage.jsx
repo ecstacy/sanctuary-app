@@ -9,6 +9,7 @@ import useConsent from '../hooks/useConsent'
 import { useHealthConsent } from '../hooks/useHealthConsent'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { exportUserData } from '../lib/dataExport'
+import { shareApp } from '../lib/shareApp'
 import { deleteAllUserData } from '../lib/accountDeletion'
 import { track, reset as resetAnalytics, EVENTS } from '../lib/track'
 import { _forceTestCrash, recordError as crashRecordError } from '../lib/crash'
@@ -106,6 +107,7 @@ export default function ProfilePage() {
   // ── Data export / account deletion (GDPR Art. 15/17) ──
   const [exporting, setExporting] = useState(false)
   const [exportStatus, setExportStatus] = useState(null) // 'done' | 'error' | null
+  const [shareStatus, setShareStatus] = useState(null)   // 'copied' | null
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [deleteConfirmText, setDeleteConfirmText] = useState('')
   const [deleting, setDeleting] = useState(false)
@@ -419,6 +421,11 @@ export default function ProfilePage() {
     setPasswordMsg(null)
     setShowCurrentPw(false)
     setShowNewPw(false)
+  }
+
+  async function handleShare() {
+    const r = await shareApp({ surface: 'profile', t })
+    if (r === 'clipboard') { setShareStatus('copied'); setTimeout(() => setShareStatus(null), 2500) }
   }
 
   async function handleSignOut() {
@@ -1292,6 +1299,24 @@ export default function ProfilePage() {
             </div>
           )}
         </div>
+
+        {/* Share / invite — a warm nudge to spread the word */}
+        <button
+          onClick={handleShare}
+          aria-label={t('share.profileTitle', 'Share The Sanctuary')}
+          className="w-full mb-5 flex items-center gap-4 bg-primary-container/40 border border-primary/15 rounded-2xl p-4 text-left active:scale-[0.99] transition-transform stagger-4"
+        >
+          <div className="w-11 h-11 rounded-2xl bg-primary-container flex items-center justify-center flex-shrink-0">
+            <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">ios_share</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="font-body font-semibold text-sm text-on-surface">{t('share.profileTitle', 'Share The Sanctuary')}</p>
+            <p className="font-body text-[13px] text-on-surface-variant mt-0.5">
+              {shareStatus === 'copied' ? t('share.copied', 'Link copied — paste it anywhere') : t('share.profileSub', 'Invite friends & family to try it')}
+            </p>
+          </div>
+          <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-lg">chevron_right</span>
+        </button>
 
         {/* Your data — GDPR export + account deletion */}
         <div className="bg-surface-container rounded-2xl overflow-hidden stagger-4">

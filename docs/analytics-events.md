@@ -312,6 +312,17 @@ every component.
   build a "CTA performance" board that's vendor-agnostic of the action
   the CTA leads to.
 
+#### `app_shared`
+- **Where**: the "Share The Sanctuary" invite (Profile page) and the dismissible
+  "spread the word" nudge (Home foot). Fires when the share actually resolves
+  (sheet opened or link copied), paired with a `cta_clicked`
+  (`cta_id=share_app_{profile|home}`) on tap so tap→share drop-off is measurable.
+- **Props**: `surface*` (`profile` | `home`), `method*` (`share_sheet` |
+  `clipboard`). A cancelled native sheet fires neither (only the cta_clicked).
+- **Notes**: the shared link carries `utm_source=app_share&utm_medium=referral`,
+  so friend-of-friend installs show as **referral** in the acquisition breakdown
+  (lib/installReferrer). This is the word-of-mouth loop's numerator.
+
 #### `element_engaged`
 - **Where**: low-frequency, manually-instrumented for elements we
   *specifically* want to learn about (e.g. PoseFigure expand, dosha card

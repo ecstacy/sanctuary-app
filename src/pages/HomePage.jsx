@@ -18,6 +18,7 @@ import PaywallSheet from '../components/PaywallSheet'
 import WelcomeToPlusCard from '../components/WelcomeToPlusCard'
 import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
 import MealOfTheDayCard from '../components/MealOfTheDayCard'
+import { shareApp } from '../lib/shareApp'
 import DoshaGem, { GEM_HUE, gemRadiusAtU } from '../components/DoshaGem'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
 import { saveDoshaSelfReport, doshaSelfReport } from '../lib/doshaSelfReport'
@@ -978,6 +979,9 @@ export default function HomePage() {
           </p>
         </div>
 
+        {/* ── Spread the word — a gentle, dismissible invite at the very foot. ── */}
+        <ShareNudge t={t} />
+
       </div>
 
       {/* Paywall sheet for the Vikriti card's Plus action. Dosha-tagged so
@@ -990,6 +994,53 @@ export default function HomePage() {
         subhead={t('home.paywallSubhead')}
       />
 
+    </div>
+  )
+}
+
+// A gentle "spread the word" card at the foot of Home. Dismissible (persisted),
+// so it never nags — one tap opens the share sheet (or copies the link).
+function ShareNudge({ t }) {
+  const [dismissed, setDismissed] = useState(() => {
+    try { return localStorage.getItem('sanctuary.shareNudge') === 'dismissed' } catch { return false }
+  })
+  const [copied, setCopied] = useState(false)
+  if (dismissed) return null
+
+  async function onShare() {
+    const r = await shareApp({ surface: 'home', t })
+    if (r === 'clipboard') { setCopied(true); setTimeout(() => setCopied(false), 2500) }
+  }
+  function dismiss() {
+    setDismissed(true)
+    try { localStorage.setItem('sanctuary.shareNudge', 'dismissed') } catch { /* ignore */ }
+  }
+
+  return (
+    <div className="relative bg-primary-container/40 border border-primary/15 rounded-2xl p-5 mt-5 stagger-7">
+      <button
+        onClick={dismiss}
+        aria-label={t('share.dismiss', 'Dismiss')}
+        className="absolute top-1.5 right-1.5 w-11 h-11 flex items-center justify-center text-on-surface-variant/50"
+      >
+        <span aria-hidden="true" className="material-symbols-outlined text-base">close</span>
+      </button>
+      <div className="flex items-start gap-3 pr-8">
+        <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl mt-0.5">volunteer_activism</span>
+        <div className="min-w-0">
+          <p className="font-body font-semibold text-[15px] text-on-surface">{t('share.homeTitle', 'Know someone who’d love this?')}</p>
+          <p className="font-body text-[13px] text-on-surface-variant mt-1 leading-relaxed">
+            {t('share.homeSub', 'Share The Sanctuary with a friend and help them find their calm.')}
+          </p>
+        </div>
+      </div>
+      <button
+        onClick={onShare}
+        className="mt-4 inline-flex items-center gap-1.5 bg-primary text-on-primary font-label text-sm px-5 min-h-[44px] rounded-full active:scale-95 transition-transform"
+      >
+        <span aria-hidden="true" className="material-symbols-outlined text-[18px]">ios_share</span>
+        {copied ? t('share.copied', 'Link copied') : t('share.homeCta', 'Share the app')}
+      </button>
     </div>
   )
 }
