@@ -5,6 +5,7 @@
 
 import { supabase } from './supabase'
 import { logSearch } from './analytics'
+import { DEV_MOCK_MEAL_LOGS } from './devMockAuth'
 
 // Capture every parsed meal-check term into the `searches` table (source
 // 'meal_check') so we can review, in our own DB (not third-party analytics),
@@ -45,6 +46,7 @@ export function logMealSearchTerms(userId, parsed) {
 
 export async function listMealLogs(userId, limit = 30) {
   if (!userId) return []
+  if (DEV_MOCK_MEAL_LOGS) return DEV_MOCK_MEAL_LOGS.slice(0, limit)   // dev-only sample history
   const { data, error } = await supabase
     .from('meal_logs')
     .select('*')
