@@ -2134,5 +2134,16 @@
     "checkCount_one": "{{count}} check",
     "empty": "Check a few meals and your weekly trends will appear here.",
     "footnote": "Based on the meals you’ve checked. The more you log, the clearer the picture."
+  },
+  "share": {
+    "title": "The Sanctuary",
+    "message": "I’ve been using The Sanctuary — personalized yoga & Ayurveda for your dosha. Thought you’d like it:",
+    "profileTitle": "Share The Sanctuary",
+    "profileSub": "Invite friends & family to try it",
+    "homeTitle": "Know someone who’d love this?",
+    "homeSub": "Share The Sanctuary with a friend and help them find their calm.",
+    "homeCta": "Share the app",
+    "copied": "Link copied — paste it anywhere",
+    "dismiss": "Dismiss"
   }
 }

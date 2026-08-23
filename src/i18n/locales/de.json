@@ -2134,5 +2134,16 @@
     "checkCount_one": "{{count}} Check",
     "empty": "Prüfe ein paar Mahlzeiten, dann erscheinen hier deine wöchentlichen Trends.",
     "footnote": "Basierend auf deinen geprüften Mahlzeiten. Je mehr du erfasst, desto klarer das Bild."
+  },
+  "share": {
+    "title": "The Sanctuary",
+    "message": "Ich nutze The Sanctuary — personalisiertes Yoga & Ayurveda für dein Dosha. Ich dachte, das gefällt dir:",
+    "profileTitle": "The Sanctuary teilen",
+    "profileSub": "Lade Freunde & Familie zum Ausprobieren ein",
+    "homeTitle": "Kennst du jemanden, der das lieben würde?",
+    "homeSub": "Teile The Sanctuary mit einer Freundin oder einem Freund und hilf ihnen, zur Ruhe zu kommen.",
+    "homeCta": "App teilen",
+    "copied": "Link kopiert – überall einfügbar",
+    "dismiss": "Schließen"
   }
 }
