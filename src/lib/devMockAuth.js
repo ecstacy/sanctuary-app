@@ -85,3 +85,19 @@ function getDevMock() {
 
 // Resolved once at module load (mirrors how AuthContext reads the session once).
 export const DEV_MOCK = getDevMock()
+
+// Dev-only sample meal history, so the "patterns lately" card + personalised
+// suggestions have something to work with. Real ingredient ids → dietProfile
+// computes real top-foods/tastes; perDosha leans Pitta so the card reads that.
+// Consumed by listMealLogs when the mock session is active.
+const daysAgo = (n) => new Date(Date.now() - n * 86400000).toISOString()
+export const DEV_MOCK_MEAL_LOGS = DEV_MOCK ? [
+  { id: 'm1', input_text: 'Coffee and eggs', item_ids: ['coffee', 'egg'], assessment: { perDosha: { vata: 0.3, pitta: 0.7, kapha: -0.2 }, headline: 'pitta', concern: 'mind', lens: 'pitta' }, eaten_at: daysAgo(0) },
+  { id: 'm2', input_text: 'Rice and dal', item_ids: ['basmatiRice', 'mungDal'], assessment: { perDosha: { vata: -0.4, pitta: -0.1, kapha: 0.2 }, headline: null, concern: 'neutral', lens: 'pitta' }, eaten_at: daysAgo(1) },
+  { id: 'm3', input_text: 'Chicken salad with lemon', item_ids: ['chicken', 'lemon', 'spinach'], assessment: { perDosha: { vata: 0.1, pitta: 0.55, kapha: -0.3 }, headline: 'pitta', concern: 'mind', lens: 'pitta' }, eaten_at: daysAgo(2) },
+  { id: 'm4', input_text: 'Coffee', item_ids: ['coffee'], assessment: { perDosha: { vata: 0.5, pitta: 0.6, kapha: -0.3 }, headline: 'pitta', concern: 'mind', lens: 'pitta' }, eaten_at: daysAgo(3) },
+  { id: 'm5', input_text: 'Yoghurt and banana', item_ids: ['yoghurt', 'banana'], assessment: { perDosha: { vata: -0.2, pitta: 0.3, kapha: 0.4 }, headline: null, concern: 'watch', lens: 'pitta' }, eaten_at: daysAgo(5) },
+  { id: 'm6', input_text: 'Eggs and toast', item_ids: ['egg', 'whiteBread'], assessment: { perDosha: { vata: -0.1, pitta: 0.5, kapha: 0.1 }, headline: 'pitta', concern: 'mind', lens: 'pitta' }, eaten_at: daysAgo(7) },
+  { id: 'm7', input_text: 'Coffee and toast', item_ids: ['coffee', 'whiteBread'], assessment: { perDosha: { vata: 0.3, pitta: 0.6, kapha: 0.0 }, headline: 'pitta', concern: 'mind', lens: 'pitta' }, eaten_at: daysAgo(9) },
+  { id: 'm8', input_text: 'Rice and chicken', item_ids: ['basmatiRice', 'chicken'], assessment: { perDosha: { vata: -0.3, pitta: 0.4, kapha: 0.1 }, headline: 'pitta', concern: 'mind', lens: 'pitta' }, eaten_at: daysAgo(11) },
+] : null

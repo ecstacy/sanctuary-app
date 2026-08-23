@@ -203,7 +203,7 @@ export default function MealCheckPage() {
   // window.history.back and pops the route to Home). Returning true consumes it.
   useEffect(() => {
     return pushBackInterceptor(() => {
-      if (phase === 'result' || phase === 'confirm') { setPhase('input'); setResult(null); return true }
+      if (phase === 'result' || phase === 'confirm') { backToInput(); return true }
       return false
     })
   }, [phase])
@@ -404,10 +404,17 @@ export default function MealCheckPage() {
     setPhase('input'); setText(''); setItems([]); setAmbiguous([]); setUnknown([]); setResult(null)
   }
 
+  // Back to a CLEAN input — going back from a result/confirm starts a fresh
+  // check, so the box shouldn't still hold the last meal's text.
+  function backToInput() {
+    logIdRef.current = null
+    setPhase('input'); setText(''); setItems([]); setAmbiguous([]); setUnknown([]); setResult(null)
+  }
+
   // In-flow back: step back through the phases before leaving the feature, so a
   // single back never skips from a result straight past the input.
   function onBack() {
-    if (phase === 'result' || phase === 'confirm') { setPhase('input'); setResult(null) }
+    if (phase === 'result' || phase === 'confirm') backToInput()
     else navigate(-1)
   }
 
@@ -756,32 +763,44 @@ function PatternsCard({ t, profile, onOpen }) {
   return (
     <button
       onClick={onOpen}
-      className="mt-9 w-full text-left rounded-2xl bg-surface-container-low border border-outline-variant p-4 active:scale-[0.99] transition-transform"
+      className="mt-9 w-full text-left rounded-2xl bg-surface-container-low border border-outline-variant p-5 active:scale-[0.99] transition-transform"
     >
-      <div className="flex items-center gap-2 mb-2">
-        <span aria-hidden="true" className="material-symbols-outlined text-primary text-base">insights</span>
-        <p className="font-label text-[11px] uppercase tracking-wider text-primary">{t('mealCheck.patternsTitle')}</p>
-        {/* A dosha-coloured dot / "balanced" dot mirrors the trend colour. */}
+      {/* One label, one status pill — no competing dot + chevron + link. */}
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <p className="font-label text-[11px] uppercase tracking-widest text-on-surface-variant">
+          {t('mealCheck.patternsTitle')}
+        </p>
         <span
-          className="ml-1 w-2 h-2 rounded-full"
-          style={{ background: hue || 'var(--color-outline)' }}
-          aria-hidden="true"
-        />
-        <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/50 text-lg ml-auto">chevron_right</span>
+          className="shrink-0 font-label text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-full"
+          style={dom
+            ? { background: `${hue}22`, color: hue }
+            : { background: 'var(--color-surface-container-high)', color: 'var(--color-on-surface-variant)' }}
+        >
+          {dom ? `↑ ${doshaDisplayName(dom)}` : t('mealCheck.balancedShort')}
+        </span>
       </div>
-      <p className="font-body text-[13px] text-on-surface leading-relaxed">
+
+      {/* The insight, as the hero line. */}
+      <p className="font-body text-[15px] text-on-surface leading-snug">
         {dom
           ? t('mealCheck.patternDosha', { dosha: doshaDisplayName(dom) })
           : t('mealCheck.patternBalanced')}
       </p>
+
+      {/* Tastes as quiet supporting detail. */}
       {(often.length > 0 || rarely.length > 0) && (
-        <p className="font-body text-[12px] text-on-surface-variant leading-relaxed mt-1">
+        <p className="font-body text-[13px] text-on-surface-variant/80 leading-relaxed mt-1.5">
           {often.length > 0 && t('mealCheck.patternOften', { tastes: tasteList(often) })}
           {often.length > 0 && rarely.length > 0 && ' · '}
           {rarely.length > 0 && t('mealCheck.patternRarely', { tastes: tasteList(rarely) })}
         </p>
       )}
-      <p className="font-label text-[11px] text-primary mt-3">{t('mealCheck.patternsSeeWeekly', 'See weekly trends →')}</p>
+
+      {/* Single, explicit affordance. */}
+      <span className="inline-flex items-center gap-1 font-label text-[11px] text-primary mt-4">
+        {t('mealCheck.patternsSeeWeekly', 'See weekly trends')}
+        <span aria-hidden="true" className="material-symbols-outlined text-sm">arrow_forward</span>
+      </span>
     </button>
   )
 }
