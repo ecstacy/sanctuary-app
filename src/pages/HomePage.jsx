@@ -486,32 +486,30 @@ export default function HomePage() {
 
         {/* ── Greeting + current-state pill ── */}
         <div className="stagger-1">
-          <div className="flex items-start justify-between gap-3">
-            <div className="min-w-0">
-              <p className="font-label text-xs text-primary uppercase tracking-widest mb-1">
-                {t('home.namaste')}
-              </p>
-              {/* Punctuation lives in the locale string (Latin period vs. bare
-                  name in Devanagari). */}
-              <h1 className="font-headline text-4xl text-on-surface leading-tight">
-                {t('home.greetingName', { name: firstName })}
-              </h1>
-            </div>
-            {currentDosha && (
-              <span
-                className="flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-body text-xs font-semibold mt-1"
-                style={balanced
-                  ? { backgroundColor: 'var(--color-surface-container-high)', color: 'var(--color-on-surface-variant)' }
-                  : { backgroundColor: `${DOSHA_HEX[currentDosha]}1f`, color: DOSHA_INK[currentDosha] }}
-              >
-                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: balanced ? 'var(--color-on-surface-variant)' : DOSHA_HEX[currentDosha] }} />
-                {isElevated ? t('home.state.pill', { dosha: currentDoshaName }) : (balanced ? t('home.state.balancedName') : currentDoshaName)}
-              </span>
-            )}
-          </div>
+          <p className="font-label text-xs text-primary uppercase tracking-widest mb-1">
+            {t('home.namaste')}
+          </p>
+          {/* Punctuation lives in the locale string (Latin period vs. bare
+              name in Devanagari). */}
+          <h1 className="font-headline text-4xl text-on-surface leading-tight">
+            {t('home.greetingName', { name: firstName })}
+          </h1>
           <p className="font-body text-sm text-on-surface-variant mt-1">
             {subtitle}
           </p>
+          {/* The current-state chip sits with the greeting it describes, left-
+              aligned under the subtitle — not floating in the top-right corner. */}
+          {currentDosha && (
+            <span
+              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-body text-xs font-semibold mt-4"
+              style={balanced
+                ? { backgroundColor: 'var(--color-surface-container-high)', color: 'var(--color-on-surface-variant)' }
+                : { backgroundColor: `${DOSHA_HEX[currentDosha]}1f`, color: DOSHA_INK[currentDosha] }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: balanced ? 'var(--color-on-surface-variant)' : DOSHA_HEX[currentDosha] }} />
+              {isElevated ? t('home.state.pill', { dosha: currentDoshaName }) : (balanced ? t('home.state.balancedName') : currentDoshaName)}
+            </span>
+          )}
         </div>
 
         {/* ── The focus — today's composed session. Not a card: the practice
