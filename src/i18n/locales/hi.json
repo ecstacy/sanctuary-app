@@ -883,7 +883,8 @@
       "pitta": "आपके पित्त को शांत करने के लिए",
       "kapha": "आपके कफ को जगाने के लिए",
       "general": "आपके लिए चुना गया"
-    }
+    },
+    "poseMinMeta": "{{poses}} आसन · {{min}} मिनट"
   },
   "pranayamaPractice": {
     "endPractice": "अभ्यास समाप्त करें",

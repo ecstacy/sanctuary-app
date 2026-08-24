@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
 import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { pickRoutine } from '../lib/routineSelect'
-import { getRoutine, getDoshaTag } from '../data/asanas'
+import { getRoutine, getRoutineKeys, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
 import { track, EVENTS } from '../lib/track'
 import { useIsPremium } from '../hooks/useIsPremium'
@@ -38,6 +38,7 @@ export default function RoutinePage() {
   const userDosha = profile?.dosha_details?.primary || profile?.dosha?.toLowerCase() || null
 
   const [expanded, setExpanded] = useState(null)
+  const [switcherOpen, setSwitcherOpen] = useState(false)
 
   // ── Entitlement gate ────────────────────────────────────────────────
   // Every routine bundles at least one Plus-only asana (the free tier
@@ -79,10 +80,7 @@ export default function RoutinePage() {
             <span className="material-symbols-outlined text-white text-lg">arrow_back</span>
           </button>
           <button
-            onClick={() => {
-              track(EVENTS.ROUTINE_SWITCHED, { from_routine: routineKey })
-              navigate('/discover')
-            }}
+            onClick={() => setSwitcherOpen(true)}
             className="flex items-center gap-1.5 h-9 px-4 rounded-full bg-white/20 backdrop-blur-sm text-white active:scale-95 transition-all"
           >
             <span className="material-symbols-outlined text-base">swap_horiz</span>
@@ -353,6 +351,60 @@ export default function RoutinePage() {
         headline={t('routinePage.paywallHeadline', { label: routine.label })}
         subhead={t('routinePage.paywallSubhead')}
       />
+
+      {/* ── Switch-routine picker — swap in place instead of leaving for
+           Discover. Portaled so PageTransition's transform can't break the
+           fixed positioning. ── */}
+      {switcherOpen && createPortal(
+        <div className="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-label={t('routinePage.switchRoutine')}>
+          <div
+            className="absolute inset-0 bg-on-surface/40 backdrop-blur-sm animate-fade-in"
+            onClick={() => setSwitcherOpen(false)}
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 bg-surface rounded-t-3xl shadow-2xl px-5 pt-3"
+            style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}
+          >
+            <div className="w-10 h-1 rounded-full bg-outline-variant/50 mx-auto mb-4" aria-hidden="true" />
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-3 px-1">
+              {t('routinePage.switchRoutine')}
+            </p>
+            <div className="flex flex-col gap-1.5 max-h-[60vh] overflow-y-auto">
+              {getRoutineKeys().map((key) => {
+                const r = getRoutine(key)
+                const active = key === routineKey
+                return (
+                  <button
+                    key={key}
+                    onClick={() => {
+                      if (key !== routineKey) {
+                        track(EVENTS.ROUTINE_SWITCHED, { from_routine: routineKey, to_routine: key })
+                        navigate('/routine', { replace: true, state: { routineKey: key } })
+                      }
+                      setSwitcherOpen(false)
+                    }}
+                    className={`flex items-center gap-3 p-3 rounded-2xl text-left active:scale-[0.99] transition-all ${
+                      active ? 'bg-primary-container/50 border border-primary/20' : 'bg-surface-container-low'
+                    }`}
+                  >
+                    <span className="w-11 h-11 rounded-xl bg-surface-container flex items-center justify-center flex-shrink-0">
+                      <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl">{r.icon}</span>
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block font-body text-[15px] font-semibold text-on-surface leading-tight">{r.label}</span>
+                      <span className="block font-label text-[11px] text-on-surface-variant uppercase tracking-wider mt-0.5">
+                        {t('routinePage.poseMinMeta', { poses: r.asanas.length, min: Math.round(r.totalDuration / 60) })}
+                      </span>
+                    </span>
+                    {active && <span aria-hidden="true" className="material-symbols-outlined text-primary text-xl flex-shrink-0">check_circle</span>}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
 
     </div>
   )

@@ -883,7 +883,8 @@
       "pitta": "Um dein Pitta zu kühlen",
       "kapha": "Um dein Kapha zu heben",
       "general": "Für dich ausgewählt"
-    }
+    },
+    "poseMinMeta": "{{poses}} Übungen · {{min}} Min"
   },
   "pranayamaPractice": {
     "endPractice": "Praxis beenden",
