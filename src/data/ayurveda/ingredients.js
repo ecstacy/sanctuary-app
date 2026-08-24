@@ -884,7 +884,7 @@ export const INGREDIENTS = {
 
   garlic: {
     id: 'garlic',
-    dietTags: ['allium', 'root'],
+    dietTags: ['allium'],
     name: 'Garlic',
     sanskrit: 'Lashuna',
     devanagari: 'लशुन',
@@ -920,7 +920,7 @@ export const INGREDIENTS = {
     devanagari: 'पलाण्डु',
     aliases: ['pyaz', 'zwiebel', 'raw onion', 'salad onion', 'red onion'],
     category: 'vegetable',
-    dietTags: ['allium', 'root'],
+    dietTags: ['allium'],
     rasa: ['sweet', 'pungent'],
     virya: 'heating',
     vipaka: 'pungent',
@@ -944,7 +944,7 @@ export const INGREDIENTS = {
     devanagari: 'पलाण्डु',
     aliases: ['onion', 'onions', 'fried onion', 'sautéed onion', 'gebratene zwiebel', 'onion masala', 'pyaz'],
     category: 'vegetable',
-    dietTags: ['allium', 'root'],
+    dietTags: ['allium'],
     rasa: ['sweet', 'pungent'],
     virya: 'heating',
     vipaka: 'pungent',

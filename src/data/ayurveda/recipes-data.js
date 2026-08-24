@@ -54,7 +54,11 @@ export const RECIPES = {
   // ── Everyday sabzis. ─────────────────────────────────────────────────────
   bhindiMasala: {
     id: 'bhindiMasala', name: 'Bhindi masala', aliases: ['okra masala', 'ladyfinger sabzi'],
-    ingredientIds: ['okra', 'onionCooked', 'tomatoCooked', 'cumin'], method: 'sauteed', reviewStatus: 'reviewed',
+    ingredientIds: ['okra', 'onionCooked', 'tomatoCooked', 'cumin'], method: 'sauteed',
+    // Reviewer override: okra is light and Kapha-reducing; the dish shouldn't
+    // read Kapha-building off the onion/tomato. Pinned K0 (2026-08-24).
+    overrideDosha: { kapha: 0 },
+    reviewStatus: 'reviewed',
   },
   bainganBharta: {
     id: 'bainganBharta', name: 'Baingan bharta', aliases: ['smoked aubergine mash', 'brinjal bharta'],
