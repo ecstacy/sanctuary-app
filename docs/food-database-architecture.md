@@ -52,8 +52,25 @@ properties are real facts that must be checked. Rice *shapes* / pasta *shapes*
 don't need separate entries — they don't change dosha; one base + a recipe's
 method covers the variety.
 
-## Not yet migrated
+## Migration (incremental, validated — not a blind bulk convert)
 
-The ~132 existing hand-rated composite dishes (`ingredients-dishes.js`,
-`ingredients-modern-draft-*.js`) still carry authored values. They can be
-converted to recipes incrementally; new dishes should always be recipes.
+Migrating a hand-rated dish is only worth it where deriving **adds** something
+and doesn't **lose** anything:
+- A recipe may carry authored `whyFavor`/`whyAvoid` prose and `extraAllergens`
+  (for allergens from minor un-modelled parts — a soy glaze, mayo), so migration
+  keeps the user-facing text and never drops a safety flag.
+- Migrate dishes whose energetics are cooking-method-dominated (meat + fry/fat)
+  — derivation is reliable there. **Leave well-crafted, nuanced entries**
+  (fermented batters like idli/dosa, where steaming/ferment carry subtlety a
+  simple ingredient-sum misses) hand-rated until the model captures them.
+
+**Done 2026-08-24:** the 12 composite **meat** dishes (butterChicken,
+friedChicken, chickenNuggets, chickenWings, meatballs, cheeseburger, hotDog,
+clubSandwich, shawarma, teriyakiChicken, tonkatsu, katsuCurry) — the fragile
+ones the meat-tag gap came from — are now recipes. Their `meat` tag and
+energetics derive; the manual tags are gone.
+
+**Remaining (~115):** the veg Indian dishes in `ingredients-dishes.js`
+(dosa/idli/…) and the rest of `ingredients-modern-draft-*.js` stay hand-rated
+for now. Convert selectively, validating derived-vs-authored per dish. New
+dishes are always recipes.
