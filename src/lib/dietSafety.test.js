@@ -146,6 +146,18 @@ const REVIEWED_SIGNED_OFF = [
   'beanSprouts', 'seaweed', 'broadBeans', 'butterBeans', 'brie', 'halloumi',
   'condensedMilk', 'pineNut', 'brazilNut', 'molasses', 'passionFruit', 'mandarin',
   'spelt', 'polenta',
+  // Modern batch 5 — 2026-08-24 (docs/diet-review-modern-batch-5.md). 46 pantry,
+  // Japanese, coffee, condiments & world-recipe entries — human-reviewed &
+  // corrected. Property-derived (source.text 'modern'), all confidence 'medium'.
+  'farro', 'cornstarch', 'breadcrumbs', 'riceFlour', 'coconutFlour', 'cashewButter',
+  'cocoaPowder', 'driedCranberries', 'vermicelli', 'tapioca', 'ricePaper', 'grahamCracker',
+  'udon', 'soba', 'tempura', 'teriyakiChicken', 'tonkatsu', 'mochi', 'sake', 'wasabi',
+  'matchaLatte', 'onigiri',
+  'espresso', 'americano', 'mocha', 'macchiato', 'cortado', 'affogato', 'frappe',
+  'aioli', 'ranchDressing', 'hoisinSauce', 'oysterSauce', 'harissa', 'chimichurri',
+  'relish', 'tartarSauce', 'honeyMustard',
+  'shakshuka', 'pokeBowl', 'banhMi', 'katsuCurry', 'buddhaBowl', 'frenchToast',
+  'scone', 'minestrone',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {
