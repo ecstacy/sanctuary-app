@@ -5,4 +5,6 @@
 // disk. Keys are lowercased template ids; values keep the real filename.
 // Drop a {mealId}.webp into public/meals/ and it registers on the next build.
 
-export const MEAL_IMAGE_FILES = {}
+export const MEAL_IMAGE_FILES = {
+  "kitchari": "kitchari.webp"
+}
