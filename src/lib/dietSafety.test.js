@@ -158,6 +158,15 @@ const REVIEWED_SIGNED_OFF = [
   'relish', 'tartarSauce', 'honeyMustard',
   'shakshuka', 'pokeBowl', 'banhMi', 'katsuCurry', 'buddhaBowl', 'frenchToast',
   'scone', 'minestrone',
+  // Derived recipes — 2026-08-24 (recipes-data.js). Composite dishes whose
+  // dosha/rasa/vīrya/guṇa/allergens/tags are COMPUTED from reviewed ingredients
+  // + a cooking method (lib/deriveRecipe.js), never hand-rated. Review is
+  // culinary (right ingredients + method), not classical.
+  'jeeraRice', 'lemonRice', 'curdRice', 'coconutRice', 'tomatoRice',
+  'bhindiMasala', 'bainganBharta', 'alooJeera', 'vegKorma',
+  'dalFry', 'chanaMasala', 'rajmaMasala', 'mungKhichdi',
+  'vegetableUpma', 'vegetablePoha',
+  'aglioOlioPasta', 'tomatoPasta', 'mushroomPasta',
 ]
 
 describe('the review gate — unreviewed facts must not reach users', () => {
