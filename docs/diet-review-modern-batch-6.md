@@ -13,20 +13,157 @@ _All rows are `reviewStatus: 'draft'` — invisible to the app until fact-checke
 | ✔ | Food | id | rasa | vīrya | doshaEffect | flags |
 |---|------|----|------|-------|-------------|-------|
 | ☐ | Roti / chapati | `roti` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten |
+- | ☐ | **Roti / chapati** | `roti` | sweet | neutral | V −1 · P 0 · K +1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - ghee
+
+tags:
+  - flatbread
+  - whole_grain
+
+notes:
+  - Refers to a fresh whole-wheat chapati/roti.
+  - Dry or stale rotis become more Vata-aggravating.
+  - Stuffed parathas should be modelled separately.
+- The main refinement I'd recommend is Vata −1. Fresh chapati is a warm, soft, freshly cooked whole grain bread, and its moisture and nourishment generally outweigh any drying effect of the wheat itself. The current V0 would be more appropriate for a cold or dry leftover roti than for the freshly prepared food most users expect.
+
 | ☐ | Tandoori roti | `tandooriRoti` | sweet | heating | V 0 · P 0 · K +1 | allergen:gluten |
+- | ☐ | **Tandoori roti** | `tandooriRoti` | sweet | heating | V 0 · P 0 · K +1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - ghee
+
+tags:
+  - flatbread
+
+notes:
+  - Refers to plain whole-wheat tandoori roti.
+  - Brushing with butter or ghee would make it slightly more Vata-pacifying.
+- The only refinement I'd add is documenting the guṇas as Heavy + Dry.
+
 | ☐ | Bhatura | `bhatura` | sweet, sour | heating | V −1 · P +1 · K +1 | allergen:gluten · caution:processed |
+- | ☐ | **Bhatura** | `bhatura` | sweet, sour | heating | V −1 · P +1 · K +1 | allergen:gluten · caution:processed |
+- allergens:
+  - gluten
+
+cautions:
+  - processed
+
+balancedBy:
+  - chole
+
+tags:
+  - fried
+  - flatbread
+
+notes:
+  - Refers to a classic fermented bhatura.
+  - Typically paired with chole, whose legumes and spices change the overall meal profile.
+- The only thing I'd revisit is the meaning of caution:processed. If that tag is meant to identify ultra-processed foods, bhatura doesn't fit well. A more specific caution such as deep_fried or refined_grain would communicate the concern more accurately
+
 | ☐ | Thepla | `thepla` | sweet, pungent | heating | V −1 · P +1 · K 0 | allergen:gluten |
+- | ☐ | **Thepla** | `thepla` | sweet, pungent | heating | V −1 · P +1 · K 0 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - yogurt
+
+tags:
+  - flatbread
+
+notes:
+  - Refers to classic methi thepla.
+  - Sweeter or less-spiced versions may be slightly more Kapha-promoting.
+- 
+
 | ☐ | Missi roti | `missiRoti` | sweet, astringent, pungent | heating | V 0 · P +1 · K −1 | allergen:gluten |
+- | ☐ | **Missi roti** | `missiRoti` | sweet, astringent, pungent | heating | V −1 · P +1 · K −1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - yogurt
+
+tags:
+  - flatbread
+  - legume
+
+notes:
+  - Refers to a traditional missi roti made with whole wheat and besan.
+  - Versions with substantial onion or green chili are slightly more Pitta-provoking.
+- One caveat
+    This recommendation assumes a traditional missi roti that contains a meaningful proportion of wheat flour (often around 40–60%) and is served fresh with a little fat. If you were modelling a very high-besan, low-oil version, V0 would be a reasonable alternative because besan's drying quality becomes more prominent.
+    Confidence - Moderate to high. The only refinement I'd suggest is V−1 instead of V0. In practice, fresh missi roti is usually eaten hot with some fat, which tends to offset the drying nature of gram flour while preserving its clear Kapha-reducing effect.
+
 | ☐ | Pav | `pav` | sweet | neutral | V −1 · P 0 · K +1 | allergen:gluten |
+- | ☐ | **Pav** | `pav` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - vegetableCurry
+
+tags:
+  - bread
+
+notes:
+  - Refers to a plain fresh pav.
+  - Buttered pav or pav toasted with butter becomes more oily and slightly more Vata-pacifying.
+- The only change I'd recommend is V0 instead of V−1. Although fresh pav is soft, it is still a refined, baked bread and generally doesn't provide the same grounding, moist quality as a freshly cooked whole-wheat chapati. This also keeps your bread category internally consistent.
+
 
 ## Western loaves & rolls (10)
 
 | ✔ | Food | id | rasa | vīrya | doshaEffect | flags |
 |---|------|----|------|-------|-------------|-------|
 | ☐ | Ciabatta | `ciabatta` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten |
+- | ☐ | **Ciabatta** | `ciabatta` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - oliveOil
+
+tags:
+  - bread
+
+notes:
+  - Refers to fresh plain ciabatta.
+  - Toasted ciabatta becomes noticeably drier and may shift toward Vata +1.
+- The only refinement I'd add is documenting the guṇas as Heavy + Dry, which reflects the baked crust and chewy texture while recognizing that the high-hydration crumb keeps ciabatta from becoming strongly Vata-aggravating.
+
 | ☐ | Focaccia | `focaccia` | sweet, salty | neutral | V −1 · P 0 · K +1 | allergen:gluten |
+- | ☐ | **Focaccia** | `focaccia` | sweet, salty | neutral | V −1 · P 0 · K +1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - rosemary
+
+tags:
+  - bread
+
+notes:
+  - Refers to classic olive oil focaccia.
+  - Variants with cheese or cured meats are heavier and may increase Kapha further.
+- The only refinement I'd suggest is explicitly classifying focaccia as Heavy + Oily, since its generous olive oil content is its defining energetic characteristic and explains why it is more Vata-pacifying than other baked wheat breads.
+
 | ☐ | Brioche | `brioche` | sweet | neutral | V −1 · P 0 · K +1 | allergen:gluten, dairy, egg · caution:high_sugar |
+- 
+- 
+- 
+
 | ☐ | Cornbread | `cornbread` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten · caution:high_sugar |
+- 
+- 
+- 
+
 | ☐ | English muffin | `englishMuffin` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten |
 | ☐ | Crumpet | `crumpet` | sweet | neutral | V −1 · P 0 · K +1 | allergen:gluten |
 | ☐ | Breadstick / grissini | `breadstick` | sweet | neutral | V +1 · P 0 · K 0 | allergen:gluten |
