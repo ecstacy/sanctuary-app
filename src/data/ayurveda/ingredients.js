@@ -116,6 +116,7 @@ import { MODERN_DRAFT_INGREDIENTS_4 } from './ingredients-modern-draft-4'
 import { COMMON_INGREDIENTS } from './ingredients-common'
 import { MODERN_DRAFT_INGREDIENTS_5 } from './ingredients-modern-draft-5'
 import { MODERN_DRAFT_INGREDIENTS_6 } from './ingredients-modern-draft-6'
+import { MODERN_DRAFT_INGREDIENTS_7 } from './ingredients-modern-draft-7'
 import { RECIPES } from './recipes-data'
 import { deriveRecipes } from '../../lib/deriveRecipe'
 
@@ -3405,6 +3406,7 @@ Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_4)
 Object.assign(INGREDIENTS, COMMON_INGREDIENTS)
 Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_5)
 Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_6)
+Object.assign(INGREDIENTS, MODERN_DRAFT_INGREDIENTS_7)
 
 // ── Derived recipes ─────────────────────────────────────────────────────────
 // Composite dishes computed from the (now fully-assembled) base ingredients +
