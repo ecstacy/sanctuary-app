@@ -188,6 +188,20 @@ Same workflow as Batch A: **attach the approved `kitchari` key-frame to every pr
 | 9 | `stewedAppleBreakfast.png` | Warm stewed apple slices dusted with cardamom | bowl | peach `#f6e4d1 → #eec6a6` |
 | 10 | `vegetableOmelette.png` | A folded omelette with tomato, onion, bell pepper and spinach | plate | clay `#f1ddcf → #e3bfa4` |
 
+## 9c. Batch-C prompt kit — new recipes (5 templates)
+
+The five recipes added to the suggestion rotation (batch 7). Same workflow — attach the `kitchari` key-frame, save as `{templateId}.png`, `npm run meals:webp`.
+
+| # | Save as | Dish + ingredients to show | Vessel | Background wash |
+|---|---|---|---|---|
+| 1 | `sobaGreensBowl.png` | Buckwheat soba noodles tossed with sautéed spinach and carrot, a sheen of sesame oil | bowl | vegetable `#e4ede2 → #c3dcc4` |
+| 2 | `udonNoodleSoup.png` | Thick udon noodles in a clear vegetable broth with carrot and spinach | bowl | clay `#f1ddcf → #e3bfa4` |
+| 3 | `farroVegBowl.png` | Nutty farro with roasted sweet potato and spinach, a few walnuts | bowl | amber `#f4ead2 → #e7cfa0` |
+| 4 | `vermicelliUpma.png` | Soft vermicelli with green peas and carrot, a mustard-seed and curry-leaf tempering | bowl | amber `#f4ead2 → #e7cfa0` |
+| 5 | `sabudanaKhichdi.png` | Translucent soaked tapioca pearls tossed with crushed peanuts and soft potato cubes | bowl | cream `#f3f0e7 → #e2ddcb` |
+
+> **Note — recipe dishes don't have a card surface yet.** The ~14 new recipe foods (dal fry, tomato pasta, jeera rice…) are logged in Meal Check, not shown as idea cards, so they have nowhere to display an image today. If we want them illustrated, the ingredient/recipe detail page needs an image slot first (a small follow-up). Until then, only meal *templates* (above) earn images.
+
 ## 10. Decisions (was: open questions)
 
 - **Style key-frame** — ✅ `kitchari`. Approved 2026-08-24: overhead single matte stoneware bowl, painterly gouache, warm terracotta wash. It is now the reference — attach it to every following dish prompt. Note its wash runs a touch warmer/more saturated than the §3 hex; **match the key-frame, not the hex** — set consistency wins.
