@@ -875,6 +875,14 @@
         "Eased tightness",
         "Better range"
       ]
+    },
+    "picked": {
+      "evening": "A calming wind-down",
+      "morning": "To start your morning",
+      "vata": "To ground your Vata",
+      "pitta": "To cool your Pitta",
+      "kapha": "To lift your Kapha",
+      "general": "Chosen for you"
     }
   },
   "pranayamaPractice": {

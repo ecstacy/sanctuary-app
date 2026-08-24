@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { useAuth } from '../context/AuthContext'
+import { useVikritiSignal } from '../hooks/useVikritiSignal'
+import { pickRoutine } from '../lib/routineSelect'
 import { getRoutine, getDoshaTag } from '../data/asanas'
 import PoseFigure from '../components/PoseFigure'
 import { track, EVENTS } from '../lib/track'
@@ -24,7 +26,14 @@ export default function RoutinePage() {
   const location = useLocation()
   const { profile } = useAuth()
 
-  const routineKey = location.state?.routineKey || 'stress'
+  // Personalized default: when the user opens the Routine tab without picking a
+  // specific routine, choose one that fits their current dosha state + time of
+  // day (an explicit pick from Discover still wins). See lib/routineSelect.
+  const { vikriti } = useVikritiSignal()
+  const picked = useMemo(() => pickRoutine({ vikriti, hour: new Date().getHours() }), [vikriti])
+  const explicit = !!location.state?.routineKey
+  const routineKey = location.state?.routineKey || picked.key
+  const pickedReason = explicit ? null : picked.reason
   const routine = getRoutine(routineKey)
   const userDosha = profile?.dosha_details?.primary || profile?.dosha?.toLowerCase() || null
 
@@ -85,6 +94,12 @@ export default function RoutinePage() {
           <div className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center mx-auto mb-3">
             <span className="material-symbols-outlined text-white text-2xl">{routine.icon}</span>
           </div>
+          {pickedReason && (
+            <p className="font-label text-[11px] text-white/85 uppercase tracking-widest mb-1.5 flex items-center justify-center gap-1">
+              <span aria-hidden="true" className="material-symbols-outlined text-[15px]">auto_awesome</span>
+              {t(`routinePage.picked.${pickedReason}`)}
+            </p>
+          )}
           <h1 className="font-headline text-3xl text-white leading-tight mb-2">
             {routine.label}
           </h1>

@@ -78,8 +78,11 @@ export default function BottomNav() {
             aria-label={label}
             aria-current={active ? 'page' : undefined}
             onClick={() => {
+              // The Routine tab opens a PERSONALIZED default (dosha + time of
+              // day) — RoutinePage picks it when no explicit routineKey is
+              // passed. Clear any prior state so the tab always re-personalizes.
               if (tab.path === '/routine') {
-                navigate('/routine', { state: { routineKey: 'stress' } })
+                navigate('/routine', { state: {} })
               } else {
                 navigate(tab.path)
               }

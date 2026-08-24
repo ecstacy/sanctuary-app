@@ -875,6 +875,14 @@
         "Gelöste Spannung",
         "Größere Reichweite"
       ]
+    },
+    "picked": {
+      "evening": "Ein beruhigender Ausklang",
+      "morning": "Für deinen Morgen",
+      "vata": "Um dein Vata zu erden",
+      "pitta": "Um dein Pitta zu kühlen",
+      "kapha": "Um dein Kapha zu heben",
+      "general": "Für dich ausgewählt"
     }
   },
   "pranayamaPractice": {
