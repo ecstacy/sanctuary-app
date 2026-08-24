@@ -12,6 +12,7 @@
 //  recipe flow grows from.
 // ─────────────────────────────────────────────────────────────────────────────
 
+import { useState } from 'react'
 import { SUITABILITY } from '../lib/doshaSemantics'
 import { mealVisual } from '../lib/mealVisual'
 
@@ -27,6 +28,11 @@ export default function MealIdeaCard({ idea, targetDosha, doshaLabel, t, onTap }
   const balances = targetDosha && idea.suitability === SUITABILITY.BALANCING
   const hasVerdict = targetDosha && idea.contributions.length > 0
 
+  // A bundled illustration when one exists, else the generated tile. onError
+  // drops back to the tile so a missing/broken file never shows a broken image.
+  const [imgFailed, setImgFailed] = useState(false)
+  const showImage = idea.image && !imgFailed
+
   return (
     <button
       onClick={onTap}
@@ -34,8 +40,14 @@ export default function MealIdeaCard({ idea, targetDosha, doshaLabel, t, onTap }
     >
       {/* ── Visual header — the "photo". ─────────────────────────────────── */}
       <div className="relative h-28 w-full overflow-hidden">
-        {idea.image ? (
-          <img src={idea.image} alt="" className="h-full w-full object-cover" />
+        {showImage ? (
+          <img
+            src={idea.image}
+            alt=""
+            loading="lazy"
+            onError={() => setImgFailed(true)}
+            className="h-full w-full object-cover"
+          />
         ) : (
           <div
             aria-hidden="true"

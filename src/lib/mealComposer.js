@@ -40,6 +40,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { ALL_MEAL_TEMPLATES } from '../data/ayurveda/meals'
+import { mealImage } from './mealImage'
 import { getIngredient } from './ingredients'
 import { exclusionFor } from './dietSafety'
 import { foodSuitability, SUITABILITY } from './doshaSemantics'
@@ -249,10 +250,11 @@ export function composeMeals(ctx = {}) {
       optional:   c.optional.map((i) => ({ id: i.id, name: i.name, category: i.category })),
       /** Dominant ingredient category — the primary key for a dish's visual. */
       category:   c.core[0]?.category || null,
-      /** Optional real photo/illustration. Null today; the hook for the future
-       *  themed-image pipeline — when a template carries one, the card shows it
-       *  in place of the generated tile with no other change. */
-      image:      c.tpl.image || null,
+      /** Real illustration when one is bundled for this dish, else null → the
+       *  card falls back to the generated mealVisual tile. Resolved from the
+       *  auto-generated manifest (public/meals/); a template-level `image`
+       *  still wins if one is set explicitly. See docs/meal-image-plan.md. */
+      image:      c.tpl.image || mealImage(c.tpl.id),
       kind:       c.kind,
       suitability: net.suitability,
       /**
