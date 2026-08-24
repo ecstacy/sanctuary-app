@@ -1933,7 +1933,8 @@
       "seeMore": "See today's other ideas",
       "seeMorePlus": "See more with Plus"
     },
-    "balances": "Balances {{dosha}}"
+    "balances": "Balances {{dosha}}",
+    "forYou": "For you"
   },
   "mealCheck": {
     "title": "Meal Check",

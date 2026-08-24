@@ -54,7 +54,7 @@ export default function MealIdeaCard({ idea, targetDosha, doshaLabel, t, onTap }
 
         {/* The one glanceable teaser that earns the tap. */}
         {balances && (
-          <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-surface-container-low/90 backdrop-blur-sm pl-1.5 pr-2.5 py-1 shadow-sm">
+          <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-surface-container-low pl-1.5 pr-2.5 py-1 shadow-md">
             <span aria-hidden="true" className="material-symbols-outlined text-pine text-[15px]">spa</span>
             <span className="font-label text-[10px] uppercase tracking-wide text-pine">
               {t('meals.balances', { dosha: doshaLabel })}
@@ -63,7 +63,7 @@ export default function MealIdeaCard({ idea, targetDosha, doshaLabel, t, onTap }
         )}
 
         {idea.kind === 'preparation' && (
-          <span className="absolute top-3 right-3 rounded-full bg-surface-container-low/90 backdrop-blur-sm px-2.5 py-1 font-label text-[9px] uppercase tracking-wide text-on-surface-variant shadow-sm">
+          <span className="absolute top-3 right-3 rounded-full bg-surface-container-low px-2.5 py-1 font-label text-[9px] uppercase tracking-wide text-on-surface-variant shadow-md">
             {t('meals.kind.preparation')}
           </span>
         )}

@@ -105,19 +105,30 @@ export default function MealOfTheDayCard() {
           </div>
         )}
 
-        {/* Slot label — this is the Home nudge, so it names the occasion. */}
-        <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-surface-container-low/90 backdrop-blur-sm pl-1.5 pr-2.5 py-1 shadow-sm">
+        {/* Slot label — this is the Home nudge, so it names the occasion.
+            Opaque (not translucent) so it stays legible over any image. */}
+        <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-surface-container-low pl-1.5 pr-2.5 py-1 shadow-md">
           <span aria-hidden="true" className="material-symbols-outlined text-primary text-[15px]">restaurant_menu</span>
           <span className="font-label text-[10px] uppercase tracking-wide text-on-surface-variant">
             {t(`meals.heading.${result.slot}`)}
           </span>
         </span>
 
-        {balances && (
-          <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-surface-container-low/90 backdrop-blur-sm pl-1.5 pr-2.5 py-1 shadow-sm">
+        {/* Personalization cue — always present so the card reads as "chosen
+            for you". Upgrades to the specific "Balances X" when the dish is a
+            clear win for the user's current dosha. */}
+        {balances ? (
+          <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-surface-container-low pl-1.5 pr-2.5 py-1 shadow-md">
             <span aria-hidden="true" className="material-symbols-outlined text-pine text-[15px]">spa</span>
             <span className="font-label text-[10px] uppercase tracking-wide text-pine">
               {t('meals.balances', { dosha: t(`diet.dosha.${target.dosha}`) })}
+            </span>
+          </span>
+        ) : (
+          <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-surface-container-low pl-1.5 pr-2.5 py-1 shadow-md">
+            <span aria-hidden="true" className="material-symbols-outlined text-primary text-[15px]">favorite</span>
+            <span className="font-label text-[10px] uppercase tracking-wide text-primary">
+              {t('meals.forYou')}
             </span>
           </span>
         )}

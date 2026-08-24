@@ -1933,7 +1933,8 @@
       "seeMore": "Weitere Ideen für heute",
       "seeMorePlus": "Mehr sehen mit Plus"
     },
-    "balances": "Gleicht {{dosha}} aus"
+    "balances": "Gleicht {{dosha}} aus",
+    "forYou": "Für dich"
   },
   "mealCheck": {
     "title": "Mahlzeit-Check",

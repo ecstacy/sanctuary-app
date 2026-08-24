@@ -1933,7 +1933,8 @@
       "seeMore": "आज के अन्य सुझाव देखें",
       "seeMorePlus": "Plus के साथ और देखें"
     },
-    "balances": "{{dosha}} को संतुलित करता है"
+    "balances": "{{dosha}} को संतुलित करता है",
+    "forYou": "आपके लिए"
   },
   "mealCheck": {
     "title": "भोजन जाँच",
