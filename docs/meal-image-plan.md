@@ -200,7 +200,7 @@ The five recipes added to the suggestion rotation (batch 7). Same workflow — a
 | 4 | `vermicelliUpma.png` | Soft vermicelli with green peas and carrot, a mustard-seed and curry-leaf tempering | bowl | amber `#f4ead2 → #e7cfa0` |
 | 5 | `sabudanaKhichdi.png` | Translucent soaked tapioca pearls tossed with crushed peanuts and soft potato cubes | bowl | cream `#f3f0e7 → #e2ddcb` |
 
-> **Note — recipe dishes don't have a card surface yet.** The ~14 new recipe foods (dal fry, tomato pasta, jeera rice…) are logged in Meal Check, not shown as idea cards, so they have nowhere to display an image today. If we want them illustrated, the ingredient/recipe detail page needs an image slot first (a small follow-up). Until then, only meal *templates* (above) earn images.
+> **Recipes can now be illustrated too.** The meal detail page (`/meal/:id`, 2026-08-24) gives every dish — templates *and* recipe foods — a hero image slot. Drop `public/meals/{recipeId}.png` (e.g. `dalFry.png`, `tomatoPasta.png`) and it shows on that recipe's detail hero, same pipeline. Recipe ids: dalFry, rajmaMasala, jeeraRice, lemonRice, curdRice, coconutRice, tomatoRice, bhindiMasala, bainganBharta, alooJeera, vegKorma, aglioOlioPasta, tomatoPasta, mushroomPasta, plus the migrated meat dishes (butterChicken, friedChicken, …). Prompts: same template as Batch A/B, ingredients from `recipes-data.js`.
 
 ## 10. Decisions (was: open questions)
 

@@ -78,7 +78,7 @@ export default function MealOfTheDayCard() {
           source:       'home_meal_of_day',
           is_premium:   isPremium,
         })
-        navigate('/meals')
+        navigate(`/meal/${idea.id}`)
       }}
       className="group w-full text-left rounded-3xl overflow-hidden bg-surface-container-low border border-outline-variant/40 shadow-sm stagger-4 active:scale-[0.99] transition-transform"
     >

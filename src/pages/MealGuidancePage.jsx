@@ -172,7 +172,7 @@ export default function MealGuidancePage() {
               t={t}
               onTap={() => {
                 track(EVENTS.MEAL_IDEA_TAPPED, { meal_id: idea.id, target_dosha: target.dosha })
-                navigate(`/ingredient/${idea.core[0].id}`)
+                navigate(`/meal/${idea.id}`)
               }}
             />
           ))}

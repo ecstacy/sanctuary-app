@@ -314,3 +314,64 @@ export function composeMeals(ctx = {}) {
     meta: { targetDosha, doshaSource: ctx.doshaSource || 'none', season: ctx.season || null, dateKey },
   }
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  deriveMealById — a single dish, for the meal detail page.
+//
+//  Same idea shape as composeMeals produces, for one meal chosen by id, derived
+//  against the user's current dosha target. Handles both meal TEMPLATES (the
+//  suggestion cards) and derived RECIPE foods (dishes logged in meal-check), so
+//  the detail page can render either. Returns null for an unknown id or a
+//  template whose core is unreviewed.
+// ─────────────────────────────────────────────────────────────────────────────
+export function deriveMealById(id, { targetDosha = null, dietPrefs = {} } = {}) {
+  if (!id) return null
+
+  const tpl = ALL_MEAL_TEMPLATES.find((t) => t.id === id)
+  if (tpl) {
+    const core = tpl.coreIds.map(getIngredient)
+    if (core.some((i) => !i)) return null           // an unreviewed core → not shippable
+    const optional = (tpl.optionalIds || []).map(getIngredient)
+      .filter((i) => i && !exclusionFor(i, dietPrefs).excluded)
+    const net = netDoshaEffect(core, targetDosha)
+    const already = new Set([...core, ...optional].map((i) => i.id))
+    return {
+      id: tpl.id, name: tpl.name, prep: tpl.prep || null, kind: tpl.kind,
+      core:     core.map((i) => ({ id: i.id, name: i.name, category: i.category })),
+      optional: optional.map((i) => ({ id: i.id, name: i.name, category: i.category })),
+      category: core[0]?.category || null,
+      image:    tpl.image || mealImage(tpl.id),
+      suitability: net.suitability,
+      balancedBy: [...new Set(core.flatMap((i) => i.balancedBy || []))]
+        .filter((x) => !already.has(x)).map(getIngredient)
+        .filter((i) => i && !exclusionFor(i, dietPrefs).excluded)
+        .map((i) => ({ id: i.id, name: i.name })),
+      contributions: explainIdea(core, targetDosha),
+      isDerived: [...core, ...optional].some((i) => i.confidence === 'medium'),
+      citations: [...new Set(core.filter((i) => i.source?.text === 'CS').map((i) => i.source.verse))].filter(Boolean),
+    }
+  }
+
+  // A derived recipe food (a dish, not a template).
+  const food = getIngredient(id)
+  if (food?.isDerivedRecipe) {
+    const parts = (food.ingredientIds || []).map(getIngredient).filter(Boolean)
+    const net = netDoshaEffect(parts, targetDosha)
+    return {
+      id: food.id, name: food.name, prep: null, kind: 'recipe',
+      core:     parts.map((i) => ({ id: i.id, name: i.name, category: i.category })),
+      optional: [],
+      category: parts[0]?.category || null,
+      image:    mealImage(food.id),
+      suitability: net.suitability,
+      balancedBy: [],
+      contributions: explainIdea(parts, targetDosha),
+      isDerived: true,
+      citations: [],
+      whyFavor: food.whyFavor || null,
+      whyAvoid: food.whyAvoid || null,
+    }
+  }
+
+  return null
+}
