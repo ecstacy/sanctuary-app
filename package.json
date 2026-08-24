@@ -13,6 +13,7 @@
     "foods:pages": "node scripts/build-food-pages.mjs",
     "web:pages": "node scripts/build-food-pages.mjs && node scripts/build-pose-manifest.mjs && node scripts/build-pose-pages.mjs",
     "meals:manifest": "node scripts/build-meal-manifest.mjs",
+    "meals:webp": "node scripts/convert-meals-webp.mjs && node scripts/build-meal-manifest.mjs",
     "predev": "node scripts/build-pose-manifest.mjs && node scripts/build-meal-manifest.mjs",
     "prebuild": "node scripts/build-pose-manifest.mjs && node scripts/build-meal-manifest.mjs",
     "dev": "vite",

@@ -151,8 +151,8 @@ Workflow for consistency in ChatGPT:
 Per-dish message format:
 > [attach approved kitchari] Same exact style, vessel, lighting and background treatment. Paint this dish: **{dish + ingredients from the table}**. Background wash in these tones: **{hex}**.
 
-## 10. Open questions
+## 10. Decisions (was: open questions)
 
-- **Style key-frame dish** — which hero to lock the style on? Suggest `kitchari` (the app's archetypal dish, simple to render well).
-- **Tool** — which image model/service, and budget for ~47 images + iterations?
-- **Detail view** — when the ingredient→recipe flow lands, do we want a larger/full-bleed crop of the same master (the 1024² master supports it)?
+- **Style key-frame** — ✅ `kitchari`. Approved 2026-08-24: overhead single matte stoneware bowl, painterly gouache, warm terracotta wash. It is now the reference — attach it to every following dish prompt. Note its wash runs a touch warmer/more saturated than the §3 hex; **match the key-frame, not the hex** — set consistency wins.
+- **Tool** — ✅ ChatGPT / GPT-image (§9 workflow).
+- **Detail view / masters** — ✅ Ship a single 900px WebP per dish (`npm run meals:webp`, ~110 KB each). 900px covers both the card band and a future full-bleed phone detail view at 2×, so we don't keep multi-MB masters. If a large/print master is ever needed, re-export with `KEEP_PNG=1`.
