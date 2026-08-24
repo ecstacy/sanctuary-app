@@ -203,12 +203,14 @@ export default function DoshaProfileContent({
               {/* Legend — dot · name · element on the left, big % on the right.
                   Tabular-nums + large headline weight gives the numbers
                   presence; the secondary/tertiary rows fade slightly so the
-                  dominant dosha reads first. */}
+                  dominant dosha reads first — but a tridoshic constitution has
+                  no dominant dosha, so all three stay full-strength (fading the
+                  "tertiary" there just looks like Kapha is greyed out). */}
               <div className="space-y-3.5">
                 {[
                   { key: primary, data: primaryData, pct: percentages[primary], opacity: 1 },
-                  ...(secondaryData ? [{ key: secondary, data: secondaryData, pct: percentages[secondary], opacity: 0.85 }] : []),
-                  ...(tertiaryData  ? [{ key: tertiary,  data: tertiaryData,  pct: percentages[tertiary],  opacity: 0.6  }] : []),
+                  ...(secondaryData ? [{ key: secondary, data: secondaryData, pct: percentages[secondary], opacity: isTridoshic ? 1 : 0.85 }] : []),
+                  ...(tertiaryData  ? [{ key: tertiary,  data: tertiaryData,  pct: percentages[tertiary],  opacity: isTridoshic ? 1 : 0.6  }] : []),
                 ].map(({ key, data, pct, opacity }) => (
                   <div key={key} className="flex items-baseline justify-between gap-4" style={{ opacity }}>
                     <div className="flex items-center gap-3 min-w-0">
