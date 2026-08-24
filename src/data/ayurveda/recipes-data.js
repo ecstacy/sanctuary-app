@@ -64,28 +64,12 @@ export const RECIPES = {
     id: 'dalFry', name: 'Dal fry', aliases: ['tadka dal', 'dal tadka'],
     ingredientIds: ['toorDal', 'tomatoCooked', 'onionCooked', 'garlic', 'cumin', 'ghee'], method: 'tempered', reviewStatus: 'reviewed',
   },
-  chanaMasala: {
-    id: 'chanaMasala', name: 'Chana masala', aliases: ['chole', 'chickpea masala'],
-    ingredientIds: ['chickpea', 'tomatoCooked', 'onionCooked', 'garlic', 'cumin'], method: 'simmered', reviewStatus: 'reviewed',
-  },
   rajmaMasala: {
     id: 'rajmaMasala', name: 'Rajma masala', aliases: ['kidney bean curry'],
     ingredientIds: ['rajma', 'tomatoCooked', 'onionCooked', 'garlic', 'cumin'], method: 'simmered', reviewStatus: 'reviewed',
   },
-  mungKhichdi: {
-    id: 'mungKhichdi', name: 'Moong dal khichdi', aliases: ['moong khichdi', 'dal rice'],
-    ingredientIds: ['mungDal', 'basmatiRice', 'turmeric', 'cumin', 'ghee'], method: 'simmered', reviewStatus: 'reviewed',
-  },
 
   // ── Breakfast tiffin. ────────────────────────────────────────────────────
-  vegetableUpma: {
-    id: 'vegetableUpma', name: 'Vegetable upma', aliases: ['rava upma', 'uppittu'],
-    ingredientIds: ['semolina', 'peas', 'carrot', 'mustardSeed', 'curryLeaf'], method: 'tempered', reviewStatus: 'reviewed',
-  },
-  vegetablePoha: {
-    id: 'vegetablePoha', name: 'Vegetable poha', aliases: ['kanda poha', 'flattened rice'],
-    ingredientIds: ['flattenedRice', 'peas', 'peanut', 'onionCooked', 'mustardSeed', 'curryLeaf', 'turmeric'], method: 'tempered', reviewStatus: 'reviewed',
-  },
 
   // ── Pasta — one base, different sauces & methods. ────────────────────────
   aglioOlioPasta: {
@@ -99,5 +83,84 @@ export const RECIPES = {
   mushroomPasta: {
     id: 'mushroomPasta', name: 'Mushroom pasta', aliases: ['creamy mushroom pasta'],
     ingredientIds: ['pasta', 'mushroom', 'garlic', 'oliveOil'], method: 'sauteed', reviewStatus: 'reviewed',
+  },
+
+  // ── Migrated meat dishes (were hand-rated in ingredients-modern-draft-3/5).
+  //    Now recipes: the 'meat' tag and energetics DERIVE, so veg/pescatarian/
+  //    halal exclusion is automatic and can no longer drift. Prose preserved;
+  //    extraAllergens carry allergens from minor un-modelled parts (soy glaze,
+  //    mayo). ─────────────────────────────────────────────────────────────────
+  butterChicken: {
+    id: 'butterChicken', name: 'Butter chicken', aliases: ['murgh makhani', 'butter chicken curry'],
+    ingredientIds: ['chicken', 'tomatoCooked', 'butter', 'onionCooked', 'garlic'], method: 'simmered',
+    whyFavor: 'Rich, creamy and grounding — settling for Vata.',
+    whyAvoid: 'Cream, butter and spiced tomato — heavy and oily for Kapha, sour and heating for Pitta.',
+    reviewStatus: 'reviewed',
+  },
+  friedChicken: {
+    id: 'friedChicken', name: 'Fried chicken', aliases: ['crispy chicken', 'kfc', 'fried chicken piece'],
+    ingredientIds: ['chicken', 'breadcrumbs'], method: 'fried',
+    whyAvoid: 'Breaded, deep-fried chicken — very oily and heating; adds to Pitta and Kapha.',
+    reviewStatus: 'reviewed',
+  },
+  chickenNuggets: {
+    id: 'chickenNuggets', name: 'Chicken nuggets', aliases: ['nuggets', 'chicken nugget'],
+    ingredientIds: ['chicken', 'breadcrumbs'], method: 'fried',
+    whyAvoid: 'Breaded, deep-fried processed chicken — oily and heating; heavy for Kapha.',
+    reviewStatus: 'reviewed',
+  },
+  chickenWings: {
+    id: 'chickenWings', name: 'Chicken wings', aliases: ['buffalo wings', 'hot wings'],
+    ingredientIds: ['chicken'], method: 'fried',
+    whyAvoid: 'Fried, sauced wings — oily and sharply heating; strong on Pitta.',
+    reviewStatus: 'reviewed',
+  },
+  meatballs: {
+    id: 'meatballs', name: 'Meatballs', aliases: ['meatball', 'kofta'],
+    ingredientIds: ['mince', 'breadcrumbs', 'onionCooked'], method: 'fried',
+    whyAvoid: 'Fried minced meat — heavy, oily and heating; adds to Pitta and Kapha.',
+    reviewStatus: 'reviewed',
+  },
+  cheeseburger: {
+    id: 'cheeseburger', name: 'Cheeseburger', aliases: ['burger', 'hamburger', 'beef burger'],
+    ingredientIds: ['beef', 'hardCheese', 'breadRoll', 'onionCooked'], method: 'grilled',
+    whyAvoid: 'Beef patty, cheese and a refined bun — heavy, oily and heating; adds to Pitta and Kapha.',
+    reviewStatus: 'reviewed',
+  },
+  hotDog: {
+    id: 'hotDog', name: 'Hot dog', aliases: ['hotdog', 'frankfurter'],
+    ingredientIds: ['sausage', 'breadRoll'], method: 'none',
+    whyAvoid: 'Processed sausage in a refined bun — heavy and salty; leans to Kapha and Pitta.',
+    reviewStatus: 'reviewed',
+  },
+  clubSandwich: {
+    id: 'clubSandwich', name: 'Club sandwich', aliases: ['blt sandwich', 'club sarnie'],
+    ingredientIds: ['breadRoll', 'chicken', 'bacon', 'tomatoRaw'], method: 'none', extraAllergens: ['egg'],
+    whyAvoid: 'Layered bread with meat, bacon and mayo — heavy, moist and salty.',
+    reviewStatus: 'reviewed',
+  },
+  shawarma: {
+    id: 'shawarma', name: 'Shawarma / doner kebab', aliases: ['doner kebab', 'gyro', 'kebab wrap'],
+    ingredientIds: ['chicken', 'pita', 'onionCooked', 'garlic'], method: 'roasted',
+    whyAvoid: 'Spiced roasted meat in a flatbread — heavy, oily, salty and heating.',
+    reviewStatus: 'reviewed',
+  },
+  teriyakiChicken: {
+    id: 'teriyakiChicken', name: 'Teriyaki chicken', aliases: ['teriyaki chicken', 'chicken teriyaki'],
+    ingredientIds: ['chicken', 'onionCooked'], method: 'grilled', extraAllergens: ['soy', 'gluten'],
+    whyAvoid: 'Chicken glazed in a sweet-salty soy sauce — building and heating; sweet-heavy for Kapha.',
+    reviewStatus: 'reviewed',
+  },
+  tonkatsu: {
+    id: 'tonkatsu', name: 'Tonkatsu', aliases: ['tonkatsu', 'pork katsu', 'chicken katsu', 'katsu'],
+    ingredientIds: ['pork', 'breadcrumbs'], method: 'fried',
+    whyAvoid: 'A breaded, deep-fried cutlet — oily, heavy and heating.',
+    reviewStatus: 'reviewed',
+  },
+  katsuCurry: {
+    id: 'katsuCurry', name: 'Katsu curry', aliases: ['katsu curry', 'chicken katsu curry'],
+    ingredientIds: ['pork', 'breadcrumbs', 'basmatiRice', 'carrot', 'onionCooked'], method: 'fried',
+    whyAvoid: 'A breaded fried cutlet with mild curry sauce and rice — oily, heavy and heating.',
+    reviewStatus: 'reviewed',
   },
 }

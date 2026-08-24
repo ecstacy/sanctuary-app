@@ -74,8 +74,8 @@ export function deriveRecipe(recipe, resolve) {
 
   // Safety — allergens and diet tags flow up from the parts. Meat is added when
   // any part is meat, so composite meat dishes are excluded automatically.
-  const allergens = mergeUnique(parts.map((p) => allergensOf(p)))
-  const dietTags = mergeUnique(parts.map((p) => p.dietTags))
+  const allergens = mergeUnique([...parts.map((p) => allergensOf(p)), recipe.extraAllergens || []])
+  const dietTags = mergeUnique([...parts.map((p) => p.dietTags), recipe.extraTags || []])
   if (parts.some((p) => animalKind(p) === 'meat') && !dietTags.includes(DIET_TAGS.MEAT)) {
     dietTags.push(DIET_TAGS.MEAT)
   }
@@ -95,6 +95,12 @@ export function deriveRecipe(recipe, resolve) {
     doshaEffect,
     ...(allergens.length ? { allergens } : {}),
     ...(dietTags.length ? { dietTags } : {}),
+    // Optional authored prose — culinary, not classical — carried through so a
+    // migrated dish keeps its user-facing explanation while its energetics stay
+    // derived. Never a place to smuggle a dosha claim.
+    ...(recipe.whyFavor ? { whyFavor: recipe.whyFavor } : {}),
+    ...(recipe.whyAvoid ? { whyAvoid: recipe.whyAvoid } : {}),
+    ...(recipe.cautions ? { cautions: recipe.cautions } : {}),
     source: {
       text: 'derived',
       note: `Derived recipe: ${names}${label}. Dosha, taste, vīrya and qualities computed from its constituents and cooking method — not hand-rated.`,

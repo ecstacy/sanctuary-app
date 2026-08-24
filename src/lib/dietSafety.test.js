@@ -164,8 +164,7 @@ const REVIEWED_SIGNED_OFF = [
   // culinary (right ingredients + method), not classical.
   'jeeraRice', 'lemonRice', 'curdRice', 'coconutRice', 'tomatoRice',
   'bhindiMasala', 'bainganBharta', 'alooJeera', 'vegKorma',
-  'dalFry', 'chanaMasala', 'rajmaMasala', 'mungKhichdi',
-  'vegetableUpma', 'vegetablePoha',
+  'dalFry', 'rajmaMasala',
   'aglioOlioPasta', 'tomatoPasta', 'mushroomPasta',
 ]
 
