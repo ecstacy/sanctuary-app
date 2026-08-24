@@ -1,5 +1,7 @@
 # Modern-diet review batch 6 (16 entries) — bread depth
 
+> **✅ APPLIED & LIVE — 2026-08-24.** All reviewer corrections applied and all 16 flipped `draft → reviewed` (+ signoff). Changes: roti V−1, missiRoti V−1, pav V0, cornbread V+1 & high_sugar removed, crumpet V0, breadstick K+1, pumpernickel V−1, cornTortilla V+1; guṇa tandooriRoti/ciabatta Heavy+Dry, englishMuffin Light+Dry; bhatura caution processed→deep_fried; brioche high_sugar removed.
+
 _All rows are `reviewStatus: 'draft'` — invisible to the app until fact-checked and flipped to `reviewed` (add the id to `REVIEWED_SIGNED_OFF` in `dietSafety.test.js`). Source: property-derived (`modern`, `confidence: medium`). Sign convention: doshaEffect −1 pacifies / +1 aggravates._
 
 **Why this batch:** "bread" was thin — white / rye / sourdough / whole-wheat + a few dishes, but **no roti/chapati** (a staple for this audience) and none of the everyday Western loaves. Filling these lets the meal-check search **recommend the exact bread** the user ate instead of collapsing everything to "white bread" — the difference between a trusted verdict and a rough guess.
@@ -155,21 +157,137 @@ notes:
 - The only refinement I'd suggest is explicitly classifying focaccia as Heavy + Oily, since its generous olive oil content is its defining energetic characteristic and explains why it is more Vata-pacifying than other baked wheat breads.
 
 | ☐ | Brioche | `brioche` | sweet | neutral | V −1 · P 0 · K +1 | allergen:gluten, dairy, egg · caution:high_sugar |
-- 
-- 
-- 
+- | ☐ | **Brioche** | `brioche` | sweet | neutral | V −1 · P 0 · K +1 | allergen:gluten, dairy, egg · caution:high_sugar |
+- allergens:
+  - gluten
+  - dairy
+  - egg
+
+cautions:
+  - high_sugar
+
+balancedBy:
+  - berries
+
+tags:
+  - bread
+  - enriched_bread
+
+notes:
+  - Refers to plain brioche.
+  - Sweet-filled or chocolate brioche is more Kapha-promoting.
+- The only point I'd revisit is whether caution:high_sugar matches your project's threshold. Energetically it's reasonable, but nutritionally plain brioche is often richer in butter and eggs than in sugar. If your caution tags are intended to flag foods with particularly high added sugar, you might instead reserve that tag for sweeter brioche products rather than the base bread.
 
 | ☐ | Cornbread | `cornbread` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten · caution:high_sugar |
-- 
-- 
-- 
+- | ☐ | **Cornbread** | `cornbread` | sweet | neutral | V +1 · P 0 · K +1 | allergen:gluten | —
+- allergens:
+  - gluten   # if wheat flour is included
+
+balancedBy:
+  - butter
+
+tags:
+  - bread
+
+notes:
+  - Refers to a traditional cornbread.
+  - Gluten-free versions made solely with cornmeal should omit the gluten allergen.
+  - Sweetened or honey cornbread may warrant `caution:high_sugar`.
+- The most important refinement is Vata +1, reflecting cornbread's characteristic dry, crumbly texture. I also recommend making both the gluten allergen and high_sugar caution conditional, as traditional recipes vary considerably.
 
 | ☐ | English muffin | `englishMuffin` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten |
+- | ☐ | **English muffin** | `englishMuffin` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - butter
+
+tags:
+  - bread
+
+notes:
+  - Refers to a plain English muffin.
+  - Toasting makes it slightly drier and may shift it toward Vata +1.
+- The only refinement I'd suggest is explicitly classifying English muffins as Light + Dry, reflecting their airy, griddled texture and common use as a toasted bread while keeping them distinct from both soft rolls and crisp toast.
+
 | ☐ | Crumpet | `crumpet` | sweet | neutral | V −1 · P 0 · K +1 | allergen:gluten |
+- | ☐ | **Crumpet** | `crumpet` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - butter
+
+tags:
+  - bread
+
+notes:
+  - Refers to a plain crumpet.
+  - Well-toasted crumpets become drier and may shift toward Vata +1.
+- The only substantive refinement I'd recommend is V0. Although a fresh crumpet is soft and moist, its typical preparation and consumption (split, toasted, often with a crisp exterior) make it less consistently Vata-pacifying than fresh flatbreads or enriched breads.
+
 | ☐ | Breadstick / grissini | `breadstick` | sweet | neutral | V +1 · P 0 · K 0 | allergen:gluten |
+- | ☐ | **Breadstick / grissini** | `breadstick` | sweet | neutral | V +1 · P 0 · K +1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - oliveOil
+
+tags:
+  - bread
+  - cracker
+
+notes:
+  - Refers to plain Italian grissini.
+  - Seeded or cheese-coated versions are more Kapha-promoting.
+- The only refinement I'd recommend is Kapha +1, because despite their dryness, breadsticks are still refined wheat breads and fit well with the rest of your grain products as mildly Kapha-promoting.
+
 | ☐ | Pumpernickel | `pumpernickel` | sweet, sour | neutral | V 0 · P +1 · K +1 | allergen:gluten |
+- | ☐ | **Pumpernickel** | `pumpernickel` | sweet, sour | neutral | V −1 · P +1 · K +1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - cucumber
+
+tags:
+  - bread
+  - sourdough
+  - whole_grain
+
+notes:
+  - Refers to traditional pumpernickel made with rye and sourdough.
+  - Lighter commercial rye breads may be somewhat drier and closer to V0.
+
 | ☐ | Flatbread (generic) | `flatbread` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten |
+- | ☐ | **Flatbread (generic)** | `flatbread` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten | 
+- allergens:
+  - gluten
+
+tags:
+  - bread
+
+notes:
+  - Generic placeholder entry.
+  - Use specific entries (chapati, naan, pita, lavash, tortilla, thepla, etc.) whenever possible for more accurate energetics.
+- 
+
 | ☐ | Corn tortilla | `cornTortilla` | sweet | neutral | V 0 · P 0 · K +1 | (gluten-free) |
+- | ☐ | **Corn tortilla** | `cornTortilla` | sweet | neutral | V +1 · P 0 · K +1 | (gluten-free) |
+- balancedBy:
+  - avocado
+
+tags:
+  - flatbread
+  - gluten_free
+
+notes:
+  - Refers to a traditional corn tortilla.
+  - Fresh tortillas are less drying than packaged tortillas but remain lighter than wheat flatbreads.
+- The main refinement I'd recommend is Vata +1. Traditional corn tortillas are thinner, drier, and less oily than most wheat flatbreads, making them mildly Vata-aggravating while remaining neutral for Pitta and mildly Kapha-promoting.
+
 
 ---
 

@@ -71,7 +71,7 @@ export const MODERN_DRAFT_INGREDIENTS_7 = {
     id: 'rawMango', name: 'Raw mango',
     aliases: ['raw mango', 'green mango', 'kaccha aam', 'unripe mango'],
     category: 'fruit', rasa: ['sour', 'astringent'], virya: 'heating', vipaka: 'sour',
-    guna: ['light', 'dry'], doshaEffect: { vata: -1, pitta: 1, kapha: 0 },
+    guna: ['light', 'dry'], doshaEffect: { vata: -1, pitta: 1, kapha: -1 },
     whyFavor: 'Sharp and sour — kindles a dull appetite and grounds Vata; the base of cooling summer drinks once sweetened.',
     whyAvoid: 'Unripe and sour — heating and Pitta-aggravating on its own.',
     source: { ...M, note: 'Non-classical (ripe amra is classical, this is the unripe fruit). Derived: sour-astringent, light and heating — Pitta↑, Vata↓; astringency keeps Kapha neutral.' },

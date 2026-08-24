@@ -158,6 +158,12 @@ const REVIEWED_SIGNED_OFF = [
   'relish', 'tartarSauce', 'honeyMustard',
   'shakshuka', 'pokeBowl', 'banhMi', 'katsuCurry', 'buddhaBowl', 'frenchToast',
   'scone', 'minestrone',
+  // Modern batch 6 — 2026-08-24 (docs/diet-review-modern-batch-6.md). 16 bread
+  // depth entries (Indian flatbreads + Western loaves), human-reviewed &
+  // corrected. Property-derived (source.text 'modern'), all confidence 'medium'.
+  'roti', 'tandooriRoti', 'bhatura', 'thepla', 'missiRoti', 'pav',
+  'ciabatta', 'focaccia', 'brioche', 'cornbread', 'englishMuffin', 'crumpet',
+  'breadstick', 'pumpernickel', 'flatbread', 'cornTortilla',
   // Derived recipes — 2026-08-24 (recipes-data.js). Composite dishes whose
   // dosha/rasa/vīrya/guṇa/allergens/tags are COMPUTED from reviewed ingredients
   // + a cooking method (lib/deriveRecipe.js), never hand-rated. Review is
