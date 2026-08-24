@@ -11,6 +11,23 @@ _All rows are `reviewStatus: 'draft'` — invisible to the app until fact-checke
 | ✔ | Food | id | rasa | vīrya | doshaEffect | flags |
 |---|------|----|------|-------|-------------|-------|
 | ☐ | Farro | `farro` | sweet | neutral | V 0 · P 0 · K +1 | allergen:gluten |
+
+- | ☐ | **Farro** | sweet | neutral | V −1 · P 0 · K +1 | allergen:gluten |
+- allergens:
+  - gluten
+
+balancedBy:
+  - oliveOil
+
+tags:
+  - grain
+  - whole_grain
+
+notes:
+  - Refers to cooked farro.
+  - Applies broadly whether the product is emmer, einkorn, or spelt sold as farro.
+
+- 
 | ☐ | Cornstarch | `cornstarch` | sweet | cooling | V 0 · P 0 · K +1 | — |
 | ☐ | Breadcrumbs / panko | `breadcrumbs` | sweet | neutral | V +1 · P 0 · K +1 | allergen:gluten · caution:processed |
 | ☐ | Rice flour | `riceFlour` | sweet | cooling | V 0 · P 0 · K +1 | — |

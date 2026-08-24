@@ -1932,7 +1932,8 @@
     "card": {
       "seeMore": "आज के अन्य सुझाव देखें",
       "seeMorePlus": "Plus के साथ और देखें"
-    }
+    },
+    "balances": "{{dosha}} को संतुलित करता है"
   },
   "mealCheck": {
     "title": "भोजन जाँच",

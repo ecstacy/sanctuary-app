@@ -1932,7 +1932,8 @@
     "card": {
       "seeMore": "See today's other ideas",
       "seeMorePlus": "See more with Plus"
-    }
+    },
+    "balances": "Balances {{dosha}}"
   },
   "mealCheck": {
     "title": "Meal Check",
