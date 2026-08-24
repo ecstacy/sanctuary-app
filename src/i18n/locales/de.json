@@ -1932,7 +1932,8 @@
     "card": {
       "seeMore": "Weitere Ideen für heute",
       "seeMorePlus": "Mehr sehen mit Plus"
-    }
+    },
+    "balances": "Gleicht {{dosha}} aus"
   },
   "mealCheck": {
     "title": "Mahlzeit-Check",

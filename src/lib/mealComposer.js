@@ -245,8 +245,14 @@ export function composeMeals(ctx = {}) {
       name:       c.tpl.name,
       prep:       c.tpl.prep || null,
       slots:      c.tpl.slots,
-      core:       c.core.map((i) => ({ id: i.id, name: i.name })),
-      optional:   c.optional.map((i) => ({ id: i.id, name: i.name })),
+      core:       c.core.map((i) => ({ id: i.id, name: i.name, category: i.category })),
+      optional:   c.optional.map((i) => ({ id: i.id, name: i.name, category: i.category })),
+      /** Dominant ingredient category — the primary key for a dish's visual. */
+      category:   c.core[0]?.category || null,
+      /** Optional real photo/illustration. Null today; the hook for the future
+       *  themed-image pipeline — when a template carries one, the card shows it
+       *  in place of the generated tile with no other change. */
+      image:      c.tpl.image || null,
       kind:       c.kind,
       suitability: net.suitability,
       /**

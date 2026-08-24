@@ -27,18 +27,12 @@ import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { useDietPrefs } from '../hooks/useDietPrefs'
 import { resolveDietTarget, shouldExplainTarget } from '../lib/dietTarget'
 import { composeMeals } from '../lib/mealComposer'
-import { SUITABILITY } from '../lib/doshaSemantics'
 import { DIET_DISCLAIMER } from '../lib/dietSafety'
+import MealIdeaCard from '../components/MealIdeaCard'
 import PaywallSheet from '../components/PaywallSheet'
 import MedicalDisclaimer from '../components/MedicalDisclaimer'
 import useScrollDepth from '../hooks/useScrollDepth'
 import { track, EVENTS } from '../lib/track'
-
-const SUITABILITY_STYLE = {
-  [SUITABILITY.BALANCING]: { icon: 'trending_down', tint: 'text-pine' },
-  [SUITABILITY.NEUTRAL]:   { icon: 'remove',        tint: 'text-on-surface-variant' },
-  [SUITABILITY.CAUTION]:   { icon: 'trending_up',   tint: 'text-clay' },
-}
 
 function EmptyState({ icon, title, body, ctaLabel, onCta }) {
   return (
@@ -168,78 +162,20 @@ export default function MealGuidancePage() {
         )}
 
         {/* ── Ideas ─────────────────────────────────────────────────────── */}
-        <div className="flex flex-col gap-3 mt-5">
-          {result.ideas.map((idea) => {
-            const style = SUITABILITY_STYLE[idea.suitability]
-            return (
-              <button
-                key={idea.id}
-                onClick={() => {
-                  track(EVENTS.MEAL_IDEA_TAPPED, { meal_id: idea.id, target_dosha: target.dosha })
-                  navigate(`/ingredient/${idea.core[0].id}`)
-                }}
-                className="bg-surface-container-low rounded-2xl p-4 text-left active:scale-[0.99] transition-all"
-              >
-                <div className="flex items-center gap-2 flex-wrap">
-                  <p className="font-body text-base font-semibold text-on-surface">{idea.name}</p>
-                  {/* A component, not a full meal — said rather than implied. */}
-                  {idea.kind === 'preparation' && (
-                    <span className="px-2 py-0.5 rounded-full bg-surface-container-high font-label text-[8px] uppercase tracking-wide text-on-surface-variant">
-                      {t('meals.kind.preparation')}
-                    </span>
-                  )}
-                </div>
-
-                {/* Verdict shown WITH its inputs — a derived conclusion that
-                    hides its derivation looks exactly like an asserted one. */}
-                {target.dosha && idea.contributions.length > 0 && (
-                  <p className={`font-body text-xs mt-1.5 flex items-start gap-1.5 ${style.tint}`}>
-                    <span aria-hidden="true" className="material-symbols-outlined text-sm flex-shrink-0">{style.icon}</span>
-                    <span>
-                      {t(`meals.verdict.${idea.suitability}`, { dosha: t(`diet.dosha.${target.dosha}`) })}
-                      {' — '}
-                      {idea.contributions.map((c) => c.name).join(', ')}
-                    </span>
-                  </p>
-                )}
-
-                <p className="font-body text-xs text-on-surface-variant mt-2">
-                  {idea.core.map((c) => c.name).join(' · ')}
-                  {idea.optional.length > 0 && (
-                    <span className="text-on-surface-variant/60">
-                      {' + '}{idea.optional.map((o) => o.name).join(', ')}
-                    </span>
-                  )}
-                </p>
-
-                {idea.prep && (
-                  <p className="font-body text-xs text-on-surface-variant/70 mt-2 leading-relaxed">{idea.prep}</p>
-                )}
-
-                {/* Traditional companions. Never presented as required — the
-                    rule that every spice stays optional is the whole reason
-                    this field exists rather than a core-ingredient exception. */}
-                {idea.balancedBy.length > 0 && (
-                  <p className="font-body text-xs text-on-surface-variant/70 mt-2 leading-relaxed">
-                    {t('meals.balancedBy', { list: idea.balancedBy.map((b) => b.name).join(', ') })}
-                  </p>
-                )}
-
-                <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
-                  {idea.isDerived && (
-                    <span className="px-2 py-0.5 rounded-full bg-surface-container-high font-label text-[8px] uppercase tracking-wide text-on-surface-variant">
-                      {t('diet.confidence.medium')}
-                    </span>
-                  )}
-                  {idea.citations.map((v) => (
-                    <span key={v} className="px-2 py-0.5 rounded-full bg-primary-container font-label text-[8px] uppercase tracking-wide text-on-primary-container">
-                      {v}
-                    </span>
-                  ))}
-                </div>
-              </button>
-            )
-          })}
+        <div className="flex flex-col gap-4 mt-5">
+          {result.ideas.map((idea) => (
+            <MealIdeaCard
+              key={idea.id}
+              idea={idea}
+              targetDosha={target.dosha}
+              doshaLabel={target.dosha ? t(`diet.dosha.${target.dosha}`) : ''}
+              t={t}
+              onTap={() => {
+                track(EVENTS.MEAL_IDEA_TAPPED, { meal_id: idea.id, target_dosha: target.dosha })
+                navigate(`/ingredient/${idea.core[0].id}`)
+              }}
+            />
+          ))}
         </div>
 
         {/* Ideas, not recipes — said plainly rather than left to be inferred. */}
