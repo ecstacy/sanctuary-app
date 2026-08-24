@@ -11,7 +11,7 @@ import { describe, it, expect, afterEach } from 'vitest'
 import {
   ALLERGENS, DIET_PATTERNS, PATTERN_KEYS, PATTERNS_WITH_RULES, ALLERGEN_KEYS,
   detectSeekHelp, needsSofterHandling, messageForTriggers,
-  exclusionFor, filterSafe, allergensOf, unknownSafetyKeys,
+  exclusionFor, filterSafe, allergensOf, unknownSafetyKeys, animalKind,
   DISORDERED_EATING_MESSAGE, SEEK_HELP_MESSAGE,
 } from './dietSafety'
 import { INGREDIENTS, ALL_INGREDIENTS } from '../data/ayurveda/ingredients'
@@ -246,6 +246,44 @@ describe('allergens are an absolute filter, not a ranking penalty', () => {
   it('vegan excludes dairy; vegetarian does not', () => {
     expect(exclusionFor(ghee, { patterns: ['vegan'] }).excluded).toBe(true)
     expect(exclusionFor(ghee, { patterns: ['vegetarian'] }).excluded).toBe(false)
+  })
+})
+
+describe('composite meat dishes (category other) are excluded like whole meat', () => {
+  // The gap this closes: a chicken curry is category 'other', so it slipped
+  // every animal-food filter. It now carries the MEAT dietTag.
+  const meatDish = INGREDIENTS.butterChicken
+
+  it('is excluded for vegetarian, vegan, eggetarian, pescatarian, halal and kosher', () => {
+    for (const pattern of ['vegetarian', 'vegan', 'eggetarian', 'pescatarian', 'halal', 'kosher']) {
+      expect(exclusionFor(meatDish, { patterns: [pattern] }).excluded, `${pattern}`).toBe(true)
+    }
+  })
+
+  it('every MEAT-tagged dish resolves to animalKind "meat"', () => {
+    const tagged = ALL_INGREDIENTS.filter((f) => (f.dietTags || []).includes('meat'))
+    expect(tagged.length).toBeGreaterThan(0)
+    for (const f of tagged) {
+      expect(animalKind(f), f.id).toBe('meat')
+      expect(exclusionFor(f, { patterns: ['vegetarian'] }).excluded, f.id).toBe(true)
+    }
+  })
+
+  it('leaves genuinely-variable dishes (veg versions standard) untagged and allowed', () => {
+    // biryani/tikkaMasala have common vegetarian forms — kept neutral so a
+    // vegetarian still sees them, per the reviewer's variant-tagging rule.
+    for (const id of ['biryani', 'tikkaMasala']) {
+      const f = INGREDIENTS[id]
+      expect((f.dietTags || []).includes('meat'), id).toBe(false)
+      expect(exclusionFor(f, { patterns: ['vegetarian'] }).excluded, id).toBe(false)
+    }
+  })
+
+  it('a fish/shellfish-allergen composite reads as seafood (veg out, pescatarian in)', () => {
+    const fishDish = { id: 'x', category: 'other', allergens: ['fish'], reviewStatus: 'reviewed' }
+    expect(animalKind(fishDish)).toBe('seafood')
+    expect(exclusionFor(fishDish, { patterns: ['vegetarian'] }).excluded).toBe(true)
+    expect(exclusionFor(fishDish, { patterns: ['pescatarian'] }).excluded).toBe(false)
   })
 })
 

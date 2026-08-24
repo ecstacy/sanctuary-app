@@ -83,6 +83,11 @@ export const DIET_TAGS = {
   ANIMAL_DERIVED: 'animal_derived',  // from an animal but not meat/dairy (honey)
   ANIMAL_RENNET:  'animal_rennet',   // slaughter-derived enzyme — not vegetarian
   GELATIN:        'gelatin',         // slaughter-derived (bones/skin) — not vegetarian
+  MEAT:           'meat',            // red meat OR poultry — the flesh marker a
+                                     // COMPOSITE dish carries so veg/pescatarian
+                                     // filters catch it (a whole animal food is
+                                     // caught by its 'animal' category instead).
+                                     // pork/beef are ADDITIONAL finer tags.
   PORK:           'pork',            // halal, kosher, no_pork
   BEEF:           'beef',            // no_beef (Hindu observance)
   ALCOHOL:        'alcohol',         // halal
@@ -145,14 +150,27 @@ export function tagsOf(ingredient) {
 
 /**
  * Which kind of animal food this is, for the eating-style patterns
- * (eggetarian, pescatarian). Derived from the allergen it carries so the data
- * needs no extra field: egg → 'egg'; fish/shellfish → 'seafood'; anything else
- * in the animal category → 'meat' (meat & poultry). null for non-animal foods.
- * If a future beef/pork food needs finer handling, it also carries a dietTag.
+ * (eggetarian, pescatarian, vegetarian, vegan). 'egg' | 'seafood' | 'meat' |
+ * null.
+ *
+ * Whole animal foods (category 'animal') derive it from the allergen they
+ * carry: egg → 'egg'; fish/shellfish → 'seafood'; anything else → 'meat'.
+ *
+ * COMPOSITE dishes (category 'other' — a chicken curry, a fish stew) have no
+ * 'animal' category to key off, so they slipped through every animal-food
+ * filter. They now declare flesh explicitly: the MEAT dietTag → 'meat', and a
+ * fish/shellfish allergen → 'seafood' (a reliable proxy; only seafood carries
+ * those). Egg is deliberately NOT derived for composites — an egg-containing
+ * cake is not an "animal food" these patterns exclude.
  */
 export function animalKind(ingredient) {
-  if (ingredient?.category !== 'animal') return null
   const alg = allergensOf(ingredient)
+  const tags = tagsOf(ingredient)
+  if (tags.includes(DIET_TAGS.MEAT)) return 'meat'
+  if (ingredient?.category !== 'animal') {
+    if (alg.includes('fish') || alg.includes('shellfish')) return 'seafood'
+    return null
+  }
   if (alg.includes('egg')) return 'egg'
   if (alg.includes('fish') || alg.includes('shellfish')) return 'seafood'
   return 'meat'
@@ -322,12 +340,15 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
 
   const add = (key) => hits.push({ reason: 'pattern', key })
 
-  if (cat === 'animal' && (veg || vegan)) add(vegan ? 'vegan' : 'vegetarian')
+  // Any animal food is out for veg/vegan. Whole animal foods are caught by
+  // their 'animal' category; composite dishes (category 'other') by their kind
+  // — 'meat' (MEAT tag) or 'seafood' (fish/shellfish allergen).
+  if ((veg || vegan) && (cat === 'animal' || kind !== null)) add(vegan ? 'vegan' : 'vegetarian')
   // Eating styles that admit SOME animal foods. Eggetarian (lacto-ovo) keeps
   // eggs and excludes the rest; pescatarian keeps fish/seafood (and eggs) and
   // excludes meat & poultry. Both are looser than vegetarian, so they only
   // matter when vegetarian/vegan is NOT also set.
-  if (egget && cat === 'animal' && kind !== 'egg') add('eggetarian')
+  if (egget && (kind === 'meat' || kind === 'seafood' || (cat === 'animal' && kind !== 'egg'))) add('eggetarian')
   if (pesc && kind === 'meat') add('pescatarian')
   if (cat === 'dairy' && vegan) add('vegan')
   // Animal-derived but neither meat nor dairy — honey, which no category rule
@@ -349,8 +370,10 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
   // meat, exclude rather than imply approval — silence would read as "this is
   // fine for you", and under-restriction is the harmful direction. The UI
   // wording must stay "we can't confirm", never "this is halal".
-  if (halal && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.ALCOHOL) || cat === 'animal')) add('halal')
-  if (kosher && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.SHELLFISH) || cat === 'animal')) add('kosher')
+  // `kind === 'meat'` extends these to composite meat dishes (fish/egg stay
+  // permitted, as they are under both codes).
+  if (halal && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.ALCOHOL) || cat === 'animal' || kind === 'meat')) add('halal')
+  if (kosher && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.SHELLFISH) || cat === 'animal' || kind === 'meat')) add('kosher')
 
   // Single-food observances, keyed on an explicit tag so they exclude exactly
   // the one food and nothing else. (No beef/pork foods exist in the dataset
