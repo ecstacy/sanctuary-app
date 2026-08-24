@@ -121,7 +121,37 @@ Each image gets ticked before it goes live, on three axes:
 
 Keep an approved-set list (as the diet batches pin reviewed ids) so a half-reviewed batch can't leak to production.
 
-## 9. Open questions
+## 9. Batch-A prompt kit (ChatGPT / GPT-image)
+
+Workflow for consistency in ChatGPT:
+1. **Lock the key-frame first.** Send the style preamble + the `kitchari` prompt. Iterate until the vessel, wash, brushwork, and lighting are right. That image is the reference for the whole set.
+2. **Stay in one conversation** and, for each following dish, attach the approved `kitchari` image and say _"same exact style, vessel, lighting and background treatment — now paint this dish."_ GPT-image carries style far better from a reference image than from words alone.
+3. **Save each as the template id** — `kitchari.png`, `dalRiceGreens.png`, … (PNG is fine; the manifest accepts it). Drop into `public/meals/`, run `npm run meals:manifest` (or just start the dev server), and the cards light up.
+
+**Style preamble (paste once, pin it):**
+> A warm, hand-painted gouache illustration of a single dish, seen from directly above. The food sits in one matte warm-grey stoneware bowl, centred, on a plain painted background wash in the colour I give, with subtle paper texture. Soft diffuse top light, a faint soft shadow under the bowl. Muted earthy palette, natural but slightly desaturated food colours, gentle visible brushwork, no hard outlines. Nourishing, calm, home-cooked mood. No cutlery, no hands, no text, no logo, no props. Square composition, subject centred with headroom. Show only the ingredients I name.
+
+**The 12 dishes** (background hex matches each card's fallback tile so image and tile stay one family):
+
+| # | Save as | Dish + ingredients to show | Background wash |
+|---|---|---|---|
+| 1 ⭐ | `kitchari.png` | Mung dal and basmati rice cooked soft together into a loose porridge, faint sheen of ghee | clay `#f1ddcf → #e3bfa4` |
+| 2 | `dalRiceGreens.png` | Soft yellow mung dal, white basmati rice, and a small side of sautéed green spinach | clay `#f1ddcf → #e3bfa4` |
+| 3 | `chickpeaCurry.png` | Spiced whole chickpeas in a light golden sauce beside white basmati rice | amber `#f4ead2 → #e7cfa0` |
+| 4 | `dalTadkaRice.png` | Yellow toor dal with a ghee-tempered top (cumin, tomato, onion) beside basmati rice | clay `#f1ddcf → #e3bfa4` |
+| 5 | `rajmaChawal.png` | Red kidney beans in a tomato-onion gravy beside white basmati rice | amber `#f4ead2 → #e7cfa0` |
+| 6 | `vegetablePulao.png` | Loose basmati rice with carrot, peas and green beans, a few whole spices and cashews | amber `#f4ead2 → #e7cfa0` |
+| 7 | `mixedVegSoup.png` | A warming soup of carrot, green beans and spinach with a little barley | clay `#f1ddcf → #e3bfa4` |
+| 8 | `lentilSoup.png` | A hearty red-lentil soup with soft carrot | clay `#f1ddcf → #e3bfa4` |
+| 9 | `chickpeaSaladBowl.png` | Cooked chickpeas with chopped cucumber and raw tomato, mint, a lemon-oil sheen | vegetable `#e4ede2 → #c3dcc4` |
+| 10 | `quinoaSalad.png` | Cooled quinoa tossed with cucumber, tomato, mint and a few chickpeas | vegetable `#e4ede2 → #c3dcc4` |
+| 11 | `capreseSalad.png` | Sliced tomato and fresh white mozzarella with basil leaves and a drizzle of olive oil | vegetable `#e4ede2 → #c3dcc4` |
+| 12 | `grainBowlHummus.png` | Quinoa topped with roasted sweet potato and vegetables, a generous spoon of hummus | amber `#f4ead2 → #e7cfa0` |
+
+Per-dish message format:
+> [attach approved kitchari] Same exact style, vessel, lighting and background treatment. Paint this dish: **{dish + ingredients from the table}**. Background wash in these tones: **{hex}**.
+
+## 10. Open questions
 
 - **Style key-frame dish** — which hero to lock the style on? Suggest `kitchari` (the app's archetypal dish, simple to render well).
 - **Tool** — which image model/service, and budget for ~47 images + iterations?
