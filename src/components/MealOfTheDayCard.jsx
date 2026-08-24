@@ -18,7 +18,7 @@
 //  a tease. Showing one real answer and stopping is a fair trade.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
@@ -28,14 +28,9 @@ import { useDietPrefs } from '../hooks/useDietPrefs'
 import { resolveDietTarget } from '../lib/dietTarget'
 import { composeMeals } from '../lib/mealComposer'
 import { SUITABILITY } from '../lib/doshaSemantics'
+import { mealVisual } from '../lib/mealVisual'
 import useImpression from '../hooks/useImpression'
 import { track, EVENTS } from '../lib/track'
-
-const STYLE = {
-  [SUITABILITY.BALANCING]: { icon: 'trending_down', tint: 'text-pine' },
-  [SUITABILITY.NEUTRAL]:   { icon: 'remove',        tint: 'text-on-surface-variant' },
-  [SUITABILITY.CAUTION]:   { icon: 'trending_up',   tint: 'text-clay' },
-}
 
 export default function MealOfTheDayCard() {
   const navigate = useNavigate()
@@ -65,10 +60,13 @@ export default function MealOfTheDayCard() {
     contentType: 'meal',
     contentId:   idea?.id || 'none',
   })
+  const [imgFailed, setImgFailed] = useState(false)
 
   if (!idea) return null
 
-  const style = STYLE[idea.suitability]
+  const vis = mealVisual(idea)
+  const balances = target.dosha && idea.suitability === SUITABILITY.BALANCING
+  const showImage = idea.image && !imgFailed
 
   return (
     <button
@@ -82,35 +80,62 @@ export default function MealOfTheDayCard() {
         })
         navigate('/meals')
       }}
-      className="w-full text-left bg-surface-container-low rounded-2xl p-5 stagger-4 active:scale-[0.98] transition-all"
+      className="group w-full text-left rounded-3xl overflow-hidden bg-surface-container-low border border-outline-variant/40 shadow-sm stagger-4 active:scale-[0.99] transition-transform"
     >
-      <div className="flex items-center gap-2">
-        <span aria-hidden="true" className="material-symbols-outlined text-primary text-lg">restaurant_menu</span>
-        <span className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest">
-          {t(`meals.heading.${result.slot}`)}
+      {/* ── Visual header — the "photo", same language as /meals. ────────── */}
+      <div className="relative h-28 w-full overflow-hidden">
+        {showImage ? (
+          <img
+            src={idea.image}
+            alt=""
+            loading="lazy"
+            onError={() => setImgFailed(true)}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className="h-full w-full flex items-center justify-center"
+            style={{ backgroundImage: `linear-gradient(135deg, ${vis.from} 0%, ${vis.to} 100%)` }}
+          >
+            <div className="absolute inset-0" style={{ background: 'radial-gradient(120% 100% at 50% -20%, rgba(255,255,255,0.45), transparent 60%)' }} />
+            <span className="material-symbols-outlined relative text-[46px]" style={{ color: vis.ink, opacity: 0.72 }}>
+              {vis.icon}
+            </span>
+          </div>
+        )}
+
+        {/* Slot label — this is the Home nudge, so it names the occasion. */}
+        <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-surface-container-low/90 backdrop-blur-sm pl-1.5 pr-2.5 py-1 shadow-sm">
+          <span aria-hidden="true" className="material-symbols-outlined text-primary text-[15px]">restaurant_menu</span>
+          <span className="font-label text-[10px] uppercase tracking-wide text-on-surface-variant">
+            {t(`meals.heading.${result.slot}`)}
+          </span>
         </span>
+
+        {balances && (
+          <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-surface-container-low/90 backdrop-blur-sm pl-1.5 pr-2.5 py-1 shadow-sm">
+            <span aria-hidden="true" className="material-symbols-outlined text-pine text-[15px]">spa</span>
+            <span className="font-label text-[10px] uppercase tracking-wide text-pine">
+              {t('meals.balances', { dosha: t(`diet.dosha.${target.dosha}`) })}
+            </span>
+          </span>
+        )}
       </div>
 
-      <p className="font-body text-base font-semibold text-on-surface mt-2">{idea.name}</p>
-
-      {/* The verdict shown with its inputs, exactly as on /meals — a derived
-          conclusion that hides its derivation reads as an asserted one. */}
-      {target.dosha && idea.contributions.length > 0 && (
-        <p className={`font-body text-xs mt-1.5 flex items-start gap-1.5 ${style.tint}`}>
-          <span aria-hidden="true" className="material-symbols-outlined text-sm flex-shrink-0">{style.icon}</span>
-          <span>
-            {t(`meals.verdict.${idea.suitability}`, { dosha: t(`diet.dosha.${target.dosha}`) })}
-            {' — '}
-            {idea.contributions.map((c) => c.name).join(', ')}
-          </span>
-        </p>
-      )}
-
-      <p className={`font-body text-xs mt-2.5 flex items-center gap-1 ${isPremium ? 'text-on-surface-variant/70' : 'text-plus font-medium'}`}>
-        {!isPremium && <span aria-hidden="true" className="material-symbols-outlined text-sm">auto_awesome</span>}
-        {isPremium ? t('meals.card.seeMore') : t('meals.card.seeMorePlus')}
-        <span aria-hidden="true" className="material-symbols-outlined text-sm">chevron_right</span>
-      </p>
+      {/* ── Body — name + the see-more (or Plus) affordance. ──────────────── */}
+      <div className="p-4 flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <p className="font-body text-[17px] font-semibold text-on-surface leading-tight">{idea.name}</p>
+          <p className={`font-body text-xs mt-1 flex items-center gap-1 ${isPremium ? 'text-on-surface-variant/70' : 'text-plus font-medium'}`}>
+            {!isPremium && <span aria-hidden="true" className="material-symbols-outlined text-sm">auto_awesome</span>}
+            {isPremium ? t('meals.card.seeMore') : t('meals.card.seeMorePlus')}
+          </p>
+        </div>
+        <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/40 text-xl flex-shrink-0 group-active:translate-x-0.5 transition-transform">
+          chevron_right
+        </span>
+      </div>
     </button>
   )
 }
