@@ -61,6 +61,20 @@ describe('parseMeal', () => {
     expect(parseMeal('scrambled eggs').matched.map((m) => m.id)).toContain('egg')
   })
 
+  it('captures EVERY food in a phrase, not just the first', () => {
+    // "paneer pulao with tomato chutney" used to read as only paneer + chutney,
+    // silently dropping pulao and tomato — the whole plate must count.
+    const ids = parseMeal('paneer pulao with tomato chutney').matched.map((m) => m.id)
+    expect(ids).toContain('paneer')
+    expect(ids).toContain('pulao')
+    expect(ids).toContain('chutney')
+    expect(ids.some((id) => /tomato/i.test(id))).toBe(true)
+    // …but a modifier that only name-CONTAINS a food is not mistaken for one.
+    expect(parseMeal('black coffee').matched.map((m) => m.id)).toEqual(['coffee'])
+    // …and a genuine multi-word food stays one food, not split into its words.
+    expect(parseMeal('corn tortilla').matched.map((m) => m.id)).toEqual(['cornTortilla'])
+  })
+
   it('surfaces unknown foods instead of guessing them', () => {
     const { matched, unknown } = parseMeal('quinoa and a unicornberry')
     expect(matched.map((m) => m.id)).toContain('quinoa')

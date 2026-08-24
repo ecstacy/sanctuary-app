@@ -172,6 +172,18 @@ function lookup(token) {
 
 const brief = (r) => ({ id: r.id, name: r.name })
 
+// Foods a single leftover word names EXACTLY (name or alias equals the word).
+// Used to recover the second/third food in a phrase — "paneer pulao" names two
+// foods, "tomato chutney" names two. Only exact matches count, so a modifier
+// like "black"/"fresh"/"scrambled" (which merely name-CONTAINS a food) is not
+// mistaken for a food request.
+function exactFoodMatches(word) {
+  const w = word.trim().toLowerCase()
+  if (w.length < 3) return []
+  const { results } = searchIngredients(w)
+  return results.filter((r) => isExact(r, w))
+}
+
 // For an OPEN composite ingredient (`composite: 'open'`), return the metadata the
 // parser attaches to its matched item: `open: true` plus its suggested add-in
 // components resolved to {id,name} (reviewed rows only). A non-open ingredient
@@ -243,6 +255,7 @@ export function parseMeal(text) {
       unknown.push({ token: baseText, suggestions: nearest(baseText) })
     } else if (results.length === 1) {
       const r = results[0]
+      const mods = modifiersOf(baseText, r)
       if (!seen.has(r.id)) {
         seen.add(r.id)
         const qty = { count, size, unit }
@@ -251,7 +264,7 @@ export function parseMeal(text) {
           id: r.id,
           name: r.name,
           qty,
-          modifiers: modifiersOf(baseText, r),
+          modifiers: mods,
           portionWeight: portionWeightOf(qty),
           // An OPEN composite (smoothie, salad…) names a format, not a recipe, so
           // its baked-in verdict is only a fallback. Flag it and resolve its
@@ -259,6 +272,29 @@ export function parseMeal(text) {
           // rather than trust a generic outcome. See ingredients `composite:'open'`.
           ...openCompositeMeta(r),
         })
+      }
+      // A phrase can name more than one food ("paneer pulao", "tomato chutney").
+      // Recover any additional EXACT foods hiding in the leftover words so the
+      // reading reflects the whole plate, not just its first item.
+      for (const w of mods) {
+        const ex = exactFoodMatches(w)
+        if (!ex.length) continue
+        if (ex.length === 1) {
+          const e = ex[0]
+          if (seen.has(e.id)) continue
+          seen.add(e.id)
+          matched.push({
+            token: w,
+            id: e.id,
+            name: e.name,
+            qty: { count: 1, size: null, unit: null },
+            modifiers: [],
+            portionWeight: portionWeightOf({ count: 1 }),
+            ...openCompositeMeta(e),
+          })
+        } else if (!ambiguous.some((a) => a.token === w)) {
+          ambiguous.push({ token: w, options: ex.slice(0, 4).map(brief) })
+        }
       }
     } else {
       ambiguous.push({ token: baseText, options: results.slice(0, 4).map(brief) })
