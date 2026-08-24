@@ -30,11 +30,21 @@ export const RECIPES = {
   },
   curdRice: {
     id: 'curdRice', name: 'Curd rice', aliases: ['thayir sadam', 'yoghurt rice', 'dahi rice'],
-    ingredientIds: ['basmatiRice', 'yoghurt', 'mustardSeed', 'curryLeaf'], method: 'tempered', reviewStatus: 'reviewed',
+    ingredientIds: ['basmatiRice', 'yoghurt', 'mustardSeed', 'curryLeaf'], method: 'tempered',
+    // Reviewer override: dahi is classically heating, but curd rice — cooled,
+    // soothing, eaten to pacify heat — is culinarily a cooling dish. Pinned
+    // cooling / Pitta-neutral / Kapha-building to match its real identity.
+    overrideVirya: 'cooling', overrideDosha: { pitta: 0, kapha: 1 },
+    reviewStatus: 'reviewed',
   },
   coconutRice: {
     id: 'coconutRice', name: 'Coconut rice', aliases: ['thengai sadam'],
-    ingredientIds: ['basmatiRice', 'coconut', 'mustardSeed', 'curryLeaf'], method: 'tempered', reviewStatus: 'reviewed',
+    ingredientIds: ['basmatiRice', 'coconut', 'mustardSeed', 'curryLeaf'], method: 'tempered',
+    // Reviewer override: coconut is the dominant note — a cooling, building
+    // dish; the light tadka doesn't reverse that. (The equal-weight vote lets a
+    // pinch of mustard/curry leaf cancel the coconut, reading it neutral/K−1.)
+    overrideVirya: 'cooling', overrideDosha: { kapha: 1 },
+    reviewStatus: 'reviewed',
   },
   tomatoRice: {
     id: 'tomatoRice', name: 'Tomato rice', aliases: ['thakkali sadam'],

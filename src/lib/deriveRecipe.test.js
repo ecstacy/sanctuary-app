@@ -45,6 +45,17 @@ describe('deriveRecipe', () => {
     expect(deriveRecipe({ id: 'f', name: 'F', ingredientIds: ['rice', 'chilli'], method: 'grilled' }, resolve).virya).toBe('heating')
   })
 
+  it('lets a reviewer override virya/dosha where classical rules misread a dish', () => {
+    // Curd-rice case: constituents would vote heating, but the reviewer pins it.
+    const d = deriveRecipe(
+      { id: 'z', name: 'Z', ingredientIds: ['rice', 'chilli'], method: 'sauteed', overrideVirya: 'cooling', overrideDosha: { kapha: 1 } },
+      resolve,
+    )
+    expect(d.virya).toBe('cooling')
+    expect(d.doshaEffect.kapha).toBe(1)
+    expect(d.source.note).toMatch(/override/i)
+  })
+
   it('returns null when nothing resolves (all ingredients missing/unreviewed)', () => {
     expect(deriveRecipe({ id: 'g', name: 'G', ingredientIds: ['nope', 'gone'], method: 'none' }, resolve)).toBeNull()
   })

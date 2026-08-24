@@ -70,7 +70,15 @@ export function deriveRecipe(recipe, resolve) {
 
   // Virya — a heating/cooling vote plus the method nudge.
   const heatVote = parts.reduce((a, p) => a + (VIRYA_HEAT[p.virya] || 0), 0) + method.heat
-  const virya = heatVote > 0 ? 'heating' : heatVote < 0 ? 'cooling' : 'neutral'
+  let virya = heatVote > 0 ? 'heating' : heatVote < 0 ? 'cooling' : 'neutral'
+
+  // Reviewer overrides — the rare case where classical ingredient rules misread
+  // a dish's real energetics (curd rice: dahi is classically heating, but the
+  // cooled preparation is a cooling dish). Sparing and explicit; the note says
+  // so. `overrideVirya` / `overrideDosha` (partial) win over the derivation.
+  let overridden = false
+  if (recipe.overrideVirya) { virya = recipe.overrideVirya; overridden = true }
+  if (recipe.overrideDosha) { Object.assign(doshaEffect, recipe.overrideDosha); overridden = true }
 
   // Safety — allergens and diet tags flow up from the parts. Meat is added when
   // any part is meat, so composite meat dishes are excluded automatically.
@@ -103,7 +111,8 @@ export function deriveRecipe(recipe, resolve) {
     ...(recipe.cautions ? { cautions: recipe.cautions } : {}),
     source: {
       text: 'derived',
-      note: `Derived recipe: ${names}${label}. Dosha, taste, vīrya and qualities computed from its constituents and cooking method — not hand-rated.`,
+      note: `Derived recipe: ${names}${label}. Dosha, taste, vīrya and qualities computed from its constituents and cooking method — not hand-rated.`
+        + (overridden ? ' Reviewer override applied where classical ingredient rules misread the dish.' : ''),
     },
     confidence: 'medium',
     reviewStatus: recipe.reviewStatus || 'draft',

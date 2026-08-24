@@ -446,12 +446,17 @@ describe('pattern exclusions rely on dietTags, which entries must actually set',
     expect(exclusionFor(INGREDIENTS.potato, { patterns: ['no_onion_garlic'] }).excluded).toBe(false)
   })
 
-  it('excludes rhizomes for Jain however they are processed', () => {
-    // Review batch 2 overturned an earlier fresh-vs-dried asymmetry: the rule
-    // follows the PLANT PART, not the processing. Drying and powdering a
-    // rhizome does not make it something else.
-    for (const id of ['gingerFresh', 'gingerDry', 'turmeric']) {
-      expect(exclusionFor(INGREDIENTS[id], { patterns: ['jain'] }).excluded, id).toBe(true)
+  it('excludes fresh rhizomes & root veg for Jain, but permits dried spice powders', () => {
+    // 2026-08-24 reviewer decision (common Jain practice — the app default):
+    // dried spice rhizomes used in pinches (turmeric powder, dry ginger) are
+    // widely accepted, so they no longer carry the `root` tag; fresh rhizomes
+    // (fresh ginger) and root vegetables stay excluded. This revises the
+    // batch-2 "follow the plant part regardless of processing" rule toward
+    // everyday practice — a stricter profile could re-tag them later.
+    expect(exclusionFor(INGREDIENTS.gingerFresh, { patterns: ['jain'] }).excluded, 'gingerFresh').toBe(true)
+    expect(exclusionFor(INGREDIENTS.potato, { patterns: ['jain'] }).excluded, 'potato').toBe(true)
+    for (const id of ['gingerDry', 'turmeric']) {
+      expect(exclusionFor(INGREDIENTS[id], { patterns: ['jain'] }).excluded, id).toBe(false)
     }
   })
 
