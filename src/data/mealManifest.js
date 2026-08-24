@@ -6,5 +6,16 @@
 // Drop a {mealId}.webp into public/meals/ and it registers on the next build.
 
 export const MEAL_IMAGE_FILES = {
-  "kitchari": "kitchari.webp"
+  "capresesalad": "capreseSalad.webp",
+  "chickpeacurry": "chickpeaCurry.webp",
+  "chickpeasaladbowl": "chickpeaSaladBowl.webp",
+  "dalricegreens": "dalRiceGreens.webp",
+  "daltadkarice": "dalTadkaRice.webp",
+  "grainbowlhummus": "grainBowlHummus.webp",
+  "kitchari": "kitchari.webp",
+  "lentilsoup": "lentilSoup.webp",
+  "mixedvegsoup": "mixedVegSoup.webp",
+  "quinoasalad": "quinoaSalad.webp",
+  "rajmachawal": "rajmaChawal.webp",
+  "vegetablepulao": "vegetablePulao.webp"
 }
