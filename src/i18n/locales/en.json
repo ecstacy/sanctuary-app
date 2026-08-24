@@ -675,10 +675,7 @@
       "change": "Change"
     },
     "familiarity": {
-      "stage0": "Still getting to know you — the more you check in, the sharper your reading gets.",
-      "stage1": "Your reading is taking shape.",
-      "stage2": "Your reading is settling in.",
-      "stage3": "Your reading is well-tuned to you."
+      "stage0": "Still getting to know you — the more you check in, the sharper your reading gets."
     }
   },
   "profile": {

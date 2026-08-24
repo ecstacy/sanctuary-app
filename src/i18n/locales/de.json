@@ -675,10 +675,7 @@
       "change": "Ändern"
     },
     "familiarity": {
-      "stage0": "Wir lernen dich noch kennen — je öfter du eincheckst, desto genauer wird deine Lesung.",
-      "stage1": "Deine Lesung nimmt Gestalt an.",
-      "stage2": "Deine Lesung festigt sich.",
-      "stage3": "Deine Lesung ist gut auf dich abgestimmt."
+      "stage0": "Wir lernen dich noch kennen — je öfter du eincheckst, desto genauer wird deine Lesung."
     }
   },
   "profile": {

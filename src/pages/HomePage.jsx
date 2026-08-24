@@ -810,10 +810,11 @@ export default function HomePage() {
           />
         )}
 
-        {/* "Getting to know you" — a qualitative read that deepens with
-            engagement (never a numeric % that would read as "barely knows me").
-            (#55) */}
-        {familiarity && (
+        {/* "Getting to know you" — shown ONLY at stage 0, where it's an
+            actionable nudge ("check in more → sharper reading"). Stages 1–3 were
+            passive status with no payload — a permanent line that didn't help —
+            so we drop them: the nudge simply disappears once the user engages. (#55) */}
+        {familiarity && familiarity.stage === 0 && (
           <div className="flex items-center gap-2 px-1 mt-2">
             <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/50 text-[15px]">psychology</span>
             <p className="font-body text-[12px] text-on-surface-variant/80 leading-snug">
