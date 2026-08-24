@@ -15,6 +15,13 @@
 //
 //  Sign convention matches the dataset: dosha −1 pacifies / +1 aggravates.
 //  Deliberately conservative — a method shifts by at most one step per dosha.
+//
+//  PRINCIPLE (reviewer, 2026-08-24): a method modifies TEXTURE/qualities (oily,
+//  dry, heavy, light) more than thermal energy. Heat should come primarily from
+//  the ingredients, not from the technique. So a tadka/tempering carries oil and
+//  aromatics but no method heat — its warmth is the mustard/cumin/chilli in it,
+//  which count as ingredients. Only genuine hot-cooking (sauté/roast/grill/fry)
+//  and fermentation carry a method heat nudge.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const COOKING_METHODS = {
@@ -29,7 +36,7 @@ export const COOKING_METHODS = {
   roasted:   { label: 'roasted',     dosha: { vata: 1 },                    guna: ['dry'],           rasa: [], heat: 1 },
   baked:     { label: 'baked',       dosha: {},                             guna: ['dry'],           rasa: [], heat: 0 },
   grilled:   { label: 'grilled',     dosha: { pitta: 1 },                   guna: ['dry', 'light'],  rasa: [], heat: 1 },
-  tempered:  { label: 'tempered',    dosha: {},                             guna: ['oily'],          rasa: [], heat: 1 }, // tadka
+  tempered:  { label: 'tempered',    dosha: {},                             guna: ['oily'],          rasa: [], heat: 0 }, // tadka — adds oil + aromatics, not a heating cook
   fermented: { label: 'fermented',   dosha: { pitta: 1, kapha: -1 },        guna: [],                rasa: ['sour'], heat: 1 },
   pickled:   { label: 'pickled',     dosha: { pitta: 1 },                   guna: [],                rasa: ['sour'], heat: 1 },
   none:      { label: '',            dosha: {},                             guna: [],                rasa: [], heat: 0 },

@@ -280,7 +280,6 @@ export const INGREDIENTS = {
     // Review batch 2: tagged to MATCH gingerFresh. The earlier fresh/dried
     // asymmetry was wrong — Jain exclusion follows the PLANT PART, not the
     // processing. A rhizome stays a rhizome dried and powdered.
-    dietTags: ['root'],
     name: 'Ginger (dry)',
     sanskrit: 'Shunthi',
     devanagari: 'शुण्ठी',
@@ -735,7 +734,6 @@ export const INGREDIENTS = {
     id: 'turmeric',
     // Rhizome, so it follows the same plant-part rule as ginger. Signed off in
     // review batch 2 for consistency with that precedent.
-    dietTags: ['root'],
     name: 'Turmeric',
     sanskrit: 'Haridra',
     devanagari: 'हरिद्रा',
