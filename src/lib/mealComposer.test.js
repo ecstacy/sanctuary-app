@@ -32,6 +32,10 @@ const REVIEWED_TEMPLATES = [
   'ricottaToast', 'grilledCheeseSandwich', 'pastaPesto', 'hummusPitaPlate',
   'bulgurSalad', 'capreseSalad', 'codRiceVeg', 'sardineToast', 'lambCurryRice',
   'whiteBeanStew', 'splitPeaSoup',
+  // Batch 7 — 2026-08-24 (recipes on modern batch-5 ingredients: soba, udon,
+  // vermicelli, farro, tapioca).
+  'sobaGreensBowl', 'udonNoodleSoup', 'farroVegBowl', 'vermicelliUpma',
+  'sabudanaKhichdi',
 ]
 
 /**

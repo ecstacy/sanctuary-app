@@ -635,6 +635,61 @@ export const MEAL_TEMPLATES = {
     reviewStatus: 'reviewed',
   },
 
+  // ── Batch 7 — 2026-08-24 (recipes built on modern batch-5 ingredients:
+  //    soba, udon, vermicelli, farro, tapioca). ──────────────────────────────
+  sobaGreensBowl: {
+    id: 'sobaGreensBowl',
+    name: 'Soba noodle bowl with greens',
+    coreIds: ['soba', 'spinach', 'carrot'],
+    optionalIds: ['sesameOil', 'gingerFresh', 'mushroom'],
+    slots: ['midday', 'evening'],
+    seasons: ['spring', 'summer'],
+    prep: 'Buckwheat noodles tossed with sautéed greens and a little sesame oil.',
+    reviewStatus: 'reviewed',
+  },
+
+  udonNoodleSoup: {
+    id: 'udonNoodleSoup',
+    name: 'Udon noodle soup',
+    coreIds: ['udon', 'carrot', 'spinach'],
+    optionalIds: ['gingerFresh', 'sesameOil', 'mushroom'],
+    slots: ['midday', 'evening'],
+    seasons: ['autumn', 'winter'],
+    prep: 'Soft wheat noodles in a warming vegetable broth.',
+    reviewStatus: 'reviewed',
+  },
+
+  farroVegBowl: {
+    id: 'farroVegBowl',
+    name: 'Farro and roasted vegetable bowl',
+    coreIds: ['farro', 'sweetPotato', 'spinach'],
+    optionalIds: ['oliveOil', 'cumin', 'walnut'],
+    slots: ['midday'],
+    seasons: ['autumn', 'winter'],
+    prep: 'Nutty farro with warm roasted vegetables and a drizzle of olive oil.',
+    reviewStatus: 'reviewed',
+  },
+
+  vermicelliUpma: {
+    id: 'vermicelliUpma',
+    name: 'Vermicelli upma',
+    coreIds: ['vermicelli', 'carrot', 'peas'],
+    optionalIds: ['mustardSeed', 'curryLeaf', 'cashew', 'gingerFresh'],
+    slots: ['morning', 'midday'],
+    prep: 'Roasted vermicelli steamed with vegetables and a curry-leaf tempering.',
+    reviewStatus: 'reviewed',
+  },
+
+  sabudanaKhichdi: {
+    id: 'sabudanaKhichdi',
+    name: 'Sabudana khichdi',
+    coreIds: ['tapioca', 'peanut', 'potato'],
+    optionalIds: ['cumin', 'gingerFresh', 'curryLeaf'],
+    slots: ['morning', 'midday'],
+    prep: 'Soaked tapioca pearls tossed with crushed peanuts and soft potato.',
+    reviewStatus: 'reviewed',
+  },
+
 }
 
 /** Stable list form. Includes drafts — filter before display. */
