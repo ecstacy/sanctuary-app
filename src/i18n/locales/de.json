@@ -1680,7 +1680,9 @@
       "errRateLimited": "Zu viele Versuche. Bitte warte einen Moment und versuche es erneut.",
       "errKindUnsupported": "Dieser Code kann hier noch nicht eingelöst werden.",
       "errDefault": "Dieser Code konnte nicht eingelöst werden."
-    }
+    },
+    "comingSoonTitle": "Sanctuary Plus kommt bald",
+    "comingSoonBody": "Wir geben Plus noch den letzten Schliff. Bis dahin bleibt hier alles kostenlos – wir sagen dir Bescheid, sobald es so weit ist."
   },
   "notifications": {
     "practiceReminderTitle": "Zeit für deine Praxis",

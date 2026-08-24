@@ -19,19 +19,38 @@
 //  *selling* or *steering to* an external purchase inside the app. So we gate
 //  the buy path, never the access path.
 //
-//  Promo redemption stays available in both cases: a free grant is not a sale,
-//  so it triggers neither Apple's IAP rule nor OIDAR/GST.
+//  Promo redemption stays available in all cases: a free grant is not a sale,
+//  so it triggers neither Apple's IAP rule nor OIDAR/GST — and it's how we grant
+//  Plus to ourselves/testers while selling is globally off (see 'prelaunch').
+//
+//    • 'prelaunch' — a global kill-switch (VITE_SELLING_ENABLED, default off).
+//                 The Play launch ships free-tier-first: no payments/tax profile
+//                 is required of a free app, so this decouples the store launch
+//                 from the German Steuernummer wait (docs/TODO.md #11). Flip the
+//                 env to 'true' and rebuild to turn selling on globally once the
+//                 tax ID lands — no code change, no re-review.
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { Capacitor } from '@capacitor/core'
 import { isPlusPurchaseRestricted } from './region'
 
+// Global selling switch. Explicit env wins; otherwise it defaults ON in dev
+// (so the real paywall stays testable locally) and OFF in a production build
+// (so a release cut without the env var is launch-safe / free-tier-first).
+// To monetize: set VITE_SELLING_ENABLED=true for the release build.
+const SELLING_ENABLED = import.meta.env.VITE_SELLING_ENABLED != null
+  ? import.meta.env.VITE_SELLING_ENABLED === 'true'
+  : import.meta.env.DEV === true
+
 /**
  * Why we can't sell Plus right now, or null if we can.
- * @returns {'ios' | 'region' | null}
+ * @returns {'prelaunch' | 'ios' | 'region' | null}
  */
 export function getPurchaseBlockReason() {
-  // Platform first — it's absolute, region is jurisdictional.
+  // Global kill-switch first — when selling is off, that's the honest reason
+  // on every platform and region, and nothing below should override it.
+  if (!SELLING_ENABLED) return 'prelaunch'
+  // Platform next — it's absolute; region is jurisdictional.
   if (Capacitor.getPlatform() === 'ios') return 'ios'
   if (isPlusPurchaseRestricted()) return 'region'
   return null

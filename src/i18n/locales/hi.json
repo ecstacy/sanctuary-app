@@ -1680,7 +1680,9 @@
       "errRateLimited": "बहुत अधिक प्रयास। कृपया थोड़ी देर प्रतीक्षा करें और पुनः प्रयास करें।",
       "errKindUnsupported": "वह कोड अभी यहाँ रिडीम नहीं किया जा सकता।",
       "errDefault": "वह कोड रिडीम नहीं किया जा सका।"
-    }
+    },
+    "comingSoonTitle": "Sanctuary Plus जल्द आ रहा है",
+    "comingSoonBody": "हम Plus पर अंतिम रूप दे रहे हैं। तब तक यहाँ सब कुछ मुफ़्त रहेगा — तैयार होते ही हम आपको बता देंगे।"
   },
   "notifications": {
     "practiceReminderTitle": "आपके अभ्यास का समय",
