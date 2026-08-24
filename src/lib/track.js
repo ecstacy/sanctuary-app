@@ -232,6 +232,8 @@ export const EVENTS = Object.freeze({
   DIET_SAFETY_TRIGGERED:    'diet_safety_triggered',
   MEAL_COMPOSED:            'meal_composed',
   MEAL_IDEA_TAPPED:         'meal_idea_tapped',
+  MEAL_DETAIL_VIEWED:       'meal_detail_viewed',
+  MEAL_INGREDIENT_TAPPED:   'meal_ingredient_tapped',
 })
 
 // ─── Internal state ──────────────────────────────────────────────────────

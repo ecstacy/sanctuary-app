@@ -108,6 +108,10 @@ export function deriveRecipe(recipe, resolve) {
     confidence: 'medium',
     reviewStatus: recipe.reviewStatus || 'draft',
     isDerivedRecipe: true,
+    // The constituents that actually resolved, so a detail page can list them
+    // (tappable → each ingredient) and re-derive the dosha impact for a target.
+    ingredientIds: parts.map((p) => p.id),
+    method: recipe.method || 'none',
   }
 }
 

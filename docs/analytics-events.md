@@ -566,7 +566,14 @@ Spec'd with the feature (docs/diet-feature-plan.md §8); wired per chunk.
   dataset is still awaiting review; `filtered_out` shows how often a user's own
   restrictions empty the result, which is the signal that the template set is
   too narrow.
-- **`meal_idea_tapped`** — `{meal_id*, target_dosha, source, is_premium}`.
+- **`meal_idea_tapped`** — `{meal_id*, target_dosha, source, is_premium}`. Now
+  opens the meal detail page (`/meal/:id`), not the lead ingredient.
+- **`meal_detail_viewed`** — `{meal_id*, kind* ('meal'|'recipe'), suitability*,
+  target_dosha, dosha_source}`. `MealDetailPage` mount. `suitability` is the
+  dish's derived impact on the user's target dosha — the personalization the
+  page leads with.
+- **`meal_ingredient_tapped`** — `{meal_id*, ingredient_id*}`. Drill-down from a
+  meal into one of its ingredients' pages.
   `source` distinguishes the Home widget (`home_meal_of_day`) from the planner.
 - **(superseded) `meal_composed`** — `{slot*, target_dosha*, dosha_source*, idea_count*, used_available_ingredients*, excluded_count}`.
 - **`meal_idea_tapped`** — `{idea_id*, slot*, position*}`.

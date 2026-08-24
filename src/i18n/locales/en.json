@@ -2145,5 +2145,9 @@
     "homeCta": "Share the app",
     "copied": "Link copied — paste it anywhere",
     "dismiss": "Dismiss"
+  },
+  "mealDetail": {
+    "ingredients": "Ingredients",
+    "optional": "Often added"
   }
 }

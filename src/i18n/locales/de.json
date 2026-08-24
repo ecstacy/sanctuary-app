@@ -2145,5 +2145,9 @@
     "homeCta": "App teilen",
     "copied": "Link kopiert – überall einfügbar",
     "dismiss": "Schließen"
+  },
+  "mealDetail": {
+    "ingredients": "Zutaten",
+    "optional": "Oft ergänzt"
   }
 }
