@@ -36,6 +36,7 @@ export default function DiscoverBreathworkPage() {
               pranayama={p}
               position={i}
               locked={locked}
+              full
               surface="discover_breathwork_page"
               onTap={() => {
                 if (locked) { setPaywall(true); return }

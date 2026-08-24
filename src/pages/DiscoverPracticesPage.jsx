@@ -76,6 +76,7 @@ export default function DiscoverPracticesPage() {
               asana={asana}
               position={i}
               locked={locked}
+              full
               surface="discover_practices"
               onTap={() => {
                 if (locked) { setPaywall(true); return }

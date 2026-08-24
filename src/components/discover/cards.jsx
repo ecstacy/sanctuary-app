@@ -70,10 +70,14 @@ export function FoodResultRow({ ingredient, onTap, t, exclusion }) {
 // card can call `useImpression` legally (one hook per component). With the
 // strip being horizontally-scrolled, off-screen cards never fire — exactly
 // what we want for an honest CTR denominator.
-export function ExploreAsanaCard({ asana, position, locked, onTap, surface = 'discover_explore_asanas' }) {
+export function ExploreAsanaCard({ asana, position, locked, onTap, full = false, surface = 'discover_explore_asanas' }) {
   const { t } = useTranslation()
   const la = localizeAsana(asana)
   const done = isDoneToday(asana.id)
+  // Case-insensitive: the data stores 'beginner' lowercase, so `!== 'Beginner'`
+  // never matched and beginner pills showed on every card. Only non-beginner
+  // levels earn a badge — the level of most poses is noise otherwise.
+  const showLevel = asana.level && asana.level.toLowerCase() !== 'beginner' && !locked
   const ref = useImpression({
     surface,
     contentType: 'asana',
@@ -87,7 +91,9 @@ export function ExploreAsanaCard({ asana, position, locked, onTap, surface = 'di
       aria-label={locked
         ? t('discover.plusAria', { name: la.english })
         : t('discover.itemAria', { english: la.english, sanskrit: la.sanskrit })}
-      className="flex-shrink-0 w-36 snap-start active:scale-[0.97] transition-all text-left"
+      // `full` fills a grid column (the library grid); the default fixed width
+      // is for the horizontally-scrolled strip.
+      className={`${full ? 'w-full' : 'flex-shrink-0 w-36 snap-start'} active:scale-[0.97] transition-all text-left`}
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/30 to-primary/10">
         <div className={`absolute inset-0 flex items-center justify-center pointer-events-none ${locked ? 'opacity-40' : ''}`}>
@@ -97,9 +103,9 @@ export function ExploreAsanaCard({ asana, position, locked, onTap, surface = 'di
             <span aria-hidden="true" className="material-symbols-outlined text-primary/30 text-6xl">{asana.icon}</span>
           )}
         </div>
-        {asana.level && asana.level !== 'Beginner' && !locked && (
+        {showLevel && (
           <div className="absolute top-2 left-2">
-            <span className="px-2 py-0.5 bg-surface/90 backdrop-blur-sm rounded-full font-label text-[11px] text-primary uppercase tracking-wide">
+            <span className="px-2 py-0.5 bg-surface rounded-full font-label text-[10px] text-primary uppercase tracking-wide shadow-sm">
               {asana.level}
             </span>
           </div>
@@ -142,7 +148,7 @@ export function ExploreAsanaCard({ asana, position, locked, onTap, surface = 'di
 // ─── PranayamaCard ────────────────────────────────────────────────────────
 // One card per breath technique on the Discover Breathwork row. Same
 // impression-tracking pattern as ExploreAsanaCard.
-export function PranayamaCard({ pranayama, position, locked, onTap, surface = 'discover_breathwork' }) {
+export function PranayamaCard({ pranayama, position, locked, onTap, full = false, surface = 'discover_breathwork' }) {
   const { t } = useTranslation()
   const lp = localizePranayama(pranayama)
   const ref = useImpression({
@@ -159,7 +165,7 @@ export function PranayamaCard({ pranayama, position, locked, onTap, surface = 'd
       aria-label={locked
         ? t('discover.plusAria', { name: lp.english })
         : t('discover.itemAria', { english: lp.english, sanskrit: lp.sanskrit })}
-      className="flex-shrink-0 w-44 snap-start active:scale-[0.97] transition-all text-left"
+      className={`${full ? 'w-full' : 'flex-shrink-0 w-44 snap-start'} active:scale-[0.97] transition-all text-left`}
     >
       <div className="relative aspect-square rounded-2xl overflow-hidden mb-2 bg-gradient-to-br from-primary-container/40 to-primary/10 flex items-center justify-center">
         <div className={locked ? 'opacity-40' : ''}>
