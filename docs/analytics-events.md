@@ -365,7 +365,10 @@ can be compared across entry points in one funnel.
   `dosha_chapter3`, `post_practice`, `settings_upgrade`, `settings_have_code`,
   `routine_locked`, `asana_detail_locked`, `pranayama_detail_locked`,
   `protocol_{vikriti}`, `vikriti_{dosha}`), `anonymous*: bool`,
-  `region*` (coarse, from timezone, e.g. `Europe`/`IN`), `purchase_restricted*: bool`.
+  `region*` (coarse, from timezone, e.g. `Europe`/`IN`), `purchase_restricted*: bool`,
+  `block_reason` (`prelaunch` \| `ios` \| `region` \| `null`) — why selling is
+  gated. `prelaunch` = global selling switch off (`VITE_SELLING_ENABLED`, the
+  free-tier-first launch); `ios` = Apple IAP policy; `region` = OIDAR/GST.
 
 #### `paywall_dismissed`
 - **Props**: `surface*`, `pane*: 'plans' \| 'promo'`.

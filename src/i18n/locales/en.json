@@ -1680,7 +1680,9 @@
       "errRateLimited": "Too many attempts. Please wait a little while and try again.",
       "errKindUnsupported": "That code can't be redeemed here yet.",
       "errDefault": "That code couldn't be redeemed."
-    }
+    },
+    "comingSoonTitle": "Sanctuary Plus is coming soon",
+    "comingSoonBody": "We’re still putting the finishing touches on Plus. Everything here stays free in the meantime — we’ll let you know the moment it’s ready."
   },
   "notifications": {
     "practiceReminderTitle": "Time for your practice",

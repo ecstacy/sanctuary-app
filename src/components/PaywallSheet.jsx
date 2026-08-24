@@ -328,13 +328,17 @@ export default function PaywallSheet({ open, onClose, surface, headline, subhead
             {purchaseRestricted ? (
               <div className="bg-surface-container rounded-2xl p-5 mb-5 text-center">
                 <span aria-hidden="true" className="material-symbols-outlined text-on-surface-variant/60 text-2xl mb-2">
-                  {blockReason === 'ios' ? 'lock' : 'public'}
+                  {blockReason === 'ios' ? 'lock' : blockReason === 'prelaunch' ? 'hourglass_top' : 'public'}
                 </span>
                 <p className="font-body font-semibold text-sm text-on-surface mb-1">
-                  {blockReason === 'ios' ? t('paywall.iosTitle') : t('paywall.regionTitle')}
+                  {blockReason === 'ios' ? t('paywall.iosTitle')
+                    : blockReason === 'prelaunch' ? t('paywall.comingSoonTitle')
+                    : t('paywall.regionTitle')}
                 </p>
                 <p className="font-body text-xs text-on-surface-variant/70 leading-relaxed">
-                  {blockReason === 'ios' ? t('paywall.iosBody') : t('paywall.regionBody')}
+                  {blockReason === 'ios' ? t('paywall.iosBody')
+                    : blockReason === 'prelaunch' ? t('paywall.comingSoonBody')
+                    : t('paywall.regionBody')}
                 </p>
               </div>
             ) : (
