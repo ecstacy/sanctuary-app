@@ -115,19 +115,20 @@ export default function RecommendationsPage() {
     }
   }
 
-  // ── Practice with a real asana → open its detail page (explore) ──
+  // ── Practice with a real asana OR a dedicated guided page → open it ──
   function handlePracticeExplore(recId, practiceIndex, practice) {
     if (user?.id) {
       analytics.logContentEvent({
         userId: user.id,
         eventType: analytics.EVENT_TYPES.CLICKED,
         contentType: analytics.CONTENT_TYPES.ASANA,
-        contentId: practice.poseId,
+        contentId: practice.poseId || practice.route,
         surface: analytics.SURFACES.SEARCH_RESULT,
         context: { query, from: 'recommendation_practice', practice_title: practice.title },
       })
     }
-    navigate(`/asana/${practice.poseId}`)
+    // A guided practice (Yoga Nidra) has its own page; an asana opens its detail.
+    navigate(practice.route || `/asana/${practice.poseId}`)
   }
 
   // ── "Also Related" card click — log `clicked`, then pivot the search ──
@@ -350,7 +351,7 @@ export default function RecommendationsPage() {
                   const isExpanded = expandedPractice === `${topResult.id}-${i}`
                   // Rows backed by a real asana open its detail page (explore);
                   // the rest keep the tap-to-expand description (no asana to open).
-                  const canExplore = !!practice.poseId
+                  const canExplore = !!practice.poseId || !!practice.route
                   return (
                     <button
                       key={i}

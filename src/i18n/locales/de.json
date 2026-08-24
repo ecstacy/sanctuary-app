@@ -2159,5 +2159,16 @@
   "mealDetail": {
     "ingredients": "Zutaten",
     "optional": "Oft ergänzt"
+  },
+  "yogaNidra": {
+    "intro": "Eine geführte Entspannung, die deine Aufmerksamkeit sanft durch den Körper führt, bis an die ruhige Schwelle des Schlafs. Lege dich an einen Ort, an dem du ungestört ruhen kannst.",
+    "lengthMin": "{{min}} Min · im Liegen",
+    "begin": "Beginnen",
+    "pause": "Pause",
+    "resume": "Fortsetzen",
+    "finish": "Fertig",
+    "stageProgress": "Phase {{n}} von {{total}}",
+    "doneTitle": "Ruhe abgeschlossen",
+    "doneBody": "Nimm dir einen Moment, bevor du aufstehst. Trage diese Ruhe mit dir."
   }
 }

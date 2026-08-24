@@ -2159,5 +2159,16 @@
   "mealDetail": {
     "ingredients": "Ingredients",
     "optional": "Often added"
+  },
+  "yogaNidra": {
+    "intro": "A guided relaxation that moves your awareness gently through the body, to the calm edge of sleep. Lie down somewhere you can rest undisturbed.",
+    "lengthMin": "{{min}} min · lying down",
+    "begin": "Begin",
+    "pause": "Pause",
+    "resume": "Resume",
+    "finish": "Finish",
+    "stageProgress": "Stage {{n}} of {{total}}",
+    "doneTitle": "Rest complete",
+    "doneBody": "Take a moment before you rise. Carry this calm with you."
   }
 }
