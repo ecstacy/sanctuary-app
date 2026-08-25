@@ -344,6 +344,20 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
   // their 'animal' category; composite dishes (category 'other') by their kind
   // — 'meat' (MEAT tag) or 'seafood' (fish/shellfish allergen).
   if ((veg || vegan) && (cat === 'animal' || kind !== null)) add(vegan ? 'vegan' : 'vegetarian')
+
+  // A food that CONTAINS egg or dairy — but isn't itself a whole animal food —
+  // still violates veg/vegan (a cake, french toast, custard). The category
+  // rules only catch whole animal/dairy foods, so these slip through. This
+  // app's "vegetarian" excludes egg (eggetarian is the lacto-ovo pattern), so
+  // an egg-containing dish is out for both — even a dairy-category custard that
+  // also has egg. Dairy is out for vegan only (lacto-vegetarians keep it), and
+  // dairy-category foods are already handled by the rule below, so the dairy
+  // check here is only for composites.
+  if (cat !== 'animal') {
+    const alg = allergensOf(ingredient)
+    if ((veg || vegan) && alg.includes('egg')) add(vegan ? 'vegan' : 'vegetarian')
+    if (vegan && cat !== 'dairy' && alg.includes('dairy')) add('vegan')
+  }
   // Eating styles that admit SOME animal foods. Eggetarian (lacto-ovo) keeps
   // eggs and excludes the rest; pescatarian keeps fish/seafood (and eggs) and
   // excludes meat & poultry. Both are looser than vegetarian, so they only
