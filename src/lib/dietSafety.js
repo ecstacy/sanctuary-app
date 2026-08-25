@@ -385,9 +385,13 @@ export function exclusionFor(ingredient, dietPrefs = {}) {
   // fine for you", and under-restriction is the harmful direction. The UI
   // wording must stay "we can't confirm", never "this is halal".
   // `kind === 'meat'` extends these to composite meat dishes (fish/egg stay
-  // permitted, as they are under both codes).
+  // permitted, as they are under both codes). Kosher also excludes a composite
+  // carrying a shellfish ALLERGEN (prawn tempura, shellfish paella) — shellfish
+  // is unambiguously non-kosher, and the dish carries the allergen, not the tag.
+  // Halal deliberately does NOT add shellfish: it's broadly permitted (or at
+  // most makruh) across schools, so excluding it would over-restrict.
   if (halal && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.ALCOHOL) || cat === 'animal' || kind === 'meat')) add('halal')
-  if (kosher && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.SHELLFISH) || cat === 'animal' || kind === 'meat')) add('kosher')
+  if (kosher && (tags.has(DIET_TAGS.PORK) || tags.has(DIET_TAGS.SHELLFISH) || cat === 'animal' || kind === 'meat' || allergensOf(ingredient).includes('shellfish'))) add('kosher')
 
   // Single-food observances, keyed on an explicit tag so they exclude exactly
   // the one food and nothing else. (No beef/pork foods exist in the dataset

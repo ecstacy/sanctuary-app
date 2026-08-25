@@ -300,6 +300,16 @@ describe('composite meat dishes (category other) are excluded like whole meat', 
     expect(exclusionFor(fishDish, { patterns: ['pescatarian'] }).excluded).toBe(false)
   })
 
+  it('a shellfish composite is kosher-excluded but stays halal-permitted', () => {
+    // Prawn tempura carries a shellfish ALLERGEN, not the SHELLFISH tag.
+    const prawnDish = { id: 's', category: 'other', allergens: ['shellfish', 'gluten'], reviewStatus: 'reviewed' }
+    expect(exclusionFor(prawnDish, { patterns: ['kosher'] }).excluded, 'kosher out').toBe(true)
+    expect(exclusionFor(prawnDish, { patterns: ['halal'] }).excluded, 'halal permits').toBe(false)
+    // A finned-fish composite stays kosher (only shellfish is out).
+    const fishDish = { id: 'f2', category: 'other', allergens: ['fish'], reviewStatus: 'reviewed' }
+    expect(exclusionFor(fishDish, { patterns: ['kosher'] }).excluded, 'kosher fish ok').toBe(false)
+  })
+
   it('a composite that CONTAINS egg or dairy is caught for veg/vegan', () => {
     // Cake / french toast: category 'other', not an animal food, but contains
     // egg + dairy. Used to slip veg/vegan entirely.
