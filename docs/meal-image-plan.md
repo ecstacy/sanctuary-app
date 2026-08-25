@@ -204,62 +204,62 @@ The five recipes added to the suggestion rotation (batch 7). Same workflow — a
 
 ## 9d. Batch-D prompt kit — remaining meals (52 dishes)
 
-Everything still on the generated-tile fallback. Same workflow — attach the `kitchari` key-frame, save as `{{id}}.png` in `public/meals/`, `npm run meals:webp`. Vessel: bowl for curries/dals/soups/rice, **plate** for toast/sandwiches/burgers/cutlets. Wash matches each card's fallback tile.
+Everything still on the generated-tile fallback. Same workflow — attach the `kitchari` key-frame, save as `{{id}}.png` in `public/meals/`, `npm run meals:webp`. Vessel: **bowl** for curries/dals/soups/rice, **plate** for toast/sandwiches/burgers/cutlets/flatbreads, **cup** for milk/tea drinks. Ingredients include the main add-ins so single-core dishes read as real dishes. Wash matches each card's fallback tile.
 
 | Save as | Dish + ingredients | Vessel | Background wash |
 |---|---|---|---|
 | `aglioOlioPasta.png` | Aglio e olio pasta — Pasta, Garlic, Olive oil, Green chilli | bowl | amber `#f4ead2 → #e7cfa0` |
 | `alooJeera.png` | Aloo jeera — Potato, Cumin, Turmeric | bowl | vegetable `#e4ede2 → #c3dcc4` |
 | `bainganBharta.png` | Baingan bharta — Aubergine, Tomato (cooked), Onion (cooked), Garlic | bowl | vegetable `#e4ede2 → #c3dcc4` |
-| `barleySoup.png` | Barley soup — Barley | bowl | clay `#f1ddcf → #e3bfa4` |
+| `barleySoup.png` | Barley soup — Barley, Black pepper, Ginger (dry), Spinach, Onion (cooked) | bowl | clay `#f1ddcf → #e3bfa4` |
 | `bhindiMasala.png` | Bhindi masala — Okra, Onion (cooked), Tomato (cooked), Cumin | bowl | vegetable `#e4ede2 → #c3dcc4` |
-| `bulgurSalad.png` | Bulgur salad — Bulgur wheat, Cucumber, Tomato (raw) | bowl | vegetable `#e4ede2 → #c3dcc4` |
+| `bulgurSalad.png` | Bulgur salad — Bulgur wheat, Cucumber, Tomato (raw), Olive oil, Lemon | bowl | vegetable `#e4ede2 → #c3dcc4` |
 | `butterChicken.png` | Butter chicken — Chicken, Tomato (cooked), Butter, Onion (cooked), Garlic | bowl | clay `#f1ddcf → #e3bfa4` |
-| `buttermilkRice.png` | Rice with buttermilk — Basmati rice, Buttermilk | bowl | amber `#f4ead2 → #e7cfa0` |
-| `chapatiSabzi.png` | Chapati with cooked vegetables — Wheat | bowl | amber `#f4ead2 → #e7cfa0` |
+| `buttermilkRice.png` | Rice with buttermilk — Basmati rice, Buttermilk, Cumin, Coriander seed | cup | amber `#f4ead2 → #e7cfa0` |
+| `chapatiSabzi.png` | Chapati with cooked vegetables — Wheat, Spinach, Ghee, Cumin, Garlic | plate | amber `#f4ead2 → #e7cfa0` |
 | `cheeseburger.png` | Cheeseburger — Beef, Hard cheese, Bread roll, Onion (cooked) | plate | clay `#f1ddcf → #e3bfa4` |
 | `chickenNuggets.png` | Chicken nuggets — Chicken, Breadcrumbs | plate | clay `#f1ddcf → #e3bfa4` |
-| `chickenRiceVeg.png` | Chicken with rice and vegetables — Chicken, Basmati rice, Green peas | bowl | amber `#f4ead2 → #e7cfa0` |
+| `chickenRiceVeg.png` | Chicken with rice and vegetables — Chicken, Basmati rice, Green peas, Turmeric, Cumin | bowl | amber `#f4ead2 → #e7cfa0` |
 | `chickenWings.png` | Chicken wings — Chicken | plate | clay `#f1ddcf → #e3bfa4` |
 | `clubSandwich.png` | Club sandwich — Bread roll, Chicken, Bacon, Tomato (raw) | plate | amber `#f4ead2 → #e7cfa0` |
 | `coconutRice.png` | Coconut rice — Basmati rice, Coconut, Mustard seed, Curry leaf | bowl | amber `#f4ead2 → #e7cfa0` |
-| `codRiceVeg.png` | Baked cod with rice and vegetables — Cod, Basmati rice, Broccoli | bowl | amber `#f4ead2 → #e7cfa0` |
+| `codRiceVeg.png` | Baked cod with rice and vegetables — Cod, Basmati rice, Broccoli, Lemon, Ginger (fresh) | bowl | amber `#f4ead2 → #e7cfa0` |
 | `curdRice.png` | Curd rice — Basmati rice, Yoghurt, Mustard seed, Curry leaf | bowl | amber `#f4ead2 → #e7cfa0` |
 | `dalFry.png` | Dal fry — Toor dal, Tomato (cooked), Onion (cooked), Garlic, Cumin | bowl | clay `#f1ddcf → #e3bfa4` |
-| `fishCurryRice.png` | Fish curry with rice — Fish (freshwater), Basmati rice | bowl | amber `#f4ead2 → #e7cfa0` |
+| `fishCurryRice.png` | Fish curry with rice — Fish (freshwater), Basmati rice, Coconut milk (canned), Turmeric, Curry leaf | bowl | amber `#f4ead2 → #e7cfa0` |
 | `friedChicken.png` | Fried chicken — Chicken, Breadcrumbs | plate | clay `#f1ddcf → #e3bfa4` |
-| `greekSalad.png` | Greek-style salad — Cucumber, Tomato (raw), Feta, Olives | bowl | vegetable `#e4ede2 → #c3dcc4` |
-| `grilledCheeseSandwich.png` | Grilled cheese sandwich — Whole-wheat bread, Cheddar | plate | amber `#f4ead2 → #e7cfa0` |
+| `greekSalad.png` | Greek-style salad — Cucumber, Tomato (raw), Feta, Olives, Olive oil | bowl | vegetable `#e4ede2 → #c3dcc4` |
+| `grilledCheeseSandwich.png` | Grilled cheese sandwich — Whole-wheat bread, Cheddar, Butter, Tomato (cooked), Black pepper | plate | amber `#f4ead2 → #e7cfa0` |
 | `hotDog.png` | Hot dog — Sausage, Bread roll | plate | clay `#f1ddcf → #e3bfa4` |
-| `hummusPitaPlate.png` | Hummus and pita plate — Pita bread, Hummus | bowl | amber `#f4ead2 → #e7cfa0` |
+| `hummusPitaPlate.png` | Hummus and pita plate — Pita bread, Hummus, Olive oil, Cucumber, Tomato (raw) | bowl | amber `#f4ead2 → #e7cfa0` |
 | `jeeraRice.png` | Jeera rice — Basmati rice, Cumin, Ghee | bowl | amber `#f4ead2 → #e7cfa0` |
 | `katsuCurry.png` | Katsu curry — Pork, Breadcrumbs, Basmati rice, Carrot, Onion (cooked) | plate | vegetable `#e4ede2 → #c3dcc4` |
-| `lambCurryRice.png` | Lamb curry with rice — Lamb, Basmati rice | bowl | amber `#f4ead2 → #e7cfa0` |
+| `lambCurryRice.png` | Lamb curry with rice — Lamb, Basmati rice, Onion (cooked), Tomato (cooked), Ginger (fresh) | bowl | amber `#f4ead2 → #e7cfa0` |
 | `lemonRice.png` | Lemon rice — Basmati rice, Lemon, Mustard seed, Curry leaf, Peanut | bowl | amber `#f4ead2 → #e7cfa0` |
-| `lentilPastaVeg.png` | Lentil pasta with vegetables — Lentil pasta, Tomato (cooked) | bowl | clay `#f1ddcf → #e3bfa4` |
+| `lentilPastaVeg.png` | Lentil pasta with vegetables — Lentil pasta, Tomato (cooked), Olive oil, Garlic, Black pepper | bowl | clay `#f1ddcf → #e3bfa4` |
 | `meatballs.png` | Meatballs — Minced meat, Breadcrumbs, Onion (cooked) | bowl | clay `#f1ddcf → #e3bfa4` |
 | `mushroomPasta.png` | Mushroom pasta — Pasta, Mushroom, Garlic, Olive oil | bowl | amber `#f4ead2 → #e7cfa0` |
-| `paneerPeasChapati.png` | Paneer and peas with chapati — Paneer, Green peas, Wheat | bowl | amber `#f4ead2 → #e7cfa0` |
-| `pastaPesto.png` | Pasta with pesto — Pasta, Pesto | bowl | amber `#f4ead2 → #e7cfa0` |
-| `peanutButterBananaToast.png` | Peanut butter and banana toast — Whole-wheat bread, Peanut butter, Banana | plate | amber `#f4ead2 → #e7cfa0` |
-| `potatoWithGhee.png` | Mashed potato — Potato | bowl | vegetable `#e4ede2 → #c3dcc4` |
+| `paneerPeasChapati.png` | Paneer and peas with chapati — Paneer, Green peas, Wheat, Turmeric, Cumin | plate | amber `#f4ead2 → #e7cfa0` |
+| `pastaPesto.png` | Pasta with pesto — Pasta, Pesto, Parmesan, Olive oil, Black pepper | bowl | amber `#f4ead2 → #e7cfa0` |
+| `peanutButterBananaToast.png` | Peanut butter and banana toast — Whole-wheat bread, Peanut butter, Banana, Honey, Cinnamon | plate | amber `#f4ead2 → #e7cfa0` |
+| `potatoWithGhee.png` | Mashed potato — Potato, Ghee, Cumin, Black pepper, Asafoetida | bowl | vegetable `#e4ede2 → #c3dcc4` |
 | `rajmaMasala.png` | Rajma masala — Kidney beans, Tomato (cooked), Onion (cooked), Garlic, Cumin | bowl | vegetable `#e4ede2 → #c3dcc4` |
-| `ricottaToast.png` | Ricotta toast with fruit — Whole-wheat bread, Ricotta | plate | amber `#f4ead2 → #e7cfa0` |
-| `salmonRiceGreens.png` | Salmon with rice and greens — Salmon, Basmati rice, Broccoli | bowl | amber `#f4ead2 → #e7cfa0` |
-| `sardineToast.png` | Sardines on toast — Sardines, Whole-wheat bread | plate | amber `#f4ead2 → #e7cfa0` |
+| `ricottaToast.png` | Ricotta toast with fruit — Whole-wheat bread, Ricotta, Honey, Banana, Strawberry | plate | amber `#f4ead2 → #e7cfa0` |
+| `salmonRiceGreens.png` | Salmon with rice and greens — Salmon, Basmati rice, Broccoli, Ghee, Lemon | bowl | amber `#f4ead2 → #e7cfa0` |
+| `sardineToast.png` | Sardines on toast — Sardines, Whole-wheat bread, Lemon, Black pepper, Tomato (raw) | plate | amber `#f4ead2 → #e7cfa0` |
 | `shawarma.png` | Shawarma / doner kebab — Chicken, Pita bread, Onion (cooked), Garlic | plate | clay `#f1ddcf → #e3bfa4` |
-| `spicedMilk.png` | Warm spiced milk — Cow’s milk | bowl | cream `#f3f0e7 → #e2ddcb` |
-| `splitPeaSoup.png` | Split pea soup — Split peas | bowl | clay `#f1ddcf → #e3bfa4` |
+| `spicedMilk.png` | Warm spiced milk — Cow’s milk, Ginger (dry), Turmeric, Jaggery | cup | cream `#f3f0e7 → #e2ddcb` |
+| `splitPeaSoup.png` | Split pea soup — Split peas, Carrot, Onion (cooked), Cumin, Ghee | bowl | clay `#f1ddcf → #e3bfa4` |
 | `teriyakiChicken.png` | Teriyaki chicken — Chicken, Onion (cooked) | bowl | clay `#f1ddcf → #e3bfa4` |
-| `tofuStirFryRice.png` | Tofu stir-fry with rice — Tofu, Basmati rice, Bell pepper | bowl | amber `#f4ead2 → #e7cfa0` |
+| `tofuStirFryRice.png` | Tofu stir-fry with rice — Tofu, Basmati rice, Bell pepper, Ginger (fresh), Soy sauce | bowl | amber `#f4ead2 → #e7cfa0` |
 | `tomatoPasta.png` | Tomato pasta — Pasta, Tomato (cooked), Garlic, Olive oil | bowl | amber `#f4ead2 → #e7cfa0` |
 | `tomatoRice.png` | Tomato rice — Basmati rice, Tomato (cooked), Onion (cooked), Mustard seed, Curry leaf | bowl | amber `#f4ead2 → #e7cfa0` |
-| `tomatoSoup.png` | Tomato soup — Tomato (cooked) | bowl | clay `#f1ddcf → #e3bfa4` |
+| `tomatoSoup.png` | Tomato soup — Tomato (cooked), Black pepper, Cream, Garlic, Olive oil | bowl | clay `#f1ddcf → #e3bfa4` |
 | `tonkatsu.png` | Tonkatsu — Pork, Breadcrumbs | plate | clay `#f1ddcf → #e3bfa4` |
-| `tunaSandwich.png` | Tuna sandwich — Tuna, Whole-wheat bread | plate | amber `#f4ead2 → #e7cfa0` |
-| `uradDalStew.png` | Slow-cooked urad dal — Urad dal | bowl | clay `#f1ddcf → #e3bfa4` |
+| `tunaSandwich.png` | Tuna sandwich — Tuna, Whole-wheat bread, Mayonnaise, Lettuce, Cucumber | plate | amber `#f4ead2 → #e7cfa0` |
+| `uradDalStew.png` | Slow-cooked urad dal — Urad dal, Ghee, Asafoetida, Ginger (fresh), Garlic | bowl | clay `#f1ddcf → #e3bfa4` |
 | `vegKorma.png` | Vegetable korma — Carrot, Green peas, Potato, Coconut, Cashew | bowl | vegetable `#e4ede2 → #c3dcc4` |
-| `whiteBeanStew.png` | White bean stew — White beans, Tomato (cooked), Carrot | bowl | vegetable `#e4ede2 → #c3dcc4` |
+| `whiteBeanStew.png` | White bean stew — White beans, Tomato (cooked), Carrot, Olive oil, Garlic | bowl | vegetable `#e4ede2 → #c3dcc4` |
 
 ## 10. Decisions (was: open questions)
 
