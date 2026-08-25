@@ -107,194 +107,524 @@
     <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/terms"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/terms"/><priority>0.3</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/</loc><priority>0.8</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/affogato</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/aglio-e-olio-pasta</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/aioli</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/almond</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/almond-milk</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/almond-oil</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/aloo-gobi</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/aloo-jeera</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/amaranth</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/americano</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/amla</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/apple-cider-vinegar</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/apple-juice</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/apple-raw</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/apple-stewed</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/apricot</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/artichoke</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/arugula</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/asafoetida</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/ash-gourd</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/asparagus</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/aubergine</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/avocado</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/avocado-oil</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/b-nh-m</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/bacon</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/bagel</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/baguette</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/baingan-bharta</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/baked-beans</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/balsamic-vinegar</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/banana</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/barfi</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/barley</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/basil</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/basmati-rice</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/bay-leaf</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/bbq-sauce</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/bean-sprouts</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/beef</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/beef-jerky</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/beer</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/beetroot</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/bell-pepper</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/bhatura</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/bhindi-masala</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/biryani</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/biscuits</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/bitter-gourd</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/black-beans</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/black-eyed-peas</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/black-pepper</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/black-tea</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/blackberry</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/blueberry</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/bok-choy</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/bottle-gourd</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/brazil-nuts</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/bread-roll</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/breadcrumbs</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/breadstick</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/brie</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/brioche</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/broad-beans</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/broccoli</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/brown-lentil</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/brown-rice</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/brown-sugar</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/brownie</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/brussels-sprouts</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/bubble-tea</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/buckwheat</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/buddha-bowl</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/bulgur-wheat</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/burrito</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/butter</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/butter-beans</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/butter-chicken</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/buttermilk</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cabbage</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/caesar-salad</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cake</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cane-sugar</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cardamom</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/carom-seed</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/carrot</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cashew</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cashew-butter</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cauliflower</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/ccf-tea-cumin-coriander-fennel</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/celeriac</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/celery</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/chana-dal</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cheddar</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cheese-puffs</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cheeseburger</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cheesecake</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cherry</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/chestnut</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/chia-seeds</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/chicken</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/chicken-nuggets</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/chicken-wings</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/chickpea</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/chilli-powder</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/chimichurri</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/chocolate-bar-filled</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/chocolate-chip-cookie</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/chocolate-hazelnut-spread</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/chole</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/chutney</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/ciabatta</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cinnamon</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/clove</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/club-sandwich</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cocoa</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cocoa-powder</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/coconut</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/coconut-flour</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/coconut-milk-canned</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/coconut-oil</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/coconut-rice</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/coconut-water</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cod</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/coffee</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cola-soft-drink</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/coleslaw</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/colocasia</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/condensed-milk</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/coriander-leaf</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/coriander-seed</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/corn</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/corn-tortilla</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cornbread</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cornflakes</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cornstarch</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cortado</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cottage-cheese</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/couscous</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cows-milk</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/crab</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/crackers</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cranberry</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cream</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/cream-cheese</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/croissant</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/crumpet</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cucumber</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/cumin</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/curd-rice</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/curry-leaf</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/curry-powder</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/custard</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/custard-apple</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/dal-fry</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/dal-makhani</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/dark-chocolate</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/dates</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/dhokla</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/dill-seed</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/donut</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/dosa</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/dried-apricots</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/dried-cranberries</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/drinkable-yoghurt</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/drumstick-moringa</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/dry-mango-powder</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/duck</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/dumplings</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/edamame</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/egg</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/elephant-foot-yam</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/endive</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/energy-drink</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/english-muffin</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/espresso</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/falafel</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/farro</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/fennel-bulb</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/fennel-seed</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/fenugreek-leaf</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/fenugreek-seed</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/feta</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/fig</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/finger-millet</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/fish-and-chips</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/fish-freshwater</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/fish-sauce</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/flapjack-oat-bar</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/flatbread</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/flattened-rice</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/flax-seed</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/focaccia</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/foxtail-millet</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/frapp</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/french-fries</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/french-toast</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/fresh-summer-roll</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/fried-chicken</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/fried-dumplings</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/fried-rice</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/fruit-leather</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/garam-masala</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/garlic</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/garlic-bread</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/ghee</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/ginger-dry</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/ginger-fresh</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/gnocchi</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/goat-meat</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/graham-cracker</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/gram-flour</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/granola</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/granola-bar</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/grapefruit</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/grapes</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/gravy</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/greek-yoghurt</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/green-beans</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/green-chilli</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/green-peas</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/green-salad</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/green-tea</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/guacamole</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/guava</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/gulab-jamun</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/gummy-candy</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/halloumi</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/halwa</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/hard-cheese</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/harissa</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/hazelnut</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/hoisin-sauce</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/holy-basil-tulsi</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/honey</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/honey-mustard</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/horse-gram</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/hot-chocolate</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/hot-dog</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/hummus</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/ice-cream</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/ice-cream-bar</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/iced-coffee</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/idli</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/instant-noodles</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/ivy-gourd</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/jackfruit-ripe</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/jaggery</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/jalebi</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/jam</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/java-plum-jamun</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/jeera-rice</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/kadhi</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/kale</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/katsu-curry</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/kefir</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/ketchup</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/kheer</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/khichdi</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/khoa-reduced-milk</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/kidney-beans</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/kiwi</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/kohlrabi</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/kombucha</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/kulcha</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/laddu</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/lamb</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/lasagna</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/lassi</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/latte</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/leek</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/lemon</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/lemon-rice</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/lemonade</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/lemongrass</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/lentil-pasta</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/lettuce</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/lime</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/lobster</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/long-pepper-pippali</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/lotus-seed</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/lychee</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mac-and-cheese</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/macadamia</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/macchiato</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/mace</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mandarin</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mango-pickle</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/mango-ripe</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/maple-syrup</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/marshmallow</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/masala-chai</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/masoor-dal</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/matcha</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/matcha-latte</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mayonnaise</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/meatballs</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/medu-vada</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/milk-chocolate</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/milkshake</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/minced-meat</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/minestrone</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/mint</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/miso-soup</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/missi-roti</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mixed-nuts-salted</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mocha</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mochi</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/molasses</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/moth-bean</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mozzarella</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/muesli-raw</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/muffin</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/mung-dal</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/mushroom</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mushroom-pasta</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/muskmelon</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mussels</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/mustard</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/mustard-greens</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/mustard-oil</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/mustard-seed</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/naan</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/nachos</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/nectarine</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/nigella-seed</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/nutmeg</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/oat-milk</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/oats</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/okra</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/olive-oil</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/olives</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/omelette</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/onigiri</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/onion-cooked</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/onion-raw</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/onion-rings</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/orange</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/orange-juice</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/oregano</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/oyster-sauce</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pad-thai</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/paella</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pakora</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/palak-paneer</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pancakes</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/paneer</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/papadum</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/papaya</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/paprika</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/paratha</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/parmesan</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/parsley</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/parsnip</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/passion-fruit</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/pasta</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pav</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/peach</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/peanut</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/peanut-butter</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/peanut-oil</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/pear</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/pearl-millet</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pecan</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/persimmon</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pesto</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pho</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pine-nuts</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/pineapple</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pinto-beans</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/pistachio</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pita-bread</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pizza</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/plum</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/poha</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/pointed-gourd</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/poke-bowl</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/polenta</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/pomegranate-sweet</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/popcorn</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/poppy-seed</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pork</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/potato</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/potato-chips-crisps</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/prawn</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pretzels</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/protein-bar</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/prunes</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pulao</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/pumpernickel</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/pumpkin</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/pumpkin-seeds</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/quesadilla</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/quinoa</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/radish-mature</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/radish-tender</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/raisins</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/raita</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/rajma-masala</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/ramen-restaurant</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/ranch-dressing</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/rapeseed-oil</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/rasam</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/raspberry</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/raw-banana</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/relish</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/rice-cake</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/rice-flour</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/rice-milk</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/rice-noodles</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/rice-paper</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/ricotta</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/ridge-gourd</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/risotto</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/rock-candy-mishri</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/rock-salt-saindhava</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/rosemary</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/roti</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/rye-bread</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/saffron</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/sago-sabudana</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/sake</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/salmon</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/salsa</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/salt</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/sambar</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/samosa</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/sandwich</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/sardines</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/sausage</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/scallops</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/scone</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/seaweed</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/seitan</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/semolina</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/sesame-oil</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/sesame-seed</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/shakshuka</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/shallot</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/shawarma-doner-kebab</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/smoothie</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/snow-peas</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/soba</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/sorghum</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/sour-cream</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/sourdough-bread</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/soy-milk</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/soy-sauce</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/soybean</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/sparkling-water</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/spelt</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/spinach</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/split-peas</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/spring-onion</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/spring-roll</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/squid</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/sriracha-hot-sauce</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/star-anise</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/stevia</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/stew</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/stock-broth</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/strawberry</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/sugarcane-juice</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/sunflower-oil</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/sunflower-seed</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/sushi</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/swede</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/sweet-lime-mosambi</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/sweet-potato</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tacos</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tahini</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/tamarind</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tandoori-roti</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tapioca</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tartar-sauce</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tempeh</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tempura</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/teriyaki-chicken</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/thepla</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/thyme</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tikka-masala</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/tofu</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/tomato-cooked</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tomato-juice</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tomato-pasta</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/tomato-raw</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tomato-rice</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tonkatsu</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/toor-dal</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tortilla-chips</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/trail-mix</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/tuna</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/turkey</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/turmeric</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/turnip</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/udon</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/upma</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/urad-dal</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/uttapam</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/vanilla</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/vegetable-korma</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/veggie-burrito</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/vermicelli</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/waffles</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/walnut</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/wasabi</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/water</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/watercress</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/watermelon</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/wheat</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/wheat-tortilla-wrap</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/whey-protein-powder</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/whiskey</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/white-beans</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/white-bread</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/whole-mung-bean</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/whole-wheat-bread</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/wine</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/yoghurt</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/zucchini</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/de/poses/accomplished-pose</loc>

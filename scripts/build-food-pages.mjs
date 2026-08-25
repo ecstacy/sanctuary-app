@@ -102,7 +102,8 @@ const head = ({ title, description, canonical, jsonld }) => `<!doctype html>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:image" content="${SITE}/assets/og.png">
-${jsonld ? `  <script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ''}
+${(Array.isArray(jsonld) ? jsonld : jsonld ? [jsonld] : [])
+    .map((j) => `  <script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n')}
 </head>
 <body>
 
@@ -166,7 +167,7 @@ function foodPage(f, related) {
           </tr>`
   }).join('\n')
 
-  const jsonld = {
+  const breadcrumb = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
@@ -175,6 +176,37 @@ function foodPage(f, related) {
       { '@type': 'ListItem', position: 3, name: f.name, item: canonical },
     ],
   }
+
+  // FAQPage — these pages ARE questions ("is X good for pitta?"). Structuring
+  // the three dosha verdicts (which are already in the on-page table) as an
+  // FAQPage targets Google's FAQ rich result + "People also ask". Answers
+  // mirror the visible verdicts exactly, as the guidelines require.
+  const faqAnswer = (d) => {
+    const note = verdictNote(foodSuitability(f.doshaEffect?.[d]), d)
+    const why = f.whyFavor || f.whyAvoid
+    return why ? `${note} ${why}`.trim() : note   // JSON.stringify escapes; no HTML esc inside JSON-LD
+  }
+  const faq = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      ...['vata', 'pitta', 'kapha'].map((d) => ({
+        '@type': 'Question',
+        name: `Is ${f.name} good for ${titleCase(d)}?`,
+        acceptedAnswer: { '@type': 'Answer', text: faqAnswer(d) },
+      })),
+      {
+        '@type': 'Question',
+        name: `What are the Ayurvedic properties of ${f.name}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `${f.name} has a ${(f.rasa || []).join(', ')} taste and a ${VIRYA_LABEL[f.virya] || f.virya} potency (vīrya)`
+            + (f.guna?.length ? `, with ${f.guna.join(', ')} qualities` : '') + '.',
+        },
+      },
+    ],
+  }
+  const jsonld = [breadcrumb, faq]
 
   const metaBits = [
     f.rasa?.length ? `<strong>Taste:</strong> ${esc(f.rasa.map(titleCase).join(', '))}` : '',
