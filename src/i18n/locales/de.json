@@ -1943,7 +1943,8 @@
       "seeMorePlus": "Mehr sehen mit Plus"
     },
     "balances": "Gleicht {{dosha}} aus",
-    "forYou": "Für dich"
+    "forYou": "Für dich",
+    "yourFavourites": "Deine Favoriten"
   },
   "mealCheck": {
     "title": "Mahlzeit-Check",
@@ -2158,7 +2159,9 @@
   },
   "mealDetail": {
     "ingredients": "Zutaten",
-    "optional": "Oft ergänzt"
+    "optional": "Oft ergänzt",
+    "favourite": "Zu Favoriten",
+    "unfavourite": "Aus Favoriten entfernen"
   },
   "yogaNidra": {
     "intro": "Eine geführte Entspannung, die deine Aufmerksamkeit sanft durch den Körper führt, bis an die ruhige Schwelle des Schlafs. Lege dich an einen Ort, an dem du ungestört ruhen kannst.",

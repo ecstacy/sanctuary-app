@@ -17,6 +17,7 @@ import { useDietPrefs } from '../hooks/useDietPrefs'
 import { resolveDietTarget } from '../lib/dietTarget'
 import { deriveMealById } from '../lib/mealComposer'
 import { getIngredient, suitabilityFor } from '../lib/ingredients'
+import { useMealFavourites } from '../hooks/useMealFavourites'
 import { SUITABILITY } from '../lib/doshaSemantics'
 import { mealVisual } from '../lib/mealVisual'
 import { DIET_DISCLAIMER } from '../lib/dietSafety'
@@ -53,6 +54,7 @@ export default function MealDetailPage() {
   const { profile } = useAuth()
   const vikriti = useVikritiSignal()
   const { prefs: dietPrefs } = useDietPrefs()
+  const { isFavourite, toggle } = useMealFavourites()
   useScrollDepth('meal_detail')
 
   const target = useMemo(() => resolveDietTarget({ vikriti, profile }), [vikriti, profile])
@@ -107,6 +109,19 @@ export default function MealDetailPage() {
         )}
         <button onClick={() => navigate(-1)} className="absolute top-4 left-4 w-11 h-11 rounded-full bg-surface-container-low/90 backdrop-blur-sm flex items-center justify-center shadow-sm" aria-label={t('common.back')}>
           <span aria-hidden="true" className="material-symbols-outlined text-on-surface text-lg">arrow_back</span>
+        </button>
+        <button
+          onClick={() => {
+            const now = toggle(meal.id)
+            track(EVENTS.MEAL_FAVOURITED, { meal_id: meal.id, favourited: now })
+          }}
+          className="absolute top-4 right-4 w-11 h-11 rounded-full bg-surface-container-low/90 backdrop-blur-sm flex items-center justify-center shadow-sm active:scale-90 transition-transform"
+          aria-label={isFavourite(meal.id) ? t('mealDetail.unfavourite') : t('mealDetail.favourite')}
+          aria-pressed={isFavourite(meal.id)}
+        >
+          <span aria-hidden="true" className={`material-symbols-outlined text-lg ${isFavourite(meal.id) ? 'text-clay' : 'text-on-surface-variant'}`} style={isFavourite(meal.id) ? { fontVariationSettings: "'FILL' 1" } : undefined}>
+            favorite
+          </span>
         </button>
       </div>
 

@@ -574,6 +574,8 @@ Spec'd with the feature (docs/diet-feature-plan.md §8); wired per chunk.
   page leads with.
 - **`meal_ingredient_tapped`** — `{meal_id*, ingredient_id*}`. Drill-down from a
   meal into one of its ingredients' pages.
+- **`meal_favourited`** — `{meal_id*, favourited* (bool)}`. Star toggle on the
+  meal detail page; the /meals page surfaces the saved set.
   `source` distinguishes the Home widget (`home_meal_of_day`) from the planner.
 - **(superseded) `meal_composed`** — `{slot*, target_dosha*, dosha_source*, idea_count*, used_available_ingredients*, excluded_count}`.
 - **`meal_idea_tapped`** — `{idea_id*, slot*, position*}`.

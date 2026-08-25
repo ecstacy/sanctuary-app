@@ -234,6 +234,7 @@ export const EVENTS = Object.freeze({
   MEAL_IDEA_TAPPED:         'meal_idea_tapped',
   MEAL_DETAIL_VIEWED:       'meal_detail_viewed',
   MEAL_INGREDIENT_TAPPED:   'meal_ingredient_tapped',
+  MEAL_FAVOURITED:          'meal_favourited',
 })
 
 // ─── Internal state ──────────────────────────────────────────────────────

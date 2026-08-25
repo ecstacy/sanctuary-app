@@ -26,7 +26,9 @@ import { useIsPremium } from '../hooks/useIsPremium'
 import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { useDietPrefs } from '../hooks/useDietPrefs'
 import { resolveDietTarget, shouldExplainTarget } from '../lib/dietTarget'
-import { composeMeals } from '../lib/mealComposer'
+import { composeMeals, deriveMealById } from '../lib/mealComposer'
+import { useMealFavourites } from '../hooks/useMealFavourites'
+import { mealVisual } from '../lib/mealVisual'
 import { DIET_DISCLAIMER } from '../lib/dietSafety'
 import MealIdeaCard from '../components/MealIdeaCard'
 import PaywallSheet from '../components/PaywallSheet'
@@ -74,6 +76,14 @@ export default function MealGuidancePage() {
     season:      target.season,
     dietPrefs,
   }), [user?.id, target.dosha, target.source, target.season, dietPrefs])
+
+  // Favourited meals, resolved against the current target so their verdict is
+  // right too. Only those that still resolve (reviewed) are shown.
+  const { favourites } = useMealFavourites()
+  const favMeals = useMemo(
+    () => favourites.map((id) => deriveMealById(id, { targetDosha: target.dosha, dietPrefs })).filter(Boolean),
+    [favourites, target.dosha, dietPrefs],
+  )
 
   useEffect(() => {
     if (!isPremium) return
@@ -159,6 +169,37 @@ export default function MealGuidancePage() {
             title={t('meals.empty.unreviewed.title')}
             body={t('meals.empty.unreviewed.body')}
           />
+        )}
+
+        {/* ── Your favourites — the loop closure for meals you keep. ──────── */}
+        {favMeals.length > 0 && (
+          <div className="mt-6">
+            <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-widest mb-2 px-1">{t('meals.yourFavourites')}</p>
+            <div className="flex gap-3 overflow-x-auto pb-1 -mx-6 px-6 snap-x">
+              {favMeals.map((m) => {
+                const fv = mealVisual(m)
+                return (
+                  <button
+                    key={m.id}
+                    onClick={() => { track(EVENTS.MEAL_IDEA_TAPPED, { meal_id: m.id, target_dosha: target.dosha, source: 'favourites' }); navigate(`/meal/${m.id}`) }}
+                    className="flex-shrink-0 w-28 snap-start text-left active:scale-[0.98] transition-transform"
+                  >
+                    <div className="relative h-24 w-full rounded-2xl overflow-hidden">
+                      {m.image ? (
+                        <img src={m.image} alt="" loading="lazy" className="h-full w-full object-cover" />
+                      ) : (
+                        <div aria-hidden="true" className="h-full w-full flex items-center justify-center" style={{ backgroundImage: `linear-gradient(135deg, ${fv.from} 0%, ${fv.to} 100%)` }}>
+                          <span className="material-symbols-outlined text-[30px]" style={{ color: fv.ink, opacity: 0.72 }}>{fv.icon}</span>
+                        </div>
+                      )}
+                      <span aria-hidden="true" className="material-symbols-outlined absolute top-1.5 right-1.5 text-clay text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>favorite</span>
+                    </div>
+                    <p className="font-body text-[12px] text-on-surface mt-1.5 leading-tight line-clamp-2">{m.name}</p>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
         )}
 
         {/* ── Ideas ─────────────────────────────────────────────────────── */}

@@ -1943,7 +1943,8 @@
       "seeMorePlus": "See more with Plus"
     },
     "balances": "Balances {{dosha}}",
-    "forYou": "For you"
+    "forYou": "For you",
+    "yourFavourites": "Your favourites"
   },
   "mealCheck": {
     "title": "Meal Check",
@@ -2158,7 +2159,9 @@
   },
   "mealDetail": {
     "ingredients": "Ingredients",
-    "optional": "Often added"
+    "optional": "Often added",
+    "favourite": "Save to favourites",
+    "unfavourite": "Remove from favourites"
   },
   "yogaNidra": {
     "intro": "A guided relaxation that moves your awareness gently through the body, to the calm edge of sleep. Lie down somewhere you can rest undisturbed.",
