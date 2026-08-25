@@ -215,7 +215,7 @@ Everything still on the generated-tile fallback. Same workflow — attach the `k
 | `bhindiMasala.png` | Bhindi masala — Okra, Onion (cooked), Tomato (cooked), Cumin | bowl | vegetable `#e4ede2 → #c3dcc4` |
 | `bulgurSalad.png` | Bulgur salad — Bulgur wheat, Cucumber, Tomato (raw), Olive oil, Lemon | bowl | vegetable `#e4ede2 → #c3dcc4` |
 | `butterChicken.png` | Butter chicken — Chicken, Tomato (cooked), Butter, Onion (cooked), Garlic | bowl | clay `#f1ddcf → #e3bfa4` |
-| `buttermilkRice.png` | Rice with buttermilk — Basmati rice, Buttermilk, Cumin, Coriander seed | cup | amber `#f4ead2 → #e7cfa0` |
+| `buttermilkRice.png` | Rice with buttermilk — Basmati rice, Buttermilk, Cumin, Coriander seed | bowl | amber `#f4ead2 → #e7cfa0` |
 | `chapatiSabzi.png` | Chapati with cooked vegetables — Wheat, Spinach, Ghee, Cumin, Garlic | plate | amber `#f4ead2 → #e7cfa0` |
 | `cheeseburger.png` | Cheeseburger — Beef, Hard cheese, Bread roll, Onion (cooked) | plate | clay `#f1ddcf → #e3bfa4` |
 | `chickenNuggets.png` | Chicken nuggets — Chicken, Breadcrumbs | plate | clay `#f1ddcf → #e3bfa4` |
