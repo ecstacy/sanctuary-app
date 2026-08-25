@@ -16,9 +16,9 @@
 //  Defaults
 //  --------
 //  • `aggregate` → off until the user says yes
-//  • `crash`     → off until the user says yes (no crash reporter wired up
-//                  today, but the flag is here so we can add one later
-//                  without shipping another consent prompt)
+//  • `crash`     → off until the user says yes. Gates Firebase Crashlytics
+//                  (lib/crash.js) — native crash + non-fatal error reporting,
+//                  a silent no-op until this flag is true.
 //
 //  Storage
 //  -------
