@@ -202,6 +202,65 @@ The five recipes added to the suggestion rotation (batch 7). Same workflow — a
 
 > **Recipes can now be illustrated too.** The meal detail page (`/meal/:id`, 2026-08-24) gives every dish — templates *and* recipe foods — a hero image slot. Drop `public/meals/{recipeId}.png` (e.g. `dalFry.png`, `tomatoPasta.png`) and it shows on that recipe's detail hero, same pipeline. Recipe ids: dalFry, rajmaMasala, jeeraRice, lemonRice, curdRice, coconutRice, tomatoRice, bhindiMasala, bainganBharta, alooJeera, vegKorma, aglioOlioPasta, tomatoPasta, mushroomPasta, plus the migrated meat dishes (butterChicken, friedChicken, …). Prompts: same template as Batch A/B, ingredients from `recipes-data.js`.
 
+## 9d. Batch-D prompt kit — remaining meals (52 dishes)
+
+Everything still on the generated-tile fallback. Same workflow — attach the `kitchari` key-frame, save as `{{id}}.png` in `public/meals/`, `npm run meals:webp`. Vessel: bowl for curries/dals/soups/rice, **plate** for toast/sandwiches/burgers/cutlets. Wash matches each card's fallback tile.
+
+| Save as | Dish + ingredients | Wash |
+|---|---|---|
+| `aglioOlioPasta.png` | Aglio e olio pasta — Pasta, Garlic, Olive oil, Green chilli | amber `#f4ead2` |
+| `alooJeera.png` | Aloo jeera — Potato, Cumin, Turmeric | vegetable `#e4ede2` |
+| `bainganBharta.png` | Baingan bharta — Aubergine, Tomato (cooked), Onion (cooked), Garlic | vegetable `#e4ede2` |
+| `barleySoup.png` | Barley soup — Barley | clay `#f1ddcf` |
+| `bhindiMasala.png` | Bhindi masala — Okra, Onion (cooked), Tomato (cooked), Cumin | vegetable `#e4ede2` |
+| `bulgurSalad.png` | Bulgur salad — Bulgur wheat, Cucumber, Tomato (raw) | vegetable `#e4ede2` |
+| `butterChicken.png` | Butter chicken — Chicken, Tomato (cooked), Butter, Onion (cooked), Garlic | clay `#f1ddcf` |
+| `buttermilkRice.png` | Rice with buttermilk — Basmati rice, Buttermilk | amber `#f4ead2` |
+| `chapatiSabzi.png` | Chapati with cooked vegetables — Wheat | amber `#f4ead2` |
+| `cheeseburger.png` | Cheeseburger — Beef, Hard cheese, Bread roll, Onion (cooked) | clay `#f1ddcf` |
+| `chickenNuggets.png` | Chicken nuggets — Chicken, Breadcrumbs | clay `#f1ddcf` |
+| `chickenRiceVeg.png` | Chicken with rice and vegetables — Chicken, Basmati rice, Green peas | amber `#f4ead2` |
+| `chickenWings.png` | Chicken wings — Chicken | clay `#f1ddcf` |
+| `clubSandwich.png` | Club sandwich — Bread roll, Chicken, Bacon, Tomato (raw) | amber `#f4ead2` |
+| `coconutRice.png` | Coconut rice — Basmati rice, Coconut, Mustard seed, Curry leaf | amber `#f4ead2` |
+| `codRiceVeg.png` | Baked cod with rice and vegetables — Cod, Basmati rice, Broccoli | amber `#f4ead2` |
+| `curdRice.png` | Curd rice — Basmati rice, Yoghurt, Mustard seed, Curry leaf | amber `#f4ead2` |
+| `dalFry.png` | Dal fry — Toor dal, Tomato (cooked), Onion (cooked), Garlic, Cumin | clay `#f1ddcf` |
+| `fishCurryRice.png` | Fish curry with rice — Fish (freshwater), Basmati rice | amber `#f4ead2` |
+| `friedChicken.png` | Fried chicken — Chicken, Breadcrumbs | clay `#f1ddcf` |
+| `greekSalad.png` | Greek-style salad — Cucumber, Tomato (raw), Feta, Olives | vegetable `#e4ede2` |
+| `grilledCheeseSandwich.png` | Grilled cheese sandwich — Whole-wheat bread, Cheddar | amber `#f4ead2` |
+| `hotDog.png` | Hot dog — Sausage, Bread roll | clay `#f1ddcf` |
+| `hummusPitaPlate.png` | Hummus and pita plate — Pita bread, Hummus | amber `#f4ead2` |
+| `jeeraRice.png` | Jeera rice — Basmati rice, Cumin, Ghee | amber `#f4ead2` |
+| `katsuCurry.png` | Katsu curry — Pork, Breadcrumbs, Basmati rice, Carrot, Onion (cooked) | vegetable `#e4ede2` |
+| `lambCurryRice.png` | Lamb curry with rice — Lamb, Basmati rice | amber `#f4ead2` |
+| `lemonRice.png` | Lemon rice — Basmati rice, Lemon, Mustard seed, Curry leaf, Peanut | amber `#f4ead2` |
+| `lentilPastaVeg.png` | Lentil pasta with vegetables — Lentil pasta, Tomato (cooked) | clay `#f1ddcf` |
+| `meatballs.png` | Meatballs — Minced meat, Breadcrumbs, Onion (cooked) | clay `#f1ddcf` |
+| `mushroomPasta.png` | Mushroom pasta — Pasta, Mushroom, Garlic, Olive oil | amber `#f4ead2` |
+| `paneerPeasChapati.png` | Paneer and peas with chapati — Paneer, Green peas, Wheat | amber `#f4ead2` |
+| `pastaPesto.png` | Pasta with pesto — Pasta, Pesto | amber `#f4ead2` |
+| `peanutButterBananaToast.png` | Peanut butter and banana toast — Whole-wheat bread, Peanut butter, Banana | amber `#f4ead2` |
+| `potatoWithGhee.png` | Mashed potato — Potato | vegetable `#e4ede2` |
+| `rajmaMasala.png` | Rajma masala — Kidney beans, Tomato (cooked), Onion (cooked), Garlic, Cumin | vegetable `#e4ede2` |
+| `ricottaToast.png` | Ricotta toast with fruit — Whole-wheat bread, Ricotta | amber `#f4ead2` |
+| `salmonRiceGreens.png` | Salmon with rice and greens — Salmon, Basmati rice, Broccoli | amber `#f4ead2` |
+| `sardineToast.png` | Sardines on toast — Sardines, Whole-wheat bread | amber `#f4ead2` |
+| `shawarma.png` | Shawarma / doner kebab — Chicken, Pita bread, Onion (cooked), Garlic | clay `#f1ddcf` |
+| `spicedMilk.png` | Warm spiced milk — Cow’s milk | cream `#f3f0e7` |
+| `splitPeaSoup.png` | Split pea soup — Split peas | clay `#f1ddcf` |
+| `teriyakiChicken.png` | Teriyaki chicken — Chicken, Onion (cooked) | clay `#f1ddcf` |
+| `tofuStirFryRice.png` | Tofu stir-fry with rice — Tofu, Basmati rice, Bell pepper | amber `#f4ead2` |
+| `tomatoPasta.png` | Tomato pasta — Pasta, Tomato (cooked), Garlic, Olive oil | amber `#f4ead2` |
+| `tomatoRice.png` | Tomato rice — Basmati rice, Tomato (cooked), Onion (cooked), Mustard seed, Curry leaf | amber `#f4ead2` |
+| `tomatoSoup.png` | Tomato soup — Tomato (cooked) | clay `#f1ddcf` |
+| `tonkatsu.png` | Tonkatsu — Pork, Breadcrumbs | clay `#f1ddcf` |
+| `tunaSandwich.png` | Tuna sandwich — Tuna, Whole-wheat bread | amber `#f4ead2` |
+| `uradDalStew.png` | Slow-cooked urad dal — Urad dal | clay `#f1ddcf` |
+| `vegKorma.png` | Vegetable korma — Carrot, Green peas, Potato, Coconut, Cashew | vegetable `#e4ede2` |
+| `whiteBeanStew.png` | White bean stew — White beans, Tomato (cooked), Carrot | vegetable `#e4ede2` |
+
 ## 10. Decisions (was: open questions)
 
 - **Style key-frame** — ✅ `kitchari`. Approved 2026-08-24: overhead single matte stoneware bowl, painterly gouache, warm terracotta wash. It is now the reference — attach it to every following dish prompt. Note its wash runs a touch warmer/more saturated than the §3 hex; **match the key-frame, not the hex** — set consistency wins.
