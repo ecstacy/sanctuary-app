@@ -299,6 +299,20 @@ describe('composite meat dishes (category other) are excluded like whole meat', 
     expect(exclusionFor(fishDish, { patterns: ['vegetarian'] }).excluded).toBe(true)
     expect(exclusionFor(fishDish, { patterns: ['pescatarian'] }).excluded).toBe(false)
   })
+
+  it('a composite that CONTAINS egg or dairy is caught for veg/vegan', () => {
+    // Cake / french toast: category 'other', not an animal food, but contains
+    // egg + dairy. Used to slip veg/vegan entirely.
+    const eggDish   = { id: 'e', category: 'other', allergens: ['egg', 'gluten'], reviewStatus: 'reviewed' }
+    const dairyDish = { id: 'd', category: 'other', allergens: ['dairy'], reviewStatus: 'reviewed' }
+    // This app's "vegetarian" excludes egg; eggetarian (lacto-ovo) keeps it.
+    expect(exclusionFor(eggDish, { patterns: ['vegetarian'] }).excluded, 'egg→veg').toBe(true)
+    expect(exclusionFor(eggDish, { patterns: ['vegan'] }).excluded, 'egg→vegan').toBe(true)
+    expect(exclusionFor(eggDish, { patterns: ['eggetarian'] }).excluded, 'egg→eggetarian keeps').toBe(false)
+    // Dairy: out for vegan, fine for lacto-vegetarian.
+    expect(exclusionFor(dairyDish, { patterns: ['vegan'] }).excluded, 'dairy→vegan').toBe(true)
+    expect(exclusionFor(dairyDish, { patterns: ['vegetarian'] }).excluded, 'dairy→veg keeps').toBe(false)
+  })
 })
 
 describe('the exclusion path fails CLOSED, not open', () => {
