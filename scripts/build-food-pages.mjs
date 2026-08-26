@@ -32,12 +32,13 @@ const OUT_DIR = join(REPO, 'website', 'foods')
 const SITE = 'https://www.thesanctuaryteam.com'
 
 // Load canonical data (bundle in-memory — same trick as build-pose-pages.mjs).
-const { REVIEWED_INGREDIENTS, foodSuitability } = await (async () => {
+const { REVIEWED_INGREDIENTS, foodSuitability, VIRUDDHA_PAIRINGS, VIRUDDHA_NOTES } = await (async () => {
   const bundled = await esbuild.build({
     stdin: {
       contents:
         `export { REVIEWED_INGREDIENTS } from './src/lib/ingredients.js'\n` +
-        `export { foodSuitability } from './src/lib/doshaSemantics.js'\n`,
+        `export { foodSuitability } from './src/lib/doshaSemantics.js'\n` +
+        `export { VIRUDDHA_PAIRINGS, VIRUDDHA_NOTES } from './src/data/ayurveda/viruddhaAhara.js'\n`,
       resolveDir: REPO, loader: 'js',
     },
     bundle: true, format: 'cjs', platform: 'node', write: false, logLevel: 'silent',
@@ -46,6 +47,11 @@ const { REVIEWED_INGREDIENTS, foodSuitability } = await (async () => {
   new Function('module', 'exports', 'require', bundled.outputFiles[0].text)(mod, mod.exports, require)
   return mod.exports
 })()
+
+// Reviewed-only viruddha content — the /food-combinations guide reads ONLY this,
+// so nothing ships publicly until a human signs off in the review doc.
+const REVIEWED_PAIRINGS = VIRUDDHA_PAIRINGS.filter((p) => p.reviewStatus === 'reviewed')
+const REVIEWED_VNOTES = VIRUDDHA_NOTES.filter((n) => n.reviewStatus === 'reviewed')
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 const esc = (s) => String(s ?? '')
@@ -458,6 +464,80 @@ ${groupList(easeOff)}
 ` + footer()
 }
 
+// ── Food-combinations guide (viruddha āhāra) ────────────────────────────────
+// Reviewed pairings only. Answers "can I eat X with Y" — a query cluster generic
+// food sites don't cover. Emitted only when there IS reviewed content.
+const SEVERITY_LABEL = {
+  classical: 'Classical', traditional: 'Traditional', modern: 'Modern application',
+}
+function combinationsPage() {
+  const canonical = `${SITE}/food-combinations`
+  const title = 'Ayurvedic food combinations to avoid (viruddha āhāra) | The Sanctuary'
+  const description = `${REVIEWED_PAIRINGS.length} incompatible food combinations from the classical Ayurvedic texts — milk with fish, honey heated, curd with fruit — with why, and a safer alternative for each.`
+  const cite = (s) => s?.text ? ` <span class="src">— ${esc(SOURCE_LABEL[s.text] || s.text)}${s.verse ? ` ${esc(s.verse)}` : ''}</span>` : ''
+
+  const pairItems = REVIEWED_PAIRINGS.map((p) => `      <article class="combo">
+        <h3>${esc(p.a)} + ${esc(p.b)} <span class="sev sev-${p.severity}">${esc(SEVERITY_LABEL[p.severity] || p.severity)}</span></h3>
+        <p>${esc(p.reason)}${cite(p.source)}</p>
+        <p class="swap"><strong>Instead:</strong> ${esc(p.saferSwap)}</p>
+      </article>`).join('\n')
+
+  const noteItems = REVIEWED_VNOTES.map((n) => `      <article class="combo">
+        <h3><span class="sev sev-${n.severity}">${esc(SEVERITY_LABEL[n.severity] || n.severity)}</span></h3>
+        <p>${esc(n.reason)}${cite(n.source)}</p>
+        <p class="swap"><strong>Instead:</strong> ${esc(n.saferSwap)}</p>
+      </article>`).join('\n')
+
+  const faq = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: REVIEWED_PAIRINGS.slice(0, 10).map((p) => ({
+      '@type': 'Question',
+      name: `Can you eat ${p.a.toLowerCase()} with ${p.b.toLowerCase()}?`,
+      acceptedAnswer: { '@type': 'Answer', text: `${p.reason} ${p.saferSwap}` },
+    })),
+  }
+  const breadcrumb = {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
+      { '@type': 'ListItem', position: 2, name: 'Food combinations', item: canonical },
+    ],
+  }
+
+  return head({ title, description, canonical, jsonld: [breadcrumb, faq] }) + `
+<main>
+  <div class="wrap pose-page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span>
+      <span aria-current="page">Food combinations</span>
+    </nav>
+    <header class="pose-head">
+      <p class="kicker">Viruddha āhāra</p>
+      <h1>Food combinations to avoid</h1>
+      <p class="sub">Some foods are wholesome on their own but incompatible together.
+         These are the classical Ayurvedic pairings to keep apart — and what to do instead.
+         <a href="/foods/">Browse all foods →</a></p>
+    </header>
+    <section>
+      <h2>Incompatible pairings</h2>
+${pairItems}
+    </section>${noteItems ? `
+    <section>
+      <h2>How &amp; when it's taken</h2>
+${noteItems}
+    </section>` : ''}
+    <aside class="pose-cta">
+      <h2>Checked for you, in the app.</h2>
+      <p>The Sanctuary flags incompatible combinations in a meal automatically — and composes meals that avoid them.</p>
+      <p class="cta-note"><a href="/quiz">Take the dosha quiz →</a></p>
+    </aside>
+    <p class="disclaimer">General Ayurvedic guidance, not medical advice.</p>
+  </div>
+</main>
+` + footer()
+}
+
 // ── Emit ────────────────────────────────────────────────────────────────────
 const foods = REVIEWED_INGREDIENTS.slice().sort((a, b) => a.name.localeCompare(b.name))
 
@@ -479,6 +559,16 @@ for (const dosha of ['vata', 'pitta', 'kapha']) {
 for (const f of foods) {
   const related = foods.filter((r) => r.category === f.category && r.id !== f.id).slice(0, 6)
   await writeFile(join(OUT_DIR, `${foodSlug(f)}.html`), foodPage(f, related), 'utf8')
+}
+
+// Food-combinations guide — only when there is reviewed viruddha content, so
+// the page never ships empty or with unreviewed pairings. Lives at the site
+// root (/food-combinations), not under /foods/.
+if (REVIEWED_PAIRINGS.length > 0) {
+  await writeFile(join(REPO, 'website', 'food-combinations.html'), combinationsPage(), 'utf8')
+  console.log(`✓ food-combinations guide (${REVIEWED_PAIRINGS.length} pairings, ${REVIEWED_VNOTES.length} notes) → website/food-combinations.html`)
+} else {
+  console.log(`· food-combinations guide skipped — 0 reviewed viruddha pairings (see docs/diet-review-viruddha-ahara.md)`)
 }
 
 console.log(`✓ ${foods.length} food pages + hub + 3 dosha hubs → website/foods/`)

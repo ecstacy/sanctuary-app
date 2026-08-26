@@ -45,6 +45,7 @@ import DoshaEffectRows from '../components/DoshaEffectRows'
 import { resolveDietTarget, shouldExplainTarget } from '../lib/dietTarget'
 import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { DIET_DISCLAIMER } from '../lib/dietSafety'
+import { viruddhaForIngredient } from '../data/ayurveda/viruddhaAhara'
 import MedicalDisclaimer from '../components/MedicalDisclaimer'
 import FoodIcon from '../components/FoodIcon'
 import { track, EVENTS } from '../lib/track'
@@ -170,9 +171,14 @@ export default function IngredientDetailPage() {
     : (ingredient.whyFavor || ingredient.whyAvoid)
   const otherWhy = leadWhy === ingredient.whyFavor ? ingredient.whyAvoid : ingredient.whyFavor
 
+  // Structured viruddha āhāra (reviewed only) — empty until sign-off.
+  const viruddha = viruddhaForIngredient(ingredient)
+  const hasViruddha = viruddha.pairings.length > 0 || viruddha.notes.length > 0
+
   const hasPractice = ingredient.bestTime?.length || ingredient.bestSeason?.length
     || ingredient.preparation || ingredient.balancedBy?.length
     || ingredient.combosToAvoid?.length || ingredient.cautions?.length || ingredient.cautionNote
+    || hasViruddha
 
   return (
     <div className="min-h-screen bg-background text-on-surface font-body pb-24">
@@ -325,6 +331,32 @@ export default function IngredientDetailPage() {
                       <li key={c} className="font-body text-[15px] text-on-surface flex gap-2 leading-relaxed">
                         <span aria-hidden="true" className="material-symbols-outlined text-base text-on-surface-variant/50 mt-0.5">close</span>
                         {c}
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              )}
+
+              {/* Viruddha āhāra — incompatible combinations (reviewed only).
+                  Distinct from the free-text combosToAvoid above: structured,
+                  sourced pairings with a safer swap. */}
+              {hasViruddha && (
+                <Card>
+                  <p className="font-label text-[11px] text-on-surface-variant uppercase tracking-wider mb-2">{t('diet.viruddha.title', 'Avoid combining with')}</p>
+                  <ul className="flex flex-col gap-3">
+                    {viruddha.pairings.map(({ pairing, otherLabel }) => (
+                      <li key={pairing.id} className="font-body text-[15px] text-on-surface flex gap-2 leading-relaxed">
+                        <span aria-hidden="true" className="material-symbols-outlined text-base text-on-surface-variant/50 mt-0.5">block</span>
+                        <span>
+                          <span className="font-semibold">{otherLabel}</span> — {pairing.reason}{' '}
+                          <span className="text-on-surface-variant">{pairing.saferSwap}</span>
+                        </span>
+                      </li>
+                    ))}
+                    {viruddha.notes.map((n) => (
+                      <li key={n.id} className="font-body text-[15px] text-on-surface flex gap-2 leading-relaxed">
+                        <span aria-hidden="true" className="material-symbols-outlined text-base text-on-surface-variant/50 mt-0.5">schedule</span>
+                        <span>{n.reason} <span className="text-on-surface-variant">{n.saferSwap}</span></span>
                       </li>
                     ))}
                   </ul>

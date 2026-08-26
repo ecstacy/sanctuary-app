@@ -21,6 +21,7 @@
 
 import { REVIEWED_INGREDIENTS, getIngredient, searchIngredients } from './ingredients'
 import { exclusionFor } from './dietSafety'
+import { viruddhaInMeal } from '../data/ayurveda/viruddhaAhara'
 import { effectivePrimary, afterBaseline, isBalancedConstitution } from './doshaState'
 import { prepDeltaFor, impliedAdditionsFor } from './mealModifiers'
 import { PRANAYAMAS } from '../data/pranayamas'
@@ -495,17 +496,32 @@ export function remediesFor(assessment, { dietPrefs = {}, slot = null } = {}) {
 export function mealCombos(ids) {
   const items = (ids || []).map(getIngredient).filter(Boolean)
   const out = []
+  const seen = new Set()
+  const push = (a, b, note) => {
+    const key = [a, b].sort().join('|') + '::' + note
+    if (seen.has(key)) return
+    seen.add(key)
+    out.push({ a, b, note })
+  }
+
+  // (1) Free-text per-ingredient `combosToAvoid` — legacy, name-substring match.
   for (const a of items) {
     for (const warn of a.combosToAvoid || []) {
       const w = String(warn).toLowerCase()
       for (const b of items) {
         if (b.id === a.id) continue
         const names = [b.name, ...(b.aliases || [])].map((n) => n.toLowerCase())
-        if (names.some((n) => n.length > 2 && w.includes(n))) {
-          out.push({ a: a.id, b: b.id, note: warn })
-        }
+        if (names.some((n) => n.length > 2 && w.includes(n))) push(a.id, b.id, warn)
       }
     }
   }
+
+  // (2) Structured viruddha āhāra pairings (reviewed only) — tag-matched, so
+  // they catch e.g. milk with ANY sour fruit. Note carries reason + safer swap.
+  for (const { pairing, aFood, bFood } of viruddhaInMeal(items)) {
+    const note = `${pairing.a} with ${pairing.b}: ${pairing.reason} ${pairing.saferSwap}`
+    push(aFood.id, bFood.id, note)
+  }
+
   return out
 }
