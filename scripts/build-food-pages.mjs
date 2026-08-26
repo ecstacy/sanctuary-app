@@ -129,6 +129,7 @@ ${(Array.isArray(jsonld) ? jsonld : jsonld ? [jsonld] : [])
     <nav class="nav-links">
       <a href="/foods/">Foods</a>
       <a href="/poses/">Poses</a>
+      <a href="/guides/">Guides</a>
       <a href="/quiz">Dosha quiz</a>
       <a href="/support">Support</a>
     </nav>

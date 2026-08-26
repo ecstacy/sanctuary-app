@@ -630,6 +630,10 @@
   <url><loc>https://www.thesanctuaryteam.com/foods/wine</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/yoghurt</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/zucchini</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/guides/</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/guides/how-to-eat-for-your-dosha</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/guides/six-tastes-of-ayurveda</loc><priority>0.6</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/guides/what-is-your-dosha</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/de/poses/accomplished-pose</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/poses/accomplished-pose"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/poses/accomplished-pose"/>
