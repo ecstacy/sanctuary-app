@@ -40,13 +40,14 @@ const SITE = 'https://www.thesanctuaryteam.com'
 
 // ── Load canonical data (asanas.js imports a Vite-only specifier, so bundle
 //    it in-memory with esbuild first — same trick as generate-voice.mjs) ──
-const { ASANAS, IMAGE_FILES, getDoshaTag, REVIEWED_INGREDIENTS } = await (async () => {
+const { ASANAS, IMAGE_FILES, getDoshaTag, REVIEWED_INGREDIENTS, practiceSuitability, SUITABILITY } = await (async () => {
   const bundled = await esbuild.build({
     stdin: {
       contents:
         `export { ASANAS, getDoshaTag } from './src/data/asanas.js'\n` +
         `export { IMAGE_FILES } from './src/data/poseManifest.js'\n` +
-        `export { REVIEWED_INGREDIENTS } from './src/lib/ingredients.js'\n`,
+        `export { REVIEWED_INGREDIENTS } from './src/lib/ingredients.js'\n` +
+        `export { practiceSuitability, SUITABILITY } from './src/lib/doshaSemantics.js'\n`,
       resolveDir: REPO,
       loader: 'js',
     },
@@ -324,6 +325,40 @@ const ctaBlock = (a, lang) => {
       </aside>`
 }
 
+// Cross-link a pose to the food side of the same balance — the dosha(s) it
+// calms → the food hubs that calm them + the eating guide. Threads the three
+// content pillars (poses ↔ foods ↔ guides) around the shared dosha lens.
+const CROSSLINK_UI = {
+  en: { title: 'Balance it off the mat, too', body: 'Poses and food are two sides of the same balance. Calm the same dosha on your plate:',
+        hub: { vata: 'Best foods for Vata', pitta: 'Best foods for Pitta', kapha: 'Best foods for Kapha' },
+        hubSub: { vata: 'Warm, moist, grounding', pitta: 'Cool, sweet, calming', kapha: 'Light, warm, pungent' },
+        guide: 'How to eat for your dosha', guideSub: 'A practical guide' },
+  de: { title: 'Bring es auch abseits der Matte ins Gleichgewicht', body: 'Haltungen und Ernährung sind zwei Seiten derselben Balance. Beruhige dasselbe Dosha auf dem Teller:',
+        hub: { vata: 'Beste Lebensmittel für Vata', pitta: 'Beste Lebensmittel für Pitta', kapha: 'Beste Lebensmittel für Kapha' },
+        hubSub: { vata: 'Warm, feucht, erdend', pitta: 'Kühl, süß, beruhigend', kapha: 'Leicht, warm, scharf' },
+        guide: 'Wie du für dein Dosha isst', guideSub: 'Ein praktischer Leitfaden (Englisch)' },
+  hi: { title: 'इसे मैट से परे भी संतुलित करें', body: 'आसन और आहार एक ही संतुलन के दो पहलू हैं। उसी दोष को थाली में शांत करें:',
+        hub: { vata: 'वात के लिए सर्वोत्तम आहार', pitta: 'पित्त के लिए सर्वोत्तम आहार', kapha: 'कफ़ के लिए सर्वोत्तम आहार' },
+        hubSub: { vata: 'गर्म, नम, स्थिर', pitta: 'ठंडा, मीठा, शांत', kapha: 'हल्का, गर्म, तीखा' },
+        guide: 'अपने दोष के लिए कैसे खाएँ', guideSub: 'एक व्यावहारिक गाइड (अंग्रेज़ी)' },
+}
+function foodCrossLink(base, lang) {
+  const u = CROSSLINK_UI[lang]
+  let doshas = ['vata', 'pitta', 'kapha'].filter((d) => suitCode(base, d) === 'b')
+  if (!doshas.length) doshas = ['vata', 'pitta', 'kapha']  // a caution-only pose: still offer the eating side
+  const items = doshas.map((d) =>
+    `<li><a href="/foods/for-${d}">${esc(u.hub[d])}<span>${esc(u.hubSub[d])}</span></a></li>`).join('')
+  return `
+      <section class="pose-crosslink">
+        <h2>${esc(u.title)}</h2>
+        <p class="pose-note">${esc(u.body)}</p>
+        <ul class="pose-related">
+          ${items}
+          <li><a href="/guides/how-to-eat-for-your-dosha">${esc(u.guide)}<span>${esc(u.guideSub)}</span></a></li>
+        </ul>
+      </section>`
+}
+
 // ── Single pose page ────────────────────────────────────────────────────────
 function posePage(base, related, lang) {
   const a = localizeAsana(base, lang)
@@ -427,6 +462,7 @@ ${doshaRows}
         </table>
         ${base.bodyParts?.length ? `<p class="pose-meta"><strong>${esc(t.bodyFocus)}</strong> ${esc(base.bodyParts.map(titleCase).join(', '))}</p>` : ''}
       </section>
+${foodCrossLink(base, lang)}
 
       ${a.contraindications?.length ? `<section class="pose-safety">
         <h2>${esc(t.whoAvoid)}</h2>
@@ -456,8 +492,21 @@ ${ctaBlock(a, lang)}
 }
 
 // ── Index page ──────────────────────────────────────────────────────────────
+// Localized filter-bar strings (dosha names stay Latin, as elsewhere).
+const FILTER_UI = {
+  en: { search: 'Search poses…', all: 'All', good: (d) => `Good for ${d}`, one: 'pose', many: 'poses', empty: 'No poses match those filters.', clear: 'Clear filters', browse: 'Browse all poses', byDosha: 'Filter by dosha', byCat: 'Filter by category' },
+  de: { search: 'Haltungen suchen…', all: 'Alle', good: (d) => `Gut für ${d}`, one: 'Haltung', many: 'Haltungen', empty: 'Keine Haltungen entsprechen diesen Filtern.', clear: 'Filter zurücksetzen', browse: 'Alle Haltungen durchsuchen', byDosha: 'Nach Dosha filtern', byCat: 'Nach Kategorie filtern' },
+  hi: { search: 'आसन खोजें…', all: 'सभी', good: (d) => `${d} के लिए अच्छा`, one: 'आसन', many: 'आसन', empty: 'इन फ़िल्टरों से कोई आसन मेल नहीं खाता।', clear: 'फ़िल्टर हटाएँ', browse: 'सभी आसन देखें', byDosha: 'दोष अनुसार फ़िल्टर', byCat: 'श्रेणी अनुसार फ़िल्टर' },
+}
+// Sign-safe pose→dosha suitability code for a data attribute. 'b' balancing.
+const suitCode = (a, d) => {
+  const s = practiceSuitability(a.doshaAffinity?.[d])
+  return s === SUITABILITY.BALANCING ? 'b' : s === SUITABILITY.CAUTION ? 'c' : 'n'
+}
+
 function indexPage(byCategory, lang) {
   const t = UI[lang]
+  const f = FILTER_UI[lang]
   const p = prefix(lang)
   const total = asanas.length
   const jsonld = {
@@ -465,21 +514,24 @@ function indexPage(byCategory, lang) {
     name: UI[lang].nav.poses, description: t.idxDesc(total), url: `${SITE}${p}/poses/`, inLanguage: lang,
   }
 
-  const sections = Object.keys(byCategory).sort().map((cat) => `
-      <section>
-        <h2 id="${slugify(cat)}">${esc(catLabel(cat, lang))} <span class="cat-count">${byCategory[cat].length}</span></h2>
-        <ul class="pose-grid">
-          ${byCategory[cat].map((base) => {
-            const a = localizeAsana(base, lang)
-            const img = imageFor(base.poseKey)
-            return `<li><a href="${p}/poses/${slugOf(base)}">
-              ${img ? `<img src="/assets/poses/${esc(img)}" alt="" width="120" height="120" loading="lazy">` : '<span class="pose-thumb-blank" aria-hidden="true"></span>'}
-              <span class="pose-grid-name">${esc(a.english)}</span>
-              <span class="pose-grid-sans">${esc(a.sanskrit || '')}</span>
-            </a></li>`
-          }).join('')}
-        </ul>
-      </section>`).join('')
+  const cats = Object.keys(byCategory).sort()
+  const catChips = cats.map((cat) =>
+    `<button type="button" class="chip" data-cat="${esc(cat)}">${esc(catLabel(cat, lang))} <span class="chip-n">${byCategory[cat].length}</span></button>`).join('')
+
+  // One flat grid of every pose, sorted by English name, each card carrying its
+  // category, searchable name, and sign-safe per-dosha suitability.
+  const cards = asanas.slice()
+    .map((base) => ({ base, a: localizeAsana(base, lang) }))
+    .sort((x, y) => x.a.english.localeCompare(y.a.english))
+    .map(({ base, a }) => {
+      const img = imageFor(base.poseKey)
+      const searchable = `${a.english} ${a.sanskrit || ''} ${(a.aliases || []).join(' ')}`.toLowerCase()
+      return `<li class="pose-card" data-name="${esc(searchable)}" data-cat="${esc(base.category)}" data-v="${suitCode(base, 'vata')}" data-p="${suitCode(base, 'pitta')}" data-k="${suitCode(base, 'kapha')}"><a href="${p}/poses/${slugOf(base)}">
+        ${img ? `<img src="/assets/poses/${esc(img)}" alt="" width="120" height="120" loading="lazy">` : '<span class="pose-thumb-blank" aria-hidden="true"></span>'}
+        <span class="pose-grid-name">${esc(a.english)}</span>
+        <span class="pose-grid-sans">${esc(a.sanskrit || '')}</span>
+      </a></li>`
+    }).join('')
 
   return head({ lang, title: t.idxTitle(total), description: t.idxDesc(total), altPath: '/poses/', jsonld }) + `
 <main>
@@ -491,9 +543,71 @@ function indexPage(byCategory, lang) {
     <p class="kicker">${esc(UI[lang].footer.poseLibrary)}</p>
     <h1>${esc(t.idxH1(total))}</h1>
     <p class="sub">${esc(t.idxSub)} <a href="${p}/quiz">${esc(t.findDosha)}</a></p>
-${sections}
+
+    <div class="lib-filters" id="poseFilters">
+      <input type="search" class="lib-search" id="poseSearch" placeholder="${esc(f.search)}" aria-label="${esc(f.search)}" autocomplete="off">
+      <div class="chip-row" role="group" aria-label="${esc(f.byDosha)}">
+        <button type="button" class="chip chip-dosha" data-dosha="v">${esc(f.good('Vata'))}</button>
+        <button type="button" class="chip chip-dosha" data-dosha="p">${esc(f.good('Pitta'))}</button>
+        <button type="button" class="chip chip-dosha" data-dosha="k">${esc(f.good('Kapha'))}</button>
+      </div>
+      <div class="chip-row" role="group" aria-label="${esc(f.byCat)}">
+        <button type="button" class="chip on" data-cat="">${esc(f.all)} <span class="chip-n">${total}</span></button>
+        ${catChips}
+      </div>
+    </div>
+    <p class="lib-count" id="poseCount" aria-live="polite">${total} ${f.many}</p>
+    <ul class="pose-grid" id="poseGrid">
+      ${cards}
+    </ul>
+    <p class="lib-empty" id="poseEmpty" hidden>${esc(f.empty)} <button type="button" class="linklike" id="poseReset">${esc(f.clear)}</button></p>
   </div>
 </main>
+<script>
+(function () {
+  var grid = document.getElementById('poseGrid');
+  if (!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.pose-card'));
+  var search = document.getElementById('poseSearch');
+  var countEl = document.getElementById('poseCount');
+  var emptyEl = document.getElementById('poseEmpty');
+  var ONE = ${JSON.stringify(f.one)}, MANY = ${JSON.stringify(f.many)};
+  var state = { q: '', cat: '', dosha: '' };
+  function apply() {
+    var q = state.q, shown = 0;
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      var ok = (!q || c.getAttribute('data-name').indexOf(q) !== -1)
+        && (!state.cat || c.getAttribute('data-cat') === state.cat)
+        && (!state.dosha || c.getAttribute('data-' + state.dosha) === 'b');
+      c.hidden = !ok; if (ok) shown++;
+    }
+    countEl.textContent = shown + ' ' + (shown === 1 ? ONE : MANY);
+    emptyEl.hidden = shown !== 0;
+  }
+  function setActive(row, btn) { row.querySelectorAll('.chip').forEach(function (b) { b.classList.remove('on'); }); if (btn) btn.classList.add('on'); }
+  if (search) search.addEventListener('input', function () { state.q = this.value.trim().toLowerCase(); apply(); });
+  document.querySelectorAll('#poseFilters [data-cat]').forEach(function (btn) {
+    btn.addEventListener('click', function () { state.cat = btn.getAttribute('data-cat'); setActive(btn.parentNode, btn); apply(); });
+  });
+  document.querySelectorAll('#poseFilters [data-dosha]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var d = btn.getAttribute('data-dosha');
+      if (state.dosha === d) { state.dosha = ''; btn.classList.remove('on'); }
+      else { state.dosha = d; setActive(btn.parentNode, btn); }
+      apply();
+    });
+  });
+  var reset = document.getElementById('poseReset');
+  if (reset) reset.addEventListener('click', function () {
+    state = { q: '', cat: '', dosha: '' };
+    if (search) search.value = '';
+    document.querySelectorAll('#poseFilters .chip').forEach(function (b) { b.classList.remove('on'); });
+    var all = document.querySelector('#poseFilters [data-cat=""]'); if (all) all.classList.add('on');
+    apply();
+  });
+})();
+</script>
 ` + footer(lang)
 }
 
