@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css?v=2">
+  <link rel="stylesheet" href="/assets/style.css?v=3">
   <link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/">
   <link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/">
   <link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/">
@@ -42,9 +42,10 @@
       <span>The Sanctuary</span>
     </a>
     <nav class="nav-links">
+      <a href="/hi/poses/">आसन</a>
+      <a href="/foods/">आहार</a>
+      <a href="/guides/">गाइड</a>
       <a href="/hi/quiz">दोष क्विज़</a>
-      <a href="#how">यह कैसे काम करता है</a>
-      <a href="#features">विशेषताएँ</a>
       <a href="/hi/support">सहायता</a>
       <span class="lang-switch" aria-label="भाषा">
         <a href="/">🇬🇧 EN</a>
@@ -80,9 +81,12 @@
           <p class="cta-note" style="margin-top:14px">जल्द आ रहा है — पहले Android, फिर iOS।</p>
         </div>
         <figure class="hero-gem">
-          <img src="/assets/hero-app-hi.png?v=2"
-               alt="Sanctuary ऐप एक व्यक्तिगत दोष रीडिंग दिखाते हुए — 40% वात, 40% पित्त, 20% कफ — एक चमकते रत्न के रूप में"
-               loading="eager" width="1092" height="1011">
+          <picture>
+            <source srcset="/assets/dosha-gem.webp" type="image/webp">
+            <img src="/assets/dosha-gem.png"
+                 alt="The Sanctuary का दोष रत्न — एक व्यक्तिगत आयुर्वेदिक प्रकृति रीडिंग, चमकते तरल-कांच के रत्न के रूप में"
+                 loading="eager" width="720" height="720">
+          </picture>
         </figure>
       </div>
     </div>
@@ -110,6 +114,23 @@
              बिछाएँ और प्ले दबाएँ — क्रम आपके लिए तय है।</p>
         </div>
       </div>
+    </section>
+
+    <section id="explore">
+      <p class="section-kicker">एक्सप्लोर करें</p>
+      <h2>योग और आयुर्वेद का एक जीवंत संग्रह।</h2>
+      <p class="sub" style="margin-bottom:22px">मुफ़्त में देखें — वही ज्ञान जिसे ऐप चुपचाप आपके लिए निजीकृत करता है।</p>
+      <ul class="explore-cards">
+        <li><a href="/hi/poses/"><span class="explore-emoji" aria-hidden="true">🧘</span><strong>76 योग आसन</strong><span>लाभ, सावधानियाँ और दोष प्रभाव — संस्कृत नहीं, तकलीफ़ से खोजें।</span></a></li>
+        <li><a href="/foods/"><span class="explore-emoji" aria-hidden="true">🌿</span><strong>520 आहार</strong><span>स्वाद, वीर्य, और हर आहार वात, पित्त व कफ़ को कैसे प्रभावित करता है। <em>(अंग्रेज़ी में)</em></span></a></li>
+        <li><a href="/guides/"><span class="explore-emoji" aria-hidden="true">📖</span><strong>आयुर्वेद गाइड</strong><span>आपका दोष क्या है, छह रस, और संतुलन के लिए कैसे खाएँ। <em>(अंग्रेज़ी में)</em></span></a></li>
+      </ul>
+      <p class="section-kicker" style="margin-top:30px">दोष अनुसार सर्वोत्तम आहार</p>
+      <ul class="pose-related">
+        <li><a href="/foods/for-vata">वात के लिए सर्वोत्तम आहार<span>गर्म, नम, स्थिर करने वाला</span></a></li>
+        <li><a href="/foods/for-pitta">पित्त के लिए सर्वोत्तम आहार<span>ठंडा, मीठा, शांत करने वाला</span></a></li>
+        <li><a href="/foods/for-kapha">कफ़ के लिए सर्वोत्तम आहार<span>हल्का, गर्म, तीखा</span></a></li>
+      </ul>
     </section>
 
     <section class="peek">

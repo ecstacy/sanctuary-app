@@ -244,7 +244,7 @@ const head = ({ lang, title, description, altPath, image, jsonld }) => {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css?v=2">
+  <link rel="stylesheet" href="/assets/style.css?v=3">
 ${alts.map((a) => `  <link rel="alternate" hreflang="${a.h}" href="${esc(a.href)}">`).join('\n')}
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">

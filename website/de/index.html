@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css?v=2">
+  <link rel="stylesheet" href="/assets/style.css?v=3">
   <link rel="alternate" hreflang="en" href="https://www.thesanctuaryteam.com/">
   <link rel="alternate" hreflang="de" href="https://www.thesanctuaryteam.com/de/">
   <link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/">
@@ -42,9 +42,10 @@
       <span>The Sanctuary</span>
     </a>
     <nav class="nav-links">
+      <a href="/de/poses/">Haltungen</a>
+      <a href="/foods/">Lebensmittel</a>
+      <a href="/guides/">Leitfäden</a>
       <a href="/de/quiz">Dosha-Quiz</a>
-      <a href="#how">So funktioniert's</a>
-      <a href="#features">Funktionen</a>
       <a href="/de/support">Support</a>
       <span class="lang-switch" aria-label="Sprache">
         <a href="/">🇬🇧 EN</a>
@@ -80,9 +81,12 @@
           <p class="cta-note" style="margin-top:14px">Bald verfügbar — zuerst Android, iOS folgt.</p>
         </div>
         <figure class="hero-gem">
-          <img src="/assets/hero-app-de.png?v=2"
-               alt="Die Sanctuary-App mit einer persönlichen Dosha-Lesung — 40 % Vata, 40 % Pitta, 20 % Kapha — als leuchtendes Juwel"
-               loading="eager" width="1092" height="1008">
+          <picture>
+            <source srcset="/assets/dosha-gem.webp" type="image/webp">
+            <img src="/assets/dosha-gem.png"
+                 alt="Das Dosha-Juwel von The Sanctuary — eine persönliche ayurvedische Konstitutions-Lesung als leuchtender Flüssigglas-Stein"
+                 loading="eager" width="720" height="720">
+          </picture>
         </figure>
       </div>
     </div>
@@ -112,6 +116,23 @@
              ist für dich erledigt.</p>
         </div>
       </div>
+    </section>
+
+    <section id="explore">
+      <p class="section-kicker">Entdecken</p>
+      <h2>Eine lebendige Bibliothek für Yoga &amp; Ayurveda.</h2>
+      <p class="sub" style="margin-bottom:22px">Frei zugänglich — dasselbe Wissen, das die App still für dich personalisiert.</p>
+      <ul class="explore-cards">
+        <li><a href="/de/poses/"><span class="explore-emoji" aria-hidden="true">🧘</span><strong>76 Yoga-Haltungen</strong><span>Vorteile, Vorsichtsmaßnahmen &amp; Dosha-Wirkung — durchsuchbar nach Beschwerden, nicht nach Sanskrit.</span></a></li>
+        <li><a href="/foods/"><span class="explore-emoji" aria-hidden="true">🌿</span><strong>520 Lebensmittel</strong><span>Geschmack, Wirkkraft und wie jedes Lebensmittel Vata, Pitta und Kapha beeinflusst. <em>(auf Englisch)</em></span></a></li>
+        <li><a href="/guides/"><span class="explore-emoji" aria-hidden="true">📖</span><strong>Ayurveda-Leitfäden</strong><span>Was dein Dosha ist, die sechs Geschmacksrichtungen und wie du ausgewogen isst. <em>(auf Englisch)</em></span></a></li>
+      </ul>
+      <p class="section-kicker" style="margin-top:30px">Beste Lebensmittel je Dosha</p>
+      <ul class="pose-related">
+        <li><a href="/foods/for-vata">Beste Lebensmittel für Vata<span>Warm, feucht, erdend</span></a></li>
+        <li><a href="/foods/for-pitta">Beste Lebensmittel für Pitta<span>Kühl, süß, beruhigend</span></a></li>
+        <li><a href="/foods/for-kapha">Beste Lebensmittel für Kapha<span>Leicht, warm, scharf</span></a></li>
+      </ul>
     </section>
 
     <section class="peek">
