@@ -67,6 +67,11 @@ const CATEGORY_ORDER = ['grain', 'legume', 'vegetable', 'fruit', 'dairy', 'spice
 
 const VIRYA_LABEL = { heating: 'Heating (uṣṇa)', cooling: 'Cooling (śīta)', neutral: 'Neutral' }
 
+// Resolve balancedBy ids → their reviewed entry, so pairings link to their page.
+const BY_ID = new Map(REVIEWED_INGREDIENTS.map((x) => [x.id, x]))
+// Classical text a citation points at — the authority signal generic food sites lack.
+const SOURCE_LABEL = { CS: 'Charaka Saṃhitā', SS: 'Suśruta Saṃhitā', AH: 'Aṣṭāṅga Hṛdaya' }
+
 // Sign-safe: foodSuitability maps the food's doshaEffect (-1/0/+1) to a verdict.
 const VERDICT = {
   balancing: { cls: 'pacify',   label: 'Balancing' },
@@ -272,6 +277,25 @@ ${doshaRows}
         <h2>Cautions</h2>
         ${list(f.cautions.map(titleCase))}
         ${f.cautionNote ? `<p class="pose-note">${esc(f.cautionNote)}</p>` : ''}
+      </section>` : ''}
+
+      ${f.preparation ? `<section>
+        <h2>How to prepare ${esc(f.name)}</h2>
+        <p>${esc(f.preparation)}</p>
+      </section>` : ''}
+
+      ${(() => {
+        const companions = (f.balancedBy || []).map((id) => BY_ID.get(id)).filter(Boolean)
+        return companions.length ? `<section>
+        <h2>Traditionally balanced with</h2>
+        <p class="pose-note">Classical pairings that make ${esc(f.name)} easier to digest or more balancing for the doshas.</p>
+        <ul class="related-list">${companions.map((c) => `<li><a href="/foods/${foodSlug(c)}">${esc(c.name)}</a></li>`).join('')}</ul>
+      </section>` : ''
+      })()}
+
+      ${f.source?.verse && SOURCE_LABEL[f.source.text] ? `<section>
+        <h2>In the classical texts</h2>
+        <p>${esc(f.name)} is attested in the <strong>${esc(SOURCE_LABEL[f.source.text])}</strong> (${esc(f.source.verse)})${f.source.note ? ` — ${esc(f.source.note)}` : ''}.</p>
       </section>` : ''}
 
       <p class="pose-source"><strong>${esc(confidence)}.</strong> ${f.confidence === 'high'
