@@ -341,7 +341,7 @@ ${doshaRows}
 function hubPage(foods) {
   const total = foods.length
   const title = `Ayurvedic food guide — ${total} foods for vata, pitta & kapha | The Sanctuary`
-  const description = `Browse ${total} foods with their taste, potency, and how each affects vata, pitta and kapha — the Ayurvedic lens for what to favour and what to ease off.`
+  const description = `Browse ${total} foods with their taste, potency, and how each affects vata, pitta and kapha — filter by category or by the dosha you want to calm.`
   const byCat = {}
   foods.forEach((f) => { (byCat[f.category] ||= []).push(f) })
   const jsonld = {
@@ -351,15 +351,17 @@ function hubPage(foods) {
     url: `${SITE}/foods/`,
     description,
   }
-  const sections = CATEGORY_ORDER.filter((c) => byCat[c]).map((c) => {
-    const items = byCat[c].slice().sort((a, b) => a.name.localeCompare(b.name))
-    return `      <section>
-        <h2>${esc(CATEGORY_LABEL[c])}</h2>
-        <ul class="pose-related">
-          ${items.map((f) => `<li><a href="/foods/${foodSlug(f)}">${esc(f.name)}<span>${esc((f.rasa || []).map(titleCase).join(', '))} · ${esc(f.virya)}</span></a></li>`).join('')}
-        </ul>
-      </section>`
-  }).join('\n')
+
+  // Category chips, in display order, with counts — only non-empty buckets.
+  const catChips = CATEGORY_ORDER.filter((c) => byCat[c]).map((c) =>
+    `<button type="button" class="chip" data-cat="${c}">${esc(CATEGORY_LABEL[c])} <span class="chip-n">${byCat[c].length}</span></button>`).join('')
+
+  // Every food as a filterable card, sorted alphabetically. data-* carry the
+  // dosha effect (sign-safe: -1 calms / +1 aggravates) so the dosha chips can
+  // filter without re-deriving anything.
+  const eff = (f, d) => (f.doshaEffect?.[d] ?? 0)
+  const cards = foods.slice().sort((a, b) => a.name.localeCompare(b.name)).map((f) =>
+    `<a class="food-card" href="/foods/${foodSlug(f)}" data-name="${esc(f.name.toLowerCase())}" data-cat="${esc(f.category)}" data-v="${eff(f, 'vata')}" data-p="${eff(f, 'pitta')}" data-k="${eff(f, 'kapha')}">${esc(f.name)}<span>${esc((f.rasa || []).map(titleCase).join(', '))}${f.virya ? ` · ${esc(f.virya)}` : ''}</span></a>`).join('')
 
   return head({ title, description, canonical: `${SITE}/foods/`, jsonld }) + `
 <main>
@@ -382,9 +384,79 @@ function hubPage(foods) {
         <li><a href="/foods/for-kapha">Best foods for Kapha<span>Light, warm, pungent</span></a></li>
       </ul>
     </section>
-${sections}
+
+    <section>
+      <h2>Browse all foods</h2>
+      <div class="lib-filters" id="foodFilters">
+        <input type="search" class="lib-search" id="foodSearch" placeholder="Search foods…" aria-label="Search foods" autocomplete="off">
+        <div class="chip-row" role="group" aria-label="Filter by dosha">
+          <button type="button" class="chip chip-dosha" data-dosha="v">Calms Vata</button>
+          <button type="button" class="chip chip-dosha" data-dosha="p">Calms Pitta</button>
+          <button type="button" class="chip chip-dosha" data-dosha="k">Calms Kapha</button>
+        </div>
+        <div class="chip-row" role="group" aria-label="Filter by category">
+          <button type="button" class="chip on" data-cat="">All <span class="chip-n">${total}</span></button>
+          ${catChips}
+        </div>
+      </div>
+      <p class="lib-count" id="foodCount" aria-live="polite">${total} foods</p>
+      <div class="food-grid" id="foodGrid">
+        ${cards}
+      </div>
+      <p class="lib-empty" id="foodEmpty" hidden>No foods match those filters. <button type="button" class="linklike" id="foodReset">Clear filters</button></p>
+    </section>
   </div>
 </main>
+<script>
+(function () {
+  var grid = document.getElementById('foodGrid');
+  if (!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.food-card'));
+  var search = document.getElementById('foodSearch');
+  var countEl = document.getElementById('foodCount');
+  var emptyEl = document.getElementById('foodEmpty');
+  var state = { q: '', cat: '', dosha: '' };
+
+  function apply() {
+    var q = state.q, shown = 0;
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      var ok = (!q || c.getAttribute('data-name').indexOf(q) !== -1)
+        && (!state.cat || c.getAttribute('data-cat') === state.cat)
+        && (!state.dosha || parseInt(c.getAttribute('data-' + state.dosha), 10) < 0);
+      c.hidden = !ok;
+      if (ok) shown++;
+    }
+    countEl.textContent = shown + (shown === 1 ? ' food' : ' foods');
+    emptyEl.hidden = shown !== 0;
+  }
+  function setActive(row, btn) {
+    row.querySelectorAll('.chip').forEach(function (b) { b.classList.remove('on'); });
+    if (btn) btn.classList.add('on');
+  }
+
+  if (search) search.addEventListener('input', function () { state.q = this.value.trim().toLowerCase(); apply(); });
+  document.querySelectorAll('#foodFilters [data-cat]').forEach(function (btn) {
+    btn.addEventListener('click', function () { state.cat = btn.getAttribute('data-cat'); setActive(btn.parentNode, btn); apply(); });
+  });
+  document.querySelectorAll('#foodFilters [data-dosha]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var d = btn.getAttribute('data-dosha');
+      if (state.dosha === d) { state.dosha = ''; btn.classList.remove('on'); }
+      else { state.dosha = d; setActive(btn.parentNode, btn); }
+      apply();
+    });
+  });
+  var reset = document.getElementById('foodReset');
+  if (reset) reset.addEventListener('click', function () {
+    state = { q: '', cat: '', dosha: '' };
+    if (search) search.value = '';
+    document.querySelectorAll('#foodFilters .chip').forEach(function (b) { b.classList.remove('on'); });
+    var all = document.querySelector('#foodFilters [data-cat=""]'); if (all) all.classList.add('on');
+    apply();
+  });
+})();
+</script>
 ` + footer()
 }
 

@@ -199,6 +199,45 @@ a[data-play-link] { visibility: hidden; }
   @keyframes gem-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 }
 
+/* Library filter bar + grid — shared by /foods and /poses hubs. */
+.lib-filters { display: flex; flex-direction: column; gap: 12px; margin: 4px 0 6px; }
+.lib-search {
+  width: 100%; box-sizing: border-box; padding: 12px 16px;
+  border-radius: 12px; border: 1px solid var(--outline);
+  background: var(--surface-low); color: var(--on-surface);
+  font-family: inherit; font-size: 0.95rem;
+}
+.lib-search:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  cursor: pointer; white-space: nowrap;
+  padding: 7px 14px; border-radius: 999px;
+  border: 1px solid var(--outline); background: transparent;
+  color: var(--on-surface-variant); font-family: inherit; font-size: 0.83rem; font-weight: 600;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.chip:hover { background: var(--surface-low); }
+.chip.on { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.chip-dosha.on { background: var(--secondary); border-color: var(--secondary); color: #fff; }
+.chip-n { opacity: 0.6; font-weight: 500; }
+.chip.on .chip-n { opacity: 0.8; }
+.lib-count { font-size: 0.82rem; color: var(--on-surface-variant); margin: 14px 0 10px; font-weight: 600; }
+.lib-empty { color: var(--on-surface-variant); font-size: 0.9rem; }
+.linklike { background: none; border: 0; padding: 0; color: var(--primary); font: inherit; cursor: pointer; text-decoration: underline; }
+.food-grid {
+  display: grid; gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+}
+.food-card {
+  display: block; padding: 13px 15px; border-radius: 12px;
+  background: var(--surface-low); border: 1px solid rgba(37, 39, 31, 0.06);
+  text-decoration: none; color: var(--on-surface); font-weight: 600; font-size: 0.92rem;
+  transition: background 0.12s, transform 0.12s;
+}
+.food-card:hover { background: var(--background); transform: translateY(-2px); }
+.food-card[hidden] { display: none; }
+.food-card span { display: block; font-weight: 400; font-size: 0.76rem; color: var(--on-surface-variant); margin-top: 3px; text-transform: capitalize; }
+
 /* Explore — three destination cards linking into the content library. */
 .explore-cards {
   list-style: none;
