@@ -1519,6 +1519,7 @@
       "filterAll": "सभी",
       "filterLabel": "श्रेणी से छाँटें",
       "resultCount": "{{count}} खाद्य पदार्थ",
+      "calmsYourDosha": "आपके {{dosha}} को शांत करता है",
       "noResults": "“{{query}}” से मेल नहीं मिला।",
       "clearFilters": "फ़िल्टर हटाएँ",
       "mealCheckEntry": "देखें कि कोई भोजन आपके दोषों पर क्या असर करता है",

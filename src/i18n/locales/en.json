@@ -1519,6 +1519,7 @@
       "filterAll": "All",
       "filterLabel": "Filter by category",
       "resultCount": "{{count}} foods",
+      "calmsYourDosha": "Calms your {{dosha}}",
       "noResults": "No foods match “{{query}}”.",
       "clearFilters": "Clear filters",
       "mealCheckEntry": "See what a meal does to your doshas",

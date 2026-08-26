@@ -13,6 +13,7 @@ import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { REVIEWED_INGREDIENTS, coverageStats } from '../lib/ingredients'
+import { foodSuitability, SUITABILITY } from '../lib/doshaSemantics'
 import { exclusionFor } from '../lib/dietSafety'
 import { useDietPrefs } from '../hooks/useDietPrefs'
 import { useAuth } from '../context/AuthContext'
@@ -70,6 +71,13 @@ function matchesQuery(ing, q) {
 
 function matchesAttrs(ing, attrs) {
   for (const token of attrs) {
+    // `d:<dosha>` — foods that CALM that dosha (the personalized "for you"
+    // filter). Sign-safe via foodSuitability.
+    if (token.startsWith('d:')) {
+      const dosha = token.slice(2)
+      if (foodSuitability(ing.doshaEffect?.[dosha]) !== SUITABILITY.BALANCING) return false
+      continue
+    }
     const f = ATTR_FILTERS.find((a) => a.token === token)
     if (!f) continue
     if (f.kind === 'virya' && ing.virya !== f.value) return false
@@ -111,13 +119,20 @@ function FoodCard({ ing, dietPrefs, t, navigate }) {
 export default function DiscoverFoodsPage() {
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { user } = useAuth()
+  const { user, profile } = useAuth()
   const { prefs: dietPrefs } = useDietPrefs()
 
   const [query, setQuery] = useState('')
   const [activeCat, setActiveCat] = useState(ALL)
   const [activeAttrs, setActiveAttrs] = useState(() => new Set())
   const q = query.trim().toLowerCase()
+
+  // The user's constitution — powers the personalized "calms your dosha" filter.
+  // Only a single-dosha primary gets a chip; tridoshic/dual have no one axis to
+  // calm, so they fall back to the plain potency/taste refiners.
+  const primary = String(profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
+  const userDosha = ['vata', 'pitta', 'kapha'].includes(primary) ? primary : null
+  const doshaToken = userDosha ? `d:${userDosha}` : null
 
   const coverage = useMemo(() => coverageStats(), [])
 
@@ -259,8 +274,29 @@ export default function DiscoverFoodsPage() {
           ))}
         </div>
 
-        {/* Row 2 — attribute refiners (potency + taste), multi-select. */}
+        {/* Row 2 — attribute refiners (potency + taste), multi-select. The
+            personalized "calms your dosha" chip leads when we know the user's
+            constitution — the in-app twin of the website's /foods/for-<dosha>. */}
         <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-1 px-1 mt-2 pb-0.5">
+          {doshaToken && (() => {
+            const on = activeAttrs.has(doshaToken)
+            const doshaLabel = t(`diet.dosha.${userDosha}`)
+            return (
+              <button
+                key={doshaToken}
+                aria-pressed={on}
+                onClick={() => toggleAttr(doshaToken)}
+                className={`shrink-0 whitespace-nowrap rounded-full pl-2.5 pr-3.5 py-1.5 font-body text-xs font-semibold border transition-colors inline-flex items-center gap-1 ${
+                  on
+                    ? 'bg-primary border-primary text-on-primary'
+                    : 'bg-transparent border-primary/50 text-primary active:bg-primary-container/40'
+                }`}
+              >
+                <span aria-hidden="true" className="material-symbols-outlined text-[15px]" style={{ fontVariationSettings: on ? "'FILL' 1" : "'FILL' 0" }}>self_improvement</span>
+                {t('discover.foods.calmsYourDosha', { dosha: doshaLabel, defaultValue: `Calms your ${doshaLabel}` })}
+              </button>
+            )
+          })()}
           {ATTR_FILTERS.map((f) => {
             const on = activeAttrs.has(f.token)
             return (
