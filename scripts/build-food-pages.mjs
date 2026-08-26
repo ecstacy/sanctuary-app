@@ -365,7 +365,94 @@ function hubPage(foods) {
       <p class="sub">${total} foods with their taste, potency, and how each affects
          vata, pitta and kapha. <a href="/quiz">Find your dosha →</a></p>
     </header>
+    <section>
+      <h2>Best foods by dosha</h2>
+      <ul class="pose-related">
+        <li><a href="/foods/for-vata">Best foods for Vata<span>Warm, moist, grounding</span></a></li>
+        <li><a href="/foods/for-pitta">Best foods for Pitta<span>Cool, sweet, calming</span></a></li>
+        <li><a href="/foods/for-kapha">Best foods for Kapha<span>Light, warm, pungent</span></a></li>
+      </ul>
+    </section>
 ${sections}
+  </div>
+</main>
+` + footer()
+}
+
+// ── Per-dosha hub ("best foods for pitta") ──────────────────────────────────
+// The three highest-volume queries in the niche, built by filtering the corpus
+// on each food's suitability — pure dataset leverage, and a linked cluster
+// around the food pages.
+const DOSHA_INTRO = {
+  vata:  'Vata is dry, light, cold and mobile. To calm it, favour warm, moist, grounding and lightly oily foods — and ease off dry, cold, raw and airy ones.',
+  pitta: 'Pitta is hot, sharp, oily and intense. To cool it, favour cooling, sweet and mildly bitter or astringent foods — and ease off hot, sour, salty and fried ones.',
+  kapha: 'Kapha is heavy, cold, oily and stable. To lighten it, favour light, warm, dry and pungent foods — and ease off heavy, sweet, cold and oily ones.',
+}
+
+function doshaHubPage(dosha, foods) {
+  const D = titleCase(dosha)
+  const favour = foods.filter((f) => foodSuitability(f.doshaEffect?.[dosha]) === 'balancing')
+  const easeOff = foods.filter((f) => foodSuitability(f.doshaEffect?.[dosha]) === 'caution')
+  const canonical = `${SITE}/foods/for-${dosha}`
+  const title = `Best foods for ${D} — what to favour & avoid (Ayurveda) | The Sanctuary`
+  const description = `${favour.length} foods that calm ${D} and ${easeOff.length} to ease off, from the classical Ayurvedic lens — grouped by taste, potency and how each affects the doshas.`
+  const eg = (arr) => arr.slice(0, 8).map((f) => f.name).join(', ')
+
+  const jsonld = [
+    { '@context': 'https://schema.org', '@type': 'CollectionPage', name: `Best foods for ${D}`, url: canonical, description },
+    {
+      '@context': 'https://schema.org', '@type': 'FAQPage',
+      mainEntity: [
+        { '@type': 'Question', name: `What foods are good for ${D}?`, acceptedAnswer: { '@type': 'Answer', text: `${DOSHA_INTRO[dosha]} Foods that calm ${D} include ${eg(favour)}.` } },
+        { '@type': 'Question', name: `What foods aggravate ${D}?`, acceptedAnswer: { '@type': 'Answer', text: `Go easy on foods that raise ${D}, such as ${eg(easeOff)}.` } },
+      ],
+    },
+  ]
+
+  const groupList = (arr) => CATEGORY_ORDER.filter((c) => arr.some((f) => f.category === c)).map((c) => {
+    const items = arr.filter((f) => f.category === c).sort((a, b) => a.name.localeCompare(b.name))
+    return `      <section>
+        <h3>${esc(CATEGORY_LABEL[c])}</h3>
+        <ul class="pose-related">
+          ${items.map((f) => `<li><a href="/foods/${foodSlug(f)}">${esc(f.name)}<span>${esc((f.rasa || []).map(titleCase).join(', '))} · ${esc(f.virya)}</span></a></li>`).join('')}
+        </ul>
+      </section>`
+  }).join('\n')
+
+  return head({ title, description, canonical, jsonld }) + `
+<main>
+  <div class="wrap pose-page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span>
+      <a href="/foods/">Foods</a> <span aria-hidden="true">/</span>
+      <span aria-current="page">For ${esc(D)}</span>
+    </nav>
+    <header class="pose-head">
+      <p class="kicker">Ayurvedic food guide</p>
+      <h1>Best foods for ${esc(D)}</h1>
+      <p class="pose-lede">${esc(DOSHA_INTRO[dosha])}</p>
+      <p class="pose-note">These lists come from the same reviewed dataset the app uses.
+         Your ideal plate depends on your whole constitution and the season — <a href="/quiz">find your dosha →</a>.</p>
+    </header>
+
+    <article>
+      <section>
+        <h2>Foods that calm ${esc(D)} <span class="count">(${favour.length})</span></h2>
+${groupList(favour)}
+      </section>
+
+      ${easeOff.length ? `<section class="pose-safety">
+        <h2>Go easy on these when ${esc(D)} is high <span class="count">(${easeOff.length})</span></h2>
+${groupList(easeOff)}
+      </section>` : ''}
+
+      <aside class="pose-cta">
+        <p class="section-kicker">Eat for your ${esc(D)}</p>
+        <h2>Personalised in the app.</h2>
+        <p>The Sanctuary composes daily meals around your dosha and the season — not a generic list.</p>
+        <p class="cta-note"><a href="/foods/">← Browse all foods</a> &nbsp;·&nbsp; <a href="/quiz">Take the dosha quiz →</a></p>
+      </aside>
+    </article>
   </div>
 </main>
 ` + footer()
@@ -386,9 +473,12 @@ for (const f of foods) {
 }
 
 await writeFile(join(OUT_DIR, 'index.html'), hubPage(foods), 'utf8')
+for (const dosha of ['vata', 'pitta', 'kapha']) {
+  await writeFile(join(OUT_DIR, `for-${dosha}.html`), doshaHubPage(dosha, foods), 'utf8')
+}
 for (const f of foods) {
   const related = foods.filter((r) => r.category === f.category && r.id !== f.id).slice(0, 6)
   await writeFile(join(OUT_DIR, `${foodSlug(f)}.html`), foodPage(f, related), 'utf8')
 }
 
-console.log(`✓ ${foods.length} food pages + hub → website/foods/`)
+console.log(`✓ ${foods.length} food pages + hub + 3 dosha hubs → website/foods/`)

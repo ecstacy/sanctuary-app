@@ -107,6 +107,9 @@
     <xhtml:link rel="alternate" hreflang="hi" href="https://www.thesanctuaryteam.com/hi/terms"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thesanctuaryteam.com/terms"/><priority>0.3</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/</loc><priority>0.8</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/for-vata</loc><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/for-pitta</loc><priority>0.7</priority></url>
+  <url><loc>https://www.thesanctuaryteam.com/foods/for-kapha</loc><priority>0.7</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/affogato</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/aglio-e-olio-pasta</loc><priority>0.6</priority></url>
   <url><loc>https://www.thesanctuaryteam.com/foods/aioli</loc><priority>0.6</priority></url>

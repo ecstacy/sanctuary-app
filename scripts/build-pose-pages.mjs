@@ -597,6 +597,8 @@ poseUrls.sort((a, b) => a.loc.localeCompare(b.loc))
 // ingredient dataset isn't translated yet. Sitemap owned here.)
 const foodUrls = [
   { loc: `${SITE}/foods/`, priority: '0.8' },
+  // Per-dosha hubs ("best foods for pitta") — high-intent, high priority.
+  ...['vata', 'pitta', 'kapha'].map((d) => ({ loc: `${SITE}/foods/for-${d}`, priority: '0.7' })),
   ...REVIEWED_INGREDIENTS
     .map((f) => ({ loc: `${SITE}/foods/${slugify(f.name)}`, priority: '0.6' }))
     .sort((a, b) => a.loc.localeCompare(b.loc)),
