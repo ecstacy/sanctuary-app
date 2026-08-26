@@ -32,13 +32,15 @@ const OUT_DIR = join(REPO, 'website', 'foods')
 const SITE = 'https://www.thesanctuaryteam.com'
 
 // Load canonical data (bundle in-memory — same trick as build-pose-pages.mjs).
-const { REVIEWED_INGREDIENTS, foodSuitability, VIRUDDHA_PAIRINGS, VIRUDDHA_NOTES } = await (async () => {
+const { REVIEWED_INGREDIENTS, foodSuitability, VIRUDDHA_PAIRINGS, VIRUDDHA_NOTES,
+        SEASON_GUIDANCE, reviewedSeasons, seasonalFoods } = await (async () => {
   const bundled = await esbuild.build({
     stdin: {
       contents:
         `export { REVIEWED_INGREDIENTS } from './src/lib/ingredients.js'\n` +
         `export { foodSuitability } from './src/lib/doshaSemantics.js'\n` +
-        `export { VIRUDDHA_PAIRINGS, VIRUDDHA_NOTES } from './src/data/ayurveda/viruddhaAhara.js'\n`,
+        `export { VIRUDDHA_PAIRINGS, VIRUDDHA_NOTES } from './src/data/ayurveda/viruddhaAhara.js'\n` +
+        `export { SEASON_GUIDANCE, reviewedSeasons, seasonalFoods } from './src/data/ayurveda/rtucharya.js'\n`,
       resolveDir: REPO, loader: 'js',
     },
     bundle: true, format: 'cjs', platform: 'node', write: false, logLevel: 'silent',
@@ -538,6 +540,63 @@ ${noteItems}
 ` + footer()
 }
 
+// ── Seasonal guide (ṛtucharyā) ──────────────────────────────────────────────
+// Reviewed seasons only. Favour/ease-off lists are DERIVED from the season's
+// dosha via the already-reviewed foodSuitability — no new food claims.
+function seasonalHubPage(season, foods) {
+  const g = SEASON_GUIDANCE[season]
+  const { favour, easeOff } = seasonalFoods(season, foods)
+  const Cap = titleCase(season)
+  const canonical = `${SITE}/foods/seasonal/${season}`
+  const title = `What to eat in ${Cap} — seasonal Ayurvedic food guide (ṛtucharyā) | The Sanctuary`
+  const description = `${g.intro} ${favour.length} foods to favour and ${easeOff.length} to ease off this ${season}.`
+  const cite = g.source?.text ? ` <span class="src">— ${esc(SOURCE_LABEL[g.source.text] || g.source.text)}${g.source.verse ? ` ${esc(g.source.verse)}` : ''}</span>` : ''
+  const list = (arr) => `<ul class="pose-related">${arr.slice().sort((a, b) => a.name.localeCompare(b.name))
+    .map((f) => `<li><a href="/foods/${foodSlug(f)}">${esc(f.name)}<span>${esc((f.rasa || []).map(titleCase).join(', '))} · ${esc(f.virya)}</span></a></li>`).join('')}</ul>`
+
+  const jsonld = [
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
+      { '@type': 'ListItem', position: 2, name: 'Ayurvedic food guide', item: `${SITE}/foods/` },
+      { '@type': 'ListItem', position: 3, name: `Eating in ${Cap}`, item: canonical },
+    ] },
+    { '@context': 'https://schema.org', '@type': 'CollectionPage', name: `What to eat in ${Cap}`, url: canonical, description },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [
+      { '@type': 'Question', name: `What should I eat in ${season}?`, acceptedAnswer: { '@type': 'Answer', text: g.intro } },
+    ] },
+  ]
+
+  return head({ title, description, canonical, jsonld }) + `
+<main>
+  <div class="wrap pose-page">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span>
+      <a href="/foods/">Foods</a> <span aria-hidden="true">/</span>
+      <span aria-current="page">Eating in ${esc(Cap)}</span>
+    </nav>
+    <header class="pose-head">
+      <p class="kicker">Ṛtucharyā · ${esc(g.ritu)}</p>
+      <h1>${esc(g.title)}</h1>
+      <p class="sub">${esc(g.intro)}${cite}</p>
+    </header>
+    <section>
+      <h2>Favour this ${esc(season)} <span class="count">${favour.length}</span></h2>
+      ${list(favour)}
+    </section>
+    <section>
+      <h2>Ease off this ${esc(season)} <span class="count">${easeOff.length}</span></h2>
+      ${list(easeOff)}
+    </section>
+    <aside class="pose-cta">
+      <h2>Meals for the season, in the app.</h2>
+      <p>The Sanctuary composes daily meals around your dosha AND the season — not a generic list.</p>
+      <p class="cta-note"><a href="/foods/">← Browse all foods</a> &nbsp;·&nbsp; <a href="/quiz">Take the dosha quiz →</a></p>
+    </aside>
+  </div>
+</main>
+` + footer()
+}
+
 // ── Emit ────────────────────────────────────────────────────────────────────
 const foods = REVIEWED_INGREDIENTS.slice().sort((a, b) => a.name.localeCompare(b.name))
 
@@ -569,6 +628,18 @@ if (REVIEWED_PAIRINGS.length > 0) {
   console.log(`✓ food-combinations guide (${REVIEWED_PAIRINGS.length} pairings, ${REVIEWED_VNOTES.length} notes) → website/food-combinations.html`)
 } else {
   console.log(`· food-combinations guide skipped — 0 reviewed viruddha pairings (see docs/diet-review-viruddha-ahara.md)`)
+}
+
+// Seasonal guides — only reviewed seasons, so none ship until sign-off.
+const seasons = reviewedSeasons()
+if (seasons.length > 0) {
+  await mkdir(join(OUT_DIR, 'seasonal'), { recursive: true })
+  for (const s of seasons) {
+    await writeFile(join(OUT_DIR, 'seasonal', `${s}.html`), seasonalHubPage(s, foods), 'utf8')
+  }
+  console.log(`✓ seasonal guides (${seasons.join(', ')}) → website/foods/seasonal/`)
+} else {
+  console.log(`· seasonal guides skipped — 0 reviewed seasons (see docs/diet-review-rtucharya.md)`)
 }
 
 console.log(`✓ ${foods.length} food pages + hub + 3 dosha hubs → website/foods/`)

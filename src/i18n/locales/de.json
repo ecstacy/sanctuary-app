@@ -1520,6 +1520,8 @@
       "filterLabel": "Nach Kategorie filtern",
       "resultCount": "{{count}} Lebensmittel",
       "calmsYourDosha": "Beruhigt dein {{dosha}}",
+      "inSeason": "Saison · {{season}}",
+      "seasons": { "spring": "Frühling", "summer": "Sommer", "autumn": "Herbst", "winter": "Winter" },
       "noResults": "Keine Treffer für „{{query}}“.",
       "clearFilters": "Filter zurücksetzen",
       "mealCheckEntry": "Sieh, was eine Mahlzeit mit deinen Doshas macht",

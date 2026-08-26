@@ -14,6 +14,8 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { REVIEWED_INGREDIENTS, coverageStats } from '../lib/ingredients'
 import { foodSuitability, SUITABILITY } from '../lib/doshaSemantics'
+import { seasonFor } from '../lib/dietTarget'
+import { seasonGuidance, seasonalDosha } from '../data/ayurveda/rtucharya'
 import { exclusionFor } from '../lib/dietSafety'
 import { useDietPrefs } from '../hooks/useDietPrefs'
 import { useVikritiSignal } from '../hooks/useVikritiSignal'
@@ -80,6 +82,14 @@ function matchesAttrs(ing, attrs) {
       if (foodSuitability(ing.doshaEffect?.[dosha]) !== SUITABILITY.BALANCING) return false
       continue
     }
+    // `s:<season>` — foods that suit the season, i.e. calm the season's dosha
+    // (ṛtucharyā). Only reviewed seasons resolve a dosha; else the token matches
+    // nothing rather than silently passing everything.
+    if (token.startsWith('s:')) {
+      const dosha = seasonalDosha(token.slice(2))
+      if (!dosha || foodSuitability(ing.doshaEffect?.[dosha]) !== SUITABILITY.BALANCING) return false
+      continue
+    }
     const f = ATTR_FILTERS.find((a) => a.token === token)
     if (!f) continue
     if (f.kind === 'virya' && ing.virya !== f.value) return false
@@ -138,6 +148,11 @@ export default function DiscoverFoodsPage() {
   const target = useMemo(() => resolveDietTarget({ vikriti, profile }), [vikriti, profile])
   const userDosha = ['vata', 'pitta', 'kapha'].includes(target.dosha) ? target.dosha : null
   const doshaToken = userDosha ? `d:${userDosha}` : null
+
+  // Seasonal (ṛtucharyā) chip — only when the CURRENT season is reviewed.
+  const currentSeason = seasonFor()
+  const seasonInfo = seasonGuidance(currentSeason)
+  const seasonToken = seasonInfo ? `s:${currentSeason}` : null
 
   const coverage = useMemo(() => coverageStats(), [])
 
@@ -299,6 +314,25 @@ export default function DiscoverFoodsPage() {
               >
                 <span aria-hidden="true" className="material-symbols-outlined text-[15px]" style={{ fontVariationSettings: on ? "'FILL' 1" : "'FILL' 0" }}>self_improvement</span>
                 {t('discover.foods.calmsYourDosha', { dosha: doshaLabel, defaultValue: `Calms your ${doshaLabel}` })}
+              </button>
+            )
+          })()}
+          {seasonToken && (() => {
+            const on = activeAttrs.has(seasonToken)
+            const seasonLabel = t(`discover.foods.seasons.${currentSeason}`, currentSeason)
+            return (
+              <button
+                key={seasonToken}
+                aria-pressed={on}
+                onClick={() => toggleAttr(seasonToken)}
+                className={`shrink-0 whitespace-nowrap rounded-full pl-2.5 pr-3.5 py-1.5 font-body text-xs font-semibold border transition-colors inline-flex items-center gap-1 ${
+                  on
+                    ? 'bg-secondary border-secondary text-on-secondary'
+                    : 'bg-transparent border-secondary/50 text-secondary active:bg-secondary-container/40'
+                }`}
+              >
+                <span aria-hidden="true" className="material-symbols-outlined text-[15px]" style={{ fontVariationSettings: on ? "'FILL' 1" : "'FILL' 0" }}>partly_cloudy_day</span>
+                {t('discover.foods.inSeason', { season: seasonLabel, defaultValue: `In season · ${seasonLabel}` })}
               </button>
             )
           })()}
