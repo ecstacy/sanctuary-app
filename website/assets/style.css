@@ -168,23 +168,23 @@ a[data-play-link] { visibility: hidden; }
 /* Hero visual — the dosha gem card as a floating tile. It carries its own
    rounded card surface, so it sits on a soft shadow rather than inside the
    phone bezel (which .peek below uses for the full home screen). */
-/* The dosha gem — a transparent render floating on a soft radial glow. */
+/* The dosha gem — the app's live WebGL gem, captured on a transparent ground
+   and floating on a soft radial glow. Taller than wide (teardrop). */
 .hero-gem {
   justify-self: center;
   position: relative;
-  width: min(420px, 84vw);
-  aspect-ratio: 1;
+  width: min(360px, 74vw);
   display: grid;
   place-items: center;
 }
 .hero-gem::before {
   content: "";
   position: absolute;
-  inset: 4%;
+  inset: -6% 2%;
   z-index: 0;
-  background: radial-gradient(circle at 50% 46%,
-    rgba(63, 122, 82, 0.20) 0%, rgba(194, 109, 74, 0.10) 42%, transparent 70%);
-  filter: blur(6px);
+  background: radial-gradient(circle at 50% 50%,
+    rgba(53, 112, 143, 0.18) 0%, rgba(158, 87, 32, 0.10) 44%, transparent 72%);
+  filter: blur(8px);
 }
 .hero-gem img {
   position: relative;
