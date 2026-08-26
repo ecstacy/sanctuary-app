@@ -16,6 +16,8 @@ import { REVIEWED_INGREDIENTS, coverageStats } from '../lib/ingredients'
 import { foodSuitability, SUITABILITY } from '../lib/doshaSemantics'
 import { exclusionFor } from '../lib/dietSafety'
 import { useDietPrefs } from '../hooks/useDietPrefs'
+import { useVikritiSignal } from '../hooks/useVikritiSignal'
+import { resolveDietTarget } from '../lib/dietTarget'
 import { useAuth } from '../context/AuthContext'
 import SubPage from '../components/discover/SubPage'
 import NavRow from '../components/NavRow'
@@ -127,11 +129,14 @@ export default function DiscoverFoodsPage() {
   const [activeAttrs, setActiveAttrs] = useState(() => new Set())
   const q = query.trim().toLowerCase()
 
-  // The user's constitution — powers the personalized "calms your dosha" filter.
-  // Only a single-dosha primary gets a chip; tridoshic/dual have no one axis to
-  // calm, so they fall back to the plain potency/taste refiners.
-  const primary = String(profile?.dosha_details?.primary || profile?.dosha || '').toLowerCase()
-  const userDosha = ['vata', 'pitta', 'kapha'].includes(primary) ? primary : null
+  // The dosha the personalized "calms your dosha" filter reads against — the
+  // SAME resolution the meal engine uses: a live vikriti flare supersedes the
+  // constitution, a self-correction is honoured, and a balanced/tridoshic user
+  // gets no single axis (dosha:null), so they fall back to the potency/taste
+  // refiners instead of being lensed to a wrong dominant.
+  const vikriti = useVikritiSignal()
+  const target = useMemo(() => resolveDietTarget({ vikriti, profile }), [vikriti, profile])
+  const userDosha = ['vata', 'pitta', 'kapha'].includes(target.dosha) ? target.dosha : null
   const doshaToken = userDosha ? `d:${userDosha}` : null
 
   const coverage = useMemo(() => coverageStats(), [])
