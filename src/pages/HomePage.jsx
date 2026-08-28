@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../context/AuthContext'
-import { doshaDisplayName } from '../i18n/contentI18n'
+import { doshaDisplayName, doshaDisplayNames } from '../i18n/contentI18n'
 import { composeDailySession } from '../lib/dailySession'
 import usePracticeStats from '../hooks/usePracticeStats'
 import useScrollDepth from '../hooks/useScrollDepth'
@@ -10,19 +10,21 @@ import useImpression from '../hooks/useImpression'
 import useVikritiSchedule from '../hooks/useVikritiSchedule'
 import { useVikritiSignal } from '../hooks/useVikritiSignal'
 import { useIsPremium } from '../hooks/useIsPremium'
-import { useMealCheckAccess } from '../hooks/useMealCheckAccess'
 import VikritiCard from '../components/VikritiCard'
 import NavRow from '../components/NavRow'
 import ReminderPrompt from '../components/ReminderPrompt'
 import PaywallSheet from '../components/PaywallSheet'
 import WelcomeToPlusCard from '../components/WelcomeToPlusCard'
 import AnalyticsConsentCard from '../components/AnalyticsConsentCard'
-import MealOfTheDayCard from '../components/MealOfTheDayCard'
+import NourishRail from '../components/NourishRail'
+import MealCheckPromo from '../components/MealCheckPromo'
+import GuidanceRail from '../components/GuidanceRail'
 import { shareApp } from '../lib/shareApp'
 import DoshaGem, { GEM_HUE, gemRadiusAtU } from '../components/DoshaGem'
 import { track, screen, setSuperProps, EVENTS } from '../lib/track'
 import { saveDoshaSelfReport, doshaSelfReport } from '../lib/doshaSelfReport'
 import { deriveCurrentDoshaState } from '../lib/currentDoshaState'
+import { dominantDoshas } from '../lib/doshaState'
 import { getIntent } from '../lib/intent'
 import { getRefine } from '../lib/refine'
 import { computeFamiliarity } from '../lib/familiarity'
@@ -172,7 +174,12 @@ function gemLegendRows(order, pct) {
     const side = i === 1 ? 'left' : 'right'
     const edge = gemRadiusAtU(uCentre) * GEM_EDGE_VX
     const x1 = side === 'right' ? 236 : 64                       // by the label
-    const x2 = side === 'right' ? GEM_CX + edge : GEM_CX - edge  // on the gem edge
+    // Inner end lands on the gem edge — but the teardrop is widest low, so the
+    // bottom band's edge nearly touches its label. Pull the inner end a little
+    // further in there so the connector keeps a MIN length instead of vanishing.
+    const MIN = 24
+    const edgeX = side === 'right' ? GEM_CX + edge : GEM_CX - edge
+    const x2 = side === 'right' ? Math.min(edgeX, x1 - MIN) : Math.max(edgeX, x1 + MIN)
     return { dosha: d, vy, side, x1, x2 }
   })
 }
@@ -182,12 +189,14 @@ export default function HomePage() {
   const location = useLocation()
   const { t } = useTranslation()
   const { profile, user, refreshProfile } = useAuth()
-  const mealAccess = useMealCheckAccess()
   // checkin is still fed to the composer (null = no explicit mood); the home
   // no longer exposes a mood picker, so there's no setter.
   const [checkedIn] = useState(null)
 
   const firstName = profile?.full_name?.split(' ')[0] || t('home.defaultFirstName')
+  // Profile picture for the header button — same source order as ProfilePage
+  // (uploaded avatar, then the OAuth provider's photo). Falls back to the icon.
+  const avatarUrl = profile?.avatar_url || user?.user_metadata?.avatar_url || user?.user_metadata?.picture || null
   // Rotate quote daily using day-of-year so all quotes cycle through
   const now = new Date()
   const startOfYear = new Date(now.getFullYear(), 0, 0)
@@ -421,10 +430,12 @@ export default function HomePage() {
   // different readings. Home already holds the two vikriti reads + profile, so we
   // pass them straight in (no extra fetch).
   const {
-    currentDosha, isElevated, balanced, prakritiValid,
+    currentDosha, currentDoshas, isElevated, balanced, prakritiValid,
     currentPercentages: doshaPercentages,
   } = deriveCurrentDoshaState({ profile, signal: vikritiSignal, schedule: vikriti })
-  const currentDoshaName = currentDosha ? doshaDisplayName(currentDosha) : null
+  // Display name is co-dominance–aware ("Vata-Kapha"); `currentDosha` stays the
+  // single primary for colour + gem + tips lookups.
+  const currentDoshaName = currentDoshas?.length ? doshaDisplayNames(currentDoshas) : null
   // Favour list follows the current state (or constitution; balanced when tridoshic).
   const intent         = getIntent()
   // The qualitative "getting to know you" progression (#55) — folds the
@@ -439,6 +450,8 @@ export default function HomePage() {
   // A balanced (tridoshic, un-elevated) reading favours the balanced tips, not
   // the arbitrary sort-order primary.
   const favourDosha    = balanced ? null : currentDosha
+  // Label names both when co-dominant; tips + colour stay keyed to the primary.
+  const favourDoshaLabel = balanced ? null : (currentDoshaName || (favourDosha ? doshaDisplayName(favourDosha) : null))
   const favourTips     = t(`home.favour.${favourDosha || 'balanced'}`, { returnObjects: true })
 
   return (
@@ -462,7 +475,17 @@ export default function HomePage() {
           }`}
           aria-label={isPremium ? t('home.profileAriaPlus') : t('home.profileAria')}
         >
-          <span className="material-symbols-outlined text-on-surface-variant text-lg">person</span>
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt=""
+              className="w-full h-full rounded-full object-cover"
+              referrerPolicy="no-referrer"
+              onError={(e) => { e.currentTarget.style.display = 'none' }}
+            />
+          ) : (
+            <span className="material-symbols-outlined text-on-surface-variant text-lg">person</span>
+          )}
           {isPremium && (
             <span
               aria-hidden="true"
@@ -597,7 +620,7 @@ export default function HomePage() {
               })
               navigate('/vikriti')
             }}
-            className="relative w-full text-left rounded-xl p-4 bg-primary-container/40 border border-primary/15 active:scale-[0.98] transition-all stagger-2 overflow-hidden"
+            className="relative w-full text-left rounded-xl p-4 bg-primary-container/50 border border-primary/15 card-elev active:scale-[0.98] transition-all stagger-2 overflow-hidden"
           >
             <div className="absolute -right-3 -bottom-3 opacity-[0.08]">
               <span className="material-symbols-outlined text-5xl text-primary">waving_hand</span>
@@ -715,7 +738,7 @@ export default function HomePage() {
         {currentDosha ? (
           <button
             onClick={() => navigate('/dosha')}
-            className="w-full text-left rounded-2xl p-5 stagger-4 bg-surface-container-low border border-outline-variant/40 active:scale-[0.99] transition-all"
+            className="w-full text-left rounded-2xl p-5 stagger-4 bg-surface-container-low border border-outline-variant/30 card-elev active:scale-[0.99] transition-all"
           >
             <div className="flex items-center justify-between mb-1">
               <p className="font-label text-xs text-on-surface-variant uppercase tracking-widest">{t('home.state.title')}</p>
@@ -737,16 +760,20 @@ export default function HomePage() {
               const rows = gemLegendRows(order, doshaPercentages)
               return (
                 <div className="relative mx-auto my-3" style={{ width: '100%', maxWidth: 320, height: 208 }}>
-                  <svg viewBox="0 0 300 180" preserveAspectRatio="none" className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
-                    {rows.map(({ dosha, vy, x1, x2 }) => (
-                      <line key={dosha}
-                        x1={x1} y1={vy} x2={x2} y2={vy}
-                        stroke="var(--color-outline-variant)" strokeWidth="1" />
-                    ))}
-                  </svg>
                   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                     <DoshaGem percentages={doshaPercentages} dominant={currentDosha} size={200} />
                   </div>
+                  {/* Leader lines OVER the gem so the widest (bottom) band's short
+                      connector still reads; a dot marks the zone it points to. */}
+                  <svg viewBox="0 0 300 180" preserveAspectRatio="none" className="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+                    {rows.map(({ dosha, vy, x1, x2 }) => (
+                      <g key={dosha}>
+                        <line x1={x1} y1={vy} x2={x2} y2={vy}
+                          stroke="var(--color-outline-variant)" strokeWidth="1.25" strokeLinecap="round" />
+                        <circle cx={x2} cy={vy} r="2.4" fill={GEM_HUE[dosha].base} />
+                      </g>
+                    ))}
+                  </svg>
                   {rows.map(({ dosha, vy, side }) => (
                     <div key={dosha} className="absolute" style={{
                       [side]: 0,
@@ -762,11 +789,22 @@ export default function HomePage() {
                 </div>
               )
             })()}
-            <p className="font-body text-[13px] text-on-surface-variant leading-relaxed">
-              {isElevated
-                ? t(`home.state.say.${currentDosha}`)
-                : (balanced ? t('home.state.base.balanced') : t(`home.state.base.${currentDosha}`))}
-            </p>
+            {(() => {
+              // Match the sentence to the balance the gem SHOWS: a 40-40-20
+              // reading is co-dominant, so name both instead of singling one out.
+              const stateDoshas = dominantDoshas(doshaPercentages)
+              const dual = stateDoshas.length === 2
+              const dualLabel = dual ? doshaDisplayNames(stateDoshas) : null
+              return (
+                <p className="font-body text-[13px] text-on-surface-variant leading-relaxed">
+                  {isElevated
+                    ? (dual ? t('home.state.say.dual', { doshas: dualLabel }) : t(`home.state.say.${currentDosha}`))
+                    : (balanced
+                        ? t('home.state.base.balanced')
+                        : (dual ? t('home.state.base.dual', { doshas: dualLabel }) : t(`home.state.base.${currentDosha}`)))}
+                </p>
+              )
+            })()}
           </button>
         ) : (
           // ── No dosha yet — the quiz entry. Once taken, the triangle above
@@ -833,86 +871,47 @@ export default function HomePage() {
           />
         )}
 
-        {/* ── To nourish — the meal composer's idea. Renders nothing when it
-             has none, so Home never carries an empty apology card. ── */}
+        {/* ── To nourish — the meal composer's ideas for the CURRENT slot, as a
+             swipeable rail. Renders nothing when it has none, so Home never
+             carries an empty apology card. ── */}
         <div className="stagger-5">
-          <p className="font-label text-xs text-on-surface-variant uppercase tracking-widest mb-2 px-1">
-            {t('home.nourish.title')}
-          </p>
-          <MealOfTheDayCard />
-          <NavRow
-            className="mt-3"
-            icon="query_stats"
-            title={t('mealCheck.title')}
-            summary={t('mealCheck.inputHelp')}
-            ariaLabel={t('mealCheck.title')}
-            onClick={() => navigate('/meal-check')}
-            badge={(mealAccess.state === 'trial' || mealAccess.state === 'trial_fresh') && (
-              <span className="shrink-0 font-label text-[10px] uppercase tracking-wide text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded-full">
-                {t('mealCheck.homeBadge', { count: mealAccess.trialDaysLeft })}
-              </span>
-            )}
-          />
+          <NourishRail />
+          <MealCheckPromo className="mt-3" />
         </div>
 
         {/* ── To favour / ease off — always on, keyed to current state (or
              constitution) for favour and to time-of-day for what to ease. ── */}
-        <div className="grid grid-cols-1 gap-3 stagger-5">
-          <div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant/40">
-            <div className="flex items-center gap-2.5 mb-3">
-              <span className="material-symbols-outlined text-primary text-lg">eco</span>
-              <h3 className="font-headline text-lg text-on-surface">{t('home.favour.title')}</h3>
-              {favourDosha && (
-                <span className="ml-auto font-label text-[11px] uppercase tracking-widest font-semibold px-2.5 py-1 rounded-full"
-                  style={{ backgroundColor: `${DOSHA_HEX[favourDosha]}22`, color: DOSHA_INK[favourDosha] }}>
-                  {doshaDisplayName(favourDosha)}
-                </span>
-              )}
-            </div>
-            {/* Why these, in the user's own terms — a current flare vs their
-                baseline constitution. Turns a generic list into an earned one. */}
-            <p className="font-body text-[13px] text-on-surface-variant/80 leading-relaxed mb-3">
-              {favourDosha
-                ? (isElevated
-                    ? t('home.favour.whyElevated', { dosha: doshaDisplayName(favourDosha) })
-                    : t('home.favour.whyBase', { dosha: doshaDisplayName(favourDosha) }))
-                : t('home.favour.whyBalanced')}
-            </p>
-            {/* Second personal anchor: the goal the user told us at onboarding
-                (#53). Makes the list feel aimed at what they came for. */}
-            {intent && (
-              <p className="flex items-center gap-1.5 font-body text-[12px] text-primary/85 -mt-1.5 mb-3">
-                <span aria-hidden="true" className="material-symbols-outlined text-[14px]">flag</span>
-                {t('home.favour.goalNote', { goal: t(`onboarding.intent.options.${intent}`) })}
-              </p>
-            )}
-            <div className="flex flex-col gap-2.5">
-              {(Array.isArray(favourTips) ? favourTips : []).map((tip, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-primary/70 text-base mt-0.5 flex-shrink-0">check</span>
-                  <p className="font-body text-sm text-on-surface-variant leading-relaxed">{tip}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="stagger-5 flex flex-col gap-5">
+          <GuidanceRail
+            title={t('home.favour.title')}
+            icon="eco"
+            accent="primary"
+            ariaLabel={t('home.favour.title')}
+            badge={favourDosha
+              ? { text: favourDoshaLabel, style: { backgroundColor: `${DOSHA_HEX[favourDosha]}22`, color: DOSHA_INK[favourDosha] } }
+              : null}
+            context={favourDosha
+              ? (isElevated
+                  ? t('home.favour.whyElevated', { dosha: favourDoshaLabel })
+                  : t('home.favour.whyBase', { dosha: favourDoshaLabel }))
+              : t('home.favour.whyBalanced')}
+            note={intent
+              ? { icon: 'flag', text: t('home.favour.goalNote', { goal: t(`onboarding.intent.options.${intent}`) }) }
+              : null}
+            tips={(Array.isArray(favourTips) ? favourTips : []).map((text) => ({ text }))}
+          />
 
-          <div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant/40">
-            <div className="flex items-center gap-2.5 mb-3">
-              <span className="material-symbols-outlined text-secondary text-lg">block</span>
-              <h3 className="font-headline text-lg text-on-surface">{t('home.favour.avoidTitle')}</h3>
-              <span className="ml-auto font-label text-[11px] text-on-secondary-container uppercase tracking-widest font-semibold bg-secondary-container px-2.5 py-1 rounded-full">
-                {t(`home.avoid.badge.${timeOfDay}`)}
-              </span>
-            </div>
-            <div className="flex flex-col gap-2.5">
-              {avoidTips.map((tip, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-secondary/70 text-base mt-0.5 flex-shrink-0">{tip.icon}</span>
-                  <p className="font-body text-sm text-on-surface-variant leading-relaxed">{tip.text}</p>
-                </div>
-              ))}
-            </div>
-            <p className="font-label text-[11px] text-secondary/60 uppercase tracking-widest text-center italic mt-4 pt-3 border-t border-secondary-container/20">
+          <div>
+            <GuidanceRail
+              title={t('home.favour.avoidTitle')}
+              icon="block"
+              accent="secondary"
+              ariaLabel={t('home.favour.avoidTitle')}
+              badge={{ text: t(`home.avoid.badge.${timeOfDay}`), className: 'text-on-secondary-container bg-secondary-container' }}
+              context={t('home.avoid.intro')}
+              tips={avoidTips}
+            />
+            <p className="font-label text-[11px] text-secondary/60 uppercase tracking-widest text-center italic mt-3">
               {t('home.avoid.reminder')}
             </p>
           </div>
@@ -930,7 +929,7 @@ export default function HomePage() {
             </p>
             <button
               onClick={() => navigate('/journey')}
-              className="w-full text-left bg-surface-container-low rounded-2xl p-5 border border-outline-variant/40 active:scale-[0.99] transition-all"
+              className="w-full text-left bg-surface-container-low rounded-2xl p-5 border border-outline-variant/30 card-elev active:scale-[0.99] transition-all"
             >
               <div className="flex items-center justify-between mb-4">
                 <span className="font-headline text-lg text-on-surface">{t('home.journey.title')}</span>
@@ -1074,7 +1073,7 @@ function DoshaFitCheck({ t, dosha, report, onSave }) {
   }
 
   return (
-    <div className="rounded-2xl bg-surface-container-low border border-outline-variant/40 p-4 mt-2.5 mb-1">
+    <div className="rounded-2xl bg-surface-container-low border border-outline-variant/30 card-elev p-4 mt-2.5 mb-1">
       {mode === 'ask' ? (
         <div className="flex items-center gap-3 flex-wrap">
           <p className="font-body text-sm text-on-surface">{t('home.fit.prompt')}</p>

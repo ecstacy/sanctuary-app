@@ -475,6 +475,7 @@
     "begin": "Begin",
     "avoid": {
       "title": "What to avoid",
+      "intro": "A few things to ease off for now.",
       "reminder": "Gentle reminder: Balance is a practice, not a destination.",
       "badge": {
         "morning": "morning",
@@ -596,7 +597,8 @@
       "say": {
         "vata": "Your balance leans toward Vata this week. A warm, grounding practice draws it back toward centre.",
         "pitta": "Your balance leans toward Pitta this week. A cool, slow practice draws it back toward centre.",
-        "kapha": "Your balance leans toward Kapha this week. A warming, energising practice draws it back toward centre."
+        "kapha": "Your balance leans toward Kapha this week. A warming, energising practice draws it back toward centre.",
+        "dual": "Your balance leans toward {{doshas}} this week. A steadying practice draws it back toward centre."
       },
       "details": "Details",
       "legendSettled": "settled",
@@ -606,7 +608,8 @@
         "vata": "Your nature runs Vata — air and ether. Today’s practice keeps you grounded and steady.",
         "pitta": "Your nature runs Pitta — fire and water. Today’s practice keeps you cool and unhurried.",
         "kapha": "Your nature runs Kapha — earth and water. Today’s practice keeps you light and moving.",
-        "balanced": "Your constitution is balanced across all three doshas — a rare equilibrium. Keep it steady."
+        "balanced": "Your constitution is balanced across all three doshas — a rare equilibrium. Keep it steady.",
+        "dual": "Your nature runs {{doshas}} — a dual constitution. Today's practice keeps you centred."
       },
       "balancedName": "Balanced"
     },
@@ -624,7 +627,10 @@
       "later": "Later"
     },
     "nourish": {
-      "title": "To nourish"
+      "title": "To nourish",
+      "viewAll": "View all",
+      "moreIdeas": "More ideas",
+      "unlockAll": "Unlock all"
     },
     "favour": {
       "title": "To favour",
@@ -1344,6 +1350,7 @@
     "thisWeek": "This Week",
     "minutes": "minutes",
     "level": "Level {{n}}",
+    "yourLevel": "Your Level",
     "progressTo": "Progress to {{title}}",
     "minProgress": "{{current}}/{{total}} min",
     "highestLevel": "You have achieved the highest level. Namaste.",
@@ -1994,6 +2001,7 @@
     "yourState": "You: {{state}}",
     "stateBalanced": "Balanced",
     "homeBadge": "Free · {{count}}d",
+    "homeCta": "Check a meal",
     "dirRaises": "raises",
     "dirSettles": "settles",
     "dirSteady": "steady",

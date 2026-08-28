@@ -16,10 +16,12 @@
    Tailwind reads these via var() with the same values as fallback.
    ═══════════════════════════════════════════════════════════════════════════ */
 :root {
-  /* Surfaces — oat ground, warm-white cards, stepped warm neutrals */
-  --color-background: #f3f0e7;
-  --color-surface: #f3f0e7;
-  --color-surface-container-low: #fbfaf3;
+  /* Surfaces — oat ground, warm-white cards, stepped warm neutrals.
+     The ground is kept a clear step below the card fill so cards read as cards
+     (they were ~3% apart before and merged into the page). */
+  --color-background: #f3efe5;
+  --color-surface: #f3efe5;
+  --color-surface-container-low: #fffdf9;
   --color-surface-container: #ece9dd;
   --color-surface-container-high: #e4e1d2;
   --color-surface-container-highest: #ddd8c7;
@@ -65,7 +67,17 @@
   --color-primary-fixed-dim: #aecdb6;
   --color-on-primary: #f4faf3;
   --color-on-primary-container: #26503a;
+
+  /* Elevation — a warm, brown-tinted soft shadow (never grey/black on this oat
+     palette) so crisp near-white cards float on the light ground. Two layers:
+     a tight contact shadow + a soft ambient one. */
+  --shadow-card: 0 1px 2px rgba(66, 55, 32, 0.05), 0 8px 20px -6px rgba(66, 55, 32, 0.09);
+  --shadow-card-lg: 0 2px 4px rgba(66, 55, 32, 0.06), 0 16px 34px -10px rgba(66, 55, 32, 0.12);
 }
+
+/* Card elevation utilities — apply to floating cards for a consistent lift. */
+.card-elev { box-shadow: var(--shadow-card); }
+.card-elev-lg { box-shadow: var(--shadow-card-lg); }
 
 /* Vata — cool slate blue (Air + Ether), deepened for the oat ground */
 :root[data-dosha="vata"] {
@@ -175,6 +187,20 @@ select:focus-visible,
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Meal Check promo — steam wisps rising from a warm bowl. Each wisp drifts up
+   and fades; staggered delays make it read as gentle, continuous steam. Frozen
+   under prefers-reduced-motion (handled globally above). */
+@keyframes meal-steam {
+  0%   { opacity: 0;   transform: translateY(3px) scaleY(0.6); }
+  30%  { opacity: 0.9; }
+  75%  { opacity: 0.4; }
+  100% { opacity: 0;   transform: translateY(-11px) scaleY(1.15); }
+}
+.meal-steam {
+  transform-origin: bottom center;
+  animation: meal-steam 2.8s ease-in-out infinite;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

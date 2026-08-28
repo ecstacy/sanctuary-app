@@ -475,6 +475,7 @@
     "begin": "Beginnen",
     "avoid": {
       "title": "Was du vermeiden solltest",
+      "intro": "Ein paar Dinge, die du jetzt meiden solltest.",
       "reminder": "Sanfte Erinnerung: Balance ist eine Praxis, kein Ziel.",
       "badge": {
         "morning": "Morgen",
@@ -596,7 +597,8 @@
       "say": {
         "vata": "Dein Gleichgewicht neigt diese Woche zu Vata. Eine warme, erdende Praxis führt es zur Mitte zurück.",
         "pitta": "Dein Gleichgewicht neigt diese Woche zu Pitta. Eine kühle, langsame Praxis führt es zur Mitte zurück.",
-        "kapha": "Dein Gleichgewicht neigt diese Woche zu Kapha. Eine wärmende, belebende Praxis führt es zur Mitte zurück."
+        "kapha": "Dein Gleichgewicht neigt diese Woche zu Kapha. Eine wärmende, belebende Praxis führt es zur Mitte zurück.",
+        "dual": "Deine Balance neigt diese Woche zu {{doshas}}. Eine ausgleichende Praxis führt sie zur Mitte zurück."
       },
       "details": "Details",
       "legendSettled": "ruhig",
@@ -606,7 +608,8 @@
         "vata": "Deine Natur ist Vata — Luft und Äther. Die heutige Praxis hält dich geerdet und stabil.",
         "pitta": "Deine Natur ist Pitta — Feuer und Wasser. Die heutige Praxis hält dich kühl und gelassen.",
         "kapha": "Deine Natur ist Kapha — Erde und Wasser. Die heutige Praxis hält dich leicht und in Bewegung.",
-        "balanced": "Deine Konstitution ist über alle drei Doshas ausgeglichen — ein seltenes Gleichgewicht. Halte es stabil."
+        "balanced": "Deine Konstitution ist über alle drei Doshas ausgeglichen — ein seltenes Gleichgewicht. Halte es stabil.",
+        "dual": "Deine Natur ist {{doshas}} — eine duale Konstitution. Die heutige Praxis hält dich zentriert."
       },
       "balancedName": "Ausgeglichen"
     },
@@ -624,7 +627,10 @@
       "later": "Später"
     },
     "nourish": {
-      "title": "Zur Nährung"
+      "title": "Zur Nährung",
+      "viewAll": "Alle ansehen",
+      "moreIdeas": "Mehr Ideen",
+      "unlockAll": "Alle freischalten"
     },
     "favour": {
       "title": "Zu bevorzugen",
@@ -1344,6 +1350,7 @@
     "thisWeek": "Diese Woche",
     "minutes": "Minuten",
     "level": "Stufe {{n}}",
+    "yourLevel": "Dein Niveau",
     "progressTo": "Fortschritt zu {{title}}",
     "minProgress": "{{current}}/{{total}} Min.",
     "highestLevel": "Du hast die höchste Stufe erreicht. Namaste.",
@@ -1994,6 +2001,7 @@
     "yourState": "Du: {{state}}",
     "stateBalanced": "Ausgeglichen",
     "homeBadge": "Frei · {{count}}T",
+    "homeCta": "Mahlzeit prüfen",
     "dirRaises": "erhöht",
     "dirSettles": "senkt",
     "dirSteady": "stabil",
