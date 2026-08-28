@@ -208,6 +208,24 @@ describe('assessMeal — sign correctness', () => {
     expect(a.headline).toBeNull()
   })
 
+  describe('headlineDoshas — co-raise (name both when comparable)', () => {
+    it('a single clear dominant names just that dosha', () => {
+      const a = assessMeal(['gingerFresh'])
+      expect(a.headlineDoshas).toEqual(['pitta'])
+    })
+    it('is empty when nothing is raised', () => {
+      expect(assessMeal(['basmatiRice']).headlineDoshas).toEqual([])
+      expect(assessMeal([]).headlineDoshas).toEqual([])
+    })
+    it('always starts with the primary headline and never exceeds two', () => {
+      const a = assessMeal(['tomato', 'garlic'])
+      if (a.headline) {
+        expect(a.headlineDoshas[0]).toBe(a.headline)
+        expect(a.headlineDoshas.length).toBeLessThanOrEqual(2)
+      }
+    })
+  })
+
   it('returns an all-neutral, headline-less result for an empty meal', () => {
     const a = assessMeal([])
     expect(a.headline).toBeNull()

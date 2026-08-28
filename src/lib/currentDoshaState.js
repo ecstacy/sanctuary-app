@@ -18,7 +18,7 @@
 //  useCurrentDoshaState wires the hooks; deriveCurrentDoshaState is the logic.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { effectivePrimary } from './doshaState'
+import { effectivePrimary, dominantDoshas } from './doshaState'
 
 const DOSHAS = ['vata', 'pitta', 'kapha']
 
@@ -66,12 +66,31 @@ export function deriveCurrentDoshaState({ profile, signal, schedule } = {}) {
   const balanced = isTridoshic && !isElevated
   const currentDosha = signalValid || (prakritiValid ? prakriti : null)
 
+  // Co-dominance: a 40-40-20 constitution is dual (Vata-Kapha), not an arbitrary
+  // single pick. A live vikriti flare is always a single dosha; a balanced /
+  // tridoshic reading has none. `currentDosha` stays the primary (for the gem
+  // key, colours, lensing); `currentDoshas` carries the 1–2 to NAME.
+  let currentDoshas
+  if (signalValid) {
+    currentDoshas = [signalValid]
+  } else if (balanced || !prakritiValid) {
+    currentDoshas = balanced ? [] : (prakritiValid ? [prakriti] : [])
+  } else {
+    const dom = dominantDoshas(prakritiPercentages)
+    if (dom.length === 2) {
+      currentDoshas = dom.includes(prakriti) ? [prakriti, dom.find((d) => d !== prakriti)] : dom
+    } else {
+      currentDoshas = [prakriti]
+    }
+  }
+
   // The percentages that go with whichever source is the reading, so the split
   // shown always matches the label.
   const currentPercentages = (vikritiFresh && schedule?.lastVikritiPercentages) || prakritiPercentages || null
 
   return {
     currentDosha,
+    currentDoshas,
     source: signalValid ? 'vikriti' : (prakritiValid ? 'prakriti' : null),
     isElevated,
     balanced,

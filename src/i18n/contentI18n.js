@@ -249,6 +249,18 @@ export function doshaDisplayName(doshaKey) {
   return doshaKey.charAt(0).toUpperCase() + doshaKey.slice(1)
 }
 
+/**
+ * Display name for one OR two co-dominant doshas, e.g. "Vata" or "Vata-Kapha".
+ * Accepts a single key or an array; joins a co-dominant pair with an en-dash so
+ * a 40-40-20 constitution reads "Vata-Kapha" rather than arbitrarily picking one.
+ * @param {string|string[]|null} doshas
+ */
+export function doshaDisplayNames(doshas) {
+  const list = (Array.isArray(doshas) ? doshas : [doshas]).filter(Boolean)
+  if (list.length === 0) return ''
+  return list.map(doshaDisplayName).join('-')
+}
+
 // ── Precautions ─────────────────────────────────────────────────────────────
 // AsanaDetailPage's static PRECAUTIONS map, keyed by asana id. Returns the
 // localized array for the active language, or the English base array.

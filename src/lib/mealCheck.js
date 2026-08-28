@@ -375,12 +375,18 @@ export function assessMeal(items, profile = {}) {
   const prakritiLens = isBalancedConstitution(profile) ? null : (DOSHAS.includes(prakriti) ? prakriti : null)
   const lens = vikritiRelevant ? vikriti : prakritiLens
 
-  // Headline = the dosha the meal raises most (if any).
-  let headline = null
-  let peak = SHIFT_THRESHOLD
-  for (const d of DOSHAS) {
-    if (perDosha[d] > peak) { peak = perDosha[d]; headline = d }
-  }
+  // Headline = the dosha the meal raises most (if any). When a SECOND dosha
+  // rises comparably (≥75% of the top), the meal co-raises both — naming only
+  // one then reads as inaccurate ("leans Kapha" while Pitta also clearly rises).
+  const raised = DOSHAS
+    .filter((d) => perDosha[d] > SHIFT_THRESHOLD)
+    .sort((a, b) => perDosha[b] - perDosha[a])
+  const headline = raised[0] || null
+  const coRaised = raised[1] && perDosha[raised[1]] >= perDosha[raised[0]] * 0.75
+    ? raised[1] : null
+  // `headline` stays the single primary (concern framing, remedies target);
+  // `headlineDoshas` is the 1–2 to NAME in the verdict.
+  const headlineDoshas = headline ? (coRaised ? [headline, coRaised] : [headline]) : []
 
   // Concern framing.
   //   mind   — raises the user's own (already-elevated) dosha  → "not ideal"
@@ -396,6 +402,7 @@ export function assessMeal(items, profile = {}) {
     perDosha,
     dir,
     headline,
+    headlineDoshas,
     lens,
     prakriti: DOSHAS.includes(prakriti) ? prakriti : null,
     vikriti: vikritiRelevant ? vikriti : null,

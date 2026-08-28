@@ -20,7 +20,7 @@ import { exclusionFor } from '../lib/dietSafety'
 import { formFor, curatedFor } from '../lib/consumableForms'
 import { computeDietProfile, hasDietPattern } from '../lib/dietProfile'
 import { PRANAYAMAS } from '../data/pranayamas'
-import { doshaDisplayName } from '../i18n/contentI18n'
+import { doshaDisplayName, doshaDisplayNames } from '../i18n/contentI18n'
 import { GEM_HUE } from '../components/DoshaGem'
 import PaywallSheet from '../components/PaywallSheet'
 import { track } from '../lib/track'
@@ -520,7 +520,7 @@ export default function MealCheckPage() {
   // readers — the async result was previously silent (a11y standard).
   const liveMessage = phase === 'result' && result
     ? (result.assessment?.headline
-        ? t('mealCheck.announceRaises', { dosha: doshaDisplayName(result.assessment.headline), defaultValue: 'Result ready. This meal leans {{dosha}}.' })
+        ? t('mealCheck.announceRaises', { dosha: doshaDisplayNames(result.assessment.headlineDoshas?.length ? result.assessment.headlineDoshas : [result.assessment.headline]), defaultValue: 'Result ready. This meal leans {{dosha}}.' })
         : t('mealCheck.announceBalanced', 'Result ready. This meal is balanced.'))
     : phase === 'confirm'
       ? t('mealCheck.confirmTitle')
@@ -955,7 +955,10 @@ function buildRebalance(target, foods, dietPrefs) {
 function ResultView({ t, result, items, profile, dietPrefs, onRemoveItem, onAddFood, onChangeVariant, onOpenDetail, onReset }) {
   const { assessment: a, remedies: r } = result
   const head = a.headline
-  const dLabel = head ? doshaDisplayName(head) : null
+  // Name co-raised doshas together ("Kapha-Pitta"); tolerate old snapshots that
+  // predate headlineDoshas by falling back to the single headline.
+  const headDoshas = a.headlineDoshas && a.headlineDoshas.length ? a.headlineDoshas : (head ? [head] : [])
+  const dLabel = headDoshas.length ? doshaDisplayNames(headDoshas) : null
 
   const verdict = !head
     ? t('mealCheck.verdictBalanced')

@@ -1,5 +1,28 @@
 import { describe, it, expect } from 'vitest'
-import { effectivePrimary, afterBaseline, baselineAt, isBalancedConstitution } from './doshaState'
+import { effectivePrimary, afterBaseline, baselineAt, isBalancedConstitution, dominantDoshas } from './doshaState'
+
+describe('dominantDoshas — co-dominance (dual constitutions)', () => {
+  it('a clear single dominant returns one dosha', () => {
+    expect(dominantDoshas({ vata: 52, pitta: 30, kapha: 18 })).toEqual(['vata'])
+  })
+  it('a 40-40-20 split is co-dominant (both 40s, ordered by %)', () => {
+    // vata & kapha tie at 40 → dual, not an arbitrary single pick.
+    expect(dominantDoshas({ vata: 40, pitta: 20, kapha: 40 })).toEqual(['vata', 'kapha'])
+  })
+  it('the boundary case 45-37-18 (exactly 8 apart) stays single', () => {
+    expect(dominantDoshas({ vata: 45, pitta: 37, kapha: 18 })).toEqual(['vata'])
+  })
+  it('within the gap (44-38-18) is dual', () => {
+    expect(dominantDoshas({ vata: 44, pitta: 38, kapha: 18 })).toEqual(['vata', 'pitta'])
+  })
+  it('orders the pair by percentage, descending', () => {
+    expect(dominantDoshas({ vata: 20, pitta: 38, kapha: 42 })).toEqual(['kapha', 'pitta'])
+  })
+  it('returns [] with no percentages', () => {
+    expect(dominantDoshas(null)).toEqual([])
+    expect(dominantDoshas({ vata: 0, pitta: 0, kapha: 0 })).toEqual([])
+  })
+})
 
 describe('isBalancedConstitution — tridoshic detection', () => {
   it('is true when the three percentages sit within a narrow band', () => {

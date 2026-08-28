@@ -6,14 +6,14 @@ import DoshaGem from '../components/DoshaGem'
 import VikritiHistoryChart from '../components/VikritiHistoryChart'
 import { useCurrentDoshaState } from '../hooks/useCurrentDoshaState'
 import { useVikritiHistory } from '../hooks/useVikritiHistory'
-import { doshaDisplayName } from '../i18n/contentI18n'
+import { doshaDisplayName, doshaDisplayNames } from '../i18n/contentI18n'
 
 // The "this week / current state" lead — the SAME reading the Home state card
 // shows, so tapping the card continues the story instead of contradicting it.
 // Shown only when today's reading is a live imbalance that differs from the
 // baseline; otherwise the constitution stands on its own below.
 function ThisWeekLead({ t, onBack, state, history }) {
-  const name = doshaDisplayName(state.currentDosha)
+  const name = state.currentDoshas?.length ? doshaDisplayNames(state.currentDoshas) : doshaDisplayName(state.currentDosha)
   return (
     <div className="px-6 pt-3">
       <header className="flex items-center py-2 -ml-1">

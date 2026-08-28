@@ -56,6 +56,32 @@ export function isBalancedConstitution(profile) {
   return Math.max(...vals) - Math.min(...vals) <= 10
 }
 
+// Top two doshas within this many points read as CO-DOMINANT (a dual
+// constitution), so a 40-40-20 reading is "Vata-Kapha" rather than an arbitrary
+// single pick, while 45-37-18 (8 apart) stays single Vata.
+export const CODOM_GAP = 8
+
+/**
+ * The 1–2 dominant doshas of a percentage split, co-dominance–aware. Returns the
+ * top dosha, plus the second when it sits strictly within CODOM_GAP points of the
+ * top — ordered by percentage, descending. Does NOT itself decide "balanced"
+ * (that's the caller's job via isBalancedConstitution / tridoshic checks), so it
+ * can be reused wherever a split is already known to have a dominant.
+ * @param {object|null} percentages  { vata, pitta, kapha }
+ * @param {{gap?: number}} [opts]
+ * @returns {string[]}  [] | [d] | [d1, d2]
+ */
+export function dominantDoshas(percentages, { gap = CODOM_GAP } = {}) {
+  if (!percentages) return []
+  const ranked = DOSHAS
+    .map((d) => ({ d, v: Number(percentages[d]) || 0 }))
+    .sort((a, b) => b.v - a.v)
+  if (ranked.every((r) => r.v === 0)) return []
+  const out = [ranked[0].d]
+  if (ranked[0].v - ranked[1].v < gap) out.push(ranked[1].d)
+  return out
+}
+
 /**
  * Is a vikriti timestamp newer than the constitution baseline (i.e. not stale)?
  * True when there is no baseline yet, so behaviour is unchanged for profiles
